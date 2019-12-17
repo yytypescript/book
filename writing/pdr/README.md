@@ -14,7 +14,7 @@ description: >-
 
 {% page-ref page="0002-iterative-writing-process.md" %}
 
-{% page-ref page="0003-du-zhe-ceng.md" %}
+{% page-ref page="0003-target-readers.md" %}
 
 ### テンプレート
 
