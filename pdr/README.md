@@ -8,9 +8,11 @@ description: >-
 
 ### PDR一覧
 
-* [0000-なぜ私たちは技術書を書くのか？](0000-why-do-we-write-technical-books.md)
-* [0001-GitBookで執筆する](0001-write-with-gitbook.md)
-* PDR3
+{% page-ref page="0000-why-do-we-write-technical-books.md" %}
+
+{% page-ref page="0001-write-with-gitbook.md" %}
+
+{% page-ref page="0002-iterative-writing-process.md" %}
 
 ### テンプレート
 
