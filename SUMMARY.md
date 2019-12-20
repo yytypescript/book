@@ -11,4 +11,5 @@
   * [0002-イテレーティブな執筆プロセス](writing/pdr/0002-iterative-writing-process.md)
   * [0003-読者層](writing/pdr/0003-target-readers.md)
   * [PDRテンプレート](writing/pdr/__pdr-template.md)
+* [CONTRIBUTING](contributing.md)
 
