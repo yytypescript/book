@@ -10,6 +10,12 @@
   * [0001-GitBookで執筆する](writing/pdr/0001-write-with-gitbook.md)
   * [0002-イテレーティブな執筆プロセス](writing/pdr/0002-iterative-writing-process.md)
   * [0003-読者層](writing/pdr/0003-target-readers.md)
+  * [0004-目次の運用方法](writing/pdr/0004-no.md)
   * [PDRテンプレート](writing/pdr/__pdr-template.md)
 * [CONTRIBUTING](contributing.md)
+* [Untitled](untitled.md)
+
+## 目次
+
+* [\[TODO\]目次テンプレート](mu-ci/todotenpurto.md)
 
