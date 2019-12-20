@@ -16,7 +16,7 @@ description: >-
 
 {% page-ref page="0003-target-readers.md" %}
 
-{% page-ref page="0004-no.md" %}
+{% page-ref page="0004-how-to-manage-article-status.md" %}
 
 ### テンプレート
 
