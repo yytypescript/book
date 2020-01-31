@@ -17,5 +17,5 @@
 
 ## 目次
 
-* [\[TODO\]目次テンプレート](mu-ci/todotenpurto.md)
+* [\[DOING\]ページテンプレート](mu-ci/todotenpurto.md)
 
