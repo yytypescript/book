@@ -18,4 +18,5 @@
 ## 目次
 
 * [\[DOING\]ページテンプレート](mu-ci/todotenpurto.md)
+* [\[DOING\]TypeScriptの良さ](doingtypescriptnosa.md)
 
