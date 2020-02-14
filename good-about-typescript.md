@@ -1,4 +1,4 @@
-# \[DOING\]TypeScriptの良さ
+# TypeScriptの良さ
 
 TypeScriptはMicrosoftにより2012年10月1日に発表されました。
 
