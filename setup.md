@@ -1,4 +1,4 @@
-# 開発環境の準備
+# 3.1 開発環境の準備
 
 {% hint style="warning" %}
 このページは未完成です。クロレ\(mosapride\)執筆中 twitter: @v\_kurore
@@ -145,16 +145,7 @@ C:\>node -v
 
 ### エディタは何を使ったらいいか？
 
-シェアで決めつけるのも好きではありませんが、Visual Studio Codeが一番良く使われています。無料であり、インストールすれば拡張機能なしでもコーディングを行うことができます。
-
-TypeScript、Visual Studio Codeも主にMicrosoftが中心に開発されているため相性が良いのかもしれません。
-
-{% hint style="info" %}
-🧙♂ **Tips:** Visual Studio Codeは主にTypeScriptで開発されています。またVS Codeと略すことが多いです。
-{% endhint %}
-
-対応OSはWindows、Mac、Linuxのいづれにも対応しています。ダウンロードサイトから環境にあったインストーラーをダウンロード・インストールを行ってください。  
-[https://code.visualstudio.com/download](https://code.visualstudio.com/download)
+シェアで決めつけるのも好きではありませんが、Visual Studio Codeが一番良く使われています。TypeScriptもVisual Studio Codeも主にMicrosoftが中心に開発されているため相性が良いのかもしれません。
 
 ### TypeScriptをインストールする
 
