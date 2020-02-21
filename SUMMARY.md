@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [簡単な関数をCLIで作ってみよう](README.md)
 * [TypeScriptの良さ](good-about-typescript.md)
 * [開発環境の準備](setup.md)
 * [ジェネリクス](generics.md)
@@ -17,4 +17,5 @@
   * [0004-各ページのステータス管理方法](writing/pdr/0004-how-to-manage-article-status.md)
   * [PDRテンプレート](writing/pdr/__pdr-template.md)
 * [\[DOING\]ページテンプレート](todotenpurto.md)
+* [\[DOING\]簡単な関数をCLIで作ってみよう](runoncli.md)
 
