@@ -5,7 +5,9 @@
 JavaScriptで以下のような関数があったとします。
 
 ```text
-const increment = (num) => num + 1;
+function increment(num) {
+  return num + 1;
+}
 
 console.log(increment(1));
 ```
@@ -22,7 +24,9 @@ $ node increment.js
 予想通りのなんでもない関数ですが、この関数が以下のように呼ばれたらどうでしょうか。
 
 ```text
-const increment = (num) => num + 1;
+function increment(num) {
+  return num + 1;
+}
 
 console.log(increment('1'));
 ```
@@ -56,7 +60,9 @@ Parameter 'num' implicitly has an 'any' type, ...
 これは、TypeScriptはこの引数に対していかなる型情報も与えられていない\(いわゆる`any`\)よということを言っています。そこで型を付加します。付加する型は`number`です。
 
 ```text
-const increment = (num: number) => num + 1;
+function increment(num: number) {
+  return num + 1;
+}
 
 console.log(increment('1'));
 ```
@@ -95,16 +101,18 @@ Found 1 error.
 戻り値も書いた`increment.ts`の完全版は以下のようになります。
 
 ```text
-const increment = (num: number): number => num + 1;
+function increment(num: number): number {
+  return num + 1;
+}
 ```
 
 もちろん、この関数で戻り値を`string`など`number`ではない型に設定するとTypeScriptから指摘を受けます。
 
 ```text
-increment.ts:1:44 - error TS2322: Type 'number' is not assignable to type 'string'.
+increment.ts:2:3 - error TS2322: Type 'number' is not assignable to type 'string'.
 
-1 const increment = (num: number): string => num + 1;
-                                             ~~~~~~~
+2   return num + 1;
+    ~~~~~~~~~~~~~~~
 ```
 
 {% hint style="info" %}
