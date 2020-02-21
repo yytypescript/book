@@ -2,7 +2,7 @@
 
 * [Initial page](README.md)
 * [TypeScriptの良さ](good-about-typescript.md)
-* [3.1 開発環境の準備](setup.md)
+* [開発環境の準備](setup.md)
 * [ジェネリクス](generics.md)
 
 ## 執筆者向け情報 <a id="writing"></a>

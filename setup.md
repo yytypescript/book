@@ -1,4 +1,4 @@
-# 3.1 開発環境の準備
+# 開発環境の準備
 
 {% hint style="warning" %}
 このページは未完成です。クロレ\(mosapride\)執筆中 twitter: @v\_kurore
