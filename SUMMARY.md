@@ -15,6 +15,7 @@
   * [0002-イテレーティブな執筆プロセス](writing/pdr/0002-iterative-writing-process.md)
   * [0003-読者層](writing/pdr/0003-target-readers.md)
   * [0004-各ページのステータス管理方法](writing/pdr/0004-how-to-manage-article-status.md)
+  * [0006-語末には「です」「ます」\(敬体\)に統一する](writing/pdr/0006-use-desu-masu.md)
   * [PDRテンプレート](writing/pdr/__pdr-template.md)
 * [\[DOING\]ページテンプレート](todotenpurto.md)
 * [\[DOING\]簡単な関数をCLIで作ってみよう](runoncli.md)

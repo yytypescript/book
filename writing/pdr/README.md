@@ -18,6 +18,8 @@ description: >-
 
 {% page-ref page="0004-how-to-manage-article-status.md" %}
 
+{% page-ref page="0006-use-desu-masu.md" %}
+
 ### テンプレート
 
 PDRを追加する際は、[PDRのテンプレート](__pdr-template.md)をお使い下さい。
