@@ -20,6 +20,10 @@ description: >-
 
 {% page-ref page="0006-use-desu-masu.md" %}
 
+{% page-ref page="0007-use-function-for-sample-code.md" %}
+
+
+
 ### テンプレート
 
 PDRを追加する際は、[PDRのテンプレート](__pdr-template.md)をお使い下さい。
