@@ -1,9 +1,11 @@
 # Table of contents
 
-* [簡単な関数をCLIで作ってみよう](README.md)
+* [TOP](README.md)
 * [TypeScriptの良さ](good-about-typescript.md)
 * [開発環境の準備](setup.md)
+* [簡単な関数をCLIで作ってみよう](make-a-simple-function-with-cli.md)
 * [ジェネリクス](generics.md)
+* [\[DOING\]ページテンプレート](todotenpurto.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
@@ -18,6 +20,4 @@
   * [0006-語末には「です」「ます」\(敬体\)に統一する](writing/pdr/0006-use-desu-masu.md)
   * [0007-関数定義のサンプルコードには極力functionを使う](writing/pdr/0007-use-function-for-sample-code.md)
   * [PDRテンプレート](writing/pdr/__pdr-template.md)
-* [\[DOING\]ページテンプレート](todotenpurto.md)
-* [\[DOING\]簡単な関数をCLIで作ってみよう](runoncli.md)
 
