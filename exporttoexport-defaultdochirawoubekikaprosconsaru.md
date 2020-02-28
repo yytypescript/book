@@ -33,3 +33,5 @@
 named exportsとdefault exportについてはECMAScript Discussion Archivesにおいて、議論されているので、こちらも参考にしてみると良いでしょう。  
 [https://esdiscuss.org/topic/moduleimport](https://esdiscuss.org/topic/moduleimport)
 
+### どちらをどういうときに使うべきなのか？
+
