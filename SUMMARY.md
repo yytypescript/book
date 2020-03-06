@@ -21,4 +21,6 @@
   * [0007-関数定義のサンプルコードには極力functionを使う](writing/pdr/0007-use-function-for-sample-code.md)
   * [PDRテンプレート](writing/pdr/__pdr-template.md)
 * [exportとexport defaultどちらを使うべきか？Pros/Consある話](exporttoexport-defaultdochirawoubekikaprosconsaru.md)
+* [配列](array.md)
+* [タプル](tuple.md)
 
