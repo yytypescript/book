@@ -6,6 +6,11 @@ description: >-
 
 # PDR
 
+* **P**ublisher's **D**ecision **R**ecord; 出版者意思決定記録
+* YYTSでの造語
+* 元は Architecture Decision Record
+  * [アーキテクチャの「なぜ？」を記録する！ADRってなんぞや？ - Qiita](https://qiita.com/fuubit/items/dbb22435202acbe48849)
+
 ### PDR一覧
 
 {% page-ref page="0000-why-do-we-write-technical-books.md" %}
