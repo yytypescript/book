@@ -9,7 +9,7 @@ description: >-
 
 JavaScriptで以下のような関数があったとします。
 
-```javascript
+```typescript
 function increment(num) {
   return num + 1;
 }
@@ -28,7 +28,7 @@ $ node increment.js
 
 予想通りのなんでもない関数ですが、この関数が以下のように呼ばれたらどうでしょうか。
 
-```javascript
+```typescript
 function increment(num) {
   return num + 1;
 }
@@ -58,7 +58,7 @@ $ mv increment.js increment.ts
 
 これをエディタで開くと`increment`の引数にあたる`num`のところで何か言われます。
 
-```text
+```typescript
 Parameter 'num' implicitly has an 'any' type, ...
 ```
 
@@ -74,7 +74,7 @@ console.log(increment('1'));
 
 すると今度は呼び出し側の引数で何か言われます。
 
-```text
+```typescript
 Argument of type '"1"' is not assignable to parameter of type 'number'.`
 ```
 
@@ -88,7 +88,7 @@ $ tsc increment.ts
 
 するとやはり警告が出てしまいます。
 
-```text
+```typescript
 increment.ts:3:23 - error TS2345: Argument of type '"1"' is not assignable to parameter of type 'number'.
 
 3 console.log(increment('1'));
@@ -113,7 +113,7 @@ function increment(num: number): number {
 
 もちろん、この関数で戻り値を`string`など`number`ではない型に設定するとTypeScriptから指摘を受けます。
 
-```text
+```typescript
 increment.ts:2:3 - error TS2322: Type 'number' is not assignable to type 'string'.
 
 2   return num + 1;
