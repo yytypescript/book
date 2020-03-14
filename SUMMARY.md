@@ -21,7 +21,6 @@
   * [0003-読者層](writing/pdr/0003-target-readers.md)
   * [0004-各ページのステータス管理方法](writing/pdr/0004-how-to-manage-article-status.md)
   * [0005-ライセンスについて](writing/pdr/0005-raisensunitsuite.md)
-  * [\[DOING\]0008-PDRについて](writing/pdr/doing0006-pdrnitsuite.md)
   * [0006-語末には「です」「ます」\(敬体\)に統一する](writing/pdr/0006-use-desu-masu.md)
   * [0007-関数定義のサンプルコードには極力functionを使う](writing/pdr/0007-use-function-for-sample-code.md)
   * [PDRテンプレート](writing/pdr/__pdr-template.md)
