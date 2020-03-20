@@ -43,8 +43,8 @@ $ node increment.js
 11
 ```
 
-これは算術の`+`\(加算\)を期待してこの関数を作ったと思われるところに文字列が入ってしまったため、`+`が文字列連結として解釈されてしまったことが原因です。  
-もしこれが金額の計算だったとしたら大変なことになりますね。
+これは算術演算子の`+`\(加算\)を期待してこの関数を作ったと思われるところに文字列が入ってしまったため、`+`が文字列連結として解釈されてしまったことが原因です。  
+もしこれが金額の計算だったとしたら大変なことになります。
 
 TypeScriptを使うと、コーディングの時点でこのような型の不一致による意図しない挙動を抑えられるようになります。
 
@@ -62,7 +62,7 @@ $ mv increment.js increment.ts
 Parameter 'num' implicitly has an 'any' type, ...
 ```
 
-これは、TypeScriptはこの引数に対していかなる型情報も与えられていない\(いわゆる`any`\)よということを言っています。そこで型を付加します。付加する型は`number`です。
+これは、TypeScriptはこの引数に対していかなる型情報も与えられていない\(いわゆる`any`\)よということを言っています。そこで型を付加します。付加する型は`number`型です。
 
 ```typescript
 function increment(num: number) {
@@ -78,7 +78,7 @@ console.log(increment('1'));
 Argument of type '"1"' is not assignable to parameter of type 'number'.`
 ```
 
-引数の`'1'`は`number`ではないよという至極まっとうな指摘です。
+引数の`'1'`は`number`型ではないよという至極まっとうな指摘です。
 
 ひとまずこの警告を完全無視してトランスパイルをしてみます。
 
@@ -111,7 +111,7 @@ function increment(num: number): number {
 }
 ```
 
-もちろん、この関数で戻り値を`string`など`number`ではない型に設定するとTypeScriptから指摘を受けます。
+もちろん、この関数で戻り値を`string`型など`number`型ではない型に設定するとTypeScriptから指摘を受けます。
 
 ```typescript
 increment.ts:2:3 - error TS2322: Type 'number' is not assignable to type 'string'.

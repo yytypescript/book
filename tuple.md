@@ -33,7 +33,7 @@ list[0].
 const list: [number, string, boolean] = tuple();
 ```
 
-同様に関数の戻り値を書くことができます。
+同様に関数の戻り値も書くことができます。
 
 ```typescript
 function tuple(): [number, string, boolean] {
@@ -71,17 +71,17 @@ list[5];
 TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。その時TypeScriptでは`Promise.all()`というものを使用します。  
 `Promise`についての詳しい説明は本書に専門の項目がありますので譲りますが、この時タプルが役に立ちます。
 
-たとえば以下のような処理に時間が`3`秒、`5`秒かかる関数`takes3Seconds(), takes5Seconds()`があるとします。
+たとえば以下のような処理に時間が`3`秒、`5`秒かかる関数`takes3Seconds()`、`takes5Seconds()`があるとします。
 
 ```typescript
 async function takes3Seconds(): Promise<string> {
-    // ...
-    return 'finished!';
+  // ...
+  return 'finished!';
 }
 
 async function takes5Seconds(): Promise<number> {
-    // ...
-    return -1;
+  // ...
+  return -1;
 }
 ```
 
@@ -96,8 +96,8 @@ const num = await takes5Seconds();
 
 ```typescript
 const tuple: [string, number] = await Promise.all([
-    takes3Seconds(),
-    takes5Seconds()
+  takes3Seconds(),
+  takes5Seconds()
 ]);
 ```
 
@@ -106,8 +106,8 @@ const tuple: [string, number] = await Promise.all([
 
 ```typescript
 const tuple: [number, string] = await Promise.all([
-    takes5Seconds(),
-    takes3Seconds()
+  takes5Seconds(),
+  takes3Seconds()
 ]);
 ```
 
