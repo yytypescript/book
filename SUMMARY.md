@@ -7,7 +7,8 @@
 * [配列](array.md)
 * [タプル](tuple.md)
 * [ユニオン型](union.md)
-* [ジェネリクス](generics.md)
+* [ジェネリクス](generics/README.md)
+  * [型変数](generics/type-variables.md)
 * [\[DOING\]ページテンプレート](todotenpurto.md)
 
 ## 執筆者向け情報 <a id="writing"></a>

@@ -4,7 +4,7 @@
 
 ## ジェネリクスが解決する問題
 
-ジェネリクスが具体的にどのような問題を解決するのか見ていきましょう。ここに、`chooseRandomly`という普通の関数があります。この関数は、2つの文字列を引数に受け取り、五分五分の確率で第1引数か第2引数の値を抽選して返します。
+ジェネリクスが具体的にどのような問題を解決するのか見ていきましょう。ここに、`chooseRandomlyString`という普通の関数があります。この関数は、2つの文字列を引数に受け取り、五分五分の確率で第1引数か第2引数の値を抽選して返します。
 
 ```typescript
 function chooseRandomlyString(v1: string, v2: string): string {
@@ -12,13 +12,13 @@ function chooseRandomlyString(v1: string, v2: string): string {
 }
 ```
 
-`chooseRandomly`は文字列の抽選に限っては、この関数を再利用していくことができます。
+`chooseRandomlyString`は文字列の抽選に限っては、この関数を再利用していくことができます。
 
 ```typescript
 const winOrLose = chooseRandomlyString("勝ち", "負け");
 ```
 
-次に、文字列だけでなく数値の抽選も同じロジックで行う必要が出てきたと考えてみましょう。`chooseRandomly`は文字列にしか対応していないので、数値用の関数を新設しないとなりません。
+次に、文字列だけでなく数値の抽選も同じロジックで行う必要が出てきたと考えてみましょう。`chooseRandomlyString`は文字列にしか対応していないので、数値用の関数を新設しないとなりません。
 
 ```typescript
 // 数値用の抽選関数
