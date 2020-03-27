@@ -6,6 +6,7 @@
 * [簡単な関数をCLIで作ってみよう](make-a-simple-function-with-cli.md)
 * [配列](array.md)
 * [タプル](tuple.md)
+* [Enum](enum.md)
 * [ユニオン型](union.md)
 * [ジェネリクス](generics/README.md)
   * [型変数](generics/type-variables.md)
