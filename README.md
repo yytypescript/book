@@ -1,6 +1,4 @@
 # TOP
 
-本書はTypeScript入門書です。
-
-
+## サバイバルTypeScript 〜実務で使うなら最低限ここだけはおさえておきたいTypeScript入門〜\(仮称\)
 
