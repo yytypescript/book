@@ -1,6 +1,6 @@
 # Table of contents
 
-* [TOP](README.md)
+* [はじめに](README.md)
 * [TypeScriptの良さ](good-about-typescript.md)
 * [開発環境の準備](setup.md)
 * [簡単な関数をCLIで作ってみよう](make-a-simple-function-with-cli.md)
