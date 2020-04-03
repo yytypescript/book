@@ -16,7 +16,7 @@ JavaScriptはブラウザ上で動作するプログラミング言語に対し�
 
 #### なぜTypeScript開発環境にNode.jsが必要なのか
 
-Node.jsを利用してデスクトップアプリやWebサーバーなどを作成することができます。TypeScriptの開発環境にNode.jsが必要な理由はTypeScriptコンパイラを利用するためです。
+TypeScriptの開発環境にNode.jsが必要な理由はTypeScriptコンパイラ\(tsc\)を利用するためです。
 
 ### Node.jsのインストール
 
