@@ -25,6 +25,7 @@
   * [0005-ライセンスについて](writing/pdr/0005-raisensunitsuite.md)
   * [0006-語末には「です」「ます」\(敬体\)に統一する](writing/pdr/0006-use-desu-masu.md)
   * [0007-関数定義のサンプルコードには極力functionを使う](writing/pdr/0007-use-function-for-sample-code.md)
+  * [0008-サンプルコードではInterfaceよりType Aliasを優先して使う](writing/pdr/0008-prefer-type-alias-over-interface.md)
   * [PDRテンプレート](writing/pdr/__pdr-template.md)
 * [exportとexport defaultどちらを使うべきか？Pros/Consある話](exporttoexport-defaultdochirawoubekikaprosconsaru.md)
 

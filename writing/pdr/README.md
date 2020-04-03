@@ -27,7 +27,7 @@ description: >-
 
 {% page-ref page="0007-use-function-for-sample-code.md" %}
 
-
+{% page-ref page="0008-prefer-type-alias-over-interface.md" %}
 
 ### テンプレート
 
