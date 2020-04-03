@@ -8,6 +8,7 @@
 * [タプル](tuple.md)
 * [Enum](enum.md)
 * [ユニオン型](union.md)
+* [インターフェース](intfsu.md)
 * [ジェネリクス](generics/README.md)
   * [型変数](generics/type-variables.md)
 * [\[DOING\]ページテンプレート](todotenpurto.md)
