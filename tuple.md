@@ -1,6 +1,6 @@
 # タプル
 
-TypeScriptは1値のみ返却可能です。戻り値に複数の値を返したい時に、配列を返しつつ中に様々な値を入れることがあります。なお以下の関数の返却値は定数になっていますが、実際は演算した結果だと解釈してください。
+TypeScriptの関数は1値のみ返却可能です。戻り値に複数の値を返したい時に、配列を返しつつ中に様々な値を入れることがあります。なお以下の関数の戻り値は定数になっていますが、実際は演算した結果だと解釈してください。
 
 ```typescript
 function tuple() {
@@ -13,7 +13,7 @@ function tuple() {
 
 ## 配列が抱える問題
 
-上記例では戻り値の型として何が妥当でしょうか。配列のページから読み進めていただいた方は`any[]`または`unknown[]`が型の候補として浮かぶと思います。
+上記例では戻り値の型として何が妥当でしょうか。配列のページから読み進めていただいた方なんでも入れられる型ということで`any[]`または`unknown[]`が型の候補として思い浮かぶ人もいるかと思います。
 
 ```typescript
 const list: unknown[] = tuple();
@@ -27,7 +27,7 @@ list[0].
 
 ## タプルの型
 
-タプルの型は至極簡単です。`[]`を書いて中に型を書くだけです。つまり、上記関数`tuple()`は以下のような戻り値を持っていると言えます。
+タプルの型は簡単です。`[]`を書いて中に型を書くだけです。つまり、上記関数`tuple()`は以下のような戻り値を持っていると言えます。
 
 ```typescript
 const list: [number, string, boolean] = tuple();
@@ -54,22 +54,28 @@ list[1].length;
 list[2].valueOf();
 ```
 
+`toExponential(), length, valueOf()`はそれぞれ`number`型、`string`型、`boolean`型のプロパティ、メソッドです。
+
 タプルを受けた変数は、タプルで定義した範囲外の要素に対してアクセスができません。
 
 ```typescript
 const list: [number, string, boolean] = tuple();
 
 list[5];
-
 // -> Tuple type '[number, string, boolean]' of length '3' has no element at index '5'.
 ```
 
-そのため`array.push()`のような、配列の要素を増やす操作をしてもその要素を使うことはできません。
+そのため`list.push()`のような、配列の要素を増やす操作をしてもその要素を使うことはできません。
 
 ## タプルを使う場面
 
-TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。その時TypeScriptでは`Promise.all()`というものを使用します。  
-`Promise`についての詳しい説明は本書に専門の項目がありますので譲りますが、この時タプルが役に立ちます。
+TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。その時TypeScriptでは`Promise.all()`というものを使用します。この時タプルが役に立ちます。  
+`Promise`についての詳しい説明は本書に専門の項目がありますので譲ります。ここでは`Promise<T>`という型の変数は`await`をその前につけると`T`が取り出せることだけ覚えておいてください。また、この`T`をジェネリクスと言いますが、こちらも専門の項目があるので譲ります。
+
+```typescript
+const promise: Promise<number> = yy();
+const num: number = await promise;
+```
 
 たとえば以下のような処理に時間が`3`秒、`5`秒かかる関数`takes3Seconds()`、`takes5Seconds()`があるとします。
 
@@ -88,8 +94,8 @@ async function takes5Seconds(): Promise<number> {
 この関数をそのまま実行すると`3 + 5 = 8`秒かかってしまいます。
 
 ```typescript
-const str = await takes3Seconds();
-const num = await takes5Seconds();
+const str: string = await takes3Seconds();
+const num: number = await takes5Seconds();
 ```
 
 これを`Promise.all()`を使うことで以下のように書くことができます。この時かかる時間は関数の中で最も時間がかかる関数、つまり`Math.max(3, 5) = 5`秒です。

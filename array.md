@@ -39,13 +39,6 @@ array.push('nu');
 // -> Argument of type '"nu"' is not assignable to parameter of type 'number'.
 ```
 
-あえて型を指定したくない時の方法として`any`と`unknown`があります。特に深い理由がなければ`unknown`を使用してください。
-
-```typescript
-const array1: any[] = [0, 'ab', true, null, undefined];
-const array2: unknown[] = [0, 'ab', true, null, undefined];
-```
-
 ## 要素へのアクセス
 
 配列のn番目の要素にアクセスするためには`array[n]`のように筆記します。これは他の言語でも大差ないと思いますがこの時は型のチェックが完全に働かないことに注意してください。
