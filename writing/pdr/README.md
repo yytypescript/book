@@ -23,6 +23,8 @@ description: >-
 
 {% page-ref page="0004-how-to-manage-article-status.md" %}
 
+{% page-ref page="0005-about-license.md" %}
+
 {% page-ref page="0006-use-desu-masu.md" %}
 
 {% page-ref page="0007-use-function-for-sample-code.md" %}
