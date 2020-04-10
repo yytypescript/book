@@ -85,7 +85,7 @@ description: 本書の利用者、及び執筆者のライセンスについて
 
 著作物としてどうなるか
 
-* [Wipipedia投稿者向けガイドライン](https://ja.wikipedia.org/wiki/Wikipedia:FAQ_%E6%8A%95%E7%A8%BF%E8%80%85%E5%90%91%E3%81%91)
+* [Wikipedia:FAQ 投稿者向け](https://ja.wikipedia.org/wiki/Wikipedia:FAQ_%E6%8A%95%E7%A8%BF%E8%80%85%E5%90%91%E3%81%91)
   * * [Wikipedia:著作権](https://ja.wikipedia.org/wiki/Wikipedia:%E8%91%97%E4%BD%9C%E6%A8%A9)
     * [Wikipedia:著作権問題](https://ja.wikipedia.org/wiki/Wikipedia:%E8%91%97%E4%BD%9C%E6%A8%A9%E5%95%8F%E9%A1%8C)
     * [Wikipedia:ガイドブック 著作権に注意](https://ja.wikipedia.org/wiki/Wikipedia:%E3%82%AC%E3%82%A4%E3%83%89%E3%83%96%E3%83%83%E3%82%AF_%E8%91%97%E4%BD%9C%E6%A8%A9%E3%81%AB%E6%B3%A8%E6%84%8F)
