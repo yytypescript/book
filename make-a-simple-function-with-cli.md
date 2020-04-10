@@ -38,7 +38,7 @@ console.log(increment('1'));
 
 呼び出し時の`1`が`'1'`になりました。これだけでこの関数の結果は大きく変わってしまいます。
 
-```text
+```bash
 $ node increment.js
 11
 ```
@@ -82,7 +82,7 @@ Argument of type '"1"' is not assignable to parameter of type 'number'.`
 
 ひとまずこの警告を完全無視してトランスパイルをしてみます。
 
-```text
+```bash
 $ tsc increment.ts
 ```
 

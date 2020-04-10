@@ -1,0 +1,243 @@
+# ユニオン型
+
+大元が動的な型付言語であるJavaScriptのため、成功した時は`number`型を返すけれど、失敗した時は`false`を返すといった関数を提供するパッケージもあります。つまり`A`型のときもあれば`B`型の時もある。ということをひっくるめたいときにこのユニオン型が使えます。
+
+## ユニオン型の宣言
+
+上記例のユニオン型を受ける変数は以下のように宣言できます。
+
+```typescript
+const numOrFalse: number | false = union();
+```
+
+関数の戻り値についても同様に書くことができます。
+
+```typescript
+function union(): number | false {
+  // ....
+  return false;
+}
+```
+
+`Type Alias`に使うこともできます。
+
+```typescript
+type PHPLikeReturnValue = number | false;
+```
+
+型を`|`で並べるだけです。上記例は2つの例ですが、いくつでも並べることができます。
+
+## 配列やジェネリクスで注意すること
+
+以下のような宣言は、おそらく希望通りの結果になりません。
+
+```typescript
+string | number[];
+Array<number> | string;
+```
+
+これは両方とも`string`型または`number[]`型であることを意味します。
+
+正しくは以下です。特に`array`方式で書いているときは`()`が必要になるので注意してください。
+
+```typescript
+(string | number)[];
+Array<string | number>;
+```
+
+## TypeScriptはどう解釈するか
+
+関数`union()`の戻り値を受けた定数`numOrFalse`のあとに`.`をつけると`number`型と`boolean`型のどちらもが持っているメソッド、プロパティが入力補完候補に表示されます。
+
+クラスについての説明はまだ先ですが、以下のようなクラス`Beast`と`Bird`があったとします。
+
+```typescript
+class Beast {
+  public legs: number = 4;
+
+  public walk(): void {
+    // ...
+  }
+
+  public alive(): boolean {
+    return true;
+  }
+}
+
+class Bird {
+  public legs: number = 2;
+  public wings: number = 2;
+
+  public fly(): void {
+    // ...
+  }
+
+  public alive(): boolean {
+    return true;
+  }
+}
+
+// ...
+
+const creature: Beast | Bird = union();
+
+creature.
+```
+
+するとこのユニオン型を返す関数を受けた定数`creature`は`Beast`と`Bird`が共に持つプロパティ、メソッドが使用できます。つまりこの場合`creature.legs`と`creature.alive()`が入力補完候補として表示されます。
+
+## ユニオン型で注意すること
+
+ユニオン型になった元の型がもっているプロパティ、メソッドが同じでも戻り値の型が異なる場合は、その戻り値もまたユニオン型になります。  
+以下のクラス`A, B`を考えます。
+
+```typescript
+class A {
+
+  public does(): number {
+    return 1;
+  }
+  
+  public makes(num: number): number {
+    return num;
+  }
+}
+
+class B {
+
+  public does(): string {
+    return '';
+  }
+  
+  public makes(str: string): string {
+    return str;
+  }
+}
+
+const uni: A | B = union();
+```
+
+`uni.does()`は以下のようなメソッドとして解釈されます。
+
+```typescript
+const done: string | number = uni.does();
+```
+
+また同じメソッド名でありながら引数の型が違うメソッドがあれば、その引数もユニオン型になります。さらに戻り値の型も異なれば同じようにユニオン型になります。
+
+つまり`uni.makes(arg)`は以下のようなメソッドであると解釈されます。
+
+```typescript
+const made: string | number = uni.makes(arg: string | number);
+```
+
+この時、引数の型を確定させても、戻り値の型に影響を与えません。他の言語にあるようなオーバーロードのような現象は起こりません。例えば`uni.makes(1)`と`number`型を引数に入れたとしても、これは`uni.makes(arg)`が`number`型を要求する`A`型と確定したと解釈されることはありません。よって戻り値`made`は`string | number`型のままです。
+
+## ユニオン型から型を確定させる
+
+JavaScriptはその変数、定数がどの型かを確定させる機能があります。もちろんTypeScriptにも存在し、その機能を用いて型が確定できた場合、TypeScriptはその型として見なしてくれます。このときよく使うのは`typeof`と`instanceof`です。
+
+主にプリミティブ型に対しては`typeof`を、クラスに対しては`instanceof`を使えば問題ありません。
+
+```typescript
+const prim: number | string = unionP();
+
+if (typeof prim === 'number') {
+  prim.
+  return;
+}
+
+prim.
+
+const creature: Beast | Bird = unionC();
+
+if (creature instanceof Bird) {
+  creature.
+}
+```
+
+上記例では`typeof`で`number`型と確定した`if`のブロックの中、つまり4行目で`.`をつけると`number`型のプロパティ、メソッドが入力補完候補として現れます。同様に`instanceof`で`Bird`と確定した`if`ブロックの中、つまり13行目で`.`をつけると`Bird`のインスタンスが持つプロパティ、メソッドが表示されます。
+
+またユニオン型が上記の`prim`、`creature`のように2択で、`typeof`、`instanceof`の`if`のブロック内で`return`が行われれば、`if`のブロックより下ではもう片方の型であると自動的に型を確定してくれます。上記例だと`typeof`で`number`型と確定した`if`ブロックは5行目で`return`をしているので、7行目以降では`prim`はもう片方の型である`string`型であることが確定し、入力補完候補も`string`型のものが表示されるようになります。
+
+## 定数を持たせる方法で型を確定させる
+
+以下のような`Type Alias`の`SuccessResponse`、`ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
+
+```typescript
+type SuccessResponse = {
+  success: true;
+  response: Data;
+};
+
+type ErrorResponse = {
+  success: false;
+  error: Error;
+};
+
+type Response = SuccessResponse | ErrorResponse;
+```
+
+ユニオン型の`Response`は2つのType Aliasが持つ`success`を共通のプロパティとして持ちますが片方は`true`でもう片方は`false`です。
+
+そしてこの`Request`を返すような関数`req()`があり、それを呼び戻り値を定数`res`で受けたとすると以下のようなことができます。
+
+```typescript
+const res: Response = req();
+
+if (res.success) {
+  // res.response ...
+} else {
+  // res.error ...
+}
+```
+
+`if`の条件が`true`になる、つまり`res.success`が`true`になるとそのブロックでは`res.response`が入力補完候補として表示されるようになります。一方`else`のブロックでは`res.error`が入力補完候補として表示されるようになります。これは`res.success`が`true`の場合は`SuccessResponse`であることが確定し`false`の場合は`ErrorResponse`であることが確定するからです。
+
+定数であれば`boolean`型の変数`true`、`false`に限らず他の型でも可能です。
+
+```typescript
+type English = {
+  iso639: 'en';
+  thanks: 'thank you very much';
+};
+
+type French = {
+  iso639: 'fr';
+  merci: 'merci beaucoup';
+};
+
+type German = {
+  iso639: 'de';
+  danke: 'danke schön';
+};
+
+type Langauge = English | French | German;
+
+const lang: Langauge = select();
+
+switch(lang.iso639) {
+  case 'en': {
+    return lang.thanks;
+  }
+  case 'fr': {
+    return lang.merci;
+  }
+  case 'de': {
+    return lang.danke;
+  }
+}
+```
+
+上記例では`string`型の`lang.iso639`がそれに該当します。
+
+`switch`を使いましたが、`switch`の時は`fallthrough`が発生する可能性があるため`break`、`return`がないと2つ目より下では入力補完候補に制限がでてしまうことに注意してください。
+
+{% hint style="info" %}
+これより下に記載されている事項は執筆完了時に削除願います
+{% endhint %}
+
+| メインライター | 対応スケジュール |
+| :--- | :--- |
+| jamashita | 03/13 執筆完了 |
+
