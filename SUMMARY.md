@@ -6,6 +6,7 @@
 * [作りながら学ぶTypeScript](handson/README.md)
   * [開発環境の準備](handson/setup.md)
   * [簡単な関数をCLIで作ってみよう](handson/make-a-simple-function-with-cli.md)
+* [TypeScriptオーバービュー](overview.md)
 * [関数](function.md)
 * [配列](array.md)
 * [タプル](tuple.md)
