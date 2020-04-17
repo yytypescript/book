@@ -459,7 +459,7 @@ type Parameter = {
 一眼見てでどれが必須で、どれが選択可かが非常にわかりづらいです。そこで先ほど紹介した`Required<T>`と`Partial<T>`をつかってプロパティを分離し、最後にインターセクション型を使い合成します。
 
 ```typescript
-type MandatoryParameter = Required<{
+type Mandatory = Required<{
   id: string;
   active: boolean;
   balance: number;
@@ -468,7 +468,7 @@ type MandatoryParameter = Required<{
   email: string;
 }>;
 
-type OptionalParameter = Partial<{
+type Optional = Partial<{
   index: number;
   photo: string;
   age: number;
@@ -477,7 +477,7 @@ type OptionalParameter = Partial<{
   address: string;
 }>;
 
-type Parameter = Readonly<MandatoryParameter & OptionalParameter>;
+type Parameter = Readonly<Mandatory & Optional>;
 ```
 
 ## インターフェイスとの違い
