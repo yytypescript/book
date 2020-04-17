@@ -275,6 +275,7 @@ person.name.givenName = 'Gorilla';
 ```typescript
 type Person = {
   surname: string;
+  middleName?: string;
   givenName: string;
 };
 ```
@@ -288,6 +289,7 @@ type Person = {
 ```typescript
 type ReadonlyPerson = {
   readonly surname: string;
+  readonly middleName?: string;
   readonly givenName: string;
 };
 ```
@@ -301,13 +303,24 @@ type ReadonlyPerson = {
 ```typescript
 type PartialPerson = {
   surname?: string;
+  middleName?: string;
   givenName?: string;
 };
 ```
 
 ### `Requied<T>`
 
-こちらは`Partial<T>`の逆で、全てのプロパティから`?`を取り去ります。つまり`Required<Partial<Person>>`は`Person`と同じです。
+こちらは`Partial<T>`の逆で、全てのプロパティから`?`を取り去ります。
+
+`Required<Person>`は以下と同じ型になります。
+
+```typescript
+type RequiredPerson = {
+  surname: string;
+  middleName: string;
+  givenName: string;
+};
+```
 
 ## `Index signatures`
 
@@ -419,7 +432,7 @@ const n: Never = '2';
 // -> Type '"2"' is not assignable to type 'never'.
 ```
 
-この`never`型にはいかなる変数も代入できません。使い道がまるでないように見えますが、実は少し役に立ちます。
+この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが、実は少し役に立ちます。
 
 ### インターセクション型を使いこなす
 
