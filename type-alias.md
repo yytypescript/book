@@ -270,7 +270,7 @@ person.name.givenName = 'Gorilla';
 
 ## 便利な組み込み型
 
-タイプエイリアスをより便利に使うためにいくつかの便利な組み込み型が定義されています。その中でも有用なものを紹介します。これが全てではありません。なお、以下ではタイプエイリアスの`Person`を使います。
+タイプエイリアスをより便利に使うためにいくつかの便利な組み込み型が定義されています。その中でも有用なものを紹介します。これらで全てではありません。なお、以下のタイプエイリアスを使うものとします。
 
 ```typescript
 type Person = {
@@ -311,7 +311,7 @@ type PartialPerson = {
 
 ## `Index signatures`
 
-オブジェクトのキーをあえて指定せず、プロパティのみを指定したい場合がああります。そのときに使えるのがこの`Index signatures`です。  
+オブジェクトのキーをあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこの`Index signatures`です。  
 プロパティが全て`string`型であるようなオブジェクトのタイプエイリアスは以下です。
 
 ```typescript
@@ -385,7 +385,7 @@ type Jekyll = {
 
 ## インターセクション型 `(Intersection types)`
 
-考え方はユニオン型と相対するもので、わかりやすく言ってしまうとオブジェクトの定義を合成させることを指します。
+考え方はユニオン型と相対するものです。ユニオン型が**どれか**を意味するならインターセクション型は**どれも**です。言い換えるとオブジェクトの定義を合成させることを指します。
 
 ```typescript
 type TwoDimensionPoint = {
@@ -408,9 +408,9 @@ const p: ThreeDimensionPoint = {
 
 xy平面上の点を表す`TwoDimensionPoint`を拡張してxyz平面上の点の`ThreeDimensionPoint`に変換しました。
 
-### プリミティブ値のインターセクション型
+### プリミティブ型のインターセクション型
 
-プリミティブ値のインターセクション型をつくると`never`という型ができます。
+プリミティブ型のインターセクション型をつくると`never`という型ができます。
 
 ```typescript
 type Never = string & number;
@@ -446,7 +446,7 @@ type Parameter = {
 一眼見てでどれが必須で、どれが選択可かが非常にわかりづらいです。そこで先ほど紹介した`Required<T>`と`Partial<T>`をつかってプロパティを分離し、最後にインターセクション型を使い合成します。
 
 ```typescript
-type RequiredParameter = Required<{
+type MandatoryParameter = Required<{
   id: string;
   active: boolean;
   balance: number;
@@ -464,22 +464,21 @@ type OptionalParameter = Partial<{
   address: string;
 }>;
 
-type Parameter = RequiredParameter & OptionalParameter;
+type Parameter = Readonly<MandatoryParameter & OptionalParameter>;
 ```
 
-## インターフェースとの違い
+## インターフェイスとの違い
 
-タイプエイリアスとインターフェースは機能が似通っており、誰もがどちらを使うべきか非常に困惑します。  
-本書では主にオブジェクトリテラルを指すときはタイプエイリアスを使用していますが、インターフェースを使っても特に問題がありません。  
-そこで、以下にタイプエイリアスとインターフェースの違いを挙げます。
+タイプエイリアスとインターフェイスは機能が似通っており、誰もがどちらを使うべきか非常に困惑します。  
+本書では主にオブジェクトリテラルを指すときはタイプエイリアスを使用していますが、インターフェイスを使っても特に問題がありません。  
+そこで、以下にタイプエイリアスとインターフェイスの違いを挙げます。
 
 ### プリミティブ型を別の名前で定義する
 
-インターフェースはオブジェクトの型を定義することだけができます。プリミティブ型に対してインターフェースを作ることはできません。
+インターフェイスはオブジェクトの型を定義することだけができます。プリミティブ型に対してインターフェイスを作ることはできません。
 
 ```typescript
-type NULL = null;
-type VOID = void;
+type nil = null;
 ```
 
 ### ユニオン型、インターセクション型を受ける
@@ -487,14 +486,13 @@ type VOID = void;
 ユニオン型、インターセクション型はタイプエイリアスのみが受けることができます。
 
 ```typescript
-type Nullable<T> = T | null;
-type Optional<T> = Some<T> | None<T>;
-type Parameter = RequiredParameters & OptionalParameters;
+type Maybe<T> = T | null | undefined;
+type Parameter = Mandatory & Optional;
 ```
 
 ### 拡張する
 
-インターフェースはインターセクション型の代わりに拡張することができます。
+インターフェイスはインターセクション型こそできませんが代わりに拡張することができます。
 
 ```typescript
 interface Parameter extends RequiredParameters, OptionalParameters {
@@ -503,7 +501,7 @@ interface Parameter extends RequiredParameters, OptionalParameters {
 
 ### `Declaration merging`
 
-インターフェースのみができる機能で、最もタイプエイリアスと異なる特徴です。JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array`クラスは`ES2016`で`array.includes()`が、`ES2019`で`array.flatMap()`が追加されました。
+インターフェイスのみができる機能で、最もタイプエイリアスと異なる特徴です。JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array`は`ES2016`で`array.includes()`が、`ES2019`で`array.flatMap()`が追加されました。
 
 インターフェースではファイルを分けて`Array<T>`というインターフェースを定義して、使用する環境に応じて読み込むファイルを変えるだけで実装ができます。
 
@@ -513,6 +511,7 @@ interface Array<T> {
   
   includes(...): boolean;
 }
+
 // ES2019.array.ts
 interface Array<T> {
   
@@ -526,7 +525,7 @@ interface Array<T> {
 type Array<T> = ES2016Array<T> & ES2019Array<T>;
 ```
 
-この`Declaration merging`の機能は`polyfill`を行うライブラリの型定義を見るとよく見ることができます。
+この`Declaration merging`の機能は`polyfill`を行うライブラリの型定義でよく見ることができます。
 
 {% hint style="info" %}
 これより下に記載されている事項は執筆完了時に削除願います
