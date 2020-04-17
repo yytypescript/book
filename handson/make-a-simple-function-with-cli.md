@@ -56,7 +56,7 @@ TypeScriptを使うと、コーディングの時点でこのような型の不�
 $ mv increment.js increment.ts
 ```
 
-これをエディタで開くと`increment`の引数にあたる`num`のところで何か言われます。
+これをエディタで開くと`increment()`の引数にあたる`num`のところで何か言われます。
 
 ```typescript
 Parameter 'num' implicitly has an 'any' type, ...
@@ -89,12 +89,10 @@ $ tsc increment.ts
 するとやはり警告が出てしまいます。
 
 ```typescript
-increment.ts:3:23 - error TS2345: Argument of type '"1"' is not assignable to parameter of type 'number'.
+Argument of type '"1"' is not assignable to parameter of type 'number'.
 
-3 console.log(increment('1'));
-                        ~~~
-
-
+console.log(increment('1'));
+                      ~~~
 Found 1 error.
 ```
 
@@ -114,10 +112,10 @@ function increment(num: number): number {
 もちろん、この関数で戻り値を`string`型など`number`型ではない型に設定するとTypeScriptから指摘を受けます。
 
 ```typescript
-increment.ts:2:3 - error TS2322: Type 'number' is not assignable to type 'string'.
+Type 'number' is not assignable to type 'string'.
 
-2   return num + 1;
-    ~~~~~~~~~~~~~~~
+return num + 1;
+~~~~~~~~~~~~~~~
 ```
 
 {% hint style="info" %}

@@ -1,6 +1,6 @@
-# ユニオン型
+# ユニオン型 \(Union types\)
 
-大元が動的な型付言語であるJavaScriptのため、成功した時は`number`型を返すけれど、失敗した時は`false`を返すといった関数を提供するパッケージもあります。つまり`A`型のときもあれば`B`型の時もある。ということをひっくるめたいときにこのユニオン型が使えます。
+大元が動的な型付言語であるJavaScriptのため、成功した時は`number`型を返すけれど、失敗した時は`false`を返すといった関数を提供するパッケージもあります。つまり`A`型のときもあれば`B`型の時もある。ということをひっくるめたい時にこのユニオン型が使えます。
 
 ## ユニオン型の宣言
 
@@ -19,7 +19,7 @@ function union(): number | false {
 }
 ```
 
-`Type Alias`に使うこともできます。
+タイプエイリアスに使うこともできます。
 
 ```typescript
 type PHPLikeReturnValue = number | false;
@@ -38,7 +38,7 @@ Array<number> | string;
 
 これは両方とも`string`型または`number[]`型であることを意味します。
 
-正しくは以下です。特に`array`方式で書いているときは`()`が必要になるので注意してください。
+正しくは以下です。特に配列を`array`方式で書いている時は`()`が必要になるので注意してください。
 
 ```typescript
 (string | number)[];
@@ -49,7 +49,7 @@ Array<string | number>;
 
 上記の関数`union()`の戻り値を受けた定数`numOrFalse`のあとに`.`をつけると`number`型と`boolean`型のどちらもが持っているメソッド、プロパティが入力補完候補に表示されます。
 
-クラスについての説明はまだ先ですが、以下のようなクラス`Beast`と`Bird`があったとします。
+以下のようなクラス`Beast`と`Bird`があったとします。
 
 ```typescript
 class Beast {
@@ -77,7 +77,9 @@ class Bird {
   }
 }
 
-// ...
+function union(): Beast | Bird {
+  // ...
+}
 
 const creature: Beast | Bird = union();
 
@@ -114,6 +116,10 @@ class B {
   }
 }
 
+function union(): A | B {
+  // ...
+}
+
 const uni: A | B = union();
 ```
 
@@ -125,22 +131,22 @@ const done: string | number = uni.does();
 
 また同じメソッド名でありながら引数の型が違うメソッドがあれば、その引数もユニオン型になります。さらに戻り値の型も異なれば同じようにユニオン型になります。
 
-つまり`uni.makes(arg)`は以下のようなメソッドであると解釈されます。
+つまり`uni.makes()`は以下のようなメソッドであると解釈されます。
 
 ```typescript
 const made: string | number = uni.makes(arg: string | number);
 ```
 
-この時、引数の型を確定させても、戻り値の型に影響を与えません。他の言語にあるようなオーバーロードのような現象は起こりません。例えば`uni.makes(1)`と`number`型を引数に入れたとしても、これは`uni.makes(arg)`が`number`型を要求する`A`型と確定したと解釈されることはありません。よって戻り値`made`は`string | number`型のままです。
+この時、引数の型を確定させても、戻り値の型に影響を与えません。他の言語にあるようなオーバーロード`(Overloads)`のような現象は起こりません。例えば`uni.makes(1)`と`number`型を引数に入れたとしても、これは`uni.makes(arg)`が`number`型を要求する`A`型と確定したと解釈されることはありません。よって戻り値`made`は`string | number`型のままです。
+
+ちなみにTypeScriptにも関数のオーバーロードが存在します。
 
 ## ユニオン型から型を確定させる
 
-JavaScriptはその変数、定数がどの型かを確定させる機能があります。もちろんTypeScriptにも存在し、その機能を用いて型が確定できた場合、TypeScriptはその型として見なしてくれます。このときよく使うのは`typeof`と`instanceof`です。
-
-主にプリミティブ型に対しては`typeof`を、クラスに対しては`instanceof`を使えば問題ありません。
+JavaScriptはその変数、定数がどの型かを確定させる機能があります。もちろんTypeScriptにも存在し、その機能を用いて型が確定できた場合、TypeScriptはその型として見なしてくれます。このときよく使うのは`typeof`と`instanceof`です。主にプリミティブ型に対しては`typeof`を、クラスに対しては`instanceof`を使えば問題ありません。
 
 ```typescript
-const prim: number | string = unionP();
+const prim: number | string = unionPrimitive();
 
 if (typeof prim === 'number') {
   prim.
@@ -149,7 +155,7 @@ if (typeof prim === 'number') {
 
 prim.
 
-const creature: Beast | Bird = unionC();
+const creature: Beast | Bird = unionClass();
 
 if (creature instanceof Bird) {
   creature.
@@ -162,7 +168,7 @@ if (creature instanceof Bird) {
 
 ## 定数を持たせる方法で型を確定させる
 
-以下のような`Type Alias`の`SuccessResponse`、`ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
+以下のようなタイプエイリアスの`SuccessResponse`、`ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
 
 ```typescript
 type SuccessResponse = {
@@ -178,9 +184,9 @@ type ErrorResponse = {
 type Response = SuccessResponse | ErrorResponse;
 ```
 
-ユニオン型の`Response`は2つのType Aliasが持つ`success`を共通のプロパティとして持ちますが片方は`true`でもう片方は`false`です。
+ユニオン型の`Response`は2つのタイプエイリアスが持つ`success`を共通のプロパティとして持ちますが片方は`true`でもう片方は`false`です。
 
-そしてこの`Request`を返すような関数`req()`があり、それを呼び戻り値を定数`res`で受けたとすると以下のようなことができます。
+そしてこの`Request`を返す関数`req()`があり、それを呼び戻り値を定数`res`で受けたとすると以下のようなことができます。
 
 ```typescript
 const res: Response = req();
@@ -194,7 +200,22 @@ if (res.success) {
 
 `if`の条件が`true`になる、つまり`res.success`が`true`になるとそのブロックでは`res.response`が入力補完候補として表示されるようになります。一方`else`のブロックでは`res.error`が入力補完候補として表示されるようになります。これは`res.success`が`true`の場合は`SuccessResponse`であることが確定し`false`の場合は`ErrorResponse`であることが確定するからです。
 
-定数であれば`boolean`型の変数`true`、`false`に限らず他の型でも可能です。
+`Optional`をユニオン型を使って表現するとこのようになるでしょう。
+
+```typescript
+type Some<T> = {
+  present: true;
+  value: T;
+};
+
+type None<T> = {
+  present: false;
+};
+
+type Optional<T> = Some<T> | None<T>;
+```
+
+定数であれば`boolean`型の変数`true, false`に限らず他の型でも可能です。
 
 ```typescript
 type English = {
@@ -217,15 +238,12 @@ type Langauge = English | French | German;
 const lang: Langauge = select();
 
 switch(lang.iso639) {
-  case 'en': {
+  case 'en':
     return lang.thanks;
-  }
-  case 'fr': {
+  case 'fr':
     return lang.merci;
-  }
-  case 'de': {
+  case 'de':
     return lang.danke;
-  }
 }
 ```
 

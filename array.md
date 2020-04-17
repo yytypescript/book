@@ -1,4 +1,4 @@
-# 配列
+# 配列 \(Array\)
 
 TypeScriptというよりかはJavaScriptの紹介になりますが、値をまとめて扱うコレクションとして有名な配列がTypeScriptにもあります。
 
@@ -14,9 +14,9 @@ const array2: Array<T> = [];
 1番目の筆記方法を単に`array`とよび、2番目の筆記方法を`generic`と呼びます。差はなく、プロジェクトで統一して使えればいいかと思います。ちなみに一般的なのは`array`です。  
 JavaScriptのlinterとして有名な`ESLint`では、この筆記方法をどちらかに統一することを強制するオプションもあります。
 
-`T`は使う時に決めることができるジェネリクスと呼ばれるものです。本書にも記載がありますのでそちらに詳細は譲りますが、この`T`はその配列が要素としてどの型を受け付けるかを示します。
+`T`は使う時に決めることができるジェネリクス\(Generics\)と呼ばれるものです。本書にも記載がありますのでそちらに詳細は譲りますが、この`T`はその配列が要素としてどの型を受け付けるかを示します。
 
-たとえば、以下は`T`を`number`とした例です。
+例えば、以下は`T`を`number`とした例です。
 
 ```typescript
 const list1: number[] = [1, 1.5, 2];
@@ -27,7 +27,6 @@ const list2: Array<number> = [1, 1.5, 2];
 
 ```typescript
 const array: number[] = [1, 'nu'];
-
 // -> Type 'string' is not assignable to type 'number'.
 ```
 
@@ -35,7 +34,6 @@ const array: number[] = [1, 'nu'];
 const array: number[] = [];
 
 array.push('nu');
-
 // -> Argument of type '"nu"' is not assignable to parameter of type 'number'.
 ```
 
@@ -65,7 +63,7 @@ const element: T = array[n];
 const element: T | undefined = array[n];
 ```
 
-配列を不特定個数の集合と扱うのではなく、ただの有限個の入れ物として扱い時はタプルを使うことができます。
+配列を不特定個数の集合と扱うのではなく、ただの有限個の入れ物として扱いたい時はタプルを使うことができます。
 
 {% hint style="info" %}
 これより下に記載されている事項は執筆完了時に削除願います
