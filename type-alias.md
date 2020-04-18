@@ -508,15 +508,17 @@ type Parameter = Mandatory & Optional;
 インターフェイスはインターセクション型こそできませんが代わりに拡張することができます。
 
 ```typescript
-interface Parameter extends RequiredParameters, OptionalParameters {
+interface Parameter extends Mandatory, Optional {
 }
 ```
 
 ### `Declaration merging`
 
-インターフェイスのみができる機能で、最もタイプエイリアスと異なる特徴です。JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array`は`ES2016`で`array.includes()`が、`ES2019`で`array.flatMap()`が追加されました。
+インターフェイスのみができる機能で、最もタイプエイリアスと異なる特徴です
 
-インターフェースではファイルを分けて`Array<T>`というインターフェースを定義して、使用する環境に応じて読み込むファイルを変えるだけで実装ができます。
+JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array`は`ES2016`で`array.includes()`が、`ES2019`で`array.flatMap()`が追加されました。
+
+インターフェースではファイルを分けて`Array<T>`というインターフェースを定義して、使用する環境に応じて読み込むファイルを変えるだけで`Array<T>`の型定義ができます。
 
 ```typescript
 // ES2016.array.ts
