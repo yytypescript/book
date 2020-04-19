@@ -182,7 +182,8 @@ JavaScriptでは引数が少ない時はその引数には`undefined`が渡さ�
 
 ## `Optional parameters, Default parameters`
 
-引数を省略したいことがあります。その時は`Optional parameters`と`Default parameters`を使用することができます。  
+引数を省略したいことがあります。その時は`Optional parameters`と`Default parameters`を使用することができます。
+
 上記の関数`distance()`は、現在は与えられた座標を元に原点からの距離を計算していますが、これを2点の距離を計算できるようにしたいとします。すると上記の関数`distance()`は以下のようになります。
 
 ```typescript
@@ -208,7 +209,8 @@ distance(q1);
 
 引数の`p2`の右隣に`?`がつきました。これで`p2`は省略可能な引数となり5, 6行目のどちらの書き方も受け付けるようになります。
 
-しかし、この`Optional parameters`は意味する型が少々変わります。内部的には`p2`は`Point`ではなく`Point | undefined`のユニオン型`(Union Types)`として解釈されます。ユニオン型の説明は先の章にあるため詳しい説明は譲りますが、ユニオン型は日本語で言うと**どれか**の意味です。  
+しかし、この`Optional parameters`は意味する型が少々変わります。内部的には`p2`は`Point`ではなく`Point | undefined`のユニオン型`(Union Types)`として解釈されます。ユニオン型の説明は先の章にあるため詳しい説明は譲りますが、ユニオン型は日本語で言うと**どれか**の意味です。
+
 ユニオン型が与えられた時は、どちらの型にもあるプロパティ、メソッドでなければ使うことができません。当然ながら`undefined`には`x, y`というプロパティは存在しないため、上記のコードはTypeScriptに指摘されます。
 
 この問題を解消したのが以下のふたつです。
@@ -306,6 +308,8 @@ distance(q1);
 distance(q1, undefined);
 ```
 
+入力がなかった時に初期値として使いたい値を、その引数の右に書きます。ここでは`p2`の右側の`= p0`がそれにあたります。
+
 `Optional parameters`と違いユニオン型ではないため、処理の分岐が不要になります。拡張性や見通しを考えれば`Default parameters`の方に軍配が上がるでしょう。
 
 なお`Readonly<T>`はオブジェクト`T`の書き換えをできなくさせるものです。つまりこの変数`p0`に対する代入はできません。`Readonly<Point>`は以下を意味し、代入しようすると以下の指摘を受けることになります。
@@ -341,7 +345,7 @@ function distance(p1: Point, p2: Point = inverse(p1)): number {
 }
 ```
 
-また、`Default parameters`は`Optional parameters`と異なり、最後に書く必要はありません。呼び出し側で`Default parameters`を使用させたい時は`undefined`を指定します。
+また、`Default parameters`は`Optional parameters`と異なり、最後に書く必要はありません。呼び出し側で`Default parameters`を使用させたい時は`undefined`を指定します。この時`null`ではこの役目を果たせないので注意してください。
 
 ```typescript
 const p0: Readonly<Point> = {
@@ -355,6 +359,8 @@ function distance(p1: Point = p0, p2: Point): number {
 
 distance(q1, q2);
 distance(undefined, q2);
+distance(null, q2);
+// -> Argument of type 'null' is not assignable to parameter of type 'Point | undefined'.
 ```
 
 ### `Default parameters`でできないこと
@@ -384,8 +390,8 @@ function average(...nums: number[]): number {
   }) / nums.length;
 }
 
-average(); // 0
-average(1, 3); // 2
+console.log(average()); // 0
+console.log(average(1, 3)); // 2
 ```
 
 0除算を防ぐ目的で少々処理が複雑になっていますが、可変の引数の前に`...`を付ければ、可変引数を受け付け、それらを配列として受けることができます。
@@ -398,7 +404,7 @@ average(1, 3); // 2
 average([1, 3, 5, 7, 9]);
 ```
 
-このように配列を直接渡してしまうと`average()`の関数内では要素数1の`number[][]`が渡されたと解釈されます。
+このように配列を直接渡してしまうと`average()`の関数内では要素数1の`number[][]`型が渡されたと解釈されます。
 
 また、可変個の引数を受け付ける関係上、`Rest parameters`より後ろにほかの引数を書くことができません。ただし`Rest parameters`の前であれば問題ありません。
 
@@ -411,12 +417,12 @@ function average(...nums: number[], subject: string): number {
 
 ### `Spread syntax`
 
-JavaScriptに組み込みのメソッドとして存在する`Math.max()`は`Rest parameters`を要求します。上記の通り配列をそのまま入れることができないので以下のようなことができません。
+JavaScriptに組み込みのメソッドとして存在する`Math.max()`は与えられた`number`型の引数の最大値を返却しますが引数として`Rest parameters`を要求します。上記の通り配列をそのまま入れることができないので以下のようなことができません。
 
 ```typescript
 const scores: number[] = mathExamination();
 
-Math.max(scores);
+const max: number = Math.max(scores);
 ```
 
 これは学校の試験をイメージして書いています。生徒の数は1年間ではそう増減はしないので、40人ぐらいの生徒なら力技でもなんとかなるかもしれません。
@@ -432,7 +438,7 @@ Math.max(scores[0], scores[1], scores[2], scores[3], scores[4], scores[5], score
 ```typescript
 const scores: number[] = mathExamination();
 
-Math.max(...scores);
+const max: number = Math.max(...scores);
 ```
 
 `Rest parameters`も`Spread syntax`もどちらも`...`と表記しますが片方は個々の引数を配列にし、もう片方は配列を個々の引数にします。
@@ -451,9 +457,9 @@ function bmi(height: number, weight: number): number {
 この関数は引数がどちらも`number`型なので入れ替えてしまうことがあります。22は平均的な体型ですが402はややとてつもなく肥満だと言えます。
 
 ```typescript
-bmi(170, 65);
+console.log(bmi(170, 65));
 // 22.49134948096886
-bmi(65, 170);
+console.log(bmi(65, 170));
 // 402.36686390532543
 ```
 
@@ -485,6 +491,7 @@ const height: number = 170;
 const weight: number = 65;
 
 bmi({height, weight});
+bmi({weight, height});
 ```
 
 ### `Destructuring assignment`でうれしいこと
@@ -525,7 +532,7 @@ bmi({height: 180, weight: 75});
 bmi({weight: 75, height: 180});
 ```
 
-さらに以下のように引数の型の右にも`Default parameters`をつけてあげれば引数自体を省略することができるようになります。
+さらに以下のように引数の型の右にも`Default parameters`を付けてあげれば引数自体を省略することができるようになります。
 
 ```typescript
 function bmi({height = 165, weight = 60}: Partial<TopSecret> = {}): number {
@@ -537,7 +544,7 @@ bmi();
 
 ## 引数の`this`
 
-`function`とクラスのメソッドの第1引数は`this`という特殊な引数を受けることができます。これは使用するコンテキストによって`this`の意味するところが変わってしまうこれらの関数、メソッドがどのコンテキストで使用されるべきなのかをTypeScriptに伝えるために使います。この`this`は呼び出し側では引数として指定する必要はなく、呼び出し側は第2引数以降を指定すれば問題ありません。
+`function`とクラスのメソッドの第1引数は`this`という特殊な引数を受けることができます。これは使用するコンテキストによって`this`の意味するところが変わってしまうこれらどのコンテキストで使用されるべきなのかをTypeScriptに伝えるために使います。この`this`は呼び出し側では引数として指定する必要はなく、呼び出し側は第2引数以降を指定すれば問題ありません。
 
 なお、アロー関数はこの`this`を持つことができません。それは前述のとおりアロー関数は宣言時の`this`が使われるため`this`が変動することがなく、そもそも不要だからです。
 
@@ -592,7 +599,7 @@ conosle.log(femaleToStr());
 // -> The 'this' context of type 'void' is not assignable to method's 'this' of type 'Female'.
 ```
 
-`femaleToStr()`のコンテキストが`Female`ではないとの指摘です。このTypeScriptを実行することはできません。  
+`femaleToStr()`のコンテキストが`Female`ではないとの指摘です。このコードを実行することはできません。  
 ちなみにこの対応をしていない`maleToStr()`は実行できますが実行時に例外が発生します。
 
 ```typescript
@@ -603,7 +610,7 @@ TypeError: Cannot read property 'name' of undefined
 
 ## 戻り値 `(Return value)`
 
-関数の戻り値を指定することができます。あえて書かなくてもTypeScript側で補完し、関数の戻り値として提供してくれますが、意図しない戻り値を返していないかの検査が働くので書いた方が良いでしょう。前述の通り書く位置が宣言と型で異なることに注意してください。
+関数の戻り値を指定することができます。あえて書かなくてもTypeScript側で補完し、関数の戻り値として提供してくれますが、意図しない戻り値を返していないかの検査が働くので書いた方が良いでしょう。前述の通り書く位置が実装と型で異なることに注意してください。
 
 戻り値はJavaScriptと同じく1値のみの返却です。一度に多くの値を戻したい場合はタプルの章を参照してください。
 
@@ -685,7 +692,7 @@ if (isDuck(animal)) {
 
 ```typescript
 const duck1: Duck = animal as Duck;
-const duck2: Duck = <Duck>animal;
+const duck2: Duck = <Duck> animal;
 ```
 
 これをより賢くやろうというのが`Type predicate`です。
@@ -700,7 +707,7 @@ function isDuck(animal: Duck): animal is Duck {
 }
 ```
 
-これでこの関数が`true`を返す時の`if`のブロックの中では`animal`は`Duck`型として解釈されるようになります。
+これで関数`isDuck()`が`true`を返す時の`if`のブロックの中では`animal`は`Duck`型として解釈されるようになります。
 
 ```typescript
 if (isDuck(animal)) {
@@ -773,7 +780,7 @@ if (optional.isPresent()) {
 また`Type predicate`は`false`の場合を定義することができません。つまり以下のような定義はできません。
 
 ```typescript
-public isPresent(): this is Some<T>, this is not None<T>;
+public abstract isPresent(): this is Some<T>, this is not None<T>;
 ```
 
 このような時は専用のメソッドを用意します。
@@ -892,6 +899,51 @@ op.power(3).multiply(2).power(3);
 
 このような時に戻り値に`this`を設定することができます。上記クラスの戻り値の`Operator, NewOperator`を全て`this`に置き換えると問題が解消されます。
 
+```typescript
+class Operator {
+  protected value: number;
+
+  public constructor(value: number) {
+    this.value = value;
+  }
+
+  public sum(value: number): this {
+    this.value += value;
+    return this;
+  }
+
+  public subtract(value: number): this {
+    this.value -= value;
+    return this;
+  }
+
+  public multiply(value: number): this {
+    this.value *= value;
+    return this;
+  }
+
+  public devide(value: number): this {
+    this.value /= value;
+    return this;
+  }
+}
+
+class NewOperator extends Operator {
+
+  public constructor(value: number) {
+    super(value);
+  }
+
+  public power(value: number): this {
+    this.value **= value;
+    return this;
+  }
+}
+
+const op: NewOperator = new NewOperator(2);
+op.power(3).multiply(2).power(3); // 4096
+```
+
 ## オーバーロード `(Overloads)`
 
 オーバーロードとは、関数の名称は同じでありながら異なる引数、戻り値を持つことができる機能です。TypeScriptもこの機能を用意しているのですが、大元がJavaScriptであることが災いし、やや使いづらいです。
@@ -929,7 +981,7 @@ distance(1, 3, 5, 7);
 
 ### オーバーロードでうれしいこと
 
-オーバーロードを定義しないで実装すると以下のような引数を考慮する必要があります。
+オーバーロードを定義しないで実装する、つまりオーバーロードの定義なしに実装すると以下のような引数を考慮しなければなりません。
 
 ```typescript
 distance(q1, 5, undefined, 8);

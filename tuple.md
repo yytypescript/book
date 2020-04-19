@@ -42,7 +42,7 @@ function tuple(): [number, string, boolean] {
 }
 ```
 
-配列の型はふたつの筆記方法がありましたがタプルはこの書き方しか存在しません。
+配列の型は`array, generic`というふたつの書き方がありましたがタプルはこの書き方しか存在しません。
 
 ## タプルへのアクセス
 
@@ -109,7 +109,7 @@ const tuple: [string, number] = await Promise.all([
 ]);
 ```
 
-この時`Promise.all()`の戻り値を受けた変数`tuple`は`[string, number]`型で実行する関数の`Promise<T>`のジェネリクスの部分とタプルの型の順番は一致します。つまり以下のように入れ替えたら、入れ変えた結果のタプルである`[number, string]`型が得られます。
+この時`Promise.all()`の戻り値を受けた変数`tuple`は`[string, number]`型です。実行する関数の`Promise<T>`のジェネリクスの部分とタプルの型の順番は一致します。つまり以下のように入れ替えたら、入れ変えた結果のタプルである`[number, string]`型が得られます。
 
 ```typescript
 const tuple: [number, string] = await Promise.all([
