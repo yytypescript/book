@@ -178,7 +178,7 @@ type Person = {
 };
 ```
 
-上記例に`middleName`というプロパティを追加し`?`を付与しました。こうすればこのタイプエイリアス`Person`は`surname, givenName`は必ず持っているが`middleName`は持っていない人がいるということを示していると解釈できます。
+上記例に`middleName`というプロパティを追加し`?`を付与しました。こうすればこのタイプエイリアス`Person`は`surname, givenName`は必ず持っているが`middleName`は持っていない人がいるということを示しています。
 
 この記号が付与されているプロパティを呼び出すとき、使用者はその値があるかないかを確定させる必要があります。あるときはタイプエイリアス通りの型、つまりこの場合は`string`型ですが、ないときは`undefined`として解釈されますのでその判定が必要になります。
 
@@ -250,13 +250,13 @@ const person: Person = {
   age: 79
 };
 
-person.age = 80;
-// -> Cannot assign to 'age' because it is a read-only property.
 person.name = {
   surname: 'Panda',
   givenName: 'Gorilla'
 };
 // -> Cannot assign to 'name' because it is a read-only property.
+person.age = 80;
+// -> Cannot assign to 'age' because it is a read-only property.
 ```
 
 これらが代入不可能なのはわかるかと思いますが、問題は以下です。
@@ -296,7 +296,7 @@ type ReadonlyPerson = {
 
 ### `Partial<T>`
 
-こちらは`?`を全てのプロパティに対して適用してくれる組み込み型です。
+`?`を全てのプロパティに対して適用してくれる組み込み型です。
 
 `Partial<Person>`は以下と同じ型になります。
 
@@ -310,7 +310,7 @@ type PartialPerson = {
 
 ### `Requied<T>`
 
-こちらは`Partial<T>`の逆で、全てのプロパティから`?`を取り去ります。
+`Partial<T>`の逆で、全てのプロパティから`?`を取り去ります。
 
 `Required<Person>`は以下と同じ型になります。
 
@@ -335,7 +335,7 @@ type Butterfly = {
 
 キーを表している変数`key`は別名でも構いません。
 
-もちろんこの`Butterfly`にはそれが`string`型であればなんでも入ります。
+もちろんこの`Butterfly`にはプロパティが`string`型であればなんでも入ります。
 
 ```typescript
 const bufferflies: Butterfly = {
@@ -432,7 +432,7 @@ const n: Never = '2';
 // -> Type '"2"' is not assignable to type 'never'.
 ```
 
-この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが、実は少し役に立ちます。
+この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが、後続のコードが実行されないことを示す時に使えます。
 
 ### インターセクション型を使いこなす
 
@@ -496,7 +496,7 @@ type Nil = null;
 
 ### ユニオン型、インターセクション型を受ける
 
-ユニオン型、インターセクション型はタイプエイリアスのみが受けることができます。このとき、ユニオン型インターセクション型の対象となるものはタイプエイリアスでもインターフェイスでもどちらでも構いません。
+ユニオン型、インターセクション型はタイプエイリアスのみが受けることができます。このとき、ユニオン型とインターセクション型の対象となるものはタイプエイリアスでもインターフェイスでもどちらでも構いません。
 
 ```typescript
 type Nullable<T> = T | null;
@@ -530,10 +530,10 @@ type B = {
 
 ```typescript
 type C = A & B;
-
-type C = {
-  x: never;
-};
+// ->
+// type C = {
+//   x: never;
+// };
 ```
 
 インターフェイスで拡張するとコードが動作しなくなります。
@@ -541,7 +541,7 @@ type C = {
 ```typescript
 interface D extends A, B {
 }
-// Interface 'D' cannot simultaneously extend types 'A' and 'B'.
+// -> Interface 'D' cannot simultaneously extend types 'A' and 'B'.
 ```
 
 ### `Declaration merging`
