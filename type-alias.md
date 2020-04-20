@@ -93,7 +93,7 @@ const family: {
 
 ## タイプエイリアスの定義
 
-エイリアスと名前のいう通り、ある型に対する別名をつけることが目的です。例えばはじめに紹介した人物名であれば以下のようになります。
+エイリアスと名前の通り、ある型に対する別名をつけることが目的です。例えばはじめに紹介した人物名であれば以下のようになります。
 
 ```typescript
 type Person = {
@@ -107,7 +107,7 @@ const person: Person = {
 };
 ```
 
-家族は以下のようになるでしょう。
+これを使えば家族は以下のようになるでしょう。
 
 ```typescript
 type Parents = {
@@ -266,7 +266,7 @@ person.name.surname = 'Panda';
 person.name.givenName = 'Gorilla';
 ```
 
-`Name`型のプロパティ`surname, givenName`はともに`readonly`ではないためこのように上書きができてしまいます。
+`Name`のプロパティ`surname, givenName`はともに`readonly`ではないためこのように上書きができてしまいます。
 
 ## 便利な組み込み型
 
@@ -400,6 +400,8 @@ type Jekyll = {
 
 考え方はユニオン型と相対するものです。ユニオン型が**どれか**を意味するならインターセクション型は**どれも**です。言い換えるとオブジェクトの定義を合成させることを指します。
 
+インターセクション型を作るためには合成したいオブジェクト同士を`&`で列挙します。
+
 ```typescript
 type TwoDimensionPoint = {
   x: number;
@@ -423,7 +425,7 @@ xy平面上の点を表す`TwoDimensionPoint`を拡張してxyz平面上の点�
 
 ### プリミティブ型のインターセクション型
 
-プリミティブ型のインターセクション型をつくると`never`という型ができます。
+プリミティブ型のインターセクション型をつくることもできますが、作ると`never`という型ができます。
 
 ```typescript
 type Never = string & number;
