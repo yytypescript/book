@@ -20,7 +20,6 @@
   * [ジェネリクス](features/generics/README.md)
     * [型変数](features/generics/type-variables.md)
   * [exportとexport defaultどちらを使うべきか？Pros/Consある話](features/exporttoexport-defaultdochirawoubekikaprosconsaru.md)
-* [\[DOING\]ページテンプレート](todotenpurto.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
