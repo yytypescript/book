@@ -27,7 +27,7 @@ Rubyのような動的な言語では、「ageはIntegerである」と固定す
 
 では、TypeScriptではRubyと違ってどのように書くのでしょうか。
 
-```text
+```typescript
 let age = 1
 age = "one"
 ```
