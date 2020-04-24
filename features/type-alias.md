@@ -576,11 +576,3 @@ type Array<T> = ES2016Array<T> & ES2019Array<T>;
 
 この`Declaration merging`の機能は`polyfill`を行うライブラリの型定義でよく見ることができます。
 
-{% hint style="info" %}
-これより下に記載されている事項は執筆完了時に削除願います
-{% endhint %}
-
-| メインライター | 対応スケジュール |
-| :--- | :--- |
-| jamashita | 04/17終了 |
-

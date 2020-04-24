@@ -176,13 +176,5 @@ interface Teacher extends Person {
 }
 ```
 
-{% hint style="info" %}
-これより下に記載されている事項は執筆完了時に削除願います
-{% endhint %}
-
-| メインライター | 対応スケジュール |
-| :--- | :--- |
-| t-yng | 4/3 初版の執筆完了 |
-
 
 

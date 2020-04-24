@@ -120,13 +120,3 @@ const tuple: [number, string] = await Promise.all([
 
 `take3seconds()`の方が早く終わるから、先に`tuple`に入るということはありません。引数に渡した順番の通りに`tuple`の要素の型は決まります。
 
-{% hint style="info" %}
-これより下に記載されている事項は執筆完了時に削除願います
-{% endhint %}
-
-| メインライター | 対応スケジュール |
-| :--- | :--- |
-| jamashita | 03/06 執筆完了 |
-
-
-

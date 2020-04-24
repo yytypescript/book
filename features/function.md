@@ -1013,13 +1013,3 @@ Argument of type 'Point' is not assignable to parameter of type 'number'.
 
 これはTypeScriptが`distance()`を`number`型の引数4個版で受けていると解釈している時の指摘です。
 
-{% hint style="info" %}
-これより下に記載されている事項は執筆完了時に削除願います
-{% endhint %}
-
-| メインライター | 対応スケジュール |
-| :--- | :--- |
-| jamashita | 04/03 執筆完了 |
-
-
-
