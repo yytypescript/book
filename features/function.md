@@ -22,7 +22,7 @@ const increment = function(num: number): number {
 };
 ```
 
-### 匿名かつアロー関数 `(Arrow functoins)`
+### 匿名かつアロー関数 `(Arrow functions)`
 
 ```typescript
 const increment = (num: number): number => {
@@ -42,7 +42,7 @@ const increment = (num: number): number => num + 1;
 
 この時は`return`を**書いてはいけない**ので注意してください。ちなみに1行と書きましたが、厳密にはステートメントがひとつであれば改行しても問題ありません。
 
-さらに、引数が1個である場合はカッコも省略できます。
+さらに、引数が1個である場合は`()`も省略できます。
 
 ### 匿名かつアロー関数1行かつ引数が1個版
 
@@ -99,13 +99,14 @@ class JetLag {
 }
 ```
 
-このクラスのメソッド`replyFunction(), replyArrow()`は、どちらも指定したミリ秒後にコンストラクタで指定した文字列を表示しますが、実際に実行してみると以下のようになります。
+このクラスのメソッド`replyFunction(), replyArrow()`は、どちらも指定したミリ秒後にコンストラクタで指定した文字列を表示するように見えますが`replyFunction()`に問題があります。
 
 ```typescript
 const jetlag: JetLag = new JetLag('i can hear you later');
 
 jetlag.replyFunction(10);
-// undefined
+// -> 'this' implicitly has type 'any' because it does not have a type annotation.
+// -> An outer value of 'this' is shadowed by this container.
 jetlag.replyArrow(10);
 // 'i can hear you later'
 ```
@@ -132,7 +133,7 @@ public replyFunction(ms: number): void {
 
 #### `function() {}`の`this`を束縛する
 
-`function`には`bind()`という関数があります。その関数に`function`で`this`として使用したい変数を引数に入れます。
+`function`には`bind()`という関数があります。その関数に`function`の中で`this`として使用したい変数を引数に入れます。
 
 ```typescript
 public replyFunction(ms: number): void {
@@ -141,6 +142,8 @@ public replyFunction(ms: number): void {
   }.bind(this), ms);
 }
 ```
+
+ただし、この方法だけではJavaScriptでは実行できるのですが、TypeScriptでは実行できません。この`bind()`を使って意図する動作を得るには後述する**引数の`this`**を併せて使う必要があります。
 
 `() => {}`が実装される前まではほぼ必須だった`this`の取り扱いですが、現在ではそこまで必要ではなくなりました。
 
@@ -284,6 +287,21 @@ distance(q1, undefined);
 
 6行目のような書き方は指摘を受けます、動作させるためには9行目のように書かなければいけません。
 
+### 省略可能な`undefined`をTypeScriptはどう解釈しているか
+
+実はこの`Optional parameters`としても使われる省略可能な`undefined`は、TypeScriptは`void`という専用の型を作って定義しています。つまり`Optional parameters`は以下のように書き換えることもできます。
+
+```typescript
+function distance(p1: Point, p2: Point | void): number
+  // ...
+}
+
+distance(q1, q2);
+distance(q1);
+```
+
+この`void`型は値を指定しない`undefined`と、意図的に指定している`undefined`の2値を持っていますが`undefined`型は意図的に指定している`undefined`の1値のみを持っているため、このような差が生まれます。
+
 ### `Optional parameters`でできないこと
 
 `Optional parameters`は必ず最後に書かなければいけません。つまり、以下のように`Optional parameters`より後ろに普通の引数を書くことはできません。
@@ -312,7 +330,7 @@ function distance(p1: Point, p2?: Point): number {
 もちろん動くのですが、意図がわかりにくくなってしまいます。このような時に便利なのが`Default parameters`です。`Default parameters`を使用すると以下のように書けます。
 
 ```typescript
-const p0: Readonly<Point> = {
+const p0: Point = {
   x: 1,
   y: 2
 };
@@ -329,18 +347,6 @@ distance(q1, undefined);
 入力がなかった時に初期値として使いたい値を、その引数の右に書きます。ここでは`p2`の右側の`= p0`がそれにあたります。
 
 `Optional parameters`と違いユニオン型ではないため、処理の分岐が不要になります。拡張性や見通しを考えれば`Default parameters`の方に軍配が上がるでしょう。
-
-なお`Readonly<T>`はオブジェクト`T`の書き換えをできなくさせるものです。つまりこの変数`p0`に対する代入はできません。`Readonly<Point>`は以下を意味し、代入しようすると以下の指摘を受けることになります。
-
-```typescript
-type ReadOnlyPoint = {
-  readonly x: number;
-  readonly y: number;
-};
-
-p0.x = -2;
-// -> Cannot assign to 'x' because it is a read-only property.
-```
 
 ### 初期値に関数の戻り値を使う
 
@@ -363,7 +369,7 @@ function distance(p1: Point, p2: Point = inverse(p1)): number {
 }
 ```
 
-また、`Default parameters`は`Optional parameters`と異なり、最後に書く必要はありません。呼び出し側で`Default parameters`を使用させたい時は`undefined`を指定します。この時`null`ではこの役目を果たせないので注意してください。
+また、`Default parameters`は`Optional parameters`と異なり、最後に書く必要はありません。呼び出し側で`Default parameters`を使用させたい時は`undefined`を指定します。この時`null`ではこの役目を果たせないので注意してください。もちろん末尾の`Default parameters`であれば省略が可能です。
 
 ```typescript
 const p0: Readonly<Point> = {
@@ -422,9 +428,9 @@ console.log(average(1, 3)); // 2
 average([1, 3, 5, 7, 9]);
 ```
 
-このように配列を直接渡してしまうと`average()`の関数内では要素数1の`number[][]`型が渡されたと解釈されます。
+このように配列を直接渡してしまうと`average()`の関数内では要素数1の`number[][]`型が渡されたと解釈されます。もちろん`average()`の期待する引数の型は`number[]`型なので、このコードを実行することはできません。
 
-また、可変個の引数を受け付ける関係上、`Rest parameters`より後ろにほかの引数を書くことができません。ただし`Rest parameters`の前であれば問題ありません。
+また、可変個の引数を受け付ける関係上、`Rest parameters`より後ろにほかの引数を置くことができません。ただし`Rest parameters`の前であれば問題ありません。
 
 ```typescript
 function average(...nums: number[], subject: string): number {
@@ -531,7 +537,7 @@ function bmi({height = 165, weight = 60}: Partial<TopSecret>): number {
 }
 ```
 
-なお、`Partial<T>`とは、オブジェクト`T`のプロパティ、メソッドを省略可能にします。つまり`Partial<TopSecret>`は以下と同じです。
+なお、`Partial<T>`とは、オブジェクト`T`のプロパティ、メソッドを省略可能にします。つまり`Partial<TopSecret>`は以下と同じです。この時の`?`は引数で説明した`Optional parameters`と意味するものは同じです。
 
 ```typescript
 type PartialTopSecret = {
@@ -562,7 +568,7 @@ bmi();
 
 ## 引数の`this`
 
-`function`とクラスのメソッドの第1引数は`this`という特殊な引数を受けることができます。これは使用するコンテキストによって`this`の意味するところが変わってしまうこれらどのコンテキストで使用されるべきなのかをTypeScriptに伝えるために使います。この`this`は呼び出し側では引数として指定する必要はなく、呼び出し側は第2引数以降を指定すれば問題ありません。
+`function`とクラスのメソッドの第1引数は`this`という特殊な引数を受けることができます。これは使用するコンテキストによって`this`の意味するところが変わってしまうこれらがどのコンテキストで使用されるべきなのかをTypeScriptに伝えるために使います。この`this`は呼び出し側では引数として指定する必要はなく、第2引数以降を指定すれば問題ありません。
 
 なお、アロー関数はこの`this`を持つことができません。それは前述のとおりアロー関数は宣言時の`this`が使われるため`this`が変動することがなく、そもそも不要だからです。
 
@@ -660,7 +666,7 @@ function doNothing6(): undefined {
 }
 ```
 
-これは`undefined`から`void`への変換は可能であるのに対して`void`から`undefined`への変換が不可能であることに由来します。
+これは`undefined`型が明示的な`undefined`の1値のみを持つのに対し`void`型は明示的な`undefined`と暗黙の`undefined`の2値を持つことに由来します。
 
 ```typescript
 function returnUnfefined(): undefined {
@@ -696,7 +702,7 @@ function isDuck(animal: Animal): boolean {
 
 動物がアヒルかどうかを判定するその名も`isDuck()`です。
 
-ですが、この関数は使用者に対してその変数がアヒルかどうかを伝えているだけでTypeScriptに対してそれがアヒルであることを伝えるためにはキャストが必要になります。
+ですが、この関数は使用者に対してその変数がアヒルかどうかを伝えているだけです。TypeScriptに対してそれがアヒルであることを伝えるためにはキャストが必要になります。
 
 ```typescript
 if (isDuck(animal)) {
@@ -720,7 +726,7 @@ const duck2: Duck = <Duck> animal;
 `Type predicate`の宣言は戻り値が`boolean`型の関数に対して適用でき、戻り値の`boolean`を以下のように書き替えます。
 
 ```typescript
-function isDuck(animal: Duck): animal is Duck {
+function isDuck(animal: Animal): animal is Duck {
   // ...
 }
 ```
@@ -760,7 +766,7 @@ animal.quacks();
 
 ## `Type predicate, Assertion functions`のつかいかた
 
-値が存在するかしないかを表現するとき、言語によっては`Optional`という入れ物のクラスを用意することがあります。このクラスを抽象クラスとして定義し、サブクラスに値が存在する`Some`と存在しない`None`を用意すると`Optional`に`Type predicate`を使うことができます。
+値が存在するかしないかを表現する時、言語によっては`Optional`という入れ物のクラスを用意することがあります。このクラスを抽象クラスとして定義し、サブクラスに値が存在する`Some`と存在しない`None`を用意すると`Optional`に`Type predicate`を使うことができます。
 
 ```typescript
 abstract class Optional<T> {
@@ -915,7 +921,7 @@ op.power(3).multiply(2).power(3);
 
 これは`op.multiply()`の戻り値が`Operator`だからです。`Operator`には`power()`というメソッドがないためこのような問題が発生します。
 
-このような時に戻り値に`this`を設定することができます。上記クラスの戻り値の`Operator, NewOperator`を全て`this`に置き換えると問題が解消されます。
+このような時、戻り値に`this`を設定することができます。上記クラスの戻り値の`Operator, NewOperator`を全て`this`に置き換えると問題が解消されます。
 
 ```typescript
 class Operator {
@@ -968,13 +974,13 @@ op.power(3).multiply(2).power(3); // 4096
 
 ### オーバーロードの定義
 
-オーバーロードはその関数が受け付けたい引数、戻り値の組を書きます。例えば先ほど使用した2点の距離を求める関数`distance()`をオーバーロードで定義します。
+オーバーロードはその関数が受け付けたい引数、戻り値の組を実装する関数の上に書きます。例えば先ほど使用した2点の距離を求める関数`distance()`をオーバーロードで定義すると以下のようになります。なお、この例では戻り値は全て`number`型ですが、別の型にしても問題ありません。
 
 ```typescript
 function distance(p: Point): number;
 function distance(p1: Point, p2: Point): number;
 function distance(x: number, y: number): number;
-function distance(x1: number, y1: numebr, x2: number, y2: number);
+function distance(x1: number, y1: numebr, x2: number, y2: number): number;
 ```
 
 ### オーバーロードの実装
@@ -982,6 +988,10 @@ function distance(x1: number, y1: numebr, x2: number, y2: number);
 ここからが大変です。実装はオーバーロードで定義した全てをひとつの関数で処理しなければいけません。つまり`distance()`の実装は以下のようになります。これが呼び出し側では**あたかも**他言語のオーバーロードのようになります。
 
 ```typescript
+function distance(p: Point): number;
+function distance(p1: Point, p2: Point): number;
+function distance(x: number, y: number): number;
+function distance(x1: number, y1: numebr, x2: number, y2: number): number;
 function distance(
   arg1: Point | number,
   arg2?: Point | number,

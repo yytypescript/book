@@ -107,7 +107,7 @@ const person: Person = {
 };
 ```
 
-これを使えば家族は以下のようになるでしょう。
+タイプエイリアスの中でタイプエイリアスを使うこともできます。これを使えば家族は以下のようになるでしょう。
 
 ```typescript
 type Parents = {
@@ -180,7 +180,7 @@ type Person = {
 
 上記例に`middleName`というプロパティを追加し`?`を付与しました。こうすればこのタイプエイリアス`Person`は`surname, givenName`は必ず持っているが`middleName`は持っていない人がいるということを示しています。
 
-この記号が付与されているプロパティを呼び出すとき、使用者はその値があるかないかを確定させる必要があります。あるときはタイプエイリアス通りの型、つまりこの場合は`string`型ですが、ないときは`undefined`として解釈されますのでその判定が必要になります。
+この記号が付与されているプロパティを呼び出す時、使用者はその値があるかないかを確定させる必要があります。ある時はタイプエイリアス通りの型、つまりこの場合は`string`型ですが、ない時は`undefined`として解釈されますのでその判定が必要になります。
 
 ちなみに`string`型あるいは`undefined`であればユニオン型を使うと`string | undefined`と書くことができるのですが、これと`?`では明確に違う点があります。それは`undefined`とのユニオン型で書いた場合、**宣言時に省略ができなくなります**。つまり宣言時に値を持っていないことを`undefined`として明記する必要があります。
 
@@ -197,6 +197,8 @@ const person: Person = {
 };
 // -> Property 'middleName' is missing in type '{ surname: string; givenName: string; }' but required in type 'Person'.
 ```
+
+ちなみにこの省略可能な`undefined`はTypeScriptでは`undefined`型ではなく、`void`型に属しています。
 
 ### `readonly`
 
@@ -219,13 +221,10 @@ const person: Person = {
 
 person.surname = 'Panda';
 // -> Cannot assign to 'surname' because it is a read-only property.
+person.givenName = 'Gorilla';
 ```
 
 もちろん`readonly`がついていないプロパティ、この場合`givenName`は代入が可能です。
-
-```typescript
-person.givenName = 'Gorilla';
-```
 
 ### `readonly`で注意すること
 
@@ -385,7 +384,7 @@ const bufferflies: Butterfly = {
 
 ### `Index signatures`の制限
 
-`Index signatures`は`string`型もしくは`number`型しか指定できません。
+`Index signatures`は`string`型、`number`型もしくは`symbol`型しか指定できません。
 
 ```typescript
 type Jekyll = {
@@ -396,6 +395,22 @@ type Jekyll = {
 
 ちなみに`number`型のキーを持つオブジェクトとは配列のことです。様々な型をキーに設定したい場合は`Map`を使用してください。
 
+### `Record<T>`
+
+`Index signatures`を使うことと同義の組み込み方があります。
+
+```typescript
+type StringKeyObject = Record<string, string>;
+type NumberKeyObject = Record<number, string>;
+type SymbolKeyObject = Record<symbol, string>;
+```
+
+こちらもキーが`string`型、`number`型、`symbol`型であれば同様に使うことができます。また、ユニオン型をキーに使うこともできます。
+
+```typescript
+type Butterfly = Record<SystemSupportLanguage, string>;
+```
+
 ## インターセクション型 `(Intersection types)`
 
 考え方はユニオン型と相対するものです。ユニオン型が**どれか**を意味するならインターセクション型は**どれも**です。言い換えるとオブジェクトの定義を合成させることを指します。
@@ -403,7 +418,7 @@ type Jekyll = {
 インターセクション型を作るためには合成したいオブジェクト同士を`&`で列挙します。
 
 ```typescript
-type TwoDimensionPoint = {
+type TwoDimensionalPoint = {
   x: number;
   y: number;
 };
@@ -412,16 +427,16 @@ type Z = {
   z: number;
 };
 
-type ThreeDimensionPoint = TwoDimensionPoint & Z;
+type ThreeDimensionalPoint = TwoDimensionPointal & Z;
 
-const p: ThreeDimensionPoint = {
+const p: ThreeDimensionPointal = {
   x: 0,
   y: 1,
   z: 2
 };
 ```
 
-xy平面上の点を表す`TwoDimensionPoint`を拡張してxyz平面上の点の`ThreeDimensionPoint`に変換しました。
+xy平面上の点を表す`TwoDimensionalPoint`を拡張してxyz平面上の点の`ThreeDimensionalPoint`に変換しました。
 
 ### プリミティブ型のインターセクション型
 
@@ -438,7 +453,7 @@ const n: Never = '2';
 
 ### インターセクション型を使いこなす
 
-システムの巨大化に伴い、受け付けたいオブジェクトが巨大化したとします。
+システムの巨大化に伴い、受け付けたいパラメーターが巨大化したとします。
 
 ```typescript
 type Parameter = {

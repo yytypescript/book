@@ -13,7 +13,7 @@ function tuple() {
 
 ## 配列が抱える問題
 
-上記例では戻り値の型として何が妥当でしょうか。配列のページから読み進めていただいた方なんでも入れられる型ということで`any[]`または`unknown[]`が型の候補として思い浮かぶ人もいるかと思います。
+上記例では戻り値の型として何が妥当でしょうか。配列のページから読み進めていただいた方はなんでも入れられる型、ということで`any[]`または`unknown[]`が型の候補として思い浮かぶ人もいるかと思います。
 
 ```typescript
 const list: unknown[] = tuple();
@@ -68,6 +68,20 @@ list[5];
 ```
 
 そのため`list.push()`のような、配列の要素を増やす操作をしてもその要素を使うことはできません。
+
+### `Destructuring assignment`を使ってタプルにアクセスする
+
+上記関数`tuple()`の戻り値は`Destructuring assignment`を使うと以下のように受けることができます。
+
+```typescript
+const [num, str, bool]: [number, string, boolean] = tuple();
+```
+
+また、特定の戻り値だけが必要である場合は変数名を書かず`,`だけを書きます。
+
+```typescript
+const [,, bool]: [number, string, boolean] = tuple();
+```
 
 ## タプルを使う場面
 

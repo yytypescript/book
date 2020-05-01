@@ -143,7 +143,7 @@ const made: string | number = uni.makes(arg: string | number);
 
 ## ユニオン型から型を確定させる
 
-JavaScriptはその変数、定数がどの型かを確定させる機能があります。もちろんTypeScriptにも存在し、その機能を用いて型が確定できた場合、TypeScriptはその型として見なしてくれます。このときよく使うのは`typeof`と`instanceof`です。主にプリミティブ型に対しては`typeof`を、クラスに対しては`instanceof`を使えば問題ありません。
+JavaScriptはその変数がどの型かを確定させる機能があります。もちろんTypeScriptにも存在し、その機能を用いて型が確定できた場合、TypeScriptはその型として見なしてくれます。この時よく使うのは`typeof`と`instanceof`です。主にプリミティブ型に対しては`typeof`を、クラスに対しては`instanceof`を使えば問題ありません。
 
 ```typescript
 const prim: number | string = unionPrimitive();
