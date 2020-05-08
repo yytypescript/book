@@ -19,6 +19,7 @@
   * [タイプエイリアス \(Type aliases\)](features/type-alias.md)
   * [ユニオン型 \(Union types\)](features/union-type.md)
   * [インターフェース](features/interface.md)
+  * [クラス](features/class.md)
   * [ジェネリクス](features/generics/README.md)
     * [型変数](features/generics/type-variables.md)
   * [exportとexport defaultどちらを使うべきか？Pros/Consある話](features/exporttoexport-defaultdochirawoubekikaprosconsaru.md)
@@ -38,5 +39,4 @@
   * [0007-関数定義のサンプルコードには極力functionを使う](writing/pdr/0007-use-function-for-sample-code.md)
   * [0008-サンプルコードではInterfaceよりType Aliasを優先して使う](writing/pdr/0008-prefer-type-alias-over-interface.md)
   * [PDRテンプレート](writing/pdr/__pdr-template.md)
-* [クラス](class.md)
 
