@@ -18,7 +18,7 @@ const pokemon = {
 
 ## オブジェクトの型
 
-プリミティブの型以外を総称するためにTypeScriptでは`object`という型が定義されています。これはどのような形のオブジェクトリテラルも、クラスのインスタンスも、関数も受けることができます。
+プリミティブ型以外を総称するためにTypeScriptでは`object`という型が定義されています。これはどのような形のオブジェクトリテラルも、クラスのインスタンスも、関数も受けることができます。
 
 ```typescript
 const pikachu: object = {
@@ -82,7 +82,7 @@ console.log(pikachu);
 
 これはJavaScript, TypeScriptが抱えている問題というわけではなく、オブジェクトをリファレンス型として持つ言語では当然の挙動です。
 
-## プロパティを書き換えさせなくしたい
+### プロパティを書き換えさせなくしたい
 
 オブジェクトリテラルが定義されたとき、特に型を指定しないとTypeScriptはプロパティの型を推測します。例えば上記の定数`pikachu`はTypeScriptはこのように型を定義します。
 
@@ -105,11 +105,11 @@ pikachu.name = false;
 
 プロパティを書き換えさせないためには、以下のような方法が挙げられます。
 
-### `readonly`
+#### `readonly`
 
 `readonly`については、タイプエイリアスの項にて解説がありますので、そちらをご参照ください。
 
-### `const assertion`
+#### `const assertion`
 
 オブジェクトリテラルの末尾に`as const`を記述すればプロパティ全てが`readonly`になります。
 
@@ -232,6 +232,8 @@ america.canada = {
 ```typescript
 america.canada.name = 'Republic of Côte d\'Ivoire';
 // -> Cannot assign to 'name' because it is a read-only property.
+america.canada.capitalCity = 'Yamoussoukro';
+// -> Cannot assign to 'capitalCity' because it is a read-only property.
 ```
 
 ## 分割代入 \(`Destructuring assignment`\)
@@ -276,7 +278,7 @@ const {
 }: Wild = safari();
 ```
 
-もちろん`height, weight`が必要なときは書き足せば変数として設定されます。この時は1行目の宣言\(今回は`const`\)によって変数か定数かが決まるので、変数も定数も欲しい時は分けて書いてください。
+もちろん`height, weight`が必要なときは書き足せば定数として設定されます。この時は1行目の宣言\(今回は`const`\)によって変数か定数かが決まるので、変数も定数も欲しい時は分けて書いてください。
 
 ### ネストしたオブジェクトの分割代入
 
