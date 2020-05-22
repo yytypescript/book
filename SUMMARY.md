@@ -19,6 +19,7 @@
   * [Enum](features/enum.md)
   * [タイプエイリアス \(Type aliases\)](features/type-alias.md)
   * [ユニオン型 \(Union types\)](features/union-type.md)
+  * [オブジェクト \(Object\)](features/object.md)
   * [インターフェース](features/interface.md)
   * [クラス](features/class.md)
   * [ジェネリクス](features/generics/README.md)

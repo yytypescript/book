@@ -124,6 +124,22 @@ type Family = {
 const family: Family = {...};
 ```
 
+プロパティの`grandparents`は最大ふたつじゃないか、という指摘があるかと思います。気になる方はタプルの章をご参照ください。
+
+## オブジェクト内の関数の定義
+
+オブジェクトが持つ関数\(メソッド\)の定義の方法はふたつあります。これらが指す関数の意味は同じです。
+
+```typescript
+type A = {
+  merge: (arg1: string, arg2: string) => string;
+};
+
+type B = {
+  merge(arg1: string, arg2: string): string;
+};
+```
+
 ## プリミティブ型にもタイプエイリアス
 
 タイプエイリアスはオブジェクトだけではなく、プリミティブ型に対してもつけることが可能です。
@@ -178,7 +194,7 @@ type Person = {
 };
 ```
 
-上記例に`middleName`というプロパティを追加し`?`を付与しました。こうすればこのタイプエイリアス`Person`は`surname, givenName`は必ず持っているが`middleName`は持っていない人がいるということを示しています。
+上記例に`middleName`というプロパティを追加し`?`を付与しました。こうすればこのタイプエイリアス`Person`は`surname, givenName`は必ず持っているものの`middleName`は持っていない人がいるということを示しています。
 
 この記号が付与されているプロパティを呼び出す時、使用者はその値があるかないかを確定させる必要があります。ある時はタイプエイリアス通りの型、つまりこの場合は`string`型ですが、ない時は`undefined`として解釈されますのでその判定が必要になります。
 
@@ -384,7 +400,7 @@ const bufferflies: Butterfly = {
 
 ### `Index signatures`の制限
 
-`Index signatures`は`string`型、`number`型もしくは`symbol`型しか指定できません。
+`Index signatures`は`string`型、`number`型しか指定できません。
 
 ```typescript
 type Jekyll = {
@@ -395,19 +411,19 @@ type Jekyll = {
 
 ちなみに`number`型のキーを持つオブジェクトとは配列のことです。様々な型をキーに設定したい場合は`Map`を使用してください。
 
-### `Record<T>`
+### `Record<K, T>`
 
-`Index signatures`を使うことと同義の組み込み方があります。
+`Index signatures`を使うことと同義の組み込み方があります。`K`にキーとなる型を、`T`にプロパティとなる型を指定します。
 
 ```typescript
 type StringKeyObject = Record<string, string>;
 type NumberKeyObject = Record<number, string>;
-type SymbolKeyObject = Record<symbol, string>;
 ```
 
-こちらもキーが`string`型、`number`型、`symbol`型であれば同様に使うことができます。また、ユニオン型をキーに使うこともできます。
+こちらは`Index signatures`で使用できる型に加えてキーに`symbol`型も使うことができます。また、ユニオン型をキーに使うこともできます。
 
 ```typescript
+type SymbolKeyObject = Record<symbol, string>;
 type Butterfly = Record<SystemSupportLanguage, string>;
 ```
 
@@ -449,7 +465,7 @@ const n: Never = '2';
 // -> Type '"2"' is not assignable to type 'never'.
 ```
 
-この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが、後続のコードが実行されないことを示す時に使えます。
+この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが、関数の戻り値に設定すると必ず例外を返す関数、無限ループの関数など、後続のコードが実行されないことを示す時に使えます。
 
 ### インターセクション型を使いこなす
 
@@ -496,98 +512,4 @@ type Optional = Partial<{
 
 type Parameter = Readonly<Mandatory & Optional>;
 ```
-
-## インターフェイスとの違い
-
-タイプエイリアスとインターフェイスは機能が似通っており、誰もがどちらを使うべきか非常に困惑します。  
-本書では主にオブジェクトリテラルを指すときはタイプエイリアスを使用していますが、インターフェイスを使っても特に問題がありません。  
-そこで、以下にタイプエイリアスとインターフェイスの違いを挙げます。
-
-### プリミティブ型を別の名前で定義する
-
-インターフェイスはオブジェクトの型を定義することだけができます。プリミティブ型に対してインターフェイスを作ることはできません。
-
-```typescript
-type Nil = null;
-```
-
-### ユニオン型、インターセクション型を受ける
-
-ユニオン型、インターセクション型はタイプエイリアスのみが受けることができます。このとき、ユニオン型とインターセクション型の対象となるものはタイプエイリアスでもインターフェイスでもどちらでも構いません。
-
-```typescript
-type Nullable<T> = T | null;
-type Parameter = Mandatory & Optional;
-```
-
-### 拡張する
-
-インターフェイスはインターセクション型こそできませんが代わりに拡張することができます。
-
-```typescript
-interface Parameter extends Mandatory, Optional {
-}
-```
-
-### インターセクション型とインターフェイスの拡張の違い
-
-同じプロパティが違う型で衝突した時の定義が異なります。以下の例を考えます。
-
-```typescript
-type A = {
-  x: number;
-};
-
-type B = {
-  x: string;
-};
-```
-
-これをインターセクション型で合成するとプリミティブ型のインターセクション型の項目で説明した通り、プロパティの`x`は`never`型になります。
-
-```typescript
-type C = A & B;
-// ->
-// type C = {
-//   x: never;
-// };
-```
-
-インターフェイスで拡張するとコードが動作しなくなります。
-
-```typescript
-interface D extends A, B {
-}
-// -> Interface 'D' cannot simultaneously extend types 'A' and 'B'.
-```
-
-### `Declaration merging`
-
-インターフェイスのみができる機能で、最もタイプエイリアスと異なる特徴です。
-
-JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array`は`ES2016`で`array.includes()`が、`ES2019`で`array.flatMap()`が追加されました。
-
-インターフェースではバージョンごとにメソッドの`Array<T>`のインターフェイスをファイルを分けて定義して、環境に応じて読み込むファイルを変えるだけで`Array<T>`の型定義ができます。
-
-```typescript
-// ES2016.array.ts
-interface Array<T> {
-  
-  includes(...): boolean;
-}
-
-// ES2019.array.ts
-interface Array<T> {
-  
-  flatMap<U>(...): U[];
-}
-```
-
-もしこれをタイプエイリアスでやるとすれば、以下のようになるでしょう。最終的な成果物が`Array<T>`となる必要があるため、それまで別の名前で定義して、最後にインターセクション型を使い合成して`Array<T>`を作り出す必要があります。
-
-```typescript
-type Array<T> = ES2016Array<T> & ES2019Array<T>;
-```
-
-この`Declaration merging`の機能は`polyfill`を行うライブラリの型定義でよく見ることができます。
 

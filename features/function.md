@@ -372,7 +372,7 @@ function distance(p1: Point, p2: Point = inverse(p1)): number {
 また、`Default parameters`は`Optional parameters`と異なり、最後に書く必要はありません。呼び出し側で`Default parameters`を使用させたい時は`undefined`を指定します。この時`null`ではこの役目を果たせないので注意してください。もちろん末尾の`Default parameters`であれば省略が可能です。
 
 ```typescript
-const p0: Readonly<Point> = {
+const p0: Point = {
   x: 1,
   y: 2
 };
@@ -624,7 +624,7 @@ conosle.log(femaleToStr());
 ```
 
 `femaleToStr()`のコンテキストが`Female`ではないとの指摘です。このコードを実行することはできません。  
-ちなみにこの対応をしていない`maleToStr()`は実行できますが実行時に例外が発生します。
+ちなみにこの対応をしていない`maleToStr()`は実行こそできますが実行時に例外が発生します。
 
 ```typescript
     return `Monsieur ${this.name}`;
@@ -982,6 +982,8 @@ function distance(p1: Point, p2: Point): number;
 function distance(x: number, y: number): number;
 function distance(x1: number, y1: numebr, x2: number, y2: number): number;
 ```
+
+なお、オーバーロードは名前付き関数`(Normal functions)`またはクラスのメソッドでのみ可能で、匿名関数`(Anonymous functions)`、アロー関数`(Arrow functions)`で書くことはできません。
 
 ### オーバーロードの実装
 
