@@ -126,7 +126,7 @@ const pikachu = {
 代入はもちろんできません。
 
 ```typescript
-pikachu.name = 'pikachu';
+pikachu.name = 'raichu';
 // -> Cannot assign to 'name' because it is a read-only property.
 ```
 
@@ -145,6 +145,7 @@ pikachu.name = 'pikachu';
 ```typescript
 type Country = {
   name: string;
+  capitalCity: string;
 };
 
 type Continent = {
@@ -157,13 +158,16 @@ type Continent = {
 const america: Continent = {
   name: 'North American Continent',
   canada: {
-    name: 'Republic of Canada'
+    name: 'Republic of Canada',
+    capitalCity: 'Ottawa'
   },
   america: {
-    name: 'United States of America'
+    name: 'United States of America',
+    capitalCity: 'Washington, D.C.'
   },
   mexico: {
-    name: 'United Mexican States'
+    name: 'United Mexican States',
+    capitalCity: 'Mexico City'
   }
 };
 ```
@@ -174,12 +178,13 @@ const america: Continent = {
 america.name = 'African Continent';
 // -> Cannot assign to 'name' because it is a read-only property.
 america.canada = {
-  name: 'Republic of Côte d\'Ivoire'
+  name: 'Republic of Côte d\'Ivoire',
+  capitalCity: 'Yamoussoukro'
 };
 // -> Cannot assign to 'canada' because it is a read-only property.
 ```
 
-が、以下のようなことは問題なくできてしまいます。
+しかしながら、以下のようなことは問題なくできてしまいます。
 
 ```typescript
 america.canada.name = 'Republic of Côte d\'Ivoire';
@@ -192,16 +197,19 @@ america.canada.name = 'Republic of Côte d\'Ivoire';
 `as const`を付けます。
 
 ```typescript
-const america = {
+const america: Continent = {
   name: 'North American Continent',
   canada: {
-    name: 'Republic of Canada'
+    name: 'Republic of Canada',
+    capitalCity: 'Ottawa'
   },
   america: {
-    name: 'United States of America'
+    name: 'United States of America',
+    capitalCity: 'Washington, D.C.'
   },
   mexico: {
-    name: 'United Mexican States'
+    name: 'United Mexican States',
+    capitalCity: 'Mexico City'
   }
 } as const;
 ```
@@ -212,7 +220,8 @@ const america = {
 america.name = 'African Continent';
 // -> Cannot assign to 'name' because it is a read-only property.
 america.canada = {
-  name: 'Republic of Côte d\'Ivoire'
+  name: 'Republic of Côte d\'Ivoire',
+  capitalCity: 'Yamoussoukro'
 };
 // -> Cannot assign to 'canada' because it is a read-only property.
 ```
@@ -230,7 +239,7 @@ america.canada.name = 'Republic of Côte d\'Ivoire';
 
 ### 分割代入のなかった時代はこうしていた
 
-あるオブジェクトリテラルの型`Wild`があったとします。
+あるタイプエイリアス`Wild`があったとします。
 
 ```typescript
 type Wild = {
@@ -275,6 +284,7 @@ const {
 ```typescript
 type Country = {
   name: string;
+  capitalCity: string;
 };
 
 type Continent = {
@@ -415,7 +425,7 @@ type Nil = null;
 
 ### 関数を定義する
 
-関数もオブジェクトではありますが、関数に対してインターフェイスを作ることはできません。
+関数はオブジェクトではあるものの、関数に対してインターフェイスを作ることはできません。
 
 ```typescript
 type Predicate<T> = (value: T) => boolean;
@@ -604,7 +614,7 @@ const sym: Symbol = Symbol();
 
 TypeScriptの型は**見た目的に同じであれば同じ**といった非常にざっくりとした型付けです。強力な`Duck typing`と言い換えることもできるでしょう。
 
-### `Type aliases`の場合
+### タイプエイリアスの場合
 
 あくまでも型に対して別名をつけるという立ち位置なので、以下が同じものを指しているだろうということはおわかりいただけると思います。もちろん代入もできます。
 
@@ -635,7 +645,7 @@ const mail: Mail = email;
 
 ### インターフェイスの場合
 
-インターフェイスを実装\(`implementation`\)の対象として使っているのであれば、これはもちろん成立します。
+インターフェイスを実装\(`implementation`\)の対象として使っているのであれば、最後の代入はもちろん成立します。
 
 ```typescript
 interface Mail {
