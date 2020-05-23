@@ -426,23 +426,6 @@ function evolution({ name, no, genre, height, weight }: Wild): Wild {
 type Nil = null;
 ```
 
-### 関数を定義する
-
-関数はオブジェクトではあるものの、関数に対してインターフェイスを作ることはできません。
-
-```typescript
-type Predicate<T> = (value: T) => boolean;
-```
-
-ですがインターフェイスはオブジェクトの中にあるメソッドを定義することはできます。
-
-```typescript
-interface Array<T> {
-  // ...
-  forEach(callback: (value: T, index: number) => void): void;
-}
-```
-
 ### ユニオン型、インターセクション型を受ける
 
 ユニオン型、インターセクション型はタイプエイリアスのみが受けることができます。このとき、ユニオン型とインターセクション型の対象となるもの\(以下の場合`T, Mandatory, Optional`\)はタイプエイリアスでもインターフェイスでもどちらでも構いません。
