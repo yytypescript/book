@@ -356,6 +356,12 @@ const [alpha, [bravo, [charlie, [delta, echo]]]] = phone();
 const [,,, delta, echo] = phone();
 ```
 
+`Rest parameters`を使うこともできます。以下の例では`alpha`が`T`型であれば`rest`は`T[]`型になります。
+
+```typescript
+const [alpha, ...rest] = phone();
+```
+
 ### オブジェクトへの代入も分割代入
 
 オブジェクトのキーと変数名が同じ時にかぎり、オブジェクトに値を代入するときも同様に分割代入を使うことができます。以下の例がほぼ全てです。
@@ -396,7 +402,7 @@ const pikachu: Wild = { name, no, genre, height, weight };
 
 ### 引数にも分割代入
 
-**オブジェクトへの代入も分割代入**を理解した上でご覧ください。例えば先ほどの定数`pikachu`を関数に引数として与える時、以下のように与えることもできます。
+**オブジェクトへの代入も分割代入**を理解した上でご覧ください。例えば先ほどの`Wild`型の変数を関数に引数として与える時、以下のように与えることもできます。
 
 ```typescript
 const newPokemon: Wild = evolution({ name, no, genre, height, weight });
@@ -466,6 +472,16 @@ type C = A & B;
 // type C = {
 //   x: never;
 // };
+```
+
+これはプリミティブ型をインターセクション型で合成した時の挙動として正しいものです。
+
+```typescript
+type N = number & string;
+const n: N = 2;
+// -> Type '2' is not assignable to type 'never'
+const n: N = 'maintenance mode';
+// -> Type '"maintenance mode"' is not assignable to type 'never'.
 ```
 
 インターフェイスで拡張するとコードが動作しなくなります。
@@ -583,9 +599,9 @@ const literal6: {} = Symbol();
 
 文字数カウントをしたい時は`str.length`とすれば文字数が得られます。また、数値を文字列にしたければ\(`backtick`などを使わなければ\)`num.toString()`とすれば文字列が得られます。
 
-プリミティブ値はオブジェクトではないのでプロパティやメソッドを持っていないはずですがこのようなことができるのは、内部的にはJavaScriptがプリミティブ値をオブジェクトに変換しているからです。この暗黙の型変換を`Autoboxing`と呼びます。
+プリミティブ型はオブジェクトではないのでプロパティやメソッドを持っていないはずです。ですがこのようなことができるのは、内部的にはJavaScriptがプリミティブ値をオブジェクトに変換しているからです。この暗黙の型変換を`Autoboxing`と呼びます。
 
-ちなみにこのときに使われるオブジェクトを通称ラッパークラスと呼び、それらのインターフェイスもTypeScriptに`Boolean, Number, String, Symbol`として定義されています。なお`undefined`と`null`のラッパークラス`Undefined, Null`はありません。
+ちなみにこの時に使われるオブジェクトを通称ラッパークラスと呼び、それらのインターフェイスもTypeScriptに`Boolean, Number, String, Symbol`として定義されています。なお`undefined`と`null`のラッパークラス`Undefined, Null`はありません。
 
 ```typescript
 const bool: Boolean = false;
