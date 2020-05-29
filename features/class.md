@@ -1,6 +1,6 @@
 # クラス
 
-JavaScriptにもクラスの概念は存在します。TypeScriptでのクラスはJavaScriptのクラスをより型安全に拡張されています。
+JavaScriptにもクラスの概念は存在します。TypeScriptでのクラスは主にJavaScriptのクラスをより型安全に拡張されています。
 
 ### クラスに関する機能
 
@@ -16,11 +16,24 @@ JavaScriptにもクラスの概念は存在します。TypeScriptでのクラス
 | インターフェース | ✕ | ○ |
 | ジェネリクス | ✕ | ○ |
 
-TypeScriptは型が不適切な場合はコンパイルエラーとなります。コードに問題がなく型安全と判断された場合に限りコンパイルを行う事ができます。また出力されたJavaScriptファイルには型情報は除かれます。
+クラスに関わらずTypeScriptの特徴となるのはコーディング中に型が不適切な場合はコンパイルエラーを教えてくれることです。JavaScriptの場合は基本的に実行を行い不正な型が発生した場合に型エラーを知ることになります。TypeScriptコードに問題がなく型安全と判断された場合に限りコンパイルを行う事ができます。また出力されたJavaScriptファイルには型情報は除かれます。
 
 ### 書式
 
-一般的なクラスの書式はこのようになります。
+一般的なクラスの書式を日本語で説明するとこののようになります。
+
+```typescript
+class クラス名 {
+   プロパティ;
+   constructor(){}
+
+   メソッド(){
+     処理
+   }
+}
+```
+
+下記は実際のコードのサンプルです。
 
 ```typescript
 class Greeter {
@@ -34,7 +47,7 @@ class Greeter {
 }
 ```
 
-インスタンス化し、メソッドやプロパティを呼ぶことができます。
+多くのクラスはインスタンス化\(`new`\)し、メソッドやプロパティを呼ぶために使われます。
 
 ```typescript
 let greeter = new Greeter("world");
@@ -43,7 +56,7 @@ console.log(greeter.greet());  // Hello, world
 
 ### 継承
 
-オブジェクト指向の基本的な継承をサポートしています。継承する場合は`extends`キーワードを使用します。
+オブジェクト指向の基本的である継承をサポートしています。継承する場合は`extends`キーワードを使用します。
 
 ```typescript
 class Food { }
@@ -75,7 +88,7 @@ meat.showDebug(); // スーパークラスのメソッドが使用できる。
 
 #### abstract
 
-abstractは抽象クラスを作成する時に宣言します。抽象クラスとは直接インスタンス化\(new\)することができず、必ずスーパークラスとして利用することを保証するものです。抽象クラス内のメソッドにもabstract宣言を行うことができます。interfaceと似てサブクラスは抽象メソッドを実装する必要があります。
+abstractは抽象クラスを作成する時に宣言します。抽象クラスとは直接インスタンス化\(`new`\)することができず、必ずスーパークラスとして利用することを保証するものです。抽象クラス内のメソッドにもabstract宣言を行うことができます。interfaceと似てサブクラスは抽象メソッドを実装する必要があります。
 
 Foodクラスに抽象クラスに変更し、"要冷蔵"メソッド`keepRefrigerated()`を抽象メソッドとして追加すると`Meat`クラスでエラーが発生します。これは`Meat`クラスに`keepRefrigerated`メソッドが実装されていないからです。
 
@@ -138,52 +151,75 @@ gorilla.name = 'ゴリラゴリラ';
 gorilla.move(20);   // ゴリラゴリラ moved 20m.
 ```
 
-nameプロパティもpublic宣言されているため、「ゴリラ」から「ゴリラゴリラ」に変更することができます。
+nameプロパティはpublic宣言されているため、インスタンスされた変数\(`gorilla`\)からの読み書きが可能になっています。「ゴリラ」から「ゴリラゴリラ」に変更することができます。
 
 #### protected
 
-Animalクラスのnameのアクセス修飾子を`public`から`protected`に変更しエラーを出してみます
+`protected`アクセス修飾子は自身のクラスとサブクラスからアクセス可能です。
+
+Animalクラス`move`メソッドのアクセス修飾子を`public`から`protected`に変更しエラーを出してみます。
 
 ```typescript
 class Animal {
-  protected name: string;  // `public`から`protected`に変更
+  public name: string;
   public constructor(theName: string) { this.name = theName; }
-  public move(distanceInMeters: number) { 
+  protected move(distanceInMeters: number) { // `public`から`protected`に変更
     console.log(`${this.name} moved ${distanceInMeters}m.`);
   }
 }
 
 const gorilla = new Animal('ゴリラ');
-gorilla.move(10);
-gorilla.name = 'ゴリラゴリラ'; // error TS2445: Property 'name' is protected and only accessible within class 'Animal' and its subclasses.
-gorilla.move(20);
+gorilla.move(10); // error TS2339: Property 'move' does not exist on type 'Animal'.
 ```
 
-`gorilla.name`プロパティは`protected`宣言されているため、自身のクラスとサブクラスのみアクセスとなります。つまりインスタンスされたgorillaからはアクセスが拒否され、コンパイルエラーが発生します。
+`gorilla.move`メソッドは`protected`宣言されているため、自身のクラスとサブクラスのみアクセスとなります。つまりインスタンスされたgorillaからはアクセスが拒否され、コンパイルエラーが発生します。
 
-`protected`で保護された`name`プロパティを操作するためにGorillaクラスを実装してみます。
+`protected`で保護された`move`メソッドを新たに実装し、早く動く10倍早く動くゴリラを作ってみます。
 
 ```typescript
 class Animal {
-  protected name: string;
+  public name: string;
   public constructor(theName: string) { this.name = theName; }
-  public move(distanceInMeters: number) {
+  protected move(distanceInMeters: number) { // `public`から`protected`に変更
     console.log(`${this.name} moved ${distanceInMeters}m.`);
   }
 }
 
 class Gorilla extends Animal {
-  rename(name: string): void {
-    this.name = name;
+  move(distanceInMeters: number) {
+    super.move(distanceInMeters * 10);
   }
 }
 
-const gorilla = new Gorilla('ゴリラ');
-gorilla.move(10);  // ゴリラ moved 10m.
-// gorilla.name = 'ゴリラゴリラ';
-gorilla.rename('ゴリラゴリラ');
-gorilla.move(20);  // ゴリラゴリラ moved 20m.
+const gorilla = new Gorilla('早いゴリラ');
+gorilla.move(10); // 早いゴリラ moved 100m.
 ```
+
+`Animal`スーパークラスを持つ`Gorilla`クラスを定義し`move`を実装しています。`Gorilla`クラスの`move`メソッド内で`super`キーワードを利用してスーパークラスの`move`メソッドを呼び出しています。
+
+#### private
+
+`private`アクセス修飾子は自身のクラスのみアクセス可能です。
+
+`protected move`を`private move`に変更してみます。privateに変更されたことによりGorillaクラスの`super.move`にアクセスすることが許されずエラーとなります。
+
+```typescript
+class Animal {
+  public name: string;
+  public constructor(theName: string) { this.name = theName; }
+  private move(distanceInMeters: number) { // `public`から`protected`に変更
+    console.log(`${this.name} moved ${distanceInMeters}m.`);
+  }
+}
+
+class Gorilla extends Animal {
+  move(distanceInMeters: number) {
+    super.move(distanceInMeters * 10); // Property 'move' is private and only accessible within class 'Animal'.
+  }
+}
+```
+
+privateメソッドの多くの使い方としては、自身のクラス内の長いコードを機能別に分ける時に利用します。
 
 ### コンストラクターの引数のアクセス修飾子
 
@@ -275,14 +311,87 @@ outAccess.arg3; // エラー プロパティ 'arg3' は型 'ConstructorOutAccess
 
 つまり、コンストラクターの引数のアクセス修飾子はプロパティ宣言の省略をしてくれるだけにすぎません。
 
-TypeScript  
-[https://www.typescriptlang.org/docs/handbook/classes.html](https://www.typescriptlang.org/docs/handbook/classes.html)
+### Readonly修飾子\(Readonly modifier\)
 
-{% hint style="info" %}
-これより下に記載されている事項は執筆完了時に削除願います
-{% endhint %}
+`readonly`修飾子を利用してプロパティを読み取り専用にすることができます。
 
-| メインライター | 対応スケジュール |
-| :--- | :--- |
-| クロレ | 2020/05/?? |
+`readonly`を宣言したプロパティは変数宣言時、またはコンストラクター内で初期化する必要があります。
+
+```typescript
+class Octopus {
+    readonly name: string;
+    readonly numberOfLegs: number = 8;
+    constructor (theName: string) {
+        this.name = theName;
+    }
+}
+let dad = new Octopus("Man with the 8 strong legs");
+dad.name = "Man with the 3-piece suit"; // error! name is readonly.
+```
+
+### Getter/Setter
+
+プロパティへのインターセプター\(参照・代入・監視などの意味\)としGetter/Setterがあります。
+
+記述方法のサンプルは下記のようになります。
+
+```typescript
+class Human {
+  private _name: string;
+  // Getter宣言
+  get name(): string {
+    return this._name;
+  }
+
+  // Setter宣言
+  set name(name: string) {
+    this._name = name;
+  }
+}
+
+const human = new Human();
+// Setterを利用
+human.name = `田中太郎`;
+
+// Getterを利用
+console.log(human.name);  // 田中太郎
+```
+
+メソッドと違い、getter/setterを呼ぶ場合は`()`は不要です。
+
+```typescript
+// Getter
+console.log(human.name); // 正しいGetterの使用方法
+console.log(human.name()); // エラー :human.name is not a function
+
+// Setter
+human.name = '田中太郎'; // 正しいSetterの使用方法
+human.name('田中太郎'); // エラー :human.name is not a function
+```
+
+#### Getter
+
+Getterの記述方法を日本語で表すと下記のようになります。
+
+```typescript
+get 名前(): 型 {
+  必要ならば処理();
+  return 戻り値;
+}
+```
+
+Getterにはに引数の指定することはできません。また戻り値を必ず指定する必要があります。
+
+#### Setter
+
+Setterの記述方法を日本語で表すと下記のようになります。
+
+```typescript
+set 名前(変数 : 型) {
+  必要ならば処理();
+  保存処理();
+}
+```
+
+引数を必ず１つする必要があります。また戻り値を指定することはできません。
 
