@@ -983,7 +983,21 @@ function distance(x: number, y: number): number;
 function distance(x1: number, y1: numebr, x2: number, y2: number): number;
 ```
 
-なお、オーバーロードは名前付き関数`(Normal functions)`またはクラスのメソッドでのみ可能で、匿名関数`(Anonymous functions)`、アロー関数`(Arrow functions)`で書くことはできません。
+なお、上記のような書き方のオーバーロードは名前付き関数`(Normal functions)`またはクラスのメソッドでのみ可能です。匿名関数`(Anonymous functions)`、アロー関数`(Arrow functions)`では、オーバーロードを定義したタイプエイリアスまたはインターフェイスを定義します。たとえば、上記例だと以下のようなタイプエイリアスになります。
+
+```typescript
+type Distance = {
+  (p: Point): number;
+  (p1: Point, p2: Point): number;
+  (x: number, y: number): number;
+  (x1: number, y1: number, x2: number, y2: number): number;
+};
+
+const distance: Distance = (arg1: number | Point, arg2?: number | Point, arg3?: number, arg4?: number): number => {
+  // ...
+};
+
+```
 
 ### オーバーロードの実装
 
