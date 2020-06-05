@@ -23,9 +23,9 @@
   * [インターフェース](features/interface.md)
   * [クラス](features/class.md)
   * [ジェネリクス](features/generics.md)
-* [Promise / async / await](promise-async-await/README.md)
-  * [型変数](promise-async-await/type-variables.md)
-  * [exportとexport defaultどちらを使うべきか？Pros/Consある話](promise-async-await/exporttoexport-defaultdochirawoubekikaprosconsaru.md)
+  * [Promise / async / await](features/promise-async-await.md)
+  * [型変数](features/type-variables.md)
+  * [exportとexport defaultどちらを使うべきか？Pros/Consある話](features/exporttoexport-defaultdochirawoubekikaprosconsaru.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
