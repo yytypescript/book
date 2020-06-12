@@ -24,6 +24,7 @@
   * [クラス](features/class.md)
   * [ジェネリクス](features/generics.md)
   * [Promise / async / await](features/promise-async-await.md)
+  * [import / export /require](features/import-export-require.md)
   * [型変数](features/type-variables.md)
   * [exportとexport defaultどちらを使うべきか？Pros/Consある話](features/exporttoexport-defaultdochirawoubekikaprosconsaru.md)
 

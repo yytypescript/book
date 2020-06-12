@@ -996,7 +996,6 @@ type Distance = {
 const distance: Distance = (arg1: number | Point, arg2?: number | Point, arg3?: number, arg4?: number): number => {
   // ...
 };
-
 ```
 
 ### オーバーロードの実装
