@@ -1,11 +1,11 @@
 # import / export /require
 
-Node.jsが出てからというものの、フロントエンドの開発もNode.jsを通して行うことができるようにはなりましたが、実際に動く場所がブラウザとサーバーと、事情が異なります。  
+Node.jsが出てからというものの、フロントエンドの開発もNode.jsを通して行うことができるようにはなりましたが、実際に動く場所がブラウザとサーバーと事情が異なります。  
 TypeScriptは最終的にどの場面で使われるか、その用途に適した出力に変えることができます。
 
 ## かつてのJavaScript
 
-かつてJavaScriptがブラウザでのみ動いていた時代は、モジュール分割と言う考え自体はあったものの、それはあくまでもブラウザ上、さらには`html`での管理となっていました。**かつて猛威をふるった**`jQuery`といライブラリがあるとすば、それは以下のように`html`に書く必要がありました。
+かつてJavaScriptがブラウザでのみ動いていた時代は、モジュール分割と言う考え自体はあったもののそれはあくまでもブラウザ上、さらには`html`での管理となっていました。**かつて猛威をふるった**`jQuery`といライブラリがあるとすば、それは以下のように`html`に書く必要がありました。
 
 ```markup
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/x.y.z/jquery.min.js"></script>
@@ -35,19 +35,19 @@ const package1 = require('package1');
 
 これは、パッケージの`package1`の内容を定数`package1`に持ってくることを意味しています。この時`package1`は現在のプロジェクトの`node_modules`というディレクトリに存在する必要があります。
 
-自分で作った他の`.js, .ts`ファイルを読み込むこともできます。呼び出すファイルから見た読み込みたいファイルの位置を**相対パス**で書きます。たとえ同じ階層にあっても、相対パスで書く必要があります。このとき`.js, .json`とTypeScriptなら加えて`.ts`は拡張子を省略することができます。TypeScriptでの開発においては最終的にJavaScriptにトランスパイルされることを考慮すると書かないほうが無難です。
+自分で作った他の`.js, .ts`ファイルを読み込むこともできます。呼び出すファイルから見た読み込みたいファイルの位置を**相対パス**で書きます。たとえ同じ階層にあっても相対パスで書く必要があります。このとき`.js, .json`とTypeScriptなら加えて`.ts`を省略することができます。TypeScriptでの開発においては最終的にJavaScriptにトランスパイルされることを考慮すると書かないほうが無難です。
 
 ```typescript
 const myPackage = require('./MyPackage');
 ```
 
-`.js`を`.ts`と同じ場所に出力するようにしていると、TypeScriptにとって同じ名前の読み込ことができるファイルがふたつ存在することになります。この時TypeScriptは`.js`を優先して読み込むので注意してください。いくらTypeScriptのコードを変更しても変更が適用されていないようであれば、この問題の可能性があります。
+`.js`を`.ts`と同じ場所に出力するようにしているとTypeScriptにとって同じ名前の読み込ことができるファイルがふたつ存在することになります。この時TypeScriptは`.js`を優先して読み込むので注意してください。いくらTypeScriptのコードを変更しても変更が適用されていないようであれば、この問題の可能性があります。
 
 またディレクトリの中に`index.js (index.ts)`があるのであれば、ディレクトリの名前まで書けば`index.js (index.ts)`を読み込んでくれます。
 
 ### `module.exports`
 
-他のファイルを読む込むためには、そのファイルは何かを出力している必要があります。そのために使うのがこの構文です。
+他のファイルを読む込むためにはそのファイルは何かを出力している必要があります。そのために使うのがこの構文です。
 
 ```typescript
 // increment.js
@@ -64,7 +64,7 @@ console.log(increment(3));
 // 4
 ```
 
-この時、読み込んだ内容を受ける定数`increment`はこの名前である必要はなく、変更が可能です。
+この時、読み込んだ内容を受ける定数`increment`はこの名前である必要はなく変更が可能です。
 
 この`module.exports`はひとつのファイルでいくらでも書くことができますが、適用されるのは最後のもののみです。
 
@@ -133,7 +133,7 @@ console.log(inc(3));
 
 ### `import`
 
-`require()`と同じく、他の`.js, .ts`ファイルを読み込む機能ですが、`require()`はファイル内のどこにでも書くことができる一方で`import`は**必ずファイルの一番上に書く必要があります**。  
+`require()`と同じく他の`.js, .ts`ファイルを読み込む機能ですが、`require()`はファイル内のどこにでも書くことができる一方で`import`は**必ずファイルの一番上に書く必要があります**。  
 なお、書き方が2通りあります。
 
 ```typescript
@@ -186,7 +186,7 @@ const increment = i => i + 1;
 export { increment };
 ```
 
-なお、1番目の表記は定数宣言の`const`を使っていますが`let`を使っても読み込み側から定義されている`increment`を書き換えることはできません。
+なお1番目の表記は定数宣言の`const`を使っていますが`let`を使っても読み込み側から定義されている`increment`を書き換えることはできません。
 
 以下のようにして読み込みます。
 
@@ -232,13 +232,13 @@ import('./increment').then(({increment}) => {
 
 ## Node.jsで`ES Module`を使う
 
-先述の通りNode.jsでは`CommonJS`が長く使われいますが、`13.2.0`でついに正式に`ES Module`もサポートされました。
+先述の通りNode.jsでは`CommonJS`が長く使われていますが、`13.2.0`でついに正式に`ES Module`もサポートされました。
 
-しかしながら、あくまでもNode.jsは`CommonJS`で動作することが前提なので`ES Module`を使いたい時はすこし特殊な準備が必要になります。
+しかしながら、あくまでもNode.jsは`CommonJS`で動作することが前提なので`ES Module`を使いたい時はすこし準備が必要になります。
 
 ### `.mjs`
 
-`ES Module`として動作させたいJavaScriptのファイルはすべて`.mjs`の拡張子に変更します。
+`ES Module`として動作させたいJavaScriptのファイルをすべて`.mjs`の拡張子に変更します。
 
 ```typescript
 // increment.mjs
@@ -255,11 +255,11 @@ console.log(increment(3));
 // 4
 ```
 
-`import`で使うファイルのパスの**拡張子が省略できない**ことに注意してください。
+`import`で使うファイルの**拡張子が省略できない**ことに注意してください。
 
 ### `"type": "module"`
 
-`package.json`に記述を追加するとパッケージ全体が`ES Module`をサポートします。
+`package.json`にこの記述を追加するとパッケージ全体が`ES Module`をサポートします。
 
 ```typescript
 {
@@ -271,7 +271,7 @@ console.log(increment(3));
 }
 ```
 
-このようにすることで`.mjs`のファイルを作らず、そのまま`.js`で`ES Module`を使えるようになります。なお`"type": "module"`の省略時は`"type": "commonjs"`と指定されたとみなされます。
+このようにすることで拡張子を`.mjs`に変更しなくてもそのまま`.js`で`ES Module`を使えるようになります。なお`"type": "module"`の省略時は`"type": "commonjs"`と指定されたとみなされます。これは今まで通りのNode.jsです。
 
 ```typescript
 // increment.js
@@ -290,7 +290,7 @@ console.log(increment(3));
 
 #### `.cjs`
 
-`"type": "module"`を採用すると、今度は`CommonJS`で書かれたJavaScriptを読み込みたくなります。その時は`CommonJS`で書かれているファイルを全て`.cjs`に変更する必要があります。
+`"type": "module"`を採用すると今度は`CommonJS`で書かれたJavaScriptを読み込みたくなります。その時は`CommonJS`で書かれているファイルを全て`.cjs`に変更する必要があります。
 
 ```typescript
 // increment.cjs
@@ -316,9 +316,7 @@ console.log(increment(3));
 
 全てを`ES Module`として読み込むこの設定は、多くのパッケージがまだ`"type": "module"`に対応していない現状としては非常に使いづらいです。
 
-例えば`linter`やテストといった各種開発補助のパッケージの設定ファイルを`.js`で書いていると動作しなくなってしまいます。かといってこれらを`.cjs`に書き換えても、パッケージが設定ファイルの命名規則に`.cjs`が含んでいなければそれらのパッケージは設定ファイルがないと見なします。
-
-現段階では`"type": "module"`は非常に扱いづらいものとなっています。
+例えば`linter`やテストといった各種開発補助のパッケージの設定ファイルを`.js`で書いていると動作しなくなってしまいます。かといってこれらを`.cjs`に書き換えても、パッケージが設定ファイルの読み込み規則に`.cjs`が含んでいなければそれらのパッケージは設定ファイルがないと見なします。そのため`"type": "module"`は現段階では非常に扱いづらいものとなっています。
 
 ## TypeScriptでは
 
@@ -328,7 +326,7 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 出力の方法に関しては`tsconfig.json`の項目に説明がありますのでそちらをご覧ください。
 
-## `import? require?`
+## `require? import?`
 
 ブラウザ用、サーバー用の用途で使い分けてください。ブラウザ用であれば`ES Module`を、サーバー用であれば`CommonJS`が無難な選択肢になります。どちらでも使えるユニバーサルなパッケージであれば`Dual Package`を目指すのも良いでしょう。
 
@@ -336,7 +334,7 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 `CommonJS`の`module.exports`と`ES Module`の`export default`は`default export`と呼ばれ  
 `CommonJS`の`exports`と`ES Module`の`export`は`named export`と呼ばれています。  
-どちらも長所と短所があり、たびたび議論になる話題です。どちらか一方を使うように統一するコーディングガイドを持っている企業もあるようですが、片方が極端に多いというわけでもないので好みの範疇です。
+どちらも長所と短所があり、たびたび議論になる話題です。どちらか一方を使うように統一するコーディングガイドを持っている企業もあるようですが、どちらかが極端に多いというわけでもないので好みの範疇です。
 
 ### `default export`
 
@@ -383,7 +381,7 @@ console.log(taxIncluded(100));
 // 108
 ```
 
-ここで、ある国が消費税を`10%`に変更したとします。この場合このシステムでは`taxIncluded.ts`を変更すれば事足ります。
+ここで、ある国が消費税を`10%`に変更したとします。この時このシステムでは`taxIncluded.ts`を変更すればこと足ります。
 
 ```typescript
 // taxIncluded.ts
@@ -424,6 +422,8 @@ export const taxIncludedAsOf2019 = price => price * 1.1;
 // index.ts
 import { taxIncludedAsOf2019 } from './taxIncluded';
 
+// this is no longer available.
+// console.log(taxIncludedAsOf2014(100));
 console.log(taxIncludedAsOf2019(100));
 // 110
 ```
