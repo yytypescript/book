@@ -163,6 +163,14 @@ public replyFunction(ms: number): void {
 (num: number): number => {...};
 ```
 
+オブジェクト風の書き方もあります。
+
+```typescript
+type Operate = {
+  (num: number): number;
+};
+```
+
 ## 引数 `(Arguments)`
 
 関数の入力値である引数は特殊なことをしない限り、要求する型の変数を、要求する数だけ入力しなければいけません。  

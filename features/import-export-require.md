@@ -84,7 +84,7 @@ module.exports = 'Sunday';
 const day = require('./dayOfWeek');
 
 console.log(day);
-// Sunday
+// 'Sunday'
 ```
 
 ### `exports`
@@ -175,12 +175,12 @@ console.log(increment.default(3));
 `exports`に相当するものです。書き方が2通りあります。
 
 ```typescript
-// increment.js
+// util.js
 export const increment = i => i + 1;
 ```
 
 ```typescript
-// increment.js
+// util.js
 const increment = i => i + 1;
 
 export { increment };
@@ -192,7 +192,7 @@ export { increment };
 
 ```typescript
 // index.js
-import { increment } from './increment';
+import { increment } from './util';
 
 console.log(increment(3));
 // 4
@@ -200,9 +200,9 @@ console.log(increment(3));
 
 ```typescript
 // index.js
-import * as inc from './increment';
+import * as util from './util';
 
-console.log(inc.increment(3));
+console.log(util.increment(3));
 // 4
 ```
 
@@ -210,7 +210,7 @@ console.log(inc.increment(3));
 
 ```typescript
 // index.js
-import { increment as inc } from './increment';
+import { increment as inc } from './util';
 
 console.log(inc(3));
 // 4
@@ -224,7 +224,7 @@ console.log(inc(3));
 
 ```typescript
 // index.js
-import('./increment').then(({increment}) => {
+import('./util').then(({increment}) => {
     console.log(increment(3));
     // 4
 });
@@ -249,7 +249,7 @@ export const increment = i => i + 1;
 
 ```typescript
 // index.mjs
-import { increment } from './inc.mjs';
+import { increment } from './increment.mjs';
 
 console.log(increment(3));
 // 4
@@ -392,7 +392,7 @@ export default price => price * 1.1;
 
 ### 今回の問題点
 
-要件によりますが、システムが**ある年月日当時の税率**を元に金額の計算を多用するようなものだとこの暗黙の税率変更は問題になります。
+要件によりますが、システムが**ある年月日当時の消税率**を元に金額の計算を多用するようなものだとこの暗黙の税率変更は問題になります。過去の金額も全て現在の消費税率である`10%`で計算されてしまうからです。
 
 ### `named export`だと
 
@@ -430,5 +430,5 @@ console.log(taxIncludedAsOf2019(100));
 
 名前を変更したため、呼び出し元も名前の変更が強制されます。これは例え`as`を使って名前を変更していたとしても同じく変更する必要があります。
 
-ロジックが変わったこととそれによる修正を強制したいのであれば`named export`を使う方がわかりやすく、そしてエディタ、IDEを通して見つけやすくなる利点があります。逆に、公開するパッケージのようにAPIが一貫して明瞭ならば`default export`も価値があると言えます。
+ロジックが変わったこととそれによる修正を強制したいのであれば`named export`を使う方がわかりやすく、そしてエディタ、IDEを通して見つけやすくなる利点があります。逆に、公開するパッケージのようにAPIが一貫して明瞭ならば`default export`も価値があります。
 
