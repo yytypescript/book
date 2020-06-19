@@ -161,7 +161,7 @@ const america: Continent = {
     name: 'Republic of Canada',
     capitalCity: 'Ottawa'
   },
-  america: {
+  us: {
     name: 'United States of America',
     capitalCity: 'Washington, D.C.'
   },
@@ -204,7 +204,7 @@ const america: Continent = {
     name: 'Republic of Canada',
     capitalCity: 'Ottawa'
   },
-  america: {
+  us: {
     name: 'United States of America',
     capitalCity: 'Washington, D.C.'
   },
@@ -293,7 +293,7 @@ type Country = {
 type Continent = {
   name: string;
   canada: Country;
-  america: Country;
+  us: Country;
   mexico: Country;
 };
 ```
@@ -306,7 +306,7 @@ const {
   canada: {
     name
   },
-  america: {
+  us: {
     name
   },
   mexico: {
@@ -327,8 +327,8 @@ const {
   canada: {
     name: canadaName
   },
-  america: {
-    name: americaName
+  us: {
+    name: usName
   },
   mexico: {
     name: mexicoName
@@ -356,7 +356,7 @@ const [alpha, [bravo, [charlie, [delta, echo]]]] = phone();
 const [,,, delta, echo] = phone();
 ```
 
-`Rest parameters`を使うこともできます。以下の例では`alpha`が`T`型であれば`rest`は`T[]`型になります。
+`Rest parameters`を使うこともできます。以下の例では`alpha`が`T`型で`rest`は`T[]`型になります。
 
 ```typescript
 const [alpha, ...rest] = phone();
@@ -484,7 +484,7 @@ const n: N = 'maintenance mode';
 // -> Type '"maintenance mode"' is not assignable to type 'never'.
 ```
 
-インターフェイスで拡張するとコードが動作しなくなります。
+インターフェイスでは拡張自体ができません。
 
 ```typescript
 interface D extends A, B {
@@ -498,7 +498,7 @@ interface D extends A, B {
 
 JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array<T>`は`ES2016`で`array.includes()`が、`ES2019`で`array.flatMap()`が追加されました。
 
-インターフェースではバージョンごとにメソッドの`Array<T>`のインターフェイスをファイルを分けて定義して、環境に応じて読み込むファイルを変えるだけで`Array<T>`の型定義ができます。
+インターフェイスではバージョンごとにメソッドの`Array<T>`のインターフェイスをファイルを分けて定義して、環境に応じて読み込むファイルを変えるだけで`Array<T>`の型定義ができます。
 
 ```typescript
 // ES2016.array.ts
@@ -548,7 +548,7 @@ const k: {} = b;
 const l: {} = c;
 ```
 
-`object`はプリミティブ型以外の全てのリファレンス型を総称するものとして定義されています。こちらは入力補完ができません。
+`object`はプリミティブ型ではないの全てのリファレンス型を総称するものとして定義されています。こちらは入力補完ができません。
 
 `Object`はTypescriptで型の定義がされているインターフェイスです。そのため`.`を入力すればメソッドの入力補完ができます。
 
@@ -571,6 +571,8 @@ const object5: object = '';
 // -> Type '""' is not assignable to type 'object'.
 const object6: object = Symbol();
 // -> Type 'unique symbol' is not assignable to type 'object'.
+const object7: object = 10n;
+// -> Type '10n' is not assignable to type 'object'.
 
 const iObject1: Object = undefined;
 // -> Type 'undefined' is not assignable to type 'Object'.
@@ -580,6 +582,7 @@ const iObject3: Object = false;
 const iObject4: Object = 0;
 const iObject5: Object = '';
 const iObject6: Object = Symbol();
+const iObject7: Object = 10n;
 
 const literal1: {} = undefined;
 // -> Type 'undefined' is not assignable to type '{}'.
@@ -589,25 +592,27 @@ const literal3: {} = false;
 const literal4: {} = 0;
 const literal5: {} = '';
 const literal6: {} = Symbol();
+const literal7: {} = 10n;
 ```
 
-`object`は問題ないとして、`Object, {}`は`boolean, number, string, symbol`型の代入ができてしまいます。
+`object`は問題ないとして、`Object, {}`は`boolean, number, string, symbol, bigint`型の代入ができてしまいます。
 
 これはTypesScriptの設計がおかしいわけではなくJavaScriptがもともと持っている`Autoboxing`を再現したものに当たります。
 
 ### `Autoboxing`
 
-文字数カウントをしたい時は`str.length`とすれば文字数が得られます。また、数値を文字列にしたければ\(`backtick`などを使わなければ\)`num.toString()`とすれば文字列が得られます。
+文字数カウントをしたい時は`str.length`とすれば文字数が得られます。また、数値を文字列にしたければ\(`template literal`を使わなければ\)`num.toString()`とすれば文字列が得られます。
 
 プリミティブ型はオブジェクトではないのでプロパティやメソッドを持っていないはずです。ですがこのようなことができるのは、内部的にはJavaScriptがプリミティブ値をオブジェクトに変換しているからです。この暗黙の型変換を`Autoboxing`と呼びます。
 
-ちなみにこの時に使われるオブジェクトを通称ラッパークラスと呼び、それらのインターフェイスもTypeScriptに`Boolean, Number, String, Symbol`として定義されています。なお`undefined`と`null`のラッパークラス`Undefined, Null`はありません。
+ちなみにこの時に使われるオブジェクトを通称ラッパークラスと呼び、それらのインターフェイスもTypeScriptに`Boolean, Number, String, Symbol, BigInt`として定義されています。なお`undefined`と`null`のラッパークラス`Undefined, Null`はありません。
 
 ```typescript
 const bool: Boolean = false;
 const num: Number = 0;
 const str: String = '';
 const sym: Symbol = Symbol();
+const big: BigInt = 10n;
 ```
 
 当然ながらラッパークラスは`Object`を親クラスに持っているため、変数の型として`Object, {}`が定義されてしまうと`Autoboxing`をしたものと解釈され、代入ができます。
