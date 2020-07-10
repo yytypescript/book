@@ -31,7 +31,7 @@
 
 ## 執筆者向け情報 <a id="writing"></a>
 
-* [README](writing/readme.md)
+* [README](writing/writing.md)
 * [CONTRIBUTING](writing/contributing.md)
 * [PDR](writing/pdr/README.md)
   * [0000-なぜ私たちは技術書を書くのか？](writing/pdr/0000-why-do-we-write-technical-books.md)
