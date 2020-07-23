@@ -323,7 +323,7 @@ type PartialPerson = {
 };
 ```
 
-### `Requied<T>`
+### `Required<T>`
 
 `Partial<T>`の逆で、全てのプロパティから`?`を取り去ります。
 
