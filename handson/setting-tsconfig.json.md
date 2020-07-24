@@ -916,21 +916,3 @@ function next(lyric: string, count: number): string {
 
 なお、このオプションは`case`に処理がある場合のみ`break`あるいは`return`を強制します。この項目で一番初めに紹介した一か月の日数を求める関数`daysOfMonth()`は、`fallthrough`である`case`は全て処理がないため警告は発生しません。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

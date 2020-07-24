@@ -111,7 +111,7 @@ pikachu.name = false;
 
 #### `const assertion`
 
-オブジェクトリテラルの末尾に`as const`を記述すればプロパティ全てが`readonly`になります。
+オブジェクトリテラルの末尾に`as const`を記述すればプロパティが`readonly`でリテラルタイプで指定した物と同等の扱いになります。
 
 ```typescript
 const pikachu = {
