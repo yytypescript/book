@@ -7,6 +7,7 @@
 * [作りながら学ぶTypeScript](handson/README.md)
   * [開発環境の準備](handson/setup.md)
   * [簡単な関数をCLIで作ってみよう](handson/make-a-simple-function-with-cli.md)
+  * [tsconfig.jsonを設定する](handson/setting-tsconfig.json.md)
 * [TypeScriptオーバービュー](overview/README.md)
   * [TypeScript誕生の背景](overview/before-typescript.md)
 * [JavaScript再入門](revisiting-javascript.md)

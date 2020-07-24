@@ -115,7 +115,7 @@ jetlag.replyArrow(10);
 
 ### 不定な`this`をはっきりさせる
 
-`function() {}`を使うときに`this`を確定させる方法として以下のふたつがあります。以下は上記クラスの`replyFunction()`を書き換えていると解釈してください。
+`function() {}`を使う時に`this`を確定させる方法として以下のふたつがあります。以下は上記クラスの`replyFunction()`を書き換えていると解釈してください。
 
 #### 使いたい`this`を退避させる
 
@@ -426,7 +426,7 @@ console.log(average()); // 0
 console.log(average(1, 3)); // 2
 ```
 
-0除算を防ぐ目的で少々処理が複雑になっていますが、可変の引数の前に`...`を付ければ、可変引数を受け付け、それらを配列として受けることができます。
+`0`除算を防ぐ目的で少々処理が複雑になっていますが、可変の引数の前に`...`を付ければ、可変引数を受け付け、それらを配列として受けることができます。
 
 ### `Rest parameters`でできないこと
 
@@ -457,7 +457,7 @@ const scores: number[] = mathExamination();
 const max: number = Math.max(scores);
 ```
 
-これは学校の試験をイメージして書いています。生徒の数は1年間ではそう増減はしないので、40人ぐらいの生徒なら力技でもなんとかなるかもしれません。
+これは学校の数学の試験をイメージして書いています。生徒の数は1年間ではそう増減はしないので、40人ぐらいの生徒なら力技でもなんとかなるかもしれません。
 
 ```typescript
 Math.max(scores[0], scores[1], scores[2], scores[3], scores[4], scores[5], scores[6], ...);
@@ -576,7 +576,7 @@ bmi();
 
 ## 引数の`this`
 
-`function`とクラスのメソッドの第1引数は`this`という特殊な引数を受けることができます。これは使用するコンテキストによって`this`の意味するところが変わってしまうこれらがどのコンテキストで使用されるべきなのかをTypeScriptに伝えるために使います。この`this`は呼び出し側では引数として指定する必要はなく、第2引数以降を指定すれば問題ありません。
+`function`とクラスのメソッドの第1引数は`this`という特殊な引数を受けることができます。これは使用するコンテキストによって`this`の意味するところが変わってしまうこれらがどのコンテキストで使用されるべきなのかをTypeScriptに伝えるために使います。この`this`は呼び出し側では引数として指定する必要はなく、第2引数以降を指定します。
 
 なお、アロー関数はこの`this`を持つことができません。それは前述のとおりアロー関数は宣言時の`this`が使われるため`this`が変動することがなく、そもそも不要だからです。
 
@@ -639,6 +639,8 @@ conosle.log(femaleToStr());
                             ^
 TypeError: Cannot read property 'name' of undefined
 ```
+
+引数の`this`を指定することによって意図しないメソッドの持ち出しを避けることもできます。
 
 ## 戻り値 `(Return value)`
 
@@ -747,6 +749,16 @@ if (isDuck(animal)) {
   // ...
 }
 ```
+
+しかしながら、これはあくまでもその型であるとTypeScriptに解釈させるだけなので、その型であることがJavaScriptとして正しいということは断言できません。
+
+```typescript
+function isUndefined(value: unknown): value is undefined {
+  return typeof value === 'number';
+}
+```
+
+上記関数`isUndefined()`は明らかに誤っていますが、この誤りに対してTypeScriptは何も警告を出しません。
 
 ## `Assertion functions`
 

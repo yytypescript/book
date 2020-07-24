@@ -167,7 +167,7 @@ if (creature instanceof Bird) {
 
 またユニオン型が上記の`prim`、`creature`のように2択で、`typeof`、`instanceof`の`if`のブロック内で`return`が行われれば、`if`のブロックより下ではもう片方の型であると自動的に型を確定してくれます。上記例8行目の`prim`がそれにあたります。入力補完候補も`string`型のものが表示されるようになります。
 
-## 定数を持たせる方法で型を確定させる
+## 定数を持たせる方法で型を確定させる\(`Discriminated unions`\)
 
 以下のようなタイプエイリアスの`SuccessResponse`、`ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
 

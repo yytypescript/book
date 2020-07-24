@@ -344,7 +344,6 @@ type RequiredPerson = {
 
 ```typescript
 type Butterfly = {
-  [key: string]: string;
 };
 ```
 
@@ -381,7 +380,6 @@ type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
 
 ```typescript
 type Butterfly = {
-  [key in SystemSupportLanguage]: string;
 };
 ```
 
@@ -404,7 +402,6 @@ const bufferflies: Butterfly = {
 
 ```typescript
 type Jekyll = {
-  [key: boolean]: string;
 };
 // -> An index signature parameter type must be either 'string' or 'number'.
 ```
