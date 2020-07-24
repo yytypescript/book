@@ -10,6 +10,7 @@
   * [tsconfig.jsonを設定する](handson/setting-tsconfig.json.md)
 * [TypeScriptオーバービュー](overview/README.md)
   * [TypeScript誕生の背景](overview/before-typescript.md)
+  * [なぜTypeScriptを使うべきか？](overview/why-should-you-use-typescript.md)
 * [JavaScript再入門](revisiting-javascript.md)
 * [知っておきたいTypeScriptの文法と機能](features/README.md)
   * [anyとunknown](features/any-unknown.md)
