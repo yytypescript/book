@@ -18,6 +18,8 @@ console.log(person.surname);
 
 `object`型に代入したオブジェクトはプロパティ、メソッドを一切持っていないものとしてみなされます。そのため6行目のようにプロパティ、メソッドに対するアクセスができません。
 
+{% page-ref page="object.md" %}
+
 ## オブジェクトの型を定義する
 
 これでは何も旨味がないので独自に型を定義します。上記の人名を持つオブジェクトであれば以下のように定義できます。
@@ -126,9 +128,11 @@ const family: Family = {...};
 
 プロパティの`grandparents`は最大ふたつじゃないか、という指摘があるかと思います。気になる方はタプルの章をご参照ください。
 
+{% page-ref page="tuple.md" %}
+
 ## オブジェクト内の関数の定義
 
-オブジェクトが持つ関数\(メソッド\)の定義の方法はふたつあります。これらが指す関数の意味は同じです。
+オブジェクトが持つ関数\(メソッド\)の定義の方法はふたつあります。これらが指す関数の意味は基本的に同じです。
 
 ```typescript
 type A = {
@@ -177,6 +181,8 @@ type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
 ```
 
 これはそのシステムがサポートする言語は`'en', 'fr', 'it', 'es'`のいずれかであり、それに`SystemSupportLanguage`という別名を与えたことになります。
+
+{% page-ref page="union-type.md" %}
 
 ## 宣言に使える特殊な記号
 
@@ -344,6 +350,7 @@ type RequiredPerson = {
 
 ```typescript
 type Butterfly = {
+  [key: string]: string;
 };
 ```
 
@@ -361,7 +368,7 @@ const bufferflies: Butterfly = {
 };
 ```
 
-ただし、どのキーも存在するものとして扱われます、存在しないキーを指定してもエラーは発生せず`undefined`を返します。またTypeScriptによる入力補完も働きません。
+さらに、どのキーも存在するものとして扱われます、存在しないキーを指定してもエラーが発生することなく`undefined`を返します。またTypeScriptによる入力補完も働きません。
 
 ```typescript
 console.log(bufferflies.ja);
@@ -380,6 +387,7 @@ type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
 
 ```typescript
 type Butterfly = {
+  [key in SystemSupportLanguage]: string;
 };
 ```
 
@@ -402,6 +410,7 @@ const bufferflies: Butterfly = {
 
 ```typescript
 type Jekyll = {
+  [key: boolean]: string;
 };
 // -> An index signature parameter type must be either 'string' or 'number'.
 ```
@@ -462,7 +471,7 @@ const n: Never = '2';
 // -> Type '"2"' is not assignable to type 'never'.
 ```
 
-この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが、関数の戻り値に設定すると必ず例外を返す関数、無限ループの関数など、後続のコードが実行されないことを示す時に使えます。
+この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが意外なところで使うことができます。今回は説明を省きます。
 
 ### インターセクション型を使いこなす
 

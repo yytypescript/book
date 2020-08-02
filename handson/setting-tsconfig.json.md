@@ -47,7 +47,7 @@ JavaScriptも時代とともに進化をして、既存のオブジェクトに�
 
 ## フロントエンドとバックエンド
 
-フロントエンドとバックエンドはモジュールを出力する、他のモジュールを読み込むための作りが異なっています。詳細は`import / export /require`の項をご覧ください。そのため、モジュール解決のためのオプションを分けたほうが無難です。
+フロントエンドとバックエンドはモジュールを出力する、他のモジュールを読み込むための作りが異なっています。詳細は`import / export / require`の項をご覧ください。そのため、モジュール解決のためのオプションを分けたほうが無難です。
 
 ### `module`
 
@@ -84,7 +84,7 @@ JavaScriptも時代とともに進化をして、既存のオブジェクトに�
 ```
 
 * `tsconfig.base.json`
-  * `module`以外の設定を設定している礎となる`tsconfig.json`です
+  * 基本となる`tsconfig.json`です
 * `tsconfig.cjs.json`
   * `tsconfig.base.json`を継承した`commonjs`用の`tsconfig.json`です
 * `tsconfig.esm.json`
@@ -169,7 +169,7 @@ tsc -p tsconfig.esm.json
 
 ### `Tree Shaking`
 
-`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては、自分ができる全てをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなりすぎるという弱点があります。特にそれが`SPA(Signle Page Application)`だと問題です。`SPA`は読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
+`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができる全てをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなりすぎるという弱点があります。特にそれが`SPA(Signle Page Application)`だと問題です。`SPA`は読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
 
 この事態を避けるために`module bundler`は容量削減のための涙ぐましい努力を続けています。その機能のひとつとして題名の`Tree Shaking`を紹介するとともに、開発者にできる`Tree Shaking`対応パッケージの作り方を紹介します。
 
@@ -188,7 +188,7 @@ tsc -p tsconfig.esm.json
 
 `commonjs`は`require()`を使用します。`require()`はファイルのどこでも使用ができますが`esmodule`の`import`はファイルの先頭でやらなければならないという決定的な違いがあります。
 
-`require()`は、ある時はこの`js`を、それ以外はあの`js`を、と読み込むファイルをコードで切り替えることができます。つまり、以下のようなことができます。
+`require()`はある時はこの`js`を、それ以外の時はあの`js`を、と読み込むファイルをコードで切り替えることができます。つまり、以下のようなことができます。
 
 ```typescript
 let police = null;
@@ -523,7 +523,7 @@ const dump: ErrorDump = runtimeDump;
 dump(new Error('error'));
 ```
 
-しかしながら、落ちます。
+しかしながら、これは落ちてしまいます。
 
 ```typescript
 TypeError: err.stacktrace is not a function
@@ -751,6 +751,8 @@ Property 'nameXX' does not exist on type 'Person'. Did you mean 'name01'?
 ```
 
 この引数の`this`については関数 \(`Functions`\)の項に詳細がありますので併せてご参照ください。
+
+{% page-ref page="../features/function.md" %}
 
 ### `alwaysStrict`
 

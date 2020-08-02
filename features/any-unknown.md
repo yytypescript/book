@@ -83,6 +83,10 @@ console.log(unknown6.x.y.z);
 
 TypeScriptのプロジェクトを作る時に必要な`tsconfig.json`という設定ファイルにはこの`any`型の使用を防ぐためのオプションとして`noImplicitAny`があります。既存のJavaScriptのプロジェクトをTypeScriptに置き換えていくのではなく、スクラッチの状態からTypeScriptで作るのであればこの設定を入れると良いでしょう。
 
+`tsconfig.json`にある他の厳格なコーディングのための設定の説明もありますので併せて参照してください。
+
+{% page-ref page="../handson/setting-tsconfig.json.md" %}
+
 ## `Type assertion`に使う
 
 以下のクラスを例に考えます。

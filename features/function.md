@@ -171,6 +171,8 @@ type Operate = {
 };
 ```
 
+この書き方はオーバーロードで目にする機会があるかと思います。オーバーロードについては後述しますのでこのまま読み進めてください。
+
 ## 引数 `(Arguments)`
 
 関数の入力値である引数は特殊なことをしない限り、要求する型の変数を、要求する数だけ入力しなければいけません。  
@@ -209,7 +211,7 @@ distance(q1, q2);
 
 JavaScriptでは引数が少ない時はその引数には`undefined`が渡され、引数が多い場合は余分な引数は無視されるのですが、ここは大きな違いです。
 
-## `Optional parameters, Default parameters`
+## 引数を省略したい
 
 引数を省略したいことがあります。その時は`Optional parameters`と`Default parameters`を使用することができます。
 
@@ -219,8 +221,6 @@ JavaScriptでは引数が少ない時はその引数には`undefined`が渡さ�
 function distance(p1: Point, p2: Point): number {
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
-
-distance(q1, q2);
 ```
 
 ### `Optional parameters`
@@ -239,6 +239,8 @@ distance(q1);
 引数の`p2`の右隣に`?`がつきました。これで`p2`は省略可能な引数となり5, 6行目のどちらの書き方も受け付けるようになります。
 
 しかし、この`Optional parameters`は意味する型が少々変わります。内部的には`p2`は`Point`ではなく`Point | undefined`のユニオン型`(Union Types)`として解釈されます。ユニオン型の説明は先の章にあるため詳しい説明は譲りますが、ユニオン型は日本語で言うと**どれか**の意味です。
+
+{% page-ref page="union-type.md" %}
 
 ユニオン型が与えられた時は、どちらの型にもあるプロパティ、メソッドでなければ使うことができません。当然ながら`undefined`には`x, y`というプロパティは存在しないため、上記のコードはTypeScriptに指摘されます。
 
@@ -405,6 +407,8 @@ async function distanceAync(p1: Point, p2: Point = await inverseAync(p1)): Promi
 }
 ```
 
+{% page-ref page="promise-async-await.md" %}
+
 このように`Default parameters`を書くことはできません。なお`inverseAsync()`は非同期関数とします。
 
 ## `Rest parameters`
@@ -438,13 +442,21 @@ average([1, 3, 5, 7, 9]);
 
 このように配列を直接渡してしまうと`average()`の関数内では要素数1の`number[][]`型が渡されたと解釈されます。もちろん`average()`の期待する引数の型は`number[]`型なので、このコードを実行することはできません。
 
-また、可変個の引数を受け付ける関係上、`Rest parameters`より後ろにほかの引数を置くことができません。ただし`Rest parameters`の前であれば問題ありません。
+また、可変個の引数を受け付ける関係上、`Rest parameters`より後ろにほかの引数を置くことができません。
 
 ```typescript
 function average(...nums: number[], subject: string): number {
   // ...
 }
 // -> A rest parameter must be last in a parameter list.
+```
+
+ただし`Rest parameters`の前であれば問題ありません。
+
+```typescript
+function average(subject: string, ...nums: number[]): number {
+  // ...
+}
 ```
 
 ### `Spread syntax`
@@ -457,7 +469,7 @@ const scores: number[] = mathExamination();
 const max: number = Math.max(scores);
 ```
 
-これは学校の数学の試験をイメージして書いています。生徒の数は1年間ではそう増減はしないので、40人ぐらいの生徒なら力技でもなんとかなるかもしれません。
+この例は学校の数学の試験をイメージしています。生徒の数は1年間ではそう増減はしないので、40人ぐらいの生徒なら力技でもなんとかなるかもしれません。
 
 ```typescript
 Math.max(scores[0], scores[1], scores[2], scores[3], scores[4], scores[5], scores[6], ...);
@@ -838,7 +850,9 @@ abstract class Optional<T> {
 }
 ```
 
-ただこの例の場合TypeScriptではユニオン型によって簡単に解決できます。ユニオン型については詳細の説明があるのでそちらをご参照ください。
+ただしこの例の場合TypeScriptではユニオン型によって簡単に解決できます。ユニオン型については詳細の説明があるのでそちらをご参照ください。
+
+{% page-ref page="union-type.md" %}
 
 ## 戻り値の`this`
 
@@ -877,7 +891,7 @@ op.multiply(6); // 12
 op.devide(3); // 4
 ```
 
-演算ごとにステートメントを切る必要があります。  
+演算ごとにステートメントを分ける必要があります。  
 このような場合メソッドチェインを使って処理を連続させることができます。
 
 ```typescript
@@ -994,7 +1008,7 @@ op.power(3).multiply(2).power(3); // 4096
 
 ### オーバーロードの定義
 
-オーバーロードはその関数が受け付けたい引数、戻り値の組を実装する関数の上に書きます。例えば先ほど使用した2点の距離を求める関数`distance()`をオーバーロードで定義すると以下のようになります。なお、この例では戻り値は全て`number`型ですが、別の型にしても問題ありません。
+オーバーロードはその関数が受け付けたい引数、戻り値の組を実装する関数の上に書きます。例えば先ほど使用した2点の距離を求める関数`distance()`をオーバーロードで定義すると以下のようになります。なお、この例では戻り値は全て`number`型ですが、別の型にしても実装さえできれば問題ありません。
 
 ```typescript
 function distance(p: Point): number;
@@ -1003,7 +1017,7 @@ function distance(x: number, y: number): number;
 function distance(x1: number, y1: numebr, x2: number, y2: number): number;
 ```
 
-なお、上記のような書き方のオーバーロードは名前付き関数`(Normal functions)`またはクラスのメソッドでのみ可能です。匿名関数`(Anonymous functions)`、アロー関数`(Arrow functions)`では、オーバーロードを定義したタイプエイリアスまたはインターフェイスを定義します。たとえば、上記例だと以下のようなタイプエイリアスになります。
+なお、上記のような書き方のオーバーロードは名前付き関数`(Normal functions)`またはクラスのメソッドでのみ可能です。匿名関数`(Anonymous functions)`、アロー関数`(Arrow functions)`では、タイプエイリアスまたはインターフェイスでオーバーロードを定義します。たとえば、上記例だと以下のようなタイプエイリアスになります。
 
 ```typescript
 type Distance = {

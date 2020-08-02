@@ -54,6 +54,8 @@ console.log(increment(4));
 
 そこでオブジェクトの型を独自に定義することができます。独自に定義した型にエイリアス\(別名\)をつけて使い回すこともできます。この機能については本書のタイプエイリアスの項を参照ください。
 
+{% page-ref page="type-alias.md" %}
+
 ## オブジェクトのプロパティは上書き可能
 
 オブジェクトのプロパティはたとえオブジェクトを定数にしたとしても書き換えができてしまいます。
@@ -108,6 +110,8 @@ pikachu.name = false;
 #### `readonly`
 
 `readonly`については、タイプエイリアスの項にて解説がありますので、そちらをご参照ください。
+
+{% page-ref page="type-alias.md" %}
 
 #### `const assertion`
 
@@ -198,7 +202,7 @@ america.canada.capitalCity = 'Yamoussoukro';
 `as const`を付けます。
 
 ```typescript
-const america: Continent = {
+const america = {
   name: 'North American Continent',
   canada: {
     name: 'Republic of Canada',
@@ -315,11 +319,11 @@ const {
 } = america();
 ```
 
-しかしながら、この例では全てが`name`という名前で重複してしまっているため、理論上は正しいのですがこの分割代入は同じ名前の定数の多重定義となってしまっています。
+しかしながら、この例では`name`という名前が重複してしまっているため、理論上は正しいのですが同じ名前の定数の多重定義となってしまっています。
 
 ### 分割代入しつつ名前を変更する
 
-分割代入はプロパティの名前をそのまま継ながなければならないかというと、そうではありません。好きな名前に変更することができます。先ほどの`name`が重複してしまった例は以下のように書き直せます。
+分割代入はプロパティの名前をそのまま継ながなければならないかというとそうではありません。好きな名前に変更することができます。先ほどの`name`が重複してしまった例は以下のように書き直せます。
 
 ```typescript
 const {
@@ -408,7 +412,7 @@ const pikachu: Wild = { name, no, genre, height, weight };
 const newPokemon: Wild = evolution({ name, no, genre, height, weight });
 ```
 
-また、これを関数内で分割代入で受け取ることもできます。
+また、関数でこれを関数内で分割代入で受け取ることもできます。
 
 ```typescript
 function evolution({ name, no, genre, height, weight }: Wild): Wild {
@@ -417,6 +421,8 @@ function evolution({ name, no, genre, height, weight }: Wild): Wild {
 ```
 
 関数における分割代入については**関数\(Funcitons\)**の項目に詳細がありますので併せてご参照ください。
+
+{% page-ref page="function.md" %}
 
 ## タイプエイリアス？それともインターフェイス？
 

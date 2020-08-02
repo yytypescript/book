@@ -21,7 +21,7 @@ const list: unknown[] = tuple();
 list[0].
 ```
 
-ですが、この`list[0]`の後に`.`をつけてもTypeScriptは入力補完をしません。それは`list`の要素は`unknown`であり、つまりTypeScriptはそれがどの型であるかを関心しないからです。
+ですが、この`list[0]`の後に`.`をつけてもTypeScriptは入力補完をしませんし、メソッドを呼ぶことができません。それは`list`の要素は`unknown`であり、つまりTypeScriptはそれがどの型であるかを関心しないからです。
 
 せっかくTypeScriptを使って型による恩恵を享受しているのに、ここだけ型がないものとしてコーディングをするのも味気がありません。そこで使えるのがタプルです。
 
@@ -67,7 +67,7 @@ list[5];
 // -> Tuple type '[number, string, boolean]' of length '3' has no element at index '5'.
 ```
 
-そのため`list.push()`のような、配列の要素を増やす操作をしてもその要素を使うことはできません。
+そのため`list.push()`のような配列の要素を増やす操作をしてもその要素を使うことはできません。
 
 ### `Destructuring assignment`を使ってタプルにアクセスする
 
@@ -87,6 +87,10 @@ const [,, bool]: [number, string, boolean] = tuple();
 
 TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。その時TypeScriptでは`Promise.all()`というものを使用します。この時タプルが役に立ちます。  
 `Promise`についての詳しい説明は本書に専門の項目がありますので譲ります。ここでは`Promise<T>`という型の変数は`await`をその前につけると`T`が取り出せることだけ覚えておいてください。また、この`T`をジェネリクスと言いますが、こちらも専門の項目があるので譲ります。
+
+{% page-ref page="promise-async-await.md" %}
+
+{% page-ref page="generics.md" %}
 
 ```typescript
 const promise: Promise<number> = yyAsync();
