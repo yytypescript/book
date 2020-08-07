@@ -1,18 +1,22 @@
 # 定義ファイル
 
-自身のプロジェクトでTypeScriptでコーディングする場合は型を宣言することにより、IDEやエディタの補完機能やコードチェックを行えます。しかし外部のパッケージを利用する場合は型定義ファイルが含まれているとは限りません。
+自身のプロジェクトでTypeScriptでコーディングする場合は型を宣言することにより、IDEやエディタの補完機能やコードチェックを行えます。しかし外部のパッケージ\(npm\)を利用する場合は型定義ファイルが含まれているとは限りません。
 
-## 定義ファイルとは
+### 定義ファイルとは
 
 定義ファイルとはアクセス可能な宣言を記述したファイルです。拡張子は`.d.ts`です。
 
-定義ファイルは主にパッケージを配布するために作成されます。TypeScriptからJavaScriptにコンパイルされるときに型情報は無くなってしまいます。そのままJavaScriptパッケージを利用すると型定義の恩恵を得ることができません。しかし定義ファイルを同梱することにより補完やコードチェックとして利用するようにできます。
+定義ファイルは主にパッケージを配布するために作成されます。TypeScriptはJavaScriptにコンパイルされるときに型情報は無くなってしまいます。そのままJavaScriptパッケージを利用すると型定義の恩恵を得ることができません。しかし定義ファイルを同梱することにより補完やコードチェックとして利用することができます。
 
-ただし、必ずしも定義ファイルが存在するとは限りません。**定義ファイルの有無**にて説明します。
+残念なことにnpmに公開されているすべてのパッケージに必ずしも定義ファイルが存在するとは限りません。こちらに関しては**定義ファイルの有無**にて説明します。
 
-### 定義ファイル出力例
+#### 定義ファイル出力例
 
-tscコマンドに`-d`オプションをつけてコンパイルを行うと定義ファイルを出力することができます。
+tscコマンドに`-d`オプションをつけてコンパイルを行うとJavaScriptと定義ファイルを出力することができます。
+
+**TypeScriptファイル**
+
+下記のTypeScriptファイル\(sample.ts\)を`-d`オプションを付けてコンパイルしてみます。
 
 ```typescript
 // sample.ts
@@ -26,10 +30,30 @@ function greeter(person: Person): string {
 }
 ```
 
-出力されたsample.d.tsファイルの`greeter`関数の処理部はなくなり、定義情報のみになっていることが確認できます。
+tscコマンドに`-d`オプションを付けコンパイルを実行する。
+
+```text
+tsc -d
+```
+
+**JavaScriptファイル**
+
+sample.tsではInterfaceを使っていますが、JavaScriptにはInterfaceの概念がないため関数のみになりました。また引数の型情報もなくなります。
+
+```javascript
+// sample.js
+function greeter(person) {
+    return 'Hello, ' + person.firstName + ' ' + person.lastName;
+}
+//# sourceMappingURL=sample.js.map
+```
+
+**d.tsファイル**
+
+定義情報のみ記載されたファイルが出力されます。
 
 ```typescript
-// sample.d.ts
+// sample.ts.d
 interface Person {
     firstName: string;
     lastName: string;
@@ -37,9 +61,9 @@ interface Person {
 declare function greeter(person: Person): string;
 ```
 
-## 定義ファイルの有無
+### 定義ファイルの有無
 
-定義ファイルはパッケージ開発者またはボランティアにより作成されます。
+定義ファイルはパッケージ開発者またはボランティアにより作成されています。
 
 * 定義ファイル有り
   * TypeScriptで書かれたパッケージ
@@ -49,36 +73,39 @@ declare function greeter(person: Person): string;
 * 定義ファイル無し
   * JavaScriptで書かれたパッケージで定義ファイルが存在しない
 
+#### 定義ファイル有り
+
+定義ファイルが含まれているパッケージの場合は特別な作業は必要ありません。
+
+例としてdate libraryの[moment](https://github.com/moment/moment)はJavaScriptで構築されていますが、`moment.d.ts`を同封しています。そのままinstallを行うだけで定義ファイルの恩恵を受けられます。
+
+```text
+$ npm install moment
+```
+
 定義ファイル有りの場合は、設定なく型情報を参照することができます。
 
-### 定義情報を別途インストール
+#### 定義ファイル有りだが別途インストールが必要
 
-もし、パッケージに定義ファイルが同梱されていない場合は自身でインストールする必要があります。
+もし、パッケージに定義ファイルが同梱されていない場合は別途インストールする必要があります。
 
-[TypeSearch](https://microsoft.github.io/TypeSearch/)からパッケージ名を検索しインストールを行います。TypeSearchのリポジトリは[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)であり、ここに多くのライブラリの定義ファイルが一元管理されています。
+[TypeSearch](https://microsoft.github.io/TypeSearch/)からパッケージ名を検索しインストールを行います。TypeSearchのリポジトリは[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)であり、ここに多くのライブラリの定義ファイルが一元管理されています。定義ファイルのインストールも`npm`コマンドを利用します。
 
 [Express](https://expressjs.com/)本体と定義ファイルのインストール例は下記のようになります。
 
 ```text
-$ npm install express --save
-$ npm install @types/express --save-dev
+$ npm install express --save // express本体のインストール
+$ npm install @types/express --save-dev  // 型定義ファイルのインストール
 ```
 
-{% hint style="info" %}
-これより下に記載されている事項は執筆完了時に削除願います
-{% endhint %}
+#### 定義ファイル無し
 
-* クロレ
-  * 定義ファイルを書く
-    * 定義ファイルのタイプ
-      * TypeScriptで書かれたパッケージは @types不要
-      * JavaScriptで書かれているけど .d.ts を同梱しているパッケージ \(ex gatsby\)
-      * JavaScriptで書かれたパッケージで@typesに登録されているものは @types/hogehogeをインストール　**\***
-      * JavaScriptで書かれたパッケージで@typesに登録されていないものは、  _\*\*_
-        * 自力で書くかanyで頑張る
-        * allowJs: true? checkJs: true? どっちかONか両方ONにすると、jsファイルを型推論してくれた記憶が……
-        * 自分で型定義ファイルを書いたらtsconfig.json `typeRoots` をなんやかんやする
-        * \[typeRootsの誤解 -- TypeScriptで、npmからインストールしたパッケージに型定義ファイル \(\*.d.ts\) が存在しない場合の正しい対処方法 - Qiita\]\([https://qiita.com/tetradice/items/b89a5dd41fcebf96379e](https://qiita.com/tetradice/items/b89a5dd41fcebf96379e)
-          * /// 
-          * これ今も使う？
+定義ファイルがないライブラリも存在します。その場合は
+
+1. anyで妥協する
+2. 定義ファイルを作る
+
+定義ファイルの存在しないライブラリも利用することが可能ですが暗黙的にany型になります。また自身で作成しDefinitelyTypedに公開することもできます。
+
+[Contribution guide \| DefinitelyTyped](http://definitelytyped.org/guides/contributing.html)
 
