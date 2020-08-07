@@ -153,7 +153,7 @@ tsc -p tsconfig.esm.json
 {
   "name": "YYTS",
   "version": "1.0.0",
-  "license": "Apache-2.0",
+  "license": "CC BY-SA 3.0",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "types": "./esm/index.d.ts",
@@ -228,7 +228,7 @@ if (shouldCallPolice()) {
 {
   "name": "YYTS",
   "version": "1.0.0",
-  "license": "Apache-2.0",
+  "license": "CC BY-SA 3.0",
   "sideEffects": false,
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -247,7 +247,7 @@ if (shouldCallPolice()) {
 {
   "name": "YYTS",
   "version": "1.0.0",
-  "license": "Apache-2.0",
+  "license": "CC BY-SA 3.0",
   "sideEffects": [
     "./xxx.js",
     "./yyy.js"
@@ -350,7 +350,7 @@ IDEを使っている時に有用で、実際の`ts`のソースコードがど�
 {
   "name": "YYTS",
   "version": "1.0.0",
-  "license": "Apache-2.0",
+  "license": "CC BY-SA 3.0",
   "sideEffects": false,
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
