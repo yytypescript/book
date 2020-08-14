@@ -26,6 +26,7 @@
   * [インターフェース](features/interface.md)
   * [クラス](features/class.md)
   * [ジェネリクス](features/generics.md)
+  * [型パラメータの制約](features/paramtano.md)
   * [デフォルト型パラメータ](features/deforutoparamta.md)
   * [Promise / async / await](features/promise-async-await.md)
   * [定義ファイル](features/definitelytyped.md)
