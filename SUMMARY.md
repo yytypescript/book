@@ -29,10 +29,11 @@
   * [型パラメータの制約](features/paramtano.md)
   * [デフォルト型パラメータ](features/deforutoparamta.md)
   * [Promise / async / await](features/promise-async-await.md)
+  * [ユーティリティ型 \(Utility types\)](features/utility-type.md)
   * [定義ファイル](features/definitelytyped.md)
-  * [import / export /require](features/import-export-require.md)
+  * [import / export /require](features/import-export-require/README.md)
+    * [exportとexport defaultどちらを使うべきか？Pros/Consある話](features/import-export-require/exporttoexport-defaultdochirawoubekikaprosconsaru.md)
   * [型変数](features/type-variables.md)
-  * [exportとexport defaultどちらを使うべきか？Pros/Consある話](features/exporttoexport-defaultdochirawoubekikaprosconsaru.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 

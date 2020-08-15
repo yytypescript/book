@@ -289,59 +289,9 @@ person.name.givenName = 'Gorilla';
 
 `Name`のプロパティ`surname, givenName`はともに`readonly`ではないためこのように上書きができてしまいます。
 
-## 便利な組み込み型
+これら記号と、それを発展させた型の表現についてはユーティリティ型に詳細がありますのでご参照ください。
 
-タイプエイリアスをより便利に使うためにいくつかの便利な組み込み型が定義されています。その中でも有用なものを紹介します。これらで全てではありません。なお、以下のタイプエイリアスを使うものとします。
-
-```typescript
-type Person = {
-  surname: string;
-  middleName?: string;
-  givenName: string;
-};
-```
-
-### `Readonly<T>`
-
-さきほど出てきた`readonly`を全てのプロパティに対して適用してくれる組み込み型です。`readonly`の項目でも紹介したようにプロパティがオブジェクトだった場合、それが持つプロパティまでは`readonly`にしないことに注意してください。
-
-`Readonly<Person>`は以下と同じ型になります。
-
-```typescript
-type ReadonlyPerson = {
-  readonly surname: string;
-  readonly middleName?: string;
-  readonly givenName: string;
-};
-```
-
-### `Partial<T>`
-
-`?`を全てのプロパティに対して適用してくれる組み込み型です。
-
-`Partial<Person>`は以下と同じ型になります。
-
-```typescript
-type PartialPerson = {
-  surname?: string;
-  middleName?: string;
-  givenName?: string;
-};
-```
-
-### `Required<T>`
-
-`Partial<T>`の逆で、全てのプロパティから`?`を取り去ります。
-
-`Required<Person>`は以下と同じ型になります。
-
-```typescript
-type RequiredPerson = {
-  surname: string;
-  middleName: string;
-  givenName: string;
-};
-```
+{% page-ref page="utility-type.md" %}
 
 ## `Index signatures`
 
@@ -416,22 +366,6 @@ type Jekyll = {
 ```
 
 ちなみに`number`型のキーを持つオブジェクトとは配列のことです。様々な型をキーに設定したい場合は`Map`を使用してください。
-
-### `Record<K, T>`
-
-`Index signatures`を使うことと同義の組み込み方があります。`K`にキーとなる型を、`T`にプロパティとなる型を指定します。
-
-```typescript
-type StringKeyObject = Record<string, string>;
-type NumberKeyObject = Record<number, string>;
-```
-
-こちらは`Index signatures`で使用できる型に加えてキーに`symbol`型も使うことができます。また、ユニオン型をキーに使うこともできます。
-
-```typescript
-type SymbolKeyObject = Record<symbol, string>;
-type Butterfly = Record<SystemSupportLanguage, string>;
-```
 
 ## インターセクション型 `(Intersection types)`
 

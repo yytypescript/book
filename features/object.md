@@ -52,7 +52,7 @@ console.log(increment(4));
 // -> Type '{}' has no call signatures.
 ```
 
-そこでオブジェクトの型を独自に定義することができます。独自に定義した型にエイリアス\(別名\)をつけて使い回すこともできます。この機能については本書のタイプエイリアスの項を参照ください。
+そこでオブジェクトの型を独自に定義することができます。独自に定義した型にエイリアス\(別名\)をつけて使い回すこともできます。この機能については本書のタイプエイリアスの頁を参照ください。
 
 {% page-ref page="type-alias.md" %}
 
@@ -109,7 +109,7 @@ pikachu.name = false;
 
 #### `readonly`
 
-`readonly`については、タイプエイリアスの項にて解説がありますので、そちらをご参照ください。
+`readonly`については、タイプエイリアスの頁にて解説がありますので、そちらをご参照ください。
 
 {% page-ref page="type-alias.md" %}
 
@@ -420,7 +420,7 @@ function evolution({ name, no, genre, height, weight }: Wild): Wild {
 }
 ```
 
-関数における分割代入については**関数\(Funcitons\)**の項目に詳細がありますので併せてご参照ください。
+関数における分割代入については**関数\(Funcitons\)**の頁に詳細がありますので併せてご参照ください。
 
 {% page-ref page="function.md" %}
 

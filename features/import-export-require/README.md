@@ -324,9 +324,9 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 また、執筆時\(2020/06\)ではTypeScriptのトランスパイルは`.js`のみを出力でき`.cjs, .mjs`を出力する設定はありません。ブラウザでもサーバーでも使えるJavaScriptを出力したい場合は一手間加える必要があります。
 
-出力の方法に関しては`tsconfig.json`の項目に説明がありますのでそちらをご覧ください。
+出力の方法に関しては`tsconfig.json`の頁に説明がありますのでそちらをご覧ください。
 
-{% page-ref page="../handson/setting-tsconfig.json.md" %}
+{% page-ref page="../../handson/setting-tsconfig.json.md" %}
 
 ## `require? import?`
 

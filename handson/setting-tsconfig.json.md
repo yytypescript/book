@@ -47,7 +47,7 @@ JavaScriptも時代とともに進化をして、既存のオブジェクトに�
 
 ## フロントエンドとバックエンド
 
-フロントエンドとバックエンドはモジュールを出力する、他のモジュールを読み込むための作りが異なっています。詳細は`import / export / require`の項をご覧ください。そのため、モジュール解決のためのオプションを分けたほうが無難です。
+フロントエンドとバックエンドはモジュールを出力する、他のモジュールを読み込むための作りが異なっています。詳細は`import / export / require`の頁をご覧ください。そのため、モジュール解決のためのオプションを分けたほうが無難です。
 
 ### `module`
 
@@ -750,7 +750,7 @@ function dump(this: Person): string {
 Property 'nameXX' does not exist on type 'Person'. Did you mean 'name01'?
 ```
 
-この引数の`this`については関数 \(`Functions`\)の項に詳細がありますので併せてご参照ください。
+この引数の`this`については関数 \(`Functions`\)の頁に詳細がありますので併せてご参照ください。
 
 {% page-ref page="../features/function.md" %}
 
