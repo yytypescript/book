@@ -10,7 +10,7 @@ Node.jsはそれ自身ではTypeScriptをサポートしているわけではな
 npx tsc --init
 ```
 
-`typescript`をglobal installしてあれば以下でも可能です。
+`typescript`がglobal installしてあれば下記のように実行することもできます。
 
 ```bash
 tsc --init
@@ -35,7 +35,7 @@ TypeScriptは最終的にJavaScriptにトランスパイルされます。この
 JavaScriptも時代とともに進化をして、既存のオブジェクトに新しいメソッドが追加されることがあります。この追加された新しいメソッドが出力するJavaScriptのバージョン以下の時は使えないというわけではなく、TypeScript側で擬似的に再現して補ってくれます。  
 現在では欠かせない非同期処理のための`Promise, async/await`も、これらがないバージョンのJavaScriptにトランスパイルをして補い、使えるようにしてくれます。
 
-このような最新バージョンにはある、または現在実装には至っていないが提案中\(proposal\)である機能を取り入れて使えるようにする物を通称`polyfill`と言います。
+このような最新バージョンにはある、または現在実装には至っていないが提案中\(proposal\)である機能を取り入れて使えるようにする物を通称`polyfill`と言います。polyfillについて更に詳しく知りたい方は、[What is a polyfill?](https://remysharp.com/2010/10/08/what-is-a-polyfill) \(この単語の創案者である Remy Sharp による記事\)をご覧ください。
 
 ### `lib`
 
@@ -175,18 +175,18 @@ tsc -p tsconfig.esm.json
 
 #### `Tree Shaking`とは
 
-簡潔に申し上げると`Tree Shaking`とは使われていない関数、クラスを最終的な`js`ファイルに含めない機能のことです。使っていないのであれば入れる必要はない。というのは至極当然の結論ですが、この`Tree Shaking`ができるための条件があります。
+簡潔に申し上げると`Tree Shaking`とは使われていない関数、クラスを最終的な`js`ファイルに含めない機能のことです。使っていないのであれば入れる必要はない。というのは至極当然の結論ですが、この`Tree Shaking`を使うための条件があります。
 
 * `esmodule`で書かれている
 * 副作用\(`side effects`\)のないコードである
 
-以下で詳細を述べます
+各条件の詳細を見ていきましょう。
 
 ### `esmodule`で書かれている
 
 `commonjs`と`esmodule`では外部ファイルの解決方法が異なります。
 
-`commonjs`は`require()`を使用します。`require()`はファイルのどこでも使用ができますが`esmodule`の`import`はファイルの先頭でやらなければならないという決定的な違いがあります。
+`commonjs`は`require()`を使用します。`require()`はファイルのどの行でも使用ができますが`esmodule`の`import`はファイルの先頭でやらなければならないという決定的な違いがあります。
 
 `require()`はある時はこの`js`を、それ以外の時はあの`js`を、と読み込むファイルをコードで切り替えることができます。つまり、以下のようなことができます。
 
@@ -384,7 +384,7 @@ IDEを使っている時に有用で、実際の`ts`のソースコードがど�
 
 ## より厳密にコーディングする
 
-厳密なコーディングといえば`linter`がありますが、TypeScript自身にもより型チェックを厳密にするオプションがあります。以下は`tsconfig.json`の該当する部分を抜粋したものです。
+厳密なコーディングといえば`linter`があります。TypeScript自身にも、より型チェックを厳密にするオプションがあります。以下は`tsconfig.json`の該当する部分を抜粋したものです。
 
 ```typescript
   /* Strict Type-Checking Options */
@@ -572,7 +572,7 @@ stackTrace.call(undefined, new ReferenceError());
 ```typescript
 class User {
   public name: string;
-  public sex: string;
+  public gender: string;
   public age: number;
 }
 ```
@@ -581,7 +581,7 @@ class User {
 
 ```typescript
 Property 'name' has no initializer and is not definitely assigned in the constructor.
-Property 'sex' has no initializer and is not definitely assigned in the constructor.
+Property 'gender' has no initializer and is not definitely assigned in the constructor.
 Property 'age' has no initializer and is not definitely assigned in the constructor.
 ```
 
@@ -590,12 +590,12 @@ Property 'age' has no initializer and is not definitely assigned in the construc
 ```typescript
 class User {
   public name: string;
-  public sex: string;
+  public gender: string;
   public age: number;
 
-  public constructor(name: string, sex: string, age: number) {
+  public constructor(name: string, gender: string, age: number) {
     this.name = name;
-    this.sex = sex;
+    this.gender = gender;
     this.age = age;
   }
 }
@@ -604,7 +604,7 @@ class User {
 ```typescript
 class User {
   public name: string = 'John';
-  public sex: string = 'Doe';
+  public gender: string = 'Female';
   public age: number = 20;
 }
 ```
