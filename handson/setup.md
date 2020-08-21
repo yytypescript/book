@@ -6,9 +6,9 @@ TypeScriptの開発するに当たってNode.jsが必要になります。まず
 
 Node.jsとは、Chrome の V8 JavaScript エンジン で動作する JavaScript 環境です。Server-Side JavaScriptと説明される場合が多いのですが開発初期はサーバー\(Linux\)のみ動作対象OSだったためその名残となっています。2011年7月15日 Node.js v0.5.1からWindowsをサポート。2011年11月11日リリースNode.js v0.6.1からはMacをサポートするようになりました。
 
-Node.jsにはJavaScriptに存在しないAPIが存在します。わかりやすい関数はFileSystem\(fs\)です。fs.readFile\(path\)はPC上のファイル読み込みができまし、fs.writeFile\(path , data\)はPC上のディレクトリにファイル書き込みを行うことができます。ほとんどのブラウザではサンドボックスが導入されておりブラウザ外部の操作は行うことはできません。では、Node.jsは拡張されたJavaScriptかと言われるとそうではありません。Node.jsではwindows.alert\(\)など、ブラウザ独自のAPIは存在しないからです。
+Node.jsにはJavaScriptに存在しないAPIが存在します。わかりやすい関数はFileSystem\(fs\)です。fs.readFile\(path\)はPC上のファイルを読み込むことができます。fs.writeFile\(path , data\)はPC上のディレクトリにファイル書き込みを行うことができます。では、Node.jsは機能が増えたJavaScriptかと言われるとそうではありません。Node.jsではwindows.alert\(\)などといったブラウザでしか動作しないAPIはありません。
 
-JavaScriptはブラウザ上で動作するプログラミング言語に対し、Node.jsはデスクトップまたはサーバー上でNode.jsファイルを動作させる環境となります。
+JavaScriptはブラウザ上で動作するプログラミング言語です。それに対してNode.jsはデスクトップまたはサーバー上で動作させる環境となります。
 
 #### なぜTypeScript開発環境にNode.jsが必要なのか
 
@@ -16,25 +16,25 @@ TypeScriptの開発環境にNode.jsが必要な理由はTypeScriptコンパイ�
 
 ### Node.jsのインストール
 
-Node.js公式ページがらダウンロード・インストールを行う事ができますが、これはおすすめしません。何故ならばNode.jsの開発サイクルのスピードが早いためです。毎年10月に新しいバージョンのLTS版がリリースされます。
+Node.js公式ページがらダウンロードしてインストールを行う事ができます。が、これはおすすめしません。何故ならばNode.jsの開発サイクルが速いためです。毎年10月に新しいバージョンのLTS版がリリースされます。
 
 {% hint style="info" %}
 🧙♂ **Tips:** "LTS" Long Term Supportの略。長期サポートの安定版。
 {% endhint %}
 
-１台のPC上にNode.jsを利用したプロジェクトが１つ、かつ、Node.jsのアップデートを行う予定がない場合は問題がありませんが複数のプロジェクトがあり、それらが異なったバージョンの場合に支障が出てきます。言語仕様の変更などにより正しく動作する保証はありません。使用するフレームワークが最新のLTSをサポートしていない場合や脆弱性が明らかになりアップデートする必要も出てくるでしょう。  
+1台のPC上にNode.jsを利用したプロジェクトが1つ、かつ、Node.jsのアップデートを行う予定がない場合は問題がありませんが複数のプロジェクトがあり、それらが異なったバージョンの場合に支障が出てきます。言語仕様の変更などにより正しく動作する保証はありません。使用するフレームワークが最新のLTSをサポートしていない場合や脆弱性が明らかになりアップデートする必要も出てくるでしょう。  
 これらの問題を回避するためにNVMを利用します。NVMはnode version managerの略で複数のNode.jsを複数インストールし、バージョンを切り替えを行う事ができます。
 
-#### NVMからNode.jsのインストールを行う\(Mac編\)
+#### NVMからNode.jsのインストールを行う\(macOS編\)
 
 nvm-sh/nvmを利用します。  
 [https://github.com/nvm-sh/nvm](https://github.com/nvm-sh/nvm)  
 インストールをする際にgitコマンドが必要となります。OS X 10.9以降は/usr/bin/gitが廃止されたためXcodeをインストールすることおすすめします。Xcodeをインストールを行うと同時にgitも自動的にインストールされます。  
   
-terminalからインストールスクリプトを実行します。スクリプトのパスにバージョンが記載されています。最新バージョンはnvm-sh/nvm公式ページより確認してください。2020年2月現在ではv0.35.2となります。
+ターミナル\(Terminal.app\)からインストールスクリプトを実行します。スクリプトのパスにバージョンが記載されています。最新バージョンはnvm-sh/nvm公式ページより確認してください。2020年8月現在ではv0.35.3となります。
 
 ```text
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 ```
 
 スクリプト実行後、nvmコマンドのPATHを設定します。`~/.bash_profile`を作成しexport文を追加します。
@@ -44,7 +44,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
-PATHを有効にするためterminalを再起動してください。
+PATHを再読込させるために、ターミナルで `source ~/.bash_profile` コマンドを実行してください。
 
 nvmコマンドの確認のため`nvm --version`を実行します。インストールしたバージョンが表示されれば成功です。
 
@@ -92,7 +92,7 @@ v12.16.0
 
 #### NVMからNode.jsのインストールを行う\(Windows編\)
 
-nvm-windowsを利用します  
+nvm-windowsを利用します。  
 [https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows) 公式ページのreleaseからnvm-setup.zipをダウンロード・インストールを行うだけです。ダウンロードダイアログが表示されるので文言を読み、インストールを行ってください。
 
 インストール後はPCの再起動を行います。これはPAHTを確実に通すためです。
@@ -138,6 +138,8 @@ C:\>nvm use 12.16.0
 C:\>node -v
 ｖ12.16.0
 ```
+
+#### N
 
 ### エディタは何を使ったらいいか？
 
