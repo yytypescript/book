@@ -1017,7 +1017,7 @@ function distance(x: number, y: number): number;
 function distance(x1: number, y1: numebr, x2: number, y2: number): number;
 ```
 
-なお、上記のような書き方のオーバーロードは名前付き関数`(Normal functions)`またはクラスのメソッドでのみ可能です。匿名関数`(Anonymous functions)`、アロー関数`(Arrow functions)`では、タイプエイリアスまたはインターフェイスでオーバーロードを定義します。たとえば、上記例だと以下のようなタイプエイリアスになります。
+なお、上記のような書き方のオーバーロードは名前付き関数`(Normal functions)`またはクラスのメソッドでのみ可能です。匿名関数`(Anonymous functions)`、アロー関数`(Arrow functions)`では、タイプエイリアスまたはインターフェースでオーバーロードを定義します。たとえば、上記例だと以下のようなタイプエイリアスになります。
 
 ```typescript
 type Distance = {

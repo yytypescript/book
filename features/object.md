@@ -449,14 +449,14 @@ type Parameter = Mandatory & Optional;
 
 ### 拡張する
 
-インターフェイスはインターセクション型こそできませんが代わりに拡張することができます。
+インターフェースはインターセクション型こそできませんが代わりに拡張することができます。
 
 ```typescript
 interface Parameter extends Mandatory, Optional {
 }
 ```
 
-### インターセクション型とインターフェイスの拡張の違い
+### インターセクション型とインターフェースの拡張の違い
 
 同じプロパティが違う型で衝突した時の定義が異なります。以下の例を考えます。
 
@@ -490,7 +490,7 @@ const n: N = 'maintenance mode';
 // -> Type '"maintenance mode"' is not assignable to type 'never'.
 ```
 
-インターフェイスでは拡張自体ができません。
+インターフェースでは拡張自体ができません。
 
 ```typescript
 interface D extends A, B {
@@ -500,11 +500,11 @@ interface D extends A, B {
 
 ### `Declaration merging`
 
-インターフェイスのみができる機能で、最もタイプエイリアスと異なる特徴です。
+インターフェースのみができる機能で、最もタイプエイリアスと異なる特徴です。
 
 JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array<T>`は`ES2016`で`array.includes()`が、`ES2019`で`array.flatMap()`が追加されました。
 
-インターフェイスではバージョンごとにメソッドの`Array<T>`のインターフェイスをファイルを分けて定義して、環境に応じて読み込むファイルを変えるだけで`Array<T>`の型定義ができます。
+インターフェースではバージョンごとにメソッドの`Array<T>`のインターフェースをファイルを分けて定義して、環境に応じて読み込むファイルを変えるだけで`Array<T>`の型定義ができます。
 
 ```typescript
 // ES2016.array.ts
@@ -556,7 +556,7 @@ const l: {} = c;
 
 `object`はプリミティブ型ではないの全てのリファレンス型を総称するものとして定義されています。こちらは入力補完ができません。
 
-`Object`はTypescriptで型の定義がされているインターフェイスです。そのため`.`を入力すればメソッドの入力補完ができます。
+`Object`はTypescriptで型の定義がされているインターフェースです。そのため`.`を入力すればメソッドの入力補完ができます。
 
 `{}`はプロパティ、メソッドを持たないオブジェクトリテラルの型定義です。こちらも`object`と同様に入力補完はできません。
 
@@ -611,7 +611,7 @@ const literal7: {} = 10n;
 
 プリミティブ型はオブジェクトではないのでプロパティやメソッドを持っていないはずです。ですがこのようなことができるのは、内部的にはJavaScriptがプリミティブ値をオブジェクトに変換しているからです。この暗黙の型変換を`Autoboxing`と呼びます。
 
-ちなみにこの時に使われるオブジェクトを通称ラッパークラスと呼び、それらのインターフェイスもTypeScriptに`Boolean, Number, String, Symbol, BigInt`として定義されています。なお`undefined`と`null`のラッパークラス`Undefined, Null`はありません。
+ちなみにこの時に使われるオブジェクトを通称ラッパークラスと呼び、それらのインターフェースもTypeScriptに`Boolean, Number, String, Symbol, BigInt`として定義されています。なお`undefined`と`null`のラッパークラス`Undefined, Null`はありません。
 
 ```typescript
 const bool: Boolean = false;

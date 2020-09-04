@@ -23,5 +23,5 @@
 * 例外: 下記の目的でサンプルコードを示す場合は、interfaceを使っても良い。
   * interface自体を説明する。
   * interfaceとtype aliasの同異を説明する。
-  * classでインターフェイスをimplementsする。
+  * classでインターフェースをimplementsする。
 
