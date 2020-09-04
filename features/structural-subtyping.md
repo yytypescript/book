@@ -170,7 +170,7 @@ interface IInputSource {
 }
 ```
 
-`File, Request`は共にこの`IInputSource`のようなインターフェイスであると解釈されるためこのようなことが起こります。
+`File, Request`は共にこの`IInputSource`のようなインターフェースであると解釈されるためこのようなことが起こります。
 
 ## TypeScriptでさらに注意すること
 
