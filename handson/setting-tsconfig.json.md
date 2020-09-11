@@ -20,7 +20,7 @@ tsc --init
 
 公式にある`tsconfig.json`の説明はこちらです。
 
-{% embed url="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" %}
+{% embed url="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" caption="" %}
 
 全てのオプションの解説をすると余白が足りないので、ここでは用途を抽出して、以下の観点で説明します。
 
@@ -396,7 +396,7 @@ IDEを使っている時に有用で、実際の`ts`のソースコードがど�
   // "strictPropertyInitialization": true,  /* Enable strict checking of property initialization in classes. */
   // "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
   // "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
-  
+
   /* Additional Checks */
   // "noUnusedLocals": true,                /* Report errors on unused locals. */
   // "noUnusedParameters": true,            /* Report errors on unused parameters. */
@@ -744,7 +744,7 @@ function dump(this: Person): string {
 }
 ```
 
-するとTypeScriptは存在しないプロパティについての指摘をするようになります。`name21  ~ name30`に以下の警告が出るようになります。
+するとTypeScriptは存在しないプロパティについての指摘をするようになります。`name21 ~ name30`に以下の警告が出るようになります。
 
 ```typescript
 Property 'nameXX' does not exist on type 'Person'. Did you mean 'name01'?
@@ -832,7 +832,7 @@ function negaposi(num: number): string {
   } else if (num < 0) {
     return 'positive';
   }
-  
+
   return '0';
 }
 ```

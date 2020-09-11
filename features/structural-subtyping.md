@@ -37,30 +37,30 @@ public class InputSource {
 
 public class File extends InputSource {
   public final String destination;
-  
+
   public File(final String destination) {
     this.destination = destination;
   }
-  
+
   public Data fetch() {
     final Reader reader = FileSystem.readFrom(destination);
     // ...
-    
+
     return data;
   }
 }
 
 public class Request extends InputSource {
   public final String destination;
-  
+
   public Request(final String destination) {
     this.destination = destination;
   }
-  
+
   public Data fetch() {
     final Response response = HTTPRequest.get(destination);
     // ...
-    
+
     return data;
   }
 }

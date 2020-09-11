@@ -509,13 +509,13 @@ JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、
 ```typescript
 // ES2016.array.ts
 interface Array<T> {
-  
+
   includes(...): boolean;
 }
 
 // ES2019.array.ts
 interface Array<T> {
-  
+
   flatMap<U>(...): U[];
 }
 ```
