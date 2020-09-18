@@ -67,5 +67,5 @@ Promiseオブジェクトについての説明は本書にてより詳細な記�
 標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認する事ができます。  
 [https://github.com/microsoft/TypeScript/tree/master/lib](https://github.com/microsoft/TypeScript/tree/master/lib)
 
-`Array.prototype.map()` の型は [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/master/lib/lib.es5.d.ts#L1170) のファイルで確認ができます。
+`Array.prototype.map()` の型は [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/master/lib/lib.es5.d.ts#L1170) のファイルで確認できます。
 
