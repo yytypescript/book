@@ -33,6 +33,7 @@
   * [Promise / async / await](features/promise-async-await.md)
   * [ユーティリティ型 \(Utility types\)](features/utility-type.md)
   * [定義ファイル](features/definitelytyped.md)
+  * [tsconfig.json Deep Dive](features/tsconfig-json-deep-dive.md)
   * [import / export /require](features/import-export-require/README.md)
     * [exportとexport defaultどちらを使うべきか？Pros/Consある話](features/import-export-require/exporttoexport-defaultdochirawoubekikaprosconsaru.md)
   * [型変数](features/type-variables.md)
