@@ -4,7 +4,7 @@ TypeScriptで開発するということはJavaScriptに型を付与すること
 
 これから紹介するユーティリティ型は全てTypeScriptのパッケージで定義されており、ソースコードも同梱されているのでその実装方法を見ることが可能です。
 
-なお、以下でことわりなく`Person, User`というオブジェクトについて言及した時は以下のようなタイプエイリアスとそのオブジェクトを使うものとします。
+本章のユーティリティ型の仕様例で、ことわりなく`Person, User`というオブジェクトを使用している部分は、下記に示すタイプエイリアスとそのオブジェクトを使うものとします。
 
 ```typescript
 type Person = {
@@ -75,7 +75,7 @@ type PartialPerson = {
 
 {% page-ref page="type-alias.md" %}
 
-`Person`を`Record`を使って表現すると以下になりますが`Record`はプロパティを`Optinal`にする機能はないため`Person`とは完全に一致せず、上記の`Required<Person>`と同じものになります。
+`Person`を`Record`を使って表現すると以下になりますが`Record`はプロパティを`Optional`にする機能はないため`Person`とは完全に一致せず、上記の`Required<Person>`と同じものになります。
 
 ```typescript
 type Name = 'surname' | 'middleName' | 'givenName';
@@ -95,7 +95,7 @@ type Person = Pick<User, Necessary>;
 
 ### キーの部分集合である。について
 
-部分集合と聞くと難しいかもしれませんが、言い換えると**キーでに存在しないリテラルタイプを指定できない**ことを意味しています。上記例は`User`の`middleName, givenName`の`Name`は大文字から始まりますが、これを小文字にしたタイプエイリアスを定義するとこれは`Pick`では使用できません。
+部分集合と聞くと難しいかもしれませんが、言い換えると**キーに存在しないリテラルタイプを指定できない**ことを意味しています。上記例は`User`の`middleName, givenName`の`Name`は大文字から始まりますが、これを小文字にしたタイプエイリアスを定義するとこれは`Pick`では使用できません。
 
 ```typescript
 type Necessary = 'surname' | 'middlename' | 'givenname';
