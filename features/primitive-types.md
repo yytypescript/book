@@ -42,13 +42,23 @@ if (typeof whatIsThis === 'undefined') {
 }
 ```
 
-もしも`undefined`が別の値で上書きされたときは`void`演算子を使うことで`undefined`の戻り値を得ることができます。この時、`void`の右にある式にこだわりはなくどのような式でも構いません。多くの資料で`void 0`となっていることを確認できると思います。
+もしも`undefined`が別の値で上書きされた時は`void`演算子を使うことで`undefined`の戻り値を得ることができます。この時、`void`の右にある式にこだわりはなくどのような式でも構いません。多くの資料で`void 0`となっていることを確認できると思います。
 
 ```typescript
 undefined = void 0;
 ```
 
-TypeScriptでは戻り値の型では`void`\(これは上記演算子とは異なり、型です\)を使う方が望ましい場合が多いです。こちらの解説は関数のページをご覧ください。
+これを等値比較に使うこともできます。
+
+```typescript
+if (whatIsThis === void 0) {
+  // whatIsThis is undefined
+}
+```
+
+### TypeScriptの型としての`undefined`
+
+TypeScriptには型に`undefined`型が用意されていますがそれとは別に`void`型\(これは上記演算子とは異なり、型です\)も用意されています。戻り値の型として使う場合は`void`型の方がよく見られ、また望ましい場合が多いです。こちらの解説は関数のページをご覧ください。
 
 {% page-ref page="function.md" %}
 
@@ -58,9 +68,7 @@ TypeScriptでは戻り値の型では`void`\(これは上記演算子とは異�
 
 値がないことを示す値です。他言語の`null`のような役割は`undefined`が担っていることが多く、こちらは意図的に値を指定しないことを強調できます。
 
-`undefined`と異なりこちらはリテラルであり、上書きされる危険は考慮する必要がありません。等値比較も`null`との比較で問題ありません。
-
-却って`typeof`で`null`を判定させると`'object'`となり、やや面倒です。
+`undefined`と異なりこちらはリテラルであり、上書きされる危険は考慮する必要がありません。等値比較も`null`との比較で問題ありません。かえって`typeof`で`null`を判定させると`'object'`となってしまい、やや面倒です。
 
 ```typescript
 if (typeof whatIsThis === 'object') {
@@ -107,7 +115,15 @@ if (typeof whatIsThis === 'object') {
 const million: number = 10_000_00_0_00.0_000000_00;
 ```
 
-しかしながら`_`を先頭や末尾、小数点の前後に置いたり、連続で2個以上置くことはできません。
+しかしながら`_`を先頭や末尾、小数点の前後に置いたり、連続で2個以上置くことはできません。つまり以下のような表記はできません。
+
+```typescript
+_100;
+100_;
+100_.0;
+100._0;
+1__00;
+```
 
 ### 特殊な値
 
@@ -127,7 +143,7 @@ function isNaN(n: number): boolean {
 
 ## `string`
 
-0文字以上の文字からなる文字列を扱います。`number`型と同じですが意味の異なる連結`+`の演算子を処理できます。
+0文字以上の文字からなる文字列を扱います。`number`型と文字は同じですが意味の異なる連結`+`の演算子を処理できます。
 
 ### 演算子の`+`
 
@@ -142,16 +158,16 @@ console.log(w1 + w2 + w3);
 // -> 'WorldWideWeb'
 ```
 
-`string`型の変数を作成したい時は`'`か`"`のどちらかを使います。TypeScriptではこれらの差はありません。開始時の記号と終了時の記号が合っている必要と、途中にその文字が含まれている場合はエスケープされている必要があります。
+`string`型の変数を作成したい時は`'(single quote)`か`"(double quote)`のどちらかを使います。TypeScriptではこれらの差はありません。開始時の記号と終了時の記号が合っている必要と、途中にその文字が含まれている場合はエスケープされている必要があります。
 
 ```typescript
-const palindrome1: string = 'ma\'am I\'m Adam.';
-const palindrome2: string = "ma'am I'm Adam.";
+const palindrome1: string = 'madam, I\'m Adam.';
+const palindrome2: string = "madam, I'm Adam.";
 ```
 
 ### テンプレートリテラル
 
-`', "`ではなく`````で囲むとテンプレートリテラルという文字列を作ることができます。テンプレートリテラルは`', "`で宣言されている`string`型と異なり
+`', "`ではなく```(back tick)``で囲むとテンプレートリテラルという文字列を作ることができます。テンプレートリテラルは`', "`で宣言されている`string`型と異なり
 
 * 改行できる
 * 変数展開できる
@@ -181,7 +197,7 @@ console.log(`                   _  _                       _
 
 #### 変数展開できる
 
-今までは`+`を使って調整していた文字列に、直感的に変数を代入できるようになりました。クエリのような制御構文を書いていると、`'`や`"`がJSの`string`型の開始、終了なのか制御文の開始終了なのかが非常に混乱するため、この変数展開で簡素にかけるのは便利です。
+今までは`+`を使って調整していた文字列に、直感的に変数を代入できるようになりました。SQLのような制御構文を書いていると、`'`や`"`がJSの`string`型の開始、終了なのか制御文の開始終了なのかが非常に混乱するため、この変数展開で簡素にかけるのは便利です。
 
 ```typescript
 const prefecture: string = 'Tokyo';
@@ -191,6 +207,8 @@ const select2: string = `SELECT * FROM customers JOIN users ON customers.user_id
 ```
 
 **\(注意\)** これは例です。実際にはSQLのクエリをこのようにして作成せず、プリペアドステートメントを使用してください。
+
+ラッパークラスは`String`です。
 
 ## `symbol`
 
@@ -220,7 +238,7 @@ console.log(sym1 === sym2);
 const sym = Symbol();
 
 
-class S {
+class Sample {
   exposedMethod() {
     return this[sym]();
   }
@@ -231,15 +249,31 @@ class S {
 }
 
 module.exports = {
-  S
+  Sample
 };
 ```
 
-メソッドの表記が不思議に見えますが`[sym]()`は`symbol`を使ったメソッド表記です。このメソッドにアクセスするために必要な`symbol`型の変数`sym`はこの`js`ファイルから露出していないため、外部からは見ることができません。
+メソッドの表記が不思議に見えますが`[sym]()`は`symbol`型を使ったメソッド表記です。このメソッドにアクセスするために必要な`symbol`型の変数`sym`はこの`js`ファイルから露出していないため、外部からは見ることができません。
+
+ラッパークラスは`Symbol`です。
 
 ## `bigint`
 
 `number`型よりも大きな整数を扱います。`number`型と同じように四則演算`+, -, *, /`に加え剰余`%`と累乗`**`ができます。
+
+### 宣言
+
+`number`型と同様に数値リテラルを書くだけではなく、末尾に`n`をつけます。
+
+```typescript
+const bg1: bigint = 100n;
+```
+
+または`BigInt()`を使います。このとき`Bigint()`ではない\(`Int`は大文字から始まります\)ことに注意してください。
+
+```typescript
+const bg2: bigint = BigInt(100);
+```
 
 ### 演算
 
@@ -257,9 +291,12 @@ module.exports = {
 // 5n
 ```
 
-### `es2020`
+### `es2020`以前の場合
 
-`bigint`型の宣言は`number`型の宣言方法の末尾に`n`を付けるだけのように書いていますが、これは`tsconfig.json`の`target`が`es2020`以上の時限定の話になります。それ以外の`target`では`BigInt()`の関数を使って`bigint`型を作り出す必要があります。`tsconfig.json`の話は該当ページをご覧ください。
+**宣言**において`bigint`型は`number`型の宣言方法の末尾に`n`を付けるだけで宣言ができるように書いていますがこれは`tsconfig.json`の`target`が`es2020`以上の時に限られます。  
+それ以外の`target`では`BigInt()`の関数を使って`bigint`型を作り出す必要があります。`tsconfig.json`の話は該当ページをご覧ください。
 
 {% page-ref page="../handson/setting-tsconfig.json.md" %}
+
+ラッパークラスは`BigInt`です。こちらも`Int`が大文字になることに注意してください。
 

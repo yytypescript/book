@@ -24,13 +24,13 @@ impossible = true;
 // -> Type 'true' is not assignable to type 'false'.
 ```
 
-これでは`const`と宣言していることと何が違うのかと疑問を持たれる方もいらっしゃるかと思います。`const`はESMAScriptで定められている定数の宣言であるのに対し、リテラル型はTypeScriptで用意されたその1値を許容する変数あるいは定数のことです。
+### `const`と何が違うのか？
 
-### 上書きできないことを意図した使用には適していない
+これでは`const`と宣言していることと何が違うのかと疑問を持たれる方もいらっしゃるかと思います。`const`はESMAScriptで定められている定数の宣言であるのに対し、リテラル型はTypeScriptで用意されたその1値のみを許容する変数あるいは定数のことです。
 
-他の値で上書きできないことを意図してリテラル型を使うことは推奨されません。TypeScriptの型キャストにあたるType assertionは型定義の制限を無視したキャストができます。
+TypeScriptによる型のサポートはあくまでもコーディング中の話であり、実際に動作する時は型のないJavaScriptです。他のリテラルが代入できないという制限はもはやなくなっている状態であり、他の値で上書きできないことを意図していたとしてもそれらは撤廃されています。
 
-TypeScriptは実行時はJavaScriptになるため、1値しか代入できないというこの制限は撤廃され、どのような値も許容できます。JavaScriptでは実行時に意図しない代入が行われているかの検出ではできないため、リテラル型をあたかも定数のように使うことは避けてください。
+JavaScriptは実行時に意図しない代入が行われているかの検出ではできないため、リテラル型をあたかも定数のように使うことは避けてください。
 
 ```typescript
 let impossible: false = false;
@@ -41,7 +41,7 @@ impossible = true as false;
 
 ## リテラル型の使い方
 
-リテラル型はのちに紹介されるユニオン型との相性がよく、よく併用されます。ここではユニオン型とは`|`で区切られた型のどれかであるとだけ解釈してください。
+リテラル型はのちに紹介されるユニオン型との相性がよく併用されます。ここではユニオン型とは`|`で区切られた型のどれかであるとだけ解釈してください。
 
 {% page-ref page="union-type.md" %}
 
@@ -53,7 +53,7 @@ let persons: 1 | 2 | 3 | 4 | 5 = 4;
 
 ```typescript
 let persons: 1 | 2 | 3 | 4 | 5 = 6;
-// -> Type '6' is not assignable to type '1 | 2 | 3 | 4 | 5'.
+// Type '6' is not assignable to type '1 | 2 | 3 | 4 | 5'.
 ```
 
 これはデータ型が異なるリテラル型同士でも可能です。
@@ -82,10 +82,10 @@ number型の`NaN, Infinity, -Infinity`はリテラル型として使うことが
 
 ```typescript
 let inf: Infinity = Infinity;
-// -> 'Infinity' refers to a value, but is being used as a type here. Did you mean 'typeof Infinity'?
+// 'Infinity' refers to a value, but is being used as a type here. Did you mean 'typeof Infinity'?
 let minInf: -Infinity = -Infinity;
-// -> Type expected.
+// Type expected.
 let nan: NaN = NaN;
-// -> 'NaN' refers to a value, but is being used as a type here. Did you mean 'typeof NaN'?
+// 'NaN' refers to a value, but is being used as a type here. Did you mean 'typeof NaN'?
 ```
 
