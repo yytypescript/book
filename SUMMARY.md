@@ -14,7 +14,7 @@
 * [JavaScript再入門](revisiting-javascript/README.md)
   * [シングルプロセス・シングルスレッドとコールバック](revisiting-javascript/single-process-and-callback.md)
 * [知っておきたいTypeScriptの文法と機能](features/README.md)
-  * [静的型を理解する](features/statictype.md)
+  * [静的型付けを理解する](features/statictype.md)
   * [リテラル型 \(Literal types\)](features/literal-types.md)
   * [anyとunknown](features/any-unknown.md)
   * [構造的部分型 \(Structural subtyping\)](features/structural-subtyping.md)
