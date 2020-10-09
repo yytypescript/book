@@ -80,11 +80,11 @@ console.log(func());
 ```typescript
 class JetLag {
   private message: string;
-  
+
   public constructor(message: string) {
     this.message = message;
   }
-  
+
   public replyFunction(ms: number): void {
     setTimeout(function() {
       console.log(this.message);
@@ -251,7 +251,7 @@ distance(q1);
 ```typescript
 function distance(p1: Point, p2?: Point): number {
   let p0: Point | undefined = p2;
-  
+
   if (p0 === undefined) {
     p0 = {
       x: 0,
@@ -595,11 +595,11 @@ bmi();
 ```typescript
 class Male {
   private name: string;
-  
+
   public constructor(name: string) {
     this.name = name;
   }
-  
+
   public toString(): string {
     return `Monsieur ${this.name}`;
   }
@@ -607,11 +607,11 @@ class Male {
 
 class Female {
   private name: string;
-  
+
   public constructor(name: string) {
     this.name = name;
   }
-  
+
   public toString(this: Female): string {
     return `Madame ${this.name}`;
   }
@@ -658,7 +658,11 @@ TypeError: Cannot read property 'name' of undefined
 
 関数の戻り値を指定することができます。あえて書かなくてもTypeScript側で補完し、関数の戻り値として提供してくれますが、意図しない戻り値を返していないかの検査が働くので書いた方が良いでしょう。前述の通り書く位置が実装と型で異なることに注意してください。
 
+{% page-ref page="tuple.md" %}
+
 戻り値はJavaScriptと同じく1値のみの返却です。一度に多くの値を戻したい場合はタプルの章を参照してください。
+
+戻り値がないことを明示したい時は`void`と書きます。内部では`undefined`を返していることと同義です。`undefined`と`void`の違いについては次項で説明します。
 
 戻り値がないことを明示したい時は`void`と書きます。内部では`undefined`を返していることと同義です。ただし、戻り値を`undefined`と明記した時と違う点があります。それは`return`のない関数は`void`である必要があります。  
 以下の例では`doNothing4()`は`return`のない関数で戻り値の型が`undefined`なのでTypeScriptから指摘を受けます。それ以外は問題がありません。
@@ -688,7 +692,19 @@ function doNothing6(): undefined {
 }
 ```
 
+## `void`
+
+主に戻り値で使われる型です。戻り値が`void`であるとはその関数は戻り値を持っていないことを意味します。
+
 これは`undefined`型が明示的な`undefined`の1値のみを持つのに対し`void`型は明示的な`undefined`と暗黙の`undefined`の2値を持つことに由来します。
+
+JavaScriptにはこの型は存在しません。そのため前項で述べたように実際の値は`undefined`です。なぜTypeScriptは`undefined`ではなく、あえて`void`を用意したのでしょうか。
+
+なお、ここで説明する`void`は型についてでありJavaScriptが持っている式の戻り値を全て`undefined`にする`void`ではありません。
+
+### 変数の型として使う
+
+変数の型として`void`を使うことはほぼありませんが、使うことがあれば`void`は値`undefined`を代入する変数として使用できます。
 
 ```typescript
 function returnUnfefined(): undefined {
@@ -706,6 +722,106 @@ const v1: undefined = returnVoid();
 const v2: void = returnVoid();
 ```
 
+```typescript
+const v1: void = undefined;
+const u1: undefined = undefined;
+```
+
+代入時は異なる挙動になります。`undefined`型の変数を`void`型の変数に代入することができる一方で、`void`型の変数を`undefined`型の変数に代入することはできません。
+
+```typescript
+const v2: void = u1;
+const u2: undefined = v1;
+// ->  Type 'void' is not assignable to type 'undefined'.
+```
+
+### 関数の引数として使う
+
+変数同様、意図的に引数を`void`型にすることはほぼありませんが、後に登場する`generic`で必要になることがあります。
+
+{% page-ref page="generics.md" %}
+
+何もしない関数を作ります。
+
+```typescript
+function doNothing1(arg: undefined): any {
+  // NOOP
+}
+
+function doNothing2(arg: void): any {
+  // NOOP
+}
+```
+
+これらは引数の型が違うだけです。これらに先ほど定義した`void`型の変数と`undefined`型の変数を代入します。すると変数の型について説明したように`undefined`型を要求する関数`doNothing1()`に`void`型の変数を代入することはできません。
+
+```typescript
+doNothing1(u1);
+doNothing1(v1);
+// -> Argument of type 'void' is not assignable to parameter of type 'undefined'.
+doNothing2(u1);
+doNothing2(v1);
+```
+
+これだけではありません。`void`型を引数に指定した関数`doNothing2()`は引数を省略することができるようになります。
+
+```typescript
+doNothing1();
+// -> Expected 1 arguments, but got 0.
+doNothing2();
+```
+
+この引数の`void`型の挙動は引数の省略の時に登場した`?`に似ています。
+
+```typescript
+function distance1(p1: Point, p2?: Point): number {
+  // ...
+}
+
+function distance2(p1: Point, p2: Point | void): number {
+  // ...
+}
+```
+
+### 関数の戻り値として使う
+
+`void`の用途はほぼこれです。戻り値の型を`void`型にすると`return`のない関数を作ることができます。今度は`void`と`undefined`を戻り値に設定した何もしない関数を作ります。
+
+```typescript
+function doNothing1(): undefined {
+  //
+};
+
+function doNothing2(): void {
+  //
+};
+
+doNothing1();
+doNothing2();
+```
+
+すると`undefined`を戻り値に指定した関数`doNothing1()`に以下のような指摘が現れます。
+
+```typescript
+A function whose declared type is neither 'void' nor 'any' must return a value.
+```
+
+これは戻り値が`void`型でも`any`型でもない関数は`return`を省略できないことを意味しています。この指摘を回避するためには`doNothing1()`は明示的に`undefined`を返すか値を書かない`return`が必要です。以下のどちらかであれば`doNothing1()`はTypeScriptから指摘を受けません。
+
+```typescript
+function doNothing1(): undefined {
+  return;
+};
+
+function doNothing1(): undefined {
+  return undefined;
+};
+```
+
+### `void`とは
+
+これらを考慮すると`undefined`型は`undefined`という1値だけを持つ型なのに対し`void`型はそれに加えて何も書かなかった時に代入される非明示の`undefined`の2値を持っている型です。
+
 ## `Type predicate`
 
 プログラムを書いているとその変数が意図する型なのかをはっきりさせたい時があります。
@@ -717,7 +833,7 @@ function isDuck(animal: Animal): boolean {
       return true;
     }
   }
-  
+
   return false;
 }
 ```
@@ -783,7 +899,7 @@ function isDuck(animal: Animal): asserts animal is Duck {
       return;
     }
   }
-  
+
   throw new Error('YOU ARE A FROG!!!');
 }
 
@@ -845,7 +961,7 @@ public abstract isPresent(): this is Some<T>, this is not None<T>;
 abstract class Optional<T> {
   // ...
   public abstract isPresent(): this is Some<T>;
-  
+
   public abstract isAbsent(): this is None<T>;
 }
 ```
@@ -865,7 +981,7 @@ class Operator {
   public constructor(value: number) {
     this.value = value;
   }
-  
+
   public sum(value: number): void {
     this.value += value;
   }
