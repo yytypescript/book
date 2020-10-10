@@ -8,7 +8,7 @@ TypeScriptはJavaScriptの機能を独自拡張しているわけではないた
 
 ### 振る舞いがないとは
 
-振る舞いがないとは一般的にはメソッドを持たないことです。
+振る舞いがないとはメソッドを持たないことです。
 
 ```typescript
 null.toString();
@@ -16,7 +16,7 @@ null.toString();
 
 意図せずこのようにしてしまい実行時エラーになってしまった経験はあるかと思います。これは`null`が`toString()`という振る舞いを持っていないことに起因します。
 
-とはいうもののJavaScriptにおいてプリミティブ型の多くはラッパークラスを持っています。それらはメソッド呼び出しがあれば実行時に`Autoboxing`によって対応するクラスのインスタンスに変換されるため、あたかもプリミティブ型が振る舞いを持つように見え、またそのように使うことができます。
+とはいうもののJavaScriptにおいてプリミティブ型の多くはラッパークラスを持っています。それらはメソッド呼び出しがあれば実行時に`Autoboxing`によって対応するラッパークラスのインスタンスに変換されるため、あたかもプリミティブ型が振る舞いを持つように見え、またそのように使うことができます。
 
 以下はJavaScriptに用意されているプリミティブ型の紹介です。
 
@@ -24,9 +24,29 @@ null.toString();
 
 値がないことを示す値です。他言語の`null`のように設定されなかった時に代入されます。
 
+### 存在しないプロパティへのアクセス
+
+オブジェクトに存在しないプロパティにアクセスした時、`undefined`が返却されます。
+
+```typescript
+const str: any = 90;
+
+str.length;
+// -> undefined
+```
+
+JavaScriptでは配列は`number`型のプロパティを持つインスタンスと解釈されているため、存在しない添字のアクセスも同様に`undefined`が返却されます。
+
+```typescript
+const fruits: string[] = ['Apple', 'Papaya', 'Tomato'];
+
+fruits[7800000];
+// -> undefined
+```
+
 ### 歴史的背景
 
-以前はグローバルスコープの変数だったため上書きができました。そのため、その値が`undefined`であるかどうかの判定に対して`undefinied`との等値比較をすることが必ずしも正しくないことがありましたが、昨今の開発環境では代入ができないプロパティとして設定されています。そのため簡便に`undefined`との等値比較をすることでその値が`undefined`かどうかの判定ができます。
+以前はグローバルスコープの変数だったため上書きができました。そのため、その値が`undefined`であるかどうかの判定に対して`undefinied`との等値比較をすることが必ずしも正しくないことがありました。昨今の環境では`undefined`は代入ができないプロパティとして設定されているため簡便に`undefined`との等値比較をすることでその値が`undefined`かどうかの判定ができます。
 
 ```typescript
 if (whatIsThis === undefined) {
@@ -34,7 +54,7 @@ if (whatIsThis === undefined) {
 }
 ```
 
-古い環境で動作することを考慮する必要がある時や、かつての正しい判定を使いその値が`undefined`かどうかを安全に判定するには`typeof`を使います。
+古い環境で動作することを考慮する必要がある時や、かつての正しい判定を使いたい時は`typeof`を使います。
 
 ```typescript
 if (typeof whatIsThis === 'undefined') {
@@ -71,9 +91,8 @@ TypeScriptには型に`undefined`型が用意されていますがそれとは�
 `undefined`と異なりこちらはリテラルであり、上書きされる危険は考慮する必要がありません。等値比較も`null`との比較で問題ありません。かえって`typeof`で`null`を判定させると`'object'`となってしまい、やや面倒です。
 
 ```typescript
-if (typeof whatIsThis === 'object') {
-  // whatIsThis is object or null
-}
+typeof null;
+// -> 'object'
 ```
 
 ラッパークラスはありません。
@@ -240,7 +259,11 @@ const sym = Symbol();
 
 class Sample {
   exposedMethod() {
-    return this[sym]();
+    const secret = this[sym]();
+
+    // ...
+    
+    return value;
   }
 
   [sym]() {
@@ -288,7 +311,7 @@ const bg2: bigint = BigInt(100);
 
 ```typescript
 2n + BigInt(3);
-// 5n
+// -> 5n
 ```
 
 ### `es2020`以前の場合
