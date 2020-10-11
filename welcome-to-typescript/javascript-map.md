@@ -16,6 +16,8 @@ FlowやTypeScriptでは、実行する前にこういった型の不整合が検
 
 これが型指定が多少面倒でもTypeScriptやFlowを導入する理由の一部となっています。
 
+{% page-ref page="../features/statictype.md" %}
+
 ## TypeScriptと違う目的の技術
 
 TypeScriptと似ていますが、違う目的の技術としていくつか挙げられます。まずは`トランスパイラ`です。トランスパイラとは、全く違う言語をJavaScriptに変換するものです。有名なものでは、CoffeeScriptや、Elmなどがあります。これらのトランスパイラは、AltJSとも呼ばれます。一見TypeScriptもJavaScriptにトランスパイルしているように見えますが、TypeScriptはコンパイルしています。
