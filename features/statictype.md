@@ -57,7 +57,7 @@ function minus(x: number) {
 
 注目すべきは、変数`x`の隣に`number`と書かれている点です。これは、型注釈と呼ばれるもので、変数`x`がnumber型であることを表しています。
 
-このxにstring型の"two"を代入してコンパイルしてみるとどうなるでしょうか？
+この変数`x`にstring型の`"two"`を代入してコンパイルしてみるとどうなるでしょうか？
 
 ```typescript
 minus("two");
