@@ -13,7 +13,7 @@
   * [なぜTypeScriptを使うべきか？](overview/why-should-you-use-typescript.md)
 * [JavaScript再入門](revisiting-javascript/README.md)
   * [シングルプロセス・シングルスレッドとコールバック](revisiting-javascript/single-process-and-callback.md)
-* [知っておきたいTypeScriptの文法と機能](features/README.md)
+* [これだけはおさえておきたいTypeScriptの機能](features/README.md)
   * [静的型付けを理解する](features/statictype.md)
   * [プリミティブ型 \(Primitive types\)](features/primitive-types.md)
   * [リテラル型 \(Literal types\)](features/literal-types.md)
