@@ -67,6 +67,73 @@ type PartialPerson = {
 };
 ```
 
+### より便利な省略可能な引数
+
+関数の引数を`Optional parameters, Default parameters`と`Destructuring assignment`と`Partial<T>`を組み合わせることによって省略可能でありながら見やすい関数を実装できます。これらの用語ついては関数のページにて取りあげておりますのでご参照いただければと思います。
+
+{% page-ref page="function.md" %}
+
+ユーザーの検索をかける関数を作り、その属性に応じて検索ができるとします。
+
+```typescript
+function findUsers(name?: string, nationality?: string, age?: number): Promise<User[]> {
+  // ...
+}
+```
+
+ですが、この`findUsers()`のシグネチャだと**名前、国籍は問わないが年齢だけXX才の**ユーザーが欲しい時は引数の順番を維持するために他の引数は`undefined`を入力しなければいけません。
+
+```typescript
+findUsers(undefined, undefined, 22);
+```
+
+これはまだ引数が3個しかないためそこまで見辛くはないですが、多い引数の関数になると、どことどこに引数を入れて、他を`undefined`とするかが面倒になります。これを`Partial<T>`を使って見た目をよく設定できます。
+
+まず引数は全てオブジェクトで受け渡しされるものとしてそのオブジェクトを定義します。さらに省略可能にするために`Partial<T>`をつけます。
+
+```typescript
+type FindUsersArgs = Partial<{
+  name: string;
+  nationality: string;
+  age: number;
+}>;
+```
+
+これを関数`findUser()`の引数にします。
+
+```typescript
+function findUsers({ name, nationality, age }: FindUsersArgs): Promise<User[]> {
+  // ...
+}
+```
+
+これだけではまだ呼び出し側は省略ができません。`findUsers()`を使用する時は引数に`{}`を与えなければいけません。また仮に`{}`を与えたとしても`name, nationality, age`は全て`undefined`です。
+
+```typescript
+findUsers({});
+```
+
+引数を省略できるようにするため`Default parameters`を使い省略時に`{}`が代入されるようにします。
+
+```typescript
+function findUsers({ name, nationality, age }: FindUsersArgs = {}): Promise<User[]> {
+  // ...
+}
+
+findUsers();
+findUsers({ age = 22 });
+```
+
+`FindUsersArgs`の右の`= {}`がそれにあたります。これにより`findUsers()`は引数がなくても呼び出せるようになります。特定の引数だけ値をすることもできます。
+
+さらに`FindUsersArgs`側にも`Default parameters`を設定することで初期値とすることもできます。
+
+```typescript
+function findUsers({ name = 'John Doe', nationality = 'Araska', age = 22 }: FindUsersArgs = {}): Promise<User[]> {
+  // ...
+}
+```
+
 ## `Record<K, T>`
 
 `Index signatures`と似たような効果を持ちます。`K`はオブジェクトのキーを意味し、`string, number, symbol`型またはそれらのユニオン型を指定できます。`T`はオブジェクトのプロパティを意味します。`Index signatures`と異なり`K`に`symbol`型も適用できることに注意してください。
@@ -102,6 +169,56 @@ type Necessary = 'surname' | 'middlename' | 'givenname';
 type Person = Pick<User, Necessary>;
 // -> Type '"middlename"' is not assignable to type '"surname" | "middleName" | "givenName" | "age" | "address" | "nationality" | "createdAt" | "updatedAt"'.
 ```
+
+### 大元となる型の定義に追従する
+
+書籍を扱うサービスを作ったとして、書籍を意味するオブジェクト`Book`が以下のように定義されているとします。
+
+```typescript
+type Book = {
+  id: number;
+  title: string;
+  author: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+```
+
+これを参考にして`Book`を作成するための入力データとして`BookInputData`を作るとします。これは外部からのリクエストで作成され、`id, createdAt, updatedAt`はこのサービスで後付けで割り当てられるとすれば`BookInputData`は以下になります。
+
+```typescript
+type BookInputData = {
+  title: string;
+  author: string;
+};
+```
+
+ここで`author`プロパティが`string`ではなく`Person`になる必要があったとします。`Book, BookInputData`を独立して定義しているとこの変更のために都度、各々の`author`プロパティを変更する必要があります。
+
+```typescript
+type Book = {
+  id: number;
+  title: string;
+  author: Person;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type BookInputData = {
+  title: string;
+  author: Person;
+};
+```
+
+これらの定義が近くにある状態ならまだしも、異なるファイルにあれば非常に探し辛くなります。
+
+そこで`BookInputData`を`Pick<T, K>`を使って定義しなおします。
+
+```typescript
+type BookInputData = Pick<Book, 'title' | 'author'>;
+```
+
+このようにすれば`BookInputData`は少なくとも`Book`とコード上の繋がりができる上に、`author`プロパティの型変更を自動で追従してくれるようになります。
 
 ## `Omit<T, K>`
 
