@@ -6,7 +6,7 @@ JavaScriptでは関数は第一級オブジェクトです。よって変数に�
 
 関数の宣言は主に3通りの方法があります。以下は全て同じ関数`increment()`を宣言しています。
 
-### 名前付き関数 `(Normal functions)`
+### 名前付き関数\(Normal functions\)
 
 ```typescript
 function increment(num: number): number {
@@ -14,7 +14,7 @@ function increment(num: number): number {
 }
 ```
 
-### 匿名関数 `(Anonymous functions)`
+### 匿名関数\(Anonymous functions\)
 
 ```typescript
 const increment = function(num: number): number {
@@ -22,7 +22,7 @@ const increment = function(num: number): number {
 };
 ```
 
-### 匿名かつアロー関数 `(Arrow functions)`
+### 匿名かつアロー関数\(Arrow functions\)
 
 ```typescript
 const increment = (num: number): number => {
@@ -173,7 +173,7 @@ type Operate = {
 
 この書き方はオーバーロードで目にする機会があるかと思います。オーバーロードについては後述しますのでこのまま読み進めてください。
 
-## 引数 `(Arguments)`
+## 引数\(Arguments\)
 
 関数の入力値である引数は特殊なことをしない限り、要求する型の変数を、要求する数だけ入力しなければいけません。  
 例えば原点との距離を求める以下の関数があったとします。
@@ -213,7 +213,7 @@ JavaScriptでは引数が少ない時はその引数には`undefined`が渡さ�
 
 ## 引数を省略したい
 
-引数を省略したいことがあります。その時は`Optional parameters`と`Default parameters`を使用することができます。
+引数を省略したいことがあります。その時はoptional parametersとdefault parametersを使用することができます。
 
 上記の関数`distance()`は、現在は与えられた座標を元に原点からの距離を計算していますが、これを2点の距離を計算できるようにしたいとします。すると上記の関数`distance()`は以下のようになります。
 
@@ -223,9 +223,9 @@ function distance(p1: Point, p2: Point): number {
 }
 ```
 
-### `Optional parameters`
+### Optional parameters
 
-ここで、第2引数は省略可能にし、省略した場合は第1引数と原点の距離を返したいとします。これは`Optional parameters`を使用すると以下のように書けます。
+ここで、第2引数は省略可能にし、省略した場合は第1引数と原点の距離を返したいとします。これはOptional parametersを使用すると以下のように書けます。
 
 ```typescript
 function distance(p1: Point, p2?: Point): number {
@@ -238,7 +238,7 @@ distance(q1);
 
 引数の`p2`の右隣に`?`がつきました。これで`p2`は省略可能な引数となり5, 6行目のどちらの書き方も受け付けるようになります。
 
-しかし、この`Optional parameters`は意味する型が少々変わります。内部的には`p2`は`Point`ではなく`Point | undefined`のユニオン型`(Union Types)`として解釈されます。ユニオン型の説明は先の章にあるため詳しい説明は譲りますが、ユニオン型は日本語で言うと**どれか**の意味です。
+しかし、このoptional parametersは意味する型が少々変わります。内部的には`p2`は`Point`ではなく`Point | undefined`のユニオン型\(union types\)として解釈されます。ユニオン型の説明は先の章にあるため詳しい説明は譲りますが、ユニオン型は日本語で言うと**どれか**の意味です。
 
 {% page-ref page="union-type.md" %}
 
@@ -263,7 +263,7 @@ function distance(p1: Point, p2?: Point): number {
 }
 ```
 
-省略時はどの値を使うかという処理が明文化されますが、後述の`Default parameters`がほぼ同じことをできます。これで実装できる場合は`Default paramteres`の使用を検討してください。
+省略時はどの値を使うかという処理が明文化されますが、後述のdefault parametersがほぼ同じことをできます。これで実装できる場合はdefault paramteresの使用を検討してください。
 
 #### 処理を分ける
 
@@ -281,7 +281,7 @@ function distance(p1: Point, p2?: Point): number {
 
 ### `Point | undefined` との違い
 
-`p2`の型が`Point | undefined`として解釈されるのなら、あえて`?`などという記号を新しく定義する必要などないのではと思われるかもしれませんが、明確な違いがあります。それは**呼び出し側で省略できるかどうかということ**です。上記の通り`Optional parameters`は省略が可能なのですが、`undefined`とのユニオン型であることを明記すると省略ができません。
+`p2`の型が`Point | undefined`として解釈されるのなら、あえて`?`などという記号を新しく定義する必要などないのではと思われるかもしれませんが、明確な違いがあります。それは**呼び出し側で省略できるかどうかということ**です。上記の通りoptional parametersは省略が可能なのですが、`undefined`とのユニオン型であることを明記すると省略ができません。
 
 ```typescript
 function distance(p1: Point, p2: Point | undefined): number
@@ -299,7 +299,7 @@ distance(q1, undefined);
 
 ### 省略可能な`undefined`をTypeScriptはどう解釈しているか
 
-実はこの`Optional parameters`としても使われる省略可能な`undefined`は、TypeScriptは`void`という専用の型を作って定義しています。つまり`Optional parameters`は以下のように書き換えることもできます。
+実はこのoptional parametersとしても使われる省略可能な`undefined`は、TypeScriptは`void`という専用の型を作って定義しています。つまりoptional parametersは以下のように書き換えることもできます。
 
 ```typescript
 function distance(p1: Point, p2: Point | void): number
@@ -312,9 +312,9 @@ distance(q1);
 
 この`void`型は値を指定しない`undefined`と、意図的に指定している`undefined`の2値を持っていますが`undefined`型は意図的に指定している`undefined`の1値のみを持っているため、このような差が生まれます。
 
-### `Optional parameters`でできないこと
+### Optional parametersでできないこと
 
-`Optional parameters`は必ず最後に書かなければいけません。つまり、以下のように`Optional parameters`より後ろに普通の引数を書くことはできません。
+optional parametersは必ず最後に書かなければいけません。つまり、以下のようにoptional parametersより後ろに普通の引数を書くことはできません。
 
 ```typescript
 function distance(p1?: Point, p2: Point): number {
@@ -323,7 +323,7 @@ function distance(p1?: Point, p2: Point): number {
 // -> A required parameter cannot follow an optional parameter.
 ```
 
-### `Default parameters`
+### Default parameters
 
 省略した時、原点との距離を求めるといったわかりやすい例であればいいのですが`(1, 2)`との距離を求める、といった変化球がきたとします。なにも考えないとこのようになります。
 
@@ -337,7 +337,7 @@ function distance(p1: Point, p2?: Point): number {
 }
 ```
 
-もちろん動くのですが、意図がわかりにくくなってしまいます。このような時に便利なのが`Default parameters`です。`Default parameters`を使用すると以下のように書けます。
+もちろん動くのですが、意図がわかりにくくなってしまいます。このような時に便利なのがdefault parametersです。default parametersを使用すると以下のように書けます。
 
 ```typescript
 const p0: Point = {
@@ -356,11 +356,11 @@ distance(q1, undefined);
 
 入力がなかった時に初期値として使いたい値を、その引数の右に書きます。ここでは`p2`の右側の`= p0`がそれにあたります。
 
-`Optional parameters`と違いユニオン型ではないため、処理の分岐が不要になります。拡張性や見通しを考えれば`Default parameters`の方に軍配が上がるでしょう。
+optional parametersと違いユニオン型ではないため、処理の分岐が不要になります。拡張性や見通しを考えればdefault parametersの方に軍配が上がるでしょう。
 
 ### 初期値に関数の戻り値を使う
 
-`Default parameters`には関数の戻り値を指定することができます。例えば、ある`(x, y)`が与えられると転置した`(y, x)`を返す`inverse()`という関数の戻り値を初期値として使用します。ちなみに`inverse()`は以下です。
+default parametersには関数の戻り値を指定することができます。例えば、ある`(x, y)`が与えられると転置した`(y, x)`を返す`inverse()`という関数の戻り値を初期値として使用します。ちなみに`inverse()`は以下です。
 
 ```typescript
 function inverse(p: Point): Point {
@@ -379,7 +379,7 @@ function distance(p1: Point, p2: Point = inverse(p1)): number {
 }
 ```
 
-また、`Default parameters`は`Optional parameters`と異なり、最後に書く必要はありません。呼び出し側で`Default parameters`を使用させたい時は`undefined`を指定します。この時`null`ではこの役目を果たせないので注意してください。もちろん末尾の`Default parameters`であれば省略が可能です。
+また、default parametersはoptional parametersと異なり、最後に書く必要はありません。呼び出し側でdefault parametersを使用させたい時は`undefined`を指定します。この時`null`ではこの役目を果たせないので注意してください。もちろん末尾のdefault parametersであれば省略が可能です。
 
 ```typescript
 const p0: Point = {
@@ -397,9 +397,9 @@ distance(null, q2);
 // -> Argument of type 'null' is not assignable to parameter of type 'Point | undefined'.
 ```
 
-### `Default parameters`でできないこと
+### Default parametersでできないこと
 
-しかしながら、関数を`Default parameters`として使う時は非同期の関数を使うことができません。TypeScriptならびにJavaScriptは処理を非同期的に扱うことが多く、`Promise / async / await`といった非同期処理を同期的に扱うための機能があります。詳細は先の章にあるため詳しい説明は譲りますが非同期関数が値を返すまで処理を待つということはできません。
+しかしながら、関数をdefault parametersとして使う時は非同期の関数を使うことができません。TypeScriptならびにJavaScriptは処理を非同期的に扱うことが多く、`Promise / async / await`といった非同期処理を同期的に扱うための機能があります。詳細は先の章にあるため詳しい説明は譲りますが非同期関数が値を返すまで処理を待つということはできません。
 
 ```typescript
 async function distanceAync(p1: Point, p2: Point = await inverseAync(p1)): Promise<number> {
@@ -409,11 +409,11 @@ async function distanceAync(p1: Point, p2: Point = await inverseAync(p1)): Promi
 
 {% page-ref page="promise-async-await.md" %}
 
-このように`Default parameters`を書くことはできません。なお`inverseAsync()`は非同期関数とします。
+このようにdefault parametersを書くことはできません。なお`inverseAsync()`は非同期関数とします。
 
-## `Rest parameters`
+## Rest parameters
 
-いわゆる可変の引数のことです。たとえば引数に与えられた数値の平均を返す関数`average()`を作るとします。これを`Rest parameters`を使って表現すると以下のようになります。
+いわゆる可変の引数のことです。たとえば引数に与えられた数値の平均を返す関数`average()`を作るとします。これをrest parametersを使って表現すると以下のようになります。
 
 ```typescript
 function average(...nums: number[]): number {
@@ -432,9 +432,9 @@ console.log(average(1, 3)); // 2
 
 `0`除算を防ぐ目的で少々処理が複雑になっていますが、可変の引数の前に`...`を付ければ、可変引数を受け付け、それらを配列として受けることができます。
 
-### `Rest parameters`でできないこと
+### Rest parametersでできないこと
 
-`Rest parameters`は最終的に配列として解釈されるからといって、引数をまとめてひとつの配列として渡すことはできません。
+rest parametersは最終的に配列として解釈されるからといって、引数をまとめてひとつの配列として渡すことはできません。
 
 ```typescript
 average([1, 3, 5, 7, 9]);
@@ -442,7 +442,7 @@ average([1, 3, 5, 7, 9]);
 
 このように配列を直接渡してしまうと`average()`の関数内では要素数1の`number[][]`型が渡されたと解釈されます。もちろん`average()`の期待する引数の型は`number[]`型なので、このコードを実行することはできません。
 
-また、可変個の引数を受け付ける関係上、`Rest parameters`より後ろにほかの引数を置くことができません。
+また、可変個の引数を受け付ける関係上、rest parametersより後ろにほかの引数を置くことができません。
 
 ```typescript
 function average(...nums: number[], subject: string): number {
@@ -451,7 +451,7 @@ function average(...nums: number[], subject: string): number {
 // -> A rest parameter must be last in a parameter list.
 ```
 
-ただし`Rest parameters`の前であれば問題ありません。
+ただしrest parametersの前であれば問題ありません。
 
 ```typescript
 function average(subject: string, ...nums: number[]): number {
@@ -459,9 +459,9 @@ function average(subject: string, ...nums: number[]): number {
 }
 ```
 
-### `Spread syntax`
+### Spread syntax
 
-JavaScriptに組み込みのメソッドとして存在する`Math.max()`は与えられた`number`型の引数の最大値を返却しますが引数として`Rest parameters`を要求します。上記の通り配列をそのまま入れることができないので以下のようなことができません。
+JavaScriptに組み込みのメソッドとして存在する`Math.max()`は与えられた`number`型の引数の最大値を返却しますが引数としてrest parametersを要求します。上記の通り配列をそのまま入れることができないので以下のようなことができません。
 
 ```typescript
 const scores: number[] = mathExamination();
@@ -477,7 +477,7 @@ Math.max(scores[0], scores[1], scores[2], scores[3], scores[4], scores[5], score
 
 書いている最中で力つきました。しかもこれは生徒が転入したり転校したりするとコードを書き換えなければならなくなります。
 
-このような時は`Spread syntax`を使って配列を引数の列に変換します。
+このような時はspread syntaxを使って配列を引数の列に変換します。
 
 ```typescript
 const scores: number[] = mathExamination();
@@ -485,9 +485,9 @@ const scores: number[] = mathExamination();
 const max: number = Math.max(...scores);
 ```
 
-`Rest parameters`も`Spread syntax`もどちらも`...`と表記しますが片方は個々の引数を配列にし、もう片方は配列を個々の引数にします。
+rest parametersもspread syntaxもどちらも`...`と表記しますが片方は個々の引数を配列にし、もう片方は配列を個々の引数にします。
 
-## `Destructuring assignment`
+## Destructuring assignment
 
 例えばBMI\(Body Mass Index\)を計算したいとします。身長\(cm\)と体重\(kg\)が与えられれば関数`bmi()`は以下のような計算になります。
 
@@ -507,7 +507,7 @@ console.log(bmi(65, 170));
 // 402.36686390532543
 ```
 
-このような誤用を避けるための方法として`Destructuring assignment`を使うことができます。`Destructuring assignment`を使うと以下のように書きなおせます。
+このような誤用を避けるための方法としてdestructuring assignmentを使うことができます。destructuring assignmentを使うと以下のように書きなおせます。
 
 ```typescript
 type TopSecret = {
@@ -538,15 +538,15 @@ bmi({height, weight});
 bmi({weight, height});
 ```
 
-### `Destructuring assignment`でうれしいこと
+### Destructuring assignmentでうれしいこと
 
-`Destructuring assignment`は普通の引数と異なり以下のような利点があります。
+destructuring assignmentは普通の引数と異なり以下のような利点があります。
 
 #### 引数の順番にとらわれない
 
 これは、上記の通りです。
 
-#### `Default parameters`と併用できる
+#### Default parametersと併用できる
 
 身長あるいは体重を省略できるようにして、省略時に初期値を入れるようにすることができます。
 
@@ -557,7 +557,7 @@ function bmi({height = 165, weight = 60}: Partial<TopSecret>): number {
 }
 ```
 
-なお、`Partial<T>`とは、オブジェクト`T`のプロパティ、メソッドを省略可能にします。つまり`Partial<TopSecret>`は以下と同じです。この時の`?`は引数で説明した`Optional parameters`と意味するものは同じです。
+なお、`Partial<T>`とは、オブジェクト`T`のプロパティ、メソッドを省略可能にします。つまり`Partial<TopSecret>`は以下と同じです。この時の`?`は引数で説明したoptional parametersと意味するものは同じです。
 
 ```typescript
 type PartialTopSecret = {
@@ -576,7 +576,7 @@ bmi({height: 180, weight: 75});
 bmi({weight: 75, height: 180});
 ```
 
-さらに以下のように引数の型の右にも`Default parameters`を付けてあげれば引数自体を省略することができるようになります。
+さらに以下のように引数の型の右にもdefault parametersを付けてあげれば引数自体を省略することができるようになります。
 
 ```typescript
 function bmi({height = 165, weight = 60}: Partial<TopSecret> = {}): number {
@@ -654,7 +654,7 @@ TypeError: Cannot read property 'name' of undefined
 
 引数の`this`を指定することによって意図しないメソッドの持ち出しを避けることもできます。
 
-## 戻り値 `(Return value)`
+## 戻り値 \(Return value\)
 
 関数の戻り値を指定することができます。あえて書かなくてもTypeScript側で補完し、関数の戻り値として提供してくれますが、意図しない戻り値を返していないかの検査が働くので書いた方が良いでしょう。前述の通り書く位置が実装と型で異なることに注意してください。
 
@@ -822,7 +822,7 @@ function doNothing1(): undefined {
 
 これらを考慮すると`undefined`型は`undefined`という1値だけを持つ型なのに対し`void`型はそれに加えて何も書かなかった時に代入される非明示の`undefined`の2値を持っている型です。
 
-## `Type predicate`
+## Type predicate
 
 プログラムを書いているとその変数が意図する型なのかをはっきりさせたい時があります。
 
@@ -850,18 +850,18 @@ if (isDuck(animal)) {
 }
 ```
 
-`as`はTypeScriptにおけるキャストの一種です。名前を`Type Assertions`と言いますが他の言語と異なりかなり強引な型変換ができてしまいます。使用には気をつけてください。ちなみに別の表記方法があるのですが現在はあまり推奨されていません。理由は`JSX`のタグと見分けがつかないからです。
+`as`はTypeScriptにおけるキャストの一種です。名前をtype assertionsと言いますが他の言語と異なりかなり強引な型変換ができてしまいます。使用には気をつけてください。ちなみに別の表記方法があるのですが現在はあまり推奨されていません。理由は`JSX`のタグと見分けがつかないからです。
 
 ```typescript
 const duck1: Duck = animal as Duck;
 const duck2: Duck = <Duck> animal;
 ```
 
-これをより賢くやろうというのが`Type predicate`です。
+これをより賢くやろうというのがtype predicateです。
 
-### `Type predicate`の宣言
+### Type predicateの宣言
 
-`Type predicate`の宣言は戻り値が`boolean`型の関数に対して適用でき、戻り値の`boolean`を以下のように書き替えます。
+type predicateの宣言は戻り値が`boolean`型の関数に対して適用でき、戻り値の`boolean`を以下のように書き替えます。
 
 ```typescript
 function isDuck(animal: Animal): animal is Duck {
@@ -888,9 +888,9 @@ function isUndefined(value: unknown): value is undefined {
 
 上記関数`isUndefined()`は明らかに誤っていますが、この誤りに対してTypeScriptは何も警告を出しません。
 
-## `Assertion functions`
+## Assertion functions
 
-やりたいことはほぼ`Type predicate`と同じです。`Type predicate`は`boolean`型の戻り値に対して使用しましたがこちらは例外を投げるかどうかで判定します。上記関数`isDuck()`を`Assertion functions`で書きかえると以下のようになります。
+やりたいことはほぼtype predicateと同じです。type predicateは`boolean`型の戻り値に対して使用しましたがこちらは例外を投げるかどうかで判定します。上記関数`isDuck()`をassertion functionsで書きかえると以下のようになります。
 
 ```typescript
 function isDuck(animal: Animal): asserts animal is Duck {
@@ -912,9 +912,9 @@ animal.quacks();
 
 こちらはこの関数が呼ばれた後であればいつでも変数`animal`は`Duck`型として解釈されます。
 
-## `Type predicate, Assertion functions`のつかいかた
+## Type predicate, Assertion functionsのつかいかた
 
-値が存在するかしないかを表現する時、言語によっては`Optional`という入れ物のクラスを用意することがあります。このクラスを抽象クラスとして定義し、サブクラスに値が存在する`Some`と存在しない`None`を用意すると`Optional`に`Type predicate`を使うことができます。
+値が存在するかしないかを表現する時、言語によっては`Optional`という入れ物のクラスを用意することがあります。このクラスを抽象クラスとして定義し、サブクラスに値が存在する`Some`と存在しない`None`を用意すると`Optional`にtype predicateを使うことができます。
 
 ```typescript
 abstract class Optional<T> {
@@ -937,7 +937,7 @@ class None<T> extends Optional<T> {
 }
 ```
 
-### `Type predicate`で注意すること
+### Type predicateで注意すること
 
 上記`Optional`の例が顕著なのですが、`optional.isPresent()`が`false`を返したからと言ってTypeScriptは変数`optional`が`None`であるとは解釈しません。あくまでも`Some`ではないと解釈されるだけです。
 
@@ -949,7 +949,7 @@ if (optional.isPresent()) {
 }
 ```
 
-また`Type predicate`は`false`の場合を定義することができません。つまり以下のような定義はできません。
+またtype predicateは`false`の場合を定義することができません。つまり以下のような定義はできません。
 
 ```typescript
 public abstract isPresent(): this is Some<T>, this is not None<T>;
@@ -1118,7 +1118,7 @@ const op: NewOperator = new NewOperator(2);
 op.power(3).multiply(2).power(3); // 4096
 ```
 
-## オーバーロード `(Overloads)`
+## オーバーロード\(Overloads\)
 
 オーバーロードとは、関数の名称は同じでありながら異なる引数、戻り値を持つことができる機能です。TypeScriptもこの機能を用意しているのですが、大元がJavaScriptであることが災いし、やや使いづらいです。
 
