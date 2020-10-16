@@ -87,9 +87,9 @@ function findUsers(name?: string, nationality?: string, age?: number): Promise<U
 findUsers(undefined, undefined, 22);
 ```
 
-これはまだ引数が3個しかないためそこまで見辛くはないですが、多い引数の関数になると、どことどこに引数を入れて、他を`undefined`とするかが面倒になります。これを`Partial<T>`を使って見た目をよく設定できます。
+この例題は引数が3個しかないためそこまで見辛くはないですが、多い引数の関数になると、どこに引数を入れて他を`undefined`とするかが面倒です。これを`Partial<T>`を使って見た目をよくできます。
 
-まず引数は全てオブジェクトで受け渡しされるものとしてそのオブジェクトを定義します。さらに省略可能にするために`Partial<T>`をつけます。
+まず引数は全てオブジェクトで受け渡しされるものとしてそのオブジェクトの型を定義します。さらにプロパティを省略可能にするために`Partial<T>`をつけます。
 
 ```typescript
 type FindUsersArgs = Partial<{
@@ -99,7 +99,7 @@ type FindUsersArgs = Partial<{
 }>;
 ```
 
-これを関数`findUser()`の引数にします。
+これを関数`findUsers()`の引数にします。
 
 ```typescript
 function findUsers({ name, nationality, age }: FindUsersArgs): Promise<User[]> {
@@ -107,13 +107,13 @@ function findUsers({ name, nationality, age }: FindUsersArgs): Promise<User[]> {
 }
 ```
 
-これだけではまだ呼び出し側は省略ができません。`findUsers()`を使用する時は引数に`{}`を与えなければいけません。また仮に`{}`を与えたとしても`name, nationality, age`は全て`undefined`です。
+これだけではまだ呼び出し側は省略ができません。`findUsers()`を使用する時は仮に何も設定する必要がなくても引数に`{}`を与えなければいけません。
 
 ```typescript
 findUsers({});
 ```
 
-引数を省略できるようにするため`Default parameters`を使い省略時に`{}`が代入されるようにします。
+引数を省略できるようにするために`Default parameters`を使い省略時に`{}`が代入されるようにします。
 
 ```typescript
 function findUsers({ name, nationality, age }: FindUsersArgs = {}): Promise<User[]> {
@@ -124,7 +124,7 @@ findUsers();
 findUsers({ age = 22 });
 ```
 
-`FindUsersArgs`の右の`= {}`がそれにあたります。これにより`findUsers()`は引数がなくても呼び出せるようになります。特定の引数だけ値をすることもできます。
+`FindUsersArgs`の右の`= {}`がそれにあたります。これにより`findUsers()`は引数がなくても呼び出せるようになります。特定の引数だけ値をすることもできます。`findUsers({ age = 22 })`がその例です。
 
 さらに`FindUsersArgs`側にも`Default parameters`を設定することで初期値とすることもできます。
 
