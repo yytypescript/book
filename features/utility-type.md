@@ -126,7 +126,7 @@ findUsers({ age = 22 });
 
 `FindUsersArgs`の右の`= {}`がそれにあたります。これにより`findUsers()`は引数がなくても呼び出せるようになります。特定の引数だけ値をすることもできます。`findUsers({ age = 22 })`がその例です。
 
-さらに`FindUsersArgs`側にも`Default parameters`を設定することで初期値とすることもできます。
+さらに`FindUsersArgs`側にも`Default parameters`を設定することで初期値することもできます。
 
 ```typescript
 function findUsers({ name = 'John Doe', nationality = 'Araska', age = 22 }: FindUsersArgs = {}): Promise<User[]> {
