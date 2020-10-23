@@ -2,11 +2,11 @@
 
 ## TypeScriptと同じ課題を解決しようとしている技術
 
-TypeScriptと同じ分野の課題を解決しようとしている技術としてFlowが挙げられます。
+TypeScriptは、大規模なプログラムの開発における課題を、静的型検査を行うことで解決します。この静的型査での同様な立ち位置の技術としてFlowが挙げられます。
 
-Flowは、JavaScriptで静的型検査を行います。これはTypeScriptのそれと同じです。TypeScriptはJavaScriptを拡張したJavaScriptとは違う言語ですが、FlowはJavaScriptにコメントのような型アノテーションを追記するだけです。
+Flowは、JavaScriptの静的型検査を行います。TypeScriptはJavaScriptを拡張した言語として提供され、コードの主たるチェック対象はTypeScriptコードです。一方、Flowには独自の言語がなく、あくまでJavaScriptにコメントのような型アノテーションを追加しただけになっています。
 
-Flowは、既存のJavaScript資産に静的型検査を素早く導入したい場合に向いているようです。FlowもTypeScriptもできることはほぼ同じです。TypeScriptはJavaScriptではない別言語なので、ある日JavaScriptに戻りたくなっても気軽には戻れないでしょう。
+Flowは、既存のJavaScript資産に静的型検査を素早く導入したい場合に向いています。FlowもTypeScriptもできることはほぼ同じです。TypeScriptの文法はJavaScriptと互換性があるように設計されてはいますが、あくまで別言語なので、ある日唐突にJavaScriptに戻りたくなっても気軽には戻れないでしょう。
 
 ### コラム: 静的型検査とは？
 
@@ -16,11 +16,13 @@ FlowやTypeScriptでは、実行する前にこういった型の不整合が検
 
 これが型指定が多少面倒でもTypeScriptやFlowを導入する理由の一部となっています。
 
+{% page-ref page="../features/statictype.md" %}
+
 ## TypeScriptと違う目的の技術
 
-TypeScriptと似ていますが、違う目的の技術としていくつか挙げられます。まずは`トランスパイラ`です。トランスパイラとは、全く違う言語をJavaScriptに変換するものです。有名なものでは、CoffeeScriptや、Elmなどがあります。これらのトランスパイラは、AltJSとも呼ばれます。一見TypeScriptもJavaScriptにトランスパイルしているように見えますが、TypeScriptはコンパイルしています。
+TypeScriptはJavaScriptにコンパイルする「トランスパイラ」と呼ばれる技術です。トランスパイラはTypeScriptの他に、CoffeeScriptやDartがあります。技術的なTypeScriptもCoffeeScriptも同じジャンルですが、CoffeeScriptやDartが全く新しい言語をJavaScript環境で動かせるようにするためにトランスパイルを採用しているのに対し、TypeScriptはあくまでJavaScriptプラスアルファなコードをJavaScript環境で動かせるようにするためにトランスパイルをするという点で、やや毛色が異なります。
 
-またトランスパイラの一種にBabelというツールがあります。これはJavaScriptの最新の言語仕様を、古いJavaScriptでも使えるように変換します。BabelはAltJSとは違い、JavaScriptをJavaScriptに変換するためのものです。
+トランスパイラの一種にBabelというツールがあります。これはJavaScriptの最新の言語仕様を、古いJavaScript環境でも使えるように変換するものです。BabelはTypeScriptと異なり、型のチェックなどは行いません。
 
 ## TypeScriptと関係のある技術
 
@@ -42,11 +44,11 @@ npmや、npmを拡張したyarnが使われています。
 
 ### 実行環境
 
-JavaScriptを実行する環境としてNode.jsとブラウザがあります。ブラウザやNode.jsの内部にはv8エンジンというJavaScriptを評価して実行するエンジンが組み込まれています。JavaScriptはコンパイルして機械語にするということはできず、必ずNode.jsやブラウザといったランタイムが必要になります。
+JavaScriptを実行する環境としてNode.jsとブラウザがあります。多くのブラウザやNode.jsの内部にはv8エンジンというJavaScriptを評価して実行するエンジンが組み込まれています。JavaScriptはコンパイルして機械語にするということはできず、必ずNode.jsやブラウザといった実行環境が必要になります。
 
 ### コードフォーマッター
 
 コードフォーマッターは、あるルールに従ってソースコードのタブやインデントの量や種類、その他細かい書き方の揺れを整形してくれます。コードフォーマッターを使うと誰が書いても同じ見た目のコードに整形することができます。
 
-よく使わるのが、Prettier\(プリティアと発音します。\)と、ESLint\(エスリントと発音します。\)があります。Prettierはコード整形を主目的としています。一方ESLintはコードの間違いなども指摘してくれます。TypeScriptとESLintを一緒に使うときは、ESLint TypeScript Pluginを使用するとよいでしょう。
+よく使わるのが、Prettier\(プリティア\)と、ESLint\(エスリント\)があります。Prettierはコード整形を主目的としています。一方ESLintはコードの間違いなども指摘してくれます。TypeScriptとESLintを一緒に使うときは、ESLint TypeScript Pluginを使用するとよいでしょう。
 
