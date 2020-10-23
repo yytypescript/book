@@ -209,7 +209,7 @@ distance(q1, q2);
 // -> Expected 1 arguments, but got 2.
 ```
 
-JavaScriptでは引数が少ない時はその引数には`undefined`が渡され、引数が多い場合は余分な引数は無視されるのですが、ここは大きな違いです。
+JavaScriptでは引数が少ない時はその引数には`undefined`が渡され、引数が多い場合は余分な引数は無視されるのですが、ここはTypeScriptとJavaScriptとの大きな違いです。
 
 ## 引数を省略したい
 
