@@ -1,4 +1,4 @@
-# リテラル型 \(Literal types\)
+# リテラル型 \(Literal Types\)
 
 TypeScriptではプリミティブ型の中の一部だけを示すような型の表現も可能です。
 
@@ -21,16 +21,16 @@ let impossible: false = false;
 
 impossible = false;
 impossible = true;
-// -> Type 'true' is not assignable to type 'false'.
+// Type 'true' is not assignable to type 'false'.
 ```
 
 ### `const`と何が違うのか？
 
 これでは`const`と宣言していることと何が違うのかと疑問を持たれる方もいらっしゃるかと思います。`const`はESMAScriptで定められている定数の宣言であるのに対し、リテラル型はTypeScriptで用意されたその1値のみを許容する変数あるいは定数のことです。
 
-TypeScriptによる型のサポートはあくまでもコーディング中の話であり、実際に動作する時は型のないJavaScriptです。他のリテラルが代入できないという制限はもはやなくなっている状態であり、他の値で上書きできないことを意図していたとしてもそれらは撤廃されています。
+TypeScriptによる型のサポートはあくまでもコーディング中の話であり、実際に動作する時は型のないJavaScriptです。他の値が代入できないという制限はもはやなくなっている状態であり、これは上書きできないことということが撤廃されていることを意味します。
 
-JavaScriptは実行時に意図しない代入が行われているかの検出ではできないため、リテラル型をあたかも定数のように使うことは避けてください。
+リテラル型をあたかも定数のように使うことは避けてください。
 
 ```typescript
 let impossible: false = false;
@@ -72,13 +72,13 @@ const response: Response | null = ajax.get('https://....');
 
 ## TypeScriptはこう解釈している
 
-リテラル型はそのリテラルが所属するデータ型の派生型\(`subtype`\)として解釈されます。この使い方はジェネリクスで頻出します。初めはプリミティブ型の派生型とは一体何かと面食らうことがあるかもしれません。
+リテラル型はそのリテラルが所属するデータ型の派生型として解釈されます。この使い方はジェネリクスで頻出します。初めはプリミティブ型の派生型とは一体何かと面食らうことがあるかもしれません。
 
 {% page-ref page="generics.md" %}
 
 ## リテラル型にできないリテラル
 
-number型の`NaN, Infinity, -Infinity`はリテラル型として使うことができません。
+`number`型の`NaN, Infinity, -Infinity`はリテラル型として使うことができません。
 
 ```typescript
 let inf: Infinity = Infinity;

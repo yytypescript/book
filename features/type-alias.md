@@ -1,4 +1,4 @@
-# タイプエイリアス \(Type aliases\)
+# タイプエイリアス \(Type Aliases\)
 
 `JSON`は`JavaScript Object Notation`の略です。JavaScriptでは`{}`で囲まれたキー、プロパティのペアがオブジェクトになります。
 
@@ -13,7 +13,7 @@ const person: object = {
 };
 
 console.log(person.surname);
-// -> Property 'surname' does not exist on type 'object'.
+// Property 'surname' does not exist on type 'object'.
 ```
 
 `object`型に代入したオブジェクトはプロパティ、メソッドを一切持っていないものとしてみなされます。そのため6行目のようにプロパティ、メソッドに対するアクセスができません。
@@ -33,7 +33,8 @@ const person: {
   givenName: 'Gabriel'
 };
 
-console.log(person.surname);
+person.surname;
+// -> 'Fauré'
 ```
 
 型にもそのままオブジェクトを書いてしまいます。このようにすることで変数`person`は`surname`と`givenName`というふたつのプロパティを持っていることが表現でき、アクセスができるようになります。
@@ -44,13 +45,13 @@ console.log(person.surname);
 
 ```typescript
 // object
-{
+const obj = {
   surname: 'Fauré',
   givenName: 'Gabriel'
 };
 
 // type
-{
+type typ = {
   surname: string;
   givenName: string;
 };
@@ -60,7 +61,7 @@ console.log(person.surname);
 
 この機能を使って**円満な**家族を表現してみましょう。両親がおり、子供が複数存在します。最近は減りましたが二世帯住宅であれば祖父母もいるでしょう。グローバルな現在では夫婦別姓制もあります。
 
-おそらく変数`family`の型はこのようになるでしょう
+おそらく変数`family`型はこのようになるでしょう
 
 ```typescript
 const family: {
@@ -126,13 +127,13 @@ type Family = {
 const family: Family = {...};
 ```
 
-プロパティの`grandparents`は最大ふたつじゃないか、という指摘があるかと思います。気になる方はタプルの章をご参照ください。
+プロパティの`grandparents`は最大ふたつじゃないか、という指摘があるかと思います。そのように設定することもできます。その方法が気になる方はタプルのページをご参照ください。
 
 {% page-ref page="tuple.md" %}
 
 ## オブジェクト内の関数の定義
 
-オブジェクトが持つ関数\(メソッド\)の定義の方法はふたつあります。これらが指す関数の意味は基本的に同じです。
+オブジェクトが持つ関数\(メソッド\)の定義の方法はふたつあります。これらが指す関数の意味は基本的に同じです。必ずしも全く同じというわけではないのですが、かなり踏み込んだ内容になりますので本書では触れません。
 
 ```typescript
 type A = {
@@ -174,7 +175,7 @@ const person: Person = {
 
 この例は`surname`と`givenName`を取り違えていますが、これに関してTypeScriptが何かを指摘するということはありません。
 
-たいして役に立たないのではと思われるかもしれませんが、これが大いに役に立つ場面があります。それはユニオン型`(Union types)`と組み合わせることです。ユニオン型の説明は専門にありますので詳細は譲ります。ここではユニオン型は`|`で区切られたものの**どれか**がであることだけ覚えておいてください。
+たいして役に立たないのではと思われるかもしれませんが、これが大いに役に立つ場面があります。それはユニオン型と組み合わせることです。ユニオン型の説明は専門にありますので詳細は譲ります。ここではユニオン型は`|`で区切られたものの**どれか**がであることだけ覚えておいてください。
 
 ```typescript
 type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
@@ -190,7 +191,7 @@ type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
 
 ### `?`
 
-これはそのプロパティを選択可`(Optional)`にする時に使います。つまりあってもなくても構いませんの意味になります。
+これはそのプロパティを選択可\(Optional\)にする時に使います。つまりあってもなくても構いませんの意味になります。
 
 ```typescript
 type Person = {
@@ -204,27 +205,9 @@ type Person = {
 
 この記号が付与されているプロパティを呼び出す時、使用者はその値があるかないかを確定させる必要があります。ある時はタイプエイリアス通りの型、つまりこの場合は`string`型ですが、ない時は`undefined`として解釈されますのでその判定が必要になります。
 
-ちなみに`string`型あるいは`undefined`であればユニオン型を使うと`string | undefined`と書くことができるのですが、これと`?`では明確に違う点があります。それは`undefined`とのユニオン型で書いた場合、**宣言時に省略ができなくなります**。つまり宣言時に値を持っていないことを`undefined`として明記する必要があります。
-
-```typescript
-type Person = {
-  surname: string;
-  middleName: string | undefined;
-  givenName: string;
-};
-
-const person: Person = {
-  surname: 'Fauré',
-  givenName: 'Gabriel'
-};
-// -> Property 'middleName' is missing in type '{ surname: string; givenName: string; }' but required in type 'Person'.
-```
-
-ちなみにこの省略可能な`undefined`はTypeScriptでは`undefined`型ではなく、`void`型に属しています。
-
 ### `readonly`
 
-これはそのプロパティを読み取り専用`(Readonly)`にする時に使います。
+これはそのプロパティを読み取り専用\(Readonly\)にする時に使います。
 
 ```typescript
 type Person = {
@@ -242,7 +225,7 @@ const person: Person = {
 };
 
 person.surname = 'Panda';
-// -> Cannot assign to 'surname' because it is a read-only property.
+// Cannot assign to 'surname' because it is a read-only property.
 person.givenName = 'Gorilla';
 ```
 
@@ -275,9 +258,9 @@ person.name = {
   surname: 'Panda',
   givenName: 'Gorilla'
 };
-// -> Cannot assign to 'name' because it is a read-only property.
+// Cannot assign to 'name' because it is a read-only property.
 person.age = 80;
-// -> Cannot assign to 'age' because it is a read-only property.
+// Cannot assign to 'age' because it is a read-only property.
 ```
 
 これらが代入不可能なのはわかるかと思いますが、問題は以下です。
@@ -293,9 +276,9 @@ person.name.givenName = 'Gorilla';
 
 {% page-ref page="utility-type.md" %}
 
-## `Index signatures`
+## インデックス型\(`Index Signatures`\)
 
-オブジェクトのキーをあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこの`Index signatures`です。  
+オブジェクトのキーをあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこのインデックス型です。  
 プロパティが全て`string`型であるようなオブジェクトのタイプエイリアスは以下です。
 
 ```typescript
@@ -321,8 +304,8 @@ const bufferflies: Butterfly = {
 さらに、どのキーも存在するものとして扱われます、存在しないキーを指定してもエラーが発生することなく`undefined`を返します。またTypeScriptによる入力補完も働きません。
 
 ```typescript
-console.log(bufferflies.ja);
-// undefined
+bufferflies.ja;
+// -> undefined
 ```
 
 ### ユニオン型と合わせる
@@ -333,7 +316,7 @@ console.log(bufferflies.ja);
 type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
 ```
 
-これはユニオン型のタイプエイリアスですが、これを`Index signatures`のキーとして使用することができます。
+これはユニオン型のタイプエイリアスですが、これをインデックス型のキーとして使用することができます。
 
 ```typescript
 type Butterfly = {
@@ -351,23 +334,23 @@ const bufferflies: Butterfly = {
   es: 'Mariposa',
   de: 'Schmetterling'
 };
-// -> Object literal may only specify known properties, and 'de' does not exist in type 'Butterfly'.
+// Object literal may only specify known properties, and 'de' does not exist in type 'Butterfly'.
 ```
 
-### `Index signatures`の制限
+### インデックス型の制限
 
-`Index signatures`は`string`型、`number`型しか指定できません。
+インデックス型は`string`型、`number`型しか指定できません。
 
 ```typescript
 type Jekyll = {
   [key: boolean]: string;
 };
-// -> An index signature parameter type must be either 'string' or 'number'.
+// An index signature parameter type must be either 'string' or 'number'.
 ```
 
-ちなみに`number`型のキーを持つオブジェクトとは配列のことです。様々な型をキーに設定したい場合は`Map`を使用してください。
+ちなみに`number`型のキーを持つオブジェクトとは配列のようなオブジェクトのことです。
 
-## インターセクション型 `(Intersection types)`
+## インターセクション型 \(`Intersection Types`\)
 
 考え方はユニオン型と相対するものです。ユニオン型が**どれか**を意味するならインターセクション型は**どれも**です。言い換えるとオブジェクトの定義を合成させることを指します。
 
@@ -402,7 +385,7 @@ xy平面上の点を表す`TwoDimensionalPoint`を拡張してxyz平面上の点
 type Never = string & number;
 
 const n: Never = '2';
-// -> Type '"2"' is not assignable to type 'never'.
+// Type '"2"' is not assignable to type 'never'.
 ```
 
 この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが意外なところで使うことができます。今回は説明を省きます。
@@ -429,7 +412,35 @@ type Parameter = {
 };
 ```
 
-一眼でどれが必須で、どれが選択可かが非常にわかりづらいです。そこで先ほど紹介した`Required<T>`と`Partial<T>`をつかってプロパティを分離し、最後にインターセクション型を使い合成します。
+一眼でどれが必須で、どれが選択可かが非常にわかりづらいです。これをインターセクション型と後ほど紹介するユーティリティ型の`Required<T>`と`Partial<T>`を使いわかりやすく表記できます。ユーティリティ型については解説しているページがありますのでご覧ください。
+
+{% page-ref page="utility-type.md" %}
+
+#### 必須とそうでないパラメータのタイプエイリアスに分離する
+
+```typescript
+type Mandatory = {
+  id: string;
+  active: boolean;
+  balance: number;
+  surname: string;
+  givenName: string;
+  email: string;
+};
+
+type Optional = {
+  index: number;
+  photo: string;
+  age: number;
+  company: string;
+  phoneNumber: string;
+  address: string;
+};
+```
+
+#### `Required<T>, Partial<T>`をつける
+
+`Mantatory`は`Required<T>`を、`Optional`は`Partial<T>`をつけます。
 
 ```typescript
 type Mandatory = Required<{
@@ -449,7 +460,13 @@ type Optional = Partial<{
   phoneNumber: string;
   address: string;
 }>;
+```
 
+#### インターセクション型で合成する
+
+これで最初に定義した`Parameter`と同じタイプエイリアスができました。
+
+```typescript
 type Parameter = Readonly<Mandatory & Optional>;
 ```
 
