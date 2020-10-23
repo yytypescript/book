@@ -1,6 +1,6 @@
 # tsconfig.json Deep Dive
 
-基本的な`tsconfig.json`の設定を理解されている前提で話が進みますのでまだの方はすでにある本書の`tsconfig.json`のページをご覧ください。
+基本的なtsconfig.jsonの設定を理解されている前提で話が進みますのでまだの方はすでにある本書のtsconfig.jsonのページをご覧ください。
 
 {% page-ref page="../handson/setting-tsconfig.json.md" %}
 
@@ -10,7 +10,7 @@
 
 ### 型定義ファイルも出力する
 
-型定義ファイルを一緒に出力しましょう。そのためには`tsconfig.json`にある`declaration`の項目を`true`に変更します。
+型定義ファイルを一緒に出力しましょう。そのためにはtsconfig.jsonにある`declaration`の項目を`true`に変更します。
 
 ```typescript
 "declaration": true,
@@ -74,7 +74,7 @@ declare class NumericalValueObject {
 
 ### 宣言元へのジャンプでの`ts`ファイルを参照できるようにする
 
-IDEを使っている時に有用で、実際の`ts`のソースコードがどのようにして動作しているのかを閲覧することができるようになります。`tsconfig.json`にある`declarationMap`の項目を`true`に変更します。
+IDEを使っている時に有用で、実際の`ts`のソースコードがどのようにして動作しているのかを閲覧することができるようになります。tsconfig.jsonにある`declarationMap`の項目を`true`に変更します。
 
 ```typescript
 "declarationMap": true,
@@ -85,7 +85,7 @@ IDEを使っている時に有用で、実際の`ts`のソースコードがど�
 
 ### 元の`ts`も公開する
 
-特に設定していなければ元の`ts`ファイルも公開されますが、公開する内容を調整している場合は逆に`package.json`の`files`プロパティをを変更して元の`ts`ファイルも公開するように変更が必要です。`tsconfig.json`の`declarationMap`を設定しても元の`ts`ファイルを参照できない時はここで公開する内容を制限していないか確認してください。
+特に設定していなければ元の`ts`ファイルも公開されますが、公開する内容を調整している場合は逆にpackage.jsonの`files`プロパティをを変更して元の`ts`ファイルも公開するように変更が必要です。tsconfig.jsonの`declarationMap`を設定しても元の`ts`ファイルを参照できない時はここで公開する内容を制限していないか確認してください。
 
 ```typescript
 {
@@ -114,7 +114,7 @@ IDEを使っている時に有用で、実際の`ts`のソースコードがど�
 
 `sourceMap`とはAltJSがトランスパイルされたJavaScriptとの行を一致させるものです。これがあることによってデバッグやトレースをしている時に、元の`ts`ファイルの何行目で問題が発生しているかわかりやすくなります。`module bundler`を使用する時はこのオプションを有効にしていないと基本的に何もわかりません。
 
-`tsconfig.json`にある`sourceMap`の項目を`true`に変更します。
+tsconfig.jsonにある`sourceMap`の項目を`true`に変更します。
 
 ```typescript
 "sourceMap": true,
@@ -123,15 +123,15 @@ IDEを使っている時に有用で、実際の`ts`のソースコードがど�
 
 こちらもトランスパイルで出力した`js`ファイルと同じディレクトリに同名で拡張子が`js.map`のファイルも出力されるようになります。
 
-## `Dual Package`
+## Dual Package
 
 フロントエンドでもバックエンドでもTypeScriptこれ一本！Universal JSという考えがあります。確かにフロントエンドを動的にしたいのであればほぼ避けて通れないJavaScriptと、バックエンドでも使えるようになったJavaScriptで同じコードを使いまわせれば保守の観点でも異なる言語を触る必要がなくなり、統一言語としての価値が大いにあります。
 
-しかしながらフロントエンドとバックエンドではJavaScriptのモジュール解決の方法が異なります。この差異のために同じTypeScriptのコードを別々に分けなければいけないかというとそうではありません。ひとつのモジュールを`commonjs, esmodule`の両方に対応した出力をする`Dual Package`という考えがあります。
+しかしながらフロントエンドとバックエンドではJavaScriptのモジュール解決の方法が異なります。この差異のために同じTypeScriptのコードを別々に分けなければいけないかというとそうではありません。ひとつのモジュールを`commonjs, esmodule`の両方に対応した出力をするDual Packageという考えがあります。
 
-### `Dual Package`ことはじめ
+### Dual Packageことはじめ
 
-名前が仰々しいですが、やることは`commonjs`用のJavaScriptと`esmodule`用のJavaScriptを出力することです。つまり出力する`module`の分だけ`tsconfig.json`を用意します。
+名前が仰々しいですが、やることは`commonjs`用のJavaScriptと`esmodule`用のJavaScriptを出力することです。つまり出力する`module`の分だけtsconfig.jsonを用意します。
 
 プロジェクトはおおよそ以下のような構成になります。
 
@@ -143,20 +143,20 @@ IDEを使っている時に有用で、実際の`ts`のソースコードがど�
 └── tsconfig.json
 ```
 
-* `tsconfig.base.json`
-  * 基本となる`tsconfig.json`です
-* `tsconfig.cjs.json`
-  * `tsconfig.base.json`を継承した`commonjs`用の`tsconfig.json`です
-* `tsconfig.esm.json`
-  * `tsconfig.base.json`を継承した`esmodule`用の`tsconfig.json`です
-* `tsconfig.json`
-  * IDEなどはこの名前を優先して探すので、そのための`tsconfig.json`です
+* tsconfig.base.json
+  * 基本となるtsconfig.jsonです
+* tsconfig.cjs.json
+  * tsconfig.base.jsonを継承した`commonjs`用のtsconfig.jsonです
+* tsconfig.esm.json
+  * tsconfig.base.jsonを継承した`esmodule`用のtsconfig.jsonです
+* tsconfig.json
+  * IDEなどはこの名前を優先して探すので、そのためのtsconfig.jsonです
 
-`tsconfig.base.json`と`tsconfig.json`を分けるかどうかについては好みの範疇です。まとめてしまっても特に問題はありません。
+tsconfig.base.jsonとtsconfig.jsonを分けるかどうかについては好みの範疇です。まとめてしまっても特に問題はありません。
 
-#### `tsconfig.json`の継承
+#### tsconfig.jsonの継承
 
-`tsconfig.json`は他の`tsconfig.json`を継承する機能があります。上記は`tsconfig.cjs.json, tsconfig.esm.json`は以下のようにして`tsconfig.base.json`を継承しています。
+tsconfig.jsonは他のtsconfig.jsonを継承する機能があります。上記はtsconfig.cjs.json, tsconfig.esm.jsonは以下のようにしてtsconfig.base.jsonを継承しています。
 
 ```typescript
 // tsconfig.cjs.json
@@ -184,30 +184,30 @@ IDEを使っている時に有用で、実際の`ts`のソースコードがど�
 
 `outDir`はトランスパイルした`js`と、型定義ファイルを出力していれば\(後述\)それを出力するディレクトリを変更するオプションです。
 
-このような`tsconfig.xxx.json`ができていれば、あとは以下のようにファイル指定してトランスパイルをするだけです。
+このようなtsconfig.xxx.jsonができていれば、あとは以下のようにファイル指定してトランスパイルをするだけです。
 
 ```bash
 tsc -p tsconfig.cjs.json
 tsc -p tsconfig.esm.json
 ```
 
-### `Dual Pakcage`のための`package.json`
+### Dual Pakcageのためのpackage.jso`n`
 
-`package.json`も`Dual Package`のための設定が必要です。
+package.jsonもDual Packageのための設定が必要です。
 
 #### `main`
 
-`package.json`にあるそのパッケージのエントリポイントとなるファイルを指定する項目です。`Dual Package`の時はここに`commonjs`のエントリポイントとなる`js`ファイルを設定します。
+package.jsonにあるそのパッケージのエントリポイントとなるファイルを指定する項目です。Dual Packageの時はここに`commonjs`のエントリポイントとなる`js`ファイルを設定します。
 
 #### `module`
 
-`Dual Package`の時はここに`esmodule`のエントリポイントとなる`js`ファイルを設定します。
+Dual Packageの時はここに`esmodule`のエントリポイントとなる`js`ファイルを設定します。
 
 #### `types`
 
-型定義ファイルのエントリポイントとなる`ts`ファイルを設定します。型定義ファイルを出力するようにしていれば`commonjs, esmodule`のどちらの`tsconfig.json`で出力したものでも問題ありません。
+型定義ファイルのエントリポイントとなる`ts`ファイルを設定します。型定義ファイルを出力するようにしていれば`commonjs, esmodule`のどちらのtsconfig.jsonで出力したものでも問題ありません。
 
-`package.json`はこのようになっているでしょう。
+package.jsonはこのようになっているでしょう。
 
 ```typescript
 {
@@ -225,20 +225,20 @@ tsc -p tsconfig.esm.json
 }
 ```
 
-トランスパイル後の`js`のファイルの出力先はあくまでも例です。`tsconfig.json`の`outDir`を変更すれば出力先を変更できるのでそちらを設定後、`package.json`でエントリポイントとなる`js`ファイルの設定をしてください。
+トランスパイル後の`js`のファイルの出力先はあくまでも例です。tsconfig.jsonの`outDir`を変更すれば出力先を変更できるのでそちらを設定後、package.jsonでエントリポイントとなる`js`ファイルの設定をしてください。
 
-### `Tree Shaking`
+### Tree Shaking
 
-`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができる全てをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなりすぎるという弱点があります。特にそれが`SPA(Signle Page Application)`だと問題です。`SPA`は読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
+`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができる全てをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなりすぎるという弱点があります。特にそれがSPA\(Signle Page Application\)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
 
-この事態を避けるために`module bundler`は容量削減のための涙ぐましい努力を続けています。その機能のひとつとして題名の`Tree Shaking`を紹介するとともに、開発者にできる`Tree Shaking`対応パッケージの作り方を紹介します。
+この事態を避けるために`module bundler`は容量削減のための涙ぐましい努力を続けています。その機能のひとつとして題名のTree Shakingを紹介するとともに、開発者にできるTree Shaking対応パッケージの作り方を紹介します。
 
-#### `Tree Shaking`とは
+#### Tree Shakingとは
 
-`Tree Shaking`とは使われていない関数、クラスを最終的な`js`ファイルに含めない機能のことです。使っていないのであれば入れる必要はない。というのは至極当然の結論ですが、この`Tree Shaking`を使うための条件があります。
+Tree Shakingとは使われていない関数、クラスを最終的な`js`ファイルに含めない機能のことです。使っていないのであれば入れる必要はない。というのは至極当然の結論ですが、このTree Shakingを使うための条件があります。
 
 * `esmodule`で書かれている
-* 副作用\(`side effects`\)のないコードである
+* 副作用\(side effects\)のないコードである
 
 各条件の詳細を見ていきましょう。
 
@@ -265,24 +265,24 @@ if (shouldCallPolice()) {
 
 上記例で`shouldCallPolice()`が常に`true`を返すように作られていたとしても`module bundler`はそれを検知できない可能性があります。本来なら必要のない`firefighter`を読み込まないという選択を取ることは難しいでしょう。
 
-最近では`commonjs`でも`Tree Shaking`ができる`module bundler`も登場しています。
+最近では`commonjs`でもTree Shakingができる`module bundler`も登場しています。
 
-### 副作用\(`side effects`\)のないコードである
+### 副作用のないコードである
 
 ここで言及している副作用とは以下が挙げられます。
 
 * `export`するだけで効果がある
 * プロトタイプ汚染のような、既存のものに対して影響を及ぼす
 
-これらが含まれているかもしれないと`module bundler`が判断すると`Tree Shaking`の効率が落ちます。
+これらが含まれているかもしれないと`module bundler`が判断するとTree Shakingの効率が落ちます。
 
 #### 副作用がないことを伝える
 
-`module bundler`に制作したパッケージに副作用がないことを伝える方法があります。`package.json`にひとつ加えるだけで完了します。
+`module bundler`に制作したパッケージに副作用がないことを伝える方法があります。package.jsonにひとつ加えるだけで完了します。
 
 #### `sideEffects`
 
-このプロパティを`package.json`に加えて、値を`false`とすればそのパッケージには副作用がないことを伝えられます。
+このプロパティをpackage.jsonに加えて、値を`false`とすればそのパッケージには副作用がないことを伝えられます。
 
 ```typescript
 {
@@ -325,7 +325,7 @@ if (shouldCallPolice()) {
 
 ## より厳密にコーディングする
 
-厳密なコーディングといえば`linter`があります。TypeScript自身にもより型チェックを厳密にするオプションがあります。以下は`tsconfig.json`の該当する部分を抜粋したものです。
+厳密なコーディングといえば`linter`があります。TypeScript自身にもより型チェックを厳密にするオプションがあります。以下はtsconfig.jsonの該当する部分を抜粋したものです。
 
 ```typescript
   /* Strict Type-Checking Options */
@@ -365,7 +365,7 @@ if (shouldCallPolice()) {
 
 ### `noImplicitAny`
 
-型を明示しない引数はTypeScriptでは`any`になりますが、これを禁止します。
+型を明示しない引数はTypeScriptでは`any`型になりますが、これを禁止します。
 
 ```typescript
 function increment(i) {
@@ -554,7 +554,7 @@ class User {
 
 ### `noImplicitThis`
 
-名前付き関数、匿名関数はアロー関数と異なり、実行時に`this`が決定されます。そのため、内部で`this`を使っているとそれは関数を書いている時点では`any`と同じ扱いになります。このオプションはそれを禁止します。
+名前付き関数、匿名関数はアロー関数と異なり、実行時に`this`が決定されます。そのため、内部で`this`を使っているとそれは関数を書いている時点では`any`型と同じ扱いになります。このオプションはそれを禁止します。
 
 以下のような`Type alias`があるとします。
 
@@ -685,7 +685,7 @@ function dump(this: Person): string {
 Property 'nameXX' does not exist on type 'Person'. Did you mean 'name01'?
 ```
 
-この引数の`this`については関数 \(`Functions`\)の頁に詳細がありますので併せてご参照ください。
+この引数の`this`については関数のページに詳細がありますので併せてご参照ください。
 
 {% page-ref page="function.md" %}
 
@@ -758,7 +758,7 @@ function negaposi(num: number): string {
 Not all code paths return a value.
 ```
 
-となります。これを回避するためには戻り値が`void`以外の関数は常に最後に`return`を書くようにするか、場合分けを漏れないように設計するしかありません。
+となります。これを回避するためには戻り値が`void`型以外の関数は常に最後に`return`を書くようにするか、場合分けを漏れないように設計するしかありません。
 
 ```typescript
 function negaposi(num: number): string {

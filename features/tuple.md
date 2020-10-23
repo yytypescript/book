@@ -1,6 +1,6 @@
 # タプル \(Tuple\)
 
-TypeScriptの関数は1値のみ返却可能です。戻り値に複数の値を返したい時に、配列を返しつつ中に様々な値を入れることがあります。なお以下の関数の戻り値は定数になっていますが、実際は演算した結果だと解釈してください。
+TypeScriptの関数は1値のみ返却可能です。戻り値に複数の値を返したい時に、配列に返したい全ての値を入れて返すことがあります。なお以下の関数の戻り値は定数になっていますが、実際は演算した結果だと解釈してください。
 
 ```typescript
 function tuple() {
@@ -18,16 +18,16 @@ function tuple() {
 ```typescript
 const list: unknown[] = tuple();
 
-list[0].
+list[0].toString();
 ```
 
-ですが、この`list[0]`の後に`.`をつけてもTypeScriptは入力補完をしませんし、メソッドを呼ぶことができません。それは`list`の要素は`unknown`であり、つまりTypeScriptはそれがどの型であるかを関心しないからです。
+ですが、この`list[0]`の後に`.`をつけてもTypeScriptは入力補完をしません。もちろんメソッドを呼ぶことができません。それは`list`の要素は`unknown`であり、つまりTypeScriptはそれがどの型であるかを関心しないからです。
 
-せっかくTypeScriptを使って型による恩恵を享受しているのに、ここだけ型がないものとしてコーディングをするのも味気がありません。そこで使えるのがタプルです。
+では`any[]`を戻り値の型として使うべきかというと、それも問題です。せっかくTypeScriptを使って型による恩恵を享受しているのに、ここだけ型がないものとしてコーディングをするのも味気がありません。そこで使えるのがタプルです。
 
 ## タプルの型
 
-タプルの型は簡単です。`[]`を書いて中に型を書くだけです。つまり、上記関数`tuple()`は以下のような戻り値を持っていると言えます。
+タプルの型は簡単で`[]`を書いて中に型を書くだけです。つまり、上記関数`tuple()`は以下のような戻り値を持っていると言えます。
 
 ```typescript
 const list: [number, string, boolean] = tuple();
@@ -42,7 +42,7 @@ function tuple(): [number, string, boolean] {
 }
 ```
 
-配列の型は`array, generic`というふたつの書き方がありましたがタプルはこの書き方しか存在しません。
+配列の型はarray, genericというふたつの書き方がありましたがタプルはこの書き方しか存在しません。
 
 ## タプルへのアクセス
 
@@ -56,22 +56,20 @@ list[1].length;
 list[2].valueOf();
 ```
 
-`toExponential(), length, valueOf()`はそれぞれ`number`型、`string`型、`boolean`型のプロパティ、メソッドです。
-
 タプルを受けた変数は、タプルで定義した範囲外の要素に対してアクセスができません。
 
 ```typescript
 const list: [number, string, boolean] = tuple();
 
 list[5];
-// -> Tuple type '[number, string, boolean]' of length '3' has no element at index '5'.
+// Tuple type '[number, string, boolean]' of length '3' has no element at index '5'.
 ```
 
 そのため`list.push()`のような配列の要素を増やす操作をしてもその要素を使うことはできません。
 
-### `Destructuring assignment`を使ってタプルにアクセスする
+### 分割代入を使ってタプルにアクセスする
 
-上記関数`tuple()`の戻り値は`Destructuring assignment`を使うと以下のように受けることができます。
+上記関数`tuple()`の戻り値は分割代入を使うと以下のように受けることができます。
 
 ```typescript
 const [num, str, bool]: [number, string, boolean] = tuple();
@@ -97,7 +95,7 @@ const promise: Promise<number> = yyAsync();
 const num: number = await promise;
 ```
 
-例えば以下のような処理に時間が`3`秒、`5`秒かかる関数`takes3Seconds()`、`takes5Seconds()`があるとします。
+例えば以下のような処理に時間が3秒、5秒かかる関数`takes3Seconds(), takes5Seconds()`があるとします。
 
 ```typescript
 async function takes3Seconds(): Promise<string> {
@@ -111,14 +109,14 @@ async function takes5Seconds(): Promise<number> {
 }
 ```
 
-この関数をそのまま実行すると`3 + 5 = 8`秒かかってしまいます。
+この関数をそのまま実行すると3 + 5 = 8秒かかってしまいます。
 
 ```typescript
 const str: string = await takes3Seconds();
 const num: number = await takes5Seconds();
 ```
 
-これを`Promise.all()`を使うことで以下のように書くことができます。この時かかる時間は関数の中で最も時間がかかる関数、つまり`Math.max(3, 5) = 5`秒です。
+これを`Promise.all()`を使うことで以下のように書くことができます。この時かかる時間は関数の中で最も時間がかかる関数、つまり5秒です。
 
 ```typescript
 const tuple: [string, number] = await Promise.all([
@@ -127,7 +125,7 @@ const tuple: [string, number] = await Promise.all([
 ]);
 ```
 
-この時`Promise.all()`の戻り値を受けた変数`tuple`は`[string, number]`型です。実行する関数の`Promise<T>`のジェネリクスの部分とタプルの型の順番は一致します。つまり以下のように入れ替えたら、入れ変えた結果のタプルである`[number, string]`型が得られます。
+この時`Promise.all()`の戻り値を受けた変数`tuple`は`[string, number]`です。実行する関数の`Promise<T>`のジェネリクスの部分とタプルの型の順番は一致します。つまり以下のように入れ替えたら、入れ変えた結果のタプルである`[number, string]`が得られます。
 
 ```typescript
 const tuple: [number, string] = await Promise.all([

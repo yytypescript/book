@@ -39,8 +39,10 @@ function dayOff(today: DayOfTheWeek) {
   }
 }
 
-dayOff(DayOfTheWeek.SUN);  // Happy Day!!
-dayOff(DayOfTheWeek.MON);  // Today is work.
+dayOff(DayOfTheWeek.SUN);
+// -> 'Happy Day!!'
+dayOff(DayOfTheWeek.MON);
+// -> 'Today is work.'
 ```
 
 ### 数値列挙

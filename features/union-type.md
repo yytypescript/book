@@ -1,4 +1,4 @@
-# ユニオン型 \(Union types\)
+# ユニオン型 \(Union Types\)
 
 大元が動的な型付言語であるJavaScriptのため、成功した時は`number`型を返すけれど、失敗した時は`false`を返すといった関数を提供するパッケージもあります。つまり`A`型のときもあれば`B`型の時もある。ということをひっくるめたい時にこのユニオン型が使えます。
 
@@ -47,7 +47,7 @@ Array<string | number>;
 
 ## TypeScriptはどう解釈するか
 
-上記の関数`union()`の戻り値を受けた定数`numOrFalse`のあとに`.`をつけると`number`型と`boolean`型のどちらもが持っているメソッド、プロパティが入力補完候補に表示されます。
+上記の関数`union()`の戻り値を受けた定数`numOrFalse`のあとに`.`をつけると`number`型と`boolean`型の**どちらもが持っているメソッド、プロパティ**が入力補完候補に表示されます。
 
 以下のようなクラス`Beast`と`Bird`があったとします。
 
@@ -86,7 +86,7 @@ const creature: Beast | Bird = union();
 creature.
 ```
 
-するとこのユニオン型を返す関数を受けた定数`creature`は`Beast`と`Bird`が共に持つプロパティ、メソッドが使用できます。つまりこの場合`creature.legs`と`creature.alive()`が入力補完候補として表示されます。
+するとこのユニオン型を返す関数を受けた定数`creature`は`Beast`と`Bird`が**共に持つプロパティ、メソッド**が使用できます。つまりこの場合`creature.legs`と`creature.alive()`が入力補完候補として表示されます。
 
 ## ユニオン型で注意すること
 
@@ -137,9 +137,7 @@ const done: string | number = uni.does();
 const made: string | number = uni.makes(arg: string | number);
 ```
 
-この時、引数の型を確定させても、戻り値の型に影響を与えません。他の言語にあるようなオーバーロード`(Overloads)`のような現象は起こりません。例えば`uni.makes(1)`と`number`型を引数に入れたとしても、これは`uni.makes(arg)`が`number`型を要求する`A`型と確定したと解釈されることはありません。よって戻り値`made`は`string | number`型のままです。
-
-ちなみにTypeScriptにも関数のオーバーロードが存在します。
+この時、引数の型を確定させても、戻り値の型に影響を与えません。他の言語にあるようなオーバーロードのような現象は起こりません。例えば`uni.makes()`に`number`型を引数に入れたとしても、これは`uni.makes()`が`number`型を要求する`A`型と確定したと解釈されることはありません。
 
 ## ユニオン型から型を確定させる
 
@@ -149,25 +147,21 @@ JavaScriptはその変数がどの型かを確定させる機能があります�
 const prim: number | string = unionPrimitive();
 
 if (typeof prim === 'number') {
-  prim.
+  prim
   return;
 }
-
-prim.
 
 const creature: Beast | Bird = unionClass();
 
 if (creature instanceof Bird) {
-  creature.
+  creature
 }
 ```
 
-上記例では`typeof`で`number`型と確定した`if`のブロックの中、つまり4行目で`.`をつけると`number`型のプロパティ、メソッドが入力補完候補として現れます。  
-同様に`instanceof`で`Bird`と確定した`if`ブロックの中、つまり13行目で`.`をつけると`Bird`のインスタンスが持つプロパティ、メソッドが表示されます。
+上記例では`typeof`で`number`型と確定した`if`のブロックの中、つまり4行目で`prim.`とすると`number`型のプロパティ、メソッドが入力補完候補として現れます。  
+同様に`instanceof`で`Bird`と確定した`if`ブロックの中、つまり11行目で`creature.`とすると`Bird`のインスタンスが持つプロパティ、メソッドが表示されます。
 
-またユニオン型が上記の`prim`、`creature`のように2択で、`typeof`、`instanceof`の`if`のブロック内で`return`が行われれば、`if`のブロックより下ではもう片方の型であると自動的に型を確定してくれます。上記例8行目の`prim`がそれにあたります。入力補完候補も`string`型のものが表示されるようになります。
-
-## 定数を持たせる方法で型を確定させる\(`Discriminated unions`\)
+## 判別可能なユニオン型\(`Discriminated unions`\)
 
 以下のようなタイプエイリアスの`SuccessResponse`、`ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
 
@@ -209,11 +203,11 @@ type Some<T> = {
   value: T;
 };
 
-type None<T> = {
+type None = {
   present: false;
 };
 
-type Optional<T> = Some<T> | None<T>;
+type Optional<T> = Some<T> | None;
 ```
 
 定数であれば`boolean`型の変数`true, false`に限らず他の型でも可能です。
@@ -250,7 +244,7 @@ switch(lang.iso639) {
 
 上記例では`string`型の`lang.iso639`がそれに該当します。
 
-`switch`を使いましたが、`switch`の時は`fallthrough`が発生する可能性があるため`break`、`return`がないと2つ目より下では入力補完候補に制限がでてしまうことに注意してください。
+`switch`を使いましたが、`switch`の時は`fallthrough`が発生すると判別可能なユニオン型と干渉することに注意してください。
 
 ## TypeScriptはこう解釈している
 

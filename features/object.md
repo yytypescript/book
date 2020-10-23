@@ -43,13 +43,13 @@ const increment: object = i => i + 1;
 しかしながら悲しいことに`object`型を与えた変数はその変数の持っているプロパティ、メソッドに対してアクセスができません。
 
 ```typescript
-console.log(pikachu.no);
-// -> Property 'no' does not exist on type 'object'.
-console.log(pokemon.genre);
-// -> Property 'genre' does not exist on type 'object'.
-console.log(increment(4));
-// -> This expression is not callable.
-// -> Type '{}' has no call signatures.
+pikachu.no;
+// Property 'no' does not exist on type 'object'.
+pokemon.genre;
+// Property 'genre' does not exist on type 'object'.
+increment(4);
+// This expression is not callable.
+// Type '{}' has no call signatures.
 ```
 
 そこでオブジェクトの型を独自に定義することができます。独自に定義した型にエイリアス\(別名\)をつけて使い回すこともできます。この機能については本書のタイプエイリアスの頁を参照ください。
@@ -71,7 +71,7 @@ const pikachu = {
 
 pikachu.name = 'raichu';
 
-console.log(pikachu);
+pikachu;
 // ->
 // {
 //   name: 'raichu',
@@ -102,7 +102,7 @@ type Wild = {
 
 ```typescript
 pikachu.name = false;
-// -> Type 'false' is not assignable to type 'string'.
+// Type 'false' is not assignable to type 'string'.
 ```
 
 プロパティを書き換えさせないためには、以下のような方法が挙げられます。
@@ -131,7 +131,7 @@ const pikachu = {
 
 ```typescript
 pikachu.name = 'raichu';
-// -> Cannot assign to 'name' because it is a read-only property.
+// Cannot assign to 'name' because it is a read-only property.
 ```
 
 ### `readonly`と`const assertion`の違い
@@ -180,12 +180,12 @@ const america: Continent = {
 
 ```typescript
 america.name = 'African Continent';
-// -> Cannot assign to 'name' because it is a read-only property.
+// Cannot assign to 'name' because it is a read-only property.
 america.canada = {
   name: 'Republic of Côte d\'Ivoire',
   capitalCity: 'Yamoussoukro'
 };
-// -> Cannot assign to 'canada' because it is a read-only property.
+// Cannot assign to 'canada' because it is a read-only property.
 ```
 
 しかしながら、以下のようなことは問題なくできてしまいます。
@@ -223,21 +223,21 @@ const america = {
 
 ```typescript
 america.name = 'African Continent';
-// -> Cannot assign to 'name' because it is a read-only property.
+// Cannot assign to 'name' because it is a read-only property.
 america.canada = {
   name: 'Republic of Côte d\'Ivoire',
   capitalCity: 'Yamoussoukro'
 };
-// -> Cannot assign to 'canada' because it is a read-only property.
+// Cannot assign to 'canada' because it is a read-only property.
 ```
 
 これだけではなくオブジェクトが持つプロパティも同様に`readonly`にしてくれます。
 
 ```typescript
 america.canada.name = 'Republic of Côte d\'Ivoire';
-// -> Cannot assign to 'name' because it is a read-only property.
+// Cannot assign to 'name' because it is a read-only property.
 america.canada.capitalCity = 'Yamoussoukro';
-// -> Cannot assign to 'capitalCity' because it is a read-only property.
+// Cannot assign to 'capitalCity' because it is a read-only property.
 ```
 
 ## 分割代入 \(`Destructuring assignment`\)
@@ -360,7 +360,7 @@ const [alpha, [bravo, [charlie, [delta, echo]]]] = phone();
 const [,,, delta, echo] = phone();
 ```
 
-`Rest parameters`を使うこともできます。以下の例では`alpha`が`T`型で`rest`は`T[]`型になります。
+残余引数を使うこともできます。以下の例では`alpha`が`T`型で`rest`は`T[]`型になります。
 
 ```typescript
 const [alpha, ...rest] = phone();
@@ -420,7 +420,7 @@ function evolution({ name, no, genre, height, weight }: Wild): Wild {
 }
 ```
 
-関数における分割代入については**関数\(Funcitons\)**の頁に詳細がありますので併せてご参照ください。
+関数における分割代入については関数のページに詳細がありますので併せてご参照ください。
 
 {% page-ref page="function.md" %}
 
@@ -485,9 +485,9 @@ type C = A & B;
 ```typescript
 type N = number & string;
 const n: N = 2;
-// -> Type '2' is not assignable to type 'never'
+// Type '2' is not assignable to type 'never'
 const n: N = 'maintenance mode';
-// -> Type '"maintenance mode"' is not assignable to type 'never'.
+// Type '"maintenance mode"' is not assignable to type 'never'.
 ```
 
 インターフェースでは拡張自体ができません。
@@ -495,16 +495,16 @@ const n: N = 'maintenance mode';
 ```typescript
 interface D extends A, B {
 }
-// -> Interface 'D' cannot simultaneously extend types 'A' and 'B'.
+// Interface 'D' cannot simultaneously extend types 'A' and 'B'.
 ```
 
 ### `Declaration merging`
 
 インターフェースのみができる機能で、最もタイプエイリアスと異なる特徴です。
 
-JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array<T>`は`ES2016`で`array.includes()`が、`ES2019`で`array.flatMap()`が追加されました。
+JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array`クラスは`ES2016`で`array.includes()`が、`ES2019`で`array.flatMap()`が追加されました。
 
-インターフェースではバージョンごとにメソッドの`Array<T>`のインターフェースをファイルを分けて定義して、環境に応じて読み込むファイルを変えるだけで`Array<T>`の型定義ができます。
+インターフェースではバージョンごとにメソッドの`Array`のインターフェースをファイルを分けて定義して、環境に応じて読み込むファイルを変えるだけで`Array`の型定義ができます。
 
 ```typescript
 // ES2016.array.ts
@@ -520,7 +520,7 @@ interface Array<T> {
 }
 ```
 
-もしこれをタイプエイリアスでやるとすれば、以下のようになるでしょう。最終的な成果物が`Array<T>`となる必要があるため、それまで別の名前で定義して、最後にインターセクション型を使い合成して`Array<T>`を作り出す必要があります。
+もしこれをタイプエイリアスでやるとすれば、以下のようになるでしょう。最終的な成果物が`Array`となる必要があるため、それまで別の名前で定義して、最後にインターセクション型を使い合成して`Array`を作り出す必要があります。
 
 ```typescript
 type Array<T> = ES2016Array<T> & ES2019Array<T>;
@@ -566,24 +566,24 @@ const l: {} = c;
 
 ```typescript
 const object1: object = undefined;
-// -> Type 'undefined' is not assignable to type 'object'.
+// Type 'undefined' is not assignable to type 'object'.
 const object2: object = null;
-// -> Type 'null' is not assignable to type 'object'.
+// Type 'null' is not assignable to type 'object'.
 const object3: object = false;
-// -> Type 'false' is not assignable to type 'object'.
+// Type 'false' is not assignable to type 'object'.
 const object4: object = 0;
-// -> Type '0' is not assignable to type 'object'.
+// Type '0' is not assignable to type 'object'.
 const object5: object = '';
-// -> Type '""' is not assignable to type 'object'.
+// Type '""' is not assignable to type 'object'.
 const object6: object = Symbol();
-// -> Type 'unique symbol' is not assignable to type 'object'.
+// Type 'unique symbol' is not assignable to type 'object'.
 const object7: object = 10n;
-// -> Type '10n' is not assignable to type 'object'.
+// Type '10n' is not assignable to type 'object'.
 
 const iObject1: Object = undefined;
-// -> Type 'undefined' is not assignable to type 'Object'.
+// Type 'undefined' is not assignable to type 'Object'.
 const iObject2: Object = null;
-// -> Type 'null' is not assignable to type 'Object'.
+// Type 'null' is not assignable to type 'Object'.
 const iObject3: Object = false;
 const iObject4: Object = 0;
 const iObject5: Object = '';
@@ -591,9 +591,9 @@ const iObject6: Object = Symbol();
 const iObject7: Object = 10n;
 
 const literal1: {} = undefined;
-// -> Type 'undefined' is not assignable to type '{}'.
+// Type 'undefined' is not assignable to type '{}'.
 const literal2: {} = null;
-// -> Type 'null' is not assignable to type '{}'.
+// Type 'null' is not assignable to type '{}'.
 const literal3: {} = false;
 const literal4: {} = 0;
 const literal5: {} = '';
@@ -601,13 +601,13 @@ const literal6: {} = Symbol();
 const literal7: {} = 10n;
 ```
 
-`object`は問題ないとして、`Object, {}`は`boolean, number, string, symbol, bigint`型の代入ができてしまいます。
+`object`と異なり、`Object, {}`は`boolean, number, string, symbol, bigint`型の代入ができてしまいます。
 
-これはTypesScriptの設計がおかしいわけではなくJavaScriptがもともと持っている`Autoboxing`を再現したものに当たります。
+これはTypesScriptの設計がおかしいわけではなくJavaScriptがもともと持っている`Autoboxing`を意味します。
 
 ### `Autoboxing`
 
-文字数カウントをしたい時は`str.length`とすれば文字数が得られます。また、数値を文字列にしたければ\(`template literal`を使わなければ\)`num.toString()`とすれば文字列が得られます。
+文字数カウントをしたい時は`str.length`とすれば文字数が得られます。また、数値を文字列にしたければ\(テンプレートリテラルを使わなければ\)`num.toString()`とすれば文字列が得られます。
 
 プリミティブ型はオブジェクトではないのでプロパティやメソッドを持っていないはずです。ですがこのようなことができるのは、内部的にはJavaScriptがプリミティブ値をオブジェクトに変換しているからです。この暗黙の型変換を`Autoboxing`と呼びます。
 
@@ -621,5 +621,5 @@ const sym: Symbol = Symbol();
 const big: BigInt = 10n;
 ```
 
-当然ながらラッパークラスは`Object`を親クラスに持っているため、変数の型として`Object, {}`が定義されてしまうと`Autoboxing`をしたものと解釈され、代入ができます。
+当然ながらラッパークラスは`Object`を親クラスに持っているため、変数の型として`Object, {}`が定義されてしまうと`Autoboxing`をしたものと解釈され、代入ができます
 

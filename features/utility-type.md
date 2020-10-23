@@ -1,4 +1,4 @@
-# ユーティリティ型 \(Utility types\)
+# ユーティリティ型 \(Utility Types\)
 
 TypeScriptで開発するということはJavaScriptに型を付与することです。型を付与する時にあらかじめ用意されている便利な型の表現がいくつかありますのでそちらを紹介します。今回紹介するものは全てではないので、他も興味がある方は公式やソースコードを参照してください。
 
@@ -69,7 +69,7 @@ type PartialPerson = {
 
 ### より便利な省略可能な引数
 
-関数の引数を`Optional parameters, Default parameters`と`Destructuring assignment`と`Partial<T>`を組み合わせることによって省略可能でありながら見やすい関数を実装できます。これらの用語ついては関数のページにて取りあげておりますのでご参照いただければと思います。
+関数の引数をオプション引数、デフォルト引数、分割代入と`Partial<T>`を組み合わせることによって省略可能でありながら見やすい関数を実装できます。これらの用語ついては関数のページにて取りあげておりますのでご参照いただければと思います。
 
 {% page-ref page="function.md" %}
 
@@ -87,7 +87,7 @@ function findUsers(name?: string, nationality?: string, age?: number): Promise<U
 findUsers(undefined, undefined, 22);
 ```
 
-この例題は引数が3個しかないためそこまで見辛くはないですが、多い引数の関数になると、どこに引数を入れて他を`undefined`とするかが面倒です。これを`Partial<T>`を使って見た目をよくできます。
+この例題は引数が3個しかないためそこまで見辛くはないですが、多い引数の関数になるとどこに引数を入れて他を`undefined`とするかが面倒です。これを`Partial<T>`を使って見た目をよくできます。
 
 まず引数は全てオブジェクトで受け渡しされるものとしてそのオブジェクトの型を定義します。さらにプロパティを省略可能にするために`Partial<T>`をつけます。
 
@@ -113,7 +113,7 @@ function findUsers({ name, nationality, age }: FindUsersArgs): Promise<User[]> {
 findUsers({});
 ```
 
-引数を省略できるようにするために`Default parameters`を使い省略時に`{}`が代入されるようにします。
+引数を省略できるようにするためにデフォルト引数を使い省略時に`{}`が代入されるようにします。
 
 ```typescript
 function findUsers({ name, nationality, age }: FindUsersArgs = {}): Promise<User[]> {
@@ -126,7 +126,7 @@ findUsers({ age = 22 });
 
 `FindUsersArgs`の右の`= {}`がそれにあたります。これにより`findUsers()`は引数がなくても呼び出せるようになります。特定の引数だけ値をすることもできます。`findUsers({ age = 22 })`がその例です。
 
-さらに`FindUsersArgs`側にも`Default parameters`を設定することで初期値することもできます。
+さらに`FindUsersArgs`側にもデフォルト型を設定することで初期値することもできます。
 
 ```typescript
 function findUsers({ name = 'John Doe', nationality = 'Araska', age = 22 }: FindUsersArgs = {}): Promise<User[]> {
@@ -136,9 +136,9 @@ function findUsers({ name = 'John Doe', nationality = 'Araska', age = 22 }: Find
 
 ## `Record<K, T>`
 
-`Index signatures`と似たような効果を持ちます。`K`はオブジェクトのキーを意味し、`string, number, symbol`型またはそれらのユニオン型を指定できます。`T`はオブジェクトのプロパティを意味します。`Index signatures`と異なり`K`に`symbol`型も適用できることに注意してください。
+インデックス型と似たような効果を持ちます。`K`はオブジェクトのキーを意味し、`string, number, symbol`型またはそれらのユニオン型を指定できます。`T`はオブジェクトのプロパティを意味します。インデックス型とインデックス型と異なり`K`に`symbol`型も適用できることに注意してください。
 
-`Index signatures`についてはタイプエイリアスの頁を参照ください。
+インデックス型についてはタイプエイリアスのページを参照ください。
 
 {% page-ref page="type-alias.md" %}
 

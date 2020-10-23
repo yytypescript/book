@@ -2,7 +2,7 @@
 
 現在こそTypeScriptはそれなりの地位を得て、多くのnpmで公開されているパッケージは最初からTypeScriptで作られていたり、第三者によって型定義ファイルが提供されることも増えましたが、いまだに型定義ファイルを持たないパッケージもあります。
 
-JavaScriptをTypeScriptの世界に招くにあたり必須となるのは、型です。ですが前述の通りJavaScriptとしてのみ公開されているパッケージには型の定義ファイルがないものもあります。
+JavaScriptをTypeScriptの世界に招くにあたり必須となるのはずばり型です。ですが前述の通りJavaScriptとしてのみ公開されているパッケージには型の定義ファイルがないものもあります。
 
 それらは型定義ファイルが公開されるまで使うことができないかと言うとそうではありません。若干TypeScriptとしての恩恵を捨てることにはなりますが、全く使えないよりはいいでしょう。
 
@@ -17,7 +17,7 @@ const whatIsIt: unknown = superElegantPackage.doesSecond();
 
 ## `any, unknown`について
 
-`any`型、`unknown`型はどのような値も代入できます。
+`any, unknown`型はどのような値も代入できます。
 
 ```typescript
 const any1: any = null;
@@ -67,29 +67,31 @@ console.log(unknown6.name);
 // Object is of type 'unknown'.
 ```
 
-これだけ見ると`unknown`型よりも`any`型の方が優れていると思われるかもしれませんが、そうではありません。`any`型は言い換えればTypeScriptが型のチェックを放棄した型であり、そのためなんでもできます。つまりそこだけJavaScriptに戻っているのと変わりません。ということは、存在しているエラーはコンパイル時には気が付けず、ソフトウェアをリリースしたあとに実際のユーザが使ったときの実行時エラーとなり、それが不具合報告や、クレームとなり、被害が拡大していきます。
+これだけ見ると`unknown`型よりも`any`型の方が優れていると思われるかもしれませんが、そうではありません。`any`型は言い換えれば**TypeScriptが型のチェックを放棄した型**であり、そのためなんでもできます。`any`型をということはせっかく得た型という利点を手放しているのと同じで、JavaScriptに戻っているのと変わりません。
+
+これでは存在しているエラーはコンパイル時には気が付けず、ソフトウェアをリリースしたあと実際のユーザが使ったときの実行時エラーとなります。それが不具合報告や、クレームとなり、被害が拡大していきます。
 
 `any`型に関しては、以下のような無茶なコードもTypeScriptは一切関与せず、実行してみてプログラムが実行時エラーになる、初めてこのプログラムが不完全であることがわかります。
 
 ```typescript
 console.log(any6.x.y.z);
-// -> Cannot read property 'z' of undefined
+// Cannot read property 'z' of undefined
 ```
 
 `unknown`型は一貫してTypeScriptがプロパティ、メソッドへのアクセスを行わせません。そのため実行することができず、意図しないランタイム時のエラーを防止します。
 
 ```typescript
 console.log(unknown6.x.y.z);
-// -> Object is of type 'unknown'.
+// Object is of type 'unknown'.
 ```
 
-TypeScriptのプロジェクトを作る時に必要な`tsconfig.json`という設定ファイルにはこの`any`型の使用を防ぐためのオプションとして`noImplicitAny`があります。既存のJavaScriptのプロジェクトをTypeScriptに置き換えていくのではなく、スクラッチの状態からTypeScriptで作るのであればこの設定を入れると良いでしょう。
+TypeScriptのプロジェクトを作る時に必要なtsconfig.jsonという設定ファイルにはこの`any`型の使用を防ぐためのオプションとして`noImplicitAny`があります。既存のJavaScriptのプロジェクトをTypeScriptに置き換えていくのではなく、スクラッチの状態からTypeScriptで作るのであればこの設定を入れると良いでしょう。
 
-`tsconfig.json`にある他の厳格なコーディングのための設定の説明もありますので併せて参照してください。
+tsconfig.jsonにある他の厳格なコーディングのための設定の説明もありますので併せて参照してください。
 
 {% page-ref page="../handson/setting-tsconfig.json.md" %}
 
-## `Type assertion`に使う
+## 型アサーションに使う
 
 以下のクラスを例に考えます。
 
@@ -115,7 +117,7 @@ class Duck extends Bird {
 }
 ```
 
-一般的な言語でいうところのキャストはTypeScriptでは`Type assertion`と言い、`as`という構文を使います。  
+一般的な言語でいうところのキャストはTypeScriptでは型アサーションと言い、`as`という構文を使います。  
 TypeScriptではアップキャストは問題なくできます。これは他の言語でも同じだと思います。
 
 ```typescript
@@ -123,8 +125,8 @@ const duck: Duck = new Duck();
 const bird: Bird = duck as Bird;
 ```
 
-ダウンキャストに関してもTypeScriptはこの`Type assertion`を使えば問題なくできます。  
-`Type assertion`を使うことによる問題は全てプログラマが対処する必要があります。
+ダウンキャストに関してもTypeScriptはこの型アサーションを使えば問題なくできます。  
+型アサーションを使うことによる問題は全てプログラマが対処する必要があります。
 
 ```typescript
 const bird: Bird = new Bird();
@@ -133,7 +135,7 @@ duck.quack();
 // -> duck.quack is not a function
 ```
 
-ところが、全く関係のないクラスへの`Type assertion`はできません。
+ところが、全く関係のないクラスへの型アサーションはできません。
 
 ```typescript
 const cat: Cat = new Cat();
@@ -143,11 +145,11 @@ const duck: Duck = cat as Duck;
 // -> Property 'quack' is missing in type 'Cat' but required in type 'Duck'.
 ```
 
-このようなときにどうしても無理やり`Type assertion`をしたい時に`any, unknow`を使うことができます。
+このような時にどうしても無理やり型アサーションをしたい時に`any, unknow`型を使うことができます。
 
 ### 一度`any, unknown`にキャストする
 
-このような時は一度`any, unknown`に`Type assertion`した後に本来`Type assertion`したいクラスに`Type assertion`します。
+このような時は一度`any, unknown`型を経由して本来欲しいクラスに型アサーションします。
 
 ```typescript
 const cat: Cat = new Cat();
