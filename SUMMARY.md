@@ -28,6 +28,7 @@
   * [オブジェクト \(Object\)](features/object.md)
   * [インターフェース](features/interface.md)
   * [クラス](features/class.md)
+  * [型推論](features/xing-tui-lun.md)
   * [ジェネリクス](features/generics.md)
   * [ジェネリクスが使われている標準ライブラリ](features/jenerikusugawareteiruraiburari.md)
   * [型パラメータの制約](features/paramtano.md)
