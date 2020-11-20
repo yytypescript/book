@@ -4,9 +4,9 @@ TypeScriptの開発するに当たってNode.jsが必要になります。まず
 
 ### Node.jsとは
 
-Node.jsとは、Chrome の V8 JavaScript エンジン で動作する JavaScript 環境です。Server-Side JavaScriptと説明される場合が多いのですが開発初期はサーバー\(Linux\)のみ動作対象OSだったためその名残となっています。2011年7月15日 Node.js v0.5.1からWindowsをサポート。2011年11月11日リリースNode.js v0.6.1からはMacをサポートするようになりました。
+Node.jsとは、ChromeのV8 JavaScriptエンジンで動作するJavaScript環境です。Server-Side JavaScriptと説明される場合が多いのですが開発初期はサーバー\(Linux\)のみ動作対象OSだったためその名残となっています。2011年7月15日Node.js v0.5.1からWindowsをサポート。2011年11月11日リリースNode.js v0.6.1からはMacをサポートするようになりました。
 
-Node.jsにはJavaScriptに存在しないAPIが存在します。わかりやすい関数はFileSystem\(fs\)です。fs.readFile\(path\)はPC上のファイルを読み込むことができます。fs.writeFile\(path , data\)はPC上のディレクトリにファイル書き込みを行うことができます。では、Node.jsは機能が増えたJavaScriptかと言われるとそうではありません。Node.jsではwindows.alert\(\)などといったブラウザでしか動作しないAPIはありません。
+Node.jsにはJavaScriptに存在しないAPIが存在します。わかりやすい関数はFileSystem\(fs\)です。`fs.readFile(path)`はPC上のファイルを読み込むことができます。`fs.writeFile(path , data)`はPC上のディレクトリにファイル書き込みを行うことができます。では、Node.jsは機能が増えたJavaScriptかと言われるとそうではありません。Node.jsでは`windows.alert()`などといったブラウザでしか動作しないAPIはありません。
 
 JavaScriptはブラウザ上で動作するプログラミング言語です。それに対してNode.jsはデスクトップまたはサーバー上で動作させる環境となります。
 
@@ -44,7 +44,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
-PATHを再読込させるために、ターミナルで `source ~/.bash_profile` コマンドを実行してください。
+PATHを再読込させるために、ターミナルで`source ~/.bash_profile` コマンドを実行してください。
 
 nvmコマンドの確認のため`nvm --version`を実行します。インストールしたバージョンが表示されれば成功です。
 
@@ -139,8 +139,6 @@ C:\>node -v
 ｖ12.16.0
 ```
 
-#### N
-
 ### エディタは何を使ったらいいか？
 
 シェアで決めつけるのも好きではありませんが、Visual Studio Codeが一番良く使われています。無料であり、インストールすれば拡張機能なしでもコーディングを行うことができます。
@@ -151,12 +149,12 @@ TypeScript、Visual Studio Codeも主にMicrosoftが中心に開発されてい�
 🧙♂ **Tips:** Visual Studio Codeは主にTypeScriptで開発されています。またVS Codeと略すことが多いです。
 {% endhint %}
 
-対応OSはWindows、Mac、Linuxのいづれにも対応しています。ダウンロードサイトから環境にあったインストーラーをダウンロード・インストールを行ってください。  
+対応OSはWindows、Mac、Linuxのいずれにも対応しています。ダウンロードサイトから環境にあったインストーラーをダウンロード・インストールを行ってください。  
 [https://code.visualstudio.com/download](https://code.visualstudio.com/download)
 
 ### TypeScriptをインストールする
 
-Windowsの場合は`コマンドプロンプト`、または`powershell`。Macの場合は`Terminal`からtypescriptコンパイラをインストールを行います。
+Windowsの場合はコマンドプロンプト、またはpowershell。Macの場合はTerminalからtypescriptコンパイラをインストールします。
 
 ```text
 npm install -g typescript
@@ -169,5 +167,5 @@ tsc -v
 Version 3.7.5
 ```
 
-表示されるバージョンはインストールした時点でのLTSになるので異なっていて問題ありません。
+表示されるバージョンはインストールした時点でのLTSになるので上記のバージョンとは異なっていても問題ありません。
 

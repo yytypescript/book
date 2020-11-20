@@ -20,7 +20,7 @@ Go, TypeScriptで採用されている定義です。
 
 ## 実際の例で見る
 
-データを意味するクラスの`Data`を、ファイル読み込みで取得する場合と他のサーバーにリクエストを送信して取得する場合を考えます。`InputSource`という親クラス\(基本型\)を考え、その子クラス\(派生型\)として`File, Request`を考えます。`Data`クラスの構造は重要ではないので**欲しいデータがそのような形をしている**程度に考えてください。
+データを意味するクラスのDataを、ファイル読み込みで取得する場合と他のサーバーにリクエストを送信して取得する場合を考えます。InputSourceという親クラス\(基本型\)を考え、その子クラス\(派生型\)としてFile, Requestを考えます。Dataクラスの構造は重要ではないので**欲しいデータがそのような形をしている**程度に考えてください。
 
 なお、登場するクラスのほとんどは実際に存在するわけではなく、理解のために英語をあたかもクラスのように書いているだけです。そのため以下のコードをそのまま転記しても動きませんのでご了承ください。
 
@@ -66,7 +66,7 @@ public class Request extends InputSource {
 }
 ```
 
-このようなクラスの関係であればリスコフの置換原則から以下のようにして動かすことができます。これは`File, Request`のインスタンスを親クラスの変数で受けていることを意味します。
+このようなクラスの関係であればリスコフの置換原則から以下のようにして動かすことができます。これはFile, Requestのインスタンスを親クラスの変数で受けていることを意味します。
 
 ```java
 final InputSource source1 = new File("/data/~~~.txt");
@@ -94,7 +94,7 @@ incompatible types: Request cannot be converted to File
                        ^
 ```
 
-これは公称型に慣れ親しんでいる方にとっては至極当然の結果です。`File`は`Request`ではなく、`Request`は`File`ではないため入れ替えることはできません。
+これは公称型に慣れ親しんでいる方にとっては至極当然の結果です。FileはRequestではなく、RequestはFileではないため入れ替えることはできません。
 
 ### 構造的部分型の場合
 
@@ -160,7 +160,7 @@ const data3: Data = source3.fetch();
 const data4: Data = source4.fetch();
 ```
 
-するとこれはエラーが出ることなく実行できます。これが公称的部分型の大きな特徴で、`File, Request`のシグネチャが同じために可換になります。
+するとこれはエラーが出ることなく実行できます。これが公称的部分型の大きな特徴で、File, Requestのシグネチャが同じために可換になります。
 
 ```typescript
 interface IInputSource {
@@ -170,11 +170,11 @@ interface IInputSource {
 }
 ```
 
-`File, Request`は共にこの`IInputSource`のようなインターフェースであると解釈されるためこのようなことが起こります。
+File, Requestは共にこのIInputSourceのようなインターフェースであると解釈されるためこのようなことが起こります。
 
 ## TypeScriptでさらに注意すること
 
-今回の例は共に同じ親クラスを持つ子クラスの話でしたが、実はこれは**親クラスが異なっていても起こりえます**。親クラスの`InputSource`を上記TypeScriptの例から抹消してしまっても同様にこのコードは動作します。
+今回の例は共に同じ親クラスを持つ子クラスの話でしたが、実はこれは**親クラスが異なっていても起こりえます**。親クラスのInputSourceを上記TypeScriptの例から抹消してしまっても同様にこのコードは動作します。
 
 ```typescript
 class File {
@@ -214,11 +214,11 @@ const data3: Data = source3.fetch();
 const data4: Data = source4.fetch();
 ```
 
-消えたのは`InputSource`と、その継承を示す`extends InputSource`と`super();`だけです。このコードは正常なTypeScriptのコードとして動作します。
+消えたのはInputSourceと、その継承を示す`extends InputSource`と`super();`だけです。このコードは正常なTypeScriptのコードとして動作します。
 
 ## 公称型に慣れている人が注意すべきこと
 
-このような特徴があるためにタイプセーフが目的で導入されることがある`Value Object`については細心の注意を払う必要があります。例えば`UUID`を主キーとして持つUserId, GroupIdを定義します。これを構造的部分型のカラクリを知らないで実装すると以下のようになります。
+このような特徴があるためにタイプセーフが目的で導入されることがあるValue Objectについては細心の注意を払う必要があります。例えばUUIDを主キーとして持つUserId, GroupIdを定義します。これを構造的部分型のカラクリを知らないで実装すると以下のようになります。
 
 ```typescript
 class UserId {
@@ -238,7 +238,7 @@ class GroupId {
 }
 ```
 
-これらのクラスは前章で述べたとおりシグネチャが同じため可換です。
+これらのクラスは前章で述べたとおりシグネチャが同じため可換になってしまいます。
 
 ```typescript
 const id1: UserId = new GroupId('9566d14b-7ea0-4328-8e66-6ab432d459fb');
@@ -271,7 +271,7 @@ class GroupId {
 }
 ```
 
-`UserId, GroupId`は共に`klazzName`というプロパティを持ちましたが、型のリテラルタイプが異なります。このようにすることでTypeScriptはUserId, GroupIdを異なる型と認識し、タイプセーフになります。
+UserId, GroupIdは共に`klazzName`というプロパティを持ちましたが、型のリテラルタイプが異なります。このようにすることでTypeScriptはUserId, GroupIdを異なる型と認識し、タイプセーフになります。
 
 ```typescript
 Type 'GroupId' is not assignable to type 'UserId'.

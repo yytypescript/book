@@ -16,7 +16,7 @@ null.toString();
 
 意図せずこのようにしてしまい実行時エラーになってしまった経験はあるかと思います。これは`null`が`toString()`という振る舞いを持っていないことに起因します。
 
-とはいうもののJavaScriptにおいてプリミティブ型の多くはラッパークラスを持っています。それらはメソッド呼び出しがあれば実行時にAutoboxingによって対応するラッパークラスのインスタンスに変換されるため、あたかもプリミティブ型が振る舞いを持つように見え、またそのように使うことができます。
+とはいうもののJavaScriptにおいてプリミティブ型の多くはラッパークラスを持っています。ラッパークラスを持つプリミティブ値はメソッド呼び出しがあれば実行時にAutoboxingによって対応するラッパークラスのインスタンスに変換されるため、あたかもプリミティブ型が振る舞いを持つように見え、またそのように使うことができます。
 
 以下はJavaScriptに用意されているプリミティブ型の紹介です。
 
@@ -35,7 +35,7 @@ str.length;
 // -> undefined
 ```
 
-JavaScriptでは配列は`number`型のプロパティを持つインスタンスと解釈されているため、存在しない添字のアクセスも同様に`undefined`が返却されます。
+JavaScriptでは配列はnumber型のプロパティを持つオブジェクトと解釈されているため、存在しない添字のアクセスも同様に`undefined`が返却されます。
 
 ```typescript
 const fruits: string[] = ['Apple', 'Papaya', 'Tomato'];
@@ -76,9 +76,9 @@ if (whatIsThis === void 0) {
 }
 ```
 
-### TypeScriptの型としての`undefined`
+### 型としての`undefined`
 
-TypeScriptには型に`undefined`型が用意されていますがそれとは別に`void`型\(これは上記演算子とは異なり、型です\)も用意されています。戻り値の型として使う場合は`void`型の方がよく見られ、また望ましい場合が多いです。こちらの解説は関数のページをご覧ください。
+TypeScriptには型にundefined型が用意されていますがそれとは別にvoid型\(これは上記演算子とは異なり、型です\)も用意されています。戻り値の型として使う場合はvoid型の方がよく見られ、また望ましい場合が多いです。こちらの解説は関数のページをご覧ください。
 
 {% page-ref page="function.md" %}
 
@@ -128,13 +128,13 @@ typeof null;
 
 ### Numeric Separator
 
-視認性を上げるために数値を`_`で区切ることができます。n桁ずつ区切るなどと言った決まりはなく、国や地域の慣習で自由に選択できます。
+視認性を上げるために数値を\_で区切ることができます。n桁ずつ区切るなどと言った決まりはなく、国や地域の慣習で自由に選択できます。
 
 ```typescript
 const million: number = 10_000_00_0_00.0_000000_00;
 ```
 
-しかしながら`_`を先頭や末尾、小数点の前後に置いたり、連続で2個以上置くことはできません。つまり以下のような表記はできません。
+しかしながら\_を先頭や末尾、小数点の前後に置いたり、連続で2個以上置くことはできません。つまり以下のような表記はできません。
 
 ```typescript
 _100;
@@ -146,7 +146,7 @@ _100;
 
 ### 特殊な値
 
-`Infinity, -Infinity, NaN`という特殊な値を持っています。これらはリテラル型として扱うことができません。
+`Infinity, -Infinity, NaN`という特殊な値を持っています。これらはリテラル型として使うことができません。
 
 {% page-ref page="literal-types.md" %}
 
@@ -162,11 +162,11 @@ function isNaN(n: number): boolean {
 
 ## `string`
 
-0文字以上の文字からなる文字列を扱います。`number`型と文字は同じですが意味の異なる連結`+`の演算子を処理できます。
+0文字以上の文字からなる文字列を扱います。number型と文字は同じですが意味の異なる連結`+`の演算子を処理できます。
 
 ### 演算子の`+`
 
-`string`型同士であれば単純でただの文字列の合成を意味します。
+string型同士であれば単純でただの文字列の合成を意味します。
 
 ```typescript
 const w1: string = 'World';
@@ -177,7 +177,7 @@ console.log(w1 + w2 + w3);
 // -> 'WorldWideWeb'
 ```
 
-`string`型の変数を作成したい時はシングルクオート`'`かダブルクオート`"`のどちらかを使います。TypeScriptではこれらの差はありません。開始時の記号と終了時の記号が合っている必要と、途中にその文字が含まれている場合はエスケープされている必要があります。
+string型の変数を定義したい時はシングルクオート`'`かダブルクオート`"`のどちらかを使います。TypeScriptではこれらの差はありません。開始時の記号と終了時の記号が合っている必要と、途中にその文字が含まれている場合はバックスラッシュ`\`でエスケープされている必要があります。
 
 ```typescript
 const palindrome1: string = 'madam, I\'m Adam.';
@@ -186,7 +186,7 @@ const palindrome2: string = "madam, I'm Adam.";
 
 ### テンプレートリテラル\(Template Literal\)
 
-バッククォート`````で囲むとテンプレートリテラルという文字列を作ることができます。テンプレートリテラルは`', "`で宣言されている`string`型と異なり
+バッククォート`````で囲むとテンプレートリテラルという文字列を作ることができます。テンプレートリテラルは`', "`で宣言されているstring型と異なり
 
 * 改行できる
 * 変数展開できる
@@ -215,13 +215,18 @@ console.log(`                    _  _                       _
 
 #### 変数展開できる
 
-今までは`+`を使って調整していた文字列に、直感的に変数を代入できるようになりました。SQLのような制御構文を書いていると、`'`や`"`がJavaScriptの`string`型の開始、終了の文字なのかそれとも制御文の開始、終了なのかで非常に混乱するため、この変数展開で簡素にかけるのは便利です。
+今までは`+`を使って調整していた文字列に、直感的に変数を代入できるようになりました。SQLのような制御構文を書いていると、`'`や`"`がJavaScriptのstring型の開始、終了の文字なのかそれとも制御文の開始、終了なのかで非常に混乱するため、この変数展開で簡潔にかけるのは便利です。
 
 ```typescript
 const prefecture: string = 'Tokyo';
 const paid: boolean = true;
 const select1: string = 'SELECT * FROM customers JOIN users ON customers.user_id = users.user_id WHERE user.residence = "' + prefecture + '" AND user.paid = ' + paid + ';';
-const select2: string = `SELECT * FROM customers JOIN users ON customers.user_id = users.user_id WHERE user.residence = "${prefecture}" AND user.paid = ${paid};`;
+const select2: string = `SELECT *
+  FROM customers
+  JOIN users
+  ON customers.user_id = users.user_id
+  WHERE user.residence = "${prefecture}"
+  AND user.paid = ${paid};`;
 ```
 
 **\(注意\)** これは例です。実際にはSQLのクエリをこのようにして作成せず、プリペアドステートメントを使用してください。
@@ -230,7 +235,7 @@ const select2: string = `SELECT * FROM customers JOIN users ON customers.user_id
 
 ## `symbol`
 
-`symbol`はその値のみが一意になるように設計されているプリミティブ型です。`boolean, number, string`型は同じリテラルであれば等値比較が`true`になりますが`symbol`は必ず同じものでない限り`true`にはなりません。この性質はリファレンス型の等値比較に似ています。
+`symbol`はその値のみが一意になるように設計されているプリミティブ型です。boolean, number, string型は同じリテラルであれば等値比較が`true`になりますが`symbol`は必ず同じものでない限り`true`にはなりません。この性質はリファレンス型の等値比較に似ています。
 
 ```typescript
 const sym1: symbol = Symbol('Dove is a symbol of peace');
@@ -242,15 +247,15 @@ console.log(sym1 === sym2);
 // -> false
 ```
 
-`Symbol()`は`symbol`型を返す関数ですが、ここに引数として同じ値を与えても同じ`symbol`を得ることはできません。
+`Symbol()`はsymbol型を返す関数ですが、ここに引数として同じ値を与えても同じ`symbol`を得ることはできません。
 
 また見た目から`new Symbol()`としがちですが`Symbol()`はコンストラクタではないためこのように書くことはできません。
 
 ### `symbol`の使い方
 
-`symbol`型はその一意性のために使われます。かつてJavaScriptはクラスのプロパティ、メソッドに対して可視性を与えることができませんでした。つまり外部からアクセスしてほしくないプロパティ、メソッドがあってもそれを隠蔽、保護する手段がありませんでした。
+symbol型はその一意性のために使われます。かつてJavaScriptはクラスのプロパティ、メソッドに対して可視性を与えることができませんでした。つまり外部からアクセスしてほしくないプロパティ、メソッドがあってもそれを隠蔽、保護する手段がありませんでした。
 
-そのような外部からアクセスしてほしくないメソッドに対して`symbol`型の名前を与え、その`symbol`を外部に露出させないことで擬似的なprivateプロパティ、メソッドを実現していました。
+そのような外部からアクセスしてほしくないメソッドに対してsymbol型の名前を与え、その値を外部に露出させないことで擬似的なprivateプロパティ、メソッドを実現していました。
 
 ```typescript
 const sym = Symbol();
@@ -275,17 +280,17 @@ module.exports = {
 };
 ```
 
-メソッドの表記が不思議に見えますが`[sym]()`は`symbol`型を使ったメソッド表記です。このメソッドにアクセスするために必要な変数`sym`はこの`js`ファイルから露出していないため、外部からは見ることができません。
+メソッドの表記が不思議に見えますが`[sym]()`はsymbol型を使ったメソッド表記です。このメソッドにアクセスするために必要な変数`sym`はこの`js`ファイルから露出していないため、外部からは見ることができません。
 
 ラッパークラスは`Symbol`です。
 
 ## `bigint`
 
-`number`型よりも大きな整数を扱います。`number`型と同じように四則演算`+, -, *, /`に加え剰余`%`と累乗`**`ができます。
+number型よりも大きな整数を扱います。number型と同じように四則演算`+, -, *, /`に加え剰余`%`と累乗`**`ができます。
 
 ### 宣言
 
-`number`型と同様に数値リテラルを書くだけではなく、末尾に`n`をつけます。
+number型と同様に数値リテラルを書くだけではなく、末尾に`n`をつけます。
 
 ```typescript
 const bg1: bigint = 100n;
@@ -299,14 +304,14 @@ const bg2: bigint = BigInt(100);
 
 ### 演算
 
-`number`型と一緒に演算をすることはできません。どちらかに型を合わせる必要があります。
+number型と一緒に演算をすることはできません。どちらかに型を合わせる必要があります。
 
 ```typescript
 2n + 3;
 // Operator '+' cannot be applied to types '2n' and '3'.
 ```
 
-`number`型が小数部を持っていない限り、より表現幅の広い`bigint`型に合わせる方が無難です。
+number型が小数部を持っていない限り、より表現幅の広いbigint型に合わせる方が無難です。
 
 ```typescript
 2n + BigInt(3);
@@ -315,8 +320,8 @@ const bg2: bigint = BigInt(100);
 
 ### es2020以前の場合
 
-**宣言**において`bigint`型は`number`型の宣言方法の末尾に`n`を付けるだけで宣言ができるように書いていますがこれはtsconfig.jsonのtargetがes2020以上の時に限られます。  
-それ以外のtargetでは`BigInt()`の関数を使って`bigint`型を作り出す必要があります。tsconfig.jsonの話は該当ページをご覧ください。
+**宣言**においてbigint型はnumber型の宣言方法の末尾に`n`を付けるだけで宣言ができるように書いていますがこれは`target`が`es2020`以上の時に限られます。  
+それ以外の`target`では`BigInt()`の関数を使ってbigint型を作り出す必要があります。tsconfig.jsonの話は該当ページをご覧ください。
 
 {% page-ref page="../handson/setting-tsconfig.json.md" %}
 
