@@ -1,4 +1,4 @@
-# インターフェース
+# インターフェース \(Interfaces\)
 
 TypeScriptでは型を表現する方法の一つとしてインターフェースが存在します。
 
@@ -31,103 +31,18 @@ const taro: Person = {
 }
 ```
 
-## オプショナルな型の指定
+## プロパティの宣言で使える便利な記号
 
-プロパティはデフォルトで指定が必須となります。
+タイプエイリアスと同じようにインターフェースの定義ではプロパティの宣言で選択可\(Optional\)、読み取り専用\(Readonly\)にすることができます。同様にインデックス型も使用可能です。こちらについては説明が重複しますのでタイプエイリアスのページをご参照ください。
 
-```typescript
-interface Person {
-    name: string;
-    age: number:
-}
+{% page-ref page="type-alias.md" %}
 
-// "age" が未指定なのでコンパイルエラー
-// Property 'age' is missing in type '{ name: string; }' 
-// but required in type 'Person'.
-const taro: Person = {
-    name: '太郎',
-}
-```
-
-`?` を付与することで、省略可能なプロパティとする事ができます。
-
-これは `T | undefined` と書く場合と同じです。
-
-```typescript
-interface Person {
-    name: string;
-    age?: number; // ?が付いているので省略可能
-    weight: number | undefined; // weight?: number; と同じ
-}
-
-// "age", "weight" は未指定でもOK
-const taro: Person = {
-    name: '太郎',
-}
-```
-
-TypeScript（というよりはJavaScript）では、`undefined` と `null` は異なる値となるため、 `null` を指定した場合はプロパティは省略可能になりません。
-
-```typescript
-interface Person {
-    name: string;
-    age: number | null;
-}
-
-// "age" は number型かnullの指定が必須
-// Property 'age' is missing in type '{ name: string; }' 
-// but required in type 'Person'.
-const taro: Person = {
-    name: '太郎',
-}
-```
-
-## 読み取り専用のプロパティ
-
-`readonly` キーワードを指定することでプロパティを読み取り専用にする事ができます。
-
-```typescript
-interface Person {
-    name: string;
-    readonly age: number;
-}
-
-const taro: Person = {
-    name: '太郎',
-    age: 20,
-}
-
-// 値の書き換えは可能
-taro.name = 'タロウ';
-
-// 読み取り専用なので値の書き換えをするとコンパイルエラー
-// Cannot assign to 'age' because it is a read-only property.
-taro.age  = 30;
-```
-
-## キーの型指定
-
-オブジェクトのキーに対して型を指定する事ができます。  
-これを **インデックス型** と呼びます。
-
-JavaScriptはオブジェクトのキーとして、文字列・数値・シンボル型を使う事ができます。  
-例えば、何かのIDをキーにして値を保持したい時に、キーに数値以外の型を利用できなくすれば、安心して利用する事ができます。
-
-```typescript
-// メッセージIDをキーにしてメッセージを管理する型を作りたい
-interface Messages {
-    [id: number]: string;
-}
-
-let messages: Messages = [];
-messages[0] = "これはOK”;
-messages['error'] = "これはNG";
-```
-
-## 継承
+## 継承 \(`Inheritance`\)
 
 `extends` キーワードを利用して定義済みのインターフェースを継承して新たにインターフェースを定義する事ができます。  
-インターフェースを継承した場合、継承元のプロパティの型情報は全て引き継がれます。
+インターフェースを継承した場合、継承元のプロパティの型情報は全て引き継がれます。新しくプロパティを追加することもできますし、すでに宣言されているプロパティの型を部分型に指定しなおすこともできます。
+
+### プロパティを追加する
 
 ```typescript
 interface Person {
@@ -139,7 +54,7 @@ interface Student extends Person {
     grade: number; // 学年
 }
 
-interface Teacher {
+interface Teacher extends Person {
     students: Student[];  // 生徒
 }
 
@@ -154,27 +69,137 @@ const teacher: Teacher = {
     age: 30,
     students: [studentA],
 }
-    
 ```
 
-#### プロパティの上書きについて
+### プロパティを部分型に宣言しなおす
 
-インターフェースを継承した場合は部分型に限り継承元のプロパティを上書きする事ができます。
+#### リテラル型に変更する
+
+```typescript
+interface Homepage {
+  path: string;
+}
+
+interface IndexPage extends Homepage {
+  path: '/';
+}
+```
+
+#### ユニオン型から選ぶ
 
 ```typescript
 interface Person {
-    age: number | undefined;
+  age: number | undefined;
 }
 
 interface Student extends Person {
-    age: number; // number は number | undefined の一部なのでOK
-}
-
-// コンパイルエラー
-interface Teacher extends Person {
-    age: string; // string は number | undefined の一部でないのでNG
+  age: number;
 }
 ```
 
+## 実装\(`Implementation`\)
 
+他の言語と同じようにインターフェースをクラスが実装することもできます。実装時に複数のインターフェースを指定することもできます。その時は`,`でインターフェースを区切り列挙します。この時同じ名前のプロパティが違う型で衝突すると、その型は`never`型になります。`never`型の変数には値の代入ができません。
+
+```typescript
+interface Measurements {
+  bust: number;
+  waist: number;
+  hip: number;
+}
+
+interface SensitiveSizes {
+  bust: 'secret';
+  waist: 'secret';
+  hip: 'secret';
+}
+
+class Adorescent implements Measurements, SensitiveSizes {
+  // bust: never;
+  // waist: never;
+  // hip: never;
+}
+```
+
+## インターフェースが抱える問題
+
+インターフェースはTypeScriptで独自に定義された概念であり、JavaScriptには存在しません。つまり、トランスパイルをかけると消えてなくなります。そのため他の言語でできるような**その型が期待するインターフェースかどうか**の判定ができません。上記の`Student`インターフェースで以下のようなことをしても実行することはできません。
+
+```typescript
+if (studentA instanceof Student) {
+  // ...
+}
+// 'Student' only refers to a type, but is being used as a value here.
+```
+
+これを解消するためには型ガードを自前で実装する必要があります。以下はその例の`isStudent()`です。
+
+```typescript
+type UnknownObject = {
+  [key: string]: unknown;
+};
+
+function isStudent(obj: unknown): obj is Student {
+  if (typeof obj !== 'object') {
+    return false;
+  }
+  if (obj === null) {
+    return false;
+  }
+
+  const {
+    name,
+    age,
+    grade
+  } = obj as UnknownObject;
+
+  if (typeof name == 'string') {
+    return false;
+  }
+  if (typeof age == 'number') {
+    return false;
+  }
+  if (typeof grade == 'number') {
+    return false;
+  }
+
+  return true;
+}
+```
+
+以下は`isStudent()`の解説です。
+
+### 戻り値の`obj is Student`
+
+Type predicateと呼ばれる機能です。詳細が関数のページにあるのでご参照ください。ここではこの関数が戻り値として`true`を返すと、呼び出し元では引数`obj`が`Student`として解釈されるようになります。
+
+{% page-ref page="function.md" %}
+
+### `UnknownObject`
+
+`typeof`で判定される`object`型はオブジェクトではあるものの、プロパティが何も定義されていない状態です。そのためそのオブジェクトがどのようなプロパティを持っているかの検査すらできません。
+
+```typescript
+const obj: object = {
+  name: '花子'
+};
+
+obj.name;
+// Property 'name' does not exist on type 'object'.
+```
+
+そこでインデックス型を使っていったんオブジェクトのいかなるプロパティも`unknown`型のオブジェクトであると型アサーションを使い解釈させます。これで全ての`string`型のプロパティにアクセスできるようになります。型自体は`unknown`型ですが各々のプロパティを`typeof(instanceof)`で判定させれば**この関数の判定が正しい限り**TypeScriptは引数が期待する`Student`インターフェースを実装したオブジェクトであると解釈します。
+
+### 関数の判定が正しい限りとは
+
+インターフェースに変更が加わった時この関数も同時に更新されないとこの関係は崩れてしまいます。例えば`student.name`は現在`string`型ですが、これが姓名の区別のために以下のようなオブジェクトに差し替えられたとします。
+
+```typescript
+interface Name {
+  surname: string;
+  givenName: string;
+}
+```
+
+この変更に対し`isStudent()`も随伴して更新されなければこの関数が`Student`インターフェースであると判定するオブジェクトの`name`プロパティは明らかに違うものになるでしょう。
 

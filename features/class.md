@@ -1,4 +1,4 @@
-# クラス
+# クラス \(Classes\)
 
 JavaScriptにもクラスの概念は存在します。TypeScriptでのクラスは主にJavaScriptのクラスをより型安全に拡張されています。
 

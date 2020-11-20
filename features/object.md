@@ -456,48 +456,6 @@ interface Parameter extends Mandatory, Optional {
 }
 ```
 
-### インターセクション型とインターフェースの拡張の違い
-
-同じプロパティが違う型で衝突した時の定義が異なります。以下の例を考えます。
-
-```typescript
-type A = {
-  x: number;
-};
-
-type B = {
-  x: string;
-};
-```
-
-これをインターセクション型で合成するとプロパティの`x`は`never`型になります。
-
-```typescript
-type C = A & B;
-// ->
-// type C = {
-//   x: never;
-// };
-```
-
-これはプリミティブ型をインターセクション型で合成した時の挙動として正しいものです。
-
-```typescript
-type N = number & string;
-const n: N = 2;
-// Type '2' is not assignable to type 'never'
-const n: N = 'maintenance mode';
-// Type '"maintenance mode"' is not assignable to type 'never'.
-```
-
-インターフェースでは拡張自体ができません。
-
-```typescript
-interface D extends A, B {
-}
-// Interface 'D' cannot simultaneously extend types 'A' and 'B'.
-```
-
 ### `Declaration merging`
 
 インターフェースのみができる機能で、最もタイプエイリアスと異なる特徴です。
