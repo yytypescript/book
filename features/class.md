@@ -174,7 +174,7 @@ gorilla.move(10); // error TS2339: Property 'move' does not exist on type 'Anima
 
 `gorilla.move`メソッドは`protected`宣言されているため、自身のクラスとサブクラスのみアクセスとなります。つまりインスタンスされたgorillaからはアクセスが拒否され、コンパイルエラーが発生します。
 
-`protected`で保護された`move`メソッドを新たに実装し、早く動く10倍早く動くゴリラを作ってみます。
+`protected`で保護された`move`メソッドを新たに実装し、10倍速く動くゴリラを作ってみます。
 
 ```typescript
 class Animal {
@@ -192,7 +192,7 @@ class Gorilla extends Animal {
 }
 
 const gorilla = new Gorilla('早いゴリラ');
-gorilla.move(10); // 早いゴリラ moved 100m.
+gorilla.move(10); // 速いゴリラ moved 100m.
 ```
 
 `Animal`スーパークラスを持つ`Gorilla`クラスを定義し`move`を実装しています。`Gorilla`クラスの`move`メソッド内で`super`キーワードを利用してスーパークラスの`move`メソッドを呼び出しています。
