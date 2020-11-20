@@ -76,11 +76,11 @@ const teacher: Teacher = {
 #### リテラル型に変更する
 
 ```typescript
-interface Homepage {
+interface WebPage {
   path: string;
 }
 
-interface IndexPage extends Homepage {
+interface IndexPage extends WebPage {
   path: '/';
 }
 ```

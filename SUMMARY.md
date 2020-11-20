@@ -22,7 +22,7 @@
   * [関数 \(Functions\)](features/function.md)
   * [配列 \(Array\)](features/array.md)
   * [タプル \(Tuple\)](features/tuple.md)
-  * [Enum \(列挙型\)](features/enum.md)
+  * [列挙型 \(Enum\)](features/enum.md)
   * [タイプエイリアス \(Type Aliases\)](features/type-alias.md)
   * [ユニオン型 \(Union Types\)](features/union-type.md)
   * [オブジェクト \(Object\)](features/object.md)
