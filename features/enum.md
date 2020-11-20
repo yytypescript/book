@@ -1,6 +1,6 @@
-# Enum
+# Enum \(列挙型\)
 
-Enum\(列挙型\)は変数に値を自動的に割り当てる型になります。TypeScriptでは数字と文字ベースの列挙が存在します。
+Enumは変数に値を自動的に割り当てる型になります。TypeScriptでは数字と文字ベースの列挙が存在します。
 
 ### Enum宣言と利用
 
@@ -18,9 +18,9 @@ enum DayOfTheWeek {
 }
 ```
 
-一番初めに宣言されたメンバに初期値が無い場合は0からインクリメントされた値が自動的に入ります。
+一番初めに宣言されたメンバに初期値が無い場合は0からインクリメントされた値が自動的に設定設定されます。
 
-使用するには`列挙型名`.`メンバ`と記述します。
+使用するには`列挙型名.メンバ`と記述します。
 
 ```typescript
 console.log(DayOfTheWeek.SUN); // 0
@@ -73,9 +73,9 @@ enum DayOfTheWeek {
 }
 ```
 
-すべてのメンバに値を代入する事もできます。その場合は値の重複しないようにしましょう。
+すべてのメンバに値を代入する事もできます。その場合は値が重複しないようにしましょう。
 
-VS Codeでは仮想キーコードを列挙型で宣言してす。
+VS Codeでは仮想キーコードを列挙型で宣言しています。
 
 [https://github.com/microsoft/vscode/blob/master/src/vs/base/common/keyCodes.ts](https://github.com/microsoft/vscode/blob/master/src/vs/base/common/keyCodes.ts)
 
@@ -159,13 +159,13 @@ enum DayOfTheWeek {
 
 ```typescript
 enum DayOfTheWeek {
-  SUN = '休みだ！',  // 休みだ！
-  MON = 1,           // 1
-  THE,               // 2
-  WED,               // 3
-  THU,               // 4
-  FRI = '花金',      // 花金
-  SAT = 10           // 10
+  SUN = 'Happy holidays!',  // Happy holidays!
+  MON = 1,                  // 1
+  THE,                      // 2
+  WED,                      // 3
+  THU,                      // 4
+  FRI = 'TGIF',             // TGIF
+  SAT = 10                  // 10
 }
 ```
 

@@ -12,7 +12,7 @@ const three: 3 = 3;
 const radetzky: 'Radetzky' = 'Radetzky';
 ```
 
-本来なら`boolean, number, string`と型を書くべきところにも値が入っているように見えるこれがリテラル型です。
+本来ならboolean, number, stringと型を書くべきところにも値が入っているように見えるこれがリテラル型です。
 
 リテラル型は`let`で宣言してもその値しか代入できません。代入できるのも同じリテラルだけです。
 
@@ -26,11 +26,9 @@ impossible = true;
 
 ### `const`と何が違うのか？
 
-これでは`const`と宣言していることと何が違うのかと疑問を持たれる方もいらっしゃるかと思います。`const`はESMAScriptで定められている定数の宣言であるのに対し、リテラル型はTypeScriptで用意されたその1値のみを許容する変数あるいは定数のことです。
+これでは定数の`const`と宣言していることと何が違うのかと疑問を持たれる方もいらっしゃるかと思います。`const`はESMAScriptで定められている定数の宣言であるのに対し、リテラル型はTypeScriptで用意されたその1値のみを許容する変数あるいは定数のことです。
 
-TypeScriptによる型のサポートはあくまでもコーディング中の話であり、実際に動作する時は型のないJavaScriptです。他の値が代入できないという制限はもはやなくなっている状態であり、これは上書きできないことということが撤廃されていることを意味します。
-
-リテラル型をあたかも定数のように使うことは避けてください。
+TypeScriptによる型のサポートはあくまでもコーディング中の話であり、実際に動作する時は型のないJavaScriptになります。他の値が代入できないという制限はもはやなくなっている状態であり、これは上書きできないということが撤廃されていることを意味します。そのためリテラル型をあたかも定数のように使うことは避けてください。
 
 ```typescript
 let impossible: false = false;
@@ -78,7 +76,7 @@ const response: Response | null = ajax.get('https://....');
 
 ## リテラル型にできないリテラル
 
-`number`型の`NaN, Infinity, -Infinity`はリテラル型として使うことができません。
+number型の`NaN, Infinity, -Infinity`はリテラル型として使うことができません。
 
 ```typescript
 let inf: Infinity = Infinity;

@@ -161,9 +161,9 @@ if (creature instanceof Bird) {
 上記例では`typeof`で`number`型と確定した`if`のブロックの中、つまり4行目で`prim.`とすると`number`型のプロパティ、メソッドが入力補完候補として現れます。  
 同様に`instanceof`で`Bird`と確定した`if`ブロックの中、つまり11行目で`creature.`とすると`Bird`のインスタンスが持つプロパティ、メソッドが表示されます。
 
-## 判別可能なユニオン型\(`Discriminated unions`\)
+## 判別可能なユニオン型\(Discriminated unions\)
 
-以下のようなタイプエイリアスの`SuccessResponse`、`ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
+以下のようなタイプエイリアスの`SuccessResponse, ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
 
 ```typescript
 type SuccessResponse = {
@@ -195,7 +195,7 @@ if (res.success) {
 
 `if`の条件が`true`になる、つまり`res.success`が`true`になるとそのブロックでは`res.response`が入力補完候補として表示されるようになります。一方`else`のブロックでは`res.error`が入力補完候補として表示されるようになります。これは`res.success`が`true`の場合は`SuccessResponse`であることが確定し`false`の場合は`ErrorResponse`であることが確定するからです。
 
-値があるかもしれないしないかもしれないことを意味する`Optional`をユニオン型を使って表現するとこのようになるでしょう。
+値があるかもしれないしないかもしれないことを意味するモナドの`Optional`をユニオン型を使って表現するとこのようになるでしょう。
 
 ```typescript
 type Some<T> = {
@@ -242,11 +242,11 @@ switch(lang.iso639) {
 }
 ```
 
-上記例では`string`型の`lang.iso639`がそれに該当します。
+上記例では`lang.iso639`がそれに該当します。
 
-`switch`を使いましたが、`switch`の時は`fallthrough`が発生すると判別可能なユニオン型と干渉することに注意してください。
+`switch`を使いましたが、`switch`を使う際はfallthroughに注意してください。
 
 ## TypeScriptはこう解釈している
 
-ユニオン型に所属するひとつのデータ型は、ユニオン型の派生型\(`subtype`\)として解釈されます。この使い方はジェネリクスで頻出します。
+ユニオン型に所属するひとつのデータ型は、ユニオン型の派生型\(subtype\)として解釈されます。この使い方はジェネリクスで頻出します。
 

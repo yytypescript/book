@@ -1,6 +1,6 @@
 # オブジェクト \(Object\)
 
-クラスのインスタンスとしてのオブジェクト以外に、`JSON`を代表とする`{}`で囲まれたオブジェクトリテラルという書き方もかなり一般的です。
+クラスのインスタンスとしてのオブジェクト以外に、JSONを代表とする`{}`で囲まれたオブジェクトリテラルという書き方もかなり一般的です。
 
 ## オブジェクトリテラル
 
@@ -240,13 +240,13 @@ america.canada.capitalCity = 'Yamoussoukro';
 // Cannot assign to 'capitalCity' because it is a read-only property.
 ```
 
-## 分割代入 \(`Destructuring assignment`\)
+## 分割代入 \(Destructuring assignment\)
 
-見方に慣れていないと使いづらい機能ではありますが、分割代入という便利な代入方法があります。
+見かたに慣れていないと使いづらい機能ではありますが、分割代入という便利な代入方法があります。
 
 ### 分割代入のなかった時代はこうしていた
 
-あるタイプエイリアス`Wild`があったとします。
+あるタイプエイリアス`Wild`があったとします\(上述のものと同一です\)。
 
 ```typescript
 type Wild = {
@@ -456,53 +456,11 @@ interface Parameter extends Mandatory, Optional {
 }
 ```
 
-### インターセクション型とインターフェースの拡張の違い
-
-同じプロパティが違う型で衝突した時の定義が異なります。以下の例を考えます。
-
-```typescript
-type A = {
-  x: number;
-};
-
-type B = {
-  x: string;
-};
-```
-
-これをインターセクション型で合成するとプロパティの`x`は`never`型になります。
-
-```typescript
-type C = A & B;
-// ->
-// type C = {
-//   x: never;
-// };
-```
-
-これはプリミティブ型をインターセクション型で合成した時の挙動として正しいものです。
-
-```typescript
-type N = number & string;
-const n: N = 2;
-// Type '2' is not assignable to type 'never'
-const n: N = 'maintenance mode';
-// Type '"maintenance mode"' is not assignable to type 'never'.
-```
-
-インターフェースでは拡張自体ができません。
-
-```typescript
-interface D extends A, B {
-}
-// Interface 'D' cannot simultaneously extend types 'A' and 'B'.
-```
-
 ### `Declaration merging`
 
 インターフェースのみができる機能で、最もタイプエイリアスと異なる特徴です。
 
-JavaScriptが`ES2015, ES2016, ES2017, ES2018, ES2019`と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array`クラスは`ES2016`で`array.includes()`が、`ES2019`で`array.flatMap()`が追加されました。
+JavaScriptがES2015, ES2016, ES2017, ES2018, ES2019と進化するにつれ、既存のクラスにもメソッドが追加されることもあります。例えば`Array`クラスはES2016で`array.includes()`が、ES2019で`array.flatMap()`が追加されました。
 
 インターフェースではバージョンごとにメソッドの`Array`のインターフェースをファイルを分けて定義して、環境に応じて読み込むファイルを変えるだけで`Array`の型定義ができます。
 
@@ -526,7 +484,7 @@ interface Array<T> {
 type Array<T> = ES2016Array<T> & ES2019Array<T>;
 ```
 
-この`Declaration merging`の機能は`polyfill`を行うライブラリの型定義でよく見ることができます。
+このDeclaration mergingの機能は`ポリフィル`を行うライブラリの型定義でよく見ることができます。
 
 ## `object, Object, {}`
 
@@ -554,9 +512,9 @@ const k: {} = b;
 const l: {} = c;
 ```
 
-`object`はプリミティブ型ではないの全てのリファレンス型を総称するものとして定義されています。こちらは入力補完ができません。
+`object`はプリミティブ型ではないの全てのリファレンス型を総称するものとして定義されています。
 
-`Object`はTypescriptで型の定義がされているインターフェースです。そのため`.`を入力すればメソッドの入力補完ができます。
+`Object`はTypescriptで型の定義がされているインターフェースです。そのため`.`を入力すればオブジェクトが持っているメソッドの入力補完ができます。
 
 `{}`はプロパティ、メソッドを持たないオブジェクトリテラルの型定義です。こちらも`object`と同様に入力補完はできません。
 
@@ -601,17 +559,17 @@ const literal6: {} = Symbol();
 const literal7: {} = 10n;
 ```
 
-`object`と異なり、`Object, {}`は`boolean, number, string, symbol, bigint`型の代入ができてしまいます。
+`object`と異なり、`Object, {}`は`boolean, number, string, symbol, bigint`型の変数に代入ができてしまいます。
 
-これはTypesScriptの設計がおかしいわけではなくJavaScriptがもともと持っている`Autoboxing`を意味します。
+これはTypesScriptの設計がおかしいわけではなくJavaScriptがもともと持っているAutoboxingを意味します。
 
-### `Autoboxing`
+### Autoboxing
 
 文字数カウントをしたい時は`str.length`とすれば文字数が得られます。また、数値を文字列にしたければ\(テンプレートリテラルを使わなければ\)`num.toString()`とすれば文字列が得られます。
 
-プリミティブ型はオブジェクトではないのでプロパティやメソッドを持っていないはずです。ですがこのようなことができるのは、内部的にはJavaScriptがプリミティブ値をオブジェクトに変換しているからです。この暗黙の型変換を`Autoboxing`と呼びます。
+プリミティブ型はオブジェクトではないのでプロパティやメソッドを持っていないはずです。ですがこのようなことができるのは、内部的にはJavaScriptがプリミティブ値をオブジェクトに変換しているからです。この暗黙の型変換をAutoboxingと呼びます。
 
-ちなみにこの時に使われるオブジェクトを通称ラッパークラスと呼び、それらのインターフェースもTypeScriptに`Boolean, Number, String, Symbol, BigInt`として定義されています。なお`undefined`と`null`のラッパークラス`Undefined, Null`はありません。
+ちなみにこの時に使われるオブジェクトを通称ラッパークラスと呼び、それらのインターフェースもTypeScriptに`Boolean, Number, String, Symbol, BigInt`として定義されています。なお`undefined`と`null`のラッパークラスはありません。
 
 ```typescript
 const bool: Boolean = false;
@@ -621,5 +579,5 @@ const sym: Symbol = Symbol();
 const big: BigInt = 10n;
 ```
 
-当然ながらラッパークラスは`Object`を親クラスに持っているため、変数の型として`Object, {}`が定義されてしまうと`Autoboxing`をしたものと解釈され、代入ができます
+当然ながらラッパークラスは`Object`を親クラスに持っているため、変数の型として`Object, {}`が定義されてしまうとAutoboxingをしたものと解釈され、代入ができます
 

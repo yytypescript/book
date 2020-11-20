@@ -17,9 +17,9 @@ function increment(num) {
 console.log(increment(1));
 ```
 
-ただの引数を`+1`して返すだけのその名も`increment`です。
+ただの引数をインクリメントして返すだけのその名も`increment`です。
 
-上記をペーストして実行します。 実行時のファイル名を`increment.js`としていますが、異なる名前にした方は読みかえてください。
+上記を実行します。 実行時のファイル名を`increment.js`としていますが、異なる名前にした方は読みかえてください。
 
 ```bash
 $ node increment.js
@@ -36,21 +36,21 @@ function increment(num) {
 console.log(increment('1'));
 ```
 
-呼び出し時の`1`が`'1'`になりました。これだけでこの関数の結果は大きく変わってしまいます。
+呼び出し時の引数`1`が`'1'`になりました。これだけでこの関数の結果は大きく変わってしまいます。
 
 ```bash
 $ node increment.js
 11
 ```
 
-これは算術演算子の`+`\(加算\)を期待してこの関数を作ったと思われるところに文字列が入ってしまったため、`+`が文字列連結として解釈されてしまったことが原因です。  
+これは算術演算子の`+`\(加算\)を期待してこの関数を作ったと思われるところに文字列が入ってしまったため`+`が文字列連結として解釈されてしまったことが原因です。  
 もしこれが金額の計算だったとしたら大変なことになります。
 
 TypeScriptを使うと、コーディングの時点でこのような型の不一致による意図しない挙動を抑えられるようになります。
 
 ## JavaScriptをTypeScriptに変換する
 
-変更は拡張子を`.js`から`.ts` に変更するだけです。
+ファイル名の変更は拡張子を`.js`から`.ts` に変更するだけです。
 
 ```bash
 $ mv increment.js increment.ts
@@ -62,7 +62,7 @@ $ mv increment.js increment.ts
 Parameter 'num' implicitly has an 'any' type, ...
 ```
 
-これは、TypeScriptはこの引数に対していかなる型情報も与えられていない\(いわゆる`any`\)よということを言っています。そこで型を付加します。付加する型は`number`型です。
+これはTypeScriptはこの引数に対していかなる型も与えられていないよ\(いわゆる`any`\)ということを言っています。そこで型を付加します。付加する型はnumber型です。
 
 ```typescript
 function increment(num: number) {
@@ -72,13 +72,13 @@ function increment(num: number) {
 console.log(increment('1'));
 ```
 
-すると今度は呼び出し側の引数でTypeScriptコンパイラからメッセージが表示されます。
+すると今度は呼び出し側でTypeScriptコンパイラからメッセージが表示されます。
 
 ```typescript
 Argument of type '"1"' is not assignable to parameter of type 'number'.`
 ```
 
-このメッセージの意味は、「この引数の`'1'`は`number`型ではないよ」という至極まっとうな指摘です。
+このメッセージの意味は「この引数の`'1'`はnumber型ではないよ」という至極まっとうな指摘です。
 
 ひとまずこの警告を完全無視してトランスパイルをしてみます。
 
@@ -111,7 +111,7 @@ function increment(num: number): number {
 }
 ```
 
-もちろん、この関数で戻り値を`string`型など`number`型ではない型に設定するとTypeScriptから指摘を受けます。
+もちろん、この関数で戻り値をstring型などnumber型ではない型に設定するとTypeScriptから指摘を受けます。
 
 ```typescript
 Type 'number' is not assignable to type 'string'.

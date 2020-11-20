@@ -10,7 +10,7 @@ TypeScriptはJavaScriptの上位互換でJavaScriptに型が追加されてい�
 
 TypeScriptはJavaScriptが実行できる全てのブラウザ、コンピュータ、OSで動作し、オープンソースです。
 
-特徴は僕によると…
+特徴は次の通りです
 
 * JavaScriptの上位互換。
 * 安全性が高い。
