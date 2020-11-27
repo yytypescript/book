@@ -5,7 +5,7 @@ TypeScriptは最終的にどの場面で使われるか、その用途に適し�
 
 ## かつてのJavaScript
 
-かつてJavaScriptがブラウザでのみ動いていた時代は、モジュール分割と言う考え自体はあったもののそれはあくまでもブラウザ上、さらには`html`での管理となっていました。**かつて猛威をふるった**`jQuery`といライブラリがあるとすば、それは以下のように`html`に書く必要がありました。
+かつてJavaScriptがブラウザでのみ動いていた時代は、モジュール分割と言う考え自体はあったもののそれはあくまでもブラウザ上、さらには`html`での管理となっていました。よく使われていた`jQuery`というライブラリがあるとすれば、それは以下のように`html`に書く必要がありました。
 
 ```markup
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/x.y.z/jquery.min.js"></script>
