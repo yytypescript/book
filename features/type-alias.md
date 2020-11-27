@@ -308,6 +308,10 @@ bufferflies.ja;
 // -> undefined
 ```
 
+このチェックを厳密にして、型安全にするオプションがtsconfig.jsonにあります。こちらについてはtsconfig.json Deep Diveの章をご覧ください。
+
+{% page-ref page="tsconfig-json-deep-dive.md" %}
+
 ### ユニオン型と合わせる
 
 先ほどシステムがサポートする言語を定義しました。
