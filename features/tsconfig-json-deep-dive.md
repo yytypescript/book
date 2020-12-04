@@ -191,7 +191,7 @@ tsc -p tsconfig.cjs.json
 tsc -p tsconfig.esm.json
 ```
 
-### Dual Pakcageのためのpackage.jso`n`
+### Dual Pakcageのためのpackage.json
 
 package.jsonもDual Packageのための設定が必要です。
 
@@ -328,21 +328,22 @@ if (shouldCallPolice()) {
 厳密なコーディングといえば`linter`があります。TypeScript自身にもより型チェックを厳密にするオプションがあります。以下はtsconfig.jsonの該当する部分を抜粋したものです。
 
 ```typescript
-  /* Strict Type-Checking Options */
-  "strict": true,                           /* Enable all strict type-checking options. */
-  // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
-  // "strictNullChecks": true,              /* Enable strict null checks. */
-  // "strictFunctionTypes": true,           /* Enable strict checking of function types. */
-  // "strictBindCallApply": true,           /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
-  // "strictPropertyInitialization": true,  /* Enable strict checking of property initialization in classes. */
-  // "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
-  // "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
+/* Strict Type-Checking Options */
+"strict": true,                           /* Enable all strict type-checking options. */
+// "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
+// "strictNullChecks": true,              /* Enable strict null checks. */
+// "strictFunctionTypes": true,           /* Enable strict checking of function types. */
+// "strictBindCallApply": true,           /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
+// "strictPropertyInitialization": true,  /* Enable strict checking of property initialization in classes. */
+// "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
+// "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
 
-  /* Additional Checks */
-  // "noUnusedLocals": true,                /* Report errors on unused locals. */
-  // "noUnusedParameters": true,            /* Report errors on unused parameters. */
-  // "noImplicitReturns": true,             /* Report error when not all code paths in function return a value. */
-  // "noFallthroughCasesInSwitch": true,    /* Report errors for fallthrough cases in switch statement. */
+/* Additional Checks */
+// "noUnusedLocals": true,                /* Report errors on unused locals. */
+// "noUnusedParameters": true,            /* Report errors on unused parameters. */
+// "noImplicitReturns": true,             /* Report error when not all code paths in function return a value. */
+// "noFallthroughCasesInSwitch": true,    /* Report errors for fallthrough cases in switch statement. */
+// "noUncheckedIndexedAccess": true,      /* Include 'undefined' in index signature results */
 ```
 
 初期設定では`strict`のみが有効になっています。
@@ -852,4 +853,93 @@ function next(lyric: string, count: number): string {
 ```
 
 なお、このオプションは`case`に処理がある場合のみ`break`あるいは`return`を強制します。この項目で一番初めに紹介した一か月の日数を求める関数`daysOfMonth()`は、`fallthrough`である`case`は全て処理がないため警告は発生しません。
+
+### `noUncheckedIndexedAccess`
+
+インデックス型や配列で宣言されたオブジェクトが持つプロパティへのアクセスが厳密になります。インデックス型についてはタイプエイリアスのページをご参照ください。
+
+{% page-ref page="type-alias.md" %}
+
+```typescript
+type ObjectLiteralLike = {
+  [key: string]: string;
+};
+
+type ArrayObjectLike = {
+  [key: number]: string;
+};
+
+const butterfly: ObjectLiteralLike = {
+  en: 'Butterfly',
+  fr: 'Papillon',
+  it: 'Farfalla',
+  es: 'Mariposa'
+};
+
+const phoneticCodes: ArrayObjectLike = {
+  0: 'alpha',
+  1: 'bravo',
+  2: 'charlie'
+};
+```
+
+`ObjectLiteralLike, ArrrayObjectLike`は共に`string`型のプロパティを持つオブジェクトの型として宣言されています。
+
+```typescript
+const germanName: string = butterfly.de;
+const fifth: string = phoneticCodes[4];
+```
+
+これらのオブジェクトのプロパティにアクセスする時完全な型安全ではありません。上記`germanName, fifth`はどちらも定義されたオブジェクトには存在しませんがTypeScriptaこれらを`string`型と解釈します。
+
+`noUncheckedIndexedAccess`を`true`に設定しこれらをトランスパイルしようとすると
+
+```typescript
+Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+```
+
+このように厳密に定義されていないプロパティは`undefined`型とのユニオン型として解釈されるようになります。
+
+```typescript
+const englishName: string | undefined = butterfly.en;
+const first: string | undefined = phoneticCode[0];
+```
+
+ここであるサービスが英語版だけは担保し、他の言語は追々という対応をしたとします。するとそのシステムにある単語や文章を意味する型は以下のようになります。
+
+```typescript
+type SystemTerms = {
+  [key: string]: string;
+  en: string;
+};
+```
+
+このような型を定義するとそのオブジェクトは`en`プロパティに限り`noUncheckedIndexedAccess`の制約を受けません。
+
+```typescript
+const butterfly: SystemTerms = {
+  en: 'Butterfly',
+  fr: 'Papillon',
+  it: 'Farfalla',
+  es: 'Mariposa'
+};
+
+const englishName: string = butterfly.en;
+const frenchhName: string | undefined = butterfly.fr;
+```
+
+配列は添字を指定する方法でアクセスをすると`undefined`型とのユニオン型と解釈されますが`for-of, array.forEach()`はこの制約を受けないため積極的に使用を検討してください。
+
+```typescript
+const phoneticCodes: string[] = ['alpha', 'bravo', 'charlie'];
+
+for (const p of phoneticCodes) {
+  // ...
+}
+
+phoneticCodes.forEach((p: string) => {
+  // ...
+});
+```
 
