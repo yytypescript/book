@@ -308,19 +308,34 @@ bufferflies.ja;
 // -> undefined
 ```
 
-このチェックを厳密にして、型安全にするオプションがtsconfig.jsonにあります。こちらについてはtsconfig.json Deep Diveの章をご覧ください。
+このチェックをより厳密にするオプションがtsconfig.jsonにあります。このオプションを有効にするとたとえプロパティがあるキーにアクセスしてもプロパティの型は`undefined`とのユニオン型であると解釈されるようになります。こちらについてはtsconfig.json Deep Diveのページをご覧ください。
 
 {% page-ref page="tsconfig-json-deep-dive.md" %}
 
-### ユニオン型と合わせる
+### インデックス型の制限
 
-先ほどシステムがサポートする言語を定義しました。
+インデックス型は`string`型、`number`型しか指定できません。
+
+```typescript
+type Jekyll = {
+  [key: boolean]: string;
+};
+// An index signature parameter type must be either 'string' or 'number'.
+```
+
+ちなみに`number`型のキーを持つオブジェクトとは配列のようなオブジェクトのことです。
+
+## Mapped type
+
+インデックス型では設定時はどのようなキーも自由に設定できてしまい、アクセス時は毎回`undefined`かどうかの型チェックが必要です。入力の形式が決まっているのであればMapped typeの使用を検討できます。
+
+Mapped typeは主にユニオン型と組み合わせて使います。先ほどシステムがサポートする言語を定義しました。
 
 ```typescript
 type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
 ```
 
-これはユニオン型のタイプエイリアスですが、これをインデックス型のキーとして使用することができます。
+これをインデックス型と同じようにキーの制約として使用することができます。
 
 ```typescript
 type Butterfly = {
@@ -341,18 +356,46 @@ const bufferflies: Butterfly = {
 // Object literal may only specify known properties, and 'de' does not exist in type 'Butterfly'.
 ```
 
-### インデックス型の制限
+プロパティを読み取り専用にする`readonly`をそのオブジェクトの全てのプロパティに適用する`Readonly<T>`というユーティリティ型があります。他にもユーティリティ型はありますが、それらについては専門のページがありますのでここでは割愛します。
 
-インデックス型は`string`型、`number`型しか指定できません。
+{% page-ref page="utility-type.md" %}
+
+`Readonly<T>`もこの機能で実現されています。`Readonly<T>`は以下のように実装されています。
 
 ```typescript
-type Jekyll = {
-  [key: boolean]: string;
+type Readonly<T> = {
+    readonly [P in keyof T]: T[P];
 };
-// An index signature parameter type must be either 'string' or 'number'.
 ```
 
-ちなみに`number`型のキーを持つオブジェクトとは配列のようなオブジェクトのことです。
+`keyof T`という見慣れない表現が登場しましたが、これはオブジェクトのキーをユニオン型に変更するものだと解釈してください。つまり以下のようなものです。
+
+```typescript
+type Name = {
+  surname: string;
+  middleName: string;
+  givenName: string;
+};
+
+type NameKeys = keyof Name;
+// -> 'surname' | 'middleName' | 'givenName'
+```
+
+### インデックス型と異なるところ
+
+Mapped typeはインデックス型と異なり`symbol`型もキーにすることができます。
+
+```typescript
+type Identifier = symbol | 1;
+type Sample = {
+  [P in Identifier]: string;
+};
+
+const sample: Sample = {
+  [Symbol('thick')]: 'thin',
+  1: 'pork'
+};
+```
 
 ## インターセクション型 \(Intersection Types\)
 
