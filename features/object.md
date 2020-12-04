@@ -456,7 +456,41 @@ interface Parameter extends Mandatory, Optional {
 }
 ```
 
-### `Declaration merging`
+### Mapped type
+
+Mapped typeはタイプエイリアスのみができます。Mapped typeについてはタイプエイリアスのページを参照してください。
+
+{% page-ref page="type-alias.md" %}
+
+ユーティリティ型の`Readonly<T>`はMapped typeで以下のように実装されています。
+
+```typescript
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+```
+
+これをインターフェースで作り直しても動作しません。
+
+```typescript
+interface RO<T> {
+  readonly [P in keyof T]: T[P];
+};
+// 'T' is declared but its value is never read.
+// A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+// Member '[P in keyof' implicitly has an 'any' type.
+// Cannot find name 'P'.
+// Cannot find name 'keyof'.
+// Cannot find name 'T'.
+// Cannot find name 'T'.
+// Cannot find name 'P'.
+// ']' expected.
+// ';' expected.
+// Declaration or statement expected.
+// Declaration or statement expected.
+```
+
+### Declaration merging
 
 インターフェースのみができる機能で、最もタイプエイリアスと異なる特徴です。
 
