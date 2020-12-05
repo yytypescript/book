@@ -102,10 +102,10 @@ $ npm install @types/express --save-dev  // 型定義ファイルのインスト
 
 定義ファイルがないライブラリも存在します。その場合は
 
-1. anyで妥協する
+1. `any`で妥協する
 2. 定義ファイルを作る
 
-定義ファイルの存在しないライブラリも利用することが可能ですが暗黙的にany型になります。また自身で作成しDefinitelyTypedに公開することもできます。
+定義ファイルの存在しないライブラリも利用することが可能ですが暗黙的に`any`型になります。また自身で作成しDefinitelyTypedに公開することもできます。
 
 [Contribution guide \| DefinitelyTyped](http://definitelytyped.org/guides/contributing.html)
 

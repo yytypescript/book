@@ -16,7 +16,7 @@ FlowやTypeScriptでは、実行する前にこういった型の不整合が検
 
 これが型指定が多少面倒でもTypeScriptやFlowを導入する理由の一部となっています。
 
-{% page-ref page="../features/statictype.md" %}
+{% page-ref page="../features/static-type.md" %}
 
 ## TypeScriptと違う目的の技術
 
