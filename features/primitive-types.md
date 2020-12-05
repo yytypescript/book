@@ -35,7 +35,7 @@ str.length;
 // -> undefined
 ```
 
-JavaScriptでは配列はnumber型のプロパティを持つオブジェクトと解釈されているため、存在しない添字のアクセスも同様に`undefined`が返却されます。
+JavaScriptでは配列は`number`型のプロパティを持つオブジェクトと解釈されているため、存在しない添字のアクセスも同様に`undefined`が返却されます。
 
 ```typescript
 const fruits: string[] = ['Apple', 'Papaya', 'Tomato'];
