@@ -1162,5 +1162,5 @@ distance(q1, 5, undefined, 8);
 Argument of type 'Point' is not assignable to parameter of type 'number'.
 ```
 
-これはTypeScriptが`distance()`をnumber型の引数4個版で受けていると解釈している時の指摘です。
+これはTypeScriptが`distance()`を`number`型の引数4個版で受けていると解釈している時の指摘です。
 
