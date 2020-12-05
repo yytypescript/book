@@ -12,7 +12,7 @@ const three: 3 = 3;
 const radetzky: 'Radetzky' = 'Radetzky';
 ```
 
-本来ならboolean, number, stringと型を書くべきところにも値が入っているように見えるこれがリテラル型です。
+本来なら`boolean, number, string`と型を書くべきところにも値が入っているように見えるこれがリテラル型です。
 
 リテラル型は`let`で宣言してもその値しか代入できません。代入できるのも同じリテラルだけです。
 
@@ -76,7 +76,7 @@ const response: Response | null = ajax.get('https://....');
 
 ## リテラル型にできないリテラル
 
-number型の`NaN, Infinity, -Infinity`はリテラル型として使うことができません。
+`number`型の`NaN, Infinity, -Infinity`はリテラル型として使うことができません。
 
 ```typescript
 let inf: Infinity = Infinity;

@@ -62,7 +62,7 @@ $ mv increment.js increment.ts
 Parameter 'num' implicitly has an 'any' type, ...
 ```
 
-これはTypeScriptはこの引数に対していかなる型も与えられていないよ\(いわゆる`any`\)ということを言っています。そこで型を付加します。付加する型はnumber型です。
+これはTypeScriptはこの引数に対していかなる型も与えられていないよ\(いわゆる`any`\)ということを言っています。そこで型を付加します。付加する型は`number`型です。
 
 ```typescript
 function increment(num: number) {
@@ -78,7 +78,7 @@ console.log(increment('1'));
 Argument of type '"1"' is not assignable to parameter of type 'number'.`
 ```
 
-このメッセージの意味は「この引数の`'1'`はnumber型ではないよ」という至極まっとうな指摘です。
+このメッセージの意味は「この引数の`'1'`は`number`型ではないよ」という至極まっとうな指摘です。
 
 ひとまずこの警告を完全無視してトランスパイルをしてみます。
 
@@ -111,7 +111,7 @@ function increment(num: number): number {
 }
 ```
 
-もちろん、この関数で戻り値をstring型などnumber型ではない型に設定するとTypeScriptから指摘を受けます。
+もちろん、この関数で戻り値を`string`型など`number`型ではない型に設定するとTypeScriptから指摘を受けます。
 
 ```typescript
 Type 'number' is not assignable to type 'string'.

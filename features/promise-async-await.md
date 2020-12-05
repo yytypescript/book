@@ -1,15 +1,15 @@
 # Promise / async / await
 
-PromiseはES2015から追加された機能で、非同期処理を見通しよく書くことができます。ES2017で導入された async / await を使うことで Promise で書いたコードを更に見通しよく書くことができます。
+`Promise`はES2015から追加された機能で、非同期処理を見通しよく書くことができます。ES2017で導入された`async / await`を使うことで`Promise`で書いたコードを更に見通しよく書くことができます。
 
-ここでは、Promiseの詳細な説明は割愛させて頂きます。
+ここでは`Promise`の詳細な説明は割愛させて頂きます。
 
 次のドキュメントが非常に分かりやすくまとめて頂いているので、最初にこちらを読み  
-進めてPromiseについて学ぶことをオススメします。
+進めて`Promise`について学ぶことをオススメします。
 
 [非同期処理:コールバック/Promise/Async Function · JavaScript Primer \#jsprimer](https://jsprimer.net/basic/async/)
 
-ここでは、TypeScriptでPromiseを使う場合に注意する点を記載していきます。
+ここでは、TypeScriptで`Promise`を使う場合に注意する点を記載していきます。
 
 ## コールバック地獄
 
@@ -58,7 +58,7 @@ request1(function (result1) {
 
 ## Promiseとジェネリクス
 
-先ほどの例を Promise を使って書き直してみます。
+先ほどの例を`Promise`を使って書き直してみます。
 
 ```typescript
 // 非同期でAPIにリクエストを投げて値を取得する処理
@@ -102,7 +102,7 @@ request1()
 
 ここで注目するべきは `request1()` 関数の戻り値を `Promise<number>` と型指定をしている箇所です。
 
-TypeScriptでPromiseの型を指定する場合は、`Promise<T>` と書きます。`T` にはPromiseが解決 \(resolve\) された時に渡す値の任意の型を指定します。
+TypeScriptで`Promise`の型を指定する場合は、`Promise<T>` と書きます。`T` には`Promise`が解決 \(resolve\) された時に渡す値の任意の型を指定します。
 
 今回の例では `resolve(1);` と解決する値として数値を渡しているので`Promise<number>` を指定しています。
 
@@ -128,7 +128,7 @@ const user = getUser();
 console.log(user);
 ```
 
-Promiseのジェネリクスの型 `T` は必須なので、省略した場合はコンパイルエラーになります。
+`Promise`のジェネリクスの型 `T` は必須なので、省略した場合はコンパイルエラーになります。
 
 ```typescript
 // Generic type 'Promise<T>' requires 1 type argument(s)
@@ -154,12 +154,12 @@ function request(): Promise<string> {
 
 ## async / await
 
-Promiseを利用した非同期処理をより簡単に書ける構文として async /await が存在します。  
+`Promise`を利用した非同期処理をより簡単に書ける構文として`async /await`が存在します。  
 この構文を利用することで、非同期処理をより同期処理と同じような文脈で書く事ができるようになります。
 
 ### async関数
 
-関数の前に`async`キーワードを付けることで、その関数は非Promiseの値を返す時にその値を解決したPromiseを返すようになります。
+関数の前に`async`キーワードを付けることで、その関数は非`Promise`の値を返す時にその値を解決した`Promise`を返すようになります。
 
 ```typescript
 async function request_async(): Promise<number> {
@@ -179,7 +179,7 @@ request_async()
 });
 ```
 
-Promiseをそのまま返すことも可能で、2重にPromiseがラップされることはありません。
+`Promise`をそのまま返すことも可能です。二重に`Promise`がラップされることはありません。
 
 ```typescript
 async function request_async(): Promise<number> {
@@ -198,9 +198,9 @@ request_async()
 
 ### await
 
-`await` は Promiseの値が解決されるまで実行を待機して、解決された値を返します。
+`await`は Promiseの値が解決されるまで実行を待機して、解決された値を返します。
 
-`await`の注意点として **awaitはasync関数の中でのみ利用する事ができます。**
+`await`の注意点として **`await`は`async`関数の中でのみ利用する事ができます。**
 
 ```typescript
 // 1秒後に値を返す
@@ -224,13 +224,13 @@ async function main() {
 main();
 ```
 
-この例では `await request()` の行で `request()` がPromiseを解決するまで1秒待機し、コンソールに "hello" と表示します。
+この例では `await request()` の行で `request()` が`Promise`を解決するまで1秒待機し、コンソールに`"hello"`と表示します。
 
-### async / await で書き直す
+### async / awaitで書き直す
 
-最後に3つのAPI呼び出しのコードを async/awiait を利用して書き直してみます。
+最後に3つのAPI呼び出しのコードを`async / await`を利用して書き直してみます。
 
-このように async/await を利用することで、非同期の処理を同期処理のようにスッキリ書く事が出来るようになります。
+このように`async / await`を利用することで、非同期の処理を同期処理のようにスッキリ書く事が出来るようになります。
 
 ```typescript
 // 非同期でAPIにリクエストを投げて値を取得する処理
