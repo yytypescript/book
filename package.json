@@ -1,0 +1,23 @@
+{
+  "name": "book",
+  "version": "1.0.0",
+  "description": "サバイバルTypeScript 〜実務で使うなら最低限ここだけはおさえておきたいTypeScript入門〜 ---",
+  "scripts": {
+    "summary-path": "summary-to-path ./SUMMARY.md",
+    "textlint": "npm run summary-path | xargs textlint ",
+    "textlint:fix": "npm run summary-path | xargs textlint --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yytypescript/book.git"
+  },
+  "keywords": [
+    "gitbook",
+    "typescript"
+  ],
+  "devDependencies": {
+    "gitbook-summary-to-path": "^1.1.0",
+    "textlint": "^11.7.6",
+    "textlint-rule-prh": "^5.3.0"
+  }
+}
