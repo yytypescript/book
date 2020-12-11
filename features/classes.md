@@ -50,8 +50,9 @@ class Greeter {
 多くのクラスはインスタンス化\(`new`\)し、メソッドやプロパティを呼ぶために使われます。
 
 ```typescript
-let greeter = new Greeter("world");
-console.log(greeter.greet());  // Hello, world
+const greeter = new Greeter("world");
+console.log(greeter.greet());
+// -> 'Hello, world'
 ```
 
 ### 継承
@@ -66,9 +67,9 @@ class Fish extends Food { }
 class Vegetables extends Food { }
 ```
 
-この場合`Food`は親、`Meat`、`Fish`、`Vegetables`は子の関係になります。
+この場合`Food`は親、`Meat, Fish, Vegetables`は子の関係になります。
 
-親は「基本クラス」、「スーパークラス」。子は「派生クラス」、「サブクラス」などと呼ばれます。本章では親を「スーパークラス」、子を「サブクラス」として呼び方を統一します。
+親は「基本クラス」、「スーパークラス」。子は「派生クラス」、「サブクラス」などと呼ばれます。本書では親を「スーパークラス」、子を「サブクラス」として呼び方を統一します。
 
 サブクラスはスーパークラスのプロパティ、メソッドを継承します。
 
@@ -82,7 +83,7 @@ class Food {
 }
 
 class Meat extends Food { }
-let meat = new Meat('chicken' , 100);
+const meat = new Meat('chicken' , 100);
 meat.showDebug(); // スーパークラスのメソッドが使用できる。
 ```
 
@@ -90,7 +91,7 @@ meat.showDebug(); // スーパークラスのメソッドが使用できる。
 
 `abstract`は抽象クラスを作成する時に宣言します。抽象クラスとは直接インスタンス化\(`new`\)することができず、必ずスーパークラスとして利用することを保証するものです。抽象クラス内のメソッドにも`abstract`宣言を行うことができます。`interface`と同じようにサブクラスは抽象メソッドを実装する必要があります。
 
-Foodクラスに抽象クラスに変更し、"要冷蔵"メソッド`keepRefrigerated()`を抽象メソッドとして追加すると`Meat`クラスでエラーが発生します。これは`Meat`クラスに`keepRefrigerated`メソッドが実装されていないからです。
+`Food`クラスに抽象クラスに変更し、"要冷蔵"メソッド`keepRefrigerated()`を抽象メソッドとして追加すると`Meat`クラスでエラーが発生します。これは`Meat`クラスに`keepRefrigerated`メソッドが実装されていないからです。
 
 ```typescript
 abstract class Food {
@@ -105,7 +106,7 @@ abstract class Food {
 class Meat extends Food { } // エラー：非抽象クラス 'Meat' はクラス 'Food' からの継承抽象メンバー 'keepRefrigerated' を実装しません。
 ```
 
-keepRefrigeratedメソッドを実装することによりエラーはなくなります。
+`keepRefrigerated()`メソッドを実装することによりエラーはなくなります。
 
 ```typescript
 class Meat extends Food {
@@ -142,22 +143,24 @@ class Animal {
 }
 ```
 
-gorillaを実装し、動作を確認してみます。
+`gorilla`を実装し、動作を確認してみます。
 
 ```typescript
 const gorilla = new Animal('ゴリラ');
-gorilla.move(10);   // ゴリラ moved 10m.
+gorilla.move(10);
+// -> 'ゴリラ moved 10m.'
 gorilla.name = 'ゴリラゴリラ';
-gorilla.move(20);   // ゴリラゴリラ moved 20m.
+gorilla.move(20);
+// -> 'ゴリラゴリラ moved 20m.'
 ```
 
-nameプロパティはpublic宣言されているため、インスタンスされた変数\(`gorilla`\)からの読み書きが可能になっています。「ゴリラ」から「ゴリラゴリラ」に変更することができます。
+`name`プロパティは`public`宣言されているため、インスタンスされた変数\(`gorilla`\)からの読み書きが可能になっています。「ゴリラ」から「ゴリラゴリラ」に変更することができます。
 
 #### `protected`
 
 `protected`アクセス修飾子は自身のクラスとサブクラスからアクセス可能です。
 
-Animalクラス`move`メソッドのアクセス修飾子を`public`から`protected`に変更しエラーを出してみます。
+`Animal`クラス`move`メソッドのアクセス修飾子を`public`から`protected`に変更しエラーを出してみます。
 
 ```typescript
 class Animal {
@@ -172,9 +175,9 @@ const gorilla = new Animal('ゴリラ');
 gorilla.move(10); // error TS2339: Property 'move' does not exist on type 'Animal'.
 ```
 
-`gorilla.move`メソッドは`protected`宣言されているため、自身のクラスとサブクラスのみアクセスとなります。つまりインスタンスされたgorillaからはアクセスが拒否され、コンパイルエラーが発生します。
+`gorilla.move()`メソッドは`protected`宣言されているため、自身のクラスとサブクラスのみアクセスとなります。つまりインスタンスされた`gorilla`からはアクセスが拒否され、コンパイルエラーが発生します。
 
-`protected`で保護された`move`メソッドを新たに実装し、10倍速く動くゴリラを作ってみます。
+`protected`で保護された`move()`メソッドを新たに実装し、10倍速く動くゴリラを作ってみます。
 
 ```typescript
 class Animal {
@@ -192,16 +195,17 @@ class Gorilla extends Animal {
 }
 
 const gorilla = new Gorilla('早いゴリラ');
-gorilla.move(10); // 速いゴリラ moved 100m.
+gorilla.move(10);
+// -> '速いゴリラ moved 100m.'
 ```
 
-`Animal`スーパークラスを持つ`Gorilla`クラスを定義し`move`を実装しています。`Gorilla`クラスの`move`メソッド内で`super`キーワードを利用してスーパークラスの`move`メソッドを呼び出しています。
+`Animal`スーパークラスを持つ`Gorilla`クラスを定義し`move()`を実装しています。`Gorilla`クラスの`move()`メソッド内で`super`キーワードを利用してスーパークラスの`move()`メソッドを呼び出しています。
 
 #### `private`
 
 `private`アクセス修飾子は自身のクラスのみアクセス可能です。
 
-`protected move`を`private move`に変更してみます。privateに変更されたことによりGorillaクラスの`super.move`にアクセスすることが許されずエラーとなります。
+`protected move()`を`private move()`に変更してみます。`private`に変更されたことにより`Gorilla`クラスの`super.move`にアクセスすることが許されずエラーとなります。
 
 ```typescript
 class Animal {
@@ -219,7 +223,7 @@ class Gorilla extends Animal {
 }
 ```
 
-privateメソッドの多くの使い方としては、自身のクラス内の長いコードを機能別に分ける時に利用します。
+`private`メソッドの多くの使い方としては、自身のクラス内の長いコードを機能別に分ける時に利用します。
 
 ### コンストラクターの引数のアクセス修飾子
 
@@ -234,9 +238,9 @@ privateメソッドの多くの使い方としては、自身のクラス内の�
 | protected | 自身のクラス、継承クラスからアクセス可能 |
 | private | 自身のクラスのみアクセス可能 |
 
-ConstructorInAccessModifierクラスとConstructorOutAccessModifierクラスの２つを定義しました。
+`ConstructorInAccessModifier`クラスと`ConstructorOutAccessModifier`クラスのふたつを定義しました。
 
-２つのクラスの違いはコンストラクターにアクセス修飾子を定義しているかどうかだけで機能は全く同じです。
+ふたつのクラスの違いはコンストラクターにアクセス修飾子を定義しているかどうかだけで機能は全く同じです。
 
 ```typescript
 // example.ts
@@ -295,14 +299,13 @@ TypeScriptで記述する際は各アクセス修飾子のスコープ機能が�
 
 ```typescript
 // example.ts
-let InAccess = new ConstructorInAccessModifier(1, 2, 3, 4);
+const InAccess = new ConstructorInAccessModifier(1, 2, 3, 4);
 InAccess.arg0; // エラー プロパティ 'arg0' は型 'ConstructorInAccessModifier' に存在しません。ts(2339)
 InAccess.arg1;
 InAccess.arg2; // エラー プロパティ 'arg2' は型 'ConstructorInAccessModifier' に存在しません。ts(2339)
 InAccess.arg3; // エラー プロパティ 'arg3' は型 'ConstructorInAccessModifier' に存在しません。ts(2339)
 
-
-let outAccess = new ConstructorOutAccessModifier(1, 2, 3, 4);
+const outAccess = new ConstructorOutAccessModifier(1, 2, 3, 4);
 outAccess.arg0; // エラー プロパティ 'arg0' は型 'ConstructorOutAccessModifier' に存在しません。ts(2339)
 outAccess.arg1;
 outAccess.arg2; // エラー プロパティ 'arg2' は型 'ConstructorOutAccessModifier' に存在しません。ts(2339)
@@ -325,7 +328,7 @@ class Octopus {
         this.name = theName;
     }
 }
-let dad = new Octopus("Man with the 8 strong legs");
+const dad = new Octopus("Man with the 8 strong legs");
 dad.name = "Man with the 3-piece suit"; // error! name is readonly.
 ```
 

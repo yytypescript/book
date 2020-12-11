@@ -2,7 +2,7 @@
 
 基本的なtsconfig.jsonの設定を理解されている前提で話が進みますのでまだの方はすでにある本書のtsconfig.jsonのページをご覧ください。
 
-{% page-ref page="../handson/setting-tsconfig.json.md" %}
+{% page-ref page="../handson/tsconfig.json-settings.md" %}
 
 ## パッケージを使う人にもTypeScriptによる型の享受を目指す
 
@@ -858,7 +858,7 @@ function next(lyric: string, count: number): string {
 
 インデックス型や配列で宣言されたオブジェクトが持つプロパティへのアクセスが厳密になります。インデックス型についてはタイプエイリアスのページをご参照ください。
 
-{% page-ref page="type-alias.md" %}
+{% page-ref page="type-aliases.md" %}
 
 ```typescript
 type ObjectLiteralLike = {

@@ -240,7 +240,7 @@ distance(q1);
 
 しかし、このオプション引数は意味する型が少々変わります。内部的には`p2`は`Point`ではなく`Point | undefined`のユニオン型として解釈されます。ユニオン型の説明は先の章にあるため詳しい説明は譲りますが、ユニオン型は日本語で言うと**どれか**の意味です。
 
-{% page-ref page="union-type.md" %}
+{% page-ref page="union-types.md" %}
 
 ユニオン型が与えられた時は、どちらの型にもあるプロパティ、メソッドでなければ使うことができません。当然ながら`undefined`には`x, y`というプロパティは存在しないため、上記のコードはTypeScriptに指摘されます。
 
@@ -562,7 +562,7 @@ function bmi({height = 165, weight = 60}: Partial<TopSecret>): number {
 
 この`Partial<T>`については専門に解説しているページがありますので併せて参照ください。
 
-{% page-ref page="utility-type.md" %}
+{% page-ref page="utility-types.md" %}
 
 ```typescript
 type PartialTopSecret = {
@@ -944,7 +944,7 @@ abstract class Optional<T> {
 
 ただしこの例の場合TypeScriptではユニオン型によって簡単に解決できます。ユニオン型については詳細の説明があるのでそちらをご参照ください。
 
-{% page-ref page="union-type.md" %}
+{% page-ref page="union-types.md" %}
 
 ## 戻り値の`this`
 

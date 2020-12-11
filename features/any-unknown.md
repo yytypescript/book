@@ -89,7 +89,7 @@ TypeScriptのプロジェクトを作る時に必要なtsconfig.jsonにはこの
 
 tsconfig.jsonにある他の厳格なコーディングのための設定の説明もありますので併せて参照してください。
 
-{% page-ref page="../handson/setting-tsconfig.json.md" %}
+{% page-ref page="../handson/tsconfig.json-settings.md" %}
 
 ## 型アサーションに使う
 

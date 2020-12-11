@@ -323,7 +323,7 @@ const bg2: bigint = BigInt(100);
 **宣言**において`bigint`型は`number`型の宣言方法の末尾に`n`を付けるだけで宣言ができるように書いていますがこれは`target`が`es2020`以上の時に限られます。  
 それ以外の`target`では`BigInt()`の関数を使って`bigint`型を作り出す必要があります。tsconfig.jsonの話は該当ページをご覧ください。
 
-{% page-ref page="../handson/setting-tsconfig.json.md" %}
+{% page-ref page="../handson/tsconfig.json-settings.md" %}
 
 ラッパークラスは`BigInt`です。こちらも`Int`が大文字になることに注意してください。
 

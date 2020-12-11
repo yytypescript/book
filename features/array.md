@@ -71,7 +71,7 @@ const element: T | undefined = array[n];
 
 このチェックを厳密にして、型安全にするオプションがtsconfig.jsonにあります。こちらについてはtsconfig.json Deep Diveの章をご覧ください。
 
-{% page-ref page="tsconfig-json-deep-dive.md" %}
+{% page-ref page="tsconfig.json-deep-dive.md" %}
 
 配列を不特定個数の集合と扱うのではなく、ただの有限個の入れ物として扱いたい時はタプルを使うことができます。
 

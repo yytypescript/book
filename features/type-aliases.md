@@ -183,7 +183,7 @@ type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
 
 これはそのシステムがサポートする言語は`'en', 'fr', 'it', 'es'`のいずれかであり、それに`SystemSupportLanguage`という別名を与えたことになります。
 
-{% page-ref page="union-type.md" %}
+{% page-ref page="union-types.md" %}
 
 ## 宣言に使える特殊な記号
 
@@ -274,7 +274,7 @@ person.name.givenName = 'Gorilla';
 
 これら記号と、それを発展させた型の表現についてはユーティリティ型に詳細がありますのでご参照ください。
 
-{% page-ref page="utility-type.md" %}
+{% page-ref page="utility-types.md" %}
 
 ## インデックス型\(Index Signatures\)
 
@@ -310,7 +310,7 @@ bufferflies.ja;
 
 このチェックをより厳密にするオプションがtsconfig.jsonにあります。このオプションを有効にするとたとえプロパティがあるキーにアクセスしてもプロパティの型は`undefined`とのユニオン型であると解釈されるようになります。こちらについてはtsconfig.json Deep Diveのページをご覧ください。
 
-{% page-ref page="tsconfig-json-deep-dive.md" %}
+{% page-ref page="tsconfig.json-deep-dive.md" %}
 
 ### インデックス型の制限
 
@@ -358,7 +358,7 @@ const bufferflies: Butterfly = {
 
 プロパティを読み取り専用にする`readonly`をそのオブジェクトの全てのプロパティに適用する`Readonly<T>`というユーティリティ型があります。他にもユーティリティ型はありますが、それらについては専門のページがありますのでここでは割愛します。
 
-{% page-ref page="utility-type.md" %}
+{% page-ref page="utility-types.md" %}
 
 `Readonly<T>`もこの機能で実現されています。`Readonly<T>`は以下のように実装されています。
 
@@ -461,7 +461,7 @@ type Parameter = {
 
 一見してどのプロパティが必須で、どのプロパティが選択可かが非常にわかりづらいです。これをインターセクション型とユーティリティ型の`Required<T>`と`Partial<T>`を使いわかりやすく表記できます。ユーティリティ型については解説しているページがありますのでご覧ください。
 
-{% page-ref page="utility-type.md" %}
+{% page-ref page="utility-types.md" %}
 
 #### 必須とそうでないパラメータのタイプエイリアスに分離する
 
