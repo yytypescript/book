@@ -106,7 +106,7 @@ $ npm run textlint
 $ npm run textlint:fix
 ```
 
-### 用語の統一
+### 表記揺れの統一
 表記揺れを発見された場合は、[prh/yytypescript.yml](https://github.com/yytypescript/book/tree/master/handson)にルールを追加してください。
 
 prhの設定ファイルの書き方は次のページを参照してください。  
