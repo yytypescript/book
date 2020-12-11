@@ -33,5 +33,5 @@ description: >-
 
 ### テンプレート
 
-PDRを追加する際は、[PDRのテンプレート](__pdr-template.md)をお使い下さい。
+PDRを追加する際は、[PDRのテンプレート](__pdr-template.md)をお使いください。
 

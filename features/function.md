@@ -4,7 +4,7 @@ JavaScriptでは関数は第一級オブジェクトです。よって変数に�
 
 ## 関数の宣言
 
-関数の宣言は主に3通りの方法があります。以下は全て同じ関数`increment()`を宣言しています。
+関数の宣言は主に3とおりの方法があります。以下はすべて同じ関数`increment()`を宣言しています。
 
 ### 名前付き関数\(Normal Functions\)
 
@@ -30,7 +30,7 @@ const increment = (num: number): number => {
 };
 ```
 
-本書では関数は全て名前付き関数での記述となっています。
+本書では関数はすべて名前付き関数での記述となっています。
 
 また、匿名かつアロー関数は、1行で戻り値を返却できる場合はさらに短縮することができます。
 
@@ -40,7 +40,7 @@ const increment = (num: number): number => {
 const increment = (num: number): number => num + 1;
 ```
 
-この時は`return`を**書いてはいけない**ので注意してください。1行と書きましたが、厳密にはステートメントがひとつであれば改行しても問題ありません。
+このときは`return`を**書いてはいけない**ので注意してください。1行と書きましたが、厳密にはステートメントがひとつであれば改行しても問題ありません。
 
 さらに、引数が1個である場合は\(\)も省略できます。
 
@@ -50,8 +50,8 @@ const increment = (num: number): number => num + 1;
 const increment = num => num + 1;
 ```
 
-ただし、これができるのは引数が1個の時のみで、0個の時や複数ある時はできません。  
-また、この時は引数と戻り値に対して**型をつけることができません**。
+ただし、これができるのは引数が1個のときのみで、0個のときや複数ある時はできません。  
+また、このときは引数と戻り値に対して**型をつけることができません**。
 
 アロー関数の1行版でオブジェクトリテラルを返したい時はそのまま返すことができません。
 
@@ -62,7 +62,7 @@ console.log(func());
 // -> undefined
 ```
 
-この時はオブジェクトリテラルを\(\)で括ってください。
+このときはオブジェクトリテラルを\(\)で括ってください。
 
 ```typescript
 const func = () => ({x: 1});
@@ -75,7 +75,7 @@ console.log(func());
 
 ## `this`
 
-アロー関数は他と異なる点がいくつかあります。特に注意しなければならないのは`this`です。例えば以下のようなクラス`JetLag`を考えます。
+アロー関数は他と異なる点がいくつかあります。特に注意しなければならないのは`this`です。たとえば次のようなクラス`JetLag`を考えます。
 
 ```typescript
 class JetLag {
@@ -115,7 +115,7 @@ jetlag.replyArrow(10);
 
 ### 不定な`this`をはっきりさせる
 
-匿名関数を使う時にthisを確定させる方法として以下のふたつがあります。以下は上記クラスの`replyFunction()`を書き換えていると解釈してください。
+匿名関数を使う時にthisを確定させる方法として次のふたつがあります。以下は上記クラスの`replyFunction()`を書き換えていると解釈してください。
 
 #### 使いたい`this`を退避させる
 
@@ -157,7 +157,7 @@ JavaScriptであればこの方法だけで実行できるようになります�
 (num: number) => number;
 ```
 
-これは匿名かつアロー関数と少々宣言が異なります。厳密には戻り値の位置が異なります。匿名かつアロー関数は、実体を除けば以下の形をしています。
+これは匿名かつアロー関数と少々宣言が異なります。厳密には戻り値の位置が異なります。匿名かつアロー関数は、実体を除けば次の形をしています。
 
 ```typescript
 (num: number): number => {...};
@@ -176,7 +176,7 @@ type Increment = {
 ## 引数\(Arguments\)
 
 関数の入力値である引数は特殊なことをしない限り、要求する型の変数を、要求する数だけ入力しなければいけません。  
-例えば原点との距離を求める以下の関数があったとします。
+たとえば原点との距離を求める次の関数があったとします。
 
 ```typescript
 function distance(p: Point): number {
@@ -193,7 +193,7 @@ type Point = {
 };
 ```
 
-関数`distance()`は平面状にある点\(x, y\)の原点からの距離を返します。この関数を呼ぶ時は必ず引数の数、順番は揃わなければなりません。つまり以下のような関数呼び出しはできません。
+関数`distance()`は平面状にある点\(x, y\)の原点からの距離を返します。この関数を呼ぶ時は必ず引数の数、順番は揃わなければなりません。つまり次のような関数呼び出しはできません。
 
 ### 引数が少ない
 
@@ -213,9 +213,9 @@ JavaScriptでは引数が少ない時はその引数には`undefined`が渡さ�
 
 ## 引数を省略したい
 
-引数を省略したいことがあります。その時はオプション引数とデフォルト引数を使用することができます。
+引数を省略したいことがあります。そのときはオプション引数とデフォルト引数を使用することができます。
 
-上記の関数`distance()`は、現在は与えられた座標を元に原点からの距離を計算していますが、これを2点の距離を計算できるようにしたいとします。すると上記の関数`distance()`は以下のようになります。
+上記の関数`distance()`は、現在は与えられた座標を元に原点からの距離を計算していますが、これを2点の距離を計算できるようにしたいとします。すると上記の関数`distance()`は次のようになります。
 
 ```typescript
 function distance(p1: Point, p2: Point): number {
@@ -225,7 +225,7 @@ function distance(p1: Point, p2: Point): number {
 
 ### オプション引数\(Optional Parameters\)
 
-ここで第2引数は省略可能にし、省略した場合は第1引数と原点の距離を返したいとします。これはオプション引数を使用すると以下のように書けます。
+ここで第2引数は省略可能にし、省略した場合は第1引数と原点の距離を返したいとします。これはオプション引数を使用すると次のように書けます。
 
 ```typescript
 function distance(p1: Point, p2?: Point): number {
@@ -236,7 +236,7 @@ distance(q1, q2);
 distance(q1);
 ```
 
-引数の`p2`の右隣に`?`がつきました。これで`p2`は省略可能な引数となり5, 6行目のどちらの書き方も受け付けるようになります。
+引数の`p2`の右隣に`?`がつきました。これで`p2`は省略可能な引数となり5, 6行目のどちらの書き方も受けつけるようになります。
 
 しかし、このオプション引数は意味する型が少々変わります。内部的には`p2`は`Point`ではなく`Point | undefined`のユニオン型として解釈されます。ユニオン型の説明は先の章にあるため詳しい説明は譲りますが、ユニオン型は日本語で言うと**どれか**の意味です。
 
@@ -244,7 +244,7 @@ distance(q1);
 
 ユニオン型が与えられた時は、どちらの型にもあるプロパティ、メソッドでなければ使うことができません。当然ながら`undefined`には`x, y`というプロパティは存在しないため、上記のコードはTypeScriptに指摘されます。
 
-この問題を解消したのが以下のふたつです。
+この問題を解消したのが次のふたつです。
 
 #### 省略時の初期化処理を書く
 
@@ -277,11 +277,11 @@ function distance(p1: Point, p2?: Point): number {
 }
 ```
 
-ifは`p2`が`undefined`の時に実行され、内部で`return`をしています。そのため`if`ブロックの下は`p2`がPointであることが確定します。そのためTypeScriptはユニオン型から普通の`Point`として解釈し、このように書くことができるようになります。
+ifは`p2`が`undefined`のときに実行され、内部で`return`をしています。そのため`if`ブロックの下は`p2`がPointであることが確定します。そのためTypeScriptはユニオン型から普通の`Point`として解釈し、このように書くことができるようになります。
 
 ### `Point | undefined` との違い
 
-`p2`の型が`Point | undefined`として解釈されるのなら、あえて`?`などという記号を新しく定義する必要などないのではと思われるかもしれませんが、明確な違いがあります。それは**呼び出し側で省略できるかどうかということ**です。上記の通りオプション引数は省略が可能なのですが、`undefined`とのユニオン型であることを明記すると省略ができません。
+`p2`の型が`Point | undefined`として解釈されるのなら、あえて`?`などという記号を新しく定義する必要などないのではと思われるかもしれませんが、明確な違いがあります。それは**呼び出し側で省略できるかどうかということ**です。上記のとおりオプション引数は省略が可能なのですが、`undefined`とのユニオン型であることを明記すると省略ができません。
 
 ```typescript
 function distance(p1: Point, p2: Point | undefined): number
@@ -299,7 +299,7 @@ distance(q1, undefined);
 
 ### 省略可能な`undefined`をTypeScriptはどう解釈しているか
 
-実はこのオプション引数としても使われる省略可能な`undefined`は、TypeScriptは`void`という専用の型を作って定義しています。つまりオプション引数は以下のように書き換えることもできます。
+実はこのオプション引数としても使われる省略可能な`undefined`は、TypeScriptは`void`という専用の型を作って定義しています。つまりオプション引数は次のように書き換えることもできます。
 
 ```typescript
 function distance(p1: Point, p2: Point | void): number
@@ -314,7 +314,7 @@ distance(q1);
 
 ### オプション引数でできないこと
 
-オプション引数は必ず最後に書かなければいけません。つまり、以下のようにオプション引数より後ろに普通の引数を書くことはできません。
+オプション引数は必ず最後に書かなければいけません。つまり、次のようにオプション引数より後ろに普通の引数を書くことはできません。
 
 ```typescript
 function distance(p1?: Point, p2: Point): number {
@@ -325,7 +325,7 @@ function distance(p1?: Point, p2: Point): number {
 
 ### デフォルト引数\(Default Parameters\)
 
-省略した時、原点との距離を求めるといったわかりやすい例であればいいのですが\(1, 2\)との距離を求める、といった変化球がきたとします。なにも考えないとこのようになります。
+省略した時、原点との距離を求めるといったわかりやすい例であればいいのですが\(1, 2\)との距離を求める、といった変化球がきたとします。何も考えないとこのようになります。
 
 ```typescript
 function distance(p1: Point, p2?: Point): number {
@@ -337,7 +337,7 @@ function distance(p1: Point, p2?: Point): number {
 }
 ```
 
-もちろん動くのですが、意図がわかりにくくなってしまいます。このような時に便利なのがデフォルト引数です。デフォルト引数を使用すると以下のように書けます。
+もちろん動くのですが、意図がわかりにくくなってしまいます。このような時に便利なのがデフォルト引数です。デフォルト引数を使用すると次のように書けます。
 
 ```typescript
 const p0: Point = {
@@ -360,7 +360,7 @@ distance(q1, undefined);
 
 ### 初期値に関数の戻り値を使う
 
-デフォルト引数には関数の戻り値を指定することができます。例えば、ある\(x, y\)が与えられると転置した\(y, x\)を返す`inverse()`という関数の戻り値を初期値として使用します。ちなみに`inverse()`は以下です。
+デフォルト引数には関数の戻り値を指定することができます。たとえば、ある\(x, y\)が与えられると転置した\(y, x\)を返す`inverse()`という関数の戻り値を初期値として使用します。ちなみに`inverse()`は以下です。
 
 ```typescript
 function inverse(p: Point): Point {
@@ -371,7 +371,7 @@ function inverse(p: Point): Point {
 }
 ```
 
-これを使うと`distance()`は以下のようになります。
+これを使うと`distance()`は次のようになります。
 
 ```typescript
 function distance(p1: Point, p2: Point = inverse(p1)): number {
@@ -379,7 +379,7 @@ function distance(p1: Point, p2: Point = inverse(p1)): number {
 }
 ```
 
-また、デフォルト引数はオプション引数と異なりその引数を最後に書く必要はありません。呼び出し側でデフォルト引数を使用させたい時は`undefined`を指定します。この時`null`ではこの役目を果たせないので注意してください。もちろん末尾のデフォルト引数であれば省略が可能です。
+また、デフォルト引数はオプション引数と異なりその引数を最後に書く必要はありません。呼び出し側でデフォルト引数を使用させたい時は`undefined`を指定します。このとき`null`ではこの役目を果たせないので注意してください。もちろん末尾のデフォルト引数であれば省略が可能です。
 
 ```typescript
 const p0: Point = {
@@ -413,7 +413,7 @@ async function distanceAync(p1: Point, p2: Point = await inverseAync(p1)): Promi
 
 ## 残余引数\(Rest Parameters\)
 
-いわゆる可変の引数のことです。たとえば引数に与えられた数値の平均を返す関数`average()`を作るとします。これを残余引数を使って表現すると以下のようになります。
+いわゆる可変の引数のことです。たとえば引数に与えられた数値の平均を返す関数`average()`を作るとします。これを残余引数を使って表現すると次のようになります。
 
 ```typescript
 function average(...nums: number[]): number {
@@ -442,7 +442,7 @@ average([1, 3, 5, 7, 9]);
 
 このように配列を直接渡してしまうと`average()`の関数内では要素数1の`number[][]`型が渡されたと解釈されます。もちろん`average()`の期待する引数の型は`number[]`型なのでこのコードを実行することはできません。
 
-また、可変個の引数を受け付ける関係上、残余引数より後ろにほかの引数を置くことができません。
+また、可変個の引数を受けつける関係上、残余引数より後ろにほかの引数を置くことができません。
 
 ```typescript
 function average(...nums: number[], subject: string): number {
@@ -461,7 +461,7 @@ function average(subject: string, ...nums: number[]): number {
 
 ### スプレッド構文\(Spread Syntax\)
 
-JavaScriptに組み込みのメソッドとして存在する`Math.max()`は与えられた`number`型の引数の最大値を返却しますが引数として残余引数を要求します。上記の通り配列をそのまま入れることができないので以下のようなことができません。
+JavaScriptに組み込みのメソッドとして存在する`Math.max()`は与えられた`number`型の引数の最大値を返却しますが引数として残余引数を要求します。上記のとおり配列をそのまま入れることができないので次のようなことができません。
 
 ```typescript
 const scores: number[] = mathExamination();
@@ -489,7 +489,7 @@ const max: number = Math.max(...scores);
 
 ## 分割代入\(Destructuring Assignment\)
 
-例えばBMI\(Body Mass Index\)を計算したいとします。身長\(cm\)と体重\(kg\)が与えられれば関数`bmi()`は以下のような計算になります。
+たとえばBMI\(Body Mass Index\)を計算したいとします。身長\(cm\)と体重\(kg\)が与えられれば関数`bmi()`は次のような計算になります。
 
 ```typescript
 function bmi(height: number, weight: number): number {
@@ -508,7 +508,7 @@ bmi(65, 170);
 // -> 402.36686390532543
 ```
 
-このような誤用を避けるための方法として分割代入を使うことができます。分割代入を使うと以下のように書きなおせます。
+このような誤用を避けるための方法として分割代入を使うことができます。分割代入を使うと次のように書きなおせます。
 
 ```typescript
 type TopSecret = {
@@ -522,7 +522,7 @@ function bmi({height, weight}: TopSecret): number {
 }
 ```
 
-呼び出しは以下のようになります。これなら`height`と`weight`の意味を取り違えない限り問題は起こりにくくなるでしょう。以下は同じ結果を返します。
+呼び出しは次のようになります。これなら`height`と`weight`の意味を取り違えない限り問題は起こりにくくなるでしょう。以下は同じ結果を返します。
 
 ```typescript
 bmi({height: 170, weight: 65});
@@ -541,11 +541,11 @@ bmi({weight, height});
 
 ### 分割代入でうれしいこと
 
-分割代入は普通の引数と異なり以下のような利点があります。
+分割代入は普通の引数と異なり次のような利点があります。
 
 #### 引数の順番にとらわれない
 
-これは、上記の通りです。
+これは、上記のとおりです。
 
 #### デフォルト引数と併用できる
 
@@ -558,7 +558,7 @@ function bmi({height = 165, weight = 60}: Partial<TopSecret>): number {
 }
 ```
 
-`Partial<T>`とは、オブジェクト`T`のプロパティ、メソッドを省略可能にします。つまり`Partial<TopSecret>`は以下と同じです。この時の`?`は引数で説明したオプション引数と意味するものは同じです。
+`Partial<T>`とは、オブジェクト`T`のプロパティ、メソッドを省略可能にします。つまり`Partial<TopSecret>`は以下と同じです。このときの`?`は引数で説明したオプション引数と意味するものは同じです。
 
 この`Partial<T>`については専門に解説しているページがありますので併せて参照ください。
 
@@ -571,7 +571,7 @@ type PartialTopSecret = {
 };
 ```
 
-これによって呼び出し側は`bmi()`を以下のどのような方法でも呼び出すことができます。
+これによって呼び出し側は`bmi()`を次のどのような方法でも呼び出すことができます。
 
 ```typescript
 bmi({});
@@ -581,7 +581,7 @@ bmi({height: 180, weight: 75});
 bmi({weight: 75, height: 180});
 ```
 
-さらに以下のように引数の型の右にも`= {}`とデフォルト引数を付けてあげれば引数自体を省略することができるようになります。
+さらに次のように引数の型の右にも`= {}`とデフォルト引数を付けてあげれば引数自体を省略することができるようになります。
 
 ```typescript
 function bmi({height = 165, weight = 60}: Partial<TopSecret> = {}): number {
@@ -661,7 +661,7 @@ TypeError: Cannot read property 'name' of undefined
 
 ## 戻り値 \(Return Value\)
 
-関数の戻り値を指定することができます。あえて書かなくてもTypeScript側で補完し、関数の戻り値として提供してくれますが、意図しない戻り値を返していないかの検査が働くので書いた方が良いでしょう。前述の通り書く位置が実装と型で異なることに注意してください。
+関数の戻り値を指定することができます。あえて書かなくてもTypeScript側で補完し、関数の戻り値として提供してくれますが、意図しない戻り値を返していないかの検査が働くので書いた方がよいでしょう。前述のとおり書く位置が実装と型で異なることに注意してください。
 
 戻り値はJavaScriptと同じく1値のみの返却です。一度に多くの値を戻したい場合はタプルの章を参照してください。
 
@@ -775,7 +775,7 @@ doNothing1();
 doNothing2();
 ```
 
-すると`undefined`を戻り値に指定した関数`doNothing1()`に以下のような指摘が現れます。
+すると`undefined`を戻り値に指定した関数`doNothing1()`に次のような指摘が現れます。
 
 ```typescript
 A function whose declared type is neither 'void' nor 'any' must return a value.
@@ -783,7 +783,7 @@ A function whose declared type is neither 'void' nor 'any' must return a value.
 
 これは戻り値が`void`型でも`any`型でもない関数は`return`を省略できないことを意味しています。この指摘を回避するためには`doNothing1()`は明示的に`undefined`を返すか値を書かない`return`が必要です。
 
-以下のどちらかであれば`doNothing1()`はTypeScriptから指摘を受けません。
+次のどちらかであれば`doNothing1()`はTypeScriptから指摘を受けません。
 
 ```typescript
 function doNothing1(): undefined {
@@ -840,7 +840,7 @@ const duck2: Duck = <Duck> animal;
 
 ### Type predicateの宣言
 
-Type predicateの宣言は戻り値が`boolean`型の関数に対して適用でき、戻り値の方を以下のように書き替えます。
+Type predicateの宣言は戻り値が`boolean`型の関数に対して適用でき、戻り値の方を次のように書き替えます。
 
 ```typescript
 function isDuck(animal: Animal): animal is Duck {
@@ -869,7 +869,7 @@ function isUndefined(value: unknown): value is undefined {
 
 ## Assertion Functions
 
-やりたいことはほぼType predicateと同じです。Type predicateは`boolean`型の戻り値に対して使用しましたがこちらは例外を投げるかどうかで判定します。上記関数`isDuck()`をAssertion functionsで書きかえると以下のようになります。
+やりたいことはほぼType predicateと同じです。Type predicateは`boolean`型の戻り値に対して使用しましたがこちらは例外を投げるかどうかで判定します。上記関数`isDuck()`をAssertion functionsで書きかえると次のようになります。
 
 ```typescript
 function isDuck(animal: Animal): asserts animal is Duck {
@@ -925,7 +925,7 @@ if (optional.isPresent()) {
 }
 ```
 
-またType predicateは`false`の場合を定義することができません。つまり以下のような定義はできません。
+またType predicateは`false`の場合を定義することができません。つまり次のような定義はできません。
 
 ```typescript
 public abstract isPresent(): this is Some<T>, this is not None<T>;
@@ -1021,7 +1021,7 @@ op.sum(5).subtract(3).multiply(6).devide(3); // 4
 
 `op.sum(), op.subtract(), op.multiply(). op.devide()`の戻り値の型を`Operator`に変更しました。これによりメソッドチェインが可能になりました。
 
-ここで、このクラス`Operator`を拡張して累乗の計算を追加したいとします。すると新しいクラス`NewOperator`は以下のようになるでしょう。
+ここで、このクラス`Operator`を拡張して累乗の計算を追加したいとします。すると新しいクラス`NewOperator`は次のようになるでしょう。
 
 ```typescript
 class NewOperator extends Operator {
@@ -1037,7 +1037,7 @@ class NewOperator extends Operator {
 }
 ```
 
-ですが、このクラスでは以下の演算ができません。
+ですが、このクラスでは次の演算ができません。
 
 ```typescript
 const op: NewOperator = new NewOperator(2);
@@ -1047,7 +1047,7 @@ op.power(3).multiply(2).power(3);
 
 これは`op.multiply()`の戻り値が`Operator`だからです。`Operator`には`power()`というメソッドがないためこのような問題が発生します。
 
-このような時、戻り値に`this`を設定することができます。上記クラスの戻り値の`Operator, NewOperator`を全て`this`に置き換えると問題が解消されます。
+このような時、戻り値に`this`を設定することができます。上記クラスの戻り値の`Operator, NewOperator`をすべて`this`に置き換えると問題が解消されます。
 
 ```typescript
 class Operator {
@@ -1100,7 +1100,7 @@ op.power(3).multiply(2).power(3); // 4096
 
 ### オーバーロードの定義
 
-オーバーロードはその関数が受け付けたい引数、戻り値の組を実装する関数の上に書きます。先ほど使用した2点の距離を求める関数`distance()`をオーバーロードで定義すると以下のようになります。なお、この例では戻り値の型は全て`number`型ですが、別の型にしても実装さえできれば他の型にしても問題ありません。
+オーバーロードはその関数が受け付けたい引数、戻り値の組を実装する関数の上に書きます。先ほど使用した2点の距離を求める関数`distance()`をオーバーロードで定義すると次のようになります。なお、この例では戻り値の型はすべて`number`型ですが、別の型にしても実装さえできれば他の型にしても問題ありません。
 
 ```typescript
 function distance(p: Point): number;
@@ -1109,7 +1109,7 @@ function distance(x: number, y: number): number;
 function distance(x1: number, y1: numebr, x2: number, y2: number): number;
 ```
 
-なお、上記のような書き方のオーバーロードは名前付き関数またはクラスのメソッドでのみ可能です。匿名関数、アロー関数ではタイプエイリアスまたはインターフェースでオーバーロードを定義します。たとえば、上記例だと以下のようなタイプエイリアスになります。
+なお、上記のような書き方のオーバーロードは名前付き関数またはクラスのメソッドでのみ可能です。匿名関数、アロー関数ではタイプエイリアスまたはインターフェースでオーバーロードを定義します。たとえば、上記例だと次のようなタイプエイリアスになります。
 
 ```typescript
 type Distance = {
@@ -1126,7 +1126,7 @@ const distance: Distance = (arg1: number | Point, arg2?: number | Point, arg3?: 
 
 ### オーバーロードの実装
 
-ここからが大変です。実装はオーバーロードで定義した全てをひとつの関数で処理しなければいけません。つまり`distance()`の実装は以下のようになります。これが呼び出し側では**あたかも**他言語のオーバーロードのようになります。
+ここからが大変です。実装はオーバーロードで定義したすべてをひとつの関数で処理しなければいけません。つまり`distance()`の実装は次のようになります。これが呼び出し側では**あたかも**他言語のオーバーロードのようになります。
 
 ```typescript
 function distance(p: Point): number;
@@ -1150,7 +1150,7 @@ distance(1, 3, 5, 7);
 
 ### オーバーロードでうれしいこと
 
-オーバーロードの定義なしに実装すると以下のような引数を考慮しなければなりません。
+オーバーロードの定義なしに実装すると次のような引数を考慮しなければなりません。
 
 ```typescript
 distance(q1, 5, undefined, 8);
