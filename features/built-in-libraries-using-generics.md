@@ -12,7 +12,7 @@
 
 ### なぜジェネリクスが使われているか
 
-`Array`オブジェクトは `string` や `number` など状況に応じて色々な型の要素を保持する必要があります。この時、配列の要素の型はどんなプログラムを実装するかで変わってきます。つまり、要素の型を抽象化してプログラマーが実装時に型を指定できる必要があります。
+`Array`オブジェクトは `string` や `number` など状況に応じて色々な型の要素を保持する必要があります。このとき、配列の要素の型はどんなプログラムを実装するかで変わってきます。つまり、要素の型を抽象化してプログラマーが実装時に型を指定できる必要があります。
 
 この型を抽象化する方法としてジェネリクスが利用されています。
 
@@ -34,7 +34,7 @@ const numbers: number[] = [1, 2, 3, 4];
 
 #### `Array.protoype.map<T>()`
 
-`Array`オブジェクトの `map<T>()` メソッドは引数で渡された関数を全ての配列の要素に適用することで新しい配列を返す関数です。サンプルコードでは、新しく生成される数値配列の要素の型を指定する `map<number>` でジェネリクスが使われています。
+`Array`オブジェクトの `map<T>()` メソッドは引数で渡された関数をすべての配列の要素に適用することで新しい配列を返す関数です。サンプルコードでは、新しく生成される数値配列の要素の型を指定する `map<number>` でジェネリクスが使われています。
 
 ```typescript
 const textNumbers = ["1", "2", "3", "4"];
@@ -72,7 +72,7 @@ console.log(addresses.get("太郎"));
 
 #### 標準ライブラリの型定義の参照方法
 
-標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認する事ができます。  
+標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認することができます。  
 [https://github.com/microsoft/TypeScript/tree/master/lib](https://github.com/microsoft/TypeScript/tree/master/lib)
 
 `Array.prototype.map()` の型は [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/master/lib/lib.es5.d.ts#L1170) のファイルで確認できます。

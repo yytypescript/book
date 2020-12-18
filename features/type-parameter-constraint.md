@@ -1,6 +1,6 @@
 # 型パラメータの制約
 
-TypeScriptではジェネリクスの型パラメータを特定の型に限定する事ができます。
+TypeScriptではジェネリクスの型パラメータを特定の型に限定することができます。
 
 ### ジェネリクス型パラメータで直面する問題
 
@@ -17,7 +17,7 @@ function changeBackgroundColor<T>(element: T) {
 
 このコードはコンパイルに失敗します。ジェネリクスの型 `T` は、任意の型が指定可能なので、渡す型によっては `style`プロパティが存在しない場合があるからです。コンパイラは存在しないプロパティへの参照が発生する可能性を検知してコンパイルエラーとしているのです。
 
-`any` を使えばコンパイルエラーを回避する事は可能ですが、型のチェックがされません。将来バグが発生する危険性もあるので、出来る限り避けたいところです。
+`any` を使えばコンパイルエラーを回避することは可能ですが、型のチェックがされません。将来バグが発生する危険性もあるので、できる限り避けたいところです。
 
 ```typescript
 function changeBackgroundColor<T>(element: T) {
@@ -28,11 +28,11 @@ function changeBackgroundColor<T>(element: T) {
 }
 ```
 
-### 型パラメータに制約を付ける
+### 型パラメータに制約をつける
 
-TypeScriptでは `extends` キーワードを用いることで、ジェネリクスの型 `T` を特定の型に限定する事ができます。
+TypeScriptでは `extends` キーワードを用いることで、ジェネリクスの型 `T` を特定の型に限定することができます。
 
-今回の例では、 `<T extends HTMLElement>`とすることで、型 `T` は必ず `HTMLElement` またはそのサブタイプの `HTMLButtonElement` や `HTMLDivElement`である事が保証されるため、`style` プロパティに安全にアクセスできるようになります。
+今回の例では、 `<T extends HTMLElement>`とすることで、型 `T` は必ず `HTMLElement` またはそのサブタイプの `HTMLButtonElement` や `HTMLDivElement`であることが保証されるため、`style` プロパティに安全にアクセスできるようになります。
 
 ```typescript
 function changeBackgroundColor<T extends HTMLElement>(element: T) {

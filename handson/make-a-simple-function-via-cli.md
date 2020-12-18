@@ -7,7 +7,7 @@ description: >-
 
 ## JavaScriptで発生しうる問題
 
-JavaScriptで以下のような関数があったとします。
+JavaScriptで次のような関数があったとします。
 
 ```typescript
 function increment(num) {
@@ -26,7 +26,7 @@ $ node increment.js
 2
 ```
 
-予想通りのなんでもない関数ですが、この関数が以下のように呼ばれたらどうでしょうか。
+予想とおりのなんでもない関数ですが、この関数が次のように呼ばれたらどうでしょうか。
 
 ```typescript
 function increment(num) {
@@ -56,7 +56,7 @@ TypeScriptを使うと、コーディングの時点でこのような型の不�
 $ mv increment.js increment.ts
 ```
 
-これをエディタで開くと`increment()`の引数にあたる`num`のところで何か言われます。
+これをエディターで開くと`increment()`の引数にあたる`num`のところで何か言われます。
 
 ```typescript
 Parameter 'num' implicitly has an 'any' type, ...
@@ -103,7 +103,7 @@ Found 1 error.
 今回は引数のみの紹介となりましたが、戻り値にも型を指定することができます。これによりその関数内で意図しない結果を返さないかどうかの検知に使うことができます。
 
   
-戻り値も書いた`increment.ts`の完全版は以下のようになります。
+戻り値も書いた`increment.ts`の完全版は次のようになります。
 
 ```typescript
 function increment(num: number): number {

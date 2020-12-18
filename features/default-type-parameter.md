@@ -25,7 +25,7 @@ const errorEvent: MyErrorEvent<Error> = { error: new Error('エラーです'), t
 const networkErrorEvent: MyErrorEvent<NetworkAccessError> = { error: new NetworkAccessError('ネットワークエラーです'), type: 'nextwork' }
 ```
 
-例外処理を記述する時に `NetworkError`のように対応するエラークラスを全て用意することはなく、標準の `Error` で対応してしまうケースも多くありますが、今の状態では `MyErrorEvent` のジェネリクスの型 `T` を常に指定する必要があり非常に面倒です。
+例外処理を記述する時に `NetworkError`のように対応するエラークラスをすべて用意することはなく、標準の `Error` で対応してしまうケースも多くありますが、今の状態では `MyErrorEvent` のジェネリクスの型 `T` を常に指定する必要があり非常に面倒です。
 
 ```typescript
 // 型 T が必須なので、MyErrorEvent<Error>と指定する必要がある。
@@ -33,7 +33,7 @@ const networkErrorEvent: MyErrorEvent<NetworkAccessError> = { error: new Network
 const errorEvent: MyErrorEvent = { error: new Error('エラーです'), type: 'syntax' }
 ```
 
-そこで、デフォルト型パラメーターとして `Error`を指定することで、ジェネリクスの型 `T`は必要な時だけ指定して、何も指定してない場合は自動で `Error` の型とする事ができます。
+そこで、デフォルト型パラメーターとして `Error`を指定することで、ジェネリクスの型 `T`は必要な時だけ指定して、何も指定してない場合は自動で `Error` の型とすることができます。
 
 ```typescript
 type MyErrorEvent<T = Error> = {

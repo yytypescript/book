@@ -1,10 +1,10 @@
 # ユニオン型 \(Union Types\)
 
-大元が動的な型付言語であるJavaScriptのため、成功した時は`number`型を返すけれど、失敗した時は`false`を返すといった関数を提供するパッケージもあります。つまり`A`型のときもあれば`B`型の時もある。ということをひっくるめたい時にこのユニオン型が使えます。
+大元が動的な型付言語であるJavaScriptのため、成功した時は`number`型を返すけれど、失敗した時は`false`を返すといった関数を提供するパッケージもあります。つまり`A`型のときもあれば`B`型のときもある。ということをひっくるめたい時にこのユニオン型が使えます。
 
 ## ユニオン型の宣言
 
-上記例のユニオン型を受ける変数は以下のように宣言できます。
+上記例のユニオン型を受ける変数は次のように宣言できます。
 
 ```typescript
 const numOrFalse: number | false = union();
@@ -29,7 +29,7 @@ type PHPLikeReturnValue = number | false;
 
 ## 配列やジェネリクスで注意すること
 
-以下のような宣言は、おそらく希望通りの結果になりません。
+次のような宣言は、おそらく希望とおりの結果になりません。
 
 ```typescript
 string | number[];
@@ -49,7 +49,7 @@ Array<string | number>;
 
 上記の関数`union()`の戻り値を受けた定数`numOrFalse`のあとに`.`をつけると`number`型と`boolean`型の**どちらもが持っているメソッド、プロパティ**が入力補完候補に表示されます。
 
-以下のようなクラス`Beast`と`Bird`があったとします。
+次のようなクラス`Beast`と`Bird`があったとします。
 
 ```typescript
 class Beast {
@@ -91,7 +91,7 @@ creature.
 ## ユニオン型で注意すること
 
 ユニオン型になった元の型がもっているプロパティ、メソッドが同じでも戻り値の型が異なる場合は、その戻り値もまたユニオン型になります。  
-以下のクラス`A, B`を考えます。
+次のクラス`A, B`を考えます。
 
 ```typescript
 class A {
@@ -123,7 +123,7 @@ function union(): A | B {
 const uni: A | B = union();
 ```
 
-`uni.does()`は以下のようなメソッドとして解釈されます。
+`uni.does()`は次のようなメソッドとして解釈されます。
 
 ```typescript
 const done: string | number = uni.does();
@@ -131,17 +131,17 @@ const done: string | number = uni.does();
 
 また同じメソッド名でありながら引数の型が違うメソッドがあれば、その引数もユニオン型になります。さらに戻り値の型も異なれば同じようにユニオン型になります。
 
-つまり`uni.makes()`は以下のようなメソッドであると解釈されます。
+つまり`uni.makes()`は次のようなメソッドであると解釈されます。
 
 ```typescript
 const made: string | number = uni.makes(arg: string | number);
 ```
 
-この時、引数の型を確定させても、戻り値の型に影響を与えません。他の言語にあるようなオーバーロードのような現象は起こりません。例えば`uni.makes()`に`number`型を引数に入れたとしても、これは`uni.makes()`が`number`型を要求する`A`型と確定したと解釈されることはありません。
+このとき、引数の型を確定させても、戻り値の型に影響を与えません。他の言語にあるようなオーバーロードのような現象は起こりません。たとえば`uni.makes()`に`number`型を引数に入れたとしても、これは`uni.makes()`が`number`型を要求する`A`型と確定したと解釈されることはありません。
 
 ## ユニオン型から型を確定させる
 
-JavaScriptはその変数がどの型かを確定させる機能があります。もちろんTypeScriptにも存在し、その機能を用いて型が確定できた場合、TypeScriptはその型として見なしてくれます。この時よく使うのは`typeof`と`instanceof`です。主にプリミティブ型に対しては`typeof`を、クラスに対しては`instanceof`を使えば問題ありません。
+JavaScriptはその変数がどの型かを確定させる機能があります。もちろんTypeScriptにも存在し、その機能を用いて型が確定できた場合、TypeScriptはその型として見なしてくれます。このときよく使うのは`typeof`と`instanceof`です。主にプリミティブ型に対しては`typeof`を、クラスに対しては`instanceof`を使えば問題ありません。
 
 ```typescript
 const prim: number | string = unionPrimitive();
@@ -163,7 +163,7 @@ if (creature instanceof Bird) {
 
 ## 判別可能なユニオン型\(Discriminated unions\)
 
-以下のようなタイプエイリアスの`SuccessResponse, ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
+次のようなタイプエイリアスの`SuccessResponse, ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
 
 ```typescript
 type SuccessResponse = {
@@ -181,7 +181,7 @@ type Response = SuccessResponse | ErrorResponse;
 
 ユニオン型の`Response`は2つのタイプエイリアスが持つ`success`を共通のプロパティとして持ちますが片方は`true`でもう片方は`false`です。
 
-そしてこの`Request`を返す関数`req()`があり、それを呼び戻り値を定数`res`で受けたとすると以下のようなことができます。
+そしてこの`Request`を返す関数`req()`があり、それを呼び戻り値を定数`res`で受けたとすると次のようなことができます。
 
 ```typescript
 const res: Response = req();
@@ -248,5 +248,5 @@ switch(lang.iso639) {
 
 ## TypeScriptはこう解釈している
 
-ユニオン型に所属するひとつのデータ型は、ユニオン型の派生型\(subtype\)として解釈されます。この使い方はジェネリクスで頻出します。
+ユニオン型に所属する人つのデータ型は、ユニオン型の派生型\(subtype\)として解釈されます。この使い方はジェネリクスで頻出します。
 
