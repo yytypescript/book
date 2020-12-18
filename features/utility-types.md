@@ -140,7 +140,7 @@ function findUsers({ name = 'John Doe', nationality = 'Araska', age = 22 }: Find
 
 インデックス型についてはタイプエイリアスのページを参照ください。
 
-{% page-ref page="type-alias.md" %}
+{% page-ref page="type-aliases.md" %}
 
 `Person`を`Record`を使って表現すると以下になりますが`Record`はプロパティを`Optional`にする機能はないため`Person`とは完全に一致せず、上記の`Required<Person>`と同じものになります。
 

@@ -54,7 +54,7 @@ increment(4);
 
 そこでオブジェクトの型を独自に定義することができます。独自に定義した型にエイリアス\(別名\)をつけて使い回すこともできます。この機能については本書のタイプエイリアスの頁を参照ください。
 
-{% page-ref page="type-alias.md" %}
+{% page-ref page="type-aliases.md" %}
 
 ## オブジェクトのプロパティは上書き可能
 
@@ -111,7 +111,7 @@ pikachu.name = false;
 
 `readonly`については、タイプエイリアスの頁にて解説がありますので、そちらをご参照ください。
 
-{% page-ref page="type-alias.md" %}
+{% page-ref page="type-aliases.md" %}
 
 #### `const assertion`
 
@@ -460,7 +460,7 @@ interface Parameter extends Mandatory, Optional {
 
 Mapped typeはタイプエイリアスのみができます。Mapped typeについてはタイプエイリアスのページを参照してください。
 
-{% page-ref page="type-alias.md" %}
+{% page-ref page="type-aliases.md" %}
 
 ユーティリティ型の`Readonly<T>`はMapped typeで以下のように実装されています。
 

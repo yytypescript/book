@@ -41,7 +41,7 @@ impossible = true as false;
 
 リテラル型はのちに紹介されるユニオン型との相性がよく併用されます。ここではユニオン型とは`|`で区切られた型のどれかであるとだけ解釈してください。
 
-{% page-ref page="union-type.md" %}
+{% page-ref page="union-types.md" %}
 
 ```typescript
 let persons: 1 | 2 | 3 | 4 | 5 = 4;

@@ -35,7 +35,7 @@ const taro: Person = {
 
 タイプエイリアスと同じようにインターフェースの定義ではプロパティの宣言で選択可\(Optional\)、読み取り専用\(Readonly\)にすることができます。同様にインデックス型も使用可能です。こちらについては説明が重複しますのでタイプエイリアスのページをご参照ください。
 
-{% page-ref page="type-alias.md" %}
+{% page-ref page="type-aliases.md" %}
 
 ## 継承 \(`Inheritance`\)
 

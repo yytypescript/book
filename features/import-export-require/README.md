@@ -326,7 +326,7 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 出力の方法に関しては`tsconfig.json`の頁に説明がありますのでそちらをご覧ください。
 
-{% page-ref page="../../handson/setting-tsconfig.json.md" %}
+{% page-ref page="../../handson/tsconfig.json-settings.md" %}
 
 ## `require? import?`
 

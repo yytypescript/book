@@ -30,7 +30,7 @@ x = 'hello';
 let x = 1;
 
 // Error: Type 'string' is not assignable to type 'number'.
-x = 'hello'; // x は number型 と決定しているので、string型を代入するとエラー
+x = 'hello'; // x はnumber型と決定しているのでstring型を代入するとエラー
 
 // Property 'substring' does not exist on type 'number'.
 console.log(x.substring(1,3)
@@ -42,8 +42,8 @@ console.log(x.substring(1,3)
 
 ```javascript
 // JavaScriptでの例
-let x = 1; // x は Number型 となる
-x = 'hello'; // x は String型 となる
+let x = 1; // x はnumber型となる
+x = 'hello'; // x はstring型となる
 
 // output: "el"
 console.log(x.substring(1,3)
@@ -56,7 +56,7 @@ console.log(x.substring(1,3)
 変数は代入している値から型が推論されます。
 
 ```typescript
-// 代入する値から型が推論され、x は number[] となる
+// 代入する値から型が推論され x はnumber[]型になる
 const x = [1, 2, 3];
 ```
 
@@ -81,7 +81,7 @@ const x = add([1, 2, 3], 'hello');
 ```typescript
 const button = document.createElement('button');
 
-// event は MouseEvent型 になる
+// event は MouseEvent型になる
 button.onclick = function(event) {
     console.log(event.target);
 
@@ -95,10 +95,27 @@ button.onclick = function(event) {
 関数は実際に返している値で戻り値の型が推論されます。
 
 ```typescript
-// 戻り値の型は number型
+// 戻り値の型はnumber型
 // const add = (a: number, b: number) => number
 const add = function(a: number, b: number) {
     return a+b;
+}
+```
+
+`return`が複数あり違う型を返している場合推論される型はユニオン型になります。
+
+```typescript
+type Person = {
+  age?: number;
+};
+
+// 戻り値の型はnumber | null型
+function getAge(person: Person) {
+  if (typeof person.age === 'undefined') {
+    return null;
+  }
+
+  return person.age;
 }
 ```
 
@@ -155,7 +172,6 @@ class User {
 // 型を省略するケース
 const x = 1;
 const user = new User('taro');
-
 ```
 
 空配列を初期値として代入する場合やletで変数定義をする場合は`any`型になってしまうので、こういったケースでは積極的に型アノテーションを書いていきます。
@@ -175,7 +191,7 @@ let list: number[] = [];
 関数の引数は型アノテーションを書きます。型を省略した場合は`any`型になってしまうため、型の恩恵が受けられなくなってしまいます。
 
 ```typescript
-// name は any型 になる。
+// name はany型になる。
 // 引数でnumber型などを渡してもコンパイルエラーにならない
 function hello(name) {
     console.log(`Hello, ${name.toUpperCase()}`);

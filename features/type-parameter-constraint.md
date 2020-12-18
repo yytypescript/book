@@ -4,7 +4,7 @@ TypeScriptではジェネリクスの型パラメータを特定の型に限定�
 
 ### ジェネリクス型パラメータで直面する問題
 
-`changeBackgroundColor`という関数を例に考えてみます。この関数は指定されたHTML要素の背景色を変更して、そのHTML要素を返す関数です。  
+`changeBackgroundColor()`という関数を例に考えてみます。この関数は指定されたHTML要素の背景色を変更して、そのHTML要素を返す関数です。  
 ジェネリクス型 `T` を定義することで、`HTMLButtonElement` や `HTMLDivElement` などの任意のHTML要素を受け取れるようにしています。
 
 ```typescript
@@ -17,7 +17,7 @@ function changeBackgroundColor<T>(element: T) {
 
 このコードはコンパイルに失敗します。ジェネリクスの型 `T` は、任意の型が指定可能なので、渡す型によっては `style`プロパティが存在しない場合があるからです。コンパイラは存在しないプロパティへの参照が発生する可能性を検知してコンパイルエラーとしているのです。
 
-`any` を使えばコンパイルエラーを回避する事は可能ですが、型のチェックがされないので、将来バグが発生する危険性もあるので、出来る限り避けたいです。
+`any` を使えばコンパイルエラーを回避する事は可能ですが、型のチェックがされません。将来バグが発生する危険性もあるので、出来る限り避けたいところです。
 
 ```typescript
 function changeBackgroundColor<T>(element: T) {
@@ -40,4 +40,6 @@ function changeBackgroundColor<T extends HTMLElement>(element: T) {
     return element;
 }
 ```
+
+この`extends`キーワードはインターフェースに対しても使用します。インターフェースは実装のときは`implements`キーワードを使用しますが型パラメータに使用するときは`implements`を使いません。あるインターフェース`X`を実装したジェネリクスのみに限定したいときに`<T implements X>`としてはならず`<T extends X>`とします。
 
