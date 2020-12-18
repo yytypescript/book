@@ -92,22 +92,25 @@ description: あなたが本書に貢献できること。
 しっかりとしたプロセスはまだありません。今の所ふわっと合意できれば決定します。
 
 ## 校正チェック
+
 このプロジェクトでは[textlint](https://textlint.github.io/)による校正チェックを導入しています。
 
 `npm run textlint`を実行すると文章に対する校正チェックを実行できます。
 
-```
+```text
 $ npm run textlint
 ```
 
 `npm run textlint:fix`を実行することで文章の校正チェックでエラーとなっている箇所を自動修正できます。
 
-```
+```text
 $ npm run textlint:fix
 ```
 
 ### 表記揺れの統一
+
 表記揺れを発見された場合は、[prh/yytypescript.yml](https://github.com/yytypescript/book/tree/master/handson)にルールを追加してください。
 
 prhの設定ファイルの書き方は次のページを参照してください。  
 [prh/prh](https://github.com/prh/prh)
+

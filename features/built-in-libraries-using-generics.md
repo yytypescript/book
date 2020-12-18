@@ -10,7 +10,7 @@
 
 これらのオブジェクトでジェネリクスがどう使われているのかを見てきましょう。
 
-### なぜジェネリクスが使われているか
+## なぜジェネリクスが使われているか
 
 `Array`オブジェクトは `string` や `number` など状況に応じて色々な型の要素を保持する必要があります。このとき、配列の要素の型はどんなプログラムを実装するかで変わってきます。つまり、要素の型を抽象化してプログラマーが実装時に型を指定できる必要があります。
 
@@ -28,11 +28,11 @@ const numbers: number[] = [1, 2, 3, 4];
 
 {% page-ref page="array.md" %}
 
-### 標準ライブラリを使ってみる
+## 標準ライブラリを使ってみる
 
 実際にジェネリクスが使われる標準ライブラリを利用した実装をみてみましょう。
 
-#### `Array.protoype.map<T>()`
+### `Array.protoype.map<T>()`
 
 `Array`オブジェクトの `map<T>()` メソッドは引数で渡された関数をすべての配列の要素に適用することで新しい配列を返す関数です。サンプルコードでは、新しく生成される数値配列の要素の型を指定する `map<number>` でジェネリクスが使われています。
 
@@ -43,7 +43,7 @@ const numbers = textNumbers.map<number>(function(text: string) {
 });
 ```
 
-#### `Map<K, V>`
+### `Map<K, V>`
 
 `Map<K, V>` オブジェクトでは、`K` にキーの型を指定し`V` にキーに紐づく値の型を指定します。先ほどの `map<T>()` メソッドは、ジェネリクスの型定義がひとつだけでしたが、`Map<K, V>` は型定義がふたつあります。このようにジェネリクスの型定義はひとつである必要はなく、複数の型定義を持つことも可能です。
 
@@ -64,13 +64,13 @@ addresses.set("太郎", {
 console.log(addresses.get("太郎"));
 ```
 
-#### `Promise<T>`
+### `Promise<T>`
 
 `Promise`オブジェクトについての説明は本書より詳細な記載がありますので、そちらをご参照ください。
 
 {% page-ref page="promise-async-await.md" %}
 
-#### 標準ライブラリの型定義の参照方法
+### 標準ライブラリの型定義の参照方法
 
 標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認することができます。  
 [https://github.com/microsoft/TypeScript/tree/master/lib](https://github.com/microsoft/TypeScript/tree/master/lib)

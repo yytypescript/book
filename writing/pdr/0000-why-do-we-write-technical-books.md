@@ -4,7 +4,7 @@
 * 決定者: reoring, suin, philomagi, kakiuchi
 * 更新日: 2019-12-13
 
-### 背景: なぜTypeScriptの技術書を書くのか？
+## 背景: なぜTypeScriptの技術書を書くのか？
 
 TypeScriptコミュニティを盛り上げるには、今何をしたらもっともインパクトがあるのか？この疑問がTypeScriptの技術書を書きはじめる原点となる。
 
@@ -18,7 +18,7 @@ YYPHPとYYTypeScriptを主催して感じたことは、PHPと比べて**TypeScr
 
 * 関連動画: [YYTypeScript\#13 執筆会 - YouTube 6:45~11:50](https://youtu.be/zYiazS4h5e8?t=406)
 
-### 決定事項
+## 決定事項
 
 TypeScriptの技術書を書く。なぜなら、
 

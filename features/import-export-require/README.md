@@ -89,7 +89,7 @@ console.log(day);
 
 ### `exports`
 
-`module.exports`だと良くも悪くも出力しているモノの名前を変更できてしまいます。それを避けたい時はこの`exports`を使用します。 
+`module.exports`だと良くも悪くも出力しているモノの名前を変更できてしまいます。それを避けたい時はこの`exports`を使用します。
 
 ```typescript
 // util.js
@@ -350,7 +350,7 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 * エディター、IDEによっては入力補完が効きづらい
 * 再エクスポートの際に名前をつける必要がある
 
-### `named export` 
+### `named export`
 
 #### Pros
 

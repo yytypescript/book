@@ -862,11 +862,9 @@ function next(lyric: string, count: number): string {
 
 ```typescript
 type ObjectLiteralLike = {
-  [key: string]: string;
 };
 
 type ArrayObjectLike = {
-  [key: number]: string;
 };
 
 const butterfly: ObjectLiteralLike = {
@@ -910,7 +908,6 @@ const first: string | undefined = phoneticCode[0];
 
 ```typescript
 type SystemTerms = {
-  [key: string]: string;
   en: string;
 };
 ```

@@ -99,7 +99,7 @@ class A {
   public does(): number {
     return 1;
   }
-  
+
   public makes(num: number): number {
     return num;
   }
@@ -110,7 +110,7 @@ class B {
   public does(): string {
     return '';
   }
-  
+
   public makes(str: string): string {
     return str;
   }

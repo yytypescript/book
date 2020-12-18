@@ -192,8 +192,6 @@ request_async()
 .then(function(result){
     console.log(result) // 1
 });
-
-
 ```
 
 ### await

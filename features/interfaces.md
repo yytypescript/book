@@ -136,7 +136,6 @@ if (studentA instanceof Student) {
 
 ```typescript
 type UnknownObject = {
-  [key: string]: unknown;
 };
 
 function isStudent(obj: unknown): obj is Student {

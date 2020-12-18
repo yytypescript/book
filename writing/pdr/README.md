@@ -11,7 +11,7 @@ description: >-
 * 元は Architecture Decision Record
   * [アーキテクチャの「なぜ？」を記録する！ADRってなんぞや？ - Qiita](https://qiita.com/fuubit/items/dbb22435202acbe48849)
 
-### PDR一覧
+## PDR一覧
 
 {% page-ref page="0000-why-do-we-write-technical-books.md" %}
 
@@ -31,7 +31,7 @@ description: >-
 
 {% page-ref page="0008-prefer-type-alias-over-interface.md" %}
 
-### テンプレート
+## テンプレート
 
 PDRを追加する際は、[PDRのテンプレート](__pdr-template.md)をお使いください。
 

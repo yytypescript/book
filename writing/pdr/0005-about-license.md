@@ -24,8 +24,10 @@ description: 本書の利用者、及び執筆者のライセンスについて
 * 株式会社ドワンゴが出している[Scala初学者向けの学習テキスト](https://scala-text.github.io/scala_text/#%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9)
   * [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.ja)
 * [typescript-handbook](https://www.typescriptlang.org/docs/handbook/basic-types.html)
-  * [https://github.com/microsoft/TypeScript-Handbook/blob/master/LICENSE](https://github.com/microsoft/TypeScript-Handbook/blob/master/LICENSE
-    )
+  * \[[https://github.com/microsoft/TypeScript-Handbook/blob/master/LICENSE\]\(https://github.com/microsoft/TypeScript-Handbook/blob/master/LICENSE](https://github.com/microsoft/TypeScript-Handbook/blob/master/LICENSE]%28https://github.com/microsoft/TypeScript-Handbook/blob/master/LICENSE)
+
+    \)
+
   * [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 * TypeScript-Deep-Dive
   * [typescript-book](https://github.com/basarat/typescript-book/blob/master/LICENSE.md)
@@ -95,6 +97,4 @@ description: 本書の利用者、及び執筆者のライセンスについて
   * gitbookでの実現方法
     * 個別に同意してもらう。
     * 何かしらの方法で。\(メール or Googleフォーム\) ← 【採用: 今後追記】
-
-
 

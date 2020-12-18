@@ -1,8 +1,8 @@
 # exportとexport defaultどちらを使うべきか？Pros/Consある話
 
-### named exports <a id="named-exports"></a>
+## named exports <a id="named-exports"></a>
 
-#### Pros <a id="Pros"></a>
+### Pros <a id="Pros"></a>
 
 * インポートの際にエディターの補完がきく
 * TSではvscodeの自動インポートが可能になる
@@ -10,20 +10,20 @@
 * ひとつのモジュールで複数の値をエクスポートできる
 * 明示的に命名することによって、名前から情報を得ることができる
 
-#### Cons <a id="Cons"></a>
+### Cons <a id="Cons"></a>
 
 * インポートするときにエクスポートされた際に命名された名前を使う必要がある
 * エクスポートの名前を変更するとインポートしている側のコードに影響がでる
 
-### default export <a id="default-export"></a>
+## default export <a id="default-export"></a>
 
-#### Pros <a id="Pros1"></a>
+### Pros <a id="Pros1"></a>
 
 * インポート時に任意の名前を命名できる
 * インポートの構文が単純化される
 * モジュールの主要なエクスポートが何であるか、モジュール作成者の意図が伝わる
 
-#### Cons <a id="Cons1"></a>
+### Cons <a id="Cons1"></a>
 
 * インポートする際に、名前を考える必要がある
 * エディターがデフォルトエクスポートがあるかどうかを検出できない
@@ -33,5 +33,5 @@
 named exportsとdefault exportについてはECMAScript Discussion Archivesにおいて、議論されているので、こちらも参考にしてみるとよいでしょう。  
 [https://esdiscuss.org/topic/moduleimport](https://esdiscuss.org/topic/moduleimport)
 
-### どちらをどのようなときに使うべきなのか？
+## どちらをどのようなときに使うべきなのか？
 

@@ -2,7 +2,7 @@
 
 TypeScriptではジェネリクスの型パラメータを特定の型に限定することができます。
 
-### ジェネリクス型パラメータで直面する問題
+## ジェネリクス型パラメータで直面する問題
 
 `changeBackgroundColor()`という関数を例に考えてみます。この関数は指定されたHTML要素の背景色を変更して、そのHTML要素を返す関数です。  
 ジェネリクス型 `T` を定義することで、`HTMLButtonElement` や `HTMLDivElement` などの任意のHTML要素を受け取れるようにしています。
@@ -28,7 +28,7 @@ function changeBackgroundColor<T>(element: T) {
 }
 ```
 
-### 型パラメータに制約をつける
+## 型パラメータに制約をつける
 
 TypeScriptでは `extends` キーワードを用いることで、ジェネリクスの型 `T` を特定の型に限定することができます。
 
