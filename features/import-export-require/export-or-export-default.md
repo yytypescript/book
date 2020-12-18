@@ -4,7 +4,7 @@
 
 #### Pros <a id="Pros"></a>
 
-* インポートの際にエディタの補完がきく
+* インポートの際にエディターの補完がきく
 * TSではvscodeの自動インポートが可能になる
   * [https://marketplace.visualstudio.com/items?itemName=NuclleaR.vscode-extension-auto-import](https://marketplace.visualstudio.com/items?itemName=NuclleaR.vscode-extension-auto-import)
 * ひとつのモジュールで複数の値をエクスポートできる
@@ -26,12 +26,12 @@
 #### Cons <a id="Cons1"></a>
 
 * インポートする際に、名前を考える必要がある
-* エディタがデフォルトエクスポートがあるかどうかを検出できない
-* 再エクスポートの際に名前を付ける必要がある
+* エディターがデフォルトエクスポートがあるかどうかを検出できない
+* 再エクスポートの際に名前をつける必要がある
 * 関数・クラス以外をExportするときに、一度変数に代入する必要がある
 
-named exportsとdefault exportについてはECMAScript Discussion Archivesにおいて、議論されているので、こちらも参考にしてみると良いでしょう。  
+named exportsとdefault exportについてはECMAScript Discussion Archivesにおいて、議論されているので、こちらも参考にしてみるとよいでしょう。  
 [https://esdiscuss.org/topic/moduleimport](https://esdiscuss.org/topic/moduleimport)
 
-### どちらをどういうときに使うべきなのか？
+### どちらをどのようなときに使うべきなのか？
 

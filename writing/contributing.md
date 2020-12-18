@@ -9,7 +9,7 @@ description: あなたが本書に貢献できること。
 ## 感想を伝える
 
 * 読んでの感想を教えて頂けると、執筆の参考になります。
-* ポジティブな感想は嬉しいです。モチベーションが上がります。
+* ポジティブな感想はうれしいです。モチベーションが上がります。
 
 ## 分からないことを質問する
 
@@ -22,12 +22,12 @@ description: あなたが本書に貢献できること。
 
 ## SNSでシェアする
 
-* TwitterなどSNSでシェアして頂けると嬉しいです。
+* TwitterなどSNSでシェアして頂けるとうれしいです。
 
 ## 執筆会を見学する
 
-* 「見学」は最も簡単な参加形態です。まずは気軽に見に来てください。
-* 見学の際には「見学に来ました」とお伝え下さい。
+* 「見学」はもっとも簡単な参加形態です。まずは気軽に見に来てください。
+* 見学の際には「見学に来ました」とお伝えください。
 
 ### オフライン執筆会を見学する
 
@@ -41,14 +41,14 @@ description: あなたが本書に貢献できること。
 
 ### リモートで執筆会を見学する
 
-まずはYYTypeScriptのSlackへご参加ください。下記のURLから参加可能です。  
+まずはYYTypeScriptのSlackへご参加ください。次のURLから参加可能です。  
 [https://yytypescript.github.io/slack](https://yytypescript.github.io/slack)  
 執筆に関してはチャンネル \#publish にて行なっています。
 
 ## 執筆する
 
 * 執筆はこのプロジェクトの中心的な活動です。
-* 執筆には、下記のような活動があります:
+* 執筆には、次のような活動があります:
   * 新規ページを書く
   * 既存ページを良くする
     * 誤字脱字の訂正
@@ -60,10 +60,10 @@ description: あなたが本書に貢献できること。
 
 * Slackに参加する。
   * こちらのURLから参加できます→ [https://yytypescript.github.io/slack](https://yytypescript.github.io/slack)
-* gitbook.comのYYTypeScriptチームに参加する。\(執筆をgitbook.comのエディタで行っているため\)
+* gitbook.comのYYTypeScriptチームに参加する。\(執筆をgitbook.comのエディターで行っているため\)
   * 参加申し込みはこちら→[Join YYTypeScript - GitBook](https://app.gitbook.com/invite/yyts?invite=-Lw1ObCW8Ut0NnNfHG1w)
 * PDRを理解する。
-  * PDR\(publishers' decision record; 出版者意思決定記録\)は、これまで執筆に関して合意してきた意思決定が記録されています。執筆前にざっと目を通しておいて下さい。
+  * PDR\(publishers' decision record; 出版者意思決定記録\)は、これまで執筆に関して合意してきた意思決定が記録されています。執筆前にざっと目を通しておいてください。
 
 {% page-ref page="pdr/" %}
 
@@ -81,7 +81,7 @@ description: あなたが本書に貢献できること。
 
 ## 意思決定に参加する
 
-行動方針や執筆に当たっての取り決めなど、意思決定をしたい場合、下記のいずれかの方法があります。
+行動方針や執筆に当たっての取り決めなど、意思決定をしたい場合、次のいずれかの方法があります。
 
 * Slackの\#publishチャンネルで、雑談レベルで提案する。
 * PDRの提案を書き、Mergeする前にSlackの\#publishチャンネルで共有する。
@@ -91,3 +91,23 @@ description: あなたが本書に貢献できること。
 
 しっかりとしたプロセスはまだありません。今の所ふわっと合意できれば決定します。
 
+## 校正チェック
+このプロジェクトでは[textlint](https://textlint.github.io/)による校正チェックを導入しています。
+
+`npm run textlint`を実行すると文章に対する校正チェックを実行できます。
+
+```
+$ npm run textlint
+```
+
+`npm run textlint:fix`を実行することで文章の校正チェックでエラーとなっている箇所を自動修正できます。
+
+```
+$ npm run textlint:fix
+```
+
+### 表記揺れの統一
+表記揺れを発見された場合は、[prh/yytypescript.yml](https://github.com/yytypescript/book/tree/master/handson)にルールを追加してください。
+
+prhの設定ファイルの書き方は次のページを参照してください。  
+[prh/prh](https://github.com/prh/prh)

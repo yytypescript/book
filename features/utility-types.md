@@ -1,10 +1,10 @@
 # ユーティリティ型 \(Utility Types\)
 
-TypeScriptで開発するということはJavaScriptに型を付与することです。型を付与する時にあらかじめ用意されている便利な型の表現がいくつかありますのでそちらを紹介します。今回紹介するものは全てではないので、他も興味がある方は公式やソースコードを参照してください。
+TypeScriptで開発するということはJavaScriptに型を付与することです。型を付与する時にあらかじめ用意されている便利な型の表現がいくつかありますのでそちらを紹介します。今回紹介するものはすべてではないので、他も興味がある方は公式やソースコードを参照してください。
 
-これから紹介するユーティリティ型は全てTypeScriptのパッケージで定義されており、ソースコードも同梱されているのでその実装方法を見ることが可能です。
+これから紹介するユーティリティ型はすべてTypeScriptのパッケージで定義されており、ソースコードも同梱されているのでその実装方法を見ることが可能です。
 
-本章のユーティリティ型の仕様例で、ことわりなく`Person, User`というオブジェクトを使用している部分は、下記に示すタイプエイリアスとそのオブジェクトを使うものとします。
+本章のユーティリティ型の仕様例で、ことわりなく`Person, User`というオブジェクトを使用している部分は、次に示すタイプエイリアスとそのオブジェクトを使うものとします。
 
 ```typescript
 type Person = {
@@ -27,7 +27,7 @@ type User = {
 
 ## `Required<T>`
 
-全てのプロパティから`Optional`であることを意味する`?`を取り除きます。
+すべてのプロパティから`Optional`であることを意味する`?`を取り除きます。
 
 `Required<Person>`は以下と同じ型になります。
 
@@ -41,7 +41,7 @@ type RequiredPerson = {
 
 ## `Readonly<T>`
 
-オブジェクトのプロパティに対する代入を防ぐ`readonly`を全てのプロパティに対して適用します。プロパティがオブジェクトだった場合、それが持つプロパティまでは`readonly`にしないことに注意してください。これは普通の`readonly`と同じ挙動です。
+オブジェクトのプロパティに対する代入を防ぐ`readonly`をすべてのプロパティに対して適用します。プロパティがオブジェクトだった場合、それが持つプロパティまでは`readonly`にしないことに注意してください。これは普通の`readonly`と同じ挙動です。
 
 `Readonly<Person>`は以下と同じ型になります。
 
@@ -55,7 +55,7 @@ type ReadonlyPerson = {
 
 ## `Partial<T>`
 
-全てのプロパティに`Optional`であることを意味する`?`を適用します。
+すべてのプロパティに`Optional`であることを意味する`?`を適用します。
 
 `Partial<Person>`は以下と同じ型になります。
 
@@ -89,7 +89,7 @@ findUsers(undefined, undefined, 22);
 
 この例題は引数が3個しかないためそこまで見辛くはないですが、多い引数の関数になるとどこに引数を入れて他を`undefined`とするかが面倒です。これを`Partial<T>`を使って見た目をよくできます。
 
-まず引数は全てオブジェクトで受け渡しされるものとしてそのオブジェクトの型を定義します。さらにプロパティを省略可能にするために`Partial<T>`をつけます。
+まず引数はすべてオブジェクトで受け渡しされるものとしてそのオブジェクトの型を定義します。さらにプロパティを省略可能にするために`Partial<T>`をつけます。
 
 ```typescript
 type FindUsersArgs = Partial<{
@@ -142,7 +142,7 @@ function findUsers({ name = 'John Doe', nationality = 'Araska', age = 22 }: Find
 
 {% page-ref page="type-aliases.md" %}
 
-`Person`を`Record`を使って表現すると以下になりますが`Record`はプロパティを`Optional`にする機能はないため`Person`とは完全に一致せず、上記の`Required<Person>`と同じものになります。
+`Person`を`Record`を使って表現すると次になりますが`Record`はプロパティを`Optional`にする機能はないため`Person`とは完全に一致せず、上記の`Required<Person>`と同じものになります。
 
 ```typescript
 type Name = 'surname' | 'middleName' | 'givenName';
@@ -172,7 +172,7 @@ type Person = Pick<User, Necessary>;
 
 ### 大元となる型の定義に追従する
 
-書籍を扱うサービスを作ったとして、書籍を意味するオブジェクト`Book`が以下のように定義されているとします。
+書籍を扱うサービスを作ったとして、書籍を意味するオブジェクト`Book`が次のように定義されているとします。
 
 ```typescript
 type Book = {
@@ -184,7 +184,7 @@ type Book = {
 };
 ```
 
-これを参考にして`Book`を作成するための入力データとして`BookInputData`を作るとします。これは外部からのリクエストで作成され、`id, createdAt, updatedAt`はこのサービスで後付けで割り当てられるとすれば`BookInputData`は以下になります。
+これを参考にして`Book`を作成するための入力データとして`BookInputData`を作るとします。これは外部からのリクエストで作成され、`id, createdAt, updatedAt`はこのサービスで後付けで割り当てられるとすれば`BookInputData`は次になります。
 
 ```typescript
 type BookInputData = {
@@ -301,7 +301,7 @@ type InputText = Exclude<string, ''>;
 // -> string
 ```
 
-入力した文字を表す型として`InputText`を定義したとしても、この`InputText`は`''`以外の全ての`string`とは解釈されず、ただの`string`型になります。
+入力した文字を表す型として`InputText`を定義したとしても、この`InputText`は`''`以外のすべての`string`とは解釈されず、ただの`string`型になります。
 
 ## `Extract<T, U>`
 

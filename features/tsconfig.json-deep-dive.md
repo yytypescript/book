@@ -133,7 +133,7 @@ tsconfig.jsonにある`sourceMap`の項目を`true`に変更します。
 
 名前が仰々しいですが、やることは`commonjs`用のJavaScriptと`esmodule`用のJavaScriptを出力することです。つまり出力する`module`の分だけtsconfig.jsonを用意します。
 
-プロジェクトはおおよそ以下のような構成になります。
+プロジェクトはおおよそ次のような構成になります。
 
 ```bash
 ./
@@ -156,7 +156,7 @@ tsconfig.base.jsonとtsconfig.jsonを分けるかどうかについては好み�
 
 #### tsconfig.jsonの継承
 
-tsconfig.jsonは他のtsconfig.jsonを継承する機能があります。上記はtsconfig.cjs.json, tsconfig.esm.jsonは以下のようにしてtsconfig.base.jsonを継承しています。
+tsconfig.jsonは他のtsconfig.jsonを継承する機能があります。上記はtsconfig.cjs.json, tsconfig.esm.jsonは次のようにしてtsconfig.base.jsonを継承しています。
 
 ```typescript
 // tsconfig.cjs.json
@@ -184,7 +184,7 @@ tsconfig.jsonは他のtsconfig.jsonを継承する機能があります。上記
 
 `outDir`はトランスパイルした`js`と、型定義ファイルを出力していれば\(後述\)それを出力するディレクトリを変更するオプションです。
 
-このようなtsconfig.xxx.jsonができていれば、あとは以下のようにファイル指定してトランスパイルをするだけです。
+このようなtsconfig.xxx.jsonができていれば、あとは次のようにファイル指定してトランスパイルをするだけです。
 
 ```bash
 tsc -p tsconfig.cjs.json
@@ -197,15 +197,15 @@ package.jsonもDual Packageのための設定が必要です。
 
 #### `main`
 
-package.jsonにあるそのパッケージのエントリポイントとなるファイルを指定する項目です。Dual Packageの時はここに`commonjs`のエントリポイントとなる`js`ファイルを設定します。
+package.jsonにあるそのパッケージのエントリーポイントとなるファイルを指定する項目です。Dual Packageのときはここに`commonjs`のエントリーポイントとなる`js`ファイルを設定します。
 
 #### `module`
 
-Dual Packageの時はここに`esmodule`のエントリポイントとなる`js`ファイルを設定します。
+Dual Packageのときはここに`esmodule`のエントリーポイントとなる`js`ファイルを設定します。
 
 #### `types`
 
-型定義ファイルのエントリポイントとなる`ts`ファイルを設定します。型定義ファイルを出力するようにしていれば`commonjs, esmodule`のどちらのtsconfig.jsonで出力したものでも問題ありません。
+型定義ファイルのエントリーポイントとなる`ts`ファイルを設定します。型定義ファイルを出力するようにしていれば`commonjs, esmodule`のどちらのtsconfig.jsonで出力したものでも問題ありません。
 
 package.jsonはこのようになっているでしょう。
 
@@ -225,11 +225,11 @@ package.jsonはこのようになっているでしょう。
 }
 ```
 
-トランスパイル後の`js`のファイルの出力先はあくまでも例です。tsconfig.jsonの`outDir`を変更すれば出力先を変更できるのでそちらを設定後、package.jsonでエントリポイントとなる`js`ファイルの設定をしてください。
+トランスパイル後の`js`のファイルの出力先はあくまでも例です。tsconfig.jsonの`outDir`を変更すれば出力先を変更できるのでそちらを設定後、package.jsonでエントリーポイントとなる`js`ファイルの設定をしてください。
 
 ### Tree Shaking
 
-`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができる全てをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなりすぎるという弱点があります。特にそれがSPA\(Signle Page Application\)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
+`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができるすべてをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなり過ぎるという弱点があります。特にそれがSPA\(Signle Page Application\)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
 
 この事態を避けるために`module bundler`は容量削減のための涙ぐましい努力を続けています。その機能のひとつとして題名のTree Shakingを紹介するとともに、開発者にできるTree Shaking対応パッケージの作り方を紹介します。
 
@@ -248,7 +248,7 @@ Tree Shakingとは使われていない関数、クラスを最終的な`js`フ�
 
 `commonjs`は`require()`を使用します。`require()`はファイルのどの行でも使用ができますが`esmodule`の`import`はファイルの先頭でやらなければならないという決定的な違いがあります。
 
-`require()`はある時はこの`js`を、それ以外の時はあの`js`を、と読み込むファイルをコードで切り替えることができます。つまり、以下のようなことができます。
+`require()`はある時はこの`js`を、それ以外のときはあの`js`を、と読み込むファイルをコードで切り替えることができます。つまり、次のようなことができます。
 
 ```typescript
 let police = null;
@@ -261,7 +261,7 @@ if (shouldCallPolice()) {
 }
 ```
 
-一方、先述の通り`esmodule`はコードに読み込みロジックを混ぜることはできません。
+一方、先述のとおり`esmodule`はコードに読み込みロジックを混ぜることはできません。
 
 上記例で`shouldCallPolice()`が常に`true`を返すように作られていたとしても`module bundler`はそれを検知できない可能性があります。本来なら必要のない`firefighter`を読み込まないという選択を取ることは難しいでしょう。
 
@@ -352,7 +352,7 @@ if (shouldCallPolice()) {
 
 ### `strict`
 
-このオプションは**TypeScript4.0時点で**以下の7個のオプションを全て有効にしていることと同じです。スクラッチから開発するのであれば有効にしておいて差し支えないでしょう。
+このオプションは**TypeScript4.0時点で**次の7個のオプションをすべて有効にしていることと同じです。スクラッチから開発するのであれば有効にしておいて差し支えないでしょう。
 
 * noImplicitAny
 * strictNullChecks
@@ -551,13 +551,13 @@ class User {
 }
 ```
 
-このオプションが有効だと、ORMで使うようなプロパティが全て`public`でコンストラクタのないクラスは基本的に作れなくなります。
+このオプションが有効だと、ORMで使うようなプロパティがすべて`public`でコンストラクタのないクラスは基本的に作れなくなります。
 
 ### `noImplicitThis`
 
 名前付き関数、匿名関数はアロー関数と異なり、実行時に`this`が決定されます。そのため、内部で`this`を使っているとそれは関数を書いている時点では`any`型と同じ扱いになります。このオプションはそれを禁止します。
 
-以下のような`Type alias`があるとします。
+次のような`Type alias`があるとします。
 
 ```typescript
 type Person = {
@@ -666,7 +666,7 @@ TypeError: Cannot read property '0' of undefined
 
 これはプロパティが`name20`までしかない`Person`のオブジェクトリテラルに対して`name21 ~ name24`のプロパティを取得し、それに`capitalize()`を適用しようとしたことが問題です。
 
-`noImplicitThis`を`true`に設定しこれをトランスパイルしようとすると大量の以下の警告が表示されます。
+`noImplicitThis`を`true`に設定しこれをトランスパイルしようとすると大量の次の警告が表示されます。
 
 ```typescript
 'this' implicitly has type 'any' because it does not have a type annotation.
@@ -680,7 +680,7 @@ function dump(this: Person): string {
 }
 ```
 
-するとTypeScriptは存在しないプロパティについての指摘をするようになります。`name21 ~ name30`に以下の警告が出るようになります。
+するとTypeScriptは存在しないプロパティについての指摘をするようになります。`name21 ~ name30`に次の警告が出るようになります。
 
 ```typescript
 Property 'nameXX' does not exist on type 'Person'. Did you mean 'name01'?
@@ -741,7 +741,7 @@ function choose(_n1: string, n2: string): number {
 
 ### `noImplicitReturns`
 
-関数の全ての条件分岐で`return`が行われているかを厳密にチェックします。
+関数のすべての条件分岐で`return`が行われているかを厳密にチェックします。
 
 ```typescript
 function negaposi(num: number): string {
@@ -829,7 +829,7 @@ function nextLyric(lyric: string, count: number): string {
 Fallthrough case in switch.
 ```
 
-となります。これは`case 'will'`の時に`return`されない場合がある、つまり`fallthrough`が発生していることが問題です。
+となります。これは`case 'will'`のときに`return`されない場合がある、つまり`fallthrough`が発生していることが問題です。
 
 これを回避するためには`case`では漏れなく`break`あるいは`return`をするように設計します。
 
@@ -852,7 +852,7 @@ function next(lyric: string, count: number): string {
 }
 ```
 
-なお、このオプションは`case`に処理がある場合のみ`break`あるいは`return`を強制します。この項目で一番初めに紹介した一か月の日数を求める関数`daysOfMonth()`は、`fallthrough`である`case`は全て処理がないため警告は発生しません。
+なお、このオプションは`case`に処理がある場合のみ`break`あるいは`return`を強制します。この項目で一番初めに紹介した一か月の日数を求める関数`daysOfMonth()`は、`fallthrough`である`case`はすべて処理がないため警告は発生しません。
 
 ### `noUncheckedIndexedAccess`
 
@@ -906,7 +906,7 @@ const englishName: string | undefined = butterfly.en;
 const first: string | undefined = phoneticCode[0];
 ```
 
-ここであるサービスが英語版だけは担保し、他の言語は追々という対応をしたとします。するとそのシステムにある単語や文章を意味する型は以下のようになります。
+ここであるサービスが英語版だけは担保し、他の言語は追々という対応をしたとします。するとそのシステムにある単語や文章を意味する型は次のようになります。
 
 ```typescript
 type SystemTerms = {
@@ -929,7 +929,7 @@ const englishName: string = butterfly.en;
 const frenchhName: string | undefined = butterfly.fr;
 ```
 
-配列は添字を指定する方法でアクセスをすると`undefined`型とのユニオン型と解釈されますが`for-of, array.forEach()`はこの制約を受けないため積極的に使用を検討してください。
+配列はインデックスを指定する方法でアクセスをすると`undefined`型とのユニオン型と解釈されますが`for-of, array.forEach()`はこの制約を受けないため積極的に使用を検討してください。
 
 ```typescript
 const phoneticCodes: string[] = ['alpha', 'bravo', 'charlie'];

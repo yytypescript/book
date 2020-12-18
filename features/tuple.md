@@ -1,6 +1,6 @@
 # タプル \(Tuple\)
 
-TypeScriptの関数は1値のみ返却可能です。戻り値に複数の値を返したい時に、配列に返したい全ての値を入れて返すことがあります。なお以下の関数の戻り値は定数になっていますが、実際は演算した結果だと解釈してください。
+TypeScriptの関数は1値のみ返却可能です。戻り値に複数の値を返したい時に、配列に返したいすべての値を入れて返すことがあります。なお次の関数の戻り値は定数になっていますが、実際は演算した結果だと解釈してください。
 
 ```typescript
 function tuple() {
@@ -25,7 +25,7 @@ list[0].toString();
 
 ## タプルの型
 
-タプルの型は簡単で`[]`を書いて中に型を書くだけです。つまり、上記関数`tuple()`は以下のような戻り値を持っていると言えます。
+タプルの型は簡単で`[]`を書いて中に型を書くだけです。つまり、上記関数`tuple()`は次のような戻り値を持っていると言えます。
 
 ```typescript
 const list: [number, string, boolean] = tuple();
@@ -67,7 +67,7 @@ list[5];
 
 ### 分割代入を使ってタプルにアクセスする
 
-上記関数`tuple()`の戻り値は分割代入を使うと以下のように受けることができます。
+上記関数`tuple()`の戻り値は分割代入を使うと次のように受けることができます。
 
 ```typescript
 const [num, str, bool]: [number, string, boolean] = tuple();
@@ -81,7 +81,7 @@ const [,, bool]: [number, string, boolean] = tuple();
 
 ## タプルを使う場面
 
-TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。その時TypeScriptでは`Promise.all()`というものを使用します。この時タプルが役に立ちます。  
+TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。そのときTypeScriptでは`Promise.all()`というものを使用します。このときタプルが役に立ちます。  
 `Promise`についての詳しい説明は本書に専門の頁がありますので譲ります。ここでは`Promise<T>`という型の変数は`await`をその前につけると`T`が取り出せることだけ覚えておいてください。また、この`T`をジェネリクスと言いますが、こちらも専門の頁があるので譲ります。
 
 {% page-ref page="promise-async-await.md" %}
@@ -93,7 +93,7 @@ const promise: Promise<number> = yyAsync();
 const num: number = await promise;
 ```
 
-例えば以下のような処理に時間が3秒、5秒かかる関数`takes3Seconds(), takes5Seconds()`があるとします。
+たとえば次のような処理に時間が3秒、5秒かかる関数`takes3Seconds(), takes5Seconds()`があるとします。
 
 ```typescript
 async function takes3Seconds(): Promise<string> {
@@ -114,7 +114,7 @@ const str: string = await takes3Seconds();
 const num: number = await takes5Seconds();
 ```
 
-これを`Promise.all()`を使うことで以下のように書くことができます。この時かかる時間は関数の中で最も時間がかかる関数、つまり5秒です。
+これを`Promise.all()`を使うことで次のように書くことができます。このときかかる時間は関数の中でもっとも時間がかかる関数、つまり5秒です。
 
 ```typescript
 const tuple: [string, number] = await Promise.all([
@@ -123,7 +123,7 @@ const tuple: [string, number] = await Promise.all([
 ]);
 ```
 
-この時`Promise.all()`の戻り値を受けた変数`tuple`は`[string, number]`です。実行する関数の`Promise<T>`のジェネリクスの部分とタプルの型の順番は一致します。つまり以下のように入れ替えたら、入れ変えた結果のタプルである`[number, string]`が得られます。
+このとき`Promise.all()`の戻り値を受けた変数`tuple`は`[string, number]`です。実行する関数の`Promise<T>`のジェネリクスの部分とタプルの型の順番は一致します。つまり次のように入れ替えたら、入れ変えた結果のタプルである`[number, string]`が得られます。
 
 ```typescript
 const tuple: [number, string] = await Promise.all([
@@ -132,5 +132,5 @@ const tuple: [number, string] = await Promise.all([
 ]);
 ```
 
-`Promise.all()`は先に終了した関数から順番に戻り値のタプルとして格納されることはなく、元々の順番を保持します。`take3seconds()`の方が早く終わるから、先にタプルに格納されるということはなく、引数に渡した順番の通りにタプル`uple`の要素の型は決まります。
+`Promise.all()`は先に終了した関数から順番に戻り値のタプルとして格納されることはなく、元々の順番を保持します。`take3seconds()`の方が早く終わるから、先にタプルに格納されるということはなく、引数に渡した順番のとおりにタプル`uple`の要素の型は決まります。
 

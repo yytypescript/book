@@ -1,6 +1,6 @@
 # 定義ファイル
 
-自身のプロジェクトでTypeScriptでコーディングする場合は型を宣言することにより、IDEやエディタの補完機能やコードチェックを行えます。しかし外部のパッケージ\(npm\)を利用する場合は型定義ファイルが含まれているとは限りません。
+自身のプロジェクトでTypeScriptでコーディングする場合は型を宣言することにより、IDEやエディターの補完機能やコードチェックを行えます。しかし外部のパッケージ\(npm\)を利用する場合は型定義ファイルが含まれているとは限りません。
 
 ### 定義ファイルとは
 
@@ -16,7 +16,7 @@ tscコマンドに`-d`オプションをつけてコンパイルを行うとJava
 
 **TypeScriptファイル**
 
-下記のTypeScriptファイル\(sample.ts\)を`-d`オプションを付けてコンパイルしてみます。
+次のTypeScriptファイル\(sample.ts\)を`-d`オプションを付けてコンパイルしてみます。
 
 ```typescript
 // sample.ts
@@ -91,7 +91,7 @@ $ npm install moment
 
 [TypeSearch](https://microsoft.github.io/TypeSearch/)からパッケージ名を検索しインストールを行います。TypeSearchのリポジトリは[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)であり、ここに多くのライブラリの定義ファイルが一元管理されています。定義ファイルのインストールも`npm`コマンドを利用します。
 
-[Express](https://expressjs.com/)本体と定義ファイルのインストール例は下記のようになります。
+[Express](https://expressjs.com/)本体と定義ファイルのインストール例は次のようになります。
 
 ```text
 $ npm install express --save // express本体のインストール
