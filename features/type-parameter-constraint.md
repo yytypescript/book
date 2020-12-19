@@ -1,11 +1,11 @@
-# 型パラメータの制約
+# 型パラメーターの制約
 
-TypeScriptではジェネリクスの型パラメータを特定の型に限定することができます。
+TypeScriptではジェネリクスの型パラメーターを特定の型に限定する事ができます。
 
 ## ジェネリクス型パラメータで直面する問題
 
 `changeBackgroundColor()`という関数を例に考えてみます。この関数は指定されたHTML要素の背景色を変更して、そのHTML要素を返す関数です。  
-ジェネリクス型 `T` を定義することで、`HTMLButtonElement` や `HTMLDivElement` などの任意のHTML要素を受け取れるようにしています。
+ジェネリクス型`T`を定義することで`HTMLButtonElement`や`HTMLDivElement`などの任意のHTML要素を受け取れるようにしています。
 
 ```typescript
 function changeBackgroundColor<T>(element: T) {
@@ -15,9 +15,9 @@ function changeBackgroundColor<T>(element: T) {
 }
 ```
 
-このコードはコンパイルに失敗します。ジェネリクスの型 `T` は、任意の型が指定可能なので、渡す型によっては `style`プロパティが存在しない場合があるからです。コンパイラは存在しないプロパティへの参照が発生する可能性を検知してコンパイルエラーとしているのです。
+このコードはコンパイルに失敗します。ジェネリクスの型`T`は任意の型が指定可能なので、渡す型によっては`style`プロパティが存在しない場合があるからです。コンパイラは存在しないプロパティへの参照が発生する可能性を検知してコンパイルエラーとしているのです。
 
-`any` を使えばコンパイルエラーを回避することは可能ですが、型のチェックがされません。将来バグが発生する危険性もあるので、できる限り避けたいところです。
+`any`を使えばコンパイルエラーを回避する事は可能ですが型のチェックがされません。将来バグが発生する危険性もあるので、出来る限り避けたいところです。
 
 ```typescript
 function changeBackgroundColor<T>(element: T) {
@@ -30,9 +30,9 @@ function changeBackgroundColor<T>(element: T) {
 
 ## 型パラメータに制約をつける
 
-TypeScriptでは `extends` キーワードを用いることで、ジェネリクスの型 `T` を特定の型に限定することができます。
+TypeScriptでは`extends`キーワードを用いることでジェネリクスの型`T`を特定の型に限定する事ができます。
 
-今回の例では、 `<T extends HTMLElement>`とすることで、型 `T` は必ず `HTMLElement` またはそのサブタイプの `HTMLButtonElement` や `HTMLDivElement`であることが保証されるため、`style` プロパティに安全にアクセスできるようになります。
+今回の例では`<T extends HTMLElement>`とすることで型`T`は必ず`HTMLElement`またはそのサブタイプの`HTMLButtonElement`や`HTMLDivElement`である事が保証されるため`style`プロパティに安全にアクセスできるようになります。
 
 ```typescript
 function changeBackgroundColor<T extends HTMLElement>(element: T) {
@@ -41,5 +41,37 @@ function changeBackgroundColor<T extends HTMLElement>(element: T) {
 }
 ```
 
-この`extends`キーワードはインターフェースに対しても使用します。インターフェースは実装のときは`implements`キーワードを使用しますが型パラメータに使用するときは`implements`を使いません。あるインターフェース`X`を実装したジェネリクスのみに限定したいときに`<T implements X>`としてはならず`<T extends X>`とします。
+この`extends`キーワードはインターフェースに対しても使います。インターフェースは実装のときは`implements`キーワードを使いますが型パラメータに使うときは`implements`を使わず同様に`extends`を使います。
+
+```typescript
+interface ValueObject<T> {
+  value: T;
+
+  toString(): string;
+}
+
+class UserID implements ValueObject<number> {
+  public value: number;
+
+  public constructor(value: number) {
+    this.value = value;
+  }
+
+  public toString(): string {
+    return `${this.value}`;
+  }
+}
+
+class Entity<ID extends ValueObject<unknown>> {
+  private id: ID;
+
+  public constructor(id: ID) {
+    this.id = id;
+  }
+
+  //...
+}
+```
+
+`Entity`クラスは`ValueObject`インターフェースを実装しているクラスをIDとして受ける構造になっていますが19行目にあるようにこのときの型パラメータの制約は`implements`ではなく`extends`でなければなりません。
 
