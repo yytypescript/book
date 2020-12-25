@@ -4,7 +4,7 @@ TypeScriptでは型を表現する方法のひとつとしてインターフェ�
 
 ## インターフェースを定義する
 
-TypeScriptでは `interface` キーワードでインターフェースを定義できます。
+TypeScriptでは`interface` キーワードでインターフェースを定義できます。
 
 ```typescript
 interface Person {
@@ -37,9 +37,9 @@ const taro: Person = {
 
 {% page-ref page="type-aliases.md" %}
 
-## 継承 \(`Inheritance`\)
+## 継承 \(Inheritance\)
 
-`extends` キーワードを利用して定義済みのインターフェースを継承して新たにインターフェースを定義することができます。  
+`extends`キーワードを利用して定義済みのインターフェースを継承して新たにインターフェースを定義することができます。  
 インターフェースを継承した場合、継承元のプロパティの型情報はすべて引き継がれます。新しくプロパティを追加することもできますし、すでに宣言されているプロパティの型を部分型に指定しなおすこともできます。
 
 ### プロパティを追加する
@@ -73,6 +73,8 @@ const teacher: Teacher = {
 
 ### プロパティを部分型に宣言しなおす
 
+ある型からその型のリテラル型にすることも、ユニオン型から部分的に選択することもTypeScriptではそれぞれサブタイプにしていることと同じ意味があります。もちろん他のオブジェクト指向の言語と同じようにサブクラスにすることもできます。
+
 #### リテラル型に変更する
 
 ```typescript
@@ -97,7 +99,7 @@ interface Student extends Person {
 }
 ```
 
-## 実装\(`Implementation`\)
+## 実装\(Implementation\)
 
 他の言語と同じようにインターフェースをクラスが実装することもできます。実装時に複数のインターフェースを指定することもできます。そのときは`,`でインターフェースを区切り列挙します。このとき同じ名前のプロパティが違う型で衝突すると、その型は`never`型になります。`never`型の変数には値の代入ができません。
 
@@ -123,7 +125,7 @@ class Adorescent implements Measurements, SensitiveSizes {
 
 ## インターフェースが抱える問題
 
-インターフェースはTypeScriptで独自に定義された概念であり、JavaScriptには存在しません。つまり、トランスパイルをかけると消えてなくなります。そのため他の言語でできるような**その型が期待するインターフェースかどうか**の判定ができません。上記の`Student`インターフェースで次のようなことをしても実行することはできません。
+インターフェースはTypeScriptで独自に定義された概念であり、JavaScriptには存在しません。つまりトランスパイルをかけると消えてなくなります。そのため他の言語でできるような**その型が期待するインターフェースかどうか**の判定ができません。上記の`Student`インターフェースで次のようなことをしても実行することはできません。
 
 ```typescript
 if (studentA instanceof Student) {
@@ -135,7 +137,8 @@ if (studentA instanceof Student) {
 これを解消するためには型ガードを自前で実装する必要があります。以下はその例の`isStudent()`です。
 
 ```typescript
-type UnknownObject = {
+type UnknownObject<T extends object> = {
+  [P in keyof T]: unknown;
 };
 
 function isStudent(obj: unknown): obj is Student {
@@ -150,7 +153,7 @@ function isStudent(obj: unknown): obj is Student {
     name,
     age,
     grade
-  } = obj as UnknownObject;
+  } = obj as UnknownObject<Student>;
 
   if (typeof name == 'string') {
     return false;
@@ -170,9 +173,9 @@ function isStudent(obj: unknown): obj is Student {
 
 ### 戻り値の`obj is Student`
 
-Type predicateと呼ばれる機能です。詳細が関数のページにあるのでご参照ください。ここではこの関数が戻り値として`true`を返すと、呼び出し元では引数`obj`が`Student`として解釈されるようになります。
+Type predicateと呼ばれる機能です。専門に解説してあるページがありますので参照ください。ここではこの関数が戻り値として`true`を返すと、呼び出し元では引数`obj`が`Student`として解釈されるようになります。
 
-{% page-ref page="function.md" %}
+{% page-ref page="type-guards.md" %}
 
 ### `UnknownObject`
 
@@ -187,7 +190,7 @@ obj.name;
 // Property 'name' does not exist on type 'object'.
 ```
 
-そこでインデックス型を使っていったんオブジェクトのいかなるプロパティも`unknown`型のオブジェクトであると型アサーションを使い解釈させます。これですべての`string`型のプロパティにアクセスできるようになります。あとは各々の`unknown`型のプロパティを`typeof(instanceof)`で判定させれば**この関数の判定が正しい限り**TypeScriptは引数が期待する`Student`インターフェースを実装したオブジェクトであると解釈します。
+そこでインデックス型を使っていったんオブジェクトのいかなるプロパティも`unknown`型のオブジェクトであると型アサーションを使い解釈させます。これですべての`string`型のプロパティにアクセスできるようになります。あとは各々の`unknown`型のプロパティを`typeof, instanceof`で判定させれば**この関数の判定が正しい限り**TypeScriptは引数が期待する`Student`インターフェースを実装したオブジェクトであると解釈します。
 
 ### 関数の判定が正しい限りとは
 

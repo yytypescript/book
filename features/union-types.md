@@ -1,6 +1,6 @@
 # ユニオン型 \(Union Types\)
 
-大元が動的な型付言語であるJavaScriptのため、成功した時は`number`型を返すけれど、失敗した時は`false`を返すといった関数を提供するパッケージもあります。つまり`A`型のときもあれば`B`型のときもある。ということをひっくるめたい時にこのユニオン型が使えます。
+大元が動的な型付言語であるJavaScriptのため、成功した時は`number`型を返すけれど失敗した時は`false`を返すといった関数を提供するパッケージもあります。つまり`A`型のときもあれば`B`型のときもある。ということをひっくるめたい時にこのユニオン型が使えます。
 
 ## ユニオン型の宣言
 
@@ -38,7 +38,7 @@ Array<number> | string;
 
 これは両方とも`string`型または`number[]`型であることを意味します。
 
-正しくは以下です。特に配列を`array`方式で書いている時は`()`が必要になるので注意してください。
+正しくは以下です。特に配列を`array`で書いているときは`()`が必要になるので注意してください。
 
 ```typescript
 (string | number)[];
@@ -47,9 +47,9 @@ Array<string | number>;
 
 ## TypeScriptはどう解釈するか
 
-上記の関数`union()`の戻り値を受けた定数`numOrFalse`のあとに`.`をつけると`number`型と`boolean`型の**どちらもが持っているメソッド、プロパティ**が入力補完候補に表示されます。
+上記の関数`union()`の戻り値を受けた定数`numOrFalse`は`number`型と`boolean`型の**どちらもが持っているメソッド、プロパティ**を呼び出せます。
 
-次のようなクラス`Beast`と`Bird`があったとします。
+次のようなクラス`Beast`と`Bird`があるとします。
 
 ```typescript
 class Beast {
@@ -86,11 +86,12 @@ const creature: Beast | Bird = union();
 creature.
 ```
 
-するとこのユニオン型を返す関数を受けた定数`creature`は`Beast`と`Bird`が**共に持つプロパティ、メソッド**が使用できます。つまりこの場合`creature.legs`と`creature.alive()`が入力補完候補として表示されます。
+するとこのユニオン型を返す関数を受けた定数`creature`は`Beast`と`Bird`が**共に持つプロパティ、メソッド**を呼び出せます。つまりこの場合`creature.legs`と`creature.alive()`を使えます。
 
 ## ユニオン型で注意すること
 
-ユニオン型になった元の型がもっているプロパティ、メソッドが同じでも戻り値の型が異なる場合は、その戻り値もまたユニオン型になります。  
+ユニオン型になったクラスのプロパティもユニオン型になり、メソッドの戻り値もまたユニオン型になります。
+
 次のクラス`A, B`を考えます。
 
 ```typescript
@@ -129,39 +130,15 @@ const uni: A | B = union();
 const done: string | number = uni.does();
 ```
 
-また同じメソッド名でありながら引数の型が違うメソッドがあれば、その引数もユニオン型になります。さらに戻り値の型も異なれば同じようにユニオン型になります。
-
-つまり`uni.makes()`は次のようなメソッドであると解釈されます。
+`uni.makes()`は次のようなメソッドであると解釈されます。
 
 ```typescript
 const made: string | number = uni.makes(arg: string | number);
 ```
 
-このとき、引数の型を確定させても、戻り値の型に影響を与えません。他の言語にあるようなオーバーロードのような現象は起こりません。たとえば`uni.makes()`に`number`型を引数に入れたとしても、これは`uni.makes()`が`number`型を要求する`A`型と確定したと解釈されることはありません。
+このとき、引数の型をどちらかに確定させても戻り値の型に影響を与えません。他の言語にあるようなオーバーロードのような現象は起こりません。たとえば`uni.makes()`に`number`型を引数として与えたとしても、これは`uni.makes()`が`number`型を要求する`A`型と確定したと解釈されることはありません。
 
-## ユニオン型から型を確定させる
-
-JavaScriptはその変数がどの型かを確定させる機能があります。もちろんTypeScriptにも存在し、その機能を用いて型が確定できた場合、TypeScriptはその型として見なしてくれます。このときよく使うのは`typeof`と`instanceof`です。主にプリミティブ型に対しては`typeof`を、クラスに対しては`instanceof`を使えば問題ありません。
-
-```typescript
-const prim: number | string = unionPrimitive();
-
-if (typeof prim === 'number') {
-  prim
-  return;
-}
-
-const creature: Beast | Bird = unionClass();
-
-if (creature instanceof Bird) {
-  creature
-}
-```
-
-上記例では`typeof`で`number`型と確定した`if`のブロックの中、つまり4行目で`prim.`とすると`number`型のプロパティ、メソッドが入力補完候補として現れます。  
-同様に`instanceof`で`Bird`と確定した`if`ブロックの中、つまり11行目で`creature.`とすると`Bird`のインスタンスが持つプロパティ、メソッドが表示されます。
-
-## 判別可能なユニオン型\(Discriminated unions\)
+## 判別可能なユニオン型\(Discriminated Unions\)
 
 次のようなタイプエイリアスの`SuccessResponse, ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
 
@@ -179,7 +156,7 @@ type ErrorResponse = {
 type Response = SuccessResponse | ErrorResponse;
 ```
 
-ユニオン型の`Response`は2つのタイプエイリアスが持つ`success`を共通のプロパティとして持ちますが片方は`true`でもう片方は`false`です。
+ユニオン型の`Response`はふたつのタイプエイリアスが持つ`success`を共通のプロパティとして持ちますが片方は`true`でもう片方は`false`です。
 
 そしてこの`Request`を返す関数`req()`があり、それを呼び戻り値を定数`res`で受けたとすると次のようなことができます。
 
@@ -193,7 +170,7 @@ if (res.success) {
 }
 ```
 
-`if`の条件が`true`になる、つまり`res.success`が`true`になるとそのブロックでは`res.response`が入力補完候補として表示されるようになります。一方`else`のブロックでは`res.error`が入力補完候補として表示されるようになります。これは`res.success`が`true`の場合は`SuccessResponse`であることが確定し`false`の場合は`ErrorResponse`であることが確定するからです。
+`if`の条件が`true`になる、つまり`res.success`が`true`になるとそのブロックでは`res.response`を呼び出せます。一方`else`のブロックでは`res.error`を呼び出せます。これは`res.success`が`true`の場合は`SuccessResponse`であることが確定し`false`の場合は`ErrorResponse`であることが確定するからです。
 
 値があるかもしれないしないかもしれないことを意味するモナドの`Optional`をユニオン型を使って表現するとこのようになるでしょう。
 
@@ -242,9 +219,7 @@ switch(lang.iso639) {
 }
 ```
 
-上記例では`lang.iso639`がそれに該当します。
-
-`switch`を使いましたが、`switch`を使う際はfallthroughに注意してください。
+上記例では`lang.iso639`がそれに該当します。`switch`を使う際はfallthroughに注意してください。
 
 ## TypeScriptはこう解釈している
 

@@ -32,7 +32,7 @@ const increment = (num: number): number => {
 
 本書では関数はすべて名前付き関数での記述となっています。
 
-また、匿名かつアロー関数は、1行で戻り値を返却できる場合はさらに短縮することができます。
+匿名かつアロー関数は、1行で戻り値を返却できる場合はさらに短縮することができます。
 
 ### 匿名かつアロー関数1行版
 
@@ -50,7 +50,7 @@ const increment = (num: number): number => num + 1;
 const increment = num => num + 1;
 ```
 
-ただし、これができるのは引数が1個のときのみで、0個のときや複数ある時はできません。  
+ただし、これができるのは引数が1個のときのみで、0個のときや複数あるときはできません。  
 また、このときは引数と戻り値に対して**型をつけることができません**。
 
 アロー関数の1行版でオブジェクトリテラルを返したい時はそのまま返すことができません。
@@ -71,7 +71,7 @@ console.log(func());
 // -> { x: 1 }
 ```
 
-今では使う機会も減りましたがgeneratorという特殊な関数を作ることもできます。ですがこの関数はアロー関数での表記を認めておらず、必ず`function*() {}`と書く必要があります。
+generatorを使用した関数はアロー関数での表記なく、必ず`function*() {}`と書く必要があります。
 
 ## `this`
 
@@ -115,7 +115,7 @@ jetlag.replyArrow(10);
 
 ### 不定な`this`をはっきりさせる
 
-匿名関数を使う時にthisを確定させる方法として次のふたつがあります。以下は上記クラスの`replyFunction()`を書き換えていると解釈してください。
+匿名関数を使う時に`this`を確定させる方法として次のふたつがあります。以下は上記クラスの`replyFunction()`を書き換えていると解釈してください。
 
 #### 使いたい`this`を退避させる
 
@@ -145,7 +145,7 @@ public replyFunction(ms: number): void {
 
 JavaScriptであればこの方法だけで実行できるようになりますが、TypeScriptではまだ準備が足りず実行できません。この`bind()`を使って意図する動作を得るには後述する**引数の`this`**を併せて使う必要があります。
 
-厄介者の`this`でしたが、アロー関数が実装された今となってはそこまで注意を払わなくてもアロー関数で直感的に記述ができるようになりました。
+厄介者の`this`でしたが、アロー関数が実装された今そこまで注意を払わなくてもアロー関数で直感的に記述ができるようになりました。
 
 ## 関数の型
 
@@ -171,7 +171,7 @@ type Increment = {
 };
 ```
 
-この書き方はオーバーロードで目にする機会があるかと思います。オーバーロードについては後述しますのでこのまま読み進めてください。
+この書き方はオーバーロードで目にする機会があるでしょう。オーバーロードについては後述しますのでこのまま読み進めてください。
 
 ## 引数\(Arguments\)
 
@@ -209,7 +209,7 @@ distance(q1, q2);
 // Expected 1 arguments, but got 2.
 ```
 
-JavaScriptでは引数が少ない時はその引数には`undefined`が渡され、引数が多い場合は余分な引数は無視されるのですが、ここはTypeScriptとJavaScriptとの大きな違いです。
+JavaScriptでは引数が少ない時はその引数には`undefined`が渡され、引数が多い場合は余分な引数は無視されますがここはTypeScriptとJavaScriptとの大きな違いです。
 
 ## 引数を省略したい
 
@@ -277,7 +277,7 @@ function distance(p1: Point, p2?: Point): number {
 }
 ```
 
-ifは`p2`が`undefined`のときに実行され、内部で`return`をしています。そのため`if`ブロックの下は`p2`がPointであることが確定します。そのためTypeScriptはユニオン型から普通の`Point`として解釈し、このように書くことができるようになります。
+`if`は`p2`が`undefined`のときに実行されます。型ガードにより`if`ブロックの下は`p2`がPointであることが確定します。そのためTypeScriptはユニオン型から普通の`Point`として解釈し、このように書くことができるようになります。
 
 ### `Point | undefined` との違い
 
@@ -296,21 +296,6 @@ distance(q1, undefined);
 ```
 
 6行目のような書き方はTypeScriptから指摘を受けます、どうしても動作させたいのであれば9行目のように書かなければいけません。
-
-### 省略可能な`undefined`をTypeScriptはどう解釈しているか
-
-実はこのオプション引数としても使われる省略可能な`undefined`は、TypeScriptは`void`という専用の型を作って定義しています。つまりオプション引数は次のように書き換えることもできます。
-
-```typescript
-function distance(p1: Point, p2: Point | void): number
-  // ...
-}
-
-distance(q1, q2);
-distance(q1);
-```
-
-この`void`型は値を指定しない`undefined`と、意図的に指定している`undefined`の2値を持っています。`undefined`型は意図的に指定している`undefined`の1値のみを持っているため、このような差が生まれます。
 
 ### オプション引数でできないこと
 
@@ -337,7 +322,7 @@ function distance(p1: Point, p2?: Point): number {
 }
 ```
 
-もちろん動くのですが、意図がわかりにくくなってしまいます。このような時に便利なのがデフォルト引数です。デフォルト引数を使用すると次のように書けます。
+もちろん動くのですが、意図がわかりにくくなってしまいます。このようなときに便利なのがデフォルト引数です。デフォルト引数を使用すると次のように書けます。
 
 ```typescript
 const p0: Point = {
@@ -399,7 +384,7 @@ distance(null, q2);
 
 ### デフォルト引数でできないこと
 
-しかしながら、関数をデフォルト引数として使う時は非同期の関数を使うことができません。TypeScriptならびにJavaScriptは処理を非同期的に扱うことが多く、`Promise / async / await`といった非同期処理を同期的に扱うための機能があります。詳細は先のページにあるため詳しい説明は譲りますが非同期関数が値を返すまで処理を待つということはできません。
+関数をデフォルト引数として使うときは非同期の関数を使うことができません。詳細は先のページにあるため詳しい説明は譲りますが次のようなデフォルト引数はできません。なお`inverseAsync()`は非同期関数とします。
 
 ```typescript
 async function distanceAync(p1: Point, p2: Point = await inverseAync(p1)): Promise<number> {
@@ -408,8 +393,6 @@ async function distanceAync(p1: Point, p2: Point = await inverseAync(p1)): Promi
 ```
 
 {% page-ref page="promise-async-await.md" %}
-
-このようにデフォルト引数を書くことはできません。なお`inverseAsync()`は非同期関数とします。
 
 ## 残余引数\(Rest Parameters\)
 
@@ -434,7 +417,7 @@ console.log(average(1, 3)); // 2
 
 ### 残余引数でできないこと
 
-残余引数は最終的に配列として解釈されるからといって、引数をまとめてひとつの配列として渡すことはできません。
+残余引数は最終的に配列として解釈されるからといって引数をまとめてひとつの配列として渡すことはできません。
 
 ```typescript
 average([1, 3, 5, 7, 9]);
@@ -442,7 +425,7 @@ average([1, 3, 5, 7, 9]);
 
 このように配列を直接渡してしまうと`average()`の関数内では要素数1の`number[][]`型が渡されたと解釈されます。もちろん`average()`の期待する引数の型は`number[]`型なのでこのコードを実行することはできません。
 
-また、可変個の引数を受けつける関係上、残余引数より後ろにほかの引数を置くことができません。
+また可変個の引数を受けつける関係上、残余引数より後ろにほかの引数を置くことができません。
 
 ```typescript
 function average(...nums: number[], subject: string): number {
@@ -465,19 +448,27 @@ JavaScriptに組み込みのメソッドとして存在する`Math.max()`は与�
 
 ```typescript
 const scores: number[] = mathExamination();
-
 const max: number = Math.max(scores);
 ```
 
-この例は学校の数学の試験をイメージしています。生徒の数は1年間ではそう増減はしないので、40人ぐらいの生徒なら力技でもなんとかなるかもしれません。
+この例は学校の数学の試験をイメージしています。学校であれば生徒の数は1年間でそう増減はしないので40人ぐらいの生徒なら力技でもなんとかなるかもしれません。
 
 ```typescript
-Math.max(scores[0], scores[1], scores[2], scores[3], scores[4], scores[5], scores[6], ...);
+Math.max(
+  scores[0],
+  scores[1],
+  scores[2],
+  scores[3],
+  scores[4],
+  scores[5],
+  scores[6],
+  ...
+);
 ```
 
-書いている最中で力つきました。しかもこれは生徒が転入したり転校したりするとコードを書き換えなければならなくなります。
+書いている最中で力つきました。これは来年は描き直しが必要な上に、生徒が転入したり転校したりしてもコードを書き直す必要があります。
 
-このような時はスプレッド構文を使って配列を引数の列に変換します。
+このようなときはスプレッド構文を使って配列を引数の列に変換します。
 
 ```typescript
 const scores: number[] = mathExamination();
@@ -499,7 +490,7 @@ return weight / (mHeight ** 2);
 }
 ```
 
-この関数は引数がどちらも`number`型なので入れ替えてしまうことがあります。22は平均的な体型ですが402はややとてつもなく肥満だと言えます。
+この関数は引数がどちらも`number`型なので入れ替えてしまうことがあります。22は平均的な体型ですが402はややとてつもなく肥満です。
 
 ```typescript
 bmi(170, 65);
@@ -595,8 +586,6 @@ bmi();
 
 アロー関数以外の関数とクラスのメソッドの第1引数は`this`という特殊な引数を受けることができます。これは使用するコンテキストによって`this`の意味するところが変わってしまうこれらがどのコンテキストで使用されるべきなのかをTypeScriptに伝えるために使います。この`this`は呼び出す側は意識する必要はありません。第2引数以降を指定してください。
 
-アロー関数はこの`this`を持つことができません。それは前述のとおりアロー関数は宣言時の`this`が使われるため`this`が変動することがなく、そもそも不要だからです。
-
 ```typescript
 class Male {
   private name: string;
@@ -637,7 +626,7 @@ female.toString();
 // -> 'Madame Frédérique'
 ```
 
-ですが、各インスタンスの`toString`を変数に代入すると意味が変わります。
+ですが各インスタンスの`toString()`を変数に代入すると意味が変わります。
 
 ```typescript
 const maleToStr: () => string = male.toString;
@@ -667,7 +656,7 @@ TypeError: Cannot read property 'name' of undefined
 
 {% page-ref page="tuple.md" %}
 
-戻り値がないことを明示したい時は`void`と書きます。内部では`undefined`を返していることと同義です。`undefined`と`void`の違いについては次項で説明します。
+戻り値がないことを明示したいときは`void`と書きます。内部では`undefined`を返していることと同義です。`undefined`と`void`の違いについては次項で説明します。
 
 ## `void`
 
@@ -798,153 +787,6 @@ function doNothing1(): undefined {
 ### `void`とは
 
 これらを考慮すると`undefined`型は`undefined`という1値だけを持つ型なのに対し`void`型はそれに加えて何も書かなかった時に代入される非明示の`undefined`の2値を持っている型といえます。
-
-## Type Predicate
-
-プログラムを書いているとその変数が意図する型なのかをはっきりさせたい時があります。
-
-```typescript
-function isDuck(animal: Animal): boolean {
-  if (walksLikeDuck(animal)) {
-    if (quacksLikeDuck(animal)) {
-      return true;
-    }
-  }
-
-  return false;
-}
-```
-
-動物がアヒルかどうかを判定するその名も`isDuck()`です。
-
-ですが、この関数は使用者に対してその変数がアヒルかどうかを伝えているだけです。TypeScriptに対してそれがアヒルであることを伝えるためには型アサーションが必要になります。
-
-```typescript
-if (isDuck(animal)) {
-  const duck: Duck = animal as Duck;
-  duck.quacks();
-  // ...
-}
-```
-
-`as`はTypeScriptにおけるキャストの一種です。名前を型アサーションと言いますが他の言語と異なりかなり強引な型変換ができてしまいますので使用には気をつけてください。
-
-ちなみに別の表記方法があるのですが現在はあまり推奨されていません。理由は`JSX`のタグと見分けがつかないからです。
-
-```typescript
-const duck1: Duck = animal as Duck;
-const duck2: Duck = <Duck> animal;
-```
-
-これをより賢くやろうというのがType predicateです。
-
-### Type predicateの宣言
-
-Type predicateの宣言は戻り値が`boolean`型の関数に対して適用でき、戻り値の方を次のように書き替えます。
-
-```typescript
-function isDuck(animal: Animal): animal is Duck {
-  // ...
-}
-```
-
-これで関数`isDuck()`が`true`を返す時のifのブロックの中では`animal`はDuckとして解釈されるようになります。
-
-```typescript
-if (isDuck(animal)) {
-  animal.quacks();
-  // ...
-}
-```
-
-しかしながら、これはあくまでもその型であるとTypeScriptに解釈させるだけなので、その型であることがJavaScriptとして正しいということは断言できません。
-
-```typescript
-function isUndefined(value: unknown): value is undefined {
-  return typeof value === 'number';
-}
-```
-
-上記関数`isUndefined()`は明らかに誤っていますが、この誤りに対してTypeScriptは何も警告を出しません。
-
-## Assertion Functions
-
-やりたいことはほぼType predicateと同じです。Type predicateは`boolean`型の戻り値に対して使用しましたがこちらは例外を投げるかどうかで判定します。上記関数`isDuck()`をAssertion functionsで書きかえると次のようになります。
-
-```typescript
-function isDuck(animal: Animal): asserts animal is Duck {
-  if (walksLikeDuck(animal)) {
-    if (quacksLikeDuck(animal)) {
-      return;
-    }
-  }
-
-  throw new Error('YOU ARE A FROG!!!');
-}
-
-// ...
-
-isDuck(animal);
-
-animal.quacks();
-```
-
-こちらはこの関数が呼ばれた後であればいつでも変数`animal`は`Duck`型として解釈されます。
-
-## Type predicate, Assertion functionsのつかいかた
-
-値が存在するかしないかを表現する時、言語によっては`Optional`という入れ物のクラスを用意することがあります。このクラスを抽象クラスとして定義し、サブクラスに値が存在する`Some`と存在しない`None`を用意すると`Optional`にType predicateを使うことができます。
-
-```typescript
-abstract class Optional<T> {
-  public abstract isPresent(): this is Some<T>;
-}
-
-class Some<T> extends Optional<T> {
-  public isPresent(): this is Some<T> {
-    return true;
-  }
-}
-
-class None<T> extends Optional<T> {
-  public isPresent(): this is Some<T> {
-    return false;
-  }
-}
-```
-
-### Type predicateで注意すること
-
-上記`Optional`の例が顕著なのですが、`optional.isPresent()`が`false`を返したからと言ってTypeScriptは変数`optional`が`None`であるとは解釈しません。あくまでも`Some`ではないと解釈されるだけです。
-
-```typescript
-if (optional.isPresent()) {
-  // optional is Some<T>
-} else {
-  // optional is something else but Some<T>
-}
-```
-
-またType predicateは`false`の場合を定義することができません。つまり次のような定義はできません。
-
-```typescript
-public abstract isPresent(): this is Some<T>, this is not None<T>;
-```
-
-このような時は専用のメソッドを用意します。
-
-```typescript
-abstract class Optional<T> {
-  // ...
-  public abstract isPresent(): this is Some<T>;
-
-  public abstract isAbsent(): this is None<T>;
-}
-```
-
-ただしこの例の場合TypeScriptではユニオン型によって簡単に解決できます。ユニオン型については詳細の説明があるのでそちらをご参照ください。
-
-{% page-ref page="union-types.md" %}
 
 ## 戻り値の`this`
 

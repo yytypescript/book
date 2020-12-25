@@ -20,6 +20,7 @@
   * [リテラル型 \(Literal Types\)](features/literal-types.md)
   * [anyとunknown](features/any-unknown.md)
   * [構造的部分型 \(Structural Subtyping\)](features/structural-subtyping.md)
+  * [型ガード \(Type Guards\)](features/type-guards.md)
   * [関数 \(Functions\)](features/function.md)
   * [配列 \(Array\)](features/array.md)
   * [タプル \(Tuple\)](features/tuple.md)
