@@ -156,7 +156,7 @@ type ErrorResponse = {
 type Response = SuccessResponse | ErrorResponse;
 ```
 
-ユニオン型の`Response`はふたつのタイプエイリアスが持つ`success`を共通のプロパティとして持ちますが片方は`true`でもう片方は`false`です。
+ユニオン型の`Response`はふたつのタイプエイリアスが持つ`success`を共通のプロパティとして持ちますが片方は`true`でもう片方は`false`です。ここは`boolean`型とせず**あえてリテラル型にしています**。
 
 そしてこの`Request`を返す関数`req()`があり、それを呼び戻り値を定数`res`で受けたとすると次のようなことができます。
 
@@ -187,7 +187,7 @@ type None = {
 type Optional<T> = Some<T> | None;
 ```
 
-定数であれば`boolean`型の変数`true, false`に限らず他の型でも可能です。
+リテラル型を使えば`true, false`に限らず他の型でも可能です。
 
 ```typescript
 type English = {
@@ -219,7 +219,36 @@ switch(lang.iso639) {
 }
 ```
 
-上記例では`lang.iso639`がそれに該当します。`switch`を使う際はfallthroughに注意してください。
+上記例では`lang.iso639`がそれに該当します。
+
+リテラル型なくても他の型どうしであればTypeScriptはこの判別を自動的にしてくれます。
+
+```typescript
+type Measurement = {
+  b: number;
+  w: number;
+  h: number;
+};
+
+type TopSecret = {
+  b: 'secret';
+  w: 'secret';
+  h: 'secret';
+};
+
+type ThreeSize = Measurement | TopSecret;
+
+const size: ThreeSize = measure();
+
+if (size.b === 'secret') {
+  console.log(size.w);
+  // -> 'secret'
+  console.log(size.h);
+  // -> 'secret'
+}
+```
+
+スリーサイズを公表したくない人は`'secret'`という文字をどこかひとつでもに入れておけば`TopSecret`型であると判別され、対応する`if`ブロックではすべてのサイズは`'secret'`になります。
 
 ## TypeScriptはこう解釈している
 
