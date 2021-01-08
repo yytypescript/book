@@ -1,10 +1,10 @@
 # ユーティリティ型 \(Utility Types\)
 
-TypeScriptで開発するということはJavaScriptに型を付与することです。型を付与する時にあらかじめ用意されている便利な型の表現がいくつかありますのでそちらを紹介します。今回紹介するものはすべてではないので、他も興味がある方は公式やソースコードを参照してください。
+TypeScriptで開発するということはJavaScriptに型を付与することです。ここでは型を付与するときにあらかじめ用意されている便利な型の表現がいくつかありますのでそれらを紹介します。今回紹介するものはすべてではありませんので、興味がある方は公式やソースコードを参照してください。
 
 これから紹介するユーティリティ型はすべてTypeScriptのパッケージで定義されており、ソースコードも同梱されているのでその実装方法を見ることが可能です。
 
-本章のユーティリティ型の仕様例で、ことわりなく`Person, User`というオブジェクトを使用している部分は、次に示すタイプエイリアスとそのオブジェクトを使うものとします。
+本章のユーティリティ型の使用例で、ことわりなく`Person, User`というオブジェクトを使っている部分は、次に示すタイプエイリアスとそのタイプエイリアスを満たすオブジェクトを使うものとします。
 
 ```typescript
 type Person = {
@@ -73,36 +73,39 @@ type PartialPerson = {
 
 {% page-ref page="function.md" %}
 
-ユーザーの検索をかける関数を作り、その属性に応じて検索ができるとします。
+ユーザーの検索をかける関数を作ります。プロパティはそれぞれ引数となっており、対応する引数に値を与えると検索ができる関数`findUsers()`があるとします。ここでは例のため引数を
 
 ```typescript
-function findUsers(name?: string, nationality?: string, age?: number): Promise<User[]> {
+function findUsers(
+  surname?: string,
+  middleName?: string,
+  givenName?: string,
+  age?: number,
+  address?: string,
+  nationality?: string
+): Promise<User[]> {
   // ...
 }
 ```
 
-ですが、この`findUsers()`のシグネチャだと**名前、国籍は問わないが年齢だけXX才の**ユーザーが欲しい時は引数の順番を維持するために他の引数は`undefined`を入力しなければいけません。
+ですが、この`findUsers()`のシグネチャだと**年齢だけがXX才の**ユーザーが欲しい時は引数の順番を維持するために他の引数は`undefined`を入力しなければいけません。
 
 ```typescript
-findUsers(undefined, undefined, 22);
+findUsers(undefined, undefined, undefined, 22);
 ```
 
-この例題は引数が3個しかないためそこまで見辛くはないですが、多い引数の関数になるとどこに引数を入れて他を`undefined`とするかが面倒です。これを`Partial<T>`を使って見た目をよくできます。
+この例では引数は6個しかなく`age`以降の引数は省略できるためそこまで見辛くありませんが、多い引数の関数になるとどこが対応する引数なのかを探すだけでも面倒です。これを`Partial<T>`を使って見た目をよくできます。
 
 まず引数はすべてオブジェクトで受け渡しされるものとしてそのオブジェクトの型を定義します。さらにプロパティを省略可能にするために`Partial<T>`をつけます。
 
 ```typescript
-type FindUsersArgs = Partial<{
-  name: string;
-  nationality: string;
-  age: number;
-}>;
+type FindUsersArgs = Partial<User>;
 ```
 
 これを関数`findUsers()`の引数にします。
 
 ```typescript
-function findUsers({ name, nationality, age }: FindUsersArgs): Promise<User[]> {
+function findUsers({ surname, middleName, givenName, age, address, nationality }: FindUsersArgs): Promise<User[]> {
   // ...
 }
 ```
@@ -116,7 +119,7 @@ findUsers({});
 引数を省略できるようにするためにデフォルト引数を使い省略時に`{}`が代入されるようにします。
 
 ```typescript
-function findUsers({ name, nationality, age }: FindUsersArgs = {}): Promise<User[]> {
+function findUsers({ surname, middleName, givenName, age, address, nationality }: FindUsersArgs = {}): Promise<User[]> {
   // ...
 }
 
@@ -142,7 +145,7 @@ function findUsers({ name = 'John Doe', nationality = 'Araska', age = 22 }: Find
 
 {% page-ref page="type-aliases.md" %}
 
-`Person`を`Record`を使って表現すると次になりますが`Record`はプロパティを`Optional`にする機能はないため`Person`とは完全に一致せず、上記の`Required<Person>`と同じものになります。
+`Person`を`Record`を使って表現すると次になりますが`Record`はプロパティを`Optional`にする機能はないため`Person`とは完全に一致せず`Required<Person>`と同じものになります。
 
 ```typescript
 type Name = 'surname' | 'middleName' | 'givenName';
@@ -156,17 +159,17 @@ type Person = Record<Name, string>;
 以下は`Pick`を使って`User`から`Person`を作る一例です。
 
 ```typescript
-type Necessary = 'surname' | 'middleName' | 'givenName';
-type Person = Pick<User, Necessary>;
+type Mandatory = 'surname' | 'middleName' | 'givenName';
+type Person = Pick<User, Mandatory>;
 ```
 
 ### キーの部分集合である。について
 
-部分集合と聞くと難しいかもしれませんが、言い換えると**キーに存在しないリテラルタイプを指定できない**ことを意味しています。上記例は`User`の`middleName, givenName`の`Name`は大文字から始まりますが、これを小文字にしたタイプエイリアスを定義するとこれは`Pick`では使用できません。
+部分集合と聞くと難しいかもしれませんが、言い換えると**キーに存在しないリテラルタイプを指定できない**ことを意味しています。上記例は`User`の`middleName, givenName`の`Name`は大文字から始まりますが、これを小文字にしたタイプエイリアスを定義することはできません。
 
 ```typescript
-type Necessary = 'surname' | 'middlename' | 'givenname';
-type Person = Pick<User, Necessary>;
+type Mandatory = 'surname' | 'middlename' | 'givenname';
+type Person = Pick<User, Mandatory>;
 // -> Type '"middlename"' is not assignable to type '"surname" | "middleName" | "givenName" | "age" | "address" | "nationality" | "createdAt" | "updatedAt"'.
 ```
 
@@ -227,8 +230,8 @@ type BookInputData = Pick<Book, 'title' | 'author'>;
 以下は`Omit`を使って`User`から`Person`を作る一例です。
 
 ```typescript
-type Unnecessary = 'age' | 'address' | 'nationality' | 'createdAt' | 'updatedAt';
-type Person = Omit<User, Unnecessary>;
+type Optional = 'age' | 'address' | 'nationality' | 'createdAt' | 'updatedAt';
+type Person = Omit<User, Optional>;
 ```
 
 ### キーの部分集合である必要がない。について
@@ -236,8 +239,8 @@ type Person = Omit<User, Unnecessary>;
 `Pick`と逆です。`User`の`createdAt, updatedAt`の`At`は大文字から始まりますが、これに気づかずに小文字で書いてしまってもこのことに対する指摘はなく`Omit`の結果は`createdAt, updatedAt`を含んでしまいます。
 
 ```typescript
-type Unnecessary = 'age' | 'address' | 'nationality' | 'createdat' | 'updatedat';
-type Person = Omit<User, Unnecessary>;
+type Optional = 'age' | 'address' | 'nationality' | 'createdat' | 'updatedat';
+type Person = Omit<User, Optional>;
 // -> 
 // {
 //    surname: string,
@@ -254,10 +257,10 @@ type Person = Omit<User, Unnecessary>;
 
 ```typescript
 type Grade = 'A' | 'B' | 'C' | 'D' | 'E';
-type PassingGrade = Exclude<Grade, 'E'>;
+type PassGrade = Exclude<Grade, 'E'>;
 ```
 
-この例は成績についてです。落第を示す成績が`'E'`でそれ以外は及第だとすればこのようにして及第を示すタイプエイリアス`PassingGrade`を作ることができます。
+この例は成績をイメージしています。落第を示す成績が`'E'`でそれ以外は及第だとすればこのようにして及第を示すタイプエイリアス`PassGrade`を作ることができます。
 
 ### `Exclude`の注意点
 
@@ -309,10 +312,10 @@ type InputText = Exclude<string, ''>;
 
 ```typescript
 type Grade = 'A' | 'B' | 'C' | 'D' | 'E';
-type FailingGrade = Extract<Grade, 'E'>;
+type FailGrade = Extract<Grade, 'E'>;
 ```
 
-落第を表す成績が`'E'`ならこのようにして落第を表すタイプエイリアス`FailingGrade`を作ることができます。
+落第を表す成績が`'E'`ならこのようにして落第を表すタイプエイリアス`FailGrade`を作ることができます。
 
 ### `Extract`の注意点
 

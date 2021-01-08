@@ -39,9 +39,8 @@
   * [ユーティリティ型 \(Utility Types\)](features/utility-types.md)
   * [定義ファイル](features/definitelytyped.md)
   * [tsconfig.json Deep Dive](features/tsconfig.json-deep-dive.md)
-  * [import / export /require](features/import-export-require/README.md)
-    * [exportとexport defaultどちらを使うべきか？Pros/Consある話](features/import-export-require/export-or-export-default.md)
-  * [型変数](features/type-variables.md)
+  * [import / export /require](features/import-export-require.md)
+  * [型変数 \(Type Variables\)](features/type-variables.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 

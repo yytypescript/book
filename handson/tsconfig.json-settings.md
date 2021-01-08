@@ -54,7 +54,7 @@ JavaScriptも時代とともに進化をして、既存のオブジェクトに�
 
 フロントエンドとバックエンドはモジュールの読み込み方法が異なっています。詳細は`import / export / require`のページをご覧ください。次の設定は使う場面で切り替えるべき項目です。
 
-{% page-ref page="../features/import-export-require/" %}
+{% page-ref page="../features/import-export-require.md" %}
 
 ### `module`
 

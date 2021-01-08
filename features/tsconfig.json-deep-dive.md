@@ -70,11 +70,11 @@ declare class NumericalValueObject {
 }
 ```
 
-内容自体は実装部分がないインターフェースのようなファイルとなっています。
+内容自体はちょうどインターフェースのようなファイルとなっています。
 
 ### 宣言元へのジャンプでの`ts`ファイルを参照できるようにする
 
-IDEを使っている時に有用で、実際の`ts`のソースコードがどのようにして動作しているのかを閲覧することができるようになります。tsconfig.jsonにある`declarationMap`の項目を`true`に変更します。
+IDEを使っているときに有用で、実際の`ts`のソースコードがどのようにして動作しているのかを閲覧することができるようになります。tsconfig.jsonにある`declarationMap`の項目を`true`に変更します。
 
 ```typescript
 "declarationMap": true,
@@ -85,7 +85,7 @@ IDEを使っている時に有用で、実際の`ts`のソースコードがど�
 
 ### 元の`ts`も公開する
 
-特に設定していなければ元の`ts`ファイルも公開されますが、公開する内容を調整している場合は逆にpackage.jsonの`files`プロパティをを変更して元の`ts`ファイルも公開するように変更が必要です。tsconfig.jsonの`declarationMap`を設定しても元の`ts`ファイルを参照できない時はここで公開する内容を制限していないか確認してください。
+特に設定していなければ元の`ts`ファイルも公開されますが、公開する内容を調整している場合は逆にpackage.jsonの`files`プロパティをを変更して元の`ts`ファイルも公開するように変更が必要です。tsconfig.jsonの`declarationMap`を設定しても元の`ts`ファイルを参照できないときはここで公開する内容を制限していないか確認してください。
 
 ```typescript
 {
@@ -112,7 +112,7 @@ IDEを使っている時に有用で、実際の`ts`のソースコードがど�
 
 ### JavaScriptの`sourceMap`も出力する
 
-`sourceMap`とはAltJSがトランスパイルされたJavaScriptとの行を一致させるものです。これがあることによってデバッグやトレースをしている時に、元の`ts`ファイルの何行目で問題が発生しているかわかりやすくなります。`module bundler`を使用する時はこのオプションを有効にしていないと基本的に何もわかりません。
+`sourceMap`とはAltJSがトランスパイルされたJavaScriptとの行を一致させるものです。これがあることによってデバッグやトレースをしている時に、元の`ts`ファイルの何行目で問題が発生しているかわかりやすくなります。`module bundler`を使用する時はこのオプションを有効にしていないと基本的に何もわかりません。このオプションはパッケージを公開しないとしても有効にしておくことが望ましいでしょう。
 
 tsconfig.jsonにある`sourceMap`の項目を`true`に変更します。
 
@@ -150,9 +150,9 @@ tsconfig.jsonにある`sourceMap`の項目を`true`に変更します。
 * tsconfig.esm.json
   * tsconfig.base.jsonを継承した`esmodule`用のtsconfig.jsonです
 * tsconfig.json
-  * IDEなどはこの名前を優先して探すので、そのためのtsconfig.jsonです
+  * IDEはこの名前を優先して探すので、そのためのtsconfig.jsonです
 
-tsconfig.base.jsonとtsconfig.jsonを分けるかどうかについては好みの範疇です。まとめてしまっても特に問題はありません。
+tsconfig.base.jsonとtsconfig.jsonを分けるかどうかについては好みの範疇です。まとめてしまっても問題はありません。
 
 #### tsconfig.jsonの継承
 
@@ -229,13 +229,13 @@ package.jsonはこのようになっているでしょう。
 
 ### Tree Shaking
 
-`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができるすべてをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなり過ぎるという弱点があります。特にそれがSPA\(Signle Page Application\)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
+`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができるすべてをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなりすぎるという欠点があります。特にそれがSPA\(Signle Page Application\)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
 
 この事態を避けるために`module bundler`は容量削減のための涙ぐましい努力を続けています。その機能のひとつとして題名のTree Shakingを紹介するとともに、開発者にできるTree Shaking対応パッケージの作り方を紹介します。
 
 #### Tree Shakingとは
 
-Tree Shakingとは使われていない関数、クラスを最終的な`js`ファイルに含めない機能のことです。使っていないのであれば入れる必要はない。というのは至極当然の結論ですが、このTree Shakingを使うための条件があります。
+Tree Shakingとは使われていない関数、クラスを最終的な`js`ファイルに含めない機能のことです。使っていないのであれば入れる必要はない。というのは至極当然の結論ですがこのTree Shakingを使うための条件があります。
 
 * `esmodule`で書かれている
 * 副作用\(side effects\)のないコードである
@@ -371,7 +371,7 @@ if (shouldCallPolice()) {
 ```typescript
 function increment(i) {
   return i + 1;
-};
+}
 ```
 
 `noImplicitAny`を`true`に設定しこれをトランスパイルしようとすると
@@ -385,7 +385,7 @@ Parameter 'i' implicitly has an 'any' type.
 ```typescript
 function increment(i: number): number {
   return i + 1;
-};
+}
 ```
 
 とします。なお戻り値の型は必須ではありません。
@@ -680,7 +680,7 @@ function dump(this: Person): string {
 }
 ```
 
-するとTypeScriptは存在しないプロパティについての指摘をするようになります。`name21 ~ name30`に次の警告が出るようになります。
+するとTypeScriptは存在しないプロパティについての指摘をするようになります。`name21 ~ name24`に次の警告が出るようになります。
 
 ```typescript
 Property 'nameXX' does not exist on type 'Person'. Did you mean 'name01'?
@@ -713,7 +713,7 @@ function add(n1: string, n2: string): number {
 'str' is declared but its value is never read.
 ```
 
-となります。デバッグをしている時など若干邪魔な時があります。
+となります。デバッグをしている時など若干邪魔なときがあります。
 
 ### `noUnusedParameters`
 
@@ -804,7 +804,7 @@ function daysOfMonth(month: number): number {
 意図してこの`fallthrough`を使いこなすよりもバグを産むことの方が遥かに多いため、このオプションはそれを禁止します。
 
 ```typescript
-function nextLyric(lyric: string, count: number): string {
+function nextLyric(lyric: string, count: number = 1): string {
   switch (lyric) {
     case 'we':
       return 'will';
@@ -862,9 +862,10 @@ function next(lyric: string, count: number): string {
 
 ```typescript
 type ObjectLiteralLike = {
+  [key: string]: string;
 };
-
 type ArrayObjectLike = {
+  [key: number]: string;
 };
 
 const butterfly: ObjectLiteralLike = {
@@ -888,7 +889,7 @@ const germanName: string = butterfly.de;
 const fifth: string = phoneticCodes[4];
 ```
 
-これらのオブジェクトのプロパティにアクセスする時完全な型安全ではありません。上記`germanName, fifth`はどちらも定義されたオブジェクトには存在しませんがTypeScriptaこれらを`string`型と解釈します。
+これらのオブジェクトのプロパティにアクセスする時完全な型安全ではありません。上記`germanName, fifth`はどちらも定義されたオブジェクトには存在しませんがTypeScriptaはこれらを`string`型と解釈します。
 
 `noUncheckedIndexedAccess`を`true`に設定しこれらをトランスパイルしようとすると
 

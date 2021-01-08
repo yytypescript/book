@@ -48,12 +48,12 @@ function greeter(person) {
 //# sourceMappingURL=sample.js.map
 ```
 
-**d.tsファイル**
+**`d.ts`ファイル**
 
 定義情報のみ記載されたファイルが出力されます。
 
 ```typescript
-// sample.ts.d
+// sample.d.ts
 interface Person {
     firstName: string;
     lastName: string;
@@ -67,7 +67,7 @@ declare function greeter(person: Person): string;
 
 * 定義ファイル有り
   * TypeScriptで書かれたパッケージ
-  * JavaScriptで書かれたパッケージだが、.d.tsファイルを同梱している
+  * JavaScriptで書かれたパッケージだが`.d.ts`ファイルを同梱している
 * 定義ファイル有りだが別途インストールが必要
   * JavaScriptで書かれたパッケージだが、 DefinitelyTypedに登録されている
 * 定義ファイル無し

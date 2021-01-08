@@ -48,7 +48,7 @@ function request3(result2: number, callback: Callback<number>) {
 request1((result1) => {
     request2(result1, (result2) => {
         request3(result2, (result3) => {
-            console.log(result3); // 4
+            console.log(result3); // -> 4
         });
     });
 });
@@ -75,7 +75,7 @@ function request1(): Promise<number> {
 function request2(result1: number): Promise<number> {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(result1+1);
+            resolve(result1 + 1);
         }, 1000);
     });
 };
@@ -84,18 +84,16 @@ function request2(result1: number): Promise<number> {
 function request3(result2: number): Promise<number> {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(result2+2);
+            resolve(result2 + 2);
         }, 1000);
     });
 };
 
-request1()
-.then((result1) => {
+request1().then((result1) => {
     return request2(result1);
-})
-.then((result2) => {
+}).then((result2) => {
     const result3 = request3(result2);
-    console.log(result3); // 4
+    console.log(result3); // -> 4
 });
 ```
 
@@ -119,14 +117,13 @@ function getUser(): Promise<User> {
     return new Promise((resolve) => {
         const user: User = {
             name: '太郎',
-            age: 10,
+            age: 10
         };
         resolve(user);
     })
 }
 
-getUser()
-.then((user: User) => {
+getUser().then((user: User) => {
     console.log(user);
 });
 ```
@@ -176,9 +173,8 @@ function request(): Promise<number> {
     });
 }
 
-requestAsync()
-.then((result) => {
-    console.log(result); // 1
+requestAsync().then((result) => {
+    console.log(result); // -> 1
 });
 ```
 
@@ -191,9 +187,8 @@ async function requestAsync(): Promise<number> {
     });
 }
 
-requestAsync()
-.then((result) => {
-    console.log(result); // 1
+requestAsync().then((result) => {
+    console.log(result); // -> 1
 });
 ```
 
