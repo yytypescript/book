@@ -1,6 +1,6 @@
 # 開発環境の準備
 
-TypeScriptの開発するに当たってNode.jsが必要になります。まずはNode.jsのおさらいをしましょう。
+TypeScriptを開発するに当たってNode.jsが必要になります。まずはNode.jsのおさらいをしましょう。
 
 ## Node.jsとは
 
@@ -23,13 +23,13 @@ Node.js公式ページがらダウンロードしてインストールを行う�
 {% endhint %}
 
 1台のPC上にNode.jsを利用したプロジェクトが1つ、かつ、Node.jsのアップデートを行う予定がない場合は問題がありませんが複数のプロジェクトがあり、それらが異なったバージョンの場合に支障が出てきます。言語仕様の変更などにより正しく動作する保証はありません。使用するフレームワークが最新のLTSをサポートしていない場合や脆弱性が明らかになりアップデートする必要も出てくるでしょう。  
-これらの問題を回避するためにNVMを利用します。NVMはnode version managerの略で複数のNode.jsを複数インストールし、バージョンを切り替えを行うことができます。
+これらの問題を回避するためにNVMを利用します。NVMはnode version managerの略で複数のNode.jsを複数インストールし、バージョン切り替えを行うことができます。
 
 ### NVMからNode.jsのインストールを行う\(macOS編\)
 
 nvm-sh/nvmを利用します。  
 [https://github.com/nvm-sh/nvm](https://github.com/nvm-sh/nvm)  
-インストールをする際にgitコマンドが必要となります。macOS 10.9以降は/usr/bin/gitが廃止されたためXcodeをインストールすることお勧めします。Xcodeをインストールを行うと同時にgitも自動的にインストールされます。
+インストールをする際にgitコマンドが必要となります。macOS 10.9以降は/usr/bin/gitが廃止されたためXcodeをインストールすることお勧めします。Xcodeのインストールを行うと同時にgitも自動的にインストールされます。
 
 ターミナル\(Terminal.app\)からインストールスクリプトを実行します。スクリプトのパスにバージョンが記載されています。最新バージョンはnvm-sh/nvm公式ページより確認してください。2020年8月現在ではv0.35.3となります。
 
@@ -93,7 +93,8 @@ v12.16.0
 ### NVMからNode.jsのインストールを行う\(Windows編\)
 
 nvm-windowsを利用します。  
-[https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows) 公式ページのreleaseからnvm-setup.zipをダウンロード・インストールを行うだけです。ダウンロードダイアログが表示されるので文言を読み、インストールを行ってください。
+[https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows)   
+公式ページのreleaseからnvm-setup.zipをダウンロード・インストールを行うだけです。ダウンロードダイアログが表示されるので文言を読み、インストールを行ってください。
 
 インストール後はPCの再起動を行います。これはPAHTを確実に通すためです。
 
