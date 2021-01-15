@@ -160,7 +160,7 @@ const data3: Data = source3.fetch();
 const data4: Data = source4.fetch();
 ```
 
-するとこれはエラーが出ることなく実行できます。これが公称的部分型の大きな特徴で、File, Requestのシグネチャが同じために可換になります。
+するとこれはエラーが出ることなく実行できます。これが構造的部分型の大きな特徴で、File, Requestのシグネチャが同じために可換になります。
 
 ```typescript
 interface IInputSource {
