@@ -283,6 +283,7 @@ person.name.givenName = 'Gorilla';
 
 ```typescript
 type Butterfly = {
+  [key: string] : string;
 };
 ```
 
@@ -317,6 +318,7 @@ bufferflies.ja;
 
 ```typescript
 type Jekyll = {
+  [key: boolean]: string;
 };
 // An index signature parameter type must be either 'string' or 'number'.
 ```
@@ -337,6 +339,7 @@ type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
 
 ```typescript
 type Butterfly = {
+  [key in SystemSupportLanguage]: string;
 };
 ```
 
@@ -385,9 +388,11 @@ Mapped typeはインデックス型と異なり`symbol`型もキーにするこ�
 ```typescript
 type Identifier = symbol | 1;
 type Sample = {
+  [P in Identifier]: string;
 };
 
 const sample: Sample = {
+  [Symbol('thick')]: 'thin',
   1: 'pork'
 };
 ```

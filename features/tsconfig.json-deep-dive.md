@@ -909,6 +909,7 @@ const first: string | undefined = phoneticCode[0];
 
 ```typescript
 type SystemTerms = {
+  [key: string]: string;
   en: string;
 };
 ```
