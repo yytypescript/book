@@ -14,6 +14,7 @@
   * [TypeScript誕生の背景](overview/before-typescript.md)
   * [なぜTypeScriptを使うべきか？](overview/why-you-should-use-typescript.md)
 * [JavaScript再入門](revisiting-javascript/README.md)
+  * [JavaScriptの型](revisiting-javascript/javascript-types.md)
   * [シングルプロセス・シングルスレッドとコールバック](revisiting-javascript/single-process-and-callback.md)
 * [これだけはおさえておきたいTypeScriptの機能](features/README.md)
   * [プリミティブ型 \(Primitive Types\)](features/primitive-types.md)
