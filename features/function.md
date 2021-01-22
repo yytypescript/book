@@ -71,7 +71,29 @@ console.log(func());
 // -> { x: 1 }
 ```
 
-generatorを使用した関数はアロー関数での表記なく、必ず`function*() {}`と書く必要があります。
+### Generator
+
+Generatorを使用した関数はアロー関数での表記なく、必ず`function*() {}`と書く必要があります。次は記述可能なGeneratorの方法です。
+
+```typescript
+function* generatorFunction1() {
+  // ...
+};
+
+const generatorFunction2 = function* () {
+  // ...
+};
+
+class GeneratorSample {
+  public* generatorFunction3() {
+    // ...
+  }
+}
+```
+
+Generatorは反復可能\(`Iterable<T>`\)な反復子\(`Iterator<T>`\)であるインターフェース`IterableIterator<T>`を実装したクラスのオブジェクトのことです。条件を満たしたクラスはGenerator関数の中で`yield`キーワードを使えます。`yield`は呼ばれたときに一度その値を呼び出し元へ返却し、次に呼ばれたときはその続きから処理を開始します。
+
+`Promise`が一般化する以前、非同期処理を代わりに担当する目的でGeneratorが使われていたことはありますが前述の`Promise`に加えて`async / await`が一般的に使われるようになってから非同期処理の目的だけGeneratorを使う機会は減りましたが現在でも大量のデータを取得したいときに一度ではなく、小出しに取得したいときにGeneratorは使い道があります。
 
 ## `this`
 
