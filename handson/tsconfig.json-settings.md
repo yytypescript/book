@@ -30,7 +30,7 @@ tsconfig.jsonが作成されます。すでにtsconfig.jsonがある時は上書
 
 ## `target`
 
-TypeScriptは最終的にJavaScriptにトランスパイルされます。このオプションはそのときにどのバージョンのJavaScript向けに出力するかといったものです。
+TypeScriptは最終的にJavaScriptにコンパイルされます。このオプションはそのときにどのバージョンのJavaScript向けに出力するかといったものです。
 
 JavaScriptも時代とともに進化をして、既存のオブジェクトに新しいメソッドが追加されることがあります。新しく追加されたメソッドは出力するJavaScriptのバージョンがそのメソッドをサポートしていない時はすなわち使えない、というわけではなくTypeScript側で疑似的に補完してくれます。
 
