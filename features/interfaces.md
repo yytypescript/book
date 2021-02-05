@@ -125,7 +125,7 @@ class Adorescent implements Measurements, SensitiveSizes {
 
 ## インターフェースが抱える問題
 
-インターフェースはTypeScriptで独自に定義された概念であり、JavaScriptには存在しません。つまりトランスパイルをかけると消えてなくなります。そのため他の言語でできるような**その型が期待するインターフェースかどうか**の判定ができません。上記の`Student`インターフェースで次のようなことをしても実行することはできません。
+インターフェースはTypeScriptで独自に定義された概念であり、JavaScriptには存在しません。つまりコンパイルをかけると消えてなくなります。そのため他の言語でできるような**その型が期待するインターフェースかどうか**の判定ができません。上記の`Student`インターフェースで次のようなことをしても実行することはできません。
 
 ```typescript
 if (studentA instanceof Student) {

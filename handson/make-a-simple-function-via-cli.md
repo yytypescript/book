@@ -80,13 +80,13 @@ Argument of type '"1"' is not assignable to parameter of type 'number'.`
 
 このメッセージの意味は「この引数の`'1'`は`number`型ではないよ」という至極まっとうな指摘です。
 
-ひとまずこの警告を完全無視してトランスパイルをしてみます。
+ひとまずこの警告を完全無視してコンパイルをしてみます。
 
 ```bash
 $ tsc increment.ts
 ```
 
-するとやはり警告が出てしまいます。
+やはり警告が出てしまいます。
 
 ```typescript
 Argument of type '"1"' is not assignable to parameter of type 'number'.
@@ -96,7 +96,7 @@ console.log(increment('1'));
 Found 1 error.
 ```
 
-このように事前にコードに潜んでいる危険を、コーディングまたはトランスパイルの時点で検知できます。
+このように事前にコードに潜んでいる危険を、コーディングまたはコンパイルの時点で検知できます。
 
 ### 戻り値にも型を書く
 
