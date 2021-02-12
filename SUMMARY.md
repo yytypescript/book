@@ -42,6 +42,8 @@
   * [tsconfig.json Deep Dive](features/tsconfig.json-deep-dive.md)
   * [import / export /require](features/import-export-require.md)
   * [型変数 \(Type Variables\)](features/type-variables.md)
+* [逆引き](ki/README.md)
+  * [用語](ki/yong-yu.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
