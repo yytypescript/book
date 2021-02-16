@@ -130,7 +130,7 @@ enum DayOfTheWeek {
   SUN = 10,  // 10
   MON,       // 11
   TUE,       // 12
-  WED = 11   // 11
+  WED = 11,   // 11
   THU,       // 12
   FRI,       // 13
   SAT        // 14
