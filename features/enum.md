@@ -10,7 +10,7 @@ Enumは変数に値を自動的に割り当てる型になります。TypeScript
 enum DayOfTheWeek {
   SUN,
   MON,
-  THE,
+  TUE,
   WED,
   THU,
   FRI,
@@ -25,7 +25,7 @@ enum DayOfTheWeek {
 ```typescript
 console.log(DayOfTheWeek.SUN); // 0
 console.log(DayOfTheWeek.MON); // 1
-console.log(DayOfTheWeek.THE); // 2
+console.log(DayOfTheWeek.TUE); // 2
 ```
 
 クラスやインターフェースと同様に型として扱うことができます。
@@ -51,7 +51,7 @@ dayOff(DayOfTheWeek.MON);
 enum DayOfTheWeek {
   SUN,       // 0
   MON,       // 1
-  THE,       // 2
+  TUE,       // 2
   WED,       // 3
   THU,       // 4
   FRI,       // 5
@@ -65,7 +65,7 @@ enum DayOfTheWeek {
 enum DayOfTheWeek {
   SUN = 1,  // 1
   MON,      // 2
-  THE,      // 3
+  TUE,      // 3
   WED,      // 4
   THU,      // 5
   FRI,      // 6
@@ -129,7 +129,7 @@ Enumはメンバ郡の値の一意性を保証する訳ではないことに注�
 enum DayOfTheWeek {
   SUN = 10,  // 10
   MON,       // 11
-  THE,       // 12
+  TUE,       // 12
   WED = 11   // 11
   THU,       // 12
   FRI,       // 13
@@ -145,7 +145,7 @@ enum DayOfTheWeek {
 enum DayOfTheWeek {
   SUN = 10,  // 10
   MON = 9,   //  9
-  THE = 8,   //  8
+  TUE = 8,   //  8
   WED = 8,   //  8
   THU = 9,   //  9
   FRI = 10,  // 10
@@ -161,7 +161,7 @@ enum DayOfTheWeek {
 enum DayOfTheWeek {
   SUN = 'Happy holidays!',  // Happy holidays!
   MON = 1,                  // 1
-  THE,                      // 2
+  TUE,                      // 2
   WED,                      // 3
   THU,                      // 4
   FRI = 'TGIF',             // TGIF
