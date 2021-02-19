@@ -33,7 +33,7 @@ let x = 1;
 x = 'hello'; // x はnumber型と決定しているのでstring型を代入するとエラー
 
 // Property 'substring' does not exist on type 'number'.
-console.log(x.substring(1,3)
+console.log(x.substring(1,3))
 ```
 
 一方、動的型付けでは実行時に型が決まるので、実行タイミングにより型が変化します。
@@ -46,7 +46,7 @@ let x = 1; // x はnumber型となる
 x = 'hello'; // x はstring型となる
 
 // output: "el"
-console.log(x.substring(1,3)
+console.log(x.substring(1,3))
 ```
 
 ## 色々な型推論

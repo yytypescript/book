@@ -155,13 +155,13 @@ function isStudent(obj: unknown): obj is Student {
     grade
   } = obj as UnknownObject<Student>;
 
-  if (typeof name == 'string') {
+  if (typeof name !== 'string') {
     return false;
   }
-  if (typeof age == 'number') {
+  if (typeof age !== 'number') {
     return false;
   }
-  if (typeof grade == 'number') {
+  if (typeof grade !== 'number') {
     return false;
   }
 

@@ -22,7 +22,7 @@ class NetworkError extends Error {
 }
 
 const errorEvent: MyErrorEvent<Error> = { error: new Error('エラーです'), type: 'syntax' }
-const networkErrorEvent: MyErrorEvent<NetworkAccessError> = { error: new NetworkAccessError('ネットワークエラーです'), type: 'nextwork' }
+const networkErrorEvent: MyErrorEvent<NetworkError> = { error: new NetworkError('ネットワークエラーです'), type: 'nextwork' }
 ```
 
 例外処理を記述する時に`NetworkError`のように対応するエラークラスを全て用意することはなく、標準の`Error`で対応してしまうケースも多くありますが、今の状態では`MyErrorEvent`のジェネリクスの型`T`を常に指定する必要があり非常に面倒です。
@@ -43,7 +43,7 @@ type MyErrorEvent<T = Error> = {
 
 // デフォルト型パラメータを指定した事で Error の型指定を省略できる
 const errorEvent: MyErrorEvent = { error: new Error('エラーです'), type: 'syntax' }
-const networkErrorEvent: MyErrorEvent<NetworkAccessError> = { error: new NetworkAccessError('ネットワークエラーです'), type: 'nextwork' }
+const networkErrorEvent: MyErrorEvent<NetworkError> = { error: new NetworkError('ネットワークエラーです'), type: 'nextwork' }
 ```
 
 ### 型パラメーターの制約と併用する
