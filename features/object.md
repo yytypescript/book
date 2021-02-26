@@ -518,7 +518,7 @@ interface Array<T> {
 type Array<T> = ES2016Array<T> & ES2019Array<T>;
 ```
 
-このDeclaration mergingの機能は`ポリフィル`を行うライブラリの型定義でよく見ることができます。
+このDeclaration mergingの機能は`ポリフィル`を行うパッケージの型定義でよく見ることができます。
 
 ## `object, Object, {}`
 

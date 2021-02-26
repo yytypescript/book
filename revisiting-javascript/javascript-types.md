@@ -64,7 +64,7 @@ const price2 = 103 * 11 / 10; // 113.3
 price1 + price2; // 224.39999999999998
 ```
 
-小数計算の誤差問題を包括的に解決したい場合は、[decimal.js](https://github.com/MikeMcl/decimal.js/)のような計算誤差がないライブラリを使うのも手です。
+小数計算の誤差問題を包括的に解決したい場合は、[decimal.js](https://github.com/MikeMcl/decimal.js/)のような計算誤差がないパッケージを使うのも手です。
 
 ### string型
 
@@ -138,7 +138,7 @@ $list2 = [1, 2, 3];
 var_dump($list1 === $list2); //=> bool(true)
 ```
 
-このような配列の中身を比べるための演算子やメソッドはJavaScriptにはないため、中身を比較したいときにはlodashの[isEqual](https://lodash.com/docs/4.17.15#isEqual)などのライブラリを使うのがおすすめです。
+このような配列の中身を比べるための演算子やメソッドはJavaScriptにはないため、中身を比較したいときにはlodashの[isEqual](https://lodash.com/docs/4.17.15#isEqual)などのパッケージを使うのがおすすめです。
 
 ### typeof演算子
 

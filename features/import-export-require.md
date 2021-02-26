@@ -5,19 +5,19 @@ TypeScriptは最終的にどの場面で使われるか、その用途に適し�
 
 ## かつてのJavaScript
 
-かつてJavaScriptがブラウザでのみ動いていた時代は、モジュール分割と言う考え自体はあったもののそれはあくまでもブラウザ上、さらには`html`での管理となっていました。よく使われていた`jQuery`というライブラリがあるとすれば、それは次のように`html`に書く必要がありました。
+かつてJavaScriptがブラウザでのみ動いていた時代は、モジュール分割と言う考え自体はあったもののそれはあくまでもブラウザ上、さらには`html`での管理となっていました。よく使われていた`jQuery`というパッケージがあるとすれば、それは次のように`html`に書く必要がありました。
 
 ```markup
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/x.y.z/jquery.min.js"></script>
 ```
 
-もし`jQuery`に依存するライブラリがあるとすれば、それより下に書く必要があります。
+もし`jQuery`に依存するパッケージがあるとすれば、 `jQuery` の宣言より下に書く必要があります。
 
 ```markup
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/x.y.z/jquery-ui.min.js"></script>
 ```
 
-ライブラリが少なければまだしも、増えてくると依存関係が複雑になります。もしも読み込む順番を間違えるとその`html`では動作しなくなるでしょう。
+パッケージが少なければまだしも、増えてくると依存関係が複雑になります。もしも読み込む順番を間違えるとその`html`では動作しなくなるでしょう。
 
 ## Node.jsが登場してから
 
@@ -220,7 +220,7 @@ console.log(inc(3));
 
 `ES Module`では`import`をファイルの先頭に書く必要があります。これは動的に読み込むファイルを切り替えられないことを意味します。この`import()`はその代替手段にあたります。
 
-`require()`と異なる点としては`import()`はライブラリの読み込みを非同期で行います。つまり`Promise`を返します。
+`require()`と異なる点としては`import()`はモジュールの読み込みを非同期で行います。つまり`Promise`を返します。
 
 ```typescript
 // index.js
