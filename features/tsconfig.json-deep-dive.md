@@ -6,7 +6,7 @@
 
 ## パッケージを使う人にもTypeScriptによる型の享受を目指す
 
-パッケージを公開する時は、動作する形で公開するのが前提なので`js`にする必要があります。つまりコンパイルは必須です。ですがせっかくTypeScriptで作ったのだからパッケージの型情報も提供しましょう。
+パッケージを公開するときは、動作する形で公開するのが前提なので`js`にする必要があります。つまりコンパイルは必須です。ですがせっかくTypeScriptで作ったのだからパッケージの型情報も提供しましょう。
 
 ### 型定義ファイルも出力する
 
@@ -112,7 +112,7 @@ IDEを使っているときに有用で、実際の`ts`のソースコードが�
 
 ### JavaScriptの`sourceMap`も出力する
 
-`sourceMap`とはAltJSがコンパイルされたJavaScriptとの行を一致させるものです。これがあることによってデバッグやトレースをしている時に、元の`ts`ファイルの何行目で問題が発生しているかわかりやすくなります。`module bundler`を使用する時はこのオプションを有効にしていないと基本的に何もわかりません。このオプションはパッケージを公開しないとしても有効にしておくことが望ましいでしょう。
+`sourceMap`とはAltJSがコンパイルされたJavaScriptとの行を一致させるものです。これがあることによってデバッグやトレースをしているときに、元の`ts`ファイルの何行目で問題が発生しているかわかりやすくなります。`module bundler`を使用するときはこのオプションを有効にしていないと基本的に何もわかりません。このオプションはパッケージを公開しないとしても有効にしておくことが望ましいでしょう。
 
 tsconfig.jsonにある`sourceMap`の項目を`true`に変更します。
 
@@ -248,7 +248,7 @@ Tree Shakingとは使われていない関数、クラスを最終的な`js`フ�
 
 `commonjs`は`require()`を使用します。`require()`はファイルのどの行でも使用ができますが`esmodule`の`import`はファイルの先頭でやらなければならないという決定的な違いがあります。
 
-`require()`はある時はこの`js`を、それ以外のときはあの`js`を、と読み込むファイルをコードで切り替えることができます。つまり、次のようなことができます。
+`require()`はあるときはこの`js`を、それ以外のときはあの`js`を、と読み込むファイルをコードで切り替えることができます。つまり、次のようなことができます。
 
 ```typescript
 let police = null;
@@ -301,7 +301,7 @@ if (shouldCallPolice()) {
 }
 ```
 
-副作用があり、そのファイルが判明している時はそのファイルを指定します。
+副作用があり、そのファイルが判明しているときはそのファイルを指定します。
 
 ```typescript
 {
@@ -325,25 +325,26 @@ if (shouldCallPolice()) {
 
 ## より厳密にコーディングする
 
-厳密なコーディングといえば`linter`があります。TypeScript自身にもより型チェックを厳密にするオプションがあります。以下はtsconfig.jsonの該当する部分を抜粋したものです。
+厳密なコーディングといえば`linter`があります。TypeScript自身にもより型チェックを厳密にするオプションがあります。以下はTypeScript 4.2.2のtsconfig.jsonの該当する部分を抜粋したものです。
 
 ```typescript
 /* Strict Type-Checking Options */
-"strict": true,                           /* Enable all strict type-checking options. */
-// "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
-// "strictNullChecks": true,              /* Enable strict null checks. */
-// "strictFunctionTypes": true,           /* Enable strict checking of function types. */
-// "strictBindCallApply": true,           /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
-// "strictPropertyInitialization": true,  /* Enable strict checking of property initialization in classes. */
-// "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
-// "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
+"strict": true,                                 /* Enable all strict type-checking options. */
+// "noImplicitAny": true,                       /* Raise error on expressions and declarations with an implied 'any' type. */
+// "strictNullChecks": true,                    /* Enable strict null checks. */
+// "strictFunctionTypes": true,                 /* Enable strict checking of function types. */
+// "strictBindCallApply": true,                 /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
+// "strictPropertyInitialization": true,        /* Enable strict checking of property initialization in classes. */
+// "noImplicitThis": true,                      /* Raise error on 'this' expressions with an implied 'any' type. */
+// "alwaysStrict": true,                        /* Parse in strict mode and emit "use strict" for each source file. */
 
 /* Additional Checks */
-// "noUnusedLocals": true,                /* Report errors on unused locals. */
-// "noUnusedParameters": true,            /* Report errors on unused parameters. */
-// "noImplicitReturns": true,             /* Report error when not all code paths in function return a value. */
-// "noFallthroughCasesInSwitch": true,    /* Report errors for fallthrough cases in switch statement. */
-// "noUncheckedIndexedAccess": true,      /* Include 'undefined' in index signature results */
+// "noUnusedLocals": true,                      /* Report errors on unused locals. */
+// "noUnusedParameters": true,                  /* Report errors on unused parameters. */
+// "noImplicitReturns": true,                   /* Report error when not all code paths in function return a value. */
+// "noFallthroughCasesInSwitch": true,          /* Report errors for fallthrough cases in switch statement. */
+// "noUncheckedIndexedAccess": true,            /* Include 'undefined' in index signature results */
+// "noPropertyAccessFromIndexSignature": true,  /* Require undeclared properties from index signatures to use element accesses. */
 ```
 
 初期設定では`strict`のみが有効になっています。
@@ -352,7 +353,7 @@ if (shouldCallPolice()) {
 
 ### `strict`
 
-このオプションは**TypeScript4.0時点で**次の7個のオプションをすべて有効にしていることと同じです。スクラッチから開発するのであれば有効にしておいて差し支えないでしょう。
+このオプションは**TypeScript4.2時点で**次の7個のオプションをすべて有効にしていることと同じです。スクラッチから開発するのであれば有効にしておいて差し支えないでしょう。
 
 * noImplicitAny
 * strictNullChecks
@@ -362,7 +363,7 @@ if (shouldCallPolice()) {
 * noImplicitThis
 * alwaysStrict
 
-この説明にTypeScriptのバージョンが明記されているのは、今後のバージョンで**オプションが追加または廃止されることがありうる**からです。より安定したオプションを設定したい場合は`strict`ではなく個々のオプションを有効にしてください。
+この説明にTypeScriptのバージョンが明記されているのは、今後のバージョンで**オプションが追加または廃止されることがありうる**からです。より安定したオプションを設定したい場合は`strict`ではなく個々のオプションを有効にしてください。このオプションを有効にして個々のオプションを無効にすると個々の設定が優先されます。
 
 ### `noImplicitAny`
 
@@ -392,7 +393,7 @@ function increment(i: number): number {
 
 ### `strictNullChecks`
 
-`null, undefined`のチェックが厳密になります。このオプションを入れていると変数に代入する時に`null, undefined`の代入を防げます。
+`null, undefined`のチェックが厳密になります。このオプションを入れていると変数に代入するときに`null, undefined`の代入を防げます。
 
 ```typescript
 const error: Error = null;
@@ -713,7 +714,7 @@ function add(n1: string, n2: string): number {
 'str' is declared but its value is never read.
 ```
 
-となります。デバッグをしている時など若干邪魔なときがあります。
+となります。デバッグをしているときなど若干邪魔なときがあります。
 
 ### `noUnusedParameters`
 
@@ -889,7 +890,7 @@ const germanName: string = butterfly.de;
 const fifth: string = phoneticCodes[4];
 ```
 
-これらのオブジェクトのプロパティにアクセスするとき完全な型安全ではありません。上記`germanName, fifth`はどちらも定義されたオブジェクトには存在しませんがTypeScriptaはこれらを`string`型と解釈します。
+これらのオブジェクトのプロパティにアクセスするときは完全な型安全ではありません。上記`germanName, fifth`はどちらも定義されたオブジェクトには存在しませんがTypeScriptaはこれらを`string`型と解釈します。
 
 `noUncheckedIndexedAccess`を`true`に設定しこれらをコンパイルしようとすると
 
@@ -928,7 +929,7 @@ const englishName: string = butterfly.en;
 const frenchhName: string | undefined = butterfly.fr;
 ```
 
-配列はインデックスを指定する方法でアクセスをすると`undefined`型とのユニオン型と解釈されますが`for-of, array.forEach()`はこの制約を受けないため積極的に使用を検討してください。
+配列はインデックス記法でアクセスをすると`undefined`型とのユニオン型と解釈されますが`for-of, array.forEach()`はこの制約を受けないため積極的に使用を検討してください。
 
 ```typescript
 const phoneticCodes: string[] = ['alpha', 'bravo', 'charlie'];
@@ -941,4 +942,45 @@ phoneticCodes.forEach((p: string) => {
   // ...
 });
 ```
+
+### `noPropertyAccessFromIndexSignature`
+
+`noUncheckedIndexedAccess` と同様にインデックス型を持つオブジェクトに対する型チェックです。インデックス型に対するアクセスをインデックス記法に強制されます。
+
+ドット記法とインデックス記法についてですが、次のようにあるオブジェクトがあるとしてドット\(`.`\)でプロパティアクセスをしているものがドット記法、ブラケット\(`[]`\)でアクセスをしているものがインデックス記法です。
+
+```typescript
+type SystemTerms = {
+  [key: string]: string;
+  en: string;
+};
+
+const butterfly: SystemTerms = {
+  en: 'Butterfly',
+  fr: 'Papillon',
+  it: 'Farfalla',
+  es: 'Mariposa'
+};
+
+// dot syntax
+butterfly.en;
+// indexed syntax
+butterfly['en'];
+```
+
+` SystemTerms` は `noUncheckedIndexedAccess` にて登場した型と同じものでシステムにおける単語、用語のうち英語は担保し他言語の存在は曖昧なものにしています。
+
+```typescript
+console.log(butterfly.fr);
+console.log(butterfly['fr']);
+```
+
+`noPropertyAccessFromIndexSignature` を `true` に設定し次のコードをコンパイルしようとすると
+
+```typescript
+Property 'fr' comes from an index signature, so it must be accessed with ['fr'].
+console.log(butterfly.fr);
+```
+
+このようにインデックス型へのドット記法でのアクセスが禁止されます。
 
