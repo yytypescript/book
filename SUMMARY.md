@@ -44,6 +44,8 @@
   * [tsconfig.json Deep Dive](features/tsconfig.json-deep-dive.md)
   * [import / export /require](features/import-export-require.md)
   * [型変数 \(Type Variables\)](features/type-variables.md)
+* [Tips](tips/README.md)
+  * [オブジェクトを浅くコピーする](tips/shallow-copy-object.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
