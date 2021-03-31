@@ -28,7 +28,7 @@ JavaScript誕生以前は、簡単なフォームのバリデーションをす�
 
 ### くすぶりはじめる大規模開発のニーズ
 
-他のプラットフォームに目を移すと、この時期にはすでにブラウザアプリケーションを実現する技術として、[Javaアプレット](https://ja.wikipedia.org/wiki/Java%E3%82%A2%E3%83%97%E3%83%AC%E3%83%83%E3%83%88)や[Adobe Flash](https://ja.wikipedia.org/wiki/Adobe_Flash)がありました。特にFlashはJavaアプレットよりも動作が軽く、ウェブサイト全体をFlashで実装するサイトが登場したり、この時代を省みて「[Flash黄金時代](https://dic.nicovideo.jp/a/flash%E9%BB%84%E9%87%91%E6%99%82%E4%BB%A3)」という言葉が後に生まれたりしました。一方のJavaScriptは依然として「補助的な道具」のイメージが支配的でした。
+他のプラットフォームに目を移すと、このとき期にはすでにブラウザアプリケーションを実現する技術として、[Javaアプレット](https://ja.wikipedia.org/wiki/Java%E3%82%A2%E3%83%97%E3%83%AC%E3%83%83%E3%83%88)や[Adobe Flash](https://ja.wikipedia.org/wiki/Adobe_Flash)がありました。特にFlashはJavaアプレットよりも動作が軽く、ウェブサイト全体をFlashで実装するサイトが登場したり、この時代を省みて「[Flash黄金時代](https://dic.nicovideo.jp/a/flash%E9%BB%84%E9%87%91%E6%99%82%E4%BB%A3)」という言葉が後に生まれたりしました。一方のJavaScriptは依然として「補助的な道具」のイメージが支配的でした。
 
 一般的に対話型のユーザーインターフェースを備えたウェブサイト、今で言うウェブアプリケーションは、当時は「リッチインターネットアプリケーション」と呼ばれ、その多くはJavaアプレットやFlashが担っていましたが、プログラマの中にはJavaScriptを使ったウェブアプリケーションの開発を試みる人たちもいました。
 
