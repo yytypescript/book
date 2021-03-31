@@ -109,7 +109,7 @@ $ npm run textlint:fix
 
 ### 表記揺れの統一
 
-表記揺れを発見された場合は、[prh/yytypescript.yml](https://github.com/yytypescript/book/tree/master/handson)にルールを追加してください。
+表記揺れを発見された場合は、[prh/yytypescript.yml](https://github.com/yytypescript/book/blob/master/prh/yytypescript.yml)にルールを追加してください。
 
 prhの設定ファイルの書き方は次のページを参照してください。  
 [prh/prh](https://github.com/prh/prh)

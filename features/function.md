@@ -834,7 +834,7 @@ class Operator {
     this.value *= value;
   }
 
-  public devide(value: number): void {
+  public divide(value: number): void {
     this.value /= value;
   }
 }
@@ -844,7 +844,7 @@ const op: Operator = new Operator(0);
 op.sum(5); // 5
 op.subtract(3); // 2
 op.multiply(6); // 12
-op.devide(3); // 4
+op.divide(3); // 4
 ```
 
 演算ごとにステートメントを分ける必要があります。  
@@ -873,17 +873,17 @@ class Operator {
     return this;
   }
 
-  public devide(value: number): Operator {
+  public divide(value: number): Operator {
     this.value /= value;
     return this;
   }
 }
 
 const op: Operator = new Operator(0);
-op.sum(5).subtract(3).multiply(6).devide(3); // 4
+op.sum(5).subtract(3).multiply(6).divide(3); // 4
 ```
 
-`op.sum(), op.subtract(), op.multiply(). op.devide()`の戻り値の型を`Operator`に変更しました。これによりメソッドチェインが可能になりました。
+`op.sum(), op.subtract(), op.multiply(). op.divide()`の戻り値の型を`Operator`に変更しました。これによりメソッドチェインが可能になりました。
 
 ここで、このクラス`Operator`を拡張して累乗の計算を追加したいとします。すると新しいクラス`NewOperator`は次のようになるでしょう。
 
@@ -936,7 +936,7 @@ class Operator {
     return this;
   }
 
-  public devide(value: number): this {
+  public divide(value: number): this {
     this.value /= value;
     return this;
   }

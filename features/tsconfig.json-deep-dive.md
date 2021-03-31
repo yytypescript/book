@@ -191,7 +191,7 @@ tsc -p tsconfig.cjs.json
 tsc -p tsconfig.esm.json
 ```
 
-### Dual Pakcageのためのpackage.json
+### Dual Packageのためのpackage.json
 
 package.jsonもDual Packageのための設定が必要です。
 
@@ -229,7 +229,7 @@ package.jsonはこのようになっているでしょう。
 
 ### Tree Shaking
 
-`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができるすべてをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなりすぎるという欠点があります。特にそれがSPA\(Signle Page Application\)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
+`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができるすべてをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなり過ぎるという欠点があります。特にそれがSPA\(Signle Page Application\)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
 
 この事態を避けるために`module bundler`は容量削減のための涙ぐましい努力を続けています。その機能のひとつとして題名のTree Shakingを紹介するとともに、開発者にできるTree Shaking対応パッケージの作り方を紹介します。
 
@@ -776,7 +776,7 @@ function negaposi(num: number): string {
 
 ### `noFallthroughCasesInSwitch`
 
-`fallthrough`とは`switch`で`break`または`return`を行わないことを意味します。以下は多くの方が`switch`で学習したであろう`fallthough`の例です。
+`fallthrough`とは`switch`で`break`または`return`を行わないことを意味します。以下は多くの方が`switch`で学習したであろう`fallthrough`の例です。
 
 ```typescript
 function daysOfMonth(month: number): number {

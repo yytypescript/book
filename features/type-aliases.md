@@ -413,9 +413,9 @@ type Z = {
   z: number;
 };
 
-type ThreeDimensionalPoint = TwoDimensionPointal & Z;
+type ThreeDimensionalPoint = TwoDimensionalPoint & Z;
 
-const p: ThreeDimensionPointal = {
+const p: ThreeDimensionalPoint = {
   x: 0,
   y: 1,
   z: 2
