@@ -191,7 +191,7 @@ tsc -p tsconfig.cjs.json
 tsc -p tsconfig.esm.json
 ```
 
-### Dual Pakcageのためのpackage.json
+### Dual Packageのためのpackage.json
 
 package.jsonもDual Packageのための設定が必要です。
 
@@ -776,7 +776,7 @@ function negaposi(num: number): string {
 
 ### `noFallthroughCasesInSwitch`
 
-`fallthrough`とは`switch`で`break`または`return`を行わないことを意味します。以下は多くの方が`switch`で学習したであろう`fallthough`の例です。
+`fallthrough`とは`switch`で`break`または`return`を行わないことを意味します。以下は多くの方が`switch`で学習したであろう`fallthrough`の例です。
 
 ```typescript
 function daysOfMonth(month: number): number {

@@ -20,7 +20,7 @@ JavaScriptにもクラスの概念は存在します。TypeScriptでのクラス
 
 ## 書式
 
-一般的なクラスの書式を日本語で説明するとこののようになります。
+一般的なクラスの書式を日本語で説明するとこのようになります。
 
 ```typescript
 class クラス名 {
@@ -136,7 +136,7 @@ class Meat extends Food {
 ```typescript
 class Animal {
   public name: string;  // プロパティにpublicアクセス修飾子
-  public constructor(theName: string) { this.name = theName; } // コンストラクターにpublicアクセス修飾子
+  public constructor(theName: string) { this.name = theName; } // コンストラクタにpublicアクセス修飾子
   public move(distanceInMeters: number) { // メソッドにpublicアクセス修飾子
     console.log(`${this.name} moved ${distanceInMeters}m.`); // publicアクセス修飾子である`this.name`を使用することが可能
   }
@@ -229,7 +229,7 @@ class Gorilla extends Animal {
 
 メソッドの引数にはアクセス修飾子を設定することはできませんがコンストラクタは特別です。
 
-引数に対してアクセス修飾子を宣言した場合はこのようにな意味になります。
+引数に対してアクセス修飾子を宣言した場合はこのような意味になります。
 
 | アクセス修飾子 | 説明 |
 | :--- | :--- |
@@ -383,7 +383,7 @@ get 名前(): 型 {
 }
 ```
 
-Getterにはに引数の指定することはできません。また戻り値を必ず指定する必要があります。
+Getterには引数の指定することはできません。また戻り値を必ず指定する必要があります。
 
 ### Setter
 
@@ -396,5 +396,5 @@ set 名前(変数 : 型) {
 }
 ```
 
-引数を必ず１つする必要があります。また戻り値を指定することはできません。
+引数を必ず１つ指定する必要があります。また戻り値を指定することはできません。
 
