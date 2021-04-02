@@ -221,7 +221,7 @@ switch(lang.iso639) {
 
 上記例では`lang.iso639`がそれに該当します。
 
-リテラル型なくても他の型どうしであればTypeScriptはこの判別を自動的にしてくれます。
+リテラル型でなくても他の型どうしであればTypeScriptはこの判別を自動的にしてくれます。
 
 ```typescript
 type Measurement = {

@@ -62,7 +62,7 @@ const object = {
 };
 ```
 
-JavaやPHPでは、オブジェクトのフィールドとメソッドははっきり区別されます。一方、JavaScriptではその区別はきっちりしていません。Javaで言うところのメソッドとフィールドは、JavaScriptでは同じように扱われます。例えば、メソッドに`null`を代入することで、フィードに変えてしまうこともできます。
+JavaやPHPでは、オブジェクトのフィールドとメソッドははっきり区別されます。一方、JavaScriptではその区別はきっちりしていません。Javaで言うところのメソッドとフィールドは、JavaScriptでは同じように扱われます。たとえば、メソッドに`null`を代入することで、フィールドに変えてしまうこともできます。
 
 ```javascript
 const calculator = {
@@ -150,11 +150,11 @@ child instanceof Parent; //=> true
 child instanceof Child; //=> true
 ```
 
-### インターフェイス
+### インターフェース
 
-JavaやPHPなどの言語ではクラスとは別に、インターフェイスが定義できますが、JavaScriptにはそれに相当する構文がありません。
+JavaやPHPなどの言語ではクラスとは別に、インターフェースが定義できますが、JavaScriptにはそれに相当する構文がありません。
 
-TypeScriptにはインターフェイスがあります。TypeScriptインターフェイスについては下記をご覧ください。
+TypeScriptにはインターフェースがあります。TypeScriptインターフェースについては下記をご覧ください。
 
 {% page-ref page="../features/interfaces.md" %}
 
