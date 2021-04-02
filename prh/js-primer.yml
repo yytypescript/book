@@ -647,7 +647,7 @@ rules:
     pattern:  綺麗
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: こと
-    pattern:  /(記|大|仕|議)?事(?!情|件|前|後|例|実|体|態|項|録)/
+    pattern:  /(食|記|大|仕|議)?事(?!情|件|前|後|例|実|体|態|項|録)/
     regexpMustEmpty: $1
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
     specs:
@@ -657,6 +657,8 @@ rules:
         to:   記事
       - from: 事件
         to:   事件
+      - from: 食事
+        to:   食事
   - expected: でき$1
     pattern:  /出来(る|て|た|ま|上が)/
     specs:
