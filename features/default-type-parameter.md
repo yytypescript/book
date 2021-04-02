@@ -46,7 +46,7 @@ const errorEvent: MyErrorEvent = { error: new Error('エラーです'), type: 's
 const networkErrorEvent: MyErrorEvent<NetworkError> = { error: new NetworkError('ネットワークエラーです'), type: 'nextwork' }
 ```
 
-### 型パラメーターの制約と併用する
+## 型パラメーターの制約と併用する
 
 ある型の部分型であることを指定しながら、かつ省略時はデフォルト型を指定する合わせ技もできます。型パラメーターの制約については専門のページがありますのでそちらを参照してください。
 
@@ -77,7 +77,7 @@ interface Serializable<T extends string | number = bigint> {
 TS2344: Type 'bigint' does not satisfy the constraint 'string | number'.
 ```
 
-### デフォルト型パラメーターをジェネリクスで指定する
+## デフォルト型パラメーターをジェネリクスで指定する
 
 ジェネリクスが複数あるとき、デフォルト型パラメーターをデフォルト型パラメーターで指定できます。
 
@@ -92,7 +92,7 @@ class Aubergine<A, B = A, C = B> {
     this.b = b;
     this.c = c;
   }
-  
+
   // ...
 }
 ```

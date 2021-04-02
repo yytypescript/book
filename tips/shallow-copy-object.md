@@ -61,7 +61,7 @@ function shouldBeCareful(meals: MealsPerDay): boolean {
   try {
     // ...
     isMeals(meals);
-    
+
     return willBeMetabo(meals);
   } catch (err: unknown) {
     // ...
@@ -202,7 +202,7 @@ const shallowCopied: object = {...sample};
 
 {% page-ref page="../features/function.md" %}
 
-オブジェクトのコピーにスプレッド構文を使えるようになったのは `ES2018` からです。たとえば次のような浅いコピーの例を
+オブジェクトのコピーにスプレッド構文を使えるようになったのはES2018からです。たとえば次のような浅いコピーの例を
 
 ```typescript
 const sample: object = {
@@ -214,7 +214,7 @@ const sample: object = {
 const shallowCopied: object = {...sample};
 ```
 
-`ES2018` でコンパイルすると次のようになります。
+ES2018でコンパイルすると以下のようになります。
 
 ```typescript
 const sample = {
@@ -224,7 +224,7 @@ const sample = {
 const shallowCopied = { ...sample };
 ```
 
-ほぼ同じですが、 `ES2017` でコンパイルすると次のようになります。
+ほぼ同じですがES2017でコンパイルすると以下のようになります。
 
 ```typescript
 const sample = {

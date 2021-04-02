@@ -6,7 +6,7 @@ description: JavaScriptのオブジェクトとクラスについておさらい
 
 ここでは、他の言語\(特にJavaやPHP\)と比べて、JavaScriptのオブジェクトやクラスにどんな特徴があるのかを復習できるようになっています。また、オブジェクトやクラスの記法についても再入門していきます。
 
-### オブジェクトリテラル
+## オブジェクトリテラル
 
 JavaScriptの特徴はオブジェクトリテラル`{}`という記法を用いて、簡単にオブジェクトを生成できる点です。
 
@@ -30,7 +30,7 @@ person.name = "Bob";
 person.age = 25;
 ```
 
-### プロパティ
+## プロパティ
 
 JavaScriptのオブジェクトは、プロパティの集合体です。プロパティはキーと値の対です。
 
@@ -76,7 +76,7 @@ calculator.sum = null;
 calculator.sum(1, 1); // ここではもうメソッドではないので、呼び出すとエラーになります
 ```
 
-### クラス
+## クラス
 
 クラスはオブジェクトの雛形を定義したもので、`class`構文を用いてクラスが定義できます。
 
@@ -117,7 +117,7 @@ class MyClass {
 }
 ```
 
-### 継承
+## 継承
 
 JavaScriptのクラスも他のクラスを持つ言語と同じように、`extends`キーワードで継承ができます。
 
@@ -150,7 +150,7 @@ child instanceof Parent; //=> true
 child instanceof Child; //=> true
 ```
 
-### インターフェース
+## インターフェース
 
 JavaやPHPなどの言語ではクラスとは別に、インターフェースが定義できますが、JavaScriptにはそれに相当する構文がありません。
 
@@ -158,7 +158,7 @@ TypeScriptにはインターフェースがあります。TypeScriptインター
 
 {% page-ref page="../features/interfaces.md" %}
 
-### 抽象クラス
+## 抽象クラス
 
 JavaやPHPなどの言語では、`abstract`修飾子を使って抽象クラスを定義できます。抽象クラスは、直接インスタンスを作れないクラスのことです。JavaScriptには抽象クラスを定義する構文はありません。
 
@@ -166,7 +166,7 @@ TypeScriptには`abstract`修飾子があり抽象クラスを表現できます
 
 {% page-ref page="../features/classes.md" %}
 
-### プロパティの可視性
+## プロパティの可視性
 
 JavaやPHPなどの言語では、フィールドやメソッドに`private`, `protected`, `public`を指定できます。JavaScriptでも`private`のようなプロパティを実現するために[プライベートクラスフィールド](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_class_fields)という仕様が実験的に導入されはじめてはいますが、現状はJavaのようなアクセス修飾子はありません。
 
