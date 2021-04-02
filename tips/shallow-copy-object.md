@@ -234,7 +234,7 @@ const sample = {
 const shallowCopied = Object.assign({}, sample);
 ```
 
-となります。スプレッド構文が実装される前はこの `Object.assign()` を使っていました。このふたつは全く同じものではありませんが `Object.assign({}, obj)` を `{...obj}` のほぼ代替として使うことができます。
+となります。スプレッド構文が実装される前はこの `Object.assign()` を使っていました。このふたつはまったく同じもの、というわけではありませんが `Object.assign({}, obj)` を `{...obj}` のほぼ代替として使うことができます。
 
 ### `...`について
 
