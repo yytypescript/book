@@ -48,6 +48,7 @@
 * [Tips](tips/README.md)
   * [オブジェクトを浅くコピーする](tips/shallow-copy-object.md)
   * [オブジェクトをマージ \(結合\) する](tips/merge-objects.md)
+  * [オブジェクトのサブセットを得る](tips/get-a-subset-of-an-object.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
