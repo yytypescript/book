@@ -366,9 +366,9 @@ const [,,, delta, echo] = phone();
 const [alpha, ...rest] = phone();
 ```
 
-### オブジェクトへの代入も分割代入
+### Shorthand property names
 
-オブジェクトのキーと変数名が同じ時にかぎり、オブジェクトに値を代入するときも同様に分割代入を使うことができます。次の例がほぼすべてです。
+オブジェクトのキーと変数名が同じ時にかぎり、オブジェクトに値を代入するときも同様にShorthand property namesを使うことができます。これも分割代入と調べると情報を得られることがあります。次の例がほぼすべてです。
 
 ```typescript
 const name: string = 'pikachu';

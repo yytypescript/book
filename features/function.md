@@ -500,7 +500,7 @@ const max: number = Math.max(...scores);
 
 残余引数もスプレッド構文もどちらも`...`と表記しますが片方は個々の引数を配列にし、もう片方は配列を個々の引数にします。
 
-## 分割代入\(Destructuring Assignment\)
+## 分割代入\(Destructuring assignment\)
 
 たとえばBMI\(Body Mass Index\)を計算したいとします。身長\(cm\)と体重\(kg\)が与えられれば関数`bmi()`は次のような計算になります。
 
