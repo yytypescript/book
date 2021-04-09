@@ -48,6 +48,7 @@
   * [オブジェクトを浅くコピーする](tips/shallow-copy-object.md)
   * [オブジェクトをマージ \(結合\) する](tips/merge-objects.md)
   * [オブジェクトのサブセットを得る](tips/get-a-subset-of-an-object.md)
+  * [オブジェクトで受け、オブジェクトを返す \(RORO\)](tips/receive-an-object-return-an-object.md)
 * [逆引き](ki/README.md)
   * [記号とキーワード](ki/ji-hao.md)
 
