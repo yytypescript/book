@@ -38,5 +38,5 @@ console.log(rec.width);
 // -> 3
 ```
 
-このように import の部分は `Rectangle` のみとなり見通しもつきやすいという特徴があります。ちなみに `Rectangle.from()` の `Rectangle` が値であり `const rec: Rectangle` の `Rectangle` が型です。このようにTypeScriptでは同名の値と型を同時に使うことができます。
+このように import の部分は `Rectangle` のみとなり見通しもつきやすいという特徴があります。ちなみに `Rectangle.from()` のRectangleが値であり `const rec: Rectangle` のRectangleが型です。このようにTypeScriptでは同名の値と型を同時に使うことができます。
 
