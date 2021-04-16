@@ -109,7 +109,7 @@ class MyClass {}
 MyClass.key = "value"; // プロパティを追加
 ```
 
-ちなみに上の例のようにクラスにプロパティを持たせるには`static`修飾子を使うと`class`構文内に書くことができます。
+ちなみに、IEやSafariを除くモダンブラウザーでは、上の例のようにクラスにプロパティを持たせるには`static`修飾子を使うと`class`構文内に書くことができます。
 
 ```javascript
 class MyClass {
