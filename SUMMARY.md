@@ -50,7 +50,8 @@
   * [オブジェクトのサブセットを得る](tips/get-a-subset-of-an-object.md)
   * [オブジェクトで受け、オブジェクトを返す \(RORO\)](tips/receive-an-object-return-an-object.md)
   * [コンパニオンオブジェクトパターン](tips/companion-object.md)
-  * [オブジェクトから型を生成する](tips/type-generated-from-object.md)
+  * [オブジェクトから型を生成する](tips/generates-type-from-object.md)
+  * [配列から型を生成する](tips/generates-type-from-array.md)
 * [逆引き](ki/README.md)
   * [記号とキーワード](ki/ji-hao.md)
 
