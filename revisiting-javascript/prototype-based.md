@@ -30,7 +30,7 @@ class Button {
 その上で、ボタンクラスに対して`new`演算子を用いると、ボタンオブジェクトが得られます。
 
 ```javascript
-dangerousButton = new Button("絶対に押すなよ！");
+dangerousButton = new Button("絶対に押すなよ?");
 ```
 
 このような言語がクラスベースと言われるのは、オブジェクトの素となるのがクラスだからです。
