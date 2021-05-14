@@ -17,6 +17,7 @@
   * [JavaScriptの型](revisiting-javascript/javascript-types.md)
   * [JavaScriptの関数](revisiting-javascript/functions.md)
   * [JavaScriptのオブジェクトとクラス](revisiting-javascript/objects-and-classes.md)
+  * [プロトタイプベース\(🚧執筆中\)](revisiting-javascript/prototype-based.md)
   * [シングルプロセス・シングルスレッドとコールバック](revisiting-javascript/single-process-and-callback.md)
 * [これだけはおさえておきたいTypeScriptの機能](features/README.md)
   * [プリミティブ型 \(Primitive Types\)](features/primitive-types.md)
