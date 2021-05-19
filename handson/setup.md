@@ -96,7 +96,7 @@ nvm-windowsを利用します。
 [https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows)   
 公式ページのreleaseからnvm-setup.zipをダウンロード・インストールを行うだけです。ダウンロードダイアログが表示されるので文言を読み、インストールを行ってください。
 
-インストール後はPCの再起動を行います。これはPAHTを確実に通すためです。
+インストール後はPCの再起動を行います。これはPATHを確実に通すためです。
 
 nvmコマンドの確認のためにコマンドプロンプトまたはPowerShellを起動し`nvm version`を実行します。インストールしたバージョンが表示されれば成功です。
 
