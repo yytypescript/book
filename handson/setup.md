@@ -93,7 +93,7 @@ v12.16.0
 ### NVMからNode.jsのインストールを行う\(Windows編\)
 
 nvm-windowsを利用します。  
-[https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows)   
+[https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows)  
 公式ページのreleaseからnvm-setup.zipをダウンロード・インストールを行うだけです。ダウンロードダイアログが表示されるので文言を読み、インストールを行ってください。
 
 インストール後はPCの再起動を行います。これはPATHを確実に通すためです。
