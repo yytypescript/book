@@ -73,7 +73,83 @@ console.log(dangerousButton.name); //=> "絶対に押すなよ？"
 一方で、書類の準備の時間がないときや、準備のモチベーションが上がらないときは、雛形までは作らないかもしれません。それでも、前回使った書類があれば、それを複製して今回必要になることに合わせて内容を加筆したり、置き換えたりしてしあげてしまうことはありませんでしょうか。このアプローチはプロトタイプベースに似ています。プロトタイプとなるオブジェクトはそれ自身も使えますし、それを素にした新しいオブジェクトももちろん使えます。前回使った書類はそれ自身で役に立っていますが、それを複製して作った新しい書類も役に立ちます。
 {% endhint %}
 
+### 継承
+
+継承についても、クラスベースとプロトタイプベースでは異なる特徴があります。クラスベースでは、継承するときは`extends`キーワードなどを用いてクラスからクラスを派生させ、派生クラスからオブジェクトを生成する手順を踏みます。
+
+では上の手順を具体的なコードで確認してみましょう。ここに`Counter`クラスがあります。
+
+```javascript
+class Counter {
+  constructor() {
+    this.count = 0;
+  }
+
+  countUp() {
+    this.count++;
+  }
+}
+```
+
+このクラスは数とそれをカウントアップする振る舞いを持っています。この`Counter`クラスを継承して、リセット機能を持った派生クラスは次の`ResetableCounter`クラスになります。
+
+```javascript
+class ResetableCounter extends Counter {
+  reset() {
+    this.count = 0;
+  }
+}
+```
+
+この`ResetableCounter`クラスを使うには、`このクラスに対して`new\`演算子でオブジェクトを生成します。
+
+```javascript
+counter = new ResetableCounter();
+counter.countUp();
+counter.reset();
+```
+
+以上の例でも分かるとおり、クラスベースでの継承とオブジェクトの生成は`extends`と`new`といった異なる言語機能になっていることが多いです。
+
+一方、プロトタイプベースのJavaScriptでは、継承もオブジェクトの生成と同じプロセスで行います。次の例は、`counter`オブジェクトを継承した`resetableCounter`オブジェクトを作っています。
+
+```javascript
+const counter = {
+  count: 0,
+  countUp() {
+    this.count++;
+  },
+};
+
+const resetableCounter = Object.create(counter);
+resetableCounter.reset = function () {
+  this.count = 0;
+};
+```
+
+継承と言ってもプロトタイプベースでは、クラスベースの`extends`のような特別な仕掛けがあるわけではなく、「既存のオブジェクトから新しいオブジェクトを作る」というプロトタイプベースの仕組みを継承に応用しているに過ぎません。
+
+### クラスベース風にも書けるJavaScript
+
+ここまでの説明で、クラスベースに慣れ親しんだ読者の中には、JavaScriptでオブジェクト指向プログラミングをしようとすると、随分と独特な書き方になるんだなと思った方がいるかもしれません。ここで誤解して欲しくないのが、プロトタイプベースのJavaScriptでもクラスのような書き方ができるようになっていることです。
+
+古いJavaScriptにはありませんでしたが、ES2015に`class`キーワードや`extends`キーワードが導入されたため、近年のJavaScriptではクラスベース風の書き方が容易にできるようになっています。なので、クラスベースの他言語から来た開発者にも、JavaScriptコードは理解しやすいものになってきています。次のコードはクラスベースの説明の際に提示したものですが、実はこれはJavaScriptでした。
+
+```javascript
+class Counter {
+  constructor() {
+    this.count = 0;
+  }
+
+  countUp() {
+    this.count++;
+  }
+}
+```
+
+`class`キーワードが使える近年のJavaScript開発では、`Object.create`を多用したり、無理にプロトタイプベースを意識したコードにする必要もそうそう無いので心配しないでください。ただ、`class`キーワードがあると言っても、JavaScriptがクラスベースに転向したのではなく、JavaScriptのオブジェクトモデルはプロトタイプベースであり続けるので、頭の片隅に入れておく必要はあります。
+
 {% hint style="warning" %}
-TODO: 続きを書く
+
 {% endhint %}
 
