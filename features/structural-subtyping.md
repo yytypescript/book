@@ -249,11 +249,11 @@ const id2: GroupId = new UserId('aae645a2-eb3f-406c-8845-3b1e56d4c28e');
 
 ### ユニークになるようにプロパティと型の組み合わせを与える
 
-シグネチャが異なるように設定することでタイプセーフを確保できるのでそのようにプロパティを与えます。とはいえ毎回違う名前のプロパティを設定するのは簡単ではないため、型を使って調整します。
+シグネチャが異なるように設定することでタイプセーフを確保できるのでそのようにプロパティを与えます。とはいえ毎回違う名前のプロパティを設定するのは簡単ではないため、型を使って調整します。今回はそのプロパティをクラス名、つまり `className` とします。
 
 ```typescript
 class UserId {
-  public readonly klazzName: 'UserId' = 'UserId';
+  public readonly className: 'UserId' = 'UserId';
   public readonly id: string;
 
   public constructor(id: string) {
@@ -262,7 +262,7 @@ class UserId {
 }
 
 class GroupId {
-  public readonly klazzName: 'GroupId' = 'GroupId';
+  public readonly className: 'GroupId' = 'GroupId';
   public readonly id: string;
 
   public constructor(id: string) {
@@ -271,22 +271,22 @@ class GroupId {
 }
 ```
 
-UserId, GroupIdは共に`klazzName`というプロパティを持ちましたが、型のリテラルタイプが異なります。このようにすることでTypeScriptはUserId, GroupIdを異なる型と認識し、タイプセーフになります。
+UserId, GroupIdは共に `className`というプロパティを持ちましたが、型 \(リテラル型\) が異なります。このようにすることでTypeScriptはUserId, GroupIdを異なる型と認識し、タイプセーフになります。
 
 ```typescript
 Type 'GroupId' is not assignable to type 'UserId'.
-  Types of property 'klazzName' are incompatible.
+  Types of property 'className' are incompatible.
     Type '"GroupId"' is not assignable to type '"UserId"'.
 
 const id1: UserId = new GroupId('9566d14b-7ea0-4328-8e66-6ab432d459fb');
       ~~~
 Type 'UserId' is not assignable to type 'GroupId'.
-  Types of property 'klazzName' are incompatible.
+  Types of property 'className' are incompatible.
     Type '"UserId"' is not assignable to type '"GroupId"'.
 
 const id2: GroupId = new UserId('aae645a2-eb3f-406c-8845-3b1e56d4c28e');
       ~~~
 ```
 
-実行するとこのようなエラーが発生します。置換することができなくなります。
+実行するとこのようなエラーが発生し置換することができなくなります。
 
