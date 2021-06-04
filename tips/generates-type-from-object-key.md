@@ -5,7 +5,7 @@
 あるメッセージが言語ごとに定義されているとします。
 
 ```typescript
-const confirm = {
+const conf = {
   en: 'Are you sure?',
   fr: 'Êtes-vous sûr?',
   es: 'está seguro?',
@@ -29,7 +29,7 @@ type Language = 'en' | 'fr' | 'es' | 'ja' | 'zh';
 この例で実行すれば次のような型 `TypeOfLanguage` が生成されるでしょう \(型名は便宜的なものです\) 。
 
 ```typescript
-type TypeOfLanguage = typeof confirm;
+type TypeOfLanguage = typeof conf;
 // ->
 // {
 //   en: string,
@@ -62,10 +62,10 @@ typeof Langauge = keyof TypeOfLanguage;
 見た目が少々いびつですが、以下でオブジェクトから希望するキーのユニオン型を生成できます。
 
 ```typescript
-type Language = keyof typeof confirm;
+type Language = keyof typeof conf;
 ```
 
-### 疑問: `keyof confirm` じゃダメなんですか？
+### 疑問: `keyof conf` じゃダメなんですか？
 
 動作しません。なぜなら `keyof` は値ではなく \(オブジェクトの\) 型に対して使用できるからです。一方 `typeof` は値から型を生成するのでこの順番で使用する必要があります。
 
