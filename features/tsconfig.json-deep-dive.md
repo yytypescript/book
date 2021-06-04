@@ -940,6 +940,144 @@ phoneticCodes.forEach((p: string) => {
 });
 ```
 
+### `noImplicitOverride`
+
+サブクラスがスーパークラスのメソッドを拡張したときに `override` のキーワードをメソッドの前に書くことを強制します。これはスーパークラスの拡張しているメソッドが取り除かれたり、名称が変更されたことを検知することに役立ちます。
+
+例えば、トグルボタン \(クリックするとオン、オフを繰り返すボタン\) のクラスがあったとすれば、それは次のようになっているでしょう。
+
+```typescript
+class ToggleButton {
+  protected active: boolean;
+  
+  public constructor() {
+    this.active = false;
+  }
+
+  public isActive(): boolean {
+    return this.active;
+  }
+
+  public enable(): void {
+    this.active = true;
+  }
+
+  public disable(): void {
+    this.active = false;
+  }
+
+  public push(): void {
+    if (this.isActive()) {
+      this.disable();
+      // ...
+      return;
+    }
+    this.enable();
+    // ...
+  }
+}
+```
+
+ここで値のオンオフの切り替えを何回したかを数えられるサブクラス `ToggleCountButton` を考えます。すると `ToggleCountButton` は次のようになります。
+
+```typescript
+class ToggleCountButton extends ToggleButton {
+  private counter: number;
+  
+  public constructor() {
+    super();
+    this.counter = 0;
+  }
+
+  public enable(): void {
+    this.counter++;
+    this.active = true;
+  }
+
+  public disable(): void {
+    this.counter++;
+    this.active = false;
+  }
+
+  public getCounter(): number {
+    return this.counter;
+  }
+}
+```
+
+ここでスーパークラスの `ToggleButton` が「オンオフの切り替えにメソッドはふたつも要らない！セッターで十分だ」と変更したとします。
+
+```typescript
+class ToggleButton {
+  protected active: boolean;
+
+  public isActive(): boolean {
+    return this.active;
+  }
+
+  public setActive(active: boolean): void {
+    this.active = active;
+  }
+
+  public push(): void {
+    if (this.isActive()) {
+      this.setActive(false);
+      // ...
+      return;
+    }
+    this.setActive(true);
+    // ...
+  }
+}
+```
+
+するとサブクラスでオーバーライドしたはずのメソッド `enable(), disable()` が意味のないメソッドとして残ることになります。
+
+`noImplicitOverride` はオーバーライドしているメソッドに `override`キーワードをつけることによってスーパークラスに同名のメソッドがないかを確認させます。
+
+`noImplicitOverride`を `true` に設定しオーバーライドしているにもかかわらず `override` のキーワードを付けずにコンパイルしようとすると
+
+```typescript
+This member must have an 'override' modifier because it overrides a member in the base class 'ToggleButton'.
+```
+
+と `override` キーワードがない旨の指摘を受けることになります。
+
+逆に、オーバーライドしていないメソッドに `override` キーワードをつけると
+
+```typescript
+This member cannot have an 'override' modifier because it is not declared in the base class 'ToggleButton'.
+```
+
+とスーパークラスのメソッドをオーバーライドしていない旨の指摘を受けることになります。
+
+なお今回の例では仮に`noImplicitOverride`オプションを有効にしていなくても `super` を使うことによってスーパークラスにメソッドが存在するかどうかを検出することはできます。
+
+```typescript
+class ToggleCountButton extends ToggleButton {
+  private counter: number;
+
+  public constructor() {
+    super();
+    this.counter = 0;
+  }
+
+  public enable(): void {
+    super.enable();
+    this.counter++;
+  }
+
+  public disable(): void {
+    super.disable();
+    this.counter++;
+  }
+
+  public getCounter(): number {
+    return this.counter;
+  }
+
+```
+
 ### `noPropertyAccessFromIndexSignature`
 
 `noUncheckedIndexedAccess` と同様にインデックス型を持つオブジェクトに対する型チェックです。インデックス型に対するアクセスをインデックス記法に強制されます。
