@@ -159,7 +159,11 @@ JavaScriptが開発には次のような要件がありました。ブラウザ�
 
 Javaに似せよと言われて作られたJavaScript。Javaはクラスベースですが、JavaScriptはプロトタイプベースです。では、JavaScriptは泣く泣くクラスベースを諦めたのでしょうか。実はそうではありません。JavaScriptの作者であるBrendan Eich氏は[後のインタビュー](https://learning.oreilly.com/library/view/coders-at-work/9781430219484/Chapter04.html)で次のように語っています。
 
-> **Seibel**: So you wanted to be like Java, but not too much. \(Javaのようにしたいけれど、大掛かりはしたくなかったわけですね。\) **Eich**: Not too much. If I put classes in, I'd be in big trouble. Not that I really had time to, but that would've been a no-no. \(そうですね。もしクラスを取り入れていたら、大変なことになっていたでしょう。時間がなかったのは確かですが、時間があったとしてもクラスはいやですね。\)
+> **Seibel**: So you wanted to be like Java, but not too much.   
+> \(Javaのようにしたいけれど、大掛かりはしたくなかったわけですね。\)   
+>   
+> **Eich**: Not too much. If I put classes in, I'd be in big trouble. Not that I really had time to, but that would've been a no-no.   
+> \(そうですね。もしクラスを取り入れていたら、大変なことになっていたでしょう。時間がなかったのは確かですが、時間があったとしてもクラスはいやですね。\)
 
 JavaScriptはクラスベースにするつもりはハナからなかったわけです。Eich氏はJavaScriptを設計するにあたって、できるだけ言語をシンプルにしたいと考えていたようです。JavaScriptはプリミティブ型の種類が少なかったり、プリミティブ型もオブジェクトのようにメソッドが使えるようになっていてプリミティブとオブジェクトの間に大きな隔たりが無かったりします。こうした言語設計もシンプルさを目指したからだそうです。
 
