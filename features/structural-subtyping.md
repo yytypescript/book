@@ -245,7 +245,35 @@ const id1: UserId = new GroupId('9566d14b-7ea0-4328-8e66-6ab432d459fb');
 const id2: GroupId = new UserId('aae645a2-eb3f-406c-8845-3b1e56d4c28e');
 ```
 
-タイプセーフを確保したい時に使える方法はひとつではなくいくつか存在しますが、ここではそのうちもっともわかりやすいひとつを紹介します。
+では、構造が同一のクラスをコンパイラに型を区別させるにはどうしたら良いのでしょうか。ここでは、その方法を2つ紹介します。
+
+### 非パブリックプロパティがあるクラスは公称型になる
+
+クラスに1つでも非パブリックなプロパティがあると、TypeScriptではそのクラスだけ構造的部分型ではなく公称型になります。例えば、`UserId`クラスと`GroupId`クラスで同名になってしまっている`id`プロパティをプライベートにするだけで、相互の代入が不可能になります。
+
+```typescript
+class UserId {
+  private readonly id: string;
+
+  constructor(id: string) {
+    this.id = id;
+  }
+}
+
+class GroupId {
+  private readonly id: string;
+
+  constructor(id: string) {
+    this.id = id;
+  }
+}
+
+const userId: UserId = new GroupId("...");
+// Type 'GroupId' is not assignable to type 'UserId'.
+//   Types have separate declarations of a private property 'id'.(2322)
+```
+
+この方法はフィールドに限らず、プライベートメソッドや`protected`フィールドでも同じ効果があります。
 
 ### ユニークになるようにプロパティと型の組み合わせを与える
 
@@ -271,7 +299,7 @@ class GroupId {
 }
 ```
 
-UserId, GroupIdは共に `className`というプロパティを持ちましたが、型 \(リテラル型\) が異なります。このようにすることでTypeScriptはUserId, GroupIdを異なる型と認識し、タイプセーフになります。
+`UserId`, `GroupId`は共に `className`というプロパティを持ちましたが、型 \(リテラル型\) が異なります。このようにすることでTypeScriptは`UserId`, `GroupId`を異なる型と認識し、タイプセーフになります。
 
 ```typescript
 Type 'GroupId' is not assignable to type 'UserId'.
