@@ -4,7 +4,7 @@ JavaScriptでは関数は第一級オブジェクトです。よって変数に�
 
 ## 関数の宣言
 
-関数の宣言は主に3とおりの方法があります。以下はすべて同じ関数`increment()`を宣言しています。
+関数の宣言は主に3とおりの方法があります。次のみっつはすべて同じ関数`increment()`を宣言しています。
 
 ### 名前付き関数\(Normal Functions\)
 
@@ -206,7 +206,7 @@ function distance(p: Point): number {
 }
 ```
 
-なお、xy座標上の点を表すPointの定義は以下です。
+なお、xy座標上の点を表すPointの定義は次の通りです。
 
 ```typescript
 type Point = {

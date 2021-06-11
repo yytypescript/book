@@ -29,7 +29,7 @@ type User = {
 
 すべてのプロパティから`Optional`であることを意味する`?`を取り除きます。
 
-`Required<Person>`は以下と同じ型になります。
+`Required<Person>`は次と同じ型になります。
 
 ```typescript
 type RequiredPerson = {
@@ -43,7 +43,7 @@ type RequiredPerson = {
 
 オブジェクトのプロパティに対する代入を防ぐ`readonly`をすべてのプロパティに対して適用します。プロパティがオブジェクトだった場合、それが持つプロパティまでは`readonly`にしないことに注意してください。これは普通の`readonly`と同じ挙動です。
 
-`Readonly<Person>`は以下と同じ型になります。
+`Readonly<Person>`は次と同じ型になります。
 
 ```typescript
 type ReadonlyPerson = {
@@ -57,7 +57,7 @@ type ReadonlyPerson = {
 
 すべてのプロパティに`Optional`であることを意味する`?`を適用します。
 
-`Partial<Person>`は以下と同じ型になります。
+`Partial<Person>`は次と同じ型になります。
 
 ```typescript
 type PartialPerson = {
@@ -156,7 +156,7 @@ type Person = Record<Name, string>;
 
 ある巨大なタイプエイリアスから、必要な部分だけを抽出します。`K`はタイプエイリアス`T`のキーの部分集合である必要があります。
 
-以下は`Pick`を使って`User`から`Person`を作る一例です。
+次の例は`Pick`を使って`User`から`Person`を作る一例です。
 
 ```typescript
 type Mandatory = 'surname' | 'middleName' | 'givenName';
@@ -227,7 +227,7 @@ type BookInputData = Pick<Book, 'title' | 'author'>;
 
 `Pick`と逆の動作です。つまり不必要な部分を取り除きます。`K`はタイプエイリアス`T`のキーの部分集合である**必要はありません**。タイポなどに対する検査が`Pick`と比べて貧弱なので注意してください。
 
-以下は`Omit`を使って`User`から`Person`を作る一例です。
+次の例は`Omit`を使って`User`から`Person`を作る一例です。
 
 ```typescript
 type Optional = 'age' | 'address' | 'nationality' | 'createdAt' | 'updatedAt';
@@ -266,7 +266,7 @@ type PassGrade = Exclude<Grade, 'E'>;
 
 `U`は`T`の部分集合である制限がありません。つまり`Omit`と同様、タイポなどに気をつけなければいけません。
 
-以下は`Pull Request`に関するタイプエイリアスと解釈してください。
+次の例は`Pull Request`に関するタイプエイリアスと解釈してください。
 
 ```typescript
 type PullRequestState = 'drft' | 'reviewed' | 'rejected';

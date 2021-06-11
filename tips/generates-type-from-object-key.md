@@ -8,13 +8,13 @@
 const conf = {
   en: 'Are you sure?',
   fr: 'Êtes-vous sûr?',
-  es: 'está seguro?',
+  es: 'Está seguro?',
   ja: 'よろしいですか？',
   zh: '您确定吗？'
 };
 ```
 
-内容は確認を促す変哲もないシステムのメッセージです。このオブジェクトを使ってシステムがサポートしている言語の一覧を作ります。以下のようなユニオン型が今回の目的です。
+内容は確認を促す変哲もないシステムのメッセージです。このオブジェクトを使ってシステムがサポートしている言語の一覧を作ります。次のようなユニオン型が今回の目的です。
 
 ```typescript
 type Language = 'en' | 'fr' | 'es' | 'ja' | 'zh';
@@ -59,7 +59,7 @@ typeof Langauge = keyof TypeOfLanguage;
 
 ## まとめ
 
-見た目が少々いびつですが、以下でオブジェクトから希望するキーのユニオン型を生成できます。
+見た目が少々いびつですが、次でオブジェクトから希望するキーのユニオン型を生成できます。
 
 ```typescript
 type Language = keyof typeof conf;

@@ -325,7 +325,7 @@ if (shouldCallPolice()) {
 
 ## より厳密にコーディングする
 
-厳密なコーディングといえば`linter`があります。TypeScript自身にもより型チェックを厳密にするオプションがあります。以下はTypeScript 4.2.2のtsconfig.jsonの該当する部分を抜粋したものです。
+厳密なコーディングといえば`linter`があります。TypeScript自身にもより型チェックを厳密にするオプションがあります。以下はTypeScript 4.3.2のtsconfig.jsonの該当する部分を抜粋したものです。
 
 ```typescript
 /* Strict Type-Checking Options */
@@ -344,6 +344,7 @@ if (shouldCallPolice()) {
 // "noImplicitReturns": true,                   /* Report error when not all code paths in function return a value. */
 // "noFallthroughCasesInSwitch": true,          /* Report errors for fallthrough cases in switch statement. */
 // "noUncheckedIndexedAccess": true,            /* Include 'undefined' in index signature results */
+// "noImplicitOverride": true,                  /* Ensure overriding members in derived classes are marked with an 'override' modifier. */
 // "noPropertyAccessFromIndexSignature": true,  /* Require undeclared properties from index signatures to use element accesses. */
 ```
 
@@ -776,7 +777,7 @@ function negaposi(num: number): string {
 
 ### `noFallthroughCasesInSwitch`
 
-`fallthrough`とは`switch`で`break`または`return`を行わないことを意味します。以下は多くの方が`switch`で学習したであろう`fallthrough`の例です。
+`fallthrough`とは`switch`で`break`または`return`を行わないことを意味します。次の例は多くの方が`switch`で学習したであろう`fallthrough`の例です。
 
 ```typescript
 function daysOfMonth(month: number): number {

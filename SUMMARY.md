@@ -53,6 +53,7 @@
   * [コンパニオンオブジェクトパターン](tips/companion-object.md)
   * [オブジェクトから型を生成する](tips/generates-type-from-object.md)
   * [オブジェクトからキーの型を生成する](tips/generates-type-from-object-key.md)
+  * [オブジェクトからプロパティの型を生成する](tips/generates-type-from-object-property.md)
   * [配列から型を生成する](tips/generates-type-from-array.md)
 * [逆引き](ki/README.md)
   * [記号とキーワード](ki/ji-hao.md)
