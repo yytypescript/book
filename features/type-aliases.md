@@ -292,7 +292,7 @@ type Butterfly = {
 もちろんこの`Butterfly`にはプロパティが`string`型であればなんでも入ります。
 
 ```typescript
-const bufferflies: Butterfly = {
+const butterflies: Butterfly = {
   en: 'Butterfly',
   fr: 'Papillon',
   it: 'Farfalla',
@@ -304,7 +304,7 @@ const bufferflies: Butterfly = {
 この型の変数を利用する時、どのキーも存在するものとして扱われます。存在しないキーを指定してもエラーが発生することなく`undefined`を返します。またTypeScriptによる入力補完も働きません。
 
 ```typescript
-bufferflies.ja;
+butterflies.ja;
 // -> undefined
 ```
 
@@ -344,7 +344,7 @@ type Butterfly = {
 このように`Butterfly`を定義するとシステムがサポートしない言語、ここでは`de`が設定、使用できなくなります。
 
 ```typescript
-const bufferflies: Butterfly = {
+const butterflies: Butterfly = {
   en: 'Butterfly',
   fr: 'Papillon',
   it: 'Farfalla',

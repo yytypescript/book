@@ -4,7 +4,7 @@ JavaScriptでは関数は第一級オブジェクトです。よって変数に�
 
 ## 関数の宣言
 
-関数の宣言は主に3とおりの方法があります。次のみっつはすべて同じ関数`increment()`を宣言しています。
+関数の宣言は主に3とおりの方法があります。次の3つはすべて同じ関数`increment()`を宣言しています。
 
 ### 名前付き関数\(Normal Functions\)
 
@@ -73,7 +73,7 @@ console.log(func());
 
 ### Generator
 
-Generatorを使用した関数はアロー関数での表記なく、必ず`function*() {}`と書く必要があります。次は記述可能なGeneratorの方法です。
+Generatorを使用した関数はアロー関数での表記ではなく、必ず`function*() {}`と書く必要があります。次は記述可能なGeneratorの方法です。
 
 ```typescript
 function* generatorFunction1() {
@@ -93,7 +93,7 @@ class GeneratorSample {
 
 Generatorは反復可能\(`Iterable<T>`\)な反復子\(`Iterator<T>`\)であるインターフェース`IterableIterator<T>`を実装したクラスのオブジェクトのことです。条件を満たしたクラスはGenerator関数の中で`yield`キーワードを使えます。`yield`は呼ばれたときに一度その値を呼び出し元へ返却し、次に呼ばれたときはその続きから処理を開始します。
 
-`Promise`が一般化する以前、非同期処理を代わりに担当する目的でGeneratorが使われていたことはありますが前述の`Promise`に加えて`async / await`が一般的に使われるようになってから非同期処理の目的だけGeneratorを使う機会は減りましたが現在でも大量のデータを取得したいときに一度ではなく、小出しに取得したいときにGeneratorは使い道があります。
+`Promise`が一般化する以前、非同期処理を代わりに担当する目的でGeneratorが使われていたことはありますが、前述の`Promise`に加えて`async / await`が一般的に使われるようになってから非同期処理の目的だけGeneratorを使う機会は減りました。現在でも大量のデータを取得したいときに一度ではなく、小出しに取得したいときにGeneratorは使い道があります。
 
 ## `this`
 
