@@ -166,7 +166,7 @@ function isNaN(n: number): boolean {
 
 ### 演算子の`+`
 
-`string`型同士であれば単純でただの文字列の合成を意味します。
+`string`型同士であれば単純で、ただの文字列の合成を意味します。
 
 ```typescript
 const w1: string = 'World';
