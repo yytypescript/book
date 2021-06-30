@@ -50,5 +50,5 @@ JavaScriptを実行する環境としてNode.jsとブラウザがあります。
 
 コードフォーマッターは、あるルールにしたがってソースコードのタブやインデントの量や種類、その他細かい書き方の揺れを整形してくれます。コードフォーマッターを使うと誰が書いても同じ見た目のコードに整形することができます。
 
-よく使わるのが、Prettier\(プリティア\)と、ESLint\(イーエスリント\)があります。Prettierはコード整形を主目的としています。一方ESLintはコードの間違いなども指摘してくれます。TypeScriptとESLintを一緒に使うときは、ESLint TypeScript Pluginを使用するとよいでしょう。
+よく使われるのが、Prettier\(プリティア\)と、ESLint\(イーエスリント\)です。Prettierはコード整形を主目的としています。一方ESLintはコードの間違いなども指摘してくれます。TypeScriptとESLintを一緒に使うときは、ESLint TypeScript Pluginを使用するとよいでしょう。
 
