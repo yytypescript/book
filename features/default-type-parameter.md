@@ -52,7 +52,7 @@ const networkErrorEvent: MyErrorEvent<NetworkError> = { error: new NetworkError(
 
 {% page-ref page="type-parameter-constraint.md" %}
 
-`MyErrorEvent`をに与えられる型`T`を`Error`のサブクラスに限定しつつ、省略時は`SyntaxError`としたい場合は次のような書き方になります。
+`MyErrorEvent`に与えられる型`T`を`Error`のサブクラスに限定しつつ、省略時は`SyntaxError`としたい場合は次のような書き方になります。
 
 ```typescript
 type MyErrorEvent<T extends Error = SyntaxError> = {
