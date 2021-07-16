@@ -140,7 +140,7 @@ var_dump($list1 === $list2); //=> bool(true)
 
 このような配列の中身を比べるための演算子やメソッドはJavaScriptにはないため、中身を比較したいときにはlodashの[isEqual](https://lodash.com/docs/4.17.15#isEqual)などのパッケージを使うのがお勧めです。
 
-## typeof演算子
+## typeof演算子 <a id="typeof-operator"></a>
 
 `typeof`演算子では値の型を調べることができます。
 

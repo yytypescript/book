@@ -25,7 +25,7 @@ type Point = {
 {% hint style="info" %}
 #### JavaScriptのtypeof演算子
 
-ここで説明したのはTypeScriptの`typeof`演算子です。JavaScriptの`typeof`演算子と同じ名前ですが、全く別のものなので注意してください。JavaScriptのtypeofの説明はJavaScript再入門の章をご覧ください。
+ここで説明したのはTypeScriptの`typeof`演算子です。JavaScriptの`typeof`演算子と同じ名前ですが、全く別のものなので注意してください。JavaScriptのtypeofの説明は[JavaScript再入門の章](../revisiting-javascript/javascript-types.md#typeof-operator)をご覧ください。
 {% endhint %}
 
 ### `keyof`
