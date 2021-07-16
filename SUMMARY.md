@@ -41,6 +41,7 @@
   * [デフォルト型パラメーター](features/default-type-parameter.md)
   * [Promise / async / await](features/promise-async-await.md)
   * [ユーティリティ型 \(Utility Types\)](features/utility-types.md)
+  * [型演算子](features/xing-yan-suan-zi.md)
   * [定義ファイル](features/definitelytyped.md)
   * [tsconfig.json Deep Dive](features/tsconfig.json-deep-dive.md)
   * [import / export /require](features/import-export-require.md)
