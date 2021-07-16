@@ -15,6 +15,7 @@
   * [なぜTypeScriptを使うべきか？](overview/why-you-should-use-typescript.md)
 * [JavaScript再入門](revisiting-javascript/README.md)
   * [JavaScriptの型](revisiting-javascript/javascript-types.md)
+  * [JavaScriptの変数とスコープ](revisiting-javascript/javascriptnotosukpu.md)
   * [JavaScriptの関数](revisiting-javascript/functions.md)
   * [JavaScriptのオブジェクトとクラス](revisiting-javascript/objects-and-classes.md)
   * [プロトタイプベース](revisiting-javascript/prototype-based.md)
