@@ -366,18 +366,9 @@ type Readonly<T> = {
 };
 ```
 
-`keyof T`という見慣れない表現が登場しましたが、これはオブジェクトのキーをユニオン型に変更するものだと解釈してください。つまり次のようなものです。
+`keyof T`という見慣れない表現が登場しましたが、これはオブジェクトのキーをユニオン型に変更するものだと解釈してください。`keyof`の詳細は型演算子をご覧ください。
 
-```typescript
-type Name = {
-  surname: string;
-  middleName: string;
-  givenName: string;
-};
-
-type NameKeys = keyof Name;
-// -> 'surname' | 'middleName' | 'givenName'
-```
+{% page-ref page="type-operators.md" %}
 
 ### インデックス型と異なるところ
 
