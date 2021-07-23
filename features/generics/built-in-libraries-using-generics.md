@@ -26,7 +26,7 @@ const numbers: Array<number> = [1, 2, 3, 4];
 const numbers: number[] = [1, 2, 3, 4];
 ```
 
-{% page-ref page="array.md" %}
+{% page-ref page="../array.md" %}
 
 ## 標準ライブラリを使ってみる
 
@@ -68,7 +68,7 @@ console.log(addresses.get("太郎"));
 
 `Promise`オブジェクトについての説明は本書より詳細な記載がありますので、そちらをご参照ください。
 
-{% page-ref page="promise-async-await.md" %}
+{% page-ref page="../promise-async-await.md" %}
 
 ### 標準ライブラリの型定義の参照方法
 

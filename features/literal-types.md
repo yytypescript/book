@@ -72,7 +72,7 @@ const response: Response | null = ajax.get('https://....');
 
 リテラル型はそのリテラルが所属するデータ型の派生型として解釈されます。この使い方はジェネリクスで頻出します。初めはプリミティブ型の派生型とは一体何かと面食らうことがあるかもしれません。
 
-{% page-ref page="generics.md" %}
+{% page-ref page="generics/" %}
 
 ## リテラル型にできないリテラル
 

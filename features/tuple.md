@@ -86,7 +86,7 @@ TypeScriptで非同期プログラミングをする時に、時間のかかる�
 
 {% page-ref page="promise-async-await.md" %}
 
-{% page-ref page="generics.md" %}
+{% page-ref page="generics/" %}
 
 ```typescript
 const promise: Promise<number> = yyAsync();
