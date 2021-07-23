@@ -10,6 +10,7 @@
   * [tsconfig.jsonを設定する](handson/tsconfig.json-settings.md)
   * [Reactでいいねボタンを作ろう](handson/react-like-button-tutorial.md)
 * [TypeScriptオーバービュー](overview/README.md)
+  * [はじめに](overview/hajimeni.md)
   * [静的型付けを理解する](overview/static-type.md)
   * [TypeScript誕生の背景](overview/before-typescript.md)
   * [なぜTypeScriptを使うべきか？](overview/why-you-should-use-typescript.md)
