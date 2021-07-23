@@ -37,14 +37,14 @@ nvm-sh/nvmを利用します。
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 ```
 
-スクリプト実行後、nvmコマンドのPATHを設定します。`~/.bash_profile`を作成しexport文を追加します。
+スクリプト実行後、nvmコマンドのPATHを設定します。`~/.zshrc`を作成しexport文を追加します。
 
 ```text
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
-PATHを再読込させるために、ターミナルで`source ~/.bash_profile` コマンドを実行してください。
+PATHを再読込させるために、ターミナルで`source ~/.zshrc` コマンドを実行してください。
 
 nvmコマンドの確認のため`nvm --version`を実行します。インストールしたバージョンが表示されれば成功です。
 
@@ -71,10 +71,10 @@ $ nvm ls-remote
         v13.8.0
 ```
 
-この場合はv12.16.0がLTSの最新版だと言うことがわかると思います。Node.js v12.16.0をインストールする場合は`nvm install バージョン`を実行します。
+この場合はv12.16.0がLTSの最新版だと言うことがわかると思います。特定のバージョンをインストールしたい場合は`nvm install v12.16.0` のようにバージョンを直接指定して実行します。 LTS版の中で最新のものをインストールしたい場合は`npm install` に`--lts`オプションを加えて実行します。
 
 ```text
-$ nvm install v12.16.0
+$ nvm install --lts
 ```
 
 インストール後、`nvm alias default バージョン`を実行します。これはデフォルトで使用するバージョンを指定するためのコマンドです。今はひとつのバージョンのみインストールしているため恩恵は感じられませんが覚えておきましょう。
