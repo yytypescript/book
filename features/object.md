@@ -613,5 +613,5 @@ const sym: Symbol = Symbol();
 const big: BigInt = 10n;
 ```
 
-当然ながらラッパークラスは`Object`を親クラスに持っているため、変数の型として`Object, {}`が定義されてしまうとAutoboxingをしたものと解釈され、代入ができます
+当然ながらラッパークラスは`Object`をスーパークラスに持っているため、変数の型として`Object, {}`が定義されてしまうとAutoboxingをしたものと解釈され、代入ができます
 
