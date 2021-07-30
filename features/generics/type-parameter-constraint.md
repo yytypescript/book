@@ -1,8 +1,8 @@
-# 型パラメーターの制約
+# 型引数の制約
 
-TypeScriptではジェネリクスの型パラメーターを特定の型に限定することができます。
+TypeScriptではジェネリクスの型引数を特定の型に限定することができます。
 
-## ジェネリクス型パラメータで直面する問題
+## ジェネリクス型引数で直面する問題
 
 `changeBackgroundColor()`という関数を例に考えてみます。この関数は指定されたHTML要素の背景色を変更して、そのHTML要素を返す関数です。  
 ジェネリクス型`T`を定義することで`HTMLButtonElement`や`HTMLDivElement`などの任意のHTML要素を受け取れるようにしています。
@@ -28,7 +28,7 @@ function changeBackgroundColor<T>(element: T) {
 }
 ```
 
-## 型パラメータに制約をつける
+## 型引数に制約をつける
 
 TypeScriptでは`extends`キーワードを用いることでジェネリクスの型`T`を特定の型に限定することができます。
 
@@ -41,7 +41,7 @@ function changeBackgroundColor<T extends HTMLElement>(element: T) {
 }
 ```
 
-この`extends`キーワードはインターフェースに対しても使います。インターフェースは実装のときは`implements`キーワードを使いますが型パラメータに使うときは`implements`を使わず同様に`extends`を使います。
+この`extends`キーワードはインターフェースに対しても使います。インターフェースは実装のときは`implements`キーワードを使いますが型引数に使うときは`implements`を使わず同様に`extends`を使います。
 
 ```typescript
 interface ValueObject<T> {
@@ -73,5 +73,4 @@ class Entity<ID extends ValueObject<unknown>> {
 }
 ```
 
-`Entity`クラスは`ValueObject`インターフェースを実装しているクラスをIDとして受ける構造になっていますが19行目にあるようにこのときの型パラメータの制約は`implements`ではなく`extends`でなければなりません。
-
+`Entity`クラスは`ValueObject`インターフェースを実装しているクラスをIDとして受ける構造になっていますが19行目にあるようにこのときの型引数の制約は`implements`ではなく`extends`でなければなりません。
