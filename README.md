@@ -64,6 +64,7 @@ description: サバイバルTypeScript 〜実務で使うなら最低限ここ�
 * zima
 * tatsuki\_sun
 * 建築のジョー
+* ないとう
 
 ## 継続的アップデート
 
