@@ -1,6 +1,6 @@
-# デフォルト型パラメーター
+# デフォルト型引数
 
-関数の引数にデフォルト値を指定するように、ジェネリクスでもデフォルトの型パラメーターを指定することができます。
+関数の引数にデフォルト値を指定するように、ジェネリクスでもデフォルトの型引数を指定することができます。
 
 例としてエラーイベントを表す`MyErrorEvent`という型を定義してみます。この型は発生した任意のエラーオブジェクトとその種類を文字列で保持する型です。
 
@@ -33,7 +33,7 @@ const networkErrorEvent: MyErrorEvent<NetworkError> = { error: new NetworkError(
 const errorEvent: MyErrorEvent = { error: new Error('エラーです'), type: 'syntax' }
 ```
 
-そこで、デフォルト型パラメーターとして`Error`を指定することでジェネリクスの型`T`は必要な時だけ指定して、何も指定してない場合は自動で`Error`とすることができます。
+そこで、デフォルト型引数として`Error`を指定することでジェネリクスの型`T`は必要な時だけ指定して、何も指定してない場合は自動で`Error`とすることができます。
 
 ```typescript
 type MyErrorEvent<T = Error> = {
@@ -41,14 +41,14 @@ type MyErrorEvent<T = Error> = {
     type: string;
 }
 
-// デフォルト型パラメータを指定した事で Error の型指定を省略できる
+// デフォルト型引数を指定した事で Error の型指定を省略できる
 const errorEvent: MyErrorEvent = { error: new Error('エラーです'), type: 'syntax' }
 const networkErrorEvent: MyErrorEvent<NetworkError> = { error: new NetworkError('ネットワークエラーです'), type: 'nextwork' }
 ```
 
-## 型パラメーターの制約と併用する
+## 型引数の制約と併用する
 
-ある型の部分型であることを指定しながら、かつ省略時はデフォルト型を指定する合わせ技もできます。型パラメーターの制約については専門のページがありますのでそちらを参照してください。
+ある型の部分型であることを指定しながら、かつ省略時はデフォルト型を指定する合わせ技もできます。型引数の制約については専門のページがありますのでそちらを参照してください。
 
 {% page-ref page="type-parameter-constraint.md" %}
 
@@ -61,7 +61,7 @@ type MyErrorEvent<T extends Error = SyntaxError> = {
 }
 ```
 
-型パラメーターの制約とデフォルト型パラメーターの両立をする場合はデフォルト型パラメーターが制約を満たしている必要があります。
+型引数の制約とデフォルト型引数の両立をする場合はデフォルト型引数が制約を満たしている必要があります。
 
 ```typescript
 interface Serializable<T extends string | number = bigint> {
@@ -71,15 +71,15 @@ interface Serializable<T extends string | number = bigint> {
 }
 ```
 
-この例は`string | number`型に制約しているにもかかわらず、デフォルト型パラメーターに`bigint`型を指定しています。そのため制約を満足することができずTypeScriptから指摘を受けます。
+この例は`string | number`型に制約しているにもかかわらず、デフォルト型引数に`bigint`型を指定しています。そのため制約を満足することができずTypeScriptから指摘を受けます。
 
 ```typescript
 TS2344: Type 'bigint' does not satisfy the constraint 'string | number'.
 ```
 
-## デフォルト型パラメーターをジェネリクスで指定する
+## デフォルト型引数をジェネリクスで指定する
 
-ジェネリクスが複数あるとき、デフォルト型パラメーターをデフォルト型パラメーターで指定できます。
+ジェネリクスが複数あるとき、デフォルト型引数をデフォルト型引数で指定できます。
 
 ```typescript
 class Aubergine<A, B = A, C = B> {
@@ -97,7 +97,7 @@ class Aubergine<A, B = A, C = B> {
 }
 ```
 
-デフォルト型パラメータは左から順に参照されるため、左にあるジェネリクスが右のジェネリクスを指定することはできません。
+デフォルト型引数は左から順に参照されるため、左にあるジェネリクスが右のジェネリクスを指定することはできません。
 
 ```typescript
 class Aubergine<A = B, B, C = B> {
@@ -116,4 +116,3 @@ class Aubergine<A = B, B, C = B> {
 ```typescript
 TS2744: Type parameter defaults can only reference previously declared type parameters.
 ```
-
