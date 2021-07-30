@@ -74,3 +74,4 @@ class Entity<ID extends ValueObject<unknown>> {
 ```
 
 `Entity`クラスは`ValueObject`インターフェースを実装しているクラスをIDとして受ける構造になっていますが19行目にあるようにこのときの型引数の制約は`implements`ではなく`extends`でなければなりません。
+

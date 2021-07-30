@@ -116,3 +116,4 @@ class Aubergine<A = B, B, C = B> {
 ```typescript
 TS2744: Type parameter defaults can only reference previously declared type parameters.
 ```
+
