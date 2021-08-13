@@ -30,6 +30,12 @@
       <td style="text-align:left">2&#x3064;&#x306E;&#x5024;&#x3092;&#x8DB3;&#x3057;&#x7B97;&#x3057;&#x307E;&#x3059;&#x3002;</td>
     </tr>
     <tr>
+      <td style="text-align:left">+</td>
+      <td style="text-align:left">&#x6587;&#x5B57;&#x5217;&#x7D50;&#x5408;&#x6F14;&#x7B97;&#x5B50;</td>
+      <td
+      style="text-align:left">2&#x3064;&#x306E;&#x6587;&#x5B57;&#x5217;&#x3092;&#x7D50;&#x5408;&#x3057;&#x307E;&#x3059;&#x3002;</td>
+    </tr>
+    <tr>
       <td style="text-align:left">-</td>
       <td style="text-align:left">&#x5358;&#x9805;&#x8CA0;&#x5024;&#x6F14;&#x7B97;&#x5B50;</td>
       <td style="text-align:left">
@@ -485,6 +491,8 @@
     </tr>
   </tbody>
 </table>
+
+
 
 ### TypeScript由来の記号
 
