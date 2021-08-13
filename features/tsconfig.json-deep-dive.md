@@ -29,24 +29,8 @@ class NumericalValueObject {
     this.value = value;
   }
 
-  public eq(other: NumericalValueObject): boolean {
+  public equals(other: NumericalValueObject): boolean {
     return this.value === other.value;
-  }
-
-  public gt(other: NumericalValueObject): boolean {
-    return this.value > other.value;
-  }
-
-  public gte(other: NumericalValueObject): boolean {
-    return this.value >= other.value;
-  }
-
-  public lt(other: NumericalValueObject): boolean {
-    return this.value < other.value;
-  }
-
-  public lte(other: NumericalValueObject): boolean {
-    return this.value <= other.value;
   }
 
   public toString(): string {
@@ -61,11 +45,7 @@ class NumericalValueObject {
 declare class NumericalValueObject {
     private value;
     constructor(value: number);
-    eq(other: NumericalValueObject): boolean;
-    gt(other: NumericalValueObject): boolean;
-    gte(other: NumericalValueObject): boolean;
-    lt(other: NumericalValueObject): boolean;
-    lte(other: NumericalValueObject): boolean;
+    equals(other: NumericalValueObject): boolean;
     toString(): string;
 }
 ```
@@ -74,7 +54,7 @@ declare class NumericalValueObject {
 
 ### 宣言元へのジャンプでの`ts`ファイルを参照できるようにする
 
-IDEを使っているときに有用で、実際の`ts`のソースコードがどのようにして動作しているのかを閲覧することができるようになります。tsconfig.jsonにある`declarationMap`の項目を`true`に変更します。
+IDEを使っているときに有用で、実際のTypeScriptのソースコードがどのようにコーディングされているかを閲覧することができるようになります。tsconfig.jsonにある`declarationMap`の項目を`true`に変更します。
 
 ```typescript
 "declarationMap": true,
@@ -109,6 +89,12 @@ IDEを使っているときに有用で、実際の`ts`のソースコードが�
 ```
 
 この例は`dist`にコンパイルした結果の`js, d.ts, d.ts.map`があり、`src`に元の`ts`があるものと想定しています。
+
+実際にパッケージとなるファイルにどのようなファイルが含まれているかについては以下のコマンドを実行してください。
+
+```typescript
+npm publish --dry-run
+```
 
 ### JavaScriptの`sourceMap`も出力する
 
@@ -325,7 +311,7 @@ if (shouldCallPolice()) {
 
 ## より厳密にコーディングする
 
-厳密なコーディングといえば`linter`があります。TypeScript自身にもより型チェックを厳密にするオプションがあります。以下はTypeScript 4.3.2のtsconfig.jsonの該当する部分を抜粋したものです。
+厳密なコーディングといえば`linter`がありますがTypeScript自身にもより型の評価を厳密にするオプションがあります。以下はTypeScript 4.3.2のtsconfig.jsonの該当する部分を抜粋したものです。
 
 ```typescript
 /* Strict Type-Checking Options */
@@ -352,9 +338,11 @@ if (shouldCallPolice()) {
 
 以下は各オプションの説明です。
 
+## Strict Type-Checking Options
+
 ### `strict`
 
-このオプションは**TypeScript4.2時点で**次の7個のオプションをすべて有効にしていることと同じです。スクラッチから開発するのであれば有効にしておいて差し支えないでしょう。
+このオプションは**TypeScript4.3時点で**次の7個のオプションをすべて有効にしていることと同じです。スクラッチから開発するのであれば有効にしておいて差し支えないでしょう。
 
 * noImplicitAny
 * strictNullChecks
@@ -364,11 +352,11 @@ if (shouldCallPolice()) {
 * noImplicitThis
 * alwaysStrict
 
-この説明にTypeScriptのバージョンが明記されているのは、今後のバージョンで**オプションが追加または廃止されることがありうる**からです。より安定したオプションを設定したい場合は`strict`ではなく個々のオプションを有効にしてください。このオプションを有効にして個々のオプションを無効にすると個々の設定が優先されます。
+この説明にTypeScriptのバージョンが明記されているのは、今後のバージョンで**オプションが追加または廃止されることがありうる**からです。より安定したオプションを設定したい場合は`strict`ではなく個々のオプションを有効にしてください。このオプションを有効にして個々のオプションを無効にした場合個々の設定が優先されます。
 
 ### `noImplicitAny`
 
-型を明示しない引数はTypeScriptでは`any`型になりますが、これを禁止します。
+型を明示しないとき、とくに引数の場合、TypeScriptはその引数を`any`型として解釈します。
 
 ```typescript
 function increment(i) {
@@ -376,142 +364,183 @@ function increment(i) {
 }
 ```
 
-`noImplicitAny`を`true`に設定しこれをコンパイルしようとすると
+`any` 型ということは、この関数に値をを代入することはJavaScriptと同じようにいかなる型の値も代入ができてしまうということです。
 
 ```typescript
-Parameter 'i' implicitly has an 'any' type.
+increment(1);
+// -> 2
+increment('1');
+// -> '11'
+increment(null);
+// -> 1
+increment(undefined);
+// -> NaN
 ```
 
-となります。これを回避するためには
+このオプションはこれを禁止するもので `any` 型となりうる型の非明示を避けます。
+
+なお戻り値についてはTypeScriptは戻り値を推測することができるので明示する必要はありません。
 
 ```typescript
-function increment(i: number): number {
+function increment(i: number) {
   return i + 1;
 }
 ```
 
-とします。なお戻り値の型は必須ではありません。
-
 ### `strictNullChecks`
 
-`null, undefined`のチェックが厳密になります。このオプションを入れていると変数に代入するときに`null, undefined`の代入を防げます。
+#### リリースされたバージョン: 2.1
+
+このオプションがなかったころは言語的に `null` と `undefined` を無視していました。つまり、次のようなことが問題なくできました。
 
 ```typescript
-const error: Error = null;
+const date: Date = null;
+const error: Error = undefined;
 ```
 
-`strictNullChecks`を`true`に設定しこれをコンパイルしようとすると
+当然ながら `null` には `getDay()` というプロパティは存在せず `undefined` には `message` というメソッドが存在しません。これらを呼び出そうとすると実行時エラーになります。
 
 ```typescript
-Type 'null' is not assignable to type 'Error'.
+date.getDay();
+// TypeError: Cannot read property 'getDay' of null
+error.message;
+// TypeError: Cannot read property 'message' of undefined
 ```
 
-となります。これを回避するためには
+このオプションを有効にすると `undefined` と `null` はそれぞれ独立した型を持つようになり `undefined` と `null` を他の型に代入することはできなくなります。
 
 ```typescript
-const error: Error | null = null;
+error TS2322: Type 'undefined' is not assignable to type 'Error'.
+const error: Error = undefined;
+      ~~~~~
+error TS2322: Type 'null' is not assignable to type 'Date'.
+const date: Date = null;
+      ~~~~
 ```
-
-とします。
 
 ### `strictFunctionTypes`
 
-関数の引数の型チェックが厳格になります。
+#### リリースされたバージョン: 2.6
+
+オブジェクト指向では、スーパークラスに対しサブクラスのインスタンスを代入することはできますがその逆は一般的ではありません。  
+例えばJavaScriptの `Error` クラスを拡張しスタックトレースを出力できるようになった `RuntimeError` というクラスを用意します。ここではスタックトレースの実装は重要ではないので `stacktrace()` というメソッドが加わったとだけ解釈してください。
 
 ```typescript
 class RuntimeError extends Error {
-  private cause?: Error;
-
-  public constructor(message: string, cause?: Error) {
-    super(message);
-    this.cause = cause;
-  }
-
-  public stacktrace(): string | undefined {
-    if (typeof this.cause === 'undefined') {
-      return this.stack;
-    }
-
-    return this.cause.stack;
+  public stacktrace(): string {
+    return ...;
   }
 }
 ```
 
-`Error`を拡張して他の`Error`を内包できるようにした`RuntimeError`があります。このクラスには`stacktrace()`というメソッドがあります。
-
-スタックトレースを出力するメソッド`runtimeDump()`を作成します。
+`RuntimeError` クラスのスタックトレースを出力する関数 `dumpRuntimeError()` を定義します。当然ながら `RuntimeError` のインスタンスは代入できますがスーパークラスの `Error` を代入することはできません。
 
 ```typescript
-const runtimeDump = (err: RuntimeError): void => {
+function dumpRuntimeError(err: RuntimeError): void {
   console.log(err.stacktrace());
 };
+
+dumpRuntimeError(new RuntimeError('runtime error'));
+dumpRuntimeError(new Error('error'));
+
+error TS2345: Argument of type 'Error' is not assignable to parameter of type 'RuntimeError'.
+  Property 'stacktrace' is missing in type 'Error' but required in type 'RuntimeError'.
+
+errorDump(new Error('error'));
+          ~~~~~~~~~~~~~~~~~~
 ```
 
-もちろん以下は動作します。
+しかしながら `dumpRuntimeError` 型の部分型である `dumpError` という型を定義したとすると、以下の代入が成り立ちます。
 
 ```typescript
-runtimeDump(new RuntimeError('runtime error', new Error('error')));
+type dumpError = (err: Error) => void;
+const dumpError: dumpError = dumpRuntimeError;
 ```
 
-`runtimeDump()`を`Error`型を引数に受ける`Type alias`に代入します。
+この関数 `dumpError()` に `Error` 型のインスタンスを代入すると `Error` 型には `stacktrace()` というメソッドがないため実行時エラーになります。
+
+このオプションを有効にすることで関数の引数の方は厳密に評価されるようになります。そのクラスまたはサブクラス以外を代入することはできなくなります。
 
 ```typescript
-type ErrorDump = (err: Error) => void;
-
-const dump: ErrorDump = runtimeDump;
-```
-
-代入した`dump()`はもちろん引数に`Error`型を受けることができます。
-
-```typescript
-dump(new Error('error'));
-```
-
-しかしながら、これは落ちてしまいます。
-
-```typescript
-TypeError: err.stacktrace is not a function
-```
-
-これは`Error`には`err.stacktrace()`が存在しないことが原因です。
-
-`strictFunctionTypes`を`true`に設定しこれをコンパイルしようとすると
-
-```typescript
-Type '(err: RuntimeError) => void' is not assignable to type 'ErrorDump'.
+error TS2322: Type '(err: RuntimeError) => void' is not assignable to type 'dumpError'.
   Types of parameters 'err' and 'err' are incompatible.
     Property 'stacktrace' is missing in type 'Error' but required in type 'RuntimeError'.
-```
 
-となります。関数の引数における型は、このオプションを有効にすることで代入時にそのクラスまたはサブクラス以外を禁止します。
+const dumpError: dumpError = dumpRuntimeError;
+      ~~~~~~~~~
+```
 
 ### `strictBindCallApply`
 
-`function.bind(), function.call(), function.apply()`の型チェックが厳密になります。
+**リリースされたバージョン: 3.2**
+
+`function.bind(), function.call(), function.apply()` はその関数を実行します。どれも第2引数以降にその関数の引数を代入できます。
+
+例えば、与えられた引数の名、姓からイニシャルを返す関数 `initial()` を考えます。与えられた文字列に対する例外検査などが少々甘いですが実装は次のようになります。
 
 ```typescript
-function stackTrace(error: Error): string | undefined {
-  return error.stack;
+function initial(givenName: string, surname: string): string {
+  return `${givenName[0].toUpperCase()}. ${surname[0].toUpperCase()}`;
 }
-
-stackTrace.call(undefined, null);
 ```
 
-`strictBindCallApply`を`true`に設定しこれをコンパイルしようとすると
+このとき `function.bind(), function.call(), function.apply()` を使って関数を呼び出すには次のようにします。
 
 ```typescript
-Argument of type 'null' is not assignable to parameter of type 'Error'.
+initial('salvador', 'dali');
+// -> 'S. D'
+initial.bind(null, 'salvador', 'dali')();
+// -> 'S. D'
+initial.call(null, 'salvador', 'dali');
+// -> 'S. D'
+initial.apply(null, ['salvador', 'dali']);
+// -> 'S. D'
 ```
 
-となります。これを回避するためには`call()`の第2引数を`Error`のインスタンスに変更します。
+これらの関数の問題点は、例え関数が引数にある型を要求するように作っていたとしても任意の値を代入できてしまうことでした。  
+引数を本来の `string` 型から他の型に変えて実行するとすべて実行時エラーになります。
 
 ```typescript
-stackTrace.call(undefined, new ReferenceError());
+initial.bind(null, 'salvador', 5)();
+// TypeError: Cannot read property 'toUpperCase' of undefined
+initial.call(null, 'salvador', 5);
+// TypeError: Cannot read property 'toUpperCase' of undefined
+initial.apply(null, ['salvador', 5]);
+// TypeError: Cannot read property 'toUpperCase' of undefined
+```
+
+このオプションを有効にするとこれらの関数呼び出しのときの引数の評価が厳密になり実行することができなくなります。
+
+```typescript
+// error of initial.bind()
+error TS2769: No overload matches this call.
+  Overload 1 of 6, '(this: (this: any, arg0: "salvador", arg1: string) => string, thisArg: any, arg0: "salvador", arg1: string): () => string', gave the following error.
+    Argument of type 'number' is not assignable to parameter of type 'string'.
+  Overload 2 of 6, '(this: (this: any, ...args: "salvador"[]) => string, thisArg: any, ...args: "salvador"[]): (...args: "salvador"[]) => string', gave the following error.
+    Argument of type '5' is not assignable to parameter of type '"salvador"'.
+
+initial.bind(null, 'salvador', 5)();
+                               ~
+// error of initial.call()
+error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+
+initial.call(null, 'salvador', 5);
+                               ~
+
+// error of initial.apply()
+error TS2322: Type 'number' is not assignable to type 'string'.
+
+initial.apply(null, ['salvador', 5]);
+                                 ~
 ```
 
 ### `strictPropertyInitialization`
 
-初期化されていない変数定数や、コンストラクタで初期化されていないクラスのプロパティを禁止します。
+**リリースされたバージョン: 2.7**
+
+このオプションを有効にするためには `strictNullChecks` も同様に有効にする必要があります。
+
+クラスのプロパティは初期化しない状態では `undefined` が格納されます。
 
 ```typescript
 class User {
@@ -519,27 +548,46 @@ class User {
   public gender: string;
   public age: number;
 }
+
+const user: User = new User();
+
+console.log(user.name);
+// -> undefined
+console.log(user.gender);
+// -> undefined
+console.log(user.age);
+// -> undefined
 ```
 
-`strictPropertyInitialization`を`true`に設定しこれをコンパイルしようとすると
-
-```typescript
-Property 'name' has no initializer and is not definitely assigned in the constructor.
-Property 'gender' has no initializer and is not definitely assigned in the constructor.
-Property 'age' has no initializer and is not definitely assigned in the constructor.
-```
-
-となります。これを回避するためにはコンストラクタで初期化するか、初期値を設定します。
+これはクラスの宣言時に、コンストラクタで各プロパティが初期化されていないためです。  
+このオプションを有効にすると宣言されたプロパティは `undefined` とのユニオン型またはオプション修飾子がついている場合を除いて必ずコンストラクタの呼び出しの時点で初期化をする必要があります。
 
 ```typescript
 class User {
-  public name: string;
-  public gender: string;
+  public name: string | undefined;
+  public gender?: string;
+  public age: number;
+}
+
+const user: User = new User();
+```
+
+```typescript
+error TS2564: Property 'age' has no initializer and is not definitely assigned in the constructor.
+
+public age: number;
+       ~~~
+```
+
+これを回避するためにはコンストラクタで初期化するか、初期値を設定します。
+
+```typescript
+class User {
+  public name: string | undefined;
+  public gender?: string;
   public age: number;
 
-  public constructor(name: string, gender: string, age: number) {
-    this.name = name;
-    this.gender = gender;
+  public constructor(age: number) {
     this.age = age;
   }
 }
@@ -547,154 +595,94 @@ class User {
 
 ```typescript
 class User {
-  public name: string = 'John';
-  public gender: string = 'Female';
-  public age: number = 20;
+  public name: string | undefined;
+  public gender?: string;
+  public age: number = 100;
 }
 ```
-
-このオプションが有効だと、ORMで使うようなプロパティがすべて`public`でコンストラクタのないクラスは基本的に作れなくなります。
 
 ### `noImplicitThis`
 
-名前付き関数、匿名関数はアロー関数と異なり、実行時に`this`が決定されます。そのため、内部で`this`を使っているとそれは関数を書いている時点では`any`型と同じ扱いになります。このオプションはそれを禁止します。
+**リリースされたバージョン: 2.0**
 
-次のような`Type alias`があるとします。
+名前付き関数、匿名関数はアロー関数と異なり、実行時に`this`が決定されます。そのため、内部で`this`を使っているとそれらは関数を書いている時点では`any`型と同じ扱いになります。
+
+例えば、対角線の長さを求める関数 `lengthOfDiagonal()` を考えます。\(横, 縦\)を \(width, height\) とすれば関数は次のようになります。
 
 ```typescript
-type Person = {
-  name01: string;
-  name02: string;
-  name03: string;
-  name04: string;
-  name05: string;
-  name06: string;
-  name07: string;
-  name08: string;
-  name09: string;
-  name10: string;
-  name11: string;
-  name12: string;
-  name13: string;
-  name14: string;
-  name15: string;
-  name16: string;
-  name17: string;
-  name18: string;
-  name19: string;
-  name20: string;
-  intro(): void;
+function lengthOfDiagonal(): number {
+  return ((this.width ** 2) + (this.height ** 2)) ** (1/2);
+}
+```
+
+これを `width, height` をプロパティに持つオブジェクトのインスタンスに代入すれば対角線の長さを計算できます。
+
+```typescript
+const area = {
+  width: 3,
+  height: 4,
+  diagonal: lengthOfDiagonal
 };
+
+console.log(area.diagonal());
+// -> 5
 ```
 
-そして、アルファベットの先頭1文字を大文字にする`capitalize()`と`nameXX`のプロパティを出力する`dump()`を定義します。
+このとき、打ち間違いで `width` を `witch` としてしまったとするとこの関数は意図した結果を返さなくなります。
 
 ```typescript
-function capitalize(str: string): string {
-  return `${str[0].toUpperCase()}${str.slice(1)}`;
-}
-
-function dump(): string {
-  const props: string[] = [];
-
-  props.push(capitalize(this.name01));
-  props.push(capitalize(this.name02));
-  props.push(capitalize(this.name03));
-  props.push(capitalize(this.name04));
-  props.push(capitalize(this.name05));
-  props.push(capitalize(this.name06));
-  props.push(capitalize(this.name07));
-  props.push(capitalize(this.name08));
-  props.push(capitalize(this.name09));
-  props.push(capitalize(this.name10));
-  props.push(capitalize(this.name11));
-  props.push(capitalize(this.name12));
-  props.push(capitalize(this.name13));
-  props.push(capitalize(this.name14));
-  props.push(capitalize(this.name15));
-  props.push(capitalize(this.name16));
-  props.push(capitalize(this.name17));
-  props.push(capitalize(this.name18));
-  props.push(capitalize(this.name19));
-  props.push(capitalize(this.name20));
-  props.push(capitalize(this.name21));
-  props.push(capitalize(this.name22));
-  props.push(capitalize(this.name23));
-  props.push(capitalize(this.name24));
-
-  return props.join(' ');
-}
-```
-
-これを使い`Person`のインスタンスを作成します。
-
-```typescript
-const person: Person = {
-  name01: 'pablo',
-  name02: 'diego',
-  name03: 'josé',
-  name04: 'francisco',
-  name05: 'de',
-  name06: 'paula',
-  name07: 'juan',
-  name08: 'nepomuceno',
-  name09: 'maría',
-  name10: 'de',
-  name11: 'los',
-  name12: 'remedios',
-  name13: 'cipriano',
-  name14: 'de',
-  name15: 'la',
-  name16: 'santísima',
-  name17: 'trinidad',
-  name18: 'ruiz',
-  name19: 'y',
-  name20: 'picasso',
-  intro: dump
+const area = {
+  witch: 3,
+  height: 4,
+  diagonal: lengthOfDiagonal
 };
+
+console.log(area.diagonal());
+// -> NaN
 ```
 
-コンパイルして実行します。
+このオプションを有効にすると `any` 型として認識されてしまっている `this` がどの型であるかを明確にできない限り実行することができなくなります。
 
 ```typescript
-console.log(person.intro());
+error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+
+return ((this.width ** 2) + (this.height ** 2)) ** (1/2);
+         ~~~~
+error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+
+return ((this.width ** 2) + (this.height ** 2)) ** (1/2);
+                             ~~~~
 ```
 
-落ちます。
-
-```typescript
-TypeError: Cannot read property '0' of undefined
-```
-
-これはプロパティが`name20`までしかない`Person`のオブジェクトリテラルに対して`name21 ~ name24`のプロパティを取得し、それに`capitalize()`を適用しようとしたことが問題です。
-
-`noImplicitThis`を`true`に設定しこれをコンパイルしようとすると大量の次の警告が表示されます。
-
-```typescript
-'this' implicitly has type 'any' because it does not have a type annotation.
-```
-
-これを回避するためには`dump()`の関数が扱っている`this`が何かを指定します。`dump()`の第1引数を`this`とし、その型を書くことでTypeScriptに伝えることができます。
-
-```typescript
-function dump(this: Person): string {
-  // ...
-}
-```
-
-するとTypeScriptは存在しないプロパティについての指摘をするようになります。`name21 ~ name24`に次の警告が出るようになります。
-
-```typescript
-Property 'nameXX' does not exist on type 'Person'. Did you mean 'name01'?
-```
-
-この引数の`this`については関数のページに詳細がありますので併せてご参照ください。
+これを回避するためには `this`が何かを明示します。引数の`this`については関数のページに詳細がありますので併せてご参照ください。
 
 {% page-ref page="function.md" %}
 
+```typescript
+type Area = {
+  width: number;
+  height: number;
+  diagonal(): number;
+};
+
+function lengthOfDiagonal(this: Area): number {
+  return ((this.width ** 2) + (this.height ** 2)) ** (1/2);
+}
+
+const area: Area = {
+  width: 3,
+  height: 4,
+  diagonal: lengthOfDiagonal
+};
+```
+
 ### `alwaysStrict`
 
+**リリースされたバージョン: 2.1**
+
 `'use strict'`を各ファイルの先頭に付加します。
+
+## Additional Checks
 
 ### `noUnusedLocals`
 
@@ -743,7 +731,7 @@ function choose(_n1: string, n2: string): number {
 
 ### `noImplicitReturns`
 
-関数のすべての条件分岐で`return`が行われているかを厳密にチェックします。
+関数のすべての条件分岐で`return`が行われているかを厳密に評価します。
 
 ```typescript
 function negaposi(num: number): string {
@@ -1081,7 +1069,7 @@ class ToggleCountButton extends ToggleButton {
 
 ### `noPropertyAccessFromIndexSignature`
 
-`noUncheckedIndexedAccess` と同様にインデックス型を持つオブジェクトに対する型チェックです。インデックス型に対するアクセスをインデックス記法に強制されます。
+`noUncheckedIndexedAccess` と同様にインデックス型を持つオブジェクトに対する型評価です。インデックス型に対するアクセスをインデックス記法に強制されます。
 
 ドット記法とインデックス記法についてですが、次のようにあるオブジェクトがあるとしてドット\(`.`\)でプロパティアクセスをしているものがドット記法、ブラケット\(`[]`\)でアクセスをしているものがインデックス記法です。
 
