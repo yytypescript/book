@@ -1,110 +1,78 @@
 # 列挙型 \(Enum\)
 
-列挙型は変数に値を自動的に割り当てる型になります。TypeScriptでは数字と文字ベースの列挙が存在します。
+列挙型を用いると、定数のセットに意味を持たせたコード表現ができます。列挙型は利点があるものの、いくつかの問題点も指摘される機能です。
 
 ## 列挙型の宣言と利用
 
-列挙型を宣言するには、`enum`キーワードの後に列挙型名とメンバを書きます。
+列挙型を宣言するには、`enum`キーワードの後に列挙型名とメンバーを書きます。次の例では、`Postion`が列挙型名で、`Top`、`Right`、`Bottom`、`Left`がメンバーになります。
 
 ```typescript
-enum DayOfTheWeek {
-  SUN,
-  MON,
-  TUE,
-  WED,
-  THU,
-  FRI,
-  SAT
+enum Position {
+  Top,
+  Right,
+  Bottom,
+  Left,
 }
 ```
 
-一番初めに宣言されたメンバに初期値が無い場合は0からインクリメントされた値が自動的に設定されます。
-
-使用するには`列挙型名.メンバ`と記述します。
+`enum`キーワードはTypeScript独自のものです。なのでJavaScriptにコンパイルすると次のようなコードになります。
 
 ```typescript
-console.log(DayOfTheWeek.SUN); // 0
-console.log(DayOfTheWeek.MON); // 1
-console.log(DayOfTheWeek.TUE); // 2
+var Position;
+(function (Position) {
+    Position[Position["Top"] = 0] = "Top";
+    Position[Position["Right"] = 1] = "Right";
+    Position[Position["Bottom"] = 2] = "Bottom";
+    Position[Position["Left"] = 3] = "Left";
+})(Position || (Position = {}));
 ```
 
-クラスやインターフェースと同様に型として扱うことができます。
+ご覧のとおり、列挙型名と同じ名前のオブジェクトが定義されます。列挙型のメンバーはオブジェクトのプロパティーになります。値は0からの連番になります。
 
 ```typescript
-function dayOff(today: DayOfTheWeek) {
-  if (today === DayOfTheWeek.SUN || today === DayOfTheWeek.SAT) {
-    console.log('Happy Day!!');
-  } else {
-    console.log('Today is work.');
-  }
-}
-
-dayOff(DayOfTheWeek.SUN);
-// -> 'Happy Day!!'
-dayOff(DayOfTheWeek.MON);
-// -> 'Today is work.'
+console.log(Position.Top); // 0
+console.log(Position.Right); // 1
+console.log(Position.Bottom); // 2
 ```
 
-## 数値列挙
+列挙型名は型として扱うことができます。
 
 ```typescript
-enum DayOfTheWeek {
-  SUN,       // 0
-  MON,       // 1
-  TUE,       // 2
-  WED,       // 3
-  THU,       // 4
-  FRI,       // 5
-  SAT        // 6
-}
+let position: Position;
+//            ^^^^^^^^型
 ```
 
-先頭のメンバに初期値を宣言することもできます。
+## 列挙型の種類
+
+列挙型には、数値列挙型\(numeric enum\)、文字列列挙型\(string enum\)、異種混合の列挙型\(heterogeneous enum\)の3種類があります。
+
+### 数値列挙型\(numeric enum\)
+
+数値列挙型はもっとも典型的な列挙型です。メンバーの値は上から順に`0`からの連番になります。
 
 ```typescript
-enum DayOfTheWeek {
-  SUN = 1,  // 1
-  MON,      // 2
-  TUE,      // 3
-  WED,      // 4
-  THU,      // 5
-  FRI,      // 6
-  SAT       // 7
+enum Position {
+  Top, // 0
+  Right, // 1
+  Bottom, // 2
+  Left, // 3
 }
 ```
 
-すべてのメンバに値を代入することもできます。その場合は値が重複しないようにしましょう。
-
-VS Codeでは仮想キーコードを列挙型で宣言しています。
-
-[https://github.com/microsoft/vscode/blob/master/src/vs/base/common/keyCodes.ts](https://github.com/microsoft/vscode/blob/master/src/vs/base/common/keyCodes.ts)
+メンバーは値を代入できます。値を代入した場合、それに続くメンバーは連番になります。
 
 ```typescript
-export const enum KeyCode {
-  Unknown = 0,
-
-  Backspace = 1,
-  Tab = 2,
-  Enter = 3,
-  Shift = 4,
-  Ctrl = 5,
-  Alt = 6,
-  PauseBreak = 7,
-  // ---- 略
-  KEY_A = 31,
-  KEY_B = 32,
-  KEY_C = 33,
-  KEY_D = 34,
-  KEY_E = 35,
-  KEY_F = 36,
-  // ---- 略
-  MAX_VALUE
+enum Position {
+  Top = 1, // 1
+  Right, // 2
+  Bottom, // 3
+  Left, // 4
 }
 ```
 
-## 文字列列挙
+### 文字列列挙型\(string enum\)
 
-数値の代わりに文字列を初期値として代入することができます。文字列列挙型では各メンバに文字列リテラルを宣言する必要があります。
+メンバーの値には文字列も使えます。文字列で構成された列挙型は文字列列挙型と呼ばれます。
 
 ```typescript
 enum Direction {
@@ -115,57 +83,131 @@ enum Direction {
 }
 ```
 
-## 列挙型のアンチパターン
+### 異種混合の列挙型\(heterogeneous enum\)
 
-YYTypeScriptメンバ内で話し合った結果、列挙型として機能はあるが使用をお勧めしないアンチパターンを紹介します。興味がない方は飛ばしてください。
-
-### 中間メンバに値を代入する
-
-先頭のメンバ以外にも初期値を代入することもできますが列挙型のメリットを潰すことになりますし、代入した値によっては重複が発生します。
-
-列挙型はメンバ郡の値の一意性を保証する訳ではないことに注意をしてください。
+数値メンバーと文字列メンバーの両方を持った列挙型も作れます。
 
 ```typescript
-enum DayOfTheWeek {
-  SUN = 10,  // 10
-  MON,       // 11
-  TUE,       // 12
-  WED = 11,   // 11
-  THU,       // 12
-  FRI,       // 13
-  SAT        // 14
+enum YesNo {
+  No = 0,
+  Yes = "yes"
 }
 ```
 
-### 重複した値を代入する
+## 列挙型の問題点
 
-重複する値を代入する場合は列挙型のメリットを潰してしまいます。
+列挙型にはいくつか問題点が指摘されていてます。ここでは、その問題点と代替手段を説明します。
+
+### 列挙型はTypeScript独自すぎる
+
+TypeScriptは、JavaScriptを拡張した言語です。拡張といっても、むやみに機能を足すのではなく、追加するのは型の世界に限ってです。こういった思想がTypeScriptにはあるため、型に関する部分を除けば、JavaScriptの文法から離れすぎない言語になっています。
+
+JavaScriptの文法からドラスティックに離れたAltJSもあります。その中で、TypeScriptが多くの開発者に支持されているのは、JavaScriptから離れすぎないところに魅力があるからというのもひとつの要因です。
+
+TypeScriptの列挙型に目を向けると、構文もJavaScriptに無いものであるだけでなく、コンパイル後の列挙型はJavaScriptのオブジェクトに変化したりと、型の世界の拡張からはみ出している独自機能になっています。TypeScriptプログラマーの中には、この点が受け入れられない人もいます。
+
+### 数値列挙型には型安全上の問題がある
+
+数値列挙型は、`number`型なら何でも代入できるという型安全上の問題点があります。次の例は、値が`0`と`1`のメンバーだけからなる列挙型ですが、実際にはそれ以外の数値を代入できてしまいます。
 
 ```typescript
-enum DayOfTheWeek {
-  SUN = 10,  // 10
-  MON = 9,   //  9
-  TUE = 8,   //  8
-  WED = 8,   //  8
-  THU = 9,   //  9
-  FRI = 10,  // 10
-  SAT = 11   // 11
+enum ZeroOrOne {
+  Zero = 0,
+  One = 1,
+}
+const zeroOrOne: ZeroOrOne = 9; // コンパイルエラーは起きません！
+```
+
+列挙型には、列挙型オブジェクトに値でアクセスすると、メンバー名を得られる仕様があります。これにも問題があります。メンバーに無い値でアクセスしたら、コンパイルエラーになってほしいところですが、そうなりません。
+
+```typescript
+enum ZeroOrOne {
+  Zero = 0,
+  One = 1,
+}
+
+console.log(ZeroOrOne[0]); //=> "Zero" これは期待どおり
+console.log(ZeroOrOne[9]); //=> undefined これはコンパイルエラーになってほしいところ…
+```
+
+### 文字列列挙型だけ公称型になる
+
+TypeScriptの型システムは、[構造的部分型](structural-subtyping.md)を採用しています。ところが、文字列列挙型は例外的に公称型になります。
+
+```typescript
+enum StringEnum {
+  Foo = "foo",
+}
+const foo1: StringEnum = StringEnum.Foo; // コンパイル通る
+const foo2: StringEnum = "foo"; // コンパイルエラーになる
+```
+
+この仕様は意外さがある部分です。加えて、数値列挙型は公称型にならないので、不揃いなところでもあります。
+
+### 列挙型の代替案
+
+列挙型の代替案をいくつか提示します。ただし、どの代替案も列挙型の特徴を100%再現するものではありません。次の代替案は目的や用途に合う合わないを判断して使い分けてください。
+
+#### 列挙型の代替案1: ユニオン型
+
+もっともシンプルな代替案はユニオン型を用いる方法です。
+
+```typescript
+type YesNo = "yes" | "no";
+
+function toJapanese(yesno: YesNo) {
+  switch (yesno) {
+    case "yes":
+      return "はい";
+    case "no":
+      return "いいえ";
+  }
 }
 ```
 
-### 数値と文字列の混合
-
-この機能をどのような場面で有効活用できるかわかる人がいるならば教えてください。
+ユニオン型とシンボルを組み合わせる方法もあります。
 
 ```typescript
-enum DayOfTheWeek {
-  SUN = 'Happy holidays!',  // Happy holidays!
-  MON = 1,                  // 1
-  TUE,                      // 2
-  WED,                      // 3
-  THU,                      // 4
-  FRI = 'TGIF',             // TGIF
-  SAT = 10                  // 10
+const yes = Symbol();
+const no = Symbol();
+type YesNo = typeof yes | typeof no;
+
+function toJapanese(yesno: YesNo) {
+  switch (yesno) {
+    case yes:
+      return "はい";
+    case no:
+      return "いいえ";
+  }
+}
+```
+
+#### 列挙型の代替案2: オブジェクトリテラル
+
+オブジェクトリテラルを使う方法もあります。
+
+```typescript
+const Position = {
+  Top: 0,
+  Right: 1,
+  Bottom: 2,
+  Left: 3,
+} as const;
+
+type Position = typeof Position[keyof typeof Position];
+// 上は type Position = 0 | 1 | 2 | 3 と同じ意味になります
+
+function toJapanese(position: Position) {
+  switch (position) {
+    case Position.Top:
+      return "上";
+    case Position.Right:
+      return "右";
+    case Position.Bottom:
+      return "下";
+    case Position.Left:
+      return "左";
+  }
 }
 ```
 
