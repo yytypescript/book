@@ -44,7 +44,7 @@ const increment = (num: number): number => num + 1;
 
 さらに、引数が1個である場合は\(\)も省略できます。
 
-### 匿名かつアロー関数1行かつ引数が1個版
+### 匿名かつアロー関数1行かつ括弧省略版
 
 ```typescript
 const increment = num => num + 1;
