@@ -211,7 +211,7 @@ gorilla.move(10);
 class Animal {
   public name: string;
   public constructor(theName: string) { this.name = theName; }
-  private move(distanceInMeters: number) { // `public`から`protected`に変更
+  private move(distanceInMeters: number) { // `public`から`private`に変更
     console.log(`${this.name} moved ${distanceInMeters}m.`);
   }
 }
