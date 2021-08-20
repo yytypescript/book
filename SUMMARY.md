@@ -58,8 +58,7 @@
   * [オブジェクトからキーの型を生成する](tips/generates-type-from-object-key.md)
   * [オブジェクトからプロパティの型を生成する](tips/generates-type-from-object-property.md)
   * [配列から型を生成する](tips/generates-type-from-array.md)
-* [逆引き](ki/README.md)
-  * [記号とキーワード](ki/ji-hao.md)
+* [索引:記号とキーワード](symbols-and-keywords.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
