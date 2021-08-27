@@ -686,52 +686,61 @@ const area: Area = {
 
 ### `noUnusedLocals`
 
-使用していない変数を禁止します。
+**リリースされたバージョン: 2.0**
+
+宣言したにもかかわらず使用されていない変数を禁止します。
 
 ```typescript
-function add(n1: string, n2: string): number {
-  const str: string = 'this is debug message';
-  // debug(str);
+function add(n1: number, n2: number): number {
+  const message: string = `the sum is ${n1 + n2}`;
 
   return n1 + n2;
 }
 ```
 
-`noUnusedLocals`を`true`に設定しこれをコンパイルしようとすると
+このオプションを有効にすると次のようなエラーが発生します。
 
 ```typescript
-'str' is declared but its value is never read.
-```
+error TS6133: 'message' is declared but its value is never read.
 
-となります。デバッグをしているときなど若干邪魔なときがあります。
+const message: string = `the sum is ${n1 + n2}`;
+      ~~~~~~~
+```
 
 ### `noUnusedParameters`
 
-使用していない引数を禁止します。
+**リリースされたバージョン: 2.0**
+
+関数で使用していない引数を禁止します。
 
 ```typescript
-function choose(n1: string, n2: string): number {
-  return n2;
+function add(n1: number, n2: number, n3: number): number {
+  return n1 + n2;
 }
 ```
 
-`noUnusedParameters`を`true`に設定しこれをコンパイルしようとすると
+このオプションを有効にすると次のようなエラーが発生します。
 
 ```typescript
-'n1' is declared but its value is never read.
+error TS6133: 'n3' is declared but its value is never read.
+
+function add(n1: number, n2: number, n3: number): number {
+                                     ~~
 ```
 
-となります。これは上記例のように第2引数だけを使用する関数に対しても適用されます。これを回避するためには、使用していない引数を`_`で始まる名前に変更します。
+これを回避するためには、使用していない引数を`_`で始まる名前に変更します。
 
 ```typescript
-function choose(_n1: string, n2: string): number {
-  // ...
+function add(n1: number, n2: number, _n3: number): number {
+  return n1 + n2;
 }
 ```
 
 ### `noImplicitReturns`
 
-関数のすべての条件分岐で`return`が行われているかを厳密に評価します。
+**リリースされたバージョン: 1.8**
+
+戻り値が `void` 型以外の関数ですべての条件分岐において値を返しているかを厳密に評価します。
 
 ```typescript
 function negaposi(num: number): string {
@@ -743,32 +752,39 @@ function negaposi(num: number): string {
 }
 ```
 
-`noImplicitReturns`を`true`に設定しこれをコンパイルしようとすると
+このオプションを有効にすると次のようなエラーが発生します。
 
 ```typescript
-Not all code paths return a value.
+error TS7030: Not all code paths return a value.
+
+function negaposi(num: number): string {
+                                ~~~~~~
 ```
 
-となります。これを回避するためには戻り値が`void`型以外の関数は常に最後に`return`を書くようにするか、場合分けを漏れないように設計するしかありません。
+これを回避するためには条件分岐の場合分けのときに値を返し忘れないように設計します。
 
 ```typescript
 function negaposi(num: number): string {
   if (num > 0) {
-    return 'negative';
-  } else if (num < 0) {
     return 'positive';
+  } else if (num < 0) {
+    return 'negative';
   }
 
-  return '0';
+  return 'this is 0';
 }
 ```
 
 ### `noFallthroughCasesInSwitch`
 
-`fallthrough`とは`switch`で`break`または`return`を行わないことを意味します。次の例は多くの方が`switch`で学習したであろう`fallthrough`の例です。
+**リリースされたバージョン: 1.8**
+
+`fallthrough`とは`switch`でにおける `case` 文で`break`または`return`を行わないことを意味します。 `case` 文が空でない場合に限り `break` や `return` が行われているかを厳密に評価します。
 
 ```typescript
 function daysOfMonth(month: number): number {
+  let days: number = 31;
+
   switch (month) {
     case 1:
     case 3:
@@ -777,84 +793,93 @@ function daysOfMonth(month: number): number {
     case 8:
     case 10:
     case 12:
-      return 31;
+      break;
     case 2:
-      return 28;
+      days = 28;
     case 4:
     case 6:
     case 9:
     case 11:
-      return 30;
+      days = 30;
     default:
       throw new Error('INVALID INPUT');
   }
+
+  return days;
 }
 ```
 
-意図してこの`fallthrough`を使いこなすよりもバグを産むことの方が遥かに多いため、このオプションはそれを禁止します。
+ある月の日数を求める関数 `daysOfMonth()` を定義しましたがこの関数には `fallthrough` が存在します。このオプションを有効にすると次のようなエラーが発生します。
 
 ```typescript
-function nextLyric(lyric: string, count: number = 1): string {
-  switch (lyric) {
-    case 'we':
-      return 'will';
-    case 'will':
-      if (count === 1) {
-        return 'we';
-      }
-      if (count === 2) {
-        return 'rock';
-      }
-    case 'rock':
-      return 'you';
-    default:
-      throw new Error('YOU ARE A KING!!!');
-  }
-}
+error TS7029: Fallthrough case in switch.
+
+    case 2:
+　  ~~~~~~~
+error TS7029: Fallthrough case in switch.
+
+    case 11:
+    ~~~~~~~~
 ```
 
-`noFallthroughCasesInSwitch`を`true`に設定しこれをコンパイルしようとすると
-
-```typescript
-Fallthrough case in switch.
-```
-
-となります。これは`case 'will'`のときに`return`されない場合がある、つまり`fallthrough`が発生していることが問題です。
+`case 1, case 3, case 5, ....` が `fallthrough` とみなされないのは `case` 文の実行部分が `break` だけで何もしないからです。
 
 これを回避するためには`case`では漏れなく`break`あるいは`return`をするように設計します。
 
 ```typescript
-function next(lyric: string, count: number): string {
-  switch (lyric) {
-    case 'we':
-      return 'will';
-    case 'will':
-      if (count % 2 === 1) {
-        return 'we';
-      }
+ffunction daysOfMonth(month: number): number {
+  let days: number = 31;
 
-      return 'rock';
-    case 'rock':
-      return 'you';
+  switch (month) {
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
+      break;
+    case 2:
+      days = 28;
+      break;
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+      days = 30;
+      break;
     default:
-      throw new Error('YOU ARE A KING!!!');
+      throw new Error('INVALID INPUT');
   }
+
+  return days;
 }
 ```
 
-なお、このオプションは`case`に処理がある場合のみ`break`あるいは`return`を強制します。この項目で一番初めに紹介した一か月の日数を求める関数`daysOfMonth()`は、`fallthrough`である`case`はすべて処理がないため警告は発生しません。
-
 ### `noUncheckedIndexedAccess`
 
-インデックス型や配列で宣言されたオブジェクトが持つプロパティへのアクセスが厳密になります。インデックス型についてはタイプエイリアスのページをご参照ください。
+**リリースされたバージョン: 4.1**
+
+インデックス型や配列で宣言されたオブジェクトが持つプロパティへのアクセスを厳密に評価します。インデックス型についてはタイプエイリアスのページをご参照ください。
 
 {% page-ref page="type-aliases.md" %}
 
 ```typescript
 type ObjectLiteralLike = {
+  en: string;
+  fr: string;
+  it: string;
+  [lang: string]: string;
 };
 type ArrayObjectLike = {
+  0: string;
+  1: string;
+  [num: number]: string;
 };
+
+function log(s: string): void {
+  console.log(s);
+}
 
 const butterfly: ObjectLiteralLike = {
   en: 'Butterfly',
@@ -868,51 +893,38 @@ const phoneticCodes: ArrayObjectLike = {
   1: 'bravo',
   2: 'charlie'
 };
+
+log(spanish);
+log(third);
 ```
 
 `ObjectLiteralLike, ArrrayObjectLike`は共に`string`型のプロパティを持つオブジェクトの型として宣言されています。
 
 ```typescript
-const germanName: string = butterfly.de;
-const fifth: string = phoneticCodes[4];
+const spanish: string = butterfly.es;
+const third: string = phoneticCodes[2];
 ```
 
-これらのオブジェクトのプロパティにアクセスするときは完全な型安全ではありません。上記`germanName, fifth`はどちらも定義されたオブジェクトには存在しませんがTypeScriptaはこれらを`string`型と解釈します。
-
-`noUncheckedIndexedAccess`を`true`に設定しこれらをコンパイルしようとすると
+これらのオブジェクトのプロパティにアクセスするときは完全な型安全ではありません。このオプションを有効にすると次のようなエラーが発生します。
 
 ```typescript
-Type 'string | undefined' is not assignable to type 'string'.
+error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
   Type 'undefined' is not assignable to type 'string'.
+
+log(spanish);
+    ~~~~~~~
+error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+log(third);
+    ~~~~~
 ```
 
 このように厳密に定義されていないプロパティは`undefined`型とのユニオン型として解釈されるようになります。
 
 ```typescript
-const englishName: string | undefined = butterfly.en;
-const first: string | undefined = phoneticCode[0];
-```
-
-ここであるサービスが英語版だけは担保し、他の言語は追々という対応をしたとします。するとそのシステムにある単語や文章を意味する型は次のようになります。
-
-```typescript
-type SystemTerms = {
-  en: string;
-};
-```
-
-このような型を定義するとそのオブジェクトは`en`プロパティに限り`noUncheckedIndexedAccess`の制約を受けません。
-
-```typescript
-const butterfly: SystemTerms = {
-  en: 'Butterfly',
-  fr: 'Papillon',
-  it: 'Farfalla',
-  es: 'Mariposa'
-};
-
-const englishName: string = butterfly.en;
-const frenchhName: string | undefined = butterfly.fr;
+const spanish: string | undefined = butterfly.es;
+const third: string | undefined = phoneticCodes[2];
 ```
 
 配列はインデックス記法でアクセスをすると`undefined`型とのユニオン型と解釈されますが`for-of, array.forEach()`はこの制約を受けないため積極的に使用を検討してください。
@@ -931,9 +943,11 @@ phoneticCodes.forEach((p: string) => {
 
 ### `noImplicitOverride`
 
+**リリースされたバージョン: 4.3**
+
 サブクラスがスーパークラスのメソッドを拡張したときに `override` のキーワードをメソッドの前に書くことを強制します。これはスーパークラスの拡張しているメソッドが取り除かれたり、名称が変更されたことを検知することに役立ちます。
 
-例えば、トグルボタン \(クリックするとオン、オフを繰り返すボタン\) のクラスがあったとすれば、それは次のようになっているでしょう。
+例えば、トグルボタン \(クリックするとオン、オフを繰り返すボタン\) のクラスが次のようになっているとします。
 
 ```typescript
 class ToggleButton {
@@ -994,7 +1008,7 @@ class ToggleCountButton extends ToggleButton {
 }
 ```
 
-ここでスーパークラスの `ToggleButton` が「オンオフの切り替えにメソッドはふたつも要らない！セッターで十分だ」と変更したとします。
+ここでスーパークラスの `ToggleButton` が「オンオフの切り替えにメソッドはふたつも要らない！セッターで十分だ」と変更されたとします。
 
 ```typescript
 class ToggleButton {
@@ -1022,60 +1036,44 @@ class ToggleButton {
 
 するとサブクラスでオーバーライドしたはずのメソッド `enable(), disable()` が意味のないメソッドとして残ることになります。
 
-`noImplicitOverride` はオーバーライドしているメソッドに `override`キーワードをつけることによってスーパークラスに同名のメソッドがないかを確認させます。
-
-`noImplicitOverride`を `true` に設定しオーバーライドしているにもかかわらず `override` のキーワードを付けずにコンパイルしようとすると
+`noImplicitOverride` はオーバーライドしているメソッドに `override`キーワードをつけることによってスーパークラスに同名のメソッドがないかを確認させます。オーバーライドをしているにもかかわらず `override` のキーワードを付けずにこのオプションを有効にすると次のようなエラーが発生します。
 
 ```typescript
-This member must have an 'override' modifier because it overrides a member in the base class 'ToggleButton'.
+error TS4114: This member must have an 'override' modifier because it overrides a member in the base class 'ToggleButton'.
+
+public enable(): void {
+       ~~~~~~
+error TS4114: This member must have an 'override' modifier because it overrides a member in the base class 'ToggleButton'.
+
+public disable(): void {
+       ~~~~~~~
 ```
 
-と `override` キーワードがない旨の指摘を受けることになります。
-
-逆に、オーバーライドしていないメソッドに `override` キーワードをつけると
+逆に、オーバーライドしていないメソッドに `override` キーワードをつけると次のようなエラーが発生します。
 
 ```typescript
-This member cannot have an 'override' modifier because it is not declared in the base class 'ToggleButton'.
-```
+error TS4113: This member cannot have an 'override' modifier because it is not declared in the base class 'ToggleButton'.
 
-とスーパークラスのメソッドをオーバーライドしていない旨の指摘を受けることになります。
+public override enable(): void {
+                ~~~~~~
+error TS4113: This member cannot have an 'override' modifier because it is not declared in the base class 'ToggleButton'.
 
-なお今回の例では仮に`noImplicitOverride`オプションを有効にしていなくても `super` を使うことによってスーパークラスにメソッドが存在するかどうかを検出することはできます。
-
-```typescript
-class ToggleCountButton extends ToggleButton {
-  private counter: number;
-
-  public constructor() {
-    super();
-    this.counter = 0;
-  }
-
-  public enable(): void {
-    super.enable();
-    this.counter++;
-  }
-
-  public disable(): void {
-    super.disable();
-    this.counter++;
-  }
-
-  public getCounter(): number {
-    return this.counter;
-  }
-
+public override disable(): void {
+                ~~~~~~~
 ```
 
 ### `noPropertyAccessFromIndexSignature`
 
-`noUncheckedIndexedAccess` と同様にインデックス型を持つオブジェクトに対する型評価です。インデックス型に対するアクセスをインデックス記法に強制されます。
+**リリースされたバージョン: 4.2**
+
+`noUncheckedIndexedAccess` と同様にインデックス型を持つオブジェクトに対する型評価です。インデックス型に対するアクセスをインデックス記法に強制します。
 
 ドット記法とインデックス記法についてですが、次のようにあるオブジェクトがあるとしてドット\(`.`\)でプロパティアクセスをしているものがドット記法、ブラケット\(`[]`\)でアクセスをしているものがインデックス記法です。
 
 ```typescript
 type SystemTerms = {
   en: string;
+  [key: string]: string;
 };
 
 const butterfly: SystemTerms = {
@@ -1095,14 +1093,15 @@ butterfly['en'];
 
 ```typescript
 console.log(butterfly.fr);
-console.log(butterfly['fr']);
 ```
 
-`noPropertyAccessFromIndexSignature` を `true` に設定し次のコードをコンパイルしようとすると
+存在が不確かなプロパティへのアクセスについて、ドット記法でアクセスするときに、このオプションを有効にすると次のようなエラーが発生します。
 
 ```typescript
-Property 'fr' comes from an index signature, so it must be accessed with ['fr'].
+error TS4111: Property 'fr' comes from an index signature, so it must be accessed with ['fr'].
+
 console.log(butterfly.fr);
+                      ~~
 ```
 
 このようにインデックス型へのドット記法でのアクセスが禁止されます。
