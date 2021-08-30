@@ -494,7 +494,7 @@ let a = 1; // 00000001
 const b = 3;
 a <<= b;
 console.log(a); // 00001000
-// 出力: 1
+// 出力: 8
 ```
 
 ### `=` 代入演算子 ![js](.gitbook/assets/js.svg)
