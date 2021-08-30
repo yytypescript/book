@@ -235,6 +235,8 @@ const id2 = 100; // OK
 const id3 = true; // ERROR
 ```
 
+{% page-ref page="features/union-types.md" %}
+
 ### `^` ビット排他的論理和 ![js](.gitbook/assets/js.svg)
 
 左の値と右の値でビットの値が異なる位置のビットを1にします。
