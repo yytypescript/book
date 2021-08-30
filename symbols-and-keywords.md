@@ -743,6 +743,14 @@ function isDuck(animal: Animal): animal is Duck { /* ... */ }
 
 {% page-ref page="features/type-operators.md" %}
 
+### `n` bigintリテラル ![js](.gitbook/assets/js.svg)
+
+数字がbigintリテラルであることを表すのに用いる記号です。
+
+```javascript
+100n; // bigint型の100
+```
+
 ### `typeof` typeof演算子 ![js](.gitbook/assets/js.svg)
 
 与えられた値の型を表す文字列を返します。
