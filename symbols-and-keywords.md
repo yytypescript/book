@@ -667,7 +667,7 @@ const lineBreak = "\n";
 ```javascript
 const a = 1; // 00000001
 const b = 5; // 00000101
-console.log(a & b); // 00000100
+console.log(a ^ b); // 00000100
 // 出力: 4
 ```
 
