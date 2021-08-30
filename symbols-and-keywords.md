@@ -213,6 +213,8 @@ interface Wizard {
 type MagicalSwordsman = Swordsman & Wizard;
 ```
 
+{% page-ref page="features/intersection-types.md" %}
+
 ### `|` ビット論理和 ![js](.gitbook/assets/js.svg)
 
 左の値と右の値でどちらのビットが1である位置のビットを1に します。
