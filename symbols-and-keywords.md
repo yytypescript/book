@@ -54,7 +54,7 @@ double bangはJavaScriptで定義されている演算子ではなく、論理�
 型を含めて左の値と右の値が異なるか判定します。
 
 ```javascript
-1 !== 2; // true
+1 === 2; // true
 ```
 
 ### `"` 文字列リテラル ![js](.gitbook/assets/js.svg)
@@ -74,11 +74,11 @@ class ExampleClass {
 }
 ```
 
-### `$` ドル記号
+### `$` ドル変数
 
 慣習的にjQueryなどのライブラリで変数として使われることがあります。変数名として`$`が使われる場合は、JavaScriptとしては変数以上の特別な意味はありません。
 
-### `$`文字列中の変数展開 ![js](.gitbook/assets/js.svg)
+### `$` 文字列中の変数展開 ![js](.gitbook/assets/js.svg)
 
 テンプレートリテラル内で変数を展開するときに用いられる記号です。
 
@@ -316,7 +316,7 @@ console.log(x); // 2
 
 オブジェクトのプロパティにアクセスするときに用いる記号です。
 
-```text
+```javascript
 const object = { property: 123 };
 object.property; // 123
 ```
@@ -656,7 +656,7 @@ type StringKeysAndStringValues = {
 
 文字列のエスケープシーケンスの開始に用いられる記号です。
 
-```text
+```javascript
 const lineBreak = "\n";
 ```
 
