@@ -700,7 +700,13 @@ console.log(~a); // 11111110
 // 出力: -2
 ```
 
-### `is` 型アサーション関数の一部
+### `as` 型アサーション ![](.gitbook/assets/ts.svg)
+
+TypeScriptコンパイラーが解釈した型を上書きする「型アサーション」に用いられるキーワードです。
+
+{% page-ref page="features/any-unknown.md" %}
+
+### `is` 型アサーション関数の一部 ![](.gitbook/assets/ts.svg)
 
 型ガードに用いる型アサーション関数の戻り値の型アノテーション部分に用いられるキーワードです。
 
