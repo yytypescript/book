@@ -21,6 +21,22 @@ function firstChar(text: string | undefined) {
 }
 ```
 
+### `!` Definite Assignment Assertion演算子 ![ts](.gitbook/assets/ts.svg)
+
+クラスのプロパティが型アノテーションで示された型でセットされていることをコンパイラーに伝える記号です。
+
+```typescript
+class Example {
+  public foo!: number;
+}
+```
+
+または、変数の値が型アノテーションで示された型でセットされていることをコンパイラーに伝える記号です。
+
+```typescript
+let numbers!: number[];
+```
+
 ### `!=` 不等価演算子 ![js](.gitbook/assets/js.svg)
 
 左の値と右の値が異なるか判定します。型が異なる場合は型変換されて比較されます。
@@ -537,8 +553,14 @@ interface User {
   name: string; // name は必須
   age?: number; // age は任意
 }
-
 const user: User = { name: "taro" };
+```
+
+または、関数の引数を必須ではなくします。
+
+```typescript
+function func(x?: number) {}
+func(); // xがなくてもOK
 ```
 
 ### `?.` オプショナルチェイニング ![js](.gitbook/assets/js.svg)
