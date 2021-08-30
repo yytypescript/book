@@ -123,6 +123,16 @@ function firstChar(text: string | undefined) {
 
 左の値が右の値以上か判定します。
 
+### `=>` アロー関数の一部 ![js](.gitbook/assets/js.svg)
+
+アロー関数の引数と関数ボディーの間に書かれる記号です。
+
+```javascript
+const increment = num => num + 1;
+//                ^^^ 引数
+//                       ^^^^^^^ 関数ボディ
+```
+
 ### `==` 等価演算子 ![js](.gitbook/assets/js.svg)
 
 左の値と右の値が等しいか判定します。型が異なる場合は型変換されて比較されます。
@@ -267,7 +277,7 @@ console.log(undefined ?? 1); // 1
 console.log(2 ?? 1); // 2
 ```
 
-### `a ? b : c` 条件（三項）演算子 ![js](.gitbook/assets/js.svg)
+### `a ? b : c` 三項演算子 ![js](.gitbook/assets/js.svg)
 
 `a`の真偽値が `true` の場合は `b` の値を返します。`a`の真偽値が `false` の場合は `c` の値を返します。
 
@@ -388,6 +398,10 @@ const a = x++, x++, x > 0
 console.log(a)  // true
 ```
 
+### `?` 三項演算子の一部 ![js](.gitbook/assets/js.svg)
+
+三項演算子`a ? b : c`の一部です。
+
 ### `?` オプション修飾子 ![ts](.gitbook/assets/ts.svg)
 
 オブジェクトのプロパティを任意プロパティとして定義します。
@@ -400,4 +414,16 @@ interface User {
 
 const user: User = { name: "taro" };
 ```
+
+### `typeof` typeof型演算子 ![](.gitbook/assets/ts.svg) 
+
+変数から型を抽出する演算子です。
+
+{% page-ref page="features/type-operators.md" %}
+
+### `keyof` keyof型演算子 ![](.gitbook/assets/ts.svg)
+
+オブジェクト型からプロパティ名を型として返す型演算子です。
+
+{% page-ref page="features/type-operators.md" %}
 
