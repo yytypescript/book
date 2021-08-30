@@ -696,10 +696,9 @@ const hyakuman = 1_000_000;
 左の値と右の値でどちらのビットが1である位置のビットを1に します。
 
 ```javascript
-const a = 1; // 00000001
-const b = 5; // 00000101
-console.log(a & b); // 00000101
-// 出力: 5
+const a = 0b010;
+const b = 0b101;
+console.log((a | b) === 0b111); // true
 ```
 
 ### `|` ユニオン型 ![ts](.gitbook/assets/ts.svg)
