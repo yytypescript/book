@@ -640,6 +640,18 @@ const object = { a: 1, b: 2 };
 object["a"]; // 1
 ```
 
+### `[` インデックス型 ![ts](.gitbook/assets/ts.svg)
+
+インデックス型\(index signature\)の開始に用いられる記号です。
+
+```typescript
+type StringKeysAndStringValues = {
+  [key: string]: string;
+};
+```
+
+{% page-ref page="features/type-aliases.md" %}
+
 ### `\` 文字列エスケープシーケンス ![js](.gitbook/assets/js.svg)
 
 文字列のエスケープシーケンスの開始に用いられる記号です。
