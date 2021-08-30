@@ -4,6 +4,8 @@
 
 ここで扱う記号とキーワードには、JavaScript由来のもの、つまり、JavaScriptとTypeScriptに共通してあるものと、TypeScriptにしかないものを併記しています。JavaScript由来のものには![js](.gitbook/assets/js.svg)のマークを、TypeScript固有のものには![TS](.gitbook/assets/ts.svg)マークを表示しています。
 
+## 記号とキーワード
+
 ### `!` 論理否定演算子 ![js](.gitbook/assets/js.svg)
 
 真値と偽値を反転します。
@@ -43,7 +45,7 @@ function firstChar(text: string | undefined) {
 
 クラスのプロパティのうち`#`で始まるプロパティはプライベートになります。
 
-```js
+```javascript
 class ExampleClass {
   #privateField;
   #privateMethod() {}
@@ -60,7 +62,7 @@ class ExampleClass {
 
 テンプレートリテラル内で変数を展開するときに用いられる記号です。
 
-```js
+```javascript
 const name = "John";
 console.log(`Hi, ${name}.`); // "Hi, John."
 ```
@@ -69,7 +71,7 @@ console.log(`Hi, ${name}.`); // "Hi, John."
 
 左の値を右の値で割った余りを計算します。
 
-```js
+```javascript
 12 % 5; // 2
 ```
 
@@ -187,21 +189,21 @@ type MyReadonly<T> = {
 };
 ```
 
-### `+=` 加算代入 ![js](.gitbook/assets/js.svg)
+## `+=` 加算代入 ![js](.gitbook/assets/js.svg)
 
 左の変数の値とに右の値を足し算した結果を左の変数に割り当てます。
 
-### `++` インクリメント ![js](.gitbook/assets/js.svg)
+## `++` インクリメント ![js](.gitbook/assets/js.svg)
 
 変数に`1`を足す演算子です。
 
-```js
+```javascript
 let x = 3;
 x++;
 console.log(x); // 4
 ```
 
-### `,` 関数引数の区切り ![js](.gitbook/assets/js.svg)
+## `,` 関数引数の区切り ![js](.gitbook/assets/js.svg)
 
 複数の引数を関数に与えたり、複数の引数を受け取る関数宣言に用いる記号です。
 
@@ -212,7 +214,7 @@ function plus(x, y, z) {
 plus(1, 2, 3);
 ```
 
-### `,` 配列要素の区切り ![js](.gitbook/assets/js.svg)
+## `,` 配列要素の区切り ![js](.gitbook/assets/js.svg)
 
 複数の要素を持つ配列を宣言するときに用いる記号です。
 
@@ -220,7 +222,7 @@ plus(1, 2, 3);
 const numbers = [1, 2, 3];
 ```
 
-### `,` オブジェクトプロパティの区切り ![js](.gitbook/assets/js.svg)
+## `,` オブジェクトプロパティの区切り ![js](.gitbook/assets/js.svg)
 
 複数のプロパティを持つオブジェクトを宣言するときに用いる記号です。
 
@@ -232,15 +234,15 @@ const data = {
 };
 ```
 
-### `,` タプル型の要素の区切り ![ts](.gitbook/assets/ts.svg)
+## `,` タプル型の要素の区切り ![ts](.gitbook/assets/ts.svg)
 
 複数の要素を持つタプル型を宣言するときに用いる記号です。
 
-```ts
+```typescript
 type Tuple = [number, string, boolean];
 ```
 
-### `,` カンマ演算子 ![js](.gitbook/assets/js.svg)
+## `,` カンマ演算子 ![js](.gitbook/assets/js.svg)
 
 左から右に式を評価をして、一番右の評価した値を返します。
 
@@ -250,7 +252,7 @@ const a = x++, x++, x > 0
 console.log(a)  // true
 ```
 
-### `-` 単項負値演算子 ![js](.gitbook/assets/js.svg)
+## `-` 単項負値演算子 ![js](.gitbook/assets/js.svg)
 
 正負を反転してNumber型に変換します。
 
@@ -258,11 +260,11 @@ console.log(a)  // true
 -"1"; // -1
 ```
 
-### `-` 減算演算子 ![js](.gitbook/assets/js.svg)
+## `-` 減算演算子 ![js](.gitbook/assets/js.svg)
 
 2つの値を引き算します。
 
-### `-` 修飾子の削除 ![ts](.gitbook/assets/ts.svg)
+## `-` 修飾子の削除 ![ts](.gitbook/assets/ts.svg)
 
 `readonly`や`?`などの修飾子を削除する。
 
@@ -276,34 +278,34 @@ type Writable<T> = {
 };
 ```
 
-### `-=` 減算代入 ![js](.gitbook/assets/js.svg)
+## `-=` 減算代入 ![js](.gitbook/assets/js.svg)
 
 左の変数の値から右の値を引き算した結果を左の変数に割り当てます。
 
-### `--` デクリメント ![js](.gitbook/assets/js.svg)
+## `--` デクリメント ![js](.gitbook/assets/js.svg)
 
 変数に`1`を引き算する演算子です。
 
-```js
+```javascript
 let x = 3;
 x--;
 console.log(x); // 2
 ```
 
-### `.` プロパティへのアクセス ![js](.gitbook/assets/js.svg)
+## `.` プロパティへのアクセス ![js](.gitbook/assets/js.svg)
 
 オブジェクトのプロパティにアクセスするときに用いる記号です。
 
-```
+```text
 const object = { property: 123 };
 object.property; // 123
 ```
 
-### `...` スプレッド構文 ![js](.gitbook/assets/js.svg)
+## `...` スプレッド構文 ![js](.gitbook/assets/js.svg)
 
 配列などの反復可能オブジェクトを関数の引数にする構文です。
 
-```js
+```javascript
 function sum(x, y, z) {
   return x + y + z;
 }
@@ -313,7 +315,7 @@ console.log(sum(...numbers)); // 6
 
 または、配列などの反復可能オブジェクトを配列要素に展開する構文です。
 
-```js
+```javascript
 const numbers = [1, 2, 3];
 const newNumbers = [0, ...numbers, 4];
 console.log(newNumbers); // [ 0, 1, 2, 3, 4 ]
@@ -321,17 +323,17 @@ console.log(newNumbers); // [ 0, 1, 2, 3, 4 ]
 
 または、オブジェクトのプロパティを展開する構文です。
 
-```js
+```javascript
 const object = { x: 1, y: 2 };
 const newObject = { ...object, z: 3 };
 console.log(newObject); // { x: 1, y: 2, z: 3 }
 ```
 
-### `...` 残余構文 ![js](.gitbook/assets/js.svg)
+## `...` 残余構文 ![js](.gitbook/assets/js.svg)
 
 関数の残りの引数をひとつの配列として受け取るのに用いられる構文です。
 
-```js
+```javascript
 function func(a, b, ...rest) {
   return rest;
 }
@@ -340,7 +342,7 @@ console.log(func(1, 2, 3, 4, 5)); // [ 3, 4, 5 ]
 
 または、配列などの反復可能オブジェクトの残りの要素を取り出す構文です。
 
-```js
+```javascript
 const numbers = [1, 2, 3, 4, 5];
 const [first, second, ...rest] = numbers;
 console.log(rest); // [ 3, 4, 5 ]
@@ -348,7 +350,7 @@ console.log(rest); // [ 3, 4, 5 ]
 
 または、オブジェクトの残りのプロパティを取り出す構文です。
 
-```js
+```javascript
 const object = { a: 1, b: 2, c: 3, d: 4 };
 const { a, b, ...rest } = object;
 console.log(rest); // { c: 3, d: 4 }
@@ -374,7 +376,7 @@ console.log(rest); // { c: 3, d: 4 }
 
 複数行コメントの開始を表す記号です。
 
-```js
+```javascript
 /*
  コメント
  */
@@ -388,7 +390,7 @@ console.log(rest); // { c: 3, d: 4 }
 
 オブジェクトプロパティのキーと値の対関係を表すのに用いられる記号です。
 
-```js
+```javascript
 const object = { a: 1, b: 2, c: 3, d: 4 };
 ```
 
@@ -400,13 +402,13 @@ const object = { a: 1, b: 2, c: 3, d: 4 };
 
 変数の型アノテーションに用いられる記号です。
 
-```ts
+```typescript
 const variable: number = 20;
 ```
 
 または、関数の引数や戻り値の型アノテーションに用いられる記号です。
 
-```ts
+```typescript
 function numberToString(x: number): string {
   return x.toString();
 }
@@ -573,7 +575,7 @@ console.log(user2.name); // kaori
 
 配列の要素やオブジェクトのプロパティにアクセスするときに用いられる記号です。
 
-```js
+```javascript
 const numbers = [1, 2, 3];
 numbers[0]; // 1
 const object = { a: 1, b: 2 };
@@ -584,7 +586,7 @@ object["a"]; // 1
 
 文字列のエスケープシーケンスの開始に用いられる記号です。
 
-```
+```text
 const lineBreak = "\n";
 ```
 
@@ -607,15 +609,15 @@ console.log(a & b); // 00000100
 
 数値の可読性のために、桁区切りとして用いられる記号です。
 
-```js
+```javascript
 const hyakuman = 1_000_000;
 ```
 
-### <code>\`</code> テンプレートリテラル ![js](.gitbook/assets/js.svg)
+### ````` テンプレートリテラル ![js](.gitbook/assets/js.svg)
 
-テンプレートリテラル(テンプレート文字列)の前後に置かれる記号です。
+テンプレートリテラル\(テンプレート文字列\)の前後に置かれる記号です。
 
-```js
+```javascript
 `string text`;
 ```
 
@@ -675,7 +677,7 @@ console.log(~a); // 11111110
 
 与えられた値の型を表す文字列を返します。
 
-```js
+```javascript
 console.log(typeof 123); // "number"
 ```
 
@@ -684,3 +686,4 @@ console.log(typeof 123); // "number"
 変数から型を抽出する演算子です。
 
 {% page-ref page="features/type-operators.md" %}
+
