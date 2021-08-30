@@ -34,7 +34,7 @@ function firstChar(text: string | undefined) {
 型を含めて左の値と右の値が異なるか判定します。
 
 ```javascript
-1 === 2; // true
+1 !== 2; // true
 ```
 
 ### `"` 文字列リテラル ![js](.gitbook/assets/js.svg)
