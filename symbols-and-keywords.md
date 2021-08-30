@@ -418,6 +418,17 @@ function numberToString(x: number): string {
 
 左の値が右の値よりも小さいか判定します。
 
+### `<` ジェネリクス ![ts](.gitbook/assets/ts.svg)
+
+ジェネリクスの型引数の開始に用いられる記号です。
+
+```typescript
+function func1<T>(x: T) { /*...*/ }
+const result = func<string>("hello");
+```
+
+{% page-ref page="features/generics/type-variables.md" %}
+
 ### `<=` 小なりイコール演算子 ![js](.gitbook/assets/js.svg)
 
 左の値が右の値以下か判定します。
