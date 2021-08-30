@@ -33,6 +33,7 @@
   * [列挙型 \(Enum\)](features/enum.md)
   * [タイプエイリアス \(Type Aliases\)](features/type-aliases.md)
   * [ユニオン型 \(Union Types\)](features/union-types.md)
+  * [インターセクション型\(Intersection Types\)](features/intersection-types.md)
   * [オブジェクト \(Object\)](features/object.md)
   * [インターフェース \(Interfaces\)](features/interfaces.md)
   * [クラス \(Classes\)](features/classes.md)
