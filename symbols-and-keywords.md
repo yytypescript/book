@@ -700,6 +700,16 @@ console.log(~a); // 11111110
 // 出力: -2
 ```
 
+### `is` 型アサーション関数の一部
+
+型ガードに用いる型アサーション関数の戻り値の型アノテーション部分に用いられるキーワードです。
+
+```typescript
+function isDuck(animal: Animal): animal is Duck { /* ... */ }
+```
+
+{% page-ref page="features/type-guards.md" %}
+
 ### `keyof` keyof型演算子 ![](.gitbook/assets/ts.svg)
 
 オブジェクト型からプロパティ名を型として返す型演算子です。
