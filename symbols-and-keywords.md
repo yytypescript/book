@@ -445,6 +445,27 @@ const result = func<string>("hello");
 
 {% page-ref page="features/generics/type-variables.md" %}
 
+### `<` JSX ![ts](.gitbook/assets/ts.svg)
+
+JSXと呼ばれるXMLリテラルの開始に現れる記号です。
+
+{% code title="Hello.tsx" %}
+```typescript
+function Hello() {
+  return <div>HELLO</div>;
+}
+```
+{% endcode %}
+
+### `<` 型アサーション ![ts](.gitbook/assets/ts.svg)
+
+型アサーションに用いられる記号です。`as`の別の書き方です。
+
+```typescript
+let someValue: unknown = "this is a string";
+let strLength: number = (<string>someValue).length;
+```
+
 ### `<=` 小なりイコール演算子 ![js](.gitbook/assets/js.svg)
 
 左の値が右の値以下か判定します。
