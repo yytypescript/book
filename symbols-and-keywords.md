@@ -189,11 +189,11 @@ type MyReadonly<T> = {
 };
 ```
 
-## `+=` 加算代入 ![js](.gitbook/assets/js.svg)
+### `+=` 加算代入 ![js](.gitbook/assets/js.svg)
 
 左の変数の値とに右の値を足し算した結果を左の変数に割り当てます。
 
-## `++` インクリメント ![js](.gitbook/assets/js.svg)
+### `++` インクリメント ![js](.gitbook/assets/js.svg)
 
 変数に`1`を足す演算子です。
 
@@ -203,7 +203,7 @@ x++;
 console.log(x); // 4
 ```
 
-## `,` 関数引数の区切り ![js](.gitbook/assets/js.svg)
+### `,` 関数引数の区切り ![js](.gitbook/assets/js.svg)
 
 複数の引数を関数に与えたり、複数の引数を受け取る関数宣言に用いる記号です。
 
@@ -214,7 +214,7 @@ function plus(x, y, z) {
 plus(1, 2, 3);
 ```
 
-## `,` 配列要素の区切り ![js](.gitbook/assets/js.svg)
+### `,` 配列要素の区切り ![js](.gitbook/assets/js.svg)
 
 複数の要素を持つ配列を宣言するときに用いる記号です。
 
@@ -222,7 +222,7 @@ plus(1, 2, 3);
 const numbers = [1, 2, 3];
 ```
 
-## `,` オブジェクトプロパティの区切り ![js](.gitbook/assets/js.svg)
+### `,` オブジェクトプロパティの区切り ![js](.gitbook/assets/js.svg)
 
 複数のプロパティを持つオブジェクトを宣言するときに用いる記号です。
 
@@ -234,7 +234,7 @@ const data = {
 };
 ```
 
-## `,` タプル型の要素の区切り ![ts](.gitbook/assets/ts.svg)
+### `,` タプル型の要素の区切り ![ts](.gitbook/assets/ts.svg)
 
 複数の要素を持つタプル型を宣言するときに用いる記号です。
 
@@ -242,7 +242,7 @@ const data = {
 type Tuple = [number, string, boolean];
 ```
 
-## `,` カンマ演算子 ![js](.gitbook/assets/js.svg)
+### `,` カンマ演算子 ![js](.gitbook/assets/js.svg)
 
 左から右に式を評価をして、一番右の評価した値を返します。
 
@@ -252,7 +252,7 @@ const a = x++, x++, x > 0
 console.log(a)  // true
 ```
 
-## `-` 単項負値演算子 ![js](.gitbook/assets/js.svg)
+### `-` 単項負値演算子 ![js](.gitbook/assets/js.svg)
 
 正負を反転してNumber型に変換します。
 
@@ -260,11 +260,11 @@ console.log(a)  // true
 -"1"; // -1
 ```
 
-## `-` 減算演算子 ![js](.gitbook/assets/js.svg)
+### `-` 減算演算子 ![js](.gitbook/assets/js.svg)
 
 2つの値を引き算します。
 
-## `-` 修飾子の削除 ![ts](.gitbook/assets/ts.svg)
+### `-` 修飾子の削除 ![ts](.gitbook/assets/ts.svg)
 
 `readonly`や`?`などの修飾子を削除する。
 
@@ -278,11 +278,11 @@ type Writable<T> = {
 };
 ```
 
-## `-=` 減算代入 ![js](.gitbook/assets/js.svg)
+### `-=` 減算代入 ![js](.gitbook/assets/js.svg)
 
 左の変数の値から右の値を引き算した結果を左の変数に割り当てます。
 
-## `--` デクリメント ![js](.gitbook/assets/js.svg)
+### `--` デクリメント ![js](.gitbook/assets/js.svg)
 
 変数に`1`を引き算する演算子です。
 
@@ -292,7 +292,7 @@ x--;
 console.log(x); // 2
 ```
 
-## `.` プロパティへのアクセス ![js](.gitbook/assets/js.svg)
+### `.` プロパティへのアクセス ![js](.gitbook/assets/js.svg)
 
 オブジェクトのプロパティにアクセスするときに用いる記号です。
 
@@ -301,7 +301,7 @@ const object = { property: 123 };
 object.property; // 123
 ```
 
-## `...` スプレッド構文 ![js](.gitbook/assets/js.svg)
+### `...` スプレッド構文 ![js](.gitbook/assets/js.svg)
 
 配列などの反復可能オブジェクトを関数の引数にする構文です。
 
@@ -329,7 +329,7 @@ const newObject = { ...object, z: 3 };
 console.log(newObject); // { x: 1, y: 2, z: 3 }
 ```
 
-## `...` 残余構文 ![js](.gitbook/assets/js.svg)
+### `...` 残余構文 ![js](.gitbook/assets/js.svg)
 
 関数の残りの引数をひとつの配列として受け取るのに用いられる構文です。
 
