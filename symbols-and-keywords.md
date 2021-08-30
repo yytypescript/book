@@ -37,7 +37,7 @@ class Example {
 let numbers!: number[];
 ```
 
-### `！！` Double Bang ![js](.gitbook/assets/js.svg)
+### `!!` Double Bang ![js](.gitbook/assets/js.svg)
 
 double bangはJavaScriptで定義されている演算子ではなく、論理否定演算子を2つ連続したイディオムです。値がtruthyかを求めるときに使われます。
 
