@@ -646,6 +646,7 @@ object["a"]; // 1
 
 ```typescript
 type StringKeysAndStringValues = {
+  [key: string] : string;
 };
 ```
 
@@ -655,7 +656,7 @@ type StringKeysAndStringValues = {
 
 文字列のエスケープシーケンスの開始に用いられる記号です。
 
-```text
+```javascript
 const lineBreak = "\n";
 ```
 
@@ -682,7 +683,7 @@ console.log(a & b); // 00000100
 const hyakuman = 1_000_000;
 ```
 
-### \`\`\`\`\` テンプレートリテラル ![js](.gitbook/assets/js.svg)
+### ````` テンプレートリテラル ![js](.gitbook/assets/js.svg)
 
 テンプレートリテラル\(テンプレート文字列\)の前後に置かれる記号です。
 
