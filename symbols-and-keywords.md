@@ -174,6 +174,33 @@ console.log(a); // false
 
 左の値と右の値を掛け算します。
 
+### `*` ジェネレーター関数の宣言 ![js](.gitbook/assets/js.svg)
+
+`Generator`オブジェクトを返すジェネレーター関数を宣言するときに用いられる記号です。
+
+```javascript
+function* numberGenerator() {
+  yield 1;
+  yield 2;
+  yield 2;
+}
+```
+
+### `*` yield\*式 ![js](.gitbook/assets/js.svg)
+
+別のジェネレーターに移譲する式を書くときに用いられる記号です。
+
+```javascript
+function* func1() {
+  yield 123;
+}
+
+function* func2() {
+  yield* func1();
+  //   ^ここ
+}
+```
+
 ### `*=` 乗算代入 ![js](.gitbook/assets/js.svg)
 
 左の変数の値と右の値を掛け算した結果を左の変数に割り当てます。
