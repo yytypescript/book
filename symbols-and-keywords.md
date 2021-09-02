@@ -843,12 +843,16 @@ console.log(~a); // 11111110
 
 ### `~~` Double Tilde ![js](.gitbook/assets/js.svg)
 
-ビット否定演算子を2つ重ねたもので、小数点以下を消し去る計算をするイディオムです。JavaScriptにこういう演算子があるわけではなく慣習的なものです。double tildeの計算結果は、**正の数**に対してのみ`Math.floor`と同じものになります。
+ビット否定演算子を2つ重ねたもので、小数点以下を消し去る計算をするイディオムです。JavaScriptにこういう演算子があるわけではなく慣習的なものです。double tildeの計算結果は、正の数については`Math.floor`と同じに、負の数は`Math.ceil`と同じになります。
 
 ```javascript
 ~~1.5; // 1
+Math.floor(1.5); // 1
+Math.ceil(1.5); // 2
+
 ~~(-1.5); // -1
 Math.floor(-1.5); // -2
+Math.ceil(-1.5); // -1
 ```
 
 ### `as` 型アサーション ![](.gitbook/assets/ts.svg)
