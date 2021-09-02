@@ -74,7 +74,7 @@ class ExampleClass {
 }
 ```
 
-### `$` ドル変数
+### `$` ドル変数 ![js](.gitbook/assets/js.svg)
 
 慣習的にjQueryなどのライブラリで変数として使われることがあります。変数名として`$`が使われる場合は、JavaScriptとしては変数以上の特別な意味はありません。
 
