@@ -653,6 +653,21 @@ const object = { a: 1, b: 2 };
 object["a"]; // 1
 ```
 
+### `[` 配列の分割代入 ![js](.gitbook/assets/js.svg)
+
+配列などの反復可能オブジェクトの分割代入の開始に用いられる記号です。
+
+```javascript
+const numbers = [1, 2, 3];
+const [first, ...rest] = numbers; // 分割代入
+console.log(first, rest); // 1 [ 2, 3 ]
+
+function func([first, ...rest]) { // 分割代入
+	console.log(first, rest);
+}
+func([1, 2, 3]); // 1 [ 2, 3 ]
+```
+
 ### `[` インデックス型 ![ts](.gitbook/assets/ts.svg)
 
 インデックス型\(index signature\)の開始に用いられる記号です。
