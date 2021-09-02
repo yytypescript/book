@@ -758,6 +758,44 @@ const hyakuman = 1_000_000;
 `string text`;
 ```
 
+### `{` ブロック文 ![js](.gitbook/assets/js.svg)
+
+if文やfor文などの構文に付随して使われる記号です。
+
+```javascript
+if (isOK) {
+  // ...
+} else {
+  // ...
+}
+```
+
+if文やfor文と付随しないブロック文は、単に変数のスコープを分けることを目的にしていることがあります。
+
+```javascript
+{
+  const value = 1;
+}
+{
+  const value = 2; // 上と同じ変数名で初期化しているが、スコープが別になるためエラーにならない。
+}
+```
+
+### `{` オブジェクトの分割代入 ![js](.gitbook/assets/js.svg)
+
+オブジェクトの分割代入に用いられる記号です。
+
+```javascript
+const object = { a: 1, b: 2, c: 3, d: 4 };
+const { a, b, ...rest } = object; // 分割代入
+console.log(a, b, rest); // 1 2 { c: 3, d: 4 }
+
+function func({ a, b, ...rest }) { // 分割代入
+  console.log(a, b, rest);
+}
+func(object); // 1 2 { c: 3, d: 4 }
+```
+
 ### `|` ビット論理和 ![js](.gitbook/assets/js.svg)
 
 左の値と右の値でどちらのビットが1である位置のビットを1に します。
