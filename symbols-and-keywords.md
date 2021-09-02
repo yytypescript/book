@@ -683,7 +683,7 @@ console.log(a ^ b); // 00000100
 const hyakuman = 1_000_000;
 ```
 
-### ````` テンプレートリテラル ![js](.gitbook/assets/js.svg)
+### \`\`\`\`\` テンプレートリテラル ![js](.gitbook/assets/js.svg)
 
 テンプレートリテラル\(テンプレート文字列\)の前後に置かれる記号です。
 
@@ -734,6 +734,16 @@ const id3 = true; // ERROR
 const a = 1; // 00000001
 console.log(~a); // 11111110
 // 出力: -2
+```
+
+### `~~` Double Tilde ![js](.gitbook/assets/js.svg)
+
+ビット否定演算子を2つ重ねたもので、小数点以下を消し去る計算をするイディオムです。JavaScriptにこういう演算子があるわけではなく慣習的なものです。double tildeの計算結果は、**正の数**に対してのみ`Math.floor`と同じものになります。
+
+```javascript
+~~1.5; // 1
+~~(-1.5); // -1
+Math.floor(-1.5); // -2
 ```
 
 ### `as` 型アサーション ![](.gitbook/assets/ts.svg)
