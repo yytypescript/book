@@ -1,6 +1,8 @@
 # 索引:記号とキーワード
 
-ここではJavaScriptとTypeScriptの記号やキーワードから、その意味を調べられます。TypeScriptのコードを読んでいて知らない記号やキーワードに出くわしたら、ここからその意味や使い方を調べる手がかりにしてください。
+JavaScriptやTypeScriptのコードには`?.`のような記号や`as`のようなキーワードが使われます。こういった記号やキーワードはGoogleで検索しづらく、意味を調べるのは難しいものです。
+
+この索引は、JavaScriptとTypeScriptの記号やキーワードから、その名前や意味を調べられるようにするためのものです。コードを読んでいて未知の記号やキーワードに出くわしたら、その意味や使い方を調べる手がかりにしてください。
 
 ここで扱う記号とキーワードには、JavaScript由来のもの、つまり、JavaScriptとTypeScriptに共通して使えるものと、TypeScriptでのみ使えるものを併記しています。JavaScript由来のものには![js](.gitbook/assets/js.svg)のマークを、TypeScript固有のものには![TS](.gitbook/assets/ts.svg)マークを表示しています。
 
