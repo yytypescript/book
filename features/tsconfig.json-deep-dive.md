@@ -854,7 +854,9 @@ const user3: User = {
 [ 'name' ]
 ```
 
-この差異が意図しない実行時エラーを生むことがあります。このオプションを有効にすると `interface, type` でオプション修飾子を持つキーはその値がキー自体を持たないようにしなければなりません。先程の例では
+この差異が意図しない実行時エラーを生むことがあります。意図する値が設定されていれば\(この場合 `'India' | 'China'` \) `nationality` は `Object.keys()` に含まれるべきですが `undefined` のときは結局その先で値の存在チェックが必要になります。
+
+このオプションを有効にすると `interface, type` でオプション修飾子を持つキーはその値がキー自体を持たないようにしなければなりません。先程の例では `undefined` を代入した `user2` で次のようなエラーが発生します。
 
 ```typescript
 TS2322: Type 'undefined' is not assignable to type '"India" | "China"'.
@@ -862,8 +864,6 @@ TS2322: Type 'undefined' is not assignable to type '"India" | "China"'.
 nationality: undefined
 ~~~~~~~~~~~
 ```
-
-と `undefined` を代入した `user2` を修正するように指摘を受けます。
 
 どうしてもキーに `undefined` も指定したい場合はオプション修飾子に加えて `undefined` のユニオン型を付加してください。
 
