@@ -4,9 +4,7 @@ JavaScriptでは関数は第一級オブジェクトです。よって変数に�
 
 ## 関数の宣言
 
-関数の宣言は主に3とおりの方法があります。次の3つはすべて同じ関数`increment()`を宣言しています。
-
-### 名前付き関数\(Normal Functions\)
+TypeScriptでは次のように関数宣言をすることで引数と戻り値の型を指定できます。
 
 ```typescript
 function increment(num: number): number {
@@ -14,86 +12,55 @@ function increment(num: number): number {
 }
 ```
 
-### 匿名関数\(Anonymous Functions\)
+引数の型指定を省略した場合は `any` 型として扱われます。
 
 ```typescript
-const increment = function(num: number): number {
+// Parameter 'num' implicitly has an 'any' type.
+function increment(num): number {
   return num + 1;
-};
+}
 ```
 
-### 匿名かつアロー関数\(Arrow Functions\)
+引数の型は TSConfig の `noImplicitAny` を `true` に設定することで指定を必須にすることができます。
 
 ```typescript
-const increment = (num: number): number => {
+// TypeError: Parameter 'num' implicitly has an 'any' type
+function increment(num): number {
   return num + 1;
-};
+}
 ```
 
-本書では関数はすべて名前付き関数での記述となっています。
+戻り値の型を省略した場合はコンパイラがコードから自動で型を推論してくれます。
 
-匿名かつアロー関数は、1行で戻り値を返却できる場合はさらに短縮することができます。
+```typescript
+function increment(num: number) {
+  return num + 1;
+}
 
-### 匿名かつアロー関数1行版
+// TypeError: Type 'number' is not assignable to type 'string'.
+const value: string = increment(1);
+```
+
+## アロー関数
+
+アロー関数でも型指定の方法は関数宣言と同様です。
 
 ```typescript
 const increment = (num: number): number => num + 1;
 ```
 
-このときは`return`を**書いてはいけない**ので注意してください。1行と書きましたが、厳密にはステートメントがひとつであれば改行しても問題ありません。
-
-さらに、引数が1個である場合は\(\)も省略できます。
-
-### 匿名かつアロー関数1行かつ括弧省略版
+アロー関数で括弧を省略した記述をした場合には、**引数と戻り値に型を指定できない**ので注意してください。
 
 ```typescript
 const increment = num => num + 1;
 ```
 
-ただし、これができるのは引数が1個のときのみで、0個のときや複数あるときはできません。  
-また、このときは引数と戻り値に対して**型をつけることができません**。
-
-アロー関数の1行版でオブジェクトリテラルを返したい時はそのまま返すことができません。
+また`noImplicitAny`を `true` に設定している場合は、引数の型指定が必須となるため括弧を省略したアロー関数の記述自体が出来なくなります。
 
 ```typescript
-const func = () => {x: 1};
-
-console.log(func());
-// -> undefined
+// TypeError: Parameter 'num' implicitly has an 'any' type
+const increment = num => num + 1;
 ```
-
-このときはオブジェクトリテラルを\(\)で括ってください。
-
-```typescript
-const func = () => ({x: 1});
-
-console.log(func());
-// -> { x: 1 }
-```
-
-### Generator
-
-Generatorを使用した関数はアロー関数での表記ではなく、必ず`function*() {}`と書く必要があります。次は可能なGeneratorの記述方法です。
-
-```typescript
-function* generatorFunction1() {
-  // ...
-};
-
-const generatorFunction2 = function* () {
-  // ...
-};
-
-class GeneratorSample {
-  public* generatorFunction3() {
-    // ...
-  }
-}
-```
-
-Generatorは反復可能\(`Iterable<T>`\)な反復子\(`Iterator<T>`\)であるインターフェース`IterableIterator<T>`を実装したクラスのオブジェクトのことです。条件を満たしたクラスはGenerator関数の中で`yield`キーワードを使えます。`yield`は呼ばれたときに一度その値を呼び出し元へ返却し、次に呼ばれたときはその続きから処理を開始します。
-
-`Promise`が一般化する以前、非同期処理を代わりに担当する目的でGeneratorが使われていたことはありますが、前述の`Promise`に加えて`async / await`が一般的に使われるようになってから非同期処理の目的でGeneratorを使う機会は減りました。現在でも大量のデータを取得したいときに一度ではなく、小出しに取得したいときにGeneratorは使い道があります。
 
 ## `this`
 
