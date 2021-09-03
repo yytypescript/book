@@ -98,7 +98,8 @@ function union(): Beast | Bird {
 
 const creature: Beast | Bird = union();
 
-creature.
+creature.legs;
+creature.alive();
 ```
 
 するとこのユニオン型を返す関数を受けた定数`creature`は`Beast`と`Bird`が**共に持つプロパティ、メソッド**を呼び出せます。つまりこの場合`creature.legs`と`creature.alive()`を使えます。
