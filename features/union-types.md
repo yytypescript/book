@@ -55,7 +55,14 @@ string | number[]
 
 ## TypeScriptはどう解釈するか
 
-上記の関数`union()`の戻り値を受けた定数`numOrFalse`は`number`型と`boolean`型の**どちらもが持っているメソッド、プロパティ**を呼び出せます。
+次の関数`union()`の戻り値を受けた変数`numOrFalse`は`number`型と`boolean`型の**どちらもが持っているメソッド、プロパティ**を呼び出せます。
+
+```typescript
+function union(): number | false {
+  return false;
+}
+const numOrFalse: number | false = union();
+```
 
 次のようなクラス`Beast`と`Bird`があるとします。
 
