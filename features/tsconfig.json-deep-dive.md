@@ -677,10 +677,6 @@ const area: Area = {
 };
 ```
 
-### `alwaysStrict`
-
-**リリースされたバージョン: 2.1**
-
 ### `useUnknownInCatchVariables`
 
 #### リリースされたバージョン: 4.4
@@ -762,9 +758,11 @@ try {
 
 また、この制限を緩くしたい。つまり `unknown` 型ではなく `any` 型にしたいのであれば補足した値に対し `any` 型を明記してください。
 
-`'use strict'`を各ファイルの先頭に付加します。
+### `alwaysStrict`
 
-## Additional Checks
+**リリースされたバージョン: 2.1**
+
+`'use strict'`を各ファイルの先頭に付加します。
 
 ### `noUnusedLocals`
 
@@ -817,6 +815,57 @@ function add(n1: number, n2: number, _n3: number): number {
   return n1 + n2;
 }
 ```
+
+### `exactOptionalPropertyTypes`
+
+#### リリースされたバージョン: 4.4
+
+今までオプション修飾子は値を設定しないことに加えて `undefined` を意図的に設定することができました。
+
+```typescript
+interface User {
+  name: string;
+  nationality?: 'India' | 'China';
+}
+
+const user1: User = {
+  name: 'Srinivasa Aiyangar Ramanujan',
+  nationality: 'India'
+};
+
+const user2: User = {
+  name: 'Sergei Vasilevich Rachmaninov'
+  nationality: undefined
+};
+
+const user3: User = {
+  name: 'Yekaterina II Alekseyevna',
+};
+```
+
+値が未定義であることと値が `undefined` であることは厳密には動作が異なります。例えば  `Object.keys()` は最たる例で、上記の `user1, user2, user3` にそれぞれ `Object.keys()` を適用すれば結果は次のようになります。
+
+```typescript
+// user1
+[ 'name', 'nationality' ]
+// user2
+[ 'name', 'nationality' ]
+// user3
+[ 'name' ]
+```
+
+この差異が意図しない実行時エラーを生むことがあります。このオプションを有効にすると `interface, type` でオプション修飾子を持つキーはその値がキー自体を持たないようにしなければなりません。先程の例では
+
+```typescript
+TS2322: Type 'undefined' is not assignable to type '"India" | "China"'.
+
+nationality: undefined
+~~~~~~~~~~~
+```
+
+と `undefined` を代入した `user2` を修正するように指摘を受けます。
+
+どうしてもキーに `undefined` も指定したい場合はオプション修飾子に加えて `undefined` のユニオン型を付加してください。
 
 ### `noImplicitReturns`
 
@@ -1187,55 +1236,4 @@ console.log(butterfly.fr);
 ```
 
 このようにインデックス型へのドット記法でのアクセスが禁止されます。
-
-### `exactOptionalPropertyTypes`
-
-#### リリースされたバージョン: 4.4
-
-今までオプション修飾子は値を設定しないことに加えて `undefined` を意図的に設定することができました。
-
-```typescript
-interface User {
-  name: string;
-  nationality?: 'India' | 'China';
-}
-
-const user1: User = {
-  name: 'Srinivasa Aiyangar Ramanujan',
-  nationality: 'India'
-};
-
-const user2: User = {
-  name: 'Sergei Vasilevich Rachmaninov'
-  nationality: undefined
-};
-
-const user3: User = {
-  name: 'Yekaterina II Alekseyevna',
-};
-```
-
-値が未定義であることと値が `undefined` であることは厳密には動作が異なります。例えば  `Object.keys()` は最たる例で、上記の `user1, user2, user3` にそれぞれ `Object.keys()` を適用すれば結果は次のようになります。
-
-```typescript
-// user1
-[ 'name', 'nationality' ]
-// user2
-[ 'name', 'nationality' ]
-// user3
-[ 'name' ]
-```
-
-この差異が意図しない実行時エラーを生むことがあります。このオプションを有効にすると `interface, type` でオプション修飾子を持つキーはその値がキー自体を持たないようにしなければなりません。先程の例では
-
-```typescript
-TS2322: Type 'undefined' is not assignable to type '"India" | "China"'.
-
-nationality: undefined
-~~~~~~~~~~~
-```
-
-と `undefined` を代入した `user2` を修正するように指摘を受けます。
-
-どうしてもキーに `undefined` も指定したい場合はオプション修飾子に加えて `undefined` のユニオン型を付加してください。
 
