@@ -709,6 +709,17 @@ type StringKeysAndStringValues = {
 
 {% page-ref page="features/type-aliases.md" %}
 
+### `[]` 配列型 ![ts](.gitbook/assets/ts.svg)
+
+配列型を表現するのに用いられる記号です。
+
+```typescript
+let names: string[];
+type FooList = Foo[];
+```
+
+{% page-ref page="features/array.md" %}
+
 ### `\` 文字列エスケープシーケンス ![js](.gitbook/assets/js.svg)
 
 文字列のエスケープシーケンスの開始に用いられる記号です。
