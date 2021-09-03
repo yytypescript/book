@@ -342,7 +342,7 @@ if (shouldCallPolice()) {
 
 ### `strict`
 
-このオプションは**TypeScript4.3時点で**次の7個のオプションをすべて有効にしていることと同じです。スクラッチから開発するのであれば有効にしておいて差し支えないでしょう。
+このオプションは**TypeScript4.4時点で**次の7個のオプションをすべて有効にしていることと同じです。スクラッチから開発するのであれば有効にしておいて差し支えないでしょう。
 
 * noImplicitAny
 * strictNullChecks
@@ -351,6 +351,7 @@ if (shouldCallPolice()) {
 * strictPropertyInitialization
 * noImplicitThis
 * alwaysStrict
+* useUnknownInCatchVariables
 
 この説明にTypeScriptのバージョンが明記されているのは、今後のバージョンで**オプションが追加または廃止されることがありうる**からです。より安定したオプションを設定したい場合は`strict`ではなく個々のオプションを有効にしてください。このオプションを有効にして個々のオプションを無効にした場合個々の設定が優先されます。
 
@@ -679,6 +680,87 @@ const area: Area = {
 ### `alwaysStrict`
 
 **リリースされたバージョン: 2.1**
+
+### `useUnknownInCatchVariables`
+
+#### リリースされたバージョン: 4.4
+
+JavaScript はいかなる値も例外として投げることができます。そのため補足した値は `any` 型でした。
+
+```typescript
+// case 1
+try {
+  throw new Error();
+} catch (err) {
+  // err is any
+}
+
+// case 2
+try {
+  throw 'This is an error!';
+} catch (err) {
+  // err is any
+}
+
+// case 3
+try {
+  throw undefined;
+} catch (err) {
+  // err is any
+}
+```
+
+この混沌は TypeScript4.0 でようやく整理されることとなりました。補足した値に対して `unknown` 型を明記することによって補足した値の型はわからないものの型安全を獲得できるようになりました。
+
+```typescript
+// case 1
+try {
+  throw new Error();
+} catch (err) {
+  // err is any
+}
+
+// case 2
+try {
+  throw 'This is an error!';
+} catch (err: unknown) {
+  // err is unknown
+}
+
+// case 3
+try {
+  throw undefined;
+} catch (err: unknown) {
+  // err is any
+}
+```
+
+今回のオプションはこの機能を常時有効にするものです。例外が補足した値は型の明記をすることなくすべてが `unknown` 型として解釈されるようになります。
+
+```typescript
+// case 1
+try {
+  throw new Error();
+} catch (err) {
+  // err is unknown
+}
+
+// case 2
+try {
+  throw 'This is an error!';
+} catch (err) {
+  // err is unknown
+}
+
+// case 3
+try {
+  throw undefined;
+} catch (err) {
+  // err is unknown
+}
+```
+
+また、この制限を緩くしたい。つまり `unknown` 型ではなく `any` 型にしたいのであれば補足した値に対し `any` 型を明記してください。
 
 `'use strict'`を各ファイルの先頭に付加します。
 
@@ -1105,4 +1187,55 @@ console.log(butterfly.fr);
 ```
 
 このようにインデックス型へのドット記法でのアクセスが禁止されます。
+
+### `exactOptionalPropertyTypes`
+
+#### リリースされたバージョン: 4.4
+
+今までオプション修飾子は値を設定しないことに加えて `undefined` を意図的に設定することができました。
+
+```typescript
+interface User {
+  name: string;
+  nationality?: 'India' | 'China';
+}
+
+const user1: User = {
+  name: 'Srinivasa Aiyangar Ramanujan',
+  nationality: 'India'
+};
+
+const user2: User = {
+  name: 'Sergei Vasilevich Rachmaninov'
+  nationality: undefined
+};
+
+const user3: User = {
+  name: 'Yekaterina II Alekseyevna',
+};
+```
+
+値が未定義であることと値が `undefined` であることは厳密には動作が異なります。例えば  `Object.keys()` は最たる例で、上記の `user1, user2, user3` にそれぞれ `Object.keys()` を適用すれば結果は次のようになります。
+
+```typescript
+// user1
+[ 'name', 'nationality' ]
+// user2
+[ 'name', 'nationality' ]
+// user3
+[ 'name' ]
+```
+
+この差異が意図しない実行時エラーを生むことがあります。このオプションを有効にすると `interface, type` でオプション修飾子を持つキーはその値がキー自体を持たないようにしなければなりません。先程の例では
+
+```typescript
+TS2322: Type 'undefined' is not assignable to type '"India" | "China"'.
+
+nationality: undefined
+~~~~~~~~~~~
+```
+
+と `undefined` を代入した `user2` を修正するように指摘を受けます。
+
+どうしてもキーに `undefined` も指定したい場合はオプション修飾子に加えて `undefined` のユニオン型を付加してください。
 
