@@ -8,7 +8,7 @@ JavaScriptやTypeScriptのコードには`?.`のような記号や`as`のよう�
 
 ## 記号とキーワード
 
-### `!` 論理否定演算子 ![js](.gitbook/assets/js.svg)
+### `!` 論理否定演算子 ![js](.gitbook/assets/js.svg)（[Logical NOT](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Logical_NOT)）
 
 
 真値と偽値を反転します。
