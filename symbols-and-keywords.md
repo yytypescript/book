@@ -8,7 +8,8 @@ JavaScriptやTypeScriptのコードには`?.`のような記号や`as`のよう�
 
 ## 記号とキーワード
 
-### `!` 論理否定演算子 ![js](.gitbook/assets/js.svg)
+### `!` 論理否定演算子 ![js](.gitbook/assets/js.svg)（[Non-null assertion operator](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator)）
+
 
 真値と偽値を反転します。
 
@@ -911,4 +912,3 @@ console.log(typeof 123); // "number"
 変数から型を抽出する演算子です。
 
 {% page-ref page="features/type-operators.md" %}
-
