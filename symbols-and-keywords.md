@@ -8,12 +8,12 @@ JavaScriptやTypeScriptのコードには`?.`のような記号や`as`のよう�
 
 ## 記号とキーワード
 
-### `!` 論理否定演算子 ![js](.gitbook/assets/js.svg)（[Non-null assertion operator](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator)）
+### `!` 論理否定演算子 ![js](.gitbook/assets/js.svg)
 
 
 真値と偽値を反転します。
 
-### `!` 非Nullアサーション ![ts](.gitbook/assets/ts.svg)
+### `!` 非Nullアサーション ![ts](.gitbook/assets/ts.svg)（[Non-null assertion operator](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator)）
 
 値がnullやundefinedでないことを宣言し、 コンパイラーに値を非Nullとして解釈させます。
 
