@@ -64,7 +64,7 @@
 ## 改訂版 <a id="next"></a>
 
 * [値・型・変数](next/values-types-variables/README.md)
-  * [🟡 数値型\(number\)](next/values-types-variables/number.md)
+  * [数値型\(number\) 🟡](next/values-types-variables/number.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
