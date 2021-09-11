@@ -61,10 +61,10 @@
   * [配列から型を生成する](tips/generates-type-from-array.md)
 * [索引:記号とキーワード](symbols-and-keywords.md)
 
-## 改訂版
+## 改訂版 <a id="next"></a>
 
-* [値・型・変数](gai-ding-ban/zhi-xing-bian-shu/README.md)
-  * [数値型\(number\)](gai-ding-ban/zhi-xing-bian-shu/shu-zhi-xing-number.md)
+* [値・型・変数](next/values-types-variables/README.md)
+  * [数値型\(number\)](next/values-types-variables/number.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
