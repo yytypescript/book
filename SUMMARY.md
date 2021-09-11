@@ -67,7 +67,7 @@
   * [値・型・変数](next/reference/values-types-variables/README.md)
     * [変数 \(Variables\)](next/reference/values-types-variables/variables/README.md)
       * [変数宣言 \(Variable Declaration\)](next/reference/values-types-variables/variables/variable-declaration.md)
-      * [Var's Problems](next/reference/values-types-variables/variables/vars-problems.md)
+      * [varとその問題点](next/reference/values-types-variables/variables/vars-problems.md)
       * [Type Annotation](next/reference/values-types-variables/variables/type-annotation.md)
       * [Type Inference](next/reference/values-types-variables/variables/type-inference.md)
     * [Primitive Types](next/reference/values-types-variables/primitive-types/README.md)
