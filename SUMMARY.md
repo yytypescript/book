@@ -74,7 +74,7 @@
     * [プリミティブ型 \(Primitive Types\)](next/reference/values-types-variables/primitive-types/README.md)
       * [プリミティブ型の基礎](next/reference/values-types-variables/primitive-types/primitive-types-introduction.md)
       * [論理型\(Boolean Type\)](next/reference/values-types-variables/primitive-types/boolean.md)
-      * [数値型\(number\) 🟡](next/reference/values-types-variables/primitive-types/number.md)
+      * [数値型\(number\)](next/reference/values-types-variables/primitive-types/number.md)
       * [String](next/reference/values-types-variables/primitive-types/string.md)
       * [Undefined](next/reference/values-types-variables/primitive-types/undefined.md)
       * [Null](next/reference/values-types-variables/primitive-types/null.md)
