@@ -10,7 +10,3 @@ TODO
 
 TODO
 
-## Booleanラッパークラス
-
-TODO
-
