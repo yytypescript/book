@@ -1,6 +1,6 @@
 # 変数宣言 \(Variable Declaration\)
 
-JavaScriptの変数宣言には `let`、 `const` 、`var`の3種類の宣言方法があります。
+JavaScriptの変数宣言\(variable declaration\)には `let`、 `const` 、`var`の3種類の宣言方法があります。
 
 `let`と`const`は、`var`における問題を解消するためにES2015で追加された構文です。これからJavaScriptを書く際は、`let`と`const`の2つだけを使うようにすると良いでしょう。
 
@@ -46,6 +46,4 @@ y = 1; // Uncaught TypeError: Assignment to constant variable.
 初めて JavaScript を書く場合に、`let`と`const`のどちらの変数宣言を使えば良いか悩む場合があるかもしれません。
 
 基本は`const`で変数宣言をして必要な場合にのみ、`let`を使うのがオススメです。`const`で変数宣言することで再代入を禁止して、意図せず変数が書き換えらることを予防できるので、より安全なコードになります。
-
-## 
 
