@@ -1,2 +1,2 @@
-# Primitive Types
+# プリミティブ型 \(Primitive Types\)
 
