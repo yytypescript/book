@@ -63,6 +63,7 @@
 
 ## 改訂版 <a id="next"></a>
 
+* [改訂版について](next/nitsuite.md)
 * [読んで学ぶTypeScript](next/reference/README.md)
   * [値・型・変数](next/reference/values-types-variables/README.md)
     * [変数 \(Variables\)](next/reference/values-types-variables/variables/README.md)
