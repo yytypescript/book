@@ -70,7 +70,19 @@
     * [Type Annotation](next/values-types-variables/variables/type-annotation.md)
     * [Type Inference](next/values-types-variables/variables/type-inference.md)
   * [Primitive Types](next/values-types-variables/primitive-types/README.md)
+    * [Boolean](next/values-types-variables/primitive-types/boolean.md)
     * [数値型\(number\) 🟡](next/values-types-variables/primitive-types/number.md)
+    * [String](next/values-types-variables/primitive-types/string.md)
+    * [Undefined](next/values-types-variables/primitive-types/undefined.md)
+    * [Null](next/values-types-variables/primitive-types/null.md)
+    * [Symbol](next/values-types-variables/primitive-types/symbol.md)
+    * [Bigint](next/values-types-variables/primitive-types/bigint.md)
+    * [Type Coercion](next/values-types-variables/primitive-types/type-coercion.md)
+    * [Literal Types](next/values-types-variables/primitive-types/literal-types.md)
+  * [Any](next/values-types-variables/any.md)
+  * [Unknown](next/values-types-variables/unknown.md)
+  * [Optional Type](next/values-types-variables/optional-type.md)
+  * [Definite Assignment Assertion](next/values-types-variables/definite-assignment-assertion.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
