@@ -69,7 +69,8 @@
     * [Var's Problems](next/values-types-variables/variables/vars-problems.md)
     * [Type Annotation](next/values-types-variables/variables/type-annotation.md)
     * [Type Inference](next/values-types-variables/variables/type-inference.md)
-  * [数値型\(number\) 🟡](next/values-types-variables/number.md)
+  * [Primitive Types](next/values-types-variables/primitive-types/README.md)
+    * [数値型\(number\) 🟡](next/values-types-variables/primitive-types/number.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
