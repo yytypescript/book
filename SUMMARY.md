@@ -73,7 +73,7 @@
       * [型推論と動的型付けの違い](next/reference/values-types-variables/variables/difference-between-type-inference-and-dynamic-typing.md)
     * [プリミティブ型 \(Primitive Types\)](next/reference/values-types-variables/primitive-types/README.md)
       * [プリミティブ型の基礎](next/reference/values-types-variables/primitive-types/primitive-types-introduction.md)
-      * [Boolean](next/reference/values-types-variables/primitive-types/boolean.md)
+      * [論理型\(Boolean Type\)](next/reference/values-types-variables/primitive-types/boolean.md)
       * [数値型\(number\) 🟡](next/reference/values-types-variables/primitive-types/number.md)
       * [String](next/reference/values-types-variables/primitive-types/string.md)
       * [Undefined](next/reference/values-types-variables/primitive-types/undefined.md)
