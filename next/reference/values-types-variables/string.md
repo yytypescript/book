@@ -17,7 +17,7 @@ Javaなどの言語では、ダブルクォートで文字列リテラル\(Strin
 
 ```typescript
 'He said "madam, I\'m Adam."'
-"He said \"madam, I'm Adam\""
+"He said \"madam, I'm Adam.\""
 ```
 
 ダブルクオートとシングルクオートを使った文字列リテラルは、文字列の途中で改行できません。改行を入れたい場合は、`\n`などの改行シーケンスを入れる必要があります。
