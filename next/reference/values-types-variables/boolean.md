@@ -4,7 +4,7 @@ JavaScriptの論理型\(boolean type\)は、`true`と`false`の論理値から�
 
 ## 論理型リテラル
 
-JavaScriptの論理型リテラルは次のように書きます。
+JavaScriptの論理型リテラルは`true`または`false`を用いて次のように書きます。
 
 ```javascript
 const isOk = true;
