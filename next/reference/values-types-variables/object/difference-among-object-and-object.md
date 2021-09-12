@@ -1,2 +1,2 @@
-# Difference Among object, {} and Object
+# Difference among object, {} and Object
 

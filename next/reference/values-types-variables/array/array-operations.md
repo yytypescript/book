@@ -1,2 +1,2 @@
-# Array Operations
+# Array operations
 

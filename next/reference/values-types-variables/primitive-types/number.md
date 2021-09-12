@@ -1,2 +1,2 @@
-# 数値型 \(Number Type\)
+# 数値型 \(Number type\)
 

@@ -1,2 +1,2 @@
-# Properties of Objects
+# Properties of objects
 

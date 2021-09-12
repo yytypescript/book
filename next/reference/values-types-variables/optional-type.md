@@ -1,2 +1,2 @@
-# Optional Type
+# Optional type
 

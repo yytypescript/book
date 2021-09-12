@@ -1,2 +1,2 @@
-# Type Alias
+# Type alias
 

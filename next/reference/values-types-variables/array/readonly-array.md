@@ -1,2 +1,2 @@
-# Readonly Array
+# Readonly array
 

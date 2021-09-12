@@ -1,2 +1,2 @@
-# How To Access Tuple Items
+# How to access tuple items
 

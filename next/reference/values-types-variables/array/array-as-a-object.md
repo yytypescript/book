@@ -1,2 +1,2 @@
-# Array as a Object
+# Array as a object
 

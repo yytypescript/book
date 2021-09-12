@@ -1,2 +1,2 @@
-# Type Assertion \`as\`
+# Type assertion \`as\`
 

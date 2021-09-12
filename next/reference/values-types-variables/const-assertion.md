@@ -1,2 +1,2 @@
-# Const Assertion
+# Const assertion
 

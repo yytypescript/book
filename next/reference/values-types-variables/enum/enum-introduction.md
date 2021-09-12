@@ -1,2 +1,2 @@
-# Enum Introduction
+# Enum introduction
 

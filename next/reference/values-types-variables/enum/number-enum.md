@@ -1,2 +1,2 @@
-# Number Enum
+# Number enum
 

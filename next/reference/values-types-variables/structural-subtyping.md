@@ -1,2 +1,2 @@
-# Structural Subtyping
+# Structural subtyping
 

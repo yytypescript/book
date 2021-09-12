@@ -1,2 +1,2 @@
-# Destructuring Assignment from Array
+# Destructuring assignment from an array
 

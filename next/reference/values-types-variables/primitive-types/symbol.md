@@ -1,2 +1,2 @@
-# Symbol
+# Symbol type
 

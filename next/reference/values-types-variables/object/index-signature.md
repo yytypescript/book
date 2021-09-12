@@ -1,2 +1,2 @@
-# Index Signature
+# Index signature
 

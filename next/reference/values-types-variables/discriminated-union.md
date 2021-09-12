@@ -1,2 +1,2 @@
-# Discriminated Union
+# Discriminated union
 

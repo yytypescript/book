@@ -1,2 +1,2 @@
-# Bigint
+# Bigint type
 

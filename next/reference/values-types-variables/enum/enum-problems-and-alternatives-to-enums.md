@@ -1,2 +1,2 @@
-# Enum Problems And Alternatives to Enums
+# Enum problems and alternatives to enums
 

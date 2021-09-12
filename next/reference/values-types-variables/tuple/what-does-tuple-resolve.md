@@ -1,2 +1,2 @@
-# What Does Tuple Resolve?
+# What do tuples resolve?
 

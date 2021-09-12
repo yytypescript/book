@@ -1,2 +1,2 @@
-# Type Coercion
+# Type coercion
 

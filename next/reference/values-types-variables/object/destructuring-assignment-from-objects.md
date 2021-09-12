@@ -1,2 +1,2 @@
-# Destructuring Assignment from Objects
+# Destructuring assignment from objects
 

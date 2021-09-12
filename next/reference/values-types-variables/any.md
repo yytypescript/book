@@ -1,2 +1,2 @@
-# Any
+# Any type
 

@@ -1,2 +1,2 @@
-# String Enum
+# String enum
 

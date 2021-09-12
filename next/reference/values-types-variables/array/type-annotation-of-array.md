@@ -1,2 +1,2 @@
-# Type Annotation of Array
+# Type annotation of array
 

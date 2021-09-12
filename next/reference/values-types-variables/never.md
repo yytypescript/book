@@ -1,2 +1,2 @@
-# Never
+# Never type
 

@@ -1,2 +1,2 @@
-# Literal Types
+# Literal type
 

@@ -1,2 +1,2 @@
-# Array Literal
+# Array literal
 

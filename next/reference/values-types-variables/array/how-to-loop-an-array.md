@@ -1,2 +1,2 @@
-# How To Loop an Array
+# How to loop an array
 

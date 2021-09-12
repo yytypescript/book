@@ -1,2 +1,2 @@
-# Prototype-Based Programming
+# Prototype-based programming
 

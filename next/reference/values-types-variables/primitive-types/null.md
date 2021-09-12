@@ -1,2 +1,2 @@
-# Null
+# Null type
 

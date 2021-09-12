@@ -1,2 +1,2 @@
-# Object Literal
+# Object literal
 
