@@ -75,7 +75,7 @@
     * [論理型 \(Boolean type\)](next/reference/values-types-variables/boolean.md)
     * [数値型 \(Number type\)](next/reference/values-types-variables/number/README.md)
       * [小数計算の誤差](next/reference/values-types-variables/number/decimal-calculation-error.md)
-    * [String type](next/reference/values-types-variables/string.md)
+    * [文字列型 \(String type\)](next/reference/values-types-variables/string.md)
     * [Undefined type](next/reference/values-types-variables/undefined.md)
     * [Null type](next/reference/values-types-variables/null.md)
     * [Symbol type](next/reference/values-types-variables/symbol.md)
