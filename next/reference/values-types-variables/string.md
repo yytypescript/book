@@ -36,7 +36,13 @@ TODO
 
 ## 文字列の型注釈
 
-TODO
+TypeScriptの文字列型の型注釈は`string`を用います。
+
+```typescript
+const message: string = "Hello";
+```
+
+名前がよく似た型に`String`型がありますが、`string`とは異なるので注意してください。
 
 ## 文字列結合
 
