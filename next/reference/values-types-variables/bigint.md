@@ -4,11 +4,13 @@ JavaScriptのbigint型は、数値型よりも大きな整数を扱えるプリ�
 
 ## bigint型リテラル
 
-bigint型のリテラルは整数値の末尾に`n`をつけて書きます。
+JavaScriptのbigint型のリテラルは整数値の末尾に`n`をつけて書きます。
 
 ```javascript
 const x = 100n;
 ```
+
+bigintリテラルをTypeScriptで用いるには、コンパイラーオプションのtargetをes2020以上にする必要があります。
 
 ## bigint型の型注釈
 
@@ -17,6 +19,17 @@ TypeScriptでbigint型を型注釈するには、`bigint`を用います。
 ```typescript
 const x: bigint = 100n;
 ```
+
+## BigInt関数
+
+bigint型はBigInt関数を使って作ることができます。BigInt関数は第1引数に数値もしくは文字列を渡します。
+
+```javascript
+const x = BigInt(100);
+const y = BigInt("9007199254740991");
+```
+
+TypeScriptでBigInt関数を用いるには、コンパイラーオプションのlibをes2020以上にする必要があります。
 
 ## bigint型を数値型と計算する
 
