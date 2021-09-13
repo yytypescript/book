@@ -83,7 +83,7 @@
     * [bigint型](next/reference/values-types-variables/bigint.md)
     * [型強制 \(Type coercion\)](next/reference/values-types-variables/type-coercion.md)
     * [リテラル型 \(Literal type\)](next/reference/values-types-variables/literal-types.md)
-    * [Any type](next/reference/values-types-variables/any.md)
+    * [any型](next/reference/values-types-variables/any.md)
     * [Unknown type](next/reference/values-types-variables/unknown.md)
     * [Optional type](next/reference/values-types-variables/optional-type.md)
     * [Definite assignment assertion](next/reference/values-types-variables/definite-assignment-assertion.md)

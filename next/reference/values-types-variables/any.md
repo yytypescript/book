@@ -1,2 +1,2 @@
-# Any type
+# any型
 
