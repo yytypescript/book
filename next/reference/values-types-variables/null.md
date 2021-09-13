@@ -1,16 +1,12 @@
 # null型
 
-値がないことを示す値です。他言語の`null`のような役割は`undefined`が担っていることが多く、こちらは意図的に値を指定しないことを強調できます。
+JavaScriptのnullは値がないことを示す値です。
 
 ## nullリテラル
 
 TODO
 
 ## nullの型注釈
-
-TODO
-
-## nullとundefinedの違い
 
 TODO
 
