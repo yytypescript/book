@@ -76,7 +76,7 @@
     * [数値型 \(Number type\)](next/reference/values-types-variables/number/README.md)
       * [小数計算の誤差](next/reference/values-types-variables/number/decimal-calculation-error.md)
     * [文字列型 \(String type\)](next/reference/values-types-variables/string.md)
-    * [Null type](next/reference/values-types-variables/null.md)
+    * [null型](next/reference/values-types-variables/null.md)
     * [undefined型](next/reference/values-types-variables/undefined.md)
     * [Symbol type](next/reference/values-types-variables/symbol.md)
     * [Bigint type](next/reference/values-types-variables/bigint.md)
@@ -122,6 +122,7 @@
     * [Type assertion \`as\`](next/reference/values-types-variables/type-assertion-as.md)
     * [Const assertion](next/reference/values-types-variables/const-assertion.md)
     * [Never type](next/reference/values-types-variables/never.md)
+    * [typeof演算子 \(Typeof operator\)](next/reference/values-types-variables/typeof-operator.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 

@@ -1,2 +1,2 @@
-# Null type
+# null型
 
