@@ -1,2 +1,2 @@
-# Array literal
+# 配列リテラル \(Array literal\)
 

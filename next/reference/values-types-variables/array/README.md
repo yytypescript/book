@@ -1,2 +1,2 @@
-# Array
+# 配列 \(Array\)
 
