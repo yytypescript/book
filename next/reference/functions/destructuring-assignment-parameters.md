@@ -1,0 +1,2 @@
+# destructuring assignment parameters
+
