@@ -80,7 +80,7 @@
     * [undefined型](next/reference/values-types-variables/undefined.md)
     * [undefinedとnullの違い](next/reference/values-types-variables/undefined-vs-null.md)
     * [シンボル型 \(Symbol type\)](next/reference/values-types-variables/symbol.md)
-    * [Bigint type](next/reference/values-types-variables/bigint.md)
+    * [bigint型](next/reference/values-types-variables/bigint.md)
     * [型強制 \(Type coercion\)](next/reference/values-types-variables/type-coercion.md)
     * [Literal type](next/reference/values-types-variables/literal-types.md)
     * [Any type](next/reference/values-types-variables/any.md)

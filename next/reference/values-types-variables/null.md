@@ -4,11 +4,19 @@ JavaScriptのnullは値がないことを示す値です。
 
 ## nullリテラル
 
-TODO
+JavaScriptのnullリテラルは`null`です。
+
+```javascript
+const x = null;
+```
 
 ## nullの型注釈
 
-TODO
+TypeScriptでnull型を型注釈するには`null`を用います。
+
+```typescript
+const x: null = null;
+```
 
 ## typeof演算子の注意点
 
