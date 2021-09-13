@@ -69,7 +69,7 @@
     * [変数宣言: letとconst](next/reference/values-types-variables/variable-declaration.md)
     * [変数宣言の型注釈 \(Type annotation\)](next/reference/values-types-variables/type-annotation.md)
     * [varとその問題点](next/reference/values-types-variables/vars-problems.md)
-    * [型推論 \(Type inference\)](next/reference/values-types-variables/type-inference.md)
+    * [変数宣言の型推論 \(Type inference\)](next/reference/values-types-variables/type-inference.md)
     * [型推論と動的型付けの違い](next/reference/values-types-variables/difference-between-type-inference-and-dynamic-typing.md)
     * [プリミティブ型 \(Primitive types\)](next/reference/values-types-variables/primitive-types.md)
     * [論理型 \(Boolean type\)](next/reference/values-types-variables/boolean.md)
