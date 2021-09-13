@@ -1,0 +1,2 @@
+# Final/Sealed Class
+
