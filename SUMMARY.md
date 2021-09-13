@@ -93,7 +93,7 @@
       * [Readonly property](next/reference/values-types-variables/object/readonly-property.md)
       * [Index signature](next/reference/values-types-variables/object/index-signature.md)
       * [プロトタイプベース](next/reference/values-types-variables/object/prototype-based-programming.md)
-      * [Difference among object, {} and Object](next/reference/values-types-variables/object/difference-among-object-and-object.md)
+      * [object、Object、{}の違い](next/reference/values-types-variables/object/difference-among-object-and-object.md)
       * [Destructuring assignment from objects](next/reference/values-types-variables/object/destructuring-assignment-from-objects.md)
     * [Structural subtyping](next/reference/values-types-variables/structural-subtyping.md)
     * [Array](next/reference/values-types-variables/array/README.md)
