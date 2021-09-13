@@ -132,15 +132,15 @@
     * [control flow analysis and type guard](next/reference/statements/control-flow-analysis-and-type-guard.md)
   * [Functions](next/reference/functions/README.md)
     * [function declaration](next/reference/functions/function-declaration.md)
-    * [function declaration and hoisting](next/reference/functions/function-declaration-and-hoisting.md)
+    * [関数宣言と巻き上げ \(hoisting\)](next/reference/functions/function-declaration-and-hoisting.md)
     * [anonymous functions](next/reference/functions/anonymous-functions.md)
-    * [arrow functions](next/reference/functions/arrow-functions.md)
+    * [アロー関数 \(arrow functions\)](next/reference/functions/arrow-functions.md)
     * [function statements vs arrow functions](next/reference/functions/function-statements-vs-arrow-functions.md)
     * [IIFE](next/reference/functions/iife.md)
     * [callback functions](next/reference/functions/callback-functions.md)
     * [overload functions](next/reference/functions/overload-functions.md)
-    * [function is a value](next/reference/functions/function-is-a-value.md)
-    * [function is an object](next/reference/functions/function-is-an-object.md)
+    * [関数は値](next/reference/functions/function-is-a-value.md)
+    * [関数はオブジェクト](next/reference/functions/function-is-an-object.md)
     * [functions and local variables](next/reference/functions/functions-and-local-variables.md)
     * [void type](next/reference/functions/void-type.md)
     * [optional parameters](next/reference/functions/optional-parameters.md)
@@ -159,6 +159,8 @@
   * [Type reuse](next/reference/type-reuse.md)
   * [Generics](next/reference/generics.md)
   * [tsconfig](next/reference/tsconfig.md)
+  * [本書で扱わない](next/reference/dewanai/README.md)
+    * [Generator](next/reference/dewanai/generator.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
