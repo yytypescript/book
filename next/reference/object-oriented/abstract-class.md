@@ -1,2 +1,2 @@
-# Abstract Class
+# abstract class
 

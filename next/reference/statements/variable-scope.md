@@ -1,2 +1,2 @@
-# Variable scope
+# variable scope
 

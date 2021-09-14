@@ -1,2 +1,2 @@
-# 配列リテラル \(Array literal\)
+# 配列リテラル \(array literal\)
 

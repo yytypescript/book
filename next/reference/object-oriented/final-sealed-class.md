@@ -1,2 +1,2 @@
-# Final/Sealed Class
+# final/sealed class
 

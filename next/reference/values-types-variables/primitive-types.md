@@ -1,4 +1,4 @@
-# プリミティブ型 \(Primitive types\)
+# プリミティブ型 \(primitive types\)
 
 JavaScriptのデータ型は、プリミティブ型とオブジェクトの2つに分類されます。
 

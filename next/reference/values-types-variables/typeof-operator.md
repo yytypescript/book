@@ -1,4 +1,4 @@
-# typeof演算子 \(Typeof operator\)
+# typeof演算子 \(typeof operator\)
 
 JavaScriptの`typeof`演算子では値の型を調べることができます。
 

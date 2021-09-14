@@ -1,4 +1,4 @@
-# 判別可能なユニオン型 \(Discriminated union\)
+# 判別可能なユニオン \(discriminated union\)
 
 次のようなタイプエイリアスの`SuccessResponse, ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
 

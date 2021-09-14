@@ -1,4 +1,4 @@
-# 論理型 \(Boolean type\)
+# 論理型 \(boolean type\)
 
 JavaScriptの論理型\(boolean type\)は、`true`と`false`の論理値からなる型です。
 

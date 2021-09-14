@@ -1,4 +1,4 @@
-# 配列の分割代入 \(Destructuring assignment\)
+# 配列の分割代入 \(destructuring assignment\)
 
 配列は分割代入を使うことができます。
 

@@ -1,4 +1,4 @@
-# 文字列型 \(String type\)
+# 文字列型 \(string type\)
 
 ## 文字列リテラル
 

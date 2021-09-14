@@ -1,4 +1,4 @@
-# Readonly array
+# readonly array
 
 TODO: readonly T\[\]について説明する
 
