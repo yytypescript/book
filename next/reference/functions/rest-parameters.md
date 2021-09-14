@@ -12,7 +12,7 @@ function func(...params) {
 }
 ```
 
-残余引数は配列になります。
+受け取った残余引数は配列になります。
 
 ```javascript
 function func(...params) {
