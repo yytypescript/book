@@ -1,0 +1,2 @@
+# readonly modifier in classes
+
