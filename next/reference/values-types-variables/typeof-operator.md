@@ -2,7 +2,7 @@
 
 JavaScriptの`typeof`演算子では値の型を調べることができます。
 
-ここではJavaScriptのtypeof演算子を説明します。TypeScriptのtypeof型演算子については、typeof型演算子をご覧ください。
+ここではJavaScriptのtypeof演算子を説明します。TypeScriptのtypeof型演算子については、typeof型演算子の説明をご覧ください。
 
 {% page-ref page="../type-reuse/typeof-type-operator.md" %}
 
