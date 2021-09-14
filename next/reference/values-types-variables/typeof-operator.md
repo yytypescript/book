@@ -4,7 +4,7 @@ JavaScriptの`typeof`演算子では値の型を調べることができます�
 
 ここではJavaScriptのtypeof演算子を説明します。TypeScriptのtypeof型演算子については、typeof型演算子をご覧ください。
 
-TODO: 「typeof型演算子」へリンクする。
+{% page-ref page="../type-reuse/typeof-type-operator.md" %}
 
 ```javascript
 typeof true; //=> "boolean"

@@ -1,2 +1,22 @@
-# typeof type operator
+# typeof型演算子
+
+`typeof`は変数から型を抽出する演算子です。次は、変数`point`に`typeof`演算子を用いて、`Point`型を定義する例です。
+
+```typescript
+const point = { x: 135, y: 35 };
+type Point = typeof point;
+```
+
+このPoint型は次のような型になります。
+
+```typescript
+type Point = {
+    x: number;
+    y: number;
+}
+```
+
+ここで説明したのはTypeScriptのtypeof**型**演算子です。JavaScriptのtypeof演算子と同じ名前ですが、全く別のものなので注意してください。
+
+{% page-ref page="../values-types-variables/typeof-operator.md" %}
 
