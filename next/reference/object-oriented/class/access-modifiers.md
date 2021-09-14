@@ -11,7 +11,7 @@ JavaやPHPなどの言語では、フィールドやメソッドに`private`, `p
 
 アクセス修飾子を省略した場合は`public`になります。
 
-アクセス修飾子は、プロパティ、コンストラクタ、メソッドに宣言することができます。
+アクセス修飾子は、フィールド、コンストラクタ、メソッドに宣言することができます。
 
 ### `public`
 
@@ -19,7 +19,7 @@ JavaやPHPなどの言語では、フィールドやメソッドに`private`, `p
 
 ```typescript
 class Animal {
-  public name: string;  // プロパティにpublicアクセス修飾子
+  public name: string;  // フィールドにpublicアクセス修飾子
   public constructor(theName: string) { this.name = theName; } // コンストラクターにpublicアクセス修飾子
   public move(distanceInMeters: number) { // メソッドにpublicアクセス修飾子
     console.log(`${this.name} moved ${distanceInMeters}m.`); // publicアクセス修飾子である`this.name`を使用することが可能
