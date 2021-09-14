@@ -1,6 +1,6 @@
 # 残余引数/可変長引数 \(rest parameter\)
 
-通常の関数は引数の数が決まっています。JavaScriptでは引数の数に決まりがない関数も作れます。引数の個数が決まっていない引数のことを可変長引数\(variable length arguments, variadic arguments\)といいます。JavaScriptでは可変長引数は残余引数\(rest parameter\)とも呼びます。
+通常の関数は引数の数が決まっています。JavaScriptでは引数の数に決まりがない関数も作れます。引数の個数が決まっていない引数のことを可変長引数\(variable length arguments, variadic arguments\)といいます。JavaScriptでは可変長引数は残余引数\(rest parameter\)と呼びます。
 
 ## 残余引数の書き方
 
