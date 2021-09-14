@@ -50,48 +50,26 @@ function func(...params: number[]) {
 
 ## 配列を残余引数として渡す
 
-残余引数は最終的に配列として解釈されるからといって引数をまとめてひとつの配列として渡すことはできません。
+JavaScriptに組み込みのメソッドに`Math.max()`があります。これは、与えられた`number`型の引数の最大値を返却します。この関数は残余引数を要求します。
 
-```typescript
-average([1, 3, 5, 7, 9]);
+```javascript
+Math.max(1, 10, 100) //=> 100
 ```
 
-このように配列を直接渡してしまうと`average()`の関数内では要素数1の`number[][]`型が渡されたと解釈されます。もちろん`average()`の期待する引数の型は`number[]`型なのでこのコードを実行することはできません。配列を引数として渡したい場合は、後述のスプレッド構文を使うことで実現ができます。
+残余引数は、引数受取時には配列になりますが、関数呼び出しのときに配列にまとめて渡すことはできません。
 
 ```typescript
-average(...[1, 3, 5, 7, 9]);
+const scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const highest = Math.max(scores);
+// Argument of type 'number[]' is not assignable to parameter of type 'number'.(2345)
 ```
 
-## スプレッド構文 \(spread syntax\)
-
-JavaScriptに組み込みのメソッドとして存在する`Math.max()`は与えられた`number`型の引数の最大値を返却しますが引数として残余引数を要求します。上記のとおり配列をそのまま入れることができないので次のようなことができません。
+このように配列を直接渡してしまうと、`max`の関数内では引数ひとつの`number[][]`型が渡されたと解釈されます。`max`の期待する引数の型は`number[]`型なので、このコードは正しく動きません。配列を引数として渡したい場合は、スプレッド構文\(spread syntax\)を用います。スプレッド構文は`...`と書きます。
 
 ```typescript
-const scores: number[] = mathExamination();
-const max: number = Math.max(scores);
+const scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const highest = Math.max(...scores);
 ```
 
-この例は学校の数学の試験をイメージしています。学校であれば生徒の数は1年間でそう増減はしないので40人ぐらいの生徒なら力技でもなんとかなるかもしれません。
-
-```typescript
-Math.max(
-  scores[0],
-  scores[1],
-  scores[2],
-  scores[3],
-  scores[4],
-  scores[5],
-  scores[6],
-  ...
-);
-```
-
-書いている最中で力つきました。これは来年は描き直しが必要な上に、生徒が転入したり転校したりしてもコードを書き直す必要があります。このようなときはスプレッド構文を使って配列を引数の列に変換します。
-
-```typescript
-const scores: number[] = mathExamination();
-const max: number = Math.max(...scores);
-```
-
-残余引数もスプレッド構文もどちらも`...`と表記しますが片方は個々の引数を配列にし、もう片方は配列を個々の引数にします。
+残余引数もスプレッド構文も`...`と同じ表記ですが、スプレッド構文は配列を引数にバラすものです。
 
