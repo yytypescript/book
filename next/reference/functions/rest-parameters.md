@@ -64,7 +64,7 @@ const highest = Math.max(scores);
 // Argument of type 'number[]' is not assignable to parameter of type 'number'.(2345)
 ```
 
-このように配列を直接渡してしまうと、`max`の関数内では引数ひとつの`number[][]`型が渡されたと解釈されます。`max`の期待する余剰引数の型は`number[]`型なので、このコードは正しく動きません。配列を引数として渡したい場合は、スプレッド構文\(spread syntax\)を用います。スプレッド構文は`...`と書きます。
+このように配列を直接渡してしまうと、`max`の関数内では引数ひとつの`number[][]`型が渡されたと解釈されます。`max`の期待する余剰引数の型は`number[]`型なので、このコードは正しく動きません。配列を余剰引数に渡す場合は、スプレッド構文\(spread syntax\)を用います。スプレッド構文は`...`と書きます。
 
 ```typescript
 const scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
