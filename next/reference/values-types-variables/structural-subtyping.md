@@ -216,5 +216,7 @@ const data4: Data = source4.fetch();
 
 消えたのはInputSourceと、その継承を示す`extends InputSource`と`super();`だけです。このコードは正常なTypeScriptのコードとして動作します。
 
-## 
+## 関連情報
+
+{% page-ref page="../object-oriented/class/class-nominality.md" %}
 
