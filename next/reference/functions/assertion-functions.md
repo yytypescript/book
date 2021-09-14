@@ -1,2 +1,2 @@
-# assertion functions
+# アサーション関数 \(assertion functions\)
 

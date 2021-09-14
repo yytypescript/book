@@ -1,2 +1,2 @@
-# RORO pattern
+# ROROパターン
 

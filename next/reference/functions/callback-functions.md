@@ -1,2 +1,2 @@
-# callback functions
+# コールバック関数 \(callback functions\)
 

@@ -1,2 +1,2 @@
-# functions and local variables
+# 関数と変数スコープ
 
