@@ -1,2 +1,2 @@
-# Functions
+# 関数
 

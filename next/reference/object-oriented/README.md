@@ -1,2 +1,2 @@
-# Object-oriented
+# オブジェクト指向
 

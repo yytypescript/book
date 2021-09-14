@@ -1,2 +1,2 @@
-# Asynchronous
+# 非同期プログラミング
 

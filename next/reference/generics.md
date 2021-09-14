@@ -1,2 +1,2 @@
-# Generics
+# ジェネリクス \(generics\)
 
