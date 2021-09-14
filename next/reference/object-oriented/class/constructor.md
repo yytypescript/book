@@ -32,3 +32,7 @@ JavaScriptでコンストラクターに引数を渡す方法は、関数呼び�
 new Person("Alice");
 ```
 
+## 関連情報
+
+{% page-ref page="constructor-shorthand.md" %}
+
