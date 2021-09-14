@@ -162,6 +162,7 @@
       * [メソッド \(methods\)](next/reference/object-oriented/class/methods.md)
       * [フィールドのデフォルト値](next/reference/object-oriented/class/frudonodeforuto.md)
       * [アクセス修飾子 \(access modifiers\)](next/reference/object-oriented/class/access-modifiers.md)
+      * [constructor shorthand](next/reference/object-oriented/class/constructor-shorthand.md)
       * [readonly modifier in classes](next/reference/object-oriented/class/readonly-modifier-in-classes.md)
       * [class is an object](next/reference/object-oriented/class/class-is-an-object.md)
       * [static fields](next/reference/object-oriented/class/static-fields.md)
