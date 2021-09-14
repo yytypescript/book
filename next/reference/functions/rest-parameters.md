@@ -44,7 +44,7 @@ TypeScriptで残余引数に型注釈するには、配列の型を書きます�
 
 ```typescript
 function func(...params: number[]) {
-  console.log(params);
+  // ...
 }
 ```
 
@@ -90,7 +90,6 @@ Math.max(
 
 ```typescript
 const scores: number[] = mathExamination();
-
 const max: number = Math.max(...scores);
 ```
 
