@@ -1,2 +1,6 @@
-# interface
+# インターフェース \(interface\)
+
+JavaやPHPなどの言語ではクラスとは別に、インターフェースが定義できますが、JavaScriptにはそれに相当する構文がありません。一方、TypeScriptにはインターフェースがあります。
+
+
 
