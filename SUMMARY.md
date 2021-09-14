@@ -107,7 +107,6 @@
       * [配列の破壊的操作](next/reference/values-types-variables/array/array-operations.md)
       * [配列をループする方法](next/reference/values-types-variables/array/how-to-loop-an-array.md)
     * [タプル \(tuple\)](next/reference/values-types-variables/tuple/README.md)
-      * [Tuple introduction](next/reference/values-types-variables/tuple/tuple-introduction.md)
       * [What do tuples resolve?](next/reference/values-types-variables/tuple/what-does-tuple-resolve.md)
       * [How to access tuple items](next/reference/values-types-variables/tuple/how-to-access-tuple-items.md)
       * [Real-world use of tuples](next/reference/values-types-variables/tuple/real-world-use-of-tuples.md)
