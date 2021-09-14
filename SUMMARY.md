@@ -184,7 +184,7 @@
   * [Thread](next/reference/thread.md)
   * [型の再利用](next/reference/type-reuse/README.md)
     * [typeof型演算子](next/reference/type-reuse/typeof-type-operator.md)
-    * [keyof type operator](next/reference/type-reuse/keyof-type-operator.md)
+    * [keyof型演算子](next/reference/type-reuse/keyof-type-operator.md)
     * [utility types](next/reference/type-reuse/utility-types/README.md)
       * [Required](next/reference/type-reuse/utility-types/required.md)
       * [Readonly](next/reference/type-reuse/utility-types/readonly.md)
