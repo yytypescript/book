@@ -2,10 +2,6 @@
 
 JavaScriptの`typeof`演算子では値の型を調べることができます。
 
-ここではJavaScriptのtypeof演算子を説明します。TypeScriptのtypeof型演算子については、typeof型演算子の説明をご覧ください。
-
-{% page-ref page="../type-reuse/typeof-type-operator.md" %}
-
 ```javascript
 typeof true; //=> "boolean"
 typeof 0; //=> "number"
@@ -36,4 +32,8 @@ function isObject(value) {
   return value !== null && typeof value === "object";
 }
 ```
+
+ここで説明したのはJavaScriptのtypeof演算子です。TypeScriptのtypeof型演算子については、typeof型演算子の説明をご覧ください。
+
+{% page-ref page="../type-reuse/typeof-type-operator.md" %}
 
