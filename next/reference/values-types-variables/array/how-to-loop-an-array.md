@@ -1,4 +1,4 @@
-# 配列をループする方法
+# 🚧配列をループする方法
 
 TODO: for \(let i; i &lt; arr.length; i++\)
 

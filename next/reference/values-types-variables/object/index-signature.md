@@ -1,4 +1,4 @@
-# インデックス型 \(Index signature\)
+# 🚧インデックス型 \(Index signature\)
 
 オブジェクトのキーをあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこのインデックス型です。  
 プロパティがすべて`string`型であるようなオブジェクトのタイプエイリアスは以下です。
@@ -32,7 +32,7 @@ butterflies.ja;
 
 このチェックをより厳密にするオプションがtsconfig.jsonにあります。このオプションを有効にするとたとえプロパティがあるキーにアクセスしてもプロパティの型は`undefined`とのユニオン型であると解釈されるようになります。こちらについてはtsconfig.json Deep Diveのページをご覧ください。
 
-{% page-ref page="../../../../features/tsconfig.json-deep-dive.md" %}
+TODO: tsconfigへリンク
 
 ### インデックス型の制限
 

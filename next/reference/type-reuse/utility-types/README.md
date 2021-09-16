@@ -1,2 +1,4 @@
-# utility types
+# 🚧ユーティリティ型 \(utility type\)
+
+TODO: ユーティリティ型とは何なのか、簡単な説明を書く
 

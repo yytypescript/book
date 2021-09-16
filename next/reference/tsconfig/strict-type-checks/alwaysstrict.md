@@ -1,2 +1,2 @@
-# alwaysStrict
+# 🚧alwaysStrict
 

@@ -1,4 +1,4 @@
-# デフォルト引数 \(default parameter\)
+# 🚧デフォルト引数 \(default parameter\)
 
 引数を省略した時、原点との距離を求める代わりに点\(1, 2\)との距離を求めるといった変化球がきたとします。何も考えないとこのようになります。
 
@@ -81,4 +81,6 @@ async function distanceAync(p1: Point, p2: Point = await inverseAync(p1)): Promi
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
 ```
+
+TODO: 🚧デフォルト引数を指定すると型推論が効くことについて書く。
 

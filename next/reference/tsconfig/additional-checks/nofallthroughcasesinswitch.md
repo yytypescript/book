@@ -1,2 +1,2 @@
-# noFallthroughCasesInSwitch
+# 🚧noFallthroughCasesInSwitch
 

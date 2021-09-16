@@ -1,2 +1,2 @@
-# strictFunctionTypes
+# 🚧strictFunctionTypes
 

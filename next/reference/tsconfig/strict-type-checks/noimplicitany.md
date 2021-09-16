@@ -1,2 +1,2 @@
-# noImplicitAny
+# 🚧noImplicitAny
 

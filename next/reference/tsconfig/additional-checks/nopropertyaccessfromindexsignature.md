@@ -1,2 +1,2 @@
-# noPropertyAccessFromIndexSignature
+# 🚧noPropertyAccessFromIndexSignature
 
