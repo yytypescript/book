@@ -43,7 +43,7 @@ const u2: undefined = v1;
 
 変数同様、意図的に引数を`void`型にすることはほぼありませんが、後に登場するジェネリクスで必要になることがあります。
 
-{% page-ref page="../generics.md" %}
+{% page-ref page="../generics/" %}
 
 何もしない関数を作ります。
 
