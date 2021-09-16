@@ -154,7 +154,7 @@
     * [戻り値のthis型](next/reference/functions/return-this-type.md)
     * [型ガード関数 \(type guard function\)](next/reference/functions/type-guard-functions.md)
     * [アサーション関数 \(assertion functions\)](next/reference/functions/assertion-functions.md)
-  * [🚧非同期プログラミング](next/reference/asynchronous.md)
+  * [🚧非同期処理](next/reference/asynchronous.md)
   * [オブジェクト指向](next/reference/object-oriented/README.md)
     * [クラス \(class\)](next/reference/object-oriented/class/README.md)
       * [コンストラクター \(constructor\)](next/reference/object-oriented/class/constructor.md)
