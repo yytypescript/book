@@ -1,4 +1,4 @@
-# type-parameter-constraint
+# 型引数の制約
 
 TypeScriptではジェネリクスの型引数を特定の型に限定することができます。
 
