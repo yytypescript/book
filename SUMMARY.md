@@ -185,6 +185,7 @@
     * [🚧single process](next/reference/thread/single-process.md)
     * [🚧single thread](next/reference/thread/single-thread.md)
     * [🚧event loop and queue](next/reference/thread/event-loop-and-queue.md)
+    * [🚧blocking](next/reference/thread/blocking.md)
   * [🚧型の再利用](next/reference/type-reuse/README.md)
     * [typeof型演算子](next/reference/type-reuse/typeof-type-operator.md)
     * [keyof型演算子](next/reference/type-reuse/keyof-type-operator.md)
