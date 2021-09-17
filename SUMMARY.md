@@ -64,6 +64,13 @@
 ## 改訂版 <a id="next"></a>
 
 * [改訂版について](next/nitsuite.md)
+* [TypeScriptのあらまし](next/overview/README.md)
+  * [🚧TypeScriptの特徴](next/overview/features.md)
+  * [🚧JavaScriptはTypeScriptの一部](next/overview/javascript-is-typescript.md)
+  * [🚧TypeScript誕生の背景](next/overview/before-typescript.md)
+  * [🚧why-you-should-use-typescript](next/overview/why-you-should-use-typescript.md)
+  * [🚧static-type](next/overview/static-type.md)
+  * [🚧ECMAScript](next/overview/ecmascript.md)
 * [読んで学ぶTypeScript](next/reference/README.md)
   * [値・型・変数](next/reference/values-types-variables/README.md)
     * [変数宣言: letとconst](next/reference/values-types-variables/variable-declaration.md)

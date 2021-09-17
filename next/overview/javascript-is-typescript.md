@@ -1,0 +1,2 @@
+# 🚧JavaScriptはTypeScriptの一部
+
