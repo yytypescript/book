@@ -1,4 +1,4 @@
-# 🚧undefined型
+# undefined型
 
 JavaScriptのundefinedは未定義を表すプリミティブな値です。変数に値がセットされていないとき、戻り値が無い関数、オブジェクトに存在しないプロパティにアクセスしたとき、配列に存在しないインデックスでアクセスしたときなどに現れます。
 
@@ -30,5 +30,5 @@ const x: undefined = undefined;
 
 戻り値のない関数は`undefined`になりますが、TypeScriptで戻り値なしを型注釈で表現する場合、`undefined`ではなく`void`を用います。詳しくは関数の説明をご覧ください。
 
-TODO: 「戻り値のない関数\(void型\)」へリンクを入れる。
+{% page-ref page="../functions/void-type.md" %}
 

@@ -87,7 +87,7 @@
       * [小数計算の誤差](next/reference/values-types-variables/number/decimal-calculation-error.md)
     * [文字列型 \(string type\)](next/reference/values-types-variables/string.md)
     * [null型](next/reference/values-types-variables/null.md)
-    * [🚧undefined型](next/reference/values-types-variables/undefined.md)
+    * [undefined型](next/reference/values-types-variables/undefined.md)
     * [🚧undefinedとnullの違い](next/reference/values-types-variables/undefined-vs-null.md)
     * [シンボル型 \(symbol type\)](next/reference/values-types-variables/symbol.md)
     * [bigint型](next/reference/values-types-variables/bigint.md)
