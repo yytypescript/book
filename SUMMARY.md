@@ -98,7 +98,7 @@
       * [プリミティブ以外はすべてオブジェクト](next/reference/values-types-variables/object/non-primitives-are-objects.md)
       * [オブジェクトリテラル \(object literal\)](next/reference/values-types-variables/object/object-literal.md)
       * [オブジェクトのプロパティ](next/reference/values-types-variables/object/properties-of-objects.md)
-      * [🚧Type annotation of objects](next/reference/values-types-variables/object/type-annotation-of-objects.md)
+      * [🚧オブジェクトの型注釈](next/reference/values-types-variables/object/type-annotation-of-objects.md)
       * [オブジェクトのreadonlyプロパティ](next/reference/values-types-variables/object/readonly-property.md)
       * [🚧インデックス型 \(index signature\)](next/reference/values-types-variables/object/index-signature.md)
       * [プロトタイプベース](next/reference/values-types-variables/object/prototype-based-programming.md)
