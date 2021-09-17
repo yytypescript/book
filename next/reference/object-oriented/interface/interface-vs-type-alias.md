@@ -1,4 +1,4 @@
-# interface vs type alias
+# 🚧interface vs type alias
 
 TODO: インターフェイスとタイプエイリアスの違いについて書く
 
