@@ -92,7 +92,7 @@
     * [シンボル型 \(symbol type\)](next/reference/values-types-variables/symbol.md)
     * [bigint型](next/reference/values-types-variables/bigint.md)
     * [型強制 \(type coercion\)](next/reference/values-types-variables/type-coercion.md)
-    * [🚧リテラル型 \(literal type\)](next/reference/values-types-variables/literal-types.md)
+    * [リテラル型 \(literal type\)](next/reference/values-types-variables/literal-types.md)
     * [🚧any型](next/reference/values-types-variables/any.md)
     * [🚧unknown型](next/reference/values-types-variables/unknown.md)
     * [🚧any vs unknown](next/reference/values-types-variables/any-vs-unknown.md)

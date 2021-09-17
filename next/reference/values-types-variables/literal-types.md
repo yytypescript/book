@@ -1,4 +1,4 @@
-# 🚧リテラル型 \(literal type\)
+# リテラル型 \(literal type\)
 
 TypeScriptではプリミティブ型の特定の値だけを代入可能にする型を表現できます。そのような型をリテラル型と呼びます。
 
@@ -35,9 +35,11 @@ const str: "foo" = "foo";
 
 一般的にリテラル型はマジックナンバーやステートの表現に用いられます。その際、ユニオン型と組み合わせることが多いです。
 
-TODO: 簡単な例を入れる
+```typescript
+let status: 1 | 2 | 3 = 1;
+```
 
-TODO: 「ユニオン型」へリンクする
+{% page-ref page="union.md" %}
 
-TODO: 「判別可能なユニオン型」へリンクする
+{% page-ref page="discriminated-union.md" %}
 
