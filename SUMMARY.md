@@ -64,7 +64,7 @@
 ## 改訂版 <a id="next"></a>
 
 * [改訂版について](next/nitsuite.md)
-* [🚧はじめに](next/introduction.md)
+* [はじめに](next/introduction.md)
 * [TypeScriptのあらまし](next/overview/README.md)
   * [TypeScriptの特徴](next/overview/features.md)
   * [🚧JavaScriptはTypeScriptの一部](next/overview/javascript-is-typescript.md)
