@@ -237,6 +237,8 @@
   * [Advanced Topics](next/reference/advanced-topics/README.md)
     * [Generator](next/reference/advanced-topics/generator.md)
     * [getters and setters](next/reference/advanced-topics/getters-and-setters.md)
+* [🚧Tips](next/tips.md)
+* [🚧索引:記号とキーワード](next/symbols-and-keywords.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
