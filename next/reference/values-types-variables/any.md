@@ -23,6 +23,8 @@ TODO: 型注釈がないとanyになることを説明する
 
 TODO: 暗黙のanyを規制する`noImplicitAny`オプションを説明する
 
+{% page-ref page="../tsconfig/strict-type-checks/noimplicitany.md" %}
+
 ## anyは悪？
 
 any型はコンパイラーのチェックを抑制したいときに用いる特別な型です。any型を濫用すると、型チェックが弱くなりバグの発見できなくなる恐れがあります。anyは型のチェックを放棄した型とも言えますが、一概に悪いとは言い切れません。理由なくanyを使うのは問題ですが、どうしてもanyを使わないとならない場面や、型安全性を妥協した上で、まずは動くコードを形にすることを優先するといったこともありえます。anyをどこまで許容するか、型チェックをどこまで厳格にするかは、チームの熟練度やプロジェクトの方針によるところが大きいです。
@@ -30,4 +32,10 @@ any型はコンパイラーのチェックを抑制したいときに用いる�
 ## 「がんばらないTypeScript」
 
 TODO: がんばらないTypeScriptというアプローチがあることを紹介する。
+
+## 関連情報
+
+{% page-ref page="../statements/unknown.md" %}
+
+{% page-ref page="../statements/any-vs-unknown.md" %}
 
