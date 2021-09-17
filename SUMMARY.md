@@ -96,7 +96,7 @@
     * [🚧any型](next/reference/values-types-variables/any.md)
     * [オブジェクト](next/reference/values-types-variables/object/README.md)
       * [プリミティブ以外はすべてオブジェクト](next/reference/values-types-variables/object/non-primitives-are-objects.md)
-      * [オブジェクトリテラル \(Object literal\)](next/reference/values-types-variables/object/object-literal.md)
+      * [オブジェクトリテラル \(object literal\)](next/reference/values-types-variables/object/object-literal.md)
       * [オブジェクトのプロパティ](next/reference/values-types-variables/object/properties-of-objects.md)
       * [🚧Type annotation of objects](next/reference/values-types-variables/object/type-annotation-of-objects.md)
       * [オブジェクトのreadonlyプロパティ](next/reference/values-types-variables/object/readonly-property.md)
