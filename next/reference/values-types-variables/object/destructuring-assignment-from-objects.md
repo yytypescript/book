@@ -1,4 +1,4 @@
-# オブジェクトの分割代入 \(Destructuring assignment\)
+# オブジェクトの分割代入 \(destructuring assignment\)
 
 見かたに慣れていないと使いづらい機能ではありますが、分割代入という便利な代入方法があります。
 
