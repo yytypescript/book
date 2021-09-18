@@ -1,2 +1,2 @@
-# 🚧optional property
+# 🚧オブジェクト型のオプショナルプロパティ \(optional property\)
 
