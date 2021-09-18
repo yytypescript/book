@@ -106,6 +106,7 @@
       * [プロトタイプベース](next/reference/values-types-variables/object/prototype-based-programming.md)
       * [object、Object、{}の違い](next/reference/values-types-variables/object/difference-among-object-and-object.md)
       * [オブジェクトの分割代入 \(destructuring assignment\)](next/reference/values-types-variables/object/destructuring-assignment-from-objects.md)
+      * [🚧optional chaining](next/reference/values-types-variables/object/optional-chaining.md)
     * [構造的部分型 \(structural subtyping\)](next/reference/values-types-variables/structural-subtyping.md)
     * [配列 \(array\)](next/reference/values-types-variables/array/README.md)
       * [🚧配列リテラル \(array literal\)](next/reference/values-types-variables/array/array-literal.md)
