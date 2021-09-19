@@ -100,7 +100,7 @@
       * [オブジェクトのプロパティ](next/reference/values-types-variables/object/properties-of-objects.md)
       * [オブジェクトの型注釈](next/reference/values-types-variables/object/type-annotation-of-objects.md)
       * [オブジェクト型のreadonlyプロパティ](next/reference/values-types-variables/object/readonly-property.md)
-      * [🚧オブジェクト型のオプショナルプロパティ \(optional property\)](next/reference/values-types-variables/object/optional-property.md)
+      * [オブジェクト型のオプショナルプロパティ \(optional property\)](next/reference/values-types-variables/object/optional-property.md)
       * [🚧余剰プロパティチェック \(excess property checking\)](next/reference/values-types-variables/object/excess-property-checking.md)
       * [🚧インデックス型 \(index signature\)](next/reference/values-types-variables/object/index-signature.md)
       * [プロトタイプベース](next/reference/values-types-variables/object/prototype-based-programming.md)
