@@ -1,4 +1,4 @@
-# 🚧余剰プロパティチェック \(excess property checking\)
+# 余剰プロパティチェック \(excess property checking\)
 
 TypeScriptのオブジェクト型には余剰プロパティチェック\(excess property checking\)という、追加のチェックが働く場合があります。余剰プロパティチェックとは、オブジェクト型に存在しないプロパティを持つオブジェクトの代入を禁止する検査です。
 
