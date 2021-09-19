@@ -122,5 +122,11 @@ person.name.givenName = 'Gorilla';
 
 {% page-ref page="../../../../features/utility-types.md" %}
 
-## 
+## 関連情報
+
+{% page-ref page="../../object-oriented/class/readonly-modifier-in-classes.md" %}
+
+{% page-ref page="../../object-oriented/interface/readonly-modifier-in-interfaces.md" %}
+
+{% page-ref page="../../type-reuse/utility-types/readonly.md" %}
 
