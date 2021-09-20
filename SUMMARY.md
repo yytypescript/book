@@ -113,7 +113,7 @@
       * [配列の型注釈 \(type annotation\)](next/reference/values-types-variables/array/type-annotation-of-array.md)
       * [配列はオブジェクト](next/reference/values-types-variables/array/array-as-a-object.md)
       * [配列要素へのアクセス](next/reference/values-types-variables/array/how-to-access-elements-in-an-array.md)
-      * [🚧readonly array](next/reference/values-types-variables/array/readonly-array.md)
+      * [読み取り専用の配列 \(readonly array\)](next/reference/values-types-variables/array/readonly-array.md)
       * [配列の分割代入 \(destructuring assignment\)](next/reference/values-types-variables/array/destructuring-assignment-from-array.md)
       * [🚧配列の破壊的操作](next/reference/values-types-variables/array/array-operations.md)
       * [🚧配列をループする方法](next/reference/values-types-variables/array/how-to-loop-an-array.md)
