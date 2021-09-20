@@ -1,26 +1,52 @@
 # 配列の分割代入 \(destructuring assignment\)
 
-配列は分割代入を使うことができます。
+## 配列の分割代入
+
+JavaScriptでは、配列から要素を取り出す方法のひとつに、`array[1]`のようにインデックスでアクセスする方法があります。この方法とは別に、分割代入\(destructuring assignment\)という方法を使っても、配列要素にアクセスできます。
+
+例えば、`[1, 2, 3, 4, 5]`のような配列から、最初の3要素を取り出して変数に代入するには次のように書きます。
 
 ```typescript
-const [alpha, bravo, charlie, delta, echo] = phone();
+const oneToFive = [1, 2, 3, 4, 5];
+const [one, two, three] = oneToFive;
+console.log(one); //=> 1
+console.log(two); //=> 2
+console.log(three); //=> 3
 ```
 
-配列の中の配列も同様に分割代入を使えます。
+## ネストした配列の分割代入
+
+JavaScriptの分割代入はフラットな配列だけでなく、ネストした入れ子構造の配列からも要素を抽出できます。ネストした要素の分割代入の書き方は、ネスト構造と一致するようにブラケット\(`[ ]`\)を重ねます。
 
 ```typescript
-const [alpha, [bravo, [charlie, [delta, echo]]]] = phone();
+const twoByTwo = [[1, 2], [3, 4]];
+const [[one, two], [three]] = twoByTwo;
+console.log(one); //=> 1
+console.log(two); //=> 2
+console.log(three); //=> 3
 ```
 
-先頭からではなく、特定番目だけ欲しい時は次のように書くこともできます。
+## 途中要素の分割代入
+
+配列の分割代入は先頭からでなく、途中の要素を取り出すこともできます。その場合、取り出さない要素の数だけカンマを書きます。
 
 ```typescript
-const [,,, delta, echo] = phone();
+const oneToFive = [1, 2, 3, 4, 5];
+const [, , , four, five] = oneToFive;
+console.log(four); //=> 4
+console.log(five); //=> 5
 ```
 
-残余引数を使うこともできます。次の例では`alpha`が`T`型で`rest`は`T[]`型になります。
+## 残余部分の代入
+
+JavaScriptの配列を分割代入するときに、残余パターン\(`...`\)を用いて、配列の残りの部分を取り出して変数に代入できます。
 
 ```typescript
-const [alpha, ...rest] = phone();
+const oneToFive = [1, 2, 3, 4, 5];
+const [one, ...twoToFive] = oneToFive;
+console.log(one); //=> 1
+console.log(twoToFive); //=> [ 2, 3, 4, 5 ]
 ```
+
+このときTypeScriptでは、残余部分の型は配列の`number[]`になります。
 
