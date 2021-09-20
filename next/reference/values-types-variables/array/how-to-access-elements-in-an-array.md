@@ -67,3 +67,5 @@ if (typeof character === "string") { // 絞り込み条件
 }
 ```
 
+配列要素へのアクセスを安全にするために、`noUncheckedIndexedAccess`を有効にしておくことを推奨します。
+
