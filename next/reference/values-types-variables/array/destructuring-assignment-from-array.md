@@ -41,7 +41,7 @@ const oneToFive = [1, 2, 3, 4, 5];
 const [one, two, three] = oneToFive;
 const num: number = one; 
 // 上はコンパイルエラーになる。
-// oneはnumber | undefinedになり、numberには代入できないため。
+// oneはnumber | undefinedで、numberには代入できないため。
 ```
 
 ## ネストした配列の分割代入
