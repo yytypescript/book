@@ -1,4 +1,4 @@
-# constアサーション \(const assertion\)
+# constアサーション「as const」 \(const assertion\)
 
 オブジェクトリテラルの末尾に`as const`を記述すればプロパティが`readonly`でリテラルタイプで指定した物と同等の扱いになります。
 
