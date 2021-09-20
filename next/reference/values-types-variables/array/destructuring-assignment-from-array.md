@@ -14,6 +14,36 @@ console.log(two); //=> 2
 console.log(three); //=> 3
 ```
 
+存在しない要素に対して分割代入した場合は、変数に`undefined`が代入されます。JavaScriptではこれはエラーになりません。
+
+```javascript
+const oneToFive = [1, 2];
+const [one, two, three] = oneToFive;
+console.log(three); //=> undefined
+```
+
+TypeScriptでは、分割代入された値の型は`T[]`の配列なら`T`型になります。例えば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number`になります。
+
+```typescript
+const oneToFive = [1, 2, 3, 4, 5];
+const [one, two, three] = oneToFive;
+const num: number = one; // oneはnumber型になるので代入できる
+```
+
+ただしTypeScriptのコンパイラーオプション`noUncheckedIndexedAccess`を有効にした場合は異なります。
+
+{% page-ref page="../../tsconfig/additional-checks/nouncheckedindexedaccess.md" %}
+
+このオプション有効状態で、配列`T[]`から分割代入すると`T`型もしくはundefined型を示す`T | undefined`型になります。例えば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number | undefined`になります。
+
+```typescript
+const oneToFive = [1, 2, 3, 4, 5];
+const [one, two, three] = oneToFive;
+const num: number = one; 
+// 上はコンパイルエラーになる。
+// oneはnumber | undefinedになり、numberには代入できないため。
+```
+
 ## ネストした配列の分割代入
 
 JavaScriptの分割代入はフラットな配列だけでなく、ネストした入れ子構造の配列からも要素を抽出できます。ネストした要素の分割代入の書き方は、ネスト構造と一致するようにブラケット\(`[ ]`\)を重ねます。
