@@ -109,7 +109,7 @@
       * [🚧optional chaining](next/reference/values-types-variables/object/optional-chaining.md)
     * [構造的部分型 \(structural subtyping\)](next/reference/values-types-variables/structural-subtyping.md)
     * [🚧配列 \(array\)](next/reference/values-types-variables/array/README.md)
-      * [🚧配列リテラル \(array literal\)](next/reference/values-types-variables/array/array-literal.md)
+      * [配列リテラル \(array literal\)](next/reference/values-types-variables/array/array-literal.md)
       * [🚧配列の型注釈](next/reference/values-types-variables/array/type-annotation-of-array.md)
       * [配列はオブジェクト](next/reference/values-types-variables/array/array-as-a-object.md)
       * [🚧How to access elements in an array](next/reference/values-types-variables/array/how-to-access-elements-in-an-array.md)
