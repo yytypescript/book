@@ -117,7 +117,7 @@
       * [配列の分割代入 \(destructuring assignment\)](next/reference/values-types-variables/array/destructuring-assignment-from-array.md)
       * [🚧配列の破壊的操作](next/reference/values-types-variables/array/array-operations.md)
       * [🚧配列をループする方法](next/reference/values-types-variables/array/how-to-loop-an-array.md)
-      * [🚧array-type-is-covariant](next/reference/values-types-variables/array/array-type-is-covariant.md)
+      * [配列の共変性 \(covariance\)](next/reference/values-types-variables/array/array-type-is-covariant.md)
     * [🚧タプル \(tuple\)](next/reference/values-types-variables/tuple/README.md)
       * [🚧What do tuples resolve?](next/reference/values-types-variables/tuple/what-does-tuple-resolve.md)
       * [🚧How to access tuple items](next/reference/values-types-variables/tuple/how-to-access-tuple-items.md)
