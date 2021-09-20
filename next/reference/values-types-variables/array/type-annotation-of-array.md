@@ -1,4 +1,4 @@
-# 配列の型注釈
+# 配列の型注釈 \(type annotation\)
 
 TypeScriptでは、配列に型注釈する方法が2通りあります。
 

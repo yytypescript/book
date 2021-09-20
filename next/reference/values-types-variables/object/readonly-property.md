@@ -1,4 +1,4 @@
-# オブジェクト型のreadonlyプロパティ
+# オブジェクト型のreadonlyプロパティ \(readonly property\)
 
 ## オブジェクトのプロパティは上書き可能
 
