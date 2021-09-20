@@ -88,7 +88,7 @@ const account = {
   password: 'ccbyncsa30',
   age: 80,
   plan: 'Standard' as 'Free' | 'Standard' | 'Premium'
-} as const;
+};
 
 type Account = typeof account;
 ```
