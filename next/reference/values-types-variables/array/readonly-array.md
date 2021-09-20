@@ -63,8 +63,10 @@ const writableNumbers: number[] = readonlyNumbers;
 ```typescript
 const readonlyNumbers: readonly number[] = [1, 2, 3];
 const writableNumbers: number[] = readonlyNumbers as number[];
-//                                                ^^^^^^^^^^^ 型アサーション    
+//                                                ^^^^^^^^^^^ 型アサーション
 ```
+
+{% page-ref page="../type-assertion-as.md" %}
 
 逆のパターンとして、普通の配列を読み取り専用配列に代入することは可能です。
 
