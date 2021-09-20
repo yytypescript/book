@@ -41,7 +41,7 @@ const oneToFive = [1, 2, 3, 4, 5];
 const [one, two, three] = oneToFive;
 const num: number = one; 
 // 上はコンパイルエラーになる。
-// oneはnumber | undefinedで、numberには代入できないため。
+// oneはnumber | undefinedになり、numberには代入できないため。
 ```
 
 ## ネストした配列の分割代入
@@ -73,10 +73,16 @@ JavaScriptの配列を分割代入するときに、残余パターン\(`...`\)�
 
 ```typescript
 const oneToFive = [1, 2, 3, 4, 5];
-const [one, ...twoToFive] = oneToFive;
+const [one, ...rest] = oneToFive;
 console.log(one); //=> 1
-console.log(twoToFive); //=> [ 2, 3, 4, 5 ]
+console.log(rest); //=> [ 2, 3, 4, 5 ]
 ```
 
 このときTypeScriptでは、残余部分の型は配列の`number[]`になります。
+
+## 関連情報
+
+{% page-ref page="how-to-access-elements-in-an-array.md" %}
+
+{% page-ref page="../object/destructuring-assignment-from-objects.md" %}
 

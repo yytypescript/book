@@ -98,3 +98,7 @@ const {
 } = america();
 ```
 
+## 関連情報
+
+{% page-ref page="../array/destructuring-assignment-from-array.md" %}
+
