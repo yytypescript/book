@@ -70,3 +70,11 @@ const writableNumbers: number[] = readonlyNumbers as number[];
 
 逆のパターンとして、普通の配列を読み取り専用配列に代入することは可能です。
 
+## 関連情報
+
+{% page-ref page="array-operations.md" %}
+
+{% page-ref page="../object/readonly-property.md" %}
+
+{% page-ref page="../../type-reuse/utility-types/readonly.md" %}
+

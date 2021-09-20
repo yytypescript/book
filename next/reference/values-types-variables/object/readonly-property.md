@@ -130,3 +130,5 @@ person.name.givenName = 'Gorilla';
 
 {% page-ref page="../../type-reuse/utility-types/readonly.md" %}
 
+{% page-ref page="../array/readonly-array.md" %}
+
