@@ -1,2 +1,2 @@
-# strict type-checks
+# 🚧strict type-checks
 

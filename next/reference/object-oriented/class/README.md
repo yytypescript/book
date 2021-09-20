@@ -1,4 +1,4 @@
-# クラス \(class\)
+# 🚧クラス \(class\)
 
 クラスはオブジェクトの雛形を定義したもので、JavaScriptとTypeScriptでは`class`構文を用いてクラスが定義できます。
 
