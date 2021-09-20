@@ -25,7 +25,7 @@ const p: ThreeDimensionalPoint = {
 
 xy平面上の点を表す`TwoDimensionalPoint`を拡張してxyz平面上の点の`ThreeDimensionalPoint`に変換しました。
 
-### プリミティブ型のインターセクション型
+## プリミティブ型のインターセクション型
 
 プリミティブ型のインターセクション型をつくることもできますが、作ると`never`という型ができます。
 
@@ -38,7 +38,7 @@ const n: Never = '2';
 
 この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが意外なところで役に立ちます。今回は説明を省きます。
 
-### インターセクション型を使いこなす
+## インターセクション型を使いこなす
 
 システムの巨大化に伴い、受け付けたいパラメーターが巨大化したとします。
 
@@ -62,9 +62,11 @@ type Parameter = {
 
 一見してどのプロパティが必須で、どのプロパティが選択可かが非常にわかりづらいです。これをインターセクション型とユーティリティ型の`Required<T>`と`Partial<T>`を使いわかりやすく表記できます。ユーティリティ型については解説しているページがありますのでご覧ください。
 
-{% page-ref page="../../../features/utility-types.md" %}
+{% page-ref page="../type-reuse/utility-types/required.md" %}
 
-#### 必須とそうでないパラメータのタイプエイリアスに分離する
+{% page-ref page="../type-reuse/utility-types/partial.md" %}
+
+### 必須とそうでないパラメータのタイプエイリアスに分離する
 
 ```typescript
 type Mandatory = {
@@ -86,7 +88,7 @@ type Optional = {
 };
 ```
 
-#### `Required<T>, Partial<T>`をつける
+### `Required<T>, Partial<T>`をつける
 
 `Mantatory`は`Required<T>`を、`Optional`は`Partial<T>`をつけます。
 
@@ -110,7 +112,7 @@ type Optional = Partial<{
 }>;
 ```
 
-#### インターセクション型で合成する
+### インターセクション型で合成する
 
 これで最初に定義した`Parameter`と同じタイプエイリアスができました。
 
