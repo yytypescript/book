@@ -11,3 +11,7 @@ TODO: いくつかの具体例を上げる
 * 判別可能なユニオン型
 * 関数
 
+## 関連情報
+
+{% page-ref page="../object-oriented/interface/interface-vs-type-alias.md" %}
+

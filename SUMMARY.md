@@ -197,7 +197,7 @@
       * [インターフェースの継承 \(inheritance\)](next/reference/object-oriented/interface/interface-inheritance.md)
       * [🚧open-ended and declaration marging](next/reference/object-oriented/interface/open-ended-and-declaration-marging.md)
       * [インターフェースとinstanceof](next/reference/object-oriented/interface/instanceof-and-interfaces.md)
-      * [🚧interface vs type alias](next/reference/object-oriented/interface/interface-vs-type-alias.md)
+      * [🚧interfaceと型エイリアス\(type alias\)の違い](next/reference/object-oriented/interface/interface-vs-type-alias.md)
   * [🚧モジュール](next/reference/modules.md)
   * [🚧スレッディング](next/reference/thread/README.md)
     * [🚧single process](next/reference/thread/single-process.md)
