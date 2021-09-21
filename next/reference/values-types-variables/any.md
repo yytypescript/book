@@ -19,7 +19,7 @@ str.toLowerCase();
 
 ## 暗黙のany
 
-TODO: 型注釈がないとanyになることを説明する
+TODO: 引数は型注釈がないとanyになることを説明する
 
 TODO: 暗黙のanyを規制する`noImplicitAny`オプションを説明する
 
