@@ -33,6 +33,6 @@ JavaScriptにはデータ型がありますが、型が異なる2つの値に対
   
 文字列と数値など型が異なる2つの値を演算するとき、暗黙に型変換される「型強制」がJavaScriptにはある。  
   
-『サバイバルTypeScriptより』
+『サバイバルTypeScript』より
 {% endhint %}
 
