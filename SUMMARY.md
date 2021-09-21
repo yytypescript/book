@@ -126,7 +126,7 @@
       * [数値列挙型 \(numeric enum\)](next/reference/values-types-variables/enum/numeric-enum.md)
       * [文字列列挙型 \(string enum\)](next/reference/values-types-variables/enum/string-enum.md)
       * [列挙型\(enum\)の問題点と代替手段](next/reference/values-types-variables/enum/enum-problems-and-alternatives-to-enums.md)
-    * [ユニオン型 \(union type\)](next/reference/values-types-variables/union.md)
+    * [🚧ユニオン型 \(union type\)](next/reference/values-types-variables/union.md)
     * [判別可能なユニオン \(discriminated union\)](next/reference/values-types-variables/discriminated-union.md)
     * [インターセクション型 \(intersection type\)](next/reference/values-types-variables/intersection.md)
     * [🚧型エイリアス \(type alias\)](next/reference/values-types-variables/type-alias.md)
