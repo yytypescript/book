@@ -125,3 +125,7 @@ america.canada.capitalCity = 'Yamoussoukro';
 // Cannot assign to 'capitalCity' because it is a read-only property.
 ```
 
+## 関連情報
+
+{% page-ref page="type-assertion-as.md" %}
+
