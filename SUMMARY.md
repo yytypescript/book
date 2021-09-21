@@ -76,7 +76,7 @@
 * [🚧作って学ぶTypeScript](next/tutorials.md)
 * [読んで学ぶTypeScript](next/reference/README.md)
   * [値・型・変数](next/reference/values-types-variables/README.md)
-    * [変数宣言: letとconst](next/reference/values-types-variables/variable-declaration.md)
+    * [変数宣言: letとconst](next/reference/values-types-variables/let-and-const.md)
     * [変数宣言の型注釈 \(type annotation\)](next/reference/values-types-variables/type-annotation.md)
     * [varとその問題点](next/reference/values-types-variables/vars-problems.md)
     * [変数宣言の型推論](next/reference/values-types-variables/type-inference.md)
