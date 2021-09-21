@@ -145,7 +145,7 @@
     * [🚧never type](next/reference/statements/never.md)
     * [🚧throw](next/reference/statements/throw.md)
     * [🚧try-catch](next/reference/statements/try-catch.md)
-    * [🚧control flow analysis and type guard](next/reference/statements/control-flow-analysis-and-type-guard.md)
+    * [🚧型ガード、制御フロー分析、型の絞り込み](next/reference/statements/control-flow-analysis-and-type-guard.md)
     * [🚧unknown型](next/reference/statements/unknown.md)
     * [🚧any vs unknown](next/reference/statements/any-vs-unknown.md)
   * [🚧関数](next/reference/functions/README.md)
