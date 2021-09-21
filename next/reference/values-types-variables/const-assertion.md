@@ -129,3 +129,5 @@ america.canada.capitalCity = 'Yamoussoukro';
 
 {% page-ref page="type-assertion-as.md" %}
 
+{% page-ref page="object/readonly-property.md" %}
+
