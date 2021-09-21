@@ -44,3 +44,7 @@ TODO: 絞り込む前は、共通のメソッドのみを呼び出せるなど�
 
 TODO: 絞り込んだからどうなるか説明する
 
+## 関連情報
+
+{% page-ref page="discriminated-union.md" %}
+
