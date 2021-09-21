@@ -143,6 +143,7 @@
       * [🚧switchのfall-through問題](next/reference/statements/switch/switch-fallthrough.md)
       * [🚧switch-and-variable-scope](next/reference/statements/switch/switch-and-variable-scope.md)
     * [🚧never type](next/reference/statements/never.md)
+    * [🚧throw](next/reference/statements/throw.md)
     * [🚧try-catch](next/reference/statements/try-catch.md)
     * [🚧control flow analysis and type guard](next/reference/statements/control-flow-analysis-and-type-guard.md)
     * [🚧unknown型](next/reference/statements/unknown.md)
