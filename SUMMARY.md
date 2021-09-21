@@ -129,7 +129,7 @@
     * [🚧ユニオン型 \(union type\)](next/reference/values-types-variables/union.md)
     * [判別可能なユニオン \(discriminated union\)](next/reference/values-types-variables/discriminated-union.md)
     * [インターセクション型 \(intersection type\)](next/reference/values-types-variables/intersection.md)
-    * [🚧型エイリアス \(type alias\)](next/reference/values-types-variables/type-alias.md)
+    * [型エイリアス \(type alias\)](next/reference/values-types-variables/type-alias.md)
     * [型アサーション「as」](next/reference/values-types-variables/type-assertion-as.md)
     * [constアサーション「as const」 \(const assertion\)](next/reference/values-types-variables/const-assertion.md)
     * [🚧definite assignment assertion](next/reference/values-types-variables/definite-assignment-assertion.md)

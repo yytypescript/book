@@ -1,4 +1,4 @@
-# 🚧型エイリアス \(type alias\)
+# 型エイリアス \(type alias\)
 
 TypeScriptでは、型に名前をつけられます。名前のついた型を型エイリアス\(type alias\)と呼びます。
 
