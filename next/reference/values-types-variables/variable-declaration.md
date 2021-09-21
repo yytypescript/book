@@ -50,6 +50,6 @@ y = 1; // Uncaught TypeError: Assignment to constant variable.
 ・letは再代入OK、constは再代入NG  
 ・基本的にconstを使うと良い  
   
-サバイバルTypeScriptより
+『サバイバルTypeScript』より
 {% endhint %}
 
