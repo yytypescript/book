@@ -1,6 +1,6 @@
 # 型エイリアス \(type alias\)
 
-TypeScriptでは、型に名前をつけられます。名前のついた型を型エイリアス\(type alias\)と呼びます。
+TypeScriptでは、型に名前をつけられます。名前のついた型を型エイリアス\(タイプエイリアス; type alias\)と呼びます。
 
 ## 型エイリアスの宣言
 
@@ -10,7 +10,7 @@ TypeScriptでは、型に名前をつけられます。名前のついた型を�
 type StringOrNumber = string | number;
 ```
 
-型エイリアスは、`string`などのビルトインの型と同様に、型注釈などで使えます。
+型エイリアスは、`string`などのビルトインの型と同様に、変数や引数、戻り値の型注釈などで使えます。
 
 ```typescript
 const value: StringOrNumber = 123;
@@ -34,6 +34,12 @@ type NumberOrNull = number | null;
 // 関数型
 type CallbackFunction = (value: string) => boolean;
 ```
+
+## 型エイリアスの使い道
+
+型エイリアスは同じ型を再利用したいときに使うと便利です。型の定義が一箇所になるため、保守性が向上します。
+
+また、型に名前を与えることで可読性が上がる場合があります。型に名前があると、その型が何を意味しているのかがコードの読み手に伝わりやすくなります。
 
 ## 関連情報
 
