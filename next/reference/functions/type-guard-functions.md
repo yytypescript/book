@@ -27,3 +27,7 @@ function isUndefined(value: unknown): value is undefined {
 
 上記関数`isUndefined()`は明らかに誤っていますが、この誤りに対してTypeScriptは何も警告を出しません。
 
+## 関連情報
+
+{% page-ref page="../statements/control-flow-analysis-and-type-guard.md" %}
+
