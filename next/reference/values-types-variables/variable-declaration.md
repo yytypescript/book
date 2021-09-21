@@ -43,3 +43,13 @@ y = 1; // Uncaught TypeError: Assignment to constant variable.
 
 初めて JavaScript を書く場合に、`let`と`const`のどちらの変数宣言を使えば良いか悩む場合があるかもしれません。基本は`const`で変数宣言をして必要な場合にのみ、`let`を使うのがオススメです。`const`で変数宣言することで再代入を禁止して、意図せず変数が書き換えらることを予防できるので、より安全なコードになります。
 
+{% hint style="success" %}
+**学びをシェアする** **─** _コピペしてツイートしよう_
+
+・JavaScriptの変数宣言はletとconstがある  
+・letは再代入OK、constは再代入NG  
+・基本的にconstを使うと良い  
+  
+サバイバルTypeScriptより
+{% endhint %}
+
