@@ -60,6 +60,8 @@ const innerWidth = 10;
 console.log(window.innerWidth); // 500
 ```
 
+{% page-ref page="../statements/variable-scope.md" %}
+
 ### 変数の巻上げ
 
 JavaScriptで宣言された変数はスコープの先頭で変数が生成されます。これは**変数の巻き上げ**と呼ばれています。`var`で宣言された変数は、スコープの先頭で生成されて`undefined`で値が初期化されます。次の例では `greeting`変数への参照はエラーとならずに `undefined` となります。
@@ -132,4 +134,6 @@ function print() {
     console.log(x); // 1
 }
 ```
+
+
 

@@ -136,7 +136,7 @@
     * [🚧definite assignment assertion](next/reference/values-types-variables/definite-assignment-assertion.md)
     * [typeof演算子 \(typeof operator\)](next/reference/values-types-variables/typeof-operator.md)
   * [🚧文](next/reference/statements/README.md)
-    * [🚧variable scope](next/reference/statements/variable-scope.md)
+    * [🚧変数のスコープ \(scope\)](next/reference/statements/variable-scope.md)
     * [🚧if-else](next/reference/statements/if-else.md)
     * [🚧for-of](next/reference/statements/for-of.md)
     * [🚧switch](next/reference/statements/switch/README.md)
