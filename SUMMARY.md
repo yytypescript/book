@@ -73,7 +73,7 @@
   * [なぜTypeScriptを使うべきか](next/overview/why-you-should-use-typescript.md)
   * [静的型付け](next/overview/static-type.md)
   * [🚧ECMAScript](next/overview/ecmascript.md)
-  * [🚧TypeScriptの射程](next/overview/range-of-typescript.md)
+  * [TypeScriptの射程](next/overview/range-of-typescript.md)
 * [🚧作って学ぶTypeScript](next/tutorials.md)
 * [読んで学ぶTypeScript](next/reference/README.md)
   * [値・型・変数](next/reference/values-types-variables/README.md)
