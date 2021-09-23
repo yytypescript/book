@@ -1,4 +1,4 @@
-# 🚧ユニオン型 \(union type\)
+# ユニオン型 \(union type\)
 
 値によっては複数の型をとりうるものが出てきます。`A`型のときもあれば`B`型のときもある。ということを表現したいときに用いるのがTypeScriptのユニオン型\(union type\)です。
 
@@ -40,9 +40,19 @@ string | number[]
 
 ## ユニオン型と絞り込み
 
-TODO: 絞り込む前は、共通のメソッドのみを呼び出せるなど、絞り込む前はどうなるか説明する
+ユニオン型`string | null`が`string`なのか`null`なのかを判定したいときは、TypeScriptの絞り込み\(narrowing\)を用います。絞り込みをするにはいくつかの方法がありますが、代表例はif文です。条件分岐で変数が文字列型かどうかをチェックすると、同じ変数でも分岐内では`string | null`型が`string`型だと判定されます。
 
-TODO: 絞り込んだからどうなるか説明する
+```typescript
+cconst maybeUserId: string | null = localStorage.getItem("userId");
+
+const userId: string = maybeUserId; // nullかもしれないので、代入できない。
+
+if (typeof maybeUserId === "string") {
+  const userId: string = maybeUserId; // この分岐内では文字列型に絞り込まれるため、代入できる。
+}
+```
+
+{% page-ref page="../statements/control-flow-analysis-and-type-guard.md" %}
 
 ## 関連情報
 
