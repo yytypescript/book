@@ -253,6 +253,7 @@
     * [getters and setters](next/reference/advanced-topics/getters-and-setters.md)
 * [🚧Tips](next/tips.md)
 * [🚧索引:記号とキーワード](next/symbols-and-keywords.md)
+* [🚧TypeScript Playgroundの使い方](next/typescript-playgroundnoi.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
