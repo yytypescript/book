@@ -224,3 +224,16 @@ function func({ x = 0, y = 0, z = 0 }: Options = {}) {
 func(); //=> 0 0 0
 ```
 
+{% hint style="success" %}
+**学びをシェアする** **─** _下のまとめをコピペしてツイートしよう_
+
+・Pythonのキーワード引数相当の構文はJavaScript/TypeScriptにはない  
+・代わりにOptions Objectパターンが使える  
+・このパターンのメリット:  
+　①引数の値が何を指すのか分かりやすい  
+　②引数追加時に古いコードを壊さない  
+　③デフォルト引数が省略できる  
+  
+『サバイバルTypeScript』より
+{% endhint %}
+
