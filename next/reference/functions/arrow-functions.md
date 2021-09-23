@@ -70,7 +70,7 @@ const increment = num => num + 1;
 `noImplicitAny`が有効になっていても、関数引数に直接アロー関数を書く場合は型注釈を省略できます。
 
 ```typescript
-[1, 2, 3].map((num) => num + 1);
+[1, 2, 3].map(num => num + 1);
 ```
 
 ## 関連情報
