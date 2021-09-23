@@ -1,6 +1,6 @@
 # 戻り値がない関数とvoid型 \(void type\)
 
-TypeScriptで戻り値がない関数の戻り値を型注釈するには`void`型を用います。
+TypeScriptで戻り値がない関数の戻り値を型注釈するにはvoid型を用います。void型は関数の戻り値を型注釈するためにある特別な型です。
 
 ```typescript
 function print(message: string): void {
@@ -8,7 +8,7 @@ function print(message: string): void {
 }
 ```
 
-## undefinedとvoidの違い
+## undefined型とvoid型の違い
 
 JavaScriptの関数では、戻り値がない場合は値として`undefined`を返します。またTypeScriptにはundefined型もあります。TypeScriptの型上の意味としては、undefined型とvoid型は同じです。したがって、戻り値の型注釈に`undefined`を用いることもできます。ただし、戻り値型がundefined型の場合は、`return undefined`が必要です。
 
