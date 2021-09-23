@@ -153,7 +153,7 @@
     * [関数式 \(function expression\)](next/reference/functions/function-expression.md)
     * [アロー関数 \(arrow function\)](next/reference/functions/arrow-functions.md)
     * [関数の型定義 \(function type declaration\)](next/reference/functions/function-type-declaration.md)
-    * [🚧関数宣言と巻き上げ \(hoisting\)](next/reference/functions/function-declaration-and-hoisting.md)
+    * [関数宣言と巻き上げ \(hoisting\)](next/reference/functions/function-declaration-and-hoisting.md)
     * [関数式とアロー関数の違い](next/reference/functions/function-expression-vs-arrow-functions.md)
     * [🚧即時実行関数 \(IIFE\)](next/reference/functions/iife.md)
     * [🚧コールバック関数 \(callback functions\)](next/reference/functions/callback-functions.md)
