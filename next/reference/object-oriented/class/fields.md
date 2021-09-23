@@ -2,7 +2,7 @@
 
 JavaScriptでインスタンスにフィールドを持たせるには、インスタンス化したオブジェクトのプロパティに値を代入します。
 
-{% code title="🟡 JavaScript" %}
+{% code title="JavaScript" %}
 ```javascript
 class Person {}
 const alice = new Person();
@@ -12,7 +12,7 @@ alice.name = "Alice";
 
 TypeScriptでは、これに加えてフィールドの型注釈を書く必要があります。
 
-{% code title="🔵 TypeScript" %}
+{% code title="TypeScript" %}
 ```typescript
 class Person {
   name: string;
@@ -22,9 +22,9 @@ alice.name = "Alice";
 ```
 {% endcode %}
 
-TypeScriptでは、クラスの宣言に書かれていないフィールドへアクセスした場合、コンパイルエラーになります。
+TypeScriptは、クラスの宣言に書かれていないフィールドへアクセスした場合、コンパイルエラーになります。
 
-{% code title="🔵 TypeScript" %}
+{% code title="TypeScript" %}
 ```typescript
 class Person {}
 const person = new Person();
@@ -64,7 +64,7 @@ console.log(alice.name); //=> undefined
 
 フィールドへの値代入は、コンストラクターを用いて行えます。コンストラクターの中では、`this`を用いて値を代入したいフィールドにアクセスします。
 
-{% code title="🔵 TypeScript" %}
+{% code title="TypeScript" %}
 ```typescript
 class Person {
   name: string;
@@ -78,7 +78,7 @@ class Person {
 
 コンストラクターに引数を持たせれば、フィールドの値を動的に指定できるようにもできます。
 
-{% code title="🔵 TypeScript" %}
+{% code title="TypeScript" %}
 ```typescript
 class Person {
   name: string;
