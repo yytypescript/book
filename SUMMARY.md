@@ -168,7 +168,7 @@
     * [残余引数/可変長引数 \(rest parameter\)](next/reference/functions/rest-parameters.md)
     * [this引数 \(this parameter\)](next/reference/functions/this-parameters.md)
     * [分割代入引数 \(destructuring assignment parameter\)](next/reference/functions/destructuring-assignment-parameters.md)
-    * [🚧キーワード引数とOptions Objectパターン](next/reference/functions/keyword-arguments-and-options-object-pattern.md)
+    * [キーワード引数とOptions Objectパターン](next/reference/functions/keyword-arguments-and-options-object-pattern.md)
     * [型ガード関数 \(type guard function\)](next/reference/functions/type-guard-functions.md)
     * [アサーション関数 \(assertion functions\)](next/reference/functions/assertion-functions.md)
   * [🚧非同期処理](next/reference/asynchronous/README.md)
