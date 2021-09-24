@@ -1,19 +1,39 @@
 # クラスのreadonly修飾子
 
-`readonly`修飾子を利用してプロパティを読み取り専用にすることができます。
+TypeScriptでは、フィールドにreadonly修飾子をつけると、そのフィールドを読み取り専用にできます。
 
-`readonly`を宣言したプロパティは変数宣言時、またはコンストラクタ内で初期化する必要があります。
+読み取り専用フィールドは、コンストラクターかフィールド初期化子でのみ値を代入できます。
 
 ```typescript
 class Octopus {
-    readonly name: string;
-    readonly numberOfLegs: number = 8;
-    constructor (theName: string) {
-        this.name = theName;
-    }
+  readonly name: string;
+  readonly legs = 8; // フィールド初期化子での代入はOK
+
+  constructor() {
+    this.name = "たこちゃん"; // コンストラクターでの代入はOK
+  }
 }
-const dad = new Octopus("Man with the 8 strong legs");
-dad.name = "Man with the 3-piece suit"; // error! name is readonly.
+```
+
+読み取り専用フィールドは、再代入しようとするとコンパイルエラーになります。
+
+```typescript
+const octopus = new Octopus();
+octopus.legs = 16;
+//      ^^^^ Cannot assign to 'legs' because it is a read-only property.(2540)
+```
+
+メソッド内の処理であっても、読み取り専用フィールドへの再代入は許されません。
+
+```typescript
+class Octopus {
+  readonly name = "たこちゃん";
+
+  setName(newName: string): void {
+    this.name = newName;
+    //   ^^^^ Cannot assign to 'name' because it is a read-only property.(2540)
+  }
+}
 ```
 
 ## 関連情報
