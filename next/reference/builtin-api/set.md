@@ -48,7 +48,7 @@ function doSomething(strings: Set<string>) {
 
 ### 値を追加する
 
-Setに値を追加するにはaddメソッドを用います。同じ値は何度追加しても増えないようになっています。
+`Set`に値を追加するには`add`メソッドを用います。同じ値は何度追加しても増えないようになっています。
 
 ```typescript
 const fruits = new Set<string>();
@@ -68,7 +68,7 @@ console.log(numbers); //=> Set (3) {1, 2, 3}
 
 ### 値を削除する
 
-Setから値を取り除くには、deleteメソッドを使います。
+`Set`から値を取り除くには、`delete`メソッドを使います。
 
 ```typescript
 const numbers = new Set([1, 2, 3]);
@@ -78,7 +78,7 @@ console.log(numbers); //=> Set (2) {1, 2}
 
 ### 値が有無を確認する
 
-Setに値が存在するかどうかはhasメソッドで調べられます。
+`Set`に値が存在するかどうかは`has`メソッドで調べられます。
 
 ```typescript
 const numbers = new Set([1, 2, 3]);
@@ -88,7 +88,7 @@ console.log(numbers.has(999)); //=> false
 
 ### 値の個数を取得する
 
-Setにいくつ値が登録されているかを調べるには、sizeフィールドの値を見ます。
+`Set`にいくつ値が登録されているかを調べるには、`size`フィールドの値を見ます。
 
 ```typescript
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -97,7 +97,7 @@ console.log(fruits.size); //=> 3
 
 ### Setを空っぽにする
 
-Setに登録された値をすべて削除するにはclearメソッドを使います。
+`Set`に登録された値をすべて削除するには`clear`メソッドを使います。
 
 ```typescript
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -107,7 +107,7 @@ console.log(fruits); //=> Set (0) {}
 
 ### Setをループする
 
-Setオブジェクトはfor-of構文でループできます。
+`Set`オブジェクトはfor-of構文でループできます。
 
 ```typescript
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -121,7 +121,7 @@ for (const fruit of fruits) {
 
 ### Setを配列に変換する
 
-Setオブジェクトを配列に変換するには、スプレッド構文を用います。
+`Set`オブジェクトを配列に変換するには、スプレッド構文を用います。
 
 ```typescript
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -133,7 +133,7 @@ console.log(array); //=> ["apple", "orange", "banana"]
 
 ## Setは直接JSONにできない
 
-SetオブジェクトはJSON.stringifyにかけても、Setに登録されている値はJSONになりません。
+`Set`オブジェクトは`JSON.stringify`にかけても、`Set`に登録されている値はJSONになりません。
 
 ```typescript
 const fruits = new Set(["apple", "orange", "banana"]);
