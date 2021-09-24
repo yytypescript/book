@@ -65,7 +65,7 @@
 
 * [改訂版について](next/nitsuite.md)
 * [はじめに](next/introduction.md)
-* [TypeScriptのあらまし](next/overview/README.md)
+* [🚧TypeScriptのあらまし](next/overview/README.md)
   * [TypeScriptの特徴](next/overview/features.md)
   * [🚧JavaScriptはTypeScriptの一部](next/overview/javascript-is-typescript.md)
   * [TypeScript誕生の背景](next/overview/before-typescript.md)
