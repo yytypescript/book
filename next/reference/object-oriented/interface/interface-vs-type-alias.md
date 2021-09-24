@@ -106,8 +106,8 @@ interface A {
 interface B extends A {
   numberField: string, // Error:stringはnumberに代入できないため
   price: { // Error:dollerフィールドが無く、Aのpriceに代入できないため
-    yen: number
-    euro: number
+    yen: number,
+    euro: number,
   }
 }
 
