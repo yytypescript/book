@@ -198,7 +198,7 @@
       * [インターフェースを実装する](next/reference/object-oriented/interface/implementing-interfaces.md)
       * [インターフェースのreadonly修飾子](next/reference/object-oriented/interface/readonly-modifier-in-interfaces.md)
       * [インターフェースの継承 \(inheritance\)](next/reference/object-oriented/interface/interface-inheritance.md)
-      * [🚧open-ended and declaration marging](next/reference/object-oriented/interface/open-ended-and-declaration-marging.md)
+      * [🚧open-endedと宣言マージ\(declaration merging\)](next/reference/object-oriented/interface/open-ended-and-declaration-merging.md)
       * [インターフェースとinstanceof](next/reference/object-oriented/interface/instanceof-and-interfaces.md)
       * [🚧interfaceと型エイリアス\(type alias\)の違い](next/reference/object-oriented/interface/interface-vs-type-alias.md)
     * [JavaScriptとTypeScriptのオブジェクト指向機能の比較](next/reference/object-oriented/javascript-vs-typescript-in-oop-features.md)
