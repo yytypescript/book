@@ -14,7 +14,7 @@ class Developer implements Human {
 }
 ```
 
-インターフェイスを複数指定することもできます。そのときは`,`でインターフェースを区切り列挙します。
+インターフェースを複数指定することもできます。そのときは`,`でインターフェースを区切り列挙します。
 
 ```typescript
 interface Human {
@@ -36,5 +36,15 @@ class TypeScriptProgrammer implements Human, Programmer {
 }
 ```
 
-## 
+インターフェースで定義されたフィールドをクラスで実装するには、クラス側にはフィールドを定義します。
+
+```typescript
+interface Human {
+  name: string;
+}
+
+class Developer implements Human {
+  name: string = "Bob";
+}
+```
 
