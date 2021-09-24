@@ -1,24 +1,38 @@
 # インターフェースを実装する
 
-他の言語と同じようにインターフェースをクラスが実装することもできます。実装時に複数のインターフェースを指定することもできます。そのときは`,`でインターフェースを区切り列挙します。このとき同じ名前のプロパティが違う型で衝突すると、その型は`never`型になります。`never`型の変数には値の代入ができません。
+TypeScriptでは、クラスがインターフェースを実装できます。実装するには`implements`キーワードを用います。
 
 ```typescript
-interface Measurements {
-  bust: number;
-  waist: number;
-  hip: number;
+interface Human {
+  think(): void;
 }
 
-interface SensitiveSizes {
-  bust: 'secret';
-  waist: 'secret';
-  hip: 'secret';
+class Developer implements Human {
+  think(): void {
+    console.log("どういう実装にしようかな〜");
+  }
+}
+```
+
+インターフェイスを複数指定することもできます。そのときは`,`でインターフェースを区切り列挙します。
+
+```typescript
+interface Human {
+  think(): void;
 }
 
-class Adorescent implements Measurements, SensitiveSizes {
-  // bust: never;
-  // waist: never;
-  // hip: never;
+interface Programmer {
+  writeCode(): void;
+}
+
+class TypeScriptProgrammer implements Human, Programmer {
+  think(): void {
+    console.log("どういうコードにしようかな〜");
+  }
+
+  writeCode(): void {
+    console.log("カタカタ");
+  }
 }
 ```
 
