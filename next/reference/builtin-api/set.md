@@ -129,6 +129,8 @@ const array = [...fruits];
 console.log(array); //=> ["apple", "orange", "banana"]
 ```
 
+{% page-ref page="../values-types-variables/array/spread-syntax-for-array.md" %}
+
 ## Setは直接JSONにできない
 
 SetオブジェクトはJSON.stringifyにかけても、Setに登録されている値はJSONになりません。
