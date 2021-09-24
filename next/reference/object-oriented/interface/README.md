@@ -13,11 +13,11 @@ interface Person {
 }
 ```
 
-## TypeScriptのインターフェース
+## インターフェースと構造的部分型
 
 Javaなどのオブジェクト指向言語ではクラスの抽象的な型定義として利用されます。そのため、インターフェース単体では利用されず、特定のクラスがインターフェースを継承し実装を追加することで初めて効果を発揮します。
 
-TypeScriptではインターフェースは型注釈として利用できるため、オブジェクトの型をInterfaceで定義するという使い方ができます。
+TypeScriptでもインターフェースをクラスに実装させることはできますが、それに加えて、TypeScriptは構造的部分型なので、インターフェースと実装関係がないオブジェクトの型注釈としても利用できます。
 
 ```typescript
 interface Person {
@@ -30,6 +30,8 @@ const taro: Person = {
     age: 12,
 }
 ```
+
+{% page-ref page="../../values-types-variables/structural-subtyping.md" %}
 
 
 
