@@ -196,7 +196,7 @@
       * [finalクラス・sealedクラス](next/reference/object-oriented/class/final-sealed-class.md)
     * [🚧インターフェース \(interface\)](next/reference/object-oriented/interface/README.md)
       * [インターフェースを実装する](next/reference/object-oriented/interface/implementing-interfaces.md)
-      * [🚧readonly modifier in interfaces](next/reference/object-oriented/interface/readonly-modifier-in-interfaces.md)
+      * [インターフェースのreadonly修飾子](next/reference/object-oriented/interface/readonly-modifier-in-interfaces.md)
       * [インターフェースの継承 \(inheritance\)](next/reference/object-oriented/interface/interface-inheritance.md)
       * [🚧open-ended and declaration marging](next/reference/object-oriented/interface/open-ended-and-declaration-marging.md)
       * [インターフェースとinstanceof](next/reference/object-oriented/interface/instanceof-and-interfaces.md)
