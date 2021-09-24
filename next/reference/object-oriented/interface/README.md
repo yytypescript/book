@@ -1,15 +1,27 @@
 # 🚧インターフェース \(interface\)
 
-JavaやPHPなどの言語ではクラスとは別に、インターフェースが定義できますが、JavaScriptにはそれに相当する構文がありません。一方、TypeScriptにはインターフェースがあります。
+インターフェースはクラスが実装すべきフィールドやメソッドを定義した型です。クラスはインターフェースを実装することで、インターフェースが求めるメソッド名や引数の型に則っているかをチェックすることができます。
+
+JavaやPHPなどの言語では、インターフェースが定義できますが、JavaScriptにはそれに相当する構文がありません。一方、TypeScriptにはインターフェースがあります。
+
+TypeScriptで定義されたインターフェースは、コンパイルチェックに活用された後、JavaScriptコードを生成する過程で消されるため、インターフェースがJavaScript実行時に影響することはありません。
 
 ## インターフェースを定義する
 
 TypeScriptでは`interface` キーワードでインターフェースを定義できます。
 
 ```typescript
-interface Person {
-    name: string;
-    age: number;
+interface SomeInterface {
+  method1(): void;
+  method2(arg: string): void;
+}
+```
+
+TypeScriptではメソッドだけでなく、パブリックフィールドも定義できます。
+
+```typescript
+interface SomeInterface {
+  field: string;
 }
 ```
 
@@ -21,14 +33,14 @@ TypeScriptでもインターフェースをクラスに実装させることは�
 
 ```typescript
 interface Person {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 }
 
 const taro: Person = {
-    name: '太郎',
-    age: 12,
-}
+  name: "太郎",
+  age: 12,
+};
 ```
 
 {% page-ref page="../../values-types-variables/structural-subtyping.md" %}
