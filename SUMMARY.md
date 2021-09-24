@@ -187,7 +187,7 @@
       * [クラスのreadonly修飾子](next/reference/object-oriented/class/readonly-modifier-in-classes.md)
       * [クラスはオブジェクト](next/reference/object-oriented/class/class-is-an-object.md)
       * [静的フィールド \(static field\)](next/reference/object-oriented/class/static-fields.md)
-      * [🚧static methods](next/reference/object-oriented/class/static-methods.md)
+      * [静的メソッド \(static method\)](next/reference/object-oriented/class/static-methods.md)
       * [メソッド戻り値のthis型とメソッドチェーン](next/reference/object-oriented/class/return-this-type.md)
       * [クラスの継承 \(inheritance\)](next/reference/object-oriented/class/class-inheritance.md)
       * [🚧super](next/reference/object-oriented/class/super.md)
