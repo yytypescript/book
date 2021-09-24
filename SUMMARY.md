@@ -179,7 +179,7 @@
       * [コンストラクター \(constructor\)](next/reference/object-oriented/class/constructor.md)
       * [フィールド \(field\)](next/reference/object-oriented/class/fields.md)
       * [メソッド \(methods\)](next/reference/object-oriented/class/methods.md)
-      * [🚧フィールドのデフォルト値](next/reference/object-oriented/class/frudonodeforuto.md)
+      * [フィールドの初期化子 \(initializer\)](next/reference/object-oriented/class/field-initializers.md)
       * [アクセス修飾子 \(access modifiers\)](next/reference/object-oriented/class/access-modifiers.md)
       * [constructor shorthand](next/reference/object-oriented/class/constructor-shorthand.md)
       * [クラスのreadonly修飾子](next/reference/object-oriented/class/readonly-modifier-in-classes.md)
