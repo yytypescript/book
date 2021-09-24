@@ -198,7 +198,7 @@
       * [インターフェースの継承 \(inheritance\)](next/reference/object-oriented/interface/interface-inheritance.md)
       * [🚧open-endedと宣言マージ\(declaration merging\)](next/reference/object-oriented/interface/open-ended-and-declaration-merging.md)
       * [インターフェースとinstanceof](next/reference/object-oriented/interface/instanceof-and-interfaces.md)
-      * [🚧interfaceと型エイリアス\(type alias\)の違い](next/reference/object-oriented/interface/interface-vs-type-alias.md)
+      * [🚧interfaceとtypeの違い](next/reference/object-oriented/interface/interface-vs-type-alias.md)
     * [JavaScriptとTypeScriptのオブジェクト指向機能の比較](next/reference/object-oriented/javascript-vs-typescript-in-oop-features.md)
   * [🚧組み込みAPI](next/reference/builtin-api/README.md)
     * [🚧Map](next/reference/builtin-api/map.md)
