@@ -1,12 +1,24 @@
 # 🚧ECMAScript
 
+## ECMAScriptはJavaScriptの仕様
+
 TODO: 次の内容を書く
 
 * ECMAScriptはJSの仕様
   * TSはJSの拡張なので、ESのアップデートは取り込まれる
+
+## 仕様策定プロセス
+
+TODO
+
 * 仕様策定プロセス
   * stageとかの説明
   * TSはstage 3になったものが取り込まれる
+
+## 後方互換性の重視
+
+TODO
+
 * ESは後方互換性を重視する
   * とにかく動いているJSを壊さないようにする
     * 10年前のJSとかも動くよ
