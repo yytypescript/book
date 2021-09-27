@@ -93,6 +93,7 @@
     * [シンボル型 \(symbol type\)](next/reference/values-types-variables/symbol.md)
     * [bigint型](next/reference/values-types-variables/bigint.md)
     * [型強制 \(type coercion\)](next/reference/values-types-variables/type-coercion.md)
+    * [🚧ボックス化 \(boxing\)](next/reference/values-types-variables/boxing.md)
     * [リテラル型 \(literal type\)](next/reference/values-types-variables/literal-types.md)
     * [🚧any型](next/reference/values-types-variables/any.md)
     * [🚧オブジェクト](next/reference/values-types-variables/object/README.md)

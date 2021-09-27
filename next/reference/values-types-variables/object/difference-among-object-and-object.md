@@ -1,95 +1,96 @@
 # object、Object、{}の違い
 
-これらは大変よく似ています。どれもオブジェクトの型の定義にどれも使うことができます。
+TypeScriptではオブジェクトの型注釈をするとき、プロパティの型まで指定するのが一般的です。
 
 ```typescript
-const a: object = {};
-const b: Object = {};
-const c: {} = {};
+let obj: { a: number; b: number };
 ```
 
-また、相互に入れ替えが可能です。
+{% page-ref page="type-annotation-of-objects.md" %}
+
+そういった一般的な型注釈とは異なり、プロパティの型を指定せず、ざっくり「オブジェクトであること」を型注釈する方法もあります。`object`型や`Object`型、`{}`型を使うものです。
 
 ```typescript
-const d: object = a;
-const e: object = b;
-const f: object = c;
-
-const g: Object = a;
-const h: Object = b;
-const i: Object = c;
-
-const j: {} = a;
-const k: {} = b;
-const l: {} = c;
+let a: object;
+let b: Object;
+let c: {};
 ```
 
-`object`はプリミティブ型ではないので、すべてのリファレンス型を総称するものとして定義されています。
-
-`Object`はTypescriptで型の定義がされているインターフェースです。そのため`.`を入力すればオブジェクトが持っているメソッドの入力補完ができます。
-
-`{}`はプロパティ、メソッドを持たないオブジェクトリテラルの型定義です。こちらも`object`と同様に入力補完はできません。
-
-### プリミティブ型を代入する
-
-当然ながらプリミティブ型はオブジェクトではありません。そのため、そもそも代入できないのではと思われるかもしれませんが、次のようになります。
+これらはどれもオブジェクト型の値ならどんなものでも代入可能になる型です。
 
 ```typescript
-const object1: object = undefined;
-// Type 'undefined' is not assignable to type 'object'.
-const object2: object = null;
-// Type 'null' is not assignable to type 'object'.
-const object3: object = false;
-// Type 'false' is not assignable to type 'object'.
-const object4: object = 0;
-// Type '0' is not assignable to type 'object'.
-const object5: object = '';
-// Type '""' is not assignable to type 'object'.
-const object6: object = Symbol();
-// Type 'unique symbol' is not assignable to type 'object'.
-const object7: object = 10n;
-// Type '10n' is not assignable to type 'object'.
-
-const iObject1: Object = undefined;
-// Type 'undefined' is not assignable to type 'Object'.
-const iObject2: Object = null;
-// Type 'null' is not assignable to type 'Object'.
-const iObject3: Object = false;
-const iObject4: Object = 0;
-const iObject5: Object = '';
-const iObject6: Object = Symbol();
-const iObject7: Object = 10n;
-
-const literal1: {} = undefined;
-// Type 'undefined' is not assignable to type '{}'.
-const literal2: {} = null;
-// Type 'null' is not assignable to type '{}'.
-const literal3: {} = false;
-const literal4: {} = 0;
-const literal5: {} = '';
-const literal6: {} = Symbol();
-const literal7: {} = 10n;
+const a: object = {}; // OK
+const b: Object = {}; // OK
+const c: {} = {}; // OK
 ```
 
-`object`と異なり、`Object, {}`は`boolean, number, string, symbol, bigint`型の変数に代入ができてしまいます。
+## object型、Object型、{}型の違い
 
-これはTypesScriptの設計がおかしいわけではなくJavaScriptが元々持っているAutoboxingを意味します。
+`object`型や`Object`型、`{}`型の3つは類似する部分がありますが、`object`型と他の2つは異なる点があります。
 
-### Autoboxing \(プリミティブ型の対応するラッパークラスとの自動変換\)
+### object型
 
-文字数カウントをしたいときは`str.length`とすれば文字数が得られます。数値を文字列にしたいときは\(テンプレートリテラルを使わなければ\)`num.toString()`とすれば文字列が得られます。
-
-プリミティブ型はオブジェクトではないのでプロパティやメソッドを持っていないはずです。ですがこのようなことができるのは、内部的にはJavaScriptがプリミティブ型の値をオブジェクトに変換しているからです。この暗黙の型変換をAutoboxingと呼びます。
-
-ちなみにこのときに使われるオブジェクトを通称ラッパークラスと呼び、それらのインターフェースもTypeScriptに`Boolean, Number, String, Symbol, BigInt`として定義されています。なお`undefined`と`null`のラッパークラスはありません。
+`object`型はオブジェクト型の値だけが代入できる型です。JavaScriptの値はプリミティブ型かオブジェクト型かの2つに大分されるので、`object`型はプリミティブ型が代入できない型とも言えます。
 
 ```typescript
-const bool: Boolean = false;
-const num: Number = 0;
-const str: String = '';
-const sym: Symbol = Symbol();
-const big: BigInt = 10n;
+let a: object;
+a = { x: 1 }; // OK
+a = [1, 2, 3]; // OK。配列はオブジェクト
+a = /a-z/; // OK。正規表現はオブジェクト
+
+// プリミティブ型はNG
+a = 1; // NG
+a = true; // NG
+a = "string"; // NG
 ```
 
-当然ながらラッパークラスは`Object`をスーパークラスに持っているため、変数の型として`Object, {}`が定義されてしまうとAutoboxingをしたものと解釈され、代入ができます
+{% page-ref page="non-primitives-are-objects.md" %}
+
+### Object型
+
+`Object`型はインターフェイスです。`valueOf`などのプロパティを持つ値なら何でも代入できます。したがって、`Object`型には`null`や`undefined`を除くあらゆるプリミティブ型も代入できます。文字列型や数値型などのプリミティブ型は自動ボックス化により、オブジェクトのようにプロパティを持てるからです。
+
+```typescript
+let a: Object;
+a = {}; // OK
+
+// ボックス化可能なプリミティブ型OK
+a = 1; // OK
+a = true; // OK
+a = "string"; // OK
+
+// nullとundefinedはNG
+a = null; // NG
+a = undefined; // NG
+```
+
+{% page-ref page="../boxing.md" %}
+
+`Object`型は[TypeScriptの公式ドキュメントで使うべきでないとされています](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#number-string-boolean-symbol-and-object)。理由はプリミティブ型も代入できてしまうためです。もしオブジェクト型ならなんでも代入可にしたい場合は、代わりに`object`型を検討すべきです。
+
+### {}型
+
+`{}型`は、プロパティを持たないオブジェクトを表す型です。プロパティを持ちうる値なら何でも代入できます。この点はObject型と似ていて、nullやundefinedを除くあらゆる型を代入できます。
+
+```typescript
+let a: {};
+a = {}; // OK
+
+// ボックス化可能なプリミティブ型OK
+a = 1; // OK
+a = true; // OK
+a = "string"; // OK
+
+// nullとundefinedはNG
+a = null; // NG
+a = undefined; // NG
+```
+
+### object型、Object型、{}型の代入範囲
+
+`object`型や`Object`型、`{}`型の代入範囲をまとめると次の図のようになります。
+
+![](../../../../.gitbook/assets/cleanshot-2021-09-27-at-12.06.52.png)
+
+
 
