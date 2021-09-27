@@ -100,7 +100,7 @@
       * [プリミティブ以外はすべてオブジェクト](next/reference/values-types-variables/object/non-primitives-are-objects.md)
       * [オブジェクトリテラル \(object literal\)](next/reference/values-types-variables/object/object-literal.md)
       * [オブジェクトのプロパティ](next/reference/values-types-variables/object/properties-of-objects.md)
-      * [オブジェクトの型注釈 \(type annotation\)](next/reference/values-types-variables/object/type-annotation-of-objects.md)
+      * [🚧オブジェクトの型注釈 \(type annotation\)](next/reference/values-types-variables/object/type-annotation-of-objects.md)
       * [オブジェクト型のreadonlyプロパティ \(readonly property\)](next/reference/values-types-variables/object/readonly-property.md)
       * [readonlyとconstの違い](next/reference/values-types-variables/object/readonly-vs-const.md)
       * [オブジェクト型のオプショナルプロパティ \(optional property\)](next/reference/values-types-variables/object/optional-property.md)
