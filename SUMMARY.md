@@ -67,7 +67,7 @@
 * [はじめに](next/introduction.md)
 * [🚧TypeScriptのあらまし](next/overview/README.md)
   * [TypeScriptの特徴](next/overview/features.md)
-  * [🚧JavaScriptはTypeScriptの一部](next/overview/javascript-is-typescript.md)
+  * [JavaScriptはTypeScriptの一部](next/overview/javascript-is-typescript.md)
   * [TypeScript誕生の背景](next/overview/before-typescript.md)
   * [JavaScriptエコシステム](next/overview/ecosystem.md)
   * [なぜTypeScriptを使うべきか](next/overview/why-you-should-use-typescript.md)
