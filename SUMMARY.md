@@ -101,7 +101,7 @@
       * [オブジェクトのプロパティ](next/reference/values-types-variables/object/properties-of-objects.md)
       * [オブジェクトの型注釈 \(type annotation\)](next/reference/values-types-variables/object/type-annotation-of-objects.md)
       * [オブジェクト型のreadonlyプロパティ \(readonly property\)](next/reference/values-types-variables/object/readonly-property.md)
-      * [🚧readonly-vs-const](next/reference/values-types-variables/object/readonly-vs-const.md)
+      * [readonlyとconstの違い](next/reference/values-types-variables/object/readonly-vs-const.md)
       * [オブジェクト型のオプショナルプロパティ \(optional property\)](next/reference/values-types-variables/object/optional-property.md)
       * [余剰プロパティチェック \(excess property checking\)](next/reference/values-types-variables/object/excess-property-checking.md)
       * [🚧インデックス型 \(index signature\)](next/reference/values-types-variables/object/index-signature.md)
