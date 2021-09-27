@@ -49,5 +49,3 @@ obj.x = 2; // Cannot assign to 'x' because it is a read-only property.(2540)
 
 {% page-ref page="../let-and-const.md" %}
 
-{% page-ref page="object-and-const.md" %}
-
