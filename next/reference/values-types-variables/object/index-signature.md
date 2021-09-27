@@ -1,48 +1,34 @@
 # 🚧インデックス型 \(index signature\)
 
-オブジェクトのキーをあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこのインデックス型です。  
-プロパティがすべて`string`型であるようなオブジェクトのタイプエイリアスは以下です。
+TypeScriptで、オブジェクトのフィールド名をあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこのインデックス型\(index signature\)です。例えば、プロパティがすべて`number`型であるオブジェクトは次のように型注釈します。
 
 ```typescript
-type Butterfly = {
-  [key: string] : string;
+let obj: {
+  [K: string]: number;
 };
 ```
 
-キーを表している変数`key`は別名でも構いません。
+フィールド名の表現部分が`[K: string]`です。この`K`の部分は型変数です。任意の型変数名にできます。`K`や`key`にするのが一般的です。`string`の部分はフィールド名の型を表します。インデックス型のフィールド名の型は`string`、`number`、`symbol`のみが指定できます。
 
-もちろんこの`Butterfly`にはプロパティが`string`型であればなんでも入ります。
+インデックス型のオブジェクトであれば、フィールド名が定義されていないプロパティも代入できます。例えば、インデックス型`{ [K: string]: number }`には、値がnumber型であれば、`a`や`b`など定義されていないフィールドに代入できます。
 
 ```typescript
-const butterflies: Butterfly = {
-  en: 'Butterfly',
-  fr: 'Papillon',
-  it: 'Farfalla',
-  es: 'Mariposa',
-  de: 'Schmetterling'
+let obj: {
+  [K: string]: number;
 };
+
+obj = { a: 1, b: 2 }; // OK
+obj.c = 4; // OK
+obj["d"] = 5; // OK
 ```
 
-この型の変数を利用する時、どのキーも存在するものとして扱われます。存在しないキーを指定してもエラーが発生することなく`undefined`を返します。またTypeScriptによる入力補完も働きません。
+コンパイラーオプションの`noUncheckedIndexedAccess`を有効にした場合、インデックス型では、プロパティの型は自動的にプロパティに指定した型とundefined型のユニオン型になります。これは、プロパティが存在しないときに、値が`undefined`になるのを正確に型で表すためです。
 
 ```typescript
-butterflies.ja;
-// -> undefined
+const obj: { [K: string]: number } = { a: 1 };
+const b: number | undefined = obj.b;
+console.log(b); //=> undefined
 ```
 
-このチェックをより厳密にするオプションがtsconfig.jsonにあります。このオプションを有効にするとたとえプロパティがあるキーにアクセスしてもプロパティの型は`undefined`とのユニオン型であると解釈されるようになります。こちらについてはtsconfig.json Deep Diveのページをご覧ください。
-
-TODO: tsconfigへリンク
-
-### インデックス型の制限
-
-インデックス型は`string`型、`number`型しか指定できません。
-
-```typescript
-type Jekyll = {
-};
-// An index signature parameter type must be either 'string' or 'number'.
-```
-
-ちなみに`number`型のキーを持つオブジェクトとは配列のようなオブジェクトのことです。
+{% page-ref page="../../tsconfig/additional-checks/nouncheckedindexedaccess.md" %}
 
