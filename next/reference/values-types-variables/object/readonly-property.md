@@ -1,134 +1,94 @@
 # オブジェクト型のreadonlyプロパティ \(readonly property\)
 
-## オブジェクトのプロパティは上書き可能
-
-オブジェクトのプロパティはたとえオブジェクトを定数にしたとしても書き換えができてしまいます。
+TypeScriptでは、オブジェクトのプロパティを読み取り専用にすることができます。読み取り専用にしたいプロパティには`readonly`修飾子をつけます。読み取り専用のプロパティに値を代入しようとすると、TypeScriptコンパイラーが代入不可の旨を警告するようになります。
 
 ```typescript
-const pikachu = {
-  name: 'pikachu',
-  no: 25,
-  genre: 'mouse pokémon',
-  height: 0.4,
-  weight: 6.0,
+let obj: {
+  readonly foo: number;
 };
-
-pikachu.name = 'raichu';
-
-pikachu;
-// ->
-// {
-//   name: 'raichu',
-//   no: 25,
-//   genre: 'mouse pokémon',
-//   height: 0.4,
-//   weight: 6
-// }
+obj = { foo: 1 };
+obj.foo = 2;
+//  ^^^ Cannot assign to 'foo' because it is a read-only property.(2540)
 ```
 
-これはJavaScript, TypeScriptが抱えている問題というわけではなく、オブジェクトをリファレンス型として持つ言語では当然の挙動です。
+## readonlyは再帰的ではない
 
-## プロパティを書き換えさせなくしたい
+`readonly`は指定したそのプロパティだけが読み取り専用になります。`readonly`はそのオブジェクトが入れ子になっている場合、その中のオブジェクトのプロパティまでを`readonly`にはしません。つまり、再帰的なものではありません。
 
-オブジェクトリテラルが定義されたとき、特に型を指定しないとTypeScriptはプロパティの型を推測します。たとえば上記の定数`pikachu`はTypeScriptはこのように型を定義します。
-
-```typescript
-type Wild = {
-  name: string;
-  no: number;
-  genre: string;
-  height: number;
-  weight: number;
-};
-```
-
-そのため、先ほどのような`name`を`string`型で上書きするようなことができてしまいます。ちなみに`string`型ではない型の代入はできません。
+例えば、`foo`プロパティが`readonly`で、`foo.bar`プロパティが`readonly`でない場合、`foo`への代入はコンパイルエラーになるものの、`foo.bar`へ直接代入するのはコンパイルエラーになりません。
 
 ```typescript
-pikachu.name = false;
-// Type 'false' is not assignable to type 'string'.
-```
-
-プロパティを書き換えさせないためには、次のような方法が挙げられます。
-
-## `readonly`
-
-これはそのプロパティを読み取り専用\(Readonly\)にする時に使います。
-
-```typescript
-type Person = {
-  readonly surname: string;
-  givenName: string;
+let obj: {
+  readonly foo: {
+    bar: number;
+  };
 };
-```
-
-上記例の`surname`を`readonly`に変更しました。これによりこのプロパティに対しての代入はできなくなります。
-
-```typescript
-const person: Person = {
-  surname: 'Fauré',
-  givenName: 'Gabriel'
-};
-
-person.surname = 'Panda';
-// Cannot assign to 'surname' because it is a read-only property.
-person.givenName = 'Gorilla';
-```
-
-もちろん`readonly`がついていないプロパティ、この場合`givenName`は代入が可能です。
-
-## `readonly`で注意すること
-
-`readonly`はそのオブジェクトが入れ子になっている場合、その中のオブジェクトのプロパティまでを`readonly`にはしません。つまり、再帰的なものではありません。
-
-```typescript
-type Name = {
-  surname: string;
-  givenName: string;
-};
-
-type Person = {
-  readonly name: Name;
-  readonly age: number;
-};
-
-const person: Person = {
-  name: {
-    surname: 'Fauré',
-    givenName: 'Gabriel'
+obj = {
+  foo: {
+    bar: 1,
   },
-  age: 79
 };
-
-person.name = {
-  surname: 'Panda',
-  givenName: 'Gorilla'
-};
-// Cannot assign to 'name' because it is a read-only property.
-person.age = 80;
-// Cannot assign to 'age' because it is a read-only property.
+obj.foo = { bar: 2 };
+//  ^^^ コンパイルエラー: Cannot assign to 'foo' because it is a read-only property.(2540)
+obj.foo.bar = 2; // コンパイルエラーにはならない
 ```
 
-これらが代入不可能なのはわかるかと思いますが、問題は以下です。
+再帰的にプロパティを読み取り専用にしたい場合は、子や孫の各プロパティに`readonly`をつけていく必要があります。
 
 ```typescript
-person.name.surname = 'Panda';
-person.name.givenName = 'Gorilla';
+let obj: {
+  readonly foo: {
+    readonly bar: number;
+  };
+};
 ```
 
-`Name`のプロパティ`surname, givenName`はともに`readonly`ではないためこのように上書きができてしまいます。
+## readonlyはコンパイル時のみ
 
-これら記号と、それを発展させた型の表現についてはユーティリティ型に詳細がありますのでご参照ください。
+`readonly`はTypeScriptの型の世界だけの概念です。つまり、読み取り専用指定を受けたプロパティがチェックを受けるのはコンパイル時だけです。コンパイルされた後のJavaScriptとしては、`readonly`がついていたプロパティも代入可能になります。
 
-{% page-ref page="../../../../features/utility-types.md" %}
+例えば、`foo`プロパティを`readonly`指定したコードで、`foo`に代入するコードはコンパイル時にはエラーとして検出されます。
+
+```typescript
+const obj: { readonly foo: number } = { foo: 1 };
+obj.foo = 2; // コンパイルエラーになる
+```
+
+しかし、コンパイル後のJavaScriptコードでは、`readonly`の記述がなくなるので、実行時にエラーとして検出されることはありません。
+
+{% code title="コンパイル後のJavaScriptコード" %}
+```javascript
+const obj = { foo: 1 };
+obj.foo = 2; // 実行時エラーにはならない
+```
+{% endcode %}
+
+実行時にチェックが無いことは一見すると危険そうですが、コンパイルエラーを無視せず、ちゃんと修正しておけば大きな問題になることはありません。
+
+## すべてのプロパティを一括して読み取り専用にする方法
+
+TypeScriptではプロパティを読み取り専用にするには、読み取り専用にしたい各プロパティにひとつひとつ`readonly`修飾子をつける必要があります。プロパティ数が多くなると`readonly`をつけていくのは記述量が多くなり手間です。
+
+そういったケースではユーティリティ型の`Readonly`を使うのも手です。`Readonly`はプロパティをすべて読み取り専用にしてくれる型です。
+
+```typescript
+let obj: Readonly<{
+  a: number;
+  b: number;
+  c: number;
+  d: number;
+  e: number;
+  f: number;
+}>;
+```
+
+{% page-ref page="../../type-reuse/utility-types/readonly.md" %}
 
 ## 関連情報
 
 {% page-ref page="../../object-oriented/class/readonly-modifier-in-classes.md" %}
 
 {% page-ref page="../../object-oriented/interface/readonly-modifier-in-interfaces.md" %}
-
-{% page-ref page="../../type-reuse/utility-types/readonly.md" %}
 
 {% page-ref page="../array/readonly-array.md" %}
 
