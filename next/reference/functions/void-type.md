@@ -23,10 +23,10 @@ function print(message: string): undefined {
 
 ```typescript
 function getIfExists(numbers: number[], search: number): number | undefined {
-   if (numbers.includes(search)) {
-      return number;
-   }
-   return undefined;
+  if (numbers.includes(search)) {
+    return number;
+  }
+  return undefined;
 }
 ```
 
