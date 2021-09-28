@@ -1,4 +1,4 @@
-# 🚧例外処理
+# 例外処理
 
 JavaScriptにはJavaに似た例外処理の構文があります。例外には`Error`オブジェクトを使い、throw構文で例外を投げます。try-catch構文で例外を捕捉できます。
 
@@ -80,9 +80,53 @@ try {
 
 ### try-catchはブロックスコープ
 
-TODO
+JavaScriptのtry-catch文内の変数はブロックスコープになります。そのため、try-catch内で宣言された変数は、try-catchの外では参照できません。
 
-### finally
+```typescript
+async function fetchData() {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    const data = await res.json();
+    console.log(data); // dataが参照できる
+  } catch (e: unknown) {
+    return;
+  }
+  console.log(data); // dataが参照できない
+}
 
-TODO
+fetchData();
+```
+
+{% page-ref page="variable-scope.md" %}
+
+try-catch文の外でも変数を参照したい場合は、tryの前に代入用の変数をlet宣言しておく必要があります。
+
+```typescript
+async function fetchData() {
+  let data: any;
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    data = await res.json();
+  } catch (e: unknown) {
+    return;
+  }
+  console.log(data); // dataが参照できる
+}
+
+fetchData();
+```
+
+### finallyブロック
+
+JavaScriptにもJavaやPHPと同じようにfinallyが書けます。finallyは例外が発生しようがしまいが必ず実行される処理です。finallyはtry-catchの後に書きます。finally内の処理はtryとcatchの処理が実行された後に実行されます。
+
+```javascript
+try {
+  // ...
+} catch (e) {
+  // ...
+} finally {
+  // ...
+}
+```
 
