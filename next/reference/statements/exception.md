@@ -52,7 +52,7 @@ try {
 
 型が`Error`オブジェクトの型ではなく`any`型になるのは、JavaScriptの仕様上どんな値がthrowされるか分からないためです。
 
-コンパイラーオプションの`useUnknownInCatchVariables`を有効にすると、catchの変数の型が`unknown`型になります。「どんな値がthrowされるか分からない」ことを型として正確に表現できるため、より型安全にしたい場合は、このオプションを有効化すると良いでしょう。
+TypeScriptのコンパイラーオプションの`useUnknownInCatchVariables`を有効にすると、catchの変数の型が`unknown`型になります。「どんな値がthrowされるか分からない」ことを型として正確に表現できるため、より型安全にしたい場合は、このオプションを有効化すると良いでしょう。
 
 {% page-ref page="../tsconfig/additional-checks/useunknownincatchvariables.md" %}
 
