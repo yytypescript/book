@@ -245,6 +245,7 @@
       * [🚧noUncheckedIndexedAccess](next/reference/tsconfig/additional-checks/nouncheckedindexedaccess.md)
       * [🚧noImplicitOverride](next/reference/tsconfig/additional-checks/noimplicitoverride.md)
       * [🚧noPropertyAccessFromIndexSignature](next/reference/tsconfig/additional-checks/nopropertyaccessfromindexsignature.md)
+      * [🚧 useUnknownInCatchVariables](next/reference/tsconfig/additional-checks/useunknownincatchvariables.md)
   * [Advanced Topics](next/reference/advanced-topics/README.md)
     * [Generator](next/reference/advanced-topics/generator.md)
     * [getters and setters](next/reference/advanced-topics/getters-and-setters.md)

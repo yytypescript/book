@@ -10,22 +10,66 @@ try {
 }
 ```
 
+## throw構文
 
+JavaScriptのthrowは例外を投げる構文です。例外として投げるオブジェクトはErrorオブジェクトを使うのが一般的です。
 
+```javascript
+throw new Error("network error!");
+```
 
+JavaScriptのthrowはJavaなどと異なり、何でも投げることができます。プリミティブ型でさえ投げれます。
 
-TODO: 次の内容を説明する。
+```javascript
+throw "just a string";
+```
 
-* throw構文\(例外の投げ方\)
-* throwできるものはErrorに限らないこと
-  * Error以外を投げるのは本書としては非推奨の旨
-    * 主な理由はスタックトレースが追えない
+これはアンチパターンです。throwが何でも投げられるとしても、Errorオブジェクトを用いるべきです。Errorオブジェクトを使ったほうがコードの読み手に意外性を与えないからです。加えて、スタックトレースが追えるのはErrorオブジェクトだけだからです。
 
-TODO: 下記内容について書く
+## try-catch構文
 
-* tryはブロックスコープ
-* catchの型注釈の書き方
+JavaScriptで例外を捉えるにはtry-catch構文を使います。例外が投げられる可能性がある部分をtryブロックで囲み、catchブロックで捉えた例外に対する処理を行います。
+
+```javascript
+try {
+  throw new Error("something wrong");
+} catch (e) {
+  console.error(e);
+}
+```
+
+### catchの型
+
+TypeScriptではcatchの変数の型はデフォルトで`any`型になります。
+
+```typescript
+try {
+  // ...
+} catch (e) {
+  // eはany型になる
+}
+```
+
+型が`Error`オブジェクトの型ではなく`any`型になるのは、JavaScriptの仕様上どんな値がthrowされるか分からないためです。
+
+コンパイラーオプションの`useUnknownInCatchVariables`を有効にすると、catchの変数の型が`unknown`型になります。「どんな値がthrowされるか分からない」ことを型として正確に表現できるため、より型安全にしたい場合は、このオプションを有効化すると良いでしょう。
+
+{% page-ref page="../tsconfig/additional-checks/useunknownincatchvariables.md" %}
+
+{% page-ref page="../values-types-variables/undefined.md" %}
+
+### catchの分岐
+
+TODO:
+
 * JavaやPHPにある複数catchはJSにはない
   * JSで型ごとにcatchを分岐するには？
-* finally
+
+### try-catchはブロックスコープ
+
+TODO
+
+### finaly
+
+TODO
 
