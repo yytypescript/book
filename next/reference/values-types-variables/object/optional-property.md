@@ -24,3 +24,7 @@ size = { width: undefined }; // OK
 size = { width: null }; // コンパイルエラー
 ```
 
+## 関連情報
+
+{% page-ref page="optional-chaining.md" %}
+
