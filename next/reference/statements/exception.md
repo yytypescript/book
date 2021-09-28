@@ -69,7 +69,7 @@ TODO:
 
 TODO
 
-### finaly
+### finally
 
 TODO
 
