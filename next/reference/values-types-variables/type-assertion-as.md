@@ -76,3 +76,5 @@ let value: number;
 
 一方、型アサーションはコンパイラーに「君はこの型だと思ってるかもしれないけど、本当はこの型だよ」と型推論の不正確さを伝えるものです。
 
+{% page-ref page="type-annotation.md" %}
+
