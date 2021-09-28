@@ -60,10 +60,23 @@ TypeScriptのコンパイラーオプションの`useUnknownInCatchVariables`を
 
 ### catchの分岐
 
-TODO:
+JavaやPHPでは捉えるエラーの型に対応するcatchを複数書けますが、JavaScriptとTypeScriptではcatchは1つしか書けません。JavaScriptでエラーの型によってエラーハンドリングを分岐したい場合は、catchブロックの中で分岐を書く方法で対応します。
 
-* JavaやPHPにある複数catchはJSにはない
-  * JSで型ごとにcatchを分岐するには？
+```typescript
+try {
+  // ...
+} catch (e) {
+  if (e instanceof TypeError) {
+    // TypeErrorに対する処理
+  } else if (e instanceof RangeError) {
+    // RangeErrorに対する処理
+  } else if (e instanceof EvalError) {
+    // EvalErrorに対する処理
+  } else {
+    // その他のエラー
+  }
+}
+```
 
 ### try-catchはブロックスコープ
 
