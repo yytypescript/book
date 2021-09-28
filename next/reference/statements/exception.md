@@ -1,4 +1,4 @@
-# 例外処理
+# 例外処理 \(exception\)
 
 JavaScriptにはJavaに似た例外処理の構文があります。例外には`Error`オブジェクトを使い、throw構文で例外を投げます。try-catch構文で例外を捕捉できます。
 
