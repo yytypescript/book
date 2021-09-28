@@ -105,7 +105,7 @@
       * [readonlyとconstの違い](next/reference/values-types-variables/object/readonly-vs-const.md)
       * [オブジェクト型のオプショナルプロパティ \(optional property\)](next/reference/values-types-variables/object/optional-property.md)
       * [余剰プロパティチェック \(excess property checking\)](next/reference/values-types-variables/object/excess-property-checking.md)
-      * [🚧インデックス型 \(index signature\)](next/reference/values-types-variables/object/index-signature.md)
+      * [インデックス型 \(index signature\)](next/reference/values-types-variables/object/index-signature.md)
       * [プロトタイプベース](next/reference/values-types-variables/object/prototype-based-programming.md)
       * [object、Object、{}の違い](next/reference/values-types-variables/object/difference-among-object-and-object.md)
       * [オブジェクトの分割代入 \(destructuring assignment\)](next/reference/values-types-variables/object/destructuring-assignment-from-objects.md)
