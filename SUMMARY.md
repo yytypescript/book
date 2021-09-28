@@ -217,7 +217,7 @@
       * [🚧Required](next/reference/type-reuse/utility-types/required.md)
       * [🚧Readonly](next/reference/type-reuse/utility-types/readonly.md)
       * [🚧Partial](next/reference/type-reuse/utility-types/partial.md)
-      * [🚧Record](next/reference/type-reuse/utility-types/record.md)
+      * [Record&lt;Keys, Type&gt;](next/reference/type-reuse/utility-types/record.md)
       * [🚧Pick](next/reference/type-reuse/utility-types/pick.md)
       * [🚧Omit](next/reference/type-reuse/utility-types/omit.md)
       * [🚧Exclude](next/reference/type-reuse/utility-types/exclude.md)
