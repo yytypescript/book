@@ -1,6 +1,6 @@
 # if-else
 
-JavaScriptの条件分岐はJavaやPHPと同じようにif-elseを用います。
+JavaScriptの条件分岐はJavaやPHPと同じようにif-else構文を用います。
 
 ```javascript
 if (value === 0) {
