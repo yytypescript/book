@@ -1,5 +1,17 @@
 # 🚧例外処理
 
+JavaScriptにはJavaに似た例外処理の構文があります。例外には`Error`オブジェクトを使い、throw構文で例外を投げます。try-catch構文で例外を捕捉できます。
+
+```javascript
+try {
+  throw new Error("something wrong");
+} catch (e) {
+  console.log(e.message); //=> "something wrong"
+}
+```
+
+
+
 
 
 TODO: 次の内容を説明する。
