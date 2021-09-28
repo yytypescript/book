@@ -54,7 +54,7 @@ try {
 
 TypeScriptのコンパイラーオプションの`useUnknownInCatchVariables`を有効にすると、catchの変数の型が`unknown`型になります。「どんな値がthrowされるか分からない」ことを型として正確に表現できるため、より型安全にしたい場合は、このオプションを有効化すると良いでしょう。
 
-{% page-ref page="../tsconfig/additional-checks/useunknownincatchvariables.md" %}
+{% page-ref page="../tsconfig/strict-type-checks/useunknownincatchvariables.md" %}
 
 {% page-ref page="../values-types-variables/undefined.md" %}
 
