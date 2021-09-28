@@ -36,5 +36,5 @@ const person: Person = {
 
 {% page-ref page="../../values-types-variables/object/index-signature.md" %}
 
-{% page-ref page="../indexed-access-types.md" %}
+{% page-ref page="../mapped-types.md" %}
 
