@@ -9,30 +9,70 @@ TypeScriptコンパイラーはコードをヒントに型を推論してくれ�
 型アサーションの書き方は2つあります。1つはas構文です。
 
 ```typescript
-const value: unknown = "this is a string";
-const length: number = (value as string).length;
+const value: string | number = "this is a string";
+const strLength: number = (value as string).length;
 ```
 
 もう1つはアングルブランケット構文\(angle-bracket syntax\)です。
 
 ```typescript
-const value: unknown = "this is a string";
-const length: number = (<string>value).length;
+const value: string | number = "this is a string";
+const strLength: number = (<string>value).length;
 ```
 
-どちらを用いるかは好みですが、as構文が用いられることのほうが多いです。
+どちらを用いるかは好みですが、アングルブランケット構文はJSXと見分けがつかないことがあるため、as構文が用いられることのほうが多いです。
 
 ## コンパイルエラーになる型アサーション
 
-TODO: 型アサーションは無制限にできるわけではないことを説明する。
+型アサーションを使えば制限なく型の情報を上書きできるかというとそうではありません。例えば、`number`型を`string`型にする型アサーションはコンパイルエラーになります。
+
+```typescript
+const num = 123;
+const str: string = num as string;
+//                  ^^^^^^^^^^^^^ コンパイルエラー
+```
+
+この例ではコンパイルエラーの内容は次のようになります。
+
+> Conversion of type 'number' to type 'string' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.\(2352\)
+
+このエラーは「number型をstring型にするのは間違いです。お互いの型に共通する部分が少なすぎるからです」という内容です。
+
+このように型アサーションはコンパイラーの型推論を上書きできるとは言っても、無茶な型の変換はできないようになっています。
+
+それでも自分の書いた型アサーションが正しいという場合は、`unknown`型を経由することで上のようなエラーを出さないようにもできます。
+
+```typescript
+const num = 123;
+const str: string = num as unknown as string; // OK
+```
 
 ## 型アサーションとキャストの違い
 
 型アサーションは、他の言語のキャストに似ています。キャストとは、実行時にある値の型を別の型に変換することです。型アサーションは、実行時に影響しません。値の型変換はしないのです。あくまでコンパイル時にコンパイラーに型を伝えるだけです。コンパイラーはその情報を手がかりに、コードをチェックします。型アノテーションはキャストではないため、TypeScriptでは型アノテーションをキャストとは呼ばないことになっています。実行時に型変換をするには、そのためのロジックを書く必要があります。
 
-## 型アサーションは危険？
+## 大いなる力には大いなる責任が伴う
+
+型アサーションには、コンパイラーの型推論を上書きする強力さがあります。そのため、プログラマーは型アサーションによってバグを産まないように十分注意する必要があります。型に関することはできるだけ、コンパイラーの型推論に頼ったほうが安全なので、型アサーションは、やむを得ない場合にのみ使うべきです。
+
+型アサーションを使う必要が出てきたら、それよりも先に、型ガードやユーザー定義型ガードで解決できないか検討してみると良いでしょう。
+
+{% page-ref page="../statements/control-flow-analysis-and-type-guard.md" %}
+
+{% page-ref page="../functions/type-guard-functions.md" %}
+
+{% page-ref page="../functions/assertion-functions.md" %}
 
 ## 型アサーションと型アノテーションの違い
 
-TODO: 型アサーションと型アノテーション\(本書では型注釈としている\)は名前が似ているためか、しばしば混同されることが見受けられるので、念の為異なる機能であることを強調する。
+型アサーションと型アノテーション\(type annotation\)は名前が似ているためかしばしば混同されます。本書では型アノテーションを「型注釈」と表記しています。この2つはTypeScriptの異なる機能です。
+
+型注釈は、コンパイラーに代入可能な型を指定するためのものです。変数や関数の戻り値がどのような型であるべきかをコンパイラーに伝えます。コンパイラーは型注釈をヒントに、その型に値が代入可能かどうかをチェックし、代入できないことが分かり次第報告してきます。
+
+```typescript
+let value: number;
+//         ^^^^^^ 型注釈
+```
+
+一方、型アサーションは、コンパイラーの型推論を上書きするものです。`string | number`型を`string`型だけに型の解釈を狭めたりすることができます。
 
