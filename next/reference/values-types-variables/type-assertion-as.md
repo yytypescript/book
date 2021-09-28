@@ -1,4 +1,4 @@
-# 🚧型アサーション「as」\(type assertion\)
+# 型アサーション「as」\(type assertion\)
 
 TypeScriptには、型推論を上書きする機能があります。その機能を型アサーション\(type assertion\)と言います。
 
