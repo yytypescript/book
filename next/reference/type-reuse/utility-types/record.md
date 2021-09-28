@@ -32,5 +32,9 @@ const person: Person = {
 };
 ```
 
+## 関連情報
 
+{% page-ref page="../../values-types-variables/object/index-signature.md" %}
+
+{% page-ref page="../indexed-access-types.md" %}
 
