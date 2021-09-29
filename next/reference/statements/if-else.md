@@ -1,4 +1,4 @@
-# if-else
+# if-else文
 
 JavaScriptの条件分岐はJavaやPHPと同じようにif-else構文を用います。
 

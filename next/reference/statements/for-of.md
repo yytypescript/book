@@ -1,4 +1,4 @@
-# for-of - 拡張for文
+# for-of文 - 拡張for文
 
 JavaScriptで配列をループするのに使えるのがfor-of構文です。PHPの`foreach`やPythonの`for in`と使い勝手が似ている構文です。
 
