@@ -48,3 +48,7 @@ if (value === 0) {
 }
 ```
 
+## 関連情報
+
+{% page-ref page="switch/" %}
+
