@@ -48,3 +48,27 @@ if (extension === "js") {
 // 出力結果: TypeScript
 ```
 
+caseは連続して書くこともできます。
+
+```javascript
+const food = "🍙";
+switch (food) {
+  case "🍎":
+  case "🍓":
+  case "🍉":
+    console.log("くだもの");
+    break;
+  case "🍙":
+  case "🍜":
+  case "🍞":
+    console.log("炭水化物");
+    break;
+  case "🥕":
+  case "🧅":
+  case "🥬":
+    console.log("野菜");
+    break;
+}
+// 結果: 炭水化物
+```
+
