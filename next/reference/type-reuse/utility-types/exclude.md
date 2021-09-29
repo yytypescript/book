@@ -35,7 +35,7 @@ type PassGrade = Exclude<Grade, "D" | "E">;
 
 ## Excludeの注意点
 
-`U`は`T`の部分集合である制限がありません。つまり、`T`に存在しない型を`U`に入れてしまったり、タイポなどに気をつけなければいけません。次の例はPull Requestに関するタイプエイリアスと解釈してください。
+`U`は`T`の部分集合である制限がありません。つまり、`T`に存在しない型を`U`に入れてしまったり、タイポなどに気をつけなければいけません。次の例は、Pull Requestに関する型と解釈してください。
 
 ```typescript
 type PullRequestState = "draft" | "reviewed" | "rejected";
