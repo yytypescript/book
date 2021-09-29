@@ -69,6 +69,6 @@ switch (food) {
     console.log("野菜");
     break;
 }
-// 結果: 炭水化物
+// 出力結果: 炭水化物
 ```
 
