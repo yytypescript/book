@@ -68,6 +68,9 @@ switch (food) {
   case "🥬":
     console.log("野菜");
     break;
+  default:
+    console.log("未知の食べ物");
+    break;
 }
 // 出力結果: 炭水化物
 ```
