@@ -237,3 +237,7 @@ func(); //=> 0 0 0
 『サバイバルTypeScript』より
 {% endhint %}
 
+## 関連情報
+
+{% page-ref page="../type-reuse/utility-types/partial.md" %}
+
