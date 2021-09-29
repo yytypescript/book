@@ -138,7 +138,7 @@
   * [🚧文](next/reference/statements/README.md)
     * [変数のスコープ \(scope\)](next/reference/statements/variable-scope.md)
     * [if-else](next/reference/statements/if-else.md)
-    * [🚧三項演算子 \(ternary operator\)](next/reference/statements/ternary-operator.md)
+    * [三項演算子 \(ternary operator\)](next/reference/statements/ternary-operator.md)
     * [🚧for-of](next/reference/statements/for-of.md)
     * [🚧switch](next/reference/statements/switch/README.md)
       * [🚧switchのfall-through問題](next/reference/statements/switch/switch-fallthrough.md)
