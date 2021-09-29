@@ -27,3 +27,7 @@ type CommonTypes = Extract<"a" | "b" | "c", "b" | "c" | "d">;
 // "b" | "c"
 ```
 
+## 関連情報
+
+{% page-ref page="exclude.md" %}
+
