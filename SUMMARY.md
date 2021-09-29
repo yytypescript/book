@@ -222,7 +222,7 @@
       * [Pick&lt;T, Keys&gt;](next/reference/type-reuse/utility-types/pick.md)
       * [Omit&lt;T, Keys&gt;](next/reference/type-reuse/utility-types/omit.md)
       * [Exclude&lt;T, U&gt;](next/reference/type-reuse/utility-types/exclude.md)
-      * [🚧Extract](next/reference/type-reuse/utility-types/extract.md)
+      * [Extract&lt;T, U&gt;](next/reference/type-reuse/utility-types/extract.md)
     * [🚧mapped types](next/reference/type-reuse/mapped-types.md)
     * [🚧indexed access types](next/reference/type-reuse/indexed-access-types.md)
   * [ジェネリクス \(generics\)](next/reference/generics/README.md)

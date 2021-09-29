@@ -88,3 +88,7 @@ type BookInputData = Pick<Book, "title" | "author">;
 
 このようにすれば`BookInputData`は少なくとも`Book`とコード上の繋がりができる上に、`author`プロパティの型変更を自動で追従してくれるようになります。
 
+## 関連情報
+
+{% page-ref page="omit.md" %}
+

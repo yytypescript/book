@@ -29,3 +29,7 @@ type RequiredPerson = {
 };
 ```
 
+## 関連情報
+
+{% page-ref page="partial.md" %}
+
