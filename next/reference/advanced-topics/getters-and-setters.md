@@ -1,4 +1,4 @@
-# getters and setters
+# セッターとゲッター \(set, get\)
 
 プロパティへのインターセプター\(参照・代入・監視などの意味\)としGetter/Setterがあります。
 
