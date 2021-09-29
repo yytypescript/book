@@ -1,4 +1,4 @@
-# 🚧ユーティリティ型 \(utility type\)
+# ユーティリティ型 \(utility type\)
 
 TypeScriptで開発するということはJavaScriptに型を付与することです。ここでは型を付与するときにあらかじめ用意されているユーティリティ型\(utility type\)を紹介します。
 

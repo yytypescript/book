@@ -214,7 +214,7 @@
   * [🚧型の再利用](next/reference/type-reuse/README.md)
     * [typeof型演算子](next/reference/type-reuse/typeof-type-operator.md)
     * [keyof型演算子](next/reference/type-reuse/keyof-type-operator.md)
-    * [🚧ユーティリティ型 \(utility type\)](next/reference/type-reuse/utility-types/README.md)
+    * [ユーティリティ型 \(utility type\)](next/reference/type-reuse/utility-types/README.md)
       * [Required&lt;T&gt;](next/reference/type-reuse/utility-types/required.md)
       * [Readonly&lt;T&gt;](next/reference/type-reuse/utility-types/readonly.md)
       * [Partial&lt;T&gt;](next/reference/type-reuse/utility-types/partial.md)
