@@ -55,5 +55,5 @@ if (extension === "js") {
 
 {% page-ref page="if-else.md" %}
 
-{% page-ref page="switch/" %}
+{% page-ref page="switch.md" %}
 
