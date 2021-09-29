@@ -1,4 +1,4 @@
-# switch文
+# 🚧switch文
 
 switch構文はJavaScriptで条件分岐を行うための構文です。
 

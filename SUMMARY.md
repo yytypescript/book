@@ -141,7 +141,7 @@
     * [if-else文](next/reference/statements/if-else.md)
     * [三項演算子 \(ternary operator\)](next/reference/statements/ternary-operator.md)
     * [for-of文 - 拡張for文](next/reference/statements/for-of.md)
-    * [switch文](next/reference/statements/switch/README.md)
+    * [🚧switch文](next/reference/statements/switch/README.md)
       * [🚧switchのfall-through問題](next/reference/statements/switch/switch-fallthrough.md)
       * [🚧switch-and-variable-scope](next/reference/statements/switch/switch-and-variable-scope.md)
     * [例外処理 \(exception\)](next/reference/statements/exception.md)
