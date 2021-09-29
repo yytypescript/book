@@ -1,2 +1,4 @@
+root: ./
+
 redirects:
     reference/generics: ./next/reference/generics.md
