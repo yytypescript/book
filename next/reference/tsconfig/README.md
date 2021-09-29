@@ -1,2 +1,2 @@
-# 🚧tsconfig
+# tsconfig
 

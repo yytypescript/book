@@ -1,2 +1,2 @@
-# 🚧Strict Type-Checking Options
+# Strict Type-Checking Options
 
