@@ -74,6 +74,7 @@
   * [静的型付け](next/overview/static-type.md)
   * [🚧ECMAScript](next/overview/ecmascript.md)
   * [TypeScriptの射程](next/overview/range-of-typescript.md)
+  * [🚧TypeScriptは何ではないか？](next/overview/typescript-is-not-that.md)
 * [🚧作って学ぶTypeScript](next/tutorials/README.md)
   * [🚧Next.jsで○○を作ろう](next/tutorials/nextjs.md)
   * [🚧Jestでテストを書こう](next/tutorials/jest.md)
