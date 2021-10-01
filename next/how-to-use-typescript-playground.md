@@ -58,7 +58,7 @@ TypeScript が enum を どのように JavaScript へコンパイルしてい�
 
 [https://www.typescriptlang.org/play?\#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA)
 
-TypeScript Playground はページのURLを共有するだけで書いたコードを他の人に共有することができます。TypeScript Playground が他のサービスと異なる特徴は、ユーザーアカウントを用意してコードを保存せずに手軽にコードが共有ができる点です。
+TypeScript Playground はページのURLを共有するだけで書いたコードを他の人に共有することができます。
 
 TypeScript Playground は
 
