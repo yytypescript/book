@@ -1,6 +1,6 @@
 # 静的メソッド \(static method\)
 
-JavaやPHPには静的メソッド\(static method\)という概念があります。通常のメソッドはインスタンスに属しますが、静的メソッドはクラスに属します。JavaやPHPではstaticキーワードで静的フィールドを宣言できます。
+JavaやPHPには静的メソッド\(static method\)という概念があります。Rubyではクラスメソッドに相当します。通常のメソッドはインスタンスに属しますが、静的メソッドはクラスに属します。JavaやPHPではstaticキーワードで静的フィールドを宣言できます。
 
 {% tabs %}
 {% tab title="Java" %}
