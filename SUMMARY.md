@@ -263,6 +263,7 @@
 * [🚧Tips](next/tips.md)
 * [🚧索引:記号とキーワード](next/symbols-and-keywords.md)
 * [🚧TypeScript Playgroundの使い方](next/how-to-use-typescript-playground.md)
+* [🚧TypeScript超入門](next/typescript.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
 
