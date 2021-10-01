@@ -54,7 +54,7 @@ TypeScript が enum を どのように JavaScript へコンパイルしてい�
 
 ### 書いたコードを共有する
 
-↓のURLを開くとエディタにコードが入力された状態で TypeScript Playgournd が表示されます。
+↓のURLを開いてみてください。エディタにコードが入力された状態で TypeScript Playgournd が表示されます。
 
 [https://www.typescriptlang.org/play?\#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA)
 
