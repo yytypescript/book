@@ -1,4 +1,4 @@
-# 🚧TypeScript超入門
+# 🚧TypeScript超入門 〜10分で分かるTypeScriptの概要〜
 
-TODO: TypeScriptの触りが分かる長めのシングルページを作る。
+TODO: 忙しい人向けにTypeScriptのエッセンスが分かる長めのシングルページを作る。
 
