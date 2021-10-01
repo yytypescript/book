@@ -66,6 +66,7 @@ description: サバイバルTypeScript 〜実務で使うなら最低限ここ�
 * 建築のジョー
 * ないとう
 * takezoux2
+* \_rena\_h
 
 ## 継続的アップデート
 
