@@ -58,7 +58,7 @@ TypeScript が enum を どのように JavaScript へコンパイルしてい�
 
 [https://www.typescriptlang.org/play?\#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA)
 
-TypeScript Playground ではページのURLを共有するだけで書いたコードを他の人に共有することができます。TypeScript Playground が他のサービスと異なる特徴は、ユーザーアカウントを用意してコードを保存せずに手軽にコードが共有ができる点です。
+TypeScript Playground はページのURLを共有するだけで書いたコードを他の人に共有することができます。TypeScript Playground が他のサービスと異なる特徴は、ユーザーアカウントを用意してコードを保存せずに手軽にコードが共有ができる点です。
 
 TypeScript Playground は
 
@@ -72,7 +72,19 @@ TypeScript Playground は
 
 ### コンパイルエラーの確認方法
 
-TODO
+エディター上で赤く表示された波線にマウスオーバーをすることでリアルタイムにコンパイルのエラーを確認することができます。
+
+```typescript
+let value = '1';
+value = 1;
+value = true;
+```
+
+また、エディターでマウスオーバーをする以外にも右側の `Errors` タブを表示して、全てのエラーを一覧で確認することができます。
+
+![](../.gitbook/assets/sukurnshotto-2021-10-01-220014png.png)
+
+
 
 ## TypeScript PlaygroundのTS Configの設定方法
 
