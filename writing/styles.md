@@ -25,13 +25,7 @@ description: みんなで執筆しても同じような文体になるように�
 
 ## Capitalization <a id="firstHeading"></a>
 
-### 見出しの英単語は単語1文字目を大文字にする
-
-> 🙆🏻‍♂️ Literal Types / ❌ Literal **t**ypes / ❌ **l**iteral **t**ypes  
-> 🙆🏻‍♂️ リテラル型\(Literal Types\) / ❌ リテラル型\(**l**iteral **t**ypes\)  
-> 🙆🏻‍♂️ Literal Typesの使い所
-
-### 文中の英単語は小文字にする
+### 英単語は小文字にする
 
 > 🙆🏻‍♂️ リテラル型\(literal types\)とは、  
 > ❌ リテラル型\(**L**iteral **T**ypes\)とは、
