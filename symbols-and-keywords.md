@@ -8,11 +8,11 @@ JavaScriptやTypeScriptのコードには`?.`のような記号や`as`のよう�
 
 ## 記号とキーワード
 
-### `!` 論理否定演算子 ![js](.gitbook/assets/js.svg)
+### `!` 論理否定演算子 \(logical not operator\) ![js](.gitbook/assets/js.svg)
 
 真値と偽値を反転します。
 
-### `!` 非Nullアサーション ![ts](.gitbook/assets/ts.svg)
+### `!` 非Nullアサーション \(non-null assertion operator\) ![ts](.gitbook/assets/ts.svg)
 
 値がnullやundefinedでないことを宣言し、 コンパイラーに値を非Nullとして解釈させます。
 
@@ -43,7 +43,7 @@ let numbers!: number[];
 
 double bangはJavaScriptで定義されている演算子ではなく、論理否定演算子を2つ連続したイディオムです。値がtruthyかを求めるときに使われます。
 
-### `!=` 不等価演算子 ![js](.gitbook/assets/js.svg)
+### `!=` 不等価演算子 \(inequality operator\) ![js](.gitbook/assets/js.svg)
 
 左の値と右の値が異なるか判定します。型が異なる場合は型変換されて比較されます。
 
@@ -51,7 +51,7 @@ double bangはJavaScriptで定義されている演算子ではなく、論理�
 "1" != 1; // false
 ```
 
-### `!==` 厳密不等価演算子 ![js](.gitbook/assets/js.svg)
+### `!==` 厳密不等価演算子 \(strict inequality operator\) ![js](.gitbook/assets/js.svg)
 
 型を含めて左の値と右の値が異なるか判定します。
 
@@ -59,11 +59,11 @@ double bangはJavaScriptで定義されている演算子ではなく、論理�
 1 !== 2; // true
 ```
 
-### `"` 文字列リテラル ![js](.gitbook/assets/js.svg)
+### `"` 文字列リテラル \(string literal\) ![js](.gitbook/assets/js.svg)
 
 `"foo"`のように文字列リテラルの開始と終了に使われる記号です。
 
-### `#` プライベートプロパティ ![js](.gitbook/assets/js.svg)
+### `#` プライベートプロパティ \(private property\) ![js](.gitbook/assets/js.svg)
 
 クラスのプロパティのうち`#`で始まるプロパティはプライベートになります。
 
@@ -76,7 +76,7 @@ class ExampleClass {
 }
 ```
 
-### `$` ドル変数 ![js](.gitbook/assets/js.svg)
+### `$` ドル変数 \(dollar variable\) ![js](.gitbook/assets/js.svg)
 
 慣習的にjQueryなどのライブラリで変数として使われることがあります。変数名として`$`が使われる場合は、JavaScriptとしては変数以上の特別な意味はありません。
 
@@ -89,7 +89,7 @@ const name = "John";
 console.log(`Hi, ${name}.`); // "Hi, John."
 ```
 
-### `%` 剰余演算子 ![js](.gitbook/assets/js.svg)
+### `%` 剰余演算子 \(reminder operator\) ![js](.gitbook/assets/js.svg)
 
 左の値を右の値で割った余りを計算します。
 
@@ -97,11 +97,11 @@ console.log(`Hi, ${name}.`); // "Hi, John."
 12 % 5; // 2
 ```
 
-### `%=` 剰余代入 ![js](.gitbook/assets/js.svg)
+### `%=` 剰余代入 \(reminder assignment\) ![js](.gitbook/assets/js.svg)
 
 左の変数の値に右の値で割り算した余りを左の変数に割り当てます。
 
-### `&` ビット論理積 ![js](.gitbook/assets/js.svg)
+### `&` ビット論理積 \(bitwise and\) ![js](.gitbook/assets/js.svg)
 
 左の値と右の値で共にビットが1である位置のビットを1に します。
 
@@ -128,7 +128,7 @@ type MagicalSwordsman = Swordsman & Wizard;
 
 {% page-ref page="reference/values-types-variables/intersection.md" %}
 
-### `&=` ビット論理積代入 ![js](.gitbook/assets/js.svg)
+### `&=` ビット論理積代入 \(bitwise and assignment\) ![js](.gitbook/assets/js.svg)
 
 左の変数の値と右の値で共にビットが1である位置のビットを1にした結果を左の変数に割り当てます。
 
@@ -140,11 +140,11 @@ console.log(a); // 00000001
 // 出力: 1
 ```
 
-### `&&` 論理積 ![js](.gitbook/assets/js.svg)
+### `&&` 論理積 \(logical and\) ![js](.gitbook/assets/js.svg)
 
 全ての真偽値が `true` のときに `true` を返します。そうでない場合に `false` を返します。
 
-### `&&=` 論理積代入 ![js](.gitbook/assets/js.svg)
+### `&&=` 論理積代入 \(logical and assignment\) ![js](.gitbook/assets/js.svg)
 
 左の変数の真偽値と右の真偽値の論理積の結果を左の変数に割り当てます。
 
@@ -155,7 +155,7 @@ a &&= b;
 console.log(a); // false
 ```
 
-### `'` 文字列リテラル ![js](.gitbook/assets/js.svg)
+### `'` 文字列リテラル \(string literal\) ![js](.gitbook/assets/js.svg)
 
 `'foo'`のように文字列リテラルの開始と終了に使われる記号です。
 
@@ -172,7 +172,7 @@ console.log(a); // false
 //                         ^^
 ```
 
-### `*` 乗算演算子 ![js](.gitbook/assets/js.svg)
+### `*` 乗算演算子 \(multiplication operator\) ![js](.gitbook/assets/js.svg)
 
 左の値と右の値を掛け算します。
 
@@ -203,11 +203,11 @@ function* func2() {
 }
 ```
 
-### `*=` 乗算代入 ![js](.gitbook/assets/js.svg)
+### `*=` 乗算代入 \(multiplication assignment\) ![js](.gitbook/assets/js.svg)
 
 左の変数の値と右の値を掛け算した結果を左の変数に割り当てます。
 
-### `**` べき乗演算子 ![js](.gitbook/assets/js.svg)
+### `**` べき乗演算子 \(exponentiation\) ![js](.gitbook/assets/js.svg)
 
 左の値を右の値でべき乗します。
 
@@ -215,7 +215,7 @@ function* func2() {
 2 ** 3; // 8
 ```
 
-### `**=` べき乗代入 ![js](.gitbook/assets/js.svg)
+### `**=` べき乗代入 \(exponentiation assignment\) ![js](.gitbook/assets/js.svg)
 
 左の変数の値を右の値でべき乗した結果を左の変数に割り当てます。
 
@@ -227,7 +227,7 @@ Number型に変換します。
 +"1"; // 1
 ```
 
-### `+` 加算演算子 ![js](.gitbook/assets/js.svg)
+### `+` 加算演算子 \(addition operator\) ![js](.gitbook/assets/js.svg)
 
 2つの値を足し算します。
 
@@ -251,11 +251,11 @@ type MyReadonly<T> = {
 };
 ```
 
-### `+=` 加算代入 ![js](.gitbook/assets/js.svg)
+### `+=` 加算代入 \(addition assignment\) ![js](.gitbook/assets/js.svg)
 
 左の変数の値とに右の値を足し算した結果を左の変数に割り当てます。
 
-### `++` インクリメント ![js](.gitbook/assets/js.svg)
+### `++` インクリメント \(increment\) ![js](.gitbook/assets/js.svg)
 
 変数に`1`を足す演算子です。
 
@@ -304,7 +304,7 @@ const data = {
 type Tuple = [number, string, boolean];
 ```
 
-### `,` カンマ演算子 ![js](.gitbook/assets/js.svg)
+### `,` カンマ演算子 \(comma operator\) ![js](.gitbook/assets/js.svg)
 
 左から右に式を評価をして、一番右の評価した値を返します。
 
@@ -322,13 +322,13 @@ console.log(a)  // true
 -"1"; // -1
 ```
 
-### `-` 減算演算子 ![js](.gitbook/assets/js.svg)
+### `-` 減算演算子 \(subtraction operator\) ![js](.gitbook/assets/js.svg)
 
 2つの値を引き算します。
 
 ### `-` 修飾子の削除 ![ts](.gitbook/assets/ts.svg)
 
-`readonly`や`?`などの修飾子を削除する。
+`readonly`や`?`などの修飾子を削除します。
 
 ```typescript
 type MyRequired<T> = {
@@ -340,11 +340,11 @@ type Writable<T> = {
 };
 ```
 
-### `-=` 減算代入 ![js](.gitbook/assets/js.svg)
+### `-=` 減算代入 \(subtraction assignment\) ![js](.gitbook/assets/js.svg)
 
 左の変数の値から右の値を引き算した結果を左の変数に割り当てます。
 
-### `--` デクリメント ![js](.gitbook/assets/js.svg)
+### `--` デクリメント \(decrement\) ![js](.gitbook/assets/js.svg)
 
 変数に`1`を引き算する演算子です。
 
@@ -363,7 +363,7 @@ const object = { property: 123 };
 object.property; // 123
 ```
 
-### `...` スプレッド構文 ![js](.gitbook/assets/js.svg)
+### `...` スプレッド構文 \(spread syntax\) ![js](.gitbook/assets/js.svg)
 
 配列などの反復可能オブジェクトを関数の引数にする構文です。
 
@@ -391,7 +391,7 @@ const newObject = { ...object, z: 3 };
 console.log(newObject); // { x: 1, y: 2, z: 3 }
 ```
 
-### `...` 残余構文 ![js](.gitbook/assets/js.svg)
+### `...` 残余構文 \(rest syntax\) ![js](.gitbook/assets/js.svg)
 
 関数の残りの引数をひとつの配列として受け取るのに用いられる構文です。
 
@@ -418,23 +418,23 @@ const { a, b, ...rest } = object;
 console.log(rest); // { c: 3, d: 4 }
 ```
 
-### `/` 除算演算子 ![js](.gitbook/assets/js.svg)
+### `/` 除算演算子 \(division operator\) ![js](.gitbook/assets/js.svg)
 
 左の値を右の値で割り算します。
 
-### `/` 正規表現リテラル ![js](.gitbook/assets/js.svg)
+### `/` 正規表現リテラル \(regular expression literal\) ![js](.gitbook/assets/js.svg)
 
 `/[0-9]+/`のような正規表現リテラルの前後に書かれる記号です。
 
-### `/=` 除算代入 ![js](.gitbook/assets/js.svg)
+### `/=` 除算代入 \(division assignment\) ![js](.gitbook/assets/js.svg)
 
 左の変数の値を右の値で割り算した結果を左の変数に割り当てます。
 
-### `//` 行コメント ![js](.gitbook/assets/js.svg)
+### `//` 行コメント \(one line comment\) ![js](.gitbook/assets/js.svg)
 
 行コメントの開始を表す記号です。
 
-### `/*` 複数行コメント ![js](.gitbook/assets/js.svg)
+### `/*` 複数行コメント \(multiline comment\) ![js](.gitbook/assets/js.svg)
 
 複数行コメントの開始を表す記号です。
 
@@ -476,7 +476,7 @@ function numberToString(x: number): string {
 }
 ```
 
-### `<` 小なり演算子 ![js](.gitbook/assets/js.svg)
+### `<` 小なり演算子 \(less than operator\) ![js](.gitbook/assets/js.svg)
 
 左の値が右の値よりも小さいか判定します。
 
@@ -512,11 +512,11 @@ let someValue: unknown = "this is a string";
 let strLength: number = (<string>someValue).length;
 ```
 
-### `<=` 小なりイコール演算子 ![js](.gitbook/assets/js.svg)
+### `<=` 小なりイコール演算子 \(less than or equal\) ![js](.gitbook/assets/js.svg)
 
 左の値が右の値以下か判定します。
 
-### `<<` ビット左シフト演算子 ![js](.gitbook/assets/js.svg)
+### `<<` ビット左シフト演算子 \(left shift operator\) ![js](.gitbook/assets/js.svg)
 
 左の値のビットを右の値の数だけ左にずらします。
 
