@@ -31,8 +31,6 @@ type ConfirmationMessage =
 
 今回は今まで紹介してきたオブジェクトから型を作り出す方法と Mapped type の合わせ技で再現することができます。
 
-{% page-ref page="../features/type-aliases.md" %}
-
 {% page-ref page="generates-type-from-object.md" %}
 
 {% page-ref page="generates-type-from-object-key.md" %}
@@ -53,8 +51,6 @@ type Language = keyof typeof conf;
 ### Mapped type
 
 オブジェクトのプロパティの型を参照するために Mapped type を使います。そのとき元のオブジェクトから型を生成するために `typeof` を使います。
-
-{% page-ref page="../features/type-aliases.md" %}
 
 ```typescript
 type ConfirmationMessage = typeof conf[Language];

@@ -1,0 +1,45 @@
+# リテラル型 \(literal type\)
+
+TypeScriptではプリミティブ型の特定の値だけを代入可能にする型を表現できます。そのような型をリテラル型と呼びます。
+
+例えば、次の例は数値が代入可能な型注釈です。数値であれば、1でも100でも何でも代入できます。
+
+```typescript
+let x: number;
+x = 1;
+```
+
+リテラル型を用いると、1だけが代入可能な型が作れます。
+
+```typescript
+let x: 1;
+x = 1;
+x = 100; // ERROR: Type '100' is not assignable to type '1'.(2322)
+```
+
+## リテラル型として表現できるもの
+
+リテラル型として表現できるプリミティブ型は次のとおりです。
+
+* 論理型のtrueとfalse
+* 数値型の値
+* 文字列型の文字列
+
+```typescript
+const isTrue: true = true;
+const num: 123 = 123;
+const str: "foo" = "foo";
+```
+
+## リテラル型の用途
+
+一般的にリテラル型はマジックナンバーやステートの表現に用いられます。その際、ユニオン型と組み合わせることが多いです。
+
+```typescript
+let status: 1 | 2 | 3 = 1;
+```
+
+{% page-ref page="union.md" %}
+
+{% page-ref page="discriminated-union.md" %}
+

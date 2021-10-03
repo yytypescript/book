@@ -44,10 +44,6 @@ type TypeOfLanguage = typeof conf;
 
 ### `keyof`
 
-タイプエイリアスで紹介したMapped Typeを使用します。
-
-{% page-ref page="../features/type-aliases.md" %}
-
 `kyeof` はオブジェクトの型に使うとそのオブジェクトのキーをユニオン型にして返します。上記の `TypeOfLanguage` 型があれば
 
 ```typescript
@@ -56,6 +52,8 @@ type Langauge = keyof TypeOfLanguage;
 ```
 
 となります。
+
+{% page-ref page="../reference/type-reuse/keyof-type-operator.md" %}
 
 ## まとめ
 

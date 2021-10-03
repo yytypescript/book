@@ -200,8 +200,6 @@ const shallowCopied: object = {...sample};
 
 もちろん変数 `sample` はオブジェクトである必要があります。この `...` はスプレッド構文です。スプレッド構文については関数の章を参照ください。
 
-{% page-ref page="../features/function.md" %}
-
 オブジェクトのコピーにスプレッド構文を使えるようになったのはES2018からです。たとえば次のような浅いコピーの例を
 
 ```typescript

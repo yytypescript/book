@@ -46,8 +46,6 @@ type UserInfo = {
 
 今回は律儀に `Optional` の `?` をつけましたが `Partial<T>` でも代用可です。
 
-{% page-ref page="../features/utility-types.md" %}
-
 このようにしてこの型のオブジェクトを引数の方としてひとつ受けるようにします。
 
 ```typescript
@@ -72,9 +70,9 @@ function findUserByName({ name }: UserInfo): User {
 
 分割代入について再度知識が必要な方は以下のページをご参照ください。
 
-{% page-ref page="../features/object.md" %}
+{% page-ref page="../reference/values-types-variables/object/destructuring-assignment-from-objects.md" %}
 
-{% page-ref page="../features/function.md" %}
+{% page-ref page="../reference/functions/destructuring-assignment-parameters.md" %}
 
 分割代入はこの関数を使う側としても引数の順番を気にする必要がなくなるとともに、ありがたいことに今後の機能拡張によって `UserInfo` が成長したとしても毎回引数を追加する必要はなく `UserInfo` を書き換え使用したい関数でそのキーにアクセスをするだけですみます。上記例のように国籍 \(`nationality`\) が増えれば好きなところに加えるだけです。順番は呼び出しに影響を与えません。
 

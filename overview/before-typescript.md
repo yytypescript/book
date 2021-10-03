@@ -1,7 +1,3 @@
----
-description: JavaScriptの誕生からTypeScriptが登場するまでの簡単な歴史
----
-
 # TypeScript誕生の背景
 
 TypeScriptは、JavaScriptでも大規模なアプリケーションを開発しやすくすることを目的に開発されたプログラミング言語です。
