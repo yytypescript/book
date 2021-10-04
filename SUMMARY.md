@@ -169,7 +169,7 @@
       * [Omit&lt;T, Keys&gt;](reference/type-reuse/utility-types/omit.md)
       * [Exclude&lt;T, U&gt;](reference/type-reuse/utility-types/exclude.md)
       * [Extract&lt;T, U&gt;](reference/type-reuse/utility-types/extract.md)
-    * [Mapped Type](reference/type-reuse/mapped-types.md)
+    * [マップ型 \(mapped type\)](reference/type-reuse/mapped-types.md)
     * [🚧indexed access types](reference/type-reuse/indexed-access-types.md)
   * [ジェネリクス \(generics\)](reference/generics/README.md)
     * [🚧ジェネリクスが使われている標準ライブラリ](reference/generics/built-in-libraries-using-generics.md)
