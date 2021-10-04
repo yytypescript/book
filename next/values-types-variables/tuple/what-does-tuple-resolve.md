@@ -1,2 +1,0 @@
-# What Does Tuple Resolve?
-

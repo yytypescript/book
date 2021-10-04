@@ -1,2 +1,0 @@
-# Primitive Types
-

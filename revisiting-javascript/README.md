@@ -1,2 +1,0 @@
-# JavaScript再入門
-

@@ -1,2 +1,0 @@
-# Type Annotation of Objects
-

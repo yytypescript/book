@@ -1,2 +1,0 @@
-# Properties of Objects
-

@@ -1,2 +1,0 @@
-# Strict Type-Checking Options
-

@@ -1,2 +1,0 @@
-# Definite Assignment Assertion
-
