@@ -157,7 +157,7 @@
   * [🚧モジュール](reference/modules.md)
   * [import / export /require](reference/import-export-require.md)
   * [シングルプロセス・シングルスレッドとコールバック](reference/single-process-and-callback.md)
-  * [🚧型の再利用](reference/type-reuse/README.md)
+  * [型の再利用](reference/type-reuse/README.md)
     * [typeof型演算子](reference/type-reuse/typeof-type-operator.md)
     * [keyof型演算子](reference/type-reuse/keyof-type-operator.md)
     * [ユーティリティ型 \(utility type\)](reference/type-reuse/utility-types/README.md)
