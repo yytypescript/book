@@ -22,7 +22,7 @@ type Language = 'en' | 'fr' | 'es' | 'ja' | 'zh';
 
 ### `typeof`
 
-頻出するこの `typeof` はJavaScriptのものではなく、TypeScriptの `typeof` です。これをオブジェクトに対して使用している例は前のページにある通りです。
+頻出するこの `typeof` はJavaScriptのものではなく、TypeScriptの `typeof` です。これをオブジェクトに対して使用している例は前のページにあるとおりです。
 
 {% page-ref page="generates-type-from-object.md" %}
 

@@ -3,7 +3,7 @@
 リリースされたバージョン: 2.6
 
 オブジェクト指向では、スーパークラスに対しサブクラスのインスタンスを代入することはできますがその逆は一般的ではありません。  
-例えばJavaScriptの `Error` クラスを拡張しスタックトレースを出力できるようになった `RuntimeError` というクラスを用意します。ここではスタックトレースの実装は重要ではないので `stacktrace()` というメソッドが加わったとだけ解釈してください。
+たとえばJavaScriptの `Error` クラスを拡張しスタックトレースを出力できるようになった `RuntimeError` というクラスを用意します。ここではスタックトレースの実装は重要ではないので `stacktrace()` というメソッドが加わったとだけ解釈してください。
 
 ```typescript
 class RuntimeError extends Error {
@@ -30,7 +30,7 @@ errorDump(new Error('error'));
           ~~~~~~~~~~~~~~~~~~
 ```
 
-しかしながら `dumpRuntimeError` 型の部分型である `dumpError` という型を定義したとすると、以下の代入が成り立ちます。
+しかしながら `dumpRuntimeError` 型の部分型である `dumpError` という型を定義したとすると、次の代入が成り立ちます。
 
 ```typescript
 type dumpError = (err: Error) => void;
@@ -54,7 +54,7 @@ TODO: 次について書く
 
 * メソッド構文\(method syntax\)には効かない
 * 関数構文\(function syntax\)にだけ効く
-* TSの引数はもともとbivariant仕様
+* TSの引数は元々bivariant仕様
 * strictFunctionTypesはそれをcontravariantにする
 * メソッドまでやると互換性的に問題がある
 * なのでメソッドは除外しbivariantのまま

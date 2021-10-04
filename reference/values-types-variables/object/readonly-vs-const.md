@@ -4,7 +4,7 @@ JavaScriptでは、`const`で宣言した変数は代入不可になります。
 
 ## constは変数への代入を禁止にするもの
 
-`const`は変数への代入を禁止するものです。例えば、`const`で宣言されたxに値を代入しようとすると、TypeScriptではコンパイルエラーになり、JavaScriptでは実行時エラーになります。
+`const`は変数への代入を禁止するものです。たとえば、`const`で宣言されたxに値を代入しようとすると、TypeScriptではコンパイルエラーになり、JavaScriptでは実行時エラーになります。
 
 ```typescript
 const x = 1;
@@ -21,7 +21,7 @@ x.y = 2; // プロパティへの代入は許可
 
 ## readonlyはプロパティへの代入を禁止にするもの
 
-TypeScriptの`readonly`はプロパティへの代入を禁止するものです。例えば、`readonly`がついたプロパティxに値を代入しようとすると、コンパイルエラーになります。
+TypeScriptの`readonly`はプロパティへの代入を禁止するものです。たとえば、`readonly`がついたプロパティxに値を代入しようとすると、コンパイルエラーになります。
 
 ```typescript
 let obj: { readonly x: number } = { x: 1 };

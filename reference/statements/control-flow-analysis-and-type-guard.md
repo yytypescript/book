@@ -1,6 +1,6 @@
 # 🚧型ガード、制御フロー分析、型の絞り込み
 
-TODO: 以下の内容を説明する
+TODO: 次の内容を説明する
 
 * TypeScriptのコンパイラーは制御フロー分析\(control flow analysis\)ができる賢いもの
 * 条件分岐で型を絞り込む\(narrowing\)ことができる

@@ -26,7 +26,7 @@ $ node increment.js
 2
 ```
 
-予想通りのなんでもない関数ですが、この関数が次のように呼ばれたらどうでしょうか。
+予想どおりのなんでもない関数ですが、この関数が次のように呼ばれたらどうでしょうか。
 
 ```typescript
 function increment(num) {
@@ -118,4 +118,3 @@ Type 'number' is not assignable to type 'string'.
 return num + 1;
 ~~~~~~~~~~~~~~~
 ```
-

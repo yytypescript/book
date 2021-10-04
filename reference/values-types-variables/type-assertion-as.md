@@ -24,7 +24,7 @@ const strLength: number = (<string>value).length;
 
 ## コンパイルエラーになる型アサーション
 
-型アサーションを使えば制限なく型の情報を上書きできるかというとそうではありません。例えば、`number`型を`string`型にする型アサーションはコンパイルエラーになります。
+型アサーションを使えば制限なく型の情報を上書きできるかというとそうではありません。たとえば、`number`型を`string`型にする型アサーションはコンパイルエラーになります。
 
 ```typescript
 const num = 123;
@@ -36,7 +36,7 @@ const str: string = num as string;
 
 > Conversion of type 'number' to type 'string' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.\(2352\)
 
-このエラーは「number型をstring型にするのは間違いです。お互いの型に共通する部分が少なすぎるからです」という内容です。
+このエラーは「number型をstring型にするのは間違いです。お互いの型に共通する部分が少な過ぎるからです」という内容です。
 
 このように型アサーションはコンパイラーの型推論を上書きできるとは言っても、無茶な型の変換はできないようになっています。
 
@@ -55,7 +55,7 @@ const str: string = num as unknown as string; // OK
 
 型アサーションには、コンパイラーの型推論を上書きする強力さがあります。そのため、プログラマーは型アサーションによってバグを産まないように十分注意する必要があります。型に関することはできるだけ、コンパイラーの型推論に頼ったほうが安全なので、型アサーションは、やむを得ない場合にのみ使うべきです。
 
-型アサーションを使う必要が出てきたら、それよりも先に、型ガードやユーザー定義型ガードで解決できないか検討してみると良いでしょう。
+型アサーションを使う必要が出てきたら、それよりも先に、型ガードやユーザー定義型ガードで解決できないか検討してみるとよいでしょう。
 
 {% page-ref page="../statements/control-flow-analysis-and-type-guard.md" %}
 

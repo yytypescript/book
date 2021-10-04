@@ -11,7 +11,7 @@ Next.js+TypeScriptで簡単なウェブアプリケーションを作るチュ�
 
 * ConnpassでTypeScript系のイベント一覧を表示するアプリ
 
-読者が学べると良いこと
+読者が学べるとよいこと
 
 * Next.jsの概要
 * Next.jsのインストール&セットアップ

@@ -33,7 +33,7 @@ function findUser(
 
 ## RORO \(Receive an Object, Return an Object\)
 
-上記ユーザーであればデータクラスのような \(ただのデータだけ入った可視性 public のクラス\) を作れば問題は回避できます。 TypeScript でその型を `UserInfo` とすれば `UserInfo` は以下になります。
+上記ユーザーであればデータクラスのような \(ただのデータだけ入った可視性 public のクラス\) を作れば問題は回避できます。 TypeScript でその型を `UserInfo` とすれば `UserInfo` は次になります。
 
 ```typescript
 type UserInfo = {
@@ -60,7 +60,7 @@ function findUser(info: UserInfo): User {
 
 これでは JavaScript ならびに TypeScript で使える便利な Tip というよりは、ただの Tip です。ではこれはなぜ JavaScript, TypeScript で重用されるのかというと、分割代入が関係しています。
 
-分割代入を使うと関数はオブジェクトのキーを引数に指定するだけでその値にアクセスできます。例えば `findUserByName()` と名前 \(`name`\) しか必要のない関数で `UserInfo` をすべて受けるのではなく分割代入を使うとこのようになります。
+分割代入を使うと関数はオブジェクトのキーを引数に指定するだけでその値にアクセスできます。たとえば `findUserByName()` と名前 \(`name`\) しか必要のない関数で `UserInfo` をすべて受けるのではなく分割代入を使うとこのようになります。
 
 ```typescript
 function findUserByName({ name }: UserInfo): User {
@@ -68,7 +68,7 @@ function findUserByName({ name }: UserInfo): User {
 }
 ```
 
-分割代入について再度知識が必要な方は以下のページをご参照ください。
+分割代入について再度知識が必要な方は次のページをご参照ください。
 
 {% page-ref page="../reference/values-types-variables/object/destructuring-assignment-from-objects.md" %}
 
@@ -94,7 +94,7 @@ function findUserByName({ name, nationality }: UserInfo): User {
 }
 ```
 
-関数の説明でもあった通りですが、分割代入にも初期値を使うことができます。例えば `findUser()` では通常引退済みのユーザーを検索しないのであれば `UserInfo` と関数は次のように書き換えるだけです。
+関数の説明でもあったとおりですが、分割代入にも初期値を使うことができます。たとえば `findUser()` では通常引退済みのユーザーを検索しないのであれば `UserInfo` と関数は次のように書き換えるだけです。
 
 ```typescript
 type UserInfo = {

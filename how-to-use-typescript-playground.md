@@ -6,7 +6,7 @@
 
 ## TypeScript Playgroundの使い方
 
-[TypeScript Playground](https://www.typescriptlang.org/play) にアクセスすれば、すぐに使い始めることができます。
+[TypeScript Playground](https://www.typescriptlang.org/play) にアクセスすれば、すぐに使いはじめることができます。
 
 検索をする際は「typescript playground」と検索をすれば、表示される検索結果からアクセスができます。
 
@@ -36,7 +36,7 @@ TypeScript を書いていると実際に生成される JavaScript のコード
 
 試しに TypeScript 固有の機能である `enum` のコンパイル結果を確認してみます。
 
-エディタに次のコードを入力して `.JS` タブを開いてみてください。
+エディターに次のコードを入力して `.JS` タブを開いてみてください。
 
 ```typescript
 enum Color {
@@ -54,7 +54,7 @@ TypeScript が enum を どのように JavaScript へコンパイルしてい�
 
 ### 書いたコードを共有する
 
-↓のURLを開いてみてください。エディタにコードが入力された状態で TypeScript Playgournd が表示されます。
+↓のURLを開いてみてください。エディターにコードが入力された状態で TypeScript Playgournd が表示されます。
 
 [https://www.typescriptlang.org/play?\#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA)
 
@@ -64,7 +64,7 @@ TypeScript Playground は
 
 1. エディターのコードを文字列圧縮ライブラリで圧縮して文字列をURLに設定する  
 2. URLを共有する  
-3. 共有されたURLが開かれる時に圧縮された文字列をデコードしてエディタに展開する
+3. 共有されたURLが開かれる時に圧縮された文字列をデコードしてエディターに展開する
 
 という仕組みでコードが共有されています。
 
@@ -80,7 +80,7 @@ value = 1;
 value = true;
 ```
 
-また、エディターでマウスオーバーをする以外にも右側の `Errors` タブを表示して、全てのエラーを一覧で確認することができます。
+また、エディターでマウスオーバーをする以外にも右側の `Errors` タブを表示して、すべてのエラーを一覧で確認することができます。
 
 ![](.gitbook/assets/sukurnshotto-2021-10-01-220014png.png)
 

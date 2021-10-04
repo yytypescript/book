@@ -9,7 +9,7 @@ function distance(p: Point): number {
 }
 ```
 
-なお、xy座標上の点を表すPointの定義は次の通りです。
+なお、xy座標上の点を表すPointの定義は次のとおりです。
 
 ```typescript
 type Point = {

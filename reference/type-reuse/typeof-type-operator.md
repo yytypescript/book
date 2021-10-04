@@ -16,7 +16,7 @@ type Point = {
 }
 ```
 
-ここで説明したのはTypeScriptのtypeof**型**演算子です。JavaScriptのtypeof演算子と同じ名前ですが、全く別のものなので注意してください。
+ここで説明したのはTypeScriptのtypeof**型**演算子です。JavaScriptのtypeof演算子と同じ名前ですが、まったく別のものなので注意してください。
 
 {% page-ref page="../values-types-variables/typeof-operator.md" %}
 

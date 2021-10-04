@@ -11,7 +11,7 @@ const point = new Point();
 console.log(point.x, point.y); //=> 0 0
 ```
 
-初期化子を用いた上の例は、次のコンストラクターでフィールドを初期化するのと同じ意味です。
+初期化子を用いた上の例は、次のコンストラクタでフィールドを初期化するのと同じ意味です。
 
 ```typescript
 class Point {

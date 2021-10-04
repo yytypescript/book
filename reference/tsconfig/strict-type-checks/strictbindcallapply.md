@@ -4,7 +4,7 @@
 
 `function.bind(), function.call(), function.apply()` はその関数を実行します。どれも第2引数以降にその関数の引数を代入できます。
 
-例えば、与えられた引数の名、姓からイニシャルを返す関数 `initial()` を考えます。与えられた文字列に対する例外検査などが少々甘いですが実装は次のようになります。
+たとえば、与えられた引数の名、姓からイニシャルを返す関数 `initial()` を考えます。与えられた文字列に対する例外検査などが少々甘いですが実装は次のようになります。
 
 ```typescript
 function initial(givenName: string, surname: string): string {

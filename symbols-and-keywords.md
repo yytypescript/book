@@ -142,7 +142,7 @@ console.log(a); // 00000001
 
 ### `&&` 論理積 \(logical and\) ![js](.gitbook/assets/js.svg)
 
-全ての真偽値が `true` のときに `true` を返します。そうでない場合に `false` を返します。
+すべての真偽値が `true` のときに `true` を返します。そうでない場合に `false` を返します。
 
 ### `&&=` 論理積代入 \(logical and assignment\) ![js](.gitbook/assets/js.svg)
 
@@ -430,7 +430,7 @@ console.log(rest); // { c: 3, d: 4 }
 
 左の変数の値を右の値で割り算した結果を左の変数に割り当てます。
 
-### `//` 行コメント \(one line comment\) ![js](.gitbook/assets/js.svg)
+### `//` 一行コメント \(one line comment\) ![js](.gitbook/assets/js.svg)
 
 行コメントの開始を表す記号です。
 
@@ -642,7 +642,7 @@ console.log(user?.name); // undefined
 
 ### `??` Null合体 ![js](.gitbook/assets/js.svg)
 
-左の値が `null` または `undefined` の時に右の値を返します。そうでない場合は左の値を返します。
+左の値が `null` または `undefined` のときに右の値を返します。そうでない場合は左の値を返します。
 
 ```javascript
 console.log(undefined ?? 1); // 1
@@ -753,7 +753,7 @@ const hyakuman = 1_000_000;
 
 慣習的にlodashなどのライブラリで変数として使われることがあります。変数名として`_`が使われる場合は、JavaScriptとしては変数以上の特別な意味はありません。
 
-また、慣習的に使わない変数の受け取り先に使われることがあります。例えば、2つの引数を受け取るコールバック関数で、第2引数だけを使う場合、第1引数をアンダースコアにする書き方をするコードが中にはあります。
+また、慣習的に使わない変数の受け取り先に使われることがあります。たとえば、2つの引数を受け取るコールバック関数で、第2引数だけを使う場合、第1引数をアンダースコアにする書き方をするコードが中にはあります。
 
 ```javascript
 [1, 2, 3].map((_, index) => {
@@ -834,7 +834,7 @@ const id3 = true; // ERROR
 
 ### `||` 論理和 ![js](.gitbook/assets/js.svg)
 
-一つでも真偽値が `true` のときに `true` を返します。そうでない場合に `false` を返します。
+ひとつでも真偽値が `true` のときに `true` を返します。そうでない場合に `false` を返します。
 
 ### `||=` 論理和代入 ![js](.gitbook/assets/js.svg)
 

@@ -4,7 +4,7 @@ TypeScriptの列挙型\(enum\)にはいくつか問題点が指摘されてい�
 
 ## 列挙型の問題点
 
-### 列挙型はTypeScript独自すぎる
+### 列挙型はTypeScript独自過ぎる
 
 TypeScriptは、JavaScriptを拡張した言語です。拡張といっても、むやみに機能を足すのではなく、追加するのは型の世界に限ってです。こういった思想がTypeScriptにはあるため、型に関する部分を除けば、JavaScriptの文法から離れすぎない言語になっています。
 

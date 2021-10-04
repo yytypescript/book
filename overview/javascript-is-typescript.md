@@ -1,6 +1,6 @@
 # JavaScriptはTypeScriptの一部
 
-TypeScriptの文法はJavaScriptの文法を拡張したものです。TypeScriptで拡張された文法は、主に型に関する部分です。それ以外のほとんどの文法はJavaScriptに由来するものです。そのため、素のJavaScriptもTypeScriptとして扱うことができます。例えば、次のコードは100%JavaScriptのものですが、これをTypeScriptコンパイラーは解析でき、静的な検査が行なえます。
+TypeScriptの文法はJavaScriptの文法を拡張したものです。TypeScriptで拡張された文法は、主に型に関する部分です。それ以外のほとんどの文法はJavaScriptに由来するものです。そのため、素のJavaScriptもTypeScriptとして扱うことができます。たとえば、次のコードは100%JavaScriptのものですが、これをTypeScriptコンパイラーは解析でき、静的な検査が行なえます。
 
 ```javascript
 const hello = "Hello";

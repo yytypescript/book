@@ -45,7 +45,7 @@ type Person = {
 
 ## Omitの注意点
 
-`Omit<T, Keys>`の`Keys`に`T`には無いプロパティキーを指定しても、TypeScriptコンパイラーは指摘しません。例えば、`Keys`にタイポがあっても検出できないので注意が必要です。
+`Omit<T, Keys>`の`Keys`に`T`には無いプロパティキーを指定しても、TypeScriptコンパイラーは指摘しません。たとえば、`Keys`にタイポがあっても検出できないので注意が必要です。
 
 ```typescript
 type User = {

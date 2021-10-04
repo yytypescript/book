@@ -23,7 +23,7 @@ console === window.console; //=> true
 
 ### 関数スコープ
 
-関数スコープ\(function scope\)は、関数内からのみ参照できる範囲です。関数内で宣言された変数は、関数の外から参照できません。
+関数スコープ\(function scope\)は、関数内でのみ参照できる範囲です。関数内で宣言された変数は、関数の外から参照できません。
 
 ```javascript
 function func() {

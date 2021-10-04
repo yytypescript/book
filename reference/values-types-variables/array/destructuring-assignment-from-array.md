@@ -4,7 +4,7 @@
 
 JavaScriptでは、配列から要素を取り出す方法のひとつに、`array[1]`のようにインデックスでアクセスする方法があります。この方法とは別に、分割代入\(destructuring assignment\)という方法を使っても、配列要素にアクセスできます。
 
-例えば、`[1, 2, 3, 4, 5]`のような配列から、最初の3要素を取り出して変数に代入するには次のように書きます。
+たとえば、`[1, 2, 3, 4, 5]`のような配列から、最初の3要素を取り出して変数に代入するには次のように書きます。
 
 ```typescript
 const oneToFive = [1, 2, 3, 4, 5];
@@ -22,7 +22,7 @@ const [one, two, three] = oneToFive;
 console.log(three); //=> undefined
 ```
 
-TypeScriptでは、分割代入された値の型は`T[]`の配列なら`T`型になります。例えば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number`になります。
+TypeScriptでは、分割代入された値の型は`T[]`の配列なら`T`型になります。たとえば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number`になります。
 
 ```typescript
 const oneToFive = [1, 2, 3, 4, 5];
@@ -34,7 +34,7 @@ const num: number = one; // oneはnumber型になるので代入できる
 
 {% page-ref page="../../tsconfig/additional-checks/nouncheckedindexedaccess.md" %}
 
-このオプション有効状態で、配列`T[]`から分割代入すると`T`型もしくはundefined型を示す`T | undefined`型になります。例えば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number | undefined`になります。
+このオプション有効状態で、配列`T[]`から分割代入すると`T`型もしくはundefined型を示す`T | undefined`型になります。たとえば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number | undefined`になります。
 
 ```typescript
 const oneToFive = [1, 2, 3, 4, 5];

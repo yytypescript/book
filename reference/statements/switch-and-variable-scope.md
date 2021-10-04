@@ -1,4 +1,4 @@
 # 🚧switch-and-variable-scope
 
-TODO: JavaScriptのswitchのcase文はローカルスコープにならない注意点について説明する。
+TODO: JavaScriptのswitchのcase節はローカルスコープにならない注意点について説明する。
 

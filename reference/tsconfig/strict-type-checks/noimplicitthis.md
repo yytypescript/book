@@ -4,7 +4,7 @@
 
 名前付き関数、匿名関数はアロー関数と異なり、実行時に`this`が決定されます。そのため、内部で`this`を使っているとそれらは関数を書いている時点では`any`型と同じ扱いになります。
 
-例えば、対角線の長さを求める関数 `lengthOfDiagonal()` を考えます。\(横, 縦\)を \(width, height\) とすれば関数は次のようになります。
+たとえば、対角線の長さを求める関数 `lengthOfDiagonal()` を考えます。\(横, 縦\)を \(width, height\) とすれば関数は次のようになります。
 
 ```typescript
 function lengthOfDiagonal(): number {

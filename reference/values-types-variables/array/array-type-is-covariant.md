@@ -4,7 +4,7 @@ TypeScriptの配列の型は共変\(covariant\)です。ここでは配列の共
 
 ## 共変とは
 
-型の世界の話で、共変とはその型自身、もしくは、その部分型\(subtype\)が代入できることを言います。例えば、Animal型とDog型の2つの型があるとします。DogはAnimalの部分型とします。共変であれば、Animal型の変数にはAnimal自身とその部分型のDogが代入できます。
+型の世界の話で、共変とはその型自身、もしくは、その部分型\(subtype\)が代入できることを言います。たとえば、Animal型とDog型の2つの型があるとします。DogはAnimalの部分型とします。共変であれば、Animal型の変数にはAnimal自身とその部分型のDogが代入できます。
 
 ```typescript
 type Animal = { isAnimal: boolean };
@@ -24,7 +24,7 @@ let pochi: Dog = animal;
 
 ## 配列は共変が許される
 
-TypeScriptの配列型は共変になっています。例えば、`Animal[]`型の配列に`Dog[]`を代入できます。
+TypeScriptの配列型は共変になっています。たとえば、`Animal[]`型の配列に`Dog[]`を代入できます。
 
 ```typescript
 const dogs: Dog[] = [pochi];

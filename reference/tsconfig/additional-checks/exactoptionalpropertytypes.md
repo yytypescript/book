@@ -23,7 +23,7 @@ const user3: User = {
 };
 ```
 
-値が未定義であることと値が `undefined` であることは厳密には動作が異なります。例えば  `Object.keys()` は最たる例で、上記の `user1, user2, user3` にそれぞれ `Object.keys()` を適用すれば結果は次のようになります。
+値が未定義であることと値が `undefined` であることは厳密には動作が異なります。たとえば  `Object.keys()` は最たる例で、上記の `user1, user2, user3` にそれぞれ `Object.keys()` を適用すれば結果は次のようになります。
 
 ```typescript
 // user1
@@ -36,7 +36,7 @@ const user3: User = {
 
 この差異が意図しない実行時エラーを生むことがあります。意図する値が設定されていれば\(この場合 `'India' | 'China'` \) `nationality` は `Object.keys()` に含まれるべきですが `undefined` のときは結局その先で値の存在チェックが必要になります。
 
-このオプションを有効にすると `interface, type` でオプション修飾子を持つキーはその値がキー自体を持たないようにしなければなりません。先程の例では `undefined` を代入した `user2` で次のようなエラーが発生します。
+このオプションを有効にすると `interface, type` でオプション修飾子を持つキーはその値がキー自体を持たないようにしなければなりません。先ほどの例では `undefined` を代入した `user2` で次のようなエラーが発生します。
 
 ```typescript
 TS2322: Type 'undefined' is not assignable to type '"India" | "China"'.

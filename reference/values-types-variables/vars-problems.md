@@ -46,7 +46,7 @@ const y = 2; // SyntaxError: Identifier 'y' has already been declared
 
 `var`はグローバル変数として定義されたときに、`window` オブジェクトのプロパティとして定義されるため、既存のプロパティを上書きする危険性があります。
 
-例えば、ブラウザ上で `innerWidth` 変数をグローバル変数として定義してしまうと、標準API の `window.innerWidth` が上書きされるため、ブラウザの幅を変更しても常に同じ値が返ってくるようになってしまいます。
+たとえば、ブラウザ上で `innerWidth` 変数をグローバル変数として定義してしまうと、標準API の `window.innerWidth` が上書きされるため、ブラウザの幅を変更しても常に同じ値が返ってくるようになってしまいます。
 
 ```javascript
 var innerWidth = 10;

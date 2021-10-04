@@ -1,10 +1,10 @@
 # 読み取り専用の配列 \(readonly array\)
 
-TypeScriptでは配列を読み取り専用\(readonly\)として型注釈できます。型注釈の方法は2通りあります。1つ目は`readonly`キーワードを使う方法です。2つ目は`ReadonlyArray<T>`を使う方法です。
+TypeScriptでは配列を読み取り専用\(readonly\)として型注釈できます。型注釈の方法は2とおりあります。1つ目は`readonly`キーワードを使う方法です。2つ目は`ReadonlyArray<T>`を使う方法です。
 
 ## readonly T\[\]
 
-配列の型注釈`T[]`の前に`readonly`キーワードを添えると、読み取り専用の配列型にできます。例えば、`readonly number[]`と書くと、その変数の型はnumberの読み取り専用配列型になります。
+配列の型注釈`T[]`の前に`readonly`キーワードを添えると、読み取り専用の配列型にできます。たとえば、`readonly number[]`と書くと、その変数の型はnumberの読み取り専用配列型になります。
 
 ```typescript
 const nums: readonly number[] = [1, 2, 3];
@@ -12,7 +12,7 @@ const nums: readonly number[] = [1, 2, 3];
 
 ## ReadonlyArray&lt;T&gt;
 
-`ReadonlyArray<T>`のような書き方でも読み取り専用の配列型になります。例えば、要素がnumber型の配列を読み取り専用にしたい場合、`ReadonlyArray<number>`と書きます。
+`ReadonlyArray<T>`のような書き方でも読み取り専用の配列型になります。たとえば、要素がnumber型の配列を読み取り専用にしたい場合、`ReadonlyArray<number>`と書きます。
 
 ```typescript
 const nums: ReadonlyArray<number> = [1, 2, 3];
@@ -20,7 +20,7 @@ const nums: ReadonlyArray<number> = [1, 2, 3];
 
 ## readonly T\[\]とReadonlyArray&lt;T&gt;の違い
 
-`readonly T[]`と`ReadonlyArray<T>`の違いは書き方以外にありません。どちらを使うかは書き手の好みです。開発チームとしてはどちらの書き方にするかは統一しておいたほうが良いでしょう。
+`readonly T[]`と`ReadonlyArray<T>`の違いは書き方以外にありません。どちらを使うかは書き手の好みです。開発チームとしてはどちらの書き方にするかは統一しておいたほうがよいでしょう。
 
 ## 読み取り専用配列の特徴
 

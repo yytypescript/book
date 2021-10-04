@@ -4,7 +4,7 @@
 
 ## Setオブジェクトの作り方
 
-`Set`オブジェクトを新たに作るには、`Set`クラスを`new`します。コンストラクターに配列を渡すと、値が`Set`に格納されます。
+`Set`オブジェクトを新たに作るには、`Set`クラスを`new`します。コンストラクタに配列を渡すと、値が`Set`に格納されます。
 
 ```typescript
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -12,7 +12,7 @@ console.log(fruits);
 //=> Set { 'apple', 'orange', 'banana' }
 ```
 
-コンストラクターに渡す配列の中に重複がある場合、重複した値は取り除かれます。
+コンストラクタに渡す配列の中に重複がある場合、重複した値は取り除かれます。
 
 ```typescript
 const fruits = new Set(['apple', 'apple', 'apple']);
@@ -20,7 +20,7 @@ console.log(fruits);
 //=> Set { 'apple' }
 ```
 
-コンストラクター引数を省略した場合、空の`Set`オブジェクトが作られます。
+コンストラクタ引数を省略した場合、空の`Set`オブジェクトが作られます。
 
 ```typescript
 const fruits = new Set();

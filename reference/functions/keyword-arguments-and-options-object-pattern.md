@@ -41,7 +41,7 @@ function func(options) {
 func({ x: 1, y: 2, z: 3 }); //=> 1 2 3
 ```
 
-更に、Options Objectパターンでは分割代入引数を応用すると、引数の部分をよりシンプルに書けるようになります。
+さらに、Options Objectパターンでは分割代入引数を応用すると、引数の部分をよりシンプルに書けるようになります。
 
 ```javascript
 function func({ x, y, z }) {
@@ -61,7 +61,7 @@ function func({ x, y, z }: { x: number; y: number; z: number }) {
 }
 ```
 
-オブジェクト型の記述が長すぎる場合には、TypeScriptの型エイリアス\(type alias\)を用いて、引数の型を分けて書くと可読性が良くなります。
+オブジェクト型の記述が長過ぎる場合には、TypeScriptの型エイリアス\(type alias\)を用いて、引数の型を分けて書くと可読性が良くなります。
 
 ```typescript
 type Options = {
@@ -101,7 +101,7 @@ findProducts({ isSale: true, withDetails: true, freeShipping: true });
 
 ### 引数追加時に古いコードを壊さない
 
-位置引数の関数は変更に弱い側面があります。例えば、ユーザーを検索する関数を実装したとします。最初の要件は国と都市でユーザーを絞り込めること、そして、ユーザー属性でソートできることだったとします。その場合、次のような実装をすれば要件は満たせます。
+位置引数の関数は変更に弱い側面があります。たとえば、ユーザーを検索する関数を実装したとします。最初の要件は国と都市でユーザーを絞り込めること、そして、ユーザー属性でソートできることだったとします。その場合、次のような実装をすれば要件は満たせます。
 
 ```javascript
 function findUsers(country, city, order, sort) {}
@@ -146,7 +146,7 @@ function findUsers({country, city, ageMin, ageMax, order, sort}) {}
 
 ### デフォルト引数が省略できる
 
-位置引数を採用した関数では、場合によってはデフォルト引数が省略できません。例えば、デフォルト引数を持つ位置引数3つを持つ関数で、1番目を2番目をデフォルトにしたい場合、それぞれに`undefined`を書く必要があります。
+位置引数を採用した関数では、場合によってはデフォルト引数が省略できません。たとえば、デフォルト引数を持つ位置引数3つを持つ関数で、1番目を2番目をデフォルトにしたい場合、それぞれに`undefined`を書く必要があります。
 
 ```javascript
 function findProducts(
@@ -177,9 +177,9 @@ findProducts({ freeShipping: true }); //=> false false true
 
 ## 引数名を変更する方法
 
-位置引数の利点は引数名の変更に強いことです。関数呼び出し側を壊すことなく、関数宣言側の引数名を自由に変更できます。例えば、`function func(hoge) {}`の`hoge`を`fuga`に変更したとしても、呼び出し側のコードには影響がありません。
+位置引数の利点は引数名の変更に強いことです。関数呼び出し側を壊すことなく、関数宣言側の引数名を自由に変更できます。たとえば、`function func(hoge) {}`の`hoge`を`fuga`に変更したとしても、呼び出し側のコードには影響がありません。
 
-引数名の指定を必要とするOptions Objectパターンでは、引数名の変更が呼び出し側コードに影響を及ぼします。例えば、`function func({ hoge }) {}`の`hoge`を`fuga`に変更した場合、呼び出し側の`func({ hoge: 123 })`も`func({ fuga: 123 })`に変更しなければなりません。
+引数名の指定を必要とするOptions Objectパターンでは、引数名の変更が呼び出し側コードに影響を及ぼします。たとえば、`function func({ hoge }) {}`の`hoge`を`fuga`に変更した場合、呼び出し側の`func({ hoge: 123 })`も`func({ fuga: 123 })`に変更しなければなりません。
 
 Options Objectパターンの引数名変更問題を解決するには、分割代入の異なる引数名への代入機能を遣います。上の例でいうと、関数宣言側を`function func({ hoge })`に変更する代わりに`function func({ hoge: fuga })`のようにします。
 

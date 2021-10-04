@@ -2,7 +2,7 @@
 
 ## JavaScriptでの配列要素アクセス
 
-JavaScriptの配列の要素にアクセスするにはブラケット`[]`を使います。ブラケットにはアクセスする要素のインデックス番号を書きます。インデックス番号は0始まりです。例えば、`abc = ["a", "b", "c"]`の1つ目の要素にアクセスするには、`abc[0]`と書きます。
+JavaScriptの配列の要素にアクセスするにはブラケット`[]`を使います。ブラケットにはアクセスする要素のインデックス番号を書きます。インデックス番号は0始まりです。たとえば、`abc = ["a", "b", "c"]`の1つ目の要素にアクセスするには、`abc[0]`と書きます。
 
 ```javascript
 const abc = ["a", "b", "c"];
@@ -18,7 +18,7 @@ console.log(abc[100]); //=> undefined
 
 ## TypeScriptの要素の型
 
-TypeScriptでは、`Type[]`型の配列から要素を取り出したとき、その値の型は`Type`になります。例えば、`string[]`型から0番目の要素の型は`string`になります。
+TypeScriptでは、`Type[]`型の配列から要素を取り出したとき、その値の型は`Type`になります。たとえば、`string[]`型から0番目の要素の型は`string`になります。
 
 ```typescript
 const abc: string[] = ["a", "b", "c"];
@@ -48,7 +48,7 @@ TypeScriptにこの問題を指摘してもらうようにするには、コン�
 
 {% page-ref page="../../tsconfig/additional-checks/nouncheckedindexedaccess.md" %}
 
-これを有効にすると、例えば、`string[]`配列から要素アクセスで得た値の型は、string型もしくはundefined型を意味する`string | undefined`になります。
+これを有効にすると、たとえば、`string[]`配列から要素アクセスで得た値の型は、string型もしくはundefined型を意味する`string | undefined`になります。
 
 ```typescript
 const abc: string[] = ["a", "b", "c"];

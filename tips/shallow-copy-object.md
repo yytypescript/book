@@ -212,7 +212,7 @@ const sample: object = {
 const shallowCopied: object = {...sample};
 ```
 
-ES2018でコンパイルすると以下のようになります。
+ES2018でコンパイルすると次のようになります。
 
 ```typescript
 const sample = {
@@ -222,7 +222,7 @@ const sample = {
 const shallowCopied = { ...sample };
 ```
 
-ほぼ同じですがES2017でコンパイルすると以下のようになります。
+ほぼ同じですがES2017でコンパイルすると次のようになります。
 
 ```typescript
 const sample = {
