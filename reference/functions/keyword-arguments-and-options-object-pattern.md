@@ -11,7 +11,7 @@ JavaScriptやTypeScriptの関数には、Pythonにあるキーワード引数の
 def func(x, y, z):
     print(x, y, z)
 
-func(x=1, y=2, z=3)  # => 1 2 3  
+func(x=1, y=2, z=3)  # => 1 2 3
 ```
 
 キーワード引数と同じような機能はRubyや、Scalaの名前付き引数\(named argument\)などに見られます。JavaScriptやTypeScriptにはキーワード引数に相当する機能はありません。
@@ -230,10 +230,10 @@ func(); //=> 0 0 0
 ・Pythonのキーワード引数相当の構文はJavaScript/TypeScriptにはない  
 ・代わりにOptions Objectパターンが使える  
 ・このパターンのメリット:  
-　①引数の値が何を指すのか分かりやすい  
-　②引数追加時に古いコードを壊さない  
-　③デフォルト引数が省略できる  
-  
+①引数の値が何を指すのか分かりやすい  
+②引数追加時に古いコードを壊さない  
+③デフォルト引数が省略できる
+
 『サバイバルTypeScript』より
 {% endhint %}
 

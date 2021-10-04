@@ -4,7 +4,7 @@
 
 ```typescript
 type Person = {
-	name: string;
+    name: string;
 };
 type PersonKey = keyof Person;
 // 上は次と同じ意味です

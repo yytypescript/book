@@ -50,3 +50,4 @@ let calculator: {
 ## Record
 
 TODO: Recordを用いたオブジェクト型の書き方も紹介する
+

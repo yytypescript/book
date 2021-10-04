@@ -4,7 +4,6 @@ TypeScriptで、オブジェクトのフィールド名をあえて指定せず�
 
 ```typescript
 let obj: {
-  [K: string]: number;
 };
 ```
 
@@ -14,7 +13,6 @@ let obj: {
 
 ```typescript
 let obj: {
-  [K: string]: number;
 };
 
 obj = { a: 1, b: 2 }; // OK

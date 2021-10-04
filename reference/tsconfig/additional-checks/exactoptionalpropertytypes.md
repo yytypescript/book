@@ -23,7 +23,7 @@ const user3: User = {
 };
 ```
 
-値が未定義であることと値が `undefined` であることは厳密には動作が異なります。たとえば  `Object.keys()` は最たる例で、上記の `user1, user2, user3` にそれぞれ `Object.keys()` を適用すれば結果は次のようになります。
+値が未定義であることと値が `undefined` であることは厳密には動作が異なります。たとえば `Object.keys()` は最たる例で、上記の `user1, user2, user3` にそれぞれ `Object.keys()` を適用すれば結果は次のようになります。
 
 ```typescript
 // user1

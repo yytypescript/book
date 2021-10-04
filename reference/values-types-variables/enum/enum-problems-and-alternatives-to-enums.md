@@ -38,7 +38,7 @@ console.log(ZeroOrOne[9]); //=> undefined これはコンパイルエラーに�
 
 ### 文字列列挙型だけ公称型になる
 
-TypeScriptの型システムは、[構造的部分型]()を採用しています。ところが、文字列列挙型は例外的に公称型になります。
+TypeScriptの型システムは、[構造的部分型](enum-problems-and-alternatives-to-enums.md)を採用しています。ところが、文字列列挙型は例外的に公称型になります。
 
 ```typescript
 enum StringEnum {

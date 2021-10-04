@@ -29,7 +29,7 @@ TypeScriptは、クラスの宣言に書かれていないフィールドへア�
 class Person {}
 const person = new Person();
 console.log(person.age);
-//                 ^^^ Property 'age' does not exist on type 'Person'.(2339) 
+//                 ^^^ Property 'age' does not exist on type 'Person'.(2339)
 ```
 {% endcode %}
 

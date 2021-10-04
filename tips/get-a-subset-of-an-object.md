@@ -31,7 +31,7 @@ const address = {
 };
 ```
 
-### 方法1: 即時関数・分割代入・shorthand property nameの合わせ技
+## 方法1: 即時関数・分割代入・shorthand property nameの合わせ技
 
 オブジェクトのサブセットを得る1つ目の方法は、即時関数と分割代入、そして、shorthand property nameを組み合わせる方法です。
 
@@ -64,7 +64,7 @@ const address = (({ name, twitter, github, ...rest }) => rest)(profile);
 //   "address": "丸の内2-4-1",
 //   "buiding": "丸ビル",
 //   "zipcode": "100-6390"
-// } 
+// }
 ```
 
 JavaScriptでは、`delete`を使うとオブジェクトからプロパティを取り除けるので、上の書き方はまどろっこしいと思われるかもしれません。この書き方をするには理由があって、TypeScriptでは`delete`の使い勝手が良くないからです。たとえば、`profile`オブジェクトから`name`プロパティを`delete`するコードを書いただけでは、「Property 'name' does not exist on type ...」といったコンパイルエラーが発生してしまうのです。
@@ -75,7 +75,7 @@ delete address.name;
 // ERROR: Property 'name' does not exist on type '{ country: string; prefecture: string; city: string; address: string; buiding: string; zipcode: string; }'.(2339)
 ```
 
-### 方法2: lodash.pick / lodash.omit
+## 方法2: lodash.pick / lodash.omit
 
 2つ目の方法は[lodash](https://lodash.com/)を用いるものです。lodashはさまざまな便利関数を提供するライブラリで、その中のひとつに`pick`というオブジェクトのサブセットを得るための関数があります。
 
@@ -118,7 +118,7 @@ const address = _.omit(profile, ["name", "twitter", "github"]);
 //   "address": "丸の内2-4-1",
 //   "buiding": "丸ビル",
 //   "zipcode": "100-6390"
-// } 
+// }
 ```
 
 lodash、lodash.pickとlodash.omitのインストールは次のコマンドで行なえます。

@@ -39,7 +39,7 @@ const abc = ["a", "b", "c"];
 const character: string = abc[100];
 console.log(character); //=> undefined
 character.toUpperCase();
-// JavaScript実行時エラー: Cannot read properties of undefined (reading 'toUpperCase') 
+// JavaScript実行時エラー: Cannot read properties of undefined (reading 'toUpperCase')
 ```
 
 ## TypeScriptで要素アクセスを型安全にする設定

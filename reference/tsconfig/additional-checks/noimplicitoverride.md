@@ -9,7 +9,7 @@
 ```typescript
 class ToggleButton {
   protected active: boolean;
-  
+
   public constructor() {
     this.active = false;
   }
@@ -43,7 +43,7 @@ class ToggleButton {
 ```typescript
 class ToggleCountButton extends ToggleButton {
   private counter: number;
-  
+
   public constructor() {
     super();
     this.counter = 0;

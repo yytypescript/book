@@ -92,5 +92,3 @@ a = undefined; // NG
 
 ![](../../../.gitbook/assets/cleanshot-2021-09-27-at-12.06.52.png)
 
-
-

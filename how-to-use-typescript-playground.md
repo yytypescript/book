@@ -84,11 +84,7 @@ value = true;
 
 ![](.gitbook/assets/sukurnshotto-2021-10-01-220014png.png)
 
-
-
 ## TypeScript PlaygroundのTS Configの設定方法
 
 TODO
-
-### 
 

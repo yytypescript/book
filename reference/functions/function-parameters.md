@@ -20,14 +20,14 @@ type Point = {
 
 関数`distance()`は平面状にある点\(x, y\)の原点からの距離を返します。この関数を呼ぶ時は必ず引数の数、順番は揃えなければなりません。つまり次のような関数呼び出しはできません。
 
-### 引数が少ない
+## 引数が少ない
 
 ```typescript
 distance();
 // Expected 1 arguments, but got 0.
 ```
 
-### 引数が多い
+## 引数が多い
 
 ```typescript
 distance(q1, q2);

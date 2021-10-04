@@ -118,3 +118,4 @@ Type 'number' is not assignable to type 'string'.
 return num + 1;
 ~~~~~~~~~~~~~~~
 ```
+

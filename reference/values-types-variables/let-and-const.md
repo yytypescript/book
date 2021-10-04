@@ -48,8 +48,8 @@ y = 1; // Uncaught TypeError: Assignment to constant variable.
 
 ・JavaScriptの変数宣言はletとconstがある  
 ・letは再代入OK、constは再代入NG  
-・基本的にconstを使うとよい  
-  
+・基本的にconstを使うとよい
+
 『サバイバルTypeScript』より
 {% endhint %}
 
