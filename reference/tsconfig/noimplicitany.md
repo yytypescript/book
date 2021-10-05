@@ -1,3 +1,7 @@
+---
+description: 暗黙のany型を使った式と宣言のエラー報告を有効にする
+---
+
 # noImplicitAny
 
 型を明示しないとき、とくに引数の場合、TypeScriptはその引数を`any`型として解釈します。
