@@ -5,4 +5,4 @@ root: ./
     summary: SUMMARY.md​
 
 redirects:
-    features/classes: reference/object-oriented/class.md
+    features/classes: reference/object-oriented/class/README.md
