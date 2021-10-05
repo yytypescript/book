@@ -1,8 +1,51 @@
 root: ./
 
 ​structure:
-    readme: README.md
-    summary: SUMMARY.md​
+    readme: README
+    summary: SUMMARY​
 
 redirects:
+    welcome-to-typescript: overview/README.md
+    welcome-to-typescript/good-about-typescript: overview/features.md
+    welcome-to-typescript/javascript-map: overview/ecosystem.md
+    handson: tutorials/README.md
+    handson/setup: tutorials/setup.md
+    handson/make-a-simple-function-via-cli: tutorials/make-a-simple-function-via-cli.md
+    handson/tsconfig.json-settings: tutorials/tsconfig.json-settings.md
+    handson/react-like-button-tutorial: tutorials/react-like-button-tutorial.md
+    overview/hajimeni: overview/README.md
+    revisiting-javascript: reference/README.md
+    revisiting-javascript/javascript-types: reference/values-types-variables/primitive-types.md
+    revisiting-javascript/javascriptnotosukpu: reference/statements/variable-scope.md
+    revisiting-javascript/functions: reference/functions/README.md
+    revisiting-javascript/objects-and-classes: reference/values-types-variables/object/README.md
+    revisiting-javascript/prototype-based: reference/values-types-variables/object/properties-of-objects.md
+    revisiting-javascript/single-process-and-callback: reference/single-process-and-callback.md
+    features: reference/README.md
+    features/primitive-types: reference/values-types-variables/primitive-types.md
+    features/literal-types: reference/values-types-variables/literal-types.md
+    features/any-unknown: reference/statements/any-vs-unknown.md
+    features/structural-subtyping: reference/values-types-variables/structural-subtyping.md
+    features/type-guards: reference/statements/control-flow-analysis-and-type-guard.md
+    features/function: reference/functions/README.md
+    features/array: reference/values-types-variables/array/README.md
+    features/tuple: reference/values-types-variables/tuple.md
+    features/enum: reference/values-types-variables/enum/README.md
+    features/type-aliases: reference/values-types-variables/type-alias.md
+    features/union-types: reference/values-types-variables/union.md
+    features/intersection-types: reference/values-types-variables/intersection.md
+    features/object: reference/values-types-variables/object/README.md
+    features/interfaces: reference/object-oriented/interface/README.md
     features/classes: reference/object-oriented/class/README.md
+    features/type-inference: reference/values-types-variables/type-inference.md
+    features/generics: reference/generics/README.md
+    features/generics/built-in-libraries-using-generics: reference/generics/built-in-libraries-using-generics.md
+    features/generics/type-variables: reference/generics/type-variables.md
+    features/generics/type-parameter-constraint: reference/generics/type-parameter-constraint.md
+    features/generics/default-type-parameter: reference/generics/default-type-parameter.md
+    features/promise-async-await: reference/promise-async-await.md
+    features/utility-types: reference/type-reuse/utility-types/README.md
+    features/type-operators: reference/type-reuse/typeof-type-operator.md
+    features/definitelytyped: reference/declaration-file.md
+    features/tsconfig.json-deep-dive: reference/tsconfig/README.md
+    features/import-export-require: reference/import-export-require.md
