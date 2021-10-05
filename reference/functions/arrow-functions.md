@@ -65,7 +65,7 @@ const increment = num => num + 1;
 //                ^^^ Parameter 'num' implicitly has an 'any' type.(7006)
 ```
 
-{% page-ref page="../tsconfig/strict-type-checks/noimplicitany.md" %}
+{% page-ref page="../tsconfig/noimplicitany.md" %}
 
 `noImplicitAny`が有効になっていても、関数引数に直接アロー関数を書く場合は型注釈を省略できます。
 

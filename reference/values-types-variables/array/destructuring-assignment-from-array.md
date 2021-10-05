@@ -32,7 +32,7 @@ const num: number = one; // oneはnumber型になるので代入できる
 
 ただしTypeScriptのコンパイラーオプション`noUncheckedIndexedAccess`を有効にした場合は異なります。
 
-{% page-ref page="../../tsconfig/additional-checks/nouncheckedindexedaccess.md" %}
+{% page-ref page="../../tsconfig/nouncheckedindexedaccess.md" %}
 
 このオプション有効状態で、配列`T[]`から分割代入すると`T`型もしくはundefined型を示す`T | undefined`型になります。たとえば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number | undefined`になります。
 

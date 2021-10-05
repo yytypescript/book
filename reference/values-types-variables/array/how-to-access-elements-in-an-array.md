@@ -46,7 +46,7 @@ character.toUpperCase();
 
 TypeScriptにこの問題を指摘してもらうようにするには、コンパイラーオプションの`noUncheckedIndexedAccess`を有効にします。
 
-{% page-ref page="../../tsconfig/additional-checks/nouncheckedindexedaccess.md" %}
+{% page-ref page="../../tsconfig/nouncheckedindexedaccess.md" %}
 
 これを有効にすると、たとえば、`string[]`配列から要素アクセスで得た値の型は、string型もしくはundefined型を意味する`string | undefined`になります。
 

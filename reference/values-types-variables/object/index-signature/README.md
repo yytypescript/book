@@ -28,7 +28,7 @@ const b: number | undefined = obj.b;
 console.log(b); //=> undefined
 ```
 
-{% page-ref page="../../../tsconfig/additional-checks/nouncheckedindexedaccess.md" %}
+{% page-ref page="../../../tsconfig/nouncheckedindexedaccess.md" %}
 
 ## Record&lt;K, T&gt;を用いたインデックス型
 

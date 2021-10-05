@@ -45,7 +45,7 @@ let calculator: {
 
 メソッド構文\(method syntax\)の型注釈と関数構文\(function syntax\)の型注釈は、基本的に同じ意味ですが、コンパイラーオプションの`strictFunctionTypes`を有効にした場合に関数構文の書き方は、メソッド引数のチェックが双変\(bivariant\)から共変\(covariant\)へと厳格になります。この詳細については`strictFunctionTypes`の説明を参照してください。
 
-{% page-ref page="../../tsconfig/strict-type-checks/strictfunctiontypes.md" %}
+{% page-ref page="../../tsconfig/strictfunctiontypes.md" %}
 
 ## Record
 

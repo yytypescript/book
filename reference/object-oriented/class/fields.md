@@ -58,9 +58,9 @@ const alice = new Person();
 console.log(alice.name); //=> undefined
 ```
 
-{% page-ref page="../../tsconfig/strict-type-checks/strictnullchecks.md" %}
+{% page-ref page="../../tsconfig/strictnullchecks.md" %}
 
-{% page-ref page="../../tsconfig/strict-type-checks/strictpropertyinitialization.md" %}
+{% page-ref page="../../tsconfig/strictpropertyinitialization.md" %}
 
 この2つのコンパイラーオプションが有効な場合でもチェックを通るように書くには、nameフィールドの型注釈を`string | undefined`のようなユニオン型にする必要があります。
 

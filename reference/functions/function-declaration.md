@@ -38,7 +38,7 @@ function increment(num): number {
 }
 ```
 
-{% page-ref page="../tsconfig/strict-type-checks/noimplicitany.md" %}
+{% page-ref page="../tsconfig/noimplicitany.md" %}
 
 次の例のように定義済みの関数プロパティに再代入する形で関数を上書きする場合は`button.onclick`の引数`event`の型が`MouseEvent`と定義されているため、その型情報から代入する関数の引数の型を省略しても、`event`の型を`MousetEvent`と推論してくれます。
 

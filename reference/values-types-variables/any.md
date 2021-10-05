@@ -23,7 +23,7 @@ TODO: 引数は型注釈がないとanyになることを説明する
 
 TODO: 暗黙のanyを規制する`noImplicitAny`オプションを説明する
 
-{% page-ref page="../tsconfig/strict-type-checks/noimplicitany.md" %}
+{% page-ref page="../tsconfig/noimplicitany.md" %}
 
 ## anyは悪？
 

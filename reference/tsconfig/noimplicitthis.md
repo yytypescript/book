@@ -53,7 +53,7 @@ return ((this.width ** 2) + (this.height ** 2)) ** (1/2);
 
 これを回避するためには `this`が何かを明示します。引数の`this`については関数のページに詳細がありますので併せてご参照ください。
 
-{% page-ref page="../../functions/this-parameters.md" %}
+{% page-ref page="../functions/this-parameters.md" %}
 
 ```typescript
 type Area = {
