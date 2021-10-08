@@ -96,6 +96,24 @@ TypeScript Playground はページのURLを共有するだけで書いたコー�
 
 新規で Playground を開き上記のリンク先と同じコードをエディターに入力すると、同じURLが生成されるのを確認できます。
 
+### 色々な形式でコードを共有する
+
+上部の`Export` タブから色々な形式でコードを共有するためのテキストを出力することができます。
+
+例えば `Copy as Markdown Link with Preview` を選択した場合は次のような形式のテキストを出力することができます。
+
+```text
+```
+function add(a:number, b:number) {
+    return a + b;
+}
+```
+
+[Playground Link](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwFgAoRTxU4qEUpMkQBqKgG52AX3bsICAM5wANsQB0SuAHMs6DAEZKAJnr0xQA)
+```
+
+
+
 ## TypeScript Playgroundの設定方法
 
 ### TypeScript のバージョンの設定
@@ -116,14 +134,31 @@ type LocaleId = `locale_${LocaleLang}`;
 
 画面上部の `TS Config` のタブをクリックすることで TS Config の設定をすることができます。
 
-次のサンプルコードをエディターに入力すると、`noImplicitAny` が有効になっているためコンパイルエラーがが発生します。
+次のサンプルコードをエディターに入力して、出力される JavaScript のコードを`.JS`で確認をするとデフォルトでは \`
 
 ```typescript
-// Parameter 'name' implicitly has an 'any' type.
-function hello(name) {
-    console.log(`hello, ${name}`);
+export function add(a:number, b:number) {
+    return a + b;
 }
 ```
 
-`TS Config` タブを開き `TypeChecking > noImplicitAny` のチェックボックスをOFFに変更すると、コンパイルエラーが消えているのが確認できます。
+Playground の初期設定では `module: 'esnext'`が選択されているので、次の出力結果になります。
+
+```javascript
+export function add(a, b) {
+    return a + b;
+}
+```
+
+`TS Config` タブを開き `Module` の設定を `CommonJS` に変更をしてみます。TS Config の設定が変更されて `CommonJS` 形式で出力される JavaScript のコードを確認することができます。
+
+```javascript
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.add = void 0;
+function add(a, b) {
+    return a + b;
+}
+exports.add = add;
+```
 
