@@ -630,7 +630,7 @@ function func(x?: number) {}
 func(); // xがなくてもOK
 ```
 
-### `?.` オプショナルチェイニング ![js](.gitbook/assets/js.svg)
+### `?.` オプショナルチェーン ![js](.gitbook/assets/js.svg)
 
 プロパティのアクセス元が `null` または `undefined` のときにエラーを発生させずに `undefined` を返します。
 

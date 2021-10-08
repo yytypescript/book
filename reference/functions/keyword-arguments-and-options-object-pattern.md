@@ -195,7 +195,7 @@ func({ hoge: 123 });
 
 ## デフォルト引数の型注釈
 
-TypeScriptでOptions Objectにデフォルト引数をもたせたい場合は、引数名のところにデフォルト値を書いた上で、オブジェクト型の型注釈にてオプショナルプロパティを指定する`?`を書きます。
+TypeScriptでOptions Objectにデフォルト引数をもたせたい場合は、引数名のところにデフォルト値を書いた上で、オブジェクト型の型注釈にてオプションプロパティを指定する`?`を書きます。
 
 ```typescript
 function func({ x, y = 0, z = 0 }: { x: number; y?: number; z?: number }) {
