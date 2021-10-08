@@ -218,6 +218,7 @@
 
 * [README](writing/writing.md)
 * [CONTRIBUTING](writing/contributing.md)
+* [執筆をはじめる](writing/start-writing.md)
 * [文体・スタイル](writing/styles.md)
 * [日英対訳表](writing/japanese-english-table.md)
 * [PDR](writing/pdr/README.md)
