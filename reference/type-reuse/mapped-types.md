@@ -1,4 +1,4 @@
-# Mapped Type
+# マップ型 \(mapped type\)
 
 インデックス型では設定時はどのようなキーも自由に設定できてしまい、アクセス時は毎回`undefined`かどうかの型チェックが必要です。入力の形式が決まっているのであればMapped typeの使用を検討できます。
 
@@ -12,7 +12,6 @@ type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
 
 ```typescript
 type Butterfly = {
-  [key in SystemSupportLanguage]: string;
 };
 ```
 
@@ -45,18 +44,17 @@ type Readonly<T> = {
 
 {% page-ref page="keyof-type-operator.md" %}
 
-### インデックス型と異なるところ
+## インデックス型と異なるところ
 
 Mapped typeはインデックス型と異なり`symbol`型もキーにすることができます。
 
 ```typescript
 type Identifier = symbol | 1;
 type Sample = {
-  [P in Identifier]: string;
 };
 
 const sample: Sample = {
-  [Symbol('thick')]: 'thin';
   1: 'pork';
 };
 ```
+
