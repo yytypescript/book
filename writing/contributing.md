@@ -28,22 +28,8 @@ description: あなたが本書に貢献できること。
 
 * 「見学」はもっとも簡単な参加形態です。まずは気軽に見に来てください。
 * 見学の際には「見学に来ました」とお伝えください。
-
-### オフライン執筆会を見学する
-
-まずは、YYTypeScriptが実施する【TypeScript技術執筆会】にお越しください。  
-2019年12月現在、第1週目以外の金曜日に毎週開催しています。  
-具体的なイベントの開催予定は[YYTypeScript - compass](https://yyts.connpass.com/) よりご確認ください。
-
-{% hint style="danger" %}
-新型コロナウイルス\(COVID-19\)感染拡大防止のため、オフラインの執筆会は休止しています。代わりにリモート執筆会にご参加ください。
-{% endhint %}
-
-### リモートで執筆会を見学する
-
-まずはYYTypeScriptのSlackへご参加ください。次のURLから参加可能です。  
-[https://yytypescript.github.io/slack](https://yytypescript.github.io/slack)  
-執筆に関してはチャンネル \#publish にて行なっています。
+* 執筆会の開催スケジュールはconnpassをご確認ください。
+  * [https://yyts.connpass.com/](https://yyts.connpass.com/)
 
 ## 執筆する
 
@@ -58,8 +44,8 @@ description: あなたが本書に貢献できること。
 
 ### 執筆のための準備
 
-* Slackに参加する。
-  * こちらのURLから参加できます→ [https://yytypescript.github.io/slack](https://yytypescript.github.io/slack)
+* Discordに参加する。
+  * こちらのURLから参加できます→ [https://discord.gg/DTwRgzt](https://discord.gg/DTwRgzt)
 * gitbook.comのYYTypeScriptチームに参加する。\(執筆をgitbook.comのエディターで行っているため\)
   * 参加申し込みはこちら→[Join YYTypeScript - GitBook](https://app.gitbook.com/invite/yyts?invite=-Lw1ObCW8Ut0NnNfHG1w)
 * PDRを理解する。
@@ -67,24 +53,19 @@ description: あなたが本書に貢献できること。
 
 {% page-ref page="pdr/" %}
 
-### 新規ページを書く\(目次からトピックを選んで書く\)
+### 新規ページを書く
 
-1. [目次](https://docs.google.com/document/d/1KubBKVfOZD-Uby6G0U2rRNViI2P1QoVsBbcSNWA9iJk/edit)から書きたいページを選ぶ。
-2. 執筆意思表示する: 目次に「\(○○執筆中\)」のように自分の名前を書く。
-3. gitbook.comで、新しいページを作り執筆を開始する。
+1. 🚧マークがついているページから書きたいページを選ぶ。
+2. 執筆意思表示する: Discordのチャットでどこどこを書きますと発言する。
+3. gitbook.comで、執筆を開始する。
 4. 執筆完了したら、Mergeする。\(レビューは不要\)
-
-### 新規ページを書く\(目次にないトピックを書く\)
-
-* 書きたいトピックがない場合は、新しく目次を作ることができます。
-* 目次を作った後はすぐに執筆をしても構いませんが、その目次の需要を確認した後に執筆することをお勧めします。
 
 ## 意思決定に参加する
 
 行動方針や執筆に当たっての取り決めなど、意思決定をしたい場合、次のいずれかの方法があります。
 
-* Slackの\#publishチャンネルで、雑談レベルで提案する。
-* PDRの提案を書き、Mergeする前にSlackの\#publishチャンネルで共有する。
+* Discordで、雑談レベルで提案する。
+* PDRの提案を書き、共有する。
 * 執筆会に来て相談する。
 
 ### 意思決定プロセス
