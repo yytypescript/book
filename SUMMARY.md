@@ -211,7 +211,7 @@
   * [オブジェクトからプロパティの型を生成する](tips/generates-type-from-object-property.md)
   * [配列から型を生成する](tips/generates-type-from-array.md)
 * [索引:記号とキーワード](symbols-and-keywords.md)
-* [🚧TypeScript Playgroundの使い方](how-to-use-typescript-playground.md)
+* [TypeScript Playgroundの使い方](how-to-use-typescript-playground.md)
 * [🚧TypeScript超入門 〜10分で分かるTypeScriptの概要〜](typescript.md)
 
 ## 執筆者向け情報 <a id="writing"></a>
