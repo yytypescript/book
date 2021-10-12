@@ -4,7 +4,7 @@ Node.jsはそれ自身ではTypeScriptをサポートしているわけではな
 
 ## 初めてのtsconfig.json
 
-typescriptがpackage.jsonのdependencies\(devDependencies\)に入っているプロジェクトで以下を実行してください。
+typescriptがpackage.jsonのdependencies(devDependencies)に入っているプロジェクトで以下を実行してください。
 
 ```bash
 npx tsc --init
@@ -20,7 +20,7 @@ tsconfig.jsonが作成されます。すでにtsconfig.jsonがある時は上書
 
 公式にあるtsconfig.jsonの説明はこちらです。
 
-{% embed url="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" caption="" %}
+{% embed url="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" %}
 
 すべてのオプションの解説をすると余白が足りないので、ここでは用途を抽出して、次の観点で説明します。
 
@@ -40,11 +40,11 @@ TypeScriptは最終的にJavaScriptにコンパイルされます。このオプ
 
 使いたい`target`には使いたい機能がない、でも使いたい。そのような時は`lib`オプションを指定することで使うことができるようになります。
 
-このような最新バージョンにはある、または現時点では実装には至っていないが提案中\(proposal\)である機能を取り入れて使えるようにする物を通称ポリフィルと言います。ポリフィルについてさらに詳しく知りたい方は、[What is a polyfill?](https://remysharp.com/2010/10/08/what-is-a-polyfill) \(この単語の創案者である Remy Sharp による記事\)をご覧ください。
+このような最新バージョンにはある、または現時点では実装には至っていないが提案中(proposal)である機能を取り入れて使えるようにする物を通称ポリフィルと言います。ポリフィルについてさらに詳しく知りたい方は、[What is a polyfill?](https://remysharp.com/2010/10/08/what-is-a-polyfill) (この単語の創案者である Remy Sharp による記事)をご覧ください。
 
 `lib`は必ず指定する必要はありません。`target`を指定すればその`target`で使われているライブラリは自動的に追加されます。指定した`target`では実装されていないライブラリや、必要がないライブラリを除外したいときに使います。
 
-指定は必ずしも必要ないとは申しあげましたがNode.jsでは構文\(`syntax`\)のサポートよりもAPIのサポートが先に行われることがあるため`target`ではまだサポートしていないがNode.jsで使えるようになっているAPIを`lib`を指定することによって使えるようにすることがあります。
+指定は必ずしも必要ないとは申しあげましたがNode.jsでは構文(`syntax`)のサポートよりもAPIのサポートが先に行われることがあるため`target`ではまだサポートしていないがNode.jsで使えるようになっているAPIを`lib`を指定することによって使えるようにすることがあります。
 
 #### `lib`を指定する上での注意
 
@@ -52,7 +52,7 @@ TypeScriptは最終的にJavaScriptにコンパイルされます。このオプ
 
 次のような`lib`を指定しない`target`の書き方は問題がありません。
 
-```javascript
+```json
 {
   "compilerOptions": {  
     "target": "es2018",
@@ -63,13 +63,13 @@ TypeScriptは最終的にJavaScriptにコンパイルされます。このオプ
 
 `lib`を指定すると、明示的にどの`target`の`lib`を使うかも明記しなければいけません。
 
-```javascript
+```json
 {
   "compilerOptions": {  
     "target": "es2018",
     "lib": [
       "es2018",
-      "esnext.AsyncIterable" 
+      "esnext.AsyncIterable",
       "esnext.Array",
       "esnext.Intl",
       "esnext.Symbol"
@@ -92,7 +92,9 @@ Node.jsのバージョンごとにサポートされているEcmaScriptの機能
 
 フロントエンドとバックエンドはモジュールの読み込み方法が異なっています。詳細は`import / export / require`のページをご覧ください。次の設定は使う場面で切り替えるべき項目です。
 
-{% page-ref page="../reference/import-export-require.md" %}
+{% content-ref url="../reference/import-export-require.md" %}
+[import-export-require.md](../reference/import-export-require.md)
+{% endcontent-ref %}
 
 ここで登場するモジュールという言葉ですが、この言葉に馴染みのない方はそのコードのファイルが読み込む他のファイルの中にあるコードぐらいに捉えてください。それらは同じプロジェクト内の他のファイルの中のコードでもあれば `npm install` したものでもあります。とくに `npm install` したものであればこれらをパッケージと呼びます。
 
@@ -104,7 +106,7 @@ Node.jsのバージョンごとにサポートされているEcmaScriptの機能
 
 #### `commonjs`
 
-バックエンド\(サーバーサイド\)で使われているモジュール読み込みの解決方法です。作成しているモジュールやパッケージがバックエンドでの動作だけを保証したい場合はもっとも無難な選択です。
+バックエンド(サーバーサイド)で使われているモジュール読み込みの解決方法です。作成しているモジュールやパッケージがバックエンドでの動作だけを保証したい場合はもっとも無難な選択です。
 
 #### `es2015, es2020, esnext`
 
@@ -188,5 +190,4 @@ Node.jsのバージョンごとにサポートされているEcmaScriptの機能
 
 ### 異なる箇所について
 
-これらふたつのtsconfig.jsonの設定で異なるのは`module, lib, jsx`です。フロントエンドであれば`lib`に`dom`を加えることもあります\(ただし、これは`"target": "es2020"`に組み込まれています\)。さらに`jsx`を使うのであれば`tsx`をどのようにしてjsのファイルに出力コンパイルしたいかを`jsx`オプションで指定します。
-
+これらふたつのtsconfig.jsonの設定で異なるのは`module, lib, jsx`です。フロントエンドであれば`lib`に`dom`を加えることもあります(ただし、これは`"target": "es2020"`に組み込まれています)。さらに`jsx`を使うのであれば`tsx`をどのようにしてjsのファイルに出力コンパイルしたいかを`jsx`オプションで指定します。
