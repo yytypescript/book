@@ -1,9 +1,10 @@
-# インデックス型 \(index signature\)
+# インデックス型 (index signature)
 
-TypeScriptで、オブジェクトのフィールド名をあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこのインデックス型\(index signature\)です。たとえば、プロパティがすべて`number`型であるオブジェクトは次のように型注釈します。
+TypeScriptで、オブジェクトのフィールド名をあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこのインデックス型(index signature)です。たとえば、プロパティがすべて`number`型であるオブジェクトは次のように型注釈します。
 
 ```typescript
 let obj: {
+  [K: string]: number;
 };
 ```
 
@@ -13,6 +14,7 @@ let obj: {
 
 ```typescript
 let obj: {
+  [K: string]: number;
 };
 
 obj = { a: 1, b: 2 }; // OK
@@ -28,9 +30,11 @@ const b: number | undefined = obj.b;
 console.log(b); //=> undefined
 ```
 
-{% page-ref page="../../../tsconfig/nouncheckedindexedaccess.md" %}
+{% content-ref url="../../tsconfig/nouncheckedindexedaccess.md" %}
+[nouncheckedindexedaccess.md](../../tsconfig/nouncheckedindexedaccess.md)
+{% endcontent-ref %}
 
-## Record&lt;K, T&gt;を用いたインデックス型
+## Record\<K, T>を用いたインデックス型
 
 インデックス型は`Record<K, T>`ユーティリティ型を用いても表現できます。次の2つの型注釈は同じ意味になります。
 
@@ -39,5 +43,6 @@ let obj1: { [K: string]: number };
 let obj2: Record<string, number>;
 ```
 
-{% page-ref page="../../../type-reuse/utility-types/record.md" %}
-
+{% content-ref url="../../type-reuse/utility-types/record.md" %}
+[record.md](../../type-reuse/utility-types/record.md)
+{% endcontent-ref %}

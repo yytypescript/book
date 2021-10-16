@@ -711,8 +711,8 @@ type StringKeysAndStringValues = {
 };
 ```
 
-{% content-ref url="reference/values-types-variables/object/index-signature/" %}
-[index-signature](reference/values-types-variables/object/index-signature/)
+{% content-ref url="reference/values-types-variables/object/index-signature.md" %}
+[index-signature.md](reference/values-types-variables/object/index-signature.md)
 {% endcontent-ref %}
 
 ### `[]` 配列型 ![ts](.gitbook/assets/TS.svg)

@@ -4,7 +4,9 @@
 
 インデックス型や配列で宣言されたオブジェクトが持つプロパティへのアクセスを厳密に評価します。
 
-{% page-ref page="../values-types-variables/object/index-signature/" %}
+{% content-ref url="../values-types-variables/object/index-signature.md" %}
+[index-signature.md](../values-types-variables/object/index-signature.md)
+{% endcontent-ref %}
 
 ```typescript
 type ObjectLiteralLike = {
@@ -82,4 +84,3 @@ phoneticCodes.forEach((p: string) => {
   // ...
 });
 ```
-
