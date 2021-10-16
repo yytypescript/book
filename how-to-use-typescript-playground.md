@@ -26,7 +26,7 @@ console.log(add(1, 2));
 
 実行後は右側の `Logs` のタブで実行結果が確認できます。
 
-![](.gitbook/assets/sukurnshotto-2021-10-01-201539png.png)
+![](<.gitbook/assets/スクリーンショット 2021-10-01 20.15.39.png>)
 
 ### JavaScriptのコンパイル結果を確認する
 
@@ -48,7 +48,7 @@ console.log(Color.RED);
 
 TypeScript が `enum` を どのように JavaScript へコンパイルしているか簡単に確認することができます。
 
-![](.gitbook/assets/sukurnshotto-2021-10-01-202145png.png)
+![](<.gitbook/assets/スクリーンショット 2021-10-01 20.21.45.png>)
 
 ### コンパイルエラーの確認方法
 
@@ -62,7 +62,7 @@ value = true;
 
 また、エディターでマウスオーバーをする以外にも右側の `Errors` タブを表示して、すべてのエラーを一覧で確認することができます。
 
-![](.gitbook/assets/sukurnshotto-2021-10-01-220014png.png)
+![](<.gitbook/assets/スクリーンショット 2021-10-01 22.00.14.png>)
 
 ### 型定義の確認方法
 
@@ -82,7 +82,7 @@ declare function add(a: number, b: number): number;
 
 ↓のURLを開いてみてください。エディターにコードが入力された状態で TypeScript Playgournd が表示されます。
 
-[https://www.typescriptlang.org/play?\#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA)
+[https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA)
 
 TypeScript Playground はページのURLを共有するだけで書いたコードを他の人に共有することができます。
 
@@ -100,9 +100,9 @@ TypeScript Playground はページのURLを共有するだけで書いたコー�
 
 上部の`Export` タブから色々な形式でコードを共有するためのテキストを出力することができます。
 
-例えば `Copy as Markdown Link with Preview` を選択した場合は次のような形式のテキストを出力することができます。
+例えば `Copy as Markdown Link with Preview `を選択した場合は次のような形式のテキストを出力することができます。
 
-```text
+````
 ```
 function add(a:number, b:number) {
     return a + b;
@@ -110,7 +110,7 @@ function add(a:number, b:number) {
 ```
 
 [Playground Link](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwFgAoRTxU4qEUpMkQBqKgG52AX3bsICAM5wANsQB0SuAHMs6DAEZKAJnr0xQA)
-```
+````
 
 
 
@@ -122,7 +122,7 @@ function add(a:number, b:number) {
 
 デフォルトでは TypeScript のバージョンは 4.1 以上なので、次のサンプルコードはコンパイルエラーが発生しません。
 
-バージョンを 4.1 未満に変更してみてください。TypeScript のバージョンが変更されたことで   
+バージョンを 4.1 未満に変更してみてください。TypeScript のバージョンが変更されたことで \
 `Template Literal Types` が非対応となりコンパイルエラーが発生するのが確認できます。
 
 ```typescript
@@ -161,4 +161,3 @@ function add(a, b) {
 }
 exports.add = add;
 ```
-

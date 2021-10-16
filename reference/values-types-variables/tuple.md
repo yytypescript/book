@@ -1,4 +1,4 @@
-# タプル \(tuple\)
+# タプル (tuple)
 
 TypeScriptの関数は1値のみ返却可能です。戻り値に複数の値を返したい時に、配列に返したいすべての値を入れて返すことがあります。なお次の関数の戻り値は定数になっていますが、実際は演算した結果だと解釈してください。
 
@@ -40,7 +40,7 @@ function tuple(): [number, string, boolean] {
 }
 ```
 
-配列の型はarray\(`T[]`\), generic\(`Array<T>`\)というふたつの書き方がありましたがタプルはこの書き方しか存在しません。
+配列の型はarray(`T[]`), generic(`Array<T>`)というふたつの書き方がありましたがタプルはこの書き方しか存在しません。
 
 ## タプルへのアクセス
 
@@ -81,10 +81,16 @@ const [,, bool]: [number, string, boolean] = tuple();
 
 ## タプルを使う場面
 
-TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。そのときTypeScriptでは`Promise.all()`というものを使用します。このときタプルが役に立ちます。  
+TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。そのときTypeScriptでは`Promise.all()`というものを使用します。このときタプルが役に立ちます。\
 `Promise`についての詳しい説明は本書に専門の頁がありますので譲ります。ここでは`Promise<T>`という型の変数は`await`をその前につけると`T`が取り出せることだけ覚えておいてください。また、この`T`をジェネリクスと言いますが、こちらも専門の頁があるので譲ります。
 
-{% page-ref page="../promise-async-await.md" %}
+{% content-ref url="../promise-async-await.md" %}
+[promise-async-await.md](../promise-async-await.md)
+{% endcontent-ref %}
+
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
+{% endcontent-ref %}
 
 ```typescript
 const promise: Promise<number> = yyAsync();
@@ -131,4 +137,3 @@ const tuple: [number, string] = await Promise.all([
 ```
 
 `Promise.all()`は先に終了した関数から順番に戻り値のタプルとして格納されることはなく、元々の順番を保持します。`take3seconds()`の方が早く終わるから、先にタプルに格納されるということはなく、引数に渡した順番のとおりにタプル`tuple`の要素の型は決まります。
-

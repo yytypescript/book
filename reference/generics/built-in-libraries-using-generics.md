@@ -26,6 +26,10 @@ const numbers: Array<number> = [1, 2, 3, 4];
 const numbers: number[] = [1, 2, 3, 4];
 ```
 
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
+{% endcontent-ref %}
+
 ## 標準ライブラリを使ってみる
 
 実際にジェネリクスが使われる標準ライブラリを利用した実装をみてみましょう。
@@ -70,8 +74,7 @@ TODO: Promiseへリンクする
 
 ### 標準ライブラリの型定義の参照方法
 
-標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認することができます。  
+標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認することができます。\
 [https://github.com/microsoft/TypeScript/tree/master/lib](https://github.com/microsoft/TypeScript/tree/master/lib)
 
 `Array.prototype.map()` の型は [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/master/lib/lib.es5.d.ts#L1170) のファイルで確認できます。
-

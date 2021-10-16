@@ -6,7 +6,9 @@ TypeScriptではオブジェクトの型注釈をするとき、プロパティ�
 let obj: { a: number; b: number };
 ```
 
-{% page-ref page="type-annotation-of-objects.md" %}
+{% content-ref url="type-annotation-of-objects.md" %}
+[type-annotation-of-objects.md](type-annotation-of-objects.md)
+{% endcontent-ref %}
 
 そういった一般的な型注釈とは異なり、プロパティの型を指定せず、ざっくり「オブジェクトであること」を型注釈する方法もあります。`object`型や`Object`型、`{}`型を使うものです。
 
@@ -44,7 +46,9 @@ a = true; // NG
 a = "string"; // NG
 ```
 
-{% page-ref page="non-primitives-are-objects.md" %}
+{% content-ref url="non-primitives-are-objects.md" %}
+[non-primitives-are-objects.md](non-primitives-are-objects.md)
+{% endcontent-ref %}
 
 ### Object型
 
@@ -64,7 +68,9 @@ a = null; // NG
 a = undefined; // NG
 ```
 
-{% page-ref page="../boxing.md" %}
+{% content-ref url="../boxing.md" %}
+[boxing.md](../boxing.md)
+{% endcontent-ref %}
 
 `Object`型は[TypeScriptの公式ドキュメントで使うべきでないとされています](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#number-string-boolean-symbol-and-object)。理由はプリミティブ型も代入できてしまうためです。もしオブジェクト型ならなんでも代入可にしたい場合は、代わりに`object`型を検討すべきです。
 
@@ -90,5 +96,4 @@ a = undefined; // NG
 
 `object`型や`Object`型、`{}`型の代入範囲をまとめると次の図のようになります。
 
-![](../../../.gitbook/assets/cleanshot-2021-09-27-at-12.06.52.png)
-
+![](<../../../.gitbook/assets/CleanShot 2021-09-27 at 12.06.52.png>)

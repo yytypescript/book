@@ -1,6 +1,6 @@
 # import / export /require
 
-Node.jsが出てからというものの、フロントエンドの開発もNode.jsを通して行うことができるようにはなりましたが、実際に動く場所がブラウザとサーバーと事情が異なります。  
+Node.jsが出てからというものの、フロントエンドの開発もNode.jsを通して行うことができるようにはなりましたが、実際に動く場所がブラウザとサーバーと事情が異なります。\
 TypeScriptは最終的にどの場面で使われるか、その用途に適した出力に変えることができます。
 
 ## かつてのJavaScript
@@ -27,13 +27,13 @@ TypeScriptは最終的にどの場面で使われるか、その用途に適し�
 
 ### `require()`
 
-Node.jsでは現在でも主流の他の`.js`ファイル\(TypeScriptでは`.ts`も\)を読み込む機能です。基本は次の構文です。
+Node.jsでは現在でも主流の他の`.js`ファイル(TypeScriptでは`.ts`も)を読み込む機能です。基本は次の構文です。
 
 ```typescript
 const package1 = require('package1');
 ```
 
-これは、パッケージの`package1`の内容を定数`package1`に持ってくることを意味しています。このとき`package1`は\(組み込みライブラリでなければ\)現在のプロジェクトの`node_modules`というディレクトリに存在する必要があります。
+これは、パッケージの`package1`の内容を定数`package1`に持ってくることを意味しています。このとき`package1`は(組み込みライブラリでなければ)現在のプロジェクトの`node_modules`というディレクトリに存在する必要があります。
 
 自分で作った他の`.js, .ts`ファイルを読み込むこともできます。呼び出すファイルから見た、読み込みたいファイルの位置を**相対パス**で書きます。たとえ同じ階層にあっても相対パスで書く必要があります。このとき`.js, .json`とTypeScriptなら加えて`.ts`を省略することができます。TypeScriptでの開発においては最終的にJavaScriptにコンパイルされることを考慮すると書かないほうが無難です。
 
@@ -129,11 +129,11 @@ console.log(inc(3));
 
 ## `ES Module`
 
-主にフロントエンド\(ブラウザ\)で採用されているファイルの読み込み方法です。`ES6`で追加された機能のため、あまりにも古いブラウザでは動作しません。
+主にフロントエンド(ブラウザ)で採用されているファイルの読み込み方法です。`ES6`で追加された機能のため、あまりにも古いブラウザでは動作しません。
 
 ### `import`
 
-`require()`と同じく他の`.js, .ts`ファイルを読み込む機能ですが、`require()`はファイル内のどこにでも書くことができる一方で`import`は**必ずファイルの一番上に書く必要があります**。  
+`require()`と同じく他の`.js, .ts`ファイルを読み込む機能ですが、`require()`はファイル内のどこにでも書くことができる一方で`import`は**必ずファイルの一番上に書く必要があります**。\
 なお、書き方が2とおりあります。
 
 ```typescript
@@ -206,7 +206,7 @@ console.log(util.increment(3));
 // -> 4
 ```
 
-1番目の場合の`import`で名前を変更するときは、`require`のとき\(分割代入\)と異なり`as`という表記を使って変更します。
+1番目の場合の`import`で名前を変更するときは、`require`のとき(分割代入)と異なり`as`という表記を使って変更します。
 
 ```typescript
 // index.js
@@ -322,20 +322,26 @@ console.log(increment(3));
 
 TypeScriptでは一般的に`ES Module`方式に則った記法で書きます。これは`CommonJS`を使用しないというわけではなく、コンパイル時の設定で`CommonJS, ES Module`のどちらにも対応した形式で出力できるのであまり問題はありません。ここまでの経緯などはTypeScriptでは意識することがあまりないでしょう。
 
-また、執筆時\(2021/01\)ではTypeScriptのコンパイルは`.js`のみを出力でき`.cjs, .mjs`を出力する設定はありません。ブラウザでもサーバーでも使えるJavaScriptを出力したい場合は一手間加える必要があります。
+また、執筆時(2021/01)ではTypeScriptのコンパイルは`.js`のみを出力でき`.cjs, .mjs`を出力する設定はありません。ブラウザでもサーバーでも使えるJavaScriptを出力したい場合は一手間加える必要があります。
 
 出力の方法に関してはtsconfig.jsonのページに説明がありますのでそちらをご覧ください。
 
-{% page-ref page="../tutorials/tsconfig.json-settings.md" %}
+{% content-ref url="../tutorials/tsconfig.json-settings.md" %}
+[tsconfig.json-settings.md](../tutorials/tsconfig.json-settings.md)
+{% endcontent-ref %}
 
 ## `require? import?`
 
 ブラウザ用、サーバー用の用途で使い分けてください。ブラウザ用であれば`ES Module`を、サーバー用であれば`CommonJS`が無難な選択肢になります。どちらでも使えるユニバーサルなパッケージであればDual Packageを目指すのもよいでしょう。
 
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
+{% endcontent-ref %}
+
 ## `default export? named export?`
 
-`module.exports`との`export default`は`default export`と呼ばれ  
-`exports`と`export`は`named export`と呼ばれています。  
+`module.exports`との`export default`は`default export`と呼ばれ\
+`exports`と`export`は`named export`と呼ばれています。\
 どちらも長所と短所があり、たびたび議論になる話題です。どちらか一方を使うように統一するコーディングガイドを持っている企業もあるようですが、どちらかが極端に多いというわけでもないので好みの範疇です。
 
 ### `default export`
@@ -359,7 +365,7 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 #### Cons
 
-* \(名前の変更はできるものの\)基本的に決まった名前で`import`して使う必要がある
+* (名前の変更はできるものの)基本的に決まった名前で`import`して使う必要がある
 * `export`しているファイルが名前を変更すると動作しなくなる
 
 ここで挙がっている**名前を変えることができる**についてはいろいろな意見があります。
@@ -433,4 +439,3 @@ console.log(taxIncludedAsOf2019(100));
 名前を変更したため、呼び出し元も名前の変更が強制されます。これはたとえ`as`を使って名前を変更していたとしても同じく変更する必要があります。
 
 ロジックが変わったこととそれによる修正を強制したいのであれば`named export`を使う方がわかりやすく、そしてエディター、IDEを通して見つけやすくなる利点があります。逆に、公開するパッケージのようにAPIが一貫して明瞭ならば`default export`も価値があります。
-
