@@ -1,0 +1,12 @@
+node_modules
+
+#
+# IDEs & editors
+#
+/.idea
+
+#
+# Generated files
+#
+/CHANGELOG.md
+/pnpm-lock.yaml

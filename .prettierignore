@@ -1,0 +1,11 @@
+#
+# IDEs & editors
+#
+/.idea
+
+#
+# Generated files
+#
+/.docusaurus
+/build
+pnpm-lock.yaml

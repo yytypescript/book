@@ -1,0 +1,99 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #007acc;
+  --ifm-color-primary-dark: #006eb8;
+  --ifm-color-primary-darker: #0068ad;
+  --ifm-color-primary-darkest: #00558f;
+  --ifm-color-primary-light: #0086e0;
+  --ifm-color-primary-lighter: #008ceb;
+  --ifm-color-primary-lightest: #0a9dff;
+  --ifm-code-font-size: 95%;
+  --ifm-font-size-base: 17px;
+  --ifm-code-padding-horizontal: 0.1rem;
+  --ifm-code-padding-vertical: 0;
+  --ifm-line-height-base: 1.8;
+  --ifm-font-family-base: "Noto Sans JP", sans-serif;
+}
+
+.markdown h1:first-child {
+  --ifm-h1-font-size: 2rem;
+  font-weight: 700;
+}
+
+.markdown > h2 {
+  --ifm-h2-font-size: 1.5rem;
+}
+
+.markdown > h3 {
+  --ifm-h3-font-size: 1.25rem;
+}
+
+.markdown {
+  font-weight: 400;
+}
+
+.markdown p {
+  text-align: justify;
+  word-wrap: break-word;
+  letter-spacing: 0.01rem;
+}
+
+code {
+  border-color: var(--ifm-code-background);
+  border-radius: 0;
+}
+
+p > code {
+  margin: 0 var(--ifm-code-padding-horizontal);
+}
+
+.markdown > pre.prism-code {
+  margin-bottom: 0;
+}
+.markdown .footnotes {
+  font-size: 0.85rem;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+html[data-theme="dark"] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.prism-code {
+  counter-reset: line-number;
+}
+
+.prism-code .token-line::before {
+  counter-increment: line-number;
+  content: counter(line-number);
+  margin-right: 1rem;
+  opacity: 0.4;
+  font-size: 0.85rem;
+  user-select: none;
+  min-width: 1rem;
+  display: inline-block;
+  position: sticky;
+}
+
+/* 3行以内のコードブロックは行番号を表示しないスタイル */
+.prism-code .token-line:only-child::before,
+.prism-code .token-line:first-child:nth-last-child(2)::before,
+.prism-code .token-line:first-child:nth-last-child(2) ~ .token-line::before,
+.prism-code .token-line:first-child:nth-last-child(3)::before,
+.prism-code .token-line:first-child:nth-last-child(3) ~ .token-line::before {
+  display: none;
+}
