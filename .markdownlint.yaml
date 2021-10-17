@@ -1,0 +1,25 @@
+default: true
+line-length: false
+no-bare-urls: false
+ul-style:
+  style: dash
+heading-style:
+  style: atx
+ul-indent:
+  indent: 2
+no-inline-html:
+  allowed_elements:
+    - small
+    - code
+    - dl
+    - dt
+    - dd
+    - figure
+    - figcaption
+    - img
+    - ruby
+    - rt
+    - details
+    - summary
+    - kbd
+    - TweetILearned

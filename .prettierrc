@@ -1,0 +1,11 @@
+{
+  "overrides": [
+    {
+      "files": ["*.md"],
+      "options": {
+        "parser": "markdown-nocjsp"
+      }
+    }
+  ],
+  "plugins": ["prettier-plugin-md-nocjsp"]
+}
