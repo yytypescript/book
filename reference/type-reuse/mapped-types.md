@@ -1,4 +1,4 @@
-# マップ型 \(mapped type\)
+# マップ型 (mapped type)
 
 インデックス型では設定時はどのようなキーも自由に設定できてしまい、アクセス時は毎回`undefined`かどうかの型チェックが必要です。入力の形式が決まっているのであればMapped typeの使用を検討できます。
 
@@ -12,6 +12,7 @@ type SystemSupportLanguage = 'en' | 'fr' | 'it' | 'es';
 
 ```typescript
 type Butterfly = {
+  [key in SystemSupportLanguage]: string;
 };
 ```
 
@@ -30,7 +31,9 @@ const butterflies: Butterfly = {
 
 プロパティを読み取り専用にする`readonly`をそのオブジェクトのすべてのプロパティに適用する`Readonly<T>`というユーティリティ型があります。他にもユーティリティ型はありますが、それらについては専門のページがありますのでここでは割愛します。
 
-{% page-ref page="utility-types/readonly.md" %}
+{% content-ref url="utility-types/readonly.md" %}
+[readonly.md](utility-types/readonly.md)
+{% endcontent-ref %}
 
 `Readonly<T>`もこの機能で実現されています。`Readonly<T>`は次のように実装されています。
 
@@ -42,7 +45,9 @@ type Readonly<T> = {
 
 `keyof T`という見慣れない表現が登場しましたが、これはオブジェクトのキーをユニオン型に変更するものだと解釈してください。`keyof`の詳細は型演算子をご覧ください。
 
-{% page-ref page="keyof-type-operator.md" %}
+{% content-ref url="keyof-type-operator.md" %}
+[keyof-type-operator.md](keyof-type-operator.md)
+{% endcontent-ref %}
 
 ## インデックス型と異なるところ
 
@@ -51,10 +56,11 @@ Mapped typeはインデックス型と異なり`symbol`型もキーにするこ�
 ```typescript
 type Identifier = symbol | 1;
 type Sample = {
+  [P in Identifier]: string;
 };
 
 const sample: Sample = {
   1: 'pork';
+  [Symbol('thick')]: 'thin';
 };
 ```
-
