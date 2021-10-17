@@ -334,8 +334,8 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 ブラウザ用、サーバー用の用途で使い分けてください。ブラウザ用であれば`ES Module`を、サーバー用であれば`CommonJS`が無難な選択肢になります。どちらでも使えるユニバーサルなパッケージであればDual Packageを目指すのもよいでしょう。
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="advanced-topics/tsconfig-for-dual-package-developers.md" %}
+[tsconfig-for-dual-package-developers.md](advanced-topics/tsconfig-for-dual-package-developers.md)
 {% endcontent-ref %}
 
 ## `default export? named export?`

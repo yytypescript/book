@@ -26,8 +26,8 @@ const numbers: Array<number> = [1, 2, 3, 4];
 const numbers: number[] = [1, 2, 3, 4];
 ```
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="../values-types-variables/array/type-annotation-of-array.md" %}
+[type-annotation-of-array.md](../values-types-variables/array/type-annotation-of-array.md)
 {% endcontent-ref %}
 
 ## 標準ライブラリを使ってみる

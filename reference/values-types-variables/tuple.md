@@ -88,8 +88,8 @@ TypeScriptで非同期プログラミングをする時に、時間のかかる�
 [promise-async-await.md](../promise-async-await.md)
 {% endcontent-ref %}
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="../generics/" %}
+[generics](../generics/)
 {% endcontent-ref %}
 
 ```typescript
