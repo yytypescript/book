@@ -96,4 +96,4 @@ a = undefined; // NG
 
 `object`型や`Object`型、`{}`型の代入範囲をまとめると次の図のようになります。
 
-![](<../../../.gitbook/assets/CleanShot 2021-09-27 at 12.06.52.png>)
+![](../../../.gitbook/assets/cleanshot-2021-09-27-at-12.06.52.png)

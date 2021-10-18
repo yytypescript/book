@@ -26,7 +26,7 @@ console.log(add(1, 2));
 
 実行後は右側の `Logs` のタブで実行結果が確認できます。
 
-![](<.gitbook/assets/スクリーンショット 2021-10-01 20.15.39.png>)
+![](.gitbook/assets/sukurnshotto-2021-10-01-201539png.png)
 
 ### JavaScriptのコンパイル結果を確認する
 
@@ -48,7 +48,7 @@ console.log(Color.RED);
 
 TypeScript が `enum` を どのように JavaScript へコンパイルしているか簡単に確認することができます。
 
-![](<.gitbook/assets/スクリーンショット 2021-10-01 20.21.45.png>)
+![](.gitbook/assets/sukurnshotto-2021-10-01-202145png.png)
 
 ### コンパイルエラーの確認方法
 
@@ -62,7 +62,7 @@ value = true;
 
 また、エディターでマウスオーバーをする以外にも右側の `Errors` タブを表示して、すべてのエラーを一覧で確認することができます。
 
-![](<.gitbook/assets/スクリーンショット 2021-10-01 22.00.14.png>)
+![](.gitbook/assets/sukurnshotto-2021-10-01-220014png.png)
 
 ### 型定義の確認方法
 
@@ -88,8 +88,8 @@ TypeScript Playground はページのURLを共有するだけで書いたコー�
 
 これは
 
-1. エディターのコードを文字列圧縮ライブラリで圧縮して文字列をURLに設定する  
-2. URLを共有する  
+1. エディターのコードを文字列圧縮ライブラリで圧縮して文字列をURLに設定する &#x20;
+2. URLを共有する &#x20;
 3. 共有されたURLが開かれる時に圧縮された文字列をデコードしてエディターに展開する
 
 という仕組みでコードが共有されています。
