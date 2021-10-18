@@ -26,9 +26,9 @@ var name;
 
 ```javascript
 function test() {
-    var x = 1;
-    var x = 2;
-    console.log(x);
+  var x = 1;
+  var x = 2;
+  console.log(x);
 }
 ```
 
@@ -60,14 +60,14 @@ const innerWidth = 10;
 console.log(window.innerWidth); // 500
 ```
 
-{% page-ref page="../statements/variable-scope.md" %}
+[変数のスコープ (scope)](../statements/variable-scope.md)
 
 ### 変数の巻上げ
 
 JavaScriptで宣言された変数はスコープの先頭で変数が生成されます。これは**変数の巻き上げ**と呼ばれています。`var`で宣言された変数は、スコープの先頭で生成されて`undefined`で値が初期化されます。次の例では `greeting`変数への参照はエラーとならずに `undefined` となります。
 
 ```typescript
-console.log(greeting) // undefined
+console.log(greeting); // undefined
 var greeting = "こんにちは";
 
 // ↓ 巻き上げの影響で実際はこう実行される
@@ -97,11 +97,11 @@ const y = 2;
 
 ```typescript
 function output() {
-    var x = 1;
-    {
-        console.log(x);　　// Reference Error
-        let x = 2;
-    }
+  var x = 1;
+  {
+    console.log(x); // Reference Error
+    let x = 2;
+  }
 }
 
 output();
@@ -113,12 +113,12 @@ JavaScript では`var`で宣言された変数のスコープは関数となる�
 
 ```typescript
 function print() {
-    var x = 1;
-    if (true) {
-        var x = 2;
-        console.log(x); // 2
-    }
+  var x = 1;
+  if (true) {
+    var x = 2;
     console.log(x); // 2
+  }
+  console.log(x); // 2
 }
 ```
 
@@ -126,12 +126,11 @@ function print() {
 
 ```typescript
 function print() {
-    const x = 1;
-    if (true) {
-        const x = 2;
-        console.log(x); // 2
-    }
-    console.log(x); // 1
+  const x = 1;
+  if (true) {
+    const x = 2;
+    console.log(x); // 2
+  }
+  console.log(x); // 1
 }
 ```
-

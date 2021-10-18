@@ -1,4 +1,8 @@
-# 関数宣言 \(function declaration\)
+---
+sidebar_label: 関数宣言
+---
+
+# 関数宣言 (function declaration)
 
 ## 関数宣言構文
 
@@ -38,20 +42,20 @@ function increment(num): number {
 }
 ```
 
-{% page-ref page="../tsconfig/noimplicitany.md" %}
+[noImplicitAny](../tsconfig/noimplicitany.md)
 
 次の例のように定義済みの関数プロパティに再代入する形で関数を上書きする場合は`button.onclick`の引数`event`の型が`MouseEvent`と定義されているため、その型情報から代入する関数の引数の型を省略しても、`event`の型を`MousetEvent`と推論してくれます。
 
 ```typescript
-const button = document.createElement('button');
+const button = document.createElement("button");
 
 // event は MouseEvent型になる
-button.onclick = function(event) {
-    console.log(event.target);
+button.onclick = function (event) {
+  console.log(event.target);
 
-    // Property 'hoge' does not exist on type 'MouseEvent'.(2339)
-    console.log(event.hoge);
-}
+  // Property 'hoge' does not exist on type 'MouseEvent'.(2339)
+  console.log(event.hoge);
+};
 ```
 
 戻り値の型注釈を省略した場合、コンパイラーがコードから型推論します。
@@ -74,11 +78,10 @@ type Person = {
 
 // 戻り値の型はnumber | null型
 function getAge(person: Person) {
-  if (typeof person.age === 'undefined') {
+  if (typeof person.age === "undefined") {
     return null;
   }
 
   return person.age;
 }
 ```
-

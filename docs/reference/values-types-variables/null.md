@@ -28,5 +28,4 @@ typeof null; //=> "object"
 
 typeof演算子の詳細は「typeof演算子」のセクションをご覧ください。
 
-{% page-ref page="typeof-operator.md" %}
-
+[typeof演算子 (typeof operator)](typeof-operator.md)

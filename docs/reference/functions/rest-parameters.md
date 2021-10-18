@@ -1,6 +1,10 @@
-# 残余引数/可変長引数 \(rest parameter\)
+---
+sidebar_label: 残余引数/可変長引数
+---
 
-通常の関数は引数の数が決まっています。JavaScriptでは引数の数に決まりがない関数も作れます。引数の個数が決まっていない引数のことを可変長引数\(variable length arguments, variadic arguments\)といいます。JavaScriptでは可変長引数は残余引数\(rest parameter\)と呼びます。
+# 残余引数/可変長引数 (rest parameter)
+
+通常の関数は引数の数が決まっています。JavaScriptでは引数の数に決まりがない関数も作れます。引数の個数が決まっていない引数のことを可変長引数(variable length arguments, variadic arguments)といいます。JavaScriptでは可変長引数は残余引数(rest parameter)と呼びます。
 
 ## 残余引数の書き方
 
@@ -53,7 +57,7 @@ function func(...params: number[]) {
 JavaScriptに組み込みのメソッドに`Math.max()`があります。これは、引数に与えられた数値の中から最大値を返します。この関数は残余引数を要求します。
 
 ```javascript
-Math.max(1, 10, 100) //=> 100
+Math.max(1, 10, 100); //=> 100
 ```
 
 残余引数は、引数受取時には配列になりますが、関数呼び出しのときにひとつの配列にまとめて渡すことはできません。
@@ -64,7 +68,7 @@ const highest = Math.max(scores);
 // Argument of type 'number[]' is not assignable to parameter of type 'number'.(2345)
 ```
 
-このように配列を直接渡してしまうと、`max`の関数内では引数ひとつの`number[][]`型が渡されたと解釈されます。`max`の期待する余剰引数の型は`number[]`型なので、このコードは正しく動きません。配列を余剰引数に渡す場合は、スプレッド構文\(spread syntax\)を用います。スプレッド構文は`...`と書きます。
+このように配列を直接渡してしまうと、`max`の関数内では引数ひとつの`number[][]`型が渡されたと解釈されます。`max`の期待する余剰引数の型は`number[]`型なので、このコードは正しく動きません。配列を余剰引数に渡す場合は、スプレッド構文(spread syntax)を用います。スプレッド構文は`...`と書きます。
 
 ```typescript
 const scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -72,4 +76,3 @@ const highest = Math.max(...scores);
 ```
 
 残余引数もスプレッド構文も`...`と同じ表記ですが、スプレッド構文は配列を引数にバラすものです。
-

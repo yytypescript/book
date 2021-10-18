@@ -25,7 +25,7 @@ function daysOfMonth(month: number): number {
     case 11:
       days = 30;
     default:
-      throw new Error('INVALID INPUT');
+      throw new Error("INVALID INPUT");
   }
 
   return days;
@@ -78,4 +78,3 @@ ffunction daysOfMonth(month: number): number {
   return days;
 }
 ```
-

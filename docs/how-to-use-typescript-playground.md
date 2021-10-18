@@ -15,8 +15,8 @@ Playground にアクセスできたら、早速コードを実行してみまし
 次のサンプルコードを Playground のエディターに入力します。
 
 ```typescript
-function add(a:number, b:number) {
-    return a + b;
+function add(a: number, b: number) {
+  return a + b;
 }
 
 console.log(add(1, 2));
@@ -26,7 +26,7 @@ console.log(add(1, 2));
 
 実行後は右側の `Logs` のタブで実行結果が確認できます。
 
-![](.gitbook/assets/sukurnshotto-2021-10-01-201539png.png)
+![](assets/sukurnshotto-2021-10-01-201539png.png)
 
 ### JavaScriptのコンパイル結果を確認する
 
@@ -38,9 +38,9 @@ TypeScript を書いていると実際に生成される JavaScript のコード
 
 ```typescript
 enum Color {
-    RED = 'red',
-    BLUE = 'blue',
-    GREEN = 'green'
+  RED = "red",
+  BLUE = "blue",
+  GREEN = "green",
 }
 
 console.log(Color.RED);
@@ -48,21 +48,21 @@ console.log(Color.RED);
 
 TypeScript が `enum` を どのように JavaScript へコンパイルしているか簡単に確認することができます。
 
-![](.gitbook/assets/sukurnshotto-2021-10-01-202145png.png)
+![](assets/sukurnshotto-2021-10-01-202145png.png)
 
 ### コンパイルエラーの確認方法
 
 次のサンプルコードをエディター上で入力してみてください。エディター上に表示される赤の波線にマウスオーバーをすることでリアルタイムにコンパイルエラーを確認することができます。
 
 ```typescript
-let value = '1';
+let value = "1";
 value = 1;
 value = true;
 ```
 
 また、エディターでマウスオーバーをする以外にも右側の `Errors` タブを表示して、すべてのエラーを一覧で確認することができます。
 
-![](.gitbook/assets/sukurnshotto-2021-10-01-220014png.png)
+![](assets/sukurnshotto-2021-10-01-220014png.png)
 
 ### 型定義の確認方法
 
@@ -70,8 +70,8 @@ value = true;
 
 ```typescript
 // コード
-function add(a:number, b:number) {
-    return a + b;
+function add(a: number, b: number) {
+  return a + b;
 }
 
 // .D.TSの出力
@@ -82,7 +82,7 @@ declare function add(a: number, b: number): number;
 
 ↓のURLを開いてみてください。エディターにコードが入力された状態で TypeScript Playgournd が表示されます。
 
-[https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA)
+<https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA>
 
 TypeScript Playground はページのURLを共有するだけで書いたコードを他の人に共有することができます。
 
@@ -102,17 +102,13 @@ TypeScript Playground はページのURLを共有するだけで書いたコー�
 
 例えば `Copy as Markdown Link with Preview `を選択した場合は次のような形式のテキストを出力することができます。
 
-````
-```
-function add(a:number, b:number) {
-    return a + b;
-}
-```
+    ```
+    function add(a:number, b:number) {
+        return a + b;
+    }
+    ```
 
-[Playground Link](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwFgAoRTxU4qEUpMkQBqKgG52AX3bsICAM5wANsQB0SuAHMs6DAEZKAJnr0xQA)
-````
-
-
+    [Playground Link](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwFgAoRTxU4qEUpMkQBqKgG52AX3bsICAM5wANsQB0SuAHMs6DAEZKAJnr0xQA)
 
 ## TypeScript Playgroundの設定方法
 
@@ -122,11 +118,11 @@ function add(a:number, b:number) {
 
 デフォルトでは TypeScript のバージョンは 4.1 以上なので、次のサンプルコードはコンパイルエラーが発生しません。
 
-バージョンを 4.1 未満に変更してみてください。TypeScript のバージョンが変更されたことで \
+バージョンを 4.1 未満に変更してみてください。TypeScript のバージョンが変更されたことで
 `Template Literal Types` が非対応となりコンパイルエラーが発生するのが確認できます。
 
 ```typescript
-type LocaleLang = 'en' | 'ja' | 'fr';
+type LocaleLang = "en" | "ja" | "fr";
 type LocaleId = `locale_${LocaleLang}`;
 ```
 
@@ -137,8 +133,8 @@ type LocaleId = `locale_${LocaleLang}`;
 次のサンプルコードをエディターに入力して、出力される JavaScript のコードを`.JS`で確認をするとデフォルトでは \`
 
 ```typescript
-export function add(a:number, b:number) {
-    return a + b;
+export function add(a: number, b: number) {
+  return a + b;
 }
 ```
 
@@ -146,7 +142,7 @@ Playground の初期設定では `module: 'esnext'`が選択されているの�
 
 ```javascript
 export function add(a, b) {
-    return a + b;
+  return a + b;
 }
 ```
 
@@ -157,7 +153,7 @@ export function add(a, b) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.add = void 0;
 function add(a, b) {
-    return a + b;
+  return a + b;
 }
 exports.add = add;
 ```

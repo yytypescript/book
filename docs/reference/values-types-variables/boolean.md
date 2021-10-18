@@ -1,6 +1,10 @@
-# 論理型 \(boolean type\)
+---
+sidebar_label: 論理型
+---
 
-JavaScriptの論理型\(boolean type\)は、`true`と`false`の論理値からなる型です。
+# 論理型 (boolean type)
+
+JavaScriptの論理型(boolean type)は、`true`と`false`の論理値からなる型です。
 
 ## 論理型リテラル
 
@@ -20,4 +24,3 @@ const isOk: boolean = true;
 ```
 
 TypeScriptには大文字で始まる`Boolean`型がありますが、これと`boolean`は別の型です。
-

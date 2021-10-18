@@ -4,12 +4,12 @@
 
 引数に対してアクセス修飾子を宣言した場合はこのような意味になります。
 
-| アクセス修飾子 | 説明 |
-| :--- | :--- |
-| \(宣言なし\) | constructorメソッド内のみアクセス可能 |
-| public | 自身のクラス内、継承クラス、インスタンス化されたクラスのどれからでもアクセス可能 |
-| protected | 自身のクラス、継承クラスからアクセス可能 |
-| private | 自身のクラスのみアクセス可能 |
+| アクセス修飾子 | 説明                                                                             |
+| :------------- | :------------------------------------------------------------------------------- |
+| (宣言なし)     | constructorメソッド内のみアクセス可能                                            |
+| public         | 自身のクラス内、継承クラス、インスタンス化されたクラスのどれからでもアクセス可能 |
+| protected      | 自身のクラス、継承クラスからアクセス可能                                         |
+| private        | 自身のクラスのみアクセス可能                                                     |
 
 `ConstructorInAccessModifier`クラスと`ConstructorOutAccessModifier`クラスのふたつを定義しました。
 
@@ -32,12 +32,7 @@ class ConstructorOutAccessModifier {
   public arg1: number;
   protected arg2: number;
   private arg3: number;
-  constructor(
-    arg0: number,
-    arg1: number,
-    arg2: number,
-    arg3: number
-  ) {
+  constructor(arg0: number, arg1: number, arg2: number, arg3: number) {
     this.arg1 = arg1;
     this.arg2 = arg2;
     this.arg3 = arg3;
@@ -51,20 +46,20 @@ class ConstructorOutAccessModifier {
 ```javascript
 // example.js
 class ConstructorInAccessModifier {
-    constructor(arg0, arg1, arg2, arg3) {
-        this.arg1 = arg1;
-        this.arg2 = arg2;
-        this.arg3 = arg3;
-        console.log({ arg0, arg1, arg2, arg3 });
-    }
+  constructor(arg0, arg1, arg2, arg3) {
+    this.arg1 = arg1;
+    this.arg2 = arg2;
+    this.arg3 = arg3;
+    console.log({ arg0, arg1, arg2, arg3 });
+  }
 }
 class ConstructorOutAccessModifier {
-    constructor(arg0, arg1, arg2, arg3) {
-        this.arg1 = arg1;
-        this.arg2 = arg2;
-        this.arg3 = arg3;
-        console.log({ arg0, arg1, arg2, arg3 });
-    }
+  constructor(arg0, arg1, arg2, arg3) {
+    this.arg1 = arg1;
+    this.arg2 = arg2;
+    this.arg3 = arg3;
+    console.log({ arg0, arg1, arg2, arg3 });
+  }
 }
 ```
 
@@ -86,4 +81,3 @@ outAccess.arg3; // エラー プロパティ 'arg3' は型 'ConstructorOutAccess
 ```
 
 つまり、コンストラクタの引数のアクセス修飾子はプロパティ宣言の省略をしてくれるだけにすぎません。
-

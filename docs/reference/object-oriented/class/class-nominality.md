@@ -1,6 +1,6 @@
 # 公称型クラス
 
-TypeScriptでは、クラスに1つでも非パブリックなプロパティがあると、そのクラスだけ構造的部分型ではなく公称型\(nominal typing\)になります。
+TypeScriptでは、クラスに1つでも非パブリックなプロパティがあると、そのクラスだけ構造的部分型ではなく公称型(nominal typing)になります。
 
 たとえば、`UserId`クラスと`GroupId`クラスで同名になってしまっている`id`プロパティをプライベートにするだけで、相互の代入が不可能になります。
 
@@ -30,5 +30,4 @@ const userId: UserId = new GroupId("...");
 
 ## 関連情報
 
-{% page-ref page="../../values-types-variables/structural-subtyping.md" %}
-
+[構造的部分型 (structural subtyping)](../../values-types-variables/structural-subtyping.md)

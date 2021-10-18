@@ -13,4 +13,3 @@ const object1 = { value: 123 };
 const object2 = { value: 123 };
 console.log(object1 == object2); //=> false
 ```
-

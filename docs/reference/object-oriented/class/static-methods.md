@@ -1,9 +1,14 @@
-# 静的メソッド \(static method\)
+---
+sidebar_label: 静的メソッド
+---
 
-JavaやPHPには静的メソッド\(static method\)という概念があります。Rubyではクラスメソッドに相当します。通常のメソッドはインスタンスに属しますが、静的メソッドはクラスに属します。JavaやPHPではstaticキーワードで静的フィールドを宣言できます。
+# 静的メソッド (static method)
+
+JavaやPHPには静的メソッド(static method)という概念があります。Rubyではクラスメソッドに相当します。通常のメソッドはインスタンスに属しますが、静的メソッドはクラスに属します。JavaやPHPではstaticキーワードで静的フィールドを宣言できます。
 
 {% tabs %}
 {% tab title="Java" %}
+
 ```java
 class SomeClass {
     static public void doSomething() {
@@ -17,9 +22,11 @@ class Main {
     }
 }
 ```
+
 {% endtab %}
 
 {% tab title="PHP" %}
+
 ```php
 class SomeClass
 {
@@ -31,25 +38,23 @@ class SomeClass
 
 SomeClass::doSomething();
 ```
+
 {% endtab %}
 {% endtabs %}
 
 JavaScriptにはJavaのような静的メソッドの機能がありません。代わりに、クラスのプロパティに後から関数を代入することで似たようなことができます。
 
-{% code title="JavaScript" %}
-```javascript
+```javascript title="JavaScript"
 class SomeClass {}
 SomeClass.doSomething = function () {
   // ...
 };
 SomeClass.doSomething();
 ```
-{% endcode %}
 
 TypeScriptでは、Java風の静的メソッドの書き方ができるようになっています。TypeScriptで静的メソッドを宣言するにはstaticキーワードを用います。
 
-{% code title="TypeScript" %}
-```typescript
+```typescript title="TypeScript"
 class SomeClass {
   static doSomething() {
     // ...
@@ -58,7 +63,6 @@ class SomeClass {
 
 SomeClass.doSomething();
 ```
-{% endcode %}
 
 ## 静的メソッドとアクセス修飾子
 
@@ -72,5 +76,4 @@ class SomeClass {
 }
 ```
 
-{% page-ref page="access-modifiers.md" %}
-
+[アクセス修飾子 (access modifier)](access-modifiers.md)

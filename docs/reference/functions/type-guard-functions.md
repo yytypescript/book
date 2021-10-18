@@ -1,4 +1,8 @@
-# 型ガード関数 \(type guard function\)
+---
+sidebar_label: 型ガード関数
+---
+
+# 型ガード関数 (type guard function)
 
 Type predicateの宣言は戻り値が`boolean`型の関数に対して適用でき、戻り値の型の部分を次のように書き替えます。
 
@@ -21,7 +25,7 @@ if (isDuck(animal)) {
 
 ```typescript
 function isUndefined(value: unknown): value is undefined {
-  return typeof value === 'number';
+  return typeof value === "number";
 }
 ```
 
@@ -29,5 +33,4 @@ function isUndefined(value: unknown): value is undefined {
 
 ## 関連情報
 
-{% page-ref page="../statements/control-flow-analysis-and-type-guard.md" %}
-
+[🚧型ガード、制御フロー分析、型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)

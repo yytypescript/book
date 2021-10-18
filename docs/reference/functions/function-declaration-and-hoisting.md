@@ -1,6 +1,10 @@
-# 関数宣言と巻き上げ \(hoisting\)
+---
+sidebar_label: 関数宣言と巻き上げ
+---
 
-JavaScriptの関数宣言と関数式の違いが現れるひとつの例は巻き上げ\(hoisting\)です。関数宣言には巻き上げがあり、関数式には巻き上げがありません。
+# 関数宣言と巻き上げ (hoisting)
+
+JavaScriptの関数宣言と関数式の違いが現れるひとつの例は巻き上げ(hoisting)です。関数宣言には巻き上げがあり、関数式には巻き上げがありません。
 
 まずは関数宣言の例を見てみましょう。次のコードは、3行目に`hello`関数の関数宣言があります。そして、その宣言の前で`hello`関数を実行しています。
 
@@ -34,8 +38,7 @@ TypeScriptでは、定義前の関数を呼び出そうとするとコンパイ�
 hello();
 // コンパイルエラー: Block-scoped variable 'hello' used before its declaration.(2448)
 
-const hello = function () { /* ... */ };
+const hello = function () {
+  /* ... */
+};
 ```
-
-
-

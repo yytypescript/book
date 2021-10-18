@@ -39,10 +39,10 @@ class NumericalValueObject {
 
 ```typescript
 declare class NumericalValueObject {
-    private value;
-    constructor(value: number);
-    equals(other: NumericalValueObject): boolean;
-    toString(): string;
+  private value;
+  constructor(value: number);
+  equals(other: NumericalValueObject): boolean;
+  toString(): string;
 }
 ```
 
@@ -104,4 +104,3 @@ tsconfig.jsonにある`sourceMap`の項目を`true`に変更します。
 ```
 
 こちらもコンパイルで出力した`js`ファイルと同じディレクトリに同名で拡張子が`js.map`のファイルも出力されるようになります。
-

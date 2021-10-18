@@ -4,9 +4,7 @@
 
 インデックス型や配列で宣言されたオブジェクトが持つプロパティへのアクセスを厳密に評価します。
 
-{% content-ref url="../values-types-variables/object/index-signature.md" %}
-[index-signature.md](../values-types-variables/object/index-signature.md)
-{% endcontent-ref %}
+[インデックス型 (index signature)](../values-types-variables/object/index-signature.md)
 
 ```typescript
 type ObjectLiteralLike = {
@@ -26,16 +24,16 @@ function log(s: string): void {
 }
 
 const butterfly: ObjectLiteralLike = {
-  en: 'Butterfly',
-  fr: 'Papillon',
-  it: 'Farfalla',
-  es: 'Mariposa'
+  en: "Butterfly",
+  fr: "Papillon",
+  it: "Farfalla",
+  es: "Mariposa",
 };
 
 const phoneticCodes: ArrayObjectLike = {
-  0: 'alpha',
-  1: 'bravo',
-  2: 'charlie'
+  0: "alpha",
+  1: "bravo",
+  2: "charlie",
 };
 
 log(spanish);
@@ -74,7 +72,7 @@ const third: string | undefined = phoneticCodes[2];
 配列はインデックス記法でアクセスをすると`undefined`型とのユニオン型と解釈されますが`for-of, array.forEach()`はこの制約を受けないため積極的に使用を検討してください。
 
 ```typescript
-const phoneticCodes: string[] = ['alpha', 'bravo', 'charlie'];
+const phoneticCodes: string[] = ["alpha", "bravo", "charlie"];
 
 for (const p of phoneticCodes) {
   // ...

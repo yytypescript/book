@@ -1,6 +1,6 @@
 # import / export /require
 
-Node.jsが出てからというものの、フロントエンドの開発もNode.jsを通して行うことができるようにはなりましたが、実際に動く場所がブラウザとサーバーと事情が異なります。\
+Node.jsが出てからというものの、フロントエンドの開発もNode.jsを通して行うことができるようにはなりましたが、実際に動く場所がブラウザとサーバーと事情が異なります。
 TypeScriptは最終的にどの場面で使われるか、その用途に適した出力に変えることができます。
 
 ## かつてのJavaScript
@@ -30,7 +30,7 @@ TypeScriptは最終的にどの場面で使われるか、その用途に適し�
 Node.jsでは現在でも主流の他の`.js`ファイル(TypeScriptでは`.ts`も)を読み込む機能です。基本は次の構文です。
 
 ```typescript
-const package1 = require('package1');
+const package1 = require("package1");
 ```
 
 これは、パッケージの`package1`の内容を定数`package1`に持ってくることを意味しています。このとき`package1`は(組み込みライブラリでなければ)現在のプロジェクトの`node_modules`というディレクトリに存在する必要があります。
@@ -38,7 +38,7 @@ const package1 = require('package1');
 自分で作った他の`.js, .ts`ファイルを読み込むこともできます。呼び出すファイルから見た、読み込みたいファイルの位置を**相対パス**で書きます。たとえ同じ階層にあっても相対パスで書く必要があります。このとき`.js, .json`とTypeScriptなら加えて`.ts`を省略することができます。TypeScriptでの開発においては最終的にJavaScriptにコンパイルされることを考慮すると書かないほうが無難です。
 
 ```typescript
-const myPackage = require('./MyPackage');
+const myPackage = require("./MyPackage");
 ```
 
 `.js`を`.ts`と同じ場所に出力するようにしているとTypeScriptにとって同じ名前の読み込ことができるファイルがふたつ存在することになります。このときTypeScriptは`.js`を優先して読み込むので注意してください。いくらTypeScriptのコードを変更しても変更が適用されていないようであればこの問題の可能性があります。
@@ -51,14 +51,14 @@ const myPackage = require('./MyPackage');
 
 ```typescript
 // increment.js
-module.exports = i => i + 1;
+module.exports = (i) => i + 1;
 ```
 
 このような`.js`のファイルがあれば同じ階層で読み込みたい時は次のようになります。
 
 ```typescript
 // index.js
-const increment = require('./increment');
+const increment = require("./increment");
 
 console.log(increment(3));
 // -> 4
@@ -70,18 +70,18 @@ console.log(increment(3));
 
 ```typescript
 // dayOfWeek.js
-module.exports = 'Monday';
-module.exports = 'Tuesday';
-module.exports = 'Wednesday';
-module.exports = 'Thursday';
-module.exports = 'Friday';
-module.exports = 'Saturday';
-module.exports = 'Sunday';
+module.exports = "Monday";
+module.exports = "Tuesday";
+module.exports = "Wednesday";
+module.exports = "Thursday";
+module.exports = "Friday";
+module.exports = "Saturday";
+module.exports = "Sunday";
 ```
 
 ```typescript
 // index.js
-const day = require('./dayOfWeek');
+const day = require("./dayOfWeek");
 
 console.log(day);
 // -> 'Sunday'
@@ -93,14 +93,14 @@ console.log(day);
 
 ```typescript
 // util.js
-exports.increment = i => i + 1;
+exports.increment = (i) => i + 1;
 ```
 
 読み込み側では次のようになります。
 
 ```typescript
 // index.js
-const util = require('./util');
+const util = require("./util");
 
 console.log(util.increment(3));
 // -> 4
@@ -110,7 +110,7 @@ console.log(util.increment(3));
 
 ```typescript
 // index.js
-const { increment } = require('./util');
+const { increment } = require("./util");
 
 console.log(increment(3));
 // -> 4
@@ -120,8 +120,8 @@ console.log(increment(3));
 
 ```typescript
 // index.js
-const { increment } = require('./other');
-const { increment: inc } = require('./util');
+const { increment } = require("./other");
+const { increment: inc } = require("./util");
 
 console.log(inc(3));
 // -> 4
@@ -133,12 +133,12 @@ console.log(inc(3));
 
 ### `import`
 
-`require()`と同じく他の`.js, .ts`ファイルを読み込む機能ですが、`require()`はファイル内のどこにでも書くことができる一方で`import`は**必ずファイルの一番上に書く必要があります**。\
+`require()`と同じく他の`.js, .ts`ファイルを読み込む機能ですが、`require()`はファイル内のどこにでも書くことができる一方で`import`は**必ずファイルの一番上に書く必要があります**。
 なお、書き方が2とおりあります。
 
 ```typescript
-import * as package1 from 'package1';
-import package2 from 'package2';
+import * as package1 from "package1";
+import package2 from "package2";
 ```
 
 使い方に若干差がありますので以下で説明します。
@@ -149,14 +149,14 @@ import package2 from 'package2';
 
 ```typescript
 // increment.js
-export default i => i + 1;
+export default (i) => i + 1;
 ```
 
 この`.js`のファイルは次のようにして読み込みます。
 
 ```typescript
 // index.js
-import increment from './increment';
+import increment from "./increment";
 
 console.log(increment(3));
 // -> 4
@@ -164,7 +164,7 @@ console.log(increment(3));
 
 ```typescript
 // index.js
-import * as increment from './increment';
+import * as increment from "./increment";
 
 console.log(increment.default(3));
 // -> 4
@@ -176,12 +176,12 @@ console.log(increment.default(3));
 
 ```typescript
 // util.js
-export const increment = i => i + 1;
+export const increment = (i) => i + 1;
 ```
 
 ```typescript
 // util.js
-const increment = i => i + 1;
+const increment = (i) => i + 1;
 
 export { increment };
 ```
@@ -192,7 +192,7 @@ export { increment };
 
 ```typescript
 // index.js
-import { increment } from './util';
+import { increment } from "./util";
 
 console.log(increment(3));
 // -> 4
@@ -200,7 +200,7 @@ console.log(increment(3));
 
 ```typescript
 // index.js
-import * as util from './util';
+import * as util from "./util";
 
 console.log(util.increment(3));
 // -> 4
@@ -210,7 +210,7 @@ console.log(util.increment(3));
 
 ```typescript
 // index.js
-import { increment as inc } from './util';
+import { increment as inc } from "./util";
 
 console.log(inc(3));
 // -> 4
@@ -224,9 +224,9 @@ console.log(inc(3));
 
 ```typescript
 // index.js
-import('./util').then(({increment}) => {
-    console.log(increment(3));
-    // -> 4
+import("./util").then(({ increment }) => {
+  console.log(increment(3));
+  // -> 4
 });
 ```
 
@@ -242,14 +242,14 @@ import('./util').then(({increment}) => {
 
 ```typescript
 // increment.mjs
-export const increment = i => i + 1;
+export const increment = (i) => i + 1;
 ```
 
 読み込み側は以下です。
 
 ```typescript
 // index.mjs
-import { increment } from './increment.mjs';
+import { increment } from "./increment.mjs";
 
 console.log(increment(3));
 // -> 4
@@ -275,12 +275,12 @@ console.log(increment(3));
 
 ```typescript
 // increment.js
-export const increment = i => i + 1;
+export const increment = (i) => i + 1;
 ```
 
 ```typescript
 // index.js
-import { increment }  from './increment.js';
+import { increment } from "./increment.js";
 
 console.log(increment(3));
 // -> 4
@@ -294,17 +294,17 @@ console.log(increment(3));
 
 ```typescript
 // increment.cjs
-exports.increment = i => i + 1;
+exports.increment = (i) => i + 1;
 ```
 
 読み込み側は以下です。
 
 ```typescript
 // index.js
-import { createRequire } from 'module';
+import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
-const { increment } = require('./increment.cjs');
+const { increment } = require("./increment.cjs");
 
 console.log(increment(3));
 // -> 4
@@ -326,47 +326,43 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 出力の方法に関してはtsconfig.jsonのページに説明がありますのでそちらをご覧ください。
 
-{% content-ref url="../tutorials/tsconfig.json-settings.md" %}
-[tsconfig.json-settings.md](../tutorials/tsconfig.json-settings.md)
-{% endcontent-ref %}
+[tsconfig.jsonを設定する](../tutorials/tsconfig.json-settings.md)
 
 ## `require? import?`
 
 ブラウザ用、サーバー用の用途で使い分けてください。ブラウザ用であれば`ES Module`を、サーバー用であれば`CommonJS`が無難な選択肢になります。どちらでも使えるユニバーサルなパッケージであればDual Packageを目指すのもよいでしょう。
 
-{% content-ref url="advanced-topics/tsconfig-for-dual-package-developers.md" %}
-[tsconfig-for-dual-package-developers.md](advanced-topics/tsconfig-for-dual-package-developers.md)
-{% endcontent-ref %}
+[デュアルパッケージ開発者のためのtsconfig (Dual Package)](advanced-topics/tsconfig-for-dual-package-developers.md)
 
 ## `default export? named export?`
 
-`module.exports`との`export default`は`default export`と呼ばれ\
-`exports`と`export`は`named export`と呼ばれています。\
+`module.exports`との`export default`は`default export`と呼ばれ
+`exports`と`export`は`named export`と呼ばれています。
 どちらも長所と短所があり、たびたび議論になる話題です。どちらか一方を使うように統一するコーディングガイドを持っている企業もあるようですが、どちらかが極端に多いというわけでもないので好みの範疇です。
 
 ### `default export`
 
 #### Pros
 
-* `import`する時に名前を変えることができる
-* そのファイルが他の`export`に比べ何をもっとも提供したいのかがわかる
+- `import`する時に名前を変えることができる
+- そのファイルが他の`export`に比べ何をもっとも提供したいのかがわかる
 
 #### Cons
 
-* エディター、IDEによっては入力補完が効きづらい
-* 再エクスポートの際に名前をつける必要がある
+- エディター、IDEによっては入力補完が効きづらい
+- 再エクスポートの際に名前をつける必要がある
 
 ### `named export`
 
 #### Pros
 
-* エディター、IDEによる入力補完が効く
-* ひとつのファイルから複数`export`できる
+- エディター、IDEによる入力補完が効く
+- ひとつのファイルから複数`export`できる
 
 #### Cons
 
-* (名前の変更はできるものの)基本的に決まった名前で`import`して使う必要がある
-* `export`しているファイルが名前を変更すると動作しなくなる
+- (名前の変更はできるものの)基本的に決まった名前で`import`して使う必要がある
+- `export`しているファイルが名前を変更すると動作しなくなる
 
 ここで挙がっている**名前を変えることができる**についてはいろいろな意見があります。
 
@@ -376,14 +372,14 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 ```typescript
 // taxIncluded.ts
-export default price => price * 1.08;
+export default (price) => price * 1.08;
 ```
 
 もちろん呼び出し側はそのまま使うことができます。
 
 ```typescript
 // index.ts
-import taxIncluded from './taxIncluded';
+import taxIncluded from "./taxIncluded";
 
 console.log(taxIncluded(100));
 // -> 108
@@ -393,7 +389,7 @@ console.log(taxIncluded(100));
 
 ```typescript
 // taxIncluded.ts
-export default price => price * 1.1;
+export default (price) => price * 1.1;
 ```
 
 この変更をこのファイル以外は知る必要がありませんし、知ることができません。
@@ -408,12 +404,12 @@ export default price => price * 1.1;
 
 ```typescript
 // taxIncluded.ts
-export const taxIncludedAsOf2014 = price => price * 1.08;
+export const taxIncludedAsOf2014 = (price) => price * 1.08;
 ```
 
 ```typescript
 // index.ts
-import { taxIncludedAsOf2014 } from './taxInclude';
+import { taxIncludedAsOf2014 } from "./taxInclude";
 
 console.log(taxIncludedAsOf2014(100));
 // -> 108
@@ -423,12 +419,12 @@ console.log(taxIncludedAsOf2014(100));
 
 ```typescript
 // taxIncluded.ts
-export const taxIncludedAsOf2019 = price => price * 1.1;
+export const taxIncludedAsOf2019 = (price) => price * 1.1;
 ```
 
 ```typescript
 // index.ts
-import { taxIncludedAsOf2019 } from './taxIncluded';
+import { taxIncludedAsOf2019 } from "./taxIncluded";
 
 // this is no longer available.
 // console.log(taxIncludedAsOf2014(100));

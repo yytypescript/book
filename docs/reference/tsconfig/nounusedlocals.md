@@ -20,4 +20,3 @@ error TS6133: 'message' is declared but its value is never read.
 const message: string = `the sum is ${n1 + n2}`;
       ~~~~~~~
 ```
-

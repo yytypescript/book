@@ -27,7 +27,7 @@ RangeError: Maximum call stack size exceeded
 JavaScriptはブラウザで発生するクリック、各種input要素からの入力、ブラウザの履歴の戻る進むなど、各種イベントをハンドリングできる言語ですが、時間のかかる処理が実行されている間はブロッキングが起こるためこれらの操作をハンドリングできなくなります。画面の描画もJavaScriptに任せていた場合はさらに画面が止まったように見えるでしょう。
 
 ```typescript
-ajax('https://...');
+ajax("https://...");
 wait(3000);
 
 if (!ajaxDone()) {
@@ -44,9 +44,9 @@ if (!ajaxDone()) {
 
 のように見えるかもしれませんが、これはその意図した動作にはなりません。実際には次のようになります。
 
-1. AJAXをして、結果を取得する（ブロックして戻ってきたら2に進む\)
+1. AJAXをして、結果を取得する（ブロックして戻ってきたら2に進む)
 2. 3000ms待つ
-3. AJAXが終わっていなかったら\(すでに終了している\)
+3. AJAXが終わっていなかったら(すでに終了している)
 4. AJAXを中止する
 
 となります。もちろん`ajaxDone()`は`ajax()`の時点で結果にかかわらず終了しているため`cancelAjax()`は実行されません。
@@ -55,19 +55,19 @@ if (!ajaxDone()) {
 
 ブロッキングの逆の概念です。Node.jsはノンブロッキングI/Oを取り扱うことができます。
 
-これは入出力の処理が終わるまで待たずにすぐに呼び出し元に結果を返し、追って別の方法で結果を伝える方式を指します。  
-ここで指している入出力とはアプリケーションが動くマシン\(サーバー\)が主にリポジトリと呼ばれるようなファイル、リクエスト、DBなど他のデータがある場所へのアクセスを指す時に使われます。
+これは入出力の処理が終わるまで待たずにすぐに呼び出し元に結果を返し、追って別の方法で結果を伝える方式を指します。
+ここで指している入出力とはアプリケーションが動くマシン(サーバー)が主にリポジトリと呼ばれるようなファイル、リクエスト、DBなど他のデータがある場所へのアクセスを指す時に使われます。
 
 ノンブロッキングかわかりやすい例としては次のようなものがあります。
 
 ```typescript
-console.log('first');
+console.log("first");
 
 setTimeout(() => {
-  console.log('second');
+  console.log("second");
 }, 1000);
 
-console.log('third');
+console.log("third");
 ```
 
 `setTimeout()`は実際に存在する関数です。第2引数では指定したミリ秒後に第1引数の関数を実行します。ここでは1000を指定しているので、1000ミリ秒、つまり1秒後となります。
@@ -75,17 +75,17 @@ console.log('third');
 JavaScriptを始めて日が浅い方はこのコードに対する出力を次のように考えます。
 
 ```typescript
-first
-second
-third
+first;
+second;
+third;
 ```
 
 実際の出力は以下です。
 
 ```typescript
-first
-third
-second
+first;
+third;
+second;
 ```
 
 `setTimeout()`がノンブロッキングな関数です。この関数は実行されると第1引数の関数をいったん保留し、処理を終えます。そのため次の`console.log('third')`が実行され、1000ミリ秒後に第1引数の関数が実行され、中にある`console.log('second')`が実行されます。
@@ -93,13 +93,13 @@ second
 1000ミリ秒は待ちすぎ、もっと短ければ意図する順番とおりに表示される。と思われるかもしれませんが、基本的に意図するとおりにはなりません。以下は第2引数を1000ミリ秒から0ミリ秒に変更した例ですが、出力される内容は変更前と変わりません。
 
 ```typescript
-console.log('first');
+console.log("first");
 
 setTimeout(() => {
-  console.log('second');
+  console.log("second");
 }, 0);
 
-console.log('third');
+console.log("third");
 
 // ->
 //   'first'
@@ -135,7 +135,7 @@ console.log('third');
 
 ノンブロッキングにはたくさんいいところがあって頼れる仲間ですが、そのノンブロッキングが時として唐突に牙を剥くことがあります。こわいですねぇ。
 
-### コールバック地獄\(Callback hell\)
+### コールバック地獄(Callback hell)
 
 コールバック界における**負の産物**です。
 
@@ -150,7 +150,7 @@ function ajax(uri: string, callback: (res: Response) => void): void {
 この関数を使う時はこのようになります。
 
 ```typescript
-ajax('https://...', (res: Response) => {
+ajax("https://...", (res: Response) => {
   // ...
 });
 ```
@@ -158,22 +158,22 @@ ajax('https://...', (res: Response) => {
 ここで、この関数`ajax()`の結果を受けてさらに`ajax()`を使いたいとすると、このようになってしまいます。
 
 ```typescript
-ajax('https://...', (res1: Response) => {
-  ajax('https://...', (res2: Response) => {
+ajax("https://...", (res1: Response) => {
+  ajax("https://...", (res2: Response) => {
     // ...
   });
 });
 ```
 
-インデント\(ネスト\)が深くなります。これが何度も続くと見るに堪えなくなります。
+インデント(ネスト)が深くなります。これが何度も続くと見るに堪えなくなります。
 
 ```typescript
-ajax('https://...', (res1: Response) => {
-  ajax('https://...', (res2: Response) => {
-    ajax('https://...', (res3: Response) => {
-      ajax('https://...', (res4: Response) => {
-        ajax('https://...', (res5: Response) => {
-          ajax('https://...', (res6: Response) => {
+ajax("https://...", (res1: Response) => {
+  ajax("https://...", (res2: Response) => {
+    ajax("https://...", (res3: Response) => {
+      ajax("https://...", (res4: Response) => {
+        ajax("https://...", (res5: Response) => {
+          ajax("https://...", (res6: Response) => {
             // ...
           });
         });
@@ -185,5 +185,4 @@ ajax('https://...', (res1: Response) => {
 
 これは波動拳ネストとも呼ばれているようですw。このコールバック地獄を解消する画期的なクラスとして`Promise`が登場し主要なブラウザとNode.jsではビルトインオブジェクトとして使うことができます。こちらの説明については本書に専用のページがありますのでそちらをご参照ください。
 
-{% page-ref page="promise-async-await.md" %}
-
+[Promise / async / await](promise-async-await.md)

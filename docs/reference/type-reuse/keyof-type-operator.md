@@ -4,7 +4,7 @@
 
 ```typescript
 type Person = {
-    name: string;
+  name: string;
 };
 type PersonKey = keyof Person;
 // 上は次と同じ意味です
@@ -66,5 +66,4 @@ type AnyKeys = keyof any;
 
 keyofは単体で使うことよりmapped typeと組み合わせて使われることが多いです。
 
-{% page-ref page="mapped-types.md" %}
-
+[マップ型 (mapped type)](mapped-types.md)

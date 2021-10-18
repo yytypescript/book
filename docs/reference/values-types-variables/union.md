@@ -1,10 +1,14 @@
-# ユニオン型 \(union type\)
+---
+sidebar_label: ユニオン型
+---
 
-TypeScriptのユニオン型\(union type\)は「いずれかの型」を表現するものです。
+# ユニオン型 (union type)
+
+TypeScriptのユニオン型(union type)は「いずれかの型」を表現するものです。
 
 ## ユニオン型の型注釈
 
-ユニオン型の型注釈は、2つ以上の型をパイプ記号\(`|`\)で繋げて書きます。たとえば、数値型もしくはundefined型を表す場合は、`number | undefined`のように書きます。
+ユニオン型の型注釈は、2つ以上の型をパイプ記号(`|`)で繋げて書きます。たとえば、数値型もしくはundefined型を表す場合は、`number | undefined`のように書きます。
 
 ```typescript
 let numberOrUndefined: number | undefined;
@@ -13,13 +17,7 @@ let numberOrUndefined: number | undefined;
 `|`は型のリストの冒頭に置くこともできます。型ごとに改行するときに、列が揃うので便利です。
 
 ```typescript
-type ErrorCode =
-  | 400
-  | 401
-  | 402
-  | 403
-  | 404
-  | 405;
+type ErrorCode = 400 | 401 | 402 | 403 | 404 | 405;
 ```
 
 ## 配列要素にユニオン型を使う際の書き方
@@ -38,7 +36,7 @@ string | number[]
 
 ## ユニオン型と絞り込み
 
-ユニオン型`string | null`が`string`なのか`null`なのかを判定したいときは、TypeScriptの絞り込み\(narrowing\)を用います。絞り込みをするにはいくつかの方法がありますが、代表例はif文です。条件分岐で変数が文字列型かどうかをチェックすると、同じ変数でも分岐内では`string | null`型が`string`型だと判定されます。
+ユニオン型`string | null`が`string`なのか`null`なのかを判定したいときは、TypeScriptの絞り込み(narrowing)を用います。絞り込みをするにはいくつかの方法がありますが、代表例はif文です。条件分岐で変数が文字列型かどうかをチェックすると、同じ変数でも分岐内では`string | null`型が`string`型だと判定されます。
 
 ```typescript
 cconst maybeUserId: string | null = localStorage.getItem("userId");
@@ -50,9 +48,8 @@ if (typeof maybeUserId === "string") {
 }
 ```
 
-{% page-ref page="../statements/control-flow-analysis-and-type-guard.md" %}
+[🚧型ガード、制御フロー分析、型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
 
 ## 関連情報
 
-{% page-ref page="discriminated-union.md" %}
-
+[判別可能なユニオン (discriminated union)](discriminated-union.md)

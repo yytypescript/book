@@ -11,12 +11,11 @@ type Point = typeof point;
 
 ```typescript
 type Point = {
-    x: number;
-    y: number;
-}
+  x: number;
+  y: number;
+};
 ```
 
 ここで説明したのはTypeScriptのtypeof**型**演算子です。JavaScriptのtypeof演算子と同じ名前ですが、まったく別のものなので注意してください。
 
-{% page-ref page="../values-types-variables/typeof-operator.md" %}
-
+[typeof演算子 (typeof operator)](../values-types-variables/typeof-operator.md)

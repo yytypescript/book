@@ -1,4 +1,8 @@
-# this引数 \(this parameter\)
+---
+sidebar_label: this引数
+---
+
+# this引数 (this parameter)
 
 アロー関数以外の関数とクラスのメソッドの第1引数は`this`という特殊な引数を受けることができます。これは使用するコンテキストによって`this`の意味するところが変わってしまうため、これらがどのコンテキストで使用されるべきなのかをTypeScriptに伝えるために使います。この`this`は呼び出す側は意識する必要はありません。第2引数以降を指定してください。
 
@@ -33,8 +37,8 @@ class Female {
 `Male, Female`はともに普通の用途で使うことができます。
 
 ```typescript
-const male: Male = new Male('Frédéric');
-const female: Female = new Female('Frédérique');
+const male: Male = new Male("Frédéric");
+const female: Female = new Female("Frédérique");
 
 male.toString();
 // -> 'Monsieur Frédéric'
@@ -53,7 +57,7 @@ femaleToStr();
 // The 'this' context of type 'void' is not assignable to method's 'this' of type 'Female'.
 ```
 
-`femaleToStr()`のコンテキストがFemaleではないとの指摘を受けています。このコードを実行することはできません。  
+`femaleToStr()`のコンテキストがFemaleではないとの指摘を受けています。このコードを実行することはできません。
 ちなみにこの対応をしていない`maleToStr()`は実行こそできますが実行時に例外が発生します。
 
 ```typescript
@@ -63,4 +67,3 @@ TypeError: Cannot read property 'name' of undefined
 ```
 
 引数の`this`を指定することによって意図しないメソッドの持ち出しを避けることができます。
-

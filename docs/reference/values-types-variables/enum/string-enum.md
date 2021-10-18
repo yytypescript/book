@@ -1,13 +1,16 @@
-# 文字列列挙型 \(string enum\)
+---
+sidebar_label: 文字列列挙型
+---
 
-TypeScriptの列挙型では、メンバーの値に文字列も使えます。文字列で構成された列挙型は文字列列挙型\(string enum\)と呼ばれます。
+# 文字列列挙型 (string enum)
+
+TypeScriptの列挙型では、メンバーの値に文字列も使えます。文字列で構成された列挙型は文字列列挙型(string enum)と呼ばれます。
 
 ```typescript
 enum Direction {
-    Up = "UP",
-    Down = "DOWN",
-    Left = "LEFT",
-    Right = "RIGHT",
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT",
 }
 ```
-

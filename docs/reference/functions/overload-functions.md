@@ -1,4 +1,8 @@
-# オーバーロード関数 \(overload functions\)
+---
+sidebar_label: オーバーロード関数
+---
+
+# オーバーロード関数 (overload functions)
 
 オーバーロードとは、関数の名称は同じでありながら異なる引数、戻り値を持つことができる機能です。TypeScriptもこの機能を用意しているのですが、大元がJavaScriptであることが災いし、やや使いづらいです。
 
@@ -23,7 +27,12 @@ type Distance = {
   (x1: number, y1: number, x2: number, y2: number): number;
 };
 
-const distance: Distance = (arg1: number | Point, arg2?: number | Point, arg3?: number, arg4?: number): number => {
+const distance: Distance = (
+  arg1: number | Point,
+  arg2?: number | Point,
+  arg3?: number,
+  arg4?: number
+): number => {
   // ...
 };
 ```
@@ -67,4 +76,3 @@ Argument of type 'Point' is not assignable to parameter of type 'number'.
 ```
 
 これはTypeScriptが`distance()`を`number`型の引数4個版で受けていると解釈している時の指摘です。
-

@@ -33,7 +33,7 @@ function increment(num) {
   return num + 1;
 }
 
-console.log(increment('1'));
+console.log(increment("1"));
 ```
 
 呼び出し時の引数`1`が`'1'`になりました。これだけでこの関数の結果は大きく変わってしまいます。
@@ -43,7 +43,7 @@ $ node increment.js
 11
 ```
 
-これは算術演算子の`+`\(加算\)を期待してこの関数を作ったと思われるところに文字列が入ってしまったため`+`が文字列連結として解釈されてしまったことが原因です。  
+これは算術演算子の`+`(加算)を期待してこの関数を作ったと思われるところに文字列が入ってしまったため`+`が文字列連結として解釈されてしまったことが原因です。
 もしこれが金額の計算だったとしたら大変なことになります。
 
 TypeScriptを使うと、コーディングの時点でこのような型の不一致による意図しない挙動を抑えられるようになります。
@@ -62,14 +62,14 @@ $ mv increment.js increment.ts
 Parameter 'num' implicitly has an 'any' type, ...
 ```
 
-これはTypeScriptはこの引数に対していかなる型も与えられていないよ\(いわゆる`any`\)ということを言っています。そこで型を付加します。付加する型は`number`型です。
+これはTypeScriptはこの引数に対していかなる型も与えられていないよ(いわゆる`any`)ということを言っています。そこで型を付加します。付加する型は`number`型です。
 
 ```typescript
 function increment(num: number) {
   return num + 1;
 }
 
-console.log(increment('1'));
+console.log(increment("1"));
 ```
 
 すると今度は呼び出し側でTypeScriptコンパイラからメッセージが表示されます。
@@ -118,4 +118,3 @@ Type 'number' is not assignable to type 'string'.
 return num + 1;
 ~~~~~~~~~~~~~~~
 ```
-

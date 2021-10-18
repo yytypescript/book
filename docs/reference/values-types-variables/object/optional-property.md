@@ -1,4 +1,8 @@
-# オブジェクト型のオプショナルプロパティ \(optional property\)
+---
+sidebar_label: オブジェクト型のオプショナルプロパティ
+---
+
+# オブジェクト型のオプショナルプロパティ (optional property)
 
 TypeScriptで、オブジェクトプロパティのオプショナルさを型付けするには、プロパティ名の後ろに`?`を書きます。
 
@@ -26,5 +30,4 @@ size = { width: null }; // コンパイルエラー
 
 ## 関連情報
 
-{% page-ref page="optional-chaining.md" %}
-
+[🚧optional chaining](optional-chaining.md)

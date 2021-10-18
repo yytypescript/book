@@ -2,7 +2,7 @@
 
 リリースされたバージョン: 2.6
 
-オブジェクト指向では、スーパークラスに対しサブクラスのインスタンスを代入することはできますがその逆は一般的ではありません。  
+オブジェクト指向では、スーパークラスに対しサブクラスのインスタンスを代入することはできますがその逆は一般的ではありません。
 たとえばJavaScriptの `Error` クラスを拡張しスタックトレースを出力できるようになった `RuntimeError` というクラスを用意します。ここではスタックトレースの実装は重要ではないので `stacktrace()` というメソッドが加わったとだけ解釈してください。
 
 ```typescript
@@ -52,10 +52,9 @@ const dumpError: dumpError = dumpRuntimeError;
 
 TODO: 次について書く
 
-* メソッド構文\(method syntax\)には効かない
-* 関数構文\(function syntax\)にだけ効く
-* TSの引数は元々bivariant仕様
-* strictFunctionTypesはそれをcontravariantにする
-* メソッドまでやると互換性的に問題がある
-* なのでメソッドは除外しbivariantのまま
-
+- メソッド構文(method syntax)には効かない
+- 関数構文(function syntax)にだけ効く
+- TSの引数は元々bivariant仕様
+- strictFunctionTypesはそれをcontravariantにする
+- メソッドまでやると互換性的に問題がある
+- なのでメソッドは除外しbivariantのまま

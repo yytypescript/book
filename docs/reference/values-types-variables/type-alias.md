@@ -1,6 +1,10 @@
-# 型エイリアス \(type alias\)
+---
+sidebar_label: 型エイリアス
+---
 
-TypeScriptでは、型に名前をつけられます。名前のついた型を型エイリアス\(タイプエイリアス; type alias\)と呼びます。
+# 型エイリアス (type alias)
+
+TypeScriptでは、型に名前をつけられます。名前のついた型を型エイリアス(タイプエイリアス; type alias)と呼びます。
 
 ## 型エイリアスの宣言
 
@@ -43,5 +47,4 @@ type CallbackFunction = (value: string) => boolean;
 
 ## 関連情報
 
-{% page-ref page="../object-oriented/interface/interface-vs-type-alias.md" %}
-
+[🚧interfaceとtypeの違い](../object-oriented/interface/interface-vs-type-alias.md)

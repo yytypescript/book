@@ -45,11 +45,11 @@ const sns = (({ twitter, github }) => ({ twitter, github }))(profile);
 
 この方法のメリットとデメリットは次のとおりです。
 
-* メリット
-  * 外部ライブラリを必要としない。
-* デメリット
-  * 初見の読み手には意外性のあるコードに見える場合がある。
-  * 即時関数の引数部分とshorthand property nameの2箇所に同じプロパティ名を書く必要があり冗長。
+- メリット
+  - 外部ライブラリを必要としない。
+- デメリット
+  - 初見の読み手には意外性のあるコードに見える場合がある。
+  - 即時関数の引数部分とshorthand property nameの2箇所に同じプロパティ名を書く必要があり冗長。
 
 この書き方は、数個の少ないプロパティを抽出したいときは便利ですが、たくさんのプロパティを抽出しようとすると記述量が増え、徐々に大変さが出てきます。
 
@@ -99,11 +99,11 @@ const sns = pick(profile, ["twitter", "github"]);
 
 lodash.pickのメリットとデメリットは次のとおりです。
 
-* メリット
-  * 宣言的で読みやすい。
-  * 記述量が少ない。
-* デメリット
-  * ライブラリを導入する必要がある。
+- メリット
+  - 宣言的で読みやすい。
+  - 記述量が少ない。
+- デメリット
+  - ライブラリを導入する必要がある。
 
 lodash.pickは抽出したいプロパティ名を指定する関数ですが、抽出したいプロパティより除外したいプロパティが少ない場合は、[lodash.omit](https://www.npmjs.com/package/lodash.omit)を使ったほうが便利です。
 
@@ -132,4 +132,3 @@ npm install -D @types/lodash
 npm install lodash.pick lodash.omit
 npm install -D @types/lodash.pick @types/lodash.omit
 ```
-

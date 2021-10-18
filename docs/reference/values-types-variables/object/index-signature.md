@@ -1,3 +1,7 @@
+---
+sidebar_label: インデックス型
+---
+
 # インデックス型 (index signature)
 
 TypeScriptで、オブジェクトのフィールド名をあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこのインデックス型(index signature)です。たとえば、プロパティがすべて`number`型であるオブジェクトは次のように型注釈します。
@@ -30,11 +34,9 @@ const b: number | undefined = obj.b;
 console.log(b); //=> undefined
 ```
 
-{% content-ref url="../../tsconfig/nouncheckedindexedaccess.md" %}
-[nouncheckedindexedaccess.md](../../tsconfig/nouncheckedindexedaccess.md)
-{% endcontent-ref %}
+[noUncheckedIndexedAccess](../../tsconfig/nouncheckedindexedaccess.md)
 
-## Record\<K, T>を用いたインデックス型
+## Record&lt;K, T>を用いたインデックス型
 
 インデックス型は`Record<K, T>`ユーティリティ型を用いても表現できます。次の2つの型注釈は同じ意味になります。
 
@@ -43,6 +45,4 @@ let obj1: { [K: string]: number };
 let obj2: Record<string, number>;
 ```
 
-{% content-ref url="../../type-reuse/utility-types/record.md" %}
-[record.md](../../type-reuse/utility-types/record.md)
-{% endcontent-ref %}
+[Record&lt;Keys, Type>](../../type-reuse/utility-types/record.md)

@@ -1,8 +1,12 @@
-# 読み取り専用の配列 \(readonly array\)
+---
+sidebar_label: 読み取り専用の配列
+---
 
-TypeScriptでは配列を読み取り専用\(readonly\)として型注釈できます。型注釈の方法は2とおりあります。1つ目は`readonly`キーワードを使う方法です。2つ目は`ReadonlyArray<T>`を使う方法です。
+# 読み取り専用の配列 (readonly array)
 
-## readonly T\[\]
+TypeScriptでは配列を読み取り専用(readonly)として型注釈できます。型注釈の方法は2とおりあります。1つ目は`readonly`キーワードを使う方法です。2つ目は`ReadonlyArray<T>`を使う方法です。
+
+## readonly T\[]
 
 配列の型注釈`T[]`の前に`readonly`キーワードを添えると、読み取り専用の配列型にできます。たとえば、`readonly number[]`と書くと、その変数の型はnumberの読み取り専用配列型になります。
 
@@ -10,7 +14,7 @@ TypeScriptでは配列を読み取り専用\(readonly\)として型注釈でき�
 const nums: readonly number[] = [1, 2, 3];
 ```
 
-## ReadonlyArray&lt;T&gt;
+## ReadonlyArray&lt;T>
 
 `ReadonlyArray<T>`のような書き方でも読み取り専用の配列型になります。たとえば、要素がnumber型の配列を読み取り専用にしたい場合、`ReadonlyArray<number>`と書きます。
 
@@ -18,7 +22,7 @@ const nums: readonly number[] = [1, 2, 3];
 const nums: ReadonlyArray<number> = [1, 2, 3];
 ```
 
-## readonly T\[\]とReadonlyArray&lt;T&gt;の違い
+## readonly T\[]とReadonlyArray&lt;T>の違い
 
 `readonly T[]`と`ReadonlyArray<T>`の違いは書き方以外にありません。どちらを使うかは書き手の好みです。開発チームとしてはどちらの書き方にするかは統一しておいたほうがよいでしょう。
 
@@ -58,7 +62,7 @@ const writableNumbers: number[] = readonlyNumbers;
 // コンパイルエラー: The type 'readonly number[]' is 'readonly' and cannot be assigned to the mutable type 'number[]'.(4104)
 ```
 
-これは、普通の配列は`push`や`pop`などのメソッドが必要なのに、読み取り専用配列にはそれが無いことになっているためです。どうしても読み取り専用配列を普通の配列に代入したいときは、型アサーション\(type assertion\)を使う方法があります。
+これは、普通の配列は`push`や`pop`などのメソッドが必要なのに、読み取り専用配列にはそれが無いことになっているためです。どうしても読み取り専用配列を普通の配列に代入したいときは、型アサーション(type assertion)を使う方法があります。
 
 ```typescript
 const readonlyNumbers: readonly number[] = [1, 2, 3];
@@ -66,15 +70,14 @@ const writableNumbers: number[] = readonlyNumbers as number[];
 //                                                ^^^^^^^^^^^ 型アサーション
 ```
 
-{% page-ref page="../type-assertion-as.md" %}
+[型アサーション「as」(type assertion)](../type-assertion-as.md)
 
 逆のパターンとして、普通の配列を読み取り専用配列に代入することは可能です。
 
 ## 関連情報
 
-{% page-ref page="array-operations.md" %}
+[🚧配列の破壊的操作](array-operations.md)
 
-{% page-ref page="../object/readonly-property.md" %}
+[オブジェクト型のreadonlyプロパティ (readonly property)](../object/readonly-property.md)
 
-{% page-ref page="../../type-reuse/utility-types/readonly.md" %}
-
+[Readonly&lt;T>](../../type-reuse/utility-types/readonly.md)

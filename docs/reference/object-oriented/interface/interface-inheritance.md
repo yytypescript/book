@@ -1,4 +1,8 @@
-# インターフェースの継承 \(inheritance\)
+---
+sidebar_label: インターフェースの継承
+---
+
+# インターフェースの継承 (inheritance)
 
 TypeScriptでは、`extends`キーワードを利用して定義済みのインターフェースを継承して、新たにインターフェースを定義することができます。インターフェースを継承した場合、継承元のプロパティの型情報はすべて引き継がれます。新しくプロパティを追加することもできますし、すでに宣言されているプロパティの型を部分型に指定しなおすこともできます。
 
@@ -6,29 +10,29 @@ TypeScriptでは、`extends`キーワードを利用して定義済みのイン�
 
 ```typescript
 interface Person {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 }
 
 interface Student extends Person {
-    grade: number; // 学年
+  grade: number; // 学年
 }
 
 interface Teacher extends Person {
-    students: Student[];  // 生徒
+  students: Student[]; // 生徒
 }
 
 const studentA: Student = {
-    name: '花子',
-    age: 10,
-    grade: 3,
-}
+  name: "花子",
+  age: 10,
+  grade: 3,
+};
 
 const teacher: Teacher = {
-    name: '太郎',
-    age: 30,
-    students: [studentA],
-}
+  name: "太郎",
+  age: 30,
+  students: [studentA],
+};
 ```
 
 ## プロパティを部分型に宣言しなおす
@@ -43,7 +47,7 @@ interface WebPage {
 }
 
 interface IndexPage extends WebPage {
-  path: '/';
+  path: "/";
 }
 ```
 
@@ -58,4 +62,3 @@ interface Student extends Person {
   age: number;
 }
 ```
-

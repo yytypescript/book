@@ -60,4 +60,3 @@ main(); //=> "hello"
 // ローカルスコープで宣言された関数にはアクセスできない
 hello(); //=> ReferenceError: hello is not defined
 ```
-

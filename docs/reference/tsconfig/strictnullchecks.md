@@ -28,4 +28,3 @@ error TS2322: Type 'null' is not assignable to type 'Date'.
 const date: Date = null;
       ~~~~
 ```
-

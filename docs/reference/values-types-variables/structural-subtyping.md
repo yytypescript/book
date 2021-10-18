@@ -1,26 +1,30 @@
-# 構造的部分型 \(structural subtyping\)
+---
+sidebar_label: 構造的部分型
+---
 
-オブジェクト指向。そこまでとはいかなくてもクラスを扱うことができる言語において、ある元となる型\(基本型: supertype\)とその継承関係にある型\(派生型: subtype\)という話は欠かすことができません。
+# 構造的部分型 (structural subtyping)
+
+オブジェクト指向。そこまでとはいかなくてもクラスを扱うことができる言語において、ある元となる型(基本型: supertype)とその継承関係にある型(派生型: subtype)という話は欠かすことができません。
 
 ## 構造的部分型とは
 
-プログラミング言語の派生型の方式は公称型\(nominal typing\)と構造的部分型\(structural subtyping\)の2種類が存在します。どちらも派生型の定義として**リスコフの置換原則**を満たしており、どちらが正しいというものではありません。それぞれが正しい、異なる派生型の解釈です。
+プログラミング言語の派生型の方式は公称型(nominal typing)と構造的部分型(structural subtyping)の2種類が存在します。どちらも派生型の定義として**リスコフの置換原則**を満たしており、どちらが正しいというものではありません。それぞれが正しい、異なる派生型の解釈です。
 
 公称型と構造的部分型の違いを理解しておくことでより安全で堅牢なTypeScriptができるようになります。
 
-### 公称型\(Nominal Typing\)
+### 公称型(Nominal Typing)
 
-Java, C++で採用されている定義です。  
+Java, C++で採用されている定義です。
 ある型を基本型にする派生型は、互いに置換ができません。
 
-### 構造的部分型\(Structural Subtyping\)
+### 構造的部分型(Structural Subtyping)
 
-Go, TypeScriptで採用されている定義です。  
-その型の見た目\(シグネチャ\)が等しければ置換可能であるという点が公称型と大きく異なっています。公称型ほど硬くはなく、とはいえ型の恩恵は受けたいというやや緩い型付けです。
+Go, TypeScriptで採用されている定義です。
+その型の見た目(シグネチャ)が等しければ置換可能であるという点が公称型と大きく異なっています。公称型ほど硬くはなく、とはいえ型の恩恵は受けたいというやや緩い型付けです。
 
 ## 実際の例で見る
 
-データを意味するクラスのDataを、ファイル読み込みで取得する場合と他のサーバーにリクエストを送信して取得する場合を考えます。InputSourceというスーパークラス\(基本型\)を考え、そのサブクラス\(派生型\)としてFile, Requestを考えます。Dataクラスの構造は重要ではないので**欲しいデータがそのような形をしている**程度に考えてください。
+データを意味するクラスのDataを、ファイル読み込みで取得する場合と他のサーバーにリクエストを送信して取得する場合を考えます。InputSourceというスーパークラス(基本型)を考え、そのサブクラス(派生型)としてFile, Requestを考えます。Dataクラスの構造は重要ではないので**欲しいデータがそのような形をしている**程度に考えてください。
 
 なお、登場するクラスのほとんどは実際に存在するわけではなく、理解のために英語をあたかもクラスのように書いているだけです。そのため次のコードをそのまま転記しても動きませんのでご了承ください。
 
@@ -103,7 +107,7 @@ incompatible types: Request cannot be converted to File
 ```typescript
 class InputSource {
   public fetch(): Data {
-    throw new Error('Please implement InputSource and override this method');
+    throw new Error("Please implement InputSource and override this method");
   }
 }
 
@@ -143,8 +147,8 @@ class Request extends InputSource {
 こちらも同様にリスコフの置換原則が成立するのでスーパークラスの変数でサブクラスを受けることができます。
 
 ```typescript
-const source1: InputSource = new File('/data/~~~.txt');
-const source2: InputSource = new Request('https://~~~~');
+const source1: InputSource = new File("/data/~~~.txt");
+const source2: InputSource = new Request("https://~~~~");
 
 const data1: Data = source1.fetch();
 const data2: Data = source2.fetch();
@@ -153,8 +157,8 @@ const data2: Data = source2.fetch();
 次に、先ほどと同じように結果を受ける変数の型をお互いのサブクラスに変更します。
 
 ```typescript
-const source3: Request = new File('/data/~~~.txt');
-const source4: File = new Request('https://~~~~');
+const source3: Request = new File("/data/~~~.txt");
+const source4: File = new Request("https://~~~~");
 
 const data3: Data = source3.fetch();
 const data4: Data = source4.fetch();
@@ -207,8 +211,8 @@ class Request {
   }
 }
 
-const source3: Request = new File('/data/~~~.txt');
-const source4: File = new Request('https://~~~~');
+const source3: Request = new File("/data/~~~.txt");
+const source4: File = new Request("https://~~~~");
 
 const data3: Data = source3.fetch();
 const data4: Data = source4.fetch();
@@ -218,5 +222,4 @@ const data4: Data = source4.fetch();
 
 ## 関連情報
 
-{% page-ref page="../object-oriented/class/class-nominality.md" %}
-
+[公称型クラス](../object-oriented/class/class-nominality.md)

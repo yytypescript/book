@@ -1,12 +1,13 @@
 ---
 description: 任意のプロパティを除いたオブジェクト型を作る
+title: "Omit<T, Keys>"
 ---
 
-# Omit&lt;T, Keys&gt;
+# Omit&lt;T, Keys>
 
 `Omit<T, Keys>`は、オブジェクト型`T`から`Keys`で指定したプロパティを除いたオブジェクト型を返すユーティリティ型です。
 
-## Omit&lt;T, Keys&gt;の型引数
+## Omit&lt;T, Keys>の型引数
 
 ### T
 
@@ -75,5 +76,4 @@ type Person = Omit<User, Optional>;
 
 ## 関連情報
 
-{% page-ref page="pick.md" %}
-
+[Pick&lt;T, Keys>](pick.md)

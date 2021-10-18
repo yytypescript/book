@@ -26,4 +26,3 @@ function add(n1: number, n2: number, _n3: number): number {
   return n1 + n2;
 }
 ```
-

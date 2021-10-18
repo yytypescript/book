@@ -1,4 +1,8 @@
-# オプショナル引数 \(optional parameter\)
+---
+sidebar_label: オプショナル引数
+---
+
+# オプショナル引数 (optional parameter)
 
 引数を省略したいことがあります。そのときはオプション引数とデフォルト引数を使用することができます。
 
@@ -25,7 +29,7 @@ distance(q1);
 
 しかし、このオプション引数は意味する型が少々変わります。内部的には`p2`は`Point`ではなく`Point | undefined`のユニオン型として解釈されます。ユニオン型の説明は先の章にあるため詳しい説明は譲りますが、ユニオン型は日本語で言うと**どれか**の意味です。
 
-{% page-ref page="../values-types-variables/union.md" %}
+[ユニオン型 (union type)](../values-types-variables/union.md)
 
 ユニオン型が与えられた時は、どちらの型にもあるプロパティ、メソッドでなければ使うことができません。上記のコードでは`p2` は `undefined` にもなる可能性があり、`undefined`には`x, y`というプロパティは存在しないため、TypeScriptに指摘されます。
 
@@ -37,10 +41,10 @@ distance(q1);
 function distance(p1: Point, p2?: Point): number {
   let p0: Point | undefined = p2;
 
-  if (typeof p0 === 'undefined') {
+  if (typeof p0 === "undefined") {
     p0 = {
       x: 0,
-      y: 0
+      y: 0,
     };
   }
 
@@ -54,7 +58,7 @@ function distance(p1: Point, p2?: Point): number {
 
 ```typescript
 function distance(p1: Point, p2?: Point): number {
-  if (typeof p2 === 'undefined') {
+  if (typeof p2 === "undefined") {
     return (p1.x ** 2 + p1.y ** 2) ** (1 / 2);
   }
 
@@ -92,4 +96,3 @@ function distance(p1?: Point, p2: Point): number {
 }
 // A required parameter cannot follow an optional parameter.
 ```
-

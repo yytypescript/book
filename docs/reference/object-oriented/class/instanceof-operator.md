@@ -12,4 +12,3 @@ parent instanceof Child; //=> false
 child instanceof Parent; //=> true
 child instanceof Child; //=> true
 ```
-

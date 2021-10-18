@@ -1,6 +1,10 @@
-# アロー関数 \(arrow function\)
+---
+sidebar_label: アロー関数
+---
 
-JavaScriptの関数は関数式に加えて、もうひとつの書き方があります。それがアロー関数\(arrow function\)です。
+# アロー関数 (arrow function)
+
+JavaScriptの関数は関数式に加えて、もうひとつの書き方があります。それがアロー関数(arrow function)です。
 
 ```javascript
 // 関数式
@@ -65,17 +69,16 @@ const increment = num => num + 1;
 //                ^^^ Parameter 'num' implicitly has an 'any' type.(7006)
 ```
 
-{% page-ref page="../tsconfig/noimplicitany.md" %}
+[noImplicitAny](../tsconfig/noimplicitany.md)
 
 `noImplicitAny`が有効になっていても、関数引数に直接アロー関数を書く場合は型注釈を省略できます。
 
 ```typescript
-[1, 2, 3].map(num => num + 1);
+[1, 2, 3].map((num) => num + 1);
 ```
 
 ## 関連情報
 
-{% page-ref page="function-expression-vs-arrow-functions.md" %}
+[関数式とアロー関数の違い](function-expression-vs-arrow-functions.md)
 
-{% page-ref page="function-expression.md" %}
-
+[関数式 (function expression)](function-expression.md)

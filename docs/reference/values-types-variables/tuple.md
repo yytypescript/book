@@ -1,3 +1,7 @@
+---
+sidebar_label: タプル
+---
+
 # タプル (tuple)
 
 TypeScriptの関数は1値のみ返却可能です。戻り値に複数の値を返したい時に、配列に返したいすべての値を入れて返すことがあります。なお次の関数の戻り値は定数になっていますが、実際は演算した結果だと解釈してください。
@@ -5,7 +9,7 @@ TypeScriptの関数は1値のみ返却可能です。戻り値に複数の値を
 ```typescript
 function tuple() {
   //...
-  return [1, 'ok', true];
+  return [1, "ok", true];
 }
 ```
 
@@ -36,7 +40,7 @@ const list: [number, string, boolean] = tuple();
 ```typescript
 function tuple(): [number, string, boolean] {
   //...
-  return [1, 'ok', true];
+  return [1, "ok", true];
 }
 ```
 
@@ -76,21 +80,17 @@ const [num, str, bool]: [number, string, boolean] = tuple();
 また、特定の戻り値だけが必要である場合は変数名を書かず`,`だけを書きます。
 
 ```typescript
-const [,, bool]: [number, string, boolean] = tuple();
+const [, , bool]: [number, string, boolean] = tuple();
 ```
 
 ## タプルを使う場面
 
-TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。そのときTypeScriptでは`Promise.all()`というものを使用します。このときタプルが役に立ちます。\
+TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。そのときTypeScriptでは`Promise.all()`というものを使用します。このときタプルが役に立ちます。
 `Promise`についての詳しい説明は本書に専門の頁がありますので譲ります。ここでは`Promise<T>`という型の変数は`await`をその前につけると`T`が取り出せることだけ覚えておいてください。また、この`T`をジェネリクスと言いますが、こちらも専門の頁があるので譲ります。
 
-{% content-ref url="../promise-async-await.md" %}
-[promise-async-await.md](../promise-async-await.md)
-{% endcontent-ref %}
+[Promise / async / await](../promise-async-await.md)
 
-{% content-ref url="../generics/" %}
-[generics](../generics/)
-{% endcontent-ref %}
+[ジェネリクス (generics)](../generics/README.md)
 
 ```typescript
 const promise: Promise<number> = yyAsync();
@@ -102,7 +102,7 @@ const num: number = await promise;
 ```typescript
 async function takes3Seconds(): Promise<string> {
   // ...
-  return 'finished!';
+  return "finished!";
 }
 
 async function takes5Seconds(): Promise<number> {
@@ -123,7 +123,7 @@ const num: number = await takes5Seconds();
 ```typescript
 const tuple: [string, number] = await Promise.all([
   takes3Seconds(),
-  takes5Seconds()
+  takes5Seconds(),
 ]);
 ```
 
@@ -132,7 +132,7 @@ const tuple: [string, number] = await Promise.all([
 ```typescript
 const tuple: [number, string] = await Promise.all([
   takes5Seconds(),
-  takes3Seconds()
+  takes3Seconds(),
 ]);
 ```
 
