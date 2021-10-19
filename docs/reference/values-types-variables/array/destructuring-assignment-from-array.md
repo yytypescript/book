@@ -1,8 +1,12 @@
-# 配列の分割代入 \(destructuring assignment\)
+---
+sidebar_label: 配列の分割代入
+---
+
+# 配列の分割代入 (destructuring assignment)
 
 ## 配列の分割代入
 
-JavaScriptでは、配列から要素を取り出す方法のひとつに、`array[1]`のようにインデックスでアクセスする方法があります。この方法とは別に、分割代入\(destructuring assignment\)という方法を使っても、配列要素にアクセスできます。
+JavaScriptでは、配列から要素を取り出す方法のひとつに、`array[1]`のようにインデックスでアクセスする方法があります。この方法とは別に、分割代入(destructuring assignment)という方法を使っても、配列要素にアクセスできます。
 
 たとえば、`[1, 2, 3, 4, 5]`のような配列から、最初の3要素を取り出して変数に代入するには次のように書きます。
 
@@ -32,24 +36,27 @@ const num: number = one; // oneはnumber型になるので代入できる
 
 ただしTypeScriptのコンパイラーオプション`noUncheckedIndexedAccess`を有効にした場合は異なります。
 
-{% page-ref page="../../tsconfig/nouncheckedindexedaccess.md" %}
+[noUncheckedIndexedAccess](../../tsconfig/nouncheckedindexedaccess.md)
 
 このオプション有効状態で、配列`T[]`から分割代入すると`T`型もしくはundefined型を示す`T | undefined`型になります。たとえば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number | undefined`になります。
 
 ```typescript
 const oneToFive = [1, 2, 3, 4, 5];
 const [one, two, three] = oneToFive;
-const num: number = one; 
+const num: number = one;
 // 上はコンパイルエラーになる。
 // oneはnumber | undefinedになり、numberには代入できないため。
 ```
 
 ## ネストした配列の分割代入
 
-JavaScriptの分割代入はフラットな配列だけでなく、ネストした入れ子構造の配列からも要素を抽出できます。ネストした要素の分割代入の書き方は、ネスト構造と一致するようにブラケット\(`[ ]`\)を重ねます。
+JavaScriptの分割代入はフラットな配列だけでなく、ネストした入れ子構造の配列からも要素を抽出できます。ネストした要素の分割代入の書き方は、ネスト構造と一致するようにブラケット(`[ ]`)を重ねます。
 
 ```typescript
-const twoByTwo = [[1, 2], [3, 4]];
+const twoByTwo = [
+  [1, 2],
+  [3, 4],
+];
 const [[one, two], [three]] = twoByTwo;
 console.log(one); //=> 1
 console.log(two); //=> 2
@@ -69,7 +76,7 @@ console.log(five); //=> 5
 
 ## 残余部分の代入
 
-JavaScriptの配列を分割代入するときに、残余パターン\(`...`\)を用いて、配列の残りの部分を取り出して変数に代入できます。
+JavaScriptの配列を分割代入するときに、残余パターン(`...`)を用いて、配列の残りの部分を取り出して変数に代入できます。
 
 ```typescript
 const oneToFive = [1, 2, 3, 4, 5];
@@ -82,7 +89,6 @@ console.log(rest); //=> [ 2, 3, 4, 5 ]
 
 ## 関連情報
 
-{% page-ref page="how-to-access-elements-in-an-array.md" %}
+[配列要素へのアクセス](how-to-access-elements-in-an-array.md)
 
-{% page-ref page="../object/destructuring-assignment-from-objects.md" %}
-
+[オブジェクトの分割代入 (destructuring assignment)](../object/destructuring-assignment-from-objects.md)

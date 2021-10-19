@@ -1,10 +1,14 @@
-# オブジェクトの分割代入 \(destructuring assignment\)
+---
+sidebar_label: オブジェクトの分割代入
+---
+
+# オブジェクトの分割代入 (destructuring assignment)
 
 見かたに慣れていないと使いづらい機能ではありますが、分割代入という便利な代入方法があります。
 
 ## 分割代入のなかった時代はこうしていた
 
-あるタイプエイリアス`Wild`があったとします\(上述のものと同一です\)。
+あるタイプエイリアス`Wild`があったとします(上述のものと同一です)。
 
 ```typescript
 type Wild = {
@@ -33,14 +37,10 @@ const genre: string = pokemon.genre;
 分割代入は、オブジェクトを返す関数などの戻り値に直接オブジェクト自体を書くような方式で使います。たとえば上記の例だとこのようになります。
 
 ```typescript
-const {
-  name,
-  no,
-  genre
-}: Wild = safari();
+const { name, no, genre }: Wild = safari();
 ```
 
-もちろん`height, weight`が必要なときは書き足せば定数として設定されます。このときは1行目の宣言\(今回は`const`\)によって変数か定数かが決まるので、変数も定数も欲しい時は分けて書いてください。
+もちろん`height, weight`が必要なときは書き足せば定数として設定されます。このときは1行目の宣言(今回は`const`)によって変数か定数かが決まるので、変数も定数も欲しい時は分けて書いてください。
 
 ## ネストしたオブジェクトの分割代入
 
@@ -65,15 +65,9 @@ type Continent = {
 ```typescript
 const {
   name,
-  canada: {
-    name
-  },
-  us: {
-    name
-  },
-  mexico: {
-    name
-  }
+  canada: { name },
+  us: { name },
+  mexico: { name },
 } = america();
 ```
 
@@ -86,19 +80,12 @@ const {
 ```typescript
 const {
   name: continentName,
-  canada: {
-    name: canadaName
-  },
-  us: {
-    name: usName
-  },
-  mexico: {
-    name: mexicoName
-  }
+  canada: { name: canadaName },
+  us: { name: usName },
+  mexico: { name: mexicoName },
 } = america();
 ```
 
 ## 関連情報
 
-{% page-ref page="../array/destructuring-assignment-from-array.md" %}
-
+[配列の分割代入 (destructuring assignment)](../array/destructuring-assignment-from-array.md)

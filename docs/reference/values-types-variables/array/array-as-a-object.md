@@ -8,7 +8,7 @@ const list2 = [1, 2, 3];
 console.log(list1 == list2); //=> false
 ```
 
-PHPでは配列\(インデックス配列\)は要素の内容で等価比較できますが、JavaScriptでは同じようにはできないので注意しましょう。
+PHPでは配列(インデックス配列)は要素の内容で等価比較できますが、JavaScriptでは同じようにはできないので注意しましょう。
 
 ```php
 <?php
@@ -18,4 +18,3 @@ var_dump($list1 === $list2); //=> bool(true)
 ```
 
 このような配列の中身を比べるための演算子やメソッドはJavaScriptにはないため、中身を比較したいときにはlodashの[isEqual](https://lodash.com/docs/4.17.15#isEqual)などのパッケージを使うのがお勧めです。
-

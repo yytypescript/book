@@ -1,12 +1,13 @@
 ---
 description: 全プロパティを必須にする
+title: Required<T>
 ---
 
-# Required&lt;T&gt;
+# Required&lt;T>
 
 `Required<T>`は、`T`のすべてのプロパティからオプショナルであることを意味する`?`を取り除くユーティリティ型です。
 
-## Required&lt;T&gt;の型引数
+## Required&lt;T>の型引数
 
 ### T
 
@@ -35,5 +36,4 @@ type RequiredPerson = {
 
 ## 関連情報
 
-{% page-ref page="partial.md" %}
-
+[Partial&lt;T>](partial.md)

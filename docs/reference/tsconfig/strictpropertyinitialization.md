@@ -23,7 +23,7 @@ console.log(user.age);
 // -> undefined
 ```
 
-これはクラスの宣言時に、コンストラクタで各プロパティが初期化されていないためです。  
+これはクラスの宣言時に、コンストラクタで各プロパティが初期化されていないためです。
 このオプションを有効にすると宣言されたプロパティは `undefined` とのユニオン型またはオプション修飾子がついている場合を除いて必ずコンストラクタの呼び出しの時点で初期化をする必要があります。
 
 ```typescript
@@ -36,7 +36,7 @@ class User {
 const user: User = new User();
 ```
 
-```typescript
+```text
 error TS2564: Property 'age' has no initializer and is not definitely assigned in the constructor.
 
 public age: number;
@@ -64,4 +64,3 @@ class User {
   public age: number = 100;
 }
 ```
-

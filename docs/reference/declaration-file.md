@@ -1,6 +1,10 @@
-# 型定義ファイル \(.d.ts\)
+---
+sidebar_label: 型定義ファイル
+---
 
-自身のプロジェクトでTypeScriptでコーディングする場合は型を宣言することにより、IDEやエディターの補完機能やコードチェックを行えます。しかし外部のパッケージ\(npm\)を利用する場合は型定義ファイルが含まれているとは限りません。
+# 型定義ファイル (.d.ts)
+
+自身のプロジェクトでTypeScriptでコーディングする場合は型を宣言することにより、IDEやエディターの補完機能やコードチェックを行えます。しかし外部のパッケージ(npm)を利用する場合は型定義ファイルが含まれているとは限りません。
 
 ## 型定義ファイルとは
 
@@ -16,7 +20,7 @@ tscコマンドに`-d`オプションをつけてコンパイルを行うとJava
 
 **TypeScriptファイル**
 
-次のTypeScriptファイル\(sample.ts\)を`-d`オプションを付けてコンパイルしてみます。
+次のTypeScriptファイル(sample.ts)を`-d`オプションを付けてコンパイルしてみます。
 
 ```typescript
 // sample.ts
@@ -26,7 +30,7 @@ interface Person {
 }
 
 function greeter(person: Person): string {
-  return 'Hello, ' + person.firstName + ' ' + person.lastName;
+  return "Hello, " + person.firstName + " " + person.lastName;
 }
 ```
 
@@ -43,7 +47,7 @@ sample.tsではInterfaceを使っていますが、JavaScriptにはInterfaceの�
 ```javascript
 // sample.js
 function greeter(person) {
-    return 'Hello, ' + person.firstName + ' ' + person.lastName;
+  return "Hello, " + person.firstName + " " + person.lastName;
 }
 //# sourceMappingURL=sample.js.map
 ```
@@ -55,8 +59,8 @@ function greeter(person) {
 ```typescript
 // sample.d.ts
 interface Person {
-    firstName: string;
-    lastName: string;
+  firstName: string;
+  lastName: string;
 }
 declare function greeter(person: Person): string;
 ```
@@ -65,13 +69,13 @@ declare function greeter(person: Person): string;
 
 型定義ファイルはパッケージ開発者またはボランティアにより作成されています。
 
-* 型定義ファイル有り
-  * TypeScriptで書かれたパッケージ
-  * JavaScriptで書かれたパッケージだが`.d.ts`ファイルを同梱している
-* 型定義ファイル有りだが別途インストールが必要
-  * JavaScriptで書かれたパッケージだが、 DefinitelyTypedに登録されている
-* 型定義ファイル無し
-  * JavaScriptで書かれたパッケージで型定義ファイルが存在しない
+- 型定義ファイル有り
+  - TypeScriptで書かれたパッケージ
+  - JavaScriptで書かれたパッケージだが`.d.ts`ファイルを同梱している
+- 型定義ファイル有りだが別途インストールが必要
+  - JavaScriptで書かれたパッケージだが、 DefinitelyTypedに登録されている
+- 型定義ファイル無し
+  - JavaScriptで書かれたパッケージで型定義ファイルが存在しない
 
 ### 型定義ファイル有り
 
@@ -107,5 +111,4 @@ $ npm install @types/express --save-dev  // 型定義ファイルのインスト
 
 型定義ファイルの存在しないライブラリも利用することが可能ですが暗黙的に`any`型になります。また自身で作成しDefinitelyTypedに公開することもできます。
 
-[Contribution guide \| DefinitelyTyped](http://definitelytyped.org/guides/contributing.html)
-
+[Contribution guide | DefinitelyTyped](http://definitelytyped.org/guides/contributing.html)

@@ -14,10 +14,9 @@ function add(n1: number, n2: number): number {
 
 このオプションを有効にすると次のようなエラーが発生します。
 
-```typescript
+```text
 error TS6133: 'message' is declared but its value is never read.
 
 const message: string = `the sum is ${n1 + n2}`;
       ~~~~~~~
 ```
-

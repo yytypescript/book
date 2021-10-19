@@ -47,5 +47,4 @@ obj.x = 2; // Cannot assign to 'x' because it is a read-only property.(2540)
 
 ## 関連情報
 
-{% page-ref page="../let-and-const.md" %}
-
+[変数宣言: letとconst](../let-and-const.md)

@@ -1,6 +1,10 @@
-# 数値列挙型 \(numeric enum\)
+---
+sidebar_label: 数値列挙型
+---
 
-TypeScriptの数値列挙型\(numeric enum\)はもっとも典型的な列挙型です。メンバーの値は上から順に`0`からの連番になります。
+# 数値列挙型 (numeric enum)
+
+TypeScriptの数値列挙型(numeric enum)はもっとも典型的な列挙型です。メンバーの値は上から順に`0`からの連番になります。
 
 ```typescript
 enum Position {
@@ -21,4 +25,3 @@ enum Position {
   Left, // 4
 }
 ```
-

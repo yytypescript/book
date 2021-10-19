@@ -17,7 +17,7 @@ function increment(i) {
 ```typescript
 increment(1);
 // -> 2
-increment('1');
+increment("1");
 // -> '11'
 increment(null);
 // -> 1
@@ -34,4 +34,3 @@ function increment(i: number) {
   return i + 1;
 }
 ```
-

@@ -38,7 +38,6 @@ class Octopus {
 
 ## 関連情報
 
-{% page-ref page="../../values-types-variables/object/readonly-property.md" %}
+[オブジェクト型のreadonlyプロパティ (readonly property)](../../values-types-variables/object/readonly-property.md)
 
-{% page-ref page="../interface/readonly-modifier-in-interfaces.md" %}
-
+[インターフェースのreadonly修飾子](../interface/readonly-modifier-in-interfaces.md)

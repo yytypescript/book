@@ -1,8 +1,8 @@
 # 0000-なぜ私たちは技術書を書くのか？
 
-* ステータス: 採用
-* 決定者: reoring, suin, philomagi, kakiuchi
-* 更新日: 2019-12-13
+- ステータス: 採用
+- 決定者: reoring, suin, philomagi, kakiuchi
+- 更新日: 2019-12-13
 
 ## 背景: なぜTypeScriptの技術書を書くのか？
 
@@ -16,13 +16,12 @@ YYPHPとYYTypeScriptを主催して感じたことは、PHPと比べて**TypeScr
 
 今我々がすべき、インパクトを最大化する行動は、TypeScriptの技術書を書くことだ。執筆はコミュニティが成長途上であるタイミングだからこそ、やる意義が大きい。日本語で書かれたTypeScriptの技術書は、片手で数えるほどしかない。そんな中、新たに書を送り出すことの価値は計り知れない。我々の執筆活動は、TypeScriptを学ぼうとする個々のプログラマーを助けるだけでなく、引いてはコミュニティを伸ばす大きな原動力のひとつになると確信している。
 
-* 関連動画: [YYTypeScript\#13 執筆会 - YouTube 6:45~11:50](https://youtu.be/zYiazS4h5e8?t=406)
+- 関連動画: [YYTypeScript#13 執筆会 - YouTube 6:45~11:50](https://youtu.be/zYiazS4h5e8?t=406)
 
 ## 決定事項
 
 TypeScriptの技術書を書く。なぜなら、
 
-* TypeScriptのコミュニティは成長途上で情報が必要とされているから。
-* TypeScriptの技術書が少なく、書くことに大きな意義があるから。
-* TypeScriptコミュニティの成長に寄与できるから。
-
+- TypeScriptのコミュニティは成長途上で情報が必要とされているから。
+- TypeScriptの技術書が少なく、書くことに大きな意義があるから。
+- TypeScriptコミュニティの成長に寄与できるから。

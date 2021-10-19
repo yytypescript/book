@@ -20,13 +20,13 @@ tsconfig.jsonが作成されます。すでにtsconfig.jsonがある時は上書
 
 公式にあるtsconfig.jsonの説明はこちらです。
 
-{% embed url="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" %}
+<https://www.typescriptlang.org/docs/handbook/tsconfig-json.html>
 
 すべてのオプションの解説をすると余白が足りないので、ここでは用途を抽出して、次の観点で説明します。
 
-* `target`の決め方
-* フロントエンドとバックエンド
-* 2020年版スクラッチからつくるなら
+- `target`の決め方
+- フロントエンドとバックエンド
+- 2020年版スクラッチからつくるなら
 
 ## `target`
 
@@ -54,8 +54,8 @@ TypeScriptは最終的にJavaScriptにコンパイルされます。このオプ
 
 ```json
 {
-  "compilerOptions": {  
-    "target": "es2018",
+  "compilerOptions": {
+    "target": "es2018"
     // "lib": []
   }
 }
@@ -65,7 +65,7 @@ TypeScriptは最終的にJavaScriptにコンパイルされます。このオプ
 
 ```json
 {
-  "compilerOptions": {  
+  "compilerOptions": {
     "target": "es2018",
     "lib": [
       "es2018",
@@ -92,9 +92,7 @@ Node.jsのバージョンごとにサポートされているEcmaScriptの機能
 
 フロントエンドとバックエンドはモジュールの読み込み方法が異なっています。詳細は`import / export / require`のページをご覧ください。次の設定は使う場面で切り替えるべき項目です。
 
-{% content-ref url="../reference/import-export-require.md" %}
-[import-export-require.md](../reference/import-export-require.md)
-{% endcontent-ref %}
+[import / export /require](../reference/import-export-require.md)
 
 ここで登場するモジュールという言葉ですが、この言葉に馴染みのない方はそのコードのファイルが読み込む他のファイルの中にあるコードぐらいに捉えてください。それらは同じプロジェクト内の他のファイルの中のコードでもあれば `npm install` したものでもあります。とくに `npm install` したものであればこれらをパッケージと呼びます。
 

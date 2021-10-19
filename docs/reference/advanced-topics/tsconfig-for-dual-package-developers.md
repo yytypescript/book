@@ -1,4 +1,8 @@
-# デュアルパッケージ開発者のためのtsconfig \(Dual Package\)
+---
+sidebar_label: デュアルパッケージ開発者のためのtsconfig
+---
+
+# デュアルパッケージ開発者のためのtsconfig (Dual Package)
 
 フロントエンドでもバックエンドでもTypeScriptこれ一本！Universal JSという考えがあります。確かにフロントエンドを動的にしたいのであればほぼ避けて通れないJavaScriptと、バックエンドでも使えるようになったJavaScriptで同じコードを使いまわせれば保守の観点でも異なる言語を触る必要がなくなり、統一言語としての価値が大いにあります。
 
@@ -18,14 +22,14 @@
 └── tsconfig.json
 ```
 
-* tsconfig.base.json
-  * 基本となるtsconfig.jsonです
-* tsconfig.cjs.json
-  * tsconfig.base.jsonを継承した`commonjs`用のtsconfig.jsonです
-* tsconfig.esm.json
-  * tsconfig.base.jsonを継承した`esmodule`用のtsconfig.jsonです
-* tsconfig.json
-  * IDEはこの名前を優先して探すので、そのためのtsconfig.jsonです
+- tsconfig.base.json
+  - 基本となるtsconfig.jsonです
+- tsconfig.cjs.json
+  - tsconfig.base.jsonを継承した`commonjs`用のtsconfig.jsonです
+- tsconfig.esm.json
+  - tsconfig.base.jsonを継承した`esmodule`用のtsconfig.jsonです
+- tsconfig.json
+  - IDEはこの名前を優先して探すので、そのためのtsconfig.jsonです
 
 tsconfig.base.jsonとtsconfig.jsonを分けるかどうかについては好みの範疇です。まとめてしまっても問題はありません。
 
@@ -57,7 +61,7 @@ tsconfig.jsonは他のtsconfig.jsonを継承する機能があります。上記
 }
 ```
 
-`outDir`はコンパイルした`js`と、型定義ファイルを出力していれば\(後述\)それを出力するディレクトリを変更するオプションです。
+`outDir`はコンパイルした`js`と、型定義ファイルを出力していれば(後述)それを出力するディレクトリを変更するオプションです。
 
 このようなtsconfig.xxx.jsonができていれば、あとは次のようにファイル指定してコンパイルをするだけです。
 
@@ -104,7 +108,7 @@ package.jsonはこのようになっているでしょう。
 
 ### Tree Shaking
 
-`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができるすべてをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなり過ぎるという欠点があります。特にそれがSPA\(Signle Page Application\)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
+`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができるすべてをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなり過ぎるという欠点があります。特にそれがSPA(Signle Page Application)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
 
 この事態を避けるために`module bundler`は容量削減のための涙ぐましい努力を続けています。その機能のひとつとして題名のTree Shakingを紹介するとともに、開発者にできるTree Shaking対応パッケージの作り方を紹介します。
 
@@ -112,8 +116,8 @@ package.jsonはこのようになっているでしょう。
 
 Tree Shakingとは使われていない関数、クラスを最終的な`js`ファイルに含めない機能のことです。使っていないのであれば入れる必要はない。というのは至極当然の結論ですがこのTree Shakingを使うための条件があります。
 
-* `esmodule`で書かれている
-* 副作用\(side effects\)のないコードである
+- `esmodule`で書かれている
+- 副作用(side effects)のないコードである
 
 各条件の詳細を見ていきましょう。
 
@@ -130,9 +134,9 @@ let police = null;
 let firefighter = null;
 
 if (shouldCallPolice()) {
-  police = require('./police');
+  police = require("./police");
 } else {
-  firefighter = require('./firefighter');
+  firefighter = require("./firefighter");
 }
 ```
 
@@ -146,8 +150,8 @@ if (shouldCallPolice()) {
 
 ここで言及している副作用とは以下が挙げられます。
 
-* `export`するだけで効果がある
-* プロトタイプ汚染のような、既存のものに対して影響を及ぼす
+- `export`するだけで効果がある
+- プロトタイプ汚染のような、既存のものに対して影響を及ぼす
 
 これらが含まれているかもしれないと`module bundler`が判断するとTree Shakingの効率が落ちます。
 
@@ -197,4 +201,3 @@ if (shouldCallPolice()) {
   }
 }
 ```
-

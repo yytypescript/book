@@ -1,10 +1,12 @@
-# 静的フィールド \(static field\)
+---
+sidebar_label: 静的フィールド
+---
 
-JavaやPHPには静的フィールド\(static field\)という概念があります。通常のフィールドはインスタンスのプロパティですが、静的フィールドはクラスのプロパティです。JavaやPHPではstaticキーワードで静的フィールドを宣言できます。
+# 静的フィールド (static field)
 
-{% tabs %}
-{% tab title="Java" %}
-```java
+JavaやPHPには静的フィールド(static field)という概念があります。通常のフィールドはインスタンスのプロパティですが、静的フィールドはクラスのプロパティです。JavaやPHPではstaticキーワードで静的フィールドを宣言できます。
+
+```java title="Java"
 class SomeClass {
     public static Integer field = 123;
 }
@@ -15,10 +17,8 @@ class Main {
     }
 }
 ```
-{% endtab %}
 
-{% tab title="PHP" %}
-```php
+```php title="PHP"
 class SomeClass
 {
     public static $field = 123;
@@ -26,30 +26,24 @@ class SomeClass
 
 var_dump(SomeClass::$field); //=> int(123)
 ```
-{% endtab %}
-{% endtabs %}
 
 JavaScriptにはJavaのような静的フィールドの機能がありません。代わりに、クラスのプロパティに後から値を代入することで似たようなことができます。
 
-{% code title="JavaScript" %}
-```javascript
+```javascript title="JavaScript"
 class SomeClass {}
 SomeClass.field = 123;
 console.log(SomeClass.field); //=> 123
 ```
-{% endcode %}
 
 TypeScriptでは、Java風の静的フィールドの書き方ができるようになっています。TypeScriptで静的フィールドを宣言するにはstaticキーワードを用います。
 
-{% code title="TypeScript" %}
-```typescript
+```typescript title="TypeScript"
 class SomeClass {
   static field: number = 123;
 }
 
 console.log(SomeClass.field); //=> 123
 ```
-{% endcode %}
 
 ## 静的フィールドの型推論
 
@@ -71,7 +65,7 @@ class SomeClass {
 }
 ```
 
-{% page-ref page="access-modifiers.md" %}
+[アクセス修飾子 (access modifier)](access-modifiers.md)
 
 ## 読み取り専用の静的フィールド
 
@@ -79,9 +73,8 @@ TypeScriptの静的フィールドはreadonly修飾子をつけると読み取�
 
 ```typescript
 class SomeClass {
-   static readonly field: number;
+  static readonly field: number;
 }
 ```
 
-{% page-ref page="readonly-modifier-in-classes.md" %}
-
+[クラスのreadonly修飾子](readonly-modifier-in-classes.md)

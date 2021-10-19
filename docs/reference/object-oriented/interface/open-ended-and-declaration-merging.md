@@ -1,4 +1,8 @@
-# 🚧open-endedと宣言マージ\(declaration merging\)
+---
+sidebar_label: "\U0001F6A7open-endedと宣言マージ"
+---
+
+# 🚧open-endedと宣言マージ(declaration merging)
 
 インターフェースのみができる機能で、もっともタイプエイリアスと異なる特徴です。
 
@@ -27,4 +31,3 @@ type Array<T> = ES2016Array<T> & ES2019Array<T>;
 ```
 
 このDeclaration mergingの機能は`ポリフィル`を行うパッケージの型定義でよく見ることができます。
-

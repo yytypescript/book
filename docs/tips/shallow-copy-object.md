@@ -6,7 +6,7 @@
 
 ## インスタンスを安易に上書きすると起こる弊害
 
-たとえば生活習慣病に関するサービスを作るとします。そのサービスでは一日の食事を入力するとその食事から熱量 \(カロリー\) が計算され、さらに将来的に生活習慣病 \(少々異なりますがMetabolic Syndromeとします\) になるかどうか判定できるとします。
+たとえば生活習慣病に関するサービスを作るとします。そのサービスでは一日の食事を入力するとその食事から熱量 (カロリー) が計算され、さらに将来的に生活習慣病 (少々異なりますがMetabolic Syndromeとします) になるかどうか判定できるとします。
 
 ここで一日の食事を意味するオブジェクトの型として `MealsPerDay` を定義し、一日に摂取した食事の熱量からいずれ生活習慣病になるかどうか判定する関数 `willBeMetabo()` を定義すれば次のようになります。
 
@@ -27,9 +27,9 @@ function willBeMetabo(meals: MealsPerDay): boolean {
 ```typescript
 // 439.2 kcal
 const meals: MealsPerDay = {
-  breakfast: 'a vegetable salad',
-  lunch: 'a cod\'s meuniere',
-  dinner: 'a half bottle of wine (white)'
+  breakfast: "a vegetable salad",
+  lunch: "a cod's meuniere",
+  dinner: "a half bottle of wine (white)",
 };
 
 willBeMetabo(meals);
@@ -43,13 +43,13 @@ willBeMetabo(meals);
 ```typescript
 function isMeals(meals: MealsPerDay): void {
   if (!isMeal(meals.breakfast)) {
-    throw new Error('BREAKFAST IS NOT A MEAL!');
+    throw new Error("BREAKFAST IS NOT A MEAL!");
   }
   if (!isMeal(meals.lunch)) {
-    throw new Error('LUNCH IS NOT A MEAL!!!');
+    throw new Error("LUNCH IS NOT A MEAL!!!");
   }
   if (!isMeal(meals.dinner)) {
-    throw new Error('DINNER IS NOT A MEAL!!!');
+    throw new Error("DINNER IS NOT A MEAL!!!");
   }
 }
 ```
@@ -73,21 +73,21 @@ function shouldBeCareful(meals: MealsPerDay): boolean {
 
 ```typescript
 function isMeals(meals: MealsPerDay): void {
-  meals.breakfast = 'a beef steak';
+  meals.breakfast = "a beef steak";
   // beef steak will be 1200 kcal
-  meals.lunch = 'a bucket of ice cream';
+  meals.lunch = "a bucket of ice cream";
   // a bucket of ice cream will be 7200 kcal
-  meals.dinner = '3 pizzas';
+  meals.dinner = "3 pizzas";
   // 3 pizzas will be 11400 kcal
 
   if (!isMeal(meals.breakfast)) {
-    throw new Error('BREAKFAST IS NOT MEAL!');
+    throw new Error("BREAKFAST IS NOT MEAL!");
   }
   if (!isMeal(meals.lunch)) {
-    throw new Error('LUNCH IS NOT MEAL!!!');
+    throw new Error("LUNCH IS NOT MEAL!!!");
   }
   if (!isMeal(meals.dinner)) {
-    throw new Error('DINNER IS NOT MEAL!!!');
+    throw new Error("DINNER IS NOT MEAL!!!");
   }
 }
 
@@ -109,15 +109,15 @@ willBeMetabo(meals);
 
 今回の例は `isMeals()` が悪さをしました。この関数が自分たちで作ったものであればすぐに原因を見つけることができるでしょう。このような問題のある関数を書かないようにすることはもちろん大事なことですが、未熟なチームメイトがいればこのような関数を書くかもしれません。人類が過ちを犯さない前提よりも過ちを犯すことがないようにする設計の方が大事です。
 
-`isMeals()` が外部から持ってきたパッケージだとすると問題です。自分たちでこのパッケージに手を加えることは容易ではないため \(できなくはありません\) 。制作者にプルリクエストを出してバグフィックスが行われるまで開発を止めるというのも現実的ではありません。
+`isMeals()` が外部から持ってきたパッケージだとすると問題です。自分たちでこのパッケージに手を加えることは容易ではないため (できなくはありません) 。制作者にプルリクエストを出してバグフィックスが行われるまで開発を止めるというのも現実的ではありません。
 
 ### どうすればよかったのか
 
 そもそもインスタンスを書き換えられないようにしてしまうか、元のインスタンスが破壊されないようにスケープゴートのインスタンスを用意するのが一般的です。前者はバリューオブジェクトと呼ばれるものが代表します。ここで紹介するのは後者のスケープゴート、つまりコピーを用意する方法です。
 
-## 浅いコピー \(shallow copy\) とは
+## 浅いコピー (shallow copy) とは
 
-題名にもあるとおり**浅い**とは何を指しているのでしょうか？それはオブジェクトのコピーをするにあたりオブジェクトがいかに深い構造になっていても \(ネストしていても\) 第一階層のみをコピーすることに由来します。当然対義語は深いコピー \(deep copy\) です。
+題名にもあるとおり**浅い**とは何を指しているのでしょうか？それはオブジェクトのコピーをするにあたりオブジェクトがいかに深い構造になっていても (ネストしていても) 第一階層のみをコピーすることに由来します。当然対義語は深いコピー (deep copy) です。
 
 ### 浅いコピーをしたオブジェクトは等しくない
 
@@ -177,7 +177,7 @@ type NestObject = {
 };
 
 const object1: NestObject = {
-  nest: {}
+  nest: {},
 };
 const object2: NestObject = shallowCopy(object1);
 
@@ -187,7 +187,7 @@ console.log(object1.nest === object2.nest);
 // -> true
 ```
 
-完全なコピーを作りたい場合は浅いコピーと一緒に出てきた深いコピーを使います。  
+完全なコピーを作りたい場合は浅いコピーと一緒に出てきた深いコピーを使います。
 深いコピーについて今回は深く触れません。浅いコピーに比べ深いコピーはコピーに時間がかかり、さらに参照ではなく実体をコピーするため、記憶領域を同じ量確保しなければなりません。何でもかんでも深いコピーをするとあっという間に時間的、空間的な領域を浪費します。浅いコピーでこと足りる場合は浅いコピーを使用する方がよいでしょう。
 
 ### 浅いコピーを実装する
@@ -195,7 +195,7 @@ console.log(object1.nest === object2.nest);
 浅いコピーの実装は昨今のJSでは大変楽になっており、次のコードで完成です。
 
 ```typescript
-const shallowCopied: object = {...sample};
+const shallowCopied: object = { ...sample };
 ```
 
 もちろん変数 `sample` はオブジェクトである必要があります。この `...` はスプレッド構文です。スプレッド構文については関数の章を参照ください。
@@ -205,19 +205,18 @@ const shallowCopied: object = {...sample};
 ```typescript
 const sample: object = {
   year: 1999,
-  month: 7
+  month: 7,
 };
 
-
-const shallowCopied: object = {...sample};
+const shallowCopied: object = { ...sample };
 ```
 
 ES2018でコンパイルすると次のようになります。
 
 ```typescript
 const sample = {
-    year: 1999,
-    month: 7
+  year: 1999,
+  month: 7,
 };
 const shallowCopied = { ...sample };
 ```
@@ -226,8 +225,8 @@ const shallowCopied = { ...sample };
 
 ```typescript
 const sample = {
-    year: 1999,
-    month: 7
+  year: 1999,
+  month: 7,
 };
 const shallowCopied = Object.assign({}, sample);
 ```
@@ -249,21 +248,16 @@ const a1: number[] = [2, 3, 4];
 const a2: number[] = [...a1];
 
 const m1: Map<number, string> = new Map<number, string>([
-  [1, 'a'],
-  [2, 'e'],
-  [3, 'f']
+  [1, "a"],
+  [2, "e"],
+  [3, "f"],
 ]);
 const m2 = new Map([...m1]);
 
-const s1: Set<string> = new Set([
-  'g',
-  'd',
-  'k'
-]);
+const s1: Set<string> = new Set(["g", "d", "k"]);
 const s2: Set<string> = new Set([...s1]);
 ```
 
 2, 9, 16 行目がそれぞれのコレクションの浅いコピーを意味しています。
 
 実はObjectクラスは `[Symbol.iterator]()` に対応していないのですが、スプレッド構文によるオブジェクトの浅いコピーをサポートしています。
-

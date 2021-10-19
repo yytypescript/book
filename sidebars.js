@@ -363,6 +363,8 @@ module.exports = {
   writerSidebar: [
     "writing/writing",
     "writing/contributing",
+    "writing/getting-started",
+    "writing/markdown",
     "writing/start-writing",
     "writing/styles",
     "writing/japanese-english-table",

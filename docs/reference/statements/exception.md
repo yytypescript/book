@@ -1,4 +1,8 @@
-# 例外処理 \(exception\)
+---
+sidebar_label: 例外処理
+---
+
+# 例外処理 (exception)
 
 JavaScriptにはJavaに似た例外処理の構文があります。例外には`Error`オブジェクトを使い、throw構文で例外を投げます。try-catch構文で例外を捕捉できます。
 
@@ -54,9 +58,9 @@ try {
 
 TypeScriptのコンパイラーオプションの`useUnknownInCatchVariables`を有効にすると、catchの変数の型が`unknown`型になります。「どんな値がthrowされるか分からない」ことを型として正確に表現できるため、より型安全にしたい場合は、このオプションを有効化するとよいでしょう。
 
-{% page-ref page="../tsconfig/useunknownincatchvariables.md" %}
+[useUnknownInCatchVariables](../tsconfig/useunknownincatchvariables.md)
 
-{% page-ref page="../values-types-variables/undefined.md" %}
+[undefined型](../values-types-variables/undefined.md)
 
 ### catchの分岐
 
@@ -97,7 +101,7 @@ async function fetchData() {
 fetchData();
 ```
 
-{% page-ref page="variable-scope.md" %}
+[変数のスコープ (scope)](variable-scope.md)
 
 try-catch文の外でも変数を参照したい場合は、tryの前に代入用の変数をlet宣言しておく必要があります。
 
@@ -129,4 +133,3 @@ try {
   // ...
 }
 ```
-

@@ -2,7 +2,7 @@
 
 ## fluent interface
 
-fluent interfaceとは「流れるようなインターフェース」という意味で、method chaining\(メソッドの連鎖\)という小技を使って、可読性の高いコードを実現するメソッドの作り方のことです。よくドメイン固有言語\(DSL\)を提供するようなクラスを作るときに使われます。
+fluent interfaceとは「流れるようなインターフェース」という意味で、method chaining(メソッドの連鎖)という小技を使って、可読性の高いコードを実現するメソッドの作り方のことです。よくドメイン固有言語(DSL)を提供するようなクラスを作るときに使われます。
 
 四則演算ができる変哲もないクラス`Operator`を考えます
 
@@ -39,8 +39,7 @@ op.multiply(6); // 12
 op.divide(3); // 4
 ```
 
-演算ごとにステートメントを分ける必要があります。  
-このような場合メソッドチェインを使って処理を連続させることができます。
+演算ごとにステートメントを分ける必要があります。このような場合メソッドチェインを使って処理を連続させることができます。
 
 ```typescript
 class Operator {
@@ -81,7 +80,6 @@ op.sum(5).subtract(3).multiply(6).divide(3); // 4
 
 ```typescript
 class NewOperator extends Operator {
-
   public constructor(value: number) {
     super(value);
   }
@@ -135,7 +133,6 @@ class Operator {
 }
 
 class NewOperator extends Operator {
-
   public constructor(value: number) {
     super(value);
   }
@@ -149,4 +146,3 @@ class NewOperator extends Operator {
 const op: NewOperator = new NewOperator(2);
 op.power(3).multiply(2).power(3); // 4096
 ```
-

@@ -1,4 +1,8 @@
-# 型変数 \(type variables\)
+---
+sidebar_label: 型変数
+---
+
+# 型変数 (type variables)
 
 ここでは、ジェネリクスで重要な概念となる「型変数」とは何なのかについて説明します。
 
@@ -14,12 +18,12 @@ const x = 1;
 
 変数という便利な入れ物があるおかげで、繰り返し同じコードを書く必要がなくなったり、より抽象的なコードを書けるようになったりと、さまざまな恩恵を享受できるわけです。
 
-型変数\(type variables\)は、もうひとつの便利な入れ物です。ただし、入れられるのは「値」ではなく「型」という違いがあります。
+型変数(type variables)は、もうひとつの便利な入れ物です。ただし、入れられるのは「値」ではなく「型」という違いがあります。
 
 ```typescript
 function printAndReturn<T>(value: T): T {
-    console.log(value);
-    return value;
+  console.log(value);
+  return value;
 }
 ```
 
@@ -29,9 +33,8 @@ function printAndReturn<T>(value: T): T {
 
 ```typescript
 function printAndReturn<T>(value: T): T {
-    let values: T[] = []; // OK
-    const doSomething = (value: T) => { /*...*/ }; // OK
-    /* ... */
+  let values: T[] = []; // OK
+  const doSomething = (value: T) => {}; // OK
 }
 
 let value: T; // Error
@@ -45,13 +48,13 @@ const value = printAndReturn<number>(123);
 
 ## 型引数
 
-型引数\(type arguments\)とは、型変数に代入した型のことを言います。次のコードでは`number`が型引数です。
+型引数(type arguments)とは、型変数に代入した型のことを言います。次のコードでは`number`が型引数です。
 
 ```typescript
 const value = printAndReturn<number>(123);
 ```
 
-TypeScriptでは、型引数にも型推論が行われます。型引数推論\(type argument inference\)と言われます。上の例では、型変数`T`に`number`を代入するコードを明示的に書いていますが、変数の`123`から型変数`T`の型は`number`型になることがコンパイラからは推測可能なので、次のコードのように型引数の記述を省略することもできます。
+TypeScriptでは、型引数にも型推論が行われます。型引数推論(type argument inference)と言われます。上の例では、型変数`T`に`number`を代入するコードを明示的に書いていますが、変数の`123`から型変数`T`の型は`number`型になることがコンパイラからは推測可能なので、次のコードのように型引数の記述を省略することもできます。
 
 ```typescript
 const value = printAndReturn(123);
@@ -62,18 +65,18 @@ const value = printAndReturn(123);
 TypeScriptの型変数に使える文字は変数名や関数名、クラス名などに使える文字種と同じものが使えます。したがって、大文字アルファベット1文字でなければならないといった制約はありません。
 
 ```typescript
-function func1<T>(x: T) { /*...*/ }
-function func2<Foo>(x: Foo) { /*...*/ }
-function func3<fooBar>(x: fooBar) { /*...*/ }
-function func4<$>(x: $) { /*...*/ }
-function func5<かた>(x: かた) { /*...*/ }
+function func1<T>(x: T) {}
+function func2<Foo>(x: Foo) {}
+function func3<fooBar>(x: fooBar) {}
+function func4<$>(x: $) {}
+function func5<かた>(x: かた) {}
 ```
 
 このように、3文字の`Foo`、キャメルケースの`fooBar`、記号の`$`、Unicodeの`かた`も型変数名として定義可能です。
 
 ```typescript
-function func1<1>(x: 1) { /*...*/ } // コンパイルエラー
-function func2<class>(x: class) { /*...*/ } // コンパイルエラー
+function func1<1>(x: 1) {} // コンパイルエラー
+function func2<class>(x: class) {} // コンパイルエラー
 ```
 
 型変数名に使えないものは数字ではじまるもの、`class`などの予約語です。
@@ -85,20 +88,19 @@ TypeScriptの慣習として、型変数名には`T`を用いることが多い�
 単純なジェネリクスで、型変数が2つある場合は、`T`と`U`が用いられることがあり、その理由はアルファベット順でTの次がUだからです。この規則にしたがって、3つ目の型変数は`V`する場合もあります。
 
 ```typescript
-function compare<T, U>(a: T, b: U) { /*...*/ }
+function compare<T, U>(a: T, b: U) {}
 ```
 
 複数の型変数がある場合、型変数に意味のある名前をつけることもあります。その場合、`TKey`、`TValue`のように`T`接頭辞を付けた命名規則がしばしば使われます。ただし、これは「型変数名には`T`を用いる」という慣習ほどは一般的でないように思われます。
 
 ```typescript
-function makeKeyValuePair<TKey, TValue>(key: TKey, value: TValue) {
-    /* ... */
-}
+function makeKeyValuePair<TKey, TValue>(key: TKey, value: TValue) {}
 ```
 
 型変数名を単語にする場合は、大文字始まりのキャメルケースにすることが普通です。
 
-{% hint style="info" %}
+:::info
+
 ### 型変数の名づけを巡る議論
 
 「型変数はどのような名づけがベストか？」というテーマについては、プログラマーによってさまざまな主張があり、見解が分かれるところです。ここでは、参考までにその議論を取り上げますが、どうか混乱しないで頂ければと思います。実務においては、**プロジェクトで一貫した命名規約に準ずる**ことを意識しておけばいいでしょう。
@@ -116,5 +118,5 @@ function makeKeyValuePair<TKey, TValue>(key: TKey, value: TValue) {
 ### 型変数のスコープの広さによって使い分けるべきとする主張
 
 プログラミングでの名づけは、名つけるもののスコープが広くなるほど長い名前を、狭くなるほど短い名前をつけるというテクニックがあります。たとえば、`for`ループで変数に`i`を用いることがありますが、これは慣習というところもありますが、変数のスコープが狭いという一面もあります。型変数にも同じことが言えて、型変数のスコープが広いものは単語にし、短いジェネリック関数の中でしか使わない型変数は1文字が妥当という考え方があります。
-{% endhint %}
 
+:::

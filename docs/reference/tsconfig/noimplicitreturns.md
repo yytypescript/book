@@ -7,9 +7,9 @@
 ```typescript
 function negaposi(num: number): string {
   if (num > 0) {
-    return 'positive';
+    return "positive";
   } else if (num < 0) {
-    return 'negative';
+    return "negative";
   }
 }
 ```
@@ -28,12 +28,11 @@ function negaposi(num: number): string {
 ```typescript
 function negaposi(num: number): string {
   if (num > 0) {
-    return 'positive';
+    return "positive";
   } else if (num < 0) {
-    return 'negative';
+    return "negative";
   }
 
-  return 'this is 0';
+  return "this is 0";
 }
 ```
-

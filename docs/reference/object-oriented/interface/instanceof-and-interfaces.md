@@ -17,26 +17,22 @@ type UnknownObject<T extends object> = {
 };
 
 function isStudent(obj: unknown): obj is Student {
-  if (typeof obj !== 'object') {
+  if (typeof obj !== "object") {
     return false;
   }
   if (obj === null) {
     return false;
   }
 
-  const {
-    name,
-    age,
-    grade
-  } = obj as UnknownObject<Student>;
+  const { name, age, grade } = obj as UnknownObject<Student>;
 
-  if (typeof name !== 'string') {
+  if (typeof name !== "string") {
     return false;
   }
-  if (typeof age !== 'number') {
+  if (typeof age !== "number") {
     return false;
   }
-  if (typeof grade !== 'number') {
+  if (typeof grade !== "number") {
     return false;
   }
 
@@ -50,7 +46,7 @@ function isStudent(obj: unknown): obj is Student {
 
 Type predicateと呼ばれる機能です。専門に解説してあるページがありますので参照ください。ここではこの関数が戻り値として`true`を返すと、呼び出し元では引数`obj`が`Student`として解釈されるようになります。
 
-{% page-ref page="../../functions/type-guard-functions.md" %}
+[型ガード関数 (type guard function)](../../functions/type-guard-functions.md)
 
 ## `UnknownObject`
 
@@ -58,7 +54,7 @@ Type predicateと呼ばれる機能です。専門に解説してあるページ
 
 ```typescript
 const obj: object = {
-  name: '花子'
+  name: "花子",
 };
 
 obj.name;
@@ -79,4 +75,3 @@ interface Name {
 ```
 
 この変更に対し`isStudent()`も随伴して更新されなければこの関数が`Student`インターフェースであると判定するオブジェクトの`name`プロパティは明らかに違うものになるでしょう。
-

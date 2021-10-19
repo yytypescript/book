@@ -23,7 +23,7 @@ TODO: 引数は型注釈がないとanyになることを説明する
 
 TODO: 暗黙のanyを規制する`noImplicitAny`オプションを説明する
 
-{% page-ref page="../tsconfig/noimplicitany.md" %}
+[noImplicitAny](../tsconfig/noimplicitany.md)
 
 ## anyは悪？
 
@@ -35,7 +35,6 @@ TODO: がんばらないTypeScriptというアプローチがあることを紹�
 
 ## 関連情報
 
-{% page-ref page="../statements/unknown.md" %}
+[🚧unknown型](../statements/unknown.md)
 
-{% page-ref page="../statements/any-vs-unknown.md" %}
-
+[🚧any vs unknown](../statements/any-vs-unknown.md)

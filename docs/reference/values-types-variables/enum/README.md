@@ -1,6 +1,11 @@
-# 列挙型 \(enum\)
+---
+sidebar_label: 列挙型
+slug: /reference/values-types-variables/enum
+---
 
-TypeScriptでは、列挙型\(enum\)を用いると、定数のセットに意味を持たせたコード表現ができます。
+# 列挙型 (enum)
+
+TypeScriptでは、列挙型(enum)を用いると、定数のセットに意味を持たせたコード表現ができます。
 
 列挙型を宣言するには、`enum`キーワードの後に列挙型名とメンバーを書きます。次の例では、`Postion`が列挙型名で、`Top`、`Right`、`Bottom`、`Left`がメンバーになります。
 
@@ -15,6 +20,7 @@ enum Position {
 
 `enum`キーワードはTypeScript独自のものです。なのでJavaScriptにコンパイルすると次のようなコードになります。
 
+<!--prettier-ignore-->
 ```typescript
 var Position;
 (function (Position) {
@@ -39,4 +45,3 @@ console.log(Position.Bottom); // 2
 let position: Position;
 //            ^^^^^^^^型
 ```
-

@@ -1,4 +1,9 @@
-# クラス \(class\)
+---
+sidebar_label: クラス
+slug: /reference/object-oriented/class
+---
+
+# クラス (class)
 
 クラスはオブジェクトの雛形を定義したもので、JavaScriptとTypeScriptでは`class`構文を用いてクラスが定義できます。
 
@@ -21,6 +26,3 @@ TypeScriptでは、クラスを定義するとクラス名と同じ名前の型�
 ```typescript
 const person: Person = new Person();
 ```
-
-
-

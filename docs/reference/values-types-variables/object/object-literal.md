@@ -1,4 +1,8 @@
-# オブジェクトリテラル \(object literal\)
+---
+sidebar_label: オブジェクトリテラル
+---
+
+# オブジェクトリテラル (object literal)
 
 JavaScriptの特徴はオブジェクトリテラル`{}`という記法を用いて、簡単にオブジェクトを生成できる点です。
 
@@ -23,4 +27,3 @@ person.age = 25;
 ```
 
 ちなみに、広く使われるデータシリアライズ形式にJSONがあるのはご存知でしょう。JSONは多くのプログラミング言語で用いらていますが、JSONはJavaScript Object Nationの略で、JSONの由来はJavaScriptのオブジェクトリテラルにあります。そして、JavaScriptではJSONをそのままオブジェクトリテラルとして解釈できます。
-

@@ -9,4 +9,3 @@ console.log(hello + " " + world);
 ```
 
 TypeScriptから見ると、JavaScriptはTypeScriptの一部と言えます。そのため、TypeScriptを十分に理解するには、JavaScriptの理解が欠かせません。まだJavaScriptをよく分かっていない場合は、TypeScriptの学習と平行してJavaScriptも学ぶ必要があります。本書はTypeScript入門者向けですが、TypeScriptの理解に欠かせないJavaScriptの文法や仕様についても同時に学べるようになっています。
-

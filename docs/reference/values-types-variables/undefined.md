@@ -30,5 +30,4 @@ const x: undefined = undefined;
 
 戻り値のない関数は`undefined`になりますが、TypeScriptで戻り値なしを型注釈で表現する場合、`undefined`ではなく`void`を用います。詳しくは関数の説明をご覧ください。
 
-{% page-ref page="../functions/void-type.md" %}
-
+[戻り値がない関数とvoid型 (void type)](../functions/void-type.md)

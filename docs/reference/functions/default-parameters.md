@@ -1,6 +1,10 @@
-# 🚧デフォルト引数 \(default parameter\)
+---
+sidebar_label: "\U0001F6A7デフォルト引数"
+---
 
-引数を省略した時、原点との距離を求める代わりに点\(1, 2\)との距離を求めるといった変化球がきたとします。何も考えないとこのようになります。
+# 🚧デフォルト引数 (default parameter)
+
+引数を省略した時、原点との距離を求める代わりに点(1, 2)との距離を求めるといった変化球がきたとします。何も考えないとこのようになります。
 
 ```typescript
 function distance(p1: Point, p2?: Point): number {
@@ -17,7 +21,7 @@ function distance(p1: Point, p2?: Point): number {
 ```typescript
 const p0: Point = {
   x: 1,
-  y: 2
+  y: 2,
 };
 
 function distance(p1: Point, p2: Point = p0): number {
@@ -35,13 +39,13 @@ distance(q1, undefined);
 
 ### 初期値に関数の戻り値を使う
 
-デフォルト引数には関数の戻り値を指定することができます。たとえば、ある\(x, y\)が与えられると転置した\(y, x\)を返す`inverse()`という関数の戻り値を初期値として使用します。ちなみに`inverse()`は以下です。
+デフォルト引数には関数の戻り値を指定することができます。たとえば、ある(x, y)が与えられると転置した(y, x)を返す`inverse()`という関数の戻り値を初期値として使用します。ちなみに`inverse()`は以下です。
 
 ```typescript
 function inverse(p: Point): Point {
   return {
     x: p.y,
-    y: p.x
+    y: p.x,
   };
 }
 ```
@@ -59,7 +63,7 @@ function distance(p1: Point, p2: Point = inverse(p1)): number {
 ```typescript
 const p0: Point = {
   x: 1,
-  y: 2
+  y: 2,
 };
 
 function distance(p1: Point = p0, p2: Point): number {
@@ -77,10 +81,12 @@ distance(null, q2);
 関数をデフォルト引数として使うときは非同期の関数を使うことができません。詳細は先のページにあるため詳しい説明は譲りますが次のようなデフォルト引数はできません。なお`inverseAsync()`は非同期関数とします。
 
 ```typescript
-async function distanceAync(p1: Point, p2: Point = await inverseAync(p1)): Promise<number> {
+async function distanceAync(
+  p1: Point,
+  p2: Point = await inverseAync(p1)
+): Promise<number> {
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
 ```
 
 TODO: 🚧デフォルト引数を指定すると型推論が効くことについて書く。
-

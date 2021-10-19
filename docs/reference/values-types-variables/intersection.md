@@ -1,4 +1,8 @@
-# インターセクション型 \(intersection type\)
+---
+sidebar_label: インターセクション型
+---
+
+# インターセクション型 (intersection type)
 
 考え方はユニオン型と相対するものです。ユニオン型が**どれか**を意味するならインターセクション型は**どれも**です。言い換えるとオブジェクトの定義を合成させることを指します。
 
@@ -19,7 +23,7 @@ type ThreeDimensionalPoint = TwoDimensionalPoint & Z;
 const p: ThreeDimensionalPoint = {
   x: 0,
   y: 1,
-  z: 2
+  z: 2,
 };
 ```
 
@@ -32,7 +36,7 @@ xy平面上の点を表す`TwoDimensionalPoint`を拡張してxyz平面上の点
 ```typescript
 type Never = string & number;
 
-const n: Never = '2';
+const n: Never = "2";
 // Type '"2"' is not assignable to type 'never'.
 ```
 
@@ -62,9 +66,9 @@ type Parameter = {
 
 一見してどのプロパティが必須で、どのプロパティが選択可かが非常にわかりづらいです。これをインターセクション型とユーティリティ型の`Required<T>`と`Partial<T>`を使いわかりやすく表記できます。ユーティリティ型については解説しているページがありますのでご覧ください。
 
-{% page-ref page="../type-reuse/utility-types/required.md" %}
+[Required&lt;T>](../type-reuse/utility-types/required.md)
 
-{% page-ref page="../type-reuse/utility-types/partial.md" %}
+[Partial&lt;T>](../type-reuse/utility-types/partial.md)
 
 ### 必須とそうでないパラメータのタイプエイリアスに分離する
 
@@ -119,4 +123,3 @@ type Optional = Partial<{
 ```typescript
 type Parameter = Readonly<Mandatory & Optional>;
 ```
-

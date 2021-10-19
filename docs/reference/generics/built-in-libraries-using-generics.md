@@ -2,9 +2,9 @@
 
 ジェネリクスは標準ライブラリの中でも多くの箇所で利用されています。ジェネリクスを利用する代表的なものとしては、
 
-* Arrayオブジェクト
-* Promiseオブジェクト
-* Mapオブジェクト
+- Arrayオブジェクト
+- Promiseオブジェクト
+- Mapオブジェクト
 
 などがあります。
 
@@ -26,9 +26,7 @@ const numbers: Array<number> = [1, 2, 3, 4];
 const numbers: number[] = [1, 2, 3, 4];
 ```
 
-{% content-ref url="../values-types-variables/array/type-annotation-of-array.md" %}
-[type-annotation-of-array.md](../values-types-variables/array/type-annotation-of-array.md)
-{% endcontent-ref %}
+[配列の型注釈 (type annotation)](../values-types-variables/array/type-annotation-of-array.md)
 
 ## 標準ライブラリを使ってみる
 
@@ -40,8 +38,8 @@ const numbers: number[] = [1, 2, 3, 4];
 
 ```typescript
 const textNumbers = ["1", "2", "3", "4"];
-const numbers = textNumbers.map<number>(function(text: string) {
-    return Number(text);
+const numbers = textNumbers.map<number>(function (text: string) {
+  return Number(text);
 });
 ```
 
@@ -51,16 +49,16 @@ const numbers = textNumbers.map<number>(function(text: string) {
 
 ```typescript
 type Address = {
-    country: string,
-    postalCode: string,
-    address1: string,
+  country: string;
+  postalCode: string;
+  address1: string;
 };
 
 const addresses = new Map<string, Address>();
 addresses.set("太郎", {
-    country: "日本",
-    postalCode: "8256405",
-    address1: "東京都",
+  country: "日本",
+  postalCode: "8256405",
+  address1: "東京都",
 });
 
 console.log(addresses.get("太郎"));
@@ -74,7 +72,7 @@ TODO: Promiseへリンクする
 
 ### 標準ライブラリの型定義の参照方法
 
-標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認することができます。\
-[https://github.com/microsoft/TypeScript/tree/master/lib](https://github.com/microsoft/TypeScript/tree/master/lib)
+標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認することができます。
+<https://github.com/microsoft/TypeScript/tree/master/lib>
 
 `Array.prototype.map()` の型は [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/master/lib/lib.es5.d.ts#L1170) のファイルで確認できます。

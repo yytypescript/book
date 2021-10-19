@@ -9,4 +9,3 @@ function hello() {
 
 hello.prop = 123;
 ```
-

@@ -1,4 +1,8 @@
-# 判別可能なユニオン \(discriminated union\)
+---
+sidebar_label: 判別可能なユニオン
+---
+
+# 判別可能なユニオン (discriminated union)
 
 次のようなタイプエイリアスの`SuccessResponse, ErrorResponse`を考え、そのユニオン型として`Response`を考えます。
 
@@ -51,30 +55,30 @@ type Optional<T> = Some<T> | None;
 
 ```typescript
 type English = {
-  iso639: 'en';
-  thanks: 'thank you very much';
+  iso639: "en";
+  thanks: "thank you very much";
 };
 
 type French = {
-  iso639: 'fr';
-  merci: 'merci beaucoup';
+  iso639: "fr";
+  merci: "merci beaucoup";
 };
 
 type German = {
-  iso639: 'de';
-  danke: 'danke schön';
+  iso639: "de";
+  danke: "danke schön";
 };
 
 type Langauge = English | French | German;
 
 const lang: Langauge = select();
 
-switch(lang.iso639) {
-  case 'en':
+switch (lang.iso639) {
+  case "en":
     return lang.thanks;
-  case 'fr':
+  case "fr":
     return lang.merci;
-  case 'de':
+  case "de":
     return lang.danke;
 }
 ```
@@ -91,16 +95,16 @@ type Measurement = {
 };
 
 type TopSecret = {
-  b: 'secret';
-  w: 'secret';
-  h: 'secret';
+  b: "secret";
+  w: "secret";
+  h: "secret";
 };
 
 type ThreeSize = Measurement | TopSecret;
 
 const size: ThreeSize = measure();
 
-if (size.b === 'secret') {
+if (size.b === "secret") {
   console.log(size.w);
   // -> 'secret'
   console.log(size.h);
@@ -109,4 +113,3 @@ if (size.b === 'secret') {
 ```
 
 スリーサイズを公表したくない人は`'secret'`という文字をどこかひとつでもに入れておけば`TopSecret`型であると判別され、対応する`if`ブロックではすべてのサイズは`'secret'`になります。
-

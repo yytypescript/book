@@ -1,11 +1,17 @@
-# 数値型 \(number type\)
+---
+sidebar_label: 数値型
+slug: /reference/values-types-variables/number
+---
 
-JavaScriptの数値型は、1や-1などの整数と0.1などの小数を含めた数値の型です。PHPなどの言語では、数値について整数を表す型\(int\)と小数を表す型\(floatやdouble\)の2つの型を持ちます。Javaなどの言語では、整数型をさらに32ビットと64ビットに細分化する言語もあります。JavaScriptには、整数と小数を型レベルで区別するものはありません。どちらも数値型で表現します。
+# 数値型 (number type)
+
+JavaScriptの数値型は、1や-1などの整数と0.1などの小数を含めた数値の型です。PHPなどの言語では、数値について整数を表す型(int)と小数を表す型(floatやdouble)の2つの型を持ちます。Javaなどの言語では、整数型をさらに32ビットと64ビットに細分化する言語もあります。JavaScriptには、整数と小数を型レベルで区別するものはありません。どちらも数値型で表現します。
 
 ## 数値リテラル
 
 JavaScriptの数値リテラルは次のように数値を見たままに書きます。
 
+<!--prettier-ignore-->
 ```javascript
 123 // 整数
 -123 // 整数(負の数)
@@ -14,6 +20,7 @@ JavaScriptの数値リテラルは次のように数値を見たままに書き�
 
 小数は小数点ではじめる書き方もできます。また、整数も小数点で終わる書き方もできます。
 
+<!--prettier-ignore-->
 ```javascript
 0.1 === .1
 5.0 === 5.
@@ -23,16 +30,18 @@ JavaScriptの数値リテラルは次のように数値を見たままに書き�
 
 2進数、8進数、16進数の表記も可能です。それぞれ表現したい数値の前に`0b`、`0o`、`0x`をつけます。
 
+<!--prettier-ignore-->
 ```typescript
 0b1010 // 2進数
 0o755 // 8進数
-0xFFF // 16進数
+0xfff // 16進数
 ```
 
-### 数値の区切り文字\(numeric separators\)
+### 数値の区切り文字(numeric separators)
 
 JavaScriptの数値リテラルは可読性のためにアンダースコアで区切って書けます。何桁ごとに区切るかは自由です。表したい値や、国と地域の慣習などに合わせて選択できます。
 
+<!--prettier-ignore-->
 ```javascript
 100_000_000 // 1億
 ```
@@ -57,6 +66,7 @@ JavaScriptの数値リテラルのプロパティを直接参照する場合、�
 
 これを回避するには、ドットを2つ続けるか、数値をカッコで囲む必要があります。
 
+<!--prettier-ignore-->
 ```javascript
 5..toString();
 (5).toString();
@@ -82,7 +92,7 @@ JavaScriptの数値型には、`NaN`と`Infinity`という特殊な値があり�
 
 ### NaN
 
-`NaN`は非数\(not-a-number\)を表す変数です。JavaScriptでは、処理の結果、数値にならない場合に`NaN`を返すことがあります。たとえば、文字列を数値に変換する`parseInt`関数は、数値化できない入力に対し、`NaN`を返します。
+`NaN`は非数(not-a-number)を表す変数です。JavaScriptでは、処理の結果、数値にならない場合に`NaN`を返すことがあります。たとえば、文字列を数値に変換する`parseInt`関数は、数値化できない入力に対し、`NaN`を返します。
 
 ```javascript
 const price = parseInt("百円");
@@ -108,4 +118,3 @@ console.log(NaN === NaN); //=> false
 ### Infinity
 
 `Infinity`は無限大を表す変数です。たとえば、1を0で割った場合、この値になります。
-

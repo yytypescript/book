@@ -1,12 +1,13 @@
 ---
 description: 全プロパティを読み取り専用にする
+title: Readonly<T>
 ---
 
-# Readonly&lt;T&gt;
+# Readonly&lt;T>
 
 `Readonly<T>`は、オブジェクト型`T`のプロパティをすべて読み取り専用にするユーティリティ型です。
 
-## Readonly&lt;T&gt;の型引数
+## Readonly&lt;T>の型引数
 
 ### T
 
@@ -39,11 +40,10 @@ type ReadonlyPerson = {
 
 ## 関連情報
 
-{% page-ref page="../../values-types-variables/object/readonly-property.md" %}
+[オブジェクト型のreadonlyプロパティ (readonly property)](../../values-types-variables/object/readonly-property.md)
 
-{% page-ref page="../../object-oriented/class/readonly-modifier-in-classes.md" %}
+[クラスのreadonly修飾子](../../object-oriented/class/readonly-modifier-in-classes.md)
 
-{% page-ref page="../../object-oriented/interface/readonly-modifier-in-interfaces.md" %}
+[インターフェースのreadonly修飾子](../../object-oriented/interface/readonly-modifier-in-interfaces.md)
 
-{% page-ref page="../../values-types-variables/object/readonly-vs-const.md" %}
-
+[readonlyとconstの違い](../../values-types-variables/object/readonly-vs-const.md)

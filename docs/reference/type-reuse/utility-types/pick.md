@@ -1,12 +1,13 @@
 ---
 description: 任意のプロパティだけを持つオブジェクト型を作る
+title: "Pick<T, Keys>"
 ---
 
-# Pick&lt;T, Keys&gt;
+# Pick&lt;T, Keys>
 
 `Pick<T, Keys>`は、型`T`から`Keys`に指定したキーだけを含むオブジェクト型を返すユーティリティ型です。
 
-## Pick&lt;T, Keys&gt;の型引数
+## Pick&lt;T, Keys>の型引数
 
 ### T
 
@@ -94,5 +95,4 @@ type BookInputData = Pick<Book, "title" | "author">;
 
 ## 関連情報
 
-{% page-ref page="omit.md" %}
-
+[Omit&lt;T, Keys>](omit.md)

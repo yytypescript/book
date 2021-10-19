@@ -4,14 +4,14 @@ TypeScriptではジェネリクスの型引数を特定の型に限定するこ�
 
 ## ジェネリクス型引数で直面する問題
 
-`changeBackgroundColor()`という関数を例に考えてみます。この関数は指定されたHTML要素の背景色を変更して、そのHTML要素を返す関数です。  
+`changeBackgroundColor()`という関数を例に考えてみます。この関数は指定されたHTML要素の背景色を変更して、そのHTML要素を返す関数です。
 ジェネリクス型`T`を定義することで`HTMLButtonElement`や`HTMLDivElement`などの任意のHTML要素を受け取れるようにしています。
 
 ```typescript
 function changeBackgroundColor<T>(element: T) {
-    // Property 'style' does not exist on type 'T'.(2339)
-    element.style.backgroundColor = 'red';
-    return element;
+  // Property 'style' does not exist on type 'T'.(2339)
+  element.style.backgroundColor = "red";
+  return element;
 }
 ```
 
@@ -21,10 +21,10 @@ function changeBackgroundColor<T>(element: T) {
 
 ```typescript
 function changeBackgroundColor<T>(element: T) {
-    // any にキャストすればコンパイルエラーは回避できる
-    // 型チェックされないのでバグの可能性
-    (element as any).style.backgroundColor = 'red';
-    return element;
+  // any にキャストすればコンパイルエラーは回避できる
+  // 型チェックされないのでバグの可能性
+  (element as any).style.backgroundColor = "red";
+  return element;
 }
 ```
 
@@ -36,8 +36,8 @@ TypeScriptでは`extends`キーワードを用いることでジェネリクス�
 
 ```typescript
 function changeBackgroundColor<T extends HTMLElement>(element: T) {
-    element.style.backgroundColor = 'red';
-    return element;
+  element.style.backgroundColor = "red";
+  return element;
 }
 ```
 
@@ -74,4 +74,3 @@ class Entity<ID extends ValueObject<unknown>> {
 ```
 
 `Entity`クラスは`ValueObject`インターフェースを実装しているクラスをIDとして受ける構造になっていますが19行目にあるようにこのときの型引数の制約は`implements`ではなく`extends`でなければなりません。
-

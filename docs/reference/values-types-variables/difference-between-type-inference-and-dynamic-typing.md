@@ -12,10 +12,10 @@
 let x = 1;
 
 // Error: Type 'string' is not assignable to type 'number'.
-x = 'hello'; // x はnumber型と決定しているのでstring型を代入するとエラー
+x = "hello"; // x はnumber型と決定しているのでstring型を代入するとエラー
 
 // Property 'substring' does not exist on type 'number'.
-console.log(x.substring(1,3))
+console.log(x.substring(1, 3));
 ```
 
 一方、動的型付けでは実行時に型が決まるので、実行タイミングにより型が変化します。次のJavaScriptの例では、最初に`1`の値が代入され変数`x`の型は`number`型となります。その後、`hello`の文字列を代入することで 変数`x`の型は `string`型に変更されます。このように実行タイミングで型が変化するので、型推論ではエラーになる処理も動的型付け言語では正常に動作します。
@@ -23,9 +23,8 @@ console.log(x.substring(1,3))
 ```javascript
 // JavaScriptでの例
 let x = 1; // x はnumber型となる
-x = 'hello'; // x はstring型となる
+x = "hello"; // x はstring型となる
 
 // output: "el"
-console.log(x.substring(1,3))
+console.log(x.substring(1, 3));
 ```
-
