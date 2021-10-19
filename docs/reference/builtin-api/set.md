@@ -1,6 +1,10 @@
-# Set&lt;T&gt;
+---
+title: Set<T>
+---
 
-`Set`はJavaScriptの組み込みAPIのひとつで、値のコレクションを扱うためのオブジェクトです。`Set`には重複する値が格納できません。`Set`に格納された値は一意\(unique\)になります。
+# Set&lt;T>
+
+`Set`はJavaScriptの組み込みAPIのひとつで、値のコレクションを扱うためのオブジェクトです。`Set`には重複する値が格納できません。`Set`に格納された値は一意(unique)になります。
 
 ## Setオブジェクトの作り方
 
@@ -15,7 +19,7 @@ console.log(fruits);
 コンストラクタに渡す配列の中に重複がある場合、重複した値は取り除かれます。
 
 ```typescript
-const fruits = new Set(['apple', 'apple', 'apple']);
+const fruits = new Set(["apple", "apple", "apple"]);
 console.log(fruits);
 //=> Set { 'apple' }
 ```
@@ -117,7 +121,7 @@ for (const fruit of fruits) {
 }
 ```
 
-{% page-ref page="../statements/for-of.md" %}
+[for-of文 - 拡張for文](../statements/for-of.md)
 
 ### Setを配列に変換する
 
@@ -129,7 +133,7 @@ const array = [...fruits];
 console.log(array); //=> ["apple", "orange", "banana"]
 ```
 
-{% page-ref page="../values-types-variables/array/spread-syntax-for-array.md" %}
+[🚧配列のスプレッド構文「...」(spread syntax)](../values-types-variables/array/spread-syntax-for-array.md)
 
 ## Setは直接JSONにできない
 
@@ -159,4 +163,3 @@ const array1 = [0, 0, 1, 1, 2, 2];
 const array2 = [...new Set(array1)];
 console.log(array2); //=> [ 0, 1, 2 ]
 ```
-

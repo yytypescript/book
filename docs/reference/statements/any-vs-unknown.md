@@ -7,22 +7,22 @@ const any1: any = null;
 const any2: any = undefined;
 const any3: any = true;
 const any4: any = 0.8;
-const any5: any = 'Comment allez-vous';
+const any5: any = "Comment allez-vous";
 const any6: any = {
   x: 0,
   y: 1,
-  name: 'origin'
+  name: "origin",
 };
 
 const unknown1: unknown = null;
 const unknown2: unknown = undefined;
 const unknown3: unknown = true;
 const unknown4: unknown = 0.8;
-const unknown5: unknown = 'Comment allez-vous';
+const unknown5: unknown = "Comment allez-vous";
 const unknown6: unknown = {
   x: 0,
   y: 1,
-  name: 'origin'
+  name: "origin",
 };
 ```
 
@@ -69,4 +69,3 @@ console.log(unknown6.x.y.z);
 ```
 
 TypeScriptのプロジェクトを作る時に必要なtsconfig.jsonにはこの`any`型の使用を防ぐためのオプションとして`noImplicitAny`があります。既存のJavaScriptのプロジェクトをTypeScriptに置き換えていくのではなく、スクラッチの状態からTypeScriptで作るのであればこの設定を入れるとよいでしょう。
-

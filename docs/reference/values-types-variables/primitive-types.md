@@ -1,3 +1,7 @@
+---
+sidebar_label: プリミティブ型
+---
+
 # プリミティブ型 (primitive types)
 
 JavaScriptのデータ型は、プリミティブ型とオブジェクトの2つに分類されます。
@@ -22,9 +26,7 @@ null.toString(); // エラーになる
 
 このように、プリミティブ型をまるでオブジェクトのように扱えるのはJavaScriptの特徴です。JavaScriptには、プリミティブ型をオブジェクトに自動変換する機能があります。この機能はオートボクシング(autoboxing)、自動ボックス化と呼ばれます。
 
-{% content-ref url="boxing.md" %}
-[boxing.md](boxing.md)
-{% endcontent-ref %}
+[🚧ボックス化 (boxing)](boxing.md)
 
 ## プリミティブ型の種類
 
@@ -40,13 +42,15 @@ null.toString(); // エラーになる
 
 上のプリミティブ型以外は、JavaScriptにおいてはすべてオブジェクトを考えて問題ありません。配列や正規表現オブジェクトなどもすべてオブジェクトです。
 
-{% hint style="success" %}
-**学びをシェアする** **─ **_下のまとめをコピペしてツイートしよう_
+:::tip
 
-・JSのプリミティブ型はイミュータブルでプロパティを持たない\
-・プリミティブをオブジェクトのように扱える「オートボクシング」がある\
-・プリミティブは7種類: boolean, number, string, undefined, null, symbol, bigint\
-・それ以外は全部オブジェクト\
-\
+**学びをシェアする** \*\*─ \*\*_下のまとめをコピペしてツイートしよう_
+
+・JSのプリミティブ型はイミュータブルでプロパティを持たない
+・プリミティブをオブジェクトのように扱える「オートボクシング」がある
+・プリミティブは7種類: boolean, number, string, undefined, null, symbol, bigint
+・それ以外は全部オブジェクト
+
 『サバイバルTypeScript』より
-{% endhint %}
+
+:::

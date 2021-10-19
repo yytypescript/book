@@ -1,4 +1,8 @@
-# リテラル型 \(literal type\)
+---
+sidebar_label: リテラル型
+---
+
+# リテラル型 (literal type)
 
 TypeScriptではプリミティブ型の特定の値だけを代入可能にする型を表現できます。そのような型をリテラル型と呼びます。
 
@@ -21,9 +25,9 @@ x = 100; // ERROR: Type '100' is not assignable to type '1'.(2322)
 
 リテラル型として表現できるプリミティブ型は次のとおりです。
 
-* 論理型のtrueとfalse
-* 数値型の値
-* 文字列型の文字列
+- 論理型のtrueとfalse
+- 数値型の値
+- 文字列型の文字列
 
 ```typescript
 const isTrue: true = true;
@@ -39,7 +43,6 @@ const str: "foo" = "foo";
 let status: 1 | 2 | 3 = 1;
 ```
 
-{% page-ref page="union.md" %}
+[ユニオン型 (union type)](union.md)
 
-{% page-ref page="discriminated-union.md" %}
-
+[判別可能なユニオン (discriminated union)](discriminated-union.md)

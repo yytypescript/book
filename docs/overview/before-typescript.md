@@ -28,7 +28,7 @@ JavaScript誕生以前は、簡単なフォームのバリデーションをす�
 
 一般的に対話型のユーザーインターフェースを備えたウェブサイト、今で言うウェブアプリケーションは、当時は「リッチインターネットアプリケーション」と呼ばれ、その多くはJavaアプレットやFlashが担っていましたが、プログラマの中にはJavaScriptを使ったウェブアプリケーションの開発を試みる人たちもいました。
 
-1997年に、Microsoftが企業向けウェブメーラーとして、Outlook Web Access 2000を市場投入しましたが、これはJavaScript製のウェブアプリケーションでした。現代の我々からすると意外かもしれませんが、この時代のJavaScriptはまだサーバーと通信することができませんでした。そこで、Microsoftはこのアプリのために、後のXMLHttpRequest\(XHR\)となるXMLHTTPという機能をInternet Explorerに追加したりもしました。XHRは革新的なアップデートでしたが、多くのプログラマから注目を得るのはもっと歴史が流れてからになります。
+1997年に、Microsoftが企業向けウェブメーラーとして、Outlook Web Access 2000を市場投入しましたが、これはJavaScript製のウェブアプリケーションでした。現代の我々からすると意外かもしれませんが、この時代のJavaScriptはまだサーバーと通信することができませんでした。そこで、Microsoftはこのアプリのために、後のXMLHttpRequest(XHR)となるXMLHTTPという機能をInternet Explorerに追加したりもしました。XHRは革新的なアップデートでしたが、多くのプログラマから注目を得るのはもっと歴史が流れてからになります。
 
 2000年代初頭には、対話型のUIを備えた大規模なウェブアプリケーションがJavaScriptで開発できるようになることが望まれだしてきました。
 
@@ -36,14 +36,14 @@ JavaScript誕生以前は、簡単なフォームのバリデーションをす�
 
 この頃には、JavaScriptはNetscape社が所有する言語から、ウェブ業界を上げて取り組む言語になっていました。そのため、JavaScriptの言語仕様はECMAScriptという名で策定され、各ベンダーがその仕様に基づいてそれぞれJavaScriptを実装するという流れになっていました。このECMAScriptを策定する会合がTC39であり、JavaScriptに関わるNetscape社やMicrosoft社を始めとしたベンダーが参加していました。
 
-TC39では、大規模開発にも耐えうるJavaScriptの必要性を鑑みて、新たな言語仕様である「ECMAScript 4」の策定についての議論を1999年頃から始めていました。このECMAScript 4\(ES4\)では、主に次のような野心的な言語仕様が議論されていました:
+TC39では、大規模開発にも耐えうるJavaScriptの必要性を鑑みて、新たな言語仕様である「ECMAScript 4」の策定についての議論を1999年頃から始めていました。このECMAScript 4(ES4)では、主に次のような野心的な言語仕様が議論されていました:
 
-* モジュール
-* Javaのようなクラス
-* 静的型付け
-* Nullable型
-* ユニオン型
-* ジェネリクス
+- モジュール
+- Javaのようなクラス
+- 静的型付け
+- Nullable型
+- ユニオン型
+- ジェネリクス
 
 おや、どれもTypeScriptが持っているものではありませんか？そうなのです。「大規模なアプリケーション開発をしやすく」という点は、2つの言語が共有する問題意識であり、そのため、今から20年前のJavaScriptにおいても、TypeScriptと同じような解決策が検討されていたのです。
 
@@ -125,17 +125,16 @@ TypeScriptの発表後、JavaScriptも再び進歩を始め、6年ぶりのメ�
 
 ## 参考資料
 
-* [Chapter 4. How JavaScript Was Created](http://speakingjs.com/es5/ch04.html)
-* [Microsoft augments JavaScript for large-scale development \| InfoWorld](https://www.infoworld.com/article/2614863/microsoft-augments-javascript-for-large-scale-development.html)
-* [The Real Story Behind ECMAScript ](https://auth0.com/blog/the-real-story-behind-es4/)
-* [JavaScript 2.0](https://web.archive.org/web/20000816194528/http://mozilla.org/js/language/js20-1999-02-18/index.html)
-* [JavaScript 2.0 Motivation](https://web.archive.org/web/20000823225602/http://mozilla.org/js/language/js20-1999-02-18/motivation.html)
-* [ActionScript - Wikipedia](https://en.wikipedia.org/wiki/ActionScript)
-* [JavaScript - Wikipedia](https://ja.wikipedia.org/wiki/JavaScript)
-* [ECMAScript - Wikipedia](https://en.wikipedia.org/wiki/ECMAScript)
-* [A Brief History of JavaScrip](https://auth0.com/blog/a-brief-history-of-javascript/)
-* [The ECMAScript 6 schedule change](https://2ality.com/2014/06/es6-schedule.html#fn2)
-* [見えてきた「ECMAScript 6」。JavaScriptの生みの親が書く「Harmony of Dreams Come True」 － Publickey](https://www.publickey1.jp/blog/12/javascriptecmascript_6harmony_of_dreams_come_true.html)
-* [JavaScript: The First 20 Years \| Zenod](https://zenodo.org/record/3707008#.XrVIhBMzZTY)
-* [Anders Hejlsberg: Introducing TypeScript \| Channel 9](https://channel9.msdn.com/posts/Anders-Hejlsberg-Introducing-TypeScript)
-
+- [Chapter 4. How JavaScript Was Created](http://speakingjs.com/es5/ch04.html)
+- [Microsoft augments JavaScript for large-scale development | InfoWorld](https://www.infoworld.com/article/2614863/microsoft-augments-javascript-for-large-scale-development.html)
+- [The Real Story Behind ECMAScript ](https://auth0.com/blog/the-real-story-behind-es4/)
+- [JavaScript 2.0](https://web.archive.org/web/20000816194528/http://mozilla.org/js/language/js20-1999-02-18/index.html)
+- [JavaScript 2.0 Motivation](https://web.archive.org/web/20000823225602/http://mozilla.org/js/language/js20-1999-02-18/motivation.html)
+- [ActionScript - Wikipedia](https://en.wikipedia.org/wiki/ActionScript)
+- [JavaScript - Wikipedia](https://ja.wikipedia.org/wiki/JavaScript)
+- [ECMAScript - Wikipedia](https://en.wikipedia.org/wiki/ECMAScript)
+- [A Brief History of JavaScrip](https://auth0.com/blog/a-brief-history-of-javascript/)
+- [The ECMAScript 6 schedule change](https://2ality.com/2014/06/es6-schedule.html#fn2)
+- [見えてきた「ECMAScript 6」。JavaScriptの生みの親が書く「Harmony of Dreams Come True」 － Publickey](https://www.publickey1.jp/blog/12/javascriptecmascript_6harmony_of_dreams_come_true.html)
+- [JavaScript: The First 20 Years | Zenod](https://zenodo.org/record/3707008#.XrVIhBMzZTY)
+- [Anders Hejlsberg: Introducing TypeScript | Channel 9](https://channel9.msdn.com/posts/Anders-Hejlsberg-Introducing-TypeScript)

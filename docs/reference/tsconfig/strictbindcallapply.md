@@ -15,31 +15,31 @@ function initial(givenName: string, surname: string): string {
 このとき `function.bind(), function.call(), function.apply()` を使って関数を呼び出すには次のようにします。
 
 ```typescript
-initial('salvador', 'dali');
+initial("salvador", "dali");
 // -> 'S. D'
-initial.bind(null, 'salvador', 'dali')();
+initial.bind(null, "salvador", "dali")();
 // -> 'S. D'
-initial.call(null, 'salvador', 'dali');
+initial.call(null, "salvador", "dali");
 // -> 'S. D'
-initial.apply(null, ['salvador', 'dali']);
+initial.apply(null, ["salvador", "dali"]);
 // -> 'S. D'
 ```
 
-これらの関数の問題点は、例え関数が引数にある型を要求するように作っていたとしても任意の値を代入できてしまうことでした。  
+これらの関数の問題点は、例え関数が引数にある型を要求するように作っていたとしても任意の値を代入できてしまうことでした。
 引数を本来の `string` 型から他の型に変えて実行するとすべて実行時エラーになります。
 
 ```typescript
-initial.bind(null, 'salvador', 5)();
+initial.bind(null, "salvador", 5)();
 // TypeError: Cannot read property 'toUpperCase' of undefined
-initial.call(null, 'salvador', 5);
+initial.call(null, "salvador", 5);
 // TypeError: Cannot read property 'toUpperCase' of undefined
-initial.apply(null, ['salvador', 5]);
+initial.apply(null, ["salvador", 5]);
 // TypeError: Cannot read property 'toUpperCase' of undefined
 ```
 
 このオプションを有効にするとこれらの関数呼び出しのときの引数の評価が厳密になり実行することができなくなります。
 
-```typescript
+```text
 // error of initial.bind()
 error TS2769: No overload matches this call.
   Overload 1 of 6, '(this: (this: any, arg0: "salvador", arg1: string) => string, thisArg: any, arg0: "salvador", arg1: string): () => string', gave the following error.
@@ -61,4 +61,3 @@ error TS2322: Type 'number' is not assignable to type 'string'.
 initial.apply(null, ['salvador', 5]);
                                  ~
 ```
-

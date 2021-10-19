@@ -17,4 +17,3 @@ class MyClass {}
 MyClass.key = "value";
 // ERROR: Property 'key' does not exist on type 'typeof MyClass'.(2339)
 ```
-

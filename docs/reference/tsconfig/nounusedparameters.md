@@ -12,7 +12,7 @@ function add(n1: number, n2: number, n3: number): number {
 
 このオプションを有効にすると次のようなエラーが発生します。
 
-```typescript
+```text
 error TS6133: 'n3' is declared but its value is never read.
 
 function add(n1: number, n2: number, n3: number): number {
@@ -26,4 +26,3 @@ function add(n1: number, n2: number, _n3: number): number {
   return n1 + n2;
 }
 ```
-

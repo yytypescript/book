@@ -1,6 +1,10 @@
-# 🚧分割代入引数 \(destructuring assignment parameter\)
+---
+sidebar_label: "\U0001F6A7分割代入引数"
+---
 
-たとえばBMI\(Body Mass Index\)を計算したいとします。身長\(cm\)と体重\(kg\)が与えられれば関数`bmi()`は次のような計算になります。
+# 🚧分割代入引数 (destructuring assignment parameter)
+
+たとえばBMI(Body Mass Index)を計算したいとします。身長(cm)と体重(kg)が与えられれば関数`bmi()`は次のような計算になります。
 
 ```javascript
 function bmi(height, weight) {
@@ -20,7 +24,7 @@ bmi(65, 170);
 
 ## 分割代入引数
 
-このような誤用を避けるための方法として、JavaScriptでは分割代入引数\(destructuring assignment parameter\)を使うことができます。
+このような誤用を避けるための方法として、JavaScriptでは分割代入引数(destructuring assignment parameter)を使うことができます。
 
 ```javascript
 function bmi({ height, weight }) {
@@ -62,4 +66,3 @@ TODO
 ## 分割代入引数全体のオプショナル化
 
 TODO
-

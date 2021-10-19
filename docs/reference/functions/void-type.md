@@ -1,4 +1,8 @@
-# 戻り値がない関数とvoid型 \(void type\)
+---
+sidebar_label: 戻り値がない関数とvoid型
+---
+
+# 戻り値がない関数とvoid型 (void type)
 
 TypeScriptで戻り値がない関数の戻り値を型注釈するにはvoid型を用います。void型は関数の戻り値を型注釈するためにある特別な型です。
 
@@ -37,4 +41,3 @@ const v: void = undefined;
 const u: undefined = v;
 // Type 'void' is not assignable to type 'undefined'.
 ```
-

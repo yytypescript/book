@@ -47,4 +47,3 @@ class Developer implements Human {
   name: string = "Bob";
 }
 ```
-

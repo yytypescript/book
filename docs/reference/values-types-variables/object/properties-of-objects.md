@@ -34,11 +34,10 @@ JavaやPHPでは、オブジェクトのフィールドとメソッドははっ�
 const calculator = {
   sum(a, b) {
     return a + b;
-  }
+  },
 };
 
 calculator.sum(1, 1); //=> 2
 calculator.sum = null;
 calculator.sum(1, 1); // ここではもうメソッドではないので、呼び出すとエラーになります
 ```
-

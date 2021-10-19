@@ -4,7 +4,7 @@
 
 サブクラスがスーパークラスのメソッドを拡張したときに `override` のキーワードをメソッドの前に書くことを強制します。これはスーパークラスの拡張しているメソッドが取り除かれたり、名称が変更されたことを検知することに役立ちます。
 
-たとえば、トグルボタン \(クリックするとオン、オフを繰り返すボタン\) のクラスが次のようになっているとします。
+たとえば、トグルボタン (クリックするとオン、オフを繰り返すボタン) のクラスが次のようになっているとします。
 
 ```typescript
 class ToggleButton {
@@ -118,4 +118,3 @@ error TS4113: This member cannot have an 'override' modifier because it is not d
 public override disable(): void {
                 ~~~~~~~
 ```
-

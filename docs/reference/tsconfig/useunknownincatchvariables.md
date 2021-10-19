@@ -14,7 +14,7 @@ try {
 
 // case 2
 try {
-  throw 'This is an error!';
+  throw "This is an error!";
 } catch (err) {
   // err is any
 }
@@ -39,7 +39,7 @@ try {
 
 // case 2
 try {
-  throw 'This is an error!';
+  throw "This is an error!";
 } catch (err: unknown) {
   // err is unknown
 }
@@ -64,7 +64,7 @@ try {
 
 // case 2
 try {
-  throw 'This is an error!';
+  throw "This is an error!";
 } catch (err) {
   // err is unknown
 }
@@ -78,4 +78,3 @@ try {
 ```
 
 また、この制限を緩くしたい。つまり `unknown` 型ではなく `any` 型にしたいのであれば補足した値に対し `any` 型を明記してください。
-

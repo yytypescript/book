@@ -29,13 +29,13 @@ JavaScriptのif-elseは文です。式ではないので、条件分岐を直接
 const result = if (value === 0) "OK" else "NG";
 ```
 
-式で条件分岐使いたい場合は三項演算子\(ternary operator\)を用います。
+式で条件分岐使いたい場合は三項演算子(ternary operator)を用います。
 
 ```javascript
 const result = value === 0 ? "OK" : "NG";
 ```
 
-{% page-ref page="ternary-operator.md" %}
+[三項演算子 (ternary operator)](ternary-operator.md)
 
 上のコードと同じロジックをif-elseで書く場合は、`if`ブロックの手前で結果を代入する変数を`let`で宣言します。
 
@@ -50,5 +50,4 @@ if (value === 0) {
 
 ## 関連情報
 
-{% page-ref page="switch.md" %}
-
+[switch文](switch.md)

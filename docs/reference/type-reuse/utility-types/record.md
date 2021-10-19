@@ -1,12 +1,13 @@
 ---
 description: キー・バリューからオブジェクト型を作る
+title: "Record<Keys, Type>"
 ---
 
-# Record\<Keys, Type>
+# Record&lt;Keys, Type>
 
 `Record<Keys, Type>`はプロパティのキーが`Keys`であり、プロパティの値が`Type`であるオブジェクト型を作るユーティリティ型です。
 
-## Record\<Keys, Type>の型引数
+## Record&lt;Keys, Type>の型引数
 
 ### Keys
 
@@ -38,10 +39,6 @@ const person: Person = {
 
 ## 関連情報
 
-{% content-ref url="../../values-types-variables/object/index-signature.md" %}
-[index-signature.md](../../values-types-variables/object/index-signature.md)
-{% endcontent-ref %}
+[インデックス型 (index signature)](../../values-types-variables/object/index-signature.md)
 
-{% content-ref url="../mapped-types.md" %}
-[mapped-types.md](../mapped-types.md)
-{% endcontent-ref %}
+[マップ型 (mapped type)](../mapped-types.md)

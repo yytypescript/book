@@ -1,12 +1,13 @@
 ---
 description: 任意の型だけを抽出する
+title: "Extract<T, U>"
 ---
 
-# Extract&lt;T, U&gt;
+# Extract&lt;T, U>
 
 `Extract<T, U>`は、ユニオン型`T`から`U`で指定した型だけを抽出した型を返すユーティリティ型です。
 
-## Extract&lt;T, U&gt;の型引数
+## Extract&lt;T, U>の型引数
 
 ### T
 
@@ -33,5 +34,4 @@ type CommonTypes = Extract<"a" | "b" | "c", "b" | "c" | "d">;
 
 ## 関連情報
 
-{% page-ref page="exclude.md" %}
-
+[Exclude&lt;T, U>](exclude.md)

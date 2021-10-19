@@ -1,12 +1,13 @@
 ---
 description: 全プロパティをオプショナルにする
+title: Partial<T>
 ---
 
-# Partial&lt;T&gt;
+# Partial&lt;T>
 
 `Partial<T>`は、オブジェクト型`T`のすべてのプロパティをオプションプロパティにするユーティリティ型です。
 
-## Partial&lt;T&gt;の型引数
+## Partial&lt;T>の型引数
 
 ### T
 
@@ -37,7 +38,7 @@ type PartialPerson = {
 
 `Partial`をOptions Objectパターンに応用すると、省略可能でありながら見やすい関数を実装できます。
 
-{% page-ref page="../../functions/keyword-arguments-and-options-object-pattern.md" %}
+[キーワード引数とOptions Objectパターン](../../functions/keyword-arguments-and-options-object-pattern.md)
 
 ユーザーの検索をかける関数を作ります。プロパティはそれぞれ引数となっており、対応する引数に値を与えると検索ができる関数`findUsers()`があるとします。ここでは例のため引数を
 
@@ -134,5 +135,4 @@ function findUsers({
 
 ## 関連情報
 
-{% page-ref page="required.md" %}
-
+[Required&lt;T>](required.md)

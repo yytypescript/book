@@ -8,8 +8,8 @@ description: interfaceでの宣言と、type aliasによる宣言の違い
 
 ```typescript
 type Animal = {
-  name: string,
-  bark(): string,
+  name: string;
+  bark(): string;
 };
 interface Animal {
   name: string;
@@ -21,12 +21,12 @@ interface Animal {
 
 ### インターフェースと型エイリアスの違い
 
-| 内容 | インターフェース | 型エイリアス |
-| :--- | :--- | :--- |
-| 継承 | 可能 | 不可。ただし交差型で表現は可能 |
+| 内容             | インターフェース   | 型エイリアス                     |
+| :--------------- | :----------------- | :------------------------------- |
+| 継承             | 可能               | 不可。ただし交差型で表現は可能   |
 | 継承による上書き | 上書きまたはエラー | フィールド毎に交差型が計算される |
-| 同名のものを宣言 | 定義がマージされる | エラー |
-| Mapped Type | 使用不可 | 使用可能 |
+| 同名のものを宣言 | 定義がマージされる | エラー                           |
+| Mapped Type      | 使用不可           | 使用可能                         |
 
 #### 継承
 
@@ -37,14 +37,14 @@ interface Animal {
   name: string;
 }
 type Creature = {
-  dna: string
-}
+  dna: string;
+};
 interface Dog extends Animal, Creature {
   dogType: string;
 }
 ```
 
-一方、型エイリアスは継承は行なえません。代わりに交差型\(&\)を使用することで、継承と似たことを実現できます。
+一方、型エイリアスは継承は行なえません。代わりに交差型(&)を使用することで、継承と似たことを実現できます。
 
 ```typescript
 type Animal = {
@@ -71,7 +71,7 @@ type Dog = Animal &
 interface Animal {
   name: any;
   price: {
-    yen: number,
+    yen: number;
   };
   legCount: number;
 }
@@ -79,34 +79,35 @@ interface Animal {
 interface Dog extends Animal {
   name: string;
   price: {
-    yen: number,
-    doller: number,
+    yen: number;
+    doller: number;
   };
 }
 // 最終的なDogの定義
 interface Dog {
   name: string;
   price: {
-    yen: number,
-    doller: number,
+    yen: number;
+    doller: number;
   };
   legCount: number;
 }
 
 // NG
 interface A {
-  numberField: number,
+  numberField: number;
   price: {
-    yen: number,
-    doller: number,
-  }
+    yen: number;
+    doller: number;
+  };
 }
 interface B extends A {
-  numberField: string, // Error:stringはnumberに代入できないため
-  price: { // Error:dollerフィールドが無く、Aのpriceに代入できないため
-    yen: number,
-    euro: number,
-  }
+  numberField: string; // Error:stringはnumberに代入できないため
+  // Error:dollerフィールドが無く、Aのpriceに代入できないため
+  price: {
+    yen: number;
+    euro: number;
+  };
 }
 ```
 
@@ -114,28 +115,28 @@ interface B extends A {
 
 ```typescript
 type Animal = {
-  name: number,
+  name: number;
   price: {
-    yen: number,
-    doller: number,
-  },
+    yen: number;
+    doller: number;
+  };
 };
 
 type Dog = Animal & {
-  name: string,
+  name: string;
   price: {
-    yen: number,
-    euro: number,
-  },
+    yen: number;
+    euro: number;
+  };
 };
 // 最終的なDogの定義
 type Dog = {
-  name: never, // 交差型作れない場合はコンパイルエラーではなくnever型になる
+  name: never; // 交差型作れない場合はコンパイルエラーではなくnever型になる
   price: {
-    yen: number,
-    doller: number,
-    euro: number,
-  },
+    yen: number;
+    doller: number;
+    euro: number;
+  };
 };
 ```
 
@@ -155,7 +156,6 @@ TODO: 残りを書く
 
 ## 関連情報
 
-{% page-ref page="./" %}
+[🚧インターフェース (interface)](./README.md)
 
-{% page-ref page="../../values-types-variables/type-alias.md" %}
-
+[型エイリアス (type alias)](../../values-types-variables/type-alias.md)

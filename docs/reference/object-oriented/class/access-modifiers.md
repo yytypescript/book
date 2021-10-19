@@ -1,13 +1,17 @@
-# アクセス修飾子 \(access modifier\)
+---
+sidebar_label: アクセス修飾子
+---
+
+# アクセス修飾子 (access modifier)
 
 JavaやPHPなどの言語では、フィールドやメソッドに`private`, `protected`, `public`を指定できます。JavaScriptでも`private`のようなプロパティを実現するために[プライベートクラスフィールド](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_class_fields)という仕様が実験的に導入されはじめてはいますが、現状はJavaのようなアクセス修飾子はありません。TypeScriptにはJava風のアクセス修飾子があります。
 
-| アクセス修飾子 | 説明 |
-| :--- | :--- |
-| \(宣言なし\) | publicと同等 |
-| public | どこからもアクセス可能 |
-| protected | 自身のクラスとサブクラスからアクセス可能 |
-| private | 自身のクラスのみアクセス可能 |
+| アクセス修飾子 | 説明                                     |
+| :------------- | :--------------------------------------- |
+| (宣言なし)     | publicと同等                             |
+| public         | どこからもアクセス可能                   |
+| protected      | 自身のクラスとサブクラスからアクセス可能 |
+| private        | 自身のクラスのみアクセス可能             |
 
 アクセス修飾子を省略した場合は`public`になります。
 
@@ -19,10 +23,17 @@ JavaやPHPなどの言語では、フィールドやメソッドに`private`, `p
 
 ```typescript
 class Animal {
-  public name: string;  // フィールドにpublicアクセス修飾子
-  public constructor(theName: string) { this.name = theName; } // コンストラクターにpublicアクセス修飾子
-  public move(distanceInMeters: number) { // メソッドにpublicアクセス修飾子
-    console.log(`${this.name} moved ${distanceInMeters}m.`); // publicアクセス修飾子である`this.name`を使用することが可能
+  public name: string; // フィールドにpublicアクセス修飾子
+
+  // コンストラクターにpublicアクセス修飾子
+  public constructor(theName: string) {
+    this.name = theName;
+  }
+
+  // メソッドにpublicアクセス修飾子
+  public move(distanceInMeters: number) {
+    console.log(`${this.name} moved ${distanceInMeters}m.`);
+    // publicアクセス修飾子である`this.name`を使用することが可能
   }
 }
 ```
@@ -30,15 +41,15 @@ class Animal {
 `gorilla`を実装し、動作を確認してみます。
 
 ```typescript
-const gorilla = new Animal('ゴリラ');
+const gorilla = new Animal("ゴリラ");
 gorilla.move(10);
-// -> 'ゴリラ moved 10m.'
-gorilla.name = 'ゴリラゴリラ';
+//=> 'ゴリラ moved 10m.'
+gorilla.name = "ゴリラゴリラ";
 gorilla.move(20);
-// -> 'ゴリラゴリラ moved 20m.'
+//=> 'ゴリラゴリラ moved 20m.'
 ```
 
-`name`プロパティは`public`宣言されているため、インスタンスされた変数\(`gorilla`\)からの読み書きが可能になっています。「ゴリラ」から「ゴリラゴリラ」に変更することができます。
+`name`プロパティは`public`宣言されているため、インスタンスされた変数(`gorilla`)からの読み書きが可能になっています。「ゴリラ」から「ゴリラゴリラ」に変更することができます。
 
 ### `protected`
 
@@ -49,13 +60,17 @@ gorilla.move(20);
 ```typescript
 class Animal {
   public name: string;
-  public constructor(theName: string) { this.name = theName; }
-  protected move(distanceInMeters: number) { // `public`から`protected`に変更
+  public constructor(theName: string) {
+    this.name = theName;
+  }
+
+  // `public`から`protected`に変更
+  protected move(distanceInMeters: number) {
     console.log(`${this.name} moved ${distanceInMeters}m.`);
   }
 }
 
-const gorilla = new Animal('ゴリラ');
+const gorilla = new Animal("ゴリラ");
 gorilla.move(10); // error TS2339: Property 'move' does not exist on type 'Animal'.
 ```
 
@@ -66,8 +81,12 @@ gorilla.move(10); // error TS2339: Property 'move' does not exist on type 'Anima
 ```typescript
 class Animal {
   public name: string;
-  public constructor(theName: string) { this.name = theName; }
-  protected move(distanceInMeters: number) { // `public`から`protected`に変更
+  public constructor(theName: string) {
+    this.name = theName;
+  }
+
+  // `public`から`protected`に変更
+  protected move(distanceInMeters: number) {
     console.log(`${this.name} moved ${distanceInMeters}m.`);
   }
 }
@@ -78,9 +97,9 @@ class Gorilla extends Animal {
   }
 }
 
-const gorilla = new Gorilla('早いゴリラ');
+const gorilla = new Gorilla("速いゴリラ");
 gorilla.move(10);
-// -> '速いゴリラ moved 100m.'
+//=> '速いゴリラ moved 100m.'
 ```
 
 `Animal`スーパークラスを持つ`Gorilla`クラスを定義し`move()`を実装しています。`Gorilla`クラスの`move()`メソッド内で`super`キーワードを利用してスーパークラスの`move()`メソッドを呼び出しています。
@@ -94,8 +113,12 @@ gorilla.move(10);
 ```typescript
 class Animal {
   public name: string;
-  public constructor(theName: string) { this.name = theName; }
-  private move(distanceInMeters: number) { // `public`から`private`に変更
+  public constructor(theName: string) {
+    this.name = theName;
+  }
+
+  // `public`から`private`に変更
+  private move(distanceInMeters: number) {
     console.log(`${this.name} moved ${distanceInMeters}m.`);
   }
 }
@@ -108,4 +131,3 @@ class Gorilla extends Animal {
 ```
 
 `private`メソッドの多くの使い方としては、自身のクラス内の長いコードを機能別に分ける時に利用します。
-

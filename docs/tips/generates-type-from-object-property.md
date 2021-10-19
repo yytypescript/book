@@ -2,38 +2,38 @@
 
 ## オブジェクトからプロパティだけ欲しい
 
-{% page-ref page="generates-type-from-object-key.md" %}
+[オブジェクトからキーの型を生成する](generates-type-from-object-key.md)
 
 前ページとは対照的にオブジェクトからプロパティだけのユニオン型を得ることを目的とします。今回も前回と同様に次のメッセージが定義されているとします。
 
 ```typescript
 const conf = {
-  en: 'Are you sure?',
-  fr: 'Êtes-vous sûr?',
-  es: 'Está seguro?',
-  ja: 'よろしいですか？',
-  zh: '您确定吗？'
+  en: "Are you sure?",
+  fr: "Êtes-vous sûr?",
+  es: "Está seguro?",
+  ja: "よろしいですか？",
+  zh: "您确定吗？",
 };
 ```
 
 最終的には次のようなユニオン型が今回の目的です。
 
 ```typescript
-type ConfirmationMessage = 
-  | 'Are you sure?'
-  | 'Êtes-vous sûr?'
-  | 'Está seguro?'
-  | 'よろしいですか？'
-  | '您确定吗？';
+type ConfirmationMessage =
+  | "Are you sure?"
+  | "Êtes-vous sûr?"
+  | "Está seguro?"
+  | "よろしいですか？"
+  | "您确定吗？";
 ```
 
 ## 今回の問題を解くにあたって
 
 今回は今まで紹介してきたオブジェクトから型を作り出す方法と Mapped type の合わせ技で再現することができます。
 
-{% page-ref page="generates-type-from-object.md" %}
+[オブジェクトから型を生成する](generates-type-from-object.md)
 
-{% page-ref page="generates-type-from-object-key.md" %}
+[オブジェクトからキーの型を生成する](generates-type-from-object-key.md)
 
 アプローチの方法としてはまずオブジェクトからキーの型を生成し Mapped type を使いオブジェクトのプロパティの型を参照、それらをリテラル型で取得します。
 
@@ -41,7 +41,7 @@ type ConfirmationMessage =
 
 キーの型の生成は前のページにあるものと同一です。次のようにすることでキーである言語のユニオン型を取得できます。詳細についてはオブジェクトからキーの値を生成するのページをご覧ください。
 
-{% page-ref page="generates-type-from-object-key.md" %}
+[オブジェクトからキーの型を生成する](generates-type-from-object-key.md)
 
 ```typescript
 type Language = keyof typeof conf;
@@ -62,11 +62,11 @@ type ConfirmationMessage = typeof conf[Language];
 
 ```typescript
 const conf = {
-  en: 'Are you sure?',
-  fr: 'Êtes-vous sûr?',
-  es: 'Está seguro?',
-  ja: 'よろしいですか？',
-  zh: '您确定吗？'
+  en: "Are you sure?",
+  fr: "Êtes-vous sûr?",
+  es: "Está seguro?",
+  ja: "よろしいですか？",
+  zh: "您确定吗？",
 } as const;
 ```
 
@@ -76,15 +76,14 @@ const conf = {
 
 ```typescript
 const conf = {
-  en: 'Are you sure?',
-  fr: 'Êtes-vous sûr?',
-  es: 'está seguro?',
-  ja: 'よろしいですか？',
-  zh: '您确定吗？'
+  en: "Are you sure?",
+  fr: "Êtes-vous sûr?",
+  es: "está seguro?",
+  ja: "よろしいですか？",
+  zh: "您确定吗？",
 } as const;
 
 type ConfirmationMessage = typeof conf[keyof typeof conf];
 ```
 
 `as const` を忘れないようにしてください。
-

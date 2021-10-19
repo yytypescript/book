@@ -6,7 +6,7 @@
 
 TypeScriptが発明されるに至った歴史的背景を「TypeScript誕生の背景」で見ましたが、JavaScriptではまかないきれなくなった大規模アプリケーション開発を克服するために生まれたのがTypeScriptです。
 
-{% page-ref page="before-typescript.md" %}
+[TypeScript誕生の背景](before-typescript.md)
 
 そのため、大規模なアプリケーション開発の現場が求める三大特徴をTypeScriptは備えています。
 
@@ -28,7 +28,7 @@ TypeScriptはJavaScriptのスーパーセットです。スーパーセットと
 
 この特徴により、開発陣が得られるメリットのひとつが、JavaScriptの知識があればTypeScriptを使い始められるということです。これは新しい言語の学習コストをとても緩やかなものにしてくれます。新言語の導入となると、難しい言語だと学習に数ヶ月要し、そこからやっと書きはじめるということもありえますが、TypeScriptの場合はひとまずJavaScriptとして書き始め、少しずつTypeScriptを学んでいき、徐々にTypeScriptの恩恵を最大化するようにコードを手直ししていくといったアプローチが可能です。TypeScriptにはJavaScriptにはない数多くの機能がありますが、どれも選択的に導入していくことができます。
 
-JavaScriptのスーパーセットであるということは、裏を返せばJavaScriptを知らないといけないということでもあります。なので、TypeScriptをJavaやC\#のようなものだと期待していたり、JavaScriptを学ぶつもりがまったくないとすると、TypeScriptでの開発はフラストレーションになるかもしれません。JavaScriptでいわゆる「罠」と言われるような注意すべき言語仕様は、TypeScriptでもそのままというものもあります。JavaScriptにまったく触れたくないならTypeScriptは適していませんが、JavaScriptを使うつもりでいたのならTypeScriptは有力な選択肢になるでしょう。
+JavaScriptのスーパーセットであるということは、裏を返せばJavaScriptを知らないといけないということでもあります。なので、TypeScriptをJavaやC#のようなものだと期待していたり、JavaScriptを学ぶつもりがまったくないとすると、TypeScriptでの開発はフラストレーションになるかもしれません。JavaScriptでいわゆる「罠」と言われるような注意すべき言語仕様は、TypeScriptでもそのままというものもあります。JavaScriptにまったく触れたくないならTypeScriptは適していませんが、JavaScriptを使うつもりでいたのならTypeScriptは有力な選択肢になるでしょう。
 
 ## 古いJS環境を対象とした開発シーンでも最新の構文が使える
 
@@ -42,13 +42,13 @@ TypeScriptの魅力は古いバージョンのJavaScriptにコンパイルでき
 
 ECMAScriptへの追従に加え、ESNextの先取りによりプログラマは最新のJavaScript構文を使いながら、古い環境のコードにも対応できるようになります。
 
-注意が必要なのは、新しいAPIの利用です。たとえば、ECMAScript 2015\(ES6\)で導入された`Map`クラスや`Set`クラスを使ったコードをTypeScriptで書き、それをES5にコンパイルすると、構文エラーは起きないものの、`Map`クラスや`Set`クラスを使う部分は実行時エラーになります。これは、TypeScriptはあくまで新しい構文を古いJSコードに変換する仕事だけを担っているためです。もし、古い環境で新しいAPIを使う必要がある場合は、[core-js](https://github.com/zloirock/core-js)などのポリフィルを併用することで解決することができます。
+注意が必要なのは、新しいAPIの利用です。たとえば、ECMAScript 2015(ES6)で導入された`Map`クラスや`Set`クラスを使ったコードをTypeScriptで書き、それをES5にコンパイルすると、構文エラーは起きないものの、`Map`クラスや`Set`クラスを使う部分は実行時エラーになります。これは、TypeScriptはあくまで新しい構文を古いJSコードに変換する仕事だけを担っているためです。もし、古い環境で新しいAPIを使う必要がある場合は、[core-js](https://github.com/zloirock/core-js)などのポリフィルを併用することで解決することができます。
 
 ## TypeScriptはもっともポピュラーでもっとも愛されるAltJSである
 
 JavaScriptにコンパイルして使う言語を総じて「AltJS」と呼びます。TypeScriptのAltJSの一種で、AltJSには他にもさまざまな言語があります。その中でもTypeScriptはもっともポピュラーな言語です。
 
-Stack Overflowが約65,000名の開発者をターゲットに行った調査から、[ポピュラーなプログラミング言語ランキング](https://insights.stackoverflow.com/survey/2020#most-popular-technologies)を発表しています。このランキングはAltJSだけでなく、JavaScriptやJava、C\#などすべてのプログラミング言語を含んでいます。このランキングで、TypeScriptはC言語やRubyを抑えて、9位にランクインしています。
+Stack Overflowが約65,000名の開発者をターゲットに行った調査から、[ポピュラーなプログラミング言語ランキング](https://insights.stackoverflow.com/survey/2020#most-popular-technologies)を発表しています。このランキングはAltJSだけでなく、JavaScriptやJava、C#などすべてのプログラミング言語を含んでいます。このランキングで、TypeScriptはC言語やRubyを抑えて、9位にランクインしています。
 
 別の調査に、世界中のJavaScriptユーザー約2万人を対象に行ったアンケート調査「[The State of JavaScript 2019](https://2019.stateofjs.com/)」があります。これによると、TypeScriptは2017年から2019年の3年間で連続して満足度ナンバーワンに輝いています。そして、89%ものユーザーが「満足し、もう一度使いたい」と回答しています。
 
@@ -57,4 +57,3 @@ Stack Overflowが約65,000名の開発者をターゲットに行った調査か
 次に、エコシステムが充実していることです。VSCodeやJetBrains IntelliJ IDEAといったTypeScriptをサポートするIDEがあり、数多くのフレームワークやパッケージもTypeScriptに対応しています。言語単体の仕様がいくら優れていたとしても、開発を取り巻く環境が整っていなければ、他の言語にすでにあるようなツールやパッケージを自ら再発明しないといけなくなってしまいます。TypeScriptはエコシステムが充実しているので、そういった心配は不要です。
 
 最後に、採用や就職の面でもTypeScriptは有利です。使用人口が多いということは企業側にとってプログラマが探しやすいということであり、求職者にとってはプロジェクトを探しやすいということです。TypeScriptは先の調査結果で示されたとおり高い満足度があり、そうした言語を採用しているプロジェクトは、プログラマからも人気が出やすく、モチベーションの高いプログラマが集まりやすいです。
-

@@ -1,4 +1,8 @@
-# クラスの継承 \(inheritance\)
+---
+sidebar_label: クラスの継承
+---
+
+# クラスの継承 (inheritance)
 
 JavaScriptのクラスも他のクラスを持つ言語と同じように、`extends`キーワードで継承ができます。
 
@@ -17,4 +21,3 @@ class Child extends Parent {
   }
 }
 ```
-

@@ -11,14 +11,14 @@ type Account = {
   accuontName: string;
   password: string;
   age: number;
-  plan: 'Free' | 'Standard' | 'Premium';
+  plan: "Free" | "Standard" | "Premium";
 };
 
 const account: Account = {
-  accountName: 'yyts',
-  password: 'ccbyncsa30',
+  accountName: "yyts",
+  password: "ccbyncsa30",
   age: 80,
-  plan: 'Standard'
+  plan: "Standard",
 };
 ```
 
@@ -30,10 +30,10 @@ const account: Account = {
 
 ```typescript
 const account = {
-  accountName: 'yyts',
-  password: 'ccbyncsa30',
+  accountName: "yyts",
+  password: "ccbyncsa30",
   age: 80,
-  plan: 'Standard'
+  plan: "Standard",
 };
 
 type Account = typeof account;
@@ -58,10 +58,10 @@ type Account = {
 
 ```typescript
 const account = {
-  accountName: 'yyts',
-  password: 'ccbyncsa30',
+  accountName: "yyts",
+  password: "ccbyncsa30",
   age: 80,
-  plan: 'Standard'
+  plan: "Standard",
 } as const;
 
 type Account = typeof account;
@@ -71,9 +71,9 @@ type Account = typeof account;
 
 ```typescript
 type Account = {
-  readonly password: 'ccbyncsa30';
-  readonly accountName: 'yyts';
-  readonly plan: 'Standard';
+  readonly password: "ccbyncsa30";
+  readonly accountName: "yyts";
+  readonly plan: "Standard";
   readonly age: 80;
 };
 ```
@@ -84,10 +84,10 @@ type Account = {
 
 ```typescript
 const account = {
-  accountName: 'yyts',
-  password: 'ccbyncsa30',
+  accountName: "yyts",
+  password: "ccbyncsa30",
   age: 80,
-  plan: 'Standard' as 'Free' | 'Standard' | 'Premium'
+  plan: "Standard" as "Free" | "Standard" | "Premium",
 };
 
 type Account = typeof account;
@@ -99,8 +99,7 @@ type Account = typeof account;
 type Account = {
   password: string;
   accountName: string;
-  plan: 'Free' | 'Standard' | 'Premium';
+  plan: "Free" | "Standard" | "Premium";
   age: number;
 };
 ```
-

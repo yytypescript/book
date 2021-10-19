@@ -1,4 +1,8 @@
-# typeof演算子 \(typeof operator\)
+---
+sidebar_label: typeof演算子
+---
+
+# typeof演算子 (typeof operator)
 
 JavaScriptの`typeof`演算子では値の型を調べることができます。
 
@@ -35,5 +39,4 @@ function isObject(value) {
 
 ここで説明したのはJavaScriptのtypeof演算子です。TypeScriptのtypeof型演算子については、typeof型演算子の説明をご覧ください。
 
-{% page-ref page="../type-reuse/typeof-type-operator.md" %}
-
+[typeof型演算子](../type-reuse/typeof-type-operator.md)

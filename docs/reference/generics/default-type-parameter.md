@@ -6,8 +6,8 @@
 
 ```typescript
 type MyErrorEvent<T> = {
-    error: T;
-    type: string;
+  error: T;
+  type: string;
 };
 ```
 
@@ -21,8 +21,14 @@ class NetworkError extends Error {
   }
 }
 
-const errorEvent: MyErrorEvent<Error> = { error: new Error('エラーです'), type: 'syntax' }
-const networkErrorEvent: MyErrorEvent<NetworkError> = { error: new NetworkError('ネットワークエラーです'), type: 'nextwork' }
+const errorEvent: MyErrorEvent<Error> = {
+  error: new Error("エラーです"),
+  type: "syntax",
+};
+const networkErrorEvent: MyErrorEvent<NetworkError> = {
+  error: new NetworkError("ネットワークエラーです"),
+  type: "nextwork",
+};
 ```
 
 例外処理を記述する時に`NetworkError`のように対応するエラークラスをすべて用意することはなく、標準の`Error`で対応してしまうケースも多くありますが、今の状態では`MyErrorEvent`のジェネリクスの型`T`を常に指定する必要があり非常に面倒です。
@@ -30,27 +36,36 @@ const networkErrorEvent: MyErrorEvent<NetworkError> = { error: new NetworkError(
 ```typescript
 // 型 T が必須なので、MyErrorEvent<Error>と指定する必要がある。
 // Generic type 'MyErrorEvent' requires 1 type argument(s)
-const errorEvent: MyErrorEvent = { error: new Error('エラーです'), type: 'syntax' }
+const errorEvent: MyErrorEvent = {
+  error: new Error("エラーです"),
+  type: "syntax",
+};
 ```
 
 そこで、デフォルト型引数として`Error`を指定することでジェネリクスの型`T`は必要な時だけ指定して、何も指定してない場合は自動で`Error`とすることができます。
 
 ```typescript
 type MyErrorEvent<T = Error> = {
-    error: T;
-    type: string;
-}
+  error: T;
+  type: string;
+};
 
 // デフォルト型引数を指定した事で Error の型指定を省略できる
-const errorEvent: MyErrorEvent = { error: new Error('エラーです'), type: 'syntax' }
-const networkErrorEvent: MyErrorEvent<NetworkError> = { error: new NetworkError('ネットワークエラーです'), type: 'nextwork' }
+const errorEvent: MyErrorEvent = {
+  error: new Error("エラーです"),
+  type: "syntax",
+};
+const networkErrorEvent: MyErrorEvent<NetworkError> = {
+  error: new NetworkError("ネットワークエラーです"),
+  type: "nextwork",
+};
 ```
 
 ## 型引数の制約と併用する
 
 ある型の部分型であることを指定しながら、かつ省略時はデフォルト型を指定する合わせ技もできます。型引数の制約については専門のページがありますのでそちらを参照してください。
 
-{% page-ref page="type-parameter-constraint.md" %}
+[型引数の制約](type-parameter-constraint.md)
 
 `MyErrorEvent`に与えられる型`T`を`Error`のサブクラスに限定しつつ、省略時は`SyntaxError`としたい場合は次のような書き方になります。
 
@@ -58,7 +73,7 @@ const networkErrorEvent: MyErrorEvent<NetworkError> = { error: new NetworkError(
 type MyErrorEvent<T extends Error = SyntaxError> = {
   error: T;
   type: string;
-}
+};
 ```
 
 型引数の制約とデフォルト型引数の両立をする場合はデフォルト型引数が制約を満たしている必要があります。
@@ -116,4 +131,3 @@ class Aubergine<A = B, B, C = B> {
 ```typescript
 TS2744: Type parameter defaults can only reference previously declared type parameters.
 ```
-

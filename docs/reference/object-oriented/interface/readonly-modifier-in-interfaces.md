@@ -10,7 +10,6 @@ interface SomeInterface {
 
 ## 関連情報
 
-{% page-ref page="../class/readonly-modifier-in-classes.md" %}
+[クラスのreadonly修飾子](../class/readonly-modifier-in-classes.md)
 
-{% page-ref page="../../values-types-variables/object/readonly-property.md" %}
-
+[オブジェクト型のreadonlyプロパティ (readonly property)](../../values-types-variables/object/readonly-property.md)

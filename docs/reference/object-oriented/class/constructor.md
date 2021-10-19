@@ -1,4 +1,8 @@
-# コンストラクター \(constructor\)
+---
+sidebar_label: コンストラクター
+---
+
+# コンストラクター (constructor)
 
 コンストラクタはクラスをnewしたときに実行される関数です。コンストラクタは、インスタンスプロパティの初期化する処理を実装する場所です。JavaScriptのコンストラクタは、constructor構文で書きます。
 
@@ -34,5 +38,4 @@ new Person("Alice");
 
 ## 関連情報
 
-{% page-ref page="constructor-shorthand.md" %}
-
+[constructor shorthand](constructor-shorthand.md)

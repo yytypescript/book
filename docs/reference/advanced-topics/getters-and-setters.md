@@ -1,6 +1,10 @@
-# セッターとゲッター \(set, get\)
+---
+sidebar_label: セッターとゲッター
+---
 
-プロパティへのインターセプター\(参照・代入・監視などの意味\)としGetter/Setterがあります。
+# セッターとゲッター (set, get)
+
+プロパティへのインターセプター(参照・代入・監視などの意味)としGetter/Setterがあります。
 
 記述方法のサンプルは次のようになります。
 
@@ -23,7 +27,7 @@ const human = new Human();
 human.name = `田中太郎`;
 
 // Getterを利用
-console.log(human.name);  // 田中太郎
+console.log(human.name); // 田中太郎
 ```
 
 メソッドと違い、getter/setterを呼ぶ場合は`()`は不要です。
@@ -34,8 +38,8 @@ console.log(human.name); // 正しいGetterの使用方法
 console.log(human.name()); // エラー :human.name is not a function
 
 // Setter
-human.name = '田中太郎'; // 正しいSetterの使用方法
-human.name('田中太郎'); // エラー :human.name is not a function
+human.name = "田中太郎"; // 正しいSetterの使用方法
+human.name("田中太郎"); // エラー :human.name is not a function
 ```
 
 ### Getter
@@ -63,4 +67,3 @@ set 名前(変数 : 型) {
 ```
 
 引数が必ずひとつ必要です。また戻り値を指定することはできません。
-

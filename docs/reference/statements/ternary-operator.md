@@ -1,6 +1,10 @@
-# 三項演算子 \(ternary operator\)
+---
+sidebar_label: 三項演算子
+---
 
-JavaScriptの三項演算子\(ternary operator\)は、条件分岐ができる演算子です。条件式、真の場合の値、偽の場合の値の三項を取るため三項演算子と呼ばれています。
+# 三項演算子 (ternary operator)
+
+JavaScriptの三項演算子(ternary operator)は、条件分岐ができる演算子です。条件式、真の場合の値、偽の場合の値の三項を取るため三項演算子と呼ばれています。
 
 ```javascript
 条件式 ? 真の場合の値 : 偽の場合の値;
@@ -53,7 +57,6 @@ if (extension === "js") {
 
 ## 関連情報
 
-{% page-ref page="if-else.md" %}
+[if-else文](if-else.md)
 
-{% page-ref page="switch.md" %}
-
+[switch文](switch.md)

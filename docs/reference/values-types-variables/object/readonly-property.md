@@ -1,4 +1,8 @@
-# オブジェクト型のreadonlyプロパティ \(readonly property\)
+---
+sidebar_label: オブジェクト型のreadonlyプロパティ
+---
+
+# オブジェクト型のreadonlyプロパティ (readonly property)
 
 TypeScriptでは、オブジェクトのプロパティを読み取り専用にすることができます。読み取り専用にしたいプロパティには`readonly`修飾子をつけます。読み取り専用のプロパティに値を代入しようとすると、TypeScriptコンパイラーが代入不可の旨を警告するようになります。
 
@@ -56,12 +60,10 @@ obj.foo = 2; // コンパイルエラーになる
 
 しかし、コンパイル後のJavaScriptコードでは、`readonly`の記述がなくなるので、実行時にエラーとして検出されることはありません。
 
-{% code title="コンパイル後のJavaScriptコード" %}
-```javascript
+```javascript title="コンパイル後のJavaScriptコード"
 const obj = { foo: 1 };
 obj.foo = 2; // 実行時エラーにはならない
 ```
-{% endcode %}
 
 実行時にチェックが無いことは一見すると危険そうですが、コンパイルエラーを無視せず、ちゃんと修正しておけば大きな問題になることはありません。
 
@@ -82,13 +84,12 @@ let obj: Readonly<{
 }>;
 ```
 
-{% page-ref page="../../type-reuse/utility-types/readonly.md" %}
+[Readonly&lt;T>](../../type-reuse/utility-types/readonly.md)
 
 ## 関連情報
 
-{% page-ref page="../../object-oriented/class/readonly-modifier-in-classes.md" %}
+[クラスのreadonly修飾子](../../object-oriented/class/readonly-modifier-in-classes.md)
 
-{% page-ref page="../../object-oriented/interface/readonly-modifier-in-interfaces.md" %}
+[インターフェースのreadonly修飾子](../../object-oriented/interface/readonly-modifier-in-interfaces.md)
 
-{% page-ref page="../array/readonly-array.md" %}
-
+[読み取り専用の配列 (readonly array)](../array/readonly-array.md)

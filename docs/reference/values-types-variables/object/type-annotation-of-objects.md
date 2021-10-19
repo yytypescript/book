@@ -1,4 +1,8 @@
-# 🚧オブジェクトの型注釈 \(type annotation\)
+---
+sidebar_label: "\U0001F6A7オブジェクトの型注釈"
+---
+
+# 🚧オブジェクトの型注釈 (type annotation)
 
 TypeScriptでオブジェクトの型注釈は、JavaScriptオブジェクトリテラルのような書き方で、オブジェクトプロパティをキーと値の型のペアを書きます。
 
@@ -43,11 +47,10 @@ let calculator: {
 };
 ```
 
-メソッド構文\(method syntax\)の型注釈と関数構文\(function syntax\)の型注釈は、基本的に同じ意味ですが、コンパイラーオプションの`strictFunctionTypes`を有効にした場合に関数構文の書き方は、メソッド引数のチェックが双変\(bivariant\)から共変\(covariant\)へと厳格になります。この詳細については`strictFunctionTypes`の説明を参照してください。
+メソッド構文(method syntax)の型注釈と関数構文(function syntax)の型注釈は、基本的に同じ意味ですが、コンパイラーオプションの`strictFunctionTypes`を有効にした場合に関数構文の書き方は、メソッド引数のチェックが双変(bivariant)から共変(covariant)へと厳格になります。この詳細については`strictFunctionTypes`の説明を参照してください。
 
-{% page-ref page="../../tsconfig/strictfunctiontypes.md" %}
+[🚧strictFunctionTypes](../../tsconfig/strictfunctiontypes.md)
 
 ## Record
 
 TODO: Recordを用いたオブジェクト型の書き方も紹介する
-

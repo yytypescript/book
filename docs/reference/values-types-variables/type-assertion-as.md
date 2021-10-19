@@ -1,6 +1,10 @@
-# 型アサーション「as」\(type assertion\)
+---
+sidebar_label: 型アサーション「as」
+---
 
-TypeScriptには、型推論を上書きする機能があります。その機能を型アサーション\(type assertion\)と言います。
+# 型アサーション「as」(type assertion)
+
+TypeScriptには、型推論を上書きする機能があります。その機能を型アサーション(type assertion)と言います。
 
 TypeScriptコンパイラーはコードをヒントに型を推論してくれます。その型推論は非常に知的ですが、場合によってはコンパイラーよりもプログラマーがより正確な型を知っている場合があります。そのような場合は、型アサーションを用いるとコンパイラーに型を伝えることができます。型アサーションはコンパイラに「私を信じて！私のほうが型に詳しいから」と伝えるようなものです。
 
@@ -13,7 +17,7 @@ const value: string | number = "this is a string";
 const strLength: number = (value as string).length;
 ```
 
-もう1つはアングルブランケット構文\(angle-bracket syntax\)です。
+もう1つはアングルブランケット構文(angle-bracket syntax)です。
 
 ```typescript
 const value: string | number = "this is a string";
@@ -34,7 +38,7 @@ const str: string = num as string;
 
 この例ではコンパイルエラーの内容は次のようになります。
 
-> Conversion of type 'number' to type 'string' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.\(2352\)
+> Conversion of type 'number' to type 'string' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.(2352)
 
 このエラーは「number型をstring型にするのは間違いです。お互いの型に共通する部分が少な過ぎるからです」という内容です。
 
@@ -57,15 +61,15 @@ const str: string = num as unknown as string; // OK
 
 型アサーションを使う必要が出てきたら、それよりも先に、型ガードやユーザー定義型ガードで解決できないか検討してみるとよいでしょう。
 
-{% page-ref page="../statements/control-flow-analysis-and-type-guard.md" %}
+[🚧型ガード、制御フロー分析、型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
 
-{% page-ref page="../functions/type-guard-functions.md" %}
+[型ガード関数 (type guard function)](../functions/type-guard-functions.md)
 
-{% page-ref page="../functions/assertion-functions.md" %}
+[アサーション関数 (assertion functions)](../functions/assertion-functions.md)
 
 ## 型アサーションと型アノテーションの違い
 
-型アサーションと型アノテーション\(type annotation\)は名前が似ているためかしばしば混同されます。本書では型アノテーションを「型注釈」と表記しています。この2つはTypeScriptの異なる機能です。
+型アサーションと型アノテーション(type annotation)は名前が似ているためかしばしば混同されます。本書では型アノテーションを「型注釈」と表記しています。この2つはTypeScriptの異なる機能です。
 
 型注釈は、コンパイラーに「この変数に代入できるのはこの型だよ」と伝えるものです。コンパイラーは型注釈をヒントに、その型に値が代入可能かどうかをチェックし、代入できないことが分かり次第報告してきます。
 
@@ -76,5 +80,4 @@ let value: number;
 
 一方、型アサーションはコンパイラーに「君はこの型だと思ってるかもしれないけど、本当はこの型だよ」と型推論の不正確さを伝えるものです。
 
-{% page-ref page="type-annotation.md" %}
-
+[変数宣言の型注釈 (type annotation)](type-annotation.md)

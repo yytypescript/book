@@ -20,7 +20,7 @@ error.message;
 
 このオプションを有効にすると `undefined` と `null` はそれぞれ独立した型を持つようになり `undefined` と `null` を他の型に代入することはできなくなります。
 
-```typescript
+```text
 error TS2322: Type 'undefined' is not assignable to type 'Error'.
 const error: Error = undefined;
       ~~~~~
@@ -28,4 +28,3 @@ error TS2322: Type 'null' is not assignable to type 'Date'.
 const date: Date = null;
       ~~~~
 ```
-
