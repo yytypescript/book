@@ -1,5 +1,5 @@
 {
-  "trailingSlash": true,
+  "trailingSlash": false,
   "redirects": [
     { "source": "/welcome-to-typescript", "destination": "/overview" },
     {
