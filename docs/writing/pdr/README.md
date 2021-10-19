@@ -35,4 +35,4 @@ slug: /writing/pdr
 
 ## テンプレート
 
-PDRを追加する際は、[PDRのテンプレート](__pdr-template.md)をお使いください。
+PDRを追加する際は、[PDRのテンプレート](pdr-template.md)をお使いください。
