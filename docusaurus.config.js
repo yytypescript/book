@@ -119,6 +119,10 @@ const { pageRef } = require("./src/remark/pageRef");
           darkTheme: darkCodeTheme,
           additionalLanguages: ["java", "php", "ruby", "shell-session"],
         },
+        googleAnalytics: {
+          trackingID: "UA-43572771-14",
+          anonymizeIP: true,
+        },
       }),
     i18n: {
       defaultLocale: "ja",
