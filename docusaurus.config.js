@@ -14,7 +14,7 @@ const { pageRef } = require("./src/remark/pageRef");
     baseUrl: "/",
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
-    favicon: "img/favicon.ico",
+    favicon: "img/logo.svg",
     organizationName: "yytypescript", // Usually your GitHub org/user name.
     projectName: "book", // Usually your repo name.
 
