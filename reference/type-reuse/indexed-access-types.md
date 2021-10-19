@@ -1,2 +1,0 @@
-# 🚧indexed access types
-

@@ -1,2 +1,0 @@
-# 作って学ぶTypeScript
-

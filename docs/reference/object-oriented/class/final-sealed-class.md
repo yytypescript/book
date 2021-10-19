@@ -1,0 +1,5 @@
+# finalクラス・sealedクラス
+
+JavaやPHPなどの他の言語には、finalクラスという機能があります。finalクラスは継承できないクラスです。finalクラスは意図しない子クラスが生まれるのを抑制できる機能です。こうした機能はJavaScriptにはありません。TypeScriptにもありません。同様にfinalメソッドもJavaScript、TypeScript両方にありません。
+
+sealedクラスはScalaやKotlinなどの言語に見られる機能で、継承を制限する面ではfinalクラスと似ています。sealedクラスは同じモジュール内(ファイルの単位など)であれば継承できるが、他のモジュールでは継承できないクラスです。sealedクラスのようなものは、JavaScriptにもTypeScriptにもありません。
