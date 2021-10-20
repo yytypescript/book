@@ -61,7 +61,7 @@ function func({ x, y, z }: { x: number; y: number; z: number }) {
 }
 ```
 
-オブジェクト型の記述が長過ぎる場合には、TypeScriptの型エイリアス(type alias)を用いて、引数の型を分けて書くと可読性が良くなります。
+オブジェクト型の記述が長すぎる場合には、TypeScriptの型エイリアス(type alias)を用いて、引数の型を分けて書くと可読性が良くなります。
 
 ```typescript
 type Options = {

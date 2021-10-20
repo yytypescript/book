@@ -6,7 +6,7 @@
 
 ## TypeScript Playgroundの使い方
 
-[TypeScript Playground](https://www.typescriptlang.org/play) にアクセスすれば、すぐに使い始めることができます。
+[TypeScript Playground](https://www.typescriptlang.org/play) にアクセスすれば、すぐに使いはじめることができます。
 
 ### プログラムの実行結果を確認する
 
@@ -100,7 +100,7 @@ TypeScript Playground はページのURLを共有するだけで書いたコー�
 
 上部の`Export` タブから色々な形式でコードを共有するためのテキストを出力することができます。
 
-例えば `Copy as Markdown Link with Preview `を選択した場合は次のような形式のテキストを出力することができます。
+たとえば `Copy as Markdown Link with Preview `を選択した場合は次のような形式のテキストを出力することができます。
 
 ````markdown
 ```

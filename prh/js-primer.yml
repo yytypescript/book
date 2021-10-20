@@ -127,17 +127,17 @@ rules:
   - expected: シングルスレッド
     patterns:
       - 単一スレッド
-  - expected: for...in
+  - expected: for-in
     patterns:
       - /for\.{1,2}in/
       - /for\\-in/
       - for/in
-  - expected: for...of
+  - expected: for-of
     patterns:
       - /for\.{1,2}of/
       - /for\\-of/
       - for/of
-  - expected: try...catch
+  - expected: try-catch
     patterns:
       - /try\.{1,2}catch/
       - /try-catch/
@@ -193,13 +193,13 @@ rules:
       - 部分文字列
       - 指定文字列
     prh: https://github.com/asciidwango/js-primer/issues/208
-  - expected: テンプレートリテラル
-    patterns: /(?<!（)Template\s*Literal(?!）)/i
-    specs:
-      - from: template literal
-        to: テンプレートリテラル
-      - from: （template literal）
-        to: （template literal）
+#  - expected: テンプレートリテラル
+#    patterns: /(?<!（)Template\s*Literal(?!）)/i
+#    specs:
+#      - from: template literal
+#        to: テンプレートリテラル
+#      - from: （template literal）
+#        to: （template literal）
   - expected: テンプレート文字列
     patterns: /Template\s*Strings/i
   - expected: タグ付きテンプレートリテラル
@@ -538,12 +538,8 @@ rules:
     patterns: 下さい
   - expected: 異なる
     patterns: ことなる
-  - expected: 過ぎる
-    prh: 「〜にすぎない」はひらがな、「〜過ぎる」などは漢字にします。
-    patterns: すぎる
-  - expected: すぎない
-    prh: 「〜にすぎない」はひらがな、「〜過ぎる」などは漢字にします。
-    patterns: 過ぎない
+  - expected: すぎ
+    patterns: 過ぎ
   - expected: たどる
     patterns: 辿る
   - expected: つなぐ
@@ -610,16 +606,16 @@ rules:
   # https://github.com/vvakame/prh/blob/master/misc/techbooster.yml
   # 記号
   # 半角括弧を全角括弧に
-  - expected: （$1）
-    pattern:  /\((.+?)\)/
-    specs:
-      - from: そうですね(笑)
-        to:   そうですね（笑）
-      - from: (@<fn>{test})
-        to:   （@<fn>{test}）
-      - from: "(ほげ)ほげ)"
-        to:   "（ほげ）ほげ)"
-    prh: 半角カッコの代わりに全角カッコを使うこと。文字のバランスが崩れるためです
+#  - expected: （$1）
+#    pattern:  /\((.+?)\)/
+#    specs:
+#      - from: そうですね(笑)
+#        to:   そうですね（笑）
+#      - from: (@<fn>{test})
+#        to:   （@<fn>{test}）
+#      - from: "(ほげ)ほげ)"
+#        to:   "（ほげ）ほげ)"
+#    prh: 半角カッコの代わりに全角カッコを使うこと。文字のバランスが崩れるためです
   - expected: →
     pattern: /->/
   # 開き

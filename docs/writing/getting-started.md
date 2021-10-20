@@ -123,6 +123,40 @@ textlintで問題が指摘された箇所で、変更すべきところを変更
 textlint指摘箇所をすべて直していい場合は`yarn textlint:fix`で一括修正できます。
 :::
 
+:::tip textlintを部分的に無効化する
+
+textlintのエラーが出ない書き方が望ましいです。場合によって、textlintを無効にしたいことがあるかもしれません。無効化したい部分はコメントで囲みます。
+
+```markdown
+...
+
+<!--textlint-disable prh-->
+
+textlintのprhルールが無効になるエリア
+
+<!--textlint-enable prh-->
+
+...
+```
+
+注意点として、コメントの前後には空行が必要です。
+
+```markdown title="NG"
+<!--textlint-disable-->
+無効化したいテキスト
+<!--textlint-enable-->
+```
+
+```markdown title="OK"
+<!--textlint-disable-->
+
+無効化したいテキスト
+
+<!--textlint-enable-->
+```
+
+:::
+
 ##### 自動修正内容をコミット
 
 自動修正の結果は差分で確認します。

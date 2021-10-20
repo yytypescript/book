@@ -6,5 +6,8 @@
         "./prh/yytypescript.yml"
       ]
     }
+  },
+  "filters": {
+    "comments": true
   }
 }
