@@ -2,6 +2,7 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const remarkBreaks = require("remark-breaks");
 const { pageRef } = require("./src/remark/pageRef");
+const { tweetILearned } = require("./src/remark/tweetILearned");
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import("@docusaurus/types").DocusaurusConfig} */
@@ -28,7 +29,7 @@ const { pageRef } = require("./src/remark/pageRef");
             editUrl: "https://github.com/yytypescript/book/edit/master/",
             routeBasePath: "/",
             numberPrefixParser: false,
-            remarkPlugins: [remarkBreaks, pageRef],
+            remarkPlugins: [remarkBreaks, pageRef, tweetILearned],
           },
           // blog: {
           //   showReadingTime: true,
