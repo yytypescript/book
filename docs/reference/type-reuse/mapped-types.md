@@ -1,8 +1,8 @@
 ---
-sidebar_label: マップ型
+sidebar_label: Mapped type
 ---
 
-# マップ型 (mapped type)
+# Mapped type
 
 インデックス型では設定時はどのようなキーも自由に設定できてしまい、アクセス時は毎回`undefined`かどうかの型チェックが必要です。入力の形式が決まっているのであればMapped typeの使用を検討できます。
 

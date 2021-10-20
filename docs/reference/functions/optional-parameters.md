@@ -1,8 +1,8 @@
 ---
-sidebar_label: オプショナル引数
+sidebar_label: オプション引数
 ---
 
-# オプショナル引数 (optional parameter)
+# オプション引数 (optional parameter)
 
 引数を省略したいことがあります。そのときはオプション引数とデフォルト引数を使用することができます。
 

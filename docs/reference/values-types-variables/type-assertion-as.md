@@ -40,7 +40,7 @@ const str: string = num as string;
 
 > Conversion of type 'number' to type 'string' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.(2352)
 
-このエラーは「number型をstring型にするのは間違いです。お互いの型に共通する部分が少な過ぎるからです」という内容です。
+このエラーは「number型をstring型にするのは間違いです。お互いの型に共通する部分が少なすぎるからです」という内容です。
 
 このように型アサーションはコンパイラーの型推論を上書きできるとは言っても、無茶な型の変換はできないようになっています。
 

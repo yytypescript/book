@@ -130,11 +130,11 @@ textlintのエラーが出ない書き方が望ましいです。場合によっ
 ```markdown
 ...
 
-<!-- textlint-disable prh -->
+<!--textlint-disable prh-->
 
 textlintのprhルールが無効になるエリア
 
-<!-- textlint-enable prh -->
+<!--textlint-enable prh-->
 
 ...
 ```
@@ -142,17 +142,17 @@ textlintのprhルールが無効になるエリア
 注意点として、コメントの前後には空行が必要です。
 
 ```markdown title="NG"
-<!-- textlint-disable -->
+<!--textlint-disable-->
 無効化したいテキスト
-<!-- textlint-enable -->
+<!--textlint-enable-->
 ```
 
 ```markdown title="OK"
-<!-- textlint-disable -->
+<!--textlint-disable-->
 
 無効化したいテキスト
 
-<!-- textlint-enable -->
+<!--textlint-enable-->
 ```
 
 :::
