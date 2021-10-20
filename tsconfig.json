@@ -4,7 +4,9 @@
   "compilerOptions": {
     "target": "ES2015",
     "baseUrl": ".",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "checkJs": true,
+    "types": ["node", "@docusaurus/module-type-aliases"]
   },
   "include": ["src/"]
 }

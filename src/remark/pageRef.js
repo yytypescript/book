@@ -1,8 +1,15 @@
-import * as fs from "fs";
-import { Root } from "mdast";
-import { Plugin } from "unified";
+"use strict";
 
-export const pageRef: Plugin<[never]> = () => (node: Root, file) => {
+/**
+ * @typedef {import("mdast").Root} Root
+ */
+
+const fs = require("fs");
+
+/**
+ * @type {(settings: [never]) => (node: Root) => void}
+ */
+const pageRef = () => (node) => {
   let linkFound = false;
 
   for (const [index, paragraph] of node.children.entries()) {
@@ -21,22 +28,28 @@ export const pageRef: Plugin<[never]> = () => (node: Root, file) => {
     }
     linkFound = true;
     node.children[index] = {
-      type: "jsx" as any,
+      type: /** @type {any} */ ("jsx"),
       value: `<PageRef link="${slugToFilename(link.url)}" />`,
     };
   }
 
   if (linkFound) {
     node.children.unshift({
-      type: "import" as any,
+      type: /** @type {any} */ ("import"),
       value: 'import PageRef from "@site/src/components/PageRef";',
     });
   }
 };
 
-function slugToFilename(slug: string): string {
+/**
+ * @param {string} slug
+ * @return {string}
+ */
+function slugToFilename(slug) {
   if (fs.existsSync(`./docs${slug}/README.md`)) {
     return `${slug}/README.md`;
   }
   return `${slug}.md`;
 }
+
+exports.pageRef = pageRef;
