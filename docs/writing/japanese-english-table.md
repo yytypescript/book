@@ -40,7 +40,7 @@
 
 <!--textlint-enable prh-->
 
-### 日本語が不明
+## 日本語が不明
 
 - Assertion functions
 - Type predicate

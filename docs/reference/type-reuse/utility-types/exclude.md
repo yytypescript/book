@@ -3,8 +3,6 @@ description: 任意の型を除外する
 title: "Exclude<T, U>"
 ---
 
-# Exclude&lt;T, U>
-
 `Exclude<T, U>`は、ユニオン型`T`から`U`で指定した型を取り除いたユニオン型を返すユーティリティ型です。
 
 ## Exclude&lt;T, U>の型引数

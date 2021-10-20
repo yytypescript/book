@@ -42,7 +42,7 @@ human.name = "田中太郎"; // 正しいSetterの使用方法
 human.name("田中太郎"); // エラー :human.name is not a function
 ```
 
-### Getter
+## Getter
 
 Getterの記述方法を日本語で表すと次のようになります。
 
@@ -55,7 +55,7 @@ get 名前(): 型 {
 
 Getterに引数を指定することはできません。また戻り値を必ず指定する必要があります。
 
-### Setter
+## Setter
 
 Setterの記述方法を日本語で表すと次のようになります。
 

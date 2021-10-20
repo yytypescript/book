@@ -18,7 +18,7 @@ sidebar_label: 型定義ファイル
 
 tscコマンドに`-d`オプションをつけてコンパイルを行うとJavaScriptと型定義ファイルを出力することができます。
 
-**TypeScriptファイル**
+#### TypeScriptファイル
 
 次のTypeScriptファイル(sample.ts)を`-d`オプションを付けてコンパイルしてみます。
 
@@ -36,11 +36,11 @@ function greeter(person: Person): string {
 
 tscコマンドに`-d`オプションを付けコンパイルを実行する。
 
-```text
+```bash
 tsc -d
 ```
 
-**JavaScriptファイル**
+#### JavaScriptファイル
 
 sample.tsではInterfaceを使っていますが、JavaScriptにはInterfaceの概念がないため関数のみになりました。また引数の型情報もなくなります。
 
@@ -52,7 +52,7 @@ function greeter(person) {
 //# sourceMappingURL=sample.js.map
 ```
 
-**`d.ts`ファイル**
+#### `d.ts`ファイル
 
 定義情報のみ記載されたファイルが出力されます。
 
@@ -83,8 +83,8 @@ declare function greeter(person: Person): string;
 
 例としてdate libraryの[moment](https://github.com/moment/moment)はJavaScriptで構築されていますが、`moment.d.ts`を同封しています。そのままinstallを行うだけで定義ファイルの恩恵を受けられます。
 
-```text
-$ npm install moment
+```bash
+npm install moment
 ```
 
 型定義ファイル有りの場合は、設定なく型情報を参照することができます。
@@ -97,9 +97,9 @@ $ npm install moment
 
 [Express](https://expressjs.com/)本体と定義ファイルのインストール例は次のようになります。
 
-```text
-$ npm install express --save // express本体のインストール
-$ npm install @types/express --save-dev  // 型定義ファイルのインストール
+```bash
+npm install express --save # express本体のインストール
+npm install @types/express --save-dev # 型定義ファイルのインストール
 ```
 
 ### 型定義ファイル無し

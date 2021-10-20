@@ -3,8 +3,6 @@ description: キー・バリューからオブジェクト型を作る
 title: "Record<Keys, Type>"
 ---
 
-# Record&lt;Keys, Type>
-
 `Record<Keys, Type>`はプロパティのキーが`Keys`であり、プロパティの値が`Type`であるオブジェクト型を作るユーティリティ型です。
 
 ## Record&lt;Keys, Type>の型引数

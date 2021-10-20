@@ -326,24 +326,24 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 ### `default export`
 
-#### Pros
+#### `default export`のPros
 
 - `import`する時に名前を変えることができる
 - そのファイルが他の`export`に比べ何をもっとも提供したいのかがわかる
 
-#### Cons
+#### `default export`のCons
 
 - エディター、IDEによっては入力補完が効きづらい
 - 再エクスポートの際に名前をつける必要がある
 
 ### `named export`
 
-#### Pros
+#### `named export`のPros
 
 - エディター、IDEによる入力補完が効く
 - ひとつのファイルから複数`export`できる
 
-#### Cons
+#### `named export`のCons
 
 - (名前の変更はできるものの)基本的に決まった名前で`import`して使う必要がある
 - `export`しているファイルが名前を変更すると動作しなくなる

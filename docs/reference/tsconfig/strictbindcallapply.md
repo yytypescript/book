@@ -1,6 +1,6 @@
 # strictBindCallApply
 
-**リリースされたバージョン: 3.2**
+リリースされたバージョン: 3.2
 
 `function.bind(), function.call(), function.apply()` はその関数を実行します。どれも第2引数以降にその関数の引数を代入できます。
 

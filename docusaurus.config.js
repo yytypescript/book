@@ -117,7 +117,14 @@ const { pageRef } = require("./src/remark/pageRef");
         prism: {
           theme: lightCodeTheme,
           darkTheme: darkCodeTheme,
-          additionalLanguages: ["java", "php", "ruby", "shell-session"],
+          additionalLanguages: [
+            "java",
+            "php",
+            "ruby",
+            "shell-session",
+            "tsx",
+            "jsx",
+          ],
         },
         googleAnalytics: {
           trackingID: "UA-43572771-14",

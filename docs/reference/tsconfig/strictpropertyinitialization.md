@@ -1,6 +1,6 @@
 # strictPropertyInitialization
 
-**リリースされたバージョン: 2.7**
+リリースされたバージョン: 2.7
 
 このオプションを有効にするためには `strictNullChecks` も同様に有効にする必要があります。
 

@@ -1,6 +1,7 @@
 default: true
 line-length: false
 no-bare-urls: false
+no-alt-text: false
 ul-style:
   style: dash
 heading-style:

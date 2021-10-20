@@ -8,13 +8,13 @@ sidebar_label: デュアルパッケージ開発者のためのtsconfig
 
 しかしながらフロントエンドとバックエンドではJavaScriptのモジュール解決の方法が異なります。この差異のために同じTypeScriptのコードを別々に分けなければいけないかというとそうではありません。ひとつのモジュールを`commonjs, esmodule`の両方に対応した出力をするDual Packageという考えがあります。
 
-### Dual Packageことはじめ
+## Dual Packageことはじめ
 
 名前が仰々しいですが、やることは`commonjs`用のJavaScriptと`esmodule`用のJavaScriptを出力することです。つまり出力する`module`の分だけtsconfig.jsonを用意します。
 
 プロジェクトはおおよそ次のような構成になります。
 
-```bash
+```text
 ./
 ├── tsconfig.base.json
 ├── tsconfig.cjs.json
@@ -33,29 +33,29 @@ sidebar_label: デュアルパッケージ開発者のためのtsconfig
 
 tsconfig.base.jsonとtsconfig.jsonを分けるかどうかについては好みの範疇です。まとめてしまっても問題はありません。
 
-#### tsconfig.jsonの継承
+### tsconfig.jsonの継承
 
 tsconfig.jsonは他のtsconfig.jsonを継承する機能があります。上記はtsconfig.cjs.json, tsconfig.esm.jsonは次のようにしてtsconfig.base.jsonを継承しています。
 
-```typescript
+```json
 // tsconfig.cjs.json
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "module": "commonjs",
-    "outDir": "./dist/cjs",
+    "outDir": "./dist/cjs"
     // ...
   }
 }
 ```
 
-```typescript
+```json
 // tsconfig.esm.json
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "module": "esnext",
-    "outDir": "./dist/esm",
+    "outDir": "./dist/esm"
     // ...
   }
 }
@@ -70,25 +70,25 @@ tsc -p tsconfig.cjs.json
 tsc -p tsconfig.esm.json
 ```
 
-### Dual Packageのためのpackage.json
+## Dual Packageのためのpackage.json
 
 package.jsonもDual Packageのための設定が必要です。
 
-#### `main`
+### `main`
 
 package.jsonにあるそのパッケージのエントリーポイントとなるファイルを指定する項目です。Dual Packageのときはここに`commonjs`のエントリーポイントとなる`js`ファイルを設定します。
 
-#### `module`
+### `module`
 
 Dual Packageのときはここに`esmodule`のエントリーポイントとなる`js`ファイルを設定します。
 
-#### `types`
+### `types`
 
 型定義ファイルのエントリーポイントとなる`ts`ファイルを設定します。型定義ファイルを出力するようにしていれば`commonjs, esmodule`のどちらのtsconfig.jsonで出力したものでも問題ありません。
 
 package.jsonはこのようになっているでしょう。
 
-```typescript
+```json
 {
   "name": "YYTS",
   "version": "1.0.0",
@@ -106,13 +106,13 @@ package.jsonはこのようになっているでしょう。
 
 コンパイル後の`js`のファイルの出力先はあくまでも例です。tsconfig.jsonの`outDir`を変更すれば出力先を変更できるのでそちらを設定後、package.jsonでエントリーポイントとなる`js`ファイルの設定をしてください。
 
-### Tree Shaking
+## Tree Shaking
 
 `module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができるすべてをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなりすぎるという欠点があります。特にそれがSPA(Signle Page Application)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
 
 この事態を避けるために`module bundler`は容量削減のための涙ぐましい努力を続けています。その機能のひとつとして題名のTree Shakingを紹介するとともに、開発者にできるTree Shaking対応パッケージの作り方を紹介します。
 
-#### Tree Shakingとは
+### Tree Shakingとは
 
 Tree Shakingとは使われていない関数、クラスを最終的な`js`ファイルに含めない機能のことです。使っていないのであれば入れる必要はない。というのは至極当然の結論ですがこのTree Shakingを使うための条件があります。
 
@@ -121,7 +121,7 @@ Tree Shakingとは使われていない関数、クラスを最終的な`js`フ�
 
 各条件の詳細を見ていきましょう。
 
-### `esmodule`で書かれている
+## `esmodule`で書かれている
 
 `commonjs`と`esmodule`では外部ファイルの解決方法が異なります。
 
@@ -146,7 +146,7 @@ if (shouldCallPolice()) {
 
 最近では`commonjs`でもTree Shakingができる`module bundler`も登場しています。
 
-### 副作用のないコードである
+## 副作用のないコードである
 
 ここで言及している副作用とは以下が挙げられます。
 
@@ -155,15 +155,15 @@ if (shouldCallPolice()) {
 
 これらが含まれているかもしれないと`module bundler`が判断するとTree Shakingの効率が落ちます。
 
-#### 副作用がないことを伝える
+### 副作用がないことを伝える
 
 `module bundler`に制作したパッケージに副作用がないことを伝える方法があります。package.jsonにひとつ加えるだけで完了します。
 
-#### `sideEffects`
+### `sideEffects`
 
 このプロパティをpackage.jsonに加えて、値を`false`とすればそのパッケージには副作用がないことを伝えられます。
 
-```typescript
+```json
 {
   "name": "YYTS",
   "version": "1.0.0",
@@ -182,15 +182,12 @@ if (shouldCallPolice()) {
 
 副作用があり、そのファイルが判明しているときはそのファイルを指定します。
 
-```typescript
+```json
 {
   "name": "YYTS",
   "version": "1.0.0",
   "license": "CC BY-SA 3.0",
-  "sideEffects": [
-    "./xxx.js",
-    "./yyy.js"
-  ],
+  "sideEffects": ["./xxx.js", "./yyy.js"],
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "types": "./esm/index.d.ts",

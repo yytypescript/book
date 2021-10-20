@@ -127,7 +127,7 @@ TypeScriptの発表後、JavaScriptも再び進歩を始め、6年ぶりのメ�
 
 - [Chapter 4. How JavaScript Was Created](http://speakingjs.com/es5/ch04.html)
 - [Microsoft augments JavaScript for large-scale development | InfoWorld](https://www.infoworld.com/article/2614863/microsoft-augments-javascript-for-large-scale-development.html)
-- [The Real Story Behind ECMAScript ](https://auth0.com/blog/the-real-story-behind-es4/)
+- [The Real Story Behind ECMAScript](https://auth0.com/blog/the-real-story-behind-es4/)
 - [JavaScript 2.0](https://web.archive.org/web/20000816194528/http://mozilla.org/js/language/js20-1999-02-18/index.html)
 - [JavaScript 2.0 Motivation](https://web.archive.org/web/20000823225602/http://mozilla.org/js/language/js20-1999-02-18/motivation.html)
 - [ActionScript - Wikipedia](https://en.wikipedia.org/wiki/ActionScript)
