@@ -364,10 +364,11 @@ module.exports = {
     "writing/writing",
     "writing/contributing",
     "writing/getting-started",
+    "writing/how-to-change",
     "writing/markdown",
-    "writing/start-writing",
     "writing/styles",
     "writing/japanese-english-table",
+    "writing/vscode",
     {
       type: "category",
       label: "PDR",

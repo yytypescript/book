@@ -4,12 +4,10 @@ description: 執筆者向けのドキュメントです。
 
 # README
 
-## 執筆への参加方法
-
 [CONTRIBUTING](contributing.md)
 
-## PDR
+[はじめて執筆する方へ](getting-started.md)
 
-執筆者が知っておくべき決定事項の一覧です。
+[執筆の流れ](how-to-change.md)
 
 [PDR](pdr/README.md)
