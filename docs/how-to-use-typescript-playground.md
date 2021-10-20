@@ -26,7 +26,7 @@ console.log(add(1, 2));
 
 実行後は右側の `Logs` のタブで実行結果が確認できます。
 
-![](assets/sukurnshotto-2021-10-01-201539png.png)
+![](how-to-use-typescript-playground/image1.png)
 
 ### JavaScriptのコンパイル結果を確認する
 
@@ -48,7 +48,7 @@ console.log(Color.RED);
 
 TypeScript が `enum` を どのように JavaScript へコンパイルしているか簡単に確認することができます。
 
-![](assets/sukurnshotto-2021-10-01-202145png.png)
+![](how-to-use-typescript-playground/image2.png)
 
 ### コンパイルエラーの確認方法
 
@@ -62,7 +62,7 @@ value = true;
 
 また、エディターでマウスオーバーをする以外にも右側の `Errors` タブを表示して、すべてのエラーを一覧で確認することができます。
 
-![](assets/sukurnshotto-2021-10-01-220014png.png)
+![](how-to-use-typescript-playground/image3.png)
 
 ### 型定義の確認方法
 
