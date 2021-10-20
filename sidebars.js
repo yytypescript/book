@@ -369,6 +369,7 @@ module.exports = {
     "writing/styles",
     "writing/japanese-english-table",
     "writing/vscode",
+    "writing/file-structure",
     {
       type: "category",
       label: "PDR",
