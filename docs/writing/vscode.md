@@ -1,6 +1,6 @@
 # VS Codeで編集する
 
-Markdownファイルを編集するにはVS Codeがお勧めです。
+Markdownファイルを編集するエディターはVS Codeがお勧めです。
 
 ## Markdownプレビューを表示する方法
 

@@ -81,13 +81,11 @@ module.exports = {
 
 ### コンテンツ編集時に知っておくとよいこと
 
-編集にあたってお勧めのエディターはVS Codeです。
-
 [VS Code](vscode.md)
 
-Markdownは標準的な記法に加えて、本プロジェクトで独自拡張した仕様があります。
-
 [Markdown](markdown.md)
+
+[ファイル構成](file-structure.md)
 
 ## コミットする
 

@@ -1,6 +1,6 @@
 # Markdown
 
-本書執筆者が知っておくべきMarkdownの使い方を説明します。
+Markdownは標準的な記法に加えて、本プロジェクトで独自拡張した仕様があります。
 
 ## Frontmatter
 
