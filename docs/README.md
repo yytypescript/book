@@ -1,9 +1,12 @@
 ---
-description: サバイバルTypeScript 〜実務で使うなら最低限ここだけはおさえておきたいTypeScript入門〜
 slug: /
 ---
 
 # はじめに
+
+<head>
+  <title>TypeScript入門『サバイバルTypeScript』〜実務で使うなら最低限ここだけはおさえておきたいこと〜</title>
+</head>
 
 ## これはどのような本か？
 
