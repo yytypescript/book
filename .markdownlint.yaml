@@ -24,3 +24,5 @@ no-inline-html:
     - summary
     - kbd
     - TweetILearned
+    - head
+    - title
