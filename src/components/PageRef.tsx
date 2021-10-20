@@ -11,7 +11,7 @@ export default function PageRef({ link }: any) {
       <Link href={metadata.permalink} className="pagination-nav__link">
         <div
           style={{
-            fontWeight: "var(--ifm-heading-font-weight)",
+            fontWeight: "var(--ifm-heading-font-weight)" as any,
             marginBottom: "0.25rem",
           }}
         >
