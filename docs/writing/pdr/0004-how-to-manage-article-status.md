@@ -44,7 +44,7 @@ Google Docsで管理を採用した。なぜなら、
 - Bad: 対応期限でソートが難しい
 - Bad: **GitBookはマージするまで最新情報が伝わらないので難しい**
 
-**GitHub Issuesで管理**
+### GitHub Issuesで管理
 
 - Good: スケールしそう
 - Bad: 今今の人数だと手間のほうが多そう

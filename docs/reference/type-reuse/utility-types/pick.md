@@ -3,8 +3,6 @@ description: 任意のプロパティだけを持つオブジェクト型を作�
 title: "Pick<T, Keys>"
 ---
 
-# Pick&lt;T, Keys>
-
 `Pick<T, Keys>`は、型`T`から`Keys`に指定したキーだけを含むオブジェクト型を返すユーティリティ型です。
 
 ## Pick&lt;T, Keys>の型引数

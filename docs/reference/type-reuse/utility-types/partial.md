@@ -3,8 +3,6 @@ description: 全プロパティをオプショナルにする
 title: Partial<T>
 ---
 
-# Partial&lt;T>
-
 `Partial<T>`は、オブジェクト型`T`のすべてのプロパティをオプションプロパティにするユーティリティ型です。
 
 ## Partial&lt;T>の型引数

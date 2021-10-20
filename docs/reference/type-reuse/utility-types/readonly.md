@@ -3,8 +3,6 @@ description: 全プロパティを読み取り専用にする
 title: Readonly<T>
 ---
 
-# Readonly&lt;T>
-
 `Readonly<T>`は、オブジェクト型`T`のプロパティをすべて読み取り専用にするユーティリティ型です。
 
 ## Readonly&lt;T>の型引数

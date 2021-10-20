@@ -74,7 +74,7 @@ list.append(grape);
 
 今度は宣言的な書き方を見てみましょう。次はReactでの書き方です。
 
-```javascript
+```jsx
 function Fruits() {
   return (
     <ul>
@@ -146,7 +146,7 @@ npm run start
 
 ひながた初期状態の上のページはsrc/App.tsxの内容が描画されています。ためしに、src/App.tsxを変更してみましょう。App.tsxの`<header>`要素の中身を消して、そこにお好きな文言に書き加えてみてください。ここでは「TypeScriptはいいぞ」に書き換えてみます。
 
-```typescript title="App.tsx"
+```tsx title="App.tsx"
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
@@ -162,9 +162,7 @@ function App() {
 export default App;
 ```
 
-:::tip
-
-**ワンポイント解説: .tsxって何？TypeScriptの中にHTMLが書ける？**
+:::tip ワンポイント解説: .tsxって何？TypeScriptの中にHTMLが書ける？
 
 App.tsxを見てこのような疑問を持ったのではないでしょうか。このHTMLに見える部分はJSXと言われるものです。JSXはJavaScriptを拡張した言語で、JavaScriptの中にXMLを直接書けるようにしたものです。XMLとHTMLは厳密には異なりますが、ここでは同じものと考えてください。
 
@@ -186,7 +184,7 @@ JSXを書いたJavaScriptファイルは拡張子を.jsxにします。同様に
 
 まず、先ほど「TypeScriptはいいぞ」と書いたところを`<LikeButton />`に変えます。次に、`LikeButton`関数を作ります。次のコードのようになるようにしてください。
 
-```typescript title="App.tsx"
+```tsx {7-9,14-16} title="App.tsx"
 import React from "react";
 import "./App.css";
 
@@ -209,9 +207,7 @@ export default App;
 
 この`LikeButton`関数が、これからいいねボタンを作っていく場所になります。
 
-:::tip
-
-**ワンポイント解説: 関数コンポーネント**
+:::tip ワンポイント解説: 関数コンポーネント
 
 ReactのJSXでは、HTMLタグの`div`や`header`が使えるだけでなく、自分で定義した関数もタグとして使うことができます。上で定義した`LikeButton`関数はその一例です。JSXを戻り値として返す関数だけがタグとして使えます。上の例では、`span`タグが戻り値になっているのがわかると思います。
 
@@ -227,7 +223,7 @@ JSXを戻り値にする関数をReact用語で「関数コンポーネント」
 
 まずは、`LikeButton`関数の`span`タグのテキストを`♥ {count}`にします。この`count`は変数なので、その変数も一緒に定義します。
 
-```typescript title="App.tsx"
+```tsx {3} title="App.tsx"
 function LikeButton() {
   const count = 999;
   return <span>♥ {count}</span>;
@@ -238,16 +234,14 @@ function LikeButton() {
 
 次に、CSSのクラスを割り当てるために、`span`タグに`className`属性を追加します。
 
-```typescript title="App.tsx"
+```tsx {3} title="App.tsx"
 function LikeButton() {
   const count = 999;
   return <span className="likeButton">♥ {count}</span>;
 }
 ```
 
-:::tip
-
-**ワンポイント解説: class属性は使わない？**
+:::tip ワンポイント解説: class属性は使わない？
 
 HTMLではCSSクラスを指定するのに`class`属性を用いるので、ここで`className`属性にしていることに驚いたのではないでしょうか。これは初期のReactがDOMプロパティに直接値をセットしていた名残りです。DOMでは、HTMLの`class`属性が`className`プロパティになります。現在は、ReactがDOMプロパティを直接セットすることがなくなったので、`className`属性に縛られる技術的理由はないのですが、React開発陣は`class`属性への乗り換えは慎重のようです。これまで作られたコンポーネントが動かなくなるかも知れないからです。また、両方サポートする気もないようです。`class`と`className`のどちらもOKとなると混乱を招くからです。
 
@@ -269,18 +263,17 @@ App.cssに上の内容を書いたら、ブラウザで確認してみましょ�
 
 ![スタイルが効いている様子](../assets/20201113200816-2x.png)
 
-:::caution
-
-**トラブルシューティング**
+:::caution トラブルシューティング
 
 App.cssはApp.tsxで`import`しているので特に何もしなくても`LikeButton`コンポーネントのスタイルに反映されます。もし、スタイルが反映されていないようなら、App.tsxにApp.cssを`import`するコードがあるか確認してください。
 
-```typescript title="App.tsx"
-import React from 'react';
-import './App.css'; // この行があるか確認する
+```tsx {2} title="App.tsx"
+import React from "react";
+import "./App.css"; // この行があるか確認する
 
 function App() {
-    // ...
+  // ...
+}
 ```
 
 :::
@@ -293,7 +286,7 @@ function App() {
 
 現状のボタンは`count`変数を表示していますが、この変数は固定値になっています。この値が変動できるように、Reactの`useState`関数を使い、カウント数の状態をReactに管理させるようにします。
 
-```typescript title="App.tsx"
+```tsx {1,7} title="App.tsx"
 import React, { useState } from "react";
 //            ^^^^^^^^^^^^ ここも追加
 
@@ -309,7 +302,7 @@ function LikeButton() {
 
 次に、`span`要素をクリックしたときに、`count`の値を増加する`handleClick`関数を実装します。この関数では、現在の`count`の値に1を足した値を`setCount`関数に渡すようにします。そして、`span`要素の`onClick`属性に`handleClick`関数を渡します。
 
-```typescript
+```tsx {3-5,7} title="App.tsx"
 function LikeButton() {
   const [count, setCount] = useState(999);
   const handleClick = () => {

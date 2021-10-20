@@ -19,7 +19,7 @@ const person = new Person();
 
 このように`class`でクラスを定義し、`new`でインスタンスを生成するスタイルは、JavaやPHP、Rubyなどと使用感がよく似ています。
 
-## クラスの型注釈 <a id="type-annotation-of-class"></a>
+## クラスの型注釈
 
 TypeScriptでは、クラスを定義するとクラス名と同じ名前の型が同時に定義されます。インスタンスを代入する変数に型注釈するには、クラス名を使います。
 

@@ -43,7 +43,7 @@ description: 本書の利用者、及び執筆者のライセンスについて
 [Creative Commons — 表示 - 継承 3.0 非移植 — CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.ja) を採用した。
 商用利用も許可する。**Linuxの精神に則り CC BY-SA に決定**する。
 
-**採用した理由**
+#### 採用した理由
 
 - **商用利用が可能**
   - Linuxと同じ考え。昔はCDで焼ける人が限定的だったため雑誌にCDがバンドルされていた。つまりは売られていた。売っても良しとすることで広い利用を促す。

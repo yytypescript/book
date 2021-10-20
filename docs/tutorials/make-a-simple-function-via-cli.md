@@ -53,7 +53,7 @@ TypeScriptを使うと、コーディングの時点でこのような型の不�
 ファイル名の変更は拡張子を`.js`から`.ts` に変更するだけです。
 
 ```bash
-$ mv increment.js increment.ts
+mv increment.js increment.ts
 ```
 
 これをエディターで開くと`increment()`の引数にあたる`num`のところで何か言われます。
@@ -83,7 +83,7 @@ Argument of type '"1"' is not assignable to parameter of type 'number'.`
 ひとまずこの警告を完全無視してコンパイルをしてみます。
 
 ```bash
-$ tsc increment.ts
+tsc increment.ts
 ```
 
 やはり警告が出てしまいます。

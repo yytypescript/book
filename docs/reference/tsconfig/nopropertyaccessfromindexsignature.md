@@ -1,6 +1,6 @@
 # noPropertyAccessFromIndexSignature
 
-**リリースされたバージョン: 4.2**
+リリースされたバージョン: 4.2
 
 `noUncheckedIndexedAccess` と同様にインデックス型を持つオブジェクトに対する型評価です。インデックス型に対するアクセスをインデックス記法に強制します。
 

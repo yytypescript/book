@@ -1,8 +1,6 @@
 # 🚧Next.jsで○○を作ろう
 
-:::caution
-
-**執筆中**
+:::caution 執筆中
 
 Next.js+TypeScriptで簡単なウェブアプリケーションを作るチュートリアルを書く。
 

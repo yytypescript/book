@@ -35,7 +35,7 @@ distance(q1);
 
 この問題を解消したのが次のふたつです。
 
-### 省略時の初期化処理を書く
+## 省略時の初期化処理を書く
 
 ```typescript
 function distance(p1: Point, p2?: Point): number {

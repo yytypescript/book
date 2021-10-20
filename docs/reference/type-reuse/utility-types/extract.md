@@ -3,8 +3,6 @@ description: 任意の型だけを抽出する
 title: "Extract<T, U>"
 ---
 
-# Extract&lt;T, U>
-
 `Extract<T, U>`は、ユニオン型`T`から`U`で指定した型だけを抽出した型を返すユーティリティ型です。
 
 ## Extract&lt;T, U>の型引数

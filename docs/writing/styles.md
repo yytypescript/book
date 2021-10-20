@@ -23,7 +23,7 @@ description: みんなで執筆しても同じような文体になるように�
 > 🙆🏻‍♂️ 強調するためにcode記法を使ってはいけません。
 > ❌ 強調するために`code記法`を使ってはいけません。
 
-## Capitalization <a id="firstHeading"></a>
+## Capitalization
 
 ### 英単語は小文字にする
 

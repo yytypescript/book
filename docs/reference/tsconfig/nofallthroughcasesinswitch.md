@@ -1,6 +1,6 @@
 # noFallthroughCasesInSwitch
 
-**リリースされたバージョン: 1.8**
+リリースされたバージョン: 1.8
 
 `fallthrough`とは`switch`でにおける `case` 文で`break`または`return`を行わないことを意味します。 `case` 文が空でない場合に限り `break` や `return` が行われているかを厳密に評価します。
 
