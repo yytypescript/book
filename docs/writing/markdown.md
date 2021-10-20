@@ -4,7 +4,7 @@
 
 ## Frontmatter
 
-ページのメタ情報や設定をfrontmatterに書くことができます。frontmatterはYAML形式です。
+必要に応じてページのメタ情報や設定をfrontmatterに書くことができます。frontmatterはYAML形式です。
 
 ```yaml
 ---
@@ -14,12 +14,13 @@ slug: /reference/function
 
 利用可能な設定は次のものがあります。
 
-| キー            | 型         | 説明                                                                                                   | デフォルト値       |
-| --------------- | ---------- | ------------------------------------------------------------------------------------------------------ | ------------------ |
-| `sidebar_label` | `string`   | サイドバーや前後ページナビゲーション、サイト内リンクブロックに表示されるページタイトル                 | 最初の見出しの内容 |
-| `slug`          | `string`   | ページのURLのパス部分                                                                                  | ファイル名         |
-| `tags`          | `string[]` | ページのタグ                                                                                           | `[]`               |
-| `description`   | `string`   | ページの要約。`<meta name="description" content="..."/>`やサイト内リンクブロックの説明として使われる。 | 最初の段落の内容   |
+| キー            | 型         | 説明                                                                                                                                                                    |
+| --------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sidebar_label` | `string`   | サイドバーや前後ページナビゲーション、サイト内リンクブロックに表示されるページタイトルです。指定しない場合、最初の見出しの内容がサイドバーに表示されます。              |
+| `slug`          | `string`   | ページのURLのパス部分。指定しない場合、ファイル名から拡張子を除いたものが`slug`になります。                                                                             |
+| `tags`          | `string[]` | ページのタグ。デフォルト値は`[]`です。                                                                                                                                  |
+| `description`   | `string`   | ページの要約。`<meta name="description" content="..."/>`やサイト内リンクブロックの説明として使われる。指定しない場合、コンテンツの最初の段落が`description`になります。 |
+| `title`         | `string`   | ページのタイトル。これを指定した場合、Markdownに見出しをつける必要はありません。                                                                                        |
 
 ```yaml
 ---
@@ -103,7 +104,7 @@ Markdownのリンクテキストは無視され、リンク先のタイトルが
 
 ## コードブロック
 
-コードブロックは言語名を適切に指定します。
+コードブロックは言語名を指定すると、シンタックスハイライトが効きます。
 
 ````markdown
 ```typescript
@@ -114,8 +115,14 @@ Markdownのリンクテキストは無視され、リンク先のタイトルが
 使用可能な言語は次のとおりです。
 
 - [Prisimでデフォルトで有効になっているもの](https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js)
-- [docusaurus.config.js](../../docusaurus.config.js)の`additionalLanguages`で追加で有効にしたもの
+- [docusaurus.config.js](https://github.com/yytypescript/book/blob/master/docusaurus.config.js)の`additionalLanguages`で追加で有効にしたもの
   - 必要に応じて追加できます。
+
+:::caution JSX/TSXのハイライト
+
+JSXを含むJavaScriptやTypeScriptは、`jsx`や`tsx`を用いてください。`javascript`や`typescript`ではJSX部分がうまくハイライトされません。
+
+:::
 
 ### コードブロックのタイトル
 
@@ -146,6 +153,40 @@ Markdownのリンクテキストは無視され、リンク先のタイトルが
 2行目
 3行目
 4行目
+```
+
+### 行ハイライト
+
+特定の行に注目してもらいたいときは、行番号を書くとその行の背景色を変えられます。
+
+````markdown
+```jsx {1,4-6,11} title="行ハイライトの表示例"
+import React from "react";
+
+function MyComponent(props) {
+  if (props.isBar) {
+    return <div>Bar</div>;
+  }
+
+  return <div>Foo</div>;
+}
+
+export default MyComponent;
+```
+````
+
+```jsx {1,4-6,11} title="行ハイライトの表示例"
+import React from "react";
+
+function MyComponent(props) {
+  if (props.isBar) {
+    return <div>Bar</div>;
+  }
+
+  return <div>Foo</div>;
+}
+
+export default MyComponent;
 ```
 
 ### サンプルコードの自動整形

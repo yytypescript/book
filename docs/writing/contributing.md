@@ -4,7 +4,7 @@ description: あなたが本書に貢献できること。
 
 # CONTRIBUTING
 
-本書の執筆には、TypeScripterのための座談会「YYTypeScript」の参加者を中心に、オープンソース的に複数人のライターが参加しています。本書をお読み下さった読者の方も、執筆に参加することができます。このページでは、どのような参加方法があるのか説明します。
+本書の執筆には、TypeScripterのための座談会「YYTypeScript」の参加者を中心に、オープンソース的に複数人のライターが参加しています。本書をお読み下さった読者の方も、執筆をはじめ、さまざまな方法で本プロジェクトに参画できます。このページでは、どのような参加方法があるのか説明します。
 
 ## 感想を伝える
 
@@ -42,23 +42,11 @@ description: あなたが本書に貢献できること。
     - 内容の追記
   - 既存ページにコメントする
 
-### 執筆のための準備
+### 執筆会Discordに参加する
 
-- Discordに参加する。
-  - こちらのURLから参加できます→ <https://discord.gg/DTwRgzt>
-- gitbook.comのYYTypeScriptチームに参加する。(執筆をgitbook.comのエディターで行っているため)
-  - 参加申し込みはこちら→[Join YYTypeScript - GitBook](https://app.gitbook.com/invite/yyts?invite=-Lw1ObCW8Ut0NnNfHG1w)
-- PDRを理解する。
-  - PDR(publishers' decision record; 出版者意思決定記録)は、これまで執筆に関して合意してきた意思決定が記録されています。執筆前にざっと目を通しておいてください。
+執筆会にはDiscordがあります。
 
-[PDR](pdr/README.md)
-
-### 新規ページを書く
-
-1. 🚧マークがついているページから書きたいページを選ぶ。
-2. 執筆意思表示する: Discordのチャットでどこどこを書きますと発言する。
-3. gitbook.comで、執筆を開始する。
-4. 執筆完了したら、Mergeする。(レビューは不要)
+こちらのURLから参加できます→ <https://discord.gg/DTwRgzt>
 
 ## 意思決定に参加する
 
@@ -71,26 +59,3 @@ description: あなたが本書に貢献できること。
 ### 意思決定プロセス
 
 しっかりとしたプロセスはまだありません。今の所ふわっと合意できれば決定します。
-
-## 校正チェック
-
-このプロジェクトでは[textlint](https://textlint.github.io/)による校正チェックを導入しています。
-
-`npm run textlint`を実行すると文章に対する校正チェックを実行できます。
-
-```bash
-npm run textlint
-```
-
-`npm run textlint:fix`を実行することで文章の校正チェックでエラーとなっている箇所を自動修正できます。
-
-```bash
-npm run textlint:fix
-```
-
-### 表記揺れの統一
-
-表記揺れを発見された場合は、[prh/yytypescript.yml](https://github.com/yytypescript/book/blob/master/prh/yytypescript.yml)にルールを追加してください。
-
-prhの設定ファイルの書き方は次のページを参照してください。
-[prh/prh](https://github.com/prh/prh)

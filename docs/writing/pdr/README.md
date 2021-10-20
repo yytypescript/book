@@ -1,17 +1,15 @@
 ---
-description: >-
-  PDR(publishers' decision record;
-  出版者意思決定記録)とは、書き手にとって重要な意思決定と、それを取り巻く文脈、その影響について記録する文書である。
-sidebar_label: 概要
+sidebar_label: PDRとは
 slug: /writing/pdr
 ---
 
 # PDR
 
-- **P**ublisher's **D**ecision **R**ecord; 出版者意思決定記録
-- YYTSでの造語
-- 元は Architecture Decision Record
-  - [アーキテクチャの「なぜ？」を記録する！ADRってなんぞや？ - Qiita](https://qiita.com/fuubit/items/dbb22435202acbe48849)
+PDRは**P**ublisher's **D**ecision **R**ecordの略で、これまでコミュニティがどんな意思決定をしたかを記録したものです。
+
+プロジェクトに後から参加した人にとって、本プロジェクトの方針や執筆に使うツール、文体、技術スタックなどが「どうしてそれが選ばれたのか？」「どのような経緯でそうなったのか？」といったことがわかりにくくなります。
+
+PDRはそのような「なぜ」への答えになるよう、決定したことだけでなく、背景と理由、そして検討した代替手段などについて書きます。
 
 ## PDR一覧
 

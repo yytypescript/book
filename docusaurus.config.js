@@ -85,8 +85,13 @@ const { pageRef } = require("./src/remark/pageRef");
               title: "執筆に参加したい方",
               items: [
                 { label: "概要", to: "/writing/writing" },
-                { label: "執筆をはじめる", to: "/writing/start-writing" },
-                // { label: "Markdown", to: "/writing/markdown" },
+                { label: "CONTRIBUTING", to: "/writing/contributing" },
+                {
+                  label: "はじめて執筆する方へ",
+                  to: "/writing/getting-started",
+                },
+                { label: "執筆の流れ", to: "/writing/how-to-change" },
+                { label: "Markdown", to: "/writing/markdown" },
                 { label: "PDR", to: "/writing/pdr" },
               ],
             },
