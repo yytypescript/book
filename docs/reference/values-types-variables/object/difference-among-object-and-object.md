@@ -90,4 +90,4 @@ a = undefined; // NG
 
 `object`型や`Object`型、`{}`型の代入範囲をまとめると次の図のようになります。
 
-![](../../../assets/cleanshot-2021-09-27-at-12.06.52.png)
+![](difference-among-object-and-object/image1.png)
