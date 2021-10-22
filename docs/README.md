@@ -1,5 +1,6 @@
 ---
 slug: /
+image: /img/ogp.png
 ---
 
 # はじめに
