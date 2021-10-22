@@ -23,7 +23,7 @@ JavaScriptやTypeScriptのコードには`?.`のような記号や`as`のよう�
 
 ### `!` 非Nullアサーション (non-null assertion operator) ![ts]
 
-値がnullやundefinedでないことを宣言し、 コンパイラーに値を非Nullとして解釈させます。
+値がnullやundefinedでないことを宣言し、コンパイラーに値を非Nullとして解釈させます。
 
 ```typescript
 function firstChar(text: string | undefined) {
@@ -32,7 +32,7 @@ function firstChar(text: string | undefined) {
 }
 ```
 
-### `!` Definite Assignment Assertion演算子 ![ts]
+### `!` Definite Assignment Assertion演算子 (definite assignment assertion operator) ![ts]
 
 クラスのプロパティが型アノテーションで示された型でセットされていることをコンパイラーに伝える記号です。
 
@@ -121,9 +121,9 @@ console.log(a & b); // 00000001
 // 出力: 1
 ```
 
-### `&` インターセクション型 ![ts]
+### `&` インターセクション型 (intersection type) ![ts]
 
-複数の型を組み合わせたインターセクション型を定義する。
+複数の型を組み合わせたインターセクション型を定義します。
 
 ```typescript
 interface Swordsman {
@@ -151,7 +151,7 @@ console.log(a); // 00000001
 
 ### `&&` 論理積 (logical and) ![js]
 
-すべての真偽値が `true` のときに `true` を返します。そうでない場合に `false` を返します。
+すべての真偽値が`true`のときに`true`を返します。そうでない場合に`false`を返します。
 
 ### `&&=` 論理積代入 (logical and assignment) ![js]
 
@@ -246,9 +246,9 @@ Number型に変換します。
 
 ### `+` 修飾子の付加 ![ts]
 
-`readonly`や`?`などの修飾子を追加する。
+`readonly`や`?`などの修飾子を追加します。
 
-何も指定しない場合は暗黙的に`+`が付与されるので `+`を実際に利用する機会はおそらくありません。
+何も指定しない場合は暗黙的に`+`が付与されるので`+`を実際に利用する機会はおそらくありません。
 
 ```typescript
 type MyPartial<T> = {
@@ -469,7 +469,7 @@ const object = { a: 1, b: 2, c: 3, d: 4 };
 
 `a ? b : c`のような三項演算子のelseを表すのに用いられる記号です。
 
-### `:` 型アノテーション ![ts]
+### `:` 型アノテーション (type annotation) ![ts]
 
 変数の型アノテーションに用いられる記号です。
 
@@ -489,7 +489,7 @@ function numberToString(x: number): string {
 
 左の値が右の値よりも小さいか判定します。
 
-### `<` ジェネリクス ![ts]
+### `<` ジェネリクス (generic) ![ts]
 
 ジェネリクスの型引数の開始に用いられる記号です。
 
@@ -510,7 +510,7 @@ function Hello() {
 }
 ```
 
-### `<` 型アサーション ![ts]
+### `<` 型アサーション (type assertion) ![ts]
 
 型アサーションに用いられる記号です。`as`の別の書き方です。
 
@@ -612,13 +612,13 @@ console.log(a >>> b); // 00011111111111111111111111111111
 
 ### `>>>=` 符号なし右シフト代入 (unsigned right shift assignment) ![js]
 
-左の変数の値のビットを右の値の数だけ右にずらした結果を左の変数に割り当てます。左に入る符号ビットは常に 0 になります。
+左の変数の値のビットを右の値の数だけ右にずらした結果を左の変数に割り当てます。左に入る符号ビットは常に0になります。
 
 ### `?` 三項演算子の一部 (conditional operator) ![js]
 
 三項演算子`a ? b : c`の一部で、条件式の終わりに置かれる記号です。
 
-### `?` オプション修飾子 ![ts]
+### `?` オプション修飾子 (optional property) ![ts]
 
 オブジェクトのプロパティを任意プロパティとして定義します。
 
@@ -639,7 +639,7 @@ func(); // xがなくてもOK
 
 ### `?.` オプショナルチェーン (optional chaining) ![js]
 
-プロパティのアクセス元が `null` または `undefined` のときにエラーを発生させずに `undefined` を返します。
+プロパティのアクセス元が`null`または`undefined`のときにエラーを発生させずに`undefined`を返します。
 
 ```javascript
 const user = null;
@@ -649,7 +649,7 @@ console.log(user?.name); // undefined
 
 ### `??` Null合体 (nullish coalescing operator) ![js]
 
-左の値が `null` または `undefined` のときに右の値を返します。そうでない場合は左の値を返します。
+左の値が`null`または`undefined`のときに右の値を返します。そうでない場合は左の値を返します。
 
 ```javascript
 console.log(undefined ?? 1); // 1
@@ -658,7 +658,7 @@ console.log(2 ?? 1); // 2
 
 ### `??=` Null合体代入 (logical nullish assignment) ![js]
 
-左の変数の値が null または undefined の場合のみ右の値を左の変数に割り当てます。
+左の変数の値が`null`または`undefined`の場合のみ右の値を左の変数に割り当てます。
 
 ```javascript
 const user1 = { name: undefined };
@@ -670,7 +670,7 @@ user2.name ??= "taro";
 console.log(user2.name); // kaori
 ```
 
-### `@` デコレーター ![ts]
+### `@` デコレーター (decorator) ![ts]
 
 デコレーターはクラスやクラスメンバーに注釈を追加するもので、デコレーターを使うのに用いられる記号です。
 
@@ -705,7 +705,7 @@ function func([first, ...rest]) {
 func([1, 2, 3]); // 1 [ 2, 3 ]
 ```
 
-### `[` インデックス型 ![ts]
+### `[` インデックス型 (index signature) ![ts]
 
 インデックス型(index signature)の開始に用いられる記号です。
 
@@ -717,7 +717,7 @@ type StringKeysAndStringValues = {
 
 [インデックス型 (index signature)](reference/values-types-variables/object/index-signature.md)
 
-### `[]` 配列型 ![ts]
+### `[]` 配列型 (array type) ![ts]
 
 配列型を表現するのに用いられる記号です。
 
@@ -777,7 +777,7 @@ const hyakuman = 1_000_000;
 `string text`;
 ```
 
-### `{` ブロック文 ![js]
+### `{` ブロック文 (block) ![js]
 
 if文やfor文などの構文に付随して使われる記号です。
 
@@ -800,7 +800,7 @@ if文やfor文などの構文を伴わないブロック文は、単に変数の
 }
 ```
 
-### `{` オブジェクトの分割代入 ![js]
+### `{` オブジェクトの分割代入 (destructuring assignment) ![js]
 
 オブジェクトの分割代入に用いられる記号です。
 
@@ -816,9 +816,9 @@ function func({ a, b, ...rest }) {
 func(object); // 1 2 { c: 3, d: 4 }
 ```
 
-### `|` ビット論理和 ![js]
+### `|` ビット論理和 (bitwise or) ![js]
 
-左の値と右の値でどちらのビットが1である位置のビットを1に します。
+左の値と右の値でどちらのビットが1である位置のビットを1にします。
 
 ```javascript
 const a = 0b010;
@@ -826,9 +826,9 @@ const b = 0b101;
 console.log((a | b) === 0b111); // true
 ```
 
-### `|` ユニオン型 ![ts]
+### `|` ユニオン型 (union type) ![ts]
 
-複数の型を組み合わせたユニオン型を定義する。
+複数の型を組み合わせたユニオン型を定義します。
 
 ```typescript
 type ID = string | number;
@@ -837,19 +837,19 @@ const id2 = 100; // OK
 const id3 = true; // ERROR
 ```
 
-### `|=` ビット論理和代入 ![js]
+### `|=` ビット論理和代入 (bitwise or assignment) ![js]
 
 左の変数の値と右の値でどちらかがのビットが1である位置のビットを1にした結果を左の変数に割り当てます。
 
-### `||` 論理和 ![js]
+### `||` 論理和 (logical or) ![js]
 
-ひとつでも真偽値が `true` のときに `true` を返します。そうでない場合に `false` を返します。
+ひとつでも真偽値が`true`のときに`true`を返します。そうでない場合に`false`を返します。
 
-### `||=` 論理和代入 ![js]
+### `||=` 論理和代入 (logical or assignment) ![js]
 
 左の変数の真偽値と右の真偽値の論理和の結果を左の変数に割り当てます。
 
-### `~` ビット否定演算子 ![js]
+### `~` ビット否定演算子 (bitwise not) ![js]
 
 ビットを反転します。
 
@@ -875,11 +875,11 @@ Math.ceil(-1.5); // -1
 
 ## キーワード
 
-### `as` 型アサーション ![ts]
+### `as` 型アサーション (type assertion) ![ts]
 
 TypeScriptコンパイラーが解釈した型を上書きする「型アサーション」に用いられるキーワードです。
 
-### `is` 型アサーション関数の一部 ![ts]
+### `is` 型アサーション関数の一部 (user-defined type guard) ![ts]
 
 型ガードに用いる型アサーション関数の戻り値の型アノテーション部分に用いられるキーワードです。
 
@@ -887,11 +887,11 @@ TypeScriptコンパイラーが解釈した型を上書きする「型アサー�
 function isDuck(animal: Animal): animal is Duck {}
 ```
 
-### `keyof` keyof型演算子 ![ts]
+### `keyof` keyof型演算子 (keyof) ![ts]
 
 オブジェクト型からプロパティ名を型として返す型演算子です。
 
-### `n` bigintリテラル ![js]
+### `n` bigintリテラル (bigint literal) ![js]
 
 数字がbigintリテラルであることを表すのに用いる記号です。
 
@@ -899,7 +899,7 @@ function isDuck(animal: Animal): animal is Duck {}
 100n; // bigint型の100
 ```
 
-### `typeof` typeof演算子 ![js]
+### `typeof` typeof演算子 (typeof) ![js]
 
 与えられた値の型を表す文字列を返します。
 
@@ -907,6 +907,6 @@ function isDuck(animal: Animal): animal is Duck {}
 console.log(typeof 123); // "number"
 ```
 
-### `typeof` typeof型演算子 ![ts]
+### `typeof` typeof型演算子 (typeof) ![ts]
 
 変数から型を抽出する演算子です。
