@@ -44,6 +44,7 @@
     "@mdx-js/react": "^1.6.21",
     "@svgr/webpack": "^5.5.0",
     "clsx": "^1.1.1",
+    "docusaurus-preset-shiki-twoslash": "^1.1.32",
     "file-loader": "^6.2.0",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.1",

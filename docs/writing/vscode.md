@@ -16,3 +16,7 @@ VS Codeでは次のショートカットキーでMarkdownプレビューが表�
 ## markdownlintプラグイン
 
 [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)プラグインをインストールすると、修正が必要な箇所がわかりやすくなります。
+
+## twoslashプラグイン
+
+[twoslashプラグイン](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-twoslash)をインストールすると、twoslashの補完が効くようになります。

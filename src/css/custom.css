@@ -97,3 +97,70 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 .prism-code .token-line:first-child:nth-last-child(3) ~ .token-line::before {
   display: none;
 }
+
+code {
+  counter-reset: step;
+  counter-increment: step 0;
+}
+
+code .line::before {
+  content: counter(step);
+  counter-increment: step;
+  width: 1rem;
+  margin-right: 1rem;
+  display: inline-block;
+  text-align: right;
+  font-size: 0.85rem;
+  color: rgba(115, 138, 148, 0.4);
+}
+
+code .meta-line::before {
+  content: "";
+  width: 1rem;
+  margin-right: 1rem;
+  display: inline-block;
+}
+
+/* 3行以内のコードブロックは行番号を表示しないスタイル */
+code .line:only-child::before,
+code .line:first-child:nth-last-child(2)::before,
+code .line:first-child:nth-last-child(2) ~ .line::before,
+code .line:first-child:nth-last-child(2) ~ .meta-line::before,
+code .line:first-child:nth-last-child(3)::before,
+code .line:first-child:nth-last-child(3) ~ .line::before,
+code .line:first-child:nth-last-child(3) ~ .meta-line::before {
+  display: none;
+}
+
+[data-theme="light"] .shiki.min-dark {
+  display: none;
+}
+
+[data-theme="dark"] .shiki.min-light {
+  display: none;
+}
+
+pre .popover,
+pre .error,
+pre .error-behind,
+pre .inline-completions {
+  font-size: 0.85rem;
+}
+
+pre .error {
+  background-color: var(--ifm-color-danger-contrast-background) !important;
+  color: var(--ifm-font-color-base) !important;
+}
+
+pre .inline-completions ul.dropdown {
+  width: auto !important;
+}
+
+pre .inline-completions ul.dropdown li {
+  margin-right: 1rem;
+}
+
+pre code {
+  word-wrap: normal;
+  white-space: nowrap;
+}
