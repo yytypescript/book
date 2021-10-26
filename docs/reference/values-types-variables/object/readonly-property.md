@@ -6,13 +6,13 @@ sidebar_label: オブジェクト型のreadonlyプロパティ
 
 TypeScriptでは、オブジェクトのプロパティを読み取り専用にすることができます。読み取り専用にしたいプロパティには`readonly`修飾子をつけます。読み取り専用のプロパティに値を代入しようとすると、TypeScriptコンパイラーが代入不可の旨を警告するようになります。
 
-```typescript
+```ts twoslash
+// @errors: 2540
 let obj: {
   readonly foo: number;
 };
 obj = { foo: 1 };
 obj.foo = 2;
-//  ^^^ Cannot assign to 'foo' because it is a read-only property.(2540)
 ```
 
 ## readonlyは再帰的ではない
@@ -21,7 +21,8 @@ obj.foo = 2;
 
 たとえば、`foo`プロパティが`readonly`で、`foo.bar`プロパティが`readonly`でない場合、`foo`への代入はコンパイルエラーになるものの、`foo.bar`へ直接代入するのはコンパイルエラーになりません。
 
-```typescript
+```ts twoslash
+// @errors: 2540
 let obj: {
   readonly foo: {
     bar: number;
@@ -33,7 +34,6 @@ obj = {
   },
 };
 obj.foo = { bar: 2 };
-//  ^^^ コンパイルエラー: Cannot assign to 'foo' because it is a read-only property.(2540)
 obj.foo.bar = 2; // コンパイルエラーにはならない
 ```
 
@@ -53,15 +53,19 @@ let obj: {
 
 たとえば、`foo`プロパティを`readonly`指定したコードで、`foo`に代入するコードはコンパイル時にはエラーとして検出されます。
 
-```typescript
+```ts twoslash
+// @errors: 2540
 const obj: { readonly foo: number } = { foo: 1 };
 obj.foo = 2; // コンパイルエラーになる
 ```
 
 しかし、コンパイル後のJavaScriptコードでは、`readonly`の記述がなくなるので、実行時にエラーとして検出されることはありません。
 
-```javascript title="コンパイル後のJavaScriptコード"
-const obj = { foo: 1 };
+```ts twoslash title="コンパイル後のJavaScriptコード"
+// @noErrors
+// @showEmit
+// @alwaysStrict: false
+const obj: { readonly foo: number } = { foo: 1 };
 obj.foo = 2; // 実行時エラーにはならない
 ```
 
