@@ -107,34 +107,26 @@ Markdownのリンクテキストは無視され、リンク先のタイトルが
 コードブロックは言語名を指定すると、シンタックスハイライトが効きます。
 
 ````markdown
-```typescript
+```ts
 // code
 ```
 ````
 
 使用可能な言語は次のとおりです。
 
-- [Prisimでデフォルトで有効になっているもの](https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js)
-- [docusaurus.config.js](https://github.com/yytypescript/book/blob/master/docusaurus.config.js)の`additionalLanguages`で追加で有効にしたもの
-  - 必要に応じて追加できます。
-
-:::caution JSX/TSXのハイライト
-
-JSXを含むJavaScriptやTypeScriptは、`jsx`や`tsx`を用いてください。`javascript`や`typescript`ではJSX部分がうまくハイライトされません。
-
-:::
+- https://github.com/shikijs/shiki/blob/main/docs/languages.md#all-languages
 
 ### コードブロックのタイトル
 
 コードブロックにタイトルをつけるには`title`属性を指定します。
 
 ````markdown
-```typescript title="sample.ts"
+```ts title="sample.ts"
 // sample code
 ```
 ````
 
-```typescript title="sample.ts"
+```ts title="sample.ts"
 // sample code
 ```
 
@@ -142,17 +134,165 @@ JSXを含むJavaScriptやTypeScriptは、`jsx`や`tsx`を用いてください�
 
 4行以上あるコードブロックは行番号が自動で付与されます。
 
-```text
+```markdown
 1行目
 2行目
 3行目
 ```
 
-```text
+```markdown
 1行目
 2行目
 3行目
 4行目
+```
+
+### Twoslash
+
+TwoslashはサンプルコードにTypeScriptコンパイラーから得られる情報を付加する機能です。付加される情報には変数の型、コンパイルエラーのメッセージなどがあります。
+
+#### 変数の型を表示する
+
+`^?`を書くと型推論された変数の型の中身を表示できます。
+
+````markdown
+```ts twoslash
+const point = { x: 135, y: 35 };
+//    ^?
+type ReadonlyPoint = Readonly<typeof point>;
+//   ^?
+```
+````
+
+```ts twoslash title="表示例"
+const point = { x: 135, y: 35 };
+//    ^?
+type ReadonlyPoint = Readonly<typeof point>;
+//   ^?
+```
+
+#### エラーを表示する
+
+`@errors`でコンパイルエラーの内容を表示できます。
+
+````markdown
+```ts twoslash
+// @errors: 7006
+function fn(s) {}
+```
+````
+
+```ts twoslash title="表示例"
+// @errors: 7006
+function fn(s) {}
+```
+
+#### コンパイラーオプションを設定する
+
+`@コンパイラーオプション: 設定値`の形式で書くと、そのコードブロックでのみ効くコンパイラーオプションを設定できます。
+
+````markdown
+```ts twoslash
+// @noImplicitAny: false
+function fn(s) {}
+```
+````
+
+```ts twoslash title="表示例"
+// @noImplicitAny: false
+function fn(s) {}
+```
+
+#### コード補完の再現
+
+`^|`を書いたところにVS Codeでのコード補完の様子を再現できます。
+
+````markdown
+<!--prettier-ignore-->
+```ts twoslash
+// @noErrors
+[1, 2, 3].fin
+//           ^|
+```
+````
+
+<!--prettier-ignore-->
+```ts twoslash title="表示例"
+// @noErrors
+[1, 2, 3].fin
+//           ^|
+```
+
+#### JavaScriptの出力
+
+`@showEmit`でコンパイル結果のJavaScriptコードを表示できます。
+
+````markdown
+```ts twoslash title="表示例"
+// @showEmit
+enum Example {
+  FOO,
+  BAR,
+}
+```
+````
+
+```ts twoslash title="表示例"
+// @showEmit
+enum Example {
+  FOO,
+  BAR,
+}
+```
+
+#### 型定義ファイルの出力
+
+TypeScriptソースコードを型定義ファイルに変換した結果を表示できます。
+
+````markdown
+```ts twoslash
+// @declaration: true
+// @showEmit
+// @showEmittedFile: index.d.ts
+
+export function getStringLength(value: string) {
+  return value.length;
+}
+```
+````
+
+```ts twoslash title="表示例"
+// @declaration: true
+// @showEmit
+// @showEmittedFile: index.d.ts
+
+export function getStringLength(value: string) {
+  return value.length;
+}
+```
+
+#### インラインハイライト(下線)
+
+下線`^^`を引いた部分がハイライトされます。これは未対応で、下線コメントが消えるだけです。
+
+````markdown
+```ts twoslash
+function greet(person: string, date: Date) {
+  console.log(`Hello ${person}, today is ${date.toDateString()}!`);
+}
+
+greet("Maddison", new Date());
+//                ^^^^^^^^^^
+```
+````
+
+```ts twoslash title="表示例"
+function greet(person: string, date: Date) {
+  console.log(`Hello ${person}, today is ${date.toDateString()}!`);
+}
+
+greet("Maddison", new Date());
+//                ^^^^^^^^^^
 ```
 
 ### 行ハイライト
@@ -160,7 +300,7 @@ JSXを含むJavaScriptやTypeScriptは、`jsx`や`tsx`を用いてください�
 特定の行に注目してもらいたいときは、行番号を書くとその行の背景色を変えられます。
 
 ````markdown
-```jsx {1,4-6,11} title="行ハイライトの表示例"
+```js twoslash {1,4-6,11} title="行ハイライトの表示例"
 import React from "react";
 
 function MyComponent(props) {
@@ -175,7 +315,7 @@ export default MyComponent;
 ```
 ````
 
-```jsx {1,4-6,11} title="行ハイライトの表示例"
+```js twoslash {1,4-6,11} title="行ハイライトの表示例"
 import React from "react";
 
 function MyComponent(props) {
@@ -195,24 +335,24 @@ export default MyComponent;
 
 自動整形をされたくないコードブロック場合は、`<!--prettier-ignore-->`を直前に書きます。
 
-````markdown {5}
-```typescript
+````markdown {4}
+```ts
 f = x => x;
 ```
 
 <!--prettier-ignore-->
-```typescript
+```ts
 f = x => x;
 ```
 ````
 
-````markdown {2,7} title="整形結果"
-```typescript
+````markdown {1,6} title="整形結果"
+```ts
 f = (x) => x;
 ```
 
 <!--prettier-ignore-->
-```typescript
+```ts
 f = x => x;
 ```
 ````

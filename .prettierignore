@@ -9,3 +9,4 @@
 /.docusaurus
 /build
 pnpm-lock.yaml
+/.cache
