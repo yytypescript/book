@@ -6,26 +6,33 @@ sidebar_label: オブジェクト型のオプションプロパティ
 
 TypeScriptで、オブジェクトプロパティのオプショナルさを型付けするには、プロパティ名の後ろに`?`を書きます。
 
-```typescript
+```ts twoslash
 let size: { width?: number };
 ```
 
 オプションプロパティを持ったオブジェクト型には、そのオプションプロパティを持たないオブジェクトを代入できます。
 
-```typescript
+```ts twoslash
+let size: { width?: number };
+// ---cut---
 size = {}; // OK
 ```
 
 また、オプションプロパティの値が`undefined`のオブジェクトも代入できます。
 
-```typescript
+```ts twoslash
+let size: { width?: number };
+// ---cut---
 size = { width: undefined }; // OK
 ```
 
 しかし、オプションプロパティの値が`null`の場合は代入できません。
 
-```typescript
-size = { width: null }; // コンパイルエラー
+```ts twoslash
+// @errors: 2322
+let size: { width?: number };
+// ---cut---
+size = { width: null };
 ```
 
 ## 関連情報

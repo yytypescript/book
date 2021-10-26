@@ -20,7 +20,7 @@ Reactは仮想DOMという考えを採用しています。仮想DOMを理解す
 
 プログラマがDOMを操作すると、間接的にHTMLが書き換えられ、その結果が画面に描画されます。動的なUIはこのような仕掛けで成り立っているのです。
 
-```javascript
+```js
 // <input id="email">の文字色を赤色にするDOM操作の例
 const emailInput = document.getElementById("email");
 emailInput.style.color = "red";
@@ -36,7 +36,7 @@ Reactの2つ目の特徴はUIを宣言的に書けるという点です。React�
 
 次のHTMLような簡単なリストを例に、命令的なコードと宣言的なコードとでどのように違ってくるか見ていきましょう。
 
-```markup
+```html
 <ul>
   <li>リンゴ</li>
   <li>オレンジ</li>
@@ -74,7 +74,7 @@ list.append(grape);
 
 今度は宣言的な書き方を見てみましょう。次はReactでの書き方です。
 
-```jsx
+```js
 function Fruits() {
   return (
     <ul>
@@ -112,13 +112,13 @@ Reactでは、小さいコンポーネントを組み合わせて、大きなア
 
 まず、`npx create-react-app`コマンドでReactプロジェクトのひながたを生成します。
 
-```bash
+```sh
 npx create-react-app like-button --template typescript
 ```
 
 1分ほどするとひながたの生成が完了します。like-buttonディレクトリが生成されるので、そのディレクトリに移動すると、ひながたが生成されているのが分かります。
 
-```bash
+```sh
 cd ./like-button
 ls -la
 drwxr-xr-x    - suin 23 Oct 20:28 .git
@@ -134,7 +134,7 @@ drwxr-xr-x    - suin 23 Oct 20:21 src
 
 このディレクトリにて`npm run start`を実行すると、Reactのローカル開発サーバーが起動します。
 
-```bash
+```sh
 npm run start
 ```
 
@@ -146,7 +146,7 @@ npm run start
 
 ひながた初期状態の上のページはsrc/App.tsxの内容が描画されています。ためしに、src/App.tsxを変更してみましょう。App.tsxの`<header>`要素の中身を消して、そこにお好きな文言に書き加えてみてください。ここでは「TypeScriptはいいぞ」に書き換えてみます。
 
-```tsx title="App.tsx"
+```ts title="App.tsx"
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
@@ -184,7 +184,7 @@ JSXを書いたJavaScriptファイルは拡張子を.jsxにします。同様に
 
 まず、先ほど「TypeScriptはいいぞ」と書いたところを`<LikeButton />`に変えます。次に、`LikeButton`関数を作ります。次のコードのようになるようにしてください。
 
-```tsx {7-9,14-16} title="App.tsx"
+```tsx twoslash {7-9,14-16} title="App.tsx"
 import React from "react";
 import "./App.css";
 
@@ -223,7 +223,7 @@ JSXを戻り値にする関数をReact用語で「関数コンポーネント」
 
 まずは、`LikeButton`関数の`span`タグのテキストを`♥ {count}`にします。この`count`は変数なので、その変数も一緒に定義します。
 
-```tsx {3} title="App.tsx"
+```tsx twoslash {3} title="App.tsx"
 function LikeButton() {
   const count = 999;
   return <span>♥ {count}</span>;
@@ -234,7 +234,7 @@ function LikeButton() {
 
 次に、CSSのクラスを割り当てるために、`span`タグに`className`属性を追加します。
 
-```tsx {3} title="App.tsx"
+```tsx twoslash {3} title="App.tsx"
 function LikeButton() {
   const count = 999;
   return <span className="likeButton">♥ {count}</span>;
@@ -267,7 +267,7 @@ App.cssに上の内容を書いたら、ブラウザで確認してみましょ�
 
 App.cssはApp.tsxで`import`しているので特に何もしなくても`LikeButton`コンポーネントのスタイルに反映されます。もし、スタイルが反映されていないようなら、App.tsxにApp.cssを`import`するコードがあるか確認してください。
 
-```tsx {2} title="App.tsx"
+```tsx twoslash {2} title="App.tsx"
 import React from "react";
 import "./App.css"; // この行があるか確認する
 
@@ -286,7 +286,7 @@ function App() {
 
 現状のボタンは`count`変数を表示していますが、この変数は固定値になっています。この値が変動できるように、Reactの`useState`関数を使い、カウント数の状態をReactに管理させるようにします。
 
-```tsx {1,7} title="App.tsx"
+```tsx twoslash {1,7} title="App.tsx"
 import React, { useState } from "react";
 //            ^^^^^^^^^^^^ ここも追加
 
@@ -302,7 +302,9 @@ function LikeButton() {
 
 次に、`span`要素をクリックしたときに、`count`の値を増加する`handleClick`関数を実装します。この関数では、現在の`count`の値に1を足した値を`setCount`関数に渡すようにします。そして、`span`要素の`onClick`属性に`handleClick`関数を渡します。
 
-```tsx {3-5,7} title="App.tsx"
+```tsx twoslash {3-5,7} title="App.tsx"
+import React, { useState } from "react";
+// ---cut---
 function LikeButton() {
   const [count, setCount] = useState(999);
   const handleClick = () => {

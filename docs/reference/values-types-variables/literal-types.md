@@ -15,10 +15,11 @@ x = 1;
 
 リテラル型を用いると、1だけが代入可能な型が作れます。
 
-```typescript
+```ts twoslash
+// @errors: 2322
 let x: 1;
 x = 1;
-x = 100; // ERROR: Type '100' is not assignable to type '1'.(2322)
+x = 100;
 ```
 
 ## リテラル型として表現できるもの
