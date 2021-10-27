@@ -312,7 +312,7 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 出力の方法に関してはtsconfig.jsonのページに説明がありますのでそちらをご覧ください。
 
-[tsconfig.jsonを設定する](../tutorials/tsconfig.json-settings.md)
+[tsconfig.jsonを設定する](./tsconfig/tsconfig.json-settings.md)
 
 ## `require? import?`
 

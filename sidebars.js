@@ -42,7 +42,6 @@ module.exports = {
         "tutorials/README",
         "tutorials/setup",
         "tutorials/make-a-simple-function-via-cli",
-        "tutorials/tsconfig.json-settings",
         "tutorials/react-like-button-tutorial",
         "tutorials/nextjs",
         "tutorials/jest",
@@ -306,6 +305,7 @@ module.exports = {
           label: "tsconfig",
           items: [
             "reference/tsconfig/README",
+            "reference/tsconfig/tsconfig.json-settings",
             "reference/tsconfig/strict",
             "reference/tsconfig/noimplicitany",
             "reference/tsconfig/strictnullchecks",

@@ -1,115 +1,149 @@
----
-description: >-
-  JavaScriptからTypeScriptへのマイグレーションは想像以上に簡単なこと、コンパイラが生成するJSコードがどんなものなのか、コンパイラがあることのメリットを体感してもらう
----
+# 簡単な関数を作ってみよう
 
-# 簡単な関数をCLIで作ってみよう
+このチュートリアルではTypeScriptで簡単な関数を作る体験を通じて、TypeScriptの型がJavaScriptのどのような問題を解決するのか、コンパイラはどのような役割をは指すのかを学びます。
+
+## このチュートリアルに必要なもの
+
+このチュートリアルをやるに当たり、必要なツールがあります。次にリストアップするものを準備しておいてください。
+
+- Node.js
+- VS CodeやWebStormなどのエディター
+- tsc(TypeScriptコンパイラ)
+
+[開発環境の準備](./setup.md)
 
 ## JavaScriptで発生しうる問題
 
-JavaScriptで次のような関数があったとします。
+まず、次のJavaScriptファイルをローカル環境に作ります。
 
-```js
+```js title="increment.js"
 function increment(num) {
   return num + 1;
 }
 
-console.log(increment(1));
+console.log(increment(999));
 ```
 
-ただの引数をインクリメントして返すだけのその名も`increment`です。
-
-上記を実行します。 実行時のファイル名を`increment.js`としていますが、異なる名前にした方は読みかえてください。
+このプログラムは引数をインクリメントして返すだけのものです。これをNode.jsで実行してみましょう。
 
 ```sh
 $ node increment.js
-2
+1000
 ```
 
-予想どおりのなんでもない関数ですが、この関数が次のように呼ばれたらどうでしょうか。
+問題なく動いたと思います。つづいて、`increment`関数の引数を`999`から文字列型の`"999"`に書き換えてみましょう。
 
-```js
+```js title="increment.js"
 function increment(num) {
   return num + 1;
 }
 
-console.log(increment("1"));
+console.log(increment("999"));
+//                    ^^^^^
 ```
 
-呼び出し時の引数`1`が`'1'`になりました。これだけでこの関数の結果は大きく変わってしまいます。
+この小さな変更で実行結果は大きく変わってしまいます。実行してみましょう。
 
 ```sh
 $ node increment.js
-11
+9991
 ```
 
-これは算術演算子の`+`(加算)を期待してこの関数を作ったと思われるところに文字列が入ってしまったため`+`が文字列連結として解釈されてしまったことが原因です。
-もしこれが金額の計算だったとしたら大変なことになります。
+出力結果は1000から9991に変わったはずです。この理由は、引数`num`が文字列になったせいで、`+`演算子が足し算ではなく文字列結合になったからです。JavaScriptは`"999" + 1`を`"999" + "1"`と解釈します。この解釈の詳細を知るには型強制の説明をご覧ください。
 
-TypeScriptを使うと、コーディングの時点でこのような型の不一致による意図しない挙動を抑えられるようになります。
+[型強制](../reference/values-types-variables/type-coercion.md)
+
+引数は`999`と`"999"`という型の微妙な違いだけです。もしもこれが金額の計算だったら大問題です。`increment`関数は引数`num`が数値型のときだけ正しい動きをします。しかし、関数を呼び出すときは、制約なしにさまざまな型を渡せてしまいます。引数に数値型のみ代入できるように制約するには、どのようにしたらよいのでしょうか。ここでTypeScriptの出番になります。
 
 ## JavaScriptをTypeScriptに変換する
 
-ファイル名の変更は拡張子を`.js`から`.ts` に変更するだけです。
+JavaScriptをTypeScriptにする第一歩は、ファイルの拡張子を`.js`から`.ts`に変更することです。TypeScriptはざっくり言って、JavaScriptに型関連の構文を追加したにすぎない言語です。なので、JavaScriptのコードはそのままでもTypeScriptとして扱えます。
 
 ```sh
 mv increment.js increment.ts
 ```
 
-これをエディターで開くと`increment()`の引数にあたる`num`のところで何か言われます。
+## コンパイラを働かせる
 
-```text
-Parameter 'num' implicitly has an 'any' type, ...
-```
+TypeScriptの目玉機能はなんと言ってもコンパイラです。コンパイラの役割のひとつは、上例のような型の問題をチェックし、発見した問題点をプログラマに報告することです。TypeScriptコンパイラはとても賢く、ノーヒントでも型の問題を指摘してくれます。しかし、ヒントを十分に与えたほうが、コンパイラはもっと緻密なチェックをしてくれます。
 
-これはTypeScriptはこの引数に対していかなる型も与えられていないよ(いわゆる`any`)ということを言っています。そこで型を付加します。付加する型は`number`型です。
+コンパイラに与えるヒントのことを「型注釈(type annotation)」と言います。それでは、`increment`関数の引数`num`に型注釈を書いてみましょう。型注釈は`num`の右に`: number`と書きます。これを書くことで「引数`num`は数値型だけが代入できます」という意味になります。コンパイラはこれをヒントに関数呼び出しコードをチェックするようになります。
 
-```ts twoslash
-// @errors: 2345
+```ts twoslash {1,2} title="increment.ts"
+// @noErrors
 function increment(num: number) {
+  //                  ^^^^^^^^型注釈
   return num + 1;
 }
 
-console.log(increment("1"));
+console.log(increment("999"));
 ```
 
-すると今度は呼び出し側でTypeScriptコンパイラからメッセージが表示されます。このメッセージの意味は「この引数の`'1'`は`number`型ではないよ」という至極まっとうな指摘です。
-
-ひとまずこの警告を完全無視してコンパイルをしてみます。
+型注釈を書いたら、TypeScriptコンパイラにチェックをさせてみましょう。TypeScriptコンパイラのコマンドは`tsc`です。
 
 ```sh
 tsc increment.ts
 ```
 
-やはり警告が出てしまいます。
+すると、次のエラーが報告されるはずです。
 
-```text
-Argument of type '"1"' is not assignable to parameter of type 'number'.
-
-console.log(increment('1'));
-                      ~~~
-Found 1 error.
-```
-
-このように事前にコードに潜んでいる危険を、コーディングまたはコンパイルの時点で検知できます。
-
-### 戻り値にも型を書く
-
-今回は引数のみの紹介となりましたが、戻り値にも型を指定することができます。これによりその関数内で意図しない結果を返さないかどうかの検知に使うことができます。
-
-戻り値も書いた`increment.ts`の完全版は次のようになります。
-
-```ts twoslash
-function increment(num: number): number {
+```ts twoslash {1,2}
+// @errors: 2345
+function increment(num: number) {
   return num + 1;
 }
+// ---cut---
+console.log(increment("999"));
 ```
 
-もちろん、この関数で戻り値を`string`型など`number`型ではない型に設定するとTypeScriptから指摘を受けます。
+このエラーの内容は、「引数`num`は数値型しか代入できないはずだが、関数呼び出しでは文字列型を代入している。本当に問題ないか？」という指摘です。
 
-```ts twoslash
-// @errors: 2322
-function increment(num: number): string {
+エラーというと望まれないものというイメージがあるかもしれません。しかし、コンパイラが報告するエラーはむしろ歓迎されるものです。なぜなら、自分の代わりにコードに潜んでいる危険を、コーディング時点で知らせてくれるからです。
+
+## コンパイルを通す
+
+コンパイラが指摘する問題点をすべて解消する作業のことを「コンパイルを通す」といいます。上のコードをコンパイルが通るコードに直してみましょう。直し方は単純に、関数呼び出しの引数を数値型にするだけです。
+
+```ts twoslash {5} title="increment.ts"
+function increment(num: number) {
   return num + 1;
 }
+
+console.log(increment(999));
+//                    ^^^直す箇所
 ```
+
+直したら再びコンパイルしてみましょう。
+
+```sh
+tsc increment.ts
+```
+
+今度は何も表示されずに処理が終わるはずです。コンパイル成功です。
+
+## 生成されたJavaScript
+
+ここまでの手順で、increment.jsというファイルができていることに気づいたかもしれません。そのファイルの内容は次のようになっていると思います。
+
+```ts twoslash title="increment.js"
+// @showEmit
+// @alwaysStrict: false
+function increment(num: number) {
+  return num + 1;
+}
+
+console.log(increment(999));
+```
+
+これは、increment.tsをコンパイルする過程でコンパイラが生成したJavaScriptファイルです。TypeScriptのコードと比べてみると、引数`num`から型注釈が取り除かれていることがわかります。
+
+型注釈の部分はTypeScript固有のものです。それが書いてあるとブラウザやNode.jsでは実行できません。なので、TypeScriptコンパイラはJavaScript実行環境で動かす用のJavaScriptファイルを生成してくれます。開発者はこの成果物のJavaScriptファイルを本番環境にデプロイすることになります。
+
+<TweetILearned>
+
+・JavaScriptからTypeScriptへの書き換えは拡張子を.tsにする
+・コンパイラは型の問題を教えてくれる
+・型注釈を書き加えると、コンパイラはより細かいチェックをしてくれる
+・コンパイラが生成したJSをデプロイして使う
+
+</TweetILearned>

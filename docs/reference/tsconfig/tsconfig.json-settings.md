@@ -92,7 +92,7 @@ Node.jsのバージョンごとにサポートされているEcmaScriptの機能
 
 フロントエンドとバックエンドはモジュールの読み込み方法が異なっています。詳細は`import / export / require`のページをご覧ください。次の設定は使う場面で切り替えるべき項目です。
 
-[import / export /require](../reference/import-export-require.md)
+[import / export /require](../import-export-require.md)
 
 ここで登場するモジュールという言葉ですが、この言葉に馴染みのない方はそのコードのファイルが読み込む他のファイルの中にあるコードぐらいに捉えてください。それらは同じプロジェクト内の他のファイルの中のコードでもあれば `npm install` したものでもあります。とくに `npm install` したものであればこれらをパッケージと呼びます。
 
