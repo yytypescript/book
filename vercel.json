@@ -152,6 +152,10 @@
     {
       "source": "/features/import-export-require",
       "destination": "/reference/import-export-require"
+    },
+    {
+      "source": "/tutorials/tsconfig.json-settings",
+      "destination": "/reference/tsconfig/tsconfig.json-settings"
     }
   ]
 }

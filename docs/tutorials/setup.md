@@ -24,7 +24,7 @@ brew install node
 
 ```text
 $ node -v
-v12.16.0
+v14.16.1
 ```
 
 ## TypeScriptをインストールする
@@ -39,22 +39,34 @@ npm install -g typescript
 
 ```text
 tsc -v
-Version 4.3.5
+Version 4.4.4
 ```
 
 表示されたバージョンはインストール時の最新バージョンになります。上の例は執筆時のバージョンなので、これと異なっていても問題ありません。
 
-## エディターは何を使ったらいいか？
+## エディター・IDE
 
-シェアで決めつけるのも好きではありませんが、Visual Studio Codeが一番良く使われています。無料であり、インストールすれば拡張機能なしでもコーディングを行うことができます。
+TypeScriptの開発にお勧めエディター・IDEはVisual Studio CodeまたはJetBrains IDEです。
 
-TypeScript、Visual Studio Codeも主にMicrosoftが中心に開発されているため相性がよいのかもしれません。
+### Visual Studio Code
 
-:::info
+Visual Studio Code(VS Code)は、Microsoftが提供する無料でオープンソースのIDEです。Windows、Mac、Linuxに対応しています。このIDE自体もTypeScriptで実装されています。
 
-🧙♂ **Tips:** Visual Studio Codeは主にTypeScriptで開発されています。またVS Codeと略すことが多いです。
+https://code.visualstudio.com/download
 
-:::
+### JetBrains IDE
 
-対応OSはWindows、Mac、Linuxのいずれにも対応しています。ダウンロードサイトから環境にあったインストーラーをダウンロード・インストールを行ってください。
-<https://code.visualstudio.com/download>
+JetBrains IDEはJetBrains社が提供する有償のIDEシリーズです。Windows、Mac、Linuxで使えます。JetBrains IDEシリーズはプログラミング言語ごとに最適化された個別のIDEが提供されています。TypeScript専用のIDEはありませんが、次にあげるIDEはTypeScriptにしっかり対応しています。
+
+- [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/) (基本はJava向けIDEだが、JSやPHP、Ruby、Goなども扱える)
+- [WebStorm](https://www.jetbrains.com/webstorm/) (JavaScript向けIDE)
+- [PhpStorm](https://www.jetbrains.com/phpstorm/) (PHP向けIDE)
+- [RubyMine](https://www.jetbrains.com/ruby/) (Ruby向けIDE)
+- [PyCharm](https://www.jetbrains.com/pycharm/) (Python向けIDE)
+- [GoLand](https://www.jetbrains.com/go/) (Go向けIDE)
+
+フロントエンドの開発のみを予定している場合、最安のWebStormで十分です。バックエンドとフロントエンドの両方を開発する場合は、PhpStorm、RubyMine、PyCharm、GoLandの中からバックエンド言語に合ったものを選ぶとよいでしょう。さまざまな言語を使う予定がある場合、ハイエンドのIntelliJ IDEA Ultimateを選ぶと網羅的になります。JetBrains IDEシリーズには無償版IntelliJ Community Edition(CE)がありますが、これはTypeScriptには対応していません。
+
+JetBrains IDEには、30日間のフリートライアルと、学生は無料で使える[無料ライセンスプログラム](https://www.jetbrains.com/community/education/#students)もあります。
+
+日本の販売代理店の株式会社サムライズムからは、[300円から1,000円の割引](https://secure.samuraism.com/referral/8BF59FFA232F45460DFA1635194C68B6)で購入することもできます。
