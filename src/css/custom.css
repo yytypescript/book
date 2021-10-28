@@ -143,7 +143,8 @@ code .line:first-child:nth-last-child(3) ~ .meta-line::before {
 pre .popover,
 pre .error,
 pre .error-behind,
-pre .inline-completions {
+pre .inline-completions,
+pre .logger {
   font-size: 0.85rem;
 }
 
@@ -163,4 +164,40 @@ pre .inline-completions ul.dropdown li {
 pre code {
   word-wrap: normal;
   white-space: nowrap;
+}
+
+/** Support for showing console log/warn/errors inline */
+pre .logger {
+  display: flex;
+  align-items: center;
+  color: black;
+  margin: 3px 0;
+  padding: 3px 0;
+  padding-left: 8px;
+  width: 100%;
+  white-space: pre-wrap;
+}
+pre .logger svg {
+  margin-right: 9px;
+  height: 15px;
+  flex-shrink: 0;
+}
+pre .logger.error-log {
+  background-color: var(--ifm-color-danger-contrast-background);
+  color: var(--ifm-color-danger-contrast-foreground);
+  border-left: 2px solid var(--ifm-color-danger-dark);
+}
+pre .logger.warn-log {
+  background-color: var(--ifm-color-warning-contrast-background);
+  border-left: 2px solid var(--ifm-color-warning-dark);
+  color: var(--ifm-color-warning-contrast-foreground);
+}
+pre .logger.log-log {
+  background-color: var(--ifm-color-secondary-contrast-background);
+  border-left: 2px solid var(--ifm-color-secondary-dark);
+  color: var(--ifm-color-secondary-contrast-foreground);
+}
+pre .logger.log-log svg {
+  margin-left: 6px;
+  margin-right: 11px;
 }
