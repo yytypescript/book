@@ -6,11 +6,13 @@ sidebar_label: 例外処理
 
 JavaScriptにはJavaに似た例外処理の構文があります。例外には`Error`オブジェクトを使い、throw構文で例外を投げます。try-catch構文で例外を捕捉できます。
 
-```javascript
+```js twoslash
+// prettier-ignore
 try {
   throw new Error("something wrong");
 } catch (e) {
-  console.log(e.message); //=> "something wrong"
+// @log: something wrong
+  console.log(e.message);
 }
 ```
 
@@ -18,13 +20,13 @@ try {
 
 JavaScriptのthrowは例外を投げる構文です。例外として投げるオブジェクトはErrorオブジェクトを使うのが一般的です。
 
-```javascript
+```js twoslash
 throw new Error("network error!");
 ```
 
 JavaScriptのthrowはJavaなどと異なり、何でも投げることができます。プリミティブ型でさえ投げれます。
 
-```javascript
+```js twoslash
 throw "just a string";
 ```
 
@@ -34,7 +36,7 @@ throw "just a string";
 
 JavaScriptで例外を捉えるにはtry-catch構文を使います。例外が投げられる可能性がある部分をtryブロックで囲み、catchブロックで捉えた例外に対する処理を行います。
 
-```javascript
+```js twoslash
 try {
   throw new Error("something wrong");
 } catch (e) {
@@ -46,11 +48,12 @@ try {
 
 TypeScriptではcatchの変数の型はデフォルトで`any`型になります。
 
-```typescript
+```ts twoslash
+// @useUnknownInCatchVariables: false
 try {
   // ...
 } catch (e) {
-  // eはany型になる
+  //     ^?
 }
 ```
 
@@ -66,7 +69,7 @@ TypeScriptのコンパイラーオプションの`useUnknownInCatchVariables`を
 
 JavaやPHPでは捉えるエラーの型に対応するcatchを複数書けますが、JavaScriptとTypeScriptではcatchは1つしか書けません。JavaScriptでエラーの型によってエラーハンドリングを分岐したい場合は、catchブロックの中で分岐を書く方法で対応します。
 
-```typescript
+```ts twoslash
 try {
   // ...
 } catch (e) {
@@ -86,7 +89,8 @@ try {
 
 JavaScriptのtry-catch文内の変数はブロックスコープになります。そのため、try-catch内で宣言された変数は、try-catchの外では参照できません。
 
-```typescript
+```ts twoslash
+// @errors: 2304
 async function fetchData() {
   try {
     const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
@@ -105,7 +109,7 @@ fetchData();
 
 try-catch文の外でも変数を参照したい場合は、tryの前に代入用の変数をlet宣言しておく必要があります。
 
-```typescript
+```ts twoslash
 async function fetchData() {
   let data: any;
   try {
@@ -124,7 +128,7 @@ fetchData();
 
 JavaScriptにもJavaやPHPと同じようにfinallyが書けます。finallyは例外が発生しようがしまいが必ず実行される処理です。finallyはtry-catchの後に書きます。finally内の処理はtryとcatchの処理が実行された後に実行されます。
 
-```javascript
+```js twoslash
 try {
   // ...
 } catch (e) {

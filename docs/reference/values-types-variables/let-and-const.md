@@ -6,20 +6,20 @@ JavaScriptの変数宣言(variable declaration)には、 `let`と`const` があ�
 
 `let`を用いた変数宣言の書き方は次のようにします。
 
-```typescript
+```ts twoslash
 let x = 1;
 ```
 
 `let`は再代入が可能です。
 
-```typescript
+```ts twoslash
 let x = 1;
 x = 2; // 再代入ができる
 ```
 
 `let`は変数の初期値なしで変数定義できます。初期値なしの変数の値は`undefined`になります。
 
-```javascript
+```js twoslash
 let x; // 初期値なし
 x = 1; // 後で代入
 ```
@@ -28,15 +28,16 @@ x = 1; // 後で代入
 
 `const`を用いた変数宣言の書き方は次のようになります。初期値は必須です。
 
-```typescript
+```js twoslash
 const y = 2;
 ```
 
 `const`は変数への再代入が禁止されています。
 
-```typescript
+```js twoslash
 const y = 1;
-y = 1; // Uncaught TypeError: Assignment to constant variable.
+y = 1;
+// @error: TypeError: Assignment to constant variable.
 ```
 
 ## letとconstの使い分け
