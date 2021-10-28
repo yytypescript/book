@@ -203,12 +203,35 @@ function fn(s) {}
 function fn(s) {}
 ```
 
+#### 実行結果を表示する
+
+`@log`、`@warn`、`@error`を用いると、実行結果のコメントをスタイリングして表示できます。
+
+````markdown
+```js twoslash
+console.log(123);
+// @log: 123
+console.warn("メッセージ");
+// @warn: メッセージ
+const x = value;
+// @error: ReferenceError: value is not defined
+```
+````
+
+```js twoslash title="表示例"
+console.log(123);
+// @log: 123
+console.warn("メッセージ");
+// @warn: メッセージ
+const x = value;
+// @error: ReferenceError: value is not defined
+```
+
 #### コード補完の再現
 
 `^|`を書いたところにVS Codeでのコード補完の様子を再現できます。
 
 ````markdown
-<!--prettier-ignore-->
 ```ts twoslash
 // @noErrors
 [1, 2, 3].fin
