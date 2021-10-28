@@ -377,7 +377,6 @@ module.exports = {
       items: [
         "writing/pdr/README",
         "writing/pdr/0000-why-do-we-write-technical-books",
-        "writing/pdr/0001-write-with-gitbook",
         "writing/pdr/0002-iterative-writing-process",
         "writing/pdr/0003-target-readers",
         "writing/pdr/0004-how-to-manage-article-status",
@@ -385,6 +384,12 @@ module.exports = {
         "writing/pdr/0006-use-desu-masu",
         "writing/pdr/0007-use-function-for-sample-code",
         "writing/pdr/0008-prefer-type-alias-over-interface",
+        "writing/pdr/0009-use-docusaurus",
+        {
+          type: "category",
+          label: "廃止",
+          items: ["writing/pdr/0001-write-with-gitbook"],
+        },
       ],
     },
   ],

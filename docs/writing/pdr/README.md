@@ -11,11 +11,9 @@ PDRは**P**ublisher's **D**ecision **R**ecordの略で、これまでコミュ�
 
 PDRはそのような「なぜ」への答えになるよう、決定したことだけでなく、背景と理由、そして検討した代替手段などについて書きます。
 
-## PDR一覧
+## 採用
 
 [0000-なぜ私たちは技術書を書くのか？](0000-why-do-we-write-technical-books.md)
-
-[0001-GitBookで執筆する](0001-write-with-gitbook.md)
 
 [0002-イテレーティブな執筆プロセス](0002-iterative-writing-process.md)
 
@@ -30,6 +28,12 @@ PDRはそのような「なぜ」への答えになるよう、決定したこ�
 [0007-関数定義のサンプルコードには極力functionを使う](0007-use-function-for-sample-code.md)
 
 [0008-サンプルコードではInterfaceよりType Aliasを優先して使う](0008-prefer-type-alias-over-interface.md)
+
+[0009-Docusaurusを採用する](0009-use-docusaurus.md)
+
+## 廃止
+
+[0001-GitBookで執筆する](0001-write-with-gitbook.md)
 
 ## テンプレート
 
