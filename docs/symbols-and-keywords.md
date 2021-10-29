@@ -879,6 +879,21 @@ Math.ceil(-1.5); // -1
 
 TypeScriptコンパイラーが解釈した型を上書きする「型アサーション」に用いられるキーワードです。
 
+### `get` ゲッター (get) ![js]
+
+オブジェクトのプロパティが参照されたときに対応する関数が呼ばれます。
+
+```javascript
+const exam = {
+  scores: [50, 70, 90, 80, 100, 60],
+  get best() {
+    return Math.max(...this.scores);
+  }
+};
+
+console.log(exam.best); // 100
+```
+
 ### `is` 型アサーション関数の一部 (user-defined type guard) ![ts]
 
 型ガードに用いる型アサーション関数の戻り値の型アノテーション部分に用いられるキーワードです。
@@ -910,3 +925,25 @@ console.log(typeof 123); // "number"
 ### `typeof` typeof型演算子 (typeof) ![ts]
 
 変数から型を抽出する演算子です。
+
+### `set` セッター (set) ![js]
+
+オブジェクトのプロパティを変更するときに対応する関数が呼ばれます。
+
+```javascript
+const prize = {
+  latest: '',
+  history: [],
+  set winner(winner) {
+    this.latest = winner;
+    this.history.push(winner);
+  }
+};
+
+prize.winner = "Stanislas Wawrinka";
+prize.winner = "Rafael Nadal Parera";
+prize.winner = "Novak Đoković";
+
+console.log(prize.latest); // "Novak Đoković"
+console.log(prize.history); // [ 'Stanislas Wawrinka', 'Rafael Nadal Parera', 'Novak Đoković' ]
+```
