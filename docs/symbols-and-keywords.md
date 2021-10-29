@@ -951,3 +951,27 @@ prize.winner = "Novak Đoković";
 console.log(prize.latest); // "Novak Đoković"
 console.log(prize.history); // [ 'Stanislas Wawrinka', 'Rafael Nadal Parera', 'Novak Đoković' ]
 ```
+
+### `void` void演算子 (void) ![js]
+
+戻り値を`undefined`にします。
+
+```javascript
+console.log(void 123); // undefined
+```
+
+### `void` void型 (void) ![ts]
+
+戻り値が`undefined`あるいはない場合に使用します。
+
+```typescript
+function returnUndefined(num: number): void {
+  if (num === 0) {
+    return undefined;
+  }
+
+  return;
+}
+```
+
+[void型](reference/functions/void-type.md)
