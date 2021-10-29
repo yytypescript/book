@@ -910,3 +910,27 @@ console.log(typeof 123); // "number"
 ### `typeof` typeof型演算子 (typeof) ![ts]
 
 変数から型を抽出する演算子です。
+
+### `void` void演算子 (void) ![js]
+
+戻り値を`undefined`にします。
+
+```javascript
+console.log(void 123); // undefined
+```
+
+### `void` void型 (void) ![ts]
+
+戻り値が`undefined`あるいはない場合に使用します。
+
+```typescript
+function returnUndefined(num: number): void {
+  if (num === 0) {
+    return undefined;
+  }
+
+  return;
+}
+```
+
+[void型](reference/functions/void-type.md)
