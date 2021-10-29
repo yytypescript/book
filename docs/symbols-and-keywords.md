@@ -892,7 +892,7 @@ const exam = {
   scores: [50, 70, 90, 80, 100, 60],
   get best() {
     return Math.max(...this.scores);
-  }
+  },
 };
 
 console.log(exam.best); // 100
@@ -936,12 +936,12 @@ console.log(typeof 123); // "number"
 
 ```javascript
 const prize = {
-  latest: '',
+  latest: "",
   history: [],
   set winner(winner) {
     this.latest = winner;
     this.history.push(winner);
-  }
+  },
 };
 
 prize.winner = "Stanislas Wawrinka";
