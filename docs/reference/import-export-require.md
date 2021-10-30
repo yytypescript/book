@@ -18,7 +18,7 @@ export const foo = "foo";
 
 したがって、`import`や`export`が無かったスクリプトファイルでも、後から`import`や`export`を追加すると、それはモジュールファイルになります。
 
-## 公開・非公開
+## 値の公開と非公開
 
 JavaScriptのモジュールは、明示的に`export`をつけた値だけが公開され、他のモジュールから参照できます。たとえば、次の例の`publicValue`は他のモジュールから利用できます。一方、`privateValue`は外部からは利用できません。
 
@@ -28,6 +28,35 @@ const privateValue = 2;
 ```
 
 JavaScriptのモジュールでは、デフォルトで変数や関数などを非公開になるわけです。Javaなどの他の言語では、モジュール(パッケージ)のメンバーがデフォルトで公開になり、非公開にしたいものには`private`修飾子をつける言語があります。そういった言語と比べると、JavaScriptは基本方針が真逆なので注意が必要です。
+
+## モジュールは常にstrict mode
+
+モジュールのJavaScriptは常にstrict modeになります。strict modeでは、さまざまな危険なコードの書き方が禁止されます。たとえば、未定義の変数への代入はエラーになります。
+
+```js twoslash
+foo = 1; // 未定義の変数fooへの代入
+// @error: ReferenceError: foo is not defined
+export const bar = foo;
+```
+
+## モジュールは`import`時に一度だけ評価される
+
+モジュールのコードが評価されるのは、1回目の`import`のときだけです。2回目以降の`import`では、最初に評価した内容が使われます。言い換えると、モジュールは初回`import`でキャッシュされるとも言えますし、モジュールはいわゆるシングルトン(singleton)的なものとも言えます。
+
+たとえば、`module.js`というモジュールを3回読み込んだとしても、この`module.js`が評価されるのは最初の1回目だけです。
+
+```js twoslash
+// @filename: module.js
+console.log("モジュールを評価しています");
+// このログが出力されるのは1回だけ
+export const value = 1;
+
+// @filename: main.js
+import "./module.js";
+// @log: モジュールを評価しています
+import "./module.js";
+import "./module.js";
+```
 
 ## モジュールの歴史的経緯
 
