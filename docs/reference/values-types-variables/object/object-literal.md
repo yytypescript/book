@@ -26,4 +26,4 @@ person.name = "Bob";
 person.age = 25;
 ```
 
-ちなみに、広く使われるデータシリアライズ形式にJSONがあるのはご存知でしょう。JSONは多くのプログラミング言語で用いらていますが、JSONはJavaScript Object Nationの略で、JSONの由来はJavaScriptのオブジェクトリテラルにあります。そして、JavaScriptではJSONをそのままオブジェクトリテラルとして解釈できます。
+ちなみに、広く使われるデータシリアライズ形式にJSONがあるのはご存知でしょう。JSONは多くのプログラミング言語で用いられていますが、JSONはJavaScript Object Nationの略で、JSONの由来はJavaScriptのオブジェクトリテラルにあります。そして、JavaScriptではJSONをそのままオブジェクトリテラルとして解釈できます。
