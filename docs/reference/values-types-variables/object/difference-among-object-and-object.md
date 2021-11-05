@@ -1,3 +1,7 @@
+---
+sidebar_label: object、Object、{}の違い
+---
+
 # object、Object、{}の違い
 
 TypeScriptではオブジェクトの型注釈をするとき、プロパティの型まで指定するのが一般的です。
