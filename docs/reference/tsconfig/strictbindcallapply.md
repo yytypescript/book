@@ -4,7 +4,7 @@
 
 `function.bind(), function.call(), function.apply()` はその関数を実行します。どれも第2引数以降にその関数の引数を代入できます。
 
-たとえば、与えられた引数の名、姓からイニシャルを返す関数 `initial()` を考えます。与えられた文字列に対する例外検査などが少々甘いですが実装は次のようになります。
+たとえば、与えられた引数の名、姓からイニシャルを返す関数`initial()`を考えます。与えられた文字列に対する例外検査などが少々甘いですが実装は次のようになります。
 
 ```typescript
 function initial(givenName: string, surname: string): string {
@@ -12,7 +12,7 @@ function initial(givenName: string, surname: string): string {
 }
 ```
 
-このとき `function.bind(), function.call(), function.apply()` を使って関数を呼び出すには次のようにします。
+このとき`function.bind(), function.call(), function.apply()`を使って関数を呼び出すには次のようにします。
 
 ```typescript
 initial("salvador", "dali");
@@ -26,7 +26,7 @@ initial.apply(null, ["salvador", "dali"]);
 ```
 
 これらの関数の問題点は、例え関数が引数にある型を要求するように作っていたとしても任意の値を代入できてしまうことでした。
-引数を本来の `string` 型から他の型に変えて実行するとすべて実行時エラーになります。
+引数を本来の`string`型から他の型に変えて実行するとすべて実行時エラーになります。
 
 ```typescript
 initial.bind(null, "salvador", 5)();

@@ -46,14 +46,14 @@ const y = 2; // SyntaxError: Identifier 'y' has already been declared
 
 `var`はグローバル変数として定義されたときに、`window` オブジェクトのプロパティとして定義されるため、既存のプロパティを上書きする危険性があります。
 
-たとえば、ブラウザ上で `innerWidth` 変数をグローバル変数として定義してしまうと、標準API の `window.innerWidth` が上書きされるため、ブラウザの幅を変更しても常に同じ値が返ってくるようになってしまいます。
+たとえば、ブラウザ上で`innerWidth` 変数をグローバル変数として定義してしまうと、標準APIの`window.innerWidth` が上書きされるため、ブラウザの幅を変更しても常に同じ値が返ってくるようになってしまいます。
 
 ```javascript
 var innerWidth = 10;
 console.log(window.innerWidth); // 10
 ```
 
-`let` や `const` はグローバルなスコープで定義されることはないため、`window` オブジェクトのプロパティを不用意に上書きする心配はありません。
+`let`や`const`はグローバルなスコープで定義されることはないため、`window` オブジェクトのプロパティを不用意に上書きする心配はありません。
 
 ```typescript
 const innerWidth = 10;
@@ -64,7 +64,7 @@ console.log(window.innerWidth); // 500
 
 ### 変数の巻上げ
 
-JavaScriptで宣言された変数はスコープの先頭で変数が生成されます。これは**変数の巻き上げ**と呼ばれています。`var`で宣言された変数は、スコープの先頭で生成されて`undefined`で値が初期化されます。次の例では `greeting`変数への参照はエラーとならずに `undefined` となります。
+JavaScriptで宣言された変数はスコープの先頭で変数が生成されます。これは**変数の巻き上げ**と呼ばれています。`var`で宣言された変数は、スコープの先頭で生成されて`undefined`で値が初期化されます。次の例では`greeting`変数への参照はエラーとならずに`undefined` となります。
 
 ```typescript
 console.log(greeting); // undefined
@@ -77,7 +77,7 @@ console.log(greeting); // undefined
 greeting = "こんにちは";
 ```
 
-`var`での変数巻き上げでは参照エラーとならないため、意図せずに `undefined` の値を参照し予期せぬバグが発生する危険性があります。
+`var`での変数巻き上げでは参照エラーとならないため、意図せずに`undefined`の値を参照し予期せぬバグが発生する危険性があります。
 
 `let`と`const`では、宣言前の変数を参照すると`Reference Error`が発生します。
 
@@ -93,7 +93,7 @@ const y = 2;
 
 `var`は変数の巻上げが発生したタイミングで`undefined`で**変数を初期化している**ため、値の参照が可能となっていました。それに対して`let`と`const` は変数の巻上げが発生しても変数が評価されるまで**変数は初期化されません**。そのため、初期化されていない変数を参照するためReference Errorが発生しているのです。
 
-次の例では`let`や`const`で変数の巻き上げが発生しないなら`console.log(x)`の評価のタイミングで関数の先頭で宣言されている `var x = 1`が参照されて`1`が出力されるはずです。しかし、実際は`let`で宣言された変数`x`がブロックスコープ内で初期化されていない状態で生成されるため、未初期化の`x`を参照してReference Errorが発生します。
+次の例では`let`や`const`で変数の巻き上げが発生しないなら`console.log(x)`の評価のタイミングで関数の先頭で宣言されている`var x = 1`が参照されて`1`が出力されるはずです。しかし、実際は`let`で宣言された変数`x`がブロックスコープ内で初期化されていない状態で生成されるため、未初期化の`x`を参照してReference Errorが発生します。
 
 ```typescript
 function output() {

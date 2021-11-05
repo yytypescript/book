@@ -22,19 +22,19 @@ function add(a: number, b: number) {
 console.log(add(1, 2));
 ```
 
-入力が終わったらエディターの上部にある`RUN` をクリックして、コードを実行できます。
+入力が終わったらエディターの上部にある`RUN`をクリックして、コードを実行できます。
 
-実行後は右側の `Logs` のタブで実行結果が確認できます。
+実行後は右側の`Logs`のタブで実行結果が確認できます。
 
 ![](how-to-use-typescript-playground/image1.png)
 
 ### JavaScriptのコンパイル結果を確認する
 
-TypeScript を書いていると実際に生成される JavaScript のコードを確認したい時があると思います。そんな時は、右側の `.JS` タブを開くことで生成される JavaScript のコードを確認することができます。
+TypeScript を書いていると実際に生成される JavaScript のコードを確認したい時があると思います。そんな時は、右側の`.JS`タブを開くことで生成される JavaScript のコードを確認することができます。
 
-試しに TypeScript 固有の機能である `enum` のコンパイル結果を確認してみます。
+試しに TypeScript 固有の機能である`enum`のコンパイル結果を確認してみます。
 
-エディターに次のコードを入力して `.JS` タブを開いてみてください。
+エディターに次のコードを入力して`.JS`タブを開いてみてください。
 
 ```typescript
 enum Color {
@@ -46,7 +46,7 @@ enum Color {
 console.log(Color.RED);
 ```
 
-TypeScript が `enum` を どのように JavaScript へコンパイルしているか簡単に確認することができます。
+TypeScript が`enum`をどのように JavaScript へコンパイルしているか簡単に確認することができます。
 
 ![](how-to-use-typescript-playground/image2.png)
 
@@ -60,13 +60,13 @@ value = 1;
 value = true;
 ```
 
-また、エディターでマウスオーバーをする以外にも右側の `Errors` タブを表示して、すべてのエラーを一覧で確認することができます。
+また、エディターでマウスオーバーをする以外にも右側の`Errors`タブを表示して、すべてのエラーを一覧で確認することができます。
 
 ![](how-to-use-typescript-playground/image3.png)
 
 ### 型定義の確認方法
 
-`.D.TS` タブを開くことでエディターのコードから生成される型定義を確認することができます。
+`.D.TS`タブを開くことでエディターのコードから生成される型定義を確認することができます。
 
 ```typescript
 // コード
@@ -98,9 +98,9 @@ TypeScript Playground はページのURLを共有するだけで書いたコー�
 
 ### 色々な形式でコードを共有する
 
-上部の`Export` タブから色々な形式でコードを共有するためのテキストを出力することができます。
+上部の`Export`タブから色々な形式でコードを共有するためのテキストを出力することができます。
 
-たとえば `Copy as Markdown Link with Preview`を選択した場合は次のような形式のテキストを出力することができます。
+たとえば`Copy as Markdown Link with Preview`を選択した場合は次のような形式のテキストを出力することができます。
 
 ````markdown
 ```
@@ -121,7 +121,7 @@ function add(a:number, b:number) {
 デフォルトでは TypeScript のバージョンは 4.1 以上なので、次のサンプルコードはコンパイルエラーが発生しません。
 
 バージョンを 4.1 未満に変更してみてください。TypeScript のバージョンが変更されたことで
-`Template Literal Types` が非対応となりコンパイルエラーが発生するのが確認できます。
+`Template Literal Types`が非対応となりコンパイルエラーが発生するのが確認できます。
 
 ```typescript
 type LocaleLang = "en" | "ja" | "fr";
@@ -130,7 +130,7 @@ type LocaleId = `locale_${LocaleLang}`;
 
 ### TS Config の設定
 
-画面上部の `TS Config` のタブをクリックすることで TS Config の設定をすることができます。
+画面上部の`TS Config`のタブをクリックすることで TS Config の設定をすることができます。
 
 次のサンプルコードをエディターに入力して、出力される JavaScript のコードを`.JS`で確認をするとデフォルトでは
 
@@ -140,7 +140,7 @@ export function add(a: number, b: number) {
 }
 ```
 
-Playground の初期設定では `module: 'esnext'`が選択されているので、次の出力結果になります。
+Playground の初期設定では`module: 'esnext'`が選択されているので、次の出力結果になります。
 
 ```javascript
 export function add(a, b) {
@@ -148,7 +148,7 @@ export function add(a, b) {
 }
 ```
 
-`TS Config` タブを開き `Module` の設定を `CommonJS` に変更をしてみます。TS Config の設定が変更されて `CommonJS` 形式で出力される JavaScript のコードを確認することができます。
+`TS Config` タブを開き`Module`の設定を`CommonJS`に変更をしてみます。TS Config の設定が変更されて`CommonJS`形式で出力される JavaScript のコードを確認することができます。
 
 ```javascript
 "use strict";

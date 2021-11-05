@@ -22,11 +22,11 @@ type Language = "en" | "fr" | "es" | "ja" | "zh";
 
 ### `typeof`
 
-頻出するこの `typeof` はJavaScriptのものではなく、TypeScriptの `typeof` です。これをオブジェクトに対して使用している例は前のページにあるとおりです。
+頻出するこの`typeof`はJavaScriptのものではなく、TypeScriptの`typeof`です。これをオブジェクトに対して使用している例は前のページにあるとおりです。
 
 [オブジェクトから型を生成する](generates-type-from-object.md)
 
-この例で実行すれば次のような型 `TypeOfLanguage` が生成されるでしょう (型名は便宜的なものです) 。
+この例で実行すれば次のような型`TypeOfLanguage`が生成されるでしょう (型名は便宜的なものです) 。
 
 ```typescript
 type TypeOfLanguage = typeof conf;
@@ -40,11 +40,11 @@ type TypeOfLanguage = typeof conf;
 // };
 ```
 
-ここまでくればあとは少しです。 `TypeOfLanguage` 型のキーだけを型にしてしまいます。
+ここまでくればあとは少しです。`TypeOfLanguage`型のキーだけを型にしてしまいます。
 
 ### `keyof`
 
-`kyeof` はオブジェクトの型に使うとそのオブジェクトのキーをユニオン型にして返します。上記の `TypeOfLanguage` 型があれば
+`kyeof`はオブジェクトの型に使うとそのオブジェクトのキーをユニオン型にして返します。上記の`TypeOfLanguage`型があれば
 
 ```typescript
 type Langauge = keyof TypeOfLanguage;
@@ -65,4 +65,4 @@ type Language = keyof typeof conf;
 
 ### 疑問: `keyof conf` じゃダメなんですか？
 
-動作しません。なぜなら `keyof` は値ではなく (オブジェクトの) 型に対して使用できるからです。一方 `typeof` は値から型を生成するのでこの順番で使用する必要があります。
+動作しません。なぜなら`keyof`は値ではなく (オブジェクトの) 型に対して使用できるからです。一方`typeof`は値から型を生成するのでこの順番で使用する必要があります。

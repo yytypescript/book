@@ -2,7 +2,7 @@
 
 リリースされたバージョン: 4.3
 
-サブクラスがスーパークラスのメソッドを拡張したときに `override` のキーワードをメソッドの前に書くことを強制します。これはスーパークラスの拡張しているメソッドが取り除かれたり、名称が変更されたことを検知することに役立ちます。
+サブクラスがスーパークラスのメソッドを拡張したときに`override`のキーワードをメソッドの前に書くことを強制します。これはスーパークラスの拡張しているメソッドが取り除かれたり、名称が変更されたことを検知することに役立ちます。
 
 たとえば、トグルボタン (クリックするとオン、オフを繰り返すボタン) のクラスが次のようになっているとします。
 
@@ -38,7 +38,7 @@ class ToggleButton {
 }
 ```
 
-ここで値のオンオフの切り替えを何回したかを数えられるサブクラス `ToggleCountButton` を考えます。すると `ToggleCountButton` は次のようになります。
+ここで値のオンオフの切り替えを何回したかを数えられるサブクラス`ToggleCountButton`を考えます。すると`ToggleCountButton`は次のようになります。
 
 ```typescript
 class ToggleCountButton extends ToggleButton {
@@ -65,7 +65,7 @@ class ToggleCountButton extends ToggleButton {
 }
 ```
 
-ここでスーパークラスの `ToggleButton` が「オンオフの切り替えにメソッドはふたつも要らない！セッターで十分だ」と変更されたとします。
+ここでスーパークラスの`ToggleButton`が「オンオフの切り替えにメソッドはふたつも要らない！セッターで十分だ」と変更されたとします。
 
 ```typescript
 class ToggleButton {
@@ -91,9 +91,9 @@ class ToggleButton {
 }
 ```
 
-するとサブクラスでオーバーライドしたはずのメソッド `enable(), disable()` が意味のないメソッドとして残ることになります。
+するとサブクラスでオーバーライドしたはずのメソッド`enable(), disable()`が意味のないメソッドとして残ることになります。
 
-`noImplicitOverride` はオーバーライドしているメソッドに `override`キーワードをつけることによってスーパークラスに同名のメソッドがないかを確認させます。オーバーライドをしているにもかかわらず `override` のキーワードを付けずにこのオプションを有効にすると次のようなエラーが発生します。
+`noImplicitOverride`はオーバーライドしているメソッドに`override`キーワードをつけることによってスーパークラスに同名のメソッドがないかを確認させます。オーバーライドをしているにもかかわらず`override`のキーワードを付けずにこのオプションを有効にすると次のようなエラーが発生します。
 
 ```typescript
 error TS4114: This member must have an 'override' modifier because it overrides a member in the base class 'ToggleButton'.
@@ -106,7 +106,7 @@ public disable(): void {
        ~~~~~~~
 ```
 
-逆に、オーバーライドしていないメソッドに `override` キーワードをつけると次のようなエラーが発生します。
+逆に、オーバーライドしていないメソッドに`override`キーワードをつけると次のようなエラーが発生します。
 
 ```typescript
 error TS4113: This member cannot have an 'override' modifier because it is not declared in the base class 'ToggleButton'.

@@ -30,7 +30,7 @@ Javaなどの言語では、ダブルクォートで文字列リテラル(String
 
 ### テンプレートリテラル
 
-JavaScriptで、バッククォート`` ` ``で囲んだ文字列はテンプレートリテラル（template literal）と言います。テンプレートリテラルは、改行と式の挿入(expression interpolation)ができます。式の挿入は `${式}`のように書きます。
+JavaScriptで、バッククォート`` ` ``で囲んだ文字列はテンプレートリテラル（template literal）と言います。テンプレートリテラルは、改行と式の挿入(expression interpolation)ができます。式の挿入は`${式}`のように書きます。
 
 ```typescript
 const count = 10;
