@@ -379,28 +379,28 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 ## `default export? named export?`
 
-`module.exports`との`export default`は`default export`と呼ばれ、`exports`と`export`は`named export`と呼ばれています。どちらも長所と短所があり、たびたび議論になる話題です。どちらか一方を使うように統一するコーディングガイドを持っている企業もあるようですが、どちらかが極端に多いというわけでもないので好みの範疇です。
+`module.exports`との`export default`はdefault exportと呼ばれ、`exports`と`export`はnamed exportと呼ばれています。どちらも長所と短所があり、たびたび議論になる話題です。どちらか一方を使うように統一するコーディングガイドを持っている企業もあるようですが、どちらかが極端に多いというわけでもないので好みの範疇です。
 
-### `default export`
+### default export
 
-#### `default export`のPros
+#### default exportのPros
 
 - `import`する時に名前を変えることができる
 - そのファイルが他の`export`に比べ何をもっとも提供したいのかがわかる
 
-#### `default export`のCons
+#### default exportのCons
 
 - エディター、IDEによっては入力補完が効きづらい
 - 再エクスポートの際に名前をつける必要がある
 
-### `named export`
+### named export
 
-#### `named export`のPros
+#### named exportのPros
 
 - エディター、IDEによる入力補完が効く
 - ひとつのファイルから複数`export`できる
 
-#### `named export`のCons
+#### named exportのCons
 
 - (名前の変更はできるものの)基本的に決まった名前で`import`して使う必要がある
 - `export`しているファイルが名前を変更すると動作しなくなる
@@ -438,9 +438,9 @@ export default (price) => price * 1.1;
 
 システムが**ある年月日当時の消税率**を元に金額の計算を多用するようなものだとこの暗黙の税率変更は問題になります。過去の金額もすべて現在の消費税率である10%で計算されてしまうからです。
 
-### `named export`だと
+### named exportだと
 
-`named export`であれば`export`する名称を変更することで呼び出し側の変更を強制させることができます。
+named exportであれば`export`する名称を変更することで呼び出し側の変更を強制させることができます。
 
 ```typescript
 // taxIncluded.ts
@@ -472,4 +472,4 @@ console.log(taxIncludedAsOf2019(100)); //=> 110
 
 名前を変更したため、呼び出し元も名前の変更が強制されます。これはたとえ`as`を使って名前を変更していたとしても同じく変更する必要があります。
 
-ロジックが変わったこととそれによる修正を強制したいのであれば`named export`を使う方がわかりやすく、そしてエディター、IDEを通して見つけやすくなる利点があります。逆に、公開するパッケージのようにAPIが一貫して明瞭ならば`default export`も価値があります。
+ロジックが変わったこととそれによる修正を強制したいのであればnamed exportを使う方がわかりやすく、そしてエディター、IDEを通して見つけやすくなる利点があります。逆に、公開するパッケージのようにAPIが一貫して明瞭ならばdefault exportも価値があります。
