@@ -18,7 +18,7 @@ type Currency = "CNY" | "EUR" | "GBP" | "JPY" | "KRW" | "USD";
 
 ### `typeof`
 
-これはJavaScriptの `typeof` ではなくTypeScriptの `typeof` です。 `typeof` はTypeScriptがその変数をどのような型であるかと認識しているかかを教えてくれます。
+これはJavaScriptの`typeof`ではなくTypeScriptの`typeof`です。`typeof`はTypeScriptがその変数をどのような型であるかと認識しているかかを教えてくれます。
 
 ```typescript
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"];
@@ -27,7 +27,7 @@ type Currency = typeof currencies;
 // -> string[]
 ```
 
-予想されている方が多かったかもしれませんが `string[]` 型と出てしまいました。ではこれをどうすれば `string` ではなく定数値で取得できるでしょうか。それは定数値で取得したいオブジェクトに `as const` をつけると取得できます。
+予想されている方が多かったかもしれませんが`string[]`型と出てしまいました。ではこれをどうすれば`string`ではなく定数値で取得できるでしょうか。それは定数値で取得したいオブジェクトに`as const`をつけると取得できます。
 
 ```typescript
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -45,7 +45,7 @@ type Currency = readonly ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"];
 
 #### 何番目のリテラル型が欲しいか
 
-たとえば `'GBP'` が欲しいとします。 `'GBP'` は2番目なので `currencies` の2番目の型を取れば希望のリテラル型が取れます。
+たとえば`'GBP'`が欲しいとします。`'GBP'`は2番目なので`currencies`の2番目の型を取れば希望のリテラル型が取れます。
 
 ```typescript
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -64,9 +64,9 @@ type Currency = typeof currencies[2];
 type Currency = typeof currencies[0] | typeof currencies[1] | typeof currencies[2] | ....
 ```
 
-そこで思いつくのは `typeof` をしているときのインデックスです。実はこれもリテラル型であり `currencies` の `2` のリテラル型を取ることを意味しています。
+そこで思いつくのは`typeof`をしているときのインデックスです。実はこれもリテラル型であり`currencies`の`2`のリテラル型を取ることを意味しています。
 
-配列はnumber型のインデックスに要素を代入しているオブジェクトなのでこのリテラル型のインデックスの代わりに `number` を使うことによって
+配列はnumber型のインデックスに要素を代入しているオブジェクトなのでこのリテラル型のインデックスの代わりに`number`を使うことによって
 
 ```typescript
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;

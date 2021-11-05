@@ -2,7 +2,7 @@
 
 リリースされたバージョン: 1.8
 
-`fallthrough`とは`switch`でにおける `case` 文で`break`または`return`を行わないことを意味します。 `case` 文が空でない場合に限り `break` や `return` が行われているかを厳密に評価します。
+`fallthrough`とは`switch`でにおける`case`文で`break`または`return`を行わないことを意味します。`case`文が空でない場合に限り`break`や`return`が行われているかを厳密に評価します。
 
 ```typescript
 function daysOfMonth(month: number): number {
@@ -32,7 +32,7 @@ function daysOfMonth(month: number): number {
 }
 ```
 
-ある月の日数を求める関数 `daysOfMonth()` を定義しましたがこの関数には `fallthrough` が存在します。このオプションを有効にすると次のようなエラーが発生します。
+ある月の日数を求める関数`daysOfMonth()`を定義しましたがこの関数には`fallthrough`が存在します。このオプションを有効にすると次のようなエラーが発生します。
 
 ```typescript
 error TS7029: Fallthrough case in switch.
@@ -45,7 +45,7 @@ error TS7029: Fallthrough case in switch.
     ~~~~~~~~
 ```
 
-`case 1, case 3, case 5, ....` が `fallthrough` とみなされないのは `case` 文の実行部分が `break` だけで何もしないからです。
+`case 1, case 3, case 5, ....`が`fallthrough`とみなされないのは`case`文の実行部分が`break`だけで何もしないからです。
 
 これを回避するためには`case`では漏れなく`break`あるいは`return`をするように設計します。
 

@@ -50,7 +50,7 @@ type Language = keyof typeof conf;
 
 ### Mapped type
 
-オブジェクトのプロパティの型を参照するために Mapped type を使います。そのとき元のオブジェクトから型を生成するために `typeof` を使います。
+オブジェクトのプロパティの型を参照するために Mapped type を使います。そのとき元のオブジェクトから型を生成するために`typeof`を使います。
 
 ```typescript
 type ConfirmationMessage = typeof conf[Language];
@@ -58,7 +58,7 @@ type ConfirmationMessage = typeof conf[Language];
 
 ### リテラル型を取得するできるようにする
 
-このままだとオブジェクトから型を生成すると同じように型はリテラル型ではありません。つまりただの `string` 型のユニオン型つまり `string` 型です。そこで、元のオブジェクト `conf` に `as const` をつけます。
+このままだとオブジェクトから型を生成すると同じように型はリテラル型ではありません。つまりただの`string`型のユニオン型つまり`string`型です。そこで、元のオブジェクト`conf`に`as const`をつけます。
 
 ```typescript
 const conf = {
@@ -72,7 +72,7 @@ const conf = {
 
 ## まとめ
 
-お好みで定義したキーの型 `Language` を Mapped type のキーの部分に代入します。最終的な形は次のようになります。
+お好みで定義したキーの型`Language`を Mapped type のキーの部分に代入します。最終的な形は次のようになります。
 
 ```typescript
 const conf = {
@@ -86,4 +86,4 @@ const conf = {
 type ConfirmationMessage = typeof conf[keyof typeof conf];
 ```
 
-`as const` を忘れないようにしてください。
+`as const`を忘れないようにしてください。

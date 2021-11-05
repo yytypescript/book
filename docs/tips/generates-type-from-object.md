@@ -22,11 +22,11 @@ const account: Account = {
 };
 ```
 
-すでにJavaScriptの資産があるプロジェクトにおいては表立って型などなく、そのため `Account` といった型は存在せず代入式の `const account` のみが存在していることでしょう。そんなときはこの `const account` をTypeScriptに変換してできるだけ近い形で型を作ることができます。
+すでにJavaScriptの資産があるプロジェクトにおいては表立って型などなく、そのため`Account`といった型は存在せず代入式の`const account`のみが存在していることでしょう。そんなときはこの`const account`をTypeScriptに変換してできるだけ近い形で型を作ることができます。
 
 ### `typeof`
 
-この `typeof` はJavaScriptのものではなく、TypeScriptの `typeof` です。これを実際に動作している変数に使ってみるとその変数をTypeScriptはどのような型と認識しているのかがわかります。
+この`typeof`はJavaScriptのものではなく、TypeScriptの`typeof`です。これを実際に動作している変数に使ってみるとその変数をTypeScriptはどのような型と認識しているのかがわかります。
 
 ```typescript
 const account = {
@@ -39,7 +39,7 @@ const account = {
 type Account = typeof account;
 ```
 
-するとこの変数から生成された型 `Account` は次のようになります。
+するとこの変数から生成された型`Account`は次のようになります。
 
 ```typescript
 type Account = {
@@ -50,11 +50,11 @@ type Account = {
 };
 ```
 
-`plan` が意図するユニオン型にはなりませんが、それなりに近い型を得ることができました。
+`plan`が意図するユニオン型にはなりませんが、それなりに近い型を得ることができました。
 
 ### プロパティを定数値で取得したい場合
 
-プロパティを定数値で取得したい場合はオブジェクトに `as const` をつけます。
+プロパティを定数値で取得したい場合はオブジェクトに`as const`をつけます。
 
 ```typescript
 const account = {
@@ -80,7 +80,7 @@ type Account = {
 
 ### 特定のプロパティだけを定数値で取得したい場合
 
-これでは型の制約が強力すぎて他の値が代入できないので、もう少し柔軟にします。たとえば `plan` だけがユニオン型になるようにしたければ `plan` の右に希望の型を書いてあげればそれでその型になります。
+これでは型の制約が強力すぎて他の値が代入できないので、もう少し柔軟にします。たとえば`plan`だけがユニオン型になるようにしたければ`plan`の右に希望の型を書いてあげればそれでその型になります。
 
 ```typescript
 const account = {
@@ -93,7 +93,7 @@ const account = {
 type Account = typeof account;
 ```
 
-`Account` は次のようになります。
+`Account`は次のようになります。
 
 ```typescript
 type Account = {

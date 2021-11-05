@@ -68,7 +68,7 @@ import "./module.js";
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/x.y.z/jquery.min.js"></script>
 ```
 
-もし`jQuery`に依存するパッケージがあるとすれば、 `jQuery` の宣言より下に書く必要があります。
+もし`jQuery`に依存するパッケージがあるとすれば、`jQuery`の宣言より下に書く必要があります。
 
 ```markup
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/x.y.z/jquery-ui.min.js"></script>
