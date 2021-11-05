@@ -13,7 +13,7 @@ TypeScriptで定義されたインターフェースは、コンパイルチェ�
 
 ## インターフェースを定義する
 
-TypeScriptでは`interface` キーワードでインターフェースを定義できます。
+TypeScriptでは`interface`キーワードでインターフェースを定義できます。
 
 ```typescript
 interface SomeInterface {

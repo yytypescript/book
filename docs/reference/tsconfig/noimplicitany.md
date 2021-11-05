@@ -12,7 +12,7 @@ function increment(i) {
 }
 ```
 
-`any` 型ということは、この関数に値をを代入することはJavaScriptと同じようにいかなる型の値も代入ができてしまうということです。
+`any`型ということは、この関数に値をを代入することはJavaScriptと同じようにいかなる型の値も代入ができてしまうということです。
 
 ```typescript
 increment(1);

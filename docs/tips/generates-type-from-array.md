@@ -35,7 +35,7 @@ const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
 type Currency = typeof currencies;
 ```
 
-`Currency` は次のようになります。
+`Currency`は次のようになります。
 
 ```typescript
 type Currency = readonly ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"];
@@ -54,7 +54,7 @@ type Currency = typeof currencies[2];
 // -> 'GBP'
 ```
 
-`'GBP'` を取ることができました。
+`'GBP'`を取ることができました。
 
 ### すべてのリテラル型が欲しい
 
