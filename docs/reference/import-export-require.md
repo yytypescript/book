@@ -411,15 +411,13 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 たとえばある国の会計ソフトウェアを作っていたとして、その国の消費税が8%だったとします。そのときのあるファイルの`export`はこのようになっていました。
 
-```typescript
-// taxIncluded.ts
+```typescript title="taxIncluded.ts"
 export default (price) => price * 1.08;
 ```
 
 もちろん呼び出し側はそのまま使うことができます。
 
-```typescript
-// index.ts
+```typescript title="index.ts"
 import taxIncluded from "./taxIncluded";
 
 console.log(taxIncluded(100)); //=> 108
@@ -427,8 +425,7 @@ console.log(taxIncluded(100)); //=> 108
 
 ここで、ある国が消費税を10%に変更したとします。このときこのシステムでは`taxIncluded.ts`を変更すればこと足ります。
 
-```typescript
-// taxIncluded.ts
+```typescript title="taxIncluded.ts"
 export default (price) => price * 1.1;
 ```
 
@@ -442,13 +439,11 @@ export default (price) => price * 1.1;
 
 named exportであれば`export`する名称を変更することで呼び出し側の変更を強制させることができます。
 
-```typescript
-// taxIncluded.ts
+```typescript title="taxIncluded.ts"
 export const taxIncludedAsOf2014 = (price) => price * 1.08;
 ```
 
-```typescript
-// index.ts
+```typescript title="index.ts"
 import { taxIncludedAsOf2014 } from "./taxInclude";
 
 console.log(taxIncludedAsOf2014(100)); //=> 108
@@ -456,13 +451,11 @@ console.log(taxIncludedAsOf2014(100)); //=> 108
 
 税率が10%に変われば次のようにします。
 
-```typescript
-// taxIncluded.ts
+```typescript title="taxIncluded.ts"
 export const taxIncludedAsOf2019 = (price) => price * 1.1;
 ```
 
-```typescript
-// index.ts
+```typescript title="index.ts"
 import { taxIncludedAsOf2019 } from "./taxIncluded";
 
 // this is no longer available.
