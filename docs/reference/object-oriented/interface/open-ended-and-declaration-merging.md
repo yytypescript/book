@@ -10,14 +10,14 @@ JavaScriptがES2015, ES2016, ES2017, ES2018, ES2019と進化するにつれ、�
 
 インターフェースではバージョンごとにメソッドの`Array`のインターフェースをファイルを分けて定義して、環境に応じて読み込むファイルを変えるだけで`Array`の型定義ができます。
 
-```typescript
-// ES2016.array.ts
+```typescript title="ES2016.array.ts"
 interface Array<T> {
 
   includes(...): boolean;
 }
+```
 
-// ES2019.array.ts
+```typescript title="ES2019.array.ts"
 interface Array<T> {
 
   flatMap<U>(...): U[];
