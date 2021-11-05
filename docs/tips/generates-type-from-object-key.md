@@ -63,6 +63,6 @@ type Langauge = keyof TypeOfLanguage;
 type Language = keyof typeof conf;
 ```
 
-### 疑問: `keyof conf` じゃダメなんですか？
+### 疑問: `keyof conf`じゃダメなんですか？
 
 動作しません。なぜなら`keyof`は値ではなく (オブジェクトの) 型に対して使用できるからです。一方`typeof`は値から型を生成するのでこの順番で使用する必要があります。

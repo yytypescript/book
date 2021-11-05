@@ -1,6 +1,6 @@
 # 変数宣言: letとconst
 
-JavaScriptの変数宣言(variable declaration)には、`let`と`const` があります。
+JavaScriptの変数宣言(variable declaration)には、`let`と`const`があります。
 
 ## letの変数宣言
 

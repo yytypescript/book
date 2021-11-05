@@ -45,7 +45,7 @@ const numbers = textNumbers.map<number>(function (text: string) {
 
 ### `Map<K, V>`
 
-`Map<K, V>` オブジェクトでは、`K` にキーの型を指定し`V` にキーに紐づく値の型を指定します。先ほどの`map<T>()`メソッドは、ジェネリクスの型定義がひとつだけでしたが、`Map<K, V>` は型定義がふたつあります。このようにジェネリクスの型定義はひとつである必要はなく、複数の型定義を持つことも可能です。
+`Map<K, V>`オブジェクトでは、`K`にキーの型を指定し`V`にキーに紐づく値の型を指定します。先ほどの`map<T>()`メソッドは、ジェネリクスの型定義がひとつだけでしたが、`Map<K, V>`は型定義がふたつあります。このようにジェネリクスの型定義はひとつである必要はなく、複数の型定義を持つことも可能です。
 
 ```typescript
 type Address = {
@@ -75,4 +75,4 @@ TODO: Promiseへリンクする
 標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認することができます。
 <https://github.com/microsoft/TypeScript/tree/master/lib>
 
-`Array.prototype.map()` の型は [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/master/lib/lib.es5.d.ts#L1170) のファイルで確認できます。
+`Array.prototype.map()`の型は [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/master/lib/lib.es5.d.ts#L1170) のファイルで確認できます。

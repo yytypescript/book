@@ -67,7 +67,7 @@ const account = {
 type Account = typeof account;
 ```
 
-`Account` は次のようになります。
+`Account`は次のようになります。
 
 ```typescript
 type Account = {

@@ -148,7 +148,7 @@ export function add(a, b) {
 }
 ```
 
-`TS Config` タブを開き`Module`の設定を`CommonJS`に変更をしてみます。TS Config の設定が変更されて`CommonJS`形式で出力される JavaScript のコードを確認することができます。
+`TS Config`タブを開き`Module`の設定を`CommonJS`に変更をしてみます。TS Config の設定が変更されて`CommonJS`形式で出力される JavaScript のコードを確認することができます。
 
 ```javascript
 "use strict";

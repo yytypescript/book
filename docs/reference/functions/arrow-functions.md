@@ -34,7 +34,7 @@ const hello = name => {
 const hello = name => `Hello, ${name}!`;
 ```
 
-`return` を省略したアロー関数でオブジェクトリテラルを返したい時はそのまま返すことができません。
+`return`を省略したアロー関数でオブジェクトリテラルを返したい時はそのまま返すことができません。
 
 <!--prettier-ignore-->
 ```typescript
@@ -43,7 +43,7 @@ console.log(func());
 //=> undefined
 ```
 
-このときはオブジェクトリテラルを`()` で括ることで返すことができます。
+このときはオブジェクトリテラルを`()`で括ることで返すことができます。
 
 ```typescript
 const func = () => ({ x: 1 });
