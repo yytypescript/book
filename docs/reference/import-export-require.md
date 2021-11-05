@@ -41,7 +41,7 @@ export const bar = foo;
 
 ## モジュールは`import`時に一度だけ評価される
 
-モジュールのコードが評価されるのは、1回目の`import`のときだけです。2回目以降の`import`では、最初に評価した内容が使われます。言い換えると、モジュールは初回`import`でキャッシュされるとも言えますし、モジュールはいわゆるシングルトン(singleton)的なものとも言えます。
+JavaScriptでは、モジュールのコードが評価されるのは、1回目の`import`のときだけです。2回目以降の`import`では、最初に評価した内容が使われます。言い換えると、モジュールは初回`import`でキャッシュされるとも言えますし、モジュールはいわゆるシングルトン(singleton)的なものとも言えます。
 
 たとえば、`module.js`というモジュールを3回読み込んだとしても、この`module.js`が評価されるのは最初の1回目だけです。
 
@@ -57,6 +57,16 @@ import "./module.js";
 import "./module.js";
 import "./module.js";
 ```
+
+## JavaScriptのモジュールシステム
+
+JavaScriptにはES Modules(ESM)という言語公式のモジュールシステムがあります。`import`構文や`export`構文を使ったものがES Modulesです。
+
+ESMが登場したのが2015年ごろです。それまで、JavaScriptには公式的なモジュールシステムがありませんでした。
+
+そのため、非公式のモジュールシステムがいくつか存在します。その中でも今も広く使われるのが、CommonJS(CJS)です。CommonJSは`require`関数と`exports`/`module.exports`変数を用いたものです。
+
+業界としてはES Modulesに統一されるべきですが、CommonJSのライブラリ資産もまだ多く残っているため、CommonJSに触れる機会はまだまだあります。
 
 ## モジュールの歴史的経緯
 
