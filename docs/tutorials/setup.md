@@ -4,22 +4,6 @@ description: TypeScriptの開発に必要になるNode.jsとTypeScriptコンパ�
 
 # 開発環境の準備
 
-:::tip TECH PLAY女子部　ご参加者の皆さまへ
-
-この度は、[「作って学ぶTypeScript」をみんなでもくもくしよう！](https://techplay.jp/event/834034)の題材に本書をお選びくださり、ありがとうございます！
-
-本書の疑問点、チュートリアルでうまく行かなかった点、本書内容に限らずTypeScriptについて分からないことなど、困ったことがございましたら、[GitHub Issues](https://github.com/yytypescript/book/issues/new?labels=%E8%B3%AA%E5%95%8F,help+wanted)にご遠慮なくお寄せください。
-
-皆さまのTypeScript学習が少しでも前進するよう、できるかぎり回答やトラブルシューティングのサポートをさせていただきます。
-
-<!-- markdownlint-disable MD033 -->
-
-<a href="https://github.com/yytypescript/book/issues/new?labels=%E8%B3%AA%E5%95%8F,help+wanted"><button class="button button--success">GitHub Issuesに質問を書く</button></a>
-
-<!-- markdownlint-enable MD033 -->
-
-:::
-
 ## Node.jsとは
 
 Node.jsは、JavaScriptをサーバーサイドで動かすことを目的に開発されたソフトウェアです。Node.jsはGoogle ChromeのJavaScriptエンジンと同じ「V8」でJavaScriptを実行します。
