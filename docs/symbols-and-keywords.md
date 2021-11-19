@@ -56,16 +56,18 @@ double bangはJavaScriptで定義されている演算子ではなく、論理�
 
 左の値と右の値が異なるか判定します。型が異なる場合は型変換されて比較されます。
 
-```javascript
-"1" != 1; // false
+```javascript twoslash
+"1" != 1;
+// @log: false
 ```
 
 ### `!==` 厳密不等価演算子 (strict inequality operator) ![js]
 
 型を含めて左の値と右の値が異なるか判定します。
 
-```javascript
-1 !== 2; // true
+```javascript twoslash
+1 !== 2;
+// @log: true
 ```
 
 ### `"` 文字列リテラル (string literal) ![js]
@@ -93,17 +95,19 @@ class ExampleClass {
 
 テンプレートリテラル内で変数を展開するときに用いられる記号です。
 
-```javascript
+```javascript twoslash
 const name = "John";
-console.log(`Hi, ${name}.`); // "Hi, John."
+console.log(`Hi, ${name}.`);
+// @log: "Hi, John."
 ```
 
 ### `%` 剰余演算子 (reminder operator) ![js]
 
 左の値を右の値で割った余りを計算します。
 
-```javascript
-12 % 5; // 2
+```javascript twoslash
+12 % 5;
+// @log: 2
 ```
 
 ### `%=` 剰余代入 (reminder assignment) ![js]
@@ -114,10 +118,13 @@ console.log(`Hi, ${name}.`); // "Hi, John."
 
 左の値と右の値で共にビットが1である位置のビットを1に します。
 
-```javascript
-const a = 1; // 00000001
-const b = 5; // 00000101
-console.log(a & b); // 00000001
+```javascript twoslash
+const a = 1;
+// @log: 00000001
+const b = 5;
+// @log: 00000101
+console.log(a & b);
+// @log: 00000001
 // 出力: 1
 ```
 
@@ -141,11 +148,14 @@ type MagicalSwordsman = Swordsman & Wizard;
 
 左の変数の値と右の値で共にビットが1である位置のビットを1にした結果を左の変数に割り当てます。
 
-```javascript
-let a = 1; // 00000001
-const b = 5; // 00000101
+```javascript twoslash
+let a = 1;
+// @log: 00000001
+const b = 5;
+// @log: 00000101
 a &= b;
-console.log(a); // 00000001
+console.log(a);
+// @log: 00000001
 // 出力: 1
 ```
 
@@ -157,11 +167,12 @@ console.log(a); // 00000001
 
 左の変数の真偽値と右の真偽値の論理積の結果を左の変数に割り当てます。
 
-```javascript
+```javascript twoslash
 let a = true;
 let b = false;
 a &&= b;
-console.log(a); // false
+console.log(a);
+// @log: false
 ```
 
 ### `'` 文字列リテラル (string literal) ![js]
@@ -220,8 +231,9 @@ function* func2() {
 
 左の値を右の値でべき乗します。
 
-```javascript
-2 ** 3; // 8
+```javascript twoslash
+2 ** 3;
+// @log: 8
 ```
 
 ### `**=` べき乗代入 (exponentiation assignment) ![js]
@@ -232,8 +244,9 @@ function* func2() {
 
 Number型に変換します。
 
-```javascript
-+"1"; // 1
+```javascript twoslash
++"1";
+// @log: 1
 ```
 
 ### `+` 加算演算子 (addition operator) ![js]
@@ -268,10 +281,11 @@ type MyReadonly<T> = {
 
 変数に`1`を足す演算子です。
 
-```javascript
+```javascript twoslash
 let x = 3;
 x++;
-console.log(x); // 4
+console.log(x);
+// @log: 4
 ```
 
 ### `,` 関数引数の区切り ![js]
@@ -327,8 +341,9 @@ console.log(a); // true
 
 正負を反転してNumber型に変換します。
 
-```javascript
--"1"; // -1
+```javascript twoslash
+-"1";
+// @log: -1
 ```
 
 ### `-` 減算演算子 (subtraction operator) ![js]
@@ -357,74 +372,82 @@ type Writable<T> = {
 
 変数に`1`を引き算する演算子です。
 
-```javascript
+```javascript twoslash
 let x = 3;
 x--;
-console.log(x); // 2
+console.log(x);
+// @log: 2
 ```
 
 ### `.` プロパティへのアクセス (dot operator) ![js]
 
 オブジェクトのプロパティにアクセスするときに用いる記号です。
 
-```javascript
+```javascript twoslash
 const object = { property: 123 };
-object.property; // 123
+object.property;
+// @log: 123
 ```
 
 ### `...` スプレッド構文 (spread syntax) ![js]
 
 配列などの反復可能オブジェクトを関数の引数にする構文です。
 
-```javascript
+```javascript twoslash
 function sum(x, y, z) {
   return x + y + z;
 }
 const numbers = [1, 2, 3];
-console.log(sum(...numbers)); // 6
+console.log(sum(...numbers));
+// @log: 6
 ```
 
 または、配列などの反復可能オブジェクトを配列要素に展開する構文です。
 
-```javascript
+```javascript twoslash
 const numbers = [1, 2, 3];
 const newNumbers = [0, ...numbers, 4];
-console.log(newNumbers); // [ 0, 1, 2, 3, 4 ]
+console.log(newNumbers);
+// @log: [ 0, 1, 2, 3, 4 ]
 ```
 
 または、オブジェクトのプロパティを展開する構文です。
 
-```javascript
+```javascript twoslash
 const object = { x: 1, y: 2 };
 const newObject = { ...object, z: 3 };
-console.log(newObject); // { x: 1, y: 2, z: 3 }
+console.log(newObject);
+// @log: { x: 1, y: 2, z: 3 }
 ```
 
 ### `...` 残余構文 (rest syntax) ![js]
 
 関数の残りの引数をひとつの配列として受け取るのに用いられる構文です。
 
-```javascript
+```javascript twoslash
 function func(a, b, ...rest) {
   return rest;
 }
-console.log(func(1, 2, 3, 4, 5)); // [ 3, 4, 5 ]
+console.log(func(1, 2, 3, 4, 5));
+// @log: [ 3, 4, 5 ]
 ```
 
 または、配列などの反復可能オブジェクトの残りの要素を取り出す構文です。
 
-```javascript
+```javascript twoslash
 const numbers = [1, 2, 3, 4, 5];
 const [first, second, ...rest] = numbers;
-console.log(rest); // [ 3, 4, 5 ]
+console.log(rest);
+// @log: [ 3, 4, 5 ]
 ```
 
 または、オブジェクトの残りのプロパティを取り出す構文です。
 
-```javascript
+```javascript twoslash
 const object = { a: 1, b: 2, c: 3, d: 4 };
 const { a, b, ...rest } = object;
-console.log(rest); // { c: 3, d: 4 }
+console.log(rest);
+// @log: { c: 3, d: 4 }
 ```
 
 ### `/` 除算演算子 (division operator) ![js]
@@ -527,10 +550,12 @@ let strLength: number = (<string>someValue).length;
 
 左の値のビットを右の値の数だけ左にずらします。
 
-```javascript
-const a = 1; // 00000001
+```javascript twoslash
+const a = 1;
+// @log: 00000001
 const b = 3;
-console.log(a << b); // 00001000
+console.log(a << b);
+// @log: 00001000
 // 出力: 8
 ```
 
@@ -538,11 +563,13 @@ console.log(a << b); // 00001000
 
 左の変数の値のビットを右の値の数だけ左にずらした結果を左の変数に割り当てます。
 
-```javascript
-let a = 1; // 00000001
+```javascript twoslash
+let a = 1;
+// @log: 00000001
 const b = 3;
 a <<= b;
-console.log(a); // 00001000
+console.log(a);
+// @log: 00001000
 // 出力: 8
 ```
 
@@ -554,16 +581,18 @@ console.log(a); // 00001000
 
 左の値と右の値が等しいか判定します。型が異なる場合は型変換されて比較されます。
 
-```javascript
-"1" == 1; // true
+```javascript twoslash
+"1" == 1;
+// @log: true
 ```
 
 ### `===` 厳密等価演算子 (strict equality) ![js]
 
 型を含めて左の値と右の値が等しいか判定します。
 
-```javascript
-"1" === 1; // false
+```javascript twoslash
+"1" === 1;
+// @log: false
 ```
 
 ### `=>` アロー関数の一部 (arrow function) ![js]
@@ -588,10 +617,12 @@ const increment = (num) => num + 1;
 
 左の値のビットを右の値の数だけ右にずらします。
 
-```javascript
-const a = 8; // 00001000
+```javascript twoslash
+const a = 8;
+// @log: 00001000
 const b = 3;
-console.log(a >> b); // 00000001
+console.log(a >> b);
+// @log: 00000001
 // 出力: 1
 ```
 
@@ -603,10 +634,12 @@ console.log(a >> b); // 00000001
 
 左の値のビットを右の値の数だけ右にずらします。左に入る符号ビットは常に0になります。
 
-```javascript
-const a = -2; // 11111111111111111111111111111110
+```javascript twoslash
+const a = -2;
+// @log: 11111111111111111111111111111110
 const b = 3;
-console.log(a >>> b); // 00011111111111111111111111111111
+console.log(a >>> b);
+// @log: 00011111111111111111111111111111
 // 出力: 536870911
 ```
 
@@ -622,52 +655,61 @@ console.log(a >>> b); // 00011111111111111111111111111111
 
 オブジェクトのプロパティを任意プロパティとして定義します。
 
-```typescript
+```typescript twoslash
 interface User {
-  name: string; // name は必須
-  age?: number; // age は任意
+  name: string;
+// @log: name は必須
+  age?: number;
+// @log: age は任意
 }
 const user: User = { name: "taro" };
 ```
 
 または、関数の引数を必須ではなくします。
 
-```typescript
+```typescript twoslash
 function func(x?: number) {}
-func(); // xがなくてもOK
+func();
+// @log: xがなくてもOK
 ```
 
 ### `?.` オプショナルチェーン (optional chaining) ![js]
 
 プロパティのアクセス元が`null`または`undefined`のときにエラーを発生させずに`undefined`を返します。
 
-```javascript
+```javascript twoslash
 const user = null;
-console.log(user.name); // Cannot read property 'name' of null
-console.log(user?.name); // undefined
+console.log(user.name);
+// @error: Cannot read property 'name' of null
+console.log(user?.name);
+// @log: undefined
 ```
 
 ### `??` Null合体 (nullish coalescing operator) ![js]
 
 左の値が`null`または`undefined`のときに右の値を返します。そうでない場合は左の値を返します。
 
-```javascript
-console.log(undefined ?? 1); // 1
-console.log(2 ?? 1); // 2
+```javascript twoslash
+console.log(undefined ?? 1);
+// @log: 1
+console.log(2 ?? 1);
+// @log: 2
 ```
 
 ### `??=` Null合体代入 (logical nullish assignment) ![js]
 
 左の変数の値が`null`または`undefined`の場合のみ右の値を左の変数に割り当てます。
 
-```javascript
+```javascript twoslash
 const user1 = { name: undefined };
 user1.name ??= "taro";
-console.log(user1.name); // taro
+console.log(user1.name);
+// @log: taro
 
 const user2 = { name: "kaori" };
 user2.name ??= "taro";
-console.log(user2.name); // kaori
+console.log(user2.name);
+// @log: kaori
 ```
 
 ### `@` デコレーター (decorator) ![ts]
@@ -682,27 +724,32 @@ console.log(user2.name); // kaori
 
 配列の要素やオブジェクトのプロパティにアクセスするときに用いられる記号です。
 
-```javascript
+```javascript twoslash
 const numbers = [1, 2, 3];
-numbers[0]; // 1
+numbers[0];
+// @log: 1
 const object = { a: 1, b: 2 };
-object["a"]; // 1
+object["a"];
+// @log: 1
 ```
 
 ### `[` 配列の分割代入 (destructuring assignment) ![js]
 
 配列などの反復可能オブジェクトの分割代入の開始に用いられる記号です。
 
-```javascript
+```javascript twoslash
 const numbers = [1, 2, 3];
-const [first, ...rest] = numbers; // 分割代入
-console.log(first, rest); // 1 [ 2, 3 ]
+const [first, ...rest] = numbers;
+// @log: 分割代入
+console.log(first, rest);
+// @log: 1 [ 2, 3 ]
 
 // 分割代入
 function func([first, ...rest]) {
   console.log(first, rest);
 }
-func([1, 2, 3]); // 1 [ 2, 3 ]
+func([1, 2, 3]);
+// @log: 1 [ 2, 3 ]
 ```
 
 ### `[` インデックス型 (index signature) ![ts]
@@ -738,10 +785,13 @@ const lineBreak = "\n";
 
 左の値と右の値でビットの値が異なる位置のビットを1にします。
 
-```javascript
-const a = 1; // 00000001
-const b = 5; // 00000101
-console.log(a ^ b); // 00000100
+```javascript twoslash
+const a = 1;
+// @log: 00000001
+const b = 5;
+// @log: 00000101
+console.log(a ^ b);
+// @log: 00000100
 // 出力: 4
 ```
 
@@ -763,9 +813,9 @@ const hyakuman = 1_000_000;
 
 また、慣習的に使わない変数の受け取り先に使われることがあります。たとえば、2つの引数を受け取るコールバック関数で、第2引数だけを使う場合、第1引数をアンダースコアにする書き方をするコードが中にはあります。
 
-```javascript
+```javascript twoslash
 [1, 2, 3].map((_, index) => {
-  // _ は 1, 2, 3のような要素値。それを使わないという意味で _ にしている
+// @log:  _ は 1, 2, 3のような要素値。それを使わないという意味で _ にしている
 });
 ```
 
@@ -791,12 +841,13 @@ if (isOK) {
 
 if文やfor文などの構文を伴わないブロック文は、単に変数のスコープを分けることを目的にしていることがあります。
 
-```javascript
+```javascript twoslash
 {
   const value = 1;
 }
 {
-  const value = 2; // 上と同じ変数名で初期化しているが、スコープが別になるためエラーにならない。
+  const value = 2;
+// @log: 上と同じ変数名で初期化しているが、スコープが別になるためエラーにならない。
 }
 ```
 
@@ -804,26 +855,29 @@ if文やfor文などの構文を伴わないブロック文は、単に変数の
 
 オブジェクトの分割代入に用いられる記号です。
 
-```javascript
+```javascript twoslash
 const object = { a: 1, b: 2, c: 3, d: 4 };
 const { a, b, ...rest } = object; // 分割代入
-console.log(a, b, rest); // 1 2 { c: 3, d: 4 }
+console.log(a, b, rest);
+// @log: 1 2 { c: 3, d: 4 }
 
 // 分割代入
 function func({ a, b, ...rest }) {
   console.log(a, b, rest);
 }
-func(object); // 1 2 { c: 3, d: 4 }
+func(object);
+// @log: 1 2 { c: 3, d: 4 }
 ```
 
 ### `|` ビット論理和 (bitwise or) ![js]
 
 左の値と右の値でどちらのビットが1である位置のビットを1にします。
 
-```javascript
+```javascript twoslash
 const a = 0b010;
 const b = 0b101;
-console.log((a | b) === 0b111); // true
+console.log((a | b) === 0b111);
+// @log: true
 ```
 
 ### `|` ユニオン型 (union type) ![ts]
@@ -832,7 +886,7 @@ console.log((a | b) === 0b111); // true
 
 ```typescript
 type ID = string | number;
-const id1 = "e29b41"; // OK
+const id1 = "e29b41";// OK
 const id2 = 100; // OK
 const id3 = true; // ERROR
 ```
@@ -853,9 +907,11 @@ const id3 = true; // ERROR
 
 ビットを反転します。
 
-```javascript
-const a = 1; // 00000001
-console.log(~a); // 11111110
+```javascript twoslash
+const a = 1;
+// @log: 00000001
+console.log(~a);
+// @log: 11111110
 // 出力: -2
 ```
 
@@ -863,14 +919,20 @@ console.log(~a); // 11111110
 
 ビット否定演算子を2つ重ねたもので、小数点以下を消し去る計算をするイディオムです。JavaScriptにこういう演算子があるわけではなく慣習的なものです。double tildeの計算結果は、正の数については`Math.floor`と同じに、負の数は`Math.ceil`と同じになります。
 
-```javascript
-~~1.5; // 1
-Math.floor(1.5); // 1
-Math.ceil(1.5); // 2
+```javascript twoslash
+~~1.5;
+// @log: 1
+Math.floor(1.5);
+// @log: 1
+Math.ceil(1.5);
+// @log: 2
 
-~~-1.5; // -1
-Math.floor(-1.5); // -2
-Math.ceil(-1.5); // -1
+~~-1.5;
+// @log: -1
+Math.floor(-1.5);
+// @log: -2
+Math.ceil(-1.5);
+// @log: -1
 ```
 
 ## キーワード
@@ -887,7 +949,7 @@ TypeScriptコンパイラーが解釈した型を上書きする「型アサー�
 
 オブジェクトのプロパティが参照されたときに対応する関数が呼ばれます。
 
-```javascript
+```javascript twoslash
 const exam = {
   scores: [50, 70, 90, 80, 100, 60],
   get best() {
@@ -895,7 +957,8 @@ const exam = {
   },
 };
 
-console.log(exam.best); // 100
+console.log(exam.best);
+// @log: 100
 ```
 
 ### `is` 型アサーション関数の一部 (user-defined type guard) ![ts]
@@ -922,8 +985,9 @@ function isDuck(animal: Animal): animal is Duck {}
 
 与えられた値の型を表す文字列を返します。
 
-```javascript
-console.log(typeof 123); // "number"
+```javascript twoslash
+console.log(typeof 123);
+// @log: "number"
 ```
 
 ### `typeof` typeof型演算子 (typeof) ![ts]
@@ -934,7 +998,7 @@ console.log(typeof 123); // "number"
 
 オブジェクトのプロパティを変更するときに対応する関数が呼ばれます。
 
-```javascript
+```javascript twoslash
 const prize = {
   latest: "",
   history: [],
@@ -948,16 +1012,19 @@ prize.winner = "Stanislas Wawrinka";
 prize.winner = "Rafael Nadal Parera";
 prize.winner = "Novak Đoković";
 
-console.log(prize.latest); // "Novak Đoković"
-console.log(prize.history); // [ 'Stanislas Wawrinka', 'Rafael Nadal Parera', 'Novak Đoković' ]
+console.log(prize.latest);
+// @log: "Novak Đoković"
+console.log(prize.history);
+// @log: [ 'Stanislas Wawrinka', 'Rafael Nadal Parera', 'Novak Đoković' ]
 ```
 
 ### `void` void演算子 (void) ![js]
 
 戻り値を`undefined`にします。
 
-```javascript
-console.log(void 123); // undefined
+```javascript twoslash
+console.log(void 123);
+// @log: undefined
 ```
 
 ### `void` void型 (void) ![ts]

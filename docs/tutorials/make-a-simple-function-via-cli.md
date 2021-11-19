@@ -72,7 +72,7 @@ TypeScriptの目玉機能はなんと言ってもコンパイラです。コン�
 ```ts twoslash {1,2} title="increment.ts"
 // @noErrors
 function increment(num: number) {
-  //                  ^^^^^^^^型注釈
+//                  ^^^^^^^^型注釈
   return num + 1;
 }
 

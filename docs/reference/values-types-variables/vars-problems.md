@@ -34,12 +34,15 @@ function test() {
 
 `let`と`const`では、同名の変数宣言はエラーになるようになっています。
 
-```typescript
+```typescript twoslash
 let x = 1;
-let x = 2; // SyntaxError: Identifier 'x' has already been declared
+let x = 2;
+// @error: SyntaxError: Identifier 'x' has already been declared
 
 const y = 1;
-const y = 2; // SyntaxError: Identifier 'y' has already been declared
+const y = 2;
+// @error: SyntaxError: Identifier 'y' has already been declared
+// @noErrors
 ```
 
 ### グローバル変数の上書き
@@ -48,16 +51,19 @@ const y = 2; // SyntaxError: Identifier 'y' has already been declared
 
 たとえば、ブラウザ上で`innerWidth`変数をグローバル変数として定義してしまうと、標準APIの`window.innerWidth`が上書きされるため、ブラウザの幅を変更しても常に同じ値が返ってくるようになってしまいます。
 
-```javascript
+```javascript twoslash
 var innerWidth = 10;
-console.log(window.innerWidth); // 10
+console.log(window.innerWidth);
+// @log: 10
 ```
 
 `let`や`const`はグローバルなスコープで定義されることはないため、`window`オブジェクトのプロパティを不用意に上書きする心配はありません。
 
-```typescript
+```typescript twoslash
 const innerWidth = 10;
-console.log(window.innerWidth); // 500
+console.log(window.innerWidth);
+// @log: 500
+// @noErrors
 ```
 
 [変数のスコープ (scope)](../statements/variable-scope.md)
@@ -66,14 +72,17 @@ console.log(window.innerWidth); // 500
 
 JavaScriptで宣言された変数はスコープの先頭で変数が生成されます。これは**変数の巻き上げ**と呼ばれています。`var`で宣言された変数は、スコープの先頭で生成されて`undefined`で値が初期化されます。次の例では`greeting`変数への参照はエラーとならずに`undefined`となります。
 
-```typescript
-console.log(greeting); // undefined
+```typescript twoslash
+console.log(greeting);
+// @log: undefined
 var greeting = "こんにちは";
 
 // ↓ 巻き上げの影響で実際はこう実行される
 
+// @noErrors
 var greeting;
-console.log(greeting); // undefined
+console.log(greeting);
+// @log: undefined
 greeting = "こんにちは";
 ```
 
@@ -81,11 +90,13 @@ greeting = "こんにちは";
 
 `let`と`const`では、宣言前の変数を参照すると`Reference Error`が発生します。
 
-```typescript
-console.log(x); // ReferenceError
+```typescript twoslash
+console.log(x);
+// @errors: 2448 2454
 let x = 1;
 
-console.log(y); // ReferenceError
+console.log(y);
+// @errors: 2448 2454
 const y = 2;
 ```
 
@@ -95,11 +106,12 @@ const y = 2;
 
 次の例では`let`や`const`で変数の巻き上げが発生しないなら`console.log(x)`の評価のタイミングで関数の先頭で宣言されている`var x = 1`が参照されて`1`が出力されるはずです。しかし、実際は`let`で宣言された変数`x`がブロックスコープ内で初期化されていない状態で生成されるため、未初期化の`x`を参照してReference Errorが発生します。
 
-```typescript
+```typescript twoslash
 function output() {
   var x = 1;
   {
-    console.log(x); // Reference Error
+    console.log(x);
+// @errors: 2448 2454
     let x = 2;
   }
 }
@@ -111,26 +123,30 @@ output();
 
 JavaScript では`var`で宣言された変数のスコープは関数となるため、`{}`の中で変数宣言をしても最初に定義した変数`x`は上書きされます。
 
-```typescript
+```typescript twoslash
 function print() {
   var x = 1;
   if (true) {
     var x = 2;
-    console.log(x); // 2
+    console.log(x);
+// @log: 2
   }
-  console.log(x); // 2
+  console.log(x);
+// @log: 2
 }
 ```
 
 `let`と`const`のスコープはブロックスコープです。次の例は`var`では変数`x`が上書きされていましたが、ここではブロックスコープ内で異なる変数として別々に定義されています。
 
-```typescript
+```typescript twoslash
 function print() {
   const x = 1;
   if (true) {
     const x = 2;
-    console.log(x); // 2
+    console.log(x);
+// @log: 2
   }
-  console.log(x); // 1
+  console.log(x);
+// @log: 1
 }
 ```
