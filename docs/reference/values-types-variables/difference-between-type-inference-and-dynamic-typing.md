@@ -16,8 +16,10 @@ console.log(x.substring(1, 3));
 
 一方、動的型付けでは実行時に型が決まるので、実行タイミングにより型が変化します。次のJavaScriptの例では、最初に`1`の値が代入され変数`x`の型は`number`型となります。その後、`hello`の文字列を代入することで 変数`x`の型は`string`型に変更されます。このように実行タイミングで型が変化するので、型推論ではエラーになる処理も動的型付け言語では正常に動作します。
 
-```ts title="JavaScript"
+```ts title="JavaScript" twoslash
 let x = 1; // xはnumber型となる
 x = "hello"; //x はstring型となる
-console.log(x.substring(1, 3)); //=> "el"
+console.log(x.substring(1, 3));
+// @log: "el"
+// @noErrors
 ```

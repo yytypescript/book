@@ -6,7 +6,8 @@
 
 クラスのプロパティは初期化しない状態では`undefined`が格納されます。
 
-```typescript
+```typescript twoslash
+// @strictPropertyInitialization: false
 class User {
   public name: string;
   public gender: string;
@@ -16,11 +17,11 @@ class User {
 const user: User = new User();
 
 console.log(user.name);
-// -> undefined
+// @log: undefined
 console.log(user.gender);
-// -> undefined
+// @log: undefined
 console.log(user.age);
-// -> undefined
+// @log: undefined
 ```
 
 これはクラスの宣言時に、コンストラクタで各プロパティが初期化されていないためです。

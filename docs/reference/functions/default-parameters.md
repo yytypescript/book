@@ -60,7 +60,22 @@ function distance(p1: Point, p2: Point = inverse(p1)): number {
 
 また、デフォルト引数はオプション引数と異なりその引数を最後に書く必要はありません。呼び出し側でデフォルト引数を使用させたい時は`undefined`を指定します。このとき`null`ではこの役目を果たせないので注意してください。もちろん末尾のデフォルト引数であれば省略が可能です。
 
-```typescript
+```typescript twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+
+const q1: Point = {
+  x: 1,
+  y: 2
+}
+const q2: Point = {
+  x: 3,
+  y: 4
+}
+
+// ---cut---
 const p0: Point = {
   x: 1,
   y: 2,
@@ -73,7 +88,7 @@ function distance(p1: Point = p0, p2: Point): number {
 distance(q1, q2);
 distance(undefined, q2);
 distance(null, q2);
-// Argument of type 'null' is not assignable to parameter of type 'Point | undefined'.
+// @errors: 2345
 ```
 
 ## デフォルト引数でできないこと

@@ -54,9 +54,11 @@ dangerousButton.name = "絶対に押すなよ？";
 
 上の例の`button`と`dangerousButton`は異なるオブジェクトになります。その証拠に、それぞれの`name`プロパティは値が異なります。
 
-```javascript
-console.log(button.name); //=> "ボタン"
-console.log(dangerousButton.name); //=> "絶対に押すなよ？"
+```javascript twoslash
+console.log(button.name);
+// @log: "ボタン"
+console.log(dangerousButton.name);
+// @log: "絶対に押すなよ？"
 ```
 
 「プロトタイプ」とは日本語では「原型」のことです。プロトタイプベースは単純に言ってしまえば、原型となるオブジェクトを素にオブジェクトを生成するアプローチなのです。

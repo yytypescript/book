@@ -87,7 +87,10 @@ switch (lang.iso639) {
 
 リテラル型でなくても他の型どうしであればTypeScriptはこの判別を自動的にしてくれます。
 
-```typescript
+```typescript twoslash
+declare function measure(): ThreeSize;
+
+// ---cut---
 type Measurement = {
   b: number;
   w: number;
@@ -106,9 +109,9 @@ const size: ThreeSize = measure();
 
 if (size.b === "secret") {
   console.log(size.w);
-  // -> 'secret'
+// @log: 'secret'
   console.log(size.h);
-  // -> 'secret'
+// @log: 'secret'
 }
 ```
 

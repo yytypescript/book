@@ -61,7 +61,7 @@ request1((result1) => {
 
 先ほどの例を`Promise`を使って書き直してみます。
 
-```typescript
+```typescript twoslash
 // 非同期でAPIにリクエストを投げて値を取得する処理
 function request1(): Promise<number> {
   return new Promise((resolve) => {
@@ -97,7 +97,8 @@ request1()
     return request3(result2);
   })
   .then((result3) => {
-    console.log(result3); //=> 4
+    console.log(result3);
+// @log: 4
   });
 ```
 
@@ -134,8 +135,8 @@ getUser().then((user: User) => {
 
 `Promise`のジェネリクスの型`T`は必須なので、省略した場合はコンパイルエラーになります。
 
-```typescript
-// Generic type 'Promise<T>' requires 1 type argument(s)
+```typescript twoslash
+// @errors: 2314
 function request(): Promise {
   return new Promise((resolve) => {
     resolve(1);
@@ -145,12 +146,11 @@ function request(): Promise {
 
 ジェネリクスの型`T`と返す値の型が合わない場合もコンパイルエラーになります。
 
-```typescript
+```typescript twoslash
+// @errors: 2345
 function request(): Promise<string> {
   return new Promise((resolve) => {
     // string型を期待しているが、number型を返しているのでコンパイルエラー
-    // Argument of type '1' is not assignable to parameter
-    // of type 'string | PromiseLike<string> | undefined'.
     resolve(1);
   });
 }
@@ -165,7 +165,7 @@ function request(): Promise<string> {
 
 関数の前に`async`キーワードをつけることで、その関数は非`Promise`の値を返す時にその値を解決した`Promise`を返すようになります。
 
-```typescript
+```typescript twoslash
 async function requestAsync(): Promise<number> {
   return 1;
 }
@@ -178,13 +178,14 @@ function request(): Promise<number> {
 }
 
 requestAsync().then((result) => {
-  console.log(result); // -> 1
+  console.log(result);
+// @log: 1
 });
 ```
 
 `Promise`をそのまま返すことも可能です。二重に`Promise`がラップされることはありません。
 
-```typescript
+```typescript twoslash
 async function requestAsync(): Promise<number> {
   return new Promise((resolve) => {
     resolve(1);
@@ -192,7 +193,8 @@ async function requestAsync(): Promise<number> {
 }
 
 requestAsync().then((result) => {
-  console.log(result); // -> 1
+  console.log(result);
+// @log: 1
 });
 ```
 

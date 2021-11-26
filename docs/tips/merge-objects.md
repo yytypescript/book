@@ -59,7 +59,7 @@ const merged = Object.assign({}, obj1, obj2, obj3);
 
 同名のキーがある場合、必ず最後に書かれているものが優先されます。値を消し込まないように注意してください。
 
-```typescript
+```typescript twoslash
 const obj1: object = {
   firstName: "Otto",
   middleName: "von",
@@ -73,9 +73,5 @@ const obj2: object = {
 const merged: object = { ...obj1, ...obj2 };
 
 console.log(merged);
-// -> {
-//   firstName: 'Yuko',
-//   middleName: 'von'
-//   lastName: 'Sato',
-//  }
+// @log: { firstName: 'Yuko', middleName: 'von' lastName: 'Sato' }
 ```

@@ -24,7 +24,16 @@ function willBeMetabo(meals: MealsPerDay): boolean {
 
 使い方としては次のようになります。
 
-```typescript
+```typescript twoslash
+type MealsPerDay = {
+  breakfast: string;
+  lunch: string;
+  dinner: string;
+};
+
+declare function willBeMetabo(meals: MealsPerDay): boolean;
+
+// ---cut---
 // 439.2 kcal
 const meals: MealsPerDay = {
   breakfast: "a vegetable salad",
@@ -33,7 +42,7 @@ const meals: MealsPerDay = {
 };
 
 willBeMetabo(meals);
-// -> false
+// @log: false
 ```
 
 ですが、これだけだと食べ物ではないもの、たとえばネジなどの不正な入力があったときにサービスが予想しない反応をしかねません。そこで入力されているものが本当に食事かどうかをバリデーションする関数として`isMeals()`を定義します。この関数は食事ではないものが与えられると例外を投げます。
@@ -71,7 +80,24 @@ function shouldBeCareful(meals: MealsPerDay): boolean {
 
 ここで`isMeals()`の制作者あるいは維持者が何を思ってか`isMeals()`に自分の好きなコッテコテギトギトの食事を、もとのインスタンスを上書きするようにプログラムを書いたとします。この変更によって前述のとても健康的で500 kcalにも満たない食事をしているはずのユーザーが`isMeals()`を19,800 kcalものカロリー爆弾を摂取していることになります。
 
-```typescript
+```typescript twoslash
+type MealsPerDay = {
+  breakfast: string;
+  lunch: string;
+  dinner: string;
+};
+
+const meals: MealsPerDay = {
+  breakfast: "a vegetable salad",
+  lunch: "a cod's meuniere",
+  dinner: "a half bottle of wine (white)",
+};
+
+declare function willBeMetabo(meals: MealsPerDay): boolean;
+
+declare function isMeal(meal: string): boolean;
+
+// ---cut---
 function isMeals(meals: MealsPerDay): void {
   meals.breakfast = "a beef steak";
   // beef steak will be 1200 kcal
@@ -92,15 +118,15 @@ function isMeals(meals: MealsPerDay): void {
 }
 
 console.log(meals);
-// 439.2 kcal
+// @log: 439.2 kcal
 
 isMeals(meals);
 
 console.log(meals);
-// 19,800 kcal !!!
+// @log: 19,800 kcal!!!
 
 willBeMetabo(meals);
-// -> true
+// @log: true
 ```
 
 `isMeals()`を呼んでしまったらもうどのような食事が与えられても`willBeMetabo()`は誰もが生活習慣病に一直線であると判別されることになります。変数`meals`の変更は`isMeals()`内に留まらず、外側にも影響を与えます。
@@ -123,55 +149,62 @@ willBeMetabo(meals);
 
 浅いコピーをする関数を`shallowCopy()`とします。実装は難しくありませんが今回は挙動についてのみ触れたいため言及は後にします。浅いコピーをしたオブジェクトとそのオリジナルは`===`で比較すると`false`を返します。これはコピーの原義から当然の挙動であり、もし`true`を返すようであればそれはコピーに失敗していることになります。
 
-```typescript
+```typescript twoslash
+declare function shallowCopy(obj: object): object;
+
+// ---cut---
 const object1: object = {};
 const object2: object = shallowCopy(object1);
 
 console.log(object1 === object2);
-// -> false
+// @log: false
 ```
 
 次の例は先ほどのインスタンスの上書きを浅いコピーをすることにより防いでいる例です。`meals`のインスタンスは変化せず`isMeals()`に引数として与えた`scapegoat`だけが変更されます。
 
-```typescript
+```typescript twoslash
+type MealsPerDay = {
+  breakfast: string;
+  lunch: string;
+  dinner: string;
+};
+
+const meals: MealsPerDay = {
+  breakfast: "a vegetable salad",
+  lunch: "a cod's meuniere",
+  dinner: "a half bottle of wine (white)",
+};
+
+declare function shallowCopy(meals: MealsPerDay): MealsPerDay;
+
+declare function isMeals(meals: MealsPerDay): void;
+
+// ---cut---
 const scapegoat: MealsPerDay = shallowCopy(meals);
 
 console.log(meals);
-// -> {
-//   breakfast: 'a vegetable salad',
-//   lunch: "a cod's meuniere",
-//   dinner: 'a half bottle of wine (white)'
-// }
+// @log: { breakfast: 'a vegetable salad', lunch: "a cod's meuniere", dinner: 'a half bottle of wine (white)' }
 
 console.log(scapegoat);
-// -> {
-//   breakfast: 'a vegetable salad',
-//   lunch: "a cod's meuniere",
-//   dinner: 'a half bottle of wine (white)'
-// }
+// @log: { breakfast: 'a vegetable salad', lunch: "a cod's meuniere", dinner: 'a half bottle of wine (white)' }
 
 isMeals(scapegoat);
 
 console.log(meals);
-// -> {
-//   breakfast: 'a vegetable salad',
-//   lunch: "a cod's meuniere",
-//   dinner: 'a half bottle of wine (white)'
-// }
+// @log: { breakfast: 'a vegetable salad', lunch: "a cod's meuniere", dinner: 'a half bottle of wine (white)' }
 
 console.log(scapegoat);
-// -> {
-//   breakfast: 'a beef steak',
-//   lunch: 'a bucket of ice cream',
-//   dinner: '3 pizzas'
-// }
+// @log: { breakfast: 'a beef steak', lunch: 'a bucket of ice cream',dinner: '3 pizzas' }
 ```
 
 ### 浅いコピーで防ぎきれない場合
 
 先ほども述べたように浅いコピーはオブジェクトの第一階層のみをコピーします。そのためもしオブジェクトが深い、複雑な階層を持っている場合、それらをすべてコピーしているのではなく、第二階層以降は単なる参照になります。次の例は浅いコピーのプロパティにオブジェクトがある場合、それがコピーではなく参照になっていることを示しています。
 
-```typescript
+```typescript twoslash
+declare function shallowCopy(meals: NestObject): NestObject;
+
+// ---cut---
 type NestObject = {
   nest: object;
 };
@@ -182,9 +215,9 @@ const object1: NestObject = {
 const object2: NestObject = shallowCopy(object1);
 
 console.log(object1 === object2);
-// -> false
+// @log: false
 console.log(object1.nest === object2.nest);
-// -> true
+// @log: true
 ```
 
 完全なコピーを作りたい場合は浅いコピーと一緒に出てきた深いコピーを使います。

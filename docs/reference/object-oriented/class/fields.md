@@ -24,11 +24,11 @@ alice.name = "Alice";
 
 TypeScriptは、クラスの宣言に書かれていないフィールドへアクセスした場合、コンパイルエラーになります。
 
-```typescript title="TypeScript"
+```typescript title="TypeScript" twoslash
+// @errors: 2339
 class Person {}
 const person = new Person();
 console.log(person.age);
-//                 ^^^ Property 'age' does not exist on type 'Person'.(2339)
 ```
 
 フィールドは宣言時に型を省略した場合でもコンストラクタで値が代入される場合は、代入する値で型が推論されます。下の例ではコンストラクタで`string`の型の値を代入しているため`name`は`string`型となります。
@@ -47,13 +47,14 @@ class Person {
 
 TypeScriptのコンパイラーオプションで`strictNullChecks`と`strictPropertyInitialization`の両方が有効になっている場合、次の例の`name: string`の部分はコンパイルエラーとして指摘されます。なぜなら、`new Person`した直後は、`name`が`undefined`になるためです。
 
-```typescript
+```typescript twoslash
 class Person {
   name: string;
-  //^^ Property 'name' has no initializer and is not definitely assigned in the constructor.(2564)
 }
 const alice = new Person();
-console.log(alice.name); //=> undefined
+console.log(alice.name);
+// @log: undefined
+// @errors: 2564
 ```
 
 [strictNullChecks](../../tsconfig/strictnullchecks.md)
@@ -62,12 +63,13 @@ console.log(alice.name); //=> undefined
 
 この2つのコンパイラーオプションが有効な場合でもチェックを通るように書くには、nameフィールドの型注釈を`string | undefined`のようなユニオン型にする必要があります。
 
-```typescript
+```typescript twoslash
 class Person {
   name: string | undefined;
 }
 const alice = new Person();
-console.log(alice.name); //=> undefined
+console.log(alice.name);
+// @log: undefined
 ```
 
 ## コンストラクタを用いたフィールドの初期化

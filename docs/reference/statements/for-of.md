@@ -21,15 +21,16 @@ for (const n of numbers) {
 
 JavaScriptで、for-ofで配列のインデックスと値を一緒に得るには、`entries`メソッドを組み合わせます。
 
-```javascript
+```javascript twoslash
 const words = ["I", "love", "TypeScript"];
 for (const [index, word] of words.entries()) {
   console.log(index, word);
 }
-// 出力結果:
-// 0 I
-// 1 love
-// 2 TypeScript
+// @log: 0 I
+
+// @log: 1 love
+
+// @log: 2 TypeScript
 ```
 
 ## 関連情報

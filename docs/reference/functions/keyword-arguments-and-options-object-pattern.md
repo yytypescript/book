@@ -27,7 +27,7 @@ func(z=3, y=2, x=1)  # => 1 2 3
 
 JavaScriptやTypeScriptにはキーワード引数のような言語仕様はありませんが、Options Objectパターンというデザインパターンで似たようなことができます。Options Objectパターンは複数の位置引数を受け取る代わりに、ひとつのオブジェクトを引数に受け取るように設計された関数を言います。
 
-```javascript
+```javascript twoslash
 // 位置引数の関数
 function normalFunc(x, y, z) {
   console.log(x, y, z);
@@ -38,7 +38,8 @@ function func(options) {
   console.log(options.x, options.y, options.z);
 }
 
-func({ x: 1, y: 2, z: 3 }); //=> 1 2 3
+func({ x: 1, y: 2, z: 3 });
+// @log: 1 2 3
 ```
 
 さらに、Options Objectパターンでは分割代入引数を応用すると、引数の部分をよりシンプルに書けるようになります。

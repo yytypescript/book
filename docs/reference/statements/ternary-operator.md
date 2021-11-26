@@ -12,10 +12,11 @@ JavaScriptの三項演算子(ternary operator)は、条件分岐ができる演�
 
 演算の結果は変数に代入できます。
 
-```javascript
+```javascript twoslash
 const age = 20;
 const drink = age >= 20 ? "ビール" : "ジュース";
-console.log(drink); //=> "ビール"
+console.log(drink);
+// @log: "ビール"
 ```
 
 条件分岐といえばif-elseですが、if-elseは構文なので上のようにif-elseを直接、値を返すような書き方はできません。
