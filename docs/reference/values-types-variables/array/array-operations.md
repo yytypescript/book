@@ -46,7 +46,7 @@ const last = (arr: string[]) => {
 
 const fruits = ["apple", "banana", "orange"];
 const lastItem = last(fruits);
-const firstItem = last(fruits);
+const firstItem = fruits[0];
 
 console.log(lastItem); // orange
 console.log(firstItem); // orange
