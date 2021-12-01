@@ -437,3 +437,36 @@ f = x => x;
 :::note 好みのタイトル
 テキスト
 :::
+
+## 「学びをシェアする」ブロック
+
+「学びをシェアする」ブロックは、読者がページの内容をTwitterでシェアしやすくするブロックです。`<TweetILearned>`で囲った範囲がツイート内容になります。
+
+```markdown title="学びをシェアするブロックの書き方例"
+<TweetILearned>
+
+・JavaScriptの変数宣言はletとconstがある
+・letは再代入OK、constは再代入NG
+・基本的にconstを使うとよい
+
+</TweetILearned>
+```
+
+表示例:
+
+<TweetILearned>
+
+・JavaScriptの変数宣言はletとconstがある
+・letは再代入OK、constは再代入NG
+・基本的にconstを使うとよい
+
+</TweetILearned>
+
+:::caution 「学びをシェアする」ブロックの注意点
+
+- `<TweetILearned>`の直後と`</TweetILearned>`の直前には空行が必要です。
+- Twitterはツイート内容に文字数制限があるため、分量には注意してください。「『サバイバルTypeScript』より」が末尾に追加されることを想定した分量にしてください。
+- ツイート内容にはMarkdownの記法を使わないでください。特にリスト記法は「・」で代用してください。
+- ツイート内容にはURLを含めないでください。URLを含んだツイートはタイムラインに表示されにくい傾向があるからです。
+
+:::
