@@ -207,6 +207,19 @@ bmi({ weight, height });
 
 [Shorhand property names](../values-types-variables/object/shorthand-property-names.md)
 
+<TweetILearned>
+
+・分割代入引数は関数でobjectや配列を部分的に使うときに便利
+・objectは中カッコで引数を書く
+→ function foo({ a, b })
+・配列はカギカッコで引数を書く
+→ function foo([a, b])
+・型注釈は分割代入の後に書く
+・既定値も指定可
+→ function foo({ a = 0})
+
+</TweetILearned>
+
 ## 関連情報
 
 [オブジェクトの分割代入](../values-types-variables/object/destructuring-assignment-from-objects.md)
