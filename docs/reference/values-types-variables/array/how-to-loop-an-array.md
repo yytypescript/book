@@ -94,3 +94,7 @@ console.log(arr2);
 ・配列にはforEachやmapメソッドがある
 
 </TweetILearned>
+
+## 関連情報
+
+[オブジェクトをループする方法](../object/how-to-loop-an-object.md)
