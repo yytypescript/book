@@ -337,4 +337,4 @@ function LikeButton() {
 
 ![](react-like-button-tutorial/like2.gif)
 
-以上でTypeScript作るReactいいねボタンは完成です。
+以上でTypeScriptで作るReactいいねボタンは完成です。
