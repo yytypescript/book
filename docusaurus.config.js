@@ -44,7 +44,12 @@ const { tweetILearned } = require("./src/remark/tweetILearned");
       ],
       [
         "docusaurus-preset-shiki-twoslash",
-        { themes: ["min-light", "min-dark"] },
+        {
+          themes: ["min-light", "min-dark"],
+          defaultCompilerOptions: {
+            project: __dirname + "/tsconfig.twoslash.json",
+          },
+        },
       ],
     ],
 

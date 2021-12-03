@@ -961,6 +961,41 @@ console.log(exam.best);
 // @log: 100
 ```
 
+### `in` in演算子 (in operator) ![js]
+
+プロパティがオブジェクトにある場合に`true`を返す演算子です。
+
+```js twoslash
+const book = { name: "サバイバルTypeScript" };
+console.log("name" in book);
+// @log: true
+console.log("price" in book);
+// @log: false
+```
+
+### `in` for-in構文 ![js]
+
+オブジェクトの列挙可能プロパティをループするfor-in構文です。
+
+```js twoslash
+const drink = { name: "Coffee", price: 500 };
+for (const property in drink) {
+  console.log(property);
+}
+```
+
+### `in` mapped type ![ts]
+
+mapped typeに現れる`in`です。
+
+```ts twoslash
+type MappedType = {
+  [key in "foo" | "bar"]: string;
+};
+```
+
+[Mapped type](reference/type-reuse/mapped-types.md)
+
 ### `is` 型アサーション関数の一部 (user-defined type guard) ![ts]
 
 型ガードに用いる型アサーション関数の戻り値の型アノテーション部分に用いられるキーワードです。
