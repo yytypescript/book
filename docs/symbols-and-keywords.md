@@ -151,17 +151,26 @@ console.log(a); // 00000001
 
 ### `&&` 論理積 (logical and) ![js]
 
-すべての真偽値が`true`のときに`true`を返します。そうでない場合に`false`を返します。
+左の値がtruthyな場合は右の値を返します。そうでないときは左の値を返します。
+
+特にboolean値が与えられた場合は、双方とも`true`のときに`true`を返し、そうでないときに`false`を返します。
+
+```javascript
+console.log(true && true) // true
+console.log(true && false) // false
+
+console.log(1 && '') // ''
+```
 
 ### `&&=` 論理積代入 (logical and assignment) ![js]
 
-左の変数の真偽値と右の真偽値の論理積の結果を左の変数に割り当てます。
+左の変数と右の値の`&&`論理積の結果を左の変数に割り当てます。
 
 ```javascript
 let a = true;
-let b = false;
+let b = 1;
 a &&= b;
-console.log(a); // false
+console.log(a); // 1
 ```
 
 ### `'` 文字列リテラル (string literal) ![js]
