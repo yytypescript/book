@@ -2,44 +2,86 @@
 sidebar_label: "\U0001F6A7デフォルト引数"
 ---
 
-# 🚧デフォルト引数 (default parameter)
+# デフォルト引数 (default parameter)
 
-引数を省略した時、原点との距離を求める代わりに点(1, 2)との距離を求めるといった変化球がきたとします。何も考えないとこのようになります。
+デフォルト引数とは、関数に値が渡されないときや`undefined`が渡されたときに代わりに初期化され使用される値のことです。なお`null`が渡されたときはデフォルト引数は適用されませんので注意してください。
+
+ここでは例として、二次元上の点を定義します。
+
+```typescript
+type Point = {
+  x: number;
+  y: number;
+};
+```
+
+そして二次元上の点p1とp2の距離を求めたい場合、以下の式が成立します。関数名を`distance()`とします。
+
+```typescript
+function distance(p1: Point, p2: Point): number {
+  return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
+}
+```
+
+これを、たとえば`p2`を省略したときは原点(0, 0)との距離を求めるようにしてほしいといったときにデフォルト引数が使えます。デフォルト引数を使いこの条件を再現すると次のようになります。
+
+```typescript
+const p0: Point = {
+  x: 0,
+  y: 0
+};
+
+function distance(p1: Point, p2: Point = p0): number {
+  return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
+}
+```
+
+引数に指定されなかったときに初期値として使いたい値を、その引数の右に書きます。ここでは`p2`の右側の`= p0`がそれにあたります。
+オプション引数と比べてもより簡素に書けるようになります。
 
 ```typescript
 function distance(p1: Point, p2?: Point): number {
-  if (p2 === undefined) {
-    return ((p1.x - 1) ** 2 + (p1.y - 2) ** 2) ** (1 / 2);
+  if (typeof p2 === "undefined")) {
+    return (p1.x ** 2 + p1.y ** 2) ** (1 / 2);
   }
 
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
 ```
 
-もちろん動くのですが、意図がわかりにくくなってしまいます。このようなときに便利なのがデフォルト引数です。デフォルト引数を使用すると次のように書けます。
+また、オプション引数と異なりデフォルト引数は値が渡されたときも渡されなかったときも意図する型(この場合`Point`型)が入っているのでオプション引数と異なり処理の分岐が不要になります。
 
-```typescript
-const p0: Point = {
-  x: 1,
-  y: 2,
+さらに、デフォルト引数があることでデフォルト引数を受け付けている引数は型推論が効き型を書く必要がなくなります。
+
+```typescript twoslash
+type Point = {
+  x: number;
+  y: number;
 };
 
-function distance(p1: Point, p2: Point = p0): number {
+const p0: Point = {
+  x: 0,
+  y: 0
+};
+
+// ---cut---
+function distance(p1: Point, p2 = p0): number {
+//                           ^?
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
+```
 
+`q1, q2`が`Point`型であれば次の関数呼び出しはすべて動作します。
+
+```typescript
 distance(q1, q2);
 distance(q1);
 distance(q1, undefined);
 ```
 
-入力がなかった時に初期値として使いたい値を、その引数の右に書きます。ここでは`p2`の右側の`= p0`がそれにあたります。
-
-オプション引数と違いユニオン型ではないため、処理の分岐が不要になります。拡張性や見通しを考えればデフォルト引数の方に軍配が上がるでしょう。
-
 ## 初期値に関数の戻り値を使う
 
-デフォルト引数には関数の戻り値を指定することができます。たとえば、ある(x, y)が与えられると転置した(y, x)を返す`inverse()`という関数の戻り値を初期値として使用します。ちなみに`inverse()`は以下です。
+デフォルト引数には関数の戻り値を指定することができます。たとえば、ある点(x, y)が与えられると転置した点(y, x)を返す`inverse()`という関数の戻り値を初期値として使用します。ちなみに`inverse()`は次のようになります。
 
 ```typescript
 function inverse(p: Point): Point {
@@ -58,9 +100,25 @@ function distance(p1: Point, p2: Point = inverse(p1)): number {
 }
 ```
 
-また、デフォルト引数はオプション引数と異なりその引数を最後に書く必要はありません。呼び出し側でデフォルト引数を使用させたい時は`undefined`を指定します。このとき`null`ではこの役目を果たせないので注意してください。もちろん末尾のデフォルト引数であれば省略が可能です。
+また、デフォルト引数はオプション引数と異なりその引数を最後に書く必要はありません。呼び出し側でデフォルト引数を使用させたい時は`undefined`を指定します。このときこのページの先頭に書いたように`null`ではこの役目を果たせないので注意してください。もちろん末尾のデフォルト引数であれば省略が可能です。
 
-```typescript
+```typescript twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+
+const q1: Point = {
+  x: 0,
+  y: 0;
+};
+
+const q2: Point = {
+  x: 0,
+  y: 0;
+}
+
+// ---cut---
 const p0: Point = {
   x: 1,
   y: 2,
@@ -73,7 +131,7 @@ function distance(p1: Point = p0, p2: Point): number {
 distance(q1, q2);
 distance(undefined, q2);
 distance(null, q2);
-// Argument of type 'null' is not assignable to parameter of type 'Point | undefined'.
+// @errors: 2345 1005
 ```
 
 ## デフォルト引数でできないこと
@@ -88,5 +146,3 @@ async function distanceAync(
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
 ```
-
-TODO: 🚧デフォルト引数を指定すると型推論が効くことについて書く。
