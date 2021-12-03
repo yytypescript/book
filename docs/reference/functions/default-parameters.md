@@ -28,7 +28,7 @@ function distance(p1: Point, p2: Point): number {
 ```typescript
 const p0: Point = {
   x: 0,
-  y: 0
+  y: 0,
 };
 
 function distance(p1: Point, p2: Point = p0): number {
@@ -61,12 +61,12 @@ type Point = {
 
 const p0: Point = {
   x: 0,
-  y: 0
+  y: 0,
 };
 
 // ---cut---
 function distance(p1: Point, p2 = p0): number {
-//                           ^?
+  //                         ^?
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
 ```
