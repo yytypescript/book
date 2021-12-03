@@ -203,6 +203,12 @@ function fn(s) {}
 function fn(s) {}
 ```
 
+:::tip
+
+twoslashのデフォルトのコンパイラオプションはtsconfig.twoslash.jsonをご覧ください。
+
+:::
+
 #### 実行結果を表示する
 
 `@log`、`@warn`、`@error`を用いると、実行結果のコメントをスタイリングして表示できます。
