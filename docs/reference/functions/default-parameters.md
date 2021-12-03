@@ -1,5 +1,5 @@
 ---
-sidebar_label: "\U0001F6A7デフォルト引数"
+sidebar_label: "デフォルト引数"
 ---
 
 # デフォルト引数 (default parameter)
