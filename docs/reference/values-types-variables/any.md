@@ -19,9 +19,32 @@ str.toLowerCase();
 
 ## 暗黙のany
 
-TODO: 引数は型注釈がないとanyになることを説明する
+型を省略してコンテキストから型が推論できない時、TypeScriptは暗黙的に型をany型として扱います。
+例としては、引数の型注釈を省略した場合です。
 
-TODO: 暗黙のanyを規制する`noImplicitAny`オプションを説明する
+次の例では `name` 変数がany型として判定されるため、型チェックは問題なく通ってしまいます。しかし、`toUpperCase()` が未定義のNumber型の値が渡されるため実行時にエラーが発生します。
+
+```ts twoslash
+function hello(name) {
+  //           ^?
+  console.log(`Hello, ${name.toUpperCase()}`);
+}
+
+// @error: name.toUpperCase is not a function
+hello(1);
+// @noImplicitAny: false
+```
+
+このように暗黙のanyは型チェックをすり抜けて実行時エラーを引き起こす可能性があります。TypeScriptでは暗黙のanyを規制するオプションとして `noImplicitAny` が用意されています。
+
+tsconfig.json にて `noImplicitAny: true` を設定することで、TypeScriptが型をany型と推測した場合にエラーが発生するようになります。
+
+```ts twoslash
+// @errors: 7006
+function hello(name) {
+  console.log(`Hello, ${name.toUpperCase()}`);
+}
+```
 
 [noImplicitAny](../tsconfig/noimplicitany.md)
 
@@ -31,7 +54,22 @@ any型はコンパイラーのチェックを抑制したいときに用いる�
 
 ## 「がんばらないTypeScript」
 
-TODO: がんばらないTypeScriptというアプローチがあることを紹介する。
+TypeScriptは型チェックにより安全にコードを書くことができる静的型付け言語です。
+今までJavaScriptなどの動的型付き言語を書いていた人にとっては、実装時に静的な型を書くことに難しさを感じるかもしれません。
+
+実際に慣れない頃はコンパイルエラーが出ている原因を調べて解消するのに1日を費やす場合もあります。
+
+TypeScriptには「がんばらないTypeScript」というアプローチがあります。
+
+TypeScript の大きな利点として、型の制約を自由にコントールすることができる点があります。ここで紹介されている any型 もその一つです。例えば、コンパイルエラーで詰まった時に any型 を指定すれば、とりあえずコンパイルエラーを解消することができます。
+
+また、既存のJavaScriptプロジェクトにTypeScriptを導入する際には大量のコンパイルエラーが発生する可能性があります。それらのコンパイルエラーを全て解消するまでTypeScriptの導入を終わらせられないと、途中で挫折して結局TypeScriptの導入ができないという状況になるかもしれません。そんな場合は any型 などを積極的に利用して、とりあえずコンパイルエラーを解消して段階的に型付けをしていくのも一つの手段です。
+
+全てが型安全な実装になっている状態が理想ですが、一部分だけが型安全な実装になっているだけでも、型チェックが全くないJavaScriptだけの時よりも大きな恩恵を受けることができます。
+
+型による制約はコードをより安全に書くための一つの手段にすぎません。型の制約に時間を費やして結局、動くモノが作れないのは本末転倒です。
+
+TypeScriptの型システムで疲弊しそうになったら、「がんばらないTypeScript」のアプローチを思い出してみてください。
 
 ## 関連情報
 
