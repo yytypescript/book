@@ -15,7 +15,7 @@ type Point = {
 };
 ```
 
-そして二次元上の点p1とp2の距離を求めたい場合、以下の式が成立します。関数名を`distance()`とします。
+そして二次元上の点p1とp2の距離を求めたい場合、次の式が成立します。関数名を`distance()`とします。
 
 ```typescript
 function distance(p1: Point, p2: Point): number {
