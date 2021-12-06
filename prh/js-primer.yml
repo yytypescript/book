@@ -681,7 +681,7 @@ rules:
     pattern:  /(の)様に/
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: 次$1
-    pattern:  /(?:下記|以下)(の|に)/
+    pattern:  /(?<!\d)(?:下記|以下)(の|に)/
     specs:
       - from: 以下の
         to:   次の
@@ -691,6 +691,8 @@ rules:
         to:   次回
       - from: 下記の
         to:   次の
+      - from: 1以下の
+        to:   1以下の
     prh: 書籍の場合は、以下ではなく次を利用します（常に下にあるとは限らないため）
   - expected: かかわらず
     pattern:  /関わ?らず/
