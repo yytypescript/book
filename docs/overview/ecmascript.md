@@ -69,6 +69,13 @@ JavaScriptエンジンは、ECMAScriptを実装したモジュールです。Jav
 
 同じブラウザブランドでも、iOS版のブラウザのレンダリングエンジンはWebKitです。たとえば、Google ChromeはBlinkを採用していますが、iOS版のGoogle ChromeのレンダリングエンジンはWebKitです。これは、iOSのレンダリングエンジンにWebKitだけが独占的に利用を許されているためです。
 
+<figure>
+<figcaption>ブラウザ、レンダリングエンジン、JavaScriptエンジン、ECMAScriptの関係図</figcaption>
+
+[![ブラウザ、レンダリングエンジン、JavaScriptエンジン、ECMAScriptの関係図](ecmascript/browser-rendering-engine-javascript-engine-ecmascript-relations.svg)](ecmascript/browser-rendering-engine-javascript-engine-ecmascript-relations.svg)
+
+</figure>
+
 TypeScriptプログラマーがブラウザとエンジンの対応を理解しておくことは重要です。エンジンを知ることは、開発したプログラムが実行される環境を把握することと同義です。エンジンは仕様にできるだけ準拠しますが、エンジンによって実装が異なることがあります。エンジンによっては実装がされていない仕様がある場合もあります。また、ブラウザによっては古いエンジンを使っている場合もあります。
 
 プログラムをテストするときも、ブラウザとエンジンの組み合わせが理解できていると、同じエンジンを採用しているブラウザはテストを省略できる場合もあります。iOSのWebKit独占の例のように、同じブランド名のブラウザでもエンジンが異なる場合があります。この場合、テストで網羅するブラウザを増やすといった意思決定が行えるようになります。
