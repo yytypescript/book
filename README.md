@@ -2,7 +2,7 @@
 
 TypeScriptの入門書です。
 
-https://book.yyts.org/
+https://typescriptbook.jp/
 
 ## 特徴
 
@@ -30,4 +30,4 @@ https://book.yyts.org/
 
 執筆に参加する方法は次のページをご覧ください。
 
-https://book.yyts.org/writing/writing
+https://typescriptbook.jp/writing/writing
