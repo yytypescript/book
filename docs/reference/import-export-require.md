@@ -45,15 +45,15 @@ export const bar = foo;
 
 たとえば、`module.js`というモジュールを3回読み込んだとしても、この`module.js`が評価されるのは最初の1回目だけです。
 
-```js twoslash
-// @filename: module.js
+```js twoslash title="module.js"
 console.log("モジュールを評価しています");
 // このログが出力されるのは1回だけ
 export const value = 1;
+```
 
-// @filename: main.js
+```js title="main.js" twoslash
 import "./module.js";
-// @log: モジュールを評価しています
+// @log: "モジュールを評価しています"
 import "./module.js";
 import "./module.js";
 ```
@@ -106,26 +106,25 @@ const myPackage = require("./MyPackage");
 
 他のファイルを読む込むためにはそのファイルは何かを出力している必要があります。そのために使うのがこの構文です。
 
-```typescript
-// increment.js
+```typescript title="increment.js"
 module.exports = (i) => i + 1;
 ```
 
 このような`.js`のファイルがあれば同じ階層で読み込みたい時は次のようになります。
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
+// @errors: 2580
 const increment = require("./increment");
 
-console.log(increment(3)); //=> 4
+console.log(increment(3));
+//　@log: 4
 ```
 
 このとき、読み込んだ内容を受ける定数`increment`はこの名前である必要はなく変更が可能です。
 
 この`module.exports`はひとつのファイルでいくらでも書くことができますが、適用されるのは最後のもののみです。
 
-```typescript
-// dayOfWeek.js
+```typescript title="dayOfWeek.js"
 module.exports = "Monday";
 module.exports = "Tuesday";
 module.exports = "Wednesday";
@@ -135,48 +134,47 @@ module.exports = "Saturday";
 module.exports = "Sunday";
 ```
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 const day = require("./dayOfWeek");
 
-console.log(day); //=> 'Sunday'
+console.log(day);
+// @log: 'Sunday'
 ```
 
 ### `exports`
 
-`module.exports`だと良くも悪くも出力しているモノの名前を変更できてしまいます。それを避けたい時はこの`exports`を使用します。
+`module.exports`だと良くも悪くも出力しているものの名前を変更できてしまいます。それを避けたい時はこの`exports`を使用します。
 
-```typescript
-// util.js
+```typescript title="util.js"
 exports.increment = (i) => i + 1;
 ```
 
 読み込み側では次のようになります。
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 const util = require("./util");
 
-console.log(util.increment(3)); //=> 4
+console.log(util.increment(3));
+// @log: 4
 ```
 
 分割代入を使うこともできます。
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 const { increment } = require("./util");
 
-console.log(increment(3)); //=> 4
+console.log(increment(3));
+// @log: 4
 ```
 
 こちらは`increment`という名前で使用する必要があります。他のファイルに同じ名前のものがあり、名前を変更する必要がある時は、分割代入のときと同じように名前を変更することができます。
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 const { increment } = require("./other");
 const { increment: inc } = require("./util");
 
-console.log(inc(3)); //=> 4
+console.log(inc(3));
+// @log: 4
 ```
 
 ## `ES Module`
@@ -199,38 +197,35 @@ import package2 from "package2";
 
 `module.exports`に対応するものです。`module.exports`と異なりひとつのファイルはひとつの`export default`しか許されていなく複数書くと動作しません。
 
-```typescript
-// increment.js
+```typescript title="increment.js"
 export default (i) => i + 1;
 ```
 
 この`.js`のファイルは次のようにして読み込みます。
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 import increment from "./increment";
 
-console.log(increment(3)); //=> 4
+console.log(increment(3));
+// @log: 4
 ```
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 import * as increment from "./increment";
 
-console.log(increment.default(3)); //=> 4
+console.log(increment.default(3));
+// @log: 4
 ```
 
 ### `export`
 
 `exports`に相当するものです。書き方が2とおりあります。
 
-```typescript
-// util.js
+```typescript title="util.js"
 export const increment = (i) => i + 1;
 ```
 
-```typescript
-// util.js
+```typescript title="util.js"
 const increment = (i) => i + 1;
 
 export { increment };
@@ -240,27 +235,27 @@ export { increment };
 
 次のようにして読み込みます。
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 import { increment } from "./util";
 
-console.log(increment(3)); //=> 4
+console.log(increment(3));
+// @log: 4
 ```
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 import * as util from "./util";
 
-console.log(util.increment(3)); //=> 4
+console.log(util.increment(3));
+// @log: 4
 ```
 
 1番目の場合の`import`で名前を変更するときは、`require`のとき(分割代入)と異なり`as`という表記を使って変更します。
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 import { increment as inc } from "./util";
 
-console.log(inc(3)); //=> 4
+console.log(inc(3));
+// @log: 4
 ```
 
 ### `import()`
@@ -269,10 +264,10 @@ console.log(inc(3)); //=> 4
 
 `require()`と異なる点としては`import()`はモジュールの読み込みを非同期で行います。つまり`Promise`を返します。
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 import("./util").then(({ increment }) => {
-  console.log(increment(3)); //=> 4
+  console.log(increment(3));
+  // @log: 4
 });
 ```
 
@@ -286,18 +281,17 @@ import("./util").then(({ increment }) => {
 
 `ES Module`として動作させたいJavaScriptのファイルをすべて`.mjs`の拡張子に変更します。
 
-```typescript
-// increment.mjs
+```typescript title="increment.mjs"
 export const increment = (i) => i + 1;
 ```
 
 読み込み側は以下です。
 
-```typescript
-// index.mjs
+```typescript title="index.mjs" twoslash
 import { increment } from "./increment.mjs";
 
-console.log(increment(3)); //=> 4
+console.log(increment(3));
+// @log: 4
 ```
 
 `import`で使うファイルの**拡張子が省略できない**ことに注意してください。
@@ -318,16 +312,15 @@ console.log(increment(3)); //=> 4
 
 このようにすることで拡張子を`.mjs`に変更しなくてもそのまま`.js`で`ES Module`を使えるようになります。なお`"type": "module"`の省略時は`"type": "commonjs"`と指定されたとみなされます。これは今までとおりのNode.jsです。
 
-```typescript
-// increment.js
+```typescript title="increment.js"
 export const increment = (i) => i + 1;
 ```
 
-```typescript
-// index.js
+```typescript title="index.js" twoslash
 import { increment } from "./increment.js";
 
-console.log(increment(3)); //=> 4
+console.log(increment(3));
+// @log: 4
 ```
 
 `.js`ではありますが**読み込む時は拡張子を省略できなくなる**ことに注意してください。
@@ -336,21 +329,20 @@ console.log(increment(3)); //=> 4
 
 `CommonJS`で書かれたJavaScriptを読み込みたくなったときは`CommonJS`で書かれているファイルをすべて`.cjs`に変更する必要があります。
 
-```typescript
-// increment.cjs
+```typescript title="increment.cjs"
 exports.increment = (i) => i + 1;
 ```
 
 読み込み側は以下です。
 
-```typescript
-// index.js
+```typescript title="index.js"
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
 const { increment } = require("./increment.cjs");
 
-console.log(increment(3)); //=> 4
+console.log(increment(3));
+// @log: 4
 ```
 
 `ES Module`には`require()`がなく、一手間加えて作り出す必要があります。
@@ -417,10 +409,11 @@ export default (price) => price * 1.08;
 
 もちろん呼び出し側はそのまま使うことができます。
 
-```typescript title="index.ts"
+```typescript title="index.ts" twoslash
 import taxIncluded from "./taxIncluded";
 
-console.log(taxIncluded(100)); //=> 108
+console.log(taxIncluded(100));
+// @log: 108
 ```
 
 ここで、ある国が消費税を10%に変更したとします。このときこのシステムでは`taxIncluded.ts`を変更すればこと足ります。
@@ -443,10 +436,11 @@ named exportであれば`export`する名称を変更することで呼び出し
 export const taxIncludedAsOf2014 = (price) => price * 1.08;
 ```
 
-```typescript title="index.ts"
+```typescript title="index.ts" twoslash
 import { taxIncludedAsOf2014 } from "./taxInclude";
 
-console.log(taxIncludedAsOf2014(100)); //=> 108
+console.log(taxIncludedAsOf2014(100));
+// @log: 108
 ```
 
 税率が10%に変われば次のようにします。
@@ -455,12 +449,13 @@ console.log(taxIncludedAsOf2014(100)); //=> 108
 export const taxIncludedAsOf2019 = (price) => price * 1.1;
 ```
 
-```typescript title="index.ts"
+```typescript title="index.ts" twoslash
 import { taxIncludedAsOf2019 } from "./taxIncluded";
 
 // this is no longer available.
 // console.log(taxIncludedAsOf2014(100));
-console.log(taxIncludedAsOf2019(100)); //=> 110
+console.log(taxIncludedAsOf2019(100));
+// @log: 110
 ```
 
 名前を変更したため、呼び出し元も名前の変更が強制されます。これはたとえ`as`を使って名前を変更していたとしても同じく変更する必要があります。
