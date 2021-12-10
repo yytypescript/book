@@ -10,7 +10,7 @@ const { tweetILearned } = require("./src/remark/tweetILearned");
   module.exports = {
     title: "TypeScript入門『サバイバルTypeScript』",
     tagline: "Dinosaurs are cool",
-    url: "https://book.yyts.org",
+    url: "https://typescriptbook.jp",
     baseUrl: "/",
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
