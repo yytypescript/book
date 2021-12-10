@@ -37,6 +37,15 @@
       "last 1 safari version"
     ]
   },
+  "lint-staged": {
+    "*.md": [
+      "markdownlint --fix",
+      "prettier --write",
+      "markdownlint",
+      "textlint"
+    ],
+    "*.{js,jsx,ts,tsx,json,json5,css,scss,graphql,gql,html,vue,yaml}": "prettier --write"
+  },
   "dependencies": {
     "@cmfcmf/docusaurus-search-local": "^0.6.6",
     "@docusaurus/core": "2.0.0-beta.6",
@@ -60,6 +69,8 @@
     "@types/react": "^17.0.25",
     "@types/react-helmet": "^6.1.2",
     "@types/react-router-dom": "^5.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
     "markdownlint-cli": "^0.29.0",
     "prettier": "^2.4.1",
     "prettier-plugin-md-nocjsp": "^1.2.0",
