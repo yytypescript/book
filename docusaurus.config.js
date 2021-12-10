@@ -3,6 +3,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const remarkBreaks = require("remark-breaks");
 const { pageRef } = require("./src/remark/pageRef");
 const { tweetILearned } = require("./src/remark/tweetILearned");
+const tsconfigForTwoslash = require(__dirname + "/tsconfig.twoslash.json");
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import("@docusaurus/types").DocusaurusConfig} */
@@ -46,9 +47,7 @@ const { tweetILearned } = require("./src/remark/tweetILearned");
         "docusaurus-preset-shiki-twoslash",
         {
           themes: ["min-light", "min-dark"],
-          defaultCompilerOptions: {
-            project: __dirname + "/tsconfig.twoslash.json",
-          },
+          defaultCompilerOptions: tsconfigForTwoslash.compilerOptions,
         },
       ],
     ],
