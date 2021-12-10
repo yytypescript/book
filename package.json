@@ -37,6 +37,15 @@
       "last 1 safari version"
     ]
   },
+  "lint-staged": {
+    "*.md": [
+      "markdownlint --fix",
+      "prettier --write",
+      "markdownlint",
+      "textlint"
+    ],
+    "*.{js,jsx,ts,tsx,json,json5,css,scss,graphql,gql,html,vue,yaml}": "prettier --write"
+  },
   "dependencies": {
     "@cmfcmf/docusaurus-search-local": "^0.6.6",
     "@docusaurus/core": "2.0.0-beta.6",
