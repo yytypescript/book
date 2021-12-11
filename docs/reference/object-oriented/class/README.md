@@ -1,6 +1,5 @@
 ---
 sidebar_label: クラス
-slug: /reference/object-oriented/class
 ---
 
 # クラス (class)
