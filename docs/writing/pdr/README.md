@@ -1,3 +1,8 @@
+---
+sidebar_label: PDRとは
+slug: /writing/pdr
+---
+
 # PDR
 
 PDRは**P**ublisher's **D**ecision **R**ecordの略で、これまでコミュニティがどんな意思決定をしたかを記録したものです。

@@ -90,7 +90,7 @@ TypeScriptで非同期プログラミングをする時に、時間のかかる�
 
 [Promise / async / await](../promise-async-await.md)
 
-[ジェネリクス (generics)](/reference/generics)
+[ジェネリクス (generics)](../generics/README.md)
 
 ```typescript
 const promise: Promise<number> = yyAsync();

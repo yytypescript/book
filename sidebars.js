@@ -21,8 +21,8 @@ module.exports = {
       type: "category",
       label: "TypeScriptのあらまし",
       collapsed: false,
-      link: { type: "doc", id: "overview/README" },
       items: [
+        "overview/README",
         "overview/features",
         "overview/javascript-is-typescript",
         "overview/before-typescript",
@@ -38,8 +38,8 @@ module.exports = {
       type: "category",
       label: "作って学ぶTypeScript",
       collapsed: false,
-      link: { type: "doc", id: "tutorials/README" },
       items: [
+        "tutorials/README",
         "tutorials/setup",
         "tutorials/make-a-simple-function-via-cli",
         "tutorials/react-like-button-tutorial",
@@ -54,16 +54,13 @@ module.exports = {
       type: "category",
       label: "読んで学ぶTypeScript",
       collapsed: false,
-      link: { type: "doc", id: "reference/README" },
       items: [
+        "reference/README",
         {
           type: "category",
           label: "値・型・変数",
-          link: {
-            type: "generated-index",
-            slug: "/reference/values-types-variables",
-          },
           items: [
+            "reference/values-types-variables/README",
             "reference/values-types-variables/let-and-const",
             "reference/values-types-variables/type-annotation",
             "reference/values-types-variables/vars-problems",
@@ -74,11 +71,8 @@ module.exports = {
             {
               type: "category",
               label: "数値型",
-              link: {
-                type: "doc",
-                id: "reference/values-types-variables/number/README",
-              },
               items: [
+                "reference/values-types-variables/number/README",
                 "reference/values-types-variables/number/decimal-calculation-error",
               ],
             },
@@ -95,11 +89,8 @@ module.exports = {
             {
               type: "category",
               label: "オブジェクト",
-              link: {
-                type: "generated-index",
-                slug: "reference/values-types-variables/object",
-              },
               items: [
+                "reference/values-types-variables/object/README",
                 "reference/values-types-variables/object/non-primitives-are-objects",
                 "reference/values-types-variables/object/object-literal",
                 "reference/values-types-variables/object/properties-of-objects",
@@ -121,11 +112,8 @@ module.exports = {
             {
               type: "category",
               label: "配列",
-              link: {
-                type: "generated-index",
-                slug: "reference/values-types-variables/array",
-              },
               items: [
+                "reference/values-types-variables/array/README",
                 "reference/values-types-variables/array/array-literal",
                 "reference/values-types-variables/array/type-annotation-of-array",
                 "reference/values-types-variables/array/array-as-a-object",
@@ -142,11 +130,8 @@ module.exports = {
             {
               type: "category",
               label: "列挙型",
-              link: {
-                type: "doc",
-                id: "reference/values-types-variables/enum/README",
-              },
               items: [
+                "reference/values-types-variables/enum/README",
                 "reference/values-types-variables/enum/numeric-enum",
                 "reference/values-types-variables/enum/string-enum",
                 "reference/values-types-variables/enum/enum-problems-and-alternatives-to-enums",
@@ -165,11 +150,8 @@ module.exports = {
         {
           type: "category",
           label: "文",
-          link: {
-            type: "generated-index",
-            slug: "reference/statements",
-          },
           items: [
+            "reference/statements/README",
             "reference/statements/variable-scope",
             "reference/statements/if-else",
             "reference/statements/ternary-operator",
@@ -187,11 +169,8 @@ module.exports = {
         {
           type: "category",
           label: "関数",
-          link: {
-            type: "generated-index",
-            slug: "reference/functions",
-          },
           items: [
+            "reference/functions/README",
             "reference/functions/function-declaration",
             "reference/functions/function-expression",
             "reference/functions/arrow-functions",
@@ -218,11 +197,8 @@ module.exports = {
         {
           type: "category",
           label: "🚧非同期処理",
-          link: {
-            type: "doc",
-            id: "reference/asynchronous/README",
-          },
           items: [
+            "reference/asynchronous/README",
             "reference/asynchronous/promise",
             "reference/asynchronous/async",
             "reference/asynchronous/await",
@@ -232,19 +208,13 @@ module.exports = {
         {
           type: "category",
           label: "オブジェクト指向",
-          link: {
-            type: "generated-index",
-            slug: "reference/object-oriented",
-          },
           items: [
+            "reference/object-oriented/README",
             {
               type: "category",
               label: "クラス",
-              link: {
-                type: "doc",
-                id: "reference/object-oriented/class/README",
-              },
               items: [
+                "reference/object-oriented/class/README",
                 "reference/object-oriented/class/constructor",
                 "reference/object-oriented/class/fields",
                 "reference/object-oriented/class/methods",
@@ -266,11 +236,8 @@ module.exports = {
             {
               type: "category",
               label: "🚧インターフェース",
-              link: {
-                type: "doc",
-                id: "reference/object-oriented/interface/README",
-              },
               items: [
+                "reference/object-oriented/interface/README",
                 "reference/object-oriented/interface/implementing-interfaces",
                 "reference/object-oriented/interface/readonly-modifier-in-interfaces",
                 "reference/object-oriented/interface/interface-inheritance",
@@ -284,12 +251,9 @@ module.exports = {
         },
         {
           type: "category",
-          label: "組み込みAPI",
-          link: {
-            type: "generated-index",
-            slug: "reference/builtin-api",
-          },
+          label: "🚧組み込みAPI",
           items: [
+            "reference/builtin-api/README",
             "reference/builtin-api/map",
             "reference/builtin-api/set",
             "reference/builtin-api/date",
@@ -302,26 +266,15 @@ module.exports = {
         {
           type: "category",
           label: "型の再利用",
-          link: {
-            type: "doc",
-            id: "reference/type-reuse/README",
-          },
           items: [
+            "reference/type-reuse/README",
             "reference/type-reuse/typeof-type-operator",
             "reference/type-reuse/keyof-type-operator",
             {
               type: "category",
               label: "ユーティリティ型",
-              link: {
-                type: "generated-index",
-                slug: "reference/type-reuse/utility-types",
-                title: "ユーティリティ型 (utility type)",
-                description:
-                  "ユーティリティ型(utility type)は、型から別の型を導き出してくれる型です。functionが実行時の世界の関数だとしたら、ユーティリティ型は型の世界の関数といったイメージです。\n" +
-                  "\n" +
-                  "ここではユーティリティ型のうち、主要なものだけを取り上げます。興味がある方は公式やソースコードを参照してください。ここで取り上げるユーティリティ型は、すべてTypeScriptのビルトインパッケージで定義されています。ソースコードも同梱されているので、その実装方法を見ることが可能です。",
-              },
               items: [
+                "reference/type-reuse/utility-types/README",
                 "reference/type-reuse/utility-types/required",
                 "reference/type-reuse/utility-types/readonly",
                 "reference/type-reuse/utility-types/partial",
@@ -339,11 +292,8 @@ module.exports = {
         {
           type: "category",
           label: "ジェネリクス",
-          link: {
-            type: "doc",
-            id: "reference/generics/README",
-          },
           items: [
+            "reference/generics/README",
             "reference/generics/built-in-libraries-using-generics",
             "reference/generics/type-variables",
             "reference/generics/type-parameter-constraint",
@@ -353,11 +303,8 @@ module.exports = {
         {
           type: "category",
           label: "tsconfig",
-          link: {
-            type: "generated-index",
-            slug: "reference/tsconfig",
-          },
           items: [
+            "reference/tsconfig/README",
             "reference/tsconfig/tsconfig.json-settings",
             "reference/tsconfig/strict",
             "reference/tsconfig/noimplicitany",
@@ -382,11 +329,8 @@ module.exports = {
         {
           type: "category",
           label: "Advanced Topics",
-          link: {
-            type: "generated-index",
-            slug: "reference/advanced-topics",
-          },
           items: [
+            "reference/advanced-topics/README",
             "reference/advanced-topics/tsconfig-for-npm-package-developers",
             "reference/advanced-topics/tsconfig-for-dual-package-developers",
             "reference/advanced-topics/generator",
@@ -399,13 +343,8 @@ module.exports = {
       type: "category",
       label: "Tips",
       collapsed: false,
-      link: {
-        type: "generated-index",
-        slug: "tips",
-        description:
-          "今日の開発で知っておくと便利なTypeScript (JavaScript) の小技を紹介する",
-      },
       items: [
+        "tips/README",
         "tips/shallow-copy-object",
         "tips/merge-objects",
         "tips/get-a-subset-of-an-object",
@@ -435,11 +374,8 @@ module.exports = {
       type: "category",
       label: "PDR",
       collapsed: false,
-      link: {
-        type: "doc",
-        id: "writing/pdr/README",
-      },
       items: [
+        "writing/pdr/README",
         "writing/pdr/0000-why-do-we-write-technical-books",
         "writing/pdr/0002-iterative-writing-process",
         "writing/pdr/0003-target-readers",

@@ -1,25 +1,31 @@
-import DocCard from "@theme/DocCard";
+import Link from "@docusaurus/Link";
 import React from "react";
 
-export default function PageRef({ link, title }: any) {
-  try {
-    const { metadata } = require("@site/docs" + link.replace(/^\/+/, "/"));
-    return (
-      <DocCard
-        item={{
-          type: "link",
-          href: metadata.permalink,
-          label: metadata.frontMatter.sidebar_label ?? metadata.title,
-          docId: metadata.id,
-        }}
-      />
-    );
-  } catch (e) {
-    console.error(e);
-    return (
-      <p>
-        <a href={link}>{title}</a>
-      </p>
-    );
-  }
+export default function PageRef({ link }: any) {
+  const { metadata } = require("@site/docs" + link.replace(/^\/+/, "/"));
+  return (
+    <nav
+      className="pagination-nav docusaurus-mt-lg"
+      style={{ margin: "0 0 var(--ifm-spacing-vertical)" }}
+    >
+      <Link href={metadata.permalink} className="pagination-nav__link">
+        <div
+          style={{
+            fontWeight: "var(--ifm-heading-font-weight)" as any,
+            marginBottom: "0.25rem",
+          }}
+        >
+          {metadata.frontMatter.sidebar_label ?? metadata.title}
+        </div>
+        <div
+          style={{
+            color: "var(--ifm-color-content-secondary)",
+            fontSize: "var(--ifm-h5-font-size)",
+          }}
+        >
+          {metadata.description}
+        </div>
+      </Link>
+    </nav>
+  );
 }

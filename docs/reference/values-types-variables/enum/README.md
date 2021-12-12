@@ -1,5 +1,6 @@
 ---
 sidebar_label: 列挙型
+slug: /reference/values-types-variables/enum
 ---
 
 # 列挙型 (enum)

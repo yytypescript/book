@@ -1,3 +1,8 @@
+---
+sidebar_label: 概要
+slug: /reference
+---
+
 # 読んで学ぶTypeScript
 
 本章では、TypeScriptの言語機能をひとつひとつ解説します。解説の範囲はTypeScriptに留まらず、JavaScriptについても必要なものを解説します。これは、TypeScript学習者がJavaScriptも並行して学ぶことが多いためです。
