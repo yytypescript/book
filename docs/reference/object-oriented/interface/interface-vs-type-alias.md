@@ -156,6 +156,6 @@ TODO: 残りを書く
 
 ## 関連情報
 
-[インターフェース (interface)](/reference/object-oriented/interface/interface-vs-type-alias)
+[🚧インターフェース (interface)](./README.md)
 
 [型エイリアス (type alias)](../../values-types-variables/type-alias.md)

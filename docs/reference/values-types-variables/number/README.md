@@ -1,5 +1,6 @@
 ---
 sidebar_label: 数値型
+slug: /reference/values-types-variables/number
 ---
 
 # 数値型 (number type)

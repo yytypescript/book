@@ -1,6 +1,5 @@
 ---
 description: 執筆者向けのドキュメントです。
-slug: /writing
 ---
 
 # README
@@ -11,4 +10,4 @@ slug: /writing
 
 [執筆の流れ](how-to-change.md)
 
-[PDR](/writing/pdr)
+[PDR](pdr/README.md)

@@ -30,4 +30,4 @@ https://typescriptbook.jp/
 
 執筆に参加する方法は次のページをご覧ください。
 
-https://typescriptbook.jp/writing
+https://typescriptbook.jp/writing/writing

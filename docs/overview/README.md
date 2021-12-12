@@ -1,3 +1,8 @@
+---
+sidebar_label: 概要
+slug: /overview
+---
+
 # TypeScriptのあらまし
 
 本章では、TypeScriptの概要について触れます。同時に、TypeScriptの良さや、TypeScriptがJavaScriptエコシステムでどういった立ち位置にあるのかを示すことで、全体像を知っていただきます。
