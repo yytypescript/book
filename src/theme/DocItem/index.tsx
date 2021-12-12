@@ -7,28 +7,29 @@
 
 import React from "react";
 import clsx from "clsx";
-
 import useWindowSize from "@theme/hooks/useWindowSize";
 import DocPaginator from "@theme/DocPaginator";
 import DocVersionBanner from "@theme/DocVersionBanner";
+import DocVersionBadge from "@theme/DocVersionBadge";
 import Seo from "@theme/Seo";
 import type { Props } from "@theme/DocItem";
 import DocItemFooter from "@theme/DocItemFooter";
 import TOC from "@theme/TOC";
 import TOCCollapsible from "@theme/TOCCollapsible";
 import { MainHeading } from "@theme/Heading";
-
 import styles from "./styles.module.css";
 import { ThemeClassNames } from "@docusaurus/theme-common";
 
 export default function DocItem(props: Props): JSX.Element {
-  const { content: DocContent, versionMetadata } = props;
+  const { content: DocContent } = props;
   const { metadata, frontMatter } = DocContent;
   const {
     image,
     keywords,
     hide_title: hideTitle,
     hide_table_of_contents: hideTableOfContents,
+    toc_min_heading_level: tocMinHeadingLevel,
+    toc_max_heading_level: tocMaxHeadingLevel,
   } = frontMatter;
   const { description, title } = metadata;
 
@@ -43,7 +44,8 @@ export default function DocItem(props: Props): JSX.Element {
   const canRenderTOC =
     !hideTableOfContents && DocContent.toc && DocContent.toc.length > 0;
 
-  const renderTocDesktop = windowSize === "desktop" || windowSize === "ssr";
+  const renderTocDesktop =
+    canRenderTOC && (windowSize === "desktop" || windowSize === "ssr");
 
   return (
     <>
@@ -55,23 +57,16 @@ export default function DocItem(props: Props): JSX.Element {
             [styles.docItemCol]: !hideTableOfContents,
           })}
         >
-          <DocVersionBanner versionMetadata={versionMetadata} />
+          <DocVersionBanner />
           <div className={styles.docItemContainer}>
             <article>
-              {versionMetadata.badge && (
-                <span
-                  className={clsx(
-                    ThemeClassNames.docs.docVersionBadge,
-                    "badge badge--secondary"
-                  )}
-                >
-                  Version: {versionMetadata.label}
-                </span>
-              )}
+              <DocVersionBadge />
 
               {canRenderTOC && (
                 <TOCCollapsible
                   toc={DocContent.toc}
+                  minHeadingLevel={tocMinHeadingLevel}
+                  maxHeadingLevel={tocMaxHeadingLevel}
                   className={clsx(
                     ThemeClassNames.docs.docTocMobile,
                     styles.tocMobile
@@ -95,13 +90,15 @@ export default function DocItem(props: Props): JSX.Element {
               <DocItemFooter {...props} />
             </article>
 
-            <DocPaginator metadata={metadata} />
+            <DocPaginator previous={metadata.previous} next={metadata.next} />
           </div>
         </div>
         {renderTocDesktop && (
           <div className="col col--3">
             <TOC
               toc={DocContent.toc}
+              minHeadingLevel={tocMinHeadingLevel}
+              maxHeadingLevel={tocMaxHeadingLevel}
               className={ThemeClassNames.docs.docTocDesktop}
             />
           </div>

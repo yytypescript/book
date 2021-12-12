@@ -29,7 +29,9 @@ const pageRef = () => (node) => {
     linkFound = true;
     node.children[index] = {
       type: /** @type {any} */ ("jsx"),
-      value: `<PageRef link="${slugToFilename(link.url)}" />`,
+      value: `<PageRef link="${slugToFilename(link.url)}" slug="${
+        link.url
+      }" title="${link.title || link.url}" />`,
     };
   }
 

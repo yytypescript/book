@@ -498,7 +498,7 @@ function func1<T>(x: T) {}
 const result = func<string>("hello");
 ```
 
-[ジェネリクス (generics)](reference/generics/README.md)
+[ジェネリクス (generics)](/reference/generics)
 
 ### `<` JSX ![ts]
 
