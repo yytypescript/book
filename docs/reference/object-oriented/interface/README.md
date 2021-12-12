@@ -1,6 +1,5 @@
 ---
 sidebar_label: "\U0001F6A7インターフェース"
-slug: /reference/object-oriented/interface
 ---
 
 # 🚧インターフェース (interface)

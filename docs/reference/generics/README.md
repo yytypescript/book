@@ -1,6 +1,5 @@
 ---
 sidebar_label: ジェネリクス
-slug: /reference/generics
 ---
 
 # ジェネリクス (generics)
