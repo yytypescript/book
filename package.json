@@ -14,6 +14,7 @@
     "preinstall": "npx only-allow yarn",
     "markdownlint": "markdownlint '**/*.md'",
     "markdownlint:fix": "yarn markdownlint --fix",
+    "prepare": "husky install",
     "prettier": "prettier '**/*.{js,jsx,ts,tsx,json,json5,css,scss,graphql,gql,html,vue,yaml,md}' --check",
     "prettier:fix": "yarn prettier --write",
     "serve": "docusaurus serve",
@@ -24,6 +25,15 @@
     "typecheck": "tsc",
     "write-heading-ids": "docusaurus write-heading-ids",
     "write-translations": "docusaurus write-translations"
+  },
+  "lint-staged": {
+    "*.md": [
+      "markdownlint --fix",
+      "prettier --write",
+      "markdownlint",
+      "textlint"
+    ],
+    "*.{js,jsx,ts,tsx,json,json5,css,scss,graphql,gql,html,vue,yaml}": "prettier --write"
   },
   "browserslist": {
     "production": [
@@ -36,15 +46,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "lint-staged": {
-    "*.md": [
-      "markdownlint --fix",
-      "prettier --write",
-      "markdownlint",
-      "textlint"
-    ],
-    "*.{js,jsx,ts,tsx,json,json5,css,scss,graphql,gql,html,vue,yaml}": "prettier --write"
   },
   "dependencies": {
     "@cmfcmf/docusaurus-search-local": "^0.9.0",
