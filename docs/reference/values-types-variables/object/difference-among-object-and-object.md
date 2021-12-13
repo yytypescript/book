@@ -96,3 +96,13 @@ a = undefined;
 `object`型や`Object`型、`{}`型の代入範囲をまとめると次の図のようになります。
 
 ![](difference-among-object-and-object/image1.png)
+
+<TweetILearned>
+
+TypeScriptにはよく似た型にobject、Object、{}がある。どれも「オブジェクト」を指す型。
+
+✅object、Object、{}の違い
+1️⃣object型: オブジェクトのみ代入可能
+2️⃣Object型、{}型: オブジェクトとnull、undefinedを除くプリミティブ型が代入可能
+
+</TweetILearned>
