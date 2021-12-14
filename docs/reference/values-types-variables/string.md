@@ -11,17 +11,14 @@ Javaなどの言語では、ダブルクォートで文字列リテラル(String
 一方JavaScriptでは、ダブルクォートでもシングルクォートでもまったく同じ文字列型になります。この点はPHPと同様です。またバッククォート(`` ` ``)を使っても文字列型になります。
 
 <!--prettier-ignore-->
-```javascript
-// これらはすべて文字列リテラル
-"Hello"
-'Hello'
-`Hello`
+```ts twoslash
+"Hello"; 'Hello'; `Hello`
 ```
 
 文字列中に同じ引用符が含まれている場合は、バックスラッシュ`\`でエスケープしなければなりません。
 
 <!--prettier-ignore-->
-```typescript
+```ts twoslash
 'He said "madam, I\'m Adam."'
 "He said \"madam, I'm Adam.\""
 ```
@@ -32,7 +29,7 @@ Javaなどの言語では、ダブルクォートで文字列リテラル(String
 
 JavaScriptで、バッククォート`` ` ``で囲んだ文字列はテンプレートリテラル（template literal）と言います。テンプレートリテラルは、改行と式の挿入(expression interpolation)ができます。式の挿入は`${式}`のように書きます。
 
-```typescript
+```ts twoslash
 const count = 10;
 console.log(`現在、${count}名が見ています。`);
 //=> 現在、10名が見ています。
@@ -41,8 +38,8 @@ console.log(`現在、${count}名が見ています。`);
 式の部分は変数だけでなく、計算式や関数を使った式も書けます。
 
 <!--prettier-ignore-->
-```javascript
-`税込み${Number.floor(100 * 1.1)}円`
+```ts twoslash
+`税込み${Math.floor(100 * 1.1)}円`
 ```
 
 ### 文字列リテラルは`'`、`"`、`` ` ``のどれを使うべきか？
@@ -53,7 +50,7 @@ TODO
 
 TypeScriptの文字列型の型注釈は`string`を用います。
 
-```typescript
+```ts twoslash
 const message: string = "Hello";
 ```
 
@@ -64,7 +61,7 @@ const message: string = "Hello";
 JavaScriptの文字列結合は文字列結合演算子(`+`)を用います。数値型の加算でも同じ演算子が使われます。
 
 <!--prettier-ignore-->
-```javascript
+```ts twoslash
 "hello" + "world"
 ```
 
