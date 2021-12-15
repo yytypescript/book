@@ -48,6 +48,8 @@ class Example {
 let numbers!: number[];
 ```
 
+[definite assignment assertion](./reference/values-types-variables/definite-assignment-assertion.md)
+
 ### `!!` Double Bang ![js]
 
 double bangはJavaScriptで定義されている演算子ではなく、論理否定演算子を2つ連続したイディオムです。値がtruthyかを求めるときに使われます。
