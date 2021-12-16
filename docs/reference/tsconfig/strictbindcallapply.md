@@ -5,7 +5,13 @@ tags: [strict]
 
 # strictBindCallApply
 
-リリースされたバージョン: 3.2
+`strictBindCallApply`は`bind`、`call`、`apply`の型チェックを厳しくするコンパイラオプションです。
+
+- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
+- 追加されたバージョン: 3.2
+- TypeScript公式が有効化推奨
+
+## 解説
 
 `function.bind(), function.call(), function.apply()`はその関数を実行します。どれも第2引数以降にその関数の引数を代入できます。
 

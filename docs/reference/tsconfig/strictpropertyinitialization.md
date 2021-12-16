@@ -5,7 +5,13 @@ tags: [strict]
 
 # strictPropertyInitialization
 
-リリースされたバージョン: 2.7
+`strictPropertyInitialization`はプロパティの初期化を必須にするコンパイラオプションです。
+
+- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
+- 追加されたバージョン: 2.7
+- TypeScript公式が有効化推奨
+
+## 解説
 
 このオプションを有効にするために`strictNullChecks`も同様に有効にする必要があります。
 

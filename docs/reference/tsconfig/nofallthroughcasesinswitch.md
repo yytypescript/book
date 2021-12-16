@@ -4,7 +4,12 @@ description: switch文のfallthroughを禁止する
 
 # noFallthroughCasesInSwitch
 
-リリースされたバージョン: 1.8
+`noFallthroughCasesInSwitch`はswitch文のfallthroughを禁止するコンパイラオプションです。
+
+- デフォルト: `false`
+- 追加されたバージョン: 1.8
+
+## 解説
 
 `fallthrough`とは`switch`でにおける`case`文で`break`または`return`を行わないことを意味します。`case`文が空でない場合に限り`break`や`return`が行われているかを厳密に評価します。
 

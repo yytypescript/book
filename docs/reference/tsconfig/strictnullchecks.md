@@ -5,7 +5,13 @@ tags: [strict]
 
 # strictNullChecks
 
-リリースされたバージョン: 2.1
+`strictNullChecks`は`null`や`undefined`のチェックを厳しくするコンパイラオプションです。
+
+- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
+- 追加されたバージョン: 2.0
+- TypeScript公式が有効化推奨
+
+## 解説
 
 このオプションがなかったころは言語的に`null`と`undefined`を無視していました。つまり、次のようなことが問題なくできました。
 
