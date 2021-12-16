@@ -1,5 +1,6 @@
 ---
 description: プロパティの初期化を必須にする
+tags: [strict]
 ---
 
 # strictPropertyInitialization

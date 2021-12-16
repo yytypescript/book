@@ -1,5 +1,6 @@
 ---
 description: bind、call、applyの型チェックを厳しくする
+tags: [strict]
 ---
 
 # strictBindCallApply

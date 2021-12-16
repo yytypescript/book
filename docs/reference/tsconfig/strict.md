@@ -1,5 +1,6 @@
 ---
 description: strict系のオプションを一括で有効化する
+tags: [strict]
 ---
 
 # strict

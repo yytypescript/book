@@ -1,5 +1,6 @@
 ---
 description: 例外捕捉catch(e)のeをunknown型として扱う
+tags: [strict]
 ---
 
 # useUnknownInCatchVariables

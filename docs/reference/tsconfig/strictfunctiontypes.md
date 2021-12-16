@@ -1,5 +1,6 @@
 ---
 description: 関数の型チェックを厳しくする
+tags: [strict]
 ---
 
 # 🚧strictFunctionTypes

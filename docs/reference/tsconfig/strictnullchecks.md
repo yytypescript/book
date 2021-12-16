@@ -1,5 +1,6 @@
 ---
 description: null・undefinedのチェックを厳しくする
+tags: [strict]
 ---
 
 # strictNullChecks

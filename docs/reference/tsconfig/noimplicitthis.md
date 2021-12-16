@@ -1,5 +1,6 @@
 ---
 description: thisの型注釈を必須にする
+tags: [strict]
 ---
 
 # noImplicitThis

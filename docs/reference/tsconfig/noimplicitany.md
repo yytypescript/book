@@ -1,5 +1,6 @@
 ---
 description: 暗黙のany型を禁ずる
+tags: [strict]
 ---
 
 # noImplicitAny

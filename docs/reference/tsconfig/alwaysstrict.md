@@ -1,5 +1,6 @@
 ---
 description: JavaScriptのstrictモードを有効にする
+tags: [strict]
 ---
 
 # alwaysStrict
