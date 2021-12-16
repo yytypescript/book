@@ -1,3 +1,7 @@
+---
+description: 使われていない引数を禁止する
+---
+
 # noUnusedParameters
 
 リリースされたバージョン: 2.0

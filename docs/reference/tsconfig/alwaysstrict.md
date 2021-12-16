@@ -1,3 +1,7 @@
+---
+description: JavaScriptのstrictモードを有効にする
+---
+
 # alwaysStrict
 
 リリースされたバージョン: 2.1

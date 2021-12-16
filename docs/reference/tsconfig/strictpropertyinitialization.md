@@ -1,3 +1,7 @@
+---
+description: プロパティの初期化を必須にする
+---
+
 # strictPropertyInitialization
 
 リリースされたバージョン: 2.7

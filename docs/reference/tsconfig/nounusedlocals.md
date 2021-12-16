@@ -1,3 +1,7 @@
+---
+description: 使われていない変数を禁止する
+---
+
 # noUnusedLocals
 
 リリースされたバージョン: 2.0

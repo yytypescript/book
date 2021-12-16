@@ -1,3 +1,7 @@
+---
+description: インデックス型のプロパティ参照に[]を必須にする
+---
+
 # noPropertyAccessFromIndexSignature
 
 リリースされたバージョン: 4.2

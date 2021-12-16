@@ -1,3 +1,7 @@
+---
+description: オプションプロパティにundefinedの代入することを禁止する
+---
+
 # exactOptionalPropertyTypes
 
 今までオプション修飾子は値を設定しないことに加えて`undefined`を意図的に設定することができました。

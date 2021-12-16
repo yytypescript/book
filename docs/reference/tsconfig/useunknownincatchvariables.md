@@ -1,3 +1,7 @@
+---
+description: 例外捕捉catch(e)のeをunknown型として扱う
+---
+
 # useUnknownInCatchVariables
 
 リリースされたバージョン: 4.4

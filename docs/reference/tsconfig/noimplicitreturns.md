@@ -1,3 +1,7 @@
+---
+description: 関数戻り値の型注釈を必須にする
+---
+
 # noImplicitReturns
 
 リリースされたバージョン: 1.8

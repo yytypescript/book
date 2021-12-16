@@ -1,3 +1,7 @@
+---
+description: メソッドオーバーライドにoverrideキーワードを必須にする
+---
+
 # noImplicitOverride
 
 リリースされたバージョン: 4.3

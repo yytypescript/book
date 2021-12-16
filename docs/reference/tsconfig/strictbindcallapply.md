@@ -1,3 +1,7 @@
+---
+description: bind、call、applyの型チェックを厳しくする
+---
+
 # strictBindCallApply
 
 リリースされたバージョン: 3.2

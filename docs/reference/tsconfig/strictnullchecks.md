@@ -1,3 +1,7 @@
+---
+description: null・undefinedのチェックを厳しくする
+---
+
 # strictNullChecks
 
 リリースされたバージョン: 2.1

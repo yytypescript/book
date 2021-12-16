@@ -1,3 +1,7 @@
+---
+description: switch文のfallthroughを禁止する
+---
+
 # noFallthroughCasesInSwitch
 
 リリースされたバージョン: 1.8

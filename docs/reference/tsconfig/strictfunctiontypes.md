@@ -1,3 +1,7 @@
+---
+description: 関数の型チェックを厳しくする
+---
+
 # 🚧strictFunctionTypes
 
 リリースされたバージョン: 2.6

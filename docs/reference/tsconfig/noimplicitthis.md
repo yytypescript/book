@@ -1,3 +1,7 @@
+---
+description: thisの型注釈を必須にする
+---
+
 # noImplicitThis
 
 リリースされたバージョン: 2.0

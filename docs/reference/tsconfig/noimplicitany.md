@@ -1,5 +1,5 @@
 ---
-description: 暗黙のany型を使った式と宣言のエラー報告を有効にする
+description: 暗黙のany型を禁ずる
 ---
 
 # noImplicitAny

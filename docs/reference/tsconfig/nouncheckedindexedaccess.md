@@ -1,3 +1,7 @@
+---
+description: インデックス型のプロパティや配列要素を参照したときundefinedのチェックを必須にする
+---
+
 # noUncheckedIndexedAccess
 
 リリースされたバージョン: 4.1
