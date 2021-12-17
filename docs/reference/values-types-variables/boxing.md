@@ -73,7 +73,34 @@ const sym: Symbol = Symbol();
 const big: BigInt = 10n;
 ```
 
-ラッパーオブジェクトを型注釈に使う書き方は可能ではあるもののメリットは無いため、型注釈にはプリミティブ型を使いましょう。
+しかし、ラッパーオブジェクト型はプリミティブ型に代入できません。
+
+```ts twoslash
+// @errors: 2322
+const n1: Number = 0;
+const n2: number = n1;
+```
+
+ラッパーオブジェクト型は演算子が使えません。
+
+```ts twoslash
+// @errors: 2362
+const num: Number = 1;
+num * 2;
+```
+
+ラッパーオブジェクト型は、そのインターフェースを満たしたオブジェクトであれば、プリミティブ型の値以外も代入できます。
+
+```ts twoslash
+const boolLike = {
+  valueOf(): boolean {
+    return true;
+  },
+};
+const bool: Boolean = boolLike;
+```
+
+プリミティブ型の代わりに、ラッパーオブジェクト型を型注釈に使う利点はありません。型注釈にはプリミティブ型を使いましょう。
 
 ```ts twoslash
 // ❌間違い

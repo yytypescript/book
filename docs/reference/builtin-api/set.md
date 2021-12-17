@@ -131,7 +131,7 @@ const array = [...fruits];
 console.log(array); //=> ["apple", "orange", "banana"]
 ```
 
-[🚧配列のスプレッド構文「...」(spread syntax)](../values-types-variables/array/spread-syntax-for-array.md)
+[配列のスプレッド構文「...」(spread syntax)](../values-types-variables/array/spread-syntax-for-array.md)
 
 ## Setは直接JSONにできない
 
