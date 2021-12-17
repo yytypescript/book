@@ -1,5 +1,5 @@
 ---
-title: 🚧Map<K, V>
+title: Map<K, V>
 ---
 
 `Map`はJavascriptの組み込みAPIのひとつで、key-valueのペアを取り扱うためのオブジェクトです。`Map`にはひとつのキーについてはひとつの値のみを格納できます。
