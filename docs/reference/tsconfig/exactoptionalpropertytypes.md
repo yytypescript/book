@@ -1,4 +1,16 @@
+---
+description: オプションプロパティにundefinedの代入することを禁止する
+---
+
 # exactOptionalPropertyTypes
+
+`exactOptionalPropertyTypes`はオプションプロパティに`undefined`の代入することを禁止するコンパイラオプションです。
+
+- デフォルト: `false`
+- 追加されたバージョン: 4.4
+- TypeScript公式が有効化推奨
+
+## 解説
 
 今までオプション修飾子は値を設定しないことに加えて`undefined`を意図的に設定することができました。
 
