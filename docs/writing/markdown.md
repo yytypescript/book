@@ -324,6 +324,66 @@ greet("Maddison", new Date());
 //                ^^^^^^^^^^
 ```
 
+:::tip Twoslashトラブルシューティング
+
+#### `import`がコンパイルエラー(2307)になる
+
+存在しない架空のモジュールをインポートしたとき、次のエラーが発生します。
+
+> [2307] 0 - Cannot find module 'モジュール名' or its corresponding type declarations.
+
+架空のモジュールをサンプルコードに使う場合は、`@filename`を使ってモジュールをでっちあげる必要があります。
+
+````markdown
+```ts twoslash
+// @filename: fictional-module.ts
+export const fictional = "fictional value!";
+
+// @filename: index.ts
+// ---cut---
+import { fictional } from "./fictional-module";
+//       ^?
+```
+````
+
+```ts twoslash title="表示例"
+// @filename: fictional-module.ts
+export const fictional = "fictional value!";
+
+// @filename: index.ts
+// ---cut---
+import { fictional } from "./fictional-module";
+//       ^?
+```
+
+##### 架空のNPMモジュールをでっちあげる
+
+架空のNPMモジュールをでっちあげるには、`declare module`でモジュールの型定義を用意します。その際、架空のモジュールのほうは`@filename`がなくてもコンパイルがとおります。
+
+````markdown
+```ts twoslash
+declare module "fictional-npm-module" {
+  const fictional = "fictional NPM module!";
+}
+// @filename: index.ts
+// ---cut---
+import { fictional } from "fictional-npm-module";
+//       ^?
+```
+````
+
+```ts twoslash title="表示例"
+declare module "fictional-npm-module" {
+  const fictional = "fictional NPM module!";
+}
+// @filename: index.ts
+// ---cut---
+import { fictional } from "fictional-npm-module";
+//       ^?
+```
+
+:::
+
 ### 行ハイライト
 
 特定の行に注目してもらいたいときは、行番号を書くとその行の背景色を変えられます。

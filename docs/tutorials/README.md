@@ -1,5 +1,4 @@
 ---
-sidebar_label: 概要
 slug: /tutorials
 ---
 
@@ -16,4 +15,4 @@ slug: /tutorials
 
 この章でのTypeScriptについての解説は最小限です。チュートリアルを進めるにあたり、必要なものは解説します。しかし、言語の詳しい仕様については省いています。まずは具体的な開発を体験してください。TypeScriptがどんな雰囲気なのか感じ取った上で、より詳しい言語の仕様や機能について学びたくなったら、次の章の「読んで学ぶTypeScript」をお読みください。
 
-[読んで学ぶTypeScript](../reference/README.md)
+[読んで学ぶTypeScript](/reference/README)

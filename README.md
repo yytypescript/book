@@ -20,7 +20,7 @@ https://typescriptbook.jp/
 
 次に、TypeScriptを知るのに必須なJavaScriptの知識も並行して学べるようになっています。
 
-さらに、他言語での知識がTypeScript学習に活かせるよう工夫しています。TypeScript学習者の多くが他言語経験者です。Java、Python、PHP、Rubyなどの他言語との対比しながらTypeScriptを学べるようになっています。
+さらに、他言語での知識がTypeScript学習に活かせるよう工夫しています。TypeScript学習者の多くが他言語経験者です。Java、Python、PHP、Rubyなどの他言語と対比しながらTypeScriptを学べるようになっています。
 
 ### オープンソース
 
@@ -30,4 +30,4 @@ https://typescriptbook.jp/
 
 執筆に参加する方法は次のページをご覧ください。
 
-https://typescriptbook.jp/writing/writing
+https://typescriptbook.jp/writing

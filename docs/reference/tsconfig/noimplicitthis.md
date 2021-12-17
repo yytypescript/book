@@ -1,6 +1,17 @@
+---
+description: thisの型注釈を必須にする
+tags: [strict]
+---
+
 # noImplicitThis
 
-リリースされたバージョン: 2.0
+`noImplicitThis`はthisの型注釈を必須にするコンパイラオプションです。
+
+- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
+- 追加されたバージョン: 2.0
+- TypeScript公式が有効化推奨
+
+## 解説
 
 名前付き関数、匿名関数はアロー関数と異なり、実行時に`this`が決定されます。そのため、内部で`this`を使っているとそれらは関数を書いている時点では`any`型と同じ扱いになります。
 

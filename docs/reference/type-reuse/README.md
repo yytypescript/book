@@ -1,5 +1,4 @@
 ---
-sidebar_label: 概要
 slug: /reference/type-reuse
 ---
 
