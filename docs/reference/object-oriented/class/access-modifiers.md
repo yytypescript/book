@@ -40,13 +40,26 @@ class Animal {
 
 `gorilla`を実装し、動作を確認してみます。
 
-```typescript
+```typescript twoslash
+class Animal {
+  public name: string;
+
+  public constructor(theName: string) {
+    this.name = theName;
+  }
+
+  public move(distanceInMeters: number) {
+    console.log(`${this.name} moved ${distanceInMeters}m.`);
+  }
+}
+
+// ---cut---
 const gorilla = new Animal("ゴリラ");
 gorilla.move(10);
-//=> 'ゴリラ moved 10m.'
+// @log: "ゴリラ moved 10m."
 gorilla.name = "ゴリラゴリラ";
 gorilla.move(20);
-//=> 'ゴリラゴリラ moved 20m.'
+// @log: "ゴリラゴリラ moved 20m."
 ```
 
 `name`プロパティは`public`宣言されているため、インスタンスされた変数(`gorilla`)からの読み書きが可能になっています。「ゴリラ」から「ゴリラゴリラ」に変更することができます。
@@ -57,7 +70,8 @@ gorilla.move(20);
 
 `Animal`クラス`move`メソッドのアクセス修飾子を`public`から`protected`に変更しエラーを出してみます。
 
-```typescript
+```typescript twoslash
+// @errors: 2445
 class Animal {
   public name: string;
   public constructor(theName: string) {
@@ -71,14 +85,14 @@ class Animal {
 }
 
 const gorilla = new Animal("ゴリラ");
-gorilla.move(10); // error TS2339: Property 'move' does not exist on type 'Animal'.
+gorilla.move(10);
 ```
 
 `gorilla.move()`メソッドは`protected`宣言されているため、自身のクラスとサブクラスのみアクセスとなります。つまりインスタンスされた`gorilla`からはアクセスが拒否され、コンパイルエラーが発生します。
 
 `protected`で保護された`move()`メソッドを新たに実装し、10倍速く動くゴリラを作ってみます。
 
-```typescript
+```typescript twoslash
 class Animal {
   public name: string;
   public constructor(theName: string) {
@@ -99,7 +113,7 @@ class Gorilla extends Animal {
 
 const gorilla = new Gorilla("速いゴリラ");
 gorilla.move(10);
-//=> '速いゴリラ moved 100m.'
+// @log: "速いゴリラ moved 100m."
 ```
 
 `Animal`スーパークラスを持つ`Gorilla`クラスを定義し`move()`を実装しています。`Gorilla`クラスの`move()`メソッド内で`super`キーワードを利用してスーパークラスの`move()`メソッドを呼び出しています。
@@ -110,7 +124,8 @@ gorilla.move(10);
 
 `protected move()`を`private move()`に変更してみます。`private`に変更されたことにより`Gorilla`クラスの`super.move`にアクセスすることが許されずエラーとなります。
 
-```typescript
+```typescript twoslash
+// @errors: 2415 2341
 class Animal {
   public name: string;
   public constructor(theName: string) {
@@ -125,7 +140,7 @@ class Animal {
 
 class Gorilla extends Animal {
   move(distanceInMeters: number) {
-    super.move(distanceInMeters * 10); // Property 'move' is private and only accessible within class 'Animal'.
+    super.move(distanceInMeters * 10);
   }
 }
 ```

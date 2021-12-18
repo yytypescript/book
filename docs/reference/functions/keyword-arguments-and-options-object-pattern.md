@@ -27,7 +27,7 @@ func(z=3, y=2, x=1)  # => 1 2 3
 
 JavaScriptやTypeScriptにはキーワード引数のような言語仕様はありませんが、Options Objectパターンというデザインパターンで似たようなことができます。Options Objectパターンは複数の位置引数を受け取る代わりに、ひとつのオブジェクトを引数に受け取るように設計された関数を言います。
 
-```javascript
+```javascript twoslash
 // 位置引数の関数
 function normalFunc(x, y, z) {
   console.log(x, y, z);
@@ -38,7 +38,8 @@ function func(options) {
   console.log(options.x, options.y, options.z);
 }
 
-func({ x: 1, y: 2, z: 3 }); //=> 1 2 3
+func({ x: 1, y: 2, z: 3 });
+// @log: 1 2 3
 ```
 
 さらに、Options Objectパターンでは分割代入引数を応用すると、引数の部分をよりシンプルに書けるようになります。
@@ -148,7 +149,7 @@ function findUsers({ country, city, ageMin, ageMax, order, sort }) {}
 
 位置引数を採用した関数では、場合によってはデフォルト引数が省略できません。たとえば、デフォルト引数を持つ位置引数3つを持つ関数で、1番目を2番目をデフォルトにしたい場合、それぞれに`undefined`を書く必要があります。
 
-```javascript
+```javascript twoslash
 function findProducts(
   isSale = false,
   withDetails = false,
@@ -157,13 +158,13 @@ function findProducts(
   console.log(isSale, withDetails, freeShipping);
 }
 
-findProducts(undefined, undefined, true); //=> false false true
-//           ^^^^^^^^^  ^^^^^^^^^
+findProducts(undefined, undefined, true);
+// @log: false false true
 ```
 
 Options Objectパターンを用いた場合は、デフォルトにしたい引数については何も書く必要がありません。
 
-```javascript
+```javascript twoslash
 function findProducts({
   isSale = false,
   withDetails = false,
@@ -172,7 +173,8 @@ function findProducts({
   console.log(isSale, withDetails, freeShipping);
 }
 
-findProducts({ freeShipping: true }); //=> false false true
+findProducts({ freeShipping: true });
+// @log: false false true
 ```
 
 ## 引数名を変更する方法
@@ -183,12 +185,13 @@ findProducts({ freeShipping: true }); //=> false false true
 
 Options Objectパターンの引数名変更問題を解決するには、分割代入の異なる引数名への代入機能を遣います。上の例でいうと、関数宣言側を`function func({ hoge })`に変更する代わりに`function func({ hoge: fuga })`のようにします。
 
-```javascript
+```javascript twoslash
 function func({ hoge: fuga }) {
   console.log(fuga);
 }
 
 func({ hoge: 123 });
+// @log: 123
 ```
 
 すると、関数呼び出し側は古い変数名`hoge`を渡すやり方から変えなくても動作するようにできます。関数の実装は、新しい変数名`fuga`が使えます。
@@ -197,19 +200,20 @@ func({ hoge: 123 });
 
 TypeScriptでOptions Objectにデフォルト引数をもたせたい場合は、引数名のところにデフォルト値を書いた上で、オブジェクト型の型注釈にてオプションプロパティを指定する`?`を書きます。
 
-```typescript
+```typescript twoslash
 function func({ x, y = 0, z = 0 }: { x: number; y?: number; z?: number }) {
   console.log(x, y, z);
 }
 
-func({ x: 1, y: undefined }); //=> 1 0 0
+func({ x: 1, y: undefined });
+// @log: 1 0 0
 ```
 
 ## Option Object自体をオプショナルにする方法
 
 TypeScriptでOptions Object自体を渡さなくても関数を呼び出せるようにするには、Options Objectのデフォルト値として空のオブジェクト`{}`を指定するとできます。
 
-```typescript
+```typescript twoslash
 type Options = {
   x?: number;
   y?: number;
@@ -217,11 +221,11 @@ type Options = {
 };
 
 function func({ x = 0, y = 0, z = 0 }: Options = {}) {
-  //                                           ^^^^ 空のオブジェクトをデフォルト値に
   console.log(x, y, z);
 }
 
-func(); //=> 0 0 0
+func();
+// @log: 0 0 0
 ```
 
 <TweetILearned>

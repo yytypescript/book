@@ -37,18 +37,18 @@ const hello = name => `Hello, ${name}!`;
 `return`を省略したアロー関数でオブジェクトリテラルを返したい時はそのまま返すことができません。
 
 <!--prettier-ignore-->
-```typescript
+```typescript twoslash
 const func = () => {x: 1}; // この書き方は誤り
 console.log(func());
-//=> undefined
+// @log: undefined
 ```
 
 このときはオブジェクトリテラルを`()`で括ることで返すことができます。
 
-```typescript
+```typescript twoslash
 const func = () => ({ x: 1 });
 console.log(func());
-//=> { x: 1 }
+// @log: { x: 1 }
 ```
 
 ## アロー関数の型注釈
@@ -69,9 +69,9 @@ const increment = num => num + 1;
 コンパイラーオプションで`noImplicitAny`を有効にしている場合は、引数の型注釈が必須となるため、カッコを省略したアロー関数の記述自体が出来なくなります。
 
 <!--prettier-ignore-->
-```typescript
+```typescript twoslash
+// @errors: 7006
 const increment = num => num + 1;
-//                ^^^ Parameter 'num' implicitly has an 'any' type.(7006)
 ```
 
 [noImplicitAny](../tsconfig/noimplicitany.md)

@@ -41,27 +41,30 @@ console.log(variable); // 参照できない
 
 レキシカルスコープ(lexical scope)変数とは、関数を定義した地点から参照できる、関数の外の変数を言います。
 
-```javascript
+```javascript twoslash
 const x = 100;
 
 function a() {
   console.log(x); // 関数の外の変数が見える
 }
 
-a(); //=> 100
+a();
+// @log: 100
 ```
 
 ### ブロックスコープ
 
 ブロックスコープ(block scope)は、ブレース`{ }`で囲まれた範囲だけ有効なスコープです。ブロックスコープ内の変数は、ブロックの外から参照できません。
 
-```javascript
+<!--prettier-ignore-->
+```javascript twoslash
 {
   const x = 100;
-  console.log(x); //=> 100
+  console.log(x);
+// @log: 100
 }
 console.log(x); // xを参照できない
-// エラー: ReferenceError: x is not defined
+// @error: ReferenceError: x is not defined
 ```
 
 ブロックスコープはif構文などのブレースにも作用します。条件分岐の中で変数宣言された変数は、条件分岐の外からは参照できないので注意しましょう。
@@ -91,20 +94,21 @@ console.log(browser); // OK
 
 JavaScriptではローカルスコープの変数に代入したつもりが、グローバル変数に代入してしまっていたといった事故が起こりえます。ローカル変数を宣言する場合は、`let`や`const`を用いますが、これを書き忘れた変数代入は、グローバル変数になってしまいます。
 
-```javascript
+```javascript twoslash
 function func() {
   foo = "ローカル変数のつもり";
 }
 func();
-console.log(window.foo); //=> "ローカル変数のつもり"
+console.log(window.foo);
+// @log: "ローカル変数のつもり"
 ```
 
 JavaScriptで変数を扱う際は、誤ってグローバル変数を作ってしまわないよう注意が必要です。一方、TypeScriptでは変数宣言されていない変数に代入しようとすると、コンパイラが指摘してくれます。
 
-```typescript
+```typescript twoslash
+// @errors: 2304
 function func() {
   foo = "ローカル変数のつもり";
-  // コンパイルエラー: Cannot find name 'foo'.(2304)
 }
 ```
 

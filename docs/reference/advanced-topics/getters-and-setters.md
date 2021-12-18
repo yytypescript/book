@@ -25,21 +25,40 @@ class Human {
 const human = new Human();
 // Setterを利用
 human.name = `田中太郎`;
-
 // Getterを利用
 console.log(human.name); // 田中太郎
 ```
 
 メソッドと違い、getter/setterを呼ぶ場合は`()`は不要です。
 
-```typescript
+```typescript twoslash
+class Human {
+  private _name: string;
+
+  public constructor(name: string) {
+    this._name = name;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  set name(name: string) {
+    this._name = name;
+  }
+}
+
+const human = new Human("田中太郎");
+// ---cut---
+// @errors: 2349 6234
 // Getter
 console.log(human.name); // 正しいGetterの使用方法
+// @log: "田中太郎"
 console.log(human.name()); // エラー :human.name is not a function
 
 // Setter
 human.name = "田中太郎"; // 正しいSetterの使用方法
-human.name("田中太郎"); // エラー :human.name is not a function
+human.name("田中太郎");
 ```
 
 ## Getter

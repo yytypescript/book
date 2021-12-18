@@ -34,9 +34,9 @@ const hello = function () {
 
 TypeScriptでは、定義前の関数を呼び出そうとするとコンパイラーが指摘してくれます。
 
-```typescript
+```typescript twoslash
 hello();
-// コンパイルエラー: Block-scoped variable 'hello' used before its declaration.(2448)
+// @errors: 2448 2454
 
 const hello = function () {};
 ```

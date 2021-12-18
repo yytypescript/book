@@ -26,16 +26,27 @@ type Point = {
 
 ## 引数が少ない
 
-```typescript
+```typescript twoslash
+declare function distance(p: number): number;
+
+// ---cut---
 distance();
-// Expected 1 arguments, but got 0.
+// @error: Expected 1 arguments, but got 0.
+// @noErrors
 ```
 
 ## 引数が多い
 
-```typescript
+```typescript twoslash
+declare function distance(p: number): number;
+
+const q1 = 1;
+const q2 = 2;
+
+// ---cut---
 distance(q1, q2);
-// Expected 1 arguments, but got 2.
+// @error: Expected 1 arguments, but got 2.
+// @noErrors
 ```
 
 JavaScriptでは引数が少ない時はその引数には`undefined`が渡され、引数が多い場合は余分な引数は無視されますがここはTypeScriptとJavaScriptとの大きな違いです。

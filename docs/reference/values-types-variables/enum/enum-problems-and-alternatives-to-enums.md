@@ -26,14 +26,16 @@ const zeroOrOne: ZeroOrOne = 9; // コンパイルエラーは起きません！
 
 列挙型には、列挙型オブジェクトに値でアクセスすると、メンバー名を得られる仕様があります。これにも問題があります。メンバーに無い値でアクセスしたら、コンパイルエラーになってほしいところですが、そうなりません。
 
-```typescript
+```typescript twoslash
 enum ZeroOrOne {
   Zero = 0,
   One = 1,
 }
 
-console.log(ZeroOrOne[0]); //=> "Zero" これは期待どおり
-console.log(ZeroOrOne[9]); //=> undefined これはコンパイルエラーになってほしいところ…
+console.log(ZeroOrOne[0]); // これは期待どおり
+// @log: "Zero"
+console.log(ZeroOrOne[9]); // これはコンパイルエラーになってほしいところ…
+// @log: undefined
 ```
 
 ### 文字列列挙型だけ公称型になる

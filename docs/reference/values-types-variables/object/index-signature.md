@@ -28,10 +28,11 @@ obj["d"] = 5; // OK
 
 コンパイラーオプションの`noUncheckedIndexedAccess`を有効にした場合、インデックス型では、プロパティの型は自動的にプロパティに指定した型とundefined型のユニオン型になります。これは、プロパティが存在しないときに、値が`undefined`になるのを正確に型で表すためです。
 
-```typescript
+```typescript twoslash
 const obj: { [K: string]: number } = { a: 1 };
 const b: number | undefined = obj.b;
-console.log(b); //=> undefined
+console.log(b);
+// @log: undefined
 ```
 
 [noUncheckedIndexedAccess](../../tsconfig/nouncheckedindexedaccess.md)

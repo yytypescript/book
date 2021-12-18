@@ -30,36 +30,38 @@ const nums: ReadonlyArray<number> = [1, 2, 3];
 
 読み取り専用の配列には、配列に対して破壊的操作をする`push`メソッドや`pop`メソッドが、**コンパイル時には無いことに**なります。したがって、`readonly number[]`型の変数`nums`に対して、`nums.push(4)`をするコードはコンパイルエラーになります。
 
-```typescript
+```typescript twoslash
+// @errors: 2339
 const nums: readonly number[] = [1, 2, 3];
 nums.push(4);
-// コンパイルエラー: Property 'push' does not exist on type 'readonly number[]'.(2339)
 ```
 
 これは、破壊的操作系のメソッドを呼び出そうとするコードがTypeScriptコンパイラーに警告されるだけです。配列オブジェクトから`push`メソッドを削除しているわけではありません。なので、JavaScript実行時には`push`メソッドが残っている状態になります。
 
-```typescript
+```typescript twoslash
 const nums: readonly number[] = [1, 2, 3];
-console.log("pop" in nums); //=> true
+console.log("pop" in nums);
+// @log: true
 ```
 
 メソッドは削除されるわけではないので、コンパイルエラーを無視して実行してみると、読み取り専用型でも配列を書き換えることはできます。
 
-```typescript
+```typescript twoslash
 const nums: readonly number[] = [1, 2, 3];
 // @ts-ignore
 nums.push(4); // 本来コンパイルエラーになるが無視する
-console.log(nums); //=> [1, 2, 3, 4]
+console.log(nums);
+// @log: [1, 2, 3, 4]
 ```
 
 ## 読み取り専用配列を配列に代入する
 
 TypeScriptの読み取り専用配列を普通の配列に代入することはできません。代入しようとするとコンパイルエラーになります。
 
-```typescript
+```typescript twoslash
+// @errors: 4104
 const readonlyNumbers: readonly number[] = [1, 2, 3];
 const writableNumbers: number[] = readonlyNumbers;
-// コンパイルエラー: The type 'readonly number[]' is 'readonly' and cannot be assigned to the mutable type 'number[]'.(4104)
 ```
 
 これは、普通の配列は`push`や`pop`などのメソッドが必要なのに、読み取り専用配列にはそれが無いことになっているためです。どうしても読み取り専用配列を普通の配列に代入したいときは、型アサーション(type assertion)を使う方法があります。

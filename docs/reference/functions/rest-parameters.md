@@ -18,20 +18,22 @@ function func(...params) {
 
 受け取った残余引数は配列になります。
 
-```javascript
+```javascript twoslash
 function func(...params) {
   console.log(params);
 }
-func(1, 2, 3); //=> [ 1, 2, 3 ]
+func(1, 2, 3);
+// @log: [ 1, 2, 3 ]
 ```
 
 普通の引数と残余引数を持つ関数も作れます。
 
-```javascript
+```javascript twoslash
 function func(param1, ...params) {
   console.log(param1, params);
 }
-func(1, 2, 3); //=> 1 [ 2, 3 ]
+func(1, 2, 3);
+// @log: 1 [ 2, 3 ]
 ```
 
 残余引数は必ず最後の引数でなければなりません。残余引数を複数持たせることはできません。また、残余引数の後に普通の引数を置くこともできません。
@@ -56,16 +58,17 @@ function func(...params: number[]) {
 
 JavaScriptに組み込みのメソッドに`Math.max()`があります。これは、引数に与えられた数値の中から最大値を返します。この関数は残余引数を要求します。
 
-```javascript
-Math.max(1, 10, 100); //=> 100
+```javascript twoslash
+Math.max(1, 10, 100);
+// @log: 100
 ```
 
 残余引数は、引数受取時には配列になりますが、関数呼び出しのときにひとつの配列にまとめて渡すことはできません。
 
-```typescript
+```typescript twoslash
+// @errors: 2345
 const scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const highest = Math.max(scores);
-// Argument of type 'number[]' is not assignable to parameter of type 'number'.(2345)
 ```
 
 このように配列を直接渡してしまうと、`max`の関数内では引数ひとつの`number[][]`型が渡されたと解釈されます。`max`の期待する余剰引数の型は`number[]`型なので、このコードは正しく動きません。配列を余剰引数に渡す場合は、スプレッド構文(spread syntax)を用います。スプレッド構文は`...`と書きます。

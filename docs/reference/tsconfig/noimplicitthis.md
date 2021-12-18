@@ -25,7 +25,10 @@ function lengthOfDiagonal(): number {
 
 これを`width, height`をプロパティに持つオブジェクトのインスタンスに代入すれば対角線の長さを計算できます。
 
-```typescript
+```typescript twoslash
+declare function lengthOfDiagonal(): number;
+
+// ---cut---
 const area = {
   width: 3,
   height: 4,
@@ -33,12 +36,15 @@ const area = {
 };
 
 console.log(area.diagonal());
-// -> 5
+// @log: 5
 ```
 
 このとき、打ち間違いで`width`を`witch`としてしまったとするとこの関数は意図した結果を返さなくなります。
 
-```typescript
+```typescript twoslash
+declare function lengthOfDiagonal(): number;
+
+// ---cut---
 const area = {
   witch: 3,
   height: 4,
@@ -46,7 +52,7 @@ const area = {
 };
 
 console.log(area.diagonal());
-// -> NaN
+// @log: NaN
 ```
 
 このオプションを有効にすると`any`型として認識されてしまっている`this`がどの型であるかを明確にできない限り実行することができなくなります。

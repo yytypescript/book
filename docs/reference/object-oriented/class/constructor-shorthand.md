@@ -63,18 +63,43 @@ class ConstructorOutAccessModifier {
 
 TypeScriptで記述する際は各アクセス修飾子のスコープ機能が有効になるため、インスタンスからのアクセスが可能なプロパティは`public`宣言された`arg1`のみが有効になります。
 
-```typescript title="example.ts"
+```typescript title="example.ts" twoslash
+class ConstructorInAccessModifier {
+  constructor(
+    arg0: number,
+    public arg1: number,
+    protected arg2: number,
+    private arg3: number
+  ) {
+    console.log({ arg0, arg1, arg2, arg3 });
+  }
+}
+
+class ConstructorOutAccessModifier {
+  public arg1: number;
+  protected arg2: number;
+  private arg3: number;
+  constructor(arg0: number, arg1: number, arg2: number, arg3: number) {
+    this.arg1 = arg1;
+    this.arg2 = arg2;
+    this.arg3 = arg3;
+    console.log({ arg0, arg1, arg2, arg3 });
+  }
+}
+
+// ---cut---
+// @errors: 2339 2445 2341
 const InAccess = new ConstructorInAccessModifier(1, 2, 3, 4);
-InAccess.arg0; // エラー プロパティ 'arg0' は型 'ConstructorInAccessModifier' に存在しません。ts(2339)
+InAccess.arg0;
 InAccess.arg1;
-InAccess.arg2; // エラー プロパティ 'arg2' は型 'ConstructorInAccessModifier' に存在しません。ts(2339)
-InAccess.arg3; // エラー プロパティ 'arg3' は型 'ConstructorInAccessModifier' に存在しません。ts(2339)
+InAccess.arg2;
+InAccess.arg3;
 
 const outAccess = new ConstructorOutAccessModifier(1, 2, 3, 4);
-outAccess.arg0; // エラー プロパティ 'arg0' は型 'ConstructorOutAccessModifier' に存在しません。ts(2339)
+outAccess.arg0;
 outAccess.arg1;
-outAccess.arg2; // エラー プロパティ 'arg2' は型 'ConstructorOutAccessModifier' に存在しません。ts(2339)
-outAccess.arg3; // エラー プロパティ 'arg3' は型 'ConstructorOutAccessModifier' に存在しません。ts(2339)
+outAccess.arg2;
+outAccess.arg3;
 ```
 
 つまり、コンストラクタの引数のアクセス修飾子はプロパティ宣言の省略をしてくれるだけにすぎません。

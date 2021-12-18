@@ -47,7 +47,7 @@ type TypeOfLanguage = typeof conf;
 `keyof`はオブジェクトの型に使うとそのオブジェクトのキーをユニオン型にして返します。上記の`TypeOfLanguage`型があれば
 
 ```typescript
-type Langauge = keyof TypeOfLanguage;
+type Language = keyof TypeOfLanguage;
 // -> 'en' | 'fr' | 'es' | 'ja' | 'zh';
 ```
 

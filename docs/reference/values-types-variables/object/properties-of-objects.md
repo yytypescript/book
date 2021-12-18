@@ -30,14 +30,15 @@ const object = {
 
 JavaやPHPでは、オブジェクトのフィールドとメソッドははっきり区別されます。一方、JavaScriptではその区別はきっちりしていません。Javaで言うところのメソッドとフィールドは、JavaScriptでは同じように扱われます。たとえば、メソッドに`null`を代入することで、フィールドに変えてしまうこともできます。
 
-```javascript
+```javascript twoslash
 const calculator = {
   sum(a, b) {
     return a + b;
   },
 };
 
-calculator.sum(1, 1); //=> 2
+calculator.sum(1, 1);
+// @log: 2
 calculator.sum = null;
 calculator.sum(1, 1); // ここではもうメソッドではないので、呼び出すとエラーになります
 ```

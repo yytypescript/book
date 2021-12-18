@@ -18,7 +18,7 @@ switch (条件) {
 
 switch文を使った例は次です。
 
-```javascript
+```javascript twoslash
 const extension = "ts";
 switch (extension) {
   case "js":
@@ -31,12 +31,12 @@ switch (extension) {
     console.log("不明な言語");
     break;
 }
-// 出力結果: TypeScript
+// @log: "TypeScript"
 ```
 
 このコードはif-elseで書き直すと次のようになります。
 
-```javascript
+```javascript twoslash
 const extension = "ts";
 if (extension === "js") {
   console.log("JavaScript");
@@ -45,12 +45,12 @@ if (extension === "js") {
 } else {
   console.log("不明な言語");
 }
-// 出力結果: TypeScript
+// @log: "TypeScript"
 ```
 
 caseは連続して書くこともできます。
 
-```javascript
+```javascript twoslash
 const food = "🍙";
 switch (food) {
   case "🍎":
@@ -72,5 +72,5 @@ switch (food) {
     console.log("未知の食べ物");
     break;
 }
-// 出力結果: 炭水化物
+// @log: "炭水化物"
 ```

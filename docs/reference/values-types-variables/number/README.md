@@ -94,9 +94,10 @@ JavaScriptの数値型には、`NaN`と`Infinity`という特殊な値があり�
 
 `NaN`は非数(not-a-number)を表す変数です。JavaScriptでは、処理の結果、数値にならない場合に`NaN`を返すことがあります。たとえば、文字列を数値に変換する`parseInt`関数は、数値化できない入力に対し、`NaN`を返します。
 
-```javascript
+```javascript twoslash
 const price = parseInt("百円");
-console.log(price); //=> NaN
+console.log(price);
+// @log: NaN
 ```
 
 値が`NaN`であるかのチェックは`Number.isNaN`を用います。
@@ -110,9 +111,11 @@ if (Number.isNaN(price)) {
 
 `NaN`は特殊で、等号比較では常に`false`になるので注意してください。
 
-```javascript
-console.log(NaN == NaN); //=> false
-console.log(NaN === NaN); //=> false
+```javascript twoslash
+console.log(NaN == NaN);
+// @log: false
+console.log(NaN === NaN);
+// @log: false
 ```
 
 ### Infinity
