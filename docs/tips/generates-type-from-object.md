@@ -8,7 +8,7 @@
 
 ```typescript
 type Account = {
-  accuontName: string;
+  accountName: string;
   password: string;
   age: number;
   plan: "Free" | "Standard" | "Premium";
