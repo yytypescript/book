@@ -13,23 +13,28 @@ title: Map<K, V>
 たとえば`string`のキーに対し`number`の値を持つ`Map<string, number>`は次のように作ります。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([
-  ["apple", 100],
-  ["strawberry", 200],
-  ["orange", 50],
+const map = new Map<string, number>([
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
 ]);
-
-console.log(fruitPrices);
-// @log: Map(3) { 'apple' => 100, 'strawberry' => 200, 'orange' => 50 }
+console.log(map);
+// @log: Map (3) {"a" => 1, "b" => 2, "c" => 3}
 ```
 
-コンストラクタ引数を省略した場合、空の`Map<any, any>`オブジェクトが作られます。
+コンストラクタ引数を省略した場合、空の`Map`オブジェクトが作られます。
 
 ```typescript twoslash
-const fruitPrices = new Map();
-
-console.log(fruitPrices);
+const map = new Map<string, number>();
+console.log(map);
 // @log: Map(0) {}
+```
+
+型引数とコンストラクタ引数の両方を省略した場合、`Map<any, any>`型になります。
+
+```typescript twoslash
+const map = new Map();
+//    ^?
 ```
 
 ## Mapのキーが同じとみなされるロジック
@@ -111,12 +116,10 @@ key-valueのペアのオブジェクトといえばずばりJavaScriptの`Object
 `Map`に値を追加するには`set`メソッドを使います。既存のキーに対し同じキーを指定すると上書きします。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([["apple", 100]]);
-
-fruitPrices.set("apple", 500);
-
-console.log(fruitPrices);
-// @log: Map (1) {"apple" => 500}
+const map = new Map([["a", 1]]);
+map.set("a", 5);
+console.log(map);
+// @log: Map (1) {"a" => 5}
 ```
 
 ### 値を削除する
@@ -124,14 +127,12 @@ console.log(fruitPrices);
 `Map`から値を削除するには`delete`メソッドを使います。キーが存在する場合はキーと値を削除し戻り値に`true`を、キーが存在しない場合は戻り値に`false`を返します。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([["apple", 100]]);
-
-console.log(fruitPrices.delete("apple"));
+const map = new Map([["a", 1]]);
+console.log(map.delete("a"));
 // @log: true
-console.log(fruitPrices.delete("apple"));
+console.log(map.delete("a"));
 // @log: false
-
-console.log(fruitPrices);
+console.log(map);
 // @log: Map (0) {}
 ```
 
@@ -140,11 +141,10 @@ console.log(fruitPrices);
 `Map`にキーが存在するかどうかを調べるには`has`メソッドを使います。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([["apple", 100]]);
-
-console.log(fruitPrices.has("apple"));
+const map = new Map([["a", 1]]);
+console.log(map.has("a"));
 // @log: true
-console.log(fruitPrices.has("strawberry"));
+console.log(map.has("b"));
 // @log: false
 ```
 
@@ -153,13 +153,12 @@ console.log(fruitPrices.has("strawberry"));
 `Map`にキーがいくつ登録されているかを調べるには`size`フィールドの値を見ます。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([
-  ["apple", 100],
-  ["strawberry", 200],
-  ["orange", 50],
+const map = new Map([
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
 ]);
-
-console.log(fruitPrices.size);
+console.log(map.size);
 // @log: 3
 ```
 
@@ -168,18 +167,15 @@ console.log(fruitPrices.size);
 `Map`に登録されているキーと値をすべて削除するには`clear`メソッドを使います。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([
-  ["apple", 100],
-  ["strawberry", 200],
-  ["orange", 50],
+const map = new Map([
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
 ]);
-
-console.log(fruitPrices.size);
+console.log(map.size);
 // @log: 3
-
-fruitPrices.clear();
-
-console.log(fruitPrices.size);
+map.clear();
+console.log(map.size);
 // @log: 0
 ```
 
@@ -197,14 +193,17 @@ console.log(fruitPrices.size);
 `Map<K, V>`を`for...of`で反復させると`[K, V]`のタプルを得ることができます。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([
-  ["apple", 100],
-  ["strawberry", 200],
-  ["orange", 50],
+const map = new Map([
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
 ]);
 
-for (const [fruit, price] of fruitPrices) {
-  // ...
+for (const [key, value] of map) {
+  console.log(key, value);
+  // "a", 1
+  // "b", 2
+  // "c", 3 の順で出力される
 }
 ```
 
@@ -213,14 +212,14 @@ for (const [fruit, price] of fruitPrices) {
 `keys`メソッドを使うと`Map`のキーのみの反復可能オブジェクトを得ることができます。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([
-  ["apple", 100],
-  ["strawberry", 200],
-  ["orange", 50],
+const map = new Map([
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
 ]);
-
-console.log(...fruitPrices.keys());
-// @log: "apple",  "strawberry",  "orange"
+const keys = [...map.keys()];
+console.log(keys);
+// @log: ["a", "b", "c"]
 ```
 
 #### `values`メソッドを使う
@@ -228,14 +227,14 @@ console.log(...fruitPrices.keys());
 `values`メソッドを使うと`Map`の値のみの反復可能オブジェクトを得ることができます。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([
-  ["apple", 100],
-  ["strawberry", 200],
-  ["orange", 50],
+const map = new Map([
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
 ]);
-
-console.log(...fruitPrices.values());
-// @log: 100,  200,  50
+const values = [...map.values()];
+console.log(values);
+// @log: [1, 2, 3]
 ```
 
 #### `entries`メソッドを使う
@@ -243,14 +242,14 @@ console.log(...fruitPrices.values());
 `entries`メソッドを使うと`Map`のキーと値の反復可能オブジェクトを得ることができます。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([
-  ["apple", 100],
-  ["strawberry", 200],
-  ["orange", 50],
+const map = new Map([
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
 ]);
-
-console.log(...fruitPrices.entries());
-// @log: ["apple", 100],  ["strawberry", 200],  ["orange", 50]
+const keyValues = [...map.entries()];
+console.log(keyValues);
+// @log: [["a", 1], ["b", 2], ["c", 3]]
 ```
 
 ### Mapを配列に変換する
@@ -258,14 +257,14 @@ console.log(...fruitPrices.entries());
 `Map<K, V>`にスプレッド構文を使うと`[K, V]`のタプルの配列を得ることができます。
 
 ```typescript twoslash
-const fruitPrices = new Map<string, number>([
-  ["apple", 100],
-  ["strawberry", 200],
-  ["orange", 50],
+const map = new Map([
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
 ]);
-
-console.log(...fruitPrices);
-// @log: ["apple", 100],  ["strawberry", 200],  ["orange", 50]
+const keyValues = [...map];
+console.log(keyValues);
+// @log: [["a", 1], ["b", 2], ["c", 3]]
 ```
 
 ## Mapとオブジェクトの操作の対応
