@@ -183,18 +183,18 @@ declare function isMeals(meals: MealsPerDay): void;
 const scapegoat: MealsPerDay = shallowCopy(meals);
 
 console.log(meals);
-// @log: { breakfast: 'a vegetable salad', lunch: "a cod's meuniere", dinner: 'a half bottle of wine (white)' }
+// @log: { breakfast: "a vegetable salad", lunch: "a cod's meuniere", dinner: "a half bottle of wine (white)" }
 
 console.log(scapegoat);
-// @log: { breakfast: 'a vegetable salad', lunch: "a cod's meuniere", dinner: 'a half bottle of wine (white)' }
+// @log: { breakfast: "a vegetable salad", lunch: "a cod's meuniere", dinner: "a half bottle of wine (white)" }
 
 isMeals(scapegoat);
 
 console.log(meals);
-// @log: { breakfast: 'a vegetable salad', lunch: "a cod's meuniere", dinner: 'a half bottle of wine (white)' }
+// @log: { breakfast: "a vegetable salad", lunch: "a cod's meuniere", dinner: "a half bottle of wine (white)" }
 
 console.log(scapegoat);
-// @log: { breakfast: 'a beef steak', lunch: 'a bucket of ice cream',dinner: '3 pizzas' }
+// @log: { breakfast: "a beef steak", lunch: "a bucket of ice cream", dinner: "3 pizzas" }
 ```
 
 ### 浅いコピーで防ぎきれない場合

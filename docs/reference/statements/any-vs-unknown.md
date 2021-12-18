@@ -36,7 +36,7 @@ console.log(any4.toFixed());
 console.log(any5.length);
 // @log: 18
 console.log(any6.name);
-// @log:'origin'
+// @log: "origin"
 ```
 
 一方、`unknown`型に代入したオブジェクトのプロパティ、メソッドは使用することができません。使用できないどころか、実行することができません。

@@ -204,6 +204,10 @@ export default (i) => i + 1;
 この`.js`のファイルは次のようにして読み込みます。
 
 ```typescript title="index.js" twoslash
+// @filename: increment.ts
+export default (i: number) => i + 1;
+// @filename: index.ts
+// ---cut---
 import increment from "./increment";
 
 console.log(increment(3));
@@ -211,6 +215,10 @@ console.log(increment(3));
 ```
 
 ```typescript title="index.js" twoslash
+// @filename: increment.ts
+export default (i: number) => i + 1;
+// @filename: index.ts
+// ---cut---
 import * as increment from "./increment";
 
 console.log(increment.default(3));
@@ -236,6 +244,10 @@ export { increment };
 次のようにして読み込みます。
 
 ```typescript title="index.js" twoslash
+// @filename: util.ts
+export const increment = (i: number) => i + 1;
+// @filename: index.ts
+// ---cut---
 import { increment } from "./util";
 
 console.log(increment(3));
@@ -243,6 +255,10 @@ console.log(increment(3));
 ```
 
 ```typescript title="index.js" twoslash
+// @filename: util.ts
+export const increment = (i: number) => i + 1;
+// @filename: index.ts
+// ---cut---
 import * as util from "./util";
 
 console.log(util.increment(3));
@@ -252,6 +268,10 @@ console.log(util.increment(3));
 1番目の場合の`import`で名前を変更するときは、`require`のとき(分割代入)と異なり`as`という表記を使って変更します。
 
 ```typescript title="index.js" twoslash
+// @filename: util.ts
+export const increment = (i: number) => i + 1;
+// @filename: index.ts
+// ---cut---
 import { increment as inc } from "./util";
 
 console.log(inc(3));
@@ -265,6 +285,10 @@ console.log(inc(3));
 `require()`と異なる点としては`import()`はモジュールの読み込みを非同期で行います。つまり`Promise`を返します。
 
 ```typescript title="index.js" twoslash
+// @filename: util.ts
+export const increment = (i: number) => i + 1;
+// @filename: index.ts
+// ---cut---
 import("./util").then(({ increment }) => {
   console.log(increment(3));
   // @log: 4
@@ -288,6 +312,10 @@ export const increment = (i) => i + 1;
 読み込み側は以下です。
 
 ```typescript title="index.mjs" twoslash
+// @filename: increment.mjs
+export const increment = (i: number) => i + 1;
+// @filename: index.js
+// ---cut---
 import { increment } from "./increment.mjs";
 
 console.log(increment(3));
@@ -317,6 +345,10 @@ export const increment = (i) => i + 1;
 ```
 
 ```typescript title="index.js" twoslash
+// @filename: increment.js
+export const increment = (i) => i + 1;
+// @filename: index.js
+// ---cut---
 import { increment } from "./increment.js";
 
 console.log(increment(3));
@@ -335,7 +367,7 @@ exports.increment = (i) => i + 1;
 
 読み込み側は以下です。
 
-```typescript title="index.js"
+```typescript title="index.js" twoslash
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
@@ -410,6 +442,10 @@ export default (price) => price * 1.08;
 もちろん呼び出し側はそのまま使うことができます。
 
 ```typescript title="index.ts" twoslash
+// @filename: taxIncluded.ts
+export default (i: number) => i + 1;
+// @filename: index.ts
+// ---cut---
 import taxIncluded from "./taxIncluded";
 
 console.log(taxIncluded(100));
@@ -437,7 +473,11 @@ export const taxIncludedAsOf2014 = (price) => price * 1.08;
 ```
 
 ```typescript title="index.ts" twoslash
-import { taxIncludedAsOf2014 } from "./taxInclude";
+// @filename: taxIncluded.ts
+export const taxIncludedAsOf2014 = (i: number) => i + 1;
+// @filename: index.ts
+// ---cut---
+import { taxIncludedAsOf2014 } from "./taxIncluded";
 
 console.log(taxIncludedAsOf2014(100));
 // @log: 108
@@ -450,6 +490,10 @@ export const taxIncludedAsOf2019 = (price) => price * 1.1;
 ```
 
 ```typescript title="index.ts" twoslash
+// @filename: taxIncluded.ts
+export const taxIncludedAsOf2019 = (i: number) => i + 1;
+// @filename: index.ts
+// ---cut---
 import { taxIncludedAsOf2019 } from "./taxIncluded";
 
 // this is no longer available.

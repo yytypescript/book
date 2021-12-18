@@ -36,8 +36,21 @@ butterfly["en"];
 
 `SystemTerms`は`noUncheckedIndexedAccess`にて登場した型と同じものでシステムにおける単語、用語のうち英語は担保し他言語の存在は曖昧なものにしています。
 
-```typescript
+```typescript twoslash
+type SystemTerms = {
+  en: string;
+  [key: string]: string;
+};
+
+const butterfly: SystemTerms = {
+  en: "Butterfly",
+  fr: "Papillon",
+  it: "Farfalla",
+  es: "Mariposa",
+};
+// ---cut---
 console.log(butterfly.fr);
+// @log: "Papillon"
 ```
 
 存在が不確かなプロパティへのアクセスについて、ドット記法でアクセスするときに、このオプションを有効にすると次のようなエラーが発生します。

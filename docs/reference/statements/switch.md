@@ -31,7 +31,7 @@ switch (extension) {
     console.log("不明な言語");
     break;
 }
-// @log: TypeScript
+// @log: "TypeScript"
 ```
 
 このコードはif-elseで書き直すと次のようになります。
@@ -45,7 +45,7 @@ if (extension === "js") {
 } else {
   console.log("不明な言語");
 }
-// @log: TypeScript
+// @log: "TypeScript"
 ```
 
 caseは連続して書くこともできます。
@@ -72,5 +72,5 @@ switch (food) {
     console.log("未知の食べ物");
     break;
 }
-// @log: 炭水化物
+// @log: "炭水化物"
 ```

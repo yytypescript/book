@@ -73,5 +73,5 @@ const obj2: object = {
 const merged: object = { ...obj1, ...obj2 };
 
 console.log(merged);
-// @log: { firstName: 'Yuko', middleName: 'von' lastName: 'Sato' }
+// @log: { firstName: "Yuko", middleName: "von" lastName: "Sato" }
 ```

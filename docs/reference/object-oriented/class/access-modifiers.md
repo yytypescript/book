@@ -56,10 +56,10 @@ class Animal {
 // ---cut---
 const gorilla = new Animal("ゴリラ");
 gorilla.move(10);
-// @log: 'ゴリラ moved 10m.'
+// @log: "ゴリラ moved 10m."
 gorilla.name = "ゴリラゴリラ";
 gorilla.move(20);
-// @log: 'ゴリラゴリラ moved 20m.'
+// @log: "ゴリラゴリラ moved 20m."
 ```
 
 `name`プロパティは`public`宣言されているため、インスタンスされた変数(`gorilla`)からの読み書きが可能になっています。「ゴリラ」から「ゴリラゴリラ」に変更することができます。
@@ -113,7 +113,7 @@ class Gorilla extends Animal {
 
 const gorilla = new Gorilla("速いゴリラ");
 gorilla.move(10);
-// @log: '速いゴリラ moved 100m.'
+// @log: "速いゴリラ moved 100m."
 ```
 
 `Animal`スーパークラスを持つ`Gorilla`クラスを定義し`move()`を実装しています。`Gorilla`クラスの`move()`メソッド内で`super`キーワードを利用してスーパークラスの`move()`メソッドを呼び出しています。

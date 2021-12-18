@@ -282,3 +282,10 @@ console.log(...fruitPrices);
 | キーを反復させる   | map.keys()          | Object.keys(object)        |
 | 値を反復させる     | map.values()        | Object.values(object)      |
 | [K, V]を反復させる | map.entries()       | Object.entries(object)     |
+
+<TweetILearned>
+
+・Mapのキーは厳密等価演算で評価される
+・MapとObjectは似ているが等しいものではない
+
+</TweetILearned>

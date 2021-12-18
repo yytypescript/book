@@ -18,7 +18,7 @@
 - API2: API1の結果をリクエストで受け取る
 - API3: API2の結果をリクエストで受け取る
 
-```typescript
+```typescript twoslash
 type Callback<T> = (result: T) => void;
 
 // 非同期でAPIにリクエストを投げて値を取得する処理
@@ -48,7 +48,8 @@ function request3(result2: number, callback: Callback<number>) {
 request1((result1) => {
   request2(result1, (result2) => {
     request3(result2, (result3) => {
-      console.log(result3); // -> 4
+      console.log(result3);
+      // @log: 4
     });
   });
 });
@@ -98,7 +99,7 @@ request1()
   })
   .then((result3) => {
     console.log(result3);
-// @log: 4
+    // @log: 4
   });
 ```
 
@@ -112,7 +113,7 @@ TypeScriptで`Promise`の型を指定する場合は`Promise<T>`と書きます�
 
 たとえば、独自で定義した型の値を解決する場合は次のように記述します。
 
-```typescript
+```typescript twoslash
 type User = {
   name: string;
   age: number;
@@ -130,6 +131,7 @@ function getUser(): Promise<User> {
 
 getUser().then((user: User) => {
   console.log(user);
+  // @log: { "name": "太郎", "age": 10 }
 });
 ```
 
@@ -179,7 +181,7 @@ function request(): Promise<number> {
 
 requestAsync().then((result) => {
   console.log(result);
-// @log: 1
+  // @log: 1
 });
 ```
 
@@ -194,7 +196,7 @@ async function requestAsync(): Promise<number> {
 
 requestAsync().then((result) => {
   console.log(result);
-// @log: 1
+  // @log: 1
 });
 ```
 
@@ -204,7 +206,7 @@ requestAsync().then((result) => {
 
 `await`の注意点として\*\*`await`は`async`関数の中でのみ使えます。\*\*
 
-```typescript
+```typescript twoslash
 // 1秒後に値を返す
 function request(): Promise<string> {
   return new Promise((resolve) => {
@@ -221,6 +223,7 @@ function request(): Promise<string> {
 async function main() {
   const result = await request();
   console.log(result);
+  // @log: "hello"
 }
 
 main();
@@ -234,7 +237,7 @@ main();
 
 このように`async / await`を利用することで、非同期の処理を同期処理のようにスッキリ書くことができるようになります。
 
-```typescript
+```typescript twoslash
 // 非同期でAPIにリクエストを投げて値を取得する処理
 function request1(): Promise<number> {
   return new Promise((resolve) => {
@@ -267,6 +270,7 @@ async function main() {
   const result2 = await request2(result1);
   const result3 = await request3(result2);
   console.log(result3);
+  // @log: 4
 }
 
 main();
