@@ -48,6 +48,8 @@ class Example {
 let numbers!: number[];
 ```
 
+[definite assignment assertion](./reference/values-types-variables/definite-assignment-assertion.md)
+
 ### `!!` Double Bang ![js]
 
 double bangはJavaScriptで定義されている演算子ではなく、論理否定演算子を2つ連続したイディオムです。値がtruthyかを求めるときに使われます。
@@ -521,7 +523,7 @@ function func1<T>(x: T) {}
 const result = func<string>("hello");
 ```
 
-[ジェネリクス (generics)](reference/generics/README.md)
+[ジェネリクス (generics)](/reference/generics)
 
 ### `<` JSX ![ts]
 
@@ -658,9 +660,9 @@ console.log(a >>> b);
 ```typescript twoslash
 interface User {
   name: string;
-// @log: name は必須
+  // @log: name は必須
   age?: number;
-// @log: age は任意
+  // @log: age は任意
 }
 const user: User = { name: "taro" };
 ```
@@ -815,7 +817,7 @@ const hyakuman = 1_000_000;
 
 ```javascript twoslash
 [1, 2, 3].map((_, index) => {
-// @log:  _ は 1, 2, 3のような要素値。それを使わないという意味で _ にしている
+  // @log:  _ は 1, 2, 3のような要素値。それを使わないという意味で _ にしている
 });
 ```
 
@@ -847,7 +849,7 @@ if文やfor文などの構文を伴わないブロック文は、単に変数の
 }
 {
   const value = 2;
-// @log: 上と同じ変数名で初期化しているが、スコープが別になるためエラーにならない。
+  // @log: 上と同じ変数名で初期化しているが、スコープが別になるためエラーにならない。
 }
 ```
 
@@ -886,7 +888,7 @@ console.log((a | b) === 0b111);
 
 ```typescript
 type ID = string | number;
-const id1 = "e29b41";// OK
+const id1 = "e29b41"; // OK
 const id2 = 100; // OK
 const id3 = true; // ERROR
 ```

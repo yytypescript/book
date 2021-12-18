@@ -1,4 +1,4 @@
-# 🚧any vs unknown
+# any vs unknown
 
 `any, unknown`型はどのような値も代入できます。
 

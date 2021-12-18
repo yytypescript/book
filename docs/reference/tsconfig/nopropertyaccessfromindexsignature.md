@@ -1,6 +1,15 @@
+---
+description: インデックス型のプロパティ参照に[]を必須にする
+---
+
 # noPropertyAccessFromIndexSignature
 
-リリースされたバージョン: 4.2
+`noPropertyAccessFromIndexSignature`はインデックス型のプロパティ参照に`[]`を必須にするコンパイラオプションです。
+
+- デフォルト: `false`
+- 追加されたバージョン: 4.2
+
+## 解説
 
 `noUncheckedIndexedAccess`と同様にインデックス型を持つオブジェクトに対する型評価です。インデックス型に対するアクセスをインデックス記法に強制します。
 

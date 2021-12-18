@@ -3,6 +3,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const remarkBreaks = require("remark-breaks");
 const { pageRef } = require("./src/remark/pageRef");
 const { tweetILearned } = require("./src/remark/tweetILearned");
+const tsconfigForTwoslash = require(__dirname + "/tsconfig.twoslash.json");
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import("@docusaurus/types").DocusaurusConfig} */
@@ -17,7 +18,6 @@ const { tweetILearned } = require("./src/remark/tweetILearned");
     favicon: "img/logo.svg",
     organizationName: "yytypescript", // Usually your GitHub org/user name.
     projectName: "book", // Usually your repo name.
-
     presets: [
       [
         "@docusaurus/preset-classic",
@@ -40,15 +40,17 @@ const { tweetILearned } = require("./src/remark/tweetILearned");
           theme: {
             customCss: require.resolve("./src/css/custom.css"),
           },
+          googleAnalytics: {
+            trackingID: "UA-43572771-14",
+            anonymizeIP: true,
+          },
         }),
       ],
       [
         "docusaurus-preset-shiki-twoslash",
         {
           themes: ["min-light", "min-dark"],
-          defaultCompilerOptions: {
-            project: __dirname + "/tsconfig.twoslash.json",
-          },
+          defaultCompilerOptions: tsconfigForTwoslash.compilerOptions,
         },
       ],
     ],
@@ -93,7 +95,7 @@ const { tweetILearned } = require("./src/remark/tweetILearned");
             {
               title: "執筆に参加したい方",
               items: [
-                { label: "概要", to: "/writing/writing" },
+                { label: "概要", to: "/writing" },
                 { label: "CONTRIBUTING", to: "/writing/contributing" },
                 {
                   label: "はじめて執筆する方へ",
@@ -140,10 +142,6 @@ const { tweetILearned } = require("./src/remark/tweetILearned");
             "jsx",
           ],
         },
-        googleAnalytics: {
-          trackingID: "UA-43572771-14",
-          anonymizeIP: true,
-        },
       }),
     i18n: {
       defaultLocale: "ja",
@@ -151,27 +149,23 @@ const { tweetILearned } = require("./src/remark/tweetILearned");
     },
     plugins: [
       // [require.resolve("docusaurus-lunr-search"), { languages: ["ja", "ja"] }],
-      [
-        require.resolve("@cmfcmf/docusaurus-search-local"),
-        {
-          // whether to index docs pages
-          indexDocs: true,
-          // must start with "/" and correspond to the routeBasePath configured for the docs plugin
-          // use "/" if you use docs-only-mode
-          // (see https://v2.docusaurus.io/docs/2.0.0-alpha.70/docs-introduction#docs-only-mode)
-          docsRouteBasePath: "/",
-
-          // Whether to also index the titles of the parent categories in the sidebar of a doc page.
-          // 0 disables this feature.
-          // 1 indexes the direct parent category in the sidebar of a doc page
-          // 2 indexes up to two nested parent categories of a doc page
-          // 3...
-          //
-          // Do _not_ use Infinity, the value must be a JSON-serializable integer.
-          indexDocSidebarParentCategories: 2,
-          language: "ja",
-        },
-      ],
+      // [
+      //   require.resolve("@cmfcmf/docusaurus-search-local"),
+      //   {
+      //     // whether to index docs pages
+      //     indexDocs: true,
+      //
+      //     // Whether to also index the titles of the parent categories in the sidebar of a doc page.
+      //     // 0 disables this feature.
+      //     // 1 indexes the direct parent category in the sidebar of a doc page
+      //     // 2 indexes up to two nested parent categories of a doc page
+      //     // 3...
+      //     //
+      //     // Do _not_ use Infinity, the value must be a JSON-serializable integer.
+      //     indexDocSidebarParentCategories: 2,
+      //     language: "ja",
+      //   },
+      // ],
     ],
   }
 );
