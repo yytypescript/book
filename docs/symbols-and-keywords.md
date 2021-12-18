@@ -333,10 +333,11 @@ type Tuple = [number, string, boolean];
 
 左から右に式を評価をして、一番右の評価した値を返します。
 
-```javascript
+```javascript twoslash
 let x = -1;
 const a = (x++, x++, x > 0);
-console.log(a); // true
+console.log(a);
+// @log: true
 ```
 
 ### `-` 単項負値演算子 ![js]
@@ -657,22 +658,22 @@ console.log(a >>> b);
 
 オブジェクトのプロパティを任意プロパティとして定義します。
 
-```typescript twoslash
+```typescript
 interface User {
   name: string;
-  // @log: name は必須
+  // name は必須
   age?: number;
-  // @log: age は任意
+  // age は任意
 }
 const user: User = { name: "taro" };
 ```
 
 または、関数の引数を必須ではなくします。
 
-```typescript twoslash
+```typescript
 function func(x?: number) {}
 func();
-// @log: xがなくてもOK
+// xがなくてもOK
 ```
 
 ### `?.` オプショナルチェーン (optional chaining) ![js]
@@ -742,7 +743,7 @@ object["a"];
 ```javascript twoslash
 const numbers = [1, 2, 3];
 const [first, ...rest] = numbers;
-// @log: 分割代入
+// 分割代入
 console.log(first, rest);
 // @log: 1 [ 2, 3 ]
 
@@ -817,7 +818,7 @@ const hyakuman = 1_000_000;
 
 ```javascript twoslash
 [1, 2, 3].map((_, index) => {
-  // @log:  _ は 1, 2, 3のような要素値。それを使わないという意味で _ にしている
+  //  _ は 1, 2, 3のような要素値。それを使わないという意味で _ にしている
 });
 ```
 
@@ -843,13 +844,13 @@ if (isOK) {
 
 if文やfor文などの構文を伴わないブロック文は、単に変数のスコープを分けることを目的にしていることがあります。
 
-```javascript twoslash
+```javascript
 {
   const value = 1;
 }
 {
   const value = 2;
-  // @log: 上と同じ変数名で初期化しているが、スコープが別になるためエラーにならない。
+  // 上と同じ変数名で初期化しているが、スコープが別になるためエラーにならない。
 }
 ```
 

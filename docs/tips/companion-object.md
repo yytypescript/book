@@ -27,15 +27,31 @@ export const Rectangle = {
 
 値も型も同名で定義します。これを外部から import してみます。
 
-```typescript
+```typescript twoslash
+// @filename: rectangle.ts
+export type Rectangle = {
+  height: number;
+  width: number;
+};
+
+export const Rectangle = {
+  from(height: number, width: number): Rectangle {
+    return {
+      height,
+      width,
+    };
+  },
+};
+// @filename: index.ts
+// ---cut---
 import { Rectangle } from "./rectangle";
 
 const rec: Rectangle = Rectangle.from(1, 3);
 
 console.log(rec.height);
-// -> 1
+// @log: 1
 console.log(rec.width);
-// -> 3
+// @log: 3
 ```
 
 このように import の部分は`Rectangle`のみとなり見通しもつきやすいという特徴があります。ちなみに`Rectangle.from()`のRectangleが値であり`const rec: Rectangle`のRectangleが型です。このようにTypeScriptでは同名の値と型を同時に使うことができます。
