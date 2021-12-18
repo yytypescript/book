@@ -24,10 +24,14 @@ rules:
   - expected: JavaScript
     patterns:
       - javascript
+      - Javascript
+      - javaScript
     options:
       wordBoundary: true
     specs:
       - from: javascript
+        to:   JavaScript
+      - from: Javascript
         to:   JavaScript
 
   - expected: ECMAScript $1
