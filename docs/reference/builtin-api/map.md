@@ -272,17 +272,17 @@ console.log(...fruitPrices);
 
 `Map`とオブジェクトは似た操作ができます。次がその対応表です。
 
-|                          | `Map`                 | オブジェクト                 |
-| ------------------------ | --------------------- | ---------------------------- |
-| 値を追加する             | `map.set(key, value)` | `object.value = key`         |
-| 値を削除する             | `map.delete(key)`     | `delete object.key`          |
-| 値の存在を確認する       | `map.has(key)`        | `object.hasOwnProperty(key)` |
-| 値の個数を取得する       | `map.size`            | `Object.keys(object).length` |
-| 空にする                 | `map.clear()`         | なし                         |
-| キーを列挙する           | `map.keys()`          | `Object.keys(object)`        |
-| 値を列挙する             | `map.values()`        | `Object.values(object)`      |
-| キーと値のペアを列挙する | `map.entries()`       | `Object.entries(object)`     |
-| 複製(シャローコピー)する | `new Map(map)`        | `{ ...object }`              |
+|                          | `Map`                 | オブジェクト                            |
+| ------------------------ | --------------------- | --------------------------------------- |
+| 値を追加する             | `map.set(key, value)` | `object.value = key`                    |
+| 値を削除する             | `map.delete(key)`     | `delete object.key`                     |
+| 値の存在を確認する       | `map.has(key)`        | `({}).hasOwnProperty.call(object, key)` |
+| 値の個数を取得する       | `map.size`            | `Object.keys(object).length`            |
+| 空にする                 | `map.clear()`         | なし                                    |
+| キーを列挙する           | `map.keys()`          | `Object.keys(object)`                   |
+| 値を列挙する             | `map.values()`        | `Object.values(object)`                 |
+| キーと値のペアを列挙する | `map.entries()`       | `Object.entries(object)`                |
+| 複製(シャローコピー)する | `new Map(map)`        | `{ ...object }`                         |
 
 <TweetILearned>
 
