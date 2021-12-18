@@ -56,6 +56,7 @@ a();
 
 ブロックスコープ(block scope)は、ブレース`{ }`で囲まれた範囲だけ有効なスコープです。ブロックスコープ内の変数は、ブロックの外から参照できません。
 
+<!--prettier-ignore-->
 ```javascript twoslash
 {
   const x = 100;

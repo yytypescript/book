@@ -69,10 +69,11 @@ TypeScriptの目玉機能はなんと言ってもコンパイラです。コン�
 
 コンパイラに与えるヒントのことを「型注釈(type annotation)」と言います。それでは、`increment`関数の引数`num`に型注釈を書いてみましょう。型注釈は`num`の右に`: number`と書きます。これを書くことで「引数`num`は数値型だけが代入できます」という意味になります。コンパイラはこれをヒントに関数呼び出しコードをチェックするようになります。
 
+<!--prettier-ignore-->
 ```ts twoslash {1,2} title="increment.ts"
 // @noErrors
 function increment(num: number) {
-//                  ^^^^^^^^型注釈
+//                 ^^^^^^^^型注釈
   return num + 1;
 }
 

@@ -107,11 +107,11 @@ const y = 2;
 次の例では`let`や`const`で変数の巻き上げが発生しないなら`console.log(x)`の評価のタイミングで関数の先頭で宣言されている`var x = 1`が参照されて`1`が出力されるはずです。しかし、実際は`let`で宣言された変数`x`がブロックスコープ内で初期化されていない状態で生成されるため、未初期化の`x`を参照してReference Errorが発生します。
 
 ```typescript twoslash
+// @errors: 2448 2454
 function output() {
   var x = 1;
   {
     console.log(x);
-// @errors: 2448 2454
     let x = 2;
   }
 }
@@ -123,6 +123,7 @@ output();
 
 JavaScript では`var`で宣言された変数のスコープは関数となるため、`{}`の中で変数宣言をしても最初に定義した変数`x`は上書きされます。
 
+<!--prettier-ignore-->
 ```typescript twoslash
 function print() {
   var x = 1;
@@ -138,6 +139,7 @@ function print() {
 
 `let`と`const`のスコープはブロックスコープです。次の例は`var`では変数`x`が上書きされていましたが、ここではブロックスコープ内で異なる変数として別々に定義されています。
 
+<!--prettier-ignore-->
 ```typescript twoslash
 function print() {
   const x = 1;
