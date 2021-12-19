@@ -40,3 +40,5 @@ const person: Person = {
 [インデックス型 (index signature)](../../values-types-variables/object/index-signature.md)
 
 [マップ型 (mapped type)](../mapped-types.md)
+
+[Map<K, V>](../../builtin-api/map.md)
