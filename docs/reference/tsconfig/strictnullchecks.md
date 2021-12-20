@@ -78,7 +78,17 @@ const value = getStringOrUndefined();
 
 `null`や`undefined`を期待しない変数にそれらが代入できるのは危険です。また、関数の戻り値に`null`や`undefined`が入る可能性が見えなくなることも、思わぬバグを生む原因になります。`strictNullChecks`は`true`を設定するのがお勧めです。
 
+<TweetILearned>
+
+😱TypeScriptデフォルトでnullとundefinedの代入チェックをしない(どんな型にも代入できる)
+✅コンパイラオプションstrictNullChecksをtrueにすると、nullとundefinedの代入がチェックされる
+👍strictNullChecksは有効にしよう
+
+</TweetILearned>
+
 ## 関連情報
+
+[strict](./strict.md)
 
 [null型](../values-types-variables/null.md)
 
