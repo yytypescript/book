@@ -1,17 +1,17 @@
 ---
-description: 関数の型チェックを厳しくする
+description: 引数型の変性のチェックを厳しくする
 tags: [strict]
 ---
 
 # strictFunctionTypes
 
-`strictFunctionTypes`は関数の型チェックを厳しくするコンパイラオプションです。
+`strictFunctionTypes`は引数型の変性のチェックを厳しくするコンパイラオプションです。
 
 - デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
 - 追加されたバージョン: 2.6
 - TypeScript公式が有効化推奨
 
-## 危険な引数の双変性
+## 引数の双変性は安心できない
 
 TypeScriptの関数には引数の双変性(parameter bivariance)という性質があります。どういうことか、順を追って見ていきましょう。
 
@@ -98,24 +98,43 @@ func = (n: number) => {}; // NG
 
 `strictFunctionTypes`は思いがけない実行時エラーを防ぐのに役立ちます。`strictFunctionTypes`は`true`を設定するのがお勧めです。
 
-## メソッドの型には効かない
+## メソッド型はチェックされない
 
-TODO
+`strictFunctionTypes`のチェックが働くのは関数型だけです。メソッド型には働きません。
 
-## なぜメソッドには効かないか？
+```ts twoslash
+interface Obj {
+  // メソッド型
+  method(n: number | null): any;
+}
+const obj: Obj = {
+  method: (n: number) => {}, // チェックされない
+};
+```
 
-TODO
+インターフェースのメソッドでも、**関数型で定義されたメソッド**は`strictFunctionTypes`のチェックが働きます。
 
-## そもそもなぜ引数の共変性を持たせたか？
-
-TODO
+```ts twoslash
+// @errors: 2322
+interface Obj {
+  // 関数型
+  method: (n: number | null) => any;
+}
+const obj: Obj = {
+  method: (n: number) => {}, // チェックが働く
+};
+```
 
 <TweetILearned>
 
-TODO
+⚙️TypeScriptのstrictFunctionTypesは、引数型の変性のチェックを厳しくするコンパイルオプション
+☹️TypeScriptの引数は双変で安心できない
+🔥実行時エラーが起こることも
+✅strictFunctionTypesは反変にしてくれる
+👍有効化推奨のオプション
 
 </TweetILearned>
 
 ## 関連情報
 
-TODO
+[strict](./strict.md)
