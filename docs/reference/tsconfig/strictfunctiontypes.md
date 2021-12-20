@@ -13,7 +13,7 @@ tags: [strict]
 
 ## 危険な引数の双変性
 
-TypeScriptの関数には引数の双変性(parameter bivariance)という危なさがあります。どういうことか、順を追って見ていきましょう。
+TypeScriptの関数には引数の双変性(parameter bivariance)という性質があります。どういうことか、順を追って見ていきましょう。
 
 まず、次の3つの型の範囲を考えてみましょう。
 
@@ -21,7 +21,7 @@ TypeScriptの関数には引数の双変性(parameter bivariance)という危な
 2. `number | null`
 3. `number | null | undefined`
 
-`number`は`number | null`より狭い型です。`number | null`の範囲には`1`や`0.5`などの数値型とnull型があります。一方、`number`型の範囲にはnull型はありません。あるのは数値型だけです。最後の`number | null | undefined`はもっとも範囲が広い型です。
+`number`は`number | null`より狭い型です。`number | null`の範囲には`1`や`0.5`などの数値型とnull型があります。`number`型の範囲にあるのは数値型だけです。最後の`number | null | undefined`はこの中でもっとも範囲が広い型です。
 
 | 型                                               | 範囲の広さ | 取れる値の例                       |
 | ------------------------------------------------ | ---------- | ---------------------------------- |
@@ -51,7 +51,7 @@ let func: (n: number | null) => any;
 func = (n: number | null | undefined) => {}; // OK
 ```
 
-上の例のように、より広い範囲の型を引数に取る関数型を代入できる特性を、**引数の反変性(parameter contravariance)**と言います。
+このような引数型の範囲を広められる特性を**引数の反変性(parameter contravariance)**と言います。
 
 引数`number | null`より狭い`number`を取る関数は代入できるでしょうか。これもTypeScriptでは代入できます。
 
@@ -62,16 +62,16 @@ let func: (n: number | null) => any;
 func = (n: number) => {}; // OK
 ```
 
-上の例のように、より狭い範囲の型を引数に取る関数型を代入できる特性を、**引数の共変性(parameter covariance)**と言います。
+このような引数型の範囲を狭められる特性を**引数の共変性(parameter covariance)**と言います。
 
 TypeScriptの関数型は、引数の反変性と引数の共変性の両特性を持っています。この両特性は一言で、**引数の双変性**と言います。
 
-この引数の双変性は危険な側面があります。`null`が渡されるかもしれない`func`関数に、`number`しか来ないことを前提とした関数を代入しているためです。もしも、`func`に`null`が渡ったら、そこで実行時エラーが発生します。
+引数の双変性は危険な側面があります。`null`が渡せる`func`関数に、`number`だけが来ることを前提とした関数を代入しているためです。もしも、`func`に`null`を渡すと、実行時エラーが発生します。
 
 ```ts twoslash
 // nullも来る可能性がある関数型
 let func: (n: number | null) => any;
-// numberしか来ないと断定した代入
+// numberを前提とした関数を代入
 func = (n: number) => n.toString();
 // funcにはnullが渡せる → 矛盾が実行時エラーを生む
 func(null);
@@ -79,9 +79,9 @@ func(null);
 // @strictFunctionTypes: false
 ```
 
-ここは実行時のエラーが起こらないように、コンパイルエラーにしてほしいところです。ところが、TypeScriptは引数の型が双変であるため、安心できない仕様になっています。
+こうした実行時エラーが起きないようにするには、引数型は反変だけが許されるべきです。そして、もし共変ならコンパイルエラーで知らせてほしいところです。ところが、TypeScriptは引数型は双変(つまり共変もOK)であるため、安心できない仕様になっています。
 
-## 引数を反変にする`strictFunctionTypes`
+## 引数の共変性を許さない`strictFunctionTypes`
 
 上の課題を解決するのが、コンパイラオプション`strictFunctionTypes`です。これを`true`にすると、引数が反変になります。もし、共変の引数にした場合、TypeScriptが警告を出します。
 
