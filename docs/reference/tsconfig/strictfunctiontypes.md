@@ -3,7 +3,7 @@ description: 関数の型チェックを厳しくする
 tags: [strict]
 ---
 
-# 🚧strictFunctionTypes
+# strictFunctionTypes
 
 `strictFunctionTypes`は関数の型チェックを厳しくするコンパイラオプションです。
 
@@ -11,63 +11,111 @@ tags: [strict]
 - 追加されたバージョン: 2.6
 - TypeScript公式が有効化推奨
 
-## 解説
+## 危険な引数の双変性
 
-オブジェクト指向では、スーパークラスに対しサブクラスのインスタンスを代入することはできますがその逆は一般的ではありません。
-たとえばJavaScriptの`Error`クラスを拡張しスタックトレースを出力できるようになった`RuntimeError`というクラスを用意します。ここではスタックトレースの実装は重要ではないので`stacktrace()`というメソッドが加わったとだけ解釈してください。
+TypeScriptの関数には引数の双変性(parameter bivariance)という危なさがあります。どういうことか、順を追って見ていきましょう。
 
-```typescript
-class RuntimeError extends Error {
-  public stacktrace(): string {
-    return "...";
-  }
-}
+まず、次の3つの型の範囲を考えてみましょう。
+
+1. `number`
+2. `number | null`
+3. `number | null | undefined`
+
+`number`は`number | null`より狭い型です。`number | null`の範囲には`1`や`0.5`などの数値型とnull型があります。一方、`number`型の範囲にはnull型はありません。あるのは数値型だけです。最後の`number | null | undefined`はもっとも範囲が広い型です。
+
+| 型                                               | 範囲の広さ | 取れる値の例                       |
+| ------------------------------------------------ | ---------- | ---------------------------------- |
+| `number`                                         | 狭い       | `1`、`0.5`...                      |
+| <code>number &#124; null</code>                  | 広い       | `1`、`0.5`...、`null`              |
+| <code>number &#124; null &#124; undefined</code> | より広い   | `1`、`0.5`...、`null`、`undefined` |
+
+続いて、次の変数`func`について考えてみましょう。この変数の型は、引数に`number | null`を取る関数です。
+
+```ts twoslash
+let func: (n: number | null) => any;
 ```
 
-`RuntimeError`クラスのスタックトレースを出力する関数`dumpRuntimeError()`を定義します。当然ながら`RuntimeError`のインスタンスは代入できますがスーパークラスの`Error`を代入することはできません。
+この変数`func`に代入できる値はどんな型でしょうか。当然、型注釈と同じ関数は問題なく代入できます。
 
-```typescript
-function dumpRuntimeError(err: RuntimeError): void {
-  console.log(err.stacktrace());
-}
-
-dumpRuntimeError(new RuntimeError("runtime error"));
-dumpRuntimeError(new Error("error"));
+```ts twoslash
+let func: (n: number | null) => any;
+// ---cut---
+func = (n: number | null) => {}; // OK
 ```
 
-```text
-error TS2345: Argument of type 'Error' is not assignable to parameter of type 'RuntimeError'.
-  Property 'stacktrace' is missing in type 'Error' but required in type 'RuntimeError'.
+引数`number | null`より広い`number | null | undefined`を受ける関数は代入できるでしょうか。これも大丈夫です。
 
-errorDump(new Error('error'));
-          ~~~~~~~~~~~~~~~~~~
+```ts twoslash
+let func: (n: number | null) => any;
+// ---cut---
+func = (n: number | null | undefined) => {}; // OK
 ```
 
-しかしながら`dumpRuntimeError`型の部分型である`dumpError`という型を定義したとすると、次の代入が成り立ちます。
+上の例のように、より広い範囲の型を引数に取る関数型を代入できる特性を、**引数の反変性(parameter contravariance)**と言います。
 
-```typescript
-type dumpError = (err: Error) => void;
-const dumpError: dumpError = dumpRuntimeError;
+引数`number | null`より狭い`number`を取る関数は代入できるでしょうか。これもTypeScriptでは代入できます。
+
+```ts twoslash
+// @strictFunctionTypes: false
+let func: (n: number | null) => any;
+// ---cut---
+func = (n: number) => {}; // OK
 ```
 
-この関数`dumpError()`に`Error`型のインスタンスを代入すると`Error`型には`stacktrace()`というメソッドがないため実行時エラーになります。
+上の例のように、より狭い範囲の型を引数に取る関数型を代入できる特性を、**引数の共変性(parameter covariance)**と言います。
 
-このオプションを有効にすることで関数の引数の方は厳密に評価されるようになります。そのクラスまたはサブクラス以外を代入することはできなくなります。
+TypeScriptの関数型は、引数の反変性と引数の共変性の両特性を持っています。この両特性は一言で、**引数の双変性**と言います。
 
-```text
-error TS2322: Type '(err: RuntimeError) => void' is not assignable to type 'dumpError'.
-  Types of parameters 'err' and 'err' are incompatible.
-    Property 'stacktrace' is missing in type 'Error' but required in type 'RuntimeError'.
+この引数の双変性は危険な側面があります。`null`が渡されるかもしれない`func`関数に、`number`しか来ないことを前提とした関数を代入しているためです。もしも、`func`に`null`が渡ったら、そこで実行時エラーが発生します。
 
-const dumpError: dumpError = dumpRuntimeError;
-      ~~~~~~~~~
+```ts twoslash
+// nullも来る可能性がある関数型
+let func: (n: number | null) => any;
+// numberしか来ないと断定した代入
+func = (n: number) => n.toString();
+// funcにはnullが渡せる → 矛盾が実行時エラーを生む
+func(null);
+// @error: Cannot read properties of null (reading 'toString')
+// @strictFunctionTypes: false
 ```
 
-TODO: 次について書く
+ここは実行時のエラーが起こらないように、コンパイルエラーにしてほしいところです。ところが、TypeScriptは引数の型が双変であるため、安心できない仕様になっています。
 
-- メソッド構文(method syntax)には効かない
-- 関数構文(function syntax)にだけ効く
-- TSの引数は元々bivariant仕様
-- strictFunctionTypesはそれをcontravariantにする
-- メソッドまでやると互換性的に問題がある
-- なのでメソッドは除外しbivariantのまま
+## 引数を反変にする`strictFunctionTypes`
+
+上の課題を解決するのが、コンパイラオプション`strictFunctionTypes`です。これを`true`にすると、引数が反変になります。もし、共変の引数にした場合、TypeScriptが警告を出します。
+
+```ts twoslash
+// @errors: 2322
+let func: (n: number | null) => any;
+// 不変
+func = (n: number | null) => {}; // OK
+// 反変
+func = (n: number | null | undefined) => {}; // OK
+// 共変
+func = (n: number) => {}; // NG
+```
+
+`strictFunctionTypes`は思いがけない実行時エラーを防ぐのに役立ちます。`strictFunctionTypes`は`true`を設定するのがお勧めです。
+
+## メソッドの型には効かない
+
+TODO
+
+## なぜメソッドには効かないか？
+
+TODO
+
+## そもそもなぜ引数の共変性を持たせたか？
+
+TODO
+
+<TweetILearned>
+
+TODO
+
+</TweetILearned>
+
+## 関連情報
+
+TODO
