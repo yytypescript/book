@@ -66,7 +66,18 @@ function foo() {
 
 戻り値の型注釈を必須にしたい場合は、[`noImplicitReturns`](./noimplicitreturns.md)を有効にしてください。
 
+<TweetILearned>
+
+😢TypeScriptは型注釈がないOR型推論不能の場合、型をanyにする(暗黙のany)
+🙅‍♂️noImplicitAnyは暗黙のanyを禁止するコンパイラオプション
+😊これをtrueにすると暗黙のanyが警告される
+✅有効化推奨のオプション
+
+</TweetILearned>
+
 ## 関連情報
+
+[strict](./strict.md)
 
 [any型](../values-types-variables/any.md)
 
