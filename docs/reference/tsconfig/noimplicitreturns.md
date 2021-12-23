@@ -25,7 +25,7 @@ function negaposi(num: number): string {
 
 このオプションを有効にすると次のようなエラーが発生します。
 
-```typescript
+```text
 error TS7030: Not all code paths return a value.
 
 function negaposi(num: number): string {

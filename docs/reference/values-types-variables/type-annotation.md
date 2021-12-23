@@ -13,6 +13,6 @@ const num: number = 123;
 
 JavaやGo、PHPなどの言語も変数に対して型を宣言できますが、変数名と型を書く位置は左右逆です。それらの言語に慣れている方は注意しましょう。
 
-```javascript
-int num = 123; // Java
+```java
+Int num = 123; // Java
 ```

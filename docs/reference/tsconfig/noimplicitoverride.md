@@ -104,7 +104,7 @@ class ToggleButton {
 
 `noImplicitOverride`はオーバーライドしているメソッドに`override`キーワードをつけることによってスーパークラスに同名のメソッドがないかを確認させます。オーバーライドをしているにもかかわらず`override`のキーワードを付けずにこのオプションを有効にすると次のようなエラーが発生します。
 
-```typescript
+```text
 error TS4114: This member must have an 'override' modifier because it overrides a member in the base class 'ToggleButton'.
 
 public enable(): void {
@@ -117,7 +117,7 @@ public disable(): void {
 
 逆に、オーバーライドしていないメソッドに`override`キーワードをつけると次のようなエラーが発生します。
 
-```typescript
+```text
 error TS4113: This member cannot have an 'override' modifier because it is not declared in the base class 'ToggleButton'.
 
 public override enable(): void {

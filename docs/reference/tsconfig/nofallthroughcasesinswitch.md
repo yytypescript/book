@@ -43,7 +43,7 @@ function daysOfMonth(month: number): number {
 
 ある月の日数を求める関数`daysOfMonth()`を定義しましたがこの関数には`fallthrough`が存在します。このオプションを有効にすると次のようなエラーが発生します。
 
-```typescript
+```text
 error TS7029: Fallthrough case in switch.
 
     case 2:
