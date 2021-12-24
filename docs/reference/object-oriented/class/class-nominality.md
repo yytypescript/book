@@ -4,7 +4,7 @@ TypeScriptでは、クラスに1つでも非パブリックなプロパティが
 
 たとえば、`UserId`クラスと`GroupId`クラスで同名になってしまっている`id`プロパティをプライベートにするだけで、相互の代入が不可能になります。
 
-```typescript
+```ts
 class UserId {
   private readonly id: string;
 

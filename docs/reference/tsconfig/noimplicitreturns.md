@@ -13,7 +13,7 @@ description: 関数戻り値の型注釈を必須にする
 
 戻り値が`void`型以外の関数ですべての条件分岐において値を返しているかを厳密に評価します。
 
-```typescript
+```ts
 function negaposi(num: number): string {
   if (num > 0) {
     return "positive";
@@ -34,7 +34,7 @@ function negaposi(num: number): string {
 
 これを回避するためには条件分岐の場合分けのときに値を返し忘れないように設計します。
 
-```typescript
+```ts
 function negaposi(num: number): string {
   if (num > 0) {
     return "positive";

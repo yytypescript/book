@@ -46,7 +46,7 @@ Reactの2つ目の特徴はUIを宣言的に書ける点です。Reactを使わ�
 
 まず、命令的なコードでは、次のようになります。
 
-```javascript
+```js
 const list = document.createElement("ul");
 const apple = document.createElement("li");
 apple.innerText = "リンゴ";

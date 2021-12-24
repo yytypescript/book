@@ -15,7 +15,7 @@
 
 ふたつのクラスの違いはコンストラクタにアクセス修飾子を定義しているかどうかだけで機能はまったく同じです。
 
-```typescript title="example.ts"
+```ts title="example.ts"
 class ConstructorInAccessModifier {
   constructor(
     arg0: number,
@@ -42,7 +42,7 @@ class ConstructorOutAccessModifier {
 
 コンパイル後のJavaScriptファイルを見てみると同一の機能を持つことが確認することができます。
 
-```javascript title="example.js"
+```js title="example.js"
 class ConstructorInAccessModifier {
   constructor(arg0, arg1, arg2, arg3) {
     this.arg1 = arg1;
@@ -63,7 +63,7 @@ class ConstructorOutAccessModifier {
 
 TypeScriptで記述する際は各アクセス修飾子のスコープ機能が有効になるため、インスタンスからのアクセスが可能なプロパティは`public`宣言された`arg1`のみが有効になります。
 
-```typescript title="example.ts" twoslash
+```ts title="example.ts" twoslash
 class ConstructorInAccessModifier {
   constructor(
     arg0: number,

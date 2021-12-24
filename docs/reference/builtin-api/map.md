@@ -43,7 +43,7 @@ map;
 
 コンストラクタ引数を省略した場合、空の`Map`が作られます。
 
-```typescript twoslash
+```ts twoslash
 const map = new Map<string, number>();
 console.log(map);
 // @log: Map(0) {}

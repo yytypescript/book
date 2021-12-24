@@ -18,7 +18,7 @@
 - API2: API1の結果をリクエストで受け取る
 - API3: API2の結果をリクエストで受け取る
 
-```typescript twoslash
+```ts twoslash
 type Callback<T> = (result: T) => void;
 
 // 非同期でAPIにリクエストを投げて値を取得する処理
@@ -62,7 +62,7 @@ request1((result1) => {
 
 先ほどの例を`Promise`を使って書き直してみます。
 
-```typescript twoslash
+```ts twoslash
 // 非同期でAPIにリクエストを投げて値を取得する処理
 function request1(): Promise<number> {
   return new Promise((resolve) => {
@@ -113,7 +113,7 @@ TypeScriptで`Promise`の型を指定する場合は`Promise<T>`と書きます�
 
 たとえば、独自で定義した型の値を解決する場合は次のように記述します。
 
-```typescript twoslash
+```ts twoslash
 type User = {
   name: string;
   age: number;
@@ -137,7 +137,7 @@ getUser().then((user: User) => {
 
 `Promise`のジェネリクスの型`T`は必須なので、省略した場合はコンパイルエラーになります。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 2314
 function request(): Promise {
   return new Promise((resolve) => {
@@ -148,7 +148,7 @@ function request(): Promise {
 
 ジェネリクスの型`T`と返す値の型が合わない場合もコンパイルエラーになります。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 2345
 function request(): Promise<string> {
   return new Promise((resolve) => {
@@ -167,7 +167,7 @@ function request(): Promise<string> {
 
 関数の前に`async`キーワードをつけることで、その関数は非`Promise`の値を返す時にその値を解決した`Promise`を返すようになります。
 
-```typescript twoslash
+```ts twoslash
 async function requestAsync(): Promise<number> {
   return 1;
 }
@@ -187,7 +187,7 @@ requestAsync().then((result) => {
 
 `Promise`をそのまま返すことも可能です。二重に`Promise`がラップされることはありません。
 
-```typescript twoslash
+```ts twoslash
 async function requestAsync(): Promise<number> {
   return new Promise((resolve) => {
     resolve(1);
@@ -206,7 +206,7 @@ requestAsync().then((result) => {
 
 `await`の注意点として\*\*`await`は`async`関数の中でのみ使えます。\*\*
 
-```typescript twoslash
+```ts twoslash
 // 1秒後に値を返す
 function request(): Promise<string> {
   return new Promise((resolve) => {
@@ -237,7 +237,7 @@ main();
 
 このように`async / await`を利用することで、非同期の処理を同期処理のようにスッキリ書くことができるようになります。
 
-```typescript twoslash
+```ts twoslash
 // 非同期でAPIにリクエストを投げて値を取得する処理
 function request1(): Promise<number> {
   return new Promise((resolve) => {

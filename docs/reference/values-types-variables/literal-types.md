@@ -8,7 +8,7 @@ TypeScriptではプリミティブ型の特定の値だけを代入可能にす�
 
 たとえば、次の例は数値が代入可能な型注釈です。数値であれば、1でも100でも何でも代入できます。
 
-```typescript
+```ts
 let x: number;
 x = 1;
 ```
@@ -30,7 +30,7 @@ x = 100;
 - 数値型の値
 - 文字列型の文字列
 
-```typescript
+```ts
 const isTrue: true = true;
 const num: 123 = 123;
 const str: "foo" = "foo";
@@ -40,7 +40,7 @@ const str: "foo" = "foo";
 
 一般的にリテラル型はマジックナンバーやステートの表現に用いられます。その際、ユニオン型と組み合わせることが多いです。
 
-```typescript
+```ts
 let status: 1 | 2 | 3 = 1;
 ```
 

@@ -13,7 +13,7 @@ description: switch文のfallthroughを禁止する
 
 `fallthrough`とは`switch`でにおける`case`文で`break`または`return`を行わないことを意味します。`case`文が空でない場合に限り`break`や`return`が行われているかを厳密に評価します。
 
-```typescript
+```ts
 function daysOfMonth(month: number): number {
   let days: number = 31;
 
@@ -58,8 +58,8 @@ error TS7029: Fallthrough case in switch.
 
 これを回避するためには`case`では漏れなく`break`あるいは`return`をするように設計します。
 
-```typescript
-ffunction daysOfMonth(month: number): number {
+```ts
+function daysOfMonth(month: number): number {
   let days: number = 31;
 
   switch (month) {
@@ -81,7 +81,7 @@ ffunction daysOfMonth(month: number): number {
       days = 30;
       break;
     default:
-      throw new Error('INVALID INPUT');
+      throw new Error("INVALID INPUT");
   }
 
   return days;

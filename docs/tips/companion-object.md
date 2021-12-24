@@ -9,7 +9,7 @@ TypeScriptでは値と型に同名を与えてその両方を区別なく使う�
 
 次の型と値 (ファクトリーメソッドを持つオブジェクト) は同じファイル`rectangle.ts`に存在するとします。
 
-```typescript
+```ts
 export type Rectangle = {
   height: number;
   width: number;
@@ -27,7 +27,7 @@ export const Rectangle = {
 
 値も型も同名で定義します。これを外部から import してみます。
 
-```typescript twoslash
+```ts twoslash
 // @filename: rectangle.ts
 export type Rectangle = {
   height: number;

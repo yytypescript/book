@@ -10,7 +10,7 @@ TypeScriptでは配列を読み取り専用(readonly)として型注釈できま
 
 配列の型注釈`T[]`の前に`readonly`キーワードを添えると、読み取り専用の配列型にできます。たとえば、`readonly number[]`と書くと、その変数の型はnumberの読み取り専用配列型になります。
 
-```typescript
+```ts
 const nums: readonly number[] = [1, 2, 3];
 ```
 
@@ -18,7 +18,7 @@ const nums: readonly number[] = [1, 2, 3];
 
 `ReadonlyArray<T>`のような書き方でも読み取り専用の配列型になります。たとえば、要素がnumber型の配列を読み取り専用にしたい場合、`ReadonlyArray<number>`と書きます。
 
-```typescript
+```ts
 const nums: ReadonlyArray<number> = [1, 2, 3];
 ```
 
@@ -30,7 +30,7 @@ const nums: ReadonlyArray<number> = [1, 2, 3];
 
 読み取り専用の配列には、配列に対して破壊的操作をする`push`メソッドや`pop`メソッドが、**コンパイル時には無いことに**なります。したがって、`readonly number[]`型の変数`nums`に対して、`nums.push(4)`をするコードはコンパイルエラーになります。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 2339
 const nums: readonly number[] = [1, 2, 3];
 nums.push(4);
@@ -38,7 +38,7 @@ nums.push(4);
 
 これは、破壊的操作系のメソッドを呼び出そうとするコードがTypeScriptコンパイラーに警告されるだけです。配列オブジェクトから`push`メソッドを削除しているわけではありません。なので、JavaScript実行時には`push`メソッドが残っている状態になります。
 
-```typescript twoslash
+```ts twoslash
 const nums: readonly number[] = [1, 2, 3];
 console.log("pop" in nums);
 // @log: true
@@ -46,7 +46,7 @@ console.log("pop" in nums);
 
 メソッドは削除されるわけではないので、コンパイルエラーを無視して実行してみると、読み取り専用型でも配列を書き換えることはできます。
 
-```typescript twoslash
+```ts twoslash
 const nums: readonly number[] = [1, 2, 3];
 // @ts-ignore
 nums.push(4); // 本来コンパイルエラーになるが無視する
@@ -58,7 +58,7 @@ console.log(nums);
 
 TypeScriptの読み取り専用配列を普通の配列に代入することはできません。代入しようとするとコンパイルエラーになります。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 4104
 const readonlyNumbers: readonly number[] = [1, 2, 3];
 const writableNumbers: number[] = readonlyNumbers;
@@ -66,7 +66,7 @@ const writableNumbers: number[] = readonlyNumbers;
 
 これは、普通の配列は`push`や`pop`などのメソッドが必要なのに、読み取り専用配列にはそれが無いことになっているためです。どうしても読み取り専用配列を普通の配列に代入したいときは、型アサーション(type assertion)を使う方法があります。
 
-```typescript
+```ts
 const readonlyNumbers: readonly number[] = [1, 2, 3];
 const writableNumbers: number[] = readonlyNumbers as number[];
 //                                                ^^^^^^^^^^^ 型アサーション

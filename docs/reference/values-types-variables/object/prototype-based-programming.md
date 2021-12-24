@@ -19,7 +19,7 @@ JavaやPHP、Ruby、Pythonなどはクラスベースに分類されます。ク
 
 たとえば、ボタンのオブジェクトがほしいときは、まずその設計図となるボタンクラスを作ります。
 
-```javascript
+```js
 class Button {
   constructor(name) {
     this.name = name;
@@ -29,7 +29,7 @@ class Button {
 
 その上で、ボタンクラスに対して`new`演算子を用いると、ボタンオブジェクトが得られます。
 
-```javascript
+```js
 dangerousButton = new Button("絶対に押すなよ?");
 ```
 
@@ -43,7 +43,7 @@ dangerousButton = new Button("絶対に押すなよ?");
 
 たとえば、JavaScriptでは既存のオブジェクトに対して、`Object.create()`を実行すると新しいオブジェクトが得られます。
 
-```javascript
+```js
 const button = {
   name: "ボタン",
 };
@@ -54,7 +54,7 @@ dangerousButton.name = "絶対に押すなよ？";
 
 上の例の`button`と`dangerousButton`は異なるオブジェクトになります。その証拠に、それぞれの`name`プロパティは値が異なります。
 
-```javascript twoslash
+```js twoslash
 console.log(button.name);
 // @log: "ボタン"
 console.log(dangerousButton.name);
@@ -83,7 +83,7 @@ console.log(dangerousButton.name);
 
 では上の手順を具体的なコードで確認してみましょう。ここに`Counter`クラスがあります。
 
-```javascript
+```js
 class Counter {
   constructor() {
     this.count = 0;
@@ -97,7 +97,7 @@ class Counter {
 
 このクラスは数とそれをカウントアップする振る舞いを持っています。この`Counter`クラスを継承して、リセット機能を持った派生クラスは次の`ResetableCounter`クラスになります。
 
-```javascript
+```js
 class ResetableCounter extends Counter {
   reset() {
     this.count = 0;
@@ -107,7 +107,7 @@ class ResetableCounter extends Counter {
 
 この`ResetableCounter`クラスを使うには、このクラスに対して`new\`演算子でオブジェクトを生成します。
 
-```javascript
+```js
 counter = new ResetableCounter();
 counter.countUp();
 counter.reset();
@@ -117,7 +117,7 @@ counter.reset();
 
 一方、プロトタイプベースのJavaScriptでは、継承もオブジェクトの生成と同じプロセスで行います。次の例は、`counter`オブジェクトを継承した`resetableCounter`オブジェクトを作っています。
 
-```javascript
+```js
 const counter = {
   count: 0,
   countUp() {
@@ -139,7 +139,7 @@ resetableCounter.reset = function () {
 
 古いJavaScriptには確かにクラスの構文がなく独特の書き方がありましたが、ES2015に`class`や`extends`構文が導入されたため、近年のJavaScriptではクラスベース風の書き方が容易にできるようになっています。なので、クラスベースの他言語から来た開発者にも、JavaScriptコードは理解しやすいものになってきています。次のコードはクラスベースの説明の際に提示したものですが、実はこれはJavaScriptでした。
 
-```javascript
+```js
 class Counter {
   constructor() {
     this.count = 0;

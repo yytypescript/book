@@ -2,7 +2,7 @@
 
 TypeScriptの文法はJavaScriptの文法を拡張したものです。TypeScriptで拡張された文法は、主に型に関する部分です。それ以外のほとんどの文法はJavaScriptに由来するものです。そのため、素のJavaScriptもTypeScriptとして扱うことができます。たとえば、次のコードは100%JavaScriptのものですが、これをTypeScriptコンパイラーは解析でき、静的な検査が行なえます。
 
-```javascript twoslash
+```js twoslash
 const hello = "Hello";
 const world = "World";
 console.log(hello + " " + world);

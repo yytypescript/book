@@ -2,7 +2,7 @@
 
 `keyof`はオブジェクト型からプロパティ名を型として返す型演算子です。たとえば、`name`プロパティを持つ型に対して、`keyof`を使うと文字列リテラル型の`"name"`が得られます。
 
-```typescript
+```ts
 type Person = {
   name: string;
 };
@@ -13,7 +13,7 @@ type PersonKey = "name";
 
 2つ以上のプロパティがあるオブジェクト型に`keyof`を使った場合は、すべてのプロパティ名がユニオン型で返されます。
 
-```typescript
+```ts
 type Book = {
   title: string;
   price: number;
@@ -26,7 +26,7 @@ type BookKey = "title" | "price" | "rating";
 
 インデックス型に`keyof`を用いると、インデックスキーの型が返ります。
 
-```typescript
+```ts
 type MapLike = { [K: string]: any };
 type MapKeys = keyof MapLike;
 //=> string | number
@@ -36,7 +36,7 @@ type MapKeys = keyof MapLike;
 
 mapped typeに`keyof`を用いると、そのキーの型が返ります。
 
-```typescript
+```ts
 type MapLike = { [K in "x" | "y" | "z"]: any };
 type MapKeys = keyof MapLike;
 //=> "x" | "y" | "z"
@@ -44,14 +44,14 @@ type MapKeys = keyof MapLike;
 
 プロパティを持たないオブジェクト型に`keyof`を使うと`never`型が返ります。
 
-```typescript
+```ts
 type What = keyof {};
 //=> never
 ```
 
 `any`型に`keyof`を使うと`string | number | symbol`型が返ります。
 
-```typescript
+```ts
 type AnyKeys = keyof any;
 //=> string | number | symbol
 ```

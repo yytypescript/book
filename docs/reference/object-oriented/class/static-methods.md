@@ -34,7 +34,7 @@ SomeClass::doSomething();
 
 JavaScriptにはJavaのような静的メソッドの機能がありません。代わりに、クラスのプロパティに後から関数を代入することで似たようなことができます。
 
-```javascript title="JavaScript"
+```js title="JavaScript"
 class SomeClass {}
 SomeClass.doSomething = function () {
   // ...
@@ -44,7 +44,7 @@ SomeClass.doSomething();
 
 TypeScriptでは、Java風の静的メソッドの書き方ができるようになっています。TypeScriptで静的メソッドを宣言するにはstaticキーワードを用います。
 
-```typescript title="TypeScript"
+```ts title="TypeScript"
 class SomeClass {
   static doSomething() {
     // ...
@@ -58,7 +58,7 @@ SomeClass.doSomething();
 
 TypeScriptの静的メソッドはアクセス修飾子を組み合わせられます。
 
-```typescript
+```ts
 class SomeClass {
   private static doSomething() {
     // ...

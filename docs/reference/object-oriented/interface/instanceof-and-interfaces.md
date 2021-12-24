@@ -2,7 +2,7 @@
 
 インターフェースはTypeScriptで独自に定義された概念であり、JavaScriptには存在しません。つまりコンパイルをかけると消えてなくなります。そのため他の言語でできるような**その型が期待するインターフェースかどうか**の判定ができません。上記の`Student`インターフェースで次のようなことをしても実行することはできません。
 
-```typescript
+```ts
 if (studentA instanceof Student) {
   // ...
 }
@@ -11,7 +11,7 @@ if (studentA instanceof Student) {
 
 これを解消するためには型ガードを自前で実装する必要があります。以下はその例の`isStudent()`です。
 
-```typescript
+```ts
 type UnknownObject<T extends object> = {
   [P in keyof T]: unknown;
 };
@@ -52,7 +52,7 @@ Type predicateと呼ばれる機能です。専門に解説してあるページ
 
 `typeof`で判定される`object`型はオブジェクトではあるものの、プロパティが何も定義されていない状態です。そのためそのオブジェクトがどのようなプロパティを持っているかの検査すらできません。
 
-```typescript
+```ts
 const obj: object = {
   name: "花子",
 };
@@ -67,7 +67,7 @@ obj.name;
 
 インターフェースに変更が加わった時この関数も同時に更新されないとこの関係は崩れてしまいます。たとえば`student.name`は現在`string`型ですが、これが姓名の区別のために次のようなオブジェクトに差し替えられたとします。
 
-```typescript
+```ts
 interface Name {
   surname: string;
   givenName: string;

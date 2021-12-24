@@ -6,7 +6,7 @@ sidebar_label: タプル
 
 TypeScriptの関数は1値のみ返却可能です。戻り値に複数の値を返したい時に、配列に返したいすべての値を入れて返すことがあります。なお次の関数の戻り値は定数になっていますが、実際は演算した結果だと解釈してください。
 
-```typescript
+```ts
 function tuple() {
   //...
   return [1, "ok", true];
@@ -17,7 +17,7 @@ function tuple() {
 
 上記例では戻り値の型として何が妥当でしょうか。配列のページから読み進めていただいた方はなんでも入れられる型、ということで`any[]`または`unknown[]`が型の候補として思い浮かぶ人もいるかと思います。
 
-```typescript
+```ts
 const list: unknown[] = tuple();
 
 list[0].toString();
@@ -31,13 +31,13 @@ list[0].toString();
 
 タプルの型は簡単で`[]`を書いて中に型を書くだけです。つまり、上記関数`tuple()`は次のような戻り値を持っていると言えます。
 
-```typescript
+```ts
 const list: [number, string, boolean] = tuple();
 ```
 
 同様に関数の戻り値にも書くことができます。
 
-```typescript
+```ts
 function tuple(): [number, string, boolean] {
   //...
   return [1, "ok", true];
@@ -50,7 +50,7 @@ function tuple(): [number, string, boolean] {
 
 タプルを受けた変数はそのまま中の型が持っているプロパティ、メソッドを使用できます。
 
-```typescript
+```ts
 const list: [number, string, boolean] = tuple();
 
 list[0].toExponential();
@@ -60,7 +60,7 @@ list[2].valueOf();
 
 タプルを受けた変数は、タプルで定義した範囲外の要素に対してアクセスができません。
 
-```typescript
+```ts
 const list: [number, string, boolean] = tuple();
 
 list[5];
@@ -73,13 +73,13 @@ list[5];
 
 上記関数`tuple()`の戻り値は分割代入を使うと次のように受けることができます。
 
-```typescript
+```ts
 const [num, str, bool]: [number, string, boolean] = tuple();
 ```
 
 また、特定の戻り値だけが必要である場合は変数名を書かず`,`だけを書きます。
 
-```typescript
+```ts
 const [, , bool]: [number, string, boolean] = tuple();
 ```
 
@@ -92,14 +92,14 @@ TypeScriptで非同期プログラミングをする時に、時間のかかる�
 
 [ジェネリクス (generics)](/reference/generics)
 
-```typescript
+```ts
 const promise: Promise<number> = yyAsync();
 const num: number = await promise;
 ```
 
 たとえば次のような処理に時間が3秒、5秒かかる関数`takes3Seconds(), takes5Seconds()`があるとします。
 
-```typescript
+```ts
 async function takes3Seconds(): Promise<string> {
   // ...
   return "finished!";
@@ -113,14 +113,14 @@ async function takes5Seconds(): Promise<number> {
 
 この関数をそのまま実行すると3 + 5 = 8秒かかってしまいます。
 
-```typescript
+```ts
 const str: string = await takes3Seconds();
 const num: number = await takes5Seconds();
 ```
 
 これを`Promise.all()`を使うことで次のように書くことができます。このときかかる時間は関数の中でもっとも時間がかかる関数、つまり5秒です。
 
-```typescript
+```ts
 const tuple: [string, number] = await Promise.all([
   takes3Seconds(),
   takes5Seconds(),
@@ -129,7 +129,7 @@ const tuple: [string, number] = await Promise.all([
 
 このとき`Promise.all()`の戻り値を受けた変数`tuple`は`[string, number]`です。実行する関数の`Promise<T>`のジェネリクスの部分とタプルの型の順番は一致します。つまり次のように入れ替えたら、入れ変えた結果のタプルである`[number, string]`が得られます。
 
-```typescript
+```ts
 const tuple: [number, string] = await Promise.all([
   takes5Seconds(),
   takes3Seconds(),

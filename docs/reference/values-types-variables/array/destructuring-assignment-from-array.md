@@ -10,7 +10,7 @@ JavaScriptでは、配列から要素を取り出す方法のひとつに、`arr
 
 たとえば、`[1, 2, 3, 4, 5]`のような配列から、最初の3要素を取り出して変数に代入するには次のように書きます。
 
-```typescript twoslash
+```ts twoslash
 const oneToFive = [1, 2, 3, 4, 5];
 const [one, two, three] = oneToFive;
 console.log(one);
@@ -23,7 +23,7 @@ console.log(three);
 
 存在しない要素に対して分割代入した場合は、変数に`undefined`が代入されます。JavaScriptではこれはエラーになりません。
 
-```javascript twoslash
+```js twoslash
 const oneToFive = [1, 2];
 const [one, two, three] = oneToFive;
 console.log(three);
@@ -32,7 +32,7 @@ console.log(three);
 
 TypeScriptでは、分割代入された値の型は`T[]`の配列なら`T`型になります。たとえば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number`になります。
 
-```typescript
+```ts
 const oneToFive = [1, 2, 3, 4, 5];
 const [one, two, three] = oneToFive;
 const num: number = one; // oneはnumber型になるので代入できる
@@ -44,7 +44,7 @@ const num: number = one; // oneはnumber型になるので代入できる
 
 このオプション有効状態で、配列`T[]`から分割代入すると`T`型もしくはundefined型を示す`T | undefined`型になります。たとえば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number | undefined`になります。
 
-```typescript
+```ts
 const oneToFive = [1, 2, 3, 4, 5];
 const [one, two, three] = oneToFive;
 const num: number = one;
@@ -56,7 +56,7 @@ const num: number = one;
 
 JavaScriptの分割代入はフラットな配列だけでなく、ネストした入れ子構造の配列からも要素を抽出できます。ネストした要素の分割代入の書き方は、ネスト構造と一致するようにブラケット(`[ ]`)を重ねます。
 
-```typescript twoslash
+```ts twoslash
 const twoByTwo = [
   [1, 2],
   [3, 4],
@@ -74,7 +74,7 @@ console.log(three);
 
 配列の分割代入は先頭からでなく、途中の要素を取り出すこともできます。その場合、取り出さない要素の数だけカンマを書きます。
 
-```typescript twoslash
+```ts twoslash
 const oneToFive = [1, 2, 3, 4, 5];
 const [, , , four, five] = oneToFive;
 console.log(four);
@@ -87,7 +87,7 @@ console.log(five);
 
 JavaScriptの配列を分割代入するときに、残余パターン(`...`)を用いて、配列の残りの部分を取り出して変数に代入できます。
 
-```typescript twoslash
+```ts twoslash
 const oneToFive = [1, 2, 3, 4, 5];
 const [one, ...rest] = oneToFive;
 console.log(one);

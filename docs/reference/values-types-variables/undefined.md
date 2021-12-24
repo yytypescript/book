@@ -2,7 +2,7 @@
 
 JavaScriptのundefinedは未定義を表すプリミティブな値です。変数に値がセットされていないとき、戻り値が無い関数、オブジェクトに存在しないプロパティにアクセスしたとき、配列に存在しないインデックスでアクセスしたときなどに現れます。
 
-```javascript twoslash
+```js twoslash
 let name;
 console.log(name);
 // @log: undefined
@@ -28,7 +28,7 @@ JavaScriptでは同じプリミティブ型でも、論理型や数値型がリ�
 
 TypeScriptでundefined型の型注釈を行うには、`undefined`を用います。
 
-```typescript
+```ts
 const x: undefined = undefined;
 ```
 

@@ -8,7 +8,7 @@ JavaScriptの関数宣言と関数式の違いが現れるひとつの例は巻�
 
 まずは関数宣言の例を見てみましょう。次のコードは、3行目に`hello`関数の関数宣言があります。そして、その宣言の前で`hello`関数を実行しています。
 
-```javascript
+```js
 hello();
 
 function hello() {
@@ -20,7 +20,7 @@ function hello() {
 
 次に関数式の例を見てみましょう。下のコードは`hello`関数を関数式を使って定義するようにしたものです。
 
-```javascript
+```js
 hello();
 
 const hello = function () {
@@ -34,7 +34,7 @@ const hello = function () {
 
 TypeScriptでは、定義前の関数を呼び出そうとするとコンパイラーが指摘してくれます。
 
-```typescript twoslash
+```ts twoslash
 hello();
 // @errors: 2448 2454
 

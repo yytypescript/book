@@ -4,7 +4,7 @@ JavaScriptでは、プリミティブ型以外のものはすべてオブジェ�
 
 プリミティブ型は値が同じであれば、同一のものと判定できますが、オブジェクト型はプロパティの値が同じであっても、インスタンスが異なると同一のものとは判定されません。
 
-```javascript twoslash
+```js twoslash
 const value1 = 123;
 const value2 = 123;
 console.log(value1 == value2);

@@ -12,7 +12,7 @@ sidebar_label: 変数のスコープ
 
 グローバル変数は、グローバルオブジェクトのプロパティになります。ブラウザでは、`window`オブジェクトのプロパティになっていることになります。日付の`Date`クラスや、デバッグに使う`console`オブジェクトなどの組み込みAPIはすべて`window`オブジェクトのプロパティです。グローバル変数へのアクセスはwindowを省略して書くことができます。
 
-```javascript
+```js
 Date === window.Date; //=> true
 console === window.console; //=> true
 ```
@@ -29,7 +29,7 @@ console === window.console; //=> true
 
 関数スコープ(function scope)は、関数内でのみ参照できる範囲です。関数内で宣言された変数は、関数の外から参照できません。
 
-```javascript
+```js
 function func() {
   const variable = 123;
   return variable; // 参照できる
@@ -41,7 +41,7 @@ console.log(variable); // 参照できない
 
 レキシカルスコープ(lexical scope)変数とは、関数を定義した地点から参照できる、関数の外の変数を言います。
 
-```javascript twoslash
+```js twoslash
 const x = 100;
 
 function a() {
@@ -57,7 +57,7 @@ a();
 ブロックスコープ(block scope)は、ブレース`{ }`で囲まれた範囲だけ有効なスコープです。ブロックスコープ内の変数は、ブロックの外から参照できません。
 
 <!--prettier-ignore-->
-```javascript twoslash
+```js twoslash
 {
   const x = 100;
   console.log(x);
@@ -69,7 +69,7 @@ console.log(x); // xを参照できない
 
 ブロックスコープはif構文などのブレースにも作用します。条件分岐の中で変数宣言された変数は、条件分岐の外からは参照できないので注意しましょう。
 
-```javascript
+```js
 if (navigator.userAgent.includes("Firefox")) {
   const browser = "Firefox";
 } else {
@@ -80,7 +80,7 @@ console.log(browser); // 参照できずエラー
 
 上の例は、ブロックスコープの外で変数宣言するように書き換える必要があります。
 
-```javascript
+```js
 let browser;
 if (navigator.userAgent.includes("Firefox")) {
   browser = "Firefox";
@@ -94,7 +94,7 @@ console.log(browser); // OK
 
 JavaScriptではローカルスコープの変数に代入したつもりが、グローバル変数に代入してしまっていたといった事故が起こりえます。ローカル変数を宣言する場合は、`let`や`const`を用いますが、これを書き忘れた変数代入は、グローバル変数になってしまいます。
 
-```javascript twoslash
+```js twoslash
 function func() {
   foo = "ローカル変数のつもり";
 }
@@ -105,7 +105,7 @@ console.log(window.foo);
 
 JavaScriptで変数を扱う際は、誤ってグローバル変数を作ってしまわないよう注意が必要です。一方、TypeScriptでは変数宣言されていない変数に代入しようとすると、コンパイラが指摘してくれます。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 2304
 function func() {
   foo = "ローカル変数のつもり";

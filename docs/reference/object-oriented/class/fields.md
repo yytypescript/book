@@ -6,7 +6,7 @@ sidebar_label: フィールド
 
 JavaScriptでインスタンスにフィールドを持たせるには、インスタンス化したオブジェクトのプロパティに値を代入します。
 
-```javascript title="JavaScript"
+```js title="JavaScript"
 class Person {}
 const alice = new Person();
 alice.name = "Alice";
@@ -14,7 +14,7 @@ alice.name = "Alice";
 
 TypeScriptでは、これに加えてフィールドの型注釈を書く必要があります。
 
-```typescript title="TypeScript"
+```ts title="TypeScript"
 class Person {
   name: string;
 }
@@ -24,7 +24,7 @@ alice.name = "Alice";
 
 TypeScriptは、クラスの宣言に書かれていないフィールドへアクセスした場合、コンパイルエラーになります。
 
-```typescript title="TypeScript" twoslash
+```ts title="TypeScript" twoslash
 // @errors: 2339
 class Person {}
 const person = new Person();
@@ -33,7 +33,7 @@ console.log(person.age);
 
 フィールドは宣言時に型を省略した場合でもコンストラクタで値が代入される場合は、代入する値で型が推論されます。下の例ではコンストラクタで`string`の型の値を代入しているため`name`は`string`型となります。
 
-```typescript
+```ts
 class Person {
   private name;
 
@@ -47,7 +47,7 @@ class Person {
 
 TypeScriptのコンパイラーオプションで`strictNullChecks`と`strictPropertyInitialization`の両方が有効になっている場合、次の例の`name: string`の部分はコンパイルエラーとして指摘されます。なぜなら、`new Person`した直後は、`name`が`undefined`になるためです。
 
-```typescript twoslash
+```ts twoslash
 class Person {
   name: string;
 }
@@ -63,7 +63,7 @@ console.log(alice.name);
 
 この2つのコンパイラーオプションが有効な場合でもチェックを通るように書くには、nameフィールドの型注釈を`string | undefined`のようなユニオン型にする必要があります。
 
-```typescript twoslash
+```ts twoslash
 class Person {
   name: string | undefined;
 }
@@ -76,7 +76,7 @@ console.log(alice.name);
 
 フィールドへの値代入は、コンストラクタを用いて行えます。コンストラクタの中では、`this`を用いて値を代入したいフィールドにアクセスします。
 
-```typescript title="TypeScript"
+```ts title="TypeScript"
 class Person {
   name: string;
 
@@ -88,7 +88,7 @@ class Person {
 
 コンストラクタに引数を持たせれば、フィールドの値を動的に指定できるようにもできます。
 
-```typescript title="TypeScript"
+```ts title="TypeScript"
 class Person {
   name: string;
 

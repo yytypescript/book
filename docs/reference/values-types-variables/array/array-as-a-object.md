@@ -2,7 +2,7 @@
 
 JavaScriptの配列はオブジェクトであるため、配列の中身が同じでも、オブジェクトのインスタンスが異なると`==`では期待する比較ができないので注意が必要です。この点はPythonのリストと同じです。
 
-```javascript twoslash
+```js twoslash
 const list1 = [1, 2, 3];
 const list2 = [1, 2, 3];
 console.log(list1 == list2);
