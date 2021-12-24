@@ -60,7 +60,7 @@ type Sample = {
 };
 
 const sample: Sample = {
-  1: 'pork';
-  [Symbol('thick')]: 'thin';
+  1: "pork",
+  [Symbol("thick")]: "thin",
 };
 ```
