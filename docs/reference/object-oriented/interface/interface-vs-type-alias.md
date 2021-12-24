@@ -6,7 +6,7 @@ description: interfaceでの宣言と、type aliasによる宣言の違い
 
 型エイリアスを利用することで、インターフェースと同様の定義が行なえます。
 
-```typescript
+```ts
 type Animal = {
   name: string;
   bark(): string;
@@ -32,7 +32,7 @@ interface Animal {
 
 インターフェースは、インターフェースや型エイリアスを継承できます。
 
-```typescript
+```ts
 interface Animal {
   name: string;
 }
@@ -46,7 +46,7 @@ interface Dog extends Animal, Creature {
 
 一方、型エイリアスは継承は行なえません。代わりに交差型(&)を使用することで、継承と似たことを実現できます。
 
-```typescript
+```ts
 type Animal = {
   name: string,
 };
@@ -66,7 +66,7 @@ type Dog = Animal &
 
 インターフェースで継承の際にプロパティをオーバーライドした際には、継承元のプロパティの型が
 
-```typescript
+```ts
 // OK
 interface Animal {
   name: any;
@@ -113,7 +113,7 @@ interface B extends A {
 
 一方、型エイリアスの場合は上書きにはならず、フィールドの型の交差型が計算されます。また、交差型で矛盾があって計算できない場合もコンパイルエラーにはなりません。
 
-```typescript
+```ts
 type Animal = {
   name: number;
   price: {

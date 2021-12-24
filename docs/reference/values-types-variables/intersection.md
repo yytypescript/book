@@ -8,7 +8,7 @@ sidebar_label: インターセクション型
 
 インターセクション型を作るためには合成したいオブジェクト同士を`&`で列挙します。
 
-```typescript
+```ts
 type TwoDimensionalPoint = {
   x: number;
   y: number;
@@ -33,7 +33,7 @@ xy平面上の点を表す`TwoDimensionalPoint`を拡張してxyz平面上の点
 
 プリミティブ型のインターセクション型をつくることもできますが、作ると`never`という型ができます。
 
-```typescript
+```ts
 type Never = string & number;
 
 const n: Never = "2";
@@ -46,7 +46,7 @@ const n: Never = "2";
 
 システムの巨大化に伴い、受け付けたいパラメーターが巨大化したとします。
 
-```typescript
+```ts
 type Parameter = {
   id: string;
   index?: number;
@@ -72,7 +72,7 @@ type Parameter = {
 
 ### 必須とそうでないパラメータのタイプエイリアスに分離する
 
-```typescript
+```ts
 type Mandatory = {
   id: string;
   active: boolean;
@@ -96,7 +96,7 @@ type Optional = {
 
 `Mantatory`は`Required<T>`を、`Optional`は`Partial<T>`をつけます。
 
-```typescript
+```ts
 type Mandatory = Required<{
   id: string;
   active: boolean;
@@ -120,6 +120,6 @@ type Optional = Partial<{
 
 これで最初に定義した`Parameter`と同じタイプエイリアスができました。
 
-```typescript
+```ts
 type Parameter = Readonly<Mandatory & Optional>;
 ```

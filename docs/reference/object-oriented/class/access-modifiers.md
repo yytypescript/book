@@ -21,7 +21,7 @@ JavaやPHPなどの言語では、フィールドやメソッドに`private`, `p
 
 `public`アクセス修飾子はどこからもアクセス可能です。
 
-```typescript
+```ts
 class Animal {
   public name: string; // フィールドにpublicアクセス修飾子
 
@@ -40,7 +40,7 @@ class Animal {
 
 `gorilla`を実装し、動作を確認してみます。
 
-```typescript twoslash
+```ts twoslash
 class Animal {
   public name: string;
 
@@ -70,7 +70,7 @@ gorilla.move(20);
 
 `Animal`クラス`move`メソッドのアクセス修飾子を`public`から`protected`に変更しエラーを出してみます。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 2445
 class Animal {
   public name: string;
@@ -92,7 +92,7 @@ gorilla.move(10);
 
 `protected`で保護された`move()`メソッドを新たに実装し、10倍速く動くゴリラを作ってみます。
 
-```typescript twoslash
+```ts twoslash
 class Animal {
   public name: string;
   public constructor(theName: string) {
@@ -124,7 +124,7 @@ gorilla.move(10);
 
 `protected move()`を`private move()`に変更してみます。`private`に変更されたことにより`Gorilla`クラスの`super.move`にアクセスすることが許されずエラーとなります。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 2415 2341
 class Animal {
   public name: string;

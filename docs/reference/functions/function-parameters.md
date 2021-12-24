@@ -7,7 +7,7 @@ sidebar_label: 関数の引数
 関数の入力値である引数は特殊なことをしない限り、要求する型の変数を、要求する数だけ入力しなければいけません。
 たとえば原点との距離を求める次の関数があったとします。
 
-```typescript
+```ts
 function distance(p: Point): number {
   return (p.x ** 2 + p.y ** 2) ** (1 / 2);
 }
@@ -15,7 +15,7 @@ function distance(p: Point): number {
 
 なお、xy座標上の点を表すPointの定義は次のとおりです。
 
-```typescript
+```ts
 type Point = {
   x: number;
   y: number;
@@ -26,7 +26,7 @@ type Point = {
 
 ## 引数が少ない
 
-```typescript twoslash
+```ts twoslash
 declare function distance(p: number): number;
 
 // ---cut---
@@ -37,7 +37,7 @@ distance();
 
 ## 引数が多い
 
-```typescript twoslash
+```ts twoslash
 declare function distance(p: number): number;
 
 const q1 = 1;

@@ -6,7 +6,7 @@ sidebar_label: constアサーション「as const」
 
 オブジェクトリテラルの末尾に`as const`を記述すればプロパティが`readonly`でリテラルタイプで指定した物と同等の扱いになります。
 
-```typescript
+```ts
 const pikachu = {
   name: "pikachu",
   no: 25,
@@ -18,7 +18,7 @@ const pikachu = {
 
 代入はもちろんできません。
 
-```typescript
+```ts
 pikachu.name = "raichu";
 // Cannot assign to 'name' because it is a read-only property.
 ```
@@ -35,7 +35,7 @@ pikachu.name = "raichu";
 
 オブジェクトの中にオブジェクトがあるときの挙動が異なります。たとえば次のようなオブジェクトがあるとします。
 
-```typescript
+```ts
 type Country = {
   name: string;
   capitalCity: string;
@@ -67,7 +67,7 @@ const america: Continent = {
 
 ここで`Continent`のタイプエイリアスがもつプロパティはすべて`readonly`です。よって次のようなことはできません。
 
-```typescript
+```ts
 america.name = "African Continent";
 // Cannot assign to 'name' because it is a read-only property.
 america.canada = {
@@ -79,7 +79,7 @@ america.canada = {
 
 しかしながら、次のようなことは問題なくできてしまいます。
 
-```typescript
+```ts
 america.canada.name = "Republic of Côte d'Ivoire";
 america.canada.capitalCity = "Yamoussoukro";
 ```
@@ -90,7 +90,7 @@ america.canada.capitalCity = "Yamoussoukro";
 
 `as const`を付けます。
 
-```typescript
+```ts
 const america = {
   name: "North American Continent",
   canada: {
@@ -110,7 +110,7 @@ const america = {
 
 `readonly`と同様にトップレベルのプロパティへの代入はできません。
 
-```typescript
+```ts
 america.name = "African Continent";
 // Cannot assign to 'name' because it is a read-only property.
 america.canada = {
@@ -122,7 +122,7 @@ america.canada = {
 
 これだけではなくオブジェクトが持つプロパティも同様に`readonly`にしてくれます。
 
-```typescript
+```ts
 america.canada.name = "Republic of Côte d'Ivoire";
 // Cannot assign to 'name' because it is a read-only property.
 america.canada.capitalCity = "Yamoussoukro";

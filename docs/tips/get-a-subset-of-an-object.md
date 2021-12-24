@@ -6,7 +6,7 @@ description: オブジェクトから任意のプロパティのみを持った�
 
 オブジェクトのサブセットを得る方法です。サブセットとは、あるオブジェクトのいち部分を切り取ったもので、ここで紹介する方法は、プロパティ名を指定してオブジェクトの一部分を切り出すものです。たとえば、次のような数多くのプロパティを持つオブジェクトがあるとき、ここから数個のプロパティだけを持つオブジェクトを作る方法です。
 
-```typescript
+```ts
 const profile = {
   name: "suin",
   twitter: "suin",
@@ -35,7 +35,7 @@ const address = {
 
 オブジェクトのサブセットを得る1つ目の方法は、即時関数と分割代入、そして、shorthand property nameを組み合わせる方法です。
 
-```typescript
+```ts
 const sns = (({ twitter, github }) => ({ twitter, github }))(profile);
 //=> {
 //   "twitter": "suin",
@@ -55,7 +55,7 @@ const sns = (({ twitter, github }) => ({ twitter, github }))(profile);
 
 抽出したいプロパティよりも、除きたいプロパティのほうが少ない場合は、次のような書き方で除きたいプロパティを指定するほうが簡単です。
 
-```typescript
+```ts
 const address = (({ name, twitter, github, ...rest }) => rest)(profile);
 //=> {
 //   "country": "JP",
@@ -69,7 +69,7 @@ const address = (({ name, twitter, github, ...rest }) => rest)(profile);
 
 JavaScriptでは、`delete`を使うとオブジェクトからプロパティを取り除けるので、上の書き方はまどろっこしいと思われるかもしれません。この書き方をするには理由があって、TypeScriptでは`delete`の使い勝手が良くないからです。たとえば、`profile`オブジェクトから`name`プロパティを`delete`するコードを書いただけでは、「Property 'name' does not exist on type ...」といったコンパイルエラーが発生してしまうのです。
 
-```typescript
+```ts
 const address = { ...profile };
 delete address.name;
 // ERROR: Property 'name' does not exist on type '{ country: string; prefecture: string; city: string; address: string; buiding: string; zipcode: string; }'.(2339)
@@ -79,7 +79,7 @@ delete address.name;
 
 2つ目の方法は[lodash](https://lodash.com/)を用いるものです。lodashはさまざまな便利関数を提供するライブラリで、その中のひとつに`pick`というオブジェクトのサブセットを得るための関数があります。
 
-```typescript
+```ts
 import _ from "lodash";
 
 const sns = _.pick(profile, ["twitter", "github"]);
@@ -91,7 +91,7 @@ const sns = _.pick(profile, ["twitter", "github"]);
 
 lodash全体ではなく、`pick`関数だけが必要な場合は、パッケージ[lodash.pick](https://www.npmjs.com/package/lodash.pick)を使うこともできます。この場合、次のようにして`pick`関数を使います。
 
-```typescript
+```ts
 import pick from "lodash.pick";
 
 const sns = pick(profile, ["twitter", "github"]);
@@ -107,7 +107,7 @@ lodash.pickのメリットとデメリットは次のとおりです。
 
 lodash.pickは抽出したいプロパティ名を指定する関数ですが、抽出したいプロパティより除外したいプロパティが少ない場合は、[lodash.omit](https://www.npmjs.com/package/lodash.omit)を使ったほうが便利です。
 
-```typescript
+```ts
 import _ from "lodash";
 
 const address = _.omit(profile, ["name", "twitter", "github"]);

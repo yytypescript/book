@@ -105,7 +105,7 @@ console.log(window.foo);
 
 JavaScriptで変数を扱う際は、誤ってグローバル変数を作ってしまわないよう注意が必要です。一方、TypeScriptでは変数宣言されていない変数に代入しようとすると、コンパイラが指摘してくれます。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 2304
 function func() {
   foo = "ローカル変数のつもり";

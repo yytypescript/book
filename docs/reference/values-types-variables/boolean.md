@@ -19,7 +19,7 @@ const isOk = false;
 
 TypeScriptの論理型の型注釈は`boolean`を使います。
 
-```typescript
+```ts
 const isOk: boolean = true;
 ```
 

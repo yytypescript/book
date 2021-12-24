@@ -18,7 +18,7 @@ class Greeter {
 
 TypeScriptでは、メソッドの引数と戻り値に型注釈できます。
 
-```typescript
+```ts
 class Greeter {
   greet(name: string): string {
     return `Hello, ${name}!`;

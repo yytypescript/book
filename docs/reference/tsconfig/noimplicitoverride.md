@@ -15,7 +15,7 @@ description: メソッドオーバーライドにoverrideキーワードを必�
 
 たとえば、トグルボタン (クリックするとオン、オフを繰り返すボタン) のクラスが次のようになっているとします。
 
-```typescript
+```ts
 class ToggleButton {
   protected active: boolean;
 
@@ -49,7 +49,7 @@ class ToggleButton {
 
 ここで値のオンオフの切り替えを何回したかを数えられるサブクラス`ToggleCountButton`を考えます。すると`ToggleCountButton`は次のようになります。
 
-```typescript
+```ts
 class ToggleCountButton extends ToggleButton {
   private counter: number;
 
@@ -76,7 +76,7 @@ class ToggleCountButton extends ToggleButton {
 
 ここでスーパークラスの`ToggleButton`が「オンオフの切り替えにメソッドはふたつも要らない！セッターで十分だ」と変更されたとします。
 
-```typescript
+```ts
 class ToggleButton {
   protected active: boolean;
 

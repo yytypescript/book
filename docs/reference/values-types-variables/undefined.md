@@ -28,7 +28,7 @@ JavaScriptでは同じプリミティブ型でも、論理型や数値型がリ�
 
 TypeScriptでundefined型の型注釈を行うには、`undefined`を用います。
 
-```typescript
+```ts
 const x: undefined = undefined;
 ```
 

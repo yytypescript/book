@@ -17,13 +17,13 @@ JavaScript, TypeScript でコードベースで行われるマージは VCS の�
 
 オブジェクトを浅くコピーする知識を使います。おさらいとして浅いコピーはスプレッド構文を使えば次のように書くだけです。
 
-```typescript
+```ts
 const copied = { ...obj };
 ```
 
 オブジェクトのマージはマージしたいオブジェクトを引数のようにスプレッド構文で並べるだけでコピーができます
 
-```typescript
+```ts
 const merged = { ...obj1, ...obj2 };
 ```
 
@@ -31,7 +31,7 @@ const merged = { ...obj1, ...obj2 };
 
 オブジェクトのマージはふたつにとどまらず、何個でもオブジェクトをマージできます。
 
-```typescript
+```ts
 const merged = {
   ...obj1,
   ...obj2,
@@ -43,13 +43,13 @@ const merged = {
 浅いコピーのときもES2017で出力しましたのでこちらも併せて出力すると
 
 <!--prettier-ignore-->
-```typescript
+```ts
 const merged = Object.assign(Object.assign(Object.assign({}, obj1), obj2), obj3);
 ```
 
 とコンパイルされます。ちなみにこれは少々冗長で
 
-```typescript
+```ts
 const merged = Object.assign({}, obj1, obj2, obj3);
 ```
 
@@ -59,7 +59,7 @@ const merged = Object.assign({}, obj1, obj2, obj3);
 
 同名のキーがある場合、必ず最後に書かれているものが優先されます。値を消し込まないように注意してください。
 
-```typescript twoslash
+```ts twoslash
 const obj1: object = {
   firstName: "Otto",
   middleName: "von",

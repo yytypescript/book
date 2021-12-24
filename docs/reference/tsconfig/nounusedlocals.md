@@ -13,7 +13,7 @@ description: 使われていない変数を禁止する
 
 宣言したにもかかわらず使用されていない変数を禁止します。
 
-```typescript
+```ts
 function add(n1: number, n2: number): number {
   const message: string = `the sum is ${n1 + n2}`;
 

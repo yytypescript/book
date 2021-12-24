@@ -8,7 +8,7 @@ title: Set<T>
 
 `Set`オブジェクトを新たに作るには、`Set`クラスを`new`します。コンストラクタに配列を渡すと、値が`Set`に格納されます。
 
-```typescript twoslash
+```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
 console.log(fruits);
 // @log: Set { 'apple', 'orange', 'banana' }
@@ -16,7 +16,7 @@ console.log(fruits);
 
 コンストラクタに渡す配列の中に重複がある場合、重複した値は取り除かれます。
 
-```typescript twoslash
+```ts twoslash
 const fruits = new Set(["apple", "apple", "apple"]);
 console.log(fruits);
 // @log: Set { 'apple' }
@@ -24,7 +24,7 @@ console.log(fruits);
 
 コンストラクタ引数を省略した場合、空の`Set`オブジェクトが作られます。
 
-```typescript twoslash
+```ts twoslash
 const fruits = new Set();
 console.log(fruits);
 // @log: Set {}
@@ -32,7 +32,7 @@ console.log(fruits);
 
 空の`Set`オブジェクトのTypeScript上の型は`Set<unknown>`になります。これでは後から`Set`に値を追加できないので、空の`Set`を作るときは、`Set`の型変数を指定する必要があります。
 
-```typescript
+```ts
 const fruits = new Set<string>();
 //                    ^^^^^^^^ 型変数を指定
 ```
@@ -41,7 +41,7 @@ const fruits = new Set<string>();
 
 TypeScriptで`Set`の型注釈をする場合は、`Set<string>`のようにSet要素の型を型変数に指定します。
 
-```typescript
+```ts
 function doSomething(strings: Set<string>) {
   // ...
 }
@@ -53,7 +53,7 @@ function doSomething(strings: Set<string>) {
 
 `Set`に値を追加するには`add`メソッドを用います。同じ値は何度追加しても増えないようになっています。
 
-```typescript twoslash
+```ts twoslash
 const fruits = new Set<string>();
 fruits.add("apple");
 fruits.add("apple");
@@ -63,7 +63,7 @@ console.log(fruits);
 
 追加した値は最後に足されます。すでに存在する値は、追加されず順番は変わりません。
 
-```typescript twoslash
+```ts twoslash
 const numbers = new Set<number>();
 numbers.add(1).add(2).add(3);
 numbers.add(1);
@@ -75,7 +75,7 @@ console.log(numbers);
 
 `Set`から値を取り除くには、`delete`メソッドを使います。
 
-```typescript twoslash
+```ts twoslash
 const numbers = new Set([1, 2, 3]);
 numbers.delete(3);
 console.log(numbers);
@@ -86,7 +86,7 @@ console.log(numbers);
 
 `Set`に値が存在するかどうかは`has`メソッドで調べられます。
 
-```typescript twoslash
+```ts twoslash
 const numbers = new Set([1, 2, 3]);
 console.log(numbers.has(1));
 // @log: true
@@ -98,7 +98,7 @@ console.log(numbers.has(999));
 
 `Set`にいくつ値が登録されているかを調べるには、`size`フィールドの値を見ます。
 
-```typescript twoslash
+```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
 console.log(fruits.size);
 // @log: 3
@@ -108,7 +108,7 @@ console.log(fruits.size);
 
 `Set`に登録された値をすべて削除するには`clear`メソッドを使います。
 
-```typescript twoslash
+```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
 fruits.clear();
 console.log(fruits);
@@ -119,7 +119,7 @@ console.log(fruits);
 
 `Set`オブジェクトはfor-of構文でループできます。
 
-```typescript
+```ts
 const fruits = new Set(["apple", "orange", "banana"]);
 
 for (const fruit of fruits) {
@@ -133,7 +133,7 @@ for (const fruit of fruits) {
 
 `Set`オブジェクトを配列に変換するには、スプレッド構文を用います。
 
-```typescript twoslash
+```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
 const array = [...fruits];
 console.log(array);
@@ -146,7 +146,7 @@ console.log(array);
 
 `Set`オブジェクトは`JSON.stringify`にかけても、`Set`に登録されている値はJSONになりません。
 
-```typescript twoslash
+```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
 console.log(JSON.stringify(fruits));
 // @log: "{}"
@@ -154,7 +154,7 @@ console.log(JSON.stringify(fruits));
 
 SetオブジェクトのデータをJSON化したい場合は、一度配列にするなどひと手間必要です。
 
-```typescript twoslash
+```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
 const array = [...fruits];
 console.log(JSON.stringify(array));

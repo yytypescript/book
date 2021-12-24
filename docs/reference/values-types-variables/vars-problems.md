@@ -34,7 +34,7 @@ function test() {
 
 `let`と`const`では、同名の変数宣言はエラーになるようになっています。
 
-```typescript twoslash
+```ts twoslash
 let x = 1;
 let x = 2;
 // @error: SyntaxError: Identifier 'x' has already been declared
@@ -59,7 +59,7 @@ console.log(window.innerWidth);
 
 `let`や`const`はグローバルなスコープで定義されることはないため、`window`オブジェクトのプロパティを不用意に上書きする心配はありません。
 
-```typescript twoslash
+```ts twoslash
 const innerWidth = 10;
 console.log(window.innerWidth);
 // @log: 500
@@ -72,7 +72,7 @@ console.log(window.innerWidth);
 
 JavaScriptで宣言された変数はスコープの先頭で変数が生成されます。これは**変数の巻き上げ**と呼ばれています。`var`で宣言された変数は、スコープの先頭で生成されて`undefined`で値が初期化されます。次の例では`greeting`変数への参照はエラーとならずに`undefined`となります。
 
-```typescript twoslash
+```ts twoslash
 console.log(greeting);
 // @log: undefined
 var greeting = "こんにちは";
@@ -90,7 +90,7 @@ greeting = "こんにちは";
 
 `let`と`const`では、宣言前の変数を参照すると`Reference Error`が発生します。
 
-```typescript twoslash
+```ts twoslash
 console.log(x);
 // @errors: 2448 2454
 let x = 1;
@@ -106,7 +106,7 @@ const y = 2;
 
 次の例では`let`や`const`で変数の巻き上げが発生しないなら`console.log(x)`の評価のタイミングで関数の先頭で宣言されている`var x = 1`が参照されて`1`が出力されるはずです。しかし、実際は`let`で宣言された変数`x`がブロックスコープ内で初期化されていない状態で生成されるため、未初期化の`x`を参照してReference Errorが発生します。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 2448 2454
 function output() {
   var x = 1;
@@ -124,7 +124,7 @@ output();
 JavaScript では`var`で宣言された変数のスコープは関数となるため、`{}`の中で変数宣言をしても最初に定義した変数`x`は上書きされます。
 
 <!--prettier-ignore-->
-```typescript twoslash
+```ts twoslash
 function print() {
   var x = 1;
   if (true) {
@@ -140,7 +140,7 @@ function print() {
 `let`と`const`のスコープはブロックスコープです。次の例は`var`では変数`x`が上書きされていましたが、ここではブロックスコープ内で異なる変数として別々に定義されています。
 
 <!--prettier-ignore-->
-```typescript twoslash
+```ts twoslash
 function print() {
   const x = 1;
   if (true) {

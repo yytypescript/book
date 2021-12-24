@@ -6,7 +6,7 @@ sidebar_label: アサーション関数
 
 やりたいことはほぼType predicateと同じです。Type predicateは`boolean`型の戻り値に対して使いましたがこちらは例外を投げるかどうかで判定します。上記関数`isDuck()`をAssertion functionsで書きかえると次のようになります。
 
-```typescript
+```ts
 function isDuck(animal: Animal): asserts animal is Duck {
   if (walksLikeDuck(animal)) {
     if (quacksLikeDuck(animal)) {

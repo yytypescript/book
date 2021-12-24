@@ -12,14 +12,14 @@ TypeScriptコンパイラーはコードをヒントに型を推論してくれ�
 
 型アサーションの書き方は2つあります。1つはas構文です。
 
-```typescript
+```ts
 const value: string | number = "this is a string";
 const strLength: number = (value as string).length;
 ```
 
 もう1つはアングルブランケット構文(angle-bracket syntax)です。
 
-```typescript
+```ts
 const value: string | number = "this is a string";
 const strLength: number = (<string>value).length;
 ```
@@ -30,7 +30,7 @@ const strLength: number = (<string>value).length;
 
 型アサーションを使えば制限なく型の情報を上書きできるかというとそうではありません。たとえば、`number`型を`string`型にする型アサーションはコンパイルエラーになります。
 
-```typescript
+```ts
 const num = 123;
 const str: string = num as string;
 //                  ^^^^^^^^^^^^^ コンパイルエラー
@@ -46,7 +46,7 @@ const str: string = num as string;
 
 それでも自分の書いた型アサーションが正しいという場合は、`unknown`型を経由することで上のようなエラーを出さないようにもできます。
 
-```typescript
+```ts
 const num = 123;
 const str: string = num as unknown as string; // OK
 ```
@@ -73,7 +73,7 @@ const str: string = num as unknown as string; // OK
 
 型注釈は、コンパイラーに「この変数に代入できるのはこの型だよ」と伝えるものです。コンパイラーは型注釈をヒントに、その型に値が代入可能かどうかをチェックし、代入できないことが分かり次第報告してきます。
 
-```typescript
+```ts
 let value: number;
 //         ^^^^^^ 型注釈
 ```

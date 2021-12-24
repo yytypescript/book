@@ -17,7 +17,7 @@ title: "Extract<T, U>"
 
 ## Extractの使用例
 
-```typescript
+```ts
 type Grade = "A" | "B" | "C" | "D" | "E";
 type FailGrade = Extract<Grade, "D" | "E">;
 //=> "D" | "E"
@@ -25,7 +25,7 @@ type FailGrade = Extract<Grade, "D" | "E">;
 
 Extractは2つのユニオン型の共通部分を導き出すことにも使えます。
 
-```typescript
+```ts
 type CommonTypes = Extract<"a" | "b" | "c", "b" | "c" | "d">;
 // "b" | "c"
 ```

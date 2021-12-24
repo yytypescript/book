@@ -34,7 +34,7 @@ const hello = function () {
 
 TypeScriptでは、定義前の関数を呼び出そうとするとコンパイラーが指摘してくれます。
 
-```typescript twoslash
+```ts twoslash
 hello();
 // @errors: 2448 2454
 
