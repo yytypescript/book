@@ -73,7 +73,7 @@ function distance(p1: Point, p2?: Point): number {
 `p2`の型が`Point | undefined`として解釈されるのなら、あえて`?`などという記号を新しく定義する必要などないのではと思われるかもしれませんが、明確な違いがあります。それは**呼び出し側で省略できるかどうかということ**です。上記のとおりオプション引数は省略が可能なのですが、`undefined`とのユニオン型であることを明記すると省略ができません。
 
 ```typescript
-function distance(p1: Point, p2: Point | undefined): number
+function distance(p1: Point, p2: Point | undefined): number {
   // ...
 }
 
