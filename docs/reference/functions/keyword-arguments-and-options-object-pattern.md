@@ -131,9 +131,9 @@ function findUsers(country, city, ageMin, ageMax, order, sort);
 Options Objectパターンを用いれば、呼び出し元コードを壊さずに、追加引数を適切な位置に足せます。変更前の関数の実装と、その呼び出しコードは次のようになります。
 
 ```javascript
-function findUsers({country, city, order, sort}) {}
+function findUsers({ country, city, order, sort }) {}
 
-findUsers({ country: "JP", city: "Tokyo", order: "id", sort: "asc");
+findUsers({ country: "JP", city: "Tokyo", order: "id", sort: "asc" });
 ```
 
 これに年齢範囲を追加した場合、関数定義の引数の位置はふさわしいところに置けます。
