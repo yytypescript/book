@@ -4,7 +4,7 @@
 
 JavaScriptの関数は値です。つまり、PHPのような他の言語と比べると特別扱いの度合いが少ないです。たとえば、関数を変数に代入することができます。
 
-```javascript
+```js
 function hello() {
   return "Hello World";
 }
@@ -16,7 +16,7 @@ helloWorld(); // 関数呼び出しも問題なくできる
 
 また、JavaScriptでは定義済みの関数と同じ名前の関数を宣言することができます。これはエラーにはなりません。これは実質、再代入のような振る舞いになります。
 
-```javascript twoslash
+```js twoslash
 function hello() {
   return "HELLO";
 }
@@ -34,7 +34,7 @@ hello();
 
 JavaScriptで関数の再代入によるバグを未然に回避したい場合は、`const`と関数式を組み合わせます。関数式については後述します。
 
-```javascript
+```js
 const hello = function () {
   return "HELLO";
 };
@@ -46,7 +46,7 @@ const hello = function () {
 
 関数は値なので、関数名のスコープも変数と同じようにスコープの概念があります。たとえば、関数スコープの中で定義された関数は、そのローカルスコープでのみ使うことができます。
 
-```javascript twoslash
+```js twoslash
 function main() {
   // ローカルスコープの関数
   function hello() {

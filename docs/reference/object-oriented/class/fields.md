@@ -6,7 +6,7 @@ sidebar_label: フィールド
 
 JavaScriptでインスタンスにフィールドを持たせるには、インスタンス化したオブジェクトのプロパティに値を代入します。
 
-```javascript title="JavaScript"
+```js title="JavaScript"
 class Person {}
 const alice = new Person();
 alice.name = "Alice";

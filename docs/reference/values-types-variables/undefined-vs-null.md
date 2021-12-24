@@ -16,7 +16,7 @@ undefinedとnullには言語の仕様上の違いがあります。これは意�
 
 undefinedは言語仕様上、プログラマーが明示的に使わなくても、自然に発生してくるものです。たとえば、変数を宣言したときに初期値がなければJavaScriptはその変数にundefinedを代入します。
 
-```javascript twoslash
+```js twoslash
 let value;
 console.log(value);
 // @log: undefined
@@ -24,7 +24,7 @@ console.log(value);
 
 オブジェクトに存在しないプロパティや配列にない要素にアクセスしたときも、自動的にundefinedになります。
 
-```javascript twoslash
+```js twoslash
 const obj = {};
 console.log(obj.foo);
 // @log: undefined
@@ -35,7 +35,7 @@ console.log(arr[0]);
 
 戻り値がない関数の戻り値を取得したときもundefinedになります。
 
-```javascript twoslash
+```js twoslash
 function func() {}
 console.log(func());
 // @log: undefined
@@ -51,7 +51,7 @@ undefinedもnullもプリミティブ型の値という点は共通していま�
 
 typeof演算子の結果がundefinedとnullで変わってきます。undefinedはtypeofの結果がプリミティブ名を指す"undefined"になるのに対し、nullは"null"ではなく"object"になります。
 
-```javascript twoslash
+```js twoslash
 typeof undefined;
 // @log: "undefined"
 typeof null;
@@ -62,7 +62,7 @@ typeof null;
 
 オブジェクトプロパティの値にundefinedを用いたとき、そのオブジェクトをJSON.stringifyでJSON化したときに、オブジェクトプロパティは削除されます。一方、プロパティの値がnullのときは、JSON化したときに値が保持されます。
 
-```javascript twoslash
+```js twoslash
 console.log(JSON.stringify({ foo: undefined }));
 // @log: {}
 console.log(JSON.stringify({ foo: null }));

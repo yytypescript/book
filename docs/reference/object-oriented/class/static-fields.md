@@ -29,7 +29,7 @@ var_dump(SomeClass::$field); //=> int(123)
 
 JavaScriptにはJavaのような静的フィールドの機能がありません。代わりに、クラスのプロパティに後から値を代入することで似たようなことができます。
 
-```javascript title="JavaScript" twoslash
+```js title="JavaScript" twoslash
 class SomeClass {}
 SomeClass.field = 123;
 console.log(SomeClass.field);

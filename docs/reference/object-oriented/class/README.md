@@ -7,13 +7,13 @@ slug: /reference/object-oriented/class
 
 クラスはオブジェクトの雛形を定義したもので、JavaScriptとTypeScriptでは`class`構文を用いてクラスが定義できます。
 
-```javascript
+```js
 class Person {}
 ```
 
 クラスに対して`new`キーワードを使うと、オブジェクトを生成できます。
 
-```javascript
+```js
 const person = new Person();
 ```
 

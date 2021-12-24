@@ -43,7 +43,7 @@ tsc -d
 
 sample.tsではInterfaceを使っていますが、JavaScriptにはInterfaceの概念がないため関数のみになりました。また引数の型情報もなくなります。
 
-```javascript title="sample.js"
+```js title="sample.js"
 function greeter(person) {
   return "Hello, " + person.firstName + " " + person.lastName;
 }

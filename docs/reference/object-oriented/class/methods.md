@@ -6,7 +6,7 @@ sidebar_label: メソッド
 
 JavaScriptのクラスにメソッドを実装するには、メソッド構文を用います。
 
-```javascript
+```js
 class Greeter {
   greet(name) {
     return `Hello, ${name}!`;

@@ -167,7 +167,7 @@ console.log(JSON.stringify(array));
 
 「`Set`に渡した値は重複しない」という特性を使って、配列から値が重複する要素を取り除く処理に応用できます。
 
-```javascript twoslash
+```js twoslash
 const array1 = [0, 0, 1, 1, 2, 2];
 const array2 = [...new Set(array1)];
 console.log(array2);

@@ -42,7 +42,7 @@ class ConstructorOutAccessModifier {
 
 コンパイル後のJavaScriptファイルを見てみると同一の機能を持つことが確認することができます。
 
-```javascript title="example.js"
+```js title="example.js"
 class ConstructorInAccessModifier {
   constructor(arg0, arg1, arg2, arg3) {
     this.arg1 = arg1;

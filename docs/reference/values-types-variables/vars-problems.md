@@ -6,13 +6,13 @@
 
 `var`次のように書くことで変数を宣言できます。
 
-```javascript
+```js
 var name = "taro";
 ```
 
 初期値を省略した変数宣言もできます。その場合の変数値は`undefined`です。
 
-```javascript
+```js
 var name;
 ```
 
@@ -24,7 +24,7 @@ var name;
 
 `var`の変数宣言では同じ変数名で宣言をした場合にエラーとならずに、後から宣言された変数が有効となります。これは思いがけず既存の変数を書き換えてしましい、意図しない結果を出力する可能性があります。
 
-```javascript
+```js
 function test() {
   var x = 1;
   var x = 2;
@@ -51,7 +51,7 @@ const y = 2;
 
 たとえば、ブラウザ上で`innerWidth`変数をグローバル変数として定義してしまうと、標準APIの`window.innerWidth`が上書きされるため、ブラウザの幅を変更しても常に同じ値が返ってくるようになってしまいます。
 
-```javascript twoslash
+```js twoslash
 var innerWidth = 10;
 console.log(window.innerWidth);
 // @log: 10

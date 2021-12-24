@@ -34,7 +34,7 @@ SomeClass::doSomething();
 
 JavaScriptにはJavaのような静的メソッドの機能がありません。代わりに、クラスのプロパティに後から関数を代入することで似たようなことができます。
 
-```javascript title="JavaScript"
+```js title="JavaScript"
 class SomeClass {}
 SomeClass.doSomething = function () {
   // ...

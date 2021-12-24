@@ -6,7 +6,7 @@ sidebar_label: コンストラクタ
 
 コンストラクタはクラスをnewしたときに実行される関数です。コンストラクタは、インスタンスプロパティの初期化する処理を実装する場所です。JavaScriptのコンストラクタは、constructor構文で書きます。
 
-```javascript
+```js
 class Person {
   constructor(name) {
     // ...
@@ -32,7 +32,7 @@ class Person {
 
 JavaScriptでコンストラクタに引数を渡す方法は、関数呼び出しの書き方とほぼ同じです。違いはnew演算子をつけることです。
 
-```javascript
+```js
 new Person("Alice");
 ```
 

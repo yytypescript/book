@@ -23,7 +23,7 @@ console.log(three);
 
 存在しない要素に対して分割代入した場合は、変数に`undefined`が代入されます。JavaScriptではこれはエラーになりません。
 
-```javascript twoslash
+```js twoslash
 const oneToFive = [1, 2];
 const [one, two, three] = oneToFive;
 console.log(three);

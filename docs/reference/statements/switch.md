@@ -2,7 +2,7 @@
 
 switch構文はJavaScriptで条件分岐を行うための構文です。
 
-```javascript
+```js
 switch (条件) {
   case 値A:
     値Aの処理;
@@ -18,7 +18,7 @@ switch (条件) {
 
 switch文を使った例は次です。
 
-```javascript twoslash
+```js twoslash
 const extension = "ts";
 switch (extension) {
   case "js":
@@ -36,7 +36,7 @@ switch (extension) {
 
 このコードはif-elseで書き直すと次のようになります。
 
-```javascript twoslash
+```js twoslash
 const extension = "ts";
 if (extension === "js") {
   console.log("JavaScript");
@@ -50,7 +50,7 @@ if (extension === "js") {
 
 caseは連続して書くこともできます。
 
-```javascript twoslash
+```js twoslash
 const food = "🍙";
 switch (food) {
   case "🍎":

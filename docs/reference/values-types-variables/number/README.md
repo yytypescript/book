@@ -12,7 +12,7 @@ JavaScriptの数値型は、1や-1などの整数と0.1などの小数を含め�
 JavaScriptの数値リテラルは次のように数値を見たままに書きます。
 
 <!--prettier-ignore-->
-```javascript
+```js
 123 // 整数
 -123 // 整数(負の数)
 20.315 // 小数
@@ -21,7 +21,7 @@ JavaScriptの数値リテラルは次のように数値を見たままに書き�
 小数は小数点ではじめる書き方もできます。また、整数も小数点で終わる書き方もできます。
 
 <!--prettier-ignore-->
-```javascript
+```js
 0.1 === .1
 5.0 === 5.
 ```
@@ -42,7 +42,7 @@ JavaScriptの数値リテラルは次のように数値を見たままに書き�
 JavaScriptの数値リテラルは可読性のためにアンダースコアで区切って書けます。何桁ごとに区切るかは自由です。表したい値や、国と地域の慣習などに合わせて選択できます。
 
 <!--prettier-ignore-->
-```javascript
+```js
 100_000_000 // 1億
 ```
 
@@ -67,7 +67,7 @@ JavaScriptの数値リテラルのプロパティを直接参照する場合、�
 これを回避するには、ドットを2つ続けるか、数値をカッコで囲む必要があります。
 
 <!--prettier-ignore-->
-```javascript
+```js
 5..toString();
 (5).toString();
 ```
@@ -94,7 +94,7 @@ JavaScriptの数値型には、`NaN`と`Infinity`という特殊な値があり�
 
 `NaN`は非数(not-a-number)を表す変数です。JavaScriptでは、処理の結果、数値にならない場合に`NaN`を返すことがあります。たとえば、文字列を数値に変換する`parseInt`関数は、数値化できない入力に対し、`NaN`を返します。
 
-```javascript twoslash
+```js twoslash
 const price = parseInt("百円");
 console.log(price);
 // @log: NaN
@@ -102,7 +102,7 @@ console.log(price);
 
 値が`NaN`であるかのチェックは`Number.isNaN`を用います。
 
-```javascript
+```js
 const price = parseInt("百円");
 if (Number.isNaN(price)) {
   console.log("数値化できません");
@@ -111,7 +111,7 @@ if (Number.isNaN(price)) {
 
 `NaN`は特殊で、等号比較では常に`false`になるので注意してください。
 
-```javascript twoslash
+```js twoslash
 console.log(NaN == NaN);
 // @log: false
 console.log(NaN === NaN);

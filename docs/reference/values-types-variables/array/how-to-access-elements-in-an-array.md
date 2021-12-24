@@ -4,7 +4,7 @@
 
 JavaScriptの配列の要素にアクセスするにはブラケット`[]`を使います。ブラケットにはアクセスする要素のインデックス番号を書きます。インデックス番号は0始まりです。たとえば、`abc = ["a", "b", "c"]`の1つ目の要素にアクセスするには、`abc[0]`と書きます。
 
-```javascript twoslash
+```js twoslash
 const abc = ["a", "b", "c"];
 console.log(abc[0]);
 // @log: "a"
@@ -12,7 +12,7 @@ console.log(abc[0]);
 
 JavaScriptの配列では、存在しないインデックス番号でもアクセスできます。その場合でも、JavaScriptではエラーになりません。得られる値は`undefined`になります。
 
-```javascript twoslash
+```js twoslash
 const abc = ["a", "b", "c"];
 console.log(abc[100]);
 // @log: undefined

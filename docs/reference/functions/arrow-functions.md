@@ -6,7 +6,7 @@ sidebar_label: アロー関数
 
 JavaScriptの関数は関数式に加えて、もうひとつの書き方があります。それがアロー関数(arrow function)です。
 
-```javascript
+```js
 // 関数式
 const hello = function (name) {
   return `Hello, ${name}!`;
@@ -21,7 +21,7 @@ const hello = (name) => {
 アロー関数は関数式に比べて短く書けるのが特徴的です。引数が1つだけの場合は、引数のカッコが省略できます。
 
 <!--prettier-ignore-->
-```javascript
+```js
 const hello = name => {
   return `Hello, ${name}!`;
 };
@@ -30,7 +30,7 @@ const hello = name => {
 さらに、関数内のコードが式1つだけの場合は、ブレースと`return`が省略できます。
 
 <!--prettier-ignore-->
-```javascript
+```js
 const hello = name => `Hello, ${name}!`;
 ```
 

@@ -2,7 +2,7 @@
 
 JavaScriptで配列をループするのに使えるのがfor-of構文です。PHPの`foreach`やPythonの`for in`と使い勝手が似ている構文です。
 
-```javascript
+```js
 for (変数 of 配列) {
   文;
 }
@@ -10,7 +10,7 @@ for (変数 of 配列) {
 
 次の例は、配列`[1, 2, 3]`をループして順番に`1`、`2`、`3`を出力するものです。
 
-```javascript
+```js
 const numbers = [1, 2, 3];
 for (const n of numbers) {
   console.log(n);
@@ -21,7 +21,7 @@ for (const n of numbers) {
 
 JavaScriptで、for-ofで配列のインデックスと値を一緒に得るには、`entries`メソッドを組み合わせます。
 
-```javascript twoslash
+```js twoslash
 const words = ["I", "love", "TypeScript"];
 for (const [index, word] of words.entries()) {
   console.log(index, word);

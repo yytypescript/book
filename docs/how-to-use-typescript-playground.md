@@ -142,7 +142,7 @@ export function add(a: number, b: number) {
 
 Playground の初期設定では`module: 'esnext'`が選択されているので、次の出力結果になります。
 
-```javascript
+```js
 export function add(a, b) {
   return a + b;
 }
@@ -150,7 +150,7 @@ export function add(a, b) {
 
 `TS Config`タブを開き`Module`の設定を`CommonJS`に変更をしてみます。TS Config の設定が変更されて`CommonJS`形式で出力される JavaScript のコードを確認することができます。
 
-```javascript
+```js
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.add = void 0;
