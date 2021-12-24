@@ -88,7 +88,7 @@ interface Serializable<T extends string | number = bigint> {
 
 この例は`string | number`型に制約しているにもかかわらず、デフォルト型引数に`bigint`型を指定しています。そのため制約を満足することができずTypeScriptから指摘を受けます。
 
-```typescript
+```text
 TS2344: Type 'bigint' does not satisfy the constraint 'string | number'.
 ```
 
@@ -128,6 +128,6 @@ class Aubergine<A = B, B, C = B> {
 }
 ```
 
-```typescript
+```text
 TS2744: Type parameter defaults can only reference previously declared type parameters.
 ```

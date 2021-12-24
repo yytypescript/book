@@ -120,14 +120,12 @@ Node.jsのバージョンごとにサポートされているEcmaScriptの機能
 
 ### バックエンドの場合
 
-```javascript
+```json
 {
   "compilerOptions": {
     "target": "es2020",
     "module": "commonjs",
-    "lib": [
-      "es2020"
-    ],
+    "lib": ["es2020"],
     "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./src",
@@ -140,28 +138,20 @@ Node.jsのバージョンごとにサポートされているEcmaScriptの機能
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ],
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules"],
   "compileOnSave": false
 }
 ```
 
 ### フロントエンドの場合
 
-```javascript
+```json
 {
   "compilerOptions": {
     "target": "es2020",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "jsx": "react",
     "sourceMap": true,
     "outDir": "./dist",
@@ -175,13 +165,8 @@ Node.jsのバージョンごとにサポートされているEcmaScriptの機能
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ],
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules"],
   "compileOnSave": false
 }
 ```

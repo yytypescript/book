@@ -71,7 +71,7 @@ distance(q1, 5, undefined, 8);
 
 オーバーロードを定義しておくことで意図する引数と戻り値の組み合わせを定義できるようになります。上記引数はオーバーロードの定義によりTypeScriptから指摘を受けます。
 
-```typescript
+```text
 Argument of type 'Point' is not assignable to parameter of type 'number'.
 ```
 
