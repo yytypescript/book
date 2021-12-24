@@ -41,7 +41,7 @@ function distance(p1: Point, p2: Point = p0): number {
 
 ```typescript
 function distance(p1: Point, p2?: Point): number {
-  if (typeof p2 === "undefined")) {
+  if (typeof p2 === "undefined") {
     return (p1.x ** 2 + p1.y ** 2) ** (1 / 2);
   }
 
