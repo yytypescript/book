@@ -14,7 +14,7 @@ const x = null;
 
 TypeScriptでnull型を型注釈するには`null`を用います。
 
-```typescript
+```ts
 const x: null = null;
 ```
 

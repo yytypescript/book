@@ -22,7 +22,7 @@ tscコマンドに`-d`オプションをつけてコンパイルを行うとJava
 
 次のTypeScriptファイル(sample.ts)を`-d`オプションを付けてコンパイルしてみます。
 
-```typescript title="sample.ts"
+```ts title="sample.ts"
 interface Person {
   firstName: string;
   lastName: string;
@@ -54,7 +54,7 @@ function greeter(person) {
 
 定義情報のみ記載されたファイルが出力されます。
 
-```typescript title="sample.d.ts"
+```ts title="sample.d.ts"
 interface Person {
   firstName: string;
   lastName: string;

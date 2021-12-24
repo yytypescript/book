@@ -25,7 +25,7 @@ JavaScriptやTypeScriptのコードには`?.`のような記号や`as`のよう�
 
 値がnullやundefinedでないことを宣言し、コンパイラーに値を非Nullとして解釈させます。
 
-```typescript
+```ts
 function firstChar(text: string | undefined) {
   // コンパイルエラーにならない
   return text!.charAt(0);
@@ -36,7 +36,7 @@ function firstChar(text: string | undefined) {
 
 クラスのプロパティが型アノテーションで示された型でセットされていることをコンパイラーに伝える記号です。
 
-```typescript
+```ts
 class Example {
   public foo!: number;
 }
@@ -44,7 +44,7 @@ class Example {
 
 または、変数の値が型アノテーションで示された型でセットされていることをコンパイラーに伝える記号です。
 
-```typescript
+```ts
 let numbers!: number[];
 ```
 
@@ -134,7 +134,7 @@ console.log(a & b);
 
 複数の型を組み合わせたインターセクション型を定義します。
 
-```typescript
+```ts
 interface Swordsman {
   sword: string;
 }
@@ -265,7 +265,7 @@ Number型に変換します。
 
 何も指定しない場合は暗黙的に`+`が付与されるので`+`を実際に利用する機会はおそらくありません。
 
-```typescript
+```ts
 type MyPartial<T> = {
   [k in keyof T]+?: T[k];
 };
@@ -325,7 +325,7 @@ const data = {
 
 複数の要素を持つタプル型を宣言するときに用いる記号です。
 
-```typescript
+```ts
 type Tuple = [number, string, boolean];
 ```
 
@@ -357,7 +357,7 @@ console.log(a);
 
 `readonly`や`?`などの修飾子を削除します。
 
-```typescript
+```ts
 type MyRequired<T> = {
   [k in keyof T]-?: T[k];
 };
@@ -499,13 +499,13 @@ const object = { a: 1, b: 2, c: 3, d: 4 };
 
 変数の型アノテーションに用いられる記号です。
 
-```typescript
+```ts
 const variable: number = 20;
 ```
 
 または、関数の引数や戻り値の型アノテーションに用いられる記号です。
 
-```typescript
+```ts
 function numberToString(x: number): string {
   return x.toString();
 }
@@ -519,7 +519,7 @@ function numberToString(x: number): string {
 
 ジェネリクスの型引数の開始に用いられる記号です。
 
-```typescript
+```ts
 function func1<T>(x: T) {}
 const result = func<string>("hello");
 ```
@@ -530,7 +530,7 @@ const result = func<string>("hello");
 
 JSXと呼ばれるXMLリテラルの開始に現れる記号です。
 
-```typescript title="Hello.tsx"
+```ts title="Hello.tsx"
 function Hello() {
   return <div>HELLO</div>;
 }
@@ -540,7 +540,7 @@ function Hello() {
 
 型アサーションに用いられる記号です。`as`の別の書き方です。
 
-```typescript
+```ts
 let someValue: unknown = "this is a string";
 let strLength: number = (<string>someValue).length;
 ```
@@ -658,7 +658,7 @@ console.log(a >>> b);
 
 オブジェクトのプロパティを任意プロパティとして定義します。
 
-```typescript
+```ts
 interface User {
   name: string;
   // name は必須
@@ -670,7 +670,7 @@ const user: User = { name: "taro" };
 
 または、関数の引数を必須ではなくします。
 
-```typescript
+```ts
 function func(x?: number) {}
 func();
 // xがなくてもOK
@@ -759,7 +759,7 @@ func([1, 2, 3]);
 
 インデックス型(index signature)の開始に用いられる記号です。
 
-```typescript
+```ts
 type StringKeysAndStringValues = {
   [key: string]: string;
 };
@@ -771,7 +771,7 @@ type StringKeysAndStringValues = {
 
 配列型を表現するのに用いられる記号です。
 
-```typescript
+```ts
 let names: string[];
 type FooList = Foo[];
 ```
@@ -887,7 +887,7 @@ console.log((a | b) === 0b111);
 
 複数の型を組み合わせたユニオン型を定義します。
 
-```typescript
+```ts
 type ID = string | number;
 const id1 = "e29b41"; // OK
 const id2 = 100; // OK
@@ -1003,7 +1003,7 @@ type MappedType = {
 
 型ガードに用いる型アサーション関数の戻り値の型アノテーション部分に用いられるキーワードです。
 
-```typescript
+```ts
 function isDuck(animal: Animal): animal is Duck {}
 ```
 
@@ -1069,7 +1069,7 @@ console.log(void 123);
 
 戻り値が`undefined`あるいはない場合に使用します。
 
-```typescript
+```ts
 function returnUndefined(num: number): void {
   if (num === 0) {
     return undefined;

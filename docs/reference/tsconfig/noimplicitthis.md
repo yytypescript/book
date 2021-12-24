@@ -17,7 +17,7 @@ tags: [strict]
 
 たとえば、対角線の長さを求める関数`lengthOfDiagonal()`を考えます。(横, 縦)を (width, height) とすれば関数は次のようになります。
 
-```typescript
+```ts
 function lengthOfDiagonal(): number {
   return (this.width ** 2 + this.height ** 2) ** (1 / 2);
 }
@@ -25,7 +25,7 @@ function lengthOfDiagonal(): number {
 
 これを`width, height`をプロパティに持つオブジェクトのインスタンスに代入すれば対角線の長さを計算できます。
 
-```typescript twoslash
+```ts twoslash
 declare function lengthOfDiagonal(): number;
 
 // ---cut---
@@ -41,7 +41,7 @@ console.log(area.diagonal());
 
 このとき、打ち間違いで`width`を`witch`としてしまったとするとこの関数は意図した結果を返さなくなります。
 
-```typescript twoslash
+```ts twoslash
 declare function lengthOfDiagonal(): number;
 
 // ---cut---
@@ -72,7 +72,7 @@ return ((this.width ** 2) + (this.height ** 2)) ** (1/2);
 
 [this引数 (this parameter)](../functions/this-parameters.md)
 
-```typescript
+```ts
 type Area = {
   width: number;
   height: number;

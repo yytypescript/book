@@ -18,7 +18,7 @@ class Person {
 
 TypeScriptでコンストラクタ引数の型注釈は、関数の型注釈のやり方と同じです。
 
-```typescript
+```ts
 class Person {
   constructor(name: string) {
     // ...

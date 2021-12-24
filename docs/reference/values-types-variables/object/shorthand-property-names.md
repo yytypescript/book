@@ -2,7 +2,7 @@
 
 オブジェクトのキーと変数名が同じ時にかぎり、オブジェクトに値を代入するときも同様にShorthand property namesを使うことができます。これも分割代入と調べると情報を得られることがあります。次の例がほぼすべてです。
 
-```typescript
+```ts
 const name: string = "pikachu";
 const no: number = 25;
 const genre: string = "mouse pokémon";
@@ -20,7 +20,7 @@ const pikachu: Wild = {
 
 要するにこちらの省略型です。
 
-```typescript
+```ts
 const pikachu: Wild = {
   name: name,
   no: no,
@@ -32,6 +32,6 @@ const pikachu: Wild = {
 
 もちろん一行で書くこともできます。
 
-```typescript
+```ts
 const pikachu: Wild = { name, no, genre, height, weight };
 ```

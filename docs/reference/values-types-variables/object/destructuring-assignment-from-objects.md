@@ -10,7 +10,7 @@ sidebar_label: オブジェクトの分割代入
 
 あるタイプエイリアス`Wild`があったとします(上述のものと同一です)。
 
-```typescript
+```ts
 type Wild = {
   name: string;
   no: number;
@@ -22,7 +22,7 @@ type Wild = {
 
 この`Wild`を変数で受けたあと`name`と`no`と`genre`だけを使いたい時、かつては次のようにする必要がありました。
 
-```typescript
+```ts
 const pokemon: Wild = safari();
 
 const name: string = pokemon.name;
@@ -36,7 +36,7 @@ const genre: string = pokemon.genre;
 
 分割代入は、オブジェクトを返す関数などの戻り値に直接オブジェクト自体を書くような方式で使います。たとえば上記の例だとこのようになります。
 
-```typescript
+```ts
 const { name, no, genre }: Wild = safari();
 ```
 
@@ -46,7 +46,7 @@ const { name, no, genre }: Wild = safari();
 
 オブジェクトの中のオブジェクト、つまりネストした状態でも問題なく使うことができます。先ほど出てきた次の例で考えます。
 
-```typescript
+```ts
 type Country = {
   name: string;
   capitalCity: string;
@@ -62,7 +62,7 @@ type Continent = {
 
 このような分割代入をすることができます。
 
-```typescript
+```ts
 const {
   name,
   canada: { name },
@@ -77,7 +77,7 @@ const {
 
 分割代入はプロパティの名前をそのまま継ながなければならないかというとそうではありません。好きな名前に変更することができます。先ほどの`name`が重複してしまった例は次のように書き直せます。
 
-```typescript
+```ts
 const {
   name: continentName,
   canada: { name: canadaName },

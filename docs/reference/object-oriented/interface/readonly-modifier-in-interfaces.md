@@ -2,7 +2,7 @@
 
 TypeScriptのインターフェースでは、フィールドにreadonly修飾子をつけることで読み取り専用のフィールドが定義できます。
 
-```typescript
+```ts
 interface SomeInterface {
   readonly field: number;
 }

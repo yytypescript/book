@@ -4,7 +4,7 @@
 
 あるメッセージが言語ごとに定義されているとします。
 
-```typescript
+```ts
 const conf = {
   en: "Are you sure?",
   fr: "Êtes-vous sûr?",
@@ -16,7 +16,7 @@ const conf = {
 
 内容は確認を促す変哲もないシステムのメッセージです。このオブジェクトを使ってシステムがサポートしている言語の一覧を作ります。次のようなユニオン型が今回の目的です。
 
-```typescript
+```ts
 type Language = "en" | "fr" | "es" | "ja" | "zh";
 ```
 
@@ -28,7 +28,7 @@ type Language = "en" | "fr" | "es" | "ja" | "zh";
 
 この例で実行すれば次のような型`TypeOfLanguage`が生成されるでしょう (型名は便宜的なものです) 。
 
-```typescript
+```ts
 type TypeOfLanguage = typeof conf;
 // ->
 // {
@@ -46,7 +46,7 @@ type TypeOfLanguage = typeof conf;
 
 `keyof`はオブジェクトの型に使うとそのオブジェクトのキーをユニオン型にして返します。上記の`TypeOfLanguage`型があれば
 
-```typescript
+```ts
 type Language = keyof TypeOfLanguage;
 // -> 'en' | 'fr' | 'es' | 'ja' | 'zh';
 ```
@@ -59,7 +59,7 @@ type Language = keyof TypeOfLanguage;
 
 見た目が少々いびつですが、次でオブジェクトから希望するキーのユニオン型を生成できます。
 
-```typescript
+```ts
 type Language = keyof typeof conf;
 ```
 

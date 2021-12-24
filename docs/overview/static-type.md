@@ -45,7 +45,7 @@ print(minus("two"))
 
 では、静的型付け言語にはどのような特徴があるのでしょうか？先ほどPythonで示した`minus()`関数を静的型付け言語であるTypeScriptで書いてみましょう。
 
-```typescript
+```ts
 function minus(x: number) {
   return x - 1;
 }
@@ -55,7 +55,7 @@ function minus(x: number) {
 
 この変数`x`に`string`型の`"two"`を代入してコンパイルしてみるとどうなるでしょうか？
 
-```typescript
+```ts
 minus("two");
 ```
 

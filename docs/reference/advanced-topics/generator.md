@@ -6,7 +6,7 @@ sidebar_label: ジェネレーター
 
 Generatorを使用した関数はアロー関数での表記ではなく、必ず`function*() {}`と書く必要があります。次は可能なGeneratorの記述方法です。
 
-```typescript
+```ts
 function* generatorFunction1() {
   // ...
 }

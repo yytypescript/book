@@ -48,7 +48,7 @@ function func(...params, param1) {}
 
 TypeScriptで残余引数に型注釈するには、配列の型を書きます。たとえば、残余引数が数値型なら、`number[]`のように書きます。
 
-```typescript
+```ts
 function func(...params: number[]) {
   // ...
 }
@@ -65,7 +65,7 @@ Math.max(1, 10, 100);
 
 残余引数は、引数受取時には配列になりますが、関数呼び出しのときにひとつの配列にまとめて渡すことはできません。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 2345
 const scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const highest = Math.max(scores);
@@ -73,7 +73,7 @@ const highest = Math.max(scores);
 
 このように配列を直接渡してしまうと、`max`の関数内では引数ひとつの`number[][]`型が渡されたと解釈されます。`max`の期待する余剰引数の型は`number[]`型なので、このコードは正しく動きません。配列を余剰引数に渡す場合は、スプレッド構文(spread syntax)を用います。スプレッド構文は`...`と書きます。
 
-```typescript
+```ts
 const scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const highest = Math.max(...scores);
 ```

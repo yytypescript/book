@@ -104,7 +104,7 @@ incompatible types: Request cannot be converted to File
 
 以下はTypeScriptでの紹介です。
 
-```typescript
+```ts
 class InputSource {
   public fetch(): Data {
     throw new Error("Please implement InputSource and override this method");
@@ -146,7 +146,7 @@ class Request extends InputSource {
 
 こちらも同様にリスコフの置換原則が成立するのでスーパークラスの変数でサブクラスを受けることができます。
 
-```typescript
+```ts
 const source1: InputSource = new File("/data/~~~.txt");
 const source2: InputSource = new Request("https://~~~~");
 
@@ -156,7 +156,7 @@ const data2: Data = source2.fetch();
 
 次に、先ほどと同じように結果を受ける変数の型をお互いのサブクラスに変更します。
 
-```typescript
+```ts
 const source3: Request = new File("/data/~~~.txt");
 const source4: File = new Request("https://~~~~");
 
@@ -166,7 +166,7 @@ const data4: Data = source4.fetch();
 
 するとこれはエラーが出ることなく実行できます。これが構造的部分型の大きな特徴で、File, Requestのシグネチャが同じために可換になります。
 
-```typescript
+```ts
 interface IInputSource {
   destination: string;
 
@@ -180,7 +180,7 @@ File, Requestは共にこのIInputSourceのようなインターフェースで�
 
 今回の例は共に同じスーパークラスを持つサブクラスの話でしたが、実はこれは**スーパークラスが異なっていても起こりえます**。スーパークラスのInputSourceを上記TypeScriptの例から抹消してしまっても同様にこのコードは動作します。
 
-```typescript
+```ts
 class File {
   public destination: string;
 

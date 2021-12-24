@@ -2,7 +2,7 @@
 
 `any, unknown`型はどのような値も代入できます。
 
-```typescript
+```ts
 const any1: any = null;
 const any2: any = undefined;
 const any3: any = true;
@@ -30,7 +30,7 @@ const unknown6: unknown = {
 
 `any`型に代入したオブジェクトのプロパティ、メソッドは使用することができます。
 
-```typescript twoskash
+```ts twoskash
 console.log(any4.toFixed());
 // @log: 1
 console.log(any5.length);
@@ -41,7 +41,7 @@ console.log(any6.name);
 
 一方、`unknown`型に代入したオブジェクトのプロパティ、メソッドは使用することができません。使用できないどころか、実行することができません。
 
-```typescript twoslash
+```ts twoslash
 const unknown4: unknown = 0.8;
 const unknown5: unknown = "Comment allez-vous";
 const unknown6: unknown = {
@@ -63,7 +63,7 @@ console.log(unknown6.name);
 
 `any`型に関しては、次のような無茶なコードもTypeScriptは一切関与せず、実行してみてプログラムが実行時エラーになる、初めてこのプログラムが不完全であることがわかります。
 
-```typescript twoslash
+```ts twoslash
 const any6: any = {
   x: 0,
   y: 1,
@@ -77,7 +77,7 @@ console.log(any6.x.y.z);
 
 `unknown`型は一貫してTypeScriptがプロパティ、メソッドへのアクセスを行わせません。そのため実行することができず、意図しないランタイム時のエラーを防止します。
 
-```typescript twoslash
+```ts twoslash
 const unknown6: unknown = {
   x: 0,
   y: 1,

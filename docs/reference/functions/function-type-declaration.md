@@ -8,19 +8,19 @@ sidebar_label: 関数の型定義
 
 ページの初めに登場した関数`increment()`では関数の型はこのようになります。
 
-```typescript
+```ts
 (num: number) => number;
 ```
 
 これは匿名かつアロー関数と少々宣言が異なります。厳密には戻り値の位置が異なります。匿名かつアロー関数は、実体を除けば次の形をしています。
 
-```typescript
+```ts
 (num: number): number => {...};
 ```
 
 オブジェクト風の書き方もあります。
 
-```typescript
+```ts
 type Increment = {
   (num: number): number;
 };

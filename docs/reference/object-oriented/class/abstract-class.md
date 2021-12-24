@@ -10,7 +10,7 @@ JavaやPHPなどの言語では、`abstract`修飾子を使って抽象クラス
 
 `Food`クラスに抽象クラスに変更し、"要冷蔵"メソッド`keepRefrigerated()`を抽象メソッドとして追加すると`Meat`クラスでエラーが発生します。これは`Meat`クラスに`keepRefrigerated`メソッドが実装されていないからです。
 
-```typescript twoslash
+```ts twoslash
 // @errors: 2515
 abstract class Food {
   constructor(protected name: string, protected calorie: number) {}
@@ -26,7 +26,7 @@ class Meat extends Food {}
 
 `keepRefrigerated()`メソッドを実装することによりエラーはなくなります。
 
-```typescript
+```ts
 class Meat extends Food {
   keepRefrigerated(): boolean {
     return true;

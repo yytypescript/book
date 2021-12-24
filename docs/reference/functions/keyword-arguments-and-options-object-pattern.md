@@ -56,7 +56,7 @@ function func({ x, y, z }) {
 
 TypeScriptでOptions Objectパターンを使うときには、引数の型注釈が必要になります。型注釈はオブジェクト型を書きます。
 
-```typescript
+```ts
 function func({ x, y, z }: { x: number; y: number; z: number }) {
   // ...
 }
@@ -64,7 +64,7 @@ function func({ x, y, z }: { x: number; y: number; z: number }) {
 
 オブジェクト型の記述が長すぎる場合には、TypeScriptの型エイリアス(type alias)を用いて、引数の型を分けて書くと可読性が良くなります。
 
-```typescript
+```ts
 type Options = {
   x: number;
   y: number;
@@ -200,7 +200,7 @@ func({ hoge: 123 });
 
 TypeScriptでOptions Objectにデフォルト引数をもたせたい場合は、引数名のところにデフォルト値を書いた上で、オブジェクト型の型注釈にてオプションプロパティを指定する`?`を書きます。
 
-```typescript twoslash
+```ts twoslash
 function func({ x, y = 0, z = 0 }: { x: number; y?: number; z?: number }) {
   console.log(x, y, z);
 }
@@ -213,7 +213,7 @@ func({ x: 1, y: undefined });
 
 TypeScriptでOptions Object自体を渡さなくても関数を呼び出せるようにするには、Options Objectのデフォルト値として空のオブジェクト`{}`を指定するとできます。
 
-```typescript twoslash
+```ts twoslash
 type Options = {
   x?: number;
   y?: number;

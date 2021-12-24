@@ -17,20 +17,20 @@ title: "Exclude<T, U>"
 
 ## Excludeの使用例
 
-```typescript
+```ts
 type Grade = "A" | "B" | "C" | "D" | "E";
 type PassGrade = Exclude<Grade, "E">;
 ```
 
 上のPassGradeは次の型と同じになります。
 
-```typescript
+```ts
 type PassGrade = "A" | "B" | "C" | "D";
 ```
 
 `Exclude`の第2引数をユニオン型にすると、複数の型を取り除くこともできます。
 
-```typescript
+```ts
 type Grade = "A" | "B" | "C" | "D" | "E";
 type PassGrade = Exclude<Grade, "D" | "E">;
 //=> "A" | "B" | "C"
@@ -40,7 +40,7 @@ type PassGrade = Exclude<Grade, "D" | "E">;
 
 `U`は`T`の部分集合である制限がありません。つまり、`T`に存在しない型を`U`に入れてしまったり、タイポなどに気をつけなければいけません。次の例は、Pull Requestに関する型と解釈してください。
 
-```typescript
+```ts
 type PullRequestState = "draft" | "reviewed" | "rejected";
 type MergeableState = Exclude<PullRequestState, "draft" | "rejected">;
 //=> "reviewed"
@@ -52,7 +52,7 @@ type MergeableState = Exclude<PullRequestState, "draft" | "rejected">;
 
 `PullRequestState`に`testFailed`という`MergeableState`に含めたくない状態を追加したとします。するとこの修正に伴って`MergeableState`の第2引数も同時に修正しないといけません。これを忘れると`testFailed`は`MergeableState`に含まれてしまいます。
 
-```typescript
+```ts
 type PullRequestState = "draft" | "reviewed" | "rejected" | "testFailed";
 type MergeableState = Exclude<PullRequestState, "draft" | "rejected">;
 //=> "reviewed" | "testFailed"
@@ -62,7 +62,7 @@ type MergeableState = Exclude<PullRequestState, "draft" | "rejected">;
 
 `PullRequestState`の`draft`を`open`に変更しました。この場合も、`Exclude`の第2引数の修正を忘れると`MergeableState`に`open`が含まれてしまいます。
 
-```typescript
+```ts
 type PullRequestState = "open" | "reviewed" | "rejected";
 type MergeableState = Exclude<PullRequestState, "draft" | "rejected">;
 //=> "open" | "reviewed"

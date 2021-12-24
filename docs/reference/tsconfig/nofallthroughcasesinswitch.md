@@ -13,7 +13,7 @@ description: switch文のfallthroughを禁止する
 
 `fallthrough`とは`switch`でにおける`case`文で`break`または`return`を行わないことを意味します。`case`文が空でない場合に限り`break`や`return`が行われているかを厳密に評価します。
 
-```typescript
+```ts
 function daysOfMonth(month: number): number {
   let days: number = 31;
 

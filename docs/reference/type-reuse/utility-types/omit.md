@@ -17,7 +17,7 @@ title: "Omit<T, Keys>"
 
 ## Omitの使用例
 
-```typescript
+```ts
 type User = {
   surname: string;
   middleName?: string;
@@ -34,7 +34,7 @@ type Person = Omit<User, Optional>;
 
 上の`Person`型は次の型と同じになります。
 
-```typescript
+```ts
 type Person = {
   surname: string;
   middleName?: string;
@@ -46,7 +46,7 @@ type Person = {
 
 `Omit<T, Keys>`の`Keys`に`T`には無いプロパティキーを指定しても、TypeScriptコンパイラーは指摘しません。たとえば、`Keys`にタイポがあっても検出できないので注意が必要です。
 
-```typescript
+```ts
 type User = {
   surname: string;
   middleName?: string;

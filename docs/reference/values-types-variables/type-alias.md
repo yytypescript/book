@@ -10,13 +10,13 @@ TypeScriptでは、型に名前をつけられます。名前のついた型を�
 
 型エイリアスを宣言するには`type`キーワードを使います。次の例は、`string | number`型に`StringOrNumber`という型名を名付けたものです。
 
-```typescript
+```ts
 type StringOrNumber = string | number;
 ```
 
 型エイリアスは、`string`などのビルトインの型と同様に、変数や引数、戻り値の型注釈などで使えます。
 
-```typescript
+```ts
 const value: StringOrNumber = 123;
 ```
 
@@ -24,7 +24,7 @@ const value: StringOrNumber = 123;
 
 型エイリアスはさまざまな型に名前をつけられます。型エイリアスの一例を次に示します。
 
-```typescript
+```ts
 // プリミティブ型
 type String = string;
 // リテラル型

@@ -10,7 +10,7 @@ JavaScript の配列ではスプレッド構文「...」を使うことで、要
 
 ある配列に要素を追加して新しい配列を作成する場合に、スプレッド構文を使買わない場合は次のようなコードを書く必要があります。
 
-```typescript
+```ts
 const arr = [1, 2, 3];
 const arr2 = [];
 for (const item of arr) {
@@ -21,14 +21,14 @@ arr2.push(4);
 
 スプレッド構文を使用することで、上の実装は次のように簡単に書き直すことができます。
 
-```typescript
+```ts
 const arr = [1, 2, 3];
 const arr2 = [...arr, 4];
 ```
 
 スプレッド構文は配列リテラルの好きな位置に記述できるので、要素と要素の間に他の配列を挿入することもできます。
 
-```typescript twoslash
+```ts twoslash
 const arr = [1, 2, 3];
 const arr2 = [0, ...arr, 4];
 ```
@@ -37,7 +37,7 @@ const arr2 = [0, ...arr, 4];
 
 配列のコピーも簡単に書けます。
 
-```typescript
+```ts
 const arr = [1, 2, 3];
 const arr2 = [...arr];
 ```
@@ -46,7 +46,7 @@ const arr2 = [...arr];
 
 配列の連結もスプレッド構文を使用して簡単に書けます。
 
-```typescript twoslash
+```ts twoslash
 const arr = [1, 2, 3];
 const arr2 = [4, 5, 6];
 

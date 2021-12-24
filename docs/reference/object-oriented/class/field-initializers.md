@@ -6,7 +6,7 @@ sidebar_label: フィールドの初期化子
 
 TypeScriptでは、初期化子(initializer)を使うとインスタンスのフィールドの初期値を指定できます。初期化子はフィールド名の右に`= 値`と書きます。初期化子は、クラスがインスタンス化されるときに自動的に実行されます。
 
-```typescript twoslash
+```ts twoslash
 class Point {
   x: number = 0;
   y: number = 0;
@@ -18,7 +18,7 @@ console.log(point.x, point.y);
 
 初期化子を用いた上の例は、次のコンストラクタでフィールドを初期化するのと同じ意味です。
 
-```typescript
+```ts
 class Point {
   x: number;
   y: number;
@@ -34,7 +34,7 @@ class Point {
 
 初期化子で値の型が自明な場合、TypeScriptコンパイラーはフィールドの型を推論してくれます。そのため、初期化子を伴うフィールドは型注釈を省略できます。
 
-```typescript
+```ts
 class Point {
   x = 0; // number型と型推論される
 }

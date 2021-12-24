@@ -15,7 +15,7 @@ description: インデックス型のプロパティ参照に[]を必須にす�
 
 ドット記法とインデックス記法についてですが、次のようにあるオブジェクトがあるとしてドット(`.`)でプロパティアクセスをしているものがドット記法、ブラケット(`[]`)でアクセスをしているものがインデックス記法です。
 
-```typescript
+```ts
 type SystemTerms = {
   en: string;
   [key: string]: string;
@@ -36,7 +36,7 @@ butterfly["en"];
 
 `SystemTerms`は`noUncheckedIndexedAccess`にて登場した型と同じものでシステムにおける単語、用語のうち英語は担保し他言語の存在は曖昧なものにしています。
 
-```typescript twoslash
+```ts twoslash
 type SystemTerms = {
   en: string;
   [key: string]: string;
