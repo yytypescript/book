@@ -110,13 +110,13 @@ type Point = {
 
 const q1: Point = {
   x: 0,
-  y: 0;
+  y: 0,
 };
 
 const q2: Point = {
   x: 0,
-  y: 0;
-}
+  y: 0,
+};
 
 // ---cut---
 const p0: Point = {
@@ -131,7 +131,7 @@ function distance(p1: Point = p0, p2: Point): number {
 distance(q1, q2);
 distance(undefined, q2);
 distance(null, q2);
-// @errors: 2345 1005
+// @errors: 2345
 ```
 
 ## デフォルト引数でできないこと
