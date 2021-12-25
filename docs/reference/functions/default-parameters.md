@@ -138,10 +138,17 @@ distance(null, q2);
 
 関数をデフォルト引数として使うときは非同期の関数を使うことができません。詳細は先のページにあるため詳しい説明は譲りますが次のようなデフォルト引数はできません。なお`inverseAsync()`は非同期関数とします。
 
-```ts
-async function distanceAync(
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+declare function inverseAsync(point: Point): Promise<Point>;
+// ---cut---
+// @errors: 2524
+async function distanceAsync(
   p1: Point,
-  p2: Point = await inverseAync(p1)
+  p2: Point = await inverseAsync(p1)
 ): Promise<number> {
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
