@@ -1,4 +1,4 @@
-# any vs unknown
+# anyとunknownの違い
 
 `any, unknown`型はどのような値も代入できます。
 
