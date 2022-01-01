@@ -68,7 +68,7 @@ console.log(addresses.get("太郎"));
 
 `Promise`オブジェクトについての説明は本書より詳細な記載がありますので、そちらをご参照ください。
 
-TODO: Promiseへリンクする
+[非同期処理:コールバック/Promise/Async Function · JavaScript Primer #jsprimer](https://jsprimer.net/basic/async/)
 
 ### 標準ライブラリの型定義の参照方法
 
