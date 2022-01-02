@@ -4,7 +4,7 @@ sidebar_label: オブジェクト型のオプションプロパティ
 
 # オブジェクト型のオプションプロパティ (optional property)
 
-TypeScriptで、オブジェクトプロパティのオプショナルさを型付けするには、プロパティ名の後ろに`?`を書きます。
+TypeScriptで、オブジェクトプロパティのオプショナルを型付けするには、プロパティ名の後ろに`?`を書きます。
 
 ```ts twoslash
 let size: { width?: number };
