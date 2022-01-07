@@ -93,6 +93,16 @@ const tsconfigForTwoslash = require(__dirname + "/tsconfig.twoslash.json");
               ],
             },
             {
+              title: "ユーティリティ",
+              items: [
+                { label: "記号とキーワード", to: "/symbols-and-keywords" },
+                {
+                  label: "TypeScript解読アシスタント",
+                  to: "/code-reading-assistant",
+                },
+              ],
+            },
+            {
               title: "執筆に参加したい方",
               items: [
                 { label: "概要", to: "/writing" },
@@ -148,6 +158,7 @@ const tsconfigForTwoslash = require(__dirname + "/tsconfig.twoslash.json");
       locales: ["ja"],
     },
     plugins: [
+      "./src/components/codeReadingAssistant/docusaurusPlugin.js",
       // [require.resolve("docusaurus-lunr-search"), { languages: ["ja", "ja"] }],
       // [
       //   require.resolve("@cmfcmf/docusaurus-search-local"),

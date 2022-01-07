@@ -86,7 +86,7 @@ export default function DocItemFooter(props: Props): JSX.Element | null {
       className={clsx(ThemeClassNames.docs.docFooter, "docusaurus-mt-lg")}
     >
       {canDisplayTagsRow && <TagsRow tags={tags} />}
-      <OtherActions {...{ permalink }} />
+      {permalink && <OtherActions permalink={permalink} />}
     </footer>
   );
 }

@@ -54,6 +54,7 @@ export default function DocItem(props: Props): JSX.Element {
       <div className="row">
         <div
           className={clsx("col", {
+            // @ts-expect-error
             [styles.docItemCol]: !hideTableOfContents,
           })}
         >

@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from "react";
 import Head from "@docusaurus/Head";
 import { useTitleFormatter } from "@docusaurus/theme-common";
 import { useBaseUrlUtils } from "@docusaurus/useBaseUrl";
+import { getOgpImageUrl } from "@site/src/theme/Seo/getOgpImageUrl";
 
 import type { Props } from "@theme/Seo";
+import React from "react";
 
 export default function Seo({
   title,
@@ -23,7 +24,9 @@ export default function Seo({
   const { withBaseUrl } = useBaseUrlUtils();
   const pageImage = image
     ? withBaseUrl(image, { absolute: true })
-    : getOgpImageUrl(title);
+    : typeof title === "string"
+    ? getOgpImageUrl(title)
+    : undefined;
   return (
     <Head>
       {title && <title>{pageTitle}</title>}
@@ -53,10 +56,4 @@ export default function Seo({
       {children}
     </Head>
   );
-}
-
-function getOgpImageUrl(title: string): string {
-  return `https://tsbook-og-image.vercel.app/${encodeURIComponent(
-    title
-  )}.png?pattern=cross&md=0&fontSize=75px&textColor=%23ffffff&textStrongColor=%238340BB&overlay=https%3A%2F%2Fraw.githubusercontent.com%2Fyytypescript%2Fog-image%2Fmain%2Fpublic%2Fogp-overlay.svg`;
 }

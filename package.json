@@ -20,20 +20,12 @@
     "serve": "docusaurus serve",
     "start": "docusaurus start",
     "swizzle": "docusaurus swizzle",
+    "test": "jest",
     "textlint": "npx textlint 'docs/**/*.md'",
     "textlint:fix": "npx textlint --fix 'docs/**/*.md'",
     "typecheck": "tsc",
     "write-heading-ids": "docusaurus write-heading-ids",
     "write-translations": "docusaurus write-translations"
-  },
-  "lint-staged": {
-    "*.md": [
-      "markdownlint --fix",
-      "prettier --write",
-      "markdownlint",
-      "textlint"
-    ],
-    "*.{js,jsx,ts,tsx,json,json5,css,scss,graphql,gql,html,vue,yaml}": "prettier --write"
   },
   "browserslist": {
     "production": [
@@ -49,35 +41,45 @@
   },
   "dependencies": {
     "@cmfcmf/docusaurus-search-local": "^0.9.0",
-    "@docusaurus/core": "2.0.0-beta.13",
-    "@docusaurus/preset-classic": "2.0.0-beta.13",
+    "@docusaurus/core": "2.0.0-beta.14",
+    "@docusaurus/preset-classic": "2.0.0-beta.14",
     "@mdx-js/react": "^1.6.22",
     "@svgr/webpack": "^5.5.0",
     "clsx": "^1.1.1",
     "docusaurus-preset-shiki-twoslash": "^1.1.33",
     "file-loader": "^6.2.0",
+    "js-base64": "^3.7.2",
+    "monaco-editor": "^0.31.1",
+    "pako": "^2.0.4",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-nl2br": "^1.0.2",
     "remark-breaks": "^2.0.1",
     "textlint-filter-rule-comments": "^1.2.2",
+    "typescript": "^4.5.4",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.0.0-beta.13",
+    "@docusaurus/module-type-aliases": "^2.0.0-beta.14",
     "@tsconfig/docusaurus": "^1.0.4",
-    "@types/react": "^17.0.37",
-    "@types/react-helmet": "^6.1.4",
+    "@types/jest": "^27.4.0",
+    "@types/pako": "^1.0.3",
+    "@types/react": "^17.0.38",
+    "@types/react-helmet": "^6.1.5",
     "@types/react-router-dom": "^5.3.2",
     "husky": "^7.0.4",
-    "lint-staged": "^12.1.2",
+    "jest": "^27.4.7",
+    "lint-staged": "^12.1.5",
     "markdownlint-cli": "^0.30.0",
+    "monaco-editor-webpack-plugin": "^7.0.1",
     "prettier": "^2.5.1",
     "prettier-plugin-md-nocjsp": "^1.2.0",
+    "raw-loader": "^4.0.2",
+    "string-snapshot-serializer": "^1.0.1",
     "textlint": "^12.1.0",
     "textlint-rule-prh": "^5.3.0",
-    "typescript": "^4.5.3"
+    "ts-jest": "^27.1.2"
   },
   "engines": {
     "node": ">=14.x"
