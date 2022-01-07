@@ -7,7 +7,7 @@ slug: /reference/values-types-variables/enum
 
 TypeScriptでは、列挙型(enum)を用いると、定数のセットに意味を持たせたコード表現ができます。
 
-列挙型を宣言するには、`enum`キーワードの後に列挙型名とメンバーを書きます。次の例では、`Postion`が列挙型名で、`Top`、`Right`、`Bottom`、`Left`がメンバーになります。
+列挙型を宣言するには、`enum`キーワードの後に列挙型名とメンバーを書きます。次の例では、`Position`が列挙型名で、`Top`、`Right`、`Bottom`、`Left`がメンバーになります。
 
 ```ts
 enum Position {
