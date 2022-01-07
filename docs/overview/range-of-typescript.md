@@ -54,9 +54,9 @@ TypeScriptでもIaCを行えます。AWSのインフラ構成を自動化する�
 
 AWSやGoogle Platformなど複数のクラウドベンダーに対応したインフラ構成ツールとして、[Pulumi](https://www.pulumi.com/)もあります。PulumiはTypeScriptで各ベンダーのインフラ構成を記述できます。インフラ構成ツールでもっとも有名なのは[Terraform](https://www.terraform.io/)ですが、TerraformはHCLと呼ばれる独自言語で記述するのに対し、PulumiはTypeScriptなので、TypeScriptプログラマーにとって手が届きやすいツールです。
 
-## Google App Script
+## Google Apps Script
 
-GoogleはSpreadsheetやDocsなどのオフィススイートを提供していて、多くの企業で導入されています。Google Spreadsheetなどには、JavaScriptで機能を拡張する仕組みが備わっています。それをGoogle App Scriptと呼びます。Google App Scriptを使うと、スプレッドシートに独自の関数を作ったり、操作を自動化したりでき、業務の効率化に役立ちます。TypeScriptで書いたコードはJavaScriptにコンパイルすれば、Google App Scriptで利用できます。
+GoogleはSpreadsheetやDocsなどのオフィススイートを提供していて、多くの企業で導入されています。Google Spreadsheetなどには、JavaScriptで機能を拡張する仕組みが備わっています。それをGoogle Apps Scriptと呼びます。Google Apps Scriptを使うと、スプレッドシートに独自の関数を作ったり、操作を自動化したりでき、業務の効率化に役立ちます。TypeScriptで書いたコードはJavaScriptにコンパイルすれば、Google Apps Scriptで利用できます。
 
 ## ブラウザ拡張
 
