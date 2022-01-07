@@ -80,7 +80,7 @@ declare function add(a: number, b: number): number;
 
 ### 書いたコードを共有する
 
-↓のURLを開いてみてください。エディターにコードが入力された状態で TypeScript Playgournd が表示されます。
+↓のURLを開いてみてください。エディターにコードが入力された状態で TypeScript Playground が表示されます。
 
 <https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA>
 

@@ -183,7 +183,7 @@ console.log(a);
 
 ### `()` 即時実行関数の一部 (IIFE: immediately invoked function expression) ![js]
 
-定義されるとすぐ実行される即時実行関数式(IIFF; Immediately Invoked Function Expression)の一部に用いられる書き方です。即時実行関数式そのものがデザインパターンで、その一部である`()`は関数呼び出しのカッコであり、JavaScriptの特別な演算子や構文というわけではありません。即時実行関数式は即時関数と呼ばれることがあります。
+定義されるとすぐ実行される即時実行関数式(IIFE; Immediately Invoked Function Expression)の一部に用いられる書き方です。即時実行関数式そのものがデザインパターンで、その一部である`()`は関数呼び出しのカッコであり、JavaScriptの特別な演算子や構文というわけではありません。即時実行関数式は即時関数と呼ばれることがあります。
 
 ```js
 (function () {})();
@@ -943,6 +943,21 @@ Math.ceil(-1.5);
 ### `as` 型アサーション (type assertion) ![ts]
 
 TypeScriptコンパイラーが解釈した型を上書きする「型アサーション」に用いられるキーワードです。
+
+### `as const` constアサーション (const assertion) ![ts]
+
+変数に含まれるハードコーディングされた値をそのリテラル型で宣言し、読み取り専用にします。
+
+```ts twoslash
+let hello = "hello";
+//      ^?
+let bye = "bye" as const;
+//  ^?
+const wolf = { caniformia: "Wolf" };
+//    ^?
+const fox = { caniformia: "Fox" } as const;
+//    ^?
+```
 
 ### `const` const ![js]
 
