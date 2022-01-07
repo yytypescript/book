@@ -944,6 +944,21 @@ Math.ceil(-1.5);
 
 TypeScriptコンパイラーが解釈した型を上書きする「型アサーション」に用いられるキーワードです。
 
+### `as const` constアサーション (const assertion) ![ts]
+
+変数に含まれるハードコーディングされた値をそのリテラル型で宣言し、読み取り専用にします。
+
+```ts twoslash
+let hello = "hello";
+//      ^?
+let bye = "bye" as const;
+//  ^?
+const wolf = { caniformia: "Wolf" };
+//    ^?
+const fox = { caniformia: "Fox" } as const;
+//    ^?
+```
+
 ### `const` const ![js]
 
 ブロックスコープを持つ定数定義です。スコープ内では再代入も再宣言もできません。
