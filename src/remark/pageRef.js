@@ -19,7 +19,7 @@ const pageRef = () => (node) => {
     if (paragraph.children.length !== 1) {
       continue;
     }
-    if (paragraph.children[0].type !== "link") {
+    if (paragraph.children[0]?.type !== "link") {
       continue;
     }
     const link = paragraph.children[0];
