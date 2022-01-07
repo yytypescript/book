@@ -183,7 +183,7 @@ console.log(a);
 
 ### `()` 即時実行関数の一部 (IIFE: immediately invoked function expression) ![js]
 
-定義されるとすぐ実行される即時実行関数式(IIFF; Immediately Invoked Function Expression)の一部に用いられる書き方です。即時実行関数式そのものがデザインパターンで、その一部である`()`は関数呼び出しのカッコであり、JavaScriptの特別な演算子や構文というわけではありません。即時実行関数式は即時関数と呼ばれることがあります。
+定義されるとすぐ実行される即時実行関数式(IIFE; Immediately Invoked Function Expression)の一部に用いられる書き方です。即時実行関数式そのものがデザインパターンで、その一部である`()`は関数呼び出しのカッコであり、JavaScriptの特別な演算子や構文というわけではありません。即時実行関数式は即時関数と呼ばれることがあります。
 
 ```js
 (function () {})();
