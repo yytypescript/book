@@ -64,7 +64,7 @@ Google ChromeやFirefoxなどのブラウザには、ブラウザの機能を拡
 
 ## 機械学習
 
-機械学習やニューラルネットワーク、ディープラーニングなどの分野はPythonが一強であることは異論がないでしょう。しかし、JavaScriptでも機械学習などのツールが多数作らててきており、TypeScriptプログラマーも手が届きやすくなってきています。[TensorFlow.js](https://www.tensorflow.org/js/)はGoogleが開発した機械学習ライブラリです。[Brain.js](https://brain.js.org/)はニューラルネットワークのライブラリです。
+機械学習やニューラルネットワーク、ディープラーニングなどの分野はPythonが一強であることは異論がないでしょう。しかし、JavaScriptでも機械学習などのツールが多数作られてきており、TypeScriptプログラマーも手が届きやすくなってきています。[TensorFlow.js](https://www.tensorflow.org/js/)はGoogleが開発した機械学習ライブラリです。[Brain.js](https://brain.js.org/)はニューラルネットワークのライブラリです。
 
 ## 組み込み系
 
