@@ -1366,10 +1366,6 @@ const syntaxKindTopicDetails: {
         "型アサーション「as」(type assertion)",
         "https://typescriptbook.jp/reference/values-types-variables/type-assertion-as"
       ),
-      page(
-        "constアサーション「as const」 (const assertion)",
-        "https://typescriptbook.jp/reference/values-types-variables/const-assertion"
-      ),
     ],
   },
   [SyntaxKind.NonNullExpression]: {
@@ -2012,6 +2008,59 @@ const customTopicDetails = defineCustomTopicDetails({
         name: "TypeScript: Documentation - Mapped Types",
         url: "https://www.typescriptlang.org/docs/handbook/2/mapped-types.html#key-remapping-via-as",
       },
+    ],
+  },
+  ImplementsInterface: {
+    name: "インターフェースの実装",
+    links: [
+      page(
+        "インターフェースを実装する",
+        "https://typescriptbook.jp/reference/object-oriented/interface/implementing-interfaces"
+      ),
+      page(
+        "構造的部分型 (structural subtyping)",
+        "https://typescriptbook.jp/reference/values-types-variables/structural-subtyping"
+      ),
+    ],
+  },
+  ExtendsClass: {
+    name: "クラスの継承",
+    links: [
+      page(
+        "クラスの継承 (inheritance)",
+        "https://typescriptbook.jp/reference/object-oriented/class/class-inheritance"
+      ),
+      page(
+        "構造的部分型 (structural subtyping)",
+        "https://typescriptbook.jp/reference/values-types-variables/structural-subtyping"
+      ),
+    ],
+  },
+  ConstAssertion: {
+    name: "constアサーション",
+    links: [
+      page(
+        "constアサーション「as const」 (const assertion)",
+        "https://typescriptbook.jp/reference/values-types-variables/const-assertion"
+      ),
+    ],
+  },
+  ConstructorShorthand: {
+    name: "constructor shorthand",
+    links: [
+      page(
+        "constructor shorthand",
+        "https://typescriptbook.jp/reference/object-oriented/class/constructor-shorthand"
+      ),
+    ],
+  },
+  DefaultTypeParameter: {
+    name: "デフォルト型引数",
+    links: [
+      page(
+        "デフォルト型引数",
+        "https://typescriptbook.jp/reference/generics/default-type-parameter"
+      ),
     ],
   },
 });

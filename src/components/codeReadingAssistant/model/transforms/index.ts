@@ -1,10 +1,12 @@
 import { Node } from "typescript";
 import { Fragment, Topic } from "../index";
+import { asExpression } from "./asExpression";
 import { asKeyword } from "./asKeyword";
 import { asteriskToken } from "./asteriskToken";
 import { defaultTransform } from "./defaultTransform";
 import { equalsGreaterThanToken } from "./equalsGreaterThanToken";
 import { exclamationToken } from "./exclamationToken";
+import { heritageClause } from "./heritageClause";
 import { mappedType } from "./mappedType";
 import { minusToken } from "./minusToken";
 import { nullKeyword } from "./nullKeyword";
@@ -37,6 +39,8 @@ export const transforms: ReadonlyArray<Transform> = [
   exclamationToken,
   typeOperator,
   asKeyword,
+  asExpression,
+  heritageClause,
   variableDeclarationList,
   variableDeclaration,
   parameter,
