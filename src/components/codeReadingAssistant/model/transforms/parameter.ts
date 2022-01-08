@@ -1,15 +1,16 @@
 import {
-  isFunctionDeclaration,
   isArrowFunction,
-  isParameter,
+  isConstructorDeclaration,
+  isFunctionDeclaration,
   isFunctionExpression,
   isMethodDeclaration,
-  isConstructorDeclaration,
-  Node,
+  isParameter,
   isSetAccessor,
+  Node,
+  ParameterDeclaration,
 } from "typescript";
 
-import { childrenOf, CustomTopic, Transform } from "./utils";
+import { childrenOf, CustomTopic, Result, Transform } from "./utils";
 
 export const parameter: Transform = ({ node, result }) => {
   if (!isParameter(node)) {
@@ -17,7 +18,11 @@ export const parameter: Transform = ({ node, result }) => {
   }
   const topic = topicOf(node.parent);
   if (topic) {
-    result.addFragmentWithTopic(node, topic);
+    if (topic === CustomTopic.ParameterOfConstructor) {
+      parameterOfConstructor(node, result);
+    } else {
+      result.addFragmentWithTopic(node, topic);
+    }
   } else {
     result.addFragment(node);
   }
@@ -34,4 +39,11 @@ const topicOf = (node: Node): CustomTopic | undefined => {
     : isConstructorDeclaration(node)
     ? CustomTopic.ParameterOfConstructor
     : undefined;
+};
+
+const parameterOfConstructor = (node: ParameterDeclaration, result: Result) => {
+  if (node.modifiers?.length ?? 0 > 1) {
+    result.addFragmentWithTopic(node, CustomTopic.ConstructorShorthand);
+  }
+  result.addFragmentWithTopic(node, CustomTopic.ParameterOfConstructor);
 };
