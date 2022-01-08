@@ -161,7 +161,6 @@ const Editor: React.FC<EditorProps> = ({
         minimap: { enabled: false },
         automaticLayout: true,
         glyphMargin: true,
-        contextmenu: false,
       });
       editor.setModel(codeModel); //
       editor.onDidChangeModelContent(() => setCode(editor.getValue()));
