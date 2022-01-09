@@ -80,7 +80,7 @@ interface Dog extends Animal {
   name: string;
   price: {
     yen: number;
-    doller: number;
+    dollar: number;
   };
 }
 // 最終的なDogの定義
@@ -88,7 +88,7 @@ interface Dog {
   name: string;
   price: {
     yen: number;
-    doller: number;
+    dollar: number;
   };
   legCount: number;
 }
@@ -98,12 +98,12 @@ interface A {
   numberField: number;
   price: {
     yen: number;
-    doller: number;
+    dollar: number;
   };
 }
 interface B extends A {
   numberField: string; // Error:stringはnumberに代入できないため
-  // Error:dollerフィールドが無く、Aのpriceに代入できないため
+  // Error:dollar
   price: {
     yen: number;
     euro: number;
@@ -118,7 +118,7 @@ type Animal = {
   name: number;
   price: {
     yen: number;
-    doller: number;
+    dollar: number;
   };
 };
 
@@ -134,7 +134,7 @@ type Dog = {
   name: never; // 交差型作れない場合はコンパイルエラーではなくnever型になる
   price: {
     yen: number;
-    doller: number;
+    dollar: number;
     euro: number;
   };
 };

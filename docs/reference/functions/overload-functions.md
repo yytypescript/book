@@ -14,7 +14,7 @@ sidebar_label: オーバーロード関数
 function distance(p: Point): number;
 function distance(p1: Point, p2: Point): number;
 function distance(x: number, y: number): number;
-function distance(x1: number, y1: numebr, x2: number, y2: number): number;
+function distance(x1: number, y1: number, x2: number, y2: number): number;
 ```
 
 なお、上記のような書き方のオーバーロードは名前付き関数またはクラスのメソッドでのみ可能です。匿名関数、アロー関数ではタイプエイリアスまたはインターフェースでオーバーロードを定義します。たとえば、上記例だと次のようなタイプエイリアスになります。
@@ -45,7 +45,7 @@ const distance: Distance = (
 function distance(p: Point): number;
 function distance(p1: Point, p2: Point): number;
 function distance(x: number, y: number): number;
-function distance(x1: number, y1: numebr, x2: number, y2: number): number;
+function distance(x1: number, y1: number, x2: number, y2: number): number;
 function distance(
   arg1: Point | number,
   arg2?: Point | number,

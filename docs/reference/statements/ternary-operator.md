@@ -23,7 +23,7 @@ console.log(drink);
 
 ```js
 // こうした書き方はできない
-const dring = if (age >= 20) "ビール" else "ジュース";
+const drink = if (age >= 20) "ビール" else "ジュース";
 ```
 
 三項演算子は条件をネストできます。

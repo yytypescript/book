@@ -205,7 +205,7 @@ bmi({ height: height, weight: weight });
 bmi({ weight, height });
 ```
 
-[Shorhand property names](../values-types-variables/object/shorthand-property-names.md)
+[Shorthand property names](../values-types-variables/object/shorthand-property-names.md)
 
 <TweetILearned>
 
