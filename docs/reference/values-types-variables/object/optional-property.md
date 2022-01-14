@@ -37,4 +37,4 @@ size = { width: null };
 
 ## 関連情報
 
-[🚧optional chaining](optional-chaining.md)
+[オプショナルチェーン (optional chaining)](optional-chaining.md)

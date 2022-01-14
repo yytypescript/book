@@ -78,7 +78,7 @@ const writableNumbers: number[] = readonlyNumbers as number[];
 
 ## 関連情報
 
-[🚧配列の破壊的操作](array-operations.md)
+[配列の破壊的操作](array-operations.md)
 
 [オブジェクト型のreadonlyプロパティ (readonly property)](../object/readonly-property.md)
 

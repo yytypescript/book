@@ -35,6 +35,6 @@ for (const [index, word] of words.entries()) {
 
 ## 関連情報
 
-[🚧配列をループする方法](../values-types-variables/array/how-to-loop-an-array.md)
+[配列をループする方法](../values-types-variables/array/how-to-loop-an-array.md)
 
-[🚧how-to-loop-an-object](../values-types-variables/object/how-to-loop-an-object.md)
+[オブジェクトをループする方法](../values-types-variables/object/how-to-loop-an-object.md)
