@@ -33,4 +33,4 @@ function isUndefined(value: unknown): value is undefined {
 
 ## 関連情報
 
-[🚧型ガード、制御フロー分析、型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
+[型ガードによる型の絞り込みと制御フロー分析](../statements/control-flow-analysis-and-type-guard.md)
