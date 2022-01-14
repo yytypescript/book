@@ -50,7 +50,7 @@ function func({ x, y, z }) {
 }
 ```
 
-[🚧分割代入引数 (destructuring assignment parameter)](destructuring-assignment-parameters.md)
+[分割代入引数 (destructuring assignment parameter)](destructuring-assignment-parameters.md)
 
 ## Options Objectパターンの型注釈
 

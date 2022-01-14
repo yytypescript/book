@@ -84,4 +84,4 @@ TypeScriptの型システムで疲弊しそうになったら、「がんばら�
 
 [🚧unknown型](../statements/unknown.md)
 
-[🚧any vs unknown](../statements/any-vs-unknown.md)
+[any vs unknown](../statements/any-vs-unknown.md)

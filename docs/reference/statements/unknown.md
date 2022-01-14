@@ -10,6 +10,6 @@ TODO: 次のことについて書く
 
 ## 関連情報
 
-[🚧any型](../values-types-variables/any.md)
+[any型](../values-types-variables/any.md)
 
-[🚧any vs unknown](any-vs-unknown.md)
+[any vs unknown](any-vs-unknown.md)

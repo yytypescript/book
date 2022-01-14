@@ -76,7 +76,7 @@ function findUserByName({ name }: UserInfo): User {
 
 [オブジェクトの分割代入 (destructuring assignment)](../reference/values-types-variables/object/destructuring-assignment-from-objects.md)
 
-[🚧分割代入引数 (destructuring assignment parameter)](../reference/functions/destructuring-assignment-parameters.md)
+[分割代入引数 (destructuring assignment parameter)](../reference/functions/destructuring-assignment-parameters.md)
 
 分割代入はこの関数を使う側としても引数の順番を気にする必要がなくなるとともに、ありがたいことに今後の機能拡張によって`UserInfo`が成長したとしても毎回引数を追加する必要はなく`UserInfo`を書き換え使用したい関数でそのキーにアクセスをするだけですみます。上記例のように国籍 (`nationality`) が増えれば好きなところに加えるだけです。順番は呼び出しに影響を与えません。
 
