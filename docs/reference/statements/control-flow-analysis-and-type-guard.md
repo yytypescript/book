@@ -17,9 +17,9 @@ function showMonth(month: string | number) {
 
 ## 制御フロー分析
 
-先ほどの例に`month`変数が`string`型であることを条件判定を追加することで`month.padStart()`の実行時は`month`が`string`型であるとTypeScriptが判断し型エラーを解消することができます。
+TypeScriptは`if`や`for`ループなどの制御フローを分析することで、コードが実行されるタイミングでの型の可能性を判断しています。
 
-TypeScriptは`if`や`for`ループなどの制御フローを分析することで、コードが実行されるタイミングにおける型の可能性を判定することができます。
+先ほどの例に`month`変数が`string`型であることを条件判定を追加することで`month.padStart()`の実行時は`month`が`string`型であるとTypeScriptが判断し型エラーを解消することができます。
 
 ```ts twoslash
 function showMonth(month: string | number) {
@@ -29,9 +29,9 @@ function showMonth(month: string | number) {
 }
 ```
 
-もう少し複雑な例を見てみます。
+もう少し複雑な例を見てみましょう。
 
-次の例では`month.toFixed()`の呼び出しのタイミングでは`months`変数の型が`string | number`となるため型エラーが発生します。
+次の例では`month.toFixed()`の呼び出しは条件分岐のスコープ外であり`month`変数の型が`string | number`となるため型エラーが発生します。
 
 ```ts twoslash
 // @errors: 2339
@@ -55,10 +55,9 @@ function showMonth(month: string | number) {
 }
 ```
 
-この変更によりエラーとなっていた`month.toFixed()`のメソッド呼び出しの型エラーを解消することができます。
+この変更によりエラーとなっていた`month.toFixed()`のメソッド呼び出しの型エラーが解消されます。
 
-これは制御フロー分析により`month`変数が`string`型の場合は早期リータンにより関数が終了し、`month.toFixed()`
-が実行されるタイミングでは`month`変数は`number`しかとらないことをTypeScriptが判断するためです。
+これは制御フロー分析により`month`変数が`string`型の場合は早期リータンにより関数が終了し、`month.toFixed()`が実行されるタイミングでは`month`変数は`number`型のみであるとTypeScriptが判断するためです。
 
 ## 型ガード
 
