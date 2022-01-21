@@ -61,7 +61,7 @@ const str: string = num as unknown as string; // OK
 
 型アサーションを使う必要が出てきたら、それよりも先に、型ガードやユーザー定義型ガードで解決できないか検討してみるとよいでしょう。
 
-[🚧型ガード、制御フロー分析、型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
+[制御フロー分析と型ガードによる型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
 
 [型ガード関数 (type guard function)](../functions/type-guard-functions.md)
 

@@ -55,7 +55,7 @@ if (typeof maybeUserId === "string") {
 }
 ```
 
-[🚧型ガード、制御フロー分析、型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
+[制御フロー分析と型ガードによる型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
 
 ## 関連情報
 
