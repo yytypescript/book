@@ -46,7 +46,7 @@ ECMAScriptへの追従に加え、ESNextの先取りによりプログラマは�
 
 ## TypeScriptはもっともポピュラーでもっとも愛されるAltJSである
 
-JavaScriptにコンパイルして使う言語を総じて「AltJS」と呼びます。TypeScriptのAltJSの一種で、AltJSには他にもさまざまな言語があります。その中でもTypeScriptはもっともポピュラーな言語です。
+JavaScriptにコンパイルして使う言語を総じて「AltJS」と呼びます。TypeScriptはAltJSの一種で、AltJSには他にもさまざまな言語があります。その中でもTypeScriptはもっともポピュラーな言語です。
 
 Stack Overflowが約65,000名の開発者をターゲットに行った調査から、[ポピュラーなプログラミング言語ランキング](https://insights.stackoverflow.com/survey/2020#most-popular-technologies)を発表しています。このランキングはAltJSだけでなく、JavaScriptやJava、C#などすべてのプログラミング言語を含んでいます。このランキングで、TypeScriptはC言語やRubyを抑えて、9位にランクインしています。
 
