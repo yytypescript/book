@@ -49,7 +49,7 @@ log(spanish);
 log(third);
 ```
 
-`ObjectLiteralLike, ArrrayObjectLike`は共に`string`型のプロパティを持つオブジェクトの型として宣言されています。
+`ObjectLiteralLike, ArrayObjectLike`は共に`string`型のプロパティを持つオブジェクトの型として宣言されています。
 
 ```ts
 const spanish: string = butterfly.es;

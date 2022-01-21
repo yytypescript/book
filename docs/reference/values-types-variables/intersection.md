@@ -94,7 +94,7 @@ type Optional = {
 
 ### `Required<T>, Partial<T>`をつける
 
-`Mantatory`は`Required<T>`を、`Optional`は`Partial<T>`をつけます。
+`Mandatory`は`Required<T>`を、`Optional`は`Partial<T>`をつけます。
 
 ```ts
 type Mandatory = Required<{

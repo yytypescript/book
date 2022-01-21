@@ -37,7 +37,7 @@ console.log(person.age);
 class Person {
   private name;
 
-  constractor(name: string) {
+  constructor(name: string) {
     this.name = name;
   }
 }
