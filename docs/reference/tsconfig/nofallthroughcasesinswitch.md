@@ -1,10 +1,19 @@
+---
+description: switch文のfallthroughを禁止する
+---
+
 # noFallthroughCasesInSwitch
 
-リリースされたバージョン: 1.8
+`noFallthroughCasesInSwitch`はswitch文のfallthroughを禁止するコンパイラオプションです。
+
+- デフォルト: `false`
+- 追加されたバージョン: 1.8
+
+## 解説
 
 `fallthrough`とは`switch`でにおける`case`文で`break`または`return`を行わないことを意味します。`case`文が空でない場合に限り`break`や`return`が行われているかを厳密に評価します。
 
-```typescript
+```ts
 function daysOfMonth(month: number): number {
   let days: number = 31;
 
@@ -34,7 +43,7 @@ function daysOfMonth(month: number): number {
 
 ある月の日数を求める関数`daysOfMonth()`を定義しましたがこの関数には`fallthrough`が存在します。このオプションを有効にすると次のようなエラーが発生します。
 
-```typescript
+```text
 error TS7029: Fallthrough case in switch.
 
     case 2:
@@ -49,8 +58,8 @@ error TS7029: Fallthrough case in switch.
 
 これを回避するためには`case`では漏れなく`break`あるいは`return`をするように設計します。
 
-```typescript
-ffunction daysOfMonth(month: number): number {
+```ts
+function daysOfMonth(month: number): number {
   let days: number = 31;
 
   switch (month) {
@@ -72,7 +81,7 @@ ffunction daysOfMonth(month: number): number {
       days = 30;
       break;
     default:
-      throw new Error('INVALID INPUT');
+      throw new Error("INVALID INPUT");
   }
 
   return days;

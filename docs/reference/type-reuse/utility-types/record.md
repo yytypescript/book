@@ -19,14 +19,14 @@ title: "Record<Keys, Type>"
 
 キーが`string`で値が`number`のインデックス型を定義する。
 
-```typescript
+```ts
 type StringNumber = Record<string, number>;
 const value: StringNumber = { a: 1, b: 2, c: 3 };
 ```
 
 キーが`firstName`、`middleName`、`familyName`で、値が文字列になるオブジェクト型を定義する。
 
-```typescript
+```ts
 type Person = Record<"firstName" | "middleName" | "lastName", string>;
 const person: Person = {
   firstName: "Robert",
@@ -40,3 +40,5 @@ const person: Person = {
 [インデックス型 (index signature)](../../values-types-variables/object/index-signature.md)
 
 [マップ型 (mapped type)](../mapped-types.md)
+
+[Map<K, V>](../../builtin-api/map.md)

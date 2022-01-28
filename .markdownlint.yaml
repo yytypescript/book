@@ -20,6 +20,7 @@ no-inline-html:
     - img
     - ruby
     - rt
+    - rp
     - details
     - summary
     - kbd

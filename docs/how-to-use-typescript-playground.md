@@ -14,7 +14,7 @@ Playground にアクセスできたら、早速コードを実行してみまし
 
 次のサンプルコードを Playground のエディターに入力します。
 
-```typescript
+```ts
 function add(a: number, b: number) {
   return a + b;
 }
@@ -36,7 +36,7 @@ TypeScript を書いていると実際に生成される JavaScript のコード
 
 エディターに次のコードを入力して`.JS`タブを開いてみてください。
 
-```typescript
+```ts
 enum Color {
   RED = "red",
   BLUE = "blue",
@@ -54,7 +54,7 @@ TypeScript が`enum`をどのように JavaScript へコンパイルしている
 
 次のサンプルコードをエディター上で入力してみてください。エディター上に表示される赤の波線にマウスオーバーをすることでリアルタイムにコンパイルエラーを確認することができます。
 
-```typescript
+```ts
 let value = "1";
 value = 1;
 value = true;
@@ -68,7 +68,7 @@ value = true;
 
 `.D.TS`タブを開くことでエディターのコードから生成される型定義を確認することができます。
 
-```typescript
+```ts
 // コード
 function add(a: number, b: number) {
   return a + b;
@@ -80,7 +80,7 @@ declare function add(a: number, b: number): number;
 
 ### 書いたコードを共有する
 
-↓のURLを開いてみてください。エディターにコードが入力された状態で TypeScript Playgournd が表示されます。
+↓のURLを開いてみてください。エディターにコードが入力された状態で TypeScript Playground が表示されます。
 
 <https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA>
 
@@ -123,7 +123,7 @@ function add(a:number, b:number) {
 バージョンを 4.1 未満に変更してみてください。TypeScript のバージョンが変更されたことで
 `Template Literal Types`が非対応となりコンパイルエラーが発生するのが確認できます。
 
-```typescript
+```ts
 type LocaleLang = "en" | "ja" | "fr";
 type LocaleId = `locale_${LocaleLang}`;
 ```
@@ -134,7 +134,7 @@ type LocaleId = `locale_${LocaleLang}`;
 
 次のサンプルコードをエディターに入力して、出力される JavaScript のコードを`.JS`で確認をするとデフォルトでは
 
-```typescript
+```ts
 export function add(a: number, b: number) {
   return a + b;
 }
@@ -142,7 +142,7 @@ export function add(a: number, b: number) {
 
 Playground の初期設定では`module: 'esnext'`が選択されているので、次の出力結果になります。
 
-```javascript
+```js
 export function add(a, b) {
   return a + b;
 }
@@ -150,7 +150,7 @@ export function add(a, b) {
 
 `TS Config`タブを開き`Module`の設定を`CommonJS`に変更をしてみます。TS Config の設定が変更されて`CommonJS`形式で出力される JavaScript のコードを確認することができます。
 
-```javascript
+```js
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.add = void 0;

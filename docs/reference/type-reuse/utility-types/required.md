@@ -13,7 +13,7 @@ title: Required<T>
 
 ## Requiredの使用例
 
-```typescript
+```ts
 type Person = {
   surname: string;
   middleName?: string;
@@ -24,7 +24,7 @@ type RequiredPerson = Required<Person>;
 
 上の`RequiredPerson`は次と同じ型になります。
 
-```typescript
+```ts
 type RequiredPerson = {
   surname: string;
   middleName: string;

@@ -10,7 +10,7 @@ JavaScriptの論理型(boolean type)は、`true`と`false`の論理値からな�
 
 JavaScriptの論理型リテラルは`true`または`false`を用いて次のように書きます。
 
-```javascript
+```js
 const isOk = true;
 const isOk = false;
 ```
@@ -19,7 +19,7 @@ const isOk = false;
 
 TypeScriptの論理型の型注釈は`boolean`を使います。
 
-```typescript
+```ts
 const isOk: boolean = true;
 ```
 

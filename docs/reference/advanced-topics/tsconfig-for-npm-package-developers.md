@@ -8,7 +8,7 @@
 
 型定義ファイルを一緒に出力しましょう。そのためにはtsconfig.jsonにある`declaration`の項目を`true`に変更します。
 
-```typescript
+```json
 "declaration": true,
 /* Generates corresponding '.d.ts' file. */
 ```
@@ -17,7 +17,7 @@
 
 変哲もない`number`型のプロパティ持つ`Value Object`を作ったとします。
 
-```typescript
+```ts
 class NumericalValueObject {
   private value: number;
 
@@ -37,7 +37,7 @@ class NumericalValueObject {
 
 これをコンパイルし、型定義を生成するとこのようになっています。
 
-```typescript
+```ts
 declare class NumericalValueObject {
   private value;
   constructor(value: number);
@@ -52,7 +52,7 @@ declare class NumericalValueObject {
 
 IDEを使っているときに有用で、実際のTypeScriptのソースコードがどのようにコーディングされているかを閲覧することができるようになります。tsconfig.jsonにある`declarationMap`の項目を`true`に変更します。
 
-```typescript
+```json
 "declarationMap": true,
 /* Generates a sourcemap for each corresponding '.d.ts' file. */
 ```
@@ -63,7 +63,7 @@ IDEを使っているときに有用で、実際のTypeScriptのソースコー�
 
 特に設定していなければ元の`ts`ファイルも公開されますが、公開する内容を調整している場合は逆にpackage.jsonの`files`プロパティをを変更して元の`ts`ファイルも公開するように変更が必要です。tsconfig.jsonの`declarationMap`を設定しても元の`ts`ファイルを参照できないときはここで公開する内容を制限していないか確認してください。
 
-```typescript
+```json
 {
   "name": "YYTS",
   "version": "1.0.0",
@@ -72,10 +72,7 @@ IDEを使っているときに有用で、実際のTypeScriptのソースコー�
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "types": "./esm/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": ["dist", "src"],
   "scripts": {
     "build": "yarn build:cjs && yarn build:esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
@@ -88,7 +85,7 @@ IDEを使っているときに有用で、実際のTypeScriptのソースコー�
 
 実際にパッケージとなるファイルにどのようなファイルが含まれているかについては次のコマンドを実行してください。
 
-```typescript
+```sh
 npm publish --dry-run
 ```
 
@@ -98,7 +95,7 @@ npm publish --dry-run
 
 tsconfig.jsonにある`sourceMap`の項目を`true`に変更します。
 
-```typescript
+```json
 "sourceMap": true,
 /* Generates corresponding '.map' file. */
 ```

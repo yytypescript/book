@@ -6,11 +6,13 @@ sidebar_label: シンボル型
 
 JavaScriptのシンボル型(symbol type)は、プリミティブ型の一種で、その値が一意になる値です。論理型や数値型は値が同じであれば、等価比較が`true`になります。一方、シンボルはシンボル名が同じであっても、初期化した場所が違うと`false`になります。
 
-```javascript
+```js twoslash
 const s1 = Symbol("foo");
 const s2 = Symbol("foo");
-console.log(s1 === s1); //=> true
-console.log(s1 === s2); //=> false
+console.log(s1 === s1);
+// @log: true
+console.log(s1 === s2);
+// @log: false
 ```
 
 Rubyにもシンボルという名前の型があります。Rubyのシンボルは値さえ同じなら、書いてある場所が異なっても等価比較が`true`になります。
@@ -28,7 +30,7 @@ p s1 == s2 #=> true
 
 TypeScriptでシンボルの型注釈は`symbol`を用います。
 
-```typescript
+```ts
 const s: symbol = Symbol();
 ```
 

@@ -1,10 +1,19 @@
+---
+description: 使われていない引数を禁止する
+---
+
 # noUnusedParameters
 
-リリースされたバージョン: 2.0
+`noUnusedParameters`は使われていない引数を禁止するコンパイラオプションです。
+
+- デフォルト: `false`
+- 追加されたバージョン: 2.0
+
+## 解説
 
 関数で使用していない引数を禁止します。
 
-```typescript
+```ts
 function add(n1: number, n2: number, n3: number): number {
   return n1 + n2;
 }
@@ -21,7 +30,7 @@ function add(n1: number, n2: number, n3: number): number {
 
 これを回避するためには、使用していない引数を`_`で始まる名前に変更します。
 
-```typescript
+```ts
 function add(n1: number, n2: number, _n3: number): number {
   return n1 + n2;
 }

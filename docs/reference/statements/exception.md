@@ -11,7 +11,7 @@ JavaScriptにはJavaに似た例外処理の構文があります。例外には
 try {
   throw new Error("something wrong");
 } catch (e) {
-// @log: something wrong
+// something wrong
   console.log(e.message);
 }
 ```

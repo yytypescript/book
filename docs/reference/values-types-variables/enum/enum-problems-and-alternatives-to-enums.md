@@ -16,7 +16,7 @@ TypeScriptの列挙型に目を向けると、構文もJavaScriptに無いもの
 
 数値列挙型は、`number`型なら何でも代入できるという型安全上の問題点があります。次の例は、値が`0`と`1`のメンバーだけからなる列挙型ですが、実際にはそれ以外の数値を代入できてしまいます。
 
-```typescript
+```ts
 enum ZeroOrOne {
   Zero = 0,
   One = 1,
@@ -26,21 +26,23 @@ const zeroOrOne: ZeroOrOne = 9; // コンパイルエラーは起きません！
 
 列挙型には、列挙型オブジェクトに値でアクセスすると、メンバー名を得られる仕様があります。これにも問題があります。メンバーに無い値でアクセスしたら、コンパイルエラーになってほしいところですが、そうなりません。
 
-```typescript
+```ts twoslash
 enum ZeroOrOne {
   Zero = 0,
   One = 1,
 }
 
-console.log(ZeroOrOne[0]); //=> "Zero" これは期待どおり
-console.log(ZeroOrOne[9]); //=> undefined これはコンパイルエラーになってほしいところ…
+console.log(ZeroOrOne[0]); // これは期待どおり
+// @log: "Zero"
+console.log(ZeroOrOne[9]); // これはコンパイルエラーになってほしいところ…
+// @log: undefined
 ```
 
 ### 文字列列挙型だけ公称型になる
 
 TypeScriptの型システムは、[構造的部分型](enum-problems-and-alternatives-to-enums.md)を採用しています。ところが、文字列列挙型は例外的に公称型になります。
 
-```typescript
+```ts
 enum StringEnum {
   Foo = "foo",
 }
@@ -58,7 +60,7 @@ const foo2: StringEnum = "foo"; // コンパイルエラーになる
 
 もっともシンプルな代替案はユニオン型を用いる方法です。
 
-```typescript
+```ts
 type YesNo = "yes" | "no";
 
 function toJapanese(yesno: YesNo) {
@@ -73,7 +75,7 @@ function toJapanese(yesno: YesNo) {
 
 ユニオン型とシンボルを組み合わせる方法もあります。
 
-```typescript
+```ts
 const yes = Symbol();
 const no = Symbol();
 type YesNo = typeof yes | typeof no;
@@ -92,7 +94,7 @@ function toJapanese(yesno: YesNo) {
 
 オブジェクトリテラルを使う方法もあります。
 
-```typescript
+```ts
 const Position = {
   Top: 0,
   Right: 1,

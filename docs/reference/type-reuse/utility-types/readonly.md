@@ -13,7 +13,7 @@ title: Readonly<T>
 
 ## Readonlyの使用例
 
-```typescript
+```ts
 type Person = {
   surname: string;
   middleName?: string;
@@ -24,7 +24,7 @@ type ReadonlyPerson = Readonly<Person>;
 
 上の`ReadonlyPerson`は次の型と同じになります。
 
-```typescript
+```ts
 type ReadonlyPerson = {
   readonly surname: string;
   readonly middleName?: string;

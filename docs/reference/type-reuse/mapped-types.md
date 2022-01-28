@@ -8,13 +8,13 @@ sidebar_label: Mapped type
 
 Mapped typeは主にユニオン型と組み合わせて使います。先ほどシステムがサポートする言語を定義しました。
 
-```typescript
+```ts
 type SystemSupportLanguage = "en" | "fr" | "it" | "es";
 ```
 
 これをインデックス型と同じようにキーの制約として使用することができます。
 
-```typescript
+```ts
 type Butterfly = {
   [key in SystemSupportLanguage]: string;
 };
@@ -22,7 +22,7 @@ type Butterfly = {
 
 このように`Butterfly`を定義するとシステムがサポートしない言語、ここでは`de`が設定、使用できなくなります。
 
-```typescript
+```ts
 const butterflies: Butterfly = {
   en: "Butterfly",
   fr: "Papillon",
@@ -39,7 +39,7 @@ const butterflies: Butterfly = {
 
 `Readonly<T>`もこの機能で実現されています。`Readonly<T>`は次のように実装されています。
 
-```typescript
+```ts
 type Readonly<T> = {
   readonly [P in keyof T]: T[P];
 };
@@ -53,14 +53,14 @@ type Readonly<T> = {
 
 Mapped typeはインデックス型と異なり`symbol`型もキーにすることができます。
 
-```typescript
+```ts
 type Identifier = symbol | 1;
 type Sample = {
   [P in Identifier]: string;
 };
 
 const sample: Sample = {
-  1: 'pork';
-  [Symbol('thick')]: 'thin';
+  1: "pork",
+  [Symbol("thick")]: "thin",
 };
 ```

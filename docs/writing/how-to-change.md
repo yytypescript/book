@@ -123,7 +123,7 @@ Prettierの自動整形をさせたくないコードブロックには`<!--pret
 
 ````markdown
 <!--prettier-ignore-->
-```typescript
+```ts
 type Code =
   | 1
   | 2

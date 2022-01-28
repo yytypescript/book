@@ -2,7 +2,7 @@
 
 JavaScriptの関数はオブジェクトです。したがって、関数にプロパティを持たせることができます。
 
-```javascript
+```js
 function hello() {
   return "Hello World";
 }

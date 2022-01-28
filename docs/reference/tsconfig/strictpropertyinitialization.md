@@ -1,66 +1,88 @@
+---
+description: クラスプロパティの初期化を必須にする
+tags: [strict]
+---
+
 # strictPropertyInitialization
 
-リリースされたバージョン: 2.7
+`strictPropertyInitialization`はクラスプロパティの初期化を必須にするコンパイラオプションです。
 
-このオプションを有効にするために`strictNullChecks`も同様に有効にする必要があります。
+- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
+- 追加されたバージョン: 2.7
+- TypeScript公式が有効化推奨
 
-クラスのプロパティは初期化しない状態では`undefined`が格納されます。
+:::caution
 
-```typescript
-class User {
-  public name: string;
-  public gender: string;
-  public age: number;
+このオプションを効かすには[`strictNullChecks`](./strictnullchecks.md)も`true`する必要があります。
+
+:::
+
+## 解説
+
+`strictPropertyInitialization`を`true`にすると、値が初期化されていないクラスプロパティについて警告を出します。
+
+```ts twoslash
+// @errors: 2564
+class Foo {
+  prop: number;
 }
-
-const user: User = new User();
-
-console.log(user.name);
-// -> undefined
-console.log(user.gender);
-// -> undefined
-console.log(user.age);
-// -> undefined
 ```
 
-これはクラスの宣言時に、コンストラクタで各プロパティが初期化されていないためです。
-このオプションを有効にすると宣言されたプロパティは`undefined`とのユニオン型またはオプション修飾子がついている場合を除いて必ずコンストラクタの呼び出しの時点で初期化をする必要があります。
+初期化は、次のいずれかで行う必要があります。
 
-```typescript
-class User {
-  public name: string | undefined;
-  public gender?: string;
-  public age: number;
-}
+1. コンストラクタで初期化
+1. 初期化子で初期化
+1. undefinedとのユニオン型で型注釈する
 
-const user: User = new User();
-```
+次は、コンストラクタで初期化する例です。
 
-```text
-error TS2564: Property 'age' has no initializer and is not definitely assigned in the constructor.
+```ts twoslash
+class Foo {
+  prop: number;
 
-public age: number;
-       ~~~
-```
-
-これを回避するためにはコンストラクタで初期化するか、初期値を設定します。
-
-```typescript
-class User {
-  public name: string | undefined;
-  public gender?: string;
-  public age: number;
-
-  public constructor(age: number) {
-    this.age = age;
+  constructor() {
+    this.prop = 1;
   }
 }
 ```
 
-```typescript
-class User {
-  public name: string | undefined;
-  public gender?: string;
-  public age: number = 100;
+次は、[初期化子](../object-oriented/class/field-initializers.md)で初期化する例です。
+
+```ts twoslash
+class Foo {
+  prop: number = 1;
+  //           ^^^初期化子
 }
 ```
+
+プロパティの型が`undefined`との[ユニオン型](../values-types-variables/union.md)の場合、初期化しなくても警告が出ません。
+
+```ts twoslash
+class Foo {
+  prop: number | undefined;
+}
+```
+
+プロパティがオプションの場合も警告が出ません。
+
+```ts twoslash
+class Foo {
+  prop?: number;
+}
+```
+
+<TweetILearned>
+
+TypeScriptのstrictPropertyInitializationはプロパティの初期化を必須にするコンパイラオプション。
+
+⚠️strictNullChecksもtrueする必要あり
+✅コンストラクタで初期化OR初期化子が必須になる
+🙆🏻‍♂️undefinedとのユニオン型で型注釈するのはOK
+
+</TweetILearned>
+
+## 関連情報
+
+[strict](./strict.md)
+
+[フィールド (field)](../object-oriented/class/fields.md)

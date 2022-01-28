@@ -29,3 +29,5 @@ rules:
     prh: mapped typeの訳語はこれに統一します。TypeScript Deep Diveでは「マップ型」と訳していますが、Map<T, U>と曖昧であることと、「マップ型」が浸透していないため訳しません。
   - expected: ポリフィル
     patterns: /[pP]olyfill/
+  - expected: 巻き上げ
+    patterns: 巻上げ

@@ -46,7 +46,7 @@ function increment(num): number {
 
 [noImplicitAny](../tsconfig/noimplicitany.md)
 
-次の例のように定義済みの関数プロパティに再代入する形で関数を上書きする場合は`button.onclick`の引数`event`の型が`MouseEvent`と定義されているため、その型情報から代入する関数の引数の型を省略しても、`event`の型を`MousetEvent`と推論してくれます。
+次の例のように定義済みの関数プロパティに再代入する形で関数を上書きする場合は`button.onclick`の引数`event`の型が`MouseEvent`と定義されているため、その型情報から代入する関数の引数の型を省略しても、`event`の型を`MouseEvent`と推論してくれます。
 
 ```ts twoslash
 // @errors: 2339

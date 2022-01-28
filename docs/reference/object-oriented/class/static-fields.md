@@ -29,27 +29,29 @@ var_dump(SomeClass::$field); //=> int(123)
 
 JavaScriptにはJavaのような静的フィールドの機能がありません。代わりに、クラスのプロパティに後から値を代入することで似たようなことができます。
 
-```javascript title="JavaScript"
+```js title="JavaScript" twoslash
 class SomeClass {}
 SomeClass.field = 123;
-console.log(SomeClass.field); //=> 123
+console.log(SomeClass.field);
+// @log: 123
 ```
 
 TypeScriptでは、Java風の静的フィールドの書き方ができるようになっています。TypeScriptで静的フィールドを宣言するにはstaticキーワードを用います。
 
-```typescript title="TypeScript"
+```ts title="TypeScript" twoslash
 class SomeClass {
   static field: number = 123;
 }
 
-console.log(SomeClass.field); //=> 123
+console.log(SomeClass.field);
+// @log: 123
 ```
 
 ## 静的フィールドの型推論
 
 TypeScriptの静的フィールドは初期値がセットされている場合、その初期値からフィールドの型が型推論されます。そのため、フィールドの型注釈が省略できます。
 
-```typescript
+```ts
 class SomeClass {
   static field = 123;
 }
@@ -59,7 +61,7 @@ class SomeClass {
 
 TypeScriptの静的フィールドはアクセス修飾子を組み合わせられます。
 
-```typescript
+```ts
 class SomeClass {
   private static field: number;
 }
@@ -71,7 +73,7 @@ class SomeClass {
 
 TypeScriptの静的フィールドはreadonly修飾子をつけると読み取り専用になります。
 
-```typescript
+```ts
 class SomeClass {
   static readonly field: number;
 }

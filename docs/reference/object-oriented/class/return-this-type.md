@@ -6,7 +6,7 @@ fluent interfaceとは「流れるようなインターフェース」という�
 
 四則演算ができる変哲もないクラス`Operator`を考えます
 
-```typescript
+```ts
 class Operator {
   protected value: number;
 
@@ -41,7 +41,7 @@ op.divide(3); // 4
 
 演算ごとにステートメントを分ける必要があります。このような場合メソッドチェインを使って処理を連続させることができます。
 
-```typescript
+```ts
 class Operator {
   protected value: number;
 
@@ -78,7 +78,7 @@ op.sum(5).subtract(3).multiply(6).divide(3); // 4
 
 ここで、このクラス`Operator`を拡張して累乗の計算を追加したいとします。すると新しいクラス`NewOperator`は次のようになるでしょう。
 
-```typescript
+```ts
 class NewOperator extends Operator {
   public constructor(value: number) {
     super(value);
@@ -93,7 +93,7 @@ class NewOperator extends Operator {
 
 ですが、このクラスでは次の演算ができません。
 
-```typescript
+```ts
 const op: NewOperator = new NewOperator(2);
 op.power(3).multiply(2).power(3);
 // Property 'power' does not exist on type 'Operator'.
@@ -103,7 +103,7 @@ op.power(3).multiply(2).power(3);
 
 このような時、戻り値に`this`を設定することができます。上記クラスの戻り値の`Operator, NewOperator`をすべて`this`に置き換えると問題が解消されます。
 
-```typescript
+```ts
 class Operator {
   protected value: number;
 

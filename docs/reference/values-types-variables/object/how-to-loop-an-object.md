@@ -65,7 +65,7 @@ for (const prop in foo) {
 const foo = { a: 1, b: 2, c: 3 };
 Object.prototype.hi = "Hi!";
 for (const prop in foo) {
-  if (foo.hasOwnProperty(prop)) {
+  if (Object.prototype.hasOwnProperty.call(foo, prop)) {
     console.log(prop, foo[prop]);
     // a 1
     // b 2

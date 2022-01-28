@@ -2,7 +2,7 @@
 
 JavaScriptでの継承関係のチェックは`instanceof`演算子で確認できます。この書き方は、JavaやPHPとよく似ています。
 
-```javascript
+```js
 const parent = new Parent();
 const child = new Child();
 

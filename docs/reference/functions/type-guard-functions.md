@@ -6,7 +6,7 @@ sidebar_label: 型ガード関数
 
 Type predicateの宣言は戻り値が`boolean`型の関数に対して適用でき、戻り値の型の部分を次のように書き替えます。
 
-```typescript
+```ts
 function isDuck(animal: Animal): animal is Duck {
   // ...
 }
@@ -14,7 +14,7 @@ function isDuck(animal: Animal): animal is Duck {
 
 これで関数`isDuck()`が`true`を返す時の`if`のブロックの中では`animal`は`Duck`型として解釈されるようになります。
 
-```typescript
+```ts
 if (isDuck(animal)) {
   animal.quacks();
   // ...
@@ -23,7 +23,7 @@ if (isDuck(animal)) {
 
 しかしながら、これはあくまでもその型であるとTypeScriptに解釈させるだけなので、JavaScriptとして正しいということは断言できません。
 
-```typescript
+```ts
 function isUndefined(value: unknown): value is undefined {
   return typeof value === "number";
 }
@@ -33,4 +33,4 @@ function isUndefined(value: unknown): value is undefined {
 
 ## 関連情報
 
-[🚧型ガード、制御フロー分析、型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
+[型ガードによる型の絞り込みと制御フロー分析](../statements/control-flow-analysis-and-type-guard.md)

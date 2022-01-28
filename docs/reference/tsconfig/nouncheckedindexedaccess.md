@@ -1,12 +1,21 @@
+---
+description: インデックス型のプロパティや配列要素を参照したときundefinedのチェックを必須にする
+---
+
 # noUncheckedIndexedAccess
 
-リリースされたバージョン: 4.1
+`noUncheckedIndexedAccess`はインデックス型のプロパティや配列要素を参照したときundefinedのチェックを必須にするコンパイラオプションです。
+
+- デフォルト: `false`
+- 追加されたバージョン: 4.1
+
+## 解説
 
 インデックス型や配列で宣言されたオブジェクトが持つプロパティへのアクセスを厳密に評価します。
 
 [インデックス型 (index signature)](../values-types-variables/object/index-signature.md)
 
-```typescript
+```ts
 type ObjectLiteralLike = {
   en: string;
   fr: string;
@@ -40,9 +49,9 @@ log(spanish);
 log(third);
 ```
 
-`ObjectLiteralLike, ArrrayObjectLike`は共に`string`型のプロパティを持つオブジェクトの型として宣言されています。
+`ObjectLiteralLike, ArrayObjectLike`は共に`string`型のプロパティを持つオブジェクトの型として宣言されています。
 
-```typescript
+```ts
 const spanish: string = butterfly.es;
 const third: string = phoneticCodes[2];
 ```
@@ -64,14 +73,14 @@ log(third);
 
 このように厳密に定義されていないプロパティは`undefined`型とのユニオン型として解釈されるようになります。
 
-```typescript
+```ts
 const spanish: string | undefined = butterfly.es;
 const third: string | undefined = phoneticCodes[2];
 ```
 
 配列はインデックス記法でアクセスをすると`undefined`型とのユニオン型と解釈されますが`for-of, array.forEach()`はこの制約を受けないため積極的に使用を検討してください。
 
-```typescript
+```ts
 const phoneticCodes: string[] = ["alpha", "bravo", "charlie"];
 
 for (const p of phoneticCodes) {

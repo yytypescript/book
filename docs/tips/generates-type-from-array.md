@@ -6,13 +6,13 @@
 
 国際的な外貨を使うことができるサービスを開発していたとします。サポートしている通貨を配列で保持しているとし次のようになっているとします。
 
-```typescript
+```ts
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"];
 ```
 
 このようなとき、このJavaScriptの資産をできるだけ変更せずに貨幣の型 (ユニオン型) を作ることができれば今後便利そうです。つまり次のようなユニオン型です。
 
-```typescript
+```ts
 type Currency = "CNY" | "EUR" | "GBP" | "JPY" | "KRW" | "USD";
 ```
 
@@ -20,7 +20,7 @@ type Currency = "CNY" | "EUR" | "GBP" | "JPY" | "KRW" | "USD";
 
 これはJavaScriptの`typeof`ではなくTypeScriptの`typeof`です。`typeof`はTypeScriptがその変数をどのような型であるかと認識しているかかを教えてくれます。
 
-```typescript
+```ts
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"];
 
 type Currency = typeof currencies;
@@ -29,7 +29,7 @@ type Currency = typeof currencies;
 
 予想されている方が多かったかもしれませんが`string[]`型と出てしまいました。ではこれをどうすれば`string`ではなく定数値で取得できるでしょうか。それは定数値で取得したいオブジェクトに`as const`をつけると取得できます。
 
-```typescript
+```ts
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
 
 type Currency = typeof currencies;
@@ -37,7 +37,7 @@ type Currency = typeof currencies;
 
 `Currency`は次のようになります。
 
-```typescript
+```ts
 type Currency = readonly ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"];
 ```
 
@@ -47,7 +47,7 @@ type Currency = readonly ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"];
 
 たとえば`'GBP'`が欲しいとします。`'GBP'`は2番目なので`currencies`の2番目の型を取れば希望のリテラル型が取れます。
 
-```typescript
+```ts
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
 
 type Currency = typeof currencies[2];
@@ -60,7 +60,7 @@ type Currency = typeof currencies[2];
 
 本題です。まさか次のようにするわけには行かないのでもっと賢い方法を考える必要があります。
 
-```typescript
+```ts
 type Currency = typeof currencies[0] | typeof currencies[1] | typeof currencies[2] | ....
 ```
 
@@ -68,7 +68,7 @@ type Currency = typeof currencies[0] | typeof currencies[1] | typeof currencies[
 
 配列はnumber型のインデックスに要素を代入しているオブジェクトなのでこのリテラル型のインデックスの代わりに`number`を使うことによって
 
-```typescript
+```ts
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
 
 type Currency = typeof currencies[number];

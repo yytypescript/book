@@ -18,6 +18,14 @@ Markdownファイルを編集するエディターはVS Codeがお勧めです�
 
 [twoslashプラグイン](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-twoslash)をインストールすると、twoslashの補完が効くようになります。
 
+### Speechプラグイン
+
+[Speechプラグイン](https://marketplace.visualstudio.com/items?itemName=bierner.speech)は、選択したテキストを音声読み上げします。文章の音声読み上げを聞きながら、文章を確認すると、誤字などに気づける場合があります。
+
+### Code Spell Checkerプラグイン
+
+[Code Spell Checkerプラグイン](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)は英単語のスペルミスと思われる箇所を下線で表示します。スペルミスの防止に役立ちます。
+
 ## 操作Tips
 
 ### 編集するファイルを探す

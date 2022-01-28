@@ -15,7 +15,7 @@ TypeScriptで定義されたインターフェースは、コンパイルチェ�
 
 TypeScriptでは`interface`キーワードでインターフェースを定義できます。
 
-```typescript
+```ts
 interface SomeInterface {
   method1(): void;
   method2(arg: string): void;
@@ -24,7 +24,7 @@ interface SomeInterface {
 
 TypeScriptではメソッドだけでなく、パブリックフィールドも定義できます。
 
-```typescript
+```ts
 interface SomeInterface {
   field: string;
 }
@@ -36,7 +36,7 @@ Javaなどのオブジェクト指向言語ではクラスの抽象的な型定�
 
 TypeScriptでもインターフェースをクラスに実装させることはできますが、それに加えて、TypeScriptは構造的部分型なので、インターフェースと実装関係がないオブジェクトの型注釈としても利用できます。
 
-```typescript
+```ts
 interface Person {
   name: string;
   age: number;

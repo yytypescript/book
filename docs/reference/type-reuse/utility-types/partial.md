@@ -13,7 +13,7 @@ title: Partial<T>
 
 ## Partialの使用例
 
-```typescript
+```ts
 type Person = {
   surname: string;
   middleName?: string;
@@ -24,7 +24,7 @@ type PartialPerson = Partial<Person>;
 
 この`PartialPerson`は次の型と同じになります。
 
-```typescript
+```ts
 type PartialPerson = {
   surname?: string;
   middleName?: string;
@@ -40,7 +40,7 @@ type PartialPerson = {
 
 ユーザーの検索をかける関数を作ります。プロパティはそれぞれ引数となっており、対応する引数に値を与えると検索ができる関数`findUsers()`があるとします。ここでは例のため引数を
 
-```typescript
+```ts
 type User = {
   surname: string;
   middleName?: string;
@@ -66,7 +66,7 @@ function findUsers(
 
 ですが、この`findUsers()`のシグネチャだと**年齢だけがXX才の**ユーザーが欲しい時は引数の順番を維持するために他の引数は`undefined`を入力しなければいけません。
 
-```typescript
+```ts
 findUsers(undefined, undefined, undefined, 22);
 ```
 
@@ -74,13 +74,13 @@ findUsers(undefined, undefined, undefined, 22);
 
 まず引数はすべてオブジェクトで受け渡しされるものとしてそのオブジェクトの型を定義します。さらにプロパティを省略可能にするために`Partial<T>`をつけます。
 
-```typescript
+```ts
 type FindUsersArgs = Partial<User>;
 ```
 
 これを関数`findUsers()`の引数にします。
 
-```typescript
+```ts
 function findUsers({
   surname,
   middleName,
@@ -95,13 +95,13 @@ function findUsers({
 
 これだけではまだ呼び出し側は省略ができません。`findUsers()`を使用する時は仮に何も設定する必要がなくても引数に`{}`を与えなければいけません。
 
-```typescript
+```ts
 findUsers({});
 ```
 
 引数を省略できるようにするためにデフォルト引数を使い省略時に`{}`が代入されるようにします。
 
-```typescript
+```ts
 function findUsers({
   surname,
   middleName,
@@ -114,14 +114,14 @@ function findUsers({
 }
 
 findUsers();
-findUsers({ age = 22 });
+findUsers({ age: 22 });
 ```
 
-`FindUsersArgs`の右の`= {}`がそれにあたります。これにより`findUsers()`は引数がなくても呼び出せるようになります。特定の引数だけ値を指定することもできます。`findUsers({ age = 22 })`がその例です。
+`FindUsersArgs`の右の`= {}`がそれにあたります。これにより`findUsers()`は引数がなくても呼び出せるようになります。特定の引数だけ値を指定することもできます。`findUsers({ age: 22 })`がその例です。
 
 さらに`FindUsersArgs`側にもデフォルト型を設定することで初期値することもできます。
 
-```typescript
+```ts
 function findUsers({
   name = "John Doe",
   nationality = "Araska",

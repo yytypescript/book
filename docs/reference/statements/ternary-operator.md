@@ -6,28 +6,29 @@ sidebar_label: 三項演算子
 
 JavaScriptの三項演算子(ternary operator)は、条件分岐ができる演算子です。条件式、真の場合の値、偽の場合の値の三項を取るため三項演算子と呼ばれています。
 
-```javascript
+```js
 条件式 ? 真の場合の値 : 偽の場合の値;
 ```
 
 演算の結果は変数に代入できます。
 
-```javascript
+```js twoslash
 const age = 20;
 const drink = age >= 20 ? "ビール" : "ジュース";
-console.log(drink); //=> "ビール"
+console.log(drink);
+// @log: "ビール"
 ```
 
 条件分岐といえばif-elseですが、if-elseは構文なので上のようにif-elseを直接、値を返すような書き方はできません。
 
-```javascript
+```js
 // こうした書き方はできない
-const dring = if (age >= 20) "ビール" else "ジュース";
+const drink = if (age >= 20) "ビール" else "ジュース";
 ```
 
 三項演算子は条件をネストできます。
 
-```javascript
+```js
 const extension = "ts";
 const language =
   extension === "js"
@@ -41,7 +42,7 @@ const language =
 
 上のコードと同等の処理をif-elseで書くと次のようになります。
 
-```javascript
+```js
 const extension = "ts";
 let language;
 if (extension === "js") {

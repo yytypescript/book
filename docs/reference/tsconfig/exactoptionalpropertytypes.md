@@ -1,8 +1,20 @@
+---
+description: オプションプロパティにundefinedの代入することを禁止する
+---
+
 # exactOptionalPropertyTypes
+
+`exactOptionalPropertyTypes`はオプションプロパティに`undefined`の代入することを禁止するコンパイラオプションです。
+
+- デフォルト: `false`
+- 追加されたバージョン: 4.4
+- TypeScript公式が有効化推奨
+
+## 解説
 
 今までオプション修飾子は値を設定しないことに加えて`undefined`を意図的に設定することができました。
 
-```typescript
+```ts
 interface User {
   name: string;
   nationality?: "India" | "China";
@@ -25,7 +37,7 @@ const user3: User = {
 
 値が未定義であることと値が`undefined`であることは厳密には動作が異なります。たとえば`Object.keys()`は最たる例で、上記の`user1, user2, user3`にそれぞれ`Object.keys()`を適用すれば結果は次のようになります。
 
-```typescript
+```ts
 // user1
 ["name", "nationality"];
 // user2

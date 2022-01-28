@@ -19,7 +19,7 @@ const pageRef = () => (node) => {
     if (paragraph.children.length !== 1) {
       continue;
     }
-    if (paragraph.children[0].type !== "link") {
+    if (paragraph.children[0]?.type !== "link") {
       continue;
     }
     const link = paragraph.children[0];
@@ -29,7 +29,9 @@ const pageRef = () => (node) => {
     linkFound = true;
     node.children[index] = {
       type: /** @type {any} */ ("jsx"),
-      value: `<PageRef link="${slugToFilename(link.url)}" />`,
+      value: `<PageRef link="${slugToFilename(link.url)}" slug="${
+        link.url
+      }" title="${link.title || link.url}" />`,
     };
   }
 

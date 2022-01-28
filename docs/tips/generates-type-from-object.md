@@ -6,9 +6,9 @@
 
 多くの言語ではその型が何かを決めてから、その型に属するオブジェクトを決めます。次の例はTypeScriptの例ですが、他の言語に当てはめても問題なく受け入れられると思います。
 
-```typescript
+```ts
 type Account = {
-  accuontName: string;
+  accountName: string;
   password: string;
   age: number;
   plan: "Free" | "Standard" | "Premium";
@@ -28,7 +28,7 @@ const account: Account = {
 
 この`typeof`はJavaScriptのものではなく、TypeScriptの`typeof`です。これを実際に動作している変数に使ってみるとその変数をTypeScriptはどのような型と認識しているのかがわかります。
 
-```typescript
+```ts
 const account = {
   accountName: "yyts",
   password: "ccbyncsa30",
@@ -41,7 +41,7 @@ type Account = typeof account;
 
 するとこの変数から生成された型`Account`は次のようになります。
 
-```typescript
+```ts
 type Account = {
   password: string;
   accountName: string;
@@ -56,7 +56,7 @@ type Account = {
 
 プロパティを定数値で取得したい場合はオブジェクトに`as const`をつけます。
 
-```typescript
+```ts
 const account = {
   accountName: "yyts",
   password: "ccbyncsa30",
@@ -69,7 +69,7 @@ type Account = typeof account;
 
 `Account`は次のようになります。
 
-```typescript
+```ts
 type Account = {
   readonly password: "ccbyncsa30";
   readonly accountName: "yyts";
@@ -82,7 +82,7 @@ type Account = {
 
 これでは型の制約が強力すぎて他の値が代入できないので、もう少し柔軟にします。たとえば`plan`だけがユニオン型になるようにしたければ`plan`の右に希望の型を書いてあげればそれでその型になります。
 
-```typescript
+```ts
 const account = {
   accountName: "yyts",
   password: "ccbyncsa30",
@@ -95,7 +95,7 @@ type Account = typeof account;
 
 `Account`は次のようになります。
 
-```typescript
+```ts
 type Account = {
   password: string;
   accountName: string;

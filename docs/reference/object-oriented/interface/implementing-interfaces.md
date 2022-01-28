@@ -2,7 +2,7 @@
 
 TypeScriptでは、クラスがインターフェースを実装できます。実装するには`implements`キーワードを用います。
 
-```typescript
+```ts
 interface Human {
   think(): void;
 }
@@ -16,7 +16,7 @@ class Developer implements Human {
 
 インターフェースを複数指定することもできます。そのときは`,`でインターフェースを区切り列挙します。
 
-```typescript
+```ts
 interface Human {
   think(): void;
 }
@@ -38,7 +38,7 @@ class TypeScriptProgrammer implements Human, Programmer {
 
 インターフェースで定義されたフィールドをクラスで実装するには、クラス側にはフィールドを定義します。
 
-```typescript
+```ts
 interface Human {
   name: string;
 }
