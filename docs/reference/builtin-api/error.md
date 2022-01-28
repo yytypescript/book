@@ -55,7 +55,7 @@ console.log(err.stack);
 
 `throw`された例外は`catch`で捕捉できます。ですが先ほど述べたようにJavaScriptはどのような値も`throw`できるので`catch`した値の型は定まらず`any`型か`unknown`型として解釈されます。どちらの型になるかはtsconfig.jsonの`useUnknownInCatchVariables`の設定により決まります。
 
-[useunknownincatchvariables]: ../tsconfig/useunknownincatchvariables.md
+[useunknownincatchvariables](../tsconfig/useunknownincatchvariables.md)
 
 もし補足した値があるクラスのインスタンスまたはある型であるかを判定したい場合は`instanceof`, `keyof`あるいは型ガードを使います。
 
