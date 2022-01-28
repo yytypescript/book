@@ -187,6 +187,7 @@ let b = 1;
 a &&= b;
 
 console.log(a);
+// @log: 1
 ```
 
 ### `'` 文字列リテラル (string literal) ![js]
