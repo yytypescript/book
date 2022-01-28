@@ -155,22 +155,27 @@ console.log(a); // 00000001
 
 特にboolean値が与えられた場合は、双方とも`true`のときに`true`を返し、そうでないときに`false`を返します。
 
-```javascript
-console.log(true && true) // true
-console.log(true && false) // false
+```js twoslash
+console.log(true && true);
+// @log: true
+console.log(true && false);
+// @log: false
 
-console.log(1 && '') // ''
+console.log(1 && "");
+// @log: ""
 ```
 
 ### `&&=` 論理積代入 (logical and assignment) ![js]
 
 左の変数と右の値の`&&`論理積の結果を左の変数に割り当てます。
 
-```javascript
+```js twoslash
 let a = true;
 let b = 1;
 a &&= b;
-console.log(a); // 1
+
+console.log(a);
+// @log: 1
 ```
 
 ### `'` 文字列リテラル (string literal) ![js]
