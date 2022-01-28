@@ -17,7 +17,7 @@ console.log(map.get("a"));
 
 コンストラクタにキーと値の[タプル型]`[K, V]`の配列`[K, V][]`を渡すと`Map<K, V>`オブジェクトが作られます。
 
-[タプル型]: ../values-types-variables/tuple.md
+[タプル型](../values-types-variables/tuple.md)
 
 ```ts twoslash
 const map = new Map<string, number>([
