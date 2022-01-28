@@ -152,6 +152,12 @@ const tsconfigForTwoslash = require(__dirname + "/tsconfig.twoslash.json");
             "jsx",
           ],
         },
+        algolia: {
+          appId: "5N3JHNPACB",
+          apiKey: "99655de886960eadb0eca65591529110",
+          indexName: "typescriptbook",
+          contextualSearch: true,
+        },
       }),
     i18n: {
       defaultLocale: "ja",
