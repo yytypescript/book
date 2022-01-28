@@ -163,18 +163,31 @@ console.log(a);
 
 ### `&&` 論理積 (logical and) ![js]
 
-すべての真偽値が`true`のときに`true`を返します。そうでない場合に`false`を返します。
+左の値がtruthyな場合は右の値を返します。そうでないときは左の値を返します。
+
+特にboolean値が与えられた場合は、双方とも`true`のときに`true`を返し、そうでないときに`false`を返します。
+
+```js twoslash
+console.log(true && true);
+// @log: true
+console.log(true && false);
+// @log: false
+
+console.log(1 && "");
+// @log: ""
+```
 
 ### `&&=` 論理積代入 (logical and assignment) ![js]
 
-左の変数の真偽値と右の真偽値の論理積の結果を左の変数に割り当てます。
+左の変数と右の値の`&&`論理積の結果を左の変数に割り当てます。
 
 ```js twoslash
 let a = true;
-let b = false;
+let b = 1;
 a &&= b;
+
 console.log(a);
-// @log: false
+// @log: 1
 ```
 
 ### `'` 文字列リテラル (string literal) ![js]
@@ -900,11 +913,31 @@ const id3 = true; // ERROR
 
 ### `||` 論理和 (logical or) ![js]
 
-ひとつでも真偽値が`true`のときに`true`を返します。そうでない場合に`false`を返します。
+左の値がtruthyな場合はそれを返します。そうでないときは右の値を返します。
+
+特にboolean値の場合は、ひとつでも`true`のときに`true`を返し、そうでない場合に`false`を返します。
+
+```js twoslash
+console.log(true || false);
+// @log: true
+console.log(false || false);
+// @log: false
+
+console.log(false || "abc");
+// @log: "abc"
+```
 
 ### `||=` 論理和代入 (logical or assignment) ![js]
 
-左の変数の真偽値と右の真偽値の論理和の結果を左の変数に割り当てます。
+左の変数と右の値の`||`論理和の結果を左の変数に割り当てます。
+
+```js twoslash
+let a = false;
+let b = 1;
+a ||= b;
+console.log(a);
+// @log: 1
+```
 
 ### `~` ビット否定演算子 (bitwise not) ![js]
 
