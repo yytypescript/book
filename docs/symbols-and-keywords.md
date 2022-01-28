@@ -904,22 +904,26 @@ const id3 = true; // ERROR
 
 特にboolean値の場合は、ひとつでも`true`のときに`true`を返し、そうでない場合に`false`を返します。
 
-```javascript
-console.log(true || false) // true
-console.log(false || false) // false
+```js twoslash
+console.log(true || false);
+// @log: true
+console.log(false || false);
+// @log: false
 
-console.log(false || 'abc') // 'abc'
+console.log(false || "abc");
+// @log: "abc"
 ```
 
 ### `||=` 論理和代入 (logical or assignment) ![js]
 
 左の変数と右の値の`||`論理和の結果を左の変数に割り当てます。
 
-```javascript
+```js twoslash
 let a = false;
 let b = 1;
 a ||= b;
-console.log(a); // 1
+console.log(a);
+// @log: 1
 ```
 
 ### `~` ビット否定演算子 (bitwise not) ![js]
