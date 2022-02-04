@@ -14,7 +14,7 @@ TypeScriptが発明されるに至った歴史的背景を「TypeScript誕生の
 2. モジュール性
 3. 緩やかな学習コスト
 
-このうち特に型による静的チェックは、TypeScriptに「Type」という名が冠されているように、TypeScriptの目玉機能です。型チェックはプログラムを実行せずとも、プログラムの欠陥に気づくことができます。バグは発見が遅れるほど修正コストが高くつきますが、TypeScriptではコーディング中に頻繁にチェックすることができ、バグ早期発見によって修正コストも抑えることができます。AirBnBによると、[TypeScriptを使っていたらAirBnBの38%ものバグを未然に防げたと見る分析](https://www.reddit.com/r/typescript/comments/aofcik/38_of_bugs_at_airbnb_could_have_been_prevented_by/)を発表しています。
+このうち特に型による静的チェックは、TypeScriptに「Type」という名が冠されているように、TypeScriptの目玉機能です。型チェックはプログラムを実行せずとも、プログラムの欠陥に気づくことができます。バグは発見が遅れるほど修正コストが高くつきますが、TypeScriptではコーディング中に頻繁にチェックすることができ、バグ早期発見によって修正コストも抑えることができます。Airbnbによると、[TypeScriptを使っていたらAirbnbの38%ものバグを未然に防げたと見る分析](https://www.reddit.com/r/typescript/comments/aofcik/38_of_bugs_at_airbnb_could_have_been_prevented_by/)を発表しています。
 
 また、型があることで、プログラムの可読性や理解しやすさが上がったり、エディターの補完機能を活かすことができ、コーディングの効率も良くなります。
 
