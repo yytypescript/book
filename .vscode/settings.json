@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["bivariance", "contravariance", "twoslash", "typeof"]
+  "cSpell.words": [
+    "bivariance",
+    "contravariance",
+    "keyof",
+    "twoslash",
+    "typeof"
+  ]
 }
