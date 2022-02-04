@@ -63,7 +63,7 @@ function isMeals(meals: MealsPerDay): void {
 }
 ```
 
-今回のユースケースでは`isMeals()`でバリデーションを行ったあとその食事を`willBeMetabo()`で判定します。食べられないものが与られたときは例外を補足して対応できればよいので大まかにはこのような形になるでしょう。
+今回のユースケースでは`isMeals()`でバリデーションを行ったあとその食事を`willBeMetabo()`で判定します。食べられないものが与られたときは例外を捕捉して対応できればよいので大まかにはこのような形になるでしょう。
 
 ```ts
 function shouldBeCareful(meals: MealsPerDay): boolean {
