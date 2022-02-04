@@ -57,7 +57,7 @@ console.log(err.stack);
 
 [useunknownincatchvariables](../tsconfig/useunknownincatchvariables.md)
 
-もし補足した値があるクラスのインスタンスまたはある型であるかを判定したい場合は`instanceof`, `keyof`あるいは型ガードを使います。
+もし捕捉した値があるクラスのインスタンスまたはある型であるかを判定したい場合は`instanceof`, `keyof`あるいは型ガードを使います。
 
 ```ts
 try {
