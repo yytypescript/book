@@ -285,10 +285,10 @@ const m1: Map<number, string> = new Map<number, string>([
   [2, "e"],
   [3, "f"],
 ]);
-const m2 = new Map([...m1]);
+const m2 = new Map(m1);
 
 const s1: Set<string> = new Set(["g", "d", "k"]);
-const s2: Set<string> = new Set([...s1]);
+const s2: Set<string> = new Set(s1);
 ```
 
 2, 9, 16 行目がそれぞれのコレクションの浅いコピーを意味しています。
