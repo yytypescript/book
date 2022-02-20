@@ -149,7 +149,7 @@ function foo({ a, b } = { a: 0, b: 0 }) {
   console.log(a, b);
 }
 foo();
-// @log: 1 2
+// @log: 0 0
 foo({ a: 1 });
 // @log: 1 undefined
 
@@ -157,7 +157,7 @@ function bar([a, b] = [0, 0]) {
   console.log(a, b);
 }
 bar();
-// @log: 1 2
+// @log: 0 0
 bar([1]);
 // @log: 1 undefined
 ```
