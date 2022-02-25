@@ -33,11 +33,11 @@ xy平面上の点を表す`TwoDimensionalPoint`を拡張してxyz平面上の点
 
 プリミティブ型のインターセクション型をつくることもできますが、作ると`never`という型ができます。
 
-```ts
+```ts twoslash
+// @errors: 2322
 type Never = string & number;
 
 const n: Never = "2";
-// Type '"2"' is not assignable to type 'never'.
 ```
 
 この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが意外なところで役に立ちます。今回は説明を省きます。
@@ -121,5 +121,5 @@ type Optional = Partial<{
 これで最初に定義した`Parameter`と同じタイプエイリアスができました。
 
 ```ts
-type Parameter = Readonly<Mandatory & Optional>;
+type Parameter = Mandatory & Optional;
 ```
