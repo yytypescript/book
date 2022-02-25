@@ -139,7 +139,7 @@ function printLang(ext: Extension): void {
 
 ### 例外による網羅性チェック
 
-一歩進んで網羅性チェック用の例外クラスを定義するのがお進めです。このクラスは、コンストラクタ引数に`never`型を取る設計にします。
+一歩進んで網羅性チェック用の例外クラスを定義するのがお勧めです。このクラスは、コンストラクタ引数に`never`型を取る設計にします。
 
 ```ts twoslash title="網羅性チェック関数"
 class ExhaustiveError extends Error {
