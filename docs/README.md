@@ -9,6 +9,12 @@ image: /img/ogp.png
   <title>TypeScript入門『サバイバルTypeScript』〜実務で使うなら最低限ここだけはおさえておきたいこと〜</title>
 </head>
 
+<!-- markdownlint-disable MD033 -->
+
+<iframe src="https://ghbtns.com/github-btn.html?user=yytypescript&repo=book&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
+
+<!-- markdownlint-restore -->
+
 ## これはどのような本か？
 
 本書の目標は、本読者がTypeScriptをすぐに実務で利用できるよう、最短ルートに読者を導く一冊になることです。本書は、TypeScriptの網羅的なドキュメントではありません。逆に、実務であまり使わないTypeScriptの機能は割愛します。扱う内容は、頻出する機能にしぼりにしぼって、「実務でTypeScriptを使うなら、ここだけはおさえておこう」「ここだけはおさえておけば、実務で死なない(=サバイバルできる)」という観点で執筆しています。
