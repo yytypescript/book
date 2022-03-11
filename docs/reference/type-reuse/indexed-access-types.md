@@ -60,7 +60,7 @@ type T = StringArray[number];
 要素がユニオン型の配列型に対しても使えます。
 
 ```ts twoslash
-type MixedArray = Array<string | undefined>;
+type MixedArray = (string | undefined)[];
 type T = MixedArray[number];
 //   ^?
 ```
