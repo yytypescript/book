@@ -68,7 +68,7 @@ double bangはJavaScriptで定義されている演算子ではなく、論理�
 型を含めて左の値と右の値が異なるか判定します。
 
 ```js twoslash
-1 !== 2;
+1 !== "1";
 // @log: true
 ```
 
