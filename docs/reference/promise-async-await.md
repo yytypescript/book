@@ -165,14 +165,21 @@ function request(): Promise<string> {
 
 ### `async`関数
 
-関数の前に`async`キーワードをつけることで、その関数は非`Promise`の値を返す時にその値を解決した`Promise`を返すようになります。
+関数の前に`async`キーワードをつけると、たとえその関数内で`Promise`が返されていなくても、戻り値の型を`Promise`で包んで返します。
 
 ```ts twoslash
 async function requestAsync(): Promise<number> {
   return 1;
 }
+```
 
-// asyncを使わずに書いた場合
+この例では非`Promise`である定数を返していますが`async`関数はその戻り値を`Promise`で包んでいます。
+
+```ts twoslash
+declare function requestAsync(): Promise<number>;
+
+// ---cut---
+// これと同じ
 function request(): Promise<number> {
   return new Promise((resolve) => {
     resolve(1);
