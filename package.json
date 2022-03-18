@@ -82,6 +82,8 @@
     "ts-jest": "^27.1.2"
   },
   "engines": {
-    "node": ">=14.x"
-  }
+    "node": ">=14.x",
+    "yarn": "^1.22.17"
+  },
+  "packageManager": "yarn@1.22.17"
 }
