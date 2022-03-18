@@ -85,7 +85,7 @@ const value: unknown = { a: 1, b: 2 };
 if (isObject(value)) {
   console.log(Object.keys(value));
   //                      ^?
-  // このでは、valueはobject型として扱える
+  // ここでは、valueはobject型として扱える
 }
 ```
 
