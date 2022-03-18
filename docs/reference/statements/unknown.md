@@ -1,15 +1,7 @@
-# 🚧unknown型
+# unknown型
 
-TODO: 次のことについて書く
-
-- unknownはTypeScriptの型
-- unknownはどんな型も代入できる型
-- unknown型はanyを除いて他の型には代入できない
-- 同様にunknown型は、プロパティアクセスや関数呼び出しがコンパイルエラーになる。
-- control flow analysisや型ガード関数と組み合わせて型の絞り込みして使うことが多い
-
-TypeScriptにはunknown型という型があります。これはこの型の変数の実体が何かをわからないときに使うタイプセーフなany型です。
-unknown型にはどのような値を代入してもエラーにはなりません。
+TypeScriptにはunknown型という型があります。これはこの型の変数の実体が何かわからないときに使うタイプセーフなany型です。
+any型と同様にunknown型にはどのような値を代入してもエラーにはなりません。
 
 ```ts twoslash
 let value: unknown;
@@ -44,102 +36,178 @@ const any: any = value; // OK
 const unknown: unknown = value; // OK
 ```
 
-number型である変数`int`に対しても代入が失敗しているのはやりすぎではないかと思われるかもしれません。
+number型である変数`int`に対しても代入が失敗しているのはやりすぎではないかと思われるかもしれませんが、不明な型をタイプセーフに扱うとこのようになります。
 
-また、unknown型にはたとえその変数にある元の値の型がわかっていたとしてもいかなる操作も許されません。
+また、unknown型はたとえその変数にある元の値の型がわかっていたとしてもいかなるプロパティへのアクセス、メソッドの呼び出しも許されません。
 
 ```ts twoslash
 // @errors: 2571
 const value: unknown = 10;
 
 value.toFixed();
+
+const obj: unknown = { name: "オブジェクト" };
+
+obj.name;
 ```
 
-## unknownはどのように使う
+## unknownの使い方
 
-## 関連情報
+このような型、一体どのように使うべきなのかという疑問が出てくるかもしれませんが次のような使い道があります。
+
+- any型よりも安全な型として使用する
+- 型ガードを使って再び有効な型として使う
+
+### any型よりも安全な型として使用する
+
+こちらについてはany型とunknown型の比較をしているページがありますのでそちらを参照ください。
+
+[anyとunknownの違い](any-vs-unknown.md)
+
+### 型ガードを使って再び有効な型として使う
+
+あるunknown型の引数を型ガードを使ってどの型であるかをTypeScriptに判定させることができます。
+たとえば、オブジェクトを判定する型ガードの関数は次のようになります。
+
+```ts twoslash
+function isObject(value: unknown): value is object {
+  if (typeof value === "object") {
+    return value !== null;
+  }
+
+  return false;
+}
+```
+
+unknown型が帰ってきた場合は型ガードや`typeof`、`instanceof`で欲しい型へと絞り込みます。
+型を絞り込むことができればその時点で変数がその型であるように振る舞うことができるようになります。
+
+```ts twoslash
+function capitalize(value: unknown): void {
+  if (typeof value === "string") {
+    console.log(value.toUpperCase());
+  }
+}
+```
+
+この例ではunknown型の変数`value`が`typeof`によりifの中ではstring型であることが確定したため、string型のメソッドである`toUpperCase()`を使えるようになりました。
+
+[型ガード関数](../functions/type-guard-functions.md)
+
+[制御フロー分析](../statements/control-flow-analysis-and-type-guard.md)
+
+### any型を返す関数の戻り値として代わりに使う
+
+たとえば`JSON.parse()`は戻り値がany型ですが、代わりにunknown型を使うことで意図しないプロパティへのアクセスを防げます。
 
 [any型](../values-types-variables/any.md)
 
-[any vs unknown](any-vs-unknown.md)
+### unknown型を配列型へと絞り込む
 
-アウトラインです。これをもとに執筆してほしいです。
+unknown型を配列型に絞り込みたいときは`Array.isArray()`を使います。使ったあとの配列はany[]型と判定されます。
+このあとさらに各要素が希望する型であるかどうかを判定したい場合はそれぞれに型ガードを施します。
 
-links→内部リンク
-keywords→できるだけ盛り込みたい検索用ワード
+```ts
+function isNumberArray(value: unknown): value is number[] {
+  if (!Array.isArray(value)) {
+    return false;
+  }
 
-unknownとは
-解決する疑問: unknownとはいったい何？
+  return value.every((e) => {
+    return typeof e === "number";
+  });
+}
+```
 
-[x] unknownはTypeScriptの特別な型
-[x] unknown型にはどんな型も代入できる
-[x] unknown型はどんな型にも代入できない(anyを除く)
-[x] 代入しようとするとコンパイルエラーになる
-[x] keywords: TypeScript、型、代入
+### unknown型からオブジェクト型へ絞り込む
 
-unknownの用例
-解決する疑問: そんな型どこで使うの？
+unknown型をオブジェクト型に絞り込みたいときに`typeof === "object"`を使うとキーとプロパティの定義されていないオブジェクトであるとされ、望む形のオブジェクトかどうかの判定ができません。そのようなときは一度希望する型とキーは同じではあるものの、プロパティの型がunknownである型を`Record<>`で作成してキャストし、その後各プロパティの型チェックをします。
 
-[ ] anyよりも型安全なコードになる
-[ ] JSON.parseの戻り値の型注釈に
-[ ] 型ガード関数に
-[ ] links: 型ガード関数
+```ts twoslash
+// @errors: 2339
+type Email = {
+  from: string;
+  to: string;
+  title: string;
+  subject: string;
+};
 
-keywords: 用法, 使い方
+function isEmail(value: unknown): value is Email {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+  const email = value as Record<keyof Email, unknown>;
 
-unknownの絞り込み
-解決する疑問: unknownの変数が返ってきた。使うとエラーになる。どうしたらいい？
+  if (typeof email.from !== "string") {
+    return false;
+  }
+  if (typeof email.to !== "string") {
+    return false;
+  }
+  if (typeof email.title !== "string") {
+    return false;
+  }
+  return typeof email.subject === "string";
+}
+```
 
-unknownの値を処理するには、型を絞り込む
-絞り込むには、型ガードを使う。
-links: 型ガード、制御フロー分析、型の絞り込み
+このときの`Record<keyof Email, unknown>`型は次のようになります。
 
-keywords: 判定、チェック、キャスト、変換、型ガード、type predicate
+```ts twoslash
+type Email = {
+  from: string;
+  to: string;
+  title: string;
+  subject: string;
+};
 
-unknownから文字列型への絞り込み
-解決する疑問: unknownを文字列型に絞り込みたい
+type MayBeEmail = Record<keyof Email, unknown>;
 
-if (typeof value === 'string')
-keywords: string 文字列型
+const mayBeEmail: MayBeEmail = {
+  //              ^?
+  from: "",
+  to: "",
+  title: "",
+  subject: "",
+};
+```
 
-unknownから配列型への絞り込み
-解決する疑問: unknownから配列型(number[])に絞り込みたい
+`Record<>`についての詳しい説明は専用に説明しているページがありますので併せて参照してください。
 
-Array.isArrayを使う
-さらに、ループの中でtypeofを使う
-keywords: array 配列
+[Record<K, T>](../type-reuse/utility-types/record.md)
 
-unknownからオブジェクト型への絞り込み
-解決する疑問: unknownのプロパティにアクセスできない
+### unknown型を型アサーションに使う
 
-typeofでしぼりこむ
-プロパティごとにtypeofする
-keywords: オブジェクト、プロパティ
+通常、型アサーションではまったく異なる型へのキャストができません。
 
-unknownと型アサーション
-普通は型アサーションは一定の制約がある (string as 'a'はOKだが、string as numberは無理)
-unknownはどんな型にも型アサーションできる
-unknownを型アサーションするのは楽だが、型安全性は犠牲になるよ
-links: 型アサーション「as」
+```ts twoslash
+// @errors: 2352
+const str = "a";
+const num = str as number;
+```
 
-unknownとcatch
-解決する疑問: catch(e)のeがunknownでハンドリングできないんだが
+このようなときにunknown型を使うことができます。unknown型を使った型アサーションはどのような型へのキャストもできるため、目的の型にキャストする前に一度unknown型へのキャストを挟むことによってこれが可能になります。
 
-useUnknownInCatchVariablesがtrueだとunknownになる
-TODO: 順当にいったら型ガードで絞り込むだけど、ベストプラクティスありません？
+```ts twoslash
+// @errors: 2352
+const str = "a";
+const num = str as unknown as number;
+```
 
-instanceof
-isError関数を作っておく
-カスタムエラーオブジェクトならクラスに型ガード静的メソッドを作っておくといいかも？
-links: 例外処理、useUnknownInCatchVariables
+ただし、このキャストは実際に値の型を変更しているのではなく、TypeScriptにその型であると認識させているだけなので型の安全性に問題が生じます。
 
-keywords: catch, 例外、エラー, ハンドリング
+[型アサーション](../values-types-variables/type-assertion-as.md)
 
-unknownとanyの違い
-解決する疑問: unknownとanyって似てるけどどう違う？
+### try-catchで捕捉される値の型
 
-ひとことでunknownは型安全なany
-anyにしたくなったらunknownを使おう
-links: unknownとanyの違い
+TypeScriptは4.4になって、投げられた例外がany型としてかunknown型のどちらかで捕捉されるかを選べるようになりました。
+ですが、標準の設定では投げられた例外はany型なのでunknown型にしたい場合はtsconfig.jsonの設定を変える必要があります。
 
-keywords: any 違い, anyの代わり
+[useUnknownInCatchVariables](../tsconfig//useunknownincatchvariables.md)
+
+## バリデーションライブラリ
+
+unknown型を安全にキャストするためにはバリデーションを行う専門のライブラリがあります。ここでは有名なライブラリを紹介します。
+
+[superstruct](https://docs.superstructjs.org/)
+[zod](https://github.com/colinhacks/zod)
