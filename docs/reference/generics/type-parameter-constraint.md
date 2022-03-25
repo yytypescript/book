@@ -21,7 +21,7 @@ function changeBackgroundColor<T>(element: T) {
 
 ```ts
 function changeBackgroundColor<T>(element: T) {
-  // any にキャストすればコンパイルエラーは回避できる
+  // any に型アサーションすればコンパイルエラーは回避できる
   // 型チェックされないのでバグの可能性
   (element as any).style.backgroundColor = "red";
   return element;
