@@ -266,31 +266,41 @@ const shallowCopied = Object.assign({}, sample);
 
 となります。スプレッド構文が実装される前はこの`Object.assign()`を使っていました。このふたつはまったく同じものではありませんが`Object.assign({}, obj)`を`{...obj}`のほぼ代替として使うことができます。
 
-### `...`について
+## コピー用のAPIを使う
 
-スプレッド構文は配列をはじめとするコレクションに対しても使うことができます。内部的には次のメソッドを実装しているクラスであればスプレッド構文に対応します。そのため、自作のスプレッド構文対応クラスも作成できます。
+JavaScriptではオブジェクトによって、浅いコピーを簡潔に書くためのAPIが提供されているものがあります。`Map`や`Set`はそれが利用できます。
 
-```ts
-[Symbol.iterator](): Iterator<T>;
-```
+### `Map<K, V>`のコピー
 
-コレクションはこれから得られる結果から同じオブジェクトを作ることにも対応しているので、次のように書くことで簡単にコレクションの浅いコピーができます。
+`Map`をコピーする場合は、`Map`コンストラクタにコピーしたい`Map`オブジェクトを渡します。
 
-```ts
-const a1: number[] = [2, 3, 4];
-const a2: number[] = [...a1];
-
-const m1: Map<number, string> = new Map<number, string>([
-  [1, "a"],
-  [2, "e"],
-  [3, "f"],
+```typescript twoslash
+const map1 = new Map([
+  [".js", "JS"],
+  [".ts", "TS"],
 ]);
-const m2 = new Map([...m1]);
-
-const s1: Set<string> = new Set(["g", "d", "k"]);
-const s2: Set<string> = new Set([...s1]);
+const map2 = new Map(map1);
+// 要素は同一だが、Mapインスタンスは異なる
+console.log(map2);
+// @log: Map (2) {".js" => "JS", ".ts" => "TS"}
+console.log(map1 !== map2);
+// @log: true
 ```
 
-2, 9, 16 行目がそれぞれのコレクションの浅いコピーを意味しています。
+[Map](../reference/builtin-api/map.md)
 
-実はObjectクラスは`[Symbol.iterator]()`に対応していないのですが、スプレッド構文によるオブジェクトの浅いコピーをサポートしています。
+### `Set<T>`のコピー
+
+`Set`をコピーする場合は、`Set`コンストラクタにコピーしたい`Set`オブジェクトを渡します。
+
+```typescript twoslash
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set(set1);
+// 要素は同一だが、Setのインスタンスは異なる
+console.log(set2);
+// @log: Set (3) {1, 2, 3}
+console.log(set1 !== set2);
+// @log: true
+```
+
+[Map](../reference/builtin-api/set.md)
