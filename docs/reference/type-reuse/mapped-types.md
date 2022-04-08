@@ -64,3 +64,41 @@ const sample: Sample = {
   [Symbol("thick")]: "thin",
 };
 ```
+
+## Mapped typeには追加のプロパティが書けない
+
+Mapped typeは追加のプロパティが定義できません。ここは、[インデックス型]とは異なる点です。
+
+<!--prettier-ignore-->
+```typescript twoslash
+// @errors: 7061
+type KeyValuesAndName = {
+  [K in string]: string;
+  name: string; // 追加のプロパティ
+};
+```
+
+追加のプロパティがある場合は、その部分をオブジェクト型として定義し、Mapped typeと[インターセクション型]を成す必要があります。
+
+```typescript twoslash
+type KeyValues = {
+  [K in string]: string;
+};
+type Name = {
+  name: string; // 追加のプロパティ
+};
+type KeyValuesAndName = KeyValues & Name;
+```
+
+上の例は、ひとつの型にまとめることもできます。
+
+```typescript twoslash
+type KeyValuesAndName = {
+  [K in string]: string;
+} & {
+  name: string; // 追加のプロパティ
+};
+```
+
+[インデックス型]: ../values-types-variables/object/index-signature.md
+[インターセクション型]: ../values-types-variables/intersection.md
