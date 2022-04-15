@@ -19,7 +19,7 @@ JavaやPHP、Ruby、Pythonなどはクラスベースに分類されます。ク
 
 たとえば、ボタンのオブジェクトがほしいときは、まずその設計図となるボタンクラスを作ります。
 
-```js
+```js twoslash
 class Button {
   constructor(name) {
     this.name = name;
@@ -29,8 +29,14 @@ class Button {
 
 その上で、ボタンクラスに対して`new`演算子を用いると、ボタンオブジェクトが得られます。
 
-```js
-dangerousButton = new Button("絶対に押すなよ?");
+```js twoslash
+class Button {
+  constructor(name) {
+    this.name = name;
+  }
+}
+// ---cut---
+const dangerousButton = new Button("絶対に押すなよ?");
 ```
 
 このような言語がクラスベースと言われるのは、オブジェクトの素となるのがクラスだからです。
@@ -43,7 +49,7 @@ dangerousButton = new Button("絶対に押すなよ?");
 
 たとえば、JavaScriptでは既存のオブジェクトに対して、`Object.create()`を実行すると新しいオブジェクトが得られます。
 
-```js
+```js twoslash
 const button = {
   name: "ボタン",
 };
@@ -83,7 +89,7 @@ console.log(dangerousButton.name);
 
 では上の手順を具体的なコードで確認してみましょう。ここに`Counter`クラスがあります。
 
-```js
+```js twoslash
 class Counter {
   constructor() {
     this.count = 0;
@@ -97,7 +103,17 @@ class Counter {
 
 このクラスは数とそれをカウントアップする振る舞いを持っています。この`Counter`クラスを継承して、リセット機能を持った派生クラスは次の`ResetableCounter`クラスになります。
 
-```js
+```js twoslash
+class Counter {
+  constructor() {
+    this.count = 0;
+  }
+
+  countUp() {
+    this.count++;
+  }
+}
+// ---cut---
 class ResetableCounter extends Counter {
   reset() {
     this.count = 0;
@@ -107,7 +123,23 @@ class ResetableCounter extends Counter {
 
 この`ResetableCounter`クラスを使うには、このクラスに対して`new\`演算子でオブジェクトを生成します。
 
-```js
+```js twoslash
+class Counter {
+  constructor() {
+    this.count = 0;
+  }
+
+  countUp() {
+    this.count++;
+  }
+}
+
+class ResetableCounter extends Counter {
+  reset() {
+    this.count = 0;
+  }
+}
+// ---cut---
 counter = new ResetableCounter();
 counter.countUp();
 counter.reset();
@@ -117,7 +149,7 @@ counter.reset();
 
 一方、プロトタイプベースのJavaScriptでは、継承もオブジェクトの生成と同じプロセスで行います。次の例は、`counter`オブジェクトを継承した`resetableCounter`オブジェクトを作っています。
 
-```js
+```js twoslash
 const counter = {
   count: 0,
   countUp() {
@@ -139,7 +171,7 @@ resetableCounter.reset = function () {
 
 古いJavaScriptには確かにクラスの構文がなく独特の書き方がありましたが、ES2015に`class`や`extends`構文が導入されたため、近年のJavaScriptではクラスベース風の書き方が容易にできるようになっています。なので、クラスベースの他言語から来た開発者にも、JavaScriptコードは理解しやすいものになってきています。次のコードはクラスベースの説明の際に提示したものですが、実はこれはJavaScriptでした。
 
-```js
+```js twoslash
 class Counter {
   constructor() {
     this.count = 0;

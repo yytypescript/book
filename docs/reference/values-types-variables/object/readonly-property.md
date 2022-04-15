@@ -39,7 +39,7 @@ obj.foo.bar = 2; // コンパイルエラーにはならない
 
 再帰的にプロパティを読み取り専用にしたい場合は、子や孫の各プロパティに`readonly`をつけていく必要があります。
 
-```ts
+```ts twoslash
 let obj: {
   readonly foo: {
     readonly bar: number;
@@ -77,7 +77,7 @@ TypeScriptではプロパティを読み取り専用にするには、読み取�
 
 そういったケースではユーティリティ型の`Readonly`を使うのも手です。`Readonly`はプロパティをすべて読み取り専用にしてくれる型です。
 
-```ts
+```ts twoslash
 let obj: Readonly<{
   a: number;
   b: number;

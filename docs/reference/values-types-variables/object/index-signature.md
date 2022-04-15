@@ -6,7 +6,7 @@ sidebar_label: インデックス型
 
 TypeScriptで、オブジェクトのフィールド名をあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこのインデックス型(index signature)です。たとえば、プロパティがすべて`number`型であるオブジェクトは次のように型注釈します。
 
-```ts
+```ts twoslash
 let obj: {
   [K: string]: number;
 };
@@ -16,7 +16,7 @@ let obj: {
 
 インデックス型のオブジェクトであれば、フィールド名が定義されていないプロパティも代入できます。たとえば、インデックス型`{ [K: string]: number }`には、値がnumber型であれば、`a`や`b`など定義されていないフィールドに代入できます。
 
-```ts
+```ts twoslash
 let obj: {
   [K: string]: number;
 };
@@ -41,7 +41,7 @@ console.log(b);
 
 インデックス型は`Record<K, T>`ユーティリティ型を用いても表現できます。次の2つの型注釈は同じ意味になります。
 
-```ts
+```ts twoslash
 let obj1: { [K: string]: number };
 let obj2: Record<string, number>;
 ```
