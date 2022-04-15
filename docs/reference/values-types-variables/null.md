@@ -6,7 +6,7 @@ JavaScriptのnullは値がないことを示す値です。
 
 JavaScriptのnullリテラルは`null`です。
 
-```js
+```ts twoslash
 const x = null;
 ```
 
@@ -14,7 +14,7 @@ const x = null;
 
 TypeScriptでnull型を型注釈するには`null`を用います。
 
-```ts
+```ts twoslash
 const x: null = null;
 ```
 
@@ -22,8 +22,9 @@ const x: null = null;
 
 JavaScriptには値の型を調べるtypeof演算子があります。`null`に対して`typeof`を用いると`"object"`が返るので注意が必要です。
 
-```js
-typeof null; //=> "object"
+```ts twoslash
+console.log(typeof null);
+// @log: "object"
 ```
 
 typeof演算子の詳細は「typeof演算子」のセクションをご覧ください。

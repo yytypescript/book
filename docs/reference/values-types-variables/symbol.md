@@ -30,7 +30,7 @@ p s1 == s2 #=> true
 
 TypeScriptでシンボルの型注釈は`symbol`を用います。
 
-```ts
+```ts twoslash
 const s: symbol = Symbol();
 ```
 

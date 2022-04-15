@@ -45,7 +45,7 @@ print(minus("two"))
 
 では、静的型付け言語にはどのような特徴があるのでしょうか？先ほどPythonで示した`minus()`関数を静的型付け言語であるTypeScriptで書いてみましょう。
 
-```ts
+```ts twoslash
 function minus(x: number) {
   return x - 1;
 }

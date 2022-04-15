@@ -12,7 +12,9 @@ Javaなどの言語では、ダブルクォートで文字列リテラル(String
 
 <!--prettier-ignore-->
 ```ts twoslash
-"Hello"; 'Hello'; `Hello`
+"Hello"; 
+'Hello'; 
+`Hello`;
 ```
 
 文字列中に同じ引用符が含まれている場合は、バックスラッシュ`\`でエスケープしなければなりません。

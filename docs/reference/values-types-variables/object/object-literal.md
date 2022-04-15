@@ -6,7 +6,7 @@ sidebar_label: オブジェクトリテラル
 
 JavaScriptの特徴はオブジェクトリテラル`{}`という記法を用いて、簡単にオブジェクトを生成できる点です。
 
-```js
+```js twoslash
 // 空っぽのオブジェクトを生成
 const object = {};
 
@@ -20,7 +20,7 @@ JavaやPHPなどの言語では、オブジェクトを生成するにはまず�
 
 次の例のように、JavaScriptでも`Object`を`new`することでオブジェクトを作ることができます。しかし、オブジェクトリテラルを使ったほうが端的で読みやすいコードになります。
 
-```js
+```js twoslash
 const person = new Object();
 person.name = "Bob";
 person.age = 25;

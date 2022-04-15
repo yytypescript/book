@@ -6,7 +6,7 @@ sidebar_label: 変数宣言の型注釈
 
 TypeScriptでは変数宣言するときに、その変数にどんな値が代入可能かを指定できます。その指定のことを型注釈(type annotation; 型アノテーション)と言います。変数宣言の型注釈は、次のように変数名の右に型を書きます。
 
-```ts
+```ts twoslash
 const num: number = 123;
 //       ^^^^^^^^ 型注釈
 ```

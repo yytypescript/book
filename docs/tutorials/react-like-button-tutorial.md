@@ -20,7 +20,7 @@ Reactは仮想DOM(virtual DOM)という考えを採用しています。仮想DO
 
 プログラマがDOMを操作すると、間接的にHTMLが書き換えられ、その結果が画面に描画されます。多くの動的なUIはDOM操作で成り立っています。
 
-```js
+```js twoslash
 // <input id="email">の文字色を赤色にするDOM操作の例
 const emailInput = document.getElementById("email");
 emailInput.style.color = "red";
@@ -46,7 +46,7 @@ Reactの2つ目の特徴はUIを宣言的に書ける点です。Reactを使わ�
 
 まず、命令的なコードでは、次のようになります。
 
-```js
+```js twoslash
 const list = document.createElement("ul");
 const apple = document.createElement("li");
 apple.innerText = "リンゴ";
@@ -74,7 +74,7 @@ list.append(grape);
 
 今度は宣言的な書き方を見てみましょう。次はReactでの書き方です。
 
-```js
+```js twoslash
 function Fruits() {
   return (
     <ul>
