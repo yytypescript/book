@@ -25,10 +25,10 @@ function print(message: string): undefined {
 
 戻り値がundefinedを含みうる関数の場合は、undefined型を含んだユニオン型を使うのが一般的です。
 
-```ts
+```typescript twoslash
 function getIfExists(numbers: number[], search: number): number | undefined {
   if (numbers.includes(search)) {
-    return number;
+    return search;
   }
   return undefined;
 }
