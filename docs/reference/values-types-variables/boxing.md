@@ -6,7 +6,7 @@ sidebar_label: "ボックス化"
 
 多くの言語では、プリミティブは一般的にフィールドやメソッドを持ちません。プリミティブをオブジェクトのように扱うには、プリミティブをオブジェクトに変換する必要があります。プリミティブからオブジェクトへの変換をボックス化(boxing)と言います。
 
-```js twoslash
+```ts twoslash
 // プリミティブ型
 const str = "abc";
 // ラッパーオブジェクトに入れる
@@ -22,7 +22,7 @@ strObject.toUpperCase(); // メソッド呼び出し
 
 JavaScriptでは、プリミティブ型の値でもフィールドを参照できたり、メソッドが呼び出せます。
 
-```js twoslash
+```ts twoslash
 const str = "abc";
 // オブジェクトのように扱う
 str.length; // フィールドの参照
@@ -45,11 +45,10 @@ JavaScriptの自動ボックス化で変換先となるオブジェクトをラ�
 
 プリミティブ型の`undefined`と`null`にはラッパーオブジェクトがありません。したがって、メソッドやフィールドの参照は常にエラーが発生します。
 
-```js twoslash
+```ts twoslash
+// @errors: 2531 2532
 null.toString();
-// @error: TypeError: Cannot read property 'toString' of null
 undefined.toString();
-// @error: TypeError: Cannot read property 'toString' of undefined
 ```
 
 ## MDNの読み方
@@ -65,7 +64,6 @@ JavaScriptを学ぶ過程で一度はお世話になるドキュメントが[MDN
 TypeScriptでは、ラッパーオブジェクトの型も定義されています。次のように、ラッパーオブジェクトの型を使って、型注釈を書くこともできます。ラッパーオブジェクト型の変数にプリミティブ型の値を代入するのも可能です。
 
 ```ts twoslash
-// @target: es2020
 const bool: Boolean = false;
 const num: Number = 0;
 const str: String = "";

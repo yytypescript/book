@@ -8,7 +8,7 @@ sidebar_label: オブジェクトの分割代入
 
 ## 分割代入のなかった時代はこうしていた
 
-あるタイプエイリアス`Wild`があったとします(上述のものと同一です)。
+あるタイプエイリアス`Wild`があったとします。
 
 ```ts
 type Wild = {
@@ -25,9 +25,9 @@ type Wild = {
 ```ts
 const pokemon: Wild = safari();
 
-const name: string = pokemon.name;
-const no: number = pokemon.no;
-const genre: string = pokemon.genre;
+const name = pokemon.name;
+const no = pokemon.no;
+const genre = pokemon.genre;
 ```
 
 これを簡素に代入まで済ませてしまおうというのが分割代入の目的です。
@@ -37,7 +37,7 @@ const genre: string = pokemon.genre;
 分割代入は、オブジェクトを返す関数などの戻り値に直接オブジェクト自体を書くような方式で使います。たとえば上記の例だとこのようになります。
 
 ```ts
-const { name, no, genre }: Wild = safari();
+const { name, no, genre } = safari();
 ```
 
 もちろん`height, weight`が必要なときは書き足せば定数として設定されます。このときは1行目の宣言(今回は`const`)によって変数か定数かが決まるので、変数も定数も欲しい時は分けて書いてください。

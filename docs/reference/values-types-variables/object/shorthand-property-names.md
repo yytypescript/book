@@ -3,11 +3,19 @@
 オブジェクトのキーと変数名が同じ時にかぎり、オブジェクトに値を代入するときも同様にShorthand property namesを使うことができます。これも分割代入と調べると情報を得られることがあります。次の例がほぼすべてです。
 
 ```ts
-const name: string = "pikachu";
-const no: number = 25;
-const genre: string = "mouse pokémon";
-const height: number = 0.4;
-const weight: number = 6.0;
+type Wild = {
+  name: string;
+  no: number;
+  genre: string;
+  height: number;
+  weight: number;
+};
+
+const name = "pikachu";
+const no = 25;
+const genre = "mouse pokémon";
+const height = 0.4;
+const weight = 6.0;
 
 const pikachu: Wild = {
   name,

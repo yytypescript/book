@@ -60,14 +60,15 @@ _100
 
 JavaScriptの数値リテラルのプロパティを直接参照する場合、小数点のドットとプロパティアクセッサーのドットが区別できないため、構文エラーになります。
 
-```ts
+```ts twoslash
+// @errors: 1351
 5.toString(); // この書き方は構文エラー
 ```
 
 これを回避するには、ドットを2つ続けるか、数値をカッコで囲む必要があります。
 
 <!--prettier-ignore-->
-```js
+```ts twoslash
 5..toString();
 (5).toString();
 ```
@@ -76,7 +77,7 @@ JavaScriptの数値リテラルのプロパティを直接参照する場合、�
 
 TypeScriptで数値型の型注釈は`number`を用います。
 
-```ts
+```ts twoslash
 const count: number = 123;
 ```
 
@@ -102,7 +103,7 @@ console.log(price);
 
 値が`NaN`であるかのチェックは`Number.isNaN`を用います。
 
-```js
+```ts twoslash
 const price = parseInt("百円");
 if (Number.isNaN(price)) {
   console.log("数値化できません");
@@ -111,7 +112,7 @@ if (Number.isNaN(price)) {
 
 `NaN`は特殊で、等号比較では常に`false`になるので注意してください。
 
-```js twoslash
+```ts twoslash
 console.log(NaN == NaN);
 // @log: false
 console.log(NaN === NaN);
