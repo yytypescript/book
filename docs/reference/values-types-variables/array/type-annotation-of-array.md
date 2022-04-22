@@ -10,7 +10,7 @@ TypeScriptでは、配列に型注釈する方法が2とおりあります。
 
 1つ目の型注釈は、要素の型の後ろに`[]`をつける書き方です。たとえば、数値型の配列の型注釈は`number[]`と書きます。
 
-```ts
+```ts twoslash
 let array: number[];
 array = [1, 2, 3];
 ```
@@ -19,7 +19,7 @@ array = [1, 2, 3];
 
 2つ目の型注釈は、`Array<T>`を用いる書き方です。`T`には要素の型を書きます。たとえば、数値型の配列の型注釈は`Array<number>`と書きます。
 
-```ts
+```ts twoslash
 let array: Array<number>;
 array = [1, 2, 3];
 ```

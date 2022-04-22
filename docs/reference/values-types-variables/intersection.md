@@ -8,7 +8,7 @@ sidebar_label: インターセクション型
 
 インターセクション型を作るためには合成したいオブジェクト同士を`&`で列挙します。
 
-```ts
+```ts twoslash
 type TwoDimensionalPoint = {
   x: number;
   y: number;
@@ -46,7 +46,7 @@ const n: Never = "2";
 
 システムの巨大化に伴い、受け付けたいパラメーターが巨大化したとします。
 
-```ts
+```ts twoslash
 type Parameter = {
   id: string;
   index?: number;
@@ -72,7 +72,7 @@ type Parameter = {
 
 ### 必須とそうでないパラメータのタイプエイリアスに分離する
 
-```ts
+```ts twoslash
 type Mandatory = {
   id: string;
   active: boolean;
@@ -96,7 +96,7 @@ type Optional = {
 
 `Mandatory`は`Required<T>`を、`Optional`は`Partial<T>`をつけます。
 
-```ts
+```ts twoslash
 type Mandatory = Required<{
   id: string;
   active: boolean;
@@ -120,6 +120,24 @@ type Optional = Partial<{
 
 これで最初に定義した`Parameter`と同じタイプエイリアスができました。
 
-```ts
+```ts twoslash
+type Mandatory = Required<{
+  id: string;
+  active: boolean;
+  balance: number;
+  surname: string;
+  givenName: string;
+  email: string;
+}>;
+
+type Optional = Partial<{
+  index: number;
+  photo: string;
+  age: number;
+  company: string;
+  phoneNumber: string;
+  address: string;
+}>;
+// ---cut---
 type Parameter = Mandatory & Optional;
 ```

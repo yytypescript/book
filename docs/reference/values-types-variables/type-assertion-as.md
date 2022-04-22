@@ -12,14 +12,14 @@ TypeScriptコンパイラーはコードをヒントに型を推論してくれ�
 
 型アサーションの書き方は2つあります。1つはas構文です。
 
-```ts
+```ts twoslash
 const value: string | number = "this is a string";
 const strLength: number = (value as string).length;
 ```
 
 もう1つはアングルブランケット構文(angle-bracket syntax)です。
 
-```ts
+```ts twoslash
 const value: string | number = "this is a string";
 const strLength: number = (<string>value).length;
 ```
@@ -30,15 +30,11 @@ const strLength: number = (<string>value).length;
 
 型アサーションを使えば制限なく型の情報を上書きできるかというとそうではありません。たとえば、`number`型を`string`型にする型アサーションはコンパイルエラーになります。
 
-```ts
+```ts twoslash
+// @errors: 2352
 const num = 123;
 const str: string = num as string;
-//                  ^^^^^^^^^^^^^ コンパイルエラー
 ```
-
-この例ではコンパイルエラーの内容は次のようになります。
-
-> Conversion of type 'number' to type 'string' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.(2352)
 
 このエラーは「number型をstring型にするのは間違いです。お互いの型に共通する部分が少なすぎるからです」という内容です。
 
@@ -46,7 +42,7 @@ const str: string = num as string;
 
 それでも自分の書いた型アサーションが正しいという場合は、`unknown`型を経由することで上のようなエラーを出さないようにもできます。
 
-```ts
+```ts twoslash
 const num = 123;
 const str: string = num as unknown as string; // OK
 ```
@@ -73,7 +69,7 @@ const str: string = num as unknown as string; // OK
 
 型注釈は、コンパイラーに「この変数に代入できるのはこの型だよ」と伝えるものです。コンパイラーは型注釈をヒントに、その型に値が代入可能かどうかをチェックし、代入できないことが分かり次第報告してきます。
 
-```ts
+```ts twoslash
 let value: number;
 //         ^^^^^^ 型注釈
 ```

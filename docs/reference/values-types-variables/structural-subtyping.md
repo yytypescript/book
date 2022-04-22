@@ -104,13 +104,42 @@ incompatible types: Request cannot be converted to File
 
 以下はTypeScriptでの紹介です。
 
-```ts
+```ts twoslash
+import fs from "fs";
+
+class Data {
+  // NOOP
+}
+
+class Reader {
+  // NOOP
+}
+
+class Response {
+  // NOOP
+}
+
+class FileSystem {
+  public static readFrom(dest: string): Reader {
+    return new Reader();
+  }
+}
+
+class HTTPRequest {
+  public static get(url: string): Response {
+    return new Response();
+  }
+}
+
 class InputSource {
   public fetch(): Data {
     throw new Error("Please implement InputSource and override this method");
   }
 }
 
+const data: Data = new Data();
+
+// ---cut---
 class File extends InputSource {
   public readonly destination: string;
 
@@ -146,7 +175,73 @@ class Request extends InputSource {
 
 こちらも同様にリスコフの置換原則が成立するのでスーパークラスの変数でサブクラスを受けることができます。
 
-```ts
+```ts twoslash
+import fs from "fs";
+
+class Data {
+  // NOOP
+}
+
+class Reader {
+  // NOOP
+}
+
+class Response {
+  // NOOP
+}
+
+class FileSystem {
+  public static readFrom(dest: string): Reader {
+    return new Reader();
+  }
+}
+
+class HTTPRequest {
+  public static get(url: string): Response {
+    return new Response();
+  }
+}
+
+class InputSource {
+  public fetch(): Data {
+    throw new Error("Please implement InputSource and override this method");
+  }
+}
+
+const data: Data = new Data();
+
+class File extends InputSource {
+  public readonly destination: string;
+
+  public constructor(destination: string) {
+    super();
+    this.destination = destination;
+  }
+
+  public fetch(): Data {
+    const reader: Reader = FileSystem.readFrom(this.destination);
+    // ...
+
+    return data;
+  }
+}
+
+class Request extends InputSource {
+  public readonly destination: string;
+
+  public constructor(destination: string) {
+    super();
+    this.destination = destination;
+  }
+
+  public fetch(): Data {
+    const response: Response = HTTPRequest.get(this.destination);
+    // ...
+
+    return data;
+  }
+}
+// ---cut---
 const source1: InputSource = new File("/data/~~~.txt");
 const source2: InputSource = new Request("https://~~~~");
 
@@ -156,7 +251,73 @@ const data2: Data = source2.fetch();
 
 次に、先ほどと同じように結果を受ける変数の型をお互いのサブクラスに変更します。
 
-```ts
+```ts twoslash
+import fs from "fs";
+
+class Data {
+  // NOOP
+}
+
+class Reader {
+  // NOOP
+}
+
+class Response {
+  // NOOP
+}
+
+class FileSystem {
+  public static readFrom(dest: string): Reader {
+    return new Reader();
+  }
+}
+
+class HTTPRequest {
+  public static get(url: string): Response {
+    return new Response();
+  }
+}
+
+class InputSource {
+  public fetch(): Data {
+    throw new Error("Please implement InputSource and override this method");
+  }
+}
+
+const data: Data = new Data();
+
+class File extends InputSource {
+  public readonly destination: string;
+
+  public constructor(destination: string) {
+    super();
+    this.destination = destination;
+  }
+
+  public fetch(): Data {
+    const reader: Reader = FileSystem.readFrom(this.destination);
+    // ...
+
+    return data;
+  }
+}
+
+class Request extends InputSource {
+  public readonly destination: string;
+
+  public constructor(destination: string) {
+    super();
+    this.destination = destination;
+  }
+
+  public fetch(): Data {
+    const response: Response = HTTPRequest.get(this.destination);
+    // ...
+
+    return data;
+  }
+}
+// ---cut---
 const source3: Request = new File("/data/~~~.txt");
 const source4: File = new Request("https://~~~~");
 
@@ -166,21 +327,59 @@ const data4: Data = source4.fetch();
 
 するとこれはエラーが出ることなく実行できます。これが構造的部分型の大きな特徴で、File, Requestのシグネチャが同じために可換になります。
 
-```ts
-interface IInputSource {
+```ts twoslash
+class Data {
+  // NOOP
+}
+// ---cut---
+interface InputSource {
   destination: string;
 
   fetch(): Data;
 }
 ```
 
-File, Requestは共にこのIInputSourceのようなインターフェースであると解釈されるためこのようなことが起こります。
+File, Requestは共にこのInputSourceのようなインターフェースであると解釈されるためこのようなことが起こります。
 
 ## TypeScriptでさらに注意すること
 
 今回の例は共に同じスーパークラスを持つサブクラスの話でしたが、実はこれは**スーパークラスが異なっていても起こりえます**。スーパークラスのInputSourceを上記TypeScriptの例から抹消してしまっても同様にこのコードは動作します。
 
-```ts
+```ts twoslash
+import fs from "fs";
+
+class Data {
+  // NOOP
+}
+
+class Reader {
+  // NOOP
+}
+
+class Response {
+  // NOOP
+}
+
+class FileSystem {
+  public static readFrom(dest: string): Reader {
+    return new Reader();
+  }
+}
+
+class HTTPRequest {
+  public static get(url: string): Response {
+    return new Response();
+  }
+}
+
+class InputSource {
+  public fetch(): Data {
+    throw new Error("Please implement InputSource and override this method");
+  }
+}
+
+const data: Data = new Data();
+// ---cut---
 class File {
   public destination: string;
 
@@ -204,7 +403,7 @@ class Request {
   }
 
   public fetch(): Data {
-    const response: Response = HTTP.get(this.destination);
+    const response: Response = HTTPRequest.get(this.destination);
     // ...
 
     return data;
