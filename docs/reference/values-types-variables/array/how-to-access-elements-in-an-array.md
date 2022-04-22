@@ -22,14 +22,14 @@ console.log(abc[100]);
 
 TypeScriptでは、`Type[]`型の配列から要素を取り出したとき、その値の型は`Type`になります。たとえば、`string[]`型から0番目の要素の型は`string`になります。
 
-```ts
+```ts twoslash
 const abc: string[] = ["a", "b", "c"];
 const character: string = abc[0];
 ```
 
 JavaScriptでは存在しないインデックスで要素アクセスした場合、エラーにならず、代わりに`undefined`が得られると説明しましたが、TypeScriptでも不在要素へのアクセスについて、コンパイラーが警告することはありません。
 
-```ts
+```ts twoslash
 const abc = ["a", "b", "c"];
 const character: string = abc[100]; // エラーにはならない
 ```
@@ -62,7 +62,7 @@ character.toUpperCase();
 
 `string | undefined`型のままでは`toUpperCase`などの文字列型のメソッドは呼び出せません。そこで、if文で変数が文字列型だけになるように絞り込みます。すると、文字列型のメソッドを呼び出してもコンパイルエラーで指摘されることがなくなります。
 
-```ts
+```ts twoslash
 const abc: string[] = ["a", "b", "c"];
 const character = abc[0];
 // 絞り込み条件

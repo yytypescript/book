@@ -2,7 +2,9 @@
 
 オブジェクトのキーと変数名が同じ時にかぎり、オブジェクトに値を代入するときも同様にShorthand property namesを使うことができます。これも分割代入と調べると情報を得られることがあります。次の例がほぼすべてです。
 
-```ts
+```ts twoslash
+import fs from "fs";
+// ---cut---
 type Wild = {
   name: string;
   no: number;
@@ -28,7 +30,23 @@ const pikachu: Wild = {
 
 要するにこちらの省略型です。
 
-```ts
+```ts twoslash
+import fs from "fs";
+
+type Wild = {
+  name: string;
+  no: number;
+  genre: string;
+  height: number;
+  weight: number;
+};
+
+const name = "pikachu";
+const no = 25;
+const genre = "mouse pokémon";
+const height = 0.4;
+const weight = 6.0;
+// ---cut---
 const pikachu: Wild = {
   name: name,
   no: no,
@@ -40,6 +58,22 @@ const pikachu: Wild = {
 
 もちろん一行で書くこともできます。
 
-```ts
+```ts twoslash
+import fs from "fs";
+
+type Wild = {
+  name: string;
+  no: number;
+  genre: string;
+  height: number;
+  weight: number;
+};
+
+const name = "pikachu";
+const no = 25;
+const genre = "mouse pokémon";
+const height = 0.4;
+const weight = 6.0;
+// ---cut---
 const pikachu: Wild = { name, no, genre, height, weight };
 ```

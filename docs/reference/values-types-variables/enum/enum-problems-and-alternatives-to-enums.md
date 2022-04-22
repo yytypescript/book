@@ -16,7 +16,7 @@ TypeScriptの列挙型に目を向けると、構文もJavaScriptに無いもの
 
 数値列挙型は、`number`型なら何でも代入できるという型安全上の問題点があります。次の例は、値が`0`と`1`のメンバーだけからなる列挙型ですが、実際にはそれ以外の数値を代入できてしまいます。
 
-```ts
+```ts twoslash
 enum ZeroOrOne {
   Zero = 0,
   One = 1,
@@ -42,7 +42,8 @@ console.log(ZeroOrOne[9]); // これはコンパイルエラーになってほ�
 
 TypeScriptの型システムは、[構造的部分型](enum-problems-and-alternatives-to-enums.md)を採用しています。ところが、文字列列挙型は例外的に公称型になります。
 
-```ts
+```ts twoslash
+// @errors: 2322
 enum StringEnum {
   Foo = "foo",
 }
@@ -60,7 +61,7 @@ const foo2: StringEnum = "foo"; // コンパイルエラーになる
 
 もっともシンプルな代替案はユニオン型を用いる方法です。
 
-```ts
+```ts twoslash
 type YesNo = "yes" | "no";
 
 function toJapanese(yesno: YesNo) {
@@ -75,7 +76,7 @@ function toJapanese(yesno: YesNo) {
 
 ユニオン型とシンボルを組み合わせる方法もあります。
 
-```ts
+```ts twoslash
 const yes = Symbol();
 const no = Symbol();
 type YesNo = typeof yes | typeof no;
@@ -94,7 +95,7 @@ function toJapanese(yesno: YesNo) {
 
 オブジェクトリテラルを使う方法もあります。
 
-```ts
+```ts twoslash
 const Position = {
   Top: 0,
   Right: 1,
