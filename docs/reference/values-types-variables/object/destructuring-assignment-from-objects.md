@@ -4,87 +4,150 @@ sidebar_label: オブジェクトの分割代入
 
 # オブジェクトの分割代入 (destructuring assignment)
 
-見かたに慣れていないと使いづらい機能ではありますが、分割代入という便利な代入方法があります。
+JavaScriptには、オブジェクトの分割代入(destructuring assignment)という便利な構文があります。分割代入は、オブジェクトからプロパティを取り出す機能です。
 
-## 分割代入のなかった時代はこうしていた
+通常、オブジェクトからプロパティを取り出す場合は、プロパティアクセサーを用います。プロパティアクセサーは、ドットを使ってプロパティを参照する記法です。
 
-あるタイプエイリアス`Wild`があったとします。
+```typescript twoslash
+const item = { price: 100 };
+const price = item.price; // プロパティアクセサー
+```
 
-```ts
-type Wild = {
-  name: string;
-  no: number;
-  genre: string;
-  height: number;
-  weight: number;
+分割代入は、中カッコ`{}`に取り出したいプロパティを指定することで、プロパティ名と同じ名前の変数が作れます。次の分割代入のサンプルコードは、上のプロパティアクセサーを使ったコードと同等の処理になります。
+
+```typescript twoslash
+const item = { price: 100 };
+const { price } = item;
+// 上は const price = item.price; と同等の処理
+```
+
+分割代入は、プロパティ名と同じ名前で変数を定義するときに、プロパティ名を2度書かないで済むのがひとつの利点です。
+
+## 複数のプロパティを取り出す
+
+分割代入は、複数のプロパティを一度に取り出すこともできます。その場合、取り出したいプロパティを中カッコに列挙します。
+
+```typescript twoslash
+const obj = { a: 1, b: 2 };
+const { a, b } = obj;
+```
+
+この特徴は、取り出すプロパティ数が多い場合に、プロパティアクセサーより便利です。プロパティアクセサーでは、プロパティごとに代入文を書かないとなりません。
+
+```typescript twoslash title="プロパティアクセサーで取り出す例"
+const color = { r: 0, g: 122, b: 204, a: 1 };
+const r = color.r;
+const g = color.g;
+const b = color.b;
+const a = color.a;
+```
+
+分割代入を使うと、これを簡潔にまとめられます。
+
+```typescript twoslash title="多くのプロパティを分割代入で取り出す例"
+const color = { r: 0, g: 122, b: 204, a: 1 };
+const { r, g, b, a } = color;
+```
+
+## 代入する変数名の指定
+
+オブジェクトの分割代入では、コロン`:`のあとに変数名を指定すると、その名前の変数に代入できます。
+
+```typescript twoslash
+const color = { r: 0, g: 122, b: 204, a: 1 };
+const { r: red, g: green, b: blue, a: alpha } = color;
+console.log(green);
+// @log: 122
+```
+
+## 入れ子構造の分割代入
+
+オブジェクトの中にオブジェクトある入れ子構造にも、分割代入が使えます。深い階層のプロパティを取り出すには、階層の分だけ中カッコで囲みます。
+
+```typescript twoslash
+const continent = {
+  name: "北アメリカ",
+  us: {
+    name: "アメリカ合衆国",
+    capitalCity: "ワシントンD.C.",
+  },
 };
-```
 
-この`Wild`を変数で受けたあと`name`と`no`と`genre`だけを使いたい時、かつては次のようにする必要がありました。
-
-```ts
-const pokemon: Wild = safari();
-
-const name = pokemon.name;
-const no = pokemon.no;
-const genre = pokemon.genre;
-```
-
-これを簡素に代入まで済ませてしまおうというのが分割代入の目的です。
-
-## 分割代入を使うとこうなる
-
-分割代入は、オブジェクトを返す関数などの戻り値に直接オブジェクト自体を書くような方式で使います。たとえば上記の例だとこのようになります。
-
-```ts
-const { name, no, genre } = safari();
-```
-
-もちろん`height, weight`が必要なときは書き足せば定数として設定されます。このときは1行目の宣言(今回は`const`)によって変数か定数かが決まるので、変数も定数も欲しい時は分けて書いてください。
-
-## ネストしたオブジェクトの分割代入
-
-オブジェクトの中のオブジェクト、つまりネストした状態でも問題なく使うことができます。先ほど出てきた次の例で考えます。
-
-```ts
-type Country = {
-  name: string;
-  capitalCity: string;
-};
-
-type Continent = {
-  name: string;
-  canada: Country;
-  us: Country;
-  mexico: Country;
-};
-```
-
-このような分割代入をすることができます。
-
-```ts
 const {
-  name,
-  canada: { name },
-  us: { name },
-  mexico: { name },
-} = america();
+  us: { name, capitalCity },
+} = continent;
+
+console.log(name);
+// @log: "アメリカ合衆国"
+console.log(capitalCity);
+// @log: "ワシントンD.C."
+// @lib: esnext
 ```
 
-しかしながら、この例では`name`という名前が重複してしまっているため、理論上は正しいのですが同じ名前の定数の多重定義となってしまっています。
+## 入れ子構造の分割代入と変数名の指定
 
-## 分割代入しつつ名前を変更する
+入れ子構造の分割代入をしながら、値を代入する変数名を指定することを同時にすることもできます。
 
-分割代入はプロパティの名前をそのまま継ながなければならないかというとそうではありません。好きな名前に変更することができます。先ほどの`name`が重複してしまった例は次のように書き直せます。
+```typescript twoslash
+const continent = {
+  name: "北アメリカ",
+  us: {
+    name: "アメリカ合衆国",
+    capitalCity: "ワシントンD.C.",
+  },
+};
 
-```ts
 const {
   name: continentName,
-  canada: { name: canadaName },
-  us: { name: usName },
-  mexico: { name: mexicoName },
-} = america();
+  us: { name: countryName },
+} = continent;
+
+console.log(continentName);
+// @log: "北アメリカ"
+console.log(countryName);
+// @log: "アメリカ合衆国"
 ```
+
+## 分割代入のデフォルト値
+
+分割代入では、`=`のあとにデフォルト値が指定できます。デフォルト値は値が、`undefined`のときに代入されます。
+
+```typescript twoslash
+const color = { r: undefined, g: 122, b: 204 };
+const { r = 0, g = 0, b = 0 } = color;
+console.log(r, g, b);
+// @log: 0,  122,  204
+```
+
+値が`null`のときは、デフォルト値が使われません。`null`がそのまま代入されます。
+
+```typescript twoslash
+const color = { r: null };
+const { r = 0 } = color;
+console.log(r);
+// @log: null
+```
+
+## デフォルト値と変数名の指定
+
+分割代入のデフォルト値と代入先の変数名を同時に指定することもできます。その場合、代入先変数名に続けて、デフォルト値を書きます。
+
+```typescript twoslash
+const color = { r: undefined, g: 122, b: 204 };
+const { r: red = 0 } = color;
+console.log(red);
+// @log: 0
+```
+
+<TweetILearned>
+
+・JavaScriptの分割代入はプロパティを取り出せる。
+・同じ変数名を使う場合、コードが簡潔になる。
+・複数のプロパティを取り出すときは特に便利。
+・入れ子のプロパティも取り出せる。
+・デフォルト値も指定できる。
+
+</TweetILearned>
 
 ## 関連情報
 
