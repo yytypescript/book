@@ -65,6 +65,8 @@ yarn dev
 
 チュートリアルを進める前にファイルが沢山ある状態では作業が進めにくいので、ボイラーテンプレートで作成されたファイルを削除して、プロジェクトをまっさらなシンプルな状態にします。
 
+ディレクトリ構造を変更するので、先ほど起動したdevサーバーは停止してください。
+
 最初にソースファイルのディレクトリをすべて削除して、src/pages/index.tsxを作成します。
 
 Next.jsでは`pages`ディレクトリが特別な意味を持っており、`pages`ディレクトリ配下のディレクトリ構造がページのルーティングに1対1で対応をします。
@@ -77,21 +79,93 @@ mkdir -p src/pages && touch src/pages/index.tsx
 
 index.tsxで「Hello,Next.js👋」と表示するようにコンポーネントを実装してましょう。
 
-```ts twoslash
+```tsx twoslash
 const IndexPage = () => {
   return <h1>Hello, Next.js 👋</h1>;
 };
 ```
 
-- 再起動しないと新しい src ディレクトリを認識できない
+コンポーネントの実装が完了したら、改めてdevサーバーを起動してブラウで確認してみてください。
+
+![チュートリアルの初期画面](nextjs/screen1.png)
 
 ## 開発
 
-### ボタンを表示
+### The Cat API について
 
-```typescript
+猫の画像をランダムに表示するにあたり[The Cat API](https://thecatapi.com/)を利用します。
+このAPIは特定の条件で猫の画像を取得したり、品種ごとの猫の情報を取得することができます。🐱
+
+今回のチュートリアルでは[APIドキュメント](https://docs.thecatapi.com/)のQuickstartに記載されている`/v1/images/search`へアクセスをしてランダムに猫の画像を取得します。
+
+### 猫の画像を表示する
+
+早速、猫の画像を表示してみましょう。
+最初はAPIでデータを取得せずに静的なURLを指定して画像を表示します。
+
+先ほど「Hello, Next.js 👋」と表示していた箇所を次のように書き換えてください。
+
+```tsx twoslash
 const IndexPage = () => {
-  return <button>きょうのにゃんこ🐱</button>;
+  return <img src="https://cdn2.thecatapi.com/images/bpc.jpg" />;
+};
+```
+
+![猫の画像を表示](nextjs/screen2.png)
+
+### ボタンを押してランダムに猫の画像を切り替える
+
+複数の猫の画像を配列で持ち、ランダムに画像が表示されるようにしてみましょう。
+https://cdn2.thecatapi.com/images/eac.jpg
+
+```tsx twoslash
+const catImages: string[] = [
+  "https://cdn2.thecatapi.com/images/bpc.jpg",
+  "https://cdn2.thecatapi.com/images/eac.jpg",
+  "https://cdn2.thecatapi.com/images/6qi.jpg",
+];
+
+const randomCatImage = (): string => {
+  const index = Math.floor(Math.random() * catImages.length);
+  return catImages[index];
+};
+
+const IndexPage = () => {
+  return <img src={randomCatImage()} />;
+};
+```
+
+ブラウザを何回か再読み込みすることでランダムに猫の画像が表示されます。
+
+続いてボタンを配置してボタンをクリックすることで猫の画像がランダムに切り替わるようにします。
+
+```tsx twoslash
+const catImages: string[] = [
+  "https://cdn2.thecatapi.com/images/bpc.jpg",
+  "https://cdn2.thecatapi.com/images/eac.jpg",
+  "https://cdn2.thecatapi.com/images/6qi.jpg",
+];
+
+const randomCatImage = (): string => {
+  const index = Math.floor(Math.random() * catImages.length);
+  return catImages[index];
+};
+
+const IndexPage = () => {
+  const [catImage, setCatImage] = useState(randomCatImage());
+
+  const handleClick = () => {
+    setCatImage(randomCatImage());
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>きょうのにゃんこ🐱</button>
+      <div style={{ marginTop: 10 }}>
+        <img src={randomCatImage()} />
+      </div>
+    </div>
+  );
 };
 ```
 
