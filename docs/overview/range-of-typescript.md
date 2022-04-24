@@ -72,4 +72,4 @@ MicrosoftはTypeScriptのサブセット言語として、リソースの少な�
 
 ## WebAssembly
 
-WebAssembly(WSM)はブラウザで動くアセンブリー言語です。WSMはJavaScriptよりも高速な処理が必要とされるところで用いられます。WSMのプログラムはC言語やC++、Rustといったシステム言語で開発されることが多いですが、TypeScriptでWSMを開発できるようにする試みも出てきています。その筆頭が[AssemblyScript](https://www.assemblyscript.org/)です。AssemblyScriptを使うと、TypeScript風のコードをWSMに変換できます。
+WebAssembly(WASM)はブラウザで動くアセンブリー言語です。WASMはJavaScriptよりも高速な処理が必要とされるところで用いられます。WASMのプログラムはC言語やC++、Rustといったシステム言語で開発されることが多いですが、TypeScriptでWASMを開発できるようにする試みも出てきています。その筆頭が[AssemblyScript](https://www.assemblyscript.org/)です。AssemblyScriptを使うと、TypeScript風のコードをWASMに変換できます。
