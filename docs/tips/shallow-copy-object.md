@@ -274,7 +274,7 @@ JavaScriptではオブジェクトによって、浅いコピーを簡潔に書�
 
 `Map`をコピーする場合は、`Map`コンストラクタにコピーしたい`Map`オブジェクトを渡します。
 
-```typescript twoslash
+```ts twoslash
 const map1 = new Map([
   [".js", "JS"],
   [".ts", "TS"],
@@ -293,7 +293,7 @@ console.log(map1 !== map2);
 
 `Set`をコピーする場合は、`Set`コンストラクタにコピーしたい`Set`オブジェクトを渡します。
 
-```typescript twoslash
+```ts twoslash
 const set1 = new Set([1, 2, 3]);
 const set2 = new Set(set1);
 // 要素は同一だが、Setのインスタンスは異なる

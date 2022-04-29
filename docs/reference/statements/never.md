@@ -208,7 +208,6 @@ function func(value: "yes" | "no"): void {
 例外のほうが、コンパイル後のJavaScriptを意識した実装になります。変数代入による網羅性チェックのコードをコンパイルすると、次のJavaScriptが生成されます。
 
 ```ts twoslash title="コンパイル後のJavaScript(変数代入による網羅性チェック)"
-// @showEmit
 // @alwaysStrict: false
 function func(value: "yes" | "no"): void {
   switch (value) {
@@ -231,7 +230,6 @@ function func(value: "yes" | "no"): void {
 例外による網羅性チェックは、コンパイル後コードだけ見ても意図が明瞭です。また、実行時にもチェックが行われます。このほうがよい実装になります。
 
 ```ts twoslash title="コンパイル後のJavaScript(例外による網羅性チェック)"
-// @showEmit
 // @alwaysStrict: false
 class ExhaustiveError extends Error {
   constructor(value: never, message = `Unsupported type: ${value}`) {

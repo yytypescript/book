@@ -28,7 +28,7 @@ function initNum() {
 
 ## `strictPropertyInitialization`とプロパティの初期化エラー
 
-TypeScriptでは次のコンパイラオプションの両方を`true`のとき、クラスのプロパティが初期化されていないとエラーを出します。
+TypeScriptでは次のコンパイラオプションの両方が`true`のとき、クラスのプロパティが初期化されていないとエラーを出します。
 
 - [`strictNullChecks`](../tsconfig/strictnullchecks.md)
 - [`strictPropertyInitialization`](../tsconfig/strictpropertyinitialization.md)

@@ -70,7 +70,7 @@ const sample: Sample = {
 Mapped typeは追加のプロパティが定義できません。ここは、[インデックス型]とは異なる点です。
 
 <!--prettier-ignore-->
-```typescript twoslash
+```ts twoslash
 // @errors: 7061
 type KeyValuesAndName = {
   [K in string]: string;
@@ -80,7 +80,7 @@ type KeyValuesAndName = {
 
 追加のプロパティがある場合は、その部分をオブジェクト型として定義し、Mapped typeと[インターセクション型]を成す必要があります。
 
-```typescript twoslash
+```ts twoslash
 type KeyValues = {
   [K in string]: string;
 };
@@ -92,7 +92,7 @@ type KeyValuesAndName = KeyValues & Name;
 
 上の例は、ひとつの型にまとめることもできます。
 
-```typescript twoslash
+```ts twoslash
 type KeyValuesAndName = {
   [K in string]: string;
 } & {

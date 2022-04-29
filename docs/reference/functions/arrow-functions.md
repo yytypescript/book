@@ -6,7 +6,7 @@ sidebar_label: アロー関数
 
 JavaScriptの関数は関数式に加えて、もうひとつの書き方があります。それがアロー関数(arrow function)です。
 
-```js
+```js twoslash
 // 関数式
 const hello = function (name) {
   return `Hello, ${name}!`;
@@ -21,7 +21,7 @@ const hello = (name) => {
 アロー関数は関数式に比べて短く書けるのが特徴的です。引数が1つだけの場合は、引数のカッコが省略できます。
 
 <!--prettier-ignore-->
-```js
+```js twoslash
 const hello = name => {
   return `Hello, ${name}!`;
 };
@@ -30,7 +30,7 @@ const hello = name => {
 さらに、関数内のコードが式1つだけの場合は、ブレースと`return`が省略できます。
 
 <!--prettier-ignore-->
-```js
+```js twoslash
 const hello = name => `Hello, ${name}!`;
 ```
 
@@ -55,7 +55,7 @@ console.log(func());
 
 TypeScriptでのアロー関数の型注釈は関数宣言と同様です。
 
-```ts
+```ts twoslash
 const increment = (num: number): number => num + 1;
 ```
 
@@ -78,7 +78,7 @@ const increment = num => num + 1;
 
 `noImplicitAny`が有効になっていても、関数引数に直接アロー関数を書く場合は型注釈を省略できます。
 
-```ts
+```ts twoslash
 [1, 2, 3].map((num) => num + 1);
 ```
 

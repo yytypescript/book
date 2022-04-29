@@ -12,7 +12,7 @@ sidebar_label: 変数のスコープ
 
 グローバル変数は、グローバルオブジェクトのプロパティになります。ブラウザでは、`window`オブジェクトのプロパティになっていることになります。日付の`Date`クラスや、デバッグに使う`console`オブジェクトなどの組み込みAPIはすべて`window`オブジェクトのプロパティです。グローバル変数へのアクセスはwindowを省略して書くことができます。
 
-```js
+```js twoslash
 Date === window.Date; //=> true
 console === window.console; //=> true
 ```
@@ -29,7 +29,7 @@ console === window.console; //=> true
 
 関数スコープ(function scope)は、関数内でのみ参照できる範囲です。関数内で宣言された変数は、関数の外から参照できません。
 
-```js
+```js twoslash
 function func() {
   const variable = 123;
   return variable; // 参照できる
@@ -69,7 +69,7 @@ console.log(x); // xを参照できない
 
 ブロックスコープはif構文などのブレースにも作用します。条件分岐の中で変数宣言された変数は、条件分岐の外からは参照できないので注意しましょう。
 
-```js
+```js twoslash
 if (navigator.userAgent.includes("Firefox")) {
   const browser = "Firefox";
 } else {
@@ -80,7 +80,7 @@ console.log(browser); // 参照できずエラー
 
 上の例は、ブロックスコープの外で変数宣言するように書き換える必要があります。
 
-```js
+```js twoslash
 let browser;
 if (navigator.userAgent.includes("Firefox")) {
   browser = "Firefox";

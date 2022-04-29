@@ -4,11 +4,25 @@ sidebar_label: オプション引数
 
 # オプション引数 (optional parameter)
 
+このページではxy平面上の一点を表すオブジェクトとして`Point`を型として定義し、それを使います。なお、具体的な`Point`の型は次のようになります。
+
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+```
+
 引数を省略したいことがあります。そのときはオプション引数とデフォルト引数を使用することができます。
 
-上記の関数`distance()`は、現在は与えられた座標を元に原点からの距離を計算していますが、これを2点の距離を計算できるようにしたいとします。すると上記の関数`distance()`は次のようになります。
+2点間の距離を求める関数`distance()`は、現在は与えられた座標を元に原点からの距離を計算していますが、これを2点の距離を計算できるようにしたいとします。すると上記の関数`distance()`は次のようになります。
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+// ---cut---
 function distance(p1: Point, p2: Point): number {
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
@@ -16,13 +30,16 @@ function distance(p1: Point, p2: Point): number {
 
 ここで第2引数は省略可能にし、省略した場合は第1引数と原点の距離を返したいとします。これはオプション引数を使用すると次のように書けます。
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+// ---cut---
 function distance(p1: Point, p2?: Point): number {
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
-
-distance(q1, q2);
-distance(q1);
+// @noErrors
 ```
 
 引数の`p2`の右隣に`?`がつきました。これで`p2`は省略可能な引数となり5, 6行目のどちらの書き方も受けつけるようになります。
@@ -37,7 +54,12 @@ distance(q1);
 
 ## 省略時の初期化処理を書く
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+// ---cut---
 function distance(p1: Point, p2?: Point): number {
   let p0: Point | undefined = p2;
 
@@ -56,7 +78,12 @@ function distance(p1: Point, p2?: Point): number {
 
 ### 処理を分ける
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+// ---cut---
 function distance(p1: Point, p2?: Point): number {
   if (typeof p2 === "undefined") {
     return (p1.x ** 2 + p1.y ** 2) ** (1 / 2);
@@ -72,14 +99,29 @@ function distance(p1: Point, p2?: Point): number {
 
 `p2`の型が`Point | undefined`として解釈されるのなら、あえて`?`などという記号を新しく定義する必要などないのではと思われるかもしれませんが、明確な違いがあります。それは**呼び出し側で省略できるかどうかということ**です。上記のとおりオプション引数は省略が可能なのですが、`undefined`とのユニオン型であることを明記すると省略ができません。
 
-```ts
-function distance(p1: Point, p2: Point | undefined): number {
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+
+const q1 = {
+  x: 0,
+  y: 0,
+};
+const q2 = {
+  x: 0,
+  y: 0,
+};
+
+// ---cut---
+// @errors: 2554
+function distance(p1: Point, p2: Point | undefined) {
   // ...
 }
 
 distance(q1, q2);
 distance(q1);
-// Expected 2 arguments, but got 1.
 
 distance(q1, undefined);
 ```
@@ -90,9 +132,14 @@ distance(q1, undefined);
 
 オプション引数は必ず最後に書かなければいけません。つまり、次のようにオプション引数より後ろに普通の引数を書くことはできません。
 
-```ts
-function distance(p1?: Point, p2: Point): number {
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+// ---cut---
+// @errors: 1016
+function distance(p1?: Point, p2: Point) {
   // ...
 }
-// A required parameter cannot follow an optional parameter.
 ```
