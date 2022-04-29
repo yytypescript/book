@@ -28,7 +28,7 @@ const drink = if (age >= 20) "ビール" else "ジュース";
 
 三項演算子は条件をネストできます。
 
-```js
+```js twoslash
 const extension = "ts";
 const language =
   extension === "js"
@@ -42,7 +42,7 @@ const language =
 
 上のコードと同等の処理をif-elseで書くと次のようになります。
 
-```js
+```js twoslash
 const extension = "ts";
 let language;
 if (extension === "js") {

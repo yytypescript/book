@@ -2,7 +2,7 @@
 
 `any, unknown`型はどのような値も代入できます。
 
-```ts
+```ts twoslash
 const any1: any = null;
 const any2: any = undefined;
 const any3: any = true;
@@ -30,7 +30,15 @@ const unknown6: unknown = {
 
 `any`型に代入したオブジェクトのプロパティ、メソッドは使用することができます。
 
-```ts twoskash
+```ts twoslash
+const any4: any = 0.8;
+const any5: any = "Comment allez-vous";
+const any6: any = {
+  x: 0,
+  y: 1,
+  name: "origin",
+};
+// ---cut---
 console.log(any4.toFixed());
 // @log: 1
 console.log(any5.length);

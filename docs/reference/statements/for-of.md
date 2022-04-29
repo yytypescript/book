@@ -10,7 +10,7 @@ for (変数 of 配列) {
 
 次の例は、配列`[1, 2, 3]`をループして順番に`1`、`2`、`3`を出力するものです。
 
-```js
+```js twoslash
 const numbers = [1, 2, 3];
 for (const n of numbers) {
   console.log(n);

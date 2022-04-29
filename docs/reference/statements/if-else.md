@@ -2,7 +2,7 @@
 
 JavaScriptの条件分岐はJavaやPHPと同じようにif-else構文を用います。
 
-```js
+```js twoslash
 if (value === 0) {
   // ...
 } else {
@@ -12,7 +12,7 @@ if (value === 0) {
 
 JavaScriptにもelse-ifがあります。`else if`のようにelseとifの間にはスペースが必要です。
 
-```js
+```js twoslash
 if (value === 0) {
   // ...
 } else if (value === 1) {
@@ -31,7 +31,7 @@ const result = if (value === 0) "OK" else "NG";
 
 式で条件分岐使いたい場合は三項演算子(ternary operator)を用います。
 
-```js
+```js twoslash
 const result = value === 0 ? "OK" : "NG";
 ```
 
@@ -39,7 +39,7 @@ const result = value === 0 ? "OK" : "NG";
 
 上のコードと同じロジックをif-elseで書く場合は、`if`ブロックの手前で結果を代入する変数を`let`で宣言します。
 
-```js
+```js twoslash
 let result;
 if (value === 0) {
   result = "OK";

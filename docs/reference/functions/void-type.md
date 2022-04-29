@@ -6,7 +6,7 @@ sidebar_label: 戻り値がない関数とvoid型
 
 TypeScriptで戻り値がない関数の戻り値を型注釈するにはvoid型を用います。void型は関数の戻り値を型注釈するためにある特別な型です。
 
-```ts
+```ts twoslash
 function print(message: string): void {
   console.log(message);
 }
@@ -16,7 +16,7 @@ function print(message: string): void {
 
 JavaScriptの関数では、戻り値がない場合は値として`undefined`を返します。またTypeScriptにはundefined型もあります。TypeScriptの型上の意味としては、undefined型とvoid型は同じです。したがって、戻り値の型注釈に`undefined`を用いることもできます。ただし、戻り値型がundefined型の場合は、`return undefined`が必要です。
 
-```ts
+```ts twoslash
 function print(message: string): undefined {
   console.log(message);
   return undefined; // これがないとコンパイルエラーになる
@@ -25,7 +25,7 @@ function print(message: string): undefined {
 
 戻り値がundefinedを含みうる関数の場合は、undefined型を含んだユニオン型を使うのが一般的です。
 
-```typescript twoslash
+```ts twoslash
 function getIfExists(numbers: number[], search: number): number | undefined {
   if (numbers.includes(search)) {
     return search;

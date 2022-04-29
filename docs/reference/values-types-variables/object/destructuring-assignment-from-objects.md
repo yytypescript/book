@@ -8,14 +8,14 @@ JavaScriptには、オブジェクトの分割代入(destructuring assignment)�
 
 通常、オブジェクトからプロパティを取り出す場合は、プロパティアクセサーを用います。プロパティアクセサーは、ドットを使ってプロパティを参照する記法です。
 
-```typescript twoslash
+```ts twoslash
 const item = { price: 100 };
 const price = item.price; // プロパティアクセサー
 ```
 
 分割代入は、中カッコ`{}`に取り出したいプロパティを指定することで、プロパティ名と同じ名前の変数が作れます。次の分割代入のサンプルコードは、上のプロパティアクセサーを使ったコードと同等の処理になります。
 
-```typescript twoslash
+```ts twoslash
 const item = { price: 100 };
 const { price } = item;
 // 上は const price = item.price; と同等の処理
@@ -27,14 +27,14 @@ const { price } = item;
 
 分割代入は、複数のプロパティを一度に取り出すこともできます。その場合、取り出したいプロパティを中カッコに列挙します。
 
-```typescript twoslash
+```ts twoslash
 const obj = { a: 1, b: 2 };
 const { a, b } = obj;
 ```
 
 この特徴は、取り出すプロパティ数が多い場合に、プロパティアクセサーより便利です。プロパティアクセサーでは、プロパティごとに代入文を書かないとなりません。
 
-```typescript twoslash title="プロパティアクセサーで取り出す例"
+```ts twoslash title="プロパティアクセサーで取り出す例"
 const color = { r: 0, g: 122, b: 204, a: 1 };
 const r = color.r;
 const g = color.g;
@@ -44,7 +44,7 @@ const a = color.a;
 
 分割代入を使うと、これを簡潔にまとめられます。
 
-```typescript twoslash title="多くのプロパティを分割代入で取り出す例"
+```ts twoslash title="多くのプロパティを分割代入で取り出す例"
 const color = { r: 0, g: 122, b: 204, a: 1 };
 const { r, g, b, a } = color;
 ```
@@ -53,7 +53,7 @@ const { r, g, b, a } = color;
 
 オブジェクトの分割代入では、コロン`:`のあとに変数名を指定すると、その名前の変数に代入できます。
 
-```typescript twoslash
+```ts twoslash
 const color = { r: 0, g: 122, b: 204, a: 1 };
 const { r: red, g: green, b: blue, a: alpha } = color;
 console.log(green);
@@ -64,7 +64,7 @@ console.log(green);
 
 オブジェクトの中にオブジェクトある入れ子構造にも、分割代入が使えます。深い階層のプロパティを取り出すには、階層の分だけ中カッコで囲みます。
 
-```typescript twoslash
+```ts twoslash
 const continent = {
   name: "北アメリカ",
   us: {
@@ -88,7 +88,7 @@ console.log(capitalCity);
 
 入れ子構造の分割代入をしながら、値を代入する変数名を指定することを同時にすることもできます。
 
-```typescript twoslash
+```ts twoslash
 const continent = {
   name: "北アメリカ",
   us: {
@@ -112,7 +112,7 @@ console.log(countryName);
 
 分割代入では、`=`のあとにデフォルト値が指定できます。デフォルト値は値が、`undefined`のときに代入されます。
 
-```typescript twoslash
+```ts twoslash
 const color = { r: undefined, g: 122, b: 204 };
 const { r = 0, g = 0, b = 0 } = color;
 console.log(r, g, b);
@@ -121,7 +121,7 @@ console.log(r, g, b);
 
 値が`null`のときは、デフォルト値が使われません。`null`がそのまま代入されます。
 
-```typescript twoslash
+```ts twoslash
 const color = { r: null };
 const { r = 0 } = color;
 console.log(r);
@@ -132,7 +132,7 @@ console.log(r);
 
 分割代入のデフォルト値と代入先の変数名を同時に指定することもできます。その場合、代入先変数名に続けて、デフォルト値を書きます。
 
-```typescript twoslash
+```ts twoslash
 const color = { r: undefined, g: 122, b: 204 };
 const { r: red = 0 } = color;
 console.log(red);

@@ -4,7 +4,7 @@
 
 JavaScriptの関数は値です。つまり、PHPのような他の言語と比べると特別扱いの度合いが少ないです。たとえば、関数を変数に代入することができます。
 
-```js
+```js twoslash
 function hello() {
   return "Hello World";
 }
@@ -34,7 +34,7 @@ hello();
 
 JavaScriptで関数の再代入によるバグを未然に回避したい場合は、`const`と関数式を組み合わせます。関数式については後述します。
 
-```js
+```js twoslash
 const hello = function () {
   return "HELLO";
 };

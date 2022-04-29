@@ -4,20 +4,25 @@ sidebar_label: "デフォルト引数"
 
 # デフォルト引数 (default parameter)
 
-デフォルト引数とは、関数に値が渡されないときや`undefined`が渡されたときに代わりに初期化され使用される値のことです。なお`null`が渡されたときはデフォルト引数は適用されませんので注意してください。
+このページではxy平面上の一点を表すオブジェクトとして`Point`を型として定義し、それを使います。なお、具体的な`Point`の型は次のようになります。
 
-ここでは例として、二次元上の点を定義します。
-
-```ts
+```ts twoslash
 type Point = {
   x: number;
   y: number;
 };
 ```
 
-そして二次元上の点p1とp2の距離を求めたい場合、次の式が成立します。関数名を`distance()`とします。
+デフォルト引数とは、関数に値が渡されないときや`undefined`が渡されたときに代わりに初期化され使用される値のことです。なお`null`が渡されたときはデフォルト引数は適用されませんので注意してください。
 
-```ts
+二次元上の点p1とp2の距離を求めたい場合、次の式が成立します。関数名を`distance()`とします。
+
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+// ---cut---
 function distance(p1: Point, p2: Point): number {
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
@@ -25,7 +30,12 @@ function distance(p1: Point, p2: Point): number {
 
 これを、たとえば`p2`を省略したときは原点(0, 0)との距離を求めるようにしてほしいといったときにデフォルト引数が使えます。デフォルト引数を使いこの条件を再現すると次のようになります。
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+// ---cut---
 const p0: Point = {
   x: 0,
   y: 0,
@@ -39,7 +49,12 @@ function distance(p1: Point, p2: Point = p0): number {
 引数に指定されなかったときに初期値として使いたい値を、その引数の右に書きます。ここでは`p2`の右側の`= p0`がそれにあたります。
 オプション引数と比べてもより簡素に書けるようになります。
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+// ---cut---
 function distance(p1: Point, p2?: Point): number {
   if (typeof p2 === "undefined") {
     return (p1.x ** 2 + p1.y ** 2) ** (1 / 2);
@@ -73,7 +88,23 @@ function distance(p1: Point, p2 = p0): number {
 
 `q1, q2`が`Point`型であれば次の関数呼び出しはすべて動作します。
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+
+const q1 = {
+  x: 0,
+  y: 0,
+};
+const q2 = {
+  x: 0,
+  y: 0,
+};
+
+declare function distance(p1: Point, p2?: Point): number;
+// ---cut---
 distance(q1, q2);
 distance(q1);
 distance(q1, undefined);
@@ -83,7 +114,12 @@ distance(q1, undefined);
 
 デフォルト引数には関数の戻り値を指定することができます。たとえば、ある点(x, y)が与えられると転置した点(y, x)を返す`inverse()`という関数の戻り値を初期値として使用します。ちなみに`inverse()`は次のようになります。
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+// ---cut---
 function inverse(p: Point): Point {
   return {
     x: p.y,
@@ -94,7 +130,14 @@ function inverse(p: Point): Point {
 
 これを使うと`distance()`は次のようになります。
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+
+declare function inverse(p: Point): Point;
+// ---cut---
 function distance(p1: Point, p2: Point = inverse(p1)): number {
   return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
 }
