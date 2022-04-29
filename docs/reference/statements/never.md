@@ -209,6 +209,7 @@ function func(value: "yes" | "no"): void {
 
 ```ts twoslash title="コンパイル後のJavaScript(変数代入による網羅性チェック)"
 // @alwaysStrict: false
+// @showEmit
 function func(value: "yes" | "no"): void {
   switch (value) {
     case "yes":
@@ -222,7 +223,6 @@ function func(value: "yes" | "no"): void {
       break;
   }
 }
-// ---cut-after---
 ```
 
 コンパイルもとのTypeScriptを知らない者がこのコードを見ると、`exhaustivenessCheck`への代入は意図が不明です。また、網羅性のチェックは実行時に行われません。
@@ -231,6 +231,7 @@ function func(value: "yes" | "no"): void {
 
 ```ts twoslash title="コンパイル後のJavaScript(例外による網羅性チェック)"
 // @alwaysStrict: false
+// @showEmit
 class ExhaustiveError extends Error {
   constructor(value: never, message = `Unsupported type: ${value}`) {
     super(message);
@@ -248,7 +249,6 @@ function func(value: "yes" | "no"): void {
       throw new ExhaustiveError(value);
   }
 }
-// ---cut-after---
 ```
 
 <TweetILearned>
