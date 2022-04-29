@@ -167,7 +167,7 @@ function isEmail(value: unknown): value is Email {
   if (typeof value.from !== "string") {
     return false;
   }
-  // ---cut-after---
+
   return true;
 }
 ```

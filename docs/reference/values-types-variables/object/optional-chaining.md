@@ -159,7 +159,6 @@ TypeScriptのコンパイラーオプション`target`が`es2020`以上のとき
 let book: undefined | { title: string };
 // ---cut---
 const title = book?.title;
-// ---cut-after---
 ```
 
 `target`が`es2019`以前の場合は、次のような三項演算子を用いたコードにコンパイルされます。
@@ -170,7 +169,6 @@ const title = book?.title;
 let book: undefined | { title: string };
 // ---cut---
 const title = book?.title;
-// ---cut-after---
 ```
 
 ## Null合体演算子と組み合わせる
