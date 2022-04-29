@@ -53,6 +53,11 @@ export default function Seo({
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "9wrel6kg8q");`}</script>
+      <script
+        defer
+        data-domain="typescriptbook.jp"
+        src="https://plausible.io/js/plausible.js"
+      ></script>
       {children}
     </Head>
   );
