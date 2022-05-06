@@ -7,13 +7,15 @@ slug: /reference/object-oriented/class
 
 クラスはオブジェクトの雛形を定義したもので、JavaScriptとTypeScriptでは`class`構文を用いてクラスが定義できます。
 
-```js
+```ts twoslash
 class Person {}
 ```
 
 クラスに対して`new`キーワードを使うと、オブジェクトを生成できます。
 
-```js
+```ts twoslash
+class Person {}
+// ---cut---
 const person = new Person();
 ```
 
@@ -23,6 +25,8 @@ const person = new Person();
 
 TypeScriptでは、クラスを定義するとクラス名と同じ名前の型が同時に定義されます。インスタンスを代入する変数に型注釈するには、クラス名を使います。
 
-```ts
+```ts twoslash
+class Person {}
+// ---cut---
 const person: Person = new Person();
 ```

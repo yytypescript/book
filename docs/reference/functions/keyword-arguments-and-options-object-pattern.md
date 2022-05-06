@@ -44,7 +44,7 @@ func({ x: 1, y: 2, z: 3 });
 
 さらに、Options Objectパターンでは分割代入引数を応用すると、引数の部分をよりシンプルに書けるようになります。
 
-```js
+```js twoslash
 function func({ x, y, z }) {
   console.log(x, y, z);
 }
@@ -56,7 +56,7 @@ function func({ x, y, z }) {
 
 TypeScriptでOptions Objectパターンを使うときには、引数の型注釈が必要になります。型注釈はオブジェクト型を書きます。
 
-```ts
+```ts twoslash
 function func({ x, y, z }: { x: number; y: number; z: number }) {
   // ...
 }
@@ -64,7 +64,7 @@ function func({ x, y, z }: { x: number; y: number; z: number }) {
 
 オブジェクト型の記述が長すぎる場合には、TypeScriptの型エイリアス(type alias)を用いて、引数の型を分けて書くと可読性が良くなります。
 
-```ts
+```ts twoslash
 type Options = {
   x: number;
   y: number;
@@ -88,7 +88,13 @@ Options Objectパターンの利点は次の3つがあります。
 
 位置引数3つを持つような関数の呼び出しコードには分かりにくさがあります。
 
-```js
+```ts twoslash
+declare function findProducts(
+  isSale: boolean,
+  withDetails: boolean,
+  freeShipping: boolean
+): void;
+// ---cut---
 findProducts(true, true, true);
 ```
 
@@ -96,7 +102,17 @@ findProducts(true, true, true);
 
 Options Objectパターンの場合、関数呼び出しコードを見ただけで、引数の意味が理解できます。引数名が際立つため、誤って引数を入れ替えてしまう心配が少ないです。
 
-```js
+```ts twoslash
+declare function findProducts({
+  isSale,
+  withDetails,
+  freeShipping,
+}: {
+  isSale: boolean;
+  withDetails: boolean;
+  freeShipping: boolean;
+}): void;
+// ---cut---
 findProducts({ isSale: true, withDetails: true, freeShipping: true });
 ```
 
@@ -104,9 +120,16 @@ findProducts({ isSale: true, withDetails: true, freeShipping: true });
 
 位置引数の関数は変更に弱い側面があります。たとえば、ユーザーを検索する関数を実装したとします。最初の要件は国と都市でユーザーを絞り込めること、そして、ユーザー属性でソートできることだったとします。その場合、次のような実装をすれば要件は満たせます。
 
-```js
-function findUsers(country, city, order, sort) {}
+```ts twoslash
+class User {}
 
+declare function findUsers(
+  country: string,
+  city: string,
+  order: string,
+  sort: string
+): Promise<User[]>;
+// ---cut---
 findUsers("JP", "Tokyo", "id", "asc");
 ```
 
@@ -130,17 +153,53 @@ function findUsers(country, city, ageMin, ageMax, order, sort);
 
 Options Objectパターンを用いれば、呼び出し元コードを壊さずに、追加引数を適切な位置に足せます。変更前の関数の実装と、その呼び出しコードは次のようになります。
 
-```js
-function findUsers({ country, city, order, sort }) {}
+```ts twoslash
+class User {}
 
+declare function findUsers({
+  country,
+  city,
+  order,
+  sort,
+}: {
+  country: string;
+  city: string;
+  order: string;
+  sort: string;
+}): Promise<User[]>;
+// ---cut---
 findUsers({ country: "JP", city: "Tokyo", order: "id", sort: "asc" });
 ```
 
 これに年齢範囲を追加した場合、関数定義の引数の位置はふさわしいところに置けます。
 
-```js
-function findUsers({ country, city, ageMin, ageMax, order, sort }) {}
-//                                  ^^^^^^^^^^^^^^追加
+```ts twoslash
+class User {}
+
+declare function findUsers({
+  country,
+  city,
+  order,
+  sort,
+  ageMin,
+  ageMax,
+}: {
+  country: string;
+  city: string;
+  order: string;
+  sort: string;
+  ageMin: number;
+  ageMax: number;
+}): Promise<User[]>;
+// ---cut---
+findUsers({
+  country: "JP",
+  city: "Tokyo",
+  ageMin: 10,
+  ageMax: 20,
+  order: "id",
+  sort: "asc",
+});
 ```
 
 加えて、関数呼び出し側のコードは変更する必要がありません。

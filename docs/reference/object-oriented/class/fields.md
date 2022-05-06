@@ -6,7 +6,7 @@ sidebar_label: フィールド
 
 JavaScriptでインスタンスにフィールドを持たせるには、インスタンス化したオブジェクトのプロパティに値を代入します。
 
-```js title="JavaScript"
+```js title="JavaScript" twoslash
 class Person {}
 const alice = new Person();
 alice.name = "Alice";
@@ -14,12 +14,13 @@ alice.name = "Alice";
 
 TypeScriptでは、これに加えてフィールドの型注釈を書く必要があります。
 
-```ts title="TypeScript"
+```ts title="TypeScript" twoslash
 class Person {
   name: string;
 }
 const alice = new Person();
 alice.name = "Alice";
+// @noErrors
 ```
 
 TypeScriptは、クラスの宣言に書かれていないフィールドへアクセスした場合、コンパイルエラーになります。
@@ -33,7 +34,7 @@ console.log(person.age);
 
 フィールドは宣言時に型を省略した場合でもコンストラクタで値が代入される場合は、代入する値で型が推論されます。下の例ではコンストラクタで`string`の型の値を代入しているため`name`は`string`型となります。
 
-```ts
+```ts twoslash
 class Person {
   private name;
 
@@ -76,7 +77,7 @@ console.log(alice.name);
 
 フィールドへの値代入は、コンストラクタを用いて行えます。コンストラクタの中では、`this`を用いて値を代入したいフィールドにアクセスします。
 
-```ts title="TypeScript"
+```ts title="TypeScript" twoslash
 class Person {
   name: string;
 
@@ -88,7 +89,7 @@ class Person {
 
 コンストラクタに引数を持たせれば、フィールドの値を動的に指定できるようにもできます。
 
-```ts title="TypeScript"
+```ts title="TypeScript" twoslash
 class Person {
   name: string;
 

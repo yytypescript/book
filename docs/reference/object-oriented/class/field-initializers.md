@@ -18,7 +18,7 @@ console.log(point.x, point.y);
 
 初期化子を用いた上の例は、次のコンストラクタでフィールドを初期化するのと同じ意味です。
 
-```ts
+```ts twoslash
 class Point {
   x: number;
   y: number;
@@ -34,7 +34,7 @@ class Point {
 
 初期化子で値の型が自明な場合、TypeScriptコンパイラーはフィールドの型を推論してくれます。そのため、初期化子を伴うフィールドは型注釈を省略できます。
 
-```ts
+```ts twoslash
 class Point {
   x = 0; // number型と型推論される
 }

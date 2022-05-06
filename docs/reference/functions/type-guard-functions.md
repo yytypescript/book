@@ -6,15 +6,26 @@ sidebar_label: 型ガード関数
 
 Type predicateの宣言は戻り値が`boolean`型の関数に対して適用でき、戻り値の型の部分を次のように書き替えます。
 
-```ts
+```ts twoslash
+class Animal {}
+class Duck {}
+// ---cut---
 function isDuck(animal: Animal): animal is Duck {
-  // ...
+  return animal instanceof Duck;
 }
 ```
 
 これで関数`isDuck()`が`true`を返す時の`if`のブロックの中では`animal`は`Duck`型として解釈されるようになります。
 
-```ts
+```ts twoslash
+class Animal {}
+class Duck {
+  public quacks(): void {}
+}
+declare function isDuck(animal: Animal): animal is Duck;
+
+const animal = new Animal();
+// ---cut---
 if (isDuck(animal)) {
   animal.quacks();
   // ...
@@ -23,7 +34,7 @@ if (isDuck(animal)) {
 
 しかしながら、これはあくまでもその型であるとTypeScriptに解釈させるだけなので、JavaScriptとして正しいということは断言できません。
 
-```ts
+```ts twoslash
 function isUndefined(value: unknown): value is undefined {
   return typeof value === "number";
 }

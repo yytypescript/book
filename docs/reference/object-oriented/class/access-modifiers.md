@@ -21,7 +21,7 @@ JavaやPHPなどの言語では、フィールドやメソッドに`private`, `p
 
 `public`アクセス修飾子はどこからもアクセス可能です。
 
-```ts
+```ts twoslash
 class Animal {
   public name: string; // フィールドにpublicアクセス修飾子
 

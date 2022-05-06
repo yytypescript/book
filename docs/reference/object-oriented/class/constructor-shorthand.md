@@ -15,7 +15,7 @@
 
 ふたつのクラスの違いはコンストラクタにアクセス修飾子を定義しているかどうかだけで機能はまったく同じです。
 
-```ts title="example.ts"
+```ts title="example.ts" twoslash
 class ConstructorInAccessModifier {
   constructor(
     arg0: number,
@@ -42,7 +42,7 @@ class ConstructorOutAccessModifier {
 
 コンパイル後のJavaScriptファイルを見てみると同一の機能を持つことが確認することができます。
 
-```js title="example.js"
+```js title="example.js" twoslash
 class ConstructorInAccessModifier {
   constructor(arg0, arg1, arg2, arg3) {
     this.arg1 = arg1;
