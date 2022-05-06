@@ -51,7 +51,7 @@ console.log(SomeClass.field);
 
 TypeScriptの静的フィールドは初期値がセットされている場合、その初期値からフィールドの型が型推論されます。そのため、フィールドの型注釈が省略できます。
 
-```ts
+```ts twoslash
 class SomeClass {
   static field = 123;
 }
@@ -61,7 +61,7 @@ class SomeClass {
 
 TypeScriptの静的フィールドはアクセス修飾子を組み合わせられます。
 
-```ts
+```ts twoslash
 class SomeClass {
   private static field: number;
 }
@@ -73,7 +73,7 @@ class SomeClass {
 
 TypeScriptの静的フィールドはreadonly修飾子をつけると読み取り専用になります。
 
-```ts
+```ts twoslash
 class SomeClass {
   static readonly field: number;
 }

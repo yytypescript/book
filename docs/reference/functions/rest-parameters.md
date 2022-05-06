@@ -10,7 +10,7 @@ sidebar_label: 残余引数/可変長引数
 
 JavaScriptで残余引数を書くには、引数の前に`...`を書きます。
 
-```js
+```js twoslash
 function func(...params) {
   // ...
 }
@@ -38,7 +38,7 @@ func(1, 2, 3);
 
 残余引数は必ず最後の引数でなければなりません。残余引数を複数持たせることはできません。また、残余引数の後に普通の引数を置くこともできません。
 
-```js
+```js twoslash
 // 構文エラーになるコード
 function func(...params1, ...params2) {}
 function func(...params, param1) {}
@@ -48,7 +48,7 @@ function func(...params, param1) {}
 
 TypeScriptで残余引数に型注釈するには、配列の型を書きます。たとえば、残余引数が数値型なら、`number[]`のように書きます。
 
-```ts
+```ts twoslash
 function func(...params: number[]) {
   // ...
 }
@@ -73,7 +73,7 @@ const highest = Math.max(scores);
 
 このように配列を直接渡してしまうと、`max`の関数内では引数ひとつの`number[][]`型が渡されたと解釈されます。`max`の期待する余剰引数の型は`number[]`型なので、このコードは正しく動きません。配列を余剰引数に渡す場合は、スプレッド構文(spread syntax)を用います。スプレッド構文は`...`と書きます。
 
-```ts
+```ts twoslash
 const scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const highest = Math.max(...scores);
 ```

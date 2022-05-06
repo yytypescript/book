@@ -6,20 +6,46 @@ sidebar_label: オーバーロード関数
 
 オーバーロードとは、関数の名称は同じでありながら異なる引数、戻り値を持つことができる機能です。TypeScriptもこの機能を用意しているのですが、大元がJavaScriptであることが災いし、やや使いづらいです。
 
+このページではxy平面上の一点を表すオブジェクトとして`Point`を型として定義し、それを使います。なお、具体的な`Point`の型は次のようになります。
+
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+```
+
 ## オーバーロードの定義
 
 オーバーロードはその関数が受け付けたい引数、戻り値の組を実装する関数の上に書きます。先ほど使用した2点の距離を求める関数`distance()`をオーバーロードで定義すると次のようになります。なお、この例では戻り値の型はすべて`number`型ですが、別の型にしても実装さえできれば他の型にしても問題ありません。
 
-```ts
-function distance(p: Point): number;
-function distance(p1: Point, p2: Point): number;
-function distance(x: number, y: number): number;
-function distance(x1: number, y1: number, x2: number, y2: number): number;
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+// ---cut---
+declare function distance(p: Point): number;
+declare function distance(p1: Point, p2: Point): number;
+declare function distance(x: number, y: number): number;
+declare function distance(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number
+): number;
 ```
 
 なお、上記のような書き方のオーバーロードは名前付き関数またはクラスのメソッドでのみ可能です。匿名関数、アロー関数ではタイプエイリアスまたはインターフェースでオーバーロードを定義します。たとえば、上記例だと次のようなタイプエイリアスになります。
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+
+const d = 0;
+// ---cut---
 type Distance = {
   (p: Point): number;
   (p1: Point, p2: Point): number;
@@ -34,6 +60,7 @@ const distance: Distance = (
   arg4?: number
 ): number => {
   // ...
+  return d;
 };
 ```
 
@@ -41,7 +68,16 @@ const distance: Distance = (
 
 ここからが大変です。実装はオーバーロードで定義したすべてをひとつの関数で処理しなければいけません。つまり`distance()`の実装は次のようになります。これが呼び出し側では**あたかも**他言語のオーバーロードのようになります。
 
-```ts
+```ts twoslash
+type Point = {
+  x: number;
+  y: number;
+};
+
+const d = 0;
+const q1 = { x: 0, y: 0 };
+const q2 = { x: 0, y: 0 };
+// ---cut---
 function distance(p: Point): number;
 function distance(p1: Point, p2: Point): number;
 function distance(x: number, y: number): number;
@@ -53,6 +89,7 @@ function distance(
   arg4?: number
 ): number {
   // ...
+  return d;
 }
 
 distance(q1);

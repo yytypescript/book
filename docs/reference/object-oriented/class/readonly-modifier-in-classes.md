@@ -4,7 +4,7 @@ TypeScriptでは、フィールドにreadonly修飾子をつけると、その�
 
 読み取り専用フィールドは、コンストラクタかフィールド初期化子でのみ値を代入できます。
 
-```ts
+```ts twoslash
 class Octopus {
   readonly name: string;
   readonly legs = 8; // フィールド初期化子での代入はOK
@@ -17,21 +17,30 @@ class Octopus {
 
 読み取り専用フィールドは、再代入しようとするとコンパイルエラーになります。
 
-```ts
+```ts twoslash
+class Octopus {
+  readonly name: string;
+  readonly legs = 8; // フィールド初期化子での代入はOK
+
+  constructor() {
+    this.name = "たこちゃん"; // コンストラクターでの代入はOK
+  }
+}
+// ---cut---
+// @errors: 2540
 const octopus = new Octopus();
 octopus.legs = 16;
-//      ^^^^ Cannot assign to 'legs' because it is a read-only property.(2540)
 ```
 
 メソッド内の処理であっても、読み取り専用フィールドへの再代入は許されません。
 
-```ts
+```ts twoslash
+// @errors: 2540
 class Octopus {
   readonly name = "たこちゃん";
 
   setName(newName: string): void {
     this.name = newName;
-    //   ^^^^ Cannot assign to 'name' because it is a read-only property.(2540)
   }
 }
 ```

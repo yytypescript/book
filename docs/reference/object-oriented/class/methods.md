@@ -6,7 +6,7 @@ sidebar_label: メソッド
 
 JavaScriptのクラスにメソッドを実装するには、メソッド構文を用います。
 
-```js
+```js twoslash
 class Greeter {
   greet(name) {
     return `Hello, ${name}!`;
@@ -18,7 +18,7 @@ class Greeter {
 
 TypeScriptでは、メソッドの引数と戻り値に型注釈できます。
 
-```ts
+```ts twoslash
 class Greeter {
   greet(name: string): string {
     return `Hello, ${name}!`;
