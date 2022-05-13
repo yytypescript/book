@@ -504,6 +504,44 @@ f = x => x;
 テキスト
 :::
 
+## 図表のキャプション
+
+図表にキャプションを追加する場合は、`<figure>`と`<figcaption>`が使えます。
+
+```markdown
+<figure><figcaption>猫の図</figcaption>
+
+![](https://placekitten.com/300/300)
+
+</figure>
+```
+
+<figure><figcaption>猫の図</figcaption>
+
+![](https://placekitten.com/300/300)
+
+</figure>
+
+```markdown
+<figure><figcaption>国と通貨</figcaption>
+
+| 国             | 通貨     |
+| -------------- | -------- |
+| アメリカ合衆国 | 米国ドル |
+| 日本           | 日本円   |
+
+</figure>
+```
+
+<figure><figcaption>国と通貨</figcaption>
+
+| 国             | 通貨     |
+| -------------- | -------- |
+| アメリカ合衆国 | 米国ドル |
+| 日本           | 日本円   |
+
+</figure>
+
 ## 「学びをシェアする」ブロック
 
 「学びをシェアする」ブロックは、読者がページの内容をTwitterでシェアしやすくするブロックです。`<TweetILearned>`で囲った範囲がツイート内容になります。

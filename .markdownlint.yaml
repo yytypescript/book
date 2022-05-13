@@ -27,3 +27,4 @@ no-inline-html:
     - TweetILearned
     - head
     - title
+    - iframe
