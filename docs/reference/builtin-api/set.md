@@ -41,7 +41,7 @@ const fruits = new Set<string>();
 
 TypeScriptで`Set`の型注釈をする場合は、`Set<string>`のようにSet要素の型を型変数に指定します。
 
-```ts
+```ts twoslash
 function doSomething(strings: Set<string>) {
   // ...
 }
@@ -119,7 +119,7 @@ console.log(fruits);
 
 `Set`オブジェクトはfor-of構文でループできます。
 
-```ts
+```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
 
 for (const fruit of fruits) {

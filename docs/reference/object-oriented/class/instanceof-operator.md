@@ -2,13 +2,21 @@
 
 JavaScriptでの継承関係のチェックは`instanceof`演算子で確認できます。この書き方は、JavaやPHPとよく似ています。
 
-```js
+```js twoslash
+class Parent {}
+
+class Child extends Parent {}
+// ---cut---
 const parent = new Parent();
 const child = new Child();
 
-parent instanceof Parent; //=> true
-parent instanceof Child; //=> false
+console.log(parent instanceof Parent);
+// @log: true
+console.log(parent instanceof Child);
+// @log: false
 
-child instanceof Parent; //=> true
-child instanceof Child; //=> true
+console.log(child instanceof Parent);
+// @log: true
+console.log(child instanceof Child);
+// @log: true
 ```

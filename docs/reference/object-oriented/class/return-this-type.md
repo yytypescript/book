@@ -6,7 +6,7 @@ fluent interfaceとは「流れるようなインターフェース」という�
 
 四則演算ができる変哲もないクラス`Operator`を考えます
 
-```ts
+```ts twoslash
 class Operator {
   protected value: number;
 
@@ -41,7 +41,7 @@ op.divide(3); // 4
 
 演算ごとにステートメントを分ける必要があります。このような場合メソッドチェインを使って処理を連続させることができます。
 
-```ts
+```ts twoslash
 class Operator {
   protected value: number;
 
@@ -78,7 +78,16 @@ op.sum(5).subtract(3).multiply(6).divide(3); // 4
 
 ここで、このクラス`Operator`を拡張して累乗の計算を追加したいとします。すると新しいクラス`NewOperator`は次のようになるでしょう。
 
-```ts
+```ts twoslash
+class Operator {
+  protected value: number;
+
+  public constructor(value: number) {
+    this.value = value;
+  }
+}
+// ---cut---
+// @errors: 2304
 class NewOperator extends Operator {
   public constructor(value: number) {
     super(value);
@@ -93,17 +102,56 @@ class NewOperator extends Operator {
 
 ですが、このクラスでは次の演算ができません。
 
-```ts
+```ts twoslash
+class Operator {
+  protected value: number;
+
+  public constructor(value: number) {
+    this.value = value;
+  }
+
+  public sum(value: number): Operator {
+    this.value += value;
+    return this;
+  }
+
+  public subtract(value: number): Operator {
+    this.value -= value;
+    return this;
+  }
+
+  public multiply(value: number): Operator {
+    this.value *= value;
+    return this;
+  }
+
+  public divide(value: number): Operator {
+    this.value /= value;
+    return this;
+  }
+}
+
+class NewOperator extends Operator {
+  public constructor(value: number) {
+    super(value);
+  }
+
+  public power(value: number): NewOperator {
+    this.value **= value;
+    return this;
+  }
+}
+// ---cut---
+// @errors: 2339
 const op: NewOperator = new NewOperator(2);
 op.power(3).multiply(2).power(3);
-// Property 'power' does not exist on type 'Operator'.
 ```
 
 これは`op.multiply()`の戻り値が`Operator`だからです。`Operator`には`power()`というメソッドがないためこのような問題が発生します。
 
-このような時、戻り値に`this`を設定することができます。上記クラスの戻り値の`Operator, NewOperator`をすべて`this`に置き換えると問題が解消されます。
+このようなとき、戻り値に`this`を設定することができます。上記クラスの戻り値の`Operator, NewOperator`をすべて`this`に置き換えると問題が解消されます。
 
-```ts
+```ts twoslash
 class Operator {
   protected value: number;
 

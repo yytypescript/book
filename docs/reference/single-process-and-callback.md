@@ -6,7 +6,7 @@ JavaScriptはシングルプロセス、シングルスレッドの言語です�
 
 コールスタックとは実行している関数の呼び出しの順序を司っているものです。スタックという言葉自体は関数の再帰呼び出しを誤って無限ループにしてしまった時に目にしたことがある人が多いのではないでしょうか。
 
-```ts
+```ts twoslash
 function stack(): never {
   stack();
 }
@@ -26,7 +26,12 @@ RangeError: Maximum call stack size exceeded
 
 JavaScriptはブラウザで発生するクリック、各種input要素からの入力、ブラウザの履歴の戻る進むなど、各種イベントをハンドリングできる言語ですが、時間のかかる処理が実行されている間はブロッキングが起こるためこれらの操作をハンドリングできなくなります。画面の描画もJavaScriptに任せていた場合はさらに画面が止まったように見えるでしょう。
 
-```ts
+```ts twoslash
+declare function ajax(url: string): Promise<unknown>;
+declare function wait(ms: number): Promise<void>;
+declare function ajaxDone(): boolean;
+declare function cancelAjax(): Promise<void>;
+// ---cut---
 ajax("https://...");
 wait(3000);
 
@@ -61,7 +66,7 @@ if (!ajaxDone()) {
 
 ノンブロッキングかわかりやすい例としては次のようなものがあります。
 
-```ts
+```ts twoslash
 console.log("first");
 
 setTimeout(() => {
@@ -143,7 +148,7 @@ console.log("third");
 
 一般的にコールバックは、ある一定の時間を要する処理結果を後から受け取るために使われます。コールバックを採用している関数は主に次のような形をしています。
 
-```ts
+```ts twoslash
 function ajax(uri: string, callback: (res: Response) => void): void {
   // ...
 }
@@ -151,7 +156,9 @@ function ajax(uri: string, callback: (res: Response) => void): void {
 
 この関数を使う時はこのようになります。
 
-```ts
+```ts twoslash
+declare function ajax(uri: string, callback: (res: Response) => void): void;
+// ---cut---
 ajax("https://...", (res: Response) => {
   // ...
 });
@@ -159,7 +166,9 @@ ajax("https://...", (res: Response) => {
 
 ここで、この関数`ajax()`の結果を受けてさらに`ajax()`を使いたいとすると、このようになってしまいます。
 
-```ts
+```ts twoslash
+declare function ajax(uri: string, callback: (res: Response) => void): void;
+// ---cut---
 ajax("https://...", (res1: Response) => {
   ajax("https://...", (res2: Response) => {
     // ...
@@ -169,7 +178,9 @@ ajax("https://...", (res1: Response) => {
 
 インデント(ネスト)が深くなります。これが何度も続くと見るに堪えなくなります。
 
-```ts
+```ts twoslash
+declare function ajax(uri: string, callback: (res: Response) => void): void;
+// ---cut---
 ajax("https://...", (res1: Response) => {
   ajax("https://...", (res2: Response) => {
     ajax("https://...", (res3: Response) => {
@@ -185,6 +196,6 @@ ajax("https://...", (res1: Response) => {
 });
 ```
 
-これは波動拳ネストとも呼ばれているようですw。このコールバック地獄を解消する画期的なクラスとして`Promise`が登場し主要なブラウザとNode.jsではビルトインオブジェクトとして使うことができます。こちらの説明については本書に専用のページがありますのでそちらをご参照ください。
+このコールバック地獄を解消する画期的なクラスとして`Promise`が登場し主要なブラウザとNode.jsではビルトインオブジェクトとして使うことができます。こちらの説明については本書に専用のページがありますのでそちらをご参照ください。
 
 [Promise / async / await](promise-async-await.md)

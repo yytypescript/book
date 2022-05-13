@@ -2,18 +2,18 @@
 
 `keyof`はオブジェクト型からプロパティ名を型として返す型演算子です。たとえば、`name`プロパティを持つ型に対して、`keyof`を使うと文字列リテラル型の`"name"`が得られます。
 
-```ts
+```ts twoslash
 type Person = {
   name: string;
 };
 type PersonKey = keyof Person;
-// 上は次と同じ意味です
-type PersonKey = "name";
+//    ^?
 ```
 
 2つ以上のプロパティがあるオブジェクト型に`keyof`を使った場合は、すべてのプロパティ名がユニオン型で返されます。
 
-```ts
+```ts twoslash
+// @noErrors
 type Book = {
   title: string;
   price: number;
@@ -26,34 +26,34 @@ type BookKey = "title" | "price" | "rating";
 
 インデックス型に`keyof`を用いると、インデックスキーの型が返ります。
 
-```ts
+```ts twoslash
 type MapLike = { [K: string]: any };
 type MapKeys = keyof MapLike;
-//=> string | number
+//    ^?
 ```
 
 キーが`string`のインデックス型は、`string`ではなく`string | number`が返ります。number型のキーアクセスの`obj[0]`は`obj["0"]`と同じになるからです。
 
 mapped typeに`keyof`を用いると、そのキーの型が返ります。
 
-```ts
+```ts twoslash
 type MapLike = { [K in "x" | "y" | "z"]: any };
 type MapKeys = keyof MapLike;
-//=> "x" | "y" | "z"
+//    ^?
 ```
 
 プロパティを持たないオブジェクト型に`keyof`を使うと`never`型が返ります。
 
-```ts
+```ts twoslash
 type What = keyof {};
-//=> never
+//   ^?
 ```
 
 `any`型に`keyof`を使うと`string | number | symbol`型が返ります。
 
-```ts
+```ts twoslash
 type AnyKeys = keyof any;
-//=> string | number | symbol
+//    ^?
 ```
 
 ## keyofのメリット

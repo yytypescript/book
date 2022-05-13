@@ -8,7 +8,7 @@ TypeScriptでは、`extends`キーワードを利用して定義済みのイン�
 
 ## プロパティを追加する
 
-```ts
+```ts twoslash
 interface Person {
   name: string;
   age: number;
@@ -41,7 +41,7 @@ const teacher: Teacher = {
 
 ### リテラル型に変更する
 
-```ts
+```ts twoslash
 interface WebPage {
   path: string;
 }
@@ -53,7 +53,7 @@ interface IndexPage extends WebPage {
 
 ### ユニオン型から選ぶ
 
-```ts
+```ts twoslash
 interface Person {
   age: number | undefined;
 }

@@ -13,18 +13,19 @@ title: Readonly<T>
 
 ## Readonlyの使用例
 
-```ts
+```ts twoslash
 type Person = {
   surname: string;
   middleName?: string;
   givenName: string;
 };
 type ReadonlyPerson = Readonly<Person>;
+//    ^?
 ```
 
 上の`ReadonlyPerson`は次の型と同じになります。
 
-```ts
+```ts twoslash
 type ReadonlyPerson = {
   readonly surname: string;
   readonly middleName?: string;

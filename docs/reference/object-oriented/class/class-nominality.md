@@ -4,7 +4,8 @@ TypeScriptでは、クラスに1つでも非パブリックなプロパティが
 
 たとえば、`UserId`クラスと`GroupId`クラスで同名になってしまっている`id`プロパティをプライベートにするだけで、相互の代入が不可能になります。
 
-```ts
+```ts twoslash
+// @errors: 2322
 class UserId {
   private readonly id: string;
 
@@ -22,8 +23,6 @@ class GroupId {
 }
 
 const userId: UserId = new GroupId("...");
-// Type 'GroupId' is not assignable to type 'UserId'.
-//   Types have separate declarations of a private property 'id'.(2322)
 ```
 
 この方法はフィールドに限らず、プライベートメソッドや`protected`プロパティでも同じ効果があります。
