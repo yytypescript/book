@@ -111,7 +111,7 @@ export default IndexPage;
 
 ![猫の画像を表示](nextjs/screen2.png)
 
-### ボタンを押してランダムに猫の画像を切り替える
+### ランダムに猫の画像を切り替える
 
 複数の猫の画像を配列で持ち、ランダムに画像が表示されるようにしてみましょう。
 
@@ -138,9 +138,9 @@ export default IndexPage;
 
 ![再読み込みで猫の画像をランダムに表示](nextjs/screen3.gif)
 
-続いてボタンを配置してボタンをクリックすることで猫の画像がランダムに切り替わるようにします。
+### ボタンクリックでランダムに画像を切り替える
 
-表示する猫の画像を`useState`を利用して`catImage`と言う名前の変数で状態として管理するようにしました。また、`きょうのにゃんこ🐱`というラベルを持つボタンを新しく追加して、クリックされた時に`handleClick`関数を実行して、`setCatImage`で状態を更新することで、ランダムに猫の画像を更新します。
+表示する猫の画像を`useState`で`catImage`と言う名前の変数で状態として管理するように変更します。また、`きょうのにゃんこ🐱`というラベルを持つボタンを新しく追加して、クリックされた時に`setCatImage`で状態を更新することで、ランダムに猫の画像を表示します。
 
 ```tsx twoslash
 import { useState } from "react";
@@ -182,17 +182,18 @@ export default IndexPage;
 
 ### The Cat API について
 
+APIリクエストで猫の画像を取得する前に利用するAPIについて簡単に紹介します。
+
 このチュートリアルでは猫の画像をランダムに表示するにあたり[The Cat API](https://thecatapi.com/)を利用します。
 このAPIは特定の条件で猫の画像を取得したり、品種ごとの猫の情報を取得することができます。🐱
-
-今回のチュートリアルでは[APIドキュメント](https://docs.thecatapi.com/)のQuickstartに記載されている`/v1/images/search`へアクセスをしてランダムに猫の画像を取得します。
+今回のチュートリアルでは[APIドキュメント](https://docs.thecatapi.com/)のQuickstartに記載されている`/v1/images/search`へリクエストをしてランダムな猫の画像を取得します。
 
 試しにブラウザで[https://api.thecatapi.com/v1/images/search](https://api.thecatapi.com/v1/images/search)へアクセスしてみてください。
 
 ランダムな結果が返ってくるので値は少し違うと思いますが、次のような構造のデータがレスポンスとして取得できます。
-レスポンスのデータ構造が配列として返ってきている点だけ注意が必要です。
+レスポンスのデータ構造が配列になっている点だけ注意が必要です。
 
-レスポンスで得られる`url`が猫の画像へアクセスするためのURLです。今回はこの値を取得して猫の画像をランダムに取得して行きます。
+レスポンスで得られる`url`が猫の画像へアクセスするためのURLです。今回はこの値を取得して猫の画像をランダムに表示します。
 
 ```json
 [
@@ -214,9 +215,9 @@ export default IndexPage;
 
 ### APIリクエストで猫の画像を取得
 
-最初はAPIリクエストで猫の画像を取得する`fetchCatImage`を実装してコンソールで確認してみます。
+最初にAPIリクエストで猫の画像を取得する`fetchCatImage`を実装してコンソールで確認してみます。
 
-`fetch`はHTTPリクエストでリソースを取得するブラウザ標準のAPIで、戻り値として[Response](https://developer.mozilla.org/ja/docs/Web/API/Response)オブジェクトを返します。`res.json()`はResponseオブジェクトの`json()`メソッドを実行しており、レスポンスのBodyテキストをJSONオブジェクトに変換するPromiseを取得することで、`result`にレスポンス結果をJSONオブジェクトとして格納しています。
+`fetch`はHTTPリクエストでリソースを取得するブラウザ標準のAPIです。戻り値として[Response](https://developer.mozilla.org/ja/docs/Web/API/Response)オブジェクトを返します。`res.json()`でResponseオブジェクトの`json()`メソッドを実行することで、レスポンスのBodyテキストをJSONオブジェクトに変換するPromiseを取得し`result`にレスポンス結果をオブジェクトとして格納しています。
 
 ```ts twoslash
 // pages/index.tsx
@@ -249,23 +250,19 @@ fetchCatImage().then((image) => {
 });
 ```
 
-APIレスポンスは仕様変更で頻繁に変更される可能性が高く特にフロントエンドではバグが混在しやすいです。
-TypeScriptで型を指定することで安全にAPIを扱えるようにします。
+APIレスポンスは変更される可能性が高く特にフロントエンドではバグが混在しやすい箇所です。型を指定することでより安全にAPIレスポンスを扱えるようにしていきます。
 
-`res.json()`は型定義で`Promise<any>`となっているため、`as`（型アサーション）で型情報を上書きしています。
+レスポンスに含まれる猫画像の型を`SearchCatImage`として定義し、レスポンスのデータ構造を`SearchCatImageResponse`として定義します。
 
-fetchAPIを使うと型アサーションを使う必要があるのがモヤモヤ
-TypeScript始めた人が型アサーションを積極的に使っていいんだと思ってしまう心配がある
+```ts twoslash
+interface CatCategory {
+  id: number;
+  name: string;
+}
 
-レスポンスの型ガードを書く？
-実行時に型が消えるのでAPIレスポンスが型定義と異なる場合に問題が発生する。
-=> レスポンスの型ガードを書けば多少解決はできる
-
-API周りは型定義ファイルを自動生成する仕組みもあったりする
-
-```typescript
 interface SearchCatImage {
   breeds: string[];
+  categories: CatCategory[];
   id: string;
   url: string;
   width: number;
@@ -273,10 +270,18 @@ interface SearchCatImage {
 }
 
 type SearchCatImagesResponse = SearchCatImage[];
+```
 
-const fetchCatImage = async () => {
+定義した`SearchCatImageResponse`の型でレスポンスの結果を型付けします。`res.json()`は型定義にて`Promise<any>`を返すようになっているので、型アサーションの`as`で型を上書きしています。
+
+型アサーションはコンパイラーの型推論を上書きするため、誤ってバグを生む危険性があります。利用は最小限にして必要な場合に限り使うようにしましょう。
+
+[型アサーション「as」(type assertion)](../reference/value-types-variables/type-assertion-as.md)
+
+```ts twoslash
+const fetchCatImage = async (): SearchCatImage => {
   const res = await fetch("api.thecatapi.com/v1/images/search");
-  const result = (await res.json()) as SearchCatImageResponseBody;
+  const result = (await res.json()) as SearchCatImageResponse;
   return result[0];
 };
 
@@ -286,54 +291,16 @@ fetchCatImage().then((image) => {
 });
 ```
 
-TypeScriptはJavaScriptにコンパイルされて実行されため、実行時には型情報が失われている。
-
-型アサーションは型チェックのタイミングでしか誤りに気付けないので、型定義のプロパティ名を間違えている状態で、プロパティを参照していても型チェックは通過する。
-
-実行時にプロパティ名が間違っているので、参照エラーとなる点に注意が必要
-
-厳密に型ガードを駆使して実装する場合はこんな感じで書く
-この方法を書いてで業務で積極的にこっちのやり方を使うと型ガードだらけになって良くないので書かない方がいいかも
-
-```typescript
-const isSearchCatImage = (image: any): image is SearchCatImage => {
-  // プロパティのnullチェックだと値としてnullを返す場合に対応ができない
-  // hasOwnPropertyやinキーワードでチェックした方が良い
-  return (
-    image.breeds != null &&
-    image.id != null &&
-    image.url != null &&
-    image.width != null &&
-    image.height != null
-  );
-};
-
-const fetchCatImage = async () => {
-  const res = await fetch("https://api.thecatapi.com/v1/images/search");
-  const result = await res.json();
-  if (
-    !Array.isArray(result) ||
-    result.length === 0 ||
-    !isSearchCatImage(result[0])
-  ) {
-    throw new Error("レスポンスのデータ構造が正しくありません");
-  }
-
-  return result[0] as SearchCatImage;
-};
-```
-
-ライブラリで型定義からコードを自動生成して色々とやる方法もある
-
-https://tech.mobilefactory.jp/entry/2021/12/10/000000
-
 ### ボタンをクリックして猫画像を更新
 
-```typescript
+APIリクエストでランダムな猫画像の取得ができるようになったので、ボタンをクリックした時に`fetchCatImage`でランダムな猫画像を取得して猫画像の状態を更新して色々な猫を表示します。
+
+```ts twoslash
 import { useState } from "react";
 
 interface SearchCatImage {
   breeds: string[];
+  categories: CatCategory[];
   id: string;
   url: string;
   width: number;
@@ -371,11 +338,15 @@ const IndexPage = () => {
 export default IndexPage;
 ```
 
+APIリクエストを経由して猫の画像をランダムに表示できるようになりました。😺
+
+![ボタンクリック時にAPIリクエストで猫の画像をランダムに表示](nextjs/screen5.gif)
+
 ### 初期画像もAPIで取得する
 
 ページを読み込み時は固定の画像を表示している状態なので、最初の画像もランダムに画像を表示するようにしましょう。
 
-```typescript
+```ts twoslash
 import { GetServerSideProps, NextPage } from "next";
 import { useState } from "react";
 
@@ -429,4 +400,69 @@ export const getServerSideProps: GetServerSideProps<
 };
 
 export default IndexPage;
+```
+
+## おまけ
+
+### より安全に型アサーションを利用する
+
+レスポンスの型がタイポしていたら、型チェックが通っても実行時にエラーになる。
+
+```typescript
+interface SearchCatImage {
+  breeds: string[];
+  id: string;
+  url: string;
+  width: number;
+  hight: number; // eが抜けてタイポをしている
+}
+
+type SearchCatImagesResponse = SearchCatImage[];
+
+const fetchCatImage = async () => {
+  const res = await fetch("api.thecatapi.com/v1/images/search");
+  const result = (await res.json()) as SearchCatImageResponseBody;
+  return result[0];
+};
+
+fetchCatImage().then((image) => {
+  console.log(image.hight); // 型としては正しいので型チェックは通過するが、実行時にundefinedとなる
+});
+```
+
+TypeScriptはJavaScriptにコンパイルされて実行されため、実行時には型情報が失われている。
+
+型アサーションは型チェックのタイミングでしか誤りに気付けないので、型定義のプロパティ名を間違えている状態で、プロパティを参照していても型チェックは通過する。
+
+実行時にプロパティ名が間違っているので、参照エラーとなる点に注意が必要
+
+厳密に型ガードを駆使して実装する場合はこんな感じで書く
+この方法を書いてで業務で積極的にこっちのやり方を使うと型ガードだらけになって良くないので書かない方がいいかも
+
+```typescript
+const isSearchCatImage = (image: any): image is SearchCatImage => {
+  // プロパティのnullチェックだと値としてnullを返す場合に対応ができない
+  // hasOwnPropertyやinキーワードでチェックした方が良い
+  return (
+    image.breeds != null &&
+    image.id != null &&
+    image.url != null &&
+    image.width != null &&
+    image.height != null
+  );
+};
+
+const fetchCatImage = async () => {
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
+  const result = await res.json();
+  if (
+    !Array.isArray(result) ||
+    result.length === 0 ||
+    !isSearchCatImage(result[0])
+  ) {
+    throw new Error("レスポンスのデータ構造が正しくありません");
+  }
+
+  return result[0] as SearchCatImage;
+};
 ```
