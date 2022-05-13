@@ -2,16 +2,26 @@
 
 インターフェースはTypeScriptで独自に定義された概念であり、JavaScriptには存在しません。つまりコンパイルをかけると消えてなくなります。そのため他の言語でできるような**その型が期待するインターフェースかどうか**の判定ができません。上記の`Student`インターフェースで次のようなことをしても実行することはできません。
 
-```ts
+```ts twoslash
+interface Student {}
+
+const studentA = {};
+// ---cut---
+// @errors: 2358 2693
 if (studentA instanceof Student) {
   // ...
 }
-// 'Student' only refers to a type, but is being used as a value here.
 ```
 
 これを解消するためには型ガードを自前で実装する必要があります。以下はその例の`isStudent()`です。
 
-```ts
+```ts twoslash
+interface Student {
+  name: string;
+  age: number;
+  grade: number;
+}
+// ---cut---
 type UnknownObject<T extends object> = {
   [P in keyof T]: unknown;
 };
@@ -52,13 +62,13 @@ Type predicateと呼ばれる機能です。専門に解説してあるページ
 
 `typeof`で判定される`object`型はオブジェクトではあるものの、プロパティが何も定義されていない状態です。そのためそのオブジェクトがどのようなプロパティを持っているかの検査すらできません。
 
-```ts
+```ts twoslash
+// @errors: 2339
 const obj: object = {
   name: "花子",
 };
 
 obj.name;
-// Property 'name' does not exist on type 'object'.
 ```
 
 そこでインデックス型を使っていったんオブジェクトのいかなるプロパティも`unknown`型のオブジェクトであると型アサーションを使い解釈させます。これですべての`string`型のプロパティにアクセスできるようになります。あとは各々の`unknown`型のプロパティを`typeof, instanceof`で判定させれば**この関数の判定が正しい限り**TypeScriptは引数が期待する`Student`インターフェースを実装したオブジェクトであると解釈します。
@@ -67,7 +77,7 @@ obj.name;
 
 インターフェースに変更が加わった時この関数も同時に更新されないとこの関係は崩れてしまいます。たとえば`student.name`は現在`string`型ですが、これが姓名の区別のために次のようなオブジェクトに差し替えられたとします。
 
-```ts
+```ts twoslash
 interface Name {
   surname: string;
   givenName: string;

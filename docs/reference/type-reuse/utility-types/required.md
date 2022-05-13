@@ -13,18 +13,19 @@ title: Required<T>
 
 ## Requiredの使用例
 
-```ts
+```ts twoslash
 type Person = {
   surname: string;
   middleName?: string;
   givenName: string;
 };
 type RequiredPerson = Required<Person>;
+//    ^?
 ```
 
 上の`RequiredPerson`は次と同じ型になります。
 
-```ts
+```ts twoslash
 type RequiredPerson = {
   surname: string;
   middleName: string;

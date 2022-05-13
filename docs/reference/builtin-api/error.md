@@ -8,7 +8,7 @@ title: Error
 
 `Error`オブジェクトを作るには`Error`クラスを`new`します。例外を投げるためには`throw`を使います。
 
-```ts
+```ts twoslash
 throw new Error();
 ```
 
@@ -16,7 +16,7 @@ throw new Error();
 
 とはいえ、JavaScriptでは例外を表す`Error`クラスとそのサブクラスだけを`throw`できるのではなく、どのような値も`throw`できます。
 
-```ts
+```ts twoslash
 throw "id is not string!";
 ```
 
@@ -59,7 +59,7 @@ console.log(err.stack);
 
 もし捕捉した値があるクラスのインスタンスまたはある型であるかを判定したい場合は`instanceof`, `keyof`あるいは型ガードを使います。
 
-```ts
+```ts twoslash
 try {
   // ...
 } catch (e) {

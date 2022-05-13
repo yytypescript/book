@@ -86,7 +86,7 @@ import "./module.js";
 
 Node.jsでは現在でも主流の他の`.js`ファイル(TypeScriptでは`.ts`も)を読み込む機能です。基本は次の構文です。
 
-```ts
+```ts twoslash
 const package1 = require("package1");
 ```
 
@@ -94,7 +94,7 @@ const package1 = require("package1");
 
 自分で作った他の`.js, .ts`ファイルを読み込むこともできます。呼び出すファイルから見た、読み込みたいファイルの位置を**相対パス**で書きます。たとえ同じ階層にあっても相対パスで書く必要があります。このとき`.js, .json`とTypeScriptなら加えて`.ts`を省略することができます。TypeScriptでの開発においては最終的にJavaScriptにコンパイルされることを考慮すると書かないほうが無難です。
 
-```ts
+```ts twoslash
 const myPackage = require("./MyPackage");
 ```
 
@@ -106,7 +106,8 @@ const myPackage = require("./MyPackage");
 
 他のファイルを読む込むためにはそのファイルは何かを出力している必要があります。そのために使うのがこの構文です。
 
-```ts title="increment.js"
+```ts title="increment.js" twoslash
+// @noErrors
 module.exports = (i) => i + 1;
 ```
 
@@ -124,7 +125,7 @@ console.log(increment(3));
 
 この`module.exports`はひとつのファイルでいくらでも書くことができますが、適用されるのは最後のもののみです。
 
-```ts title="dayOfWeek.js"
+```ts title="dayOfWeek.js" twoslash
 module.exports = "Monday";
 module.exports = "Tuesday";
 module.exports = "Wednesday";
@@ -145,7 +146,8 @@ console.log(day);
 
 `module.exports`だと良くも悪くも出力しているものの名前を変更できてしまいます。それを避けたい時はこの`exports`を使用します。
 
-```ts title="util.js"
+```ts title="util.js" twoslash
+// @noErrors
 exports.increment = (i) => i + 1;
 ```
 
@@ -186,7 +188,10 @@ console.log(inc(3));
 `require()`と同じく他の`.js, .ts`ファイルを読み込む機能ですが、`require()`はファイル内のどこにでも書くことができる一方で`import`は**必ずファイルの一番上に書く必要があります**。
 なお、書き方が2とおりあります。
 
-```ts
+```ts twoslash
+// @filename: package1
+// @filename: package2
+// ---cut---
 import * as package1 from "package1";
 import package2 from "package2";
 ```
@@ -197,7 +202,8 @@ import package2 from "package2";
 
 `module.exports`に対応するものです。`module.exports`と異なりひとつのファイルはひとつの`export default`しか許されていなく複数書くと動作しません。
 
-```ts title="increment.js"
+```ts title="increment.js" twoslash
+// @noErrors
 export default (i) => i + 1;
 ```
 
@@ -229,11 +235,13 @@ console.log(increment.default(3));
 
 `exports`に相当するものです。書き方が2とおりあります。
 
-```ts title="util.js"
+```ts title="util.js" twoslash
+// @noErrors
 export const increment = (i) => i + 1;
 ```
 
-```ts title="util.js"
+```ts title="util.js" twoslash
+// @noErrors
 const increment = (i) => i + 1;
 
 export { increment };
@@ -305,7 +313,8 @@ import("./util").then(({ increment }) => {
 
 `ES Module`として動作させたいJavaScriptのファイルをすべて`.mjs`の拡張子に変更します。
 
-```ts title="increment.mjs"
+```ts title="increment.mjs" twoslash
+// @noErrors
 export const increment = (i) => i + 1;
 ```
 
@@ -340,7 +349,8 @@ console.log(increment(3));
 
 このようにすることで拡張子を`.mjs`に変更しなくてもそのまま`.js`で`ES Module`を使えるようになります。なお`"type": "module"`の省略時は`"type": "commonjs"`と指定されたとみなされます。これは今までとおりのNode.jsです。
 
-```ts title="increment.js"
+```ts title="increment.js" twoslash
+// @noErrors
 export const increment = (i) => i + 1;
 ```
 
@@ -361,11 +371,12 @@ console.log(increment(3));
 
 `CommonJS`で書かれたJavaScriptを読み込みたくなったときは`CommonJS`で書かれているファイルをすべて`.cjs`に変更する必要があります。
 
-```ts title="increment.cjs"
+```ts title="increment.cjs" twoslash
+// @noErrors
 exports.increment = (i) => i + 1;
 ```
 
-読み込み側は以下です。
+読み込み側は次のようになります。
 
 ```ts title="index.js" twoslash
 import { createRequire } from "module";
@@ -435,7 +446,8 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 たとえばある国の会計ソフトウェアを作っていたとして、その国の消費税が8%だったとします。そのときのあるファイルの`export`はこのようになっていました。
 
-```ts title="taxIncluded.ts"
+```ts title="taxIncluded.ts" twoslash
+// @noErrors
 export default (price) => price * 1.08;
 ```
 
@@ -454,7 +466,8 @@ console.log(taxIncluded(100));
 
 ここで、ある国が消費税を10%に変更したとします。このときこのシステムでは`taxIncluded.ts`を変更すればこと足ります。
 
-```ts title="taxIncluded.ts"
+```ts title="taxIncluded.ts" twoslash
+// @noErrors
 export default (price) => price * 1.1;
 ```
 
@@ -468,7 +481,8 @@ export default (price) => price * 1.1;
 
 named exportであれば`export`する名称を変更することで呼び出し側の変更を強制させることができます。
 
-```ts title="taxIncluded.ts"
+```ts title="taxIncluded.ts" twoslash
+// @noErrors
 export const taxIncludedAsOf2014 = (price) => price * 1.08;
 ```
 
@@ -485,7 +499,8 @@ console.log(taxIncludedAsOf2014(100));
 
 税率が10%に変われば次のようにします。
 
-```ts title="taxIncluded.ts"
+```ts title="taxIncluded.ts" twoslash
+// @noErrors
 export const taxIncludedAsOf2019 = (price) => price * 1.1;
 ```
 

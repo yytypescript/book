@@ -13,18 +13,19 @@ title: Partial<T>
 
 ## Partialの使用例
 
-```ts
+```ts twoslash
 type Person = {
   surname: string;
   middleName?: string;
   givenName: string;
 };
 type PartialPerson = Partial<Person>;
+//    ^?
 ```
 
 この`PartialPerson`は次の型と同じになります。
 
-```ts
+```ts twoslash
 type PartialPerson = {
   surname?: string;
   middleName?: string;
@@ -38,9 +39,9 @@ type PartialPerson = {
 
 [キーワード引数とOptions Objectパターン](../../functions/keyword-arguments-and-options-object-pattern.md)
 
-ユーザーの検索をかける関数を作ります。プロパティはそれぞれ引数となっており、対応する引数に値を与えると検索ができる関数`findUsers()`があるとします。ここでは例のため引数を
+ユーザーの検索をかける関数を作ります。プロパティはそれぞれ引数となっており、対応する引数に値を与えると検索ができる関数`findUsers()`があるとします。ここでは例のため引数をすべてオプション引数にします。
 
-```ts
+```ts twoslash
 type User = {
   surname: string;
   middleName?: string;
@@ -59,14 +60,34 @@ function findUsers(
   age?: number,
   address?: string,
   nationality?: string
-): Promise<User[]> {
+) {
   // ...
 }
 ```
 
-ですが、この`findUsers()`のシグネチャだと**年齢だけがXX才の**ユーザーが欲しい時は引数の順番を維持するために他の引数は`undefined`を入力しなければいけません。
+この`findUsers()`のシグネチャだと**年齢だけがXX才の**ユーザーが欲しい時は引数の順番を維持するために他の引数は`undefined`を入力しなければいけません。
 
-```ts
+```ts twoslash
+type User = {
+  surname: string;
+  middleName?: string;
+  givenName: string;
+  age: number;
+  address?: string;
+  nationality: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+declare function findUsers(
+  surname?: string,
+  middleName?: string,
+  givenName?: string,
+  age?: number,
+  address?: string,
+  nationality?: string
+): Promise<User[]>;
+// ---cut---
 findUsers(undefined, undefined, undefined, 22);
 ```
 
@@ -74,13 +95,36 @@ findUsers(undefined, undefined, undefined, 22);
 
 まず引数はすべてオブジェクトで受け渡しされるものとしてそのオブジェクトの型を定義します。さらにプロパティを省略可能にするために`Partial<T>`をつけます。
 
-```ts
+```ts twoslash
+type User = {
+  surname: string;
+  middleName?: string;
+  givenName: string;
+  age: number;
+  address?: string;
+  nationality: string;
+  createdAt: string;
+  updatedAt: string;
+};
+// ---cut---
 type FindUsersArgs = Partial<User>;
 ```
 
 これを関数`findUsers()`の引数にします。
 
-```ts
+```ts twoslash
+type User = {
+  surname: string;
+  middleName?: string;
+  givenName: string;
+  age: number;
+  address?: string;
+  nationality: string;
+  createdAt: string;
+  updatedAt: string;
+};
+type FindUsersArgs = Partial<User>;
+// ---cut---
 function findUsers({
   surname,
   middleName,
@@ -88,20 +132,46 @@ function findUsers({
   age,
   address,
   nationality,
-}: FindUsersArgs): Promise<User[]> {
+}: FindUsersArgs) {
   // ...
 }
 ```
 
 これだけではまだ呼び出し側は省略ができません。`findUsers()`を使用する時は仮に何も設定する必要がなくても引数に`{}`を与えなければいけません。
 
-```ts
+```ts twoslash
+type User = {
+  surname: string;
+  middleName?: string;
+  givenName: string;
+  age: number;
+  address?: string;
+  nationality: string;
+  createdAt: string;
+  updatedAt: string;
+};
+type FindUsersArgs = Partial<User>;
+
+declare function findUsers(findUser: FindUsersArgs): unknown;
+// ---cut---
 findUsers({});
 ```
 
 引数を省略できるようにするためにデフォルト引数を使い省略時に`{}`が代入されるようにします。
 
-```ts
+```ts twoslash
+type User = {
+  surname: string;
+  middleName?: string;
+  givenName: string;
+  age: number;
+  address?: string;
+  nationality: string;
+  createdAt: string;
+  updatedAt: string;
+};
+type FindUsersArgs = Partial<User>;
+// ---cut---
 function findUsers({
   surname,
   middleName,
@@ -109,7 +179,7 @@ function findUsers({
   age,
   address,
   nationality,
-}: FindUsersArgs = {}): Promise<User[]> {
+}: FindUsersArgs = {}) {
   // ...
 }
 
@@ -119,14 +189,27 @@ findUsers({ age: 22 });
 
 `FindUsersArgs`の右の`= {}`がそれにあたります。これにより`findUsers()`は引数がなくても呼び出せるようになります。特定の引数だけ値を指定することもできます。`findUsers({ age: 22 })`がその例です。
 
-さらに`FindUsersArgs`側にもデフォルト型を設定することで初期値することもできます。
+さらに`FindUsersArgs`側にもデフォルト型を設定することで初期値を代入することもできます。
 
-```ts
+```ts twoslash
+type User = {
+  surname: string;
+  middleName?: string;
+  givenName: string;
+  age: number;
+  address?: string;
+  nationality: string;
+  createdAt: string;
+  updatedAt: string;
+};
+type FindUsersArgs = Partial<User>;
+// ---cut---
 function findUsers({
-  name = "John Doe",
+  surname = "Doe",
+  givenName = "John",
   nationality = "Araska",
   age = 22,
-}: FindUsersArgs = {}): Promise<User[]> {
+}: FindUsersArgs = {}) {
   // ...
 }
 ```

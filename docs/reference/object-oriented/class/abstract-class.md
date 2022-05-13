@@ -26,7 +26,16 @@ class Meat extends Food {}
 
 `keepRefrigerated()`メソッドを実装することによりエラーはなくなります。
 
-```ts
+```ts twoslash
+abstract class Food {
+  constructor(protected name: string, protected calorie: number) {}
+  showDebug() {
+    console.log(`name = ${this.name} `);
+    console.log(`calorie = ${this.calorie}kcal `);
+  }
+  abstract keepRefrigerated(): boolean;
+}
+// ---cut---
 class Meat extends Food {
   keepRefrigerated(): boolean {
     return true;

@@ -6,7 +6,8 @@ description: interfaceでの宣言と、type aliasによる宣言の違い
 
 型エイリアスを利用することで、インターフェースと同様の定義が行なえます。
 
-```ts
+```ts twoslash
+// @noErrors
 type Animal = {
   name: string;
   bark(): string;
@@ -32,7 +33,7 @@ interface Animal {
 
 インターフェースは、インターフェースや型エイリアスを継承できます。
 
-```ts
+```ts twoslash
 interface Animal {
   name: string;
 }
@@ -44,29 +45,26 @@ interface Dog extends Animal, Creature {
 }
 ```
 
-一方、型エイリアスは継承は行なえません。代わりに交差型(&)を使用することで、継承と似たことを実現できます。
+一方、型エイリアスは継承は行えません。代わりに交差型(&)を使用することで、継承と似たことを実現できます。
 
-```ts
+```ts twoslash
 type Animal = {
-  name: string,
+  name: string;
 };
 type Creature = {
-  dna: string,
+  dna: string;
 };
-// NG
-type Dog extends Animal
-// OK
 type Dog = Animal &
   Creature & {
-    dogType: string,
+    dogType: string;
   };
 ```
 
 ### プロパティのオーバーライド
 
-インターフェースで継承の際にプロパティをオーバーライドした際には、継承元のプロパティの型が
+インターフェースで継承の際にプロパティをオーバーライドすると、継承元のプロパティの型が上書きされます。
 
-```ts
+```ts twoslash
 // OK
 interface Animal {
   name: any;
@@ -83,6 +81,7 @@ interface Dog extends Animal {
     dollar: number;
   };
 }
+
 // 最終的なDogの定義
 interface Dog {
   name: string;
@@ -92,8 +91,12 @@ interface Dog {
   };
   legCount: number;
 }
+```
 
-// NG
+ただし、オーバーライドするためには元の型に代入できるものでなければなりません。次の例は`number`型であるフィールドを`string`型でオーバーライドしようとしている例です。
+
+```ts twoslash
+// @errors: 2430
 interface A {
   numberField: number;
   price: {
@@ -101,9 +104,9 @@ interface A {
     dollar: number;
   };
 }
+
 interface B extends A {
-  numberField: string; // Error:stringはnumberに代入できないため
-  // Error:dollar
+  numberField: string;
   price: {
     yen: number;
     euro: number;
@@ -113,7 +116,8 @@ interface B extends A {
 
 一方、型エイリアスの場合は上書きにはならず、フィールドの型の交差型が計算されます。また、交差型で矛盾があって計算できない場合もコンパイルエラーにはなりません。
 
-```ts
+```ts twoslash
+// @noErrors
 type Animal = {
   name: number;
   price: {
@@ -129,6 +133,7 @@ type Dog = Animal & {
     euro: number;
   };
 };
+
 // 最終的なDogの定義
 type Dog = {
   name: never; // 交差型作れない場合はコンパイルエラーではなくnever型になる
