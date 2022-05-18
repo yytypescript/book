@@ -166,7 +166,7 @@ const IndexPage = () => {
   return (
     <div>
       <button onClick={handleClick}>きょうのにゃんこ🐱</button>
-      <div style={{ marginTop: 10 }}>
+      <div style={{ marginTop: 8 }}>
         <img src={randomCatImage()} />
       </div>
     </div>
@@ -298,6 +298,11 @@ APIリクエストでランダムな猫画像の取得ができるようにな�
 ```ts twoslash
 import { useState } from "react";
 
+interface CatCategory {
+  id: number;
+  name: string;
+}
+
 interface SearchCatImage {
   breeds: string[];
   categories: CatCategory[];
@@ -328,7 +333,7 @@ const IndexPage = () => {
   return (
     <div>
       <button onClick={handleClick}>きょうのにゃんこ🐱</button>
-      <div style={{ marginTop: 10 }}>
+      <div style={{ marginTop: 8 }}>
         <img src={catImageUrl} width={500} height="auto" />
       </div>
     </div>
@@ -344,14 +349,28 @@ APIリクエストを経由して猫の画像をランダムに表示できる�
 
 ### 初期画像もAPIで取得する
 
-ページを読み込み時は固定の画像を表示している状態なので、最初の画像もランダムに画像を表示するようにしましょう。
+ページを読み込む時は固定の画像を表示している状態です。最後に、最初の画像もランダムに画像を表示するようにしましょう。
+
+Next.jsではページコンポーネントでデータをフェッチする方法として、`getInitialProps`, `getServerSideProps`,`getStaticProps`の3つがあります。
+
+`getInitialProps`はSSR（サーバーサイドレンダリング）時はサーバー側でデータ取得の処理が実行され、クライアントサイドでルーティングが発生した場合はクライアント側でデータの取得が実行されます。このAPIは `Automatic Static Optimization` と呼ばれる自動で静的ページとしてビルドをするNext.jsの特徴でもある機能を無効にしてしまいパフォーマスのNext.jsのパフォーマンスの恩恵を受けられないことがあるため、可能な限り他のデータフェッチ手法を使うことが推奨されています。
+
+`getServerSideProps`はSSR時にサーバーで実行されることは`getInitialProps`と同じですが、クライアントサイドでルーティングが発生した場合もデータの取得がサーバー側で実行される点が異なります。サーバー側のみで実行されることが保証されるため、`getServerSideProps`内でのみ利用しているモジュールはクライアントのコードにバンドルされず配信するファイルサイズを削減することができます。また、ユニバーサルな実装を意識する必要も無いので考慮すべき点が減り、データベースから直接データを取得するような処理を記述することも可能です。
+
+`getStaticProps`は静的ビルド実行時のみデータ取得が実行されます。これは他の2つと異なりページを描画する時にはデータ取得が実行されないことに注意が必要です。ユーザーログインが不要なLPなどの静的なページを構築する時など利用します。
 
 ```ts twoslash
 import { GetServerSideProps, NextPage } from "next";
 import { useState } from "react";
 
+interface CatCategory {
+  id: number;
+  name: string;
+}
+
 interface SearchCatImage {
   breeds: string[];
+  categories: CatCategory[];
   id: string;
   url: string;
   width: number;
@@ -381,7 +400,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
   return (
     <div>
       <button onClick={handleClick}>きょうのにゃんこ🐱</button>
-      <div style={{ marginTop: 10 }}>
+      <div style={{ marginTop: 8 }}>
         <img src={catImageUrl} width={500} height="auto" />
       </div>
     </div>
