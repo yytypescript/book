@@ -17,7 +17,7 @@ title: "Pick<T, Keys>"
 
 ## Pickの使用例
 
-```ts
+```ts twoslash
 type User = {
   surname: string;
   middleName?: string;
@@ -33,7 +33,7 @@ type Person = Pick<User, "surname" | "middleName" | "givenName">;
 
 上の`Person`は次の型と同じになります。
 
-```ts
+```ts twoslash
 type Person = {
   surname: string;
   middleName?: string;
@@ -45,7 +45,7 @@ type Person = {
 
 書籍を扱うサービスを作ったとして、書籍を意味するオブジェクト`Book`が次のように定義されているとします。
 
-```ts
+```ts twoslash
 type Book = {
   id: number;
   title: string;
@@ -57,7 +57,7 @@ type Book = {
 
 これを参考にして`Book`を作成するための入力データとして`BookInputData`を作るとします。これは外部からのリクエストで作成され、`id, createdAt, updatedAt`はこのサービスで後付けで割り当てられるとすれば`BookInputData`は次になります。
 
-```ts
+```ts twoslash
 type BookInputData = {
   title: string;
   author: string;
@@ -66,7 +66,13 @@ type BookInputData = {
 
 ここで`author`プロパティが`string`ではなく`Person`になる必要があったとします。`Book, BookInputData`を独立して定義しているとこの変更のために都度、各々の`author`プロパティを変更する必要があります。
 
-```ts
+```ts twoslash
+type Person = {
+  surname: string;
+  middleName?: string;
+  givenName: string;
+};
+// ---cut---
 type Book = {
   id: number;
   title: string;
@@ -85,7 +91,20 @@ type BookInputData = {
 
 そこで`BookInputData`を`Pick<T, K>`を使って定義しなおします。
 
-```ts
+```ts twoslash
+type Person = {
+  surname: string;
+  middleName?: string;
+  givenName: string;
+};
+type Book = {
+  id: number;
+  title: string;
+  author: Person;
+  createdAt: Date;
+  updatedAt: Date;
+};
+// ---cut---
 type BookInputData = Pick<Book, "title" | "author">;
 ```
 

@@ -15,76 +15,78 @@ tags: [strict]
 
 JavaScript はいかなる値も例外として投げることができます。そのため捕捉した値は`any`型でした。
 
-```ts
+```ts twoslash
+// @useUnknownInCatchVariables: false
 // case 1
 try {
   throw new Error();
 } catch (err) {
-  // err is any
+  //       ^?
 }
 
 // case 2
 try {
   throw "This is an error!";
 } catch (err) {
-  // err is any
+  //       ^?
 }
 
 // case 3
 try {
   throw undefined;
 } catch (err) {
-  // err is any
+  //       ^?
 }
 ```
 
 この混沌は TypeScript4.0 でようやく整理されることとなりました。捕捉した値に対して`unknown`型を明記することによって捕捉した値の型はわからないものの型安全を獲得できるようになりました。
 
-```ts
+```ts twoslash
+// @useUnknownInCatchVariables: false
 // case 1
 try {
   throw new Error();
 } catch (err) {
-  // err is any
+  //       ^?
 }
 
 // case 2
 try {
   throw "This is an error!";
 } catch (err: unknown) {
-  // err is unknown
+  //       ^?
 }
 
 // case 3
 try {
   throw undefined;
 } catch (err: unknown) {
-  // err is any
+  //       ^?
 }
 ```
 
 今回のオプションはこの機能を常時有効にするものです。例外が捕捉した値は型の明記をすることなくすべてが`unknown`型として解釈されるようになります。
 
-```ts
+```ts twoslash
 // case 1
 try {
   throw new Error();
 } catch (err) {
-  // err is unknown
+  //       ^?
 }
 
 // case 2
 try {
   throw "This is an error!";
 } catch (err) {
-  // err is unknown
+  //       ^?
 }
 
 // case 3
 try {
   throw undefined;
 } catch (err) {
-  // err is unknown
+  //       ^?
 }
 ```
 

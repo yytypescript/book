@@ -11,7 +11,7 @@ slug: /reference/generics
 
 ジェネリクスが具体的にどのような問題を解決するのか見ていきましょう。ここに、`chooseRandomlyString()`という普通の関数があります。この関数は、2つの文字列を引数に受け取り、五分五分の確率で第1引数か第2引数の値を抽選して返します。
 
-```ts
+```ts twoslash
 function chooseRandomlyString(v1: string, v2: string): string {
   return Math.random() <= 0.5 ? v1 : v2;
 }
@@ -19,13 +19,15 @@ function chooseRandomlyString(v1: string, v2: string): string {
 
 `chooseRandomlyString`は文字列の抽選に限っては、この関数を再利用していくことができます。
 
-```ts
+```ts twoslash
+declare function chooseRandomlyString(v1: string, v2: string): string;
+// ---cut---
 const winOrLose = chooseRandomlyString("勝ち", "負け");
 ```
 
 次に、文字列だけでなく数値の抽選も同じロジックで行う必要が出てきたと考えてみましょう。`chooseRandomlyString()`は文字列にしか対応していないので、数値用の関数を新設しないとなりません。
 
-```ts
+```ts twoslash
 // 数値用の抽選関数
 function chooseRandomlyNumber(v1: number, v2: number): number {
   return Math.random() <= 0.5 ? v1 : v2;
@@ -35,7 +37,10 @@ const num: number = chooseRandomlyNumber(1, 2);
 
 さらに、五分五分抽選のロジックは汎用的なので、広告のA/Bテストのために`URL`オブジェクト向けの実装も作ることになりました。
 
-```ts
+```ts twoslash
+const urlA: URL = new URL("https://www.example.com/1");
+const urlB: URL = new URL("https://www.example.com/2");
+// ---cut---
 // URLオブジェクト向けの抽選関数
 function chooseRandomlyURL(v1: URL, v2: URL): URL {
   return Math.random() <= 0.5 ? v1 : v2;
@@ -45,7 +50,7 @@ const url: URL = chooseRandomlyURL(urlA, urlB);
 
 ここまでで、`chooseRandomly()`関数は二度複製され、型だけが異なる同じ関数が3つもできてしまいました。
 
-```ts
+```ts twoslash
 // 重複した3つの関数
 function chooseRandomlyString(v1: string, v2: string): string {
   return Math.random() <= 0.5 ? v1 : v2;
@@ -62,7 +67,7 @@ function chooseRandomlyURL(v1: URL, v2: URL): URL {
 
 下のサンプルコードでは、`chooseRandomly()`に`number`型を渡していますが、戻り値は`string`型のつもりで扱っています。このコードはコンパイルエラーにはなりませんが、コンパイル後のコードを実行してみると5行目で「TypeError: str.toLowerCase is not a function」というエラーが発生します。
 
-```ts
+```ts twoslash
 function chooseRandomly(v1: any, v2: any): any {
   return Math.random() <= 0.5 ? v1 : v2;
 }
@@ -72,7 +77,8 @@ str = str.toLowerCase();
 
 コードの共通化と型の安全性の両方を達成するにはどうしたらいいのでしょうか？ここで、役に立つのがジェネリクスです。ジェネリクスの発想は実はとてもシンプルで、「型も変数のように扱えるようにする」というものです。どういうことでしょうか？先に取り上げた重複した3つの関数を「どの部分がそれぞれ異なっているのか？」という視点で見てみましょう。すると、次のように`<>`で強調した部分が違うことに気がつくはずです。それ以外はまったく同じコードです。
 
-```ts
+```ts twoslash
+// @noErrors
 function chooseRandomly<String>(v1: <string>, v2: <string>): <string> {
   return Math.random() <= 0.5 ? v1 : v2;
 }
@@ -89,7 +95,8 @@ chooseRandomly<URL>(urlA, urlB);
 
 このそれぞれ違う部分は型に関するところです。この部分を変数のように扱いたいとしたら、ジェネリクスの文法を知らなくても、プログラマーなら次のようなコードを想像するのではないでしょうか？
 
-```ts
+```ts twoslash
+// @noErrors
 // 注意: これは架空の文法です
 function chooseRandomly<type>(v1: <type>, v2: <type>): <type> {
   return Math.random() <= 0.5 ? v1 : v2;
@@ -103,7 +110,10 @@ chooseRandomly<URL>(urlA, urlB);
 
 上のコードは、あくまでジェネリクスの発想を理解するためにでっち上げた架空のコードでした。このままではTypeScriptは理解できないので、TypeScriptのジェネリクスの文法で書き直してみましょう。架空のコードともそこまでかけ離れてはいません。次のように書きます。
 
-```ts
+```ts twoslash
+const urlA: URL = new URL("https://www.example.com/1");
+const urlB: URL = new URL("https://www.example.com/2");
+// ---cut---
 function chooseRandomly<T>(v1: T, v2: T): T {
   return Math.random() <= 0.5 ? v1 : v2;
 }
@@ -116,11 +126,12 @@ chooseRandomly<URL>(urlA, urlB);
 
 先ほどコンパイル時には気づけなかったバグコードに、ジェネリクス化した`chooseRandomly`を使ってみましょう。すると、「Argument of type '0' is not assignable to parameter of type 'string'.」というコンパイルエラーが発生するようになり、`string`型を入れなければならないところに`0`を代入しているバグに気づくことができるようになりました。
 
-```ts
+```ts twoslash
+// @errors: 2345
 function chooseRandomly<T>(v1: T, v2: T): T {
   return Math.random() <= 0.5 ? v1 : v2;
 }
-let str = chooseRandomly<string>(0, 1); // コンパイルエラー
+let str = chooseRandomly<string>(0, 1);
 str = str.toLowerCase();
 ```
 

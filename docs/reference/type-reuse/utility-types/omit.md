@@ -17,7 +17,7 @@ title: "Omit<T, Keys>"
 
 ## Omitの使用例
 
-```ts
+```ts twoslash
 type User = {
   surname: string;
   middleName?: string;
@@ -34,7 +34,7 @@ type Person = Omit<User, Optional>;
 
 上の`Person`型は次の型と同じになります。
 
-```ts
+```ts twoslash
 type Person = {
   surname: string;
   middleName?: string;
@@ -46,7 +46,7 @@ type Person = {
 
 `Omit<T, Keys>`の`Keys`に`T`には無いプロパティキーを指定しても、TypeScriptコンパイラーは指摘しません。たとえば、`Keys`にタイポがあっても検出できないので注意が必要です。
 
-```ts
+```ts twoslash
 type User = {
   surname: string;
   middleName?: string;
@@ -60,14 +60,8 @@ type User = {
 type Optional = "createdat" | "updatedat" | "age" | "address" | "nationality";
 //                      ^^ typo       ^^ typo
 type Person = Omit<User, Optional>;
+//   ^?
 // このPersonは下の型になる
-// {
-//    surname: string,
-//    middleName?: string,
-//    givenName: string,
-//    createdAt: string,
-//    updatedAt: string
-// }
 ```
 
 `User`の`createdAt`,、`updatedAt`の`At`は大文字から始まりますが、これに気づかずに小文字で書いてしまっても、`Omit`の結果は`createdAt`と`updatedAt`を含んでしまいます。

@@ -13,7 +13,8 @@ description: 使われていない引数を禁止する
 
 関数で使用していない引数を禁止します。
 
-```ts
+```ts twoslash
+// @noUnusedParameters: false
 function add(n1: number, n2: number, n3: number): number {
   return n1 + n2;
 }
@@ -21,16 +22,18 @@ function add(n1: number, n2: number, n3: number): number {
 
 このオプションを有効にすると次のようなエラーが発生します。
 
-```text
-error TS6133: 'n3' is declared but its value is never read.
+```ts twoslash
+// @noUnusedParameters: true
+// @errors: 6133
 
 function add(n1: number, n2: number, n3: number): number {
-                                     ~~
+  return n1 + n2;
+}
 ```
 
 これを回避するためには、使用していない引数を`_`で始まる名前に変更します。
 
-```ts
+```ts twoslash
 function add(n1: number, n2: number, _n3: number): number {
   return n1 + n2;
 }

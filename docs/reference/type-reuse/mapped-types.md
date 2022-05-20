@@ -8,13 +8,15 @@ sidebar_label: Mapped type
 
 Mapped typeは主にユニオン型と組み合わせて使います。先ほどシステムがサポートする言語を定義しました。
 
-```ts
+```ts twoslash
 type SystemSupportLanguage = "en" | "fr" | "it" | "es";
 ```
 
 これをインデックス型と同じようにキーの制約として使用することができます。
 
-```ts
+```ts twoslash
+type SystemSupportLanguage = "en" | "fr" | "it" | "es";
+// ---cut---
 type Butterfly = {
   [key in SystemSupportLanguage]: string;
 };
@@ -22,7 +24,13 @@ type Butterfly = {
 
 このように`Butterfly`を定義するとシステムがサポートしない言語、ここでは`de`が設定、使用できなくなります。
 
-```ts
+```ts twoslash
+type SystemSupportLanguage = "en" | "fr" | "it" | "es";
+type Butterfly = {
+  [key in SystemSupportLanguage]: string;
+};
+// ---cut---
+// @errors: 2322
 const butterflies: Butterfly = {
   en: "Butterfly",
   fr: "Papillon",
@@ -30,7 +38,6 @@ const butterflies: Butterfly = {
   es: "Mariposa",
   de: "Schmetterling",
 };
-// Object literal may only specify known properties, and 'de' does not exist in type 'Butterfly'.
 ```
 
 プロパティを読み取り専用にする`readonly`をそのオブジェクトのすべてのプロパティに適用する`Readonly<T>`というユーティリティ型があります。他にもユーティリティ型はありますが、それらについては専門のページがありますのでここでは割愛します。
@@ -39,7 +46,8 @@ const butterflies: Butterfly = {
 
 `Readonly<T>`もこの機能で実現されています。`Readonly<T>`は次のように実装されています。
 
-```ts
+```ts twoslash
+// @noErrors
 type Readonly<T> = {
   readonly [P in keyof T]: T[P];
 };
@@ -53,7 +61,7 @@ type Readonly<T> = {
 
 Mapped typeはインデックス型と異なり`symbol`型もキーにすることができます。
 
-```ts
+```ts twoslash
 type Identifier = symbol | 1;
 type Sample = {
   [P in Identifier]: string;

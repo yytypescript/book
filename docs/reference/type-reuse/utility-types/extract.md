@@ -17,17 +17,17 @@ title: "Extract<T, U>"
 
 ## Extractの使用例
 
-```ts
+```ts twoslash
 type Grade = "A" | "B" | "C" | "D" | "E";
 type FailGrade = Extract<Grade, "D" | "E">;
-//=> "D" | "E"
+//   ^?
 ```
 
 Extractは2つのユニオン型の共通部分を導き出すことにも使えます。
 
-```ts
+```ts twoslash
 type CommonTypes = Extract<"a" | "b" | "c", "b" | "c" | "d">;
-// "b" | "c"
+//   ^?
 ```
 
 ## 関連情報

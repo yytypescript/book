@@ -16,13 +16,13 @@
 
 この型を抽象化する方法としてジェネリクスが利用されています。
 
-```ts
+```ts twoslash
 const numbers: Array<number> = [1, 2, 3, 4];
 ```
 
 `Array`は特別に別の記法で型表記をすることもできます。これらについては配列のページに詳細がありますので併せて参照ください。
 
-```ts
+```ts twoslash
 const numbers: number[] = [1, 2, 3, 4];
 ```
 
@@ -36,7 +36,7 @@ const numbers: number[] = [1, 2, 3, 4];
 
 `Array`オブジェクトの`map<T>()`メソッドは引数で渡された関数をすべての配列の要素に適用することで新しい配列を返す関数です。サンプルコードでは、新しく生成される数値配列の要素の型を指定する`map<number>`でジェネリクスが使われています。
 
-```ts
+```ts twoslash
 const textNumbers = ["1", "2", "3", "4"];
 const numbers = textNumbers.map<number>(function (text: string) {
   return Number(text);
@@ -47,7 +47,7 @@ const numbers = textNumbers.map<number>(function (text: string) {
 
 `Map<K, V>`オブジェクトでは、`K`にキーの型を指定し`V`にキーに紐づく値の型を指定します。先ほどの`map<T>()`メソッドは、ジェネリクスの型定義がひとつだけでしたが、`Map<K, V>`は型定義がふたつあります。このようにジェネリクスの型定義はひとつである必要はなく、複数の型定義を持つことも可能です。
 
-```ts
+```ts twoslash
 type Address = {
   country: string;
   postalCode: string;
