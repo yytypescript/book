@@ -138,7 +138,7 @@ const tsconfigForTwoslash = require(__dirname + "/tsconfig.twoslash.json");
               ],
             },
           ],
-          copyright: `Copyright © ${new Date().getFullYear()} YYTypeScript. Built with Docusaurus.`,
+          copyright: `Copyright © ${new Date().getFullYear()} YYTypeScript. <a href="/license">Licensed under CC BY-SA 4.0 and MIT(partially)</a>`,
         },
         prism: {
           theme: lightCodeTheme,

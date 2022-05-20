@@ -1,6 +1,7 @@
 ---
 slug: /
 image: /img/ogp.png
+sidebar_label: 本書の概要
 ---
 
 # はじめに
