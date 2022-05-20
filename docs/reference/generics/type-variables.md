@@ -10,7 +10,7 @@ sidebar_label: 型変数
 
 「変数」といえば、値を代入する入れ物をイメージすることでしょう。たとえば、次のコードは`x`が変数で、その値に`1`を代入しています。
 
-```ts
+```ts twoslash
 const x = 1;
 ```
 
@@ -20,7 +20,7 @@ const x = 1;
 
 型変数(type variables)は、もうひとつの便利な入れ物です。ただし、入れられるのは「値」ではなく「型」という違いがあります。
 
-```ts
+```ts twoslash
 function printAndReturn<T>(value: T): T {
   console.log(value);
   return value;
@@ -31,18 +31,22 @@ function printAndReturn<T>(value: T): T {
 
 `printAndReturn`関数の`T`の変数スコープは、この関数の範囲になります。したがって、関数のシグネチャで`T`を参照できるのはもちろん、関数の処理部分でも参照することができます。一方で、関数の外から参照することはできません。
 
-```ts
+```ts twoslash
+// @errors: 2304
 function printAndReturn<T>(value: T): T {
   let values: T[] = []; // OK
   const doSomething = (value: T) => {}; // OK
+  return value;
 }
 
-let value: T; // Error
+let value: T;
 ```
 
 この関数を利用するコードは、`number`など`T`に好きな型を代入することができます:
 
-```ts
+```ts twoslash
+declare function printAndReturn<T>(value: T): T;
+// ---cut---
 const value = printAndReturn<number>(123);
 ```
 
@@ -50,13 +54,17 @@ const value = printAndReturn<number>(123);
 
 型引数(type arguments)とは、型変数に代入した型のことを言います。次のコードでは`number`が型引数です。
 
-```ts
+```ts twoslash
+declare function printAndReturn<T>(value: T): T;
+// ---cut---
 const value = printAndReturn<number>(123);
 ```
 
 TypeScriptでは、型引数にも型推論が行われます。型引数推論(type argument inference)と言われます。上の例では、型変数`T`に`number`を代入するコードを明示的に書いていますが、変数の`123`から型変数`T`の型は`number`型になることがコンパイラからは推測可能なので、次のコードのように型引数の記述を省略することもできます。
 
-```ts
+```ts twoslash
+declare function printAndReturn<T>(value: T): T;
+// ---cut---
 const value = printAndReturn(123);
 ```
 
@@ -64,7 +72,7 @@ const value = printAndReturn(123);
 
 TypeScriptの型変数に使える文字は変数名や関数名、クラス名などに使える文字種と同じものが使えます。したがって、大文字アルファベット1文字でなければならないといった制約はありません。
 
-```ts
+```ts twoslash
 function func1<T>(x: T) {}
 function func2<Foo>(x: Foo) {}
 function func3<fooBar>(x: fooBar) {}
@@ -87,13 +95,13 @@ TypeScriptの慣習として、型変数名には`T`を用いることが多い�
 
 単純なジェネリクスで、型変数が2つある場合は、`T`と`U`が用いられることがあり、その理由はアルファベット順でTの次がUだからです。この規則にしたがって、3つ目の型変数は`V`する場合もあります。
 
-```ts
+```ts twoslash
 function compare<T, U>(a: T, b: U) {}
 ```
 
 複数の型変数がある場合、型変数に意味のある名前をつけることもあります。その場合、`TKey`、`TValue`のように`T`接頭辞を付けた命名規則がしばしば使われます。ただし、これは「型変数名には`T`を用いる」という慣習ほどは一般的でないように思われます。
 
-```ts
+```ts twoslash
 function makeKeyValuePair<TKey, TValue>(key: TKey, value: TValue) {}
 ```
 

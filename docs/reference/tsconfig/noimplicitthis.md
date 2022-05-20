@@ -17,7 +17,8 @@ tags: [strict]
 
 たとえば、対角線の長さを求める関数`lengthOfDiagonal()`を考えます。(横, 縦)を (width, height) とすれば関数は次のようになります。
 
-```ts
+```ts twoslash
+// @noErrors
 function lengthOfDiagonal(): number {
   return (this.width ** 2 + this.height ** 2) ** (1 / 2);
 }
@@ -57,22 +58,19 @@ console.log(area.diagonal());
 
 このオプションを有効にすると`any`型として認識されてしまっている`this`がどの型であるかを明確にできない限り実行することができなくなります。
 
-```text
-error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
-
-return ((this.width ** 2) + (this.height ** 2)) ** (1/2);
-         ~~~~
-error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
-
-return ((this.width ** 2) + (this.height ** 2)) ** (1/2);
-                             ~~~~
+```ts twoslash
+// @noImplicitThis: true
+// @errors: 2683
+function lengthOfDiagonal(): number {
+  return (this.width ** 2 + this.height ** 2) ** (1 / 2);
+}
 ```
 
 これを回避するためには`this`が何かを明示します。引数の`this`については関数のページに詳細がありますので併せてご参照ください。
 
 [this引数 (this parameter)](../functions/this-parameters.md)
 
-```ts
+```ts twoslash
 type Area = {
   width: number;
   height: number;

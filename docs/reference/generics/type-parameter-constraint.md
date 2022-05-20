@@ -7,7 +7,8 @@ TypeScriptではジェネリクスの型引数を特定の型に限定するこ�
 `changeBackgroundColor()`という関数を例に考えてみます。この関数は指定されたHTML要素の背景色を変更して、そのHTML要素を返す関数です。
 ジェネリクス型`T`を定義することで`HTMLButtonElement`や`HTMLDivElement`などの任意のHTML要素を受け取れるようにしています。
 
-```ts
+```ts twoslash
+// @errors: 2339
 function changeBackgroundColor<T>(element: T) {
   // Property 'style' does not exist on type 'T'.(2339)
   element.style.backgroundColor = "red";
@@ -19,7 +20,7 @@ function changeBackgroundColor<T>(element: T) {
 
 `any`を使えばコンパイルエラーを回避することは可能ですが型のチェックがされません。将来バグが発生する危険性もあるので、できる限り避けたいところです。
 
-```ts
+```ts twoslash
 function changeBackgroundColor<T>(element: T) {
   // any に型アサーションすればコンパイルエラーは回避できる
   // 型チェックされないのでバグの可能性
@@ -34,7 +35,7 @@ TypeScriptでは`extends`キーワードを用いることでジェネリクス�
 
 今回の例では`<T extends HTMLElement>`とすることで型`T`は必ず`HTMLElement`またはそのサブタイプの`HTMLButtonElement`や`HTMLDivElement`であることが保証されるため`style`プロパティに安全にアクセスできるようになります。
 
-```ts
+```ts twoslash
 function changeBackgroundColor<T extends HTMLElement>(element: T) {
   element.style.backgroundColor = "red";
   return element;
@@ -43,7 +44,7 @@ function changeBackgroundColor<T extends HTMLElement>(element: T) {
 
 この`extends`キーワードはインターフェースに対しても使います。インターフェースは実装のときは`implements`キーワードを使いますが型引数に使うときは`implements`を使わず同様に`extends`を使います。
 
-```ts
+```ts twoslash
 interface ValueObject<T> {
   value: T;
 
