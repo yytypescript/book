@@ -201,3 +201,10 @@ pre .logger.log-log svg {
   margin-left: 6px;
   margin-right: 11px;
 }
+
+.markdown figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0 var(--ifm-paragraph-margin-bottom);
+}

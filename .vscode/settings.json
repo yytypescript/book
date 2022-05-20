@@ -1,8 +1,11 @@
 {
   "cSpell.words": [
     "bivariance",
+    "camelcase",
     "contravariance",
     "keyof",
+    "mkdir",
+    "nounusedlocals",
     "twoslash",
     "typeof"
   ]
