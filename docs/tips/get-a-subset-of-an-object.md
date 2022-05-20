@@ -15,7 +15,7 @@ const profile = {
   prefecture: "東京都",
   city: "千代田区",
   address: "丸の内2-4-1",
-  buiding: "丸ビル",
+  building: "丸ビル",
   zipcode: "100-6390",
 };
 
@@ -26,7 +26,7 @@ const address = {
   prefecture: "東京都",
   city: "千代田区",
   address: "丸の内2-4-1",
-  buiding: "丸ビル",
+  building: "丸ビル",
   zipcode: "100-6390",
 };
 ```
@@ -62,7 +62,7 @@ const address = (({ name, twitter, github, ...rest }) => rest)(profile);
 //   "prefecture": "東京都",
 //   "city": "千代田区",
 //   "address": "丸の内2-4-1",
-//   "buiding": "丸ビル",
+//   "building": "丸ビル",
 //   "zipcode": "100-6390"
 // }
 ```
@@ -72,7 +72,7 @@ JavaScriptでは、`delete`を使うとオブジェクトからプロパティ�
 ```ts
 const address = { ...profile };
 delete address.name;
-// ERROR: Property 'name' does not exist on type '{ country: string; prefecture: string; city: string; address: string; buiding: string; zipcode: string; }'.(2339)
+// ERROR: Property 'name' does not exist on type '{ country: string; prefecture: string; city: string; address: string; building: string; zipcode: string; }'.(2339)
 ```
 
 ## 方法2: lodash.pick / lodash.omit
@@ -116,7 +116,7 @@ const address = _.omit(profile, ["name", "twitter", "github"]);
 //   "prefecture": "東京都",
 //   "city": "千代田区",
 //   "address": "丸の内2-4-1",
-//   "buiding": "丸ビル",
+//   "building": "丸ビル",
 //   "zipcode": "100-6390"
 // }
 ```
