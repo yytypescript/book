@@ -4,6 +4,8 @@ sidebar_label: 関数宣言
 
 # 関数宣言 (function declaration)
 
+関数宣言はJavaScriptで関数を定義する構文です。
+
 ## 関数宣言構文
 
 JavaScriptの関数宣言はfunction構文を使います。

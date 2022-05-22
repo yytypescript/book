@@ -4,9 +4,11 @@ sidebar_label: 関数式
 
 # 関数式 (function expression)
 
+関数式はJavaScriptで関数を作る方法のひとつで、function**式**を用います。
+
 ## 関数式の構文
 
-JavaScriptの関数式はfunction**式**を使って関数を作る方法です。構文は、[関数宣言]と同じです。
+関数式の構文は、[関数宣言]と同じです。
 
 [関数宣言]: ./function-expression.md
 
@@ -161,3 +163,11 @@ const factorial = function (n) {
 ・関数式の関数名は、関数内部からのみ参照可
 
 </TweetILearned>
+
+## 関連情報
+
+[関数式とアロー関数の違い](function-expression-vs-arrow-functions.md)
+
+[関数宣言](./function-declaration.md)
+
+[アロー関数](./arrow-functions.md)
