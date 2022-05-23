@@ -4,61 +4,90 @@ sidebar_label: 関数の引数
 
 # 関数の引数 (function parameter)
 
-関数の入力値である引数は特殊なことをしない限り、要求する型の変数を、要求する数だけ入力しなければいけません。
-たとえば原点との距離を求める次の関数があったとします。
+## 引数の個数
 
-```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
-// ---cut---
-function distance(p: Point): number {
-  return (p.x ** 2 + p.y ** 2) ** (1 / 2);
+JavaScriptの関数では、関数が期待する引数の個数と、関数を呼び出した際に渡した引数の数が一致していなくても、関数が呼び出せます。つまり、JavaScriptは引数のチェックを行わないということです。たとえば、引数が1つ渡されることを期待する関数を、引数2つで呼び出してもエラーになりません。
+
+```js twoslash
+function increment(n) {
+  return n + 1;
 }
+increment(1, 2); // OK
 ```
 
-なお、xy座標上の点を表すPointの定義は次のとおりです。
+逆に、JavaScriptでは、引数が少ない場合であっても関数が実行されます。その際、渡されなかった引数の値は`undefined`になります。
 
-```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
+```js twoslash
+function foo(a, b) {
+  console.log(b);
+}
+foo(1); // 引数が足りない
+// @log: undefined
 ```
 
-関数`distance()`は平面状にある点(x, y)の原点からの距離を返します。この関数を呼ぶ時は必ず引数の数、順番は揃えなければなりません。つまり次のような関数呼び出しはできません。
+基本的に引数が多く渡される分には、関数の実行が問題になることはありません。余分な引数は無視してしまえばよいからです。それでも、引数の個数を厳密にチェックしたいケースでは、変数`arguments`の`length`プロパティで引数の数をチェックします。
 
-## 引数が少ない
-
-```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
-declare function distance(p: Point): number;
-
-// ---cut---
-distance();
-// @error: Expected 1 arguments, but got 0.
-// @noErrors
+```js twoslash
+function foo(a, b) {
+  if (arguments.length > 2) {
+    throw new Error("引数の数は2つまでです");
+  }
+}
+foo(1, 2); // OK
+foo(1, 2, 3); // エラー
 ```
 
-## 引数が多い
+JavaScriptでは、上のように引数の数をチェックするには、そのためのロジックを書く必要があります。
+
+TypeScriptでは、関数の引数の数が一致していないとコンパイルエラーになります。
 
 ```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
-declare function distance(p: Point): number;
-
-const q1 = 1;
-const q2 = 2;
-
-// ---cut---
-distance(q1, q2);
+// @noImplicitAny: false
 // @errors: 2554
+function increment(n) {
+  return n + 1;
+}
+increment(1, 2); // 引数が多い
+increment(); // 引数が足りない
 ```
 
-JavaScriptでは引数が少ない時はその引数には`undefined`が渡され、引数が多い場合は余分な引数は無視されますがここはTypeScriptとJavaScriptとの大きな違いです。
+そのため、TypeScriptではJavaScriptのようにチェックロジックを書く必要はありません。
+
+## 引数の型
+
+JavaScriptは、引数の型についてもチェックを行いません。JavaやPHPなどの他のプログラミング言語の中には、関数の引数の型を定義することで、関数が期待する引数の型と異なる値が渡されたときに、関数実行前にエラーにしてくれる言語があります。JavaScriptにはこのような機能がありません。たとえば、文字列型の引数を期待する関数に、null型の値を渡しても、JavaScriptの関数は実行されます。
+
+```js twoslash
+function len(str) {
+  return str.length;
+}
+console.log(len(null));
+```
+
+この関数`len`の引数`str`は文字列型であることを想定していますが、渡される値は`null`です。それでも、関数の実行自体は行われ、`null`に存在しない`length`プロパティへの参照を試みる段階でやっとエラーになります。
+
+JavaScriptでは、引数の型を厳密にする場合、チェック処理を書く必要があります。たとえば、引数が数値型や文字列型などのプリミティブ型かのチェックはこの`typeof`演算子を使って行います。
+
+```js twoslash
+function len(str) {
+  if (typeof str !== "string") {
+    throw new Error("strは文字列型にしてください");
+  }
+  return str.length;
+}
+len("a"); // OK
+len(1); // エラー
+```
+
+TypeScriptでは、関数の引数に型注釈が書けます。型注釈を書いておくと、引数に意図しない型を書くとコンパイルエラーになります。
+
+```ts twoslash
+// @errors: 2345
+function len(str: string) {
+  return str.length;
+}
+len("a"); // OK
+len(1); // エラー
+```
+
+そのため、TypeScriptではJavaScriptのように型チェックの処理を書く必要はありません。
