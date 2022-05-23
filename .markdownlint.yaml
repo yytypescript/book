@@ -28,3 +28,4 @@ no-inline-html:
     - head
     - title
     - iframe
+    - br
