@@ -208,6 +208,7 @@ module.exports = {
             "reference/functions/function-is-an-object",
             "reference/functions/void-type",
             "reference/functions/function-parameters",
+            "reference/functions/pass-by-value",
             "reference/functions/optional-parameters",
             "reference/functions/default-parameters",
             "reference/functions/rest-parameters",
