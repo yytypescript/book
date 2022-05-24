@@ -4,142 +4,137 @@ sidebar_label: オプション引数
 
 # オプション引数 (optional parameter)
 
-このページではxy平面上の一点を表すオブジェクトとして`Point`を型として定義し、それを使います。なお、具体的な`Point`の型は次のようになります。
+オプション引数(optional parameter)は、渡す引数を省略できるようにするTypeScript固有の機能です。オプション引数は疑問符`?`を引数名の後ろに書くことで表現します。
+
+## オプション引数の構文
 
 ```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
+interface 型 {}
+// ---cut---
+// @noImplicitAny: false
+function 関数名(引数名?: 型) {}
+//                  ^オプション引数の標示
 ```
 
-引数を省略したいことがあります。そのときはオプション引数とデフォルト引数を使用することができます。
-
-2点間の距離を求める関数`distance()`は、現在は与えられた座標を元に原点からの距離を計算していますが、これを2点の距離を計算できるようにしたいとします。すると上記の関数`distance()`は次のようになります。
+オプション引数は、関数を呼び出すときに引数が省略できます。
 
 ```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
-// ---cut---
-function distance(p1: Point, p2: Point): number {
-  return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
+function hello(person?: string) {}
+hello(); // 引数を省略して呼び出せる
+hello("alice"); // 省略しない呼び出しももちろんOK
+```
+
+## 省略すると`undefined`になる
+
+オプション引数の型は、型と`undefined`の[ユニオン型](./../values-types-variables/union.md)になります。ユニオン型は日本語で言うと「いずれか」の意味です。上の例では、引数`person`は`string | undefined`型になります。
+
+```ts twoslash
+function hello(person?: string) {}
+//             ^?
+```
+
+引数を省略した場合、オプション引数の実行時の値は`undefined`になります。
+
+```ts twoslash
+function hello(person?: string) {
+  console.log(person);
+}
+hello();
+// @log: undefined
+```
+
+## オプション引数の取り回し
+
+オプション引数は、型が`undefined`とのユニオン型になるため、そのままでは使えません。たとえば、次のコードは文字列の`toUpperCase`メソッドを呼び出すコードです。これはコンパイルエラーになります。なぜなら、`person`が`undefined`型である可能性があるからです。そして、`undefined`には`toUpperCase`メソッドがありません。
+
+```ts twoslash
+// @errors: 2532
+function hello(person?: string) {
+  return "Hello " + person.toUpperCase();
 }
 ```
 
-ここで第2引数は省略可能にし、省略した場合は第1引数と原点の距離を返したいとします。これはオプション引数を使用すると次のように書けます。
+この問題を解消するには、次の2つの方法があります。
 
-```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
-// ---cut---
-function distance(p1: Point, p2?: Point): number {
-  return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
-}
-// @noErrors
-```
+### デフォルト値を代入する
 
-引数の`p2`の右隣に`?`がつきました。これで`p2`は省略可能な引数となり5, 6行目のどちらの書き方も受けつけるようになります。
+引数が`undefined`の場合分けを`if`文で書き、そこでデフォルト値を代入する方法です。
 
-しかし、このオプション引数は意味する型が少々変わります。内部的には`p2`は`Point`ではなく`Point | undefined`のユニオン型として解釈されます。ユニオン型の説明は先の章にあるため詳しい説明は譲りますが、ユニオン型は日本語で言うと**どれか**の意味です。
-
-[ユニオン型 (union type)](../values-types-variables/union.md)
-
-ユニオン型が与えられた時は、どちらの型にもあるプロパティ、メソッドでなければ使うことができません。上記のコードでは`p2`は`undefined`にもなる可能性があり、`undefined`には`x, y`というプロパティは存在しないため、TypeScriptに指摘されます。
-
-この問題を解消したのが次のふたつです。
-
-## 省略時の初期化処理を書く
-
-```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
-// ---cut---
-function distance(p1: Point, p2?: Point): number {
-  let p0: Point | undefined = p2;
-
-  if (typeof p0 === "undefined") {
-    p0 = {
-      x: 0,
-      y: 0,
-    };
+```ts twoslash {2-4}
+function hello(person?: string) {
+  if (typeof person === "undefined") {
+    person = "anonymous";
   }
-
-  return ((p1.x - p0.x) ** 2 + (p1.y - p0.y) ** 2) ** (1 / 2);
+  return "Hello " + person.toUpperCase();
 }
 ```
 
-省略時はどの値を使うか初期化処理にて明文化する必要がありますが、後述のデフォルト引数がほぼ同じことをできます。可能であればデフォルト引数の使用を検討してください。
+Null合体代入演算子`??=`でデフォルト値を代入する方法もあります。
+
+```ts twoslash {2}
+function hello(person?: string) {
+  person ??= "anonymous";
+  return "Hello " + person.toUpperCase();
+}
+```
+
+さらに、デフォルト引数を指定することでも同じことができます。多くのケースでは、デフォルト引数を使うほうがよいです。
+
+```ts twoslash {1-2}
+function hello(person: string = "anonymous") {
+  //                          ^^^^^^^^^^^^^デフォルト引数
+  return "Hello " + person.toUpperCase();
+}
+```
+
+[デフォルト引数](./default-parameters.md)
 
 ### 処理を分ける
 
-```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
-// ---cut---
-function distance(p1: Point, p2?: Point): number {
-  if (typeof p2 === "undefined") {
-    return (p1.x ** 2 + p1.y ** 2) ** (1 / 2);
+オプション引数を取り回すもうひとつの方法は、処理を分けることです。
+
+```ts twoslash {2-4}
+function hello(person?: string) {
+  if (typeof person === "undefined") {
+    return "Hello ANONYMOUS";
   }
-
-  return ((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2) ** (1 / 2);
+  return "Hello " + person.toUpperCase();
 }
 ```
 
-型ガードにより`if`ブロックより下は`p2`がPointであることが確定します。そのためTypeScriptはユニオン型から普通の`Point`として解釈できるようになります。
+## `T | undefined`との違い
 
-## `Point | undefined`との違い
+オプション引数はユニオン型`T | undefined`として解釈されます。であれば、引数の型を`T | undefined`と書けば同じなはずです。なぜTypeScriptは、疑問符`?`という別の記法を用意したのでしょうか。違いがあるのでしょうか。
 
-`p2`の型が`Point | undefined`として解釈されるのなら、あえて`?`などという記号を新しく定義する必要などないのではと思われるかもしれませんが、明確な違いがあります。それは**呼び出し側で省略できるかどうかということ**です。上記のとおりオプション引数は省略が可能なのですが、`undefined`とのユニオン型であることを明記すると省略ができません。
+これには呼び出す側で、**引数を省略できるかどうかという違い**が生まれます。オプション引数は引数自体を省略できますが、`T | undefined`型の引数は引数が省略できません。
+
+たとえば、次のオプション引数の関数は引数なしで呼び出せます。
 
 ```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
+function hello(person?: string) {}
+hello(); // 引数を省略して呼び出せる
+```
 
-const q1 = {
-  x: 0,
-  y: 0,
-};
-const q2 = {
-  x: 0,
-  y: 0,
-};
+一方、次のような`undefined`とのユニオン型の引数は、引数なしではコンパイルエラーになります。
 
-// ---cut---
+```ts twoslash
 // @errors: 2554
-function distance(p1: Point, p2: Point | undefined) {
-  // ...
-}
-
-distance(q1, q2);
-distance(q1);
-
-distance(q1, undefined);
+function hello(person: string | undefined) {}
+hello();
 ```
 
-6行目のような書き方はTypeScriptから指摘を受けます、どうしても動作させたいのであれば9行目のように書かなければいけません。
+この関数を呼び出すためには、`undefined`を渡す必要があります。
 
-## オプション引数でできないこと
+```ts twoslash {2}
+function hello(person: string | undefined) {}
+hello(undefined);
+```
 
-オプション引数は必ず最後に書かなければいけません。つまり、次のようにオプション引数より後ろに普通の引数を書くことはできません。
+## オプション引数の後に普通の引数は書けない
+
+オプション引数は必ず最後に書かなければいけません。次のようにオプション引数より後ろに普通の引数を書くと、コンパイルエラーになります。
 
 ```ts twoslash
-type Point = {
-  x: number;
-  y: number;
-};
-// ---cut---
 // @errors: 1016
-function distance(p1?: Point, p2: Point) {
-  // ...
-}
+function func(foo?: string, bar: string) {}
 ```
