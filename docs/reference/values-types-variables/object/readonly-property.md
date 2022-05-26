@@ -97,3 +97,5 @@ let obj: Readonly<{
 [インターフェースのreadonly修飾子](../../object-oriented/interface/readonly-modifier-in-interfaces.md)
 
 [読み取り専用の配列 (readonly array)](../array/readonly-array.md)
+
+[constアサーション](./../const-assertion.md)

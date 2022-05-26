@@ -83,3 +83,5 @@ const writableNumbers: number[] = readonlyNumbers as number[];
 [オブジェクト型のreadonlyプロパティ (readonly property)](../object/readonly-property.md)
 
 [Readonly&lt;T>](../../type-reuse/utility-types/readonly.md)
+
+[constアサーション](./../const-assertion.md)
