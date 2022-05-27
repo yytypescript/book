@@ -17,7 +17,7 @@
 
 変哲もない`number`型のプロパティ持つ`Value Object`を作ったとします。
 
-```ts
+```ts twoslash
 class NumericalValueObject {
   private value: number;
 
@@ -37,7 +37,7 @@ class NumericalValueObject {
 
 これをコンパイルし、型定義を生成するとこのようになっています。
 
-```ts
+```ts twoslash
 declare class NumericalValueObject {
   private value;
   constructor(value: number);

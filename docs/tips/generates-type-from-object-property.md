@@ -6,7 +6,7 @@
 
 前ページとは対照的にオブジェクトからプロパティだけのユニオン型を得ることを目的とします。今回も前回と同様に次のメッセージが定義されているとします。
 
-```ts
+```ts twoslash
 const conf = {
   en: "Are you sure?",
   fr: "Êtes-vous sûr?",
@@ -18,7 +18,7 @@ const conf = {
 
 最終的には次のようなユニオン型が今回の目的です。
 
-```ts
+```ts twoslash
 type ConfirmationMessage =
   | "Are you sure?"
   | "Êtes-vous sûr?"
@@ -43,24 +43,42 @@ type ConfirmationMessage =
 
 [オブジェクトからキーの型を生成する](generates-type-from-object-key.md)
 
-```ts
+```ts twoslash
+const conf = {
+  en: "Are you sure?",
+  fr: "Êtes-vous sûr?",
+  es: "Está seguro?",
+  ja: "よろしいですか？",
+  zh: "您确定吗？",
+};
+// ---cut---
 type Language = keyof typeof conf;
-// -> 'en' | 'fr' | 'es' | 'ja' | 'zh'
+//   ^?
 ```
 
 ### Mapped type
 
 オブジェクトのプロパティの型を参照するために Mapped type を使います。そのとき元のオブジェクトから型を生成するために`typeof`を使います。
 
-```ts
+```ts twoslash
+const conf = {
+  en: "Are you sure?",
+  fr: "Êtes-vous sûr?",
+  es: "Está seguro?",
+  ja: "よろしいですか？",
+  zh: "您确定吗？",
+};
+type Language = keyof typeof conf;
+// ---cut---
 type ConfirmationMessage = typeof conf[Language];
+//   ^?
 ```
 
 ### リテラル型を取得するできるようにする
 
 このままだとオブジェクトから型を生成すると同じように型はリテラル型ではありません。つまりただの`string`型のユニオン型つまり`string`型です。そこで、元のオブジェクト`conf`に`as const`をつけます。
 
-```ts
+```ts twoslash
 const conf = {
   en: "Are you sure?",
   fr: "Êtes-vous sûr?",
@@ -74,7 +92,7 @@ const conf = {
 
 お好みで定義したキーの型`Language`を Mapped type のキーの部分に代入します。最終的な形は次のようになります。
 
-```ts
+```ts twoslash
 const conf = {
   en: "Are you sure?",
   fr: "Êtes-vous sûr?",
@@ -84,6 +102,7 @@ const conf = {
 } as const;
 
 type ConfirmationMessage = typeof conf[keyof typeof conf];
+//   ^?
 ```
 
 `as const`を忘れないようにしてください。

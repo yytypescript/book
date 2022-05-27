@@ -4,7 +4,7 @@
 
 あるメッセージが言語ごとに定義されているとします。
 
-```ts
+```ts twoslash
 const conf = {
   en: "Are you sure?",
   fr: "Êtes-vous sûr?",
@@ -16,7 +16,7 @@ const conf = {
 
 内容は確認を促す変哲もないシステムのメッセージです。このオブジェクトを使ってシステムがサポートしている言語の一覧を作ります。次のようなユニオン型が今回の目的です。
 
-```ts
+```ts twoslash
 type Language = "en" | "fr" | "es" | "ja" | "zh";
 ```
 
@@ -28,16 +28,17 @@ type Language = "en" | "fr" | "es" | "ja" | "zh";
 
 この例で実行すれば次のような型`TypeOfLanguage`が生成されるでしょう (型名は便宜的なものです) 。
 
-```ts
+```ts twoslash
+const conf = {
+  en: "Are you sure?",
+  fr: "Êtes-vous sûr?",
+  es: "Está seguro?",
+  ja: "よろしいですか？",
+  zh: "您确定吗？",
+};
+// ---cut---
 type TypeOfLanguage = typeof conf;
-// ->
-// {
-//   en: string,
-//   fr: string,
-//   es: string,
-//   ja: string,
-//   zh: string
-// };
+//   ^?
 ```
 
 ここまでくればあとは少しです。`TypeOfLanguage`型のキーだけを型にしてしまいます。
@@ -46,9 +47,18 @@ type TypeOfLanguage = typeof conf;
 
 `keyof`はオブジェクトの型に使うとそのオブジェクトのキーをユニオン型にして返します。上記の`TypeOfLanguage`型があれば
 
-```ts
+```ts twoslash
+const conf = {
+  en: "Are you sure?",
+  fr: "Êtes-vous sûr?",
+  es: "Está seguro?",
+  ja: "よろしいですか？",
+  zh: "您确定吗？",
+};
+type TypeOfLanguage = typeof conf;
+// ---cut---
 type Language = keyof TypeOfLanguage;
-// -> 'en' | 'fr' | 'es' | 'ja' | 'zh';
+//   ^?
 ```
 
 となります。
@@ -59,8 +69,18 @@ type Language = keyof TypeOfLanguage;
 
 見た目が少々いびつですが、次でオブジェクトから希望するキーのユニオン型を生成できます。
 
-```ts
+```ts twoslash
+const conf = {
+  en: "Are you sure?",
+  fr: "Êtes-vous sûr?",
+  es: "Está seguro?",
+  ja: "よろしいですか？",
+  zh: "您确定吗？",
+};
+type TypeOfLanguage = typeof conf;
+// ---cut---
 type Language = keyof typeof conf;
+//   ^?
 ```
 
 ### 疑問: `keyof conf`じゃダメなんですか？
