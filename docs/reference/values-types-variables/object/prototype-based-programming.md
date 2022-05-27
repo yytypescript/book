@@ -101,7 +101,7 @@ class Counter {
 }
 ```
 
-このクラスは数とそれをカウントアップする振る舞いを持っています。この`Counter`クラスを継承して、リセット機能を持った派生クラスは次の`ResetableCounter`クラスになります。
+このクラスは数とそれをカウントアップする振る舞いを持っています。この`Counter`クラスを継承して、リセット機能を持った派生クラスは次の`ResettableCounter`クラスになります。
 
 ```js twoslash
 class Counter {
@@ -114,14 +114,14 @@ class Counter {
   }
 }
 // ---cut---
-class ResetableCounter extends Counter {
+class ResettableCounter extends Counter {
   reset() {
     this.count = 0;
   }
 }
 ```
 
-この`ResetableCounter`クラスを使うには、このクラスに対して`new\`演算子でオブジェクトを生成します。
+この`ResettableCounter`クラスを使うには、このクラスに対して`new`演算子でオブジェクトを生成します。
 
 ```js twoslash
 class Counter {
@@ -134,20 +134,20 @@ class Counter {
   }
 }
 
-class ResetableCounter extends Counter {
+class ResettableCounter extends Counter {
   reset() {
     this.count = 0;
   }
 }
 // ---cut---
-counter = new ResetableCounter();
+counter = new ResettableCounter();
 counter.countUp();
 counter.reset();
 ```
 
 以上の例でもわかるとおり、クラスベースでの継承とオブジェクトの生成は`extends`と`new`といった異なる言語機能になっていることが多いです。
 
-一方、プロトタイプベースのJavaScriptでは、継承もオブジェクトの生成と同じプロセスで行います。次の例は、`counter`オブジェクトを継承した`resetableCounter`オブジェクトを作っています。
+一方、プロトタイプベースのJavaScriptでは、継承もオブジェクトの生成と同じプロセスで行います。次の例は、`counter`オブジェクトを継承した`resettableCounter`オブジェクトを作っています。
 
 ```js twoslash
 const counter = {
@@ -157,8 +157,8 @@ const counter = {
   },
 };
 
-const resetableCounter = Object.create(counter);
-resetableCounter.reset = function () {
+const resettableCounter = Object.create(counter);
+resettableCounter.reset = function () {
   this.count = 0;
 };
 ```
