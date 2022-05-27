@@ -244,6 +244,12 @@ fetchCatImage().then((image) => {
 今の状態だと `fetchCatImage()` の戻り値が `any` のままなので、呼び出し側で存在しないプロパティを参照しても気づけずにバグが発生する危険性があります。
 
 ```ts twoslash
+const fetchCatImage = async () => {
+  const res = await fetch("api.thecatapi.com/v1/images/search");
+  const result = await res.json();
+  return result[0];
+};
+
 fetchCatImage().then((image) => {
   // 戻り値がany型なので型エラーにならない
   console.log(image.alt);
@@ -269,24 +275,41 @@ interface SearchCatImage {
   height: number;
 }
 
-type SearchCatImagesResponse = SearchCatImage[];
+type SearchCatImageResponse = SearchCatImage[];
 ```
 
 定義した`SearchCatImageResponse`の型でレスポンスの結果を型付けします。`res.json()`は型定義にて`Promise<any>`を返すようになっているので、型アサーションの`as`で型を上書きしています。
 
 型アサーションはコンパイラーの型推論を上書きするため、誤ってバグを生む危険性があります。利用は最小限にして必要な場合に限り使うようにしましょう。
 
-[型アサーション「as」(type assertion)](../reference/value-types-variables/type-assertion-as.md)
+[型アサーション「as」(type assertion)](../reference/values-types-variables/type-assertion-as.md)
 
 ```ts twoslash
-const fetchCatImage = async (): SearchCatImage => {
+// @errors: 2339
+
+interface CatCategory {
+  id: number;
+  name: string;
+}
+
+interface SearchCatImage {
+  breeds: string[];
+  categories: CatCategory[];
+  id: string;
+  url: string;
+  width: number;
+  height: number;
+}
+
+type SearchCatImageResponse = SearchCatImage[];
+
+const fetchCatImage = async (): Promise<SearchCatImage> => {
   const res = await fetch("api.thecatapi.com/v1/images/search");
   const result = (await res.json()) as SearchCatImageResponse;
   return result[0];
 };
 
 fetchCatImage().then((image) => {
-  // @error
   console.log(image.alt);
 });
 ```
@@ -295,7 +318,7 @@ fetchCatImage().then((image) => {
 
 APIリクエストでランダムな猫画像の取得ができるようになったので、ボタンをクリックした時に`fetchCatImage`でランダムな猫画像を取得して猫画像の状態を更新して色々な猫を表示します。
 
-```ts twoslash
+```tsx twoslash
 import { useState } from "react";
 
 interface CatCategory {
@@ -347,43 +370,33 @@ APIリクエストを経由して猫の画像をランダムに表示できる�
 
 ![ボタンクリック時にAPIリクエストで猫の画像をランダムに表示](nextjs/screen5.gif)
 
-### 初期画像もAPIで取得する
+ページを読み込む時は固定の画像を表示している状態なので、最後に、最初の画像もランダムに画像を表示するようにしましょう。
 
-ページを読み込む時は固定の画像を表示している状態です。最後に、最初の画像もランダムに画像を表示するようにしましょう。
+### Next.jsのデータフェッチAPI
+
+実装に入る前にNext.jsのデータフェッチAPIについて簡単に紹介します。
 
 Next.jsではページコンポーネントでデータをフェッチする方法として、`getInitialProps`, `getServerSideProps`,`getStaticProps`の3つがあります。
 
-`getInitialProps`はSSR（サーバーサイドレンダリング）時はサーバー側でデータ取得の処理が実行され、クライアントサイドでルーティングが発生した場合はクライアント側でデータの取得が実行されます。このAPIは `Automatic Static Optimization` と呼ばれる自動で静的ページとしてビルドをするNext.jsの特徴でもある機能を無効にしてしまいパフォーマスのNext.jsのパフォーマンスの恩恵を受けられないことがあるため、可能な限り他のデータフェッチ手法を使うことが推奨されています。
+`getInitialProps`はSSR（サーバーサイドレンダリング）時にサーバー側でデータ取得の処理が実行され、クライアントサイドでルーティングが発生した場合はクライアント側でデータの取得が実行されます。このAPIはNext.jsが自動判断して可能な場合は静的ページとして出力する`Automatic Static Optimization` と呼ばれる機能を無効にするため、パフォーマンスの恩恵を受けられないことがあります。そのため、可能な次で紹介する2つのデータフェッチ手法を使うことが推奨されています。
 
-`getServerSideProps`はSSR時にサーバーで実行されることは`getInitialProps`と同じですが、クライアントサイドでルーティングが発生した場合もデータの取得がサーバー側で実行される点が異なります。サーバー側のみで実行されることが保証されるため、`getServerSideProps`内でのみ利用しているモジュールはクライアントのコードにバンドルされず配信するファイルサイズを削減することができます。また、ユニバーサルな実装を意識する必要も無いので考慮すべき点が減り、データベースから直接データを取得するような処理を記述することも可能です。
+`getServerSideProps`はSSR時に`getInitialProps`と同様にサーバー側でデータの取得が実行されます。大きな違いはクライアントサイドでルーティングが発生した場合もデータの取得がサーバー側で実行される点です。サーバー側のみで実行されることが保証されるため、`getServerSideProps`内でのみ利用しているモジュールはクライアントのコードにバンドルされず配信するファイルサイズを削減することができます。また、ユニバーサルな実装を意識する必要も無いので考慮すべき点が減り、データベースから直接データを取得するような処理を記述することも可能です。
 
-`getStaticProps`は静的ビルド実行時のみデータ取得が実行されます。これは他の2つと異なりページを描画する時にはデータ取得が実行されないことに注意が必要です。ユーザーログインが不要なLPなどの静的なページを構築する時など利用します。
+`getStaticProps`は静的ビルド実行時のみデータ取得が実行されます。これは他の2つと異なりページを描画する時にはデータ取得が実行されないことに注意が必要です。ユーザーログインが不要なLPなどの静的なページを構築する時に利用します。
+
+### getServerSidePropsで初期画像もランダムに表示
+
+最初に`IndexPage`コンポーネントで猫画像のURLを`initialCatImageUrl`としてpropsで受け取るように変更します。
 
 ```ts twoslash
-import { GetServerSideProps, NextPage } from "next";
+import { FC } from "react";
+declare module "next" {
+  type NextPage<P = {}> = FC<P>;
+}
+// @filename: index.tsx
+// ---cut---
 import { useState } from "react";
-
-interface CatCategory {
-  id: number;
-  name: string;
-}
-
-interface SearchCatImage {
-  breeds: string[];
-  categories: CatCategory[];
-  id: string;
-  url: string;
-  width: number;
-  height: number;
-}
-
-type SearchCatImageResponse = SearchCatImage[];
-
-const fetchCatImage = async (): Promise<SearchCatImage> => {
-  const res = await fetch("https://api.thecatapi.com/v1/images/search");
-  const result = (await res.json()) as SearchCatImageResponse;
-  return result[0];
-};
+import type { NextPage } from "next";
 
 interface IndexPageProps {
   initialCatImageUrl: string;
@@ -392,19 +405,17 @@ interface IndexPageProps {
 const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
   const [catImageUrl, setCatImageUrl] = useState(initialCatImageUrl);
 
-  const handleClick = async () => {
-    const image = await fetchCatImage();
-    setCatImageUrl(image.url);
-  };
+  // （省略）
+};
+```
 
-  return (
-    <div>
-      <button onClick={handleClick}>きょうのにゃんこ🐱</button>
-      <div style={{ marginTop: 8 }}>
-        <img src={catImageUrl} width={500} height="auto" />
-      </div>
-    </div>
-  );
+続いて`getServerSideProps`で猫画像を取得して、`IndexPage`コンポーネントにpropsとして渡します。
+
+```tsx twoslash
+const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
+  const [catImageUrl, setCatImageUrl] = useState(initialCatImageUrl);
+
+  // （省略）
 };
 
 export const getServerSideProps: GetServerSideProps<
@@ -414,6 +425,56 @@ export const getServerSideProps: GetServerSideProps<
   return {
     props: {
       initialCatImageUrl: catImage.url,
+    },
+  };
+};
+
+export default IndexPage;
+```
+
+TypeScriptで型を書いているおかげで、ここでのpropsの受け渡しを型安全に行うことができます。
+試しに、`getServerSideProps`の戻り値のオブジェクトのキー名をわざとタイポしてみると、型エラーになります。
+
+```tsx twoslash
+const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
+  const [catImageUrl, setCatImageUrl] = useState(initialCatImageUrl);
+
+  // （省略）
+};
+
+export const getServerSideProps: GetServerSideProps<
+  IndexPageProps
+> = async () => {
+  const catImage = await fetchCatImage();
+  return {
+    props: {
+      initalCatImageUrl: catImage.url,
+    },
+  };
+};
+
+export default IndexPage;
+```
+
+`IndexPageProps`が型として共通化されているので、型チェックによるタイポに気づくことができます。
+型を定義することを省略して、インラインで型を定義すると型エラーにならない可能性が発生するので、型は可能な限り共通で定義して使うようにしましょう。
+
+```tsx twoslash
+const IndexPage: NextPage<{ initialCatImageUrl: string }> = ({
+  initialCatImageUrl,
+}) => {
+  const [catImageUrl, setCatImageUrl] = useState(initialCatImageUrl);
+
+  // （省略）
+};
+
+export const getServerSideProps: GetServerSideProps<{
+  initalCatImageUrl: string;
+}> = async () => {
+  const catImage = await fetchCatImage();
+  return {
+    props: {
+      initalCatImageUrl: catImage.url, // インラインの型定義がタイポしているので、型エラーにならない
     },
   };
 };
