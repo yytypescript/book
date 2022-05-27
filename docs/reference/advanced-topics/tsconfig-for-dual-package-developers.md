@@ -129,7 +129,9 @@ Tree Shakingとは使われていない関数、クラスを最終的な`js`フ�
 
 `require()`はあるときはこの`js`を、それ以外のときはあの`js`を、と読み込むファイルをコードで切り替えることができます。つまり、次のようなことができます。
 
-```ts
+```ts twoslash
+declare function shouldCallPolice(): boolean;
+// ---cut---
 let police = null;
 let firefighter = null;
 

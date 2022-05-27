@@ -8,9 +8,19 @@ sidebar_label: オブジェクトで受け、オブジェクトを返す
 
 ## いままでの関数
 
-JavaScript に限らず、駆け出しの頃の関数はこのような関数をしています。
+JavaScript に限らず、駆け出しの頃の関数はこのような姿形をしています。
 
-```ts
+```ts twoslash
+// @noErrors
+type User = {
+  id: string;
+  name: string;
+  age: number;
+  country: string;
+  password: string;
+  vip: boolean;
+};
+// ---cut---
 function findUser(
   name?: string,
   age?: number,
@@ -39,7 +49,7 @@ function findUser(
 
 上記ユーザーであればデータクラスのような (ただのデータだけ入った可視性 public のクラス) を作れば問題は回避できます。 TypeScript でその型を`UserInfo`とすれば`UserInfo`は次になります。
 
-```ts
+```ts twoslash
 type UserInfo = {
   name?: string;
   age?: number;
@@ -52,7 +62,23 @@ type UserInfo = {
 
 このようにしてこの型のオブジェクトを引数の方としてひとつ受けるようにします。
 
-```ts
+```ts twoslash
+// @noErrors
+type UserInfo = {
+  name?: string;
+  age?: number;
+  country?: string;
+  isVip?: boolean;
+};
+type User = {
+  id: string;
+  name: string;
+  age: number;
+  country: string;
+  password: string;
+  vip: boolean;
+};
+// ---cut---
 function findUser(info: UserInfo): User {
   if (info.age >= 20) {
     // ...
@@ -66,7 +92,23 @@ function findUser(info: UserInfo): User {
 
 分割代入を使うと関数はオブジェクトのキーを引数に指定するだけでその値にアクセスできます。たとえば`findUserByName()`と名前 (`name`) しか必要のない関数で`UserInfo`をすべて受けるのではなく分割代入を使うとこのようになります。
 
-```ts
+```ts twoslash
+// @noErrors
+type UserInfo = {
+  name?: string;
+  age?: number;
+  country?: string;
+  isVip?: boolean;
+};
+type User = {
+  id: string;
+  name: string;
+  age: number;
+  country: string;
+  password: string;
+  vip: boolean;
+};
+// ---cut---
 function findUserByName({ name }: UserInfo): User {
   // ...
 }
@@ -80,7 +122,7 @@ function findUserByName({ name }: UserInfo): User {
 
 分割代入はこの関数を使う側としても引数の順番を気にする必要がなくなるとともに、ありがたいことに今後の機能拡張によって`UserInfo`が成長したとしても毎回引数を追加する必要はなく`UserInfo`を書き換え使用したい関数でそのキーにアクセスをするだけですみます。上記例のように国籍 (`nationality`) が増えれば好きなところに加えるだけです。順番は呼び出しに影響を与えません。
 
-```ts
+```ts twoslash
 type UserInfo = {
   name?: string;
   age?: number;
@@ -92,7 +134,24 @@ type UserInfo = {
 
 これだけで`nationality`を (`byName`で国籍を使っている問題は置いておくとして) 簡単に呼び出せます。
 
-```ts
+```ts twoslash
+// @noErrors
+type UserInfo = {
+  name?: string;
+  age?: number;
+  country?: string;
+  nationality?: string;
+  isVip?: boolean;
+};
+type User = {
+  id: string;
+  name: string;
+  age: number;
+  country: string;
+  password: string;
+  vip: boolean;
+};
+// ---cut---
 function findUserByName({ name, nationality }: UserInfo): User {
   // ...
 }
@@ -100,7 +159,7 @@ function findUserByName({ name, nationality }: UserInfo): User {
 
 関数の説明でもあったとおりですが、分割代入にも初期値を使うことができます。たとえば`findUser()`では通常引退済みのユーザーを検索しないのであれば`UserInfo`と関数は次のように書き換えるだけです。
 
-```ts
+```ts twoslash
 type UserInfo = {
   name?: string;
   age?: number;
@@ -111,7 +170,25 @@ type UserInfo = {
 };
 ```
 
-```ts
+```ts twoslash
+// @noErrors
+type UserInfo = {
+  name?: string;
+  age?: number;
+  country?: string;
+  nationality?: string;
+  isVip?: boolean;
+  isRetired: boolean;
+};
+type User = {
+  id: string;
+  name: string;
+  age: number;
+  country: string;
+  password: string;
+  vip: boolean;
+};
+// ---cut---
 function findUser({ name, age, country, isRetired = false }: UserInfo): User {
   // ...
 }

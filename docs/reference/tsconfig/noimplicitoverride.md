@@ -15,7 +15,7 @@ description: メソッドオーバーライドにoverrideキーワードを必�
 
 たとえば、トグルボタン (クリックするとオン、オフを繰り返すボタン) のクラスが次のようになっているとします。
 
-```ts
+```ts twoslash
 class ToggleButton {
   protected active: boolean;
 
@@ -49,7 +49,37 @@ class ToggleButton {
 
 ここで値のオンオフの切り替えを何回したかを数えられるサブクラス`ToggleCountButton`を考えます。すると`ToggleCountButton`は次のようになります。
 
-```ts
+```ts twoslash
+class ToggleButton {
+  protected active: boolean;
+
+  public constructor() {
+    this.active = false;
+  }
+
+  public isActive(): boolean {
+    return this.active;
+  }
+
+  public enable(): void {
+    this.active = true;
+  }
+
+  public disable(): void {
+    this.active = false;
+  }
+
+  public push(): void {
+    if (this.isActive()) {
+      this.disable();
+      // ...
+      return;
+    }
+    this.enable();
+    // ...
+  }
+}
+// ---cut---
 class ToggleCountButton extends ToggleButton {
   private counter: number;
 
@@ -76,9 +106,13 @@ class ToggleCountButton extends ToggleButton {
 
 ここでスーパークラスの`ToggleButton`が「オンオフの切り替えにメソッドはふたつも要らない！セッターで十分だ」と変更されたとします。
 
-```ts
+```ts twoslash
 class ToggleButton {
   protected active: boolean;
+
+  public constructor() {
+    this.active = false;
+  }
 
   public isActive(): boolean {
     return this.active;
@@ -103,6 +137,58 @@ class ToggleButton {
 するとサブクラスでオーバーライドしたはずのメソッド`enable(), disable()`が意味のないメソッドとして残ることになります。
 
 `noImplicitOverride`はオーバーライドしているメソッドに`override`キーワードをつけることによってスーパークラスに同名のメソッドがないかを確認させます。オーバーライドをしているにもかかわらず`override`のキーワードを付けずにこのオプションを有効にすると次のようなエラーが発生します。
+
+```ts twoslash
+class ToggleButton {
+  protected active: boolean;
+
+  public constructor() {
+    this.active = false;
+  }
+
+  public isActive(): boolean {
+    return this.active;
+  }
+
+  public setActive(active: boolean): void {
+    this.active = active;
+  }
+
+  public push(): void {
+    if (this.isActive()) {
+      this.setActive(false);
+      // ...
+      return;
+    }
+    this.setActive(true);
+    // ...
+  }
+}
+// ---cut---
+// @noImplicitOverride: true
+class ToggleCountButton extends ToggleButton {
+  private counter: number;
+
+  public constructor() {
+    super();
+    this.counter = 0;
+  }
+
+  public enable(): void {
+    this.counter++;
+    this.active = true;
+  }
+
+  public disable(): void {
+    this.counter++;
+    this.active = false;
+  }
+
+  public getCounter(): number {
+    return this.counter;
+  }
+}
+```
 
 ```text
 error TS4114: This member must have an 'override' modifier because it overrides a member in the base class 'ToggleButton'.

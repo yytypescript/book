@@ -17,13 +17,24 @@ JavaScript, TypeScript でコードベースで行われるマージは VCS の�
 
 オブジェクトを浅くコピーする知識を使います。おさらいとして浅いコピーはスプレッド構文を使えば次のように書くだけです。
 
-```ts
+```ts twoslash
+const obj: object = {
+  why: "reason",
+};
+// ---cut---
 const copied = { ...obj };
 ```
 
 オブジェクトのマージはマージしたいオブジェクトを引数のようにスプレッド構文で並べるだけでコピーができます
 
-```ts
+```ts twoslash
+const obj1: object = {
+  why: "reason",
+};
+const obj2: object = {
+  where: "place",
+};
+// ---cut---
 const merged = { ...obj1, ...obj2 };
 ```
 
@@ -31,7 +42,17 @@ const merged = { ...obj1, ...obj2 };
 
 オブジェクトのマージはふたつにとどまらず、何個でもオブジェクトをマージできます。
 
-```ts
+```ts twoslash
+const obj1: object = {
+  why: "reason",
+};
+const obj2: object = {
+  where: "place",
+};
+const obj3: object = {
+  how: "way",
+};
+// ---cut---
 const merged = {
   ...obj1,
   ...obj2,
@@ -43,13 +64,33 @@ const merged = {
 浅いコピーのときもES2017で出力しましたのでこちらも併せて出力すると
 
 <!--prettier-ignore-->
-```ts
+```ts twoslash
+const obj1: object = {
+  why: 'reason'
+};
+const obj2: object = {
+  where: 'place'
+};
+const obj3: object = {
+  how: 'way'
+};
+// ---cut---
 const merged = Object.assign(Object.assign(Object.assign({}, obj1), obj2), obj3);
 ```
 
 とコンパイルされます。ちなみにこれは少々冗長で
 
-```ts
+```ts twoslash
+const obj1: object = {
+  why: "reason",
+};
+const obj2: object = {
+  where: "place",
+};
+const obj3: object = {
+  how: "way",
+};
+// ---cut---
 const merged = Object.assign({}, obj1, obj2, obj3);
 ```
 

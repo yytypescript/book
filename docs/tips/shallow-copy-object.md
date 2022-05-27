@@ -10,7 +10,8 @@
 
 ここで一日の食事を意味するオブジェクトの型として`MealsPerDay`を定義し、一日に摂取した食事の熱量からいずれ生活習慣病になるかどうか判定する関数`willBeMetabo()`を定義すれば次のようになります。
 
-```ts
+```ts twoslash
+// @noErrors
 type MealsPerDay = {
   breakfast: string;
   lunch: string;
@@ -49,7 +50,14 @@ willBeMetabo(meals);
 
 `isMeals()`の構造は単純です。朝食、昼食、夕食をそれぞれそれが食事であるかどうかを判定するだけです。ひとつの食事が食事であるかを判定する関数`isMeal()`があるとすれば内部でそれを呼ぶだけです。`isMeal()`の実装については今回は重要ではないため省略します。
 
-```ts
+```ts twoslash
+type MealsPerDay = {
+  breakfast: string;
+  lunch: string;
+  dinner: string;
+};
+declare function isMeal(something: string): boolean;
+// ---cut---
 function isMeals(meals: MealsPerDay): void {
   if (!isMeal(meals.breakfast)) {
     throw new Error("BREAKFAST IS NOT A MEAL!");
@@ -65,7 +73,16 @@ function isMeals(meals: MealsPerDay): void {
 
 今回のユースケースでは`isMeals()`でバリデーションを行ったあとその食事を`willBeMetabo()`で判定します。食べられないものが与られたときは例外を捕捉して対応できればよいので大まかにはこのような形になるでしょう。
 
-```ts
+```ts twoslash
+// @noErrors
+type MealsPerDay = {
+  breakfast: string;
+  lunch: string;
+  dinner: string;
+};
+declare function isMeals(meals: MealsPerDay): void;
+declare function willBeMetabo(meals: MealsPerDay): boolean;
+// ---cut---
 function shouldBeCareful(meals: MealsPerDay): boolean {
   try {
     // ...
@@ -227,7 +244,12 @@ console.log(object1.nest === object2.nest);
 
 浅いコピーの実装は昨今のJSでは大変楽になっており、次のコードで完成です。
 
-```ts
+```ts twoslash
+const sample: object = {
+  year: 1999,
+  month: 7,
+};
+// ---cut---
 const shallowCopied: object = { ...sample };
 ```
 
@@ -235,7 +257,7 @@ const shallowCopied: object = { ...sample };
 
 オブジェクトのコピーにスプレッド構文を使えるようになったのはES2018からです。たとえば次のような浅いコピーの例を
 
-```ts
+```ts twoslash
 const sample: object = {
   year: 1999,
   month: 7,
@@ -246,7 +268,7 @@ const shallowCopied: object = { ...sample };
 
 ES2018でコンパイルすると次のようになります。
 
-```ts
+```ts twoslash
 const sample = {
   year: 1999,
   month: 7,
@@ -256,7 +278,7 @@ const shallowCopied = { ...sample };
 
 ほぼ同じですがES2017でコンパイルすると次のようになります。
 
-```ts
+```ts twoslash
 const sample = {
   year: 1999,
   month: 7,

@@ -22,7 +22,7 @@ tscコマンドに`-d`オプションをつけてコンパイルを行うとJava
 
 次のTypeScriptファイル(sample.ts)を`-d`オプションを付けてコンパイルしてみます。
 
-```ts title="sample.ts"
+```ts title="sample.ts" twoslash
 interface Person {
   firstName: string;
   lastName: string;
@@ -43,7 +43,7 @@ tsc -d
 
 sample.tsではInterfaceを使っていますが、JavaScriptにはInterfaceの概念がないため関数のみになりました。また引数の型情報もなくなります。
 
-```js title="sample.js"
+```js title="sample.js" twoslash
 function greeter(person) {
   return "Hello, " + person.firstName + " " + person.lastName;
 }
@@ -54,7 +54,7 @@ function greeter(person) {
 
 定義情報のみ記載されたファイルが出力されます。
 
-```ts title="sample.d.ts"
+```ts title="sample.d.ts" twoslash
 interface Person {
   firstName: string;
   lastName: string;

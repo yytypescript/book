@@ -8,9 +8,14 @@ sidebar_label: セッターとゲッター
 
 記述方法のサンプルは次のようになります。
 
-```ts
+```ts twoslash
 class Human {
   private _name: string;
+
+  public constructor(name: string) {
+    this._name = name;
+  }
+
   // Getter宣言
   get name(): string {
     return this._name;
@@ -22,11 +27,12 @@ class Human {
   }
 }
 
-const human = new Human();
+const human = new Human("");
 // Setterを利用
 human.name = `田中太郎`;
 // Getterを利用
-console.log(human.name); // 田中太郎
+console.log(human.name);
+// @log: 田中太郎
 ```
 
 メソッドと違い、getter/setterを呼ぶ場合は`()`は不要です。

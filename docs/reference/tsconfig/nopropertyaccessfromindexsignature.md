@@ -15,7 +15,7 @@ description: インデックス型のプロパティ参照に[]を必須にす�
 
 ドット記法とインデックス記法についてですが、次のようにあるオブジェクトがあるとしてドット(`.`)でプロパティアクセスをしているものがドット記法、ブラケット(`[]`)でアクセスをしているものがインデックス記法です。
 
-```ts
+```ts twoslash
 type SystemTerms = {
   en: string;
   [key: string]: string;
@@ -55,11 +55,22 @@ console.log(butterfly.fr);
 
 存在が不確かなプロパティへのアクセスについて、ドット記法でアクセスするときに、このオプションを有効にすると次のようなエラーが発生します。
 
-```text
-error TS4111: Property 'fr' comes from an index signature, so it must be accessed with ['fr'].
+```ts twoslash
+// @noPropertyAccessFromIndexSignature: true
+type SystemTerms = {
+  en: string;
+  [key: string]: string;
+};
 
+const butterfly: SystemTerms = {
+  en: "Butterfly",
+  fr: "Papillon",
+  it: "Farfalla",
+  es: "Mariposa",
+};
+// ---cut---
+// @errors: 4111
 console.log(butterfly.fr);
-                      ~~
 ```
 
 このようにインデックス型へのドット記法でのアクセスが禁止されます。
