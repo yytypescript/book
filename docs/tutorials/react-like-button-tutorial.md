@@ -158,7 +158,7 @@ yarn start
 
 ここからは実際にコードを書いて行きますので、生成したlike-buttonプロジェクトをお好みのエディターで開いてください。
 
-ひながた初期状態の上のページはsrc/App.tsxの内容が描画されています。ためしに、src/App.tsxを変更してみましょう。App.tsxの`<header>`要素の中身を消して、そこに「TypeScriptはいいぞ」に書いてみましょう。
+ひながた初期状態の上のページはsrc/App.tsxの内容が描画されています。ためしに、src/App.tsxを変更してみましょう。App.tsxの`<header>`要素の中身を消して、「TypeScriptはいいぞ」に書き換えてみましょう。
 
 ```tsx twoslash {8} title="App.tsx"
 // @noErrors
