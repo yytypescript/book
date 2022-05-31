@@ -3,6 +3,7 @@
     "bivariance",
     "camelcase",
     "contravariance",
+    "Deno",
     "keyof",
     "mkdir",
     "nounusedlocals",
