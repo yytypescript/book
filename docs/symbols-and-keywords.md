@@ -25,7 +25,7 @@ JavaScriptやTypeScriptのコードには`?.`のような記号や`as`のよう�
 
 値がnullやundefinedでないことを宣言し、コンパイラーに値を非Nullとして解釈させます。
 
-```ts
+```ts twoslash
 function firstChar(text: string | undefined) {
   // コンパイルエラーにならない
   return text!.charAt(0);
@@ -36,7 +36,7 @@ function firstChar(text: string | undefined) {
 
 クラスのプロパティが型アノテーションで示された型でセットされていることをコンパイラーに伝える記号です。
 
-```ts
+```ts twoslash
 class Example {
   public foo!: number;
 }
@@ -44,7 +44,7 @@ class Example {
 
 または、変数の値が型アノテーションで示された型でセットされていることをコンパイラーに伝える記号です。
 
-```ts
+```ts twoslash
 let numbers!: number[];
 ```
 
@@ -80,7 +80,7 @@ double bangはJavaScriptで定義されている演算子ではなく、論理�
 
 クラスのプロパティのうち`#`で始まるプロパティはプライベートになります。
 
-```js
+```js twoslash
 class ExampleClass {
   #privateField;
   #privateMethod() {}
@@ -134,7 +134,7 @@ console.log(a & b);
 
 複数の型を組み合わせたインターセクション型を定義します。
 
-```ts
+```ts twoslash
 interface Swordsman {
   sword: string;
 }
@@ -215,7 +215,7 @@ console.log(a);
 
 `Generator`オブジェクトを返すジェネレーター関数を宣言するときに用いられる記号です。
 
-```js
+```js twoslash
 function* numberGenerator() {
   yield 1;
   yield 2;
@@ -227,7 +227,7 @@ function* numberGenerator() {
 
 別のジェネレーターに移譲する式を書くときに用いられる記号です。
 
-```js
+```js twoslash
 function* func1() {
   yield 123;
 }
@@ -278,7 +278,7 @@ Number型に変換します。
 
 何も指定しない場合は暗黙的に`+`が付与されるので`+`を実際に利用する機会はおそらくありません。
 
-```ts
+```ts twoslash
 type MyPartial<T> = {
   [k in keyof T]+?: T[k];
 };
@@ -307,7 +307,7 @@ console.log(x);
 
 複数の引数を関数に与えたり、複数の引数を受け取る関数宣言に用いる記号です。
 
-```js
+```js twoslash
 function plus(x, y, z) {
   return x + y + z;
 }
@@ -318,7 +318,7 @@ plus(1, 2, 3);
 
 複数の要素を持つ配列を宣言するときに用いる記号です。
 
-```js
+```js twoslash
 const numbers = [1, 2, 3];
 ```
 
@@ -326,7 +326,7 @@ const numbers = [1, 2, 3];
 
 複数のプロパティを持つオブジェクトを宣言するときに用いる記号です。
 
-```js
+```js twoslash
 const data = {
   property1: 1,
   property2: true,
@@ -338,7 +338,7 @@ const data = {
 
 複数の要素を持つタプル型を宣言するときに用いる記号です。
 
-```ts
+```ts twoslash
 type Tuple = [number, string, boolean];
 ```
 
@@ -370,7 +370,7 @@ console.log(a);
 
 `readonly`や`?`などの修飾子を削除します。
 
-```ts
+```ts twoslash
 type MyRequired<T> = {
   [k in keyof T]-?: T[k];
 };
@@ -500,7 +500,7 @@ console.log(rest);
 
 オブジェクトプロパティのキーと値の対関係を表すのに用いられる記号です。
 
-```js
+```js twoslash
 const object = { a: 1, b: 2, c: 3, d: 4 };
 ```
 
@@ -512,13 +512,13 @@ const object = { a: 1, b: 2, c: 3, d: 4 };
 
 変数の型アノテーションに用いられる記号です。
 
-```ts
+```ts twoslash
 const variable: number = 20;
 ```
 
 または、関数の引数や戻り値の型アノテーションに用いられる記号です。
 
-```ts
+```ts twoslash
 function numberToString(x: number): string {
   return x.toString();
 }
@@ -532,8 +532,8 @@ function numberToString(x: number): string {
 
 ジェネリクスの型引数の開始に用いられる記号です。
 
-```ts
-function func1<T>(x: T) {}
+```ts twoslash
+function func<T>(x: T) {}
 const result = func<string>("hello");
 ```
 
@@ -543,7 +543,7 @@ const result = func<string>("hello");
 
 JSXと呼ばれるXMLリテラルの開始に現れる記号です。
 
-```ts title="Hello.tsx"
+```tsx twoslash title="Hello.tsx"
 function Hello() {
   return <div>HELLO</div>;
 }
@@ -553,7 +553,7 @@ function Hello() {
 
 型アサーションに用いられる記号です。`as`の別の書き方です。
 
-```ts
+```ts twoslash
 let someValue: unknown = "this is a string";
 let strLength: number = (<string>someValue).length;
 ```
@@ -615,7 +615,7 @@ console.log(a);
 
 アロー関数の引数と関数ボディーの間に書かれる記号です。
 
-```js
+```js twoslash
 const increment = (num) => num + 1;
 //                 ^^^ 引数
 //                         ^^^^^^^ 関数ボディ
@@ -671,7 +671,7 @@ console.log(a >>> b);
 
 オブジェクトのプロパティを任意プロパティとして定義します。
 
-```ts
+```ts twoslash
 interface User {
   name: string;
   // name は必須
@@ -683,7 +683,7 @@ const user: User = { name: "taro" };
 
 または、関数の引数を必須ではなくします。
 
-```ts
+```ts twoslash
 function func(x?: number) {}
 func();
 // xがなくてもOK
@@ -772,7 +772,7 @@ func([1, 2, 3]);
 
 インデックス型(index signature)の開始に用いられる記号です。
 
-```ts
+```ts twoslash
 type StringKeysAndStringValues = {
   [key: string]: string;
 };
@@ -784,7 +784,9 @@ type StringKeysAndStringValues = {
 
 配列型を表現するのに用いられる記号です。
 
-```ts
+```ts twoslash
+class Foo {}
+// ---cut---
 let names: string[];
 type FooList = Foo[];
 ```
@@ -793,7 +795,7 @@ type FooList = Foo[];
 
 文字列のエスケープシーケンスの開始に用いられる記号です。
 
-```js
+```js twoslash
 const lineBreak = "\n";
 ```
 
@@ -819,7 +821,7 @@ console.log(a ^ b);
 
 数値の可読性のために、桁区切りとして用いられる記号です。
 
-```js
+```js twoslash
 const hyakuman = 1_000_000;
 ```
 
@@ -847,7 +849,9 @@ const hyakuman = 1_000_000;
 
 if文やfor文などの構文に付随して使われる記号です。
 
-```js
+```js twoslash
+let isOK = false;
+// ---cut---
 if (isOK) {
   // ...
 } else {
@@ -857,7 +861,7 @@ if (isOK) {
 
 if文やfor文などの構文を伴わないブロック文は、単に変数のスコープを分けることを目的にしていることがあります。
 
-```js
+```js twoslash
 {
   const value = 1;
 }
@@ -900,7 +904,7 @@ console.log((a | b) === 0b111);
 
 複数の型を組み合わせたユニオン型を定義します。
 
-```ts
+```ts twoslash
 type ID = string | number;
 const id1 = "e29b41"; // OK
 const id2 = 100; // OK
@@ -1051,8 +1055,20 @@ type MappedType = {
 
 型ガードに用いる型アサーション関数の戻り値の型アノテーション部分に用いられるキーワードです。
 
-```ts
-function isDuck(animal: Animal): animal is Duck {}
+```ts twoslash
+class Animal {
+  public legs: number;
+
+  public constructor(legs: number) {
+    this.legs = legs;
+  }
+}
+class Bird extends Animal {}
+class Duck extends Bird {}
+// ---cut---
+function isDuck(animal: Animal): animal is Duck {
+  return animal.legs === 2;
+}
 ```
 
 ### `keyof` keyof型演算子 (keyof) ![ts]
@@ -1117,7 +1133,7 @@ console.log(void 123);
 
 戻り値が`undefined`あるいはない場合に使用します。
 
-```ts
+```ts twoslash
 function returnUndefined(num: number): void {
   if (num === 0) {
     return undefined;
