@@ -1,3 +1,7 @@
+---
+image: /img/why-you-should-use-typescript.png
+---
+
 # なぜTypeScriptを使うべきか
 
 ウェブアプリケーションのフロントエンドを開発するのに、最低限の必要となる言語はHTMLやCSSを除けばJavaScriptだけです。JavaScriptさえ使えれば、かなり自由にフロントエンドを実装できます。それなのに、なぜJavaScriptではなくTypeScriptを使ったほうがいいのでしょうか？ここでは、TypeScriptを使うべき理由を大きく分けて4つ見ていきます。

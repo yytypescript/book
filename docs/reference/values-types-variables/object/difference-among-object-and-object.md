@@ -1,5 +1,6 @@
 ---
 title: object、Object、{}の違い
+image: /img/difference-among-object-and-object.png
 ---
 
 TypeScriptではオブジェクトの型注釈をするとき、プロパティの型まで指定するのが一般的です。
