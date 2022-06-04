@@ -1,3 +1,7 @@
+---
+image: /img/range-of-typescript.png
+---
+
 # TypeScriptの射程
 
 TypeScriptを覚えるとさまざまなものを作れるようになります。TypeScriptはJavaScriptにコンパイルして使う言語です。そのため、JavaScriptで作れるものは何でも作れます。ここでは、TypeScriptを学んだらどのようなソフトウェアを作れるのか、「TypeScriptの射程」について説明します。
