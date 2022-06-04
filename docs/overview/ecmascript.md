@@ -71,9 +71,7 @@ JavaScriptエンジンは、ECMAScriptを実装したモジュールです。Jav
 
 <figure>
 <figcaption>ブラウザ、レンダリングエンジン、JavaScriptエンジン、ECMAScriptの関係図</figcaption>
-
-[![ブラウザ、レンダリングエンジン、JavaScriptエンジン、ECMAScriptの関係図](ecmascript/browser-rendering-engine-javascript-engine-ecmascript-relations.svg)](ecmascript/browser-rendering-engine-javascript-engine-ecmascript-relations.svg)
-
+<a href="/img/overview/ecmascript/browser-rendering-engine-javascript-engine-ecmascript-relations.svg" target="_blank"><img src="/img/overview/ecmascript/browser-rendering-engine-javascript-engine-ecmascript-relations.svg" width="800"/></a>
 </figure>
 
 TypeScriptプログラマーがブラウザとエンジンの対応を理解しておくことは重要です。エンジンを知ることは、開発したプログラムが実行される環境を把握することと同義です。エンジンは仕様にできるだけ準拠しますが、エンジンによって実装が異なることがあります。エンジンによっては実装がされていない仕様がある場合もあります。また、ブラウザによっては古いエンジンを使っている場合もあります。
