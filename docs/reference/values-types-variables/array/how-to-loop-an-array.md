@@ -1,3 +1,7 @@
+---
+image: /img/how-to-loop-an-array.png
+---
+
 # 配列をループする方法
 
 JavaScript/TypeScriptで配列をループするには、主にfor文、for-of文、配列のメソッドの3つの方法があります。

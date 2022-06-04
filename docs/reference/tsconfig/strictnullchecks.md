@@ -1,6 +1,7 @@
 ---
 description: null・undefinedのチェックを厳しくする
 tags: [strict]
+image: /img/strictNullChecks.png
 ---
 
 # strictNullChecks

@@ -21,6 +21,7 @@ slug: /reference/function
 | `tags`          | `string[]` | ページのタグ。デフォルト値は`[]`です。                                                                                                                                  |
 | `description`   | `string`   | ページの要約。`<meta name="description" content="..."/>`やサイト内リンクブロックの説明として使われる。指定しない場合、コンテンツの最初の段落が`description`になります。 |
 | `title`         | `string`   | ページのタイトル。これを指定した場合、Markdownに見出しをつける必要はありません。                                                                                        |
+| `image`         | `string`   | OGP画像のパス。staticディレクトリからの相対パスを指定します。                                                                                                           |
 
 ```yaml
 ---
@@ -30,6 +31,7 @@ tags:
   - 関数
   - アロー関数
 description: TypeScriptでアロー関数を定義する方法
+image: /img/ogp.png
 ---
 ```
 
