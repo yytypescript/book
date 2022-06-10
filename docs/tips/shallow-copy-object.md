@@ -325,4 +325,19 @@ console.log(set1 !== set2);
 // @log: true
 ```
 
-[Map](../reference/builtin-api/set.md)
+[Set](../reference/builtin-api/set.md)
+
+### `Array<T>`のコピー
+
+配列をコピーする方法はいくつかありますが、もっとも簡単なのは配列のスプレッド構文を用いたものです。
+
+```ts twoslash
+const array1 = [1, 2, 3];
+const array2 = [...array1];
+```
+
+このときスプレッド構文`...`を書き忘れると配列の配列`T[][]`型ができあがるので気をつけてください。
+
+## 関連情報
+
+[スプレッド構文](../reference/values-types-variables/array/spread-syntax-for-array.md)
