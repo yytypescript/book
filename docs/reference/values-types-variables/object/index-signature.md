@@ -47,3 +47,7 @@ let obj2: Record<string, number>;
 ```
 
 [Record&lt;Keys, Type>](../../type-reuse/utility-types/record.md)
+
+## 関連情報
+
+[Mapped type](../../type-reuse/mapped-types.md)
