@@ -17,26 +17,26 @@ description: メソッドオーバーライドにoverrideキーワードを必�
 
 ```ts twoslash
 class ToggleButton {
-  protected active: boolean;
+  protected _active: boolean;
 
   public constructor() {
-    this.active = false;
+    this._active = false;
   }
 
-  public isActive(): boolean {
-    return this.active;
+  public get active(): boolean {
+    return this._active;
   }
 
   public enable(): void {
-    this.active = true;
+    this._active = true;
   }
 
   public disable(): void {
-    this.active = false;
+    this._active = false;
   }
 
   public push(): void {
-    if (this.isActive()) {
+    if (this._active) {
       this.disable();
       // ...
       return;
@@ -51,26 +51,26 @@ class ToggleButton {
 
 ```ts twoslash
 class ToggleButton {
-  protected active: boolean;
+  protected _active: boolean;
 
   public constructor() {
-    this.active = false;
+    this._active = false;
   }
 
-  public isActive(): boolean {
-    return this.active;
+  public get active(): boolean {
+    return this._active;
   }
 
   public enable(): void {
-    this.active = true;
+    this._active = true;
   }
 
   public disable(): void {
-    this.active = false;
+    this._active = false;
   }
 
   public push(): void {
-    if (this.isActive()) {
+    if (this.active) {
       this.disable();
       // ...
       return;
@@ -81,25 +81,25 @@ class ToggleButton {
 }
 // ---cut---
 class ToggleCountButton extends ToggleButton {
-  private counter: number;
+  private _counter: number;
 
   public constructor() {
     super();
-    this.counter = 0;
+    this._counter = 0;
   }
 
   public enable(): void {
-    this.counter++;
-    this.active = true;
+    this._counter++;
+    this._active = true;
   }
 
   public disable(): void {
-    this.counter++;
-    this.active = false;
+    this._counter++;
+    this._active = false;
   }
 
-  public getCounter(): number {
-    return this.counter;
+  public get counter(): number {
+    return this._counter;
   }
 }
 ```
@@ -108,27 +108,22 @@ class ToggleCountButton extends ToggleButton {
 
 ```ts twoslash
 class ToggleButton {
-  protected active: boolean;
+  protected _active: boolean;
 
   public constructor() {
-    this.active = false;
+    this._active = false;
   }
 
-  public isActive(): boolean {
-    return this.active;
+  public get active(): boolean {
+    return this._active;
   }
 
-  public setActive(active: boolean): void {
-    this.active = active;
+  public set active(active: boolean) {
+    this._active = active;
   }
 
   public push(): void {
-    if (this.isActive()) {
-      this.setActive(false);
-      // ...
-      return;
-    }
-    this.setActive(true);
+    this._active = !this._active;
     // ...
   }
 }
@@ -136,80 +131,52 @@ class ToggleButton {
 
 するとサブクラスでオーバーライドしたはずのメソッド`enable(), disable()`が意味のないメソッドとして残ることになります。
 
-`noImplicitOverride`はオーバーライドしているメソッドに`override`キーワードをつけることによってスーパークラスに同名のメソッドがないかを確認させます。オーバーライドをしているにもかかわらず`override`のキーワードを付けずにこのオプションを有効にすると次のようなエラーが発生します。
+`noImplicitOverride`はオーバーライドしているメソッドに`override`キーワードをつけることによってスーパークラスに同名のメソッドがないかを確認させます。`override`キーワードがついているにもかかわらずオーバーライド元となるメソッドが存在しないと次のようなエラーが発生します。
 
 ```ts twoslash
 class ToggleButton {
-  protected active: boolean;
+  protected _active: boolean;
 
   public constructor() {
-    this.active = false;
+    this._active = false;
   }
 
-  public isActive(): boolean {
-    return this.active;
+  public get active(): boolean {
+    return this._active;
   }
 
-  public setActive(active: boolean): void {
-    this.active = active;
+  public set active(active: boolean) {
+    this._active = active;
   }
 
   public push(): void {
-    if (this.isActive()) {
-      this.setActive(false);
-      // ...
-      return;
-    }
-    this.setActive(true);
+    this._active = !this.active;
     // ...
   }
 }
 // ---cut---
 // @noImplicitOverride: true
+// @errors: 4113
 class ToggleCountButton extends ToggleButton {
-  private counter: number;
+  private _counter: number;
 
   public constructor() {
     super();
-    this.counter = 0;
+    this._counter = 0;
   }
 
-  public enable(): void {
-    this.counter++;
-    this.active = true;
+  public override enable(): void {
+    this._counter++;
+    this._active = true;
   }
 
-  public disable(): void {
-    this.counter++;
-    this.active = false;
+  public override disable(): void {
+    this._counter++;
+    this._active = false;
   }
 
-  public getCounter(): number {
-    return this.counter;
+  public get counter(): number {
+    return this._counter;
   }
 }
-```
-
-```text
-error TS4114: This member must have an 'override' modifier because it overrides a member in the base class 'ToggleButton'.
-
-public enable(): void {
-       ~~~~~~
-error TS4114: This member must have an 'override' modifier because it overrides a member in the base class 'ToggleButton'.
-
-public disable(): void {
-       ~~~~~~~
-```
-
-逆に、オーバーライドしていないメソッドに`override`キーワードをつけると次のようなエラーが発生します。
-
-```text
-error TS4113: This member cannot have an 'override' modifier because it is not declared in the base class 'ToggleButton'.
-
-public override enable(): void {
-                ~~~~~~
-error TS4113: This member cannot have an 'override' modifier because it is not declared in the base class 'ToggleButton'.
-
-public override disable(): void {
-                ~~~~~~~
 ```
