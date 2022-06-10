@@ -74,3 +74,36 @@ switch (food) {
 }
 // @log: "炭水化物"
 ```
+
+## switchは厳密等価演算
+
+switch構文でその値であると判断されるのは等価演算(`==`)ではなく厳密等価演算(`===`)です。たとえば`null`と`undefined`は等価演算では等しいとされますが厳密等価演算では等しくありません。
+
+```ts twoslash
+console.log(null == undefined);
+// @log: true
+console.log(null === undefined);
+// @log: false
+```
+
+このふたつを使ったswitch構文を作るとそのことがよくわかります。
+
+```ts twoslash
+function test(n: unknown): void {
+  switch (n) {
+    case null:
+      console.log("THIS IS null");
+      return;
+    case undefined:
+      console.log("THIS IS undefined");
+      return;
+    default:
+      console.log("THIS IS THE OTHER");
+  }
+}
+
+test(null);
+// @log: 'THIS IS null'
+test(undefined);
+// @log: 'THIS IS undefined'
+```
