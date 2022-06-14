@@ -1,8 +1,11 @@
 ---
 sidebar_label: 判別可能なユニオン型
+image: /reference/values-types-variables/discriminated-union/summary-card.png
 ---
 
 # 判別可能なユニオン型 (discriminated union)
+
+![](/reference/values-types-variables/discriminated-union/summary-card@3x.png)
 
 TypeScriptの判別可能なユニオン型は、ユニオンに属する各オブジェクトの型を区別するための「しるし」がついた特別なユニオン型です。オブジェクト型からなるユニオン型を絞り込む際に、分岐ロジックが複雑になる場合は、判別可能なユニオン型を使うとコードの可読性と保守性がよくなります。
 
