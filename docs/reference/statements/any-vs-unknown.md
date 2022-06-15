@@ -97,4 +97,4 @@ const unknown6: unknown = {
 console.log(unknown6.x.y.z);
 ```
 
-TypeScriptのプロジェクトを作る時に必要なtsconfig.jsonにはこの`any`型の使用を防ぐためのオプションとして`noImplicitAny`があります。既存のJavaScriptのプロジェクトをTypeScriptに置き換えていくのではなく、スクラッチの状態からTypeScriptで作るのであればこの設定を入れるとよいでしょう。
+TypeScriptのプロジェクトを作るときに必要なtsconfig.jsonにはこの`any`型の使用を防ぐためのオプションとして`noImplicitAny`があります。既存のJavaScriptのプロジェクトをTypeScriptに置き換えていくのではなく、スクラッチの状態からTypeScriptで作るのであればこの設定を入れるとよいでしょう。

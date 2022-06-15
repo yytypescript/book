@@ -420,7 +420,7 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 #### default exportのPros
 
-- `import`する時に名前を変えることができる
+- `import`するときに名前を変えることができる
 - そのファイルが他の`export`に比べ何をもっとも提供したいのかがわかる
 
 #### default exportのCons

@@ -37,7 +37,7 @@ const networkErrorEvent: MyErrorEvent<NetworkError> = {
 };
 ```
 
-例外処理を記述する時に`NetworkError`のように対応するエラークラスをすべて用意することはなく、標準の`Error`で対応してしまうケースも多くありますが、今の状態では`MyErrorEvent`のジェネリクスの型`T`を常に指定する必要があり非常に面倒です。
+例外処理を記述するときに`NetworkError`のように対応するエラークラスをすべて用意することはなく、標準の`Error`で対応してしまうケースも多くありますが、今の状態では`MyErrorEvent`のジェネリクスの型`T`を常に指定する必要があり非常に面倒です。
 
 ```ts twoslash
 type MyErrorEvent<T> = {

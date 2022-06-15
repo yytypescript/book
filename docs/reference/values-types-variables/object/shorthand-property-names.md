@@ -1,6 +1,6 @@
 # Shorthand property names
 
-オブジェクトのキーと変数名が同じ時にかぎり、オブジェクトに値を代入するときも同様にShorthand property namesを使うことができます。これも分割代入と調べると情報を得られることがあります。次の例がほぼすべてです。
+オブジェクトのキーと変数名が同じときにかぎり、オブジェクトに値を代入するときも同様にShorthand property namesを使うことができます。これも分割代入と調べると情報を得られることがあります。次の例がほぼすべてです。
 
 ```ts twoslash
 import fs from "fs";

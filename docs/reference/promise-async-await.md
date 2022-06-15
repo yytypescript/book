@@ -12,7 +12,7 @@
 
 ## コールバック地獄
 
-次の3つのAPIがある時に、API3で得た結果を表示する処理を考えてみます。
+次の3つのAPIがあるときに、API3で得た結果を表示する処理を考えてみます。
 
 - API1: 何かの値を返す
 - API2: API1の結果をリクエストで受け取る
@@ -107,7 +107,7 @@ request1()
 
 ここで注目するべきは`request1()`関数の戻り値を`Promise<number>`と型指定をしている箇所です。
 
-TypeScriptで`Promise`の型を指定する場合は`Promise<T>`と書きます。`T`には`Promise`が解決(resolve)された時に渡す値の任意の型を指定します。
+TypeScriptで`Promise`の型を指定する場合は`Promise<T>`と書きます。`T`には`Promise`が解決(resolve)されたときに渡す値の任意の型を指定します。
 
 今回の例では`resolve(1);`と解決する値として数値を渡しているので`Promise<number>`を指定しています。
 
