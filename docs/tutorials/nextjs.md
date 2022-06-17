@@ -1,4 +1,4 @@
-# 🚧Next.jsで○○を作ろう
+# 🚧Next.jsで猫画像ジェネレーターを作ろう
 
 :::caution 執筆中
 
@@ -26,20 +26,20 @@ Next.js+TypeScriptで簡単なウェブアプリケーションを作るチュ�
 ## Next.jsの概要
 
 [Next.js](https://nextjs.org/)はVercel社が開発しているOSSのReactをベースにしたフレームワークです。
-Next.js登場前はReactで開発を進める上でwebpack等のビルドツールの設定ファイルを記述するには一定の知識が必要で、チャンク分割やCSS Modulesの読み込みなど多くのことをやろうとすると、非常に設定が複雑化してメンテナンスが非常に大変になっていました。
+Next.js登場前はReactで開発をする際にwebpackなどのビルドツールの設定ファイルを記述するには一定の知識が必要でした。チャンク分割やCSS Modulesの読み込みをやろうとすると、非常に設定が複雑化してメンテナンスが非常に大変になっていました。
 
-Next.jsはルーティング時のプリフェッチや画像の最適化などのパフォーマンス最適化をフレームワーク内で内包しており、ゼロコンフィグで簡単にパフォーマンスの高いアプリケーションを構築することができます。ページ単位のサーバーサイドレンダリング（SSR）や静的サイト生成(SSG)の機能も提供しているので、用途に合わせて柔軟にアーキテクチャを選択できるのも特徴です。
+Next.jsはルーティング時のプリフェッチや画像の最適化などのパフォーマンス最適化をフレームワーク内で内包しており、ゼロコンフィグで簡単にパフォーマンスの高いアプリケーションを構築することができます。ページ単位のサーバーサイドレンダリング（SSR）や静的サイト生成(SSG)の機能も提供しており、用途に合わせて柔軟にアーキテクチャを選択できるのも特徴です。
 
-また、Vercelというプラットフォームを提供しており、Next.jsで構築したアプリケーションを非常に簡単にデプロイ/配信することができます。
+また、[Vercel](https://vercel.com/)というプラットフォームも提供しており、Next.jsで構築したアプリケーションを簡単にデプロイ/配信することができます。
 
 ## これから作るもの
 
-このチュートリアルでは、猫🐱の画像をランダムに表示するWebアプリケーションを実装します。
+このチュートリアルでは、猫画像をランダムに表示する猫画像ジェネレーターを実装します。🐱
 
-最終的な成果物は[こちら](ホスティングしたURL)で試すことができます。
+最終的な成果物は[こちら](ホスティングしたURL)で確認できます。
 チュートリアルを開始する前に事前に触ってみることで、各ステップでどんな実装をしているかのイメージが掴みやすくなります。
 
-また、最終的な成果物のソースコードは[yytypescript/random-cat](https://github.com/yytypescript/random-cat)で確認することができます。
+また、ソースコードは[yytypescript/random-cat](https://github.com/yytypescript/random-cat)で確認することができます。
 
 ## Next.jsのセットアップ
 
@@ -47,7 +47,7 @@ Next.jsはルーティング時のプリフェッチや画像の最適化など�
 TypeScriptをベースにしたプロジェクトを作成するために `--example with-typescript` を指定します。
 `random-cat` は作成するリポジトリの名前なので好きな名前で作成してください。
 
-```shell
+```sh
 yarn create next-app --example with-typescript random-cat
 ```
 
@@ -76,11 +76,13 @@ mkdir -p src/pages && touch src/pages/index.tsx
 
 Next.jsでは`pages`ディレクトリが特別な意味を持っており、`pages`ディレクトリ配下のディレクトリ構造がページのルーティングに1対1で対応をします。たとえば、src/pages/users.tsxとファイルを作成した場合は、`/users` へアクセスした時にそのファイルのコンポーネントが描画されます。
 
-今回作成したsrc/pages/index.tsxの場合は、`/` へアクセスした時に描画されます。
+src/pages/index.tsxの場合は、`/` へアクセスした時に描画されます。
 
-index.tsxで「Hello,Next.js👋」と表示するようにコンポーネントを実装してましょう。
+## 最初のページを実装
 
-```tsx twoslash
+index.tsxで「Hello,Next.js👋」と表示するようにコンポーネントを実装してみましょう。
+
+```tsx twoslash title="pages/index.tsx"
 const IndexPage = () => {
   return <h1>Hello, Next.js 👋</h1>;
 };
@@ -92,16 +94,13 @@ export default IndexPage;
 
 ![チュートリアルの初期画面](nextjs/screen1.png)
 
-## 開発
+## 猫の画像を表示する
 
-### 猫の画像を表示する
-
-早速、猫の画像を表示してみましょう。
 最初はAPIでデータを取得せずに静的なURLを指定して画像を表示します。
 
-先ほど「Hello, Next.js 👋」と表示していた箇所を次のように書き換えてください。
+先ほど「Hello, Next.js 👋」と表示していた箇所を次のように書き換えてみてください。
 
-```tsx twoslash
+```tsx twoslash {2} title="pages/index.tsx"
 const IndexPage = () => {
   return <img src="https://cdn2.thecatapi.com/images/bpc.jpg" />;
 };
@@ -109,40 +108,34 @@ const IndexPage = () => {
 export default IndexPage;
 ```
 
+猫画像を表示することができました。
+
 ![猫の画像を表示](nextjs/screen2.png)
 
-### ランダムに猫の画像を切り替える
+## 猫の画像URLを状態で管理する
 
-複数の猫の画像を配列で持ち、ランダムに画像が表示されるようにしてみましょう。
+猫の画像を切り替えれるようにするために、src属性に直接指定していた画像URLを`catImageUrl`の状態変数で管理するように変更します。
 
-```tsx twoslash
-const catImages: string[] = [
-  "https://cdn2.thecatapi.com/images/bpc.jpg",
-  "https://cdn2.thecatapi.com/images/eac.jpg",
-  "https://cdn2.thecatapi.com/images/6qi.jpg",
-];
-
-const randomCatImage = (): string => {
-  const index = Math.floor(Math.random() * catImages.length);
-  return catImages[index];
-};
+```tsx twoslash {1,4,6} title="pages/index.tsx"
+import { useState } from "react";
 
 const IndexPage = () => {
-  return <img src={randomCatImage()} />;
+  const [catImageUrl, setCatImageUrl] = useState(
+    "https://cdn2.thecatapi.com/images/bpc.jpg"
+  );
+
+  return <img src={catImageUrl} />;
 };
 
 export default IndexPage;
 ```
 
-ブラウザを何回か再読み込みするとランダムに猫の画像が表示されます。
+## ボタンクリックでランダムに画像を切り替える
 
-![再読み込みで猫の画像をランダムに表示](nextjs/screen3.gif)
+配列で保持した猫画像のURLをランダムに返す`randomCatImage`関数を実装します。
+ボタンを新しく追加して、ボタンがクリックされた時に`setCatImageUrl(randomCatImage())`でランダムな画像URLで`catImageUrl`の状態を更新して猫画像を変更するようにします。
 
-### ボタンクリックでランダムに画像を切り替える
-
-表示する猫の画像を`useState`で`catImage`と言う名前の変数で状態として管理するように変更します。また、`きょうのにゃんこ🐱`というラベルを持つボタンを新しく追加して、クリックされた時に`setCatImage`で状態を更新することで、ランダムに猫の画像を表示します。
-
-```tsx twoslash
+```tsx twoslash {1-12,17-28} title="pages/index.tsx"
 import { useState } from "react";
 
 const catImages: string[] = [
@@ -157,17 +150,19 @@ const randomCatImage = (): string => {
 };
 
 const IndexPage = () => {
-  const [catImage, setCatImage] = useState(randomCatImage());
+  const [catImageUrl, setCatImageUrl] = useState(
+    "https://cdn2.thecatapi.com/images/bpc.jpg"
+  );
 
   const handleClick = () => {
-    setCatImage(randomCatImage());
+    setCatImageUrl(randomCatImage());
   };
 
   return (
     <div>
       <button onClick={handleClick}>きょうのにゃんこ🐱</button>
       <div style={{ marginTop: 8 }}>
-        <img src={randomCatImage()} />
+        <img src={catImageUrl} />
       </div>
     </div>
   );
@@ -176,22 +171,21 @@ const IndexPage = () => {
 export default IndexPage;
 ```
 
-ブラウザでボタンを何回かクリックすることで、猫の画像が更新されます。
+ブラウザでボタンを何回かクリックすることで、猫の画像を更新できます。
 
 ![ボタンクリックで猫の画像をランダムに表示](nextjs/screen4.gif)
 
-### The Cat API について
+## The Cat API について
 
 APIリクエストで猫の画像を取得する前に利用するAPIについて簡単に紹介します。
 
 このチュートリアルでは猫の画像をランダムに表示するにあたり[The Cat API](https://thecatapi.com/)を利用します。
-このAPIは特定の条件で猫の画像を取得したり、品種ごとの猫の情報を取得することができます。🐱
-今回のチュートリアルでは[APIドキュメント](https://docs.thecatapi.com/)のQuickstartに記載されている`/v1/images/search`へリクエストをしてランダムな猫の画像を取得します。
+このAPIは特定の条件で猫の画像を取得したり、品種ごとの猫の情報を取得することができます。
+今回のチュートリアルでは[APIドキュメント](https://docs.thecatapi.com/)のQuickstartに記載されている`/v1/images/search`へリクエストを投げてランダムな猫の画像を取得します。
 
 試しにブラウザで[https://api.thecatapi.com/v1/images/search](https://api.thecatapi.com/v1/images/search)へアクセスしてみてください。
 
-ランダムな結果が返ってくるので値は少し違うと思いますが、次のような構造のデータがレスポンスとして取得できます。
-レスポンスのデータ構造が配列になっている点だけ注意が必要です。
+ランダムな結果が返ってくるので値は少し違うと思いますが、次のような構造のデータがレスポンスとして取得できます。レスポンスのデータ構造が配列になっている点に注意してください。
 
 レスポンスで得られる`url`が猫の画像へアクセスするためのURLです。今回はこの値を取得して猫の画像をランダムに表示します。
 
@@ -213,16 +207,28 @@ APIリクエストで猫の画像を取得する前に利用するAPIについ�
 ]
 ```
 
-### APIリクエストで猫の画像を取得
+## APIリクエストで猫の画像を取得
 
 最初にAPIリクエストで猫の画像を取得する`fetchCatImage`を実装してコンソールで確認してみます。
 
-`fetch`はHTTPリクエストでリソースを取得するブラウザ標準のAPIです。戻り値として[Response](https://developer.mozilla.org/ja/docs/Web/API/Response)オブジェクトを返します。`res.json()`でResponseオブジェクトの`json()`メソッドを実行することで、レスポンスのBodyテキストをJSONオブジェクトに変換するPromiseを取得し`result`にレスポンス結果をオブジェクトとして格納しています。
+`fetch`はHTTPリクエストでリソースを取得するブラウザ標準のAPIです。戻り値として[Response](https://developer.mozilla.org/ja/docs/Web/API/Response)オブジェクトを返します。Responseオブジェクトの`json()`メソッドを実行することで、レスポンスのBodyテキストをJSONオブジェクトに変換するPromiseを取得できます。
 
-```ts twoslash
-// pages/index.tsx
+```tsx twoslash {14-22} title="pages/index.tsx"
+import { useEffect, useState } from "react";
+
+const catImages: string[] = [
+  "https://cdn2.thecatapi.com/images/bpc.jpg",
+  "https://cdn2.thecatapi.com/images/eac.jpg",
+  "https://cdn2.thecatapi.com/images/6qi.jpg",
+];
+
+const randomCatImage = (): string => {
+  const index = Math.floor(Math.random() * catImages.length);
+  return catImages[index];
+};
+
 const fetchCatImage = async () => {
-  const res = await fetch("api.thecatapi.com/v1/images/search");
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
   const result = await res.json();
   return result[0];
 };
@@ -231,21 +237,42 @@ fetchCatImage().then((image) => {
   console.log(`猫の画像: ${image.url}`);
 });
 
-// (省略)
+const IndexPage = () => {
+  const [catImage, setCatImage] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setCatImage(randomCatImage());
+  }, []);
+
+  const handleClick = () => {
+    setCatImage(randomCatImage());
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>きょうのにゃんこ🐱</button>
+      <div style={{ marginTop: 8 }}>
+        <img src={catImage} />
+      </div>
+    </div>
+  );
+};
+
+export default IndexPage;
 ```
 
-ページを読み込んで、ChromeのdevToolsを開きコンソールタブで次のようなテキストが表示されていたら成功です。
-`猫の画像: 猫の画像: https://cdn2.thecatapi.com/images/bhg.jpg`
+ページを読み込んで、ChromeのDevToolsを開きコンソールタブで次のようなテキストが表示されていたら成功です。
+`猫の画像: https://cdn2.thecatapi.com/images/bhg.jpg`
 
 リンクをクリックすることで、猫の画像をブラウザで確認することもできます。
 
-### APIのレスポンスに型付け
+## APIのレスポンスに型付け
 
 今の状態だと `fetchCatImage()` の戻り値が `any` のままなので、呼び出し側で存在しないプロパティを参照しても気づけずにバグが発生する危険性があります。
 
-```ts twoslash
+```ts twoslash title="pages/index.tsx"
 const fetchCatImage = async () => {
-  const res = await fetch("api.thecatapi.com/v1/images/search");
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
   const result = await res.json();
   return result[0];
 };
@@ -256,11 +283,11 @@ fetchCatImage().then((image) => {
 });
 ```
 
-APIレスポンスは変更される可能性が高く特にフロントエンドではバグが混在しやすい箇所です。型を指定することでより安全にAPIレスポンスを扱えるようにしていきます。
+APIレスポンスの取り扱いはフロントエンドでバグが混在しやすい箇所なので、型を指定することで安全にAPIレスポンスを扱えるようにしていきます。
 
 レスポンスに含まれる猫画像の型を`SearchCatImage`として定義し、レスポンスのデータ構造を`SearchCatImageResponse`として定義します。
 
-```ts twoslash
+```ts twoslash title="pages/index.tsx"
 interface CatCategory {
   id: number;
   name: string;
@@ -278,15 +305,13 @@ interface SearchCatImage {
 type SearchCatImageResponse = SearchCatImage[];
 ```
 
-定義した`SearchCatImageResponse`の型でレスポンスの結果を型付けします。`res.json()`は型定義にて`Promise<any>`を返すようになっているので、型アサーションの`as`で型を上書きしています。
+`fetchCatImage`関数の戻り値を`Promise<SearchCatImageResponse>`として型を指定します。
+`res.json()`は型定義にて`Promise<any>`を返すようになっているので、型アサーション(as)を使い`as SearchCatImageResponse`とAPIレスポンスの型を指定しています。
 
-型アサーションはコンパイラーの型推論を上書きするため、誤ってバグを生む危険性があります。利用は最小限にして必要な場合に限り使うようにしましょう。
+これで、APIレスポンスに存在しないプロパティを指定している箇所で型エラーが発生するようになります。
 
-[型アサーション「as」(type assertion)](../reference/values-types-variables/type-assertion-as.md)
-
-```ts twoslash
+```ts twoslash {1-15,17,19,24} title="pages/index.tsx"
 // @errors: 2339
-
 interface CatCategory {
   id: number;
   name: string;
@@ -304,7 +329,7 @@ interface SearchCatImage {
 type SearchCatImageResponse = SearchCatImage[];
 
 const fetchCatImage = async (): Promise<SearchCatImage> => {
-  const res = await fetch("api.thecatapi.com/v1/images/search");
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
   const result = (await res.json()) as SearchCatImageResponse;
   return result[0];
 };
@@ -314,11 +339,25 @@ fetchCatImage().then((image) => {
 });
 ```
 
-### ボタンをクリックして猫画像を更新
+型アサーションはコンパイラーの型推論を上書きするため、誤ってバグを生む危険性があります。利用は最小限にして必要な場合に限り使うようにしましょう。
 
-APIリクエストでランダムな猫画像の取得ができるようになったので、ボタンをクリックした時に`fetchCatImage`でランダムな猫画像を取得して猫画像の状態を更新して色々な猫を表示します。
+[型アサーション「as」(type assertion)](../reference/values-types-variables/type-assertion-as.md)
 
-```tsx twoslash
+:::tip ワンポイント解説: HTTPリクエストとジェネリクス
+
+`axios`などのHTTPクライアントライブラリではレスポンスの型をジェネリクスで指定できるようになっています。ジェネリクスで型指定ができる場合は積極的にジェネリクスを使うようにしましょう。
+
+```ts
+axios.get<SearchCatImageResponse>("https://api.thecatapi.com/v1/images/search");
+```
+
+:::
+
+## ボタンをクリックした時にAPIで猫画像を更新
+
+APIリクエストでランダムな猫画像の取得ができるようになったので、ボタンをクリックした時にAPIリクエストで猫画像を取得して画面を更新します。
+
+```tsx twoslash {1-23,30-33} title="pages/index.tsx"
 import { useState } from "react";
 
 interface CatCategory {
@@ -337,7 +376,7 @@ interface SearchCatImage {
 
 type SearchCatImageResponse = SearchCatImage[];
 
-const fetchCatImage = async () => {
+const fetchCatImage = async (): Promise<SearchCatImage> => {
   const res = await fetch("https://api.thecatapi.com/v1/images/search");
   const result = (await res.json()) as SearchCatImageResponse;
   return result[0];
@@ -370,33 +409,52 @@ APIリクエストを経由して猫の画像をランダムに表示できる�
 
 ![ボタンクリック時にAPIリクエストで猫の画像をランダムに表示](nextjs/screen5.gif)
 
-ページを読み込む時は固定の画像を表示している状態なので、最後に、最初の画像もランダムに画像を表示するようにしましょう。
-
-### Next.jsのデータフェッチAPI
+## Next.jsのデータフェッチAPI
 
 実装に入る前にNext.jsのデータフェッチAPIについて簡単に紹介します。
 
 Next.jsではページコンポーネントでデータをフェッチする方法として、`getInitialProps`, `getServerSideProps`,`getStaticProps`の3つがあります。
 
-`getInitialProps`はSSR（サーバーサイドレンダリング）時にサーバー側でデータ取得の処理が実行され、クライアントサイドでルーティングが発生した場合はクライアント側でデータの取得が実行されます。このAPIはNext.jsが自動判断して可能な場合は静的ページとして出力する`Automatic Static Optimization` と呼ばれる機能を無効にするため、パフォーマンスの恩恵を受けられないことがあります。そのため、可能な次で紹介する2つのデータフェッチ手法を使うことが推奨されています。
+`getInitialProps`はSSR（サーバーサイドレンダリング）時にサーバー側でデータ取得の処理が実行され、クライアントサイドでルーティングが発生した場合はクライアント側でデータの取得が実行されます。このAPIはサーバーとクライアントの両方で実行されるため、ユニバーサルな実装を意識する必要もあり実装難易度が上昇します。
+公式ドキュメントでもこのAPIよりも次で紹介する2つのデータフェッチ手法を使うことが推奨されています。
 
-`getServerSideProps`はSSR時に`getInitialProps`と同様にサーバー側でデータの取得が実行されます。大きな違いはクライアントサイドでルーティングが発生した場合もデータの取得がサーバー側で実行される点です。サーバー側のみで実行されることが保証されるため、`getServerSideProps`内でのみ利用しているモジュールはクライアントのコードにバンドルされず配信するファイルサイズを削減することができます。また、ユニバーサルな実装を意識する必要も無いので考慮すべき点が減り、データベースから直接データを取得するような処理を記述することも可能です。
+`getServerSideProps`はSSRでは`getInitialProps`と同様にサーバー側でデータの取得が実行されます。大きな違いはクライアントサイドでルーティングが発生した場合もデータの取得がサーバー側で実行される点です。サーバー側のみで実行されることが保証されるため、`getServerSideProps`内でのみ利用しているモジュールはクライアントのコードにバンドルされず配信するファイルサイズを削減することができます。また、ユニバーサルな実装を意識する必要も無いので考慮すべき点が減り、データベースから直接データを取得するような処理を記述することも可能です。
 
-`getStaticProps`は静的ビルド実行時のみデータ取得が実行されます。これは他の2つと異なりページを描画する時にはデータ取得が実行されないことに注意が必要です。ユーザーログインが不要なLPなどの静的なページを構築する時に利用します。
+`getStaticProps`はビルド実行時にのみデータ取得が実行されます。これは他の2つと異なりページを描画する時にはデータ取得が実行されないことに注意が必要です。ユーザーログインが不要なLPやブログなどの静的なページを構築する時に利用します。
 
-### getServerSidePropsで初期画像もランダムに表示
+## getServerSidePropsで初期画像もランダムに表示
 
-最初に`IndexPage`コンポーネントで猫画像のURLを`initialCatImageUrl`としてpropsで受け取るように変更します。
+これまでページを描画する時は固定の猫画像を表示していました。ページを描画するタイミングでもランダムな猫画像を表示するようにします。
 
-```ts twoslash
-import { FC } from "react";
-declare module "next" {
-  type NextPage<P = {}> = FC<P>;
-}
-// @filename: index.tsx
-// ---cut---
+最初に`IndexPage`コンポーネントで猫画像のURLを`initialCatImageUrl`プロパティとしてpropsで受け取るようにします。コンポーネントのpropsの型を`IndexPageProps`として定義して、`IndexPage: NextPage<IndexPageProps>`で受け取るpropsの型を指定します。
+
+この時点では、`initialCatImageUrl`はundefinedとなるので、一時的に猫画像が表示されない状態になっています。
+
+```tsx twoslash {2,26-28,30-31} title="pages/index.tsx"
 import { useState } from "react";
 import type { NextPage } from "next";
+
+interface CatCategory {
+  id: number;
+  name: string;
+}
+
+interface SearchCatImage {
+  breeds: string[];
+  categories: CatCategory[];
+  id: string;
+  url: string;
+  width: number;
+  height: number;
+}
+
+type SearchCatImageResponse = SearchCatImage[];
+
+const fetchCatImage = async () => {
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
+  const result = (await res.json()) as SearchCatImageResponse;
+  return result[0];
+};
 
 interface IndexPageProps {
   initialCatImageUrl: string;
@@ -405,17 +463,78 @@ interface IndexPageProps {
 const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
   const [catImageUrl, setCatImageUrl] = useState(initialCatImageUrl);
 
-  // （省略）
+  const handleClick = async () => {
+    const image = await fetchCatImage();
+    setCatImageUrl(image.url);
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>きょうのにゃんこ🐱</button>
+      <div style={{ marginTop: 8 }}>
+        <img src={catImageUrl} width={500} height="auto" />
+      </div>
+    </div>
+  );
 };
+
+export default IndexPage;
 ```
 
-続いて`getServerSideProps`で猫画像を取得して、`IndexPage`コンポーネントにpropsとして渡します。
+続いて`getServerSideProps`で猫画像を取得して、`IndexPage`にpropsとして渡します。
 
-```tsx twoslash
+ここで、戻り値の`initialCatImageUrl`を`initialCatImageUr`とタイポした形に変更してみてください。`GetServerSideProps<IndexPageProps>`と型指定を書いているおかげで、型エラーが発生するため型安全にデータの受け渡しができていることが確認できます。
+
+```tsx twoslash {2,52-61} title="pages/index.tsx"
+import { useState } from "react";
+import type { NextPage, GetServerSideProps } from "next";
+
+interface IndexPageProps {
+  initialCatImageUrl: string;
+}
+
+interface CatCategory {
+  id: number;
+  name: string;
+}
+
+interface SearchCatImage {
+  breeds: string[];
+  categories: CatCategory[];
+  id: string;
+  url: string;
+  width: number;
+  height: number;
+}
+
+type SearchCatImageResponse = SearchCatImage[];
+
+const fetchCatImage = async () => {
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
+  const result = (await res.json()) as SearchCatImageResponse;
+  return result[0];
+};
+
+interface IndexPageProps {
+  initialCatImageUrl: string;
+}
+
 const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
   const [catImageUrl, setCatImageUrl] = useState(initialCatImageUrl);
 
-  // （省略）
+  const handleClick = async () => {
+    const image = await fetchCatImage();
+    setCatImageUrl(image.url);
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>きょうのにゃんこ🐱</button>
+      <div style={{ marginTop: 8 }}>
+        <img src={catImageUrl} width={500} height="auto" />
+      </div>
+    </div>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps<
@@ -432,117 +551,26 @@ export const getServerSideProps: GetServerSideProps<
 export default IndexPage;
 ```
 
-TypeScriptで型を書いているおかげで、ここでのpropsの受け渡しを型安全に行うことができます。
-試しに、`getServerSideProps`の戻り値のオブジェクトのキー名をわざとタイポしてみると、型エラーになります。
+これで、ページを更新するタイミングでもランダムに猫画像が表示されるようになりました。🎉
 
-```tsx twoslash
-const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
-  const [catImageUrl, setCatImageUrl] = useState(initialCatImageUrl);
+![チュートリアルの完成](nextjs/screen6.gif)
 
-  // （省略）
-};
+## プロダクションビルドと実行
 
-export const getServerSideProps: GetServerSideProps<
-  IndexPageProps
-> = async () => {
-  const catImage = await fetchCatImage();
-  return {
-    props: {
-      initalCatImageUrl: catImage.url,
-    },
-  };
-};
+Next.jsでは`next build`を実行することで最適化されたプロダクション用のコードを生成でき、`next start`で生成されたプロダクションコードを実行できます。
+このチュートリアルではボイラテンプレートを利用しているので、package.jsonにbuildコマンドとstartコマンドがすでに用意されています。
 
-export default IndexPage;
+`yarn build`と`yarn start`でプロダクションビルドを本番用のアプリケーションを実行してみましょう。
+
+```sh
+yarn build
+yarn start
 ```
 
-`IndexPageProps`が型として共通化されているので、型チェックによるタイポに気づくことができます。
-型を定義することを省略して、インラインで型を定義すると型エラーにならない可能性が発生するので、型は可能な限り共通で定義して使うようにしましょう。
+アプリケーション起動後に[http://localhost:3000](http://localhost:3000)へブラウザでアクセスをすることで、本番用のアプリケーションの実行を確認できます。
 
-```tsx twoslash
-const IndexPage: NextPage<{ initialCatImageUrl: string }> = ({
-  initialCatImageUrl,
-}) => {
-  const [catImageUrl, setCatImageUrl] = useState(initialCatImageUrl);
+## Vercelへのデプロイ
 
-  // （省略）
-};
+最後に完成した猫画像ジェネレーターを[Vercel](https://vercel.com/)で外部に公開してみましょう。
 
-export const getServerSideProps: GetServerSideProps<{
-  initalCatImageUrl: string;
-}> = async () => {
-  const catImage = await fetchCatImage();
-  return {
-    props: {
-      initalCatImageUrl: catImage.url, // インラインの型定義がタイポしているので、型エラーにならない
-    },
-  };
-};
-
-export default IndexPage;
-```
-
-## おまけ
-
-### より安全に型アサーションを利用する
-
-レスポンスの型がタイポしていたら、型チェックが通っても実行時にエラーになる。
-
-```typescript
-interface SearchCatImage {
-  breeds: string[];
-  id: string;
-  url: string;
-  width: number;
-  hight: number; // eが抜けてタイポをしている
-}
-
-type SearchCatImagesResponse = SearchCatImage[];
-
-const fetchCatImage = async () => {
-  const res = await fetch("api.thecatapi.com/v1/images/search");
-  const result = (await res.json()) as SearchCatImageResponseBody;
-  return result[0];
-};
-
-fetchCatImage().then((image) => {
-  console.log(image.hight); // 型としては正しいので型チェックは通過するが、実行時にundefinedとなる
-});
-```
-
-TypeScriptはJavaScriptにコンパイルされて実行されため、実行時には型情報が失われている。
-
-型アサーションは型チェックのタイミングでしか誤りに気付けないので、型定義のプロパティ名を間違えている状態で、プロパティを参照していても型チェックは通過する。
-
-実行時にプロパティ名が間違っているので、参照エラーとなる点に注意が必要
-
-厳密に型ガードを駆使して実装する場合はこんな感じで書く
-この方法を書いてで業務で積極的にこっちのやり方を使うと型ガードだらけになって良くないので書かない方がいいかも
-
-```typescript
-const isSearchCatImage = (image: any): image is SearchCatImage => {
-  // プロパティのnullチェックだと値としてnullを返す場合に対応ができない
-  // hasOwnPropertyやinキーワードでチェックした方が良い
-  return (
-    image.breeds != null &&
-    image.id != null &&
-    image.url != null &&
-    image.width != null &&
-    image.height != null
-  );
-};
-
-const fetchCatImage = async () => {
-  const res = await fetch("https://api.thecatapi.com/v1/images/search");
-  const result = await res.json();
-  if (
-    !Array.isArray(result) ||
-    result.length === 0 ||
-    !isSearchCatImage(result[0])
-  ) {
-    throw new Error("レスポンスのデータ構造が正しくありません");
-  }
-
-  return result[0] as SearchCatImage;
-};
-```
+以上でNext.jsで作る猫画像ジェネレーターの完成です。😸
