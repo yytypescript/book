@@ -19,6 +19,20 @@ typeof { a: 1, b: 2 }; //=> "object"
 typeof (() => {}); //=> "function"
 ```
 
+## TypeScriptで`typeof`を使うとifやswicthでその型として使うことができる
+
+TypeScriptでは`typeof`演算子をifやswitchと併せてつかうと、条件と合致したときにその変数をその型として扱えるようになります。次の例は`unknown`型とされた変数`n`が`typeof`演算子によって`string`型であると判別された例です。
+
+```ts twoslash
+// @noErrors
+const n: unknown = "";
+
+if (typeof n === "string") {
+  n.toU;
+  //   ^|
+}
+```
+
 ## `null`を判別する
 
 `typeof`演算子で特筆すべきなのは、値が`null`の場合です。`typeof null`の演算結果は`"null"`ではなく`"object"`です。誤解が起きやすい部分なので注意しましょう。特に値がオブジェクトかどうかを判定したいときは、`typeof null`が`"object"`になることを意識して書かないと思いがけない不具合になることがあります。
