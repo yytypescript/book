@@ -50,6 +50,7 @@ module.exports = {
         "tutorials/make-a-simple-function-via-cli",
         "tutorials/react-like-button-tutorial",
         "tutorials/nextjs",
+        "tutorials/vercel-deploy",
         "tutorials/jest",
         "tutorials/prettier",
         "tutorials/eslint",
