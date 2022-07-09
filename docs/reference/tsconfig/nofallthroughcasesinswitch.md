@@ -11,7 +11,7 @@ description: switch文のfallthroughを禁止する
 
 ## 解説
 
-`fallthrough`とは`switch`でにおける`case`文で`break`または`return`を行わないことを意味します。`case`文が空でない場合に限り`break`や`return`が行われているかを厳密に評価します。
+`fallthrough`とは`switch`における`case`文で`break`または`return`を行わないことを意味します。`case`文が空でない場合に限り`break`や`return`が行われているかを厳密に評価します。
 
 ```ts twoslash
 function daysOfMonth(month: number): number {
