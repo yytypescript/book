@@ -227,6 +227,17 @@ yarn add -D eslint@^8
 Next.jsは最初からESLintが導入されています。実務でNext.jsプロジェクトでESLintを使う場合は、導入ステップは省略できます。
 :::
 
+:::tip zsh環境でエラーが出たら
+zshやその他の環境の設定によっては、`^`などの記号が特別な意味を持つために期待する動作をせずに次のようなエラーになる場合があります。
+
+```shell
+% yarn add -D eslint@^8
+zsh: no matches found: eslint@^8
+```
+
+その場合は`yarn add -D 'eslint@^8'`のようにクォートで囲ってください。
+:::
+
 ESLintが正しくインストールされたか、バージョンを表示して確認してください。
 
 ```shell
