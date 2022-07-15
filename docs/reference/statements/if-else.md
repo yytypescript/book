@@ -29,7 +29,7 @@ JavaScriptのif-elseは文です。式ではないので、条件分岐を直接
 const result = if (value === 0) "OK" else "NG";
 ```
 
-式で条件分岐使いたい場合は三項演算子(ternary operator)を用います。
+式で条件分岐を使いたい場合は三項演算子(ternary operator)を用います。
 
 ```js twoslash
 const result = value === 0 ? "OK" : "NG";
