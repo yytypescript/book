@@ -63,11 +63,11 @@ const element = document.getElementById("main");
 //    ^?
 ```
 
-この設定の効果は、ユーザーが定義した関数にも及びます。たとえば、関数の戻り値を`string | undefined`と型注釈したとしても、`strictNullChecks`が`false`の場合は`string`型になります。
+この設定の効果は、ユーザー定義の型ガード関数にも及びます。たとえば、関数の戻り値を`string | undefined`と型注釈したとしても、`strictNullChecks`が`false`の場合は`string`型になります。
 
 ```ts twoslash title="strictNullChecksがfalseの場合"
 // @strictNullChecks: false
-// ユーザーが定義した関数
+// ユーザー定義の型ガード関数
 function getStringOrUndefined(): string | undefined {
   return undefined;
 }
