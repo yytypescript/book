@@ -92,7 +92,7 @@ const increment = (num: number): number => num + 1;
 //                             ^^^^^^^^戻り値の型注釈
 ```
 
-簡潔文体では、**引数と戻り値のどちらも型注釈を書けません。**
+引数のカッコを省略した場合は、**引数と戻り値のどちらも型注釈を書けません。**
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -100,7 +100,7 @@ const increment = (num: number): number => num + 1;
 const increment = num => num + 1;
 ```
 
-暗黙のanyを禁ずるコンパイラオプション`noImplicitAny`が有効の場合、簡潔文体でアロー関数を定義するとコンパイルエラーになる場合があります。
+暗黙のanyを禁ずるコンパイラオプション`noImplicitAny`が有効の場合、引数カッコを省略したアロー関数がコンパイルエラーになる場合があります。
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -110,7 +110,7 @@ const increment = num => num + 1;
 
 [noImplicitAny](../tsconfig/noimplicitany.md)
 
-`noImplicitAny`が有効でも、引数の型が推論できる場合は、簡潔文体が使えます。たとえば、他の関数の引数にアロー関数を直接書く場合です。次の`map`関数は第1引数に関数を取ります。第1引数の型情報、引数の型がついているので、渡されるアロー関数の型注釈は省略できます。
+`noImplicitAny`が有効でも、引数の型が推論できる場合は、引数カッコが省略できます。たとえば、他の関数の引数にアロー関数を直接書く場合です。次の`map`関数は第1引数に関数を取ります。第1引数の型情報、引数の型がついているので、渡されるアロー関数の型注釈は省略できます。
 
 ```ts twoslash
 [1, 2, 3].map((num) => num + 1); // 型注釈が省略可
@@ -121,7 +121,7 @@ const increment = num => num + 1;
 ・JavaScriptのアロー関数は()=>{}のように短く書ける
 ・引数が1つの場合、()は省略できる
 ・処理が1行の場合、{}は省略できる(簡潔文体)
-・TypeScriptでは簡潔文体に型注釈が書けない
+・TypeScriptでは引数カッコ省略時に型注釈が書けない
 
 </TweetILearned>
 
