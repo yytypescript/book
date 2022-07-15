@@ -7,11 +7,10 @@ sidebar_label: 例外処理
 JavaScriptにはJavaに似た例外処理の構文があります。例外には`Error`オブジェクトを使い、throw構文で例外を投げます。try-catch構文で例外を捕捉できます。
 
 ```js twoslash
-// prettier-ignore
 try {
   throw new Error("something wrong");
 } catch (e) {
-// something wrong
+  // something wrong
   console.log(e.message);
 }
 ```
