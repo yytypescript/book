@@ -4,9 +4,11 @@ sidebar_label: アサーション関数
 
 # アサーション関数 (assertion functions)
 
-やりたいことはほぼType predicateと同じです。Type predicateは`boolean`型の戻り値に対して使いましたがこちらは例外を投げるかどうかで判定します。上記関数`isDuck()`をAssertion functionsで書きかえると次のようになります。
+ユーザー定義の型ガード関数として使われるのはType predicateが主ですが、Assertion functionという方法もあります。
+Type predicateは`boolean`型の戻り値に対して使いましたがこちらは関数が例外を投げるかどうかで判定します。型ガード関数のページで作った関数`isDuck()`をAssertion functionsで書きかえると次のようになります。
 
 ```ts twoslash
+// @errors: 2339
 class Animal {}
 class Duck {
   public quacks(): void {}
@@ -26,7 +28,8 @@ function isDuck(animal: Animal): asserts animal is Duck {
   throw new Error("YOU ARE A FROG!!!");
 }
 
-// ...
+// ここではquacks()は存在しない
+animal.quacks();
 
 isDuck(animal);
 
