@@ -138,7 +138,7 @@ function attack(player: Wizard | SwordMan) {
 }
 ```
 
-### ユーザー定義の型ガード関数 (User-Defined Type Guards)
+### ユーザー定義の型ガード関数
 
 型ガードはインラインで記述する以外にも関数として定義することもできます。
 
