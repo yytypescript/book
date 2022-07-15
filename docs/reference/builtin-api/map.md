@@ -155,6 +155,14 @@ console.log(map.get("b"));
 // @log: undefined
 ```
 
+Null合体演算子と組み合わせることによって`get`メソッドで値を取得できなかったときにデフォルトの値を代入することができます。
+
+```ts twoslash
+const map = new Map([["a", 1]]);
+console.log(map.get("b") ?? 2);
+// @log: 2
+```
+
 ### 特定の要素を削除する - `delete`
 
 `Map`からキーを指定して要素を削除するには`delete`メソッドを使います。
