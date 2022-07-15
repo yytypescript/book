@@ -133,7 +133,7 @@ TypeScriptの発表後、JavaScriptも再び進歩を始め、6年ぶりのメ�
 - [ActionScript - Wikipedia](https://en.wikipedia.org/wiki/ActionScript)
 - [JavaScript - Wikipedia](https://ja.wikipedia.org/wiki/JavaScript)
 - [ECMAScript - Wikipedia](https://en.wikipedia.org/wiki/ECMAScript)
-- [A Brief History of JavaScrip](https://auth0.com/blog/a-brief-history-of-javascript/)
+- [A Brief History of JavaScript](https://auth0.com/blog/a-brief-history-of-javascript/)
 - [The ECMAScript 6 schedule change](https://2ality.com/2014/06/es6-schedule.html#fn2)
 - [見えてきた「ECMAScript 6」。JavaScriptの生みの親が書く「Harmony of Dreams Come True」 － Publickey](https://www.publickey1.jp/blog/12/javascriptecmascript_6harmony_of_dreams_come_true.html)
 - [JavaScript: The First 20 Years | Zenod](https://zenodo.org/record/3707008#.XrVIhBMzZTY)
