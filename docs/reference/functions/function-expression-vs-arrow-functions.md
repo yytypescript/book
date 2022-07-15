@@ -455,7 +455,7 @@ console.log(taroYamada.fullName2());
 // @log: undefined undefined
 ```
 
-アロー関数を用いた`fullName2`deは`this`がオブジェクトを指さないため、期待どおりの動作になりません。もし、アロー関数を使う場合は、`this`ではなく`taroYamada.firstName`のようにオブジェクトの変数名を参照する必要があります。
+アロー関数を用いた`fullName2`は`this`がオブジェクトを指さないため、期待どおりの動作になりません。もし、アロー関数を使う場合は、`this`ではなく`taroYamada.firstName`のようにオブジェクトの変数名を参照する必要があります。
 
 ```js twoslash
 const taroYamada = {
