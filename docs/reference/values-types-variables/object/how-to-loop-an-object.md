@@ -115,8 +115,8 @@ for-in文と異なり、`hasOwnProperty`のチェックが不要です。
 ```ts twoslash
 // @target: es2017
 const foo = { a: 1, b: 2, c: 3 };
-for (const key of Object.values(foo)) {
-  console.log(key);
+for (const value of Object.values(foo)) {
+  console.log(value);
   // 1
   // 2
   // 3 の順で出力される
