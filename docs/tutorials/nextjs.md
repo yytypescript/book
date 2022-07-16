@@ -149,7 +149,7 @@ const IndexPage = () => {
 
   return (
     <div>
-      <button onClick={handleClick}>きょうのにゃんこ🐱</button>
+      <button onClick={handleClick()}>きょうのにゃんこ🐱</button>
       <div style={{ marginTop: 8 }}>
         <img src={catImageUrl} />
       </div>
@@ -239,7 +239,7 @@ const IndexPage = () => {
 
   return (
     <div>
-      <button onClick={handleClick}>きょうのにゃんこ🐱</button>
+      <button onClick={handleClick()}>きょうのにゃんこ🐱</button>
       <div style={{ marginTop: 8 }}>
         <img src={catImage} />
       </div>
@@ -383,7 +383,7 @@ const IndexPage = () => {
 
   return (
     <div>
-      <button onClick={handleClick}>きょうのにゃんこ🐱</button>
+      <button onClick={handleClick()}>きょうのにゃんこ🐱</button>
       <div style={{ marginTop: 8 }}>
         <img src={catImageUrl} width={500} height="auto" />
       </div>
@@ -465,7 +465,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
 
   return (
     <div>
-      <button onClick={handleClick}>きょうのにゃんこ🐱</button>
+      <button onClick={handleClick()}>きょうのにゃんこ🐱</button>
       <div style={{ marginTop: 8 }}>
         <img src={catImageUrl} width={500} height="auto" />
       </div>
@@ -522,7 +522,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
 
   return (
     <div>
-      <button onClick={handleClick}>きょうのにゃんこ🐱</button>
+      <button onClick={handleClick()}>きょうのにゃんこ🐱</button>
       <div style={{ marginTop: 8 }}>
         <img src={catImageUrl} width={500} height="auto" />
       </div>
