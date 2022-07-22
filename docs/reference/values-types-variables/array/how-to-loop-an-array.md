@@ -87,6 +87,24 @@ console.log(arr2);
 // @log: [ 'aa', 'bb', 'cc' ]
 ```
 
+## for-in文は使わない
+
+for-in文で配列をループすることもできます。しかし、for-in文は配列をループするのには使わないほうがよいです。配列は順番が重要なことが多いですが、for-in文は順番どおりになる保証がないためです。
+
+また、配列オブジェクトに追加のプロパティがある場合、for-in文はそれも反復処理に含めます。これが予期しない不具合につながる危険性もあります。
+
+```js twoslash
+const arr = ["a", "b", "c"];
+arr.foo = "bar"; // 追加のプロパティ
+for (const x in arr) {
+  console.log(x, arr[x]);
+  // 0 a
+  // 1 b
+  // 2 c
+  // foo bar が順に出力される
+}
+```
+
 <TweetILearned>
 
 ・TypeScript/JavaScriptで配列をループするには主に3つの方法がある。
