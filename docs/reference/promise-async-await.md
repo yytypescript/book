@@ -176,10 +176,11 @@ async function requestAsync(): Promise<number> {
 この例では非`Promise`である定数を返していますが`async`関数はその戻り値を`Promise`で包んでいます。
 
 ```ts twoslash
-declare function requestAsync(): Promise<number>;
+async function requestAsync(): Promise<number> {
+  return 1;
+}
 
-// ---cut---
-// これと同じ
+// requestAsyncはこれと同じ
 function request(): Promise<number> {
   return new Promise((resolve) => {
     resolve(1);
