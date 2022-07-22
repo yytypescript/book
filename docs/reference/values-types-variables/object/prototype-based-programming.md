@@ -193,8 +193,7 @@ JavaScriptの開発には次のような要件がありました。ブラウザ�
 
 クラスベースの言語を作るのは、プロトタイプベースの言語を作るより難しいと言われています。JavaScriptを作るのに与えられた時間は非常に少ないものでしたから、工数削減にもプロトタイプベースは一役買ったことでしょう。
 
-Javaに似せよと言われて作られたJavaScript。Javaはクラスベースですが、JavaScriptはプロトタイプベースです。では、JavaScriptは泣く泣くクラスベースを諦めたのでしょうか。実はそうではありませ
-ん。JavaScriptの作者であるBrendan Eich氏は[後のインタビュー](https://learning.oreilly.com/library/view/coders-at-work/9781430219484/Chapter04.html)で次のように語っています。
+Javaに似せよと言われて作られたJavaScript。Javaはクラスベースですが、JavaScriptはプロトタイプベースです。では、JavaScriptは泣く泣くクラスベースを諦めたのでしょうか。実はそうではありません。JavaScriptの作者であるBrendan Eich氏は[後のインタビュー](https://learning.oreilly.com/library/view/coders-at-work/9781430219484/Chapter04.html)で次のように語っています。
 
 > **Seibel**: So you wanted to be like Java, but not too much.
 > (Javaのようにしたいけれど、大掛かりはしたくなかったわけですね。)
