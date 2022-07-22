@@ -11,8 +11,8 @@ JavaやPHPなど、他の言語にもinterface構文がある言語がありま�
 他の言語のinterface構文は、同じ名前のインターフェースを宣言するとエラーになるものが多いです。たとえば、PHPで`Foo`インターフェースを2つ宣言すると、重複エラーになります。
 
 ```php title="PHP"
-interface Foo {};
-interface Foo {};
+interface Foo {}
+interface Foo {}
 // Fatal error:  Cannot declare interface Foo, because the name is already in use in...
 ```
 
