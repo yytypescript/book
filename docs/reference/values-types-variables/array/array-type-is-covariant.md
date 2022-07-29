@@ -11,8 +11,12 @@ TypeScriptの配列の型は共変(covariant)です。ここでは配列の共�
 型の世界の話で、共変とはその型自身、もしくは、その部分型(subtype)が代入できることを言います。たとえば、Animal型とDog型の2つの型があるとします。DogはAnimalの部分型とします。共変であれば、Animal型の変数にはAnimal自身とその部分型のDogが代入できます。
 
 ```ts twoslash
-type Animal = { isAnimal: boolean };
-type Dog = { isAnimal: boolean; isDog: boolean };
+interface Animal {
+  isAnimal: boolean;
+}
+interface Dog extends Animal {
+  isDog: boolean;
+}
 
 let pochi: Dog = { isAnimal: true, isDog: true };
 let animal: Animal = pochi; // 代入OK
@@ -21,8 +25,12 @@ let animal: Animal = pochi; // 代入OK
 一方で共変では、Dog型の変数には、DogのスーパータイプであるAnimalは代入できません。
 
 ```ts twoslash
-type Animal = { isAnimal: boolean };
-type Dog = { isAnimal: boolean; isDog: boolean };
+interface Animal {
+  isAnimal: boolean;
+}
+interface Dog extends Animal {
+  isDog: boolean;
+}
 // ---cut---
 // @errors: 2741
 let animal: Animal = { isAnimal: true };
@@ -34,8 +42,12 @@ let pochi: Dog = animal;
 TypeScriptの配列型は共変になっています。たとえば、`Animal[]`型の配列に`Dog[]`を代入できます。
 
 ```ts twoslash
-type Animal = { isAnimal: boolean };
-type Dog = { isAnimal: boolean; isDog: boolean };
+interface Animal {
+  isAnimal: boolean;
+}
+interface Dog extends Animal {
+  isDog: boolean;
+}
 
 let pochi: Dog = { isAnimal: true, isDog: true };
 let animal: Animal = pochi; // 代入OK
@@ -47,11 +59,12 @@ const animals: Animal[] = dogs; // 代入OK
 一見するとこの性質は問題なさそうです。ところが、次の例のように`animals[0]`をAnimal型の値に置き換えると問題が起こります。
 
 ```ts twoslash
-type Animal = { isAnimal: boolean };
-type Dog = {
+interface Animal {
   isAnimal: boolean;
+}
+interface Dog extends Animal {
   wanwan(): string; // メソッド
-};
+}
 
 const pochi = {
   isAnimal: true,
