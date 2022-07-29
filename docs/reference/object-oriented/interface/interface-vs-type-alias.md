@@ -147,7 +147,38 @@ type Dog = {
 
 ### 同名のものを宣言
 
-TODO: 書く
+型エイリアスは同名のものを複数定義できず、コンパイルエラーになります。
+
+```ts twoslash
+// @errors: 2300
+type SameNameTypeWillError = {
+  message: string;
+};
+type SameNameTypeWillError = {
+  detail: string;
+};
+```
+
+一方、インターフェースの場合は、同名のインターフェースを定義でき、同名の定義をすべて合成したインターフェースになります。
+ただし、同名のフィールドだが、型の定義が違っている場合はコンパイルエラーになります。
+
+```ts twoslash
+// @errors: 2717
+interface SameNameInterfaceIsAllowed {
+  myField: string;
+  sameNameSameTypeIsAllowed: number;
+  sameNameDifferentTypeIsNotAllowed: string;
+}
+
+interface SameNameInterfaceIsAllowed {
+  newField: string;
+  sameNameSameTypeIsAllowed: number;
+}
+
+interface SameNameInterfaceIsAllowed {
+  sameNameDifferentTypeIsNotAllowed: number;
+}
+```
 
 ### Mapped Type
 
