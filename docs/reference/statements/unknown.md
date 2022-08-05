@@ -196,7 +196,7 @@ function isEmail(value: unknown): value is Email {
 }
 ```
 
-このときの`Record<keyof Email, unknown>`型は次のように、`Email`のプロパティがすべて`unknown`になった型なります。
+このときの`Record<keyof Email, unknown>`型は次のように、`Email`のプロパティがすべて`unknown`になった型となります。
 
 ```ts twoslash
 type Email = {
