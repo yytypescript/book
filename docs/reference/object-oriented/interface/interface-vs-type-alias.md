@@ -182,7 +182,30 @@ interface SameNameInterfaceIsAllowed {
 
 ### Mapped Type
 
-TODO: 書く
+Mapped Typeについては別のページで詳しく説明しますので、ここでは型エイリアスとインターフェースのどちらで使えるかだけを説明します。
+
+[Mapped type](../../type-reuse/mapped-types.md)
+
+Mapped Typeは型のキーを動的に指定することができる仕組みであり、型エイリアスでのみ利用することができます。
+次の例ではユニオン型の一覧をキーとした新しい型を生成しています。
+
+```typescript twoslash
+type SystemSupportLanguage = "en" | "fr" | "it" | "es";
+type Butterfly = {
+  [key in SystemSupportLanguage]: string;
+};
+```
+
+インターフェースでMapped Typeを使うとエラーになります。
+
+```typescript twoslash
+// @errors: 7061
+type SystemSupportLanguage = "en" | "fr" | "it" | "es";
+
+interface Butterflly {
+  [key in SystemSupportLanguage]: string;
+}
+```
 
 ## インターフェースと型エイリアスの使い分け
 
