@@ -1094,10 +1094,10 @@ const syntaxKindTopicDetails: {
     ],
   },
   [SyntaxKind.MappedType]: {
-    name: "mapped type",
+    name: "Mapped Types",
     links: [
       page(
-        "Mapped type",
+        "Mapped Types",
         "https://typescriptbook.jp/reference/type-reuse/mapped-types"
       ),
     ],
