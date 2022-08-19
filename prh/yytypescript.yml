@@ -31,3 +31,5 @@ rules:
     patterns: /[pP]olyfill/
   - expected: 巻き上げ
     patterns: 巻上げ
+  - expected: 再帰呼び出し
+    patterns: 再起呼び出し

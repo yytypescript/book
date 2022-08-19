@@ -142,7 +142,7 @@ const factorial = function fact(n) {
 };
 ```
 
-上の例は、次のように変数名を使った再起呼び出しに書き換えることもできます。
+上の例は、次のように変数名を使った再帰呼び出しに書き換えることもできます。
 
 ```js {6} twoslash
 //                        ↓関数名を省略
@@ -150,7 +150,7 @@ const factorial = function (n) {
   if (n <= 1) {
     return 1;
   }
-  return n * factorial(n - 1); // 変数名を使った再起呼び出し
+  return n * factorial(n - 1); // 変数名を使った再帰呼び出し
 };
 ```
 
