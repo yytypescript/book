@@ -26,7 +26,7 @@ const 変数名 = (引数) => {
 
 たとえば、次の[関数式](./function-expression.md)をアロー関数に書き直すと
 
-```js twoslash title="関数式で定義したhello関数"
+```js twoslash title="関数式で定義したincrement関数"
 const increment = function (n) {
   return n + 1;
 };
@@ -34,7 +34,7 @@ const increment = function (n) {
 
 次のようになります。
 
-```js twoslash title="アロー関数で定義したhello関数"
+```js twoslash title="アロー関数で定義したincrement関数"
 const increment = (n) => {
   return n + 1;
 };

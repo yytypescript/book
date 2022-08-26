@@ -34,8 +34,8 @@
   - 列挙型
 - Polyfill
   - ポリフィル
-- Mapped type
-  - mapped type
+- Mapped Types
+  - Mapped Types
   - Deep Diveでは「マップ型」と訳している箇所もあるが、`Map<T, U>`との曖昧さが出てしまう恐れがあるので和訳はしない。
 
 <!--textlint-enable prh-->

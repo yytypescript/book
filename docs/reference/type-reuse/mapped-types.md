@@ -1,12 +1,12 @@
 ---
-sidebar_label: Mapped type
+sidebar_label: Mapped Types
 ---
 
-# Mapped type
+# Mapped Types
 
-インデックス型では設定時はどのようなキーも自由に設定できてしまい、アクセス時は毎回`undefined`かどうかの型チェックが必要です。入力の形式が決まっているのであればMapped typeの使用を検討できます。
+インデックス型では設定時はどのようなキーも自由に設定できてしまい、アクセス時は毎回`undefined`かどうかの型チェックが必要です。入力の形式が決まっているのであればMapped Typesの使用を検討できます。
 
-Mapped typeは主にユニオン型と組み合わせて使います。先ほどシステムがサポートする言語を定義しました。
+Mapped Typesは主にユニオン型と組み合わせて使います。先ほどシステムがサポートする言語を定義しました。
 
 ```ts twoslash
 type SystemSupportLanguage = "en" | "fr" | "it" | "es";
@@ -59,7 +59,7 @@ type Readonly<T> = {
 
 ## インデックス型と異なるところ
 
-Mapped typeはインデックス型と異なり`symbol`型もキーにすることができます。
+Mapped Typesはインデックス型と異なり`symbol`型もキーにすることができます。
 
 ```ts twoslash
 type Identifier = symbol | 1;
@@ -73,9 +73,9 @@ const sample: Sample = {
 };
 ```
 
-## Mapped typeには追加のプロパティが書けない
+## Mapped Typesには追加のプロパティが書けない
 
-Mapped typeは追加のプロパティが定義できません。ここは、[インデックス型]とは異なる点です。
+Mapped Typesは追加のプロパティが定義できません。ここは、[インデックス型]とは異なる点です。
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -86,7 +86,7 @@ type KeyValuesAndName = {
 };
 ```
 
-追加のプロパティがある場合は、その部分をオブジェクト型として定義し、Mapped typeと[インターセクション型]を成す必要があります。
+追加のプロパティがある場合は、その部分をオブジェクト型として定義し、Mapped Typesと[インターセクション型]を成す必要があります。
 
 ```ts twoslash
 type KeyValues = {
