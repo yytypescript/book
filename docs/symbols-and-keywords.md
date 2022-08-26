@@ -257,7 +257,7 @@ function* func2() {
 
 ### `+` 単項正値演算子 ![js]
 
-Number型に変換します。
+number型に変換します。
 
 ```js twoslash
 +"1";
@@ -355,7 +355,7 @@ console.log(a);
 
 ### `-` 単項負値演算子 ![js]
 
-正負を反転してNumber型に変換します。
+正負を反転してnumber型に変換します。
 
 ```js twoslash
 -"1";
