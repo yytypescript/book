@@ -27,7 +27,7 @@ interface Animal {
 | 継承             | 可能               | 不可。ただし交差型で表現は可能   |
 | 継承による上書き | 上書きまたはエラー | フィールド毎に交差型が計算される |
 | 同名のものを宣言 | 定義がマージされる | エラー                           |
-| Mapped Type      | 使用不可           | 使用可能                         |
+| Mapped Types     | 使用不可           | 使用可能                         |
 
 ### 継承
 
@@ -180,7 +180,7 @@ interface SameNameInterfaceIsAllowed {
 }
 ```
 
-### Mapped Type
+### Mapped Types
 
 Mapped Typeについては別のページで詳しく説明しますので、ここでは型エイリアスとインターフェースのどちらで使えるかだけを説明します。
 

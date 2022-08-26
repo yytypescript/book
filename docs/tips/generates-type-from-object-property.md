@@ -29,13 +29,13 @@ type ConfirmationMessage =
 
 ## 今回の問題を解くにあたって
 
-今回は今まで紹介してきたオブジェクトから型を作り出す方法と Mapped type の合わせ技で再現することができます。
+今回は今まで紹介してきたオブジェクトから型を作り出す方法と Mapped Types の合わせ技で再現することができます。
 
 [オブジェクトから型を生成する](generates-type-from-object.md)
 
 [オブジェクトからキーの型を生成する](generates-type-from-object-key.md)
 
-アプローチの方法としてはまずオブジェクトからキーの型を生成し Mapped type を使いオブジェクトのプロパティの型を参照、それらをリテラル型で取得します。
+アプローチの方法としてはまずオブジェクトからキーの型を生成し Mapped Types を使いオブジェクトのプロパティの型を参照、それらをリテラル型で取得します。
 
 ### キーの型を生成する
 
@@ -56,9 +56,9 @@ type Language = keyof typeof conf;
 //   ^?
 ```
 
-### Mapped type
+### Mapped Types
 
-オブジェクトのプロパティの型を参照するために Mapped type を使います。そのとき元のオブジェクトから型を生成するために`typeof`を使います。
+オブジェクトのプロパティの型を参照するために Mapped Types を使います。そのとき元のオブジェクトから型を生成するために`typeof`を使います。
 
 ```ts twoslash
 const conf = {
@@ -90,7 +90,7 @@ const conf = {
 
 ## まとめ
 
-お好みで定義したキーの型`Language`を Mapped type のキーの部分に代入します。最終的な形は次のようになります。
+お好みで定義したキーの型`Language`を Mapped Types のキーの部分に代入します。最終的な形は次のようになります。
 
 ```ts twoslash
 const conf = {

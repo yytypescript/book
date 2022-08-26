@@ -1039,9 +1039,9 @@ for (const property in drink) {
 }
 ```
 
-### `in` mapped type ![ts]
+### `in` Mapped Types ![ts]
 
-mapped typeに現れる`in`です。
+Mapped Typesに現れる`in`です。
 
 ```ts twoslash
 type MappedType = {
@@ -1049,7 +1049,7 @@ type MappedType = {
 };
 ```
 
-[Mapped type](reference/type-reuse/mapped-types.md)
+[Mapped Types](reference/type-reuse/mapped-types.md)
 
 ### `is` 型アサーション関数の一部 (user-defined type guard) ![ts]
 

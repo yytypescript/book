@@ -21,12 +21,12 @@ rules:
   - expected: インデックス型
     patterns: インデックスシグネチャ
     prh: index signatureの訳語はこれに統一します
-  - expected: mapped type
+  - expected: Mapped Types
     patterns:
       - マップ型
       - マップタイプ
       - マップドタイプ
-    prh: mapped typeの訳語はこれに統一します。TypeScript Deep Diveでは「マップ型」と訳していますが、Map<T, U>と曖昧であることと、「マップ型」が浸透していないため訳しません。
+    prh: Mapped Typesの訳語はこれに統一します。TypeScript Deep Diveでは「マップ型」と訳していますが、Map<T, U>と曖昧であることと、「マップ型」が浸透していないため訳しません。
   - expected: ポリフィル
     patterns: /[pP]olyfill/
   - expected: 巻き上げ

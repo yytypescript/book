@@ -34,7 +34,7 @@ type MapKeys = keyof MapLike;
 
 キーが`string`のインデックス型は、`string`ではなく`string | number`が返ります。number型のキーアクセスの`obj[0]`は`obj["0"]`と同じになるからです。
 
-mapped typeに`keyof`を用いると、そのキーの型が返ります。
+Mapped Types`keyof`を用いると、そのキーの型が返ります。
 
 ```ts twoslash
 type MapLike = { [K in "x" | "y" | "z"]: any };
@@ -62,8 +62,8 @@ type AnyKeys = keyof any;
 
 加えて、プロパティが何十個もあるようなオブジェクトを想像してみてください。そのプロパティ名のユニオン型を定義する必要が出てきたとします。その際に、プロパティ名をすべて転記するとなると、転記漏れや書き間違いもあるでしょう。そういう場合は`keyof`を使うとそもそも書き写す必要がないため、便利な上に安全なコーディングができます。
 
-## keyofはmapped typeと一緒に使われる
+## keyofはMapped Typesと一緒に使われる
 
-keyofは単体で使うことよりmapped typeと組み合わせて使われることが多いです。
+keyofは単体で使うことよりMapped Typesと組み合わせて使われることが多いです。
 
-[マップ型 (mapped type)](mapped-types.md)
+[マップ型 (Mapped Types)](mapped-types.md)

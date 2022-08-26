@@ -50,4 +50,4 @@ let obj2: Record<string, number>;
 
 ## 関連情報
 
-[Mapped type](../../type-reuse/mapped-types.md)
+[Mapped Types](../../type-reuse/mapped-types.md)
