@@ -108,4 +108,4 @@ npm install @types/express --save-dev # 型定義ファイルのインストー�
 
 型定義ファイルの存在しないライブラリも利用することが可能ですが暗黙的に`any`型になります。また自身で作成しDefinitelyTypedに公開することもできます。
 
-[Contribution guide | DefinitelyTyped](http://definitelytyped.org/guides/contributing.html)
+[コントリビュート（貢献）する方法 | Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/README.ja.md#%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%83%88%E8%B2%A2%E7%8C%AE%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95)
