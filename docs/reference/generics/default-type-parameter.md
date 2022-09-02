@@ -33,7 +33,7 @@ const errorEvent: MyErrorEvent<Error> = {
 
 const networkErrorEvent: MyErrorEvent<NetworkError> = {
   error: new NetworkError("ネットワークエラーです"),
-  type: "nextwork",
+  type: "network",
 };
 ```
 
@@ -76,7 +76,7 @@ const errorEvent: MyErrorEvent = {
 
 const networkErrorEvent: MyErrorEvent<NetworkError> = {
   error: new NetworkError("ネットワークエラーです"),
-  type: "nextwork",
+  type: "network",
 };
 ```
 
