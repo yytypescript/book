@@ -53,7 +53,16 @@ const errorEvent: MyErrorEvent = {
 };
 ```
 
-そこで、デフォルト型引数として`Error`を指定することでジェネリクスの型`T`は必要な時だけ指定して、何も指定してない場合は自動で`Error`とすることができます。
+そこで、`<T = Error>`とすることでデフォルト型引数として`Error`を指定します。
+
+```ts twoslash
+type MyErrorEvent<T = Error> = {
+  error: T;
+  type: string;
+};
+```
+
+デフォルト型引数として`Error`を指定することでジェネリクスの型`T`は必要な時だけ指定して、何も指定してない場合は自動で`Error`とすることができます。
 
 ```ts twoslash
 type MyErrorEvent<T = Error> = {
