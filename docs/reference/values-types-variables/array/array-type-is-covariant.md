@@ -81,7 +81,7 @@ mayBePochi.wanwan();
 // JS実行時エラー: mayBePochi.wanwan is not a function
 ```
 
-変数`animals`に`dogs`を代入した場合、`animals`の変更は`dogs`にも影響します。これはJavaScriptの配列がミュータブルなオブジェクトであるためです。`animals[0]`にAnimal型の値を代入すると、`dogs[0]`もAnimalの値になります。`dogs`は`Dog[]`型なので、型どおりならAnimal型を受け付けないことが望ましいですが、実際はそれができてしまいます。その結果、`dogs[0]`の`wanwan`メソッドを呼び出すところで、メソッドが存在しないというJavaScript実行時エラーが発生します。
+変数`animals`に`dogs`を代入した場合、`animals`の変更は`dogs`にも影響します。これはJavaScriptの配列がミュータブルなオブジェクトであるためです。`animals[0]`にAnimal型の値を代入すると、`dogs[0]`もAnimalの値になります。`dogs`は`Dog[]`型ですので、型どおりならAnimal型を受け付けないことが望ましいですが、実際はそれができてしまいます。その結果、`dogs[0]`の`wanwan`メソッドを呼び出すところで、メソッドが存在しないというJavaScript実行時エラーが発生します。
 
 型の安全性を突き詰めると、配列は共変であるべきではないです。型がある他の言語のJavaでは、`List<T>`型は共変ではなく非変(invariant)になっています。非変な配列では、その型自身しか代入できないようになり、上のような問題が起こらなくなります。
 

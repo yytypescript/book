@@ -18,7 +18,7 @@ enum Position {
 }
 ```
 
-`enum`キーワードはTypeScript独自のものです。なのでJavaScriptにコンパイルすると次のようなコードになります。
+`enum`キーワードはTypeScript独自のものです。そのためJavaScriptにコンパイルすると次のようなコードになります。
 
 <!--prettier-ignore-->
 ```js

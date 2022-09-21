@@ -281,10 +281,10 @@ const str = "a";
 const num = str as unknown as number;
 ```
 
-ただし、型アサーションは実際に値の型をキャストしているのではなく、TypeScriptにその型であると認識させているだけなので型安全性の問題は残ります。
+ただし、型アサーションは実際に値の型をキャストしているのではなく、TypeScriptにその型であると認識させているだけですので型安全性の問題は残ります。
 
 ### try-catchで捕捉される値の型
 
-TypeScriptは4.4になって、投げられた例外がany型としてかunknown型のどちらかで捕捉されるかを選べるようになりました。ですが、標準の設定では投げられた例外はany型なのでunknown型にしたい場合はtsconfig.jsonの設定を変える必要があります。
+TypeScriptは4.4になって、投げられた例外がany型としてかunknown型のどちらかで捕捉されるかを選べるようになりました。ですが、標準の設定では投げられた例外はany型ですのでunknown型にしたい場合はtsconfig.jsonの設定を変える必要があります。
 
 [useUnknownInCatchVariables](../tsconfig//useunknownincatchvariables.md)

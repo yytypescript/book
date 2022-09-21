@@ -34,7 +34,7 @@ function getIfExists(numbers: number[], search: number): number | undefined {
 }
 ```
 
-void型は関数戻り値の型注釈にだけ使うのが普通なので、変数の型注釈に使うことはまずありませんが、もしも変数の型注釈にvoid型を使った場合は、異なる挙動になります。undefined型の変数をvoid型の変数に代入することができる一方、void型の変数をundefined型の変数に代入することはできません。
+void型は関数戻り値の型注釈にだけ使うのが普通ですので、変数の型注釈に使うことはまずありませんが、もしも変数の型注釈にvoid型を使った場合は、異なる挙動になります。undefined型の変数をvoid型の変数に代入することができる一方、void型の変数をundefined型の変数に代入することはできません。
 
 ```ts twoslash
 // @errors: 2322

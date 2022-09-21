@@ -37,7 +37,7 @@ pikachu.name = "raichu";
 
 ### `readonly`はプロパティごとにつけられる
 
-`const assertion`はオブジェクト全体に対する宣言なので、すべてのプロパティが対象になりますが、`readonly`は必要なプロパティのみにつけることができます。
+`const assertion`はオブジェクト全体に対する宣言ですので、すべてのプロパティが対象になりますが、`readonly`は必要なプロパティのみにつけることができます。
 
 ### `const assertion`は再帰的に`readonly`にできる
 

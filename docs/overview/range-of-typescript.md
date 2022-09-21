@@ -56,7 +56,7 @@ JavaScriptをサポートしているFaaSは多数あります。もっとも有
 
 TypeScriptでもIaCを行えます。AWSのインフラ構成を自動化するツールに[AWS CDK(Cloud Development Kit)](https://aws.amazon.com/cdk/#:~:text=The%20AWS%20Cloud%20Development%20Kit,resources%20using%20familiar%20programming%20languages.&text=AWS%20CDK%20uses%20the%20familiarity,languages%20for%20modeling%20your%20applications.)があります。これはTypeScriptをサポートしています。
 
-AWSやGoogle Platformなど複数のクラウドベンダーに対応したインフラ構成ツールとして、[Pulumi](https://www.pulumi.com/)もあります。PulumiはTypeScriptで各ベンダーのインフラ構成を記述できます。インフラ構成ツールでもっとも有名なのは[Terraform](https://www.terraform.io/)ですが、TerraformはHCLと呼ばれる独自言語で記述するのに対し、PulumiはTypeScriptなので、TypeScriptプログラマーにとって手が届きやすいツールです。
+AWSやGoogle Platformなど複数のクラウドベンダーに対応したインフラ構成ツールとして、[Pulumi](https://www.pulumi.com/)もあります。PulumiはTypeScriptで各ベンダーのインフラ構成を記述できます。インフラ構成ツールでもっとも有名なのは[Terraform](https://www.terraform.io/)ですが、TerraformはHCLと呼ばれる独自言語で記述するのに対し、PulumiはTypeScriptですので、TypeScriptプログラマーにとって手が届きやすいツールです。
 
 ## Google Apps Script
 

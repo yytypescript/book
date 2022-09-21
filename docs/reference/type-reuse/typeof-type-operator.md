@@ -8,6 +8,6 @@ type Point = typeof point;
 //   ^?
 ```
 
-ここで説明したのはTypeScriptのtypeof**型**演算子です。JavaScriptのtypeof演算子と同じ名前ですが、まったく別のものなので注意してください。
+ここで説明したのはTypeScriptのtypeof**型**演算子です。JavaScriptのtypeof演算子と同じ名前ですが、まったく別のものですので注意してください。
 
 [typeof演算子 (typeof operator)](../values-types-variables/typeof-operator.md)

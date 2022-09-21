@@ -46,7 +46,7 @@ type MyErrorEvent<T> = {
 };
 // ---cut---
 // @errors: 2314
-// 型 T が必須なので、MyErrorEvent<Error>と指定する必要がある。
+// 型 T が必須のため、MyErrorEvent<Error>と指定する必要がある。
 const errorEvent: MyErrorEvent = {
   error: new Error("エラーです"),
   type: "syntax",

@@ -60,7 +60,7 @@ declare function printAndReturn<T>(value: T): T;
 const value = printAndReturn<number>(123);
 ```
 
-TypeScriptでは、型引数にも型推論が行われます。型引数推論(type argument inference)と言われます。上の例では、型変数`T`に`number`を代入するコードを明示的に書いていますが、変数の`123`から型変数`T`の型は`number`型になることがコンパイラからは推測可能なので、次のコードのように型引数の記述を省略することもできます。
+TypeScriptでは、型引数にも型推論が行われます。型引数推論(type argument inference)と言われます。上の例では、型変数`T`に`number`を代入するコードを明示的に書いていますが、変数の`123`から型変数`T`の型は`number`型になることがコンパイラからは推測可能ですので、次のコードのように型引数の記述を省略することもできます。
 
 ```ts twoslash
 declare function printAndReturn<T>(value: T): T;

@@ -41,7 +41,7 @@ if (isDuck(animal)) {
 }
 ```
 
-しかしながら、これはあくまでもその型であるとTypeScriptに解釈させるだけなので、JavaScriptとして正しいということは断言できません。
+しかしながら、これはあくまでもその型であるとTypeScriptに解釈させるだけですので、JavaScriptとして正しいということは断言できません。
 
 ```ts twoslash
 function isUndefined(value: unknown): value is undefined {

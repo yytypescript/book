@@ -236,7 +236,7 @@ JSXを戻り値にする関数をReact用語で「関数コンポーネント」
 
 ![今回実装するいいねボタン](react-like-button-tutorial/like1.png)
 
-まずは、`LikeButton`関数の`span`タグのテキストを`♥ {count}`にします。この`count`は変数なので、その変数も一緒に定義します。
+まずは、`LikeButton`関数の`span`タグのテキストを`♥ {count}`にします。この`count`は変数ですので、その変数も一緒に定義します。
 
 ```tsx twoslash {2-3} title="App.tsx"
 function LikeButton() {

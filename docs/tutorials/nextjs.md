@@ -20,7 +20,7 @@ Next.jsはVercel社が開発しています。同社は[Vercel](https://vercel.c
 
 ## Next.jsのセットアップ
 
-最初に `create-next-app` でプロジェクトを作成します。TypeScriptをベースにしたプロジェクトを作成するために `--example with-typescript` を指定します。`random-cat` は作成するリポジトリの名前なので好きな名前で作成してください。
+最初に `create-next-app` でプロジェクトを作成します。TypeScriptをベースにしたプロジェクトを作成するために `--example with-typescript` を指定します。`random-cat` は作成するリポジトリの名前ですので好きな名前で作成してください。
 
 ```sh
 yarn create next-app --example with-typescript random-cat
@@ -257,7 +257,7 @@ export default IndexPage;
 
 ## APIのレスポンスに型付け
 
-今の状態だと `fetchCatImage()` の戻り値が `any` のままなので、呼び出し側で存在しないプロパティを参照しても気づけずにバグが発生する危険性があります。
+今の状態だと `fetchCatImage()` の戻り値が `any` のままですので、呼び出し側で存在しないプロパティを参照しても気づけずにバグが発生する危険性があります。
 
 ```ts twoslash title="pages/index.tsx"
 const fetchCatImage = async () => {
@@ -267,12 +267,12 @@ const fetchCatImage = async () => {
 };
 
 fetchCatImage().then((image) => {
-  // 戻り値がany型なので型エラーにならない
+  // 戻り値がany型のため型エラーにならない
   console.log(image.alt);
 });
 ```
 
-APIレスポンスの取り扱いはフロントエンドでバグが混在しやすい箇所なので、型を指定することで安全にAPIレスポンスを扱えるようにしていきます。
+APIレスポンスの取り扱いはフロントエンドでバグが混在しやすい箇所ですので、型を指定することで安全にAPIレスポンスを扱えるようにしていきます。
 
 レスポンスに含まれる猫画像の型を`SearchCatImage`として定義し、レスポンスのデータ構造を`SearchCatImageResponse`として定義します。
 

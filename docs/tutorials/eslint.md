@@ -217,7 +217,7 @@ cd eslint-tutorial
 
 ### ESLintを導入する
 
-ESLintはYarnでインストールしましょう。ESLintは開発時だけ使うパッケージなので、`yarn add`コマンドには`-D`オプションをつけてインストールします。
+ESLintはYarnでインストールしましょう。ESLintは開発時だけ使うパッケージですので、`yarn add`コマンドには`-D`オプションをつけてインストールします。
 
 ```shell
 yarn add -D 'eslint@^8'
@@ -290,11 +290,11 @@ module.exports = {
 
 ##### `ecmaVersion`
 
-`parserOptions`はチェック対象のJavaScriptがどの構文を使っているかをESLintに伝えるためのオプションです。`ecmaVersion`は、どのバージョンのECMAScriptの構文を使うかを指定します。`"latest"`を設定すると、最新のECMAScriptの構文を使うという指定になります。デフォルトではECMAScript 5になっています。これはかなり古いバージョンです。実務ではES5で開発することはまれなので、ここは必ず指定しましょう。なお、`env`オプションで`es2022`などECMAScriptのバージョンを指定している場合、`ecmaVersion`にも自動的に`es2022`が設定されます。どちらも同じバージョンを指定する場合は、`ecmaVersion`の指定は省略できます。
+`parserOptions`はチェック対象のJavaScriptがどの構文を使っているかをESLintに伝えるためのオプションです。`ecmaVersion`は、どのバージョンのECMAScriptの構文を使うかを指定します。`"latest"`を設定すると、最新のECMAScriptの構文を使うという指定になります。デフォルトではECMAScript 5になっています。これはかなり古いバージョンです。実務ではES5で開発することはまれですので、ここは必ず指定しましょう。なお、`env`オプションで`es2022`などECMAScriptのバージョンを指定している場合、`ecmaVersion`にも自動的に`es2022`が設定されます。どちらも同じバージョンを指定する場合は、`ecmaVersion`の指定は省略できます。
 
 ##### `sourceType`
 
-JavaScriptにはスクリプトモードとモジュールモードがあります。`sourceType`はJavaScriptコードがどちらのモードで書かれるかを指定するオプションです。モジュールモードでは、`import`文や`export`文といった追加の構文がサポートされます。`sourceType`のデフォルト値は`"script"`(スクリプトモード)です。実務で開発する場合は、モジュールモードでJavaScript/TypeScriptを書くほうが普通なので、`sourceType`には`"module"`(モジュールモード)を指定しましょう。
+JavaScriptにはスクリプトモードとモジュールモードがあります。`sourceType`はJavaScriptコードがどちらのモードで書かれるかを指定するオプションです。モジュールモードでは、`import`文や`export`文といった追加の構文がサポートされます。`sourceType`のデフォルト値は`"script"`(スクリプトモード)です。実務で開発する場合は、モジュールモードでJavaScript/TypeScriptを書くほうが普通ですので、`sourceType`には`"module"`(モジュールモード)を指定しましょう。
 
 ### ESLintのルールを設定する
 
@@ -933,7 +933,7 @@ module.exports = {
 
 `parser`で設定したパーサーを使って、ESLintはJavaScriptやTypeScriptの構文を解析します。上の例では、TypeScriptパーサーを指定しています。この指定がないと、ESLintはTypeScriptを解釈できず、エラーが発生します。
 
-TypeScriptはJavaScriptの構文を拡張した言語です。なので、このパーサーさえ入れておけば、TypeScriptに限らずJavaScriptのこのパーサーひとつで対応できます。要するに、このパーサーひとつで、TypeScriptとJavaScriptのファイルどちらもリントできるようになります。
+TypeScriptはJavaScriptの構文を拡張した言語です。そのため、このパーサーさえ入れておけば、TypeScriptに限らずJavaScriptのこのパーサーひとつで対応できます。要するに、このパーサーひとつで、TypeScriptとJavaScriptのファイルどちらもリントできるようになります。
 
 #### `plugins`
 
@@ -973,7 +973,7 @@ module.exports = {
 };
 ```
 
-`ignorePatterns`はESLintのチェック対象外にするファイルやディレクトリを指定するオプションです。TypeScriptプロジェクトでは、コンパイルで生成されるJavaScriptは、リントしないのが普通です。なので、`dist`ディレクトリをチェック対象外にしておきます。
+`ignorePatterns`はESLintのチェック対象外にするファイルやディレクトリを指定するオプションです。TypeScriptプロジェクトでは、コンパイルで生成されるJavaScriptは、リントしないのが普通です。そのため、`dist`ディレクトリをチェック対象外にしておきます。
 
 #### `extends`
 

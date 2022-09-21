@@ -57,7 +57,7 @@ $ node increment.js
 
 ## JavaScriptをTypeScriptに変換する
 
-JavaScriptをTypeScriptにする第一歩は、ファイルの拡張子を`.js`から`.ts`に変更することです。TypeScriptはざっくり言って、JavaScriptに型関連の構文を追加したにすぎない言語です。なので、JavaScriptのコードはそのままでもTypeScriptとして扱えます。
+JavaScriptをTypeScriptにする第一歩は、ファイルの拡張子を`.js`から`.ts`に変更することです。TypeScriptはざっくり言って、JavaScriptに型関連の構文を追加したにすぎない言語です。そのため、JavaScriptのコードはそのままでもTypeScriptとして扱えます。
 
 ```sh
 mv increment.js increment.ts
@@ -138,7 +138,7 @@ console.log(increment(999));
 
 これは、increment.tsをコンパイルする過程でコンパイラが生成したJavaScriptファイルです。TypeScriptのコードと比べてみると、引数`num`から型注釈が取り除かれていることがわかります。
 
-型注釈の部分はTypeScript固有のものです。それが書いてあるとブラウザやNode.jsでは実行できません。なので、TypeScriptコンパイラはJavaScript実行環境で動かす用のJavaScriptファイルを生成してくれます。開発者はこの成果物のJavaScriptファイルを本番環境にデプロイすることになります。
+型注釈の部分はTypeScript固有のものです。それが書いてあるとブラウザやNode.jsでは実行できません。そのため、TypeScriptコンパイラはJavaScript実行環境で動かす用のJavaScriptファイルを生成してくれます。開発者はこの成果物のJavaScriptファイルを本番環境にデプロイすることになります。
 
 <TweetILearned>
 

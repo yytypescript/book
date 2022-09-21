@@ -123,7 +123,7 @@ rules:
     patterns:
       - 繰り返し処理
       - ループ処理
-    prh: 繰り返しがループ的なものか、同じことを何度も繰り返すかが曖昧なので反復処理にする
+    prh: 繰り返しがループ的なものか、同じことを何度も繰り返すかが曖昧であるため反復処理にする
   - expected: 浮動小数点数$1
     patterns:
       - /浮動小数点([ぁ-ん])/
@@ -222,7 +222,7 @@ rules:
   - expected: 各Code Pointごとに
     patterns: Code Point単位
   - expected: strict mode
-    prh: strict modeでひとつなので常に小文字
+    prh: strict modeでひとつのため常に小文字
   - expected: $1分割代入$2
     patterns:
       - /[^(分割代入（)]Destructuring assignment/i

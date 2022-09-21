@@ -40,7 +40,7 @@ type Currency = typeof currencies;
 
 #### 何番目のリテラル型が欲しいか
 
-たとえば`'GBP'`が欲しいとします。`'GBP'`は2番目なので`currencies`の2番目の型を取れば希望のリテラル型が取れます。
+たとえば`'GBP'`が欲しいとします。`'GBP'`は2番目ですので`currencies`の2番目の型を取れば希望のリテラル型が取れます。
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -61,7 +61,7 @@ type Currency = typeof currencies[0] | typeof currencies[1] | typeof currencies[
 
 そこで思いつくのは`typeof`をしているときのインデックスです。実はこれもリテラル型であり`currencies`の`2`のリテラル型を取ることを意味しています。
 
-配列はnumber型のインデックスに要素を代入しているオブジェクトなのでこのリテラル型のインデックスの代わりに`number`を使うことによって
+配列はnumber型のインデックスに要素を代入しているオブジェクトですのでこのリテラル型のインデックスの代わりに`number`を使うことによって
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;

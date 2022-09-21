@@ -36,7 +36,7 @@ const nums: readonly number[] = [1, 2, 3];
 nums.push(4);
 ```
 
-これは、破壊的操作系のメソッドを呼び出そうとするコードがTypeScriptコンパイラーに警告されるだけです。配列オブジェクトから`push`メソッドを削除しているわけではありません。なので、JavaScript実行時には`push`メソッドが残っている状態になります。
+これは、破壊的操作系のメソッドを呼び出そうとするコードがTypeScriptコンパイラーに警告されるだけです。配列オブジェクトから`push`メソッドを削除しているわけではありません。そのため、JavaScript実行時には`push`メソッドが残っている状態になります。
 
 ```ts twoslash
 const nums: readonly number[] = [1, 2, 3];
