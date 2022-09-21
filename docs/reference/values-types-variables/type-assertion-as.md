@@ -17,14 +17,14 @@ const value: string | number = "this is a string";
 const strLength: number = (value as string).length;
 ```
 
-もう1つはアングルブランケット構文(angle-bracket syntax)です。
+もう1つはアングルブラケット構文(angle-bracket syntax)です。
 
 ```ts twoslash
 const value: string | number = "this is a string";
 const strLength: number = (<string>value).length;
 ```
 
-どちらを用いるかは好みですが、アングルブランケット構文はJSXと見分けがつかないことがあるため、as構文が用いられることのほうが多いです。
+どちらを用いるかは好みですが、アングルブラケット構文はJSXと見分けがつかないことがあるため、as構文が用いられることのほうが多いです。
 
 ## コンパイルエラーになる型アサーション
 
