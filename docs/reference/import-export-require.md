@@ -118,7 +118,7 @@ module.exports = (i) => i + 1;
 const increment = require("./increment");
 
 console.log(increment(3));
-//　@log: 4
+// @log: 4
 ```
 
 このとき、読み込んだ内容を受ける定数`increment`はこの名前である必要はなく変更が可能です。
