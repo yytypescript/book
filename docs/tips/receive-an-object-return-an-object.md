@@ -166,7 +166,7 @@ type UserInfo = {
   country?: string;
   nationality?: string;
   isVip?: boolean;
-  isRetired: boolean;
+  isRetired?: boolean;
 };
 ```
 
@@ -178,7 +178,7 @@ type UserInfo = {
   country?: string;
   nationality?: string;
   isVip?: boolean;
-  isRetired: boolean;
+  isRetired?: boolean;
 };
 type User = {
   id: string;
