@@ -75,7 +75,7 @@ type State = typeof stateList[number];
 
 ## タプル型とインデックスアクセス型
 
-インデックスアクセス型は[タプル型](../values-types-variables/tuple.md)の要素の型を参照するのにも使えます。タプル型の要素の型を参照するには、ブランケット記法に[数値リテラル型](../values-types-variables/literal-types.md)を書きます。
+インデックスアクセス型は[タプル型](../values-types-variables/tuple.md)の要素の型を参照するのにも使えます。タプル型の要素の型を参照するには、ブラケット記法に[数値リテラル型](../values-types-variables/literal-types.md)を書きます。
 
 ```ts twoslash
 type Tuple = [string, number];
