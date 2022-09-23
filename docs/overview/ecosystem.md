@@ -12,7 +12,7 @@ TypeScriptを学習するとき、TypeScriptそのものを理解することは
 
 ## 言語
 
-JavaScriptの仕様を定義したのがECMAScriptです。ECMAScriptはJavaScriptのコア部分の仕様を扱います。ブラウザ関連のJavaScript仕様を定めるがWHATWGです。また、XMLの構文をJavaScriptに書けるJSXという言語もあります。TypeScriptは、JavaScriptを拡張した言語です。JSXも取り込んでいます。したがって、TypeScriptの仕様には、ECMAScript由来のもの、WHATWG由来のもの、JSX、そして、TypeScript固有仕様が含まれることになります。
+JavaScriptの仕様を定義したのがECMAScriptです。ECMAScriptはJavaScriptのコア部分の仕様を扱います。ブラウザ関連のJavaScript仕様を定めるのがWHATWGです。また、XMLの構文をJavaScriptに書けるJSXという言語もあります。TypeScriptは、JavaScriptを拡張した言語です。JSXも取り込んでいます。したがって、TypeScriptの仕様には、ECMAScript由来のもの、WHATWG由来のもの、JSX、そして、TypeScript固有仕様が含まれることになります。
 
 [ECMASCript](./ecmascript.md)
 
