@@ -57,7 +57,7 @@ JavaScriptを学ぶ過程で一度はお世話になるドキュメントが[MDN
 
 たとえば、数値の`toString`メソッドの説明は、MDNでは[「Number.prototype.toString()」というタイトルのページ](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)に書かれています。`toString`がプリミティブ型の`number`に生えているものだと思っていると、「Number.prototypeは何だろう」「数値型を調べているはずなのに、なぜNumberオブジェクトのページに書いてあるんだろう」などといった疑問を持つかもしれません。
 
-自動ボックス化とラッパーオブジェクトを知っていると、この疑問が解消します。`number`にはメソッドもフィールドもありません。メソッドなどがあるように見えるのは、自動ボックス化で`number`が`Number`オブジェクトに変換されるためです。したがって、`toString`の説明が`Number`オブジェクトのページに書いてあることが腑に落ちます。また、`Number.prototype`が表す意味は「`Number`オブジェクトのインスタンスに生えている」だとということも理解できます。
+自動ボックス化とラッパーオブジェクトを知っていると、この疑問が解消します。`number`にはメソッドもフィールドもありません。メソッドなどがあるように見えるのは、自動ボックス化で`number`が`Number`オブジェクトに変換されるためです。したがって、`toString`の説明が`Number`オブジェクトのページに書いてあることが腑に落ちます。また、`Number.prototype`が表す意味は「`Number`オブジェクトのインスタンスに生えている」ということも理解できます。
 
 ## ラッパーオブジェクトとTypeScriptの型
 
