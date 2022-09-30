@@ -6,7 +6,7 @@ sidebar_label: truthyな値、falsyな値
 
 ## 特定の条件で処理を変えたい
 
-どのような言語でも、ある条件のときは別の処理をさせたいということがあります。むしろ、ない言語はないでしょう。当然、TypeScriptでもそのような機能はあり、`if`を使います。
+どのような言語でも、ある条件のときは別の処理をさせたいということがあります。むしろ、ない言語はないでしょう。当然、JavaScriptでもそのような機能はあり、`if`を使います。
 
 ```ts twoslash
 class Employee {
@@ -27,11 +27,11 @@ if (employee.isPartTime()) {
 
 ## JavaScriptでは、真偽値でなくてもifの対象にできる
 
-ところが、JavaScriptではその限りではありません。JavaScriptではその値(や演算結果)が仮にboolean型である必要はありません。では、どのような値の場合は`if`ブロックを実行し、逆に実行しないのでしょうか。
+ところが、JavaScriptではその限りではありません。JavaScriptではその値(や演算結果)がboolean型である必要はありません。では、どのような値の場合は`if`ブロックを実行し、逆に実行しないのでしょうか。
 
-## true, false「っぽい」値
+## true, false「のような」値
 
-このようなとき、条件を満たすとされる値のことをtruthyと、また満たさないとされる値のことをfalsyと呼びます。これは英語の真と偽を意味するtruthとfalseにそれぞれ「のような」というニュアンスを模す接尾語のyをつけたものです。
+このようなとき、条件を満たすとされる値のことをtruthyと、また満たさないとされる値のことをfalsyと呼びます。これは英語の真と偽を意味するtruthとfalseにそれぞれ「のような」というニュアンスを表す接尾語のyをつけたものです。
 
 ## falsyな値
 
@@ -44,7 +44,7 @@ falsyな値から説明します。というのはfalsyな値というのは限�
 | -0        | number    | 数値の-0     |
 | NaN       | number    | Not a Number |
 | 0n        | bigint    | 整数値の0    |
-| ''        | string    | 空文字列     |
+| ""        | string    | 空文字列     |
 | null      | null      | null         |
 | undefined | undefined | undefined    |
 
@@ -74,8 +74,10 @@ console.log(array.filter((n) => n !== null));
 // @log: [3, 0, 1, 2]
 ```
 
-## 最後ここを書いて終わりだ
+## TypeScript ESLintにもこの問題のためのオプションがある
 
-TypeScriptのeslintにもboolean型を期待するところでboolean型以外が与えられると警告を発するオプションがあります。
+TypeScriptのeslintにも`if`ブロックでboolean型以外が与えられると警告を発するオプションがあります。
 
 [strict-boolean-expression](https://typescript-eslint.io/rules/strict-boolean-expressions/)
+
+しかしながら、このオプションでも`array.filter()`の例では警告を発しないので気をつける必要があります。
