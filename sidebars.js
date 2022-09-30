@@ -168,6 +168,7 @@ module.exports = {
             "reference/values-types-variables/definite-assignment-assertion",
             "reference/values-types-variables/typeof-operator",
             "reference/values-types-variables/equality",
+            "reference/values-types-variables/truthy-falsy-values",
           ],
         },
         {
