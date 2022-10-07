@@ -4,7 +4,7 @@ sidebar_label: アクセス修飾子
 
 # アクセス修飾子 (access modifier)
 
-JavaやPHPなどの言語では、フィールドやメソッドに`private`, `protected`, `public`を指定できます。JavaScriptでも`private`のようなプロパティを実現するために[プライベートクラスフィールド](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_class_fields)という仕様が実験的に導入されはじめてはいますが、現状はJavaのようなアクセス修飾子はありません。TypeScriptにはJava風のアクセス修飾子があります。
+JavaやPHPなどの言語では、フィールドやメソッドに`private`, `protected`, `public`を指定できます。JavaScriptでも`private`のようなプロパティを実現するために[プライベートクラスフィールド](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_class_fields)という仕様がありますが、Javaのようなアクセス修飾子とはやや様相が異なります。TypeScriptにはJava風のアクセス修飾子があります。
 
 | アクセス修飾子 | 説明                                     |
 | :------------- | :--------------------------------------- |
@@ -19,7 +19,7 @@ JavaやPHPなどの言語では、フィールドやメソッドに`private`, `p
 
 ## `public`
 
-`public`アクセス修飾子はどこからもアクセス可能です。
+`public`アクセス修飾子はどこからもアクセス可能です。アクセス修飾子を省略した場合も`public`を指定したものと同等として扱われます。
 
 ```ts twoslash
 class Animal {
@@ -74,6 +74,7 @@ gorilla.move(20);
 // @errors: 2445
 class Animal {
   public name: string;
+
   public constructor(theName: string) {
     this.name = theName;
   }
@@ -95,6 +96,7 @@ gorilla.move(10);
 ```ts twoslash
 class Animal {
   public name: string;
+
   public constructor(theName: string) {
     this.name = theName;
   }
@@ -128,6 +130,7 @@ gorilla.move(10);
 // @errors: 2415 2341
 class Animal {
   public name: string;
+
   public constructor(theName: string) {
     this.name = theName;
   }
@@ -146,3 +149,38 @@ class Gorilla extends Animal {
 ```
 
 `private`メソッドの多くの使い方としては、自身のクラス内の長いコードを機能別に分ける時に利用します。
+
+## アクセス修飾子を変更する
+
+クラスの継承時に、メソッドのアクセス修飾子を変更することができます。とはいえなんでも自由に変更できるのではなく、アクセス制限を緩める方向にだけ変更できます。つまり`protected` > `public`の方向への変更は可能ですがその逆はできません。
+
+```ts twoslash
+class ProtectedClass {
+  protected doNothing(): void {
+    console.log("DO NOTHING");
+  }
+}
+
+class PublicClass extends ProtectedClass {
+  public doNothing(): void {
+    console.log("DO NOTHING");
+  }
+}
+```
+
+逆の`public` > `protected`の実装はできません。
+
+```ts twoslash
+// @errors: 2415
+class PublicClass {
+  public doNothing(): void {
+    console.log("DO NOTHING");
+  }
+}
+
+class ProtectedClass extends PublicClass {
+  protected doNothing(): void {
+    console.log("DO NOTHING");
+  }
+}
+```
