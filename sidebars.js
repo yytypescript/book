@@ -273,7 +273,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "🚧インターフェース",
+              label: "インターフェース",
               link: {
                 type: "doc",
                 id: "reference/object-oriented/interface/README",
