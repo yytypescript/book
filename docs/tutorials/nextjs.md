@@ -482,10 +482,6 @@ export default IndexPage;
 import { useState } from "react";
 import type { NextPage, GetServerSideProps } from "next";
 
-interface IndexPageProps {
-  initialCatImageUrl: string;
-}
-
 interface CatCategory {
   id: number;
   name: string;
