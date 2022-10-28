@@ -1,9 +1,9 @@
 ---
-sidebar_label: "\U0001F6A7インターフェース"
+sidebar_label: "インターフェース"
 slug: /reference/object-oriented/interface
 ---
 
-# 🚧インターフェース (interface)
+# インターフェース (interface)
 
 インターフェースはクラスが実装すべきフィールドやメソッドを定義した型です。クラスはインターフェースを実装することで、インターフェースが求めるメソッド名や引数の型に則っているかをチェックすることができます。
 
