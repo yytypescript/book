@@ -109,3 +109,53 @@ public class Main {
 ## TypeScriptで配列が共変になっている理由
 
 配列が非変である言語がある中、TypeScriptはなぜ型の安全性を犠牲にしてまで配列を共変にしているでしょうか。それはTypeScriptが健全性(soundness)と利便性のバランスを取ること目標にして、型システムを設計しているためです。配列が非変であると健全性は高くなりますが、利便性は下がります。
+
+では、具体的にどのようなところで不便になるのか、見ていきましょう。込み入った話になるので、段階を踏んで説明していきます。
+
+まず、共変とは、ある型とその部分型が代入できることです。たとえば、`number`型は、ユニオン型の`number | null`型の部分型です。これを配列にした`number[]`型は、`(number | null)[]`型の部分型ということになります。
+
+TypeScriptの配列の型は、共変です。したがって、`number[]`型は`(number | null)[]`型に代入できます。もし、TypeScriptの配列の型が非変なら、`(number | null)[]`型に代入できるのは、それ自身になります。`number[]`は`(number | null)[]`に代入できないことになります。
+
+ここまでのことを整理すると次のようになります。
+
+- `number`は`number | null`の部分型
+- `number[]`は`(number | null)[]`の部分型
+- 共変なら、`(number | null)[]`に`number[]`が代入できる
+- 非変なら、`(number | null)[]`に`number[]`は代入できない
+
+次に、ここで話を変えて、次のような関数を考えてみます。
+
+```ts twoslash
+function sum(values: (number | null)[]): number {
+  let total = 0;
+  for (const value of values) {
+    if (typeof value === "number") {
+      total += value;
+    }
+  }
+  return total;
+}
+```
+
+この`sum`関数は、`(number | null)[]`、つまり数値とヌルが混在しうる配列を受け取り、数値だけピックアップして、その合計値を返す関数です。関数の引数に代入する場合も、TypeScriptの配列は共変です。共変なので、次のような`number[]`型の値を代入できます。
+
+```ts twoslash
+declare function sum(values: (number | null)[]): number;
+// ---cut---
+const values: number[] = [1, 2, 3];
+sum(values);
+```
+
+もしも、TypeScriptの配列が非変だと、上のようなコードはコンパイルエラーになるでしょう。`sum`関数は、引数に`(number | null)[]`を期待していますが、`number[]`を渡しているからです。そして、そのようなコンパイルエラーを回避しようとしたら、次のような余計な型アサーションを加えたりしないとなりません。
+
+```ts twoslash
+declare function sum(values: (number | null)[]): number;
+declare const values: number[];
+// ---cut---
+sum(values as (number | null)[]);
+//         ^^^^^^^^^^^^^^^^^型アサーション
+```
+
+こうしたことが随所で起きると、書くのも読むのも不便になります。したがって、TypeScriptでは型の完璧さよりも、利便性を優先しているものと考えられます。
+
+また、TypeScriptはJavaScriptに型を追加した言語で、根底にはJavaScriptがあります。JavaScriptからTypeScriptに移行するコードもあると思いますが、配列が非変であることを前提に書かれたJavaScriptコードは少ないと思われます。そうした状況もあって、共変を許した可能性もあります。
