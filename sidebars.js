@@ -303,6 +303,7 @@ module.exports = {
             "reference/builtin-api/map",
             "reference/builtin-api/set",
             "reference/builtin-api/date",
+            "reference/builtin-api/regexp",
             "reference/builtin-api/error",
           ],
         },
