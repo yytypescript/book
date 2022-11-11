@@ -1,8 +1,8 @@
 ---
-description: interfaceでの宣言と、type aliasによる宣言の違い
+description: interfaceでの宣言とtype aliasによる宣言の違い
 ---
 
-# 🚧interfaceとtypeの違い
+# interfaceとtypeの違い
 
 型エイリアスを利用することで、インターフェースと同様の定義が行なえます。
 
@@ -136,7 +136,7 @@ type Dog = Animal & {
 
 // 最終的なDogの定義
 type Dog = {
-  name: never; // 交差型作れない場合はコンパイルエラーではなくnever型になる
+  name: never; // 交差型を作れない場合はコンパイルエラーではなくnever型になる
   price: {
     yen: number;
     dollar: number;
@@ -182,11 +182,11 @@ interface SameNameInterfaceIsAllowed {
 
 ### Mapped Types
 
-Mapped Typeについては別のページで詳しく説明しますので、ここでは型エイリアスとインターフェースのどちらで使えるかだけを説明します。
+Mapped Typesについては別のページで詳しく説明しますので、ここでは型エイリアスとインターフェースのどちらで使えるかだけを説明します。
 
-[Mapped type](../../type-reuse/mapped-types.md)
+[Mapped Types](../../type-reuse/mapped-types.md)
 
-Mapped Typeは型のキーを動的に指定することができる仕組みであり、型エイリアスでのみ利用することができます。
+Mapped Typesは型のキーを動的に指定することができる仕組みであり、型エイリアスでのみ利用することができます。
 次の例ではユニオン型の一覧をキーとした新しい型を生成しています。
 
 ```typescript twoslash
@@ -196,25 +196,64 @@ type Butterfly = {
 };
 ```
 
-インターフェースでMapped Typeを使うとエラーになります。
+インターフェースでMapped Typesを使うとエラーになります。
 
 ```typescript twoslash
 // @errors: 7061
 type SystemSupportLanguage = "en" | "fr" | "it" | "es";
 
-interface Butterflly {
+interface Butterfly {
   [key in SystemSupportLanguage]: string;
 }
 ```
 
 ## インターフェースと型エイリアスの使い分け
 
-インターフェースは型の宣言であり、型エイリアスは型に名前をつける機能です。この定義に立ち返って使い分けをしましょう。
+実際に型を定義する時にインターフェースと型エイリアスのどちらを使うのがよいのでしょうか？残念ながら、これに関しては明確な正解はありません。
 
-TODO: 残りを書く
+インターフェースと型エイリアスのどちらでも型を定義することができますが、拡張性やMapped Typesの利用可否といった点で異なる部分が存在するので、これらのメリット・デメリットを考慮してプロジェクト内でルールを決めてそれに遵守するようにしましょう。
+
+参考例として、Googleが公開しているTypeScriptのスタイルガイドの[型エイリアスvsインターフェス](https://google.github.io/styleguide/tsguide.html#interfaces-vs-type-aliases)の項目では、プリミティブな値やユニオン型やタプルの型定義をする場合は型エイリアスを利用し、オブジェクトの型を定義する場合はインターフェースを使うことを推奨しています。
+
+インターフェースと型エイリアスの使い分けに悩む場面が多く開発スピードが落ちてしまうのであれば、型エイリアスに統一して書く方針にする考え方もあります。
+
+### インターフェースの利用例
+
+ライブラリを作成する際に定義した型の構造がアプリケーション側に依存するような場合にはインターフェースを利用するのが適切です。
+
+Node.jsの`process.env`の型定義は`@types/node/process.d.ts`で次のように実装されています。
+
+```ts twoslash
+declare module "process" {
+  global {
+    namespace NodeJS {
+      interface ProcessEnv extends Dict<string> {
+        TZ?: string;
+      }
+    }
+  }
+}
+```
+
+インターフェースで型定義されていることで、パッケージを利用する側で型の拡張が自由に行えるようになっています。
+
+もし`ProcessEnv`が型エイリアスで定義されていると型の拡張が行えず、とても開発しづらい状態になってしまいます。このように不特定多数のユーザーが型を参照するような場合には、拡張性を考慮してインターフェースで型定義をするようにしましょう。
+
+```ts twoslash
+// src/types/global.d.ts
+declare module "process" {
+  global {
+    namespace NodeJS {
+      interface ProcessEnv {
+        NODE_ENV: "development" | "production";
+      }
+    }
+  }
+}
+```
 
 ## 関連情報
 
-[インターフェース (interface)](/reference/object-oriented/interface/interface-vs-type-alias)
+[インターフェース (interface)](./README.md)
 
 [型エイリアス (type alias)](../../values-types-variables/type-alias.md)
