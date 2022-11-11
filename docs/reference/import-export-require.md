@@ -414,7 +414,7 @@ TypeScriptでは一般的に`ES Module`方式に則った記法で書きます�
 
 ## `default export? named export?`
 
-`module.exports`との`export default`はdefault exportと呼ばれ、`exports`と`export`はnamed exportと呼ばれています。どちらも長所と短所があり、たびたび議論になる話題です。どちらか一方を使うように統一するコーディングガイドを持っている企業もあるようですが、どちらかが極端に多いというわけでもないので好みの範疇です。
+`module.exports`と`export default`はdefault exportと呼ばれ、`exports`と`export`はnamed exportと呼ばれています。どちらも長所と短所があり、たびたび議論になる話題です。どちらか一方を使うように統一するコーディングガイドを持っている企業もあるようですが、どちらかが極端に多いというわけでもないので好みの範疇です。
 
 ### default export
 
