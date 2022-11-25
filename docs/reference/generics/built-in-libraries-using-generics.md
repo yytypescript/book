@@ -70,8 +70,6 @@ console.log(addresses.get("太郎"));
 
 [Promise](../asynchronous/promise.md)
 
-TODO: Promiseへリンクする
-
 ### 標準ライブラリの型定義の参照方法
 
 標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認することができます。
