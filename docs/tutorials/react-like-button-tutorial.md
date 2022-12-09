@@ -230,6 +230,16 @@ JSXを戻り値にする関数をReact用語で「関数コンポーネント」
 
 :::
 
+:::tip ワンポイント解説: JSXのセルフクロージング要素
+
+先ほども書いたように、JSXはJavaScriptの拡張構文であり、厳密にはHTMLと異なるものです。そのため、JSXにはHTMLとは異なる書き方や制約があります。
+
+上の例における`App`関数の返り値のJSXにある`<LikeButton />`という書き方も、HTMLではできないがJSXではできる書き方の1つです。これは「セルフクロージング要素/タグ」([JSXの仕様](https://facebook.github.io/jsx/#sec-jsx-elements)における名称は"JSXSelfClosingElement")と呼ばれ、`<LikeButton></ LikeButton>`のように子要素やテキストを持たない要素については、`<LikeButton />`のように末尾に`/`を付けた単体のタグで表現するというものです。
+
+JSXとHTMLのその他の違いについては、たとえば[Reactの公式ドキュメント](https://beta.reactjs.org/learn/writing-markup-with-jsx)で言及されています。
+
+:::
+
 ## ボタンのビジュアルを作り込む
 
 いいねボタンの実装場所が確保できたので、ここではボタンのタグを変更したり、CSSを書いたりして、ボタンの見た目を作っていきます。今回作るボタンは次の図のようなシンプルなものです。
