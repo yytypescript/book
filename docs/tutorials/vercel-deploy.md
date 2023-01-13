@@ -1,4 +1,4 @@
-# 🚧Vercelにデプロイしてみよう
+# Vercelにデプロイしてみよう
 
 このチュートリアルでは前のNext.jsのハンズオンで作成した猫画像ジェネレーターをVercelへデプロイする方法を学びます。
 
@@ -42,31 +42,77 @@ Next.jsを開発しているVercel社が提供しているフロントエンド�
 ![連携するGitHubリポジトリの選択](vercel-deploy/screen1.png)
 
 プロジェクトの設定画面が表示されるので、設定はデフォルトのままで「Deploy」ボタンをクリックしてください。
-![プロジェクトの設定画面](vercel-deploy/screen1.png)
+![プロジェクトの設定画面](vercel-deploy/screen2.png)
 
 デプロイ完了画面が表示されればデプロイは完了です。🎉
 画面のプレビュー表示がリンクになっており、クリックすることでデプロイされたアプリを表示することができます。
 ![デプロイ完了画面](vercel-deploy/screen3.png)
 
-「Continue To Dashboard」のボタンをクリックすることでプロジェクトのダッシュボードページへ遷移できます。
+`Continue To Dashboard`のボタンをクリックすることでプロジェクトのダッシュボードページへ遷移できます。
+ダッシュボード上でVercelが自動生成したドメインを確認できます。このドメインはプロジェクトが存続している限り変更されないため、このURLを他の人に共有することでアプリを公開することができます。
 
-## 変更を自動デプロイする
+![ダッシュボード](vercel-deploy/screen6.png)
 
-プルリクエストを作成・マージして自動デプロイを実行してみます。VercelではGitHub連携が完了した段階で自動デプロイのCI/CD環境も自動で構築されるので、プルリクエストを作成・マージするだけで自動でデプロイしたアプリを更新でき状態になっています。
+## 自動デプロイを体験
+
+プルリクエストを作成・マージして自動デプロイを実行してみます。VercelではGitHub連携が完了した段階で自動デプロイのCI/CD環境も自動で構築されるので、プルリクエストを作成・マージするだけで自動でデプロイがされる状態になっています。
 
 実際に猫画像ジェネレーターのコードの一部を修正して自動デプロイを実行してみましょう。
 
-::ボタンを変更する？
-::プルリクを作成
-::プレビュー環境を確認
-::マージする
-::自動デプロイを確認
+次のようにボタンのデザインを変更してGitHubリポジトリでプルリクエストを作成してください。
 
-## プロジェクトのダッシュボードの確認
+<!-- twoslashで記述するとコンパイルエラーが発生するのでtwoslashの指定はスキップしています -->
 
-スクリンショットで
-:::caution 執筆中
+```tsx {10-21} title="src/pages/index.tsx"
+const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
+  const [catImageUrl, setCatImageUrl] = useState(initialCatImageUrl);
 
-- 前のハンズオンで作成した猫画像ジェネレーターをVercelでデプロイするチュートリアルを書く。
+  const handleClick = async () => {
+    const image = await fetchCatImage();
+    setCatImageUrl(image.url);
+  };
 
-:::
+  return (
+    <div>
+      <button
+        onClick={handleClick}
+        style={{
+          backgroundColor: "#319795",
+          border: "none",
+          borderRadius: "4px",
+          color: "white",
+          padding: "4px 8px",
+        }}
+      >
+        きょうのにゃんこ🐱
+      </button>
+      <div style={{ marginTop: 8, maxWidth: 500 }}>
+        <img src={catImageUrl} width="100%" height="auto" alt="猫" />
+      </div>
+    </div>
+  );
+};
+```
+
+Vercelは連携しているGitHubリポジトリに新たにブランチがプッシュされると自動でビルドが実行されて、プレビュー環境をデプロイしてくれます。
+
+プルリクエストを作成するとVercel BOTが画像のようにビルドのステータスとプレビュー環境のURLをコメントとしてくれるので、`Visit Preview`のリンクをクリックすることでレビュアーは簡単に新しい変更の確認をすることができます。
+
+![VercelのBOTがプルリクエストのプレビュー環境のURLをコメント](vercel-deploy/screen4.png)
+
+ビルドの結果はプルリクエストのstatus checksにも表示されるので、ビルドが失敗している状態で誤ってデプロイをする事故も防ぐこともできます。
+
+![プルリクエストのステータスチェック](vercel-deploy/screen5.png)
+
+`Merge pull request`ボタンをクリックして、このプルリクエストをマージしてみましょう。ベースブランチに新しくブランチがマージされると本番環境に更新が自動でデプロイされます。
+
+先ほど確認した本番環境のURLにアクセスをすることで、ボタンのデザインが変更されており今回の修正が本番環境に自動でデプロイされたのを確認できます。😺
+
+![ボタンのデザインを変更した画面](vercel-deploy/screen7.png)
+
+## プロジェクトを削除
+
+プロジェクトが残って気になる方は、Settingsページに移動して`Delete`ボタンをクリックし、ダイアログで必要なテキストを入力することでプロジェクトを削除できます。
+
+![プロジェクトの削除ボタン](vercel-deploy/screen8.png)
+![プロジェクトの削除ダイアログ](vercel-deploy/screen9.png)
