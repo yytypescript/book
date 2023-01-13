@@ -35,82 +35,44 @@ const arr2 = [0, ...arr, 4];
 
 ## 配列のコピー
 
-スプレッド構文を用いて、配列のコピーを簡単に書けます。
-この方法により作成されたコピーは、元の配列とは異なる実体を持ちます。
+配列のコピーを作る際に、スプレッド構文が便利な場合があります。スプレッド構文で作成されたコピーは、元の配列とは異なる実体を持ちます。
 
-```js twoslash
+```ts twoslash
 const arr = [1, 2, 3];
-const arr2 = [...arr];
-
-arr.push(4);
-
+const backup = [...arr];
+arr.push(4); // 変更を加える
 console.log(arr);
 // @log: (4) [1, 2, 3, 4]
-console.log(arr2);
+console.log(backup); // コピーには影響なし
 // @log: (3) [1, 2, 3]
 ```
 
-ただし、この方法で行われるのはあくまでも浅いコピーです。
-そのため、自身の要素として配列を持つ配列をスプレッド構文でコピーした場合には、要素として含まれている配列の実体はコピー元と同じものになります。
-つまり、もっとも外側の配列については片方への変更が他方に影響することはありません。
+注意点として、この方法は浅いコピー(shallow copy)です。深いコピー(deep copy)ではない点に注意してください。浅いコピーで複製できるのは、1層目の要素だけです。配列の中に配列が入っている場合は、2層目より深くにある配列は、元の配列のものと値を共有します。
 
 ```js twoslash
-const arr = [[1, 2], 3];
-const arr2 = [...arr];
-
-arr.push(4);
-
-console.log(arr);
-// @log: (3) [Array(2), 3, 4]
-console.log(arr[0]);
-// @log: (2) [1, 2]
-
-console.log(arr2);
-// @log: (2) [Array(2), 3]
-console.log(arr2[0]);
-// @log: (2) [1, 2]
-```
-
-しかし、配列内の配列については片方への変更が他方にも反映されます。
-
-```js twoslash
-const arr = [[1, 2], 3];
-const arr2 = [...arr];
-
-arr[0].push(3);
-
-console.log(arr);
-// @log: (2) [Array(3), 3]
-console.log(arr[0]);
-// @log: (3) [1, 2, 3]
-
-console.log(arr2);
-// @log: (2) [Array(3), 3]
-console.log(arr2[0]);
-// @log: (3) [1, 2, 3]
+const arr = [1, [2, 3]];
+const backup = [...arr];
+arr[1].push(4);
+console.log(arr[1]);
+// @log: (3) [2, 3, 4]
+console.log(backup[1]); // 変更の影響あり
+// @log: (3) [2, 3, 4]
 ```
 
 上記のような浅いコピーの挙動についての詳しい解説はこちらにあります。
 
 [オブジェクトを浅くコピーする](../../../tips/shallow-copy-object.md)
 
-なお、任意の配列について異なる実体を持つコピーを作る方法はさまざまですが、[配列の`concat()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)を用いる方法があります。
+スプレッド演算子と同等の手段として、[配列の`concat()メソッド`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)を用いる方法もあります。
 
-```js twoslash
-const arr = [[1, 2], 3];
-const arr2 = arr.concat();
-
-arr[0].push(3);
-
+```ts twoslash
+const arr = [1, 2, 3];
+const backup = arr.concat();
+arr.push(4); // 変更を加える
 console.log(arr);
-// @log: (2) [Array(3), 3]
-console.log(arr[0]);
-// @log: (3) [1, 2, 3]
-
-console.log(arr2);
-// @log: (2) [Array(2), 3]
-console.log(arr2[0]);
-// @log: (2) [1, 2]
+// @log: (4) [1, 2, 3, 4]
+console.log(backup); // コピーには影響なし
+// @log: (3) [1, 2, 3]
 ```
 
 ## 配列の連結
@@ -120,7 +82,6 @@ console.log(arr2[0]);
 ```ts twoslash
 const arr = [1, 2, 3];
 const arr2 = [4, 5, 6];
-
 const concated = [...arr, ...arr2];
 ```
 
