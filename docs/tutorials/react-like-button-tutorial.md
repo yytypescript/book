@@ -234,9 +234,9 @@ JSXを戻り値にする関数をReact用語で「関数コンポーネント」
 
 先ほども書いたように、JSXはJavaScriptの拡張構文であり、厳密にはHTMLと異なるものです。そのため、JSXにはHTMLとは異なる書き方や制約があります。
 
-上の例における`App`関数の返り値のJSXにおける`<LikeButton />`という書き方も、JSXならではの書き方です。これは「セルフクロージング要素(タグ)」([JSXの仕様](https://facebook.github.io/jsx/#sec-jsx-elements)における名称は"JSXSelfClosingElement")と呼ばれ、`<LikeButton></ LikeButton>`というように子要素やテキストを持たない要素については、`<LikeButton />`というように末尾に`/`を付けた単体のタグで表現するというものです。
+`<LikeButton />`のようにスラッシュをタグに含める書き方も、JSXならではの書き方です。これはセルフクロージング要素([JSXの仕様](https://facebook.github.io/jsx/#sec-jsx-elements)における名称は"JSXSelfClosingElement")と呼ばれます。`<LikeButton></LikeButton>`のように子要素などを持たない場合に、`<LikeButton />`のように末尾に`/`をつけることで、短く表現できる書き方です。
 
-JSXとHTMLのその他の違いについては、たとえば[Reactの公式ドキュメント](https://beta.reactjs.org/learn/writing-markup-with-jsx)を参照してください。
+JSXとHTMLのその他の違いについては、[Reactの公式ドキュメント](https://beta.reactjs.org/learn/writing-markup-with-jsx)を参照してください。
 
 :::
 
