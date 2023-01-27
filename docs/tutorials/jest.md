@@ -33,7 +33,9 @@ Node.jsの導入については、[開発環境の準備](./setup.md)をご覧�
 npm install -g yarn
 ```
 
-## プロジェクトを作成する
+## Jest実行環境の準備
+
+### プロジェクトを作成する
 
 まず、このチュートリアルに使うプロジェクトを作成します。
 
@@ -57,7 +59,7 @@ package.jsonの内容は次のようにします。
 }
 ```
 
-## TypeScriptのインストール
+### TypeScriptのインストール
 
 プロジェクトにTypeScriptをインストールします。
 
@@ -71,7 +73,7 @@ yarn add -D typescript
 yarn tsc --init
 ```
 
-## Jestをインストールする
+### Jestをインストールする
 
 Jestをプロジェクトにインストールしましょう。インストールが必要なパッケージは、次の3つです。
 
@@ -87,7 +89,7 @@ yarn add -D jest@^28.0.0 ts-jest@^28.0.0 @types/jest@^28.0.0
 
 `jest`はJest本体です。JavaScriptだけのプロジェクトであれば、このパッケージを入れるだけでテストが始められます。`ts-jest`は、JestをTypeScriptに対応させるためのものです。`ts-jest`を入れると、TypeScriptで書いたテストコードを、コンパイルの手間なしにそのまま実行できるようになります。`@types/jest`はJestのAPIの型定義ファイルです。TypeScriptの型情報を付与されるので、テストコードの型チェックが行えるようになります。
 
-## Jestの設定ファイルを作る
+### Jestの設定ファイルを作る
 
 JestはそのままではTypeScriptを直接テストできません。なので、ここではJestでTypeScriptコードがテストできるように設定を加えます。
 
@@ -109,7 +111,7 @@ module.exports = {
 
 この`@type`のコメントはエディターに型情報を与えるためのものです。これを書いておくことで、エディター上で入力補完が効くようになります。
 
-## チェックポイント
+### チェックポイント
 
 ここまでに作成したファイルに漏れがないか確認しましょう。
 
@@ -121,7 +123,7 @@ module.exports = {
 └── yarn.lock
 ```
 
-## Jestが動くかを確認する
+### Jestが動くかを確認する
 
 ここでは、実際のテストコードを書く前に、Jestでテストコードが実行できる状態になっているかを、動作確認用のテストファイルを作って確かめます。
 
@@ -158,9 +160,13 @@ yarn jest
 rm check.test.ts
 ```
 
-## このチュートリアルでテストする関数
+これでJestの実行環境が整いました。ここからは、TypeScriptのテスト対象コードを書いて、それを実際にテストしていきます。
 
-ここからは、TypeScriptのテスト対象コードを書いて、それをテストしていきます。
+## 関数のテスト
+
+まずは関数のテストを作成・実行してみましょう。
+
+### テストする関数
 
 具体的には、次のような簡単な関数のテストを書くことを例に進めていきます。
 
@@ -172,7 +178,7 @@ function isZero(value: number): boolean {
 
 この`isZero`関数は、数値がゼロかどうかを判定するものです。
 
-## テスト対象のファイルを作る
+### テスト対象のファイルを作る
 
 まず、この関数を書いたファイルを作ります。ファイル名は`isZero.ts`にしてください。
 
@@ -208,7 +214,7 @@ export function isZero(value: number): boolean {
 }
 ```
 
-## テストコードを書く
+### テストコードを書く
 
 上の`isZero`関数をテストするコードを書きます。
 
@@ -268,7 +274,7 @@ Jestでは`expect`関数とマッチャーを使い、結果が期待する値�
 
 マッチャーは、`toBe`以外にもさまざまなものがあります。このチュートリアルでは細かく解説しないので、詳しく知りたい方は、[公式ドキュメントのリファレンス](https://jestjs.io/ja/docs/expect)をご覧ください。
 
-## テストを実行する
+### テストを実行する
 
 1つ目のテストケースができたので、Jestでテストを実行してみましょう。
 
@@ -280,7 +286,7 @@ yarn jest
 
 ![](/tutorials/jest/yarn-jest-isZero-1.svg)
 
-## テストケースを追加する
+### テストケースを追加する
 
 さらにテストケースを追加してみましょう。今度は、`isZero`関数に`1`を渡して、戻り値が`false`になるかをチェックするケースを追加します。
 
@@ -315,5 +321,97 @@ yarn jest
 今度は次のような結果になるはずです。
 
 ![](/tutorials/jest/yarn-jest-isZero-2.svg)
+
+## Reactコンポーネントのテスト
+
+ここではReactのコンポーネントのテストを作成・実行してみましょう。
+
+### テストするコンポーネント
+
+具体的には、次のような簡単なコンポーネントのテストを書くことを例に進めていきます。
+
+```ts twoslash title="simpleButton.tsx"
+function simpleButton() {
+  const [state, setState] = useState(false);
+  const handleClick = () => {
+    setState(!state);
+  };
+  return <span onClick={handleClick}>{state ? "ON" : "OFF"}</span>;
+}
+```
+
+この`simpleButton`コンポーネントはボタンであり、はじめは`OFF`となっているボタン上の文字が、ボタンをクリックするたびに`ON`/`OFF`と切り替わるものです。
+
+### テスト対象のファイルを作る11
+
+まず、このコンポーネントを書いたファイルを作ります。ファイル名は`simpleButton.tsx`にしてください。
+
+```shell
+touch simpleButton.tsx
+```
+
+このファイルを作ると、プロジェクトのファイル構成は次のようになります。
+
+```text
+├── simpleButton.tsx ... テスト対象ファイル
+├── jest.config.js
+├── node_modules
+├── package.json
+├── tsconfig.json
+└── yarn.lock
+```
+
+:::caution
+上の「関数のテスト」も実施した方は、同じ場所に`isZero.ts`と`isZero.test.ts`もあります
+:::
+
+`simpleButton.tsx`の内容は次のようにします。
+
+```ts twoslash title="simpleButton.tsx"
+function simpleButton() {
+  const [state, setState] = useState(false);
+  const handleClick = () => {
+    setState(!state);
+  };
+  return <span onClick={handleClick}>{state ? "ON" : "OFF"}</span>;
+}
+// 注意: このままではテストできません。
+```
+
+このままでは`simpleButton`関数はテストできません。Jestでテストできるようにするには、コンポーネントをエクスポートする必要があります。コンポーネントをエクスポートするために、`function`の前に`export`キーワードを追加してください。
+
+```ts twoslash title="simpleButton.tsx" {1}
+export function simpleButton() {
+  const [state, setState] = useState(false);
+  const handleClick = () => {
+    setState(!state);
+  };
+  return <span onClick={handleClick}>{state ? "ON" : "OFF"}</span>;
+}
+```
+
+### コンポーネントのテスト方法
+
+コンポーネント
+
+### スナップショットを使ったテスト: テストコードを書く
+
+### スナップショットを使ったテスト: テストを実行する
+
+### スナップショットを使わないテスト: テストコードを書く
+
+### スナップショットを使わないテスト: テストを実行する
+
+## モックを使用したテスト
+
+### モックとは何か
+
+### テストするコンポーネントa
+
+### テスト対象のファイルを作るa
+
+### モックを用いたテストコードを書く
+
+### モックを用いたテストコードを実行する
 
 以上でJestを体験してみるチュートリアルは完了です。
