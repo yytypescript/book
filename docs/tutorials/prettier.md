@@ -102,6 +102,15 @@ yarn prettier -v
 2.8.1
 ```
 
+プロジェクトにMarkdownファイルを一緒に含める場合、Prettierは日本語と英数字の間に半角スペースを挿入する挙動を取ります。（Markdownファイルのみに影響します）  
+この挙動が気に入らない場合、パッチプラグインである「[`prettier-plugin-md-nocjsp`](https://www.npmjs.com/package/prettier-plugin-md-nocjsp)」を一緒にインストールする必要があります。
+
+```shell
+yarn add -D prettier-plugin-md-nocjsp
+```
+
+なお、このプラグインの仕様は、開発中であるPrettierのバージョン3系に取り入られていますので、将来Prettierのメジャーアップデートを済ませたら、削除してください。
+
 ## TypeScriptを自動整形する
 
 `prettier`コマンドを利用して、TypeScriptのファイルをPrettierで自動整形してみましょう。
@@ -201,6 +210,24 @@ touch .prettierrc
   "tabWidth": 2,
   "semi": true,
   "singleQuote": true
+}
+```
+
+先述の`prettier-plugin-md-nocjsp`をインストールした場合は、次のようにします。
+
+```json title=".prettierrc"
+{
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": ["*.md", "README"],
+      "options": {
+        "parser": "markdown-nocjsp"
+      }
+    }
+  ]
 }
 ```
 
