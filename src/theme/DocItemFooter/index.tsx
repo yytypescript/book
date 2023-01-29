@@ -98,7 +98,7 @@ function OtherActions({ permalink }: { readonly permalink: string }) {
     <ul style={{ fontSize: "0.8em", listStyle: "none", padding: 0 }}>
       <li>
         <a
-          href={`https://github.com/yytypescript/book/issues/new?labels=%E8%AA%AD%E8%80%85%E3%81%AE%E8%B3%AA%E5%95%8F&title=質問です&body=${encodeURIComponent(
+          href={`https://github.com/yytypescript/book/discussions/new?category=q-a&title=質問です&body=${encodeURIComponent(
             `<!--ここに質問内容を書いてください。-->\n\n\n関連ページ: ${url}`
           )}`}
           target="_blank"
