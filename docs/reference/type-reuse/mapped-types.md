@@ -57,22 +57,6 @@ type Readonly<T> = {
 
 [keyof型演算子](keyof-type-operator.md)
 
-## インデックス型と異なるところ
-
-Mapped Typesはインデックス型と異なり`symbol`型もキーにすることができます。
-
-```ts twoslash
-type Identifier = symbol | 1;
-type Sample = {
-  [P in Identifier]: string;
-};
-
-const sample: Sample = {
-  1: "pork",
-  [Symbol("thick")]: "thin",
-};
-```
-
 ## Mapped Typesには追加のプロパティが書けない
 
 Mapped Typesは追加のプロパティが定義できません。ここは、[インデックス型]とは異なる点です。
