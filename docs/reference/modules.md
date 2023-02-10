@@ -22,6 +22,44 @@
 
 大規模なプログラムを作る場合、それぞれの機能ごとにモジュールを分けることで、各モジュールを読みやすく、保守性も高く、再利用もしやすくなります。
 
+### JavaScriptのモジュール
+
+JavaScriptのモジュールは、`export`または`import`を1つ以上含むJavaScriptファイルを言います。
+
+- `export`は他のモジュールに変数を公開するためのキーワードです。
+- `import`は他のモジュールから変数をインポートするキーワードです。
+
+`export`と`import`を使うと、モジュール間で変数を受け渡しできるようになります。
+
+たとえば、次は変数`world`をエクスポートしているモジュールです。
+
+```ts twoslash title="world.js"
+export const world = "World";
+```
+
+別のファイルでこれをインポートして使います。
+
+```ts twoslash title="hello.js"
+// @filename: world.js
+export const world = "World";
+// @filename: hello.js
+// ---cut---
+import { world } from "./world";
+console.log(`Hello ${world}`);
+// @log: Hello World
+```
+
+### 値の公開と非公開
+
+JavaScriptのモジュールは、明示的に`export`をつけた値だけが公開され、他のモジュールから参照できます。たとえば、次の例の`publicValue`は他のモジュールから利用できます。一方、`privateValue`は外部からは利用できません。
+
+```js twoslash
+export const publicValue = 1;
+const privateValue = 2;
+```
+
+JavaScriptのモジュールでは、デフォルトで変数や関数などを非公開になるわけです。Javaなどの他の言語では、モジュール(パッケージ)のメンバーがデフォルトで公開になり、非公開にしたいものには`private`修飾子をつける言語があります。そういった言語と比べると、JavaScriptは基本方針が真逆なので注意が必要です。
+
 ### パッケージとモジュールの違い
 
 モジュールと似た用語に、パッケージ(package)という言葉があります。プログラミング言語によって、モジュールとパッケージの定義は異なります。JavaScriptでは、これらはどのように捉えられているでしょうか。
@@ -175,9 +213,9 @@ module.exports.myFunction = () => {
 };
 ```
 
-## モジュール解決
-
 ## ESモジュールの構文
+
+## モジュール解決
 
 ## ESモジュールの仕様
 
