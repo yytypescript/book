@@ -4,10 +4,10 @@
 
 ## 本章で学べること
 
-本章では、簡単な関数のテストをJestで書くことを目標に、次のことを学びます。
+本章では、簡単な関数やReactコンポーネントのテストをJestで書けるようになることを目標に、次のことを学びます。
 
-- Jestを使ってTypeScriptの関数をテストする方法
 - Jestの導入方法
+- Jestを使ってTypeScriptの関数やReactコンポーネントをテストする方法
 - Jestでのテストの書き方
 - テストの実行方法
 - 結果の見方
@@ -322,73 +322,146 @@ yarn jest
 
 ![](/tutorials/jest/yarn-jest-isZero-2.svg)
 
+関数のテストについては以上です。
+このセクションで作成した`isZero.ts`と`isZero.test.ts`は以降では使用しないため、削除しても構いません。
+
 ## Reactコンポーネントのテスト
 
-ここではReactのコンポーネントのテストを作成・実行してみましょう。
+ここでは、Reactのコンポーネントのテストを作成・実行してみましょう。
+Reactでコンポーネントを作れることを前提にしますので、Reactの基本的な使い方を知りたいという方は[Reactでいいねボタンを作ろう](./react-like-button-tutorial.md)をご参照ください。
+
+### Reactプロジェクトの作成
+
+テストに使用するためのReactプロジェクトを作成します。
+
+```shell
+npx create-react-app jest-tutorial-react --template typescript
+```
+
+上記のコマンドを実行すると次のように聞かれることがありますが、`y`を押して`create-react-app`をインストールしてください。時間がかかることもあるので、のんびり待ちましょう。
+
+```shell
+$ npx create-react-app jest-tutorial-react --template typescript
+
+Need to install the following packages:
+  create-react-app
+Ok to proceed? (y)
+
+```
+
+成功すると今いるディレクトリ配下に`jest-tutorial-react`というディレクトリが作られます。
+そのまま下記コマンドを実行して`jest-tutorial-react`に移動しましょう。
+
+```shell
+cd jest-tutorial-react
+```
+
+移動先で、プロジェクトのファイル構成は次のようになっているはずです。
+
+```text
+├── README.md
+├── node_modules
+├── package-lock.json
+├── package.json
+├── public
+├── src
+└── tsconfig.json
+```
+
+ここで下記コマンドを実行してください。
+
+```shell
+yarn start
+```
+
+自動的にブラウザが開かれて次の画像のように表示されれば、プロジェクト作成が成功しています。
+
+![ひながた初期状態の画面](react-like-button-tutorial/screen1.png)
 
 ### テストするコンポーネント
 
-具体的には、次のような簡単なコンポーネントのテストを書くことを例に進めていきます。
+ここでは、次のような簡単なボタンコンポーネントのテストを書くことを例に進めていきます。
 
-```ts twoslash title="simpleButton.tsx"
-function simpleButton() {
-  const [state, setState] = useState(false);
-  const handleClick = () => {
-    setState(!state);
-  };
-  return <span onClick={handleClick}>{state ? "ON" : "OFF"}</span>;
-}
-```
+![ボタン上の文字がクリックによってON,OFFと切り替わる様子](jest/simpleButton.gif)
 
-この`simpleButton`コンポーネントはボタンであり、はじめは`OFF`となっているボタン上の文字が、ボタンをクリックするたびに`ON`/`OFF`と切り替わるものです。
+見てのとおり、はじめは`OFF`となっているボタン上の文字が、ボタンをクリックするたびに`ON`/`OFF`と切り替わります。
+このコンポーネントについて、次のことをテストできるようになることが目標です。
 
-### テスト対象のファイルを作る11
+- はじめは`OFF`と表示されていること
+- ボタンをクリックすると表示が`ON`に切り替わること
 
-まず、このコンポーネントを書いたファイルを作ります。ファイル名は`simpleButton.tsx`にしてください。
+### テスト対象のコンポーネントを作る
+
+まず、このコンポーネントを書いたファイルを`src`ディレクトリ配下に作ります。ファイル名は`SimpleButton.tsx`としてください。
 
 ```shell
-touch simpleButton.tsx
+cd src
+touch SimpleButton.tsx
 ```
 
-このファイルを作ると、プロジェクトのファイル構成は次のようになります。
+このファイルを作ると、`src`ディレクトリのファイル構成は次のようになります。
 
 ```text
-├── simpleButton.tsx ... テスト対象ファイル
-├── jest.config.js
-├── node_modules
-├── package.json
-├── tsconfig.json
-└── yarn.lock
+├── App.css
+├── App.test.tsx
+├── App.tsx
+├── index.css
+├── index.tsx
+├── logo.svg
+├── react-app-env.d.ts
+├── reportWebVitals.ts
+├── setupTests.ts
+└── SimpleButton.tsx
 ```
 
-:::caution
-上の「関数のテスト」も実施した方は、同じ場所に`isZero.ts`と`isZero.test.ts`もあります
+`SimpleButton.tsx`の内容は次のようにします。
+
+```ts twoslash title="SimpleButton.tsx"
+import { useState } from "react";
+
+export const SimpleButton: () => JSX.Element = () => {
+  const [state, setState] = useState(false);
+  const handleClick = () => {
+    setState(!state);
+  };
+  return <button onClick={handleClick}>{state ? "ON" : "OFF"}</button>;
+};
+```
+
+ここで、この`SimpleButton`コンポーネントの挙動を確認してみましょう。
+`index.tsx`ファイルを次のようにして保存してください。
+
+```ts twoslash title="index.tsx"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { SimpleButton } from "./simpleButton";
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
+  <React.StrictMode>
+    <SimpleButton />
+  </React.StrictMode>
+);
+```
+
+そのうえで下記コマンドを実行しましょう。
+
+```shell
+yarn start
+```
+
+すると、ブラウザが自動で立ち上がり、次のようなボタンが表示されます。
+初めは`OFF`と表示され、クリックにより`ON`と`OFF`が交互に切り替わることを確認してください。
+
+![ボタン上の文字がクリックによってON,OFFと切り替わる様子](jest/simpleButton.gif)
+
+:::info
+ボタンが小さければ、ブラウザの拡大率を上げてみると大きく表示されます。
 :::
 
-`simpleButton.tsx`の内容は次のようにします。
-
-```ts twoslash title="simpleButton.tsx"
-function simpleButton() {
-  const [state, setState] = useState(false);
-  const handleClick = () => {
-    setState(!state);
-  };
-  return <span onClick={handleClick}>{state ? "ON" : "OFF"}</span>;
-}
-// 注意: このままではテストできません。
-```
-
-このままでは`simpleButton`関数はテストできません。Jestでテストできるようにするには、コンポーネントをエクスポートする必要があります。コンポーネントをエクスポートするために、`function`の前に`export`キーワードを追加してください。
-
-```ts twoslash title="simpleButton.tsx" {1}
-export function simpleButton() {
-  const [state, setState] = useState(false);
-  const handleClick = () => {
-    setState(!state);
-  };
-  return <span onClick={handleClick}>{state ? "ON" : "OFF"}</span>;
-}
-```
+それではここからこのコンポーネントをテストしていきます。
 
 ### コンポーネントのテスト方法
 
