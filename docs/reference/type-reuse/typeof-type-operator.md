@@ -1,6 +1,6 @@
 # typeof型演算子
 
-TypeScriptの`typeof`は変数から型を抽出する型演算子です。次は、変数`point`に`typeof`演算子を用いて、`Point`型を定義する例です。このPoint型は次のような型になります。
+TypeScriptの`typeof`は変数から型を抽出する型演算子です。次は、変数`point`に`typeof`型演算子を用いて、`Point`型を定義する例です。このPoint型は次のような型になります。
 
 ```ts twoslash
 const point = { x: 135, y: 35 };
