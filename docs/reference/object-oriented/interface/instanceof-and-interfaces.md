@@ -1,87 +1,145 @@
 # インターフェースとinstanceof
 
-インターフェースはTypeScriptで独自に定義された概念であり、JavaScriptには存在しません。つまりコンパイルをかけると消えてなくなります。そのため他の言語でできるような**その型が期待するインターフェースかどうか**の判定ができません。上記の`Student`インターフェースで次のようなことをしても実行することはできません。
+JavaやPHPなど`instanceof`演算子がある言語があり、それを用いるとインターフェース名を使って型を判定できます。
 
-```ts twoslash
-interface Student {}
-
-const studentA = {};
-// ---cut---
-// @errors: 2358 2693
-if (studentA instanceof Student) {
-  // ...
+```php title="PHPのinstanceof演算子の例"
+interface MyInterface
+{
 }
+
+class MyClass implements MyInterface
+{
+}
+
+$a = new MyClass();
+var_dump($a instanceof MyInterface);
+//=> bool(true)
 ```
 
-これを解消するためには型ガードを自前で実装する必要があります。以下はその例の`isStudent()`です。
+## インターフェースはコンパイルで消える
+
+TypeScriptは上のような言語とは異なり、`instanceof インターフェイス名`で型を判定することができません。もしも、`instanceof`演算子にインターフェース名を使うと、コンパイルエラーになります。
+
+```ts twoslash title="TypeScriptでinstanceof演算子を使うとコンパイルエラーになる例"
+// @errors: 2693
+interface MyInterface {}
+
+class MyClass implements MyInterface {}
+
+const a = new MyClass();
+console.log(a instanceof MyInterface);
+```
+
+なぜかというと、インターフェースがTypeScript固有の機能でコンパイル時にコードから消えるためです。インターフェースは型レベルのものです。TypeScriptはJavaScriptにコンパイルするとき、型レベルのものを消します。変数の型注釈がコンパイル時に消えるのと同じ理屈です。
+
+コンパイル時に消えるということは、JavaScript実行時にインターフェースの情報が、どこにもないということです。そのため、`instanceof`がインターフェース名を取ることができないというわけです。
+
+## インターフェースの判定には型ガード関数を使う
+
+実行時に値がインターフェースと互換しているかを判定するには、[型ガード関数](../../functions/type-guard-functions.md)を用います。型ガード関数は、型を判定したい値を引数に取り、`true`または`false`を返す関数です。たとえば、値が`Student`インターフェース型であるかを判定する関数は次のようになります。
 
 ```ts twoslash
 interface Student {
   name: string;
-  age: number;
   grade: number;
 }
-// ---cut---
-type UnknownObject<T extends object> = {
-  [P in keyof T]: unknown;
-};
 
-function isStudent(obj: unknown): obj is Student {
-  if (typeof obj !== "object") {
+// Student型かを判定する型ガード関数
+function isStudent(value: unknown): value is Student {
+  // 値がオブジェクトであるかの判定
+  if (typeof value !== "object" || value === null) {
     return false;
   }
-  if (obj === null) {
+  const { name, grade } = value as Record<keyof Student, unknown>;
+  // nameプロパティーが文字列型かを判定
+  if (typeof name === "string") {
     return false;
   }
-
-  const { name, age, grade } = obj as UnknownObject<Student>;
-
-  if (typeof name !== "string") {
+  // gradeプロパティーが数値型かを判定
+  if (grade === "number") {
     return false;
   }
-  if (typeof age !== "number") {
-    return false;
-  }
-  if (typeof grade !== "number") {
-    return false;
-  }
-
   return true;
 }
 ```
 
-以下は`isStudent()`の解説です。
-
-## 戻り値の`obj is Student`
-
-Type predicateと呼ばれる機能です。専門に解説してあるページがありますので参照ください。ここではこの関数が戻り値として`true`を返すと、呼び出し元では引数`obj`が`Student`として解釈されるようになります。
-
-[型ガード関数 (type guard function)](../../functions/type-guard-functions.md)
-
-## `UnknownObject`
-
-`typeof`で判定される`object`型はオブジェクトではあるものの、プロパティが何も定義されていない状態です。そのためそのオブジェクトがどのようなプロパティを持っているかの検査すらできません。
+そして、この`isStudent`関数を`instanceof`の代わりに用いると、実行時に型の判定ができるようになります。
 
 ```ts twoslash
-// @errors: 2339
-const obj: object = {
-  name: "花子",
-};
+interface Student {
+  name: string;
+  grade: number;
+}
 
-obj.name;
-```
-
-そこでインデックス型を使っていったんオブジェクトのいかなるプロパティも`unknown`型のオブジェクトであると型アサーションを使い解釈させます。これですべての`string`型のプロパティにアクセスできるようになります。あとは各々の`unknown`型のプロパティを`typeof, instanceof`で判定させれば**この関数の判定が正しい限り**TypeScriptは引数が期待する`Student`インターフェースを実装したオブジェクトであると解釈します。
-
-## 関数の判定が正しい限りとは
-
-インターフェースに変更が加わった時この関数も同時に更新されないとこの関係は崩れてしまいます。たとえば`student.name`は現在`string`型ですが、これが姓名の区別のために次のようなオブジェクトに差し替えられたとします。
-
-```ts twoslash
-interface Name {
-  surname: string;
-  givenName: string;
+// Student型かを判定する型ガード関数
+function isStudent(value: unknown): value is Student {
+  // 値がオブジェクトであるかの判定
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+  const { name, grade } = value as Record<keyof Student, unknown>;
+  // nameプロパティが文字列型かを判定
+  if (typeof name === "string") {
+    return false;
+  }
+  // gradeプロパティが数値型かを判定
+  if (grade === "number") {
+    return false;
+  }
+  return true;
+}
+// ---cut---
+const tom: object = { name: "Tom", grade: 2 };
+//    ^?
+if (isStudent(tom)) {
+  tom;
+  // ^?
 }
 ```
 
-この変更に対し`isStudent()`も随伴して更新されなければこの関数が`Student`インターフェースであると判定するオブジェクトの`name`プロパティは明らかに違うものになるでしょう。
+型ガード関数の詳細については、次のページをご覧ください。
+
+[型ガード関数](../../functions/type-guard-functions.md)
+
+## 複雑なインターフェースの判定はzodが便利
+
+型ガード関数の例として、上で`isStudent`の実装を示しましたが、中身を見てみるとプロパティーごとに型を判定するロジックが必要なのが分かります。プロパティーが少なければ、型ガード関数の実装は短く保守可能な範囲に収まりますが、プロパティーが多くなると保守困難なコードになると想像されます。
+
+そのようなケースで便利なのが[zod](https://zod.dev/)です。zodはオブジェクトの構造をチェックするライブラリで、TypeScript向けに作られています。zodでは、オブジェクトの構造を定義すると、構造をチェックする型ガード関数が得られます。次は、`isStudent`をzodで実装した例です。
+
+```ts twoslash
+import z from "zod";
+
+// zodによるスキーマの定義
+const studentSchema = z.object({
+  name: z.string(),
+  grade: z.number(),
+});
+// インターフェースの型を導出
+type Student = z.infer<typeof studentSchema>;
+//   ^?
+// 型ガード関数
+function isStudent(value: unknown): value is Student {
+  return studentSchema.safeParse(value).success;
+}
+// 型の判定
+const tom: object = { name: "Tom", grade: 2 };
+if (isStudent(tom)) {
+  tom;
+  //^?
+}
+```
+
+zodを用いると、宣言的なコードになることで、型ガード関数の細かい実装を自分で書かなくてよくなることがわかるかと思います。プロパティーの数が多いインターフェースや、プロパティーがネストされて構造化されたインターフェースの型ガード関数が必要になった場合は、zodの導入を検討してみるといいでしょう。
+
+## 抽象クラスと`instanceof`
+
+TypeScriptにはインターフェースの似たものに[抽象クラス](./../class/abstract-class.md)があります。抽象クラスはインターフェースと異なり、`instanceof`演算子が使えます。これは、抽象クラスはコンパイルしても、クラスとして残るためです。
+
+```ts twoslash
+abstract class AbstractClass {}
+class ConcreteClass extends AbstractClass {}
+const obj = new ConcreteClass();
+console.log(obj instanceof AbstractClass);
+// @log: true
+```
