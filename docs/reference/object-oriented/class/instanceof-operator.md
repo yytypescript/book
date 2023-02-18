@@ -4,7 +4,7 @@
 
 ## 構文
 
-```js
+```js twoslash
 // prettier-ignore
 オブジェクト instanceof クラス
 ```

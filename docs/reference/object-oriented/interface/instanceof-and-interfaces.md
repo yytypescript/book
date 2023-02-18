@@ -1,6 +1,10 @@
 # インターフェースとinstanceof
 
-JavaやPHPなど`instanceof`演算子がある言語があり、それを用いるとインターフェース名を使って型を判定できます。
+[instanceof演算子](../class/instanceof-operator.md)は、オブジェクトがクラスのインスタンスかを判定するJavaScriptの演算子です。ここでは、`instanceof`演算子がTypeScriptのインターフェースとどのような関係にあるのかを解説します。
+
+## 他言語の`instanceof`との違い
+
+JavaやPHPなど他の言語の`instanceof`演算子は、インターフェースに用いることができる言語もありますので、他言語の次にTypeScriptに学ぶ場合は注意してください。次はPHPで`instanceof`演算子をインターフェースに使っている例です。
 
 ```php title="PHPのinstanceof演算子の例"
 interface MyInterface
@@ -16,7 +20,7 @@ var_dump($a instanceof MyInterface);
 //=> bool(true)
 ```
 
-## インターフェースはコンパイルで消える
+### `instanceof`はインターフェースに使えない
 
 TypeScriptは上のような言語とは異なり、`instanceof インターフェイス名`で型を判定することができません。もしも、`instanceof`演算子にインターフェース名を使うと、コンパイルエラーになります。
 
