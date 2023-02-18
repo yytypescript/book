@@ -42,3 +42,45 @@ class Meat extends Food {
   }
 }
 ```
+
+## JavaScriptへのコンパイルしたときに起こること
+
+TypeScriptの抽象クラスは、JavaScriptにコンパイルしたとき、消されることなく残ります。何も中身がない抽象クラスを定義してコンパイルしてみるとどうなるでしょうか。
+
+```ts twoslash
+abstract class AbstractClass {}
+```
+
+上のTypeScriptをコンパイルすると、次のJavaScriptが生成されます。
+
+```ts twoslash title="コンパイル結果"
+// @showEmit
+// @alwaysStrict: false
+abstract class AbstractClass {}
+```
+
+このように、抽象クラスは`abstract`修飾子が外され、ただのクラスとしてコンパイルされます。
+
+抽象メソッドは、コンパイル時に消されます。たとえば、次の実装の中身がある`concreteMethod`は残りますが、抽象メソッドの`abstractMethod`は消えます。
+
+```ts twoslash
+abstract class AbstractClass {
+  concreteMethod(): void {
+    /* 実装の中身 */
+  }
+  abstract abstractMethod(): void;
+}
+```
+
+上のTypeScriptのコンパイル結果は次のようになります。
+
+```ts twoslash title="コンパイル結果"
+// @showEmit
+// @alwaysStrict: false
+abstract class AbstractClass {
+  concreteMethod(): void {
+    /* 実装の中身 */
+  }
+  abstract abstractMethod(): void;
+}
+```
