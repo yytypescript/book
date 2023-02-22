@@ -65,7 +65,7 @@ type T = MixedArray[number];
 //   ^?
 ```
 
-[`typeof`型演算子](typeof-type-operator.md)と組み合わせると、配列の値から要素の型を導くこともできます。
+[`typeof`型演算子](typeof-type-operator.md)と組み合わせると、[タプル型](../values-types-variables/tuple.md)の値から各要素の型を導くこともできます。
 
 ```ts twoslash
 const stateList = ["open", "closed"] as const;
