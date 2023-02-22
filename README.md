@@ -31,3 +31,9 @@ https://typescriptbook.jp/
 執筆に参加する方法は次のページをご覧ください。
 
 https://typescriptbook.jp/writing
+
+## コントリビューター
+
+数々のPRありがとうございます！
+
+[![](https://contrib.rocks/image?repo=yytypescript/book)](https://github.com/yytypescript/book/graphs/contributors)
