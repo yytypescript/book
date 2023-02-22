@@ -78,6 +78,8 @@ sidebar_label: 本書の概要
 - takezoux2
 - \_rena_h
 
+[![](https://contrib.rocks/image?repo=yytypescript/book)](https://github.com/yytypescript/book/graphs/contributors)
+
 ## 継続的アップデート
 
 本書は継続的にアップデートされていきます。
