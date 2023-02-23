@@ -323,30 +323,30 @@ yarn jest
 ![](/tutorials/jest/yarn-jest-isZero-2.svg)
 
 関数のテストについては以上です。
-このセクションで作成した`isZero.ts`と`isZero.test.ts`は以降では使用しないため、削除しても構いません。
 
 ## Reactコンポーネントのテスト
 
-ここでは、Reactのコンポーネントのテストを作成・実行してみましょう。
-Reactでコンポーネントを作れることを前提にしますので、Reactの基本的な使い方を知りたいという方は[Reactでいいねボタンを作ろう](./react-like-button-tutorial.md)をご参照ください。
+ここでは、Reactコンポーネントのテストを作成・実行してみましょう。
+Reactでコンポーネントが作れることを前提にしますので、Reactの基本的な使い方を知りたいという方は[Reactでいいねボタンを作ろう](./react-like-button-tutorial.md)をご参照ください。
+
+:::info
+このセクションから読んで頂くこともできるよう、ここからは前セクション「関数のテスト」で使ったディレクトリとは異なる、新しいディレクトリで進めます。
+:::
 
 ### Reactプロジェクトの作成
 
-テストに使用するためのReactプロジェクトを作成します。
+テストに使用するためのReactプロジェクトを作成します。下記コマンドを実行してください。
 
 ```shell
 npx create-react-app jest-tutorial-react --template typescript
 ```
 
-上記のコマンドを実行すると次のように聞かれることがありますが、`y`を押して`create-react-app`をインストールしてください。時間がかかることもあるので、のんびり待ちましょう。
+上記を実行すると次のように聞かれることがありますが、`y`を押して`create-react-app`をインストールしてください。時間がかかることもあるので、のんびり待ちましょう。
 
 ```shell
-$ npx create-react-app jest-tutorial-react --template typescript
-
 Need to install the following packages:
   create-react-app
 Ok to proceed? (y)
-
 ```
 
 成功すると今いるディレクトリ配下に`jest-tutorial-react`というディレクトリが作られます。
@@ -356,7 +356,7 @@ Ok to proceed? (y)
 cd jest-tutorial-react
 ```
 
-移動先で、プロジェクトのファイル構成は次のようになっているはずです。
+`jest-tutorial-react`配下のファイル構成は次のようになっているはずです。
 
 ```text
 ├── README.md
@@ -368,7 +368,7 @@ cd jest-tutorial-react
 └── tsconfig.json
 ```
 
-ここで下記コマンドを実行してください。
+ここで次のコマンドを実行してください。
 
 ```shell
 yarn start
@@ -385,14 +385,15 @@ yarn start
 ![ボタン上の文字がクリックによってON,OFFと切り替わる様子](jest/simpleButton.gif)
 
 見てのとおり、はじめは`OFF`となっているボタン上の文字が、ボタンをクリックするたびに`ON`/`OFF`と切り替わります。
-このコンポーネントについて、次のことをテストできるようになることが目標です。
+このコンポーネントについて次の2点をテストしていきます。
 
 - はじめは`OFF`と表示されていること
 - ボタンをクリックすると表示が`ON`に切り替わること
 
 ### テスト対象のコンポーネントを作る
 
-まず、このコンポーネントを書いたファイルを`src`ディレクトリ配下に作ります。ファイル名は`SimpleButton.tsx`としてください。
+テストを作成するために、まずは対象コンポーネントを実装していきます。
+`src`ディレクトリ配下に、`SimpleButton.tsx`という名前でファイルを作成してください。
 
 ```shell
 cd src
@@ -416,7 +417,7 @@ touch SimpleButton.tsx
 
 `SimpleButton.tsx`の内容は次のようにします。
 
-```ts twoslash title="SimpleButton.tsx"
+```tsx twoslash title="SimpleButton.tsx"
 import { useState } from "react";
 
 export const SimpleButton: () => JSX.Element = () => {
@@ -431,10 +432,11 @@ export const SimpleButton: () => JSX.Element = () => {
 ここで、この`SimpleButton`コンポーネントの挙動を確認してみましょう。
 `index.tsx`ファイルを次のようにして保存してください。
 
-```ts twoslash title="index.tsx"
+```tsx twoslash title="index.tsx"
+// @noErrors
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { SimpleButton } from "./simpleButton";
+import { SimpleButton } from "./SimpleButton";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -461,30 +463,133 @@ yarn start
 ボタンが小さければ、ブラウザの拡大率を上げてみると大きく表示されます。
 :::
 
-それではここからこのコンポーネントをテストしていきます。
+これで今回テストするコンポーネントを作成できました。
 
 ### コンポーネントのテスト方法
 
-コンポーネント
+Reactコンポーネントをテストする方法は多くありますが、ここでは比較的よく用いられる2つの手法を紹介します。
 
-### スナップショットを使ったテスト: テストコードを書く
+まずひとつがJestの「スナップショットテスト」機能を用いる方法、そしてもうひとつは`@testing-library/react`というReactコンポーネントのテストに特化したライブラリを使用する方法です。後ほど述べるように両者は組み合わせて使うこともできます。
 
-### スナップショットを使ったテスト: テストを実行する
+Jestの「スナップショットテスト」とは簡単に言えば、ある瞬間におけるコンポーネントの全体の状態を確かめるテストです。
+「スナップショットテスト」は便利である一方、コンポーネントの中で本当に確認したい箇所だけを検証するテストや、コンポーネントに対して特定の操作を施すテストを作成したいこともあります。`@testing-library/react`は、そのようなテストを可能にするライブラリです。
 
-### スナップショットを使わないテスト: テストコードを書く
+それでは、それぞれの手法を用いたテストを実際に作ってみましょう。
 
-### スナップショットを使わないテスト: テストを実行する
+### Jestを用いた「スナップショットテスト」の作り方とやり方
 
-## モックを使用したテスト
+Jestの「スナップショットテスト」とは、まずはコンポーネントのDOMをまるごと保存し、その保存したDOMと、テスト実行時にコンポーネントを描画して生成したDOMとが一致するかを確認するテストです(DOMとは何かがよく分からない場合、ここではひとまず「コンポーネントを表すオブジェクト」程度に捉えてください)。保存されたDOMを「スナップショット」と呼びます。
 
-### モックとは何か
+:::caution
+本来、スナップショットテストの対象はコンポーネントおよびDOMに限られたものではありません。幅広い対象にスナップショットテストが実施できます。詳しくはJestの[公式ドキュメント](https://jestjs.io/ja/docs/snapshot-testing#%E3%82%B9%E3%83%8A%E3%83%83%E3%83%97%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E3%81%AFreact%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%81%A7%E3%81%AE%E3%81%BF%E5%88%A9%E7%94%A8%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%81%8B)をご参照ください。
+:::
 
-### テストするコンポーネントa
+スナップショットテストを実際にやってみましょう。
+先ほどと同じ`src`ディレクトリ配下で`SimpleButton.test.tsx`というファイルを作成します。
 
-### テスト対象のファイルを作るa
+```shell
+touch SimpleButton.test.tsx
+```
 
-### モックを用いたテストコードを書く
+スナップショットテストは次の2ステップから成ります。
 
-### モックを用いたテストコードを実行する
+1. スナップショットを検証したい状態にコンポーネントを持っていく
+2. スナップショットに照合する
+
+ここではボタンが描画されてまだ何も操作されていない状態、つまりボタンにOFFと表示されている状態についてスナップショットテストを実施することを考えます。描画されたばかりの状態を検証したいので、描画してすぐにスナップショット照合を行えばよいことになります。
+
+この考えをもとに、実際のコードを書いてみましょう。
+コンポーネントの描画には`@testing-library/react`の`render`関数を、スナップショットの照合にはJestの`toMatchSnapshot()`関数をそれぞれ使用して次のように書くことができます。
+
+```tsx twoslash title="SimpleButton.test.tsx"
+// @noErrors
+import { render } from "@testing-library/react";
+import { SimpleButton } from "./SimpleButton";
+
+test("描画されてすぐはOFFと表示されている", () => {
+  const view = render(<SimpleButton />);
+  expect(view.container).toMatchSnapshot();
+});
+```
+
+:::info
+Jest単体ではReactコンポーネントの描画ができません。そこで、コンポーネントの描画をするためのライブラリを導入する必要があります。多くのライブラリがありますが、ここでは後ほど紹介する`@testing-library/react`を用いました。
+:::
+
+テストファイルが作成できたら、`yarn test`コマンドを実行します。
+
+```shell
+yarn test
+```
+
+そうすると次のように表示され、テストが実行されて成功した(`PASS`した)ことがわかります。
+
+![SimpleButtonコンポーネントのテストがPASSした結果画面](jest/result_pass.png)
+
+さて、このとき`src`ディレクトリの中に`__snapshots__`というディレクトリが自動で追加されているはずです。これはJestがスナップショットテスト用のファイルを保存していくためのフォルダです。
+Jestのスナップショットテストは初回実行時にスナップショットテスト用のファイルを生成し、2回目から照合を行います。いまは初回実行だったため、ファイルとその置き場であるディレクトリが自動で生成されました。
+
+ここでスナップショットテストについてもう少しだけ知るために、生成されたスナップショットテスト用のファイルの中身を覗いてみましょう。
+
+`__snapshots__`ディレクトリの中に作られた`SimpleButton.test.tsx.snap`は次のようになっています。
+
+```txt twoslash title='SimpleButton.test.tsx.snap'
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+exports[`描画されてすぐはOFFと表示されている 1`] = `
+<div>
+  <button>
+    OFF
+  </button>
+</div>
+`;
+```
+
+このように、スナップショットテスト用のファイルはテストケースの名前と、そのテストケースで使われるスナップショットで構成されています。
+
+さて、今回生成されたスナップショットは`OFF`というテキストを持った`button`タグと、その親要素である`div`タグで構成されています。
+これは、まさに先ほど作った`SimpleButton`コンポーネントのDOMに一致します(`div`要素はReactの起動時に自動生成される要素です)。
+このスナップショットテストは実行のたびに、`SimpleButton`コンポーネントを描画して、たった今作られたこのスナップショットとの違いが生まれていないかを確認してくれます。
+たとえば、もしも何かの手違いで`SimpleButton`コンポーネントが描画されたときに`ON`と表示されるようになっていたら、このスナップショットテストに引っかかるのです。
+
+ここで、実際に失敗する様子も確認してみましょう。`SimpleButton`コンポーネントが描画されたときに`ON`と表示されるよう変更を加えます。
+
+```tsx twoslash {4,5} title="SimpleButton.tsx"
+import { useState } from "react";
+
+export const SimpleButton: () => JSX.Element = () => {
+  const [state, setState] = useState(true);
+  // falseからtrueに変更               ^^^^
+  const handleClick = () => {
+    setState(!state);
+  };
+  return <button onClick={handleClick}>{state ? "ON" : "OFF"}</button>;
+};
+```
+
+この状態で`yarn start`コマンドを実行すると、描画されたボタンの文字の初期値が`ON`になっていることが分かります。
+
+さて、ここで`yarn test`コマンドを実行します。
+
+```shell
+yarn test
+```
+
+先ほどのスナップショットテストが実行されますが、今回はテストが通らず、描画されたコンポーネントとスナップショットの差分が表示されます。
+
+![SimpleButtonコンポーネントのテストがFAILし、描画されたコンポーネントとスナップショットの差分が表示されている結果画面](jest/result_fail.png)
+
+今回はボタン内テキストの初期値を変更しましたが、たとえば`button`タグから`div`タグへの変更や`button`タグへのクラスの追加など、DOMに対する変更のほとんどをスナップショットテストで検知できます。
+
+スナップショットテストの詳しいやり方やベストプラクティスなど、さらに詳しい情報に触れたい方はJestの[公式ドキュメント](https://jestjs.io/ja/docs/snapshot-testing)をご参照ください。
+
+### `@testing-library/react`を用いたテストの作り方とやり方
+
+:::caution
+
+執筆中
+
+コンポーネントを操作し、コンポーネントの一部分の状態を確かめるようなテストを`@testing-library/react`で実現する方法
+
+:::
 
 以上でJestを体験してみるチュートリアルは完了です。
