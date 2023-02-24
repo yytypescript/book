@@ -80,6 +80,8 @@ sidebar_label: 本書の概要
 
 [![](https://contrib.rocks/image?repo=yytypescript/book)](https://github.com/yytypescript/book/graphs/contributors)
 
+コントリビューターの方でこちらのリストに掲載されていない方がいらっしゃいましたら[GitHub Issues](https://github.com/yytypescript/book/issues/new)にご連絡ください。
+
 ## 継続的アップデート
 
 本書は継続的にアップデートされていきます。
