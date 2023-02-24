@@ -111,7 +111,14 @@ const tsconfigForTwoslash = require(__dirname + "/tsconfig.twoslash.json");
                   label: "はじめて執筆する方へ",
                   to: "/writing/getting-started",
                 },
-                { label: "執筆の流れ", to: "/writing/how-to-change" },
+                {
+                  label: "チケット駆動",
+                  to: "/writing/ticket-driven",
+                },
+                {
+                  label: "環境構築からプルリクエストまでの流れ",
+                  to: "/writing/how-to-change",
+                },
                 { label: "Markdown", to: "/writing/markdown" },
                 { label: "PDR", to: "/writing/pdr" },
               ],

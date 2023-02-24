@@ -42,6 +42,8 @@ description: あなたが本書に貢献できること。
     - 内容の追記
   - 既存ページにコメントする
 
+[はじめて執筆する方へ](getting-started.md)
+
 ### 執筆会Discordに参加する
 
 執筆会にはDiscordがあります。
