@@ -8,7 +8,7 @@ TypeScriptはスケールするJavaScriptです。
 
 TypeScriptはJavaScriptの上位互換でJavaScriptに型が追加されているものです。TypeScriptで書かれたコードは純粋なJavaScriptにコンパイルされます。
 
-TypeScriptはJavaScriptが実行できるすべてのブラウザ、コンピュータ、OSで動作し、オープンソースです。
+TypeScriptはオープンソースであり、JavaScriptが実行できるすべてのブラウザ、コンピュータ、OSで動作します。
 
 特徴は次のとおりです
 
