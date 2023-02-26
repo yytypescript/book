@@ -445,7 +445,7 @@ interface SearchCatImage {
 
 type SearchCatImageResponse = SearchCatImage[];
 
-const fetchCatImage = async () => {
+const fetchCatImage = async (): Promise<SearchCatImage> => {
   const res = await fetch("https://api.thecatapi.com/v1/images/search");
   const result = (await res.json()) as SearchCatImageResponse;
   return result[0];
@@ -478,7 +478,7 @@ export default IndexPage;
 
 続いて`getServerSideProps`で猫画像を取得して、`IndexPage`にpropsとして渡します。
 
-```tsx twoslash {2,52-61} title="pages/index.tsx"
+```tsx twoslash {2,48-57} title="pages/index.tsx"
 import { useState } from "react";
 import type { NextPage, GetServerSideProps } from "next";
 
@@ -498,7 +498,7 @@ interface SearchCatImage {
 
 type SearchCatImageResponse = SearchCatImage[];
 
-const fetchCatImage = async () => {
+const fetchCatImage = async (): Promise<SearchCatImage> => {
   const res = await fetch("https://api.thecatapi.com/v1/images/search");
   const result = (await res.json()) as SearchCatImageResponse;
   return result[0];
