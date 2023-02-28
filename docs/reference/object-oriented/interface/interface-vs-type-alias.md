@@ -8,14 +8,14 @@ description: interfaceでの宣言とtype aliasによる宣言の違い
 
 ```ts twoslash
 // @noErrors
-type Animal = {
-  name: string;
-  bark(): string;
-};
 interface Animal {
   name: string;
   bark(): string;
 }
+type Animal = {
+  name: string;
+  bark(): string;
+};
 ```
 
 この章では、インターフェースと型エイリアスの違いについて詳しく説明していきます。
