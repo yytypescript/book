@@ -8,6 +8,7 @@ slug: /tutorials
 
 - フロントエンドアプリケーション(ReactとNext.js)
 - Jestを使った単体テスト
+- testing-libraryを使ったコンポーネントテスト
 - Prettierを使ったコードの自動整形
 - eslintを使ったコーディング規約の自動チェック
 
