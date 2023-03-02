@@ -1,4 +1,4 @@
-# JestでReactコンポーネントのテストを書こう
+# Reactコンポーネントのテストを書こう
 
 このチュートリアルでは、Reactコンポーネントのテストを書くことを学びます。
 
@@ -21,7 +21,7 @@ Reactでコンポーネントが作れることを前提にしますので、Rea
 テストに使用するためのReactプロジェクトを作成します。下記コマンドを実行してください。
 
 ```shell
-npx create-react-app jest-tutorial-react --template typescript
+npx create-react-app component-test-tutorial --template typescript
 ```
 
 上記を実行すると次のように聞かれることがありますが、`y`を押して`create-react-app`をインストールしてください。時間がかかることもあるので、のんびり待ちましょう。
@@ -32,14 +32,14 @@ Need to install the following packages:
 Ok to proceed? (y)
 ```
 
-成功すると今いるディレクトリ配下に`jest-tutorial-react`というディレクトリが作られます。
-そのまま下記コマンドを実行して`jest-tutorial-react`に移動しましょう。
+成功すると今いるディレクトリ配下に`component-test-tutorial`というディレクトリが作られます。
+そのまま下記コマンドを実行して`component-test-tutorial`に移動しましょう。
 
 ```shell
-cd jest-tutorial-react
+cd component-test-tutorial
 ```
 
-`jest-tutorial-react`配下のファイル構成は次のようになっているはずです。
+`component-test-tutorial`配下のファイル構成は次のようになっているはずです。
 
 ```text
 ├── README.md
@@ -68,11 +68,11 @@ yarn start
 
 ![ボタン上の文字がクリックによってON,OFFと切り替わる様子](jest/simpleButton.gif)
 
-このコンポーネントについて、ボタンをクリックすると表示が切り替わることをテストしましょう。
+このコンポーネントについて、ボタンをクリックすると`ON`/`OFF`の表示が切り替わることをテストしましょう。
 
 ## テスト対象のコンポーネントを作る
 
-テストを作成するために、まずは対象コンポーネントを実装していきます。
+テストを作成するために、まずはテスト対象となるコンポーネントを実装していきます。
 `src`ディレクトリ配下に、`SimpleButton.tsx`という名前でファイルを作成してください。
 
 ```shell
@@ -104,7 +104,7 @@ import { useState } from "react";
 export const SimpleButton: () => JSX.Element = () => {
   const [state, setState] = useState(false);
   const handleClick = () => {
-    setState(!state);
+    setState((prevState) => !prevState);
   };
   return <button onClick={handleClick}>{state ? "ON" : "OFF"}</button>;
 };
@@ -146,15 +146,16 @@ yarn start
 
 これで今回テストするコンポーネントを作成できました。
 
-## 基本的なテストの作り方とやり方
+## `testing-library`を使ったテストの作り方とやり方
 
 ここからはテストの作り方とやり方に入ります。
-今回は、ボタンをクリックすると表示が切り替わることをテストしていきます。
+今回は、ボタンをクリックすると`ON`/`OFF`の表示が切り替わることをテストしていきます。
 
-Reactコンポーネントをテストする方法は複数ありますが、ここでは利用者が比較的多い`testing-library`というライブラリ群を用います。
-`testing-library`はUIコンポーネントのテストをするためのライブラリ群であり、コンポーネントに対する操作やコンポーネントの描画などが実現できます。`testing-library`があれば、コンポーネントのテストはひととおりできると考えてよいです。
+Reactコンポーネントをテストする方法は複数ありますが、ここでは利用者が比較的多い`testing-library`というライブラリ群を用いる方法を紹介します。
+`testing-library`はUIコンポーネントのテストをするためのライブラリ群であり、コンポーネントの描画やコンポーネントに対する操作などが実現できます。`testing-library`があれば、コンポーネントのテストはひととおりできると考えてよいでしょう。
 
-それでは、実際にテストを作っていきます。まずは先ほどと同じ`src`ディレクトリ配下で`SimpleButton.test.tsx`というファイルを作成します。
+それでは、実際に`testing-library`を使ってテストを作っていきましょう。
+まずは先ほどと同じ`src`ディレクトリ配下で`SimpleButton.test.tsx`というファイルを作成します。
 
 ```shell
 touch SimpleButton.test.tsx
@@ -164,12 +165,12 @@ touch SimpleButton.test.tsx
 
 ```tsx twoslash title="SimpleButton.test.tsx"
 // @noErrors
-test("ボタンをクリックすると表示が切り替わる", () => {
+test("ボタンをクリックするとON/OFFの表示が切り替わる", () => {
   // ここにテストの中身を書いていきます
 });
 ```
 
-ここにテストの中身を追加していきます。今回はボタンをクリックすると表示が切り替わることがテストしたいので、次のような流れのテストコードになります。
+ここにテストの中身を追加していきます。今回はボタンをクリックすると`ON`/`OFF`の表示が切り替わることがテストしたいので、次のような流れのテストコードになります。
 
 1. ボタンを描画する
 2. `OFF`と表示されていることを確かめる
@@ -177,12 +178,12 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 4. `ON`と表示されていることを確かめる
 
 :::info
-コンポーネントのテストは、コンポーネントを描画した後、次の2つのことを組み合わせながら行われます。
+コンポーネントのテストは、コンポーネントを描画した後、次の2つのことを組み合わせて実現されます。
 
 1. コンポーネントに操作を施す
 2. コンポーネントの状態を確かめる
 
-今回の例もボタンを描画した後、「`OFF`と表示されている」という状態確認から始まり、「クリック」という操作を施した後、再び「`ON`と表示されている」という状態確認をしています。
+今回の例もボタンを描画した後、「`OFF`と表示されている」という状態確認から始まり、「クリック」という操作を施した後、再び「`ON`と表示されている」という状態確認をします。
 みなさんが自分でコンポーネントのテストを書く際も、どのような操作と状態確認を行えばよいかを意識することでテスト作成がスムーズにできるはずです。
 :::
 
@@ -194,13 +195,14 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 import { render } from "@testing-library/react";
 import { SimpleButton } from "./SimpleButton";
 
-test("ボタンをクリックすると表示が切り替わる", () => {
+test("ボタンをクリックするとON/OFFの表示が切り替わる", () => {
   render(<SimpleButton />);
 });
 ```
 
-ボタンが描画されたので、次は`OFF`と表示されていることを確かめます。具体的には、ボタンを特定し、そのテキストが`OFF`という文字列に等しいかのアサーションを実施します。
-今回、ボタンの特定には`@testing-library/react`が提供するクエリのひとつである`getByRole()`を使います。これは[WAI-ARIA](https://developer.mozilla.org/ja/docs/Learn/Accessibility/WAI-ARIA_basics)(アクセシビリティ向上を主目的として定められたwebの仕様)で定められたRoleを引数に指定すると、そのRoleを持つコンポーネントを取得するクエリです。詳細は[公式ドキュメント](https://testing-library.com/docs/queries/byrole)をご参照ください。
+ボタンが描画されたので、次は`OFF`と表示されていることを確かめます。具体的には、ボタンのDOM(DOMとは、ここではボタンを表すオブジェクトくらいに捉えていただければ大丈夫です)を取得し、そのテキストが`OFF`という文字列に等しいかのアサーションを実施します。
+今回、ボタンのDOMの取得には`@testing-library/react`が提供するクエリのひとつである`getByRole()`を使います。これは[WAI-ARIA](https://developer.mozilla.org/ja/docs/Learn/Accessibility/WAI-ARIA_basics)(アクセシビリティ向上を主目的として定められたwebの仕様)で定められたRoleを引数に指定すると、そのRoleを持つコンポーネントを取得するクエリです。詳細は[公式ドキュメント](https://testing-library.com/docs/queries/byrole)をご参照ください。
+
 具体的には、このように書けます。
 
 ```tsx twoslash title="SimpleButton.test.tsx"
@@ -208,14 +210,14 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 import { render, screen } from "@testing-library/react";
 import { SimpleButton } from "./SimpleButton";
 
-test("ボタンをクリックすると表示が切り替わる", () => {
+test("ボタンをクリックするとON/OFFの表示が切り替わる", () => {
   render(<SimpleButton />);
   const simpleButton = screen.getByRole("button");
 });
 ```
 
 そして、ボタンのテキストのアサーションは`@testing-library/jest-dom`が提供する`toHaveTextContent()`を使います。
-`expect()`にコンポーネントを渡し、そのまま`toHaveTextContent()`を続けると、そのコンポーネントがどのようなテキストを持っているかのアサーションが行なえます。
+`expect()`にコンポーネントを渡し、そのまま`toHaveTextContent()`を呼び出すと、そのコンポーネントがどのようなテキストを持っているかのアサーションが行なえます。
 具体的には次のようになります。
 
 ```tsx twoslash title="SimpleButton.test.tsx"
@@ -223,7 +225,7 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 import { render, screen } from "@testing-library/react";
 import { SimpleButton } from "./SimpleButton";
 
-test("ボタンをクリックすると表示が切り替わる", () => {
+test("ボタンをクリックするとON/OFFの表示が切り替わる", () => {
   render(<SimpleButton />);
   const simpleButton = screen.getByRole("button");
   expect(simpleButton).toHaveTextContent("OFF");
@@ -236,7 +238,7 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 
 さて、次にボタンをクリックします。
 コンポーネントの操作は`testing-library`に収録されている`@testing-library/user-event`を使って実現できます。`@testing-library/user-event`はコンポーネントの操作を含む、色々なユーザーイベントをテストで実行するライブラリです。
-具体的には`click()`にクエリでみつけた`simpleButton`を渡すことで、ボタンのクリックを実現できます。
+具体的には`click()`にクエリでみつけた`simpleButton`を引数として渡すことで、ボタンのクリックを実現できます。
 
 ```tsx twoslash title="SimpleButton.test.tsx"
 // @noErrors
@@ -244,7 +246,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SimpleButton } from "./SimpleButton";
 
-test("ボタンをクリックすると表示が切り替わる", () => {
+test("ボタンをクリックするとON/OFFの表示が切り替わる", () => {
   render(<SimpleButton />);
   const simpleButton = screen.getByRole("button");
   expect(simpleButton).toHaveTextContent("OFF");
@@ -252,8 +254,8 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 });
 ```
 
-そして、ボタンがクリックされた後のアサーションを実施します。
-先ほどと同様に`toHaveTextContent()`を用いますが、今度はボタンのテキストが`ON`になっていることを確認します。
+続けて、ボタンがクリックされた後のアサーションを実施します。
+先ほどと同様に`toHaveTextContent()`を用いますが、今度はボタンのテキストが`ON`になっていることを確認しましょう。
 
 ```tsx twoslash title="SimpleButton.test.tsx"
 // @noErrors
@@ -261,7 +263,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SimpleButton } from "./SimpleButton";
 
-test("ボタンをクリックすると表示が切り替わる", () => {
+test("ボタンをクリックするとON/OFFの表示が切り替わる", () => {
   render(<SimpleButton />);
   const simpleButton = screen.getByRole("button");
   expect(simpleButton).toHaveTextContent("OFF");
@@ -274,11 +276,11 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 
 ![テストがPASSしているコンソールの画面](jest/result_pass2.png)
 
-このように`testing-library`を用いて、コンポーネントのテストを作成できます。
-もちろん`testing-library`からは、ここで紹介したもの以外にも多くのクエリやアサーション、ユーザーイベントの機能が提供されています。実際に自分でテストを作る際に、あったらいいなと思う機能があれば公式ドキュメントをチェックするのがよいでしょう。
-クエリは[こちら](https://testing-library.com/docs/queries/about)、アサーションは[こちら](https://github.com/testing-library/jest-dom#custom-matchers)、ユーザーイベントは[こちら](https://testing-library.com/docs/user-event/intro)に公式ドキュメントがあります。必要に応じてご参照ください。
+以上が、`testing-library`を用いてコンポーネントのテストを作成する流れです。
+`testing-library`からは、ここで紹介したもの以外にも多くのクエリやアサーション、ユーザーイベントの機能が提供されています。
+英語にはなってしまいますが、クエリは[こちら](https://testing-library.com/docs/queries/about)、アサーションは[こちら](https://github.com/testing-library/jest-dom#custom-matchers)、ユーザーイベントは[こちら](https://testing-library.com/docs/user-event/intro)に公式ドキュメントによる詳細な説明があります。実際に自分でテストを作る際には、ぜひそれらも確認してみてください。
 
-## スナップショットテストの作り方とやり方
+## `Jest`を使ったスナップショットテストの作り方とやり方
 
 ここからは「スナップショットテスト」と呼ばれるテスト手法について解説します。
 
@@ -297,6 +299,10 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 ```shell
 touch SimpleButton.test.tsx
 ```
+
+:::info
+「`testing-library`を使ったテストの作り方とやり方」から続けてこのチュートリアルを実施される方は、ここから作成するテストケースを`SimpleButton.test.tsx`内に追加で書いていくのでも大丈夫です。
+:::
 
 スナップショットテストは次の2ステップから成ります。
 
@@ -320,7 +326,7 @@ test("描画されてすぐはOFFと表示されている", () => {
 ```
 
 :::info
-Jest単体ではReactコンポーネントの描画ができません。そこで、コンポーネントの描画をするためのライブラリを導入する必要があります。多くのライブラリがありますが、ここでは後ほど紹介する`@testing-library/react`を用いました。
+Jest単体ではReactコンポーネントの描画ができません。そこで、コンポーネントの描画をするためのライブラリを使用する必要があります。多くのライブラリがありますが、ここでは前章「`testing-library`を使ったテストの作り方とやり方」でも紹介した`@testing-library/react`を用いました。
 :::
 
 テストファイルが作成できたら、`yarn test`コマンドを実行します。
@@ -367,7 +373,7 @@ export const SimpleButton: () => JSX.Element = () => {
   const [state, setState] = useState(true);
   // falseからtrueに変更               ^^^^
   const handleClick = () => {
-    setState(!state);
+    setState((prevState) => !prevState);
   };
   return <button onClick={handleClick}>{state ? "ON" : "OFF"}</button>;
 };
@@ -389,4 +395,4 @@ yarn test
 
 スナップショットテストの詳しいやり方やベストプラクティスなど、さらに詳しい情報に触れたい方はJestの[公式ドキュメント](https://jestjs.io/ja/docs/snapshot-testing)をご参照ください。
 
-以上でJestを使ったコンポーネントテストのチュートリアルは完了です。
+以上でJestを使ったスナップショットテストのチュートリアルは完了です。
