@@ -98,6 +98,7 @@ touch SimpleButton.tsx
 `SimpleButton.tsx`の内容は次のようにします。
 
 ```tsx twoslash title="SimpleButton.tsx"
+// @noErrors
 import { useState } from "react";
 
 export const SimpleButton: () => JSX.Element = () => {
@@ -189,6 +190,7 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 コンポーネントの描画は`@testing-library/react`の`render()`を使って、次のようにするだけです。なお、この`@testing-library/react`というライブラリは、今回`create-react-app`でReactアプリケーションを作成したためすでにプロジェクトにインストールされています。
 
 ```tsx twoslash title="SimpleButton.test.tsx"
+// @noErrors
 import { render } from "@testing-library/react";
 import { SimpleButton } from "./SimpleButton";
 
@@ -202,6 +204,7 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 具体的には、このように書けます。
 
 ```tsx twoslash title="SimpleButton.test.tsx"
+// @noErrors
 import { render, screen } from "@testing-library/react";
 import { SimpleButton } from "./SimpleButton";
 
@@ -216,6 +219,7 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 具体的には次のようになります。
 
 ```tsx twoslash title="SimpleButton.test.tsx"
+// @noErrors
 import { render, screen } from "@testing-library/react";
 import { SimpleButton } from "./SimpleButton";
 
@@ -235,6 +239,7 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 具体的には`click()`にクエリでみつけた`simpleButton`を渡すことで、ボタンのクリックを実現できます。
 
 ```tsx twoslash title="SimpleButton.test.tsx"
+// @noErrors
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SimpleButton } from "./SimpleButton";
@@ -251,6 +256,7 @@ test("ボタンをクリックすると表示が切り替わる", () => {
 先ほどと同様に`toHaveTextContent()`を用いますが、今度はボタンのテキストが`ON`になっていることを確認します。
 
 ```tsx twoslash title="SimpleButton.test.tsx"
+// @noErrors
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SimpleButton } from "./SimpleButton";
