@@ -52,6 +52,7 @@ module.exports = {
         "tutorials/nextjs",
         "tutorials/vercel-deploy",
         "tutorials/jest",
+        "tutorials/component-test",
         "tutorials/prettier",
         "tutorials/eslint",
         "tutorials/husky",
