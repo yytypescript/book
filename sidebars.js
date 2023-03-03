@@ -436,6 +436,7 @@ module.exports = {
     "writing/writing",
     "writing/contributing",
     "writing/getting-started",
+    "writing/ticket-driven",
     "writing/how-to-change",
     "writing/markdown",
     "writing/styles",
@@ -460,6 +461,7 @@ module.exports = {
         "writing/pdr/0007-use-function-for-sample-code",
         "writing/pdr/0008-prefer-type-alias-over-interface",
         "writing/pdr/0009-use-docusaurus",
+        "writing/pdr/0010-ticket-driven",
         {
           type: "category",
           label: "廃止",
