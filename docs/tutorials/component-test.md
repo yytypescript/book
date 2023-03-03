@@ -346,7 +346,8 @@ Jestのスナップショットテストは初回実行時にスナップショ�
 
 `__snapshots__`ディレクトリの中に作られた`SimpleButton.test.tsx.snap`は次のようになっています。
 
-```twoslash title='SimpleButton.test.tsx.snap'
+```js twoslash title='SimpleButton.test.tsx.snap'
+// @noErrors
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 exports[`描画されてすぐはOFFと表示されている 1`] = `
 <div>
@@ -395,4 +396,4 @@ yarn test
 
 スナップショットテストの詳しいやり方やベストプラクティスなど、さらに詳しい情報に触れたい方はJestの[公式ドキュメント](https://jestjs.io/ja/docs/snapshot-testing)をご参照ください。
 
-以上でJestを使ったスナップショットテストのチュートリアルは完了です。
+以上でJestを使ったスナップショットテストのチュートリアルは完了です。また、Reactコンポーネントのテストのチュートリアルも完了です。
