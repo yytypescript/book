@@ -179,7 +179,7 @@ function request(): Promise<string> {
 
 `Promise<T>`には覚えておくべきメソッドがみっつあります。
 
-### `Promise.prototype.then()`
+### 待ち受けた非同期処理の結果をコールバックで実行する - `Promise.prototype.then()`
 
 `Promise<T>`が履行された(fulfilled)ときに呼び出されます。引数に使われるコールバックの第1引数は`T`型の値です。
 コールバックの戻り値として`S`型または`Promise<S>`型の値を返すと`Promise<S>`型を返します。
@@ -229,7 +229,7 @@ Promise.resolve(1)
 // @log: 'rejected'
 ```
 
-### `Promise.prototype.catch()`
+### 待ち受けた非同期処理の拒否の結果をコールバックで実行する - `Promise.prototype.catch()`
 
 `Promise<T>`が拒否された(rejected)ときに呼び出されます。引数に使われるコールバックの第1引数は`any`型の値です。
 これもコールバックの戻り値として`S`型または`Promise<S>`型の値を返すと`Promise<S>`型を返します。
@@ -267,7 +267,7 @@ Promise.resolve(1)
   });
 ```
 
-### `Promise.prototype.finally()`
+### 待ち受けた非同期処理が終了次第コールバックを実行する - `Promise.prototype.finally()`
 
 `Promise<T>`が決定された(settled)ときに呼び出されます。コールバックに引数はありません。
 このメソッドは戻り値を設定することはできません。
@@ -277,7 +277,7 @@ Promise.resolve(1)
 
 静的メソッドでも覚えておくべき大事なメソッドがあります。
 
-### `Promise.all()`
+### すべての非同期処理の結果を待ち受ける - `Promise.all()`
 
 第1引数に要素が`Promise`の配列を取り、それらの実行結果を非同期で待ち受けます。戻り値は`Promise`が解決される時間にかかわらず配列に与えられた順番どおりにPromiseの結果が返ります。
 
@@ -351,7 +351,7 @@ Promise.all([request1(), request2(), request3()])
   });
 ```
 
-### `Promise.resolve()`
+### 履行された`Promise`を返す - `Promise.resolve()`
 
 履行された`Promise`を返します。
 
@@ -359,7 +359,7 @@ Promise.all([request1(), request2(), request3()])
 const promise: Promise<number> = Promise.resolve(4);
 ```
 
-### `Promise.reject()`
+### 拒否された`Promise`を返す - `Promise.reject()`
 
 拒否された`Promise`を返します。
 
@@ -367,7 +367,7 @@ const promise: Promise<number> = Promise.resolve(4);
 const promise: Promise<string> = Promise.reject(new Error("failed"));
 ```
 
-### `Promise.allSettled()`
+### `Promise`を履行、拒否にかかわらずすべて待ち受ける - `Promise.allSettled()`
 
 第1引数に与えられたすべての`Promise`が決定される(settled)まで実行します。決定とは履行か拒否のことであり、ひとつでも拒否されると終了する`Promise.all()`と異なり、すべてが履行されるか拒否されるまで処理を待ちます。
 戻り値は判別可能なユニオン型として返ります。
@@ -392,7 +392,7 @@ Promise.allSettled([request1(), request2()]).then((values) => {
 });
 ```
 
-### `Promise.race()`
+### いちばん初めに決定された`Promise`を返す - `Promise.race()`
 
 `Promise.all()`のように第1引数に要素が`Promise`の配列を取り、それらをすべて非同期で実行しますが、その中のうちもっとも早く決定された`Promise`の結果を履行、拒否に関係なく返します。
 
