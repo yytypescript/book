@@ -49,7 +49,7 @@ function doSomething(strings: Set<string>) {
 
 ## Setの操作
 
-### 値を追加する - `add`
+### 値を追加する - `Set.prototype.add()`
 
 `Set`に値を追加するには`add`メソッドを用います。同じ値は何度追加しても増えないようになっています。
 
@@ -71,7 +71,7 @@ console.log(numbers);
 // @log: Set (3) {1, 2, 3}
 ```
 
-### 値を削除する - `delete`
+### 値を削除する - `Set.prototype.delete()`
 
 `Set`から値を取り除くには、`delete`メソッドを使います。
 
@@ -82,7 +82,7 @@ console.log(numbers);
 // @log: Set (2) {1, 2}
 ```
 
-### 値が有無を確認する - `has`
+### 値が有無を確認する - `Set.prototype.has()`
 
 `Set`に値が存在するかどうかは`has`メソッドで調べられます。
 
@@ -94,7 +94,7 @@ console.log(numbers.has(999));
 // @log: false
 ```
 
-### 値の個数を取得する - `size`
+### 値の個数を取得する - `Set.prototype.size()`
 
 `Set`にいくつ値が登録されているかを調べるには、`size`フィールドの値を見ます。
 
@@ -104,7 +104,7 @@ console.log(fruits.size);
 // @log: 3
 ```
 
-### Setを空っぽにする - `clear`
+### Setを空っぽにする - `Set.prototype.clear()`
 
 `Set`に登録された値をすべて削除するには`clear`メソッドを使います。
 

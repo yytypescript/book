@@ -117,7 +117,7 @@ console.log(map);
 
 ## Mapの操作
 
-### 要素をセットする - `set`
+### 要素をセットする - `Map.prototype.set()`
 
 `Map`にキーと値のペアを追加するには`set`メソッドを使います。
 
@@ -137,7 +137,7 @@ console.log(map);
 // @log: Map (1) {"a" => 5}
 ```
 
-### 値を取得する - `get`
+### 値を取得する - `Map.prototype.get()`
 
 `Map`からキーをもとに要素を取得するには`get`メソッドを使います。
 
@@ -163,7 +163,7 @@ console.log(map.get("b") ?? 2);
 // @log: 2
 ```
 
-### 特定の要素を削除する - `delete`
+### 特定の要素を削除する - `Map.prototype.delete()`
 
 `Map`からキーを指定して要素を削除するには`delete`メソッドを使います。
 
@@ -187,7 +187,7 @@ console.log(map.delete("b"));
 // @log: false
 ```
 
-### キーの有無を確認する - `has`
+### キーの有無を確認する - `Map.prototype.has()`
 
 `Map`にキーが存在するかどうかを調べるには`has`メソッドを使います。
 
@@ -225,7 +225,7 @@ if (typeof n === "number") {
 
 :::
 
-### 要素の個数を取得する - `size`
+### 要素の個数を取得する - `Map.prototype.size()`
 
 `Map`に登録されている要素数を調べるには`size`フィールドの値を見ます。
 
@@ -239,7 +239,7 @@ console.log(map.size);
 // @log: 3
 ```
 
-### 全要素を削除する - `clear`
+### 全要素を削除する - `Map.prototype.clear()`
 
 `Map`に登録されている要素をすべて削除するには`clear`メソッドを使います。
 
@@ -256,7 +256,7 @@ console.log(map.size);
 // @log: 0
 ```
 
-### キーを列挙する - `keys`
+### キーを列挙する - `Map.prototype.keys()`
 
 `keys`メソッドはキーの反復可能オブジェクトを返します。
 
@@ -271,7 +271,7 @@ console.log(keys);
 // @log: ["a", "b", "c"]
 ```
 
-### 値を列挙する - `values`
+### 値を列挙する - `Map.prototype.values()`
 
 `values`メソッドは値の反復可能オブジェクトを返します。
 
@@ -286,7 +286,7 @@ console.log(values);
 // @log: [1, 2, 3]
 ```
 
-### キーと値のペアを列挙する - `entries`
+### キーと値のペアを列挙する - `Map.prototype.entries()`
 
 `entries`メソッドはキーと値の反復可能オブジェクトを返します。
 
