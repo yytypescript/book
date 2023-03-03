@@ -212,7 +212,7 @@ requestAsync().then((result) => {
 
 `await`は`Promise`の値が解決されるまで実行を待機して、解決された値を返します。
 
-`await`の注意点として\*\*`await`は`async`関数の中でのみ使えます。\*\*
+`await`の注意点として**`await`は`async`関数の中でのみ使えます。**
 
 ```ts twoslash
 // 1秒後に値を返す

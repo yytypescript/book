@@ -4,6 +4,7 @@
     "camelcase",
     "contravariance",
     "Deno",
+    "instanceof",
     "keyof",
     "mkdir",
     "nounusedlocals",

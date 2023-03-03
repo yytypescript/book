@@ -156,7 +156,7 @@ function attack(player: Wizard | SwordMan) {
 }
 ```
 
-この名称は英語としても長いらしく、型ガード関数(type guarding function, guard's function)と呼ばれることもあります。
+この名称(user-defined type guard)は英語としても長いらしく、型ガード関数(type guarding function, guard's function)と呼ばれることもあります。
 
 [型ガード関数](../functions/type-guard-functions.md)
 
