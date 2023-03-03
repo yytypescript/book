@@ -346,7 +346,7 @@ Jestのスナップショットテストは初回実行時にスナップショ�
 
 `__snapshots__`ディレクトリの中に作られた`SimpleButton.test.tsx.snap`は次のようになっています。
 
-```txt twoslash title='SimpleButton.test.tsx.snap'
+```twoslash title='SimpleButton.test.tsx.snap'
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 exports[`描画されてすぐはOFFと表示されている 1`] = `
 <div>
