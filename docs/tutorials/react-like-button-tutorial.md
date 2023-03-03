@@ -156,6 +156,9 @@ yarn start
 
 ![ひながた初期状態の画面](react-like-button-tutorial/screen1.png)
 
+Reactのローカル開発サーバーを停止する場合は、Ctrl + Cキーを押してください。
+CtrlキーとCキーを同時に押すと、コマンドを中断することができます。
+
 ここからは実際にコードを書いて行きますので、生成したlike-buttonプロジェクトをお好みのエディターで開いてください。
 
 ひながた初期状態の上のページはsrc/App.tsxの内容が描画されています。ためしに、src/App.tsxを変更してみましょう。App.tsxの`<header>`要素の中身を消して、「TypeScriptはいいぞ」に書き換えてみましょう。
