@@ -62,6 +62,11 @@ p > code {
   font-size: 0.85rem;
 }
 
+.markdown video {
+  max-width: 100%;
+  height: auto;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;
@@ -207,4 +212,8 @@ pre .logger.log-log svg {
   flex-direction: column;
   align-items: center;
   margin: 0 0 var(--ifm-paragraph-margin-bottom);
+}
+
+.admonition h5 {
+  text-transform: unset !important;
 }
