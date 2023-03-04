@@ -45,9 +45,13 @@ type Currency = typeof currencies[Index];
 
 ## 数値のリテラル型と`number`型の関係を理解する
 
-`2`のリテラル型と`number`型の関係を集合で表現すると、`2`⊂`number`と書くことができます。他の表現をすると、`0`、`1`、`2`..などの具体的な数値のリテラル型のワイルドカードとして使える型が`number`型です。
+`2`のリテラル型と`number`型の関係を集合で表現すると、`2`⊂`number`と書くことができます。他の表現をすると、`0`、`1`、`2`..など数値のリテラル型のいずれかの型として振る舞うのが`number`型です。
 
-それではワイルドカードとして数値のリテラル型のユニオン型を使って実験してみます。
+「いずれかの型」といえばユニオン型の出番です。
+
+[ユニオン型 (union type)](../reference/values-types-variables/union.md)
+
+`number`型の代わりにリテラルのユニオン型を使ってみましょう。
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -55,13 +59,7 @@ type Currency = typeof currencies[0 | 1 | 2 | 3 | 4 | 5];
 //   ^?
 ```
 
-`0 | 1 | 2 | 3 | 4 | 5`型でも`number`型と同じようにすべての要素の型を生成することができました。余談ですが、この方法で特定の要素の型をユニオン型として生成することも可能です。
-
-```ts twoslash
-const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
-type Currency = typeof currencies[0 | 2];
-//   ^?
-```
+`0 | 1 | 2 | 3 | 4 | 5`型でも`currencies`配列から全要素の型を生成することができました。このように`number`型は数値のリテラル型のワイルドカードとして振る舞うことがわかります。
 
 ## 配列から全要素の型を生成する方法を一般化する
 
