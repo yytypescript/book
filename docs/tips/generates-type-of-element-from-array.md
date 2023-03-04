@@ -11,9 +11,9 @@ type Currency = typeof currencies[number];
 
 `typeof currencies[number]`という書き方は、初めて見ると理解に苦しむコードかもしれません。そのためより詳しく説明します。
 
-## 配列からある要素の型を抽出するコードを観察する
+## 配列からある要素の型を生成するコードを観察する
 
-配列からある要素の型を抽出するコードについて、前ページに続き通貨の配列でもう一度確認します。
+配列からある要素の型を生成するコードについて、前ページに続き通貨の配列でもう一度確認します。
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
