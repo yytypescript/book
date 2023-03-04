@@ -426,6 +426,7 @@ module.exports = {
         "tips/generates-type-from-object-key",
         "tips/generates-type-from-object-property",
         "tips/generates-type-from-array",
+        "tips/generates-type-of-element-from-array",
       ],
     },
     "symbols-and-keywords",
