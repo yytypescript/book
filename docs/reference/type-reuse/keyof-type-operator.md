@@ -34,7 +34,7 @@ type MapKeys = keyof MapLike;
 
 キーが`string`のインデックス型は、`string`ではなく`string | number`が返ります。number型のキーアクセスの`obj[0]`は`obj["0"]`と同じになるからです。
 
-Mapped Types`keyof`を用いると、そのキーの型が返ります。
+Mapped Typesに`keyof`を用いると、そのキーの型が返ります。
 
 ```ts twoslash
 type MapLike = { [K in "x" | "y" | "z"]: any };
