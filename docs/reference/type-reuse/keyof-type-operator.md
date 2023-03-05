@@ -24,7 +24,7 @@ type BookKey = keyof Book;
 type BookKey = "title" | "price" | "rating";
 ```
 
-インデックス型に`keyof`を用いると、インデックスキーの型が返ります。
+インデックス型に`keyof`を使うと、インデックスキーの型が返ります。
 
 ```ts twoslash
 type MapLike = { [K: string]: any };
@@ -34,7 +34,7 @@ type MapKeys = keyof MapLike;
 
 キーが`string`のインデックス型は、`string`ではなく`string | number`が返ります。number型のキーアクセスの`obj[0]`は`obj["0"]`と同じになるからです。
 
-Mapped Typesに`keyof`を用いると、そのキーの型が返ります。
+Mapped Typesに`keyof`を使うと、そのキーの型が返ります。
 
 ```ts twoslash
 type MapLike = { [K in "x" | "y" | "z"]: any };
