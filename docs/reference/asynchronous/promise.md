@@ -3,9 +3,7 @@ title: Promise<T>
 slug: /reference/asynchronous/promise
 ---
 
-`Promise`はES2015から追加された機能で、非同期処理を見通しよく書くことができます。ES2017で導入された`async / await`を使うことで`Promise`で書いたコードをさらに見通しよく書くことができます。
-
-基本的にジェネリクスを伴い`Promise<T>`と書かれます。`T`は`Promise`が履行された(fulfilled)ときに返す値の型を示します。後ほど説明しますのでひとまず読み進めてください。
+`Promise`はES2015から追加された機能で、非同期処理を見通しよく書くことができます。ES2017で導入された`async`/`await`を使うことで`Promise`で書いたコードをさらに見通しよく書くことができます。
 
 ## `Promise`がなかった時代のこと
 
@@ -15,19 +13,11 @@ slug: /reference/asynchronous/promise
 1. API2: API1の結果を使ってリクエストを送り、結果を受け取る
 1. API3: API2の結果を使ってリクエストを送り、結果を受け取る
 
-次の例では見やすさのためにコールバックを示す関数を型として宣言します。意味は`T`型の引数を受け取る関数です。
-
-```ts twoslash
-type Callback<T> = (arg: T) => void;
-```
-
 API1, API2, API3の通信をする関数`request1()`, `request2()`, `request3()`は次のようになります。各関数の`setTimeout()`はAPI通信をしている部分の遅延を意味している程度に考えてください。
 
-```ts twoslash
-type Callback<T> = (arg: T) => void;
-// ---cut---
+```js twoslash
 // API1. 非同期でAPIにリクエストを送って値を取得する処理
-function request1(callback: Callback<number>): void {
+function request1(callback) {
   setTimeout(() => {
     // 1 は適当な例、なんでもいいです
     callback(1);
@@ -35,14 +25,14 @@ function request1(callback: Callback<number>): void {
 }
 
 // API2. 受け取った値を別のAPIにリクエストを送って値を取得する処理
-function request2(result1: number, callback: Callback<number>): void {
+function request2(result1, callback) {
   setTimeout(() => {
     callback(result1 + 1);
   }, 1000);
 }
 
 // API3. 受け取った値を別のAPIにリクエストを送って値を取得する処理
-function request3(result2: number, callback: Callback<number>): void {
+function request3(result2, callback) {
   setTimeout(() => {
     callback(result2 + 2);
   }, 1000);
@@ -51,12 +41,7 @@ function request3(result2: number, callback: Callback<number>): void {
 
 これらの関数を組み合わせてみっつのAPIリクエストを順次実装すると次のようになります。
 
-```ts twoslash
-type Callback<T> = (arg: T) => void;
-declare function request1(callback: Callback<number>): void;
-declare function request2(result1: number, callback: Callback<number>): void;
-declare function request3(result2: number, callback: Callback<number>): void;
-// ---cut---
+```js twoslash
 request1((result1) => {
   request2(result1, (result2) => {
     request3(result2, (result3) => {
@@ -74,9 +59,9 @@ request1((result1) => {
 
 先ほどの例を`Promise`を使って書き直してみます。
 
-```ts twoslash
+```js twoslash
 // 非同期でAPIにリクエストを投げて値を取得する処理
-function request1(): Promise<number> {
+function request1() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(1);
@@ -85,7 +70,7 @@ function request1(): Promise<number> {
 }
 
 // 受け取った値を別のAPIにリクエストを投げて値を取得する処理
-function request2(result1: number): Promise<number> {
+function request2(result1) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(result1 + 1);
@@ -94,7 +79,7 @@ function request2(result1: number): Promise<number> {
 }
 
 // 受け取った値を別のAPIにリクエストを投げて値を取得する処理
-function request3(result2: number): Promise<number> {
+function request3(result2) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(result2 + 2);
@@ -103,13 +88,9 @@ function request3(result2: number): Promise<number> {
 }
 ```
 
-戻り値が`Promise<number>`になり、コールバック関数を示す引数がなくなりました。`Promise<T>`を返す関数を使うと次のようにみっつのAPIリクエストを実装できます。
+戻り値が`Promise`になり、コールバック関数を示す引数がなくなりました。`Promise`を返す関数を使うと次のようにみっつのAPIリクエストを実装できます。
 
-```ts twoslash
-declare function request1(): Promise<number>;
-declare function request2(result1: number): Promise<number>;
-declare function request3(result2: number): Promise<number>;
-// ---cut---
+```js twoslash
 request1()
   .then((result1) => {
     return request2(result1);
@@ -127,7 +108,7 @@ request1()
 
 ## `Promise`とジェネリクス
 
-TypeScriptで`Promise`の型を指定する場合は`Promise<T>`と書きます。`T`には`Promise`が履行されたときに渡す値の型を指定します。今回の例では`resolve(1);`と履行する値として数値を渡しているので`Promise<number>`を指定しています。
+TypeScriptで`Promise`の型を指定する場合はジェネリクスを伴い`Promise<T>`と書きます。`T`には`Promise`が履行された(fulfilled)ときに返す値の型を指定します。今回の例では`resolve(1)`と履行する値として数値を渡しているので`Promise<number>`を指定しています。
 たとえば、独自で定義した型の値を履行する場合は次のように記述します。
 
 ```ts twoslash
