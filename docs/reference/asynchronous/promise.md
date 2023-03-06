@@ -252,7 +252,7 @@ Promise.resolve(1)
 
 `Promise<T>`が決定された(settled)ときに呼び出されます。コールバックに引数はありません。
 このメソッドは戻り値を設定することはできません。
-`finally()`はES2018になって追加されました。
+`Promise.prototype.finally()`はES2018になって追加されました。
 
 ## `Promise`の静的メソッド
 
@@ -355,7 +355,7 @@ const promise: Promise<string> = Promise.reject(new Error("failed"));
 
 [判別可能なユニオン型](../../reference/values-types-variables/discriminated-union.md)
 
-`allSettled`はES2020になって追加されました。
+`Promise.allSettled()`はES2020になって追加されました。
 
 ```ts twoslash
 function request1(): Promise<number> {
