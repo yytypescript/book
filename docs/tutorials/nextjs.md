@@ -402,7 +402,7 @@ useEffect(async () => {
 
 :::
 
-❸ 最後に画像を表示するロジックです。`||`は論理和演算子で、`loading`が`true`のときに`<img>`要素を表示します。
+❸ 最後に画像を表示するロジックです。`||`は論理和演算子で、`loading`が`false`のときに`<img>`要素を表示します。
 
 ```tsx twoslash
 declare const loading: boolean;
@@ -422,7 +422,7 @@ const IndexPage = () => {
 declare const loading: boolean;
 declare const imageUrl: string;
   // ---cut---
-<div>{if (loading) { <img src={imageUrl} /> }}</div>
+<div>{if (!loading) { <img src={imageUrl} /> }}</div>
 ```
 
 したがって、JSXの式で条件分岐するには論理演算子や三項演算子を使う必要があります。
