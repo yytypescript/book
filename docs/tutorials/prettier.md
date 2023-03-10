@@ -123,10 +123,13 @@ touch src/helloWorld.ts
 `helloWorld.ts`の内容を次のように変更します。
 このコードは自動整形を確認するために、わざと見づらいコードになっています。
 
+<!--prettier-ignore-->
 ```ts twoslash title="src/helloWorld.ts"
-const hello = (name: string) => {
-  console.log("Hello,World " + name);
-};
+const hello = ( name: string) =>   {
+console.log("Hello,World "
++ name)
+
+}
 ```
 
 `prettier`コマンドを実行してみましょう。
@@ -185,10 +188,11 @@ yarn prettier --no-semi --tab-width 4 --write src
 
 整形されたコードを見るとセミコロンが消えて、インデント幅が2から4に変更されているのを確認できます。
 
+<!--prettier-ignore-->
 ```ts twoslash title="src/helloWorld.ts"
 const hello = (name: string) => {
-  console.log("Hello,World " + name);
-};
+    console.log("Hello,World " + name)
+}
 ```
 
 ### 設定ファイルを作成する
