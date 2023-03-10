@@ -961,7 +961,7 @@ module.exports = {
 };
 ```
 
-`project`と`tsconfigRootDir`はTypeScript ESLint独自のオプションです。`tsconfigRootDir`はプロジェクトルートの絶対パスを指定します。`project`、ESLint実行時に使うコンパイラ設定ファイルを`tsconfigRootDir`からの相対パスで指定します。これらの設定は、TypeScript ESLintが型情報を参照するために必要な設定です。
+`project`と`tsconfigRootDir`はTypeScript ESLint独自のオプションです。`tsconfigRootDir`はプロジェクトルートの絶対パスを指定します。`project`は、ESLint実行時に使うコンパイラ設定ファイルを`tsconfigRootDir`からの相対パスで指定します。これらの設定は、TypeScript ESLintが型情報を参照するために必要な設定です。
 
 #### `ignorePatterns`
 
