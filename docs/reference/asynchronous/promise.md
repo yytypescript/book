@@ -308,7 +308,7 @@ function request1(): Promise<number> {
 function request2(): Promise<number> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject(new Error("faied2"));
+      reject(new Error("failed2"));
     }, 2000);
   });
 }
