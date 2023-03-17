@@ -183,7 +183,7 @@ touch isZero.ts
 このファイルを作ると、プロジェクトのファイル構成は次のようになります。
 
 ```text
-├── izZero.ts ... テスト対象ファイル
+├── isZero.ts ... テスト対象ファイル
 ├── jest.config.js
 ├── node_modules
 ├── package.json
@@ -221,8 +221,8 @@ touch isZero.test.ts
 このファイルを作ると、プロジェクトのファイル構成は次のようになります。
 
 ```text
-├── izZero.ts ... テスト対象ファイル
-├── izZero.test.ts ... テストコードのファイル
+├── isZero.ts ... テスト対象ファイル
+├── isZero.test.ts ... テストコードのファイル
 ├── jest.config.js
 ├── node_modules
 ├── package.json
