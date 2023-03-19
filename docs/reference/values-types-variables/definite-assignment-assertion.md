@@ -1,6 +1,10 @@
-# definite assignment assertion
+---
+sidebar_label: 明確な割り当てアサーション
+---
 
-definite assignment assertionは、変数やプロパティが確実に初期化されていることをTypeScriptのコンパイラに伝える演算子です。
+# 明確な割り当てアサーション(definite assignment assertion)
+
+明確な割り当てアサーションは、変数やプロパティが確実に初期化されていることをTypeScriptのコンパイラに伝える演算子です。
 
 ## `strictNullChecks`と変数の初期化エラー
 
@@ -64,15 +68,15 @@ class Foo {
 }
 ```
 
-## definite assignment assertionを使う
+## 明確な割り当てアサーションを使う
 
-変数やプロパティの初期化が確実に行われていることをコンパイラに伝えるには、<ruby>definite assignment assertion<rp>(</rp><rt>デフィニット・アサイメント・アサーション</rt><rp>)</rp></ruby>を使います。変数宣言の変数名やプロパティ名のあとに`!`を書きます。
+変数やプロパティの初期化が確実に行われていることをコンパイラに伝えるには、明確な割り当てアサーションを使います。変数宣言の変数名やプロパティ名のあとに`!`を書きます。
 
 ```ts twoslash
 // @strictNullChecks: true
 // @errors: 2454
 let num!: number;
-//     ^definite assignment assertion
+//     ^明確な割り当てアサーション
 initNum();
 console.log(num * 2); // エラーにならない
 function initNum() {
@@ -85,11 +89,11 @@ function initNum() {
 // @strictNullChecks: true
 class Foo {
   num!: number;
-  // ^definite assignment assertion
+  // ^明確な割り当てアサーション
 }
 ```
 
-definite assignment assertionの意味は「確実な代入の表明」です。この変数はこの型であることが確実であることをTypeScriptコンパイラに伝えるということです。
+明確な割り当てアサーションの意味は「確実な代入の表明」です。この変数はこの型であることが確実であることをTypeScriptコンパイラに伝えるということです。
 
 ## 非Nullアサーション
 
@@ -109,7 +113,7 @@ function initNum() {
 
 ## より安全なコードを書くには
 
-definite assignment assertionと非Nullアサーションは、型の安全性を保証する責任をコンパイラからプログラマに移すものです。そして、型に関してはコンパイラより人間のほうがミスをしやすいです。なので、こうしたアサーションはできる限り使わないほうが安全性は高いです。
+明確な割り当てアサーションと非Nullアサーションは、型の安全性を保証する責任をコンパイラからプログラマに移すものです。そして、型に関してはコンパイラより人間のほうがミスをしやすいです。なので、こうしたアサーションはできる限り使わないほうが安全性は高いです。
 
 たとえば、上の例であれば`initNum`の戻り値を`num`に代入するほうが、より安全なコードになります。
 
@@ -142,7 +146,7 @@ function initNum() {
 
 <TweetILearned>
 
-・definite assignment assertionは、変数初期化が確実であるとTypeScriptのコンパイラに伝える
+・明確な割り当てアサーションは、変数初期化が確実であるとTypeScriptのコンパイラに伝える
 ・変数名のあとに!を書く
 ・型安全の責任をコンパイラからプログラマに移すものなので、使わない方法を先に検討する
 ・どうしようもないときに使う
