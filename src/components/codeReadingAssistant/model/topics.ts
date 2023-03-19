@@ -1948,10 +1948,10 @@ const customTopicDetails = defineCustomTopicDetails({
     ],
   },
   DefiniteAssignmentAssertion: {
-    name: "definite assignment assertion",
+    name: "明確な割り当てアサーション",
     links: [
       page(
-        "definite assignment assertion",
+        "明確な割り当てアサーション (definite assignment assertion)",
         "https://typescriptbook.jp/reference/values-types-variables/definite-assignment-assertion"
       ),
     ],
