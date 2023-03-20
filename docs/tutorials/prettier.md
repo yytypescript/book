@@ -99,7 +99,7 @@ cd prettier-tutorial
 Prettierは開発時にだけ使うパッケージなので`-D`オプションをつけてインストールします。
 
 ```shell
-yarn add -D prettier@^2
+yarn add -D 'prettier@^2'
 ```
 
 バージョンを表示してインストールを確認してください。
