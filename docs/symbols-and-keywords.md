@@ -32,7 +32,7 @@ function firstChar(text: string | undefined) {
 }
 ```
 
-### `!` Definite Assignment Assertion演算子 (definite assignment assertion operator) ![ts]
+### `!` 明確な割り当てアサーション演算子 (definite assignment assertion operator) ![ts]
 
 クラスのプロパティが型アノテーションで示された型でセットされていることをコンパイラーに伝える記号です。
 
