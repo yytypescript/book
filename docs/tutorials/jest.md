@@ -82,7 +82,7 @@ Jestをプロジェクトにインストールしましょう。インストー�
 これらのインストールは次のコマンドで、一度にインストールできます。
 
 ```shell
-yarn add -D 'jest@^28.0.0 ts-jest@^28.0.0' '@types/jest@^28.0.0'
+yarn add -D 'jest@^28.0.0' 'ts-jest@^28.0.0' '@types/jest@^28.0.0'
 ```
 
 `jest`はJest本体です。JavaScriptだけのプロジェクトであれば、このパッケージを入れるだけでテストが始められます。`ts-jest`は、JestをTypeScriptに対応させるためのものです。`ts-jest`を入れると、TypeScriptで書いたテストコードを、コンパイルの手間なしにそのまま実行できるようになります。`@types/jest`はJestのAPIの型定義ファイルです。TypeScriptの型情報を付与されるので、テストコードの型チェックが行えるようになります。
