@@ -39,6 +39,8 @@
   - Deep Diveでは「マップ型」と訳している箇所もあるが、`Map<T, U>`との曖昧さが出てしまう恐れがあるので和訳はしない。
 - Definite assignment assertion
   - 明確な割り当てアサーション
+- Declaration merging
+  - 宣言マージ
 
 <!--textlint-enable prh-->
 
@@ -46,4 +48,3 @@
 
 - Assertion functions
 - Type predicate
-- Declaration merging
