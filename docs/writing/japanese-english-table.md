@@ -41,10 +41,11 @@
   - 明確な割り当てアサーション
 - Declaration merging
   - 宣言マージ
+- Assertion functions
+  - アーサーション関数
 
 <!--textlint-enable prh-->
 
 ## 日本語が不明
 
-- Assertion functions
 - Type predicate
