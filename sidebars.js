@@ -387,6 +387,7 @@ module.exports = {
             "reference/tsconfig/nouncheckedindexedaccess",
             "reference/tsconfig/noimplicitoverride",
             "reference/tsconfig/nopropertyaccessfromindexsignature",
+            "reference/tsconfig/isolatedModules",
           ],
         },
         "reference/declaration-file",
