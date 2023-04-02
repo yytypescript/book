@@ -4,7 +4,7 @@ sidebar_label: 読み取り専用の配列
 
 # 読み取り専用の配列 (readonly array)
 
-TypeScriptでは配列を読み取り専用(readonly)として型注釈できます。型注釈の方法は2とおりあります。1つ目は`readonly`キーワードを使う方法です。2つ目は`ReadonlyArray<T>`を使う方法です。
+TypeScriptでは配列を読み取り専用(readonly)として型注釈できます。型注釈の方法は2通りあります。1つ目は`readonly`キーワードを使う方法です。2つ目は`ReadonlyArray<T>`を使う方法です。
 
 ## readonly T\[]
 

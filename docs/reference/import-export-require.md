@@ -186,7 +186,7 @@ console.log(inc(3));
 ### `import`
 
 `require()`と同じく他の`.js, .ts`ファイルを読み込む機能ですが、`require()`はファイル内のどこにでも書くことができる一方で`import`は**必ずファイルの一番上に書く必要があります**。
-なお、書き方が2とおりあります。
+なお、書き方が2通りあります。
 
 ```ts twoslash
 // @filename: package1
@@ -233,7 +233,7 @@ console.log(increment.default(3));
 
 ### `export`
 
-`exports`に相当するものです。書き方が2とおりあります。
+`exports`に相当するものです。書き方が2通りあります。
 
 ```ts title="util.js" twoslash
 // @noErrors

@@ -1,6 +1,6 @@
 # 従来の関数とアロー関数の違い
 
-JavaScriptの関数は、[関数宣言]、[関数式]、[アロー関数]の3とおりの方法で作れます。
+JavaScriptの関数は、[関数宣言]、[関数式]、[アロー関数]の3通りの方法で作れます。
 
 [関数宣言]: ./function-declaration.md
 [関数式]: ./function-expression.md
