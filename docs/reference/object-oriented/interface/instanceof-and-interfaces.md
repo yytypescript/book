@@ -56,11 +56,11 @@ function isStudent(value: unknown): value is Student {
   }
   const { name, grade } = value as Record<keyof Student, unknown>;
   // nameプロパティーが文字列型かを判定
-  if (typeof name === "string") {
+  if (typeof name !== "string") {
     return false;
   }
   // gradeプロパティーが数値型かを判定
-  if (typeof grade === "number") {
+  if (typeof grade !== "number") {
     return false;
   }
   return true;
@@ -83,11 +83,11 @@ function isStudent(value: unknown): value is Student {
   }
   const { name, grade } = value as Record<keyof Student, unknown>;
   // nameプロパティが文字列型かを判定
-  if (typeof name === "string") {
+  if (typeof name !== "string") {
     return false;
   }
   // gradeプロパティが数値型かを判定
-  if (grade === "number") {
+  if (grade !== "number") {
     return false;
   }
   return true;
