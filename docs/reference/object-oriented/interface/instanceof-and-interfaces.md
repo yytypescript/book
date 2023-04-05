@@ -87,7 +87,7 @@ function isStudent(value: unknown): value is Student {
     return false;
   }
   // gradeプロパティが数値型かを判定
-  if (grade !== "number") {
+  if (typeof grade !== "number") {
     return false;
   }
   return true;
