@@ -33,7 +33,7 @@ Dateオブジェクトは1977年に廃止されたJavaのDateクラスを基に�
 
 ### 年の下2-3桁を取得する - `Date.prototype.getYear()`
 
-**非推奨です**。与えられた日付の念を表す数値から1900を引いた値を返します。代わりに`Date.prototype.getFullYear()`を使ってください。
+**非推奨です**。与えられた日付の年数を表す数値から1900を引いた値を返します。代わりに`Date.prototype.getFullYear()`を使ってください。
 
 ### 月を取得する - `Date.prototype.getMonth()`
 
@@ -41,7 +41,7 @@ Dateオブジェクトは1977年に廃止されたJavaのDateクラスを基に�
 
 ### 日を取得する - `Date.prototype.getDate()`
 
-日を取得します。謝って`Date.prototype.getDay()`を使用しないでください。
+日を取得します。誤って`Date.prototype.getDay()`を使用しないでください。
 
 ### 曜日を取得する - `Date.prototype.getDay()`
 
