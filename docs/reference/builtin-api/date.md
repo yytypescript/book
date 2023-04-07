@@ -41,7 +41,7 @@ Dateオブジェクトは1977年に廃止されたJavaのDateクラスを基に�
 
 ### 日を取得する - `Date.prototype.getDate()`
 
-日を取得します。謝って`Date.prototype.getDay()`を使用しないでください。
+日を取得します。誤って`Date.prototype.getDay()`を使用しないでください。
 
 ### 曜日を取得する - `Date.prototype.getDay()`
 
