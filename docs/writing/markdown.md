@@ -360,7 +360,7 @@ import { fictional } from "./fictional-module";
 
 ##### 架空のNPMモジュールをでっちあげる
 
-架空のNPMモジュールをでっちあげるには、`declare module`でモジュールの型定義を用意します。その際、架空のモジュールのほうは`@filename`がなくてもコンパイルがとおります。
+架空のNPMモジュールをでっちあげるには、`declare module`でモジュールの型定義を用意します。その際、架空のモジュールのほうは`@filename`がなくてもコンパイルが通ります。
 
 ````markdown
 ```ts twoslash
