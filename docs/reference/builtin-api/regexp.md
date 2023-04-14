@@ -53,9 +53,9 @@ console.log(results);
 
 ## string型のメソッドでRegExpを使うメソッド
 
-### 文字列を検索する - `Regexp.prototype.match()`
+### 文字列を検索する - `String.prototype.match()`
 
-文字列をRegExpで検索します。`Regexp.prototype.exec()`と同じように使うことができます。
+文字列を`RegExp`で検索します。`Regexp.prototype.exec()`と同じように使うことができます。
 結果は`string[]`型で返り、0番目はマッチした文字列を、1番目以降はキャプチャグループを設定したときにパターンにマッチした文字列を取得します。
 一致するものがない場合は`null`を返します。
 
