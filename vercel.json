@@ -131,7 +131,7 @@
     },
     {
       "source": "/features/promise-async-await",
-      "destination": "/reference/promise-async-await"
+      "destination": "/reference/asynchronous"
     },
     {
       "source": "/features/utility-types",
@@ -152,6 +152,10 @@
     {
       "source": "/features/import-export-require",
       "destination": "/reference/import-export-require"
+    },
+    {
+      "source": "/reference/promise-async-await",
+      "destination": "/reference/asynchronous"
     },
     {
       "source": "/tutorials/tsconfig.json-settings",
