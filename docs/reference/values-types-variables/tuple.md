@@ -101,7 +101,7 @@ const [, , bool]: [number, string, boolean] = tuple();
 TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。そのときTypeScriptでは`Promise.all()`というものを使用します。このときタプルが役に立ちます。
 `Promise`についての詳しい説明は本書に専門の頁がありますので譲ります。ここでは`Promise<T>`という型の変数は`await`をその前につけると`T`が取り出せることだけ覚えておいてください。また、この`T`をジェネリクスと言いますが、こちらも専門の頁があるので譲ります。
 
-[Promise / async / await](../promise-async-await.md)
+[非同期処理](../asynchronous/README.md)
 
 [ジェネリクス (generics)](/reference/generics)
 

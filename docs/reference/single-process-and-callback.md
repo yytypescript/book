@@ -198,4 +198,4 @@ ajax("https://...", (res1: Response) => {
 
 このコールバック地獄を解消する画期的なクラスとして`Promise`が登場し主要なブラウザとNode.jsではビルトインオブジェクトとして使うことができます。こちらの説明については本書に専用のページがありますのでそちらをご参照ください。
 
-[Promise / async / await](promise-async-await.md)
+[非同期処理](./asynchronous/README.md)
