@@ -432,6 +432,7 @@ module.exports = {
       ],
     },
     "symbols-and-keywords",
+    "learning-resources",
     "how-to-use-typescript-playground",
     "typescript",
   ],
