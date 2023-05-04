@@ -82,7 +82,7 @@ console.log(numbers);
 // @log: Set (2) {1, 2}
 ```
 
-### 値が有無を確認する - `Set.prototype.has()`
+### 値の有無を確認する - `Set.prototype.has()`
 
 `Set`に値が存在するかどうかは`has`メソッドで調べられます。
 
