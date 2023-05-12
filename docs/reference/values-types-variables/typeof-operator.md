@@ -19,7 +19,7 @@ typeof { a: 1, b: 2 }; //=> "object"
 typeof (() => {}); //=> "function"
 ```
 
-## TypeScriptで`typeof`を使うとifやswicthでその型として使うことができる
+## TypeScriptで`typeof`を使うとifやswitchでその型として使うことができる
 
 TypeScriptでは`typeof`演算子をifやswitchと併せてつかうと、条件と合致したときにその変数をその型として扱えるようになります。次の例は`unknown`型とされた変数`n`が`typeof`演算子によって`string`型であると判別された例です。
 
