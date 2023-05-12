@@ -228,7 +228,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "🚧非同期処理",
+          label: "非同期処理",
           link: {
             type: "doc",
             id: "reference/asynchronous/README",
@@ -239,7 +239,6 @@ module.exports = {
             "reference/asynchronous/await",
           ],
         },
-        "reference/promise-async-await",
         {
           type: "category",
           label: "オブジェクト指向",
@@ -388,6 +387,7 @@ module.exports = {
             "reference/tsconfig/nouncheckedindexedaccess",
             "reference/tsconfig/noimplicitoverride",
             "reference/tsconfig/nopropertyaccessfromindexsignature",
+            "reference/tsconfig/isolatedModules",
           ],
         },
         "reference/declaration-file",
@@ -431,6 +431,7 @@ module.exports = {
       ],
     },
     "symbols-and-keywords",
+    "learning-resources",
     "how-to-use-typescript-playground",
     "typescript",
   ],

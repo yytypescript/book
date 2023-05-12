@@ -56,11 +56,11 @@ function isStudent(value: unknown): value is Student {
   }
   const { name, grade } = value as Record<keyof Student, unknown>;
   // nameプロパティーが文字列型かを判定
-  if (typeof name === "string") {
+  if (typeof name !== "string") {
     return false;
   }
   // gradeプロパティーが数値型かを判定
-  if (typeof grade === "number") {
+  if (typeof grade !== "number") {
     return false;
   }
   return true;
@@ -74,24 +74,7 @@ interface Student {
   name: string;
   grade: number;
 }
-
-// Student型かを判定する型ガード関数
-function isStudent(value: unknown): value is Student {
-  // 値がオブジェクトであるかの判定
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-  const { name, grade } = value as Record<keyof Student, unknown>;
-  // nameプロパティが文字列型かを判定
-  if (typeof name === "string") {
-    return false;
-  }
-  // gradeプロパティが数値型かを判定
-  if (grade === "number") {
-    return false;
-  }
-  return true;
-}
+declare function isStudent(value: unknown): value is Student;
 // ---cut---
 const tom: object = { name: "Tom", grade: 2 };
 //    ^?

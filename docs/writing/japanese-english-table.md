@@ -37,11 +37,15 @@
 - Mapped Types
   - Mapped Types
   - Deep Diveでは「マップ型」と訳している箇所もあるが、`Map<T, U>`との曖昧さが出てしまう恐れがあるので和訳はしない。
+- Definite assignment assertion
+  - 明確な割り当てアサーション
+- Declaration merging
+  - 宣言マージ
+- Assertion functions
+  - アーサーション関数
 
 <!--textlint-enable prh-->
 
 ## 日本語が不明
 
-- Assertion functions
 - Type predicate
-- Declaration merging

@@ -171,7 +171,7 @@ const fetchImage = async () => {
 
 `fetch`はHTTPリクエストでリソースを取得するブラウザ標準のAPIです。戻り値として[Response](https://developer.mozilla.org/ja/docs/Web/API/Response)オブジェクトを返します。Responseオブジェクトの`json()`メソッドを実行することで、レスポンスのボディーをJSONとしてパースし、JavaScriptのオブジェクトとして取得できます。
 
-`fetchImage`関数についている[`async`キーワード](/reference/promise-async-await#async関数)は、この関数が非同期処理を行うことを示すものです。`fetch`と`res.json`は非同期関数で、これらの処理を待つために、それぞれに[`await`キーワード](/reference/promise-async-await#await)がついています。
+`fetchImage`関数についている[`async`キーワード](/reference/asynchronous/async)は、この関数が非同期処理を行うことを示すものです。`fetch`と`res.json`は非同期関数で、これらの処理を待つために、それぞれに[`await`キーワード](/reference/asynchronous/await)がついています。
 
 <!-- todo: async/awaitのリライトが完了したらリンク先を変更する -->
 
