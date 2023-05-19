@@ -1,9 +1,13 @@
 ---
-sidebar_label: 数値型
+sidebar_label: number型
 slug: /reference/values-types-variables/number
 ---
 
-# number型 (number type)
+<!-- textlint-disable prh -->
+
+# number型 (数値型)
+
+<!-- textlint-enable prh -->
 
 JavaScriptのnumber型は、1や-1などの整数と0.1などの小数を含めた数値の型です。PHPなどの言語では、数値について整数を表す型(int)と小数を表す型(floatやdouble)の2つの型を持ちます。Javaなどの言語では、整数型をさらに32ビットと64ビットに細分化する言語もあります。JavaScriptには、整数と小数を型レベルで区別するものはありません。どちらもnumber型で表現します。
 

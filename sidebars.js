@@ -81,7 +81,7 @@ module.exports = {
             "reference/values-types-variables/boolean",
             {
               type: "category",
-              label: "数値型",
+              label: "number型",
               link: {
                 type: "doc",
                 id: "reference/values-types-variables/number/README",

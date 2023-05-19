@@ -1,10 +1,14 @@
 ---
-sidebar_label: 論理型
+sidebar_label: boolean型
 ---
 
-# boolean型 (boolean type)
+<!-- textlint-disable prh -->
 
-JavaScriptのboolean型(boolean type)は、`true`と`false`の論理値からなる型です。
+# boolean型 (論理型)
+
+<!-- textlint-enable prh -->
+
+JavaScriptのboolean型は、`true`と`false`の論理値からなる型です。
 
 ## boolean型リテラル
 

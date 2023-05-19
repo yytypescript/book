@@ -1,10 +1,14 @@
 ---
-sidebar_label: シンボル型
+sidebar_label: symbol型
 ---
 
-# symbol型 (symbol type)
+<!-- textlint-disable prh -->
 
-JavaScriptのsymbol型(symbol type)は、プリミティブ型の一種で、その値が一意になる値です。boolean型やnumber型は値が同じであれば、等価比較が`true`になります。一方、シンボルはシンボル名が同じであっても、初期化した場所が違うと`false`になります。
+# symbol型 (シンボル型)
+
+<!-- textlint-enable prh -->
+
+JavaScriptのsymbol型はプリミティブ型の一種で、その値が一意になる値です。boolean型やnumber型は値が同じであれば、等価比較が`true`になります。一方、シンボルはシンボル名が同じであっても、初期化した場所が違うと`false`になります。
 
 ```js twoslash
 const s1 = Symbol("foo");
