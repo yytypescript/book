@@ -70,7 +70,7 @@ type KeyValuesAndName = {
 };
 ```
 
-追加のプロパティがある場合は、その部分をオブジェクト型として定義し、Mapped Typesと[インターセクション型]を成す必要があります。
+追加のプロパティがある場合は、その部分をobject型として定義し、Mapped Typesと[インターセクション型]を成す必要があります。
 
 ```ts twoslash
 type KeyValues = {

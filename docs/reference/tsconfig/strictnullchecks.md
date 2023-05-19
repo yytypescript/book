@@ -32,7 +32,7 @@ date.getDay();
 // @strictNullChecks: false
 ```
 
-`strictNullChecks`が`true`の場合、非Null型への`null`の代入、非undefined型への`undefined`の代入それぞれがコンパイルエラーになります。
+`strictNullChecks`が`true`の場合、非null型への`null`の代入、非undefined型への`undefined`の代入それぞれがコンパイルエラーになります。
 
 ```ts twoslash title="strictNullChecksがtrueの場合"
 // @strictNullChecks: true

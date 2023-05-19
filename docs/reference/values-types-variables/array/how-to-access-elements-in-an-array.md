@@ -60,7 +60,7 @@ character.toUpperCase();
 // @error: Object is possibly 'undefined'.
 ```
 
-`string | undefined`型のままでは`toUpperCase`などの文字列型のメソッドは呼び出せません。そこで、if文で変数が文字列型だけになるように絞り込みます。すると、文字列型のメソッドを呼び出してもコンパイルエラーで指摘されることがなくなります。
+`string | undefined`型のままでは`toUpperCase`などのstring型のメソッドは呼び出せません。そこで、if文で変数がstring型だけになるように絞り込みます。すると、string型のメソッドを呼び出してもコンパイルエラーで指摘されることがなくなります。
 
 ```ts twoslash
 const abc: string[] = ["a", "b", "c"];

@@ -125,7 +125,7 @@ function initNum() {
 }
 ```
 
-他にも、`num`が数値型であるかを型ガードでチェックする方法もあります。
+他にも、`num`がnumber型であるかを型ガードでチェックする方法もあります。
 
 ```ts twoslash
 // @strictNullChecks: true

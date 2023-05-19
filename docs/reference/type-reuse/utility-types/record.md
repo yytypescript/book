@@ -3,7 +3,7 @@ description: キー・バリューからオブジェクト型を作る
 title: "Record<Keys, Type>"
 ---
 
-`Record<Keys, Type>`はプロパティのキーが`Keys`であり、プロパティの値が`Type`であるオブジェクト型を作るユーティリティ型です。
+`Record<Keys, Type>`はプロパティのキーが`Keys`であり、プロパティの値が`Type`であるobject型を作るユーティリティ型です。
 
 ## Record&lt;Keys, Type>の型引数
 
@@ -24,7 +24,7 @@ type StringNumber = Record<string, number>;
 const value: StringNumber = { a: 1, b: 2, c: 3 };
 ```
 
-キーが`firstName`、`middleName`、`familyName`で、値が文字列になるオブジェクト型を定義する。
+キーが`firstName`、`middleName`、`familyName`で、値が文字列になるobject型を定義する。
 
 ```ts twoslash
 type Person = Record<"firstName" | "middleName" | "lastName", string>;

@@ -33,3 +33,38 @@ rules:
     patterns: 巻上げ
   - expected: 再帰呼び出し
     patterns: 再起呼び出し
+  - expected: null型
+    patterns:
+      - Null型
+      - ヌル型
+  - expected: undefined型
+    patterns:
+      - Undefined型
+      - アンディファインド型
+  - expected: boolean型
+    patterns:
+      - Boolean型
+      - 論理型
+      - 真偽値型
+      - 真偽型
+  - expected: number型
+    patterns:
+      - Number型
+      - 数値型
+  - expected: bigint型
+    patterns:
+      - Bigint型
+      - BigInt型
+      - 長整数型
+  - expected: string型
+    patterns:
+      - String型
+      - 文字列型
+  - expected: symbol型
+    patterns:
+      - Symbol型
+      - シンボル型
+  - expected: object型
+    patterns:
+      - Object型
+      - オブジェクト型

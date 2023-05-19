@@ -22,7 +22,7 @@ console.log(arr[1]);
 
 ## undefinedリテラル
 
-JavaScriptでは同じプリミティブ型でも、論理型や数値型がリテラルがあるのに対し、`undefined`にはリテラルはありません。実は`undefined`は変数です。グローバル定数のようなものと理解して構いません。
+JavaScriptでは同じプリミティブ型でも、boolean型やnumber型がリテラルがあるのに対し、`undefined`にはリテラルはありません。実は`undefined`は変数です。グローバル定数のようなものと理解して構いません。
 
 ## undefinedの型注釈
 

@@ -26,9 +26,9 @@ x = 100;
 
 リテラル型として表現できるプリミティブ型は次のとおりです。
 
-- 論理型のtrueとfalse
-- 数値型の値
-- 文字列型の文字列
+- boolean型のtrueとfalse
+- number型の値
+- string型の文字列
 
 ```ts twoslash
 const isTrue: true = true;

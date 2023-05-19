@@ -106,9 +106,9 @@ function isNumberArray(value: unknown): value is number[] {
 }
 ```
 
-### unknown型をオブジェクト型に絞り込む
+### unknown型をobject型に絞り込む
 
-unknown型をオブジェクト型に絞り込むには、`typeof`演算子を用います。
+unknown型をobject型に絞り込むには、`typeof`演算子を用います。
 
 ```ts twoslash
 type Email = {
@@ -240,7 +240,7 @@ function isEmail(value: unknown): value is Email {
 
 :::info バリデーションライブラリも検討しよう
 
-unknown型からオブジェクト型へ安全に絞り込むには、プロパティをひとつひとつチェックする必要があります。上の例を見た読者の中には、これを実装するのは大変だと思った方もいるのではないでしょうか。
+unknown型からobject型へ安全に絞り込むには、プロパティをひとつひとつチェックする必要があります。上の例を見た読者の中には、これを実装するのは大変だと思った方もいるのではないでしょうか。
 
 チェックするプロパティ数が多い場合は、次のバリデーションライブラリを導入したほうがよいでしょう。
 

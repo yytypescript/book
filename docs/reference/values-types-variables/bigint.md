@@ -1,6 +1,6 @@
 # bigint型
 
-JavaScriptのbigint型は、数値型よりも大きな整数を扱えるプリミティブ型です。
+JavaScriptのbigint型は、number型よりも大きな整数を扱えるプリミティブ型です。
 
 ## bigint型リテラル
 
@@ -31,16 +31,16 @@ const y = BigInt("9007199254740991");
 
 TypeScriptでBigInt関数を用いるには、コンパイラーオプションのlibをes2020以上にする必要があります。
 
-## bigint型を数値型と計算する
+## bigint型をnumber型と計算する
 
-bigint型と数値型はそのままでは一緒に演算をすることはできません。どちらかに型を合わせる必要があります。
+bigint型とnumber型はそのままでは一緒に演算をすることはできません。どちらかに型を合わせる必要があります。
 
 ```ts twoslash
 // @errors: 2365
 2n + 3;
 ```
 
-数値型が小数部を持っていない限り、より表現幅の広いbigint型に合わせる方が無難です。
+number型が小数部を持っていない限り、より表現幅の広いbigint型に合わせる方が無難です。
 
 ```ts twoslash
 const i = 2n + BigInt(3);

@@ -17,7 +17,7 @@ type 戻り値の型 = any;
 type 型の名前 = (引数名: 引数の型) => 戻り値の型;
 ```
 
-たとえば、数値型を受け取り数値型を返す関数の型宣言は次です。
+たとえば、number型を受け取りnumber型を返す関数の型宣言は次です。
 
 ```ts twoslash
 type Increment = (num: number) => number;

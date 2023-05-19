@@ -8,7 +8,7 @@ TypeScriptのユニオン型(union type)は「いずれかの型」を表現す�
 
 ## ユニオン型の型注釈
 
-ユニオン型の型注釈は、2つ以上の型をパイプ記号(`|`)で繋げて書きます。たとえば、数値型もしくはundefined型を表す場合は、`number | undefined`のように書きます。
+ユニオン型の型注釈は、2つ以上の型をパイプ記号(`|`)で繋げて書きます。たとえば、number型もしくはundefined型を表す場合は、`number | undefined`のように書きます。
 
 ```ts twoslash
 let numberOrUndefined: number | undefined;
@@ -43,7 +43,7 @@ type List = (string | number)[];
 
 ## ユニオン型と絞り込み
 
-ユニオン型`string | null`が`string`なのか`null`なのかを判定したいときは、TypeScriptの絞り込み(narrowing)を用います。絞り込みをするにはいくつかの方法がありますが、代表例はif文です。条件分岐で変数が文字列型かどうかをチェックすると、同じ変数でも分岐内では`string | null`型が`string`型だと判定されます。
+ユニオン型`string | null`が`string`なのか`null`なのかを判定したいときは、TypeScriptの絞り込み(narrowing)を用います。絞り込みをするにはいくつかの方法がありますが、代表例はif文です。条件分岐で変数がstring型かどうかをチェックすると、同じ変数でも分岐内では`string | null`型が`string`型だと判定されます。
 
 ```ts twoslash
 // @errors: 2322

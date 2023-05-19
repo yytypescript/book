@@ -55,11 +55,13 @@ undefined.toString();
 
 JavaScriptを学ぶ過程で一度はお世話になるドキュメントが[MDN Web Docs](https://developer.mozilla.org/ja/docs/Web/JavaScript)です。自動ボックス化とラッパーオブジェクトを意識すると、MDNのドキュメントが理解しやすくなります。
 
-たとえば、数値の`toString`メソッドの説明は、MDNでは[「Number.prototype.toString()」というタイトルのページ](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)に書かれています。`toString`がプリミティブ型の`number`に生えているものだと思っていると、「Number.prototypeは何だろう」「数値型を調べているはずなのに、なぜNumberオブジェクトのページに書いてあるんだろう」などといった疑問を持つかもしれません。
+たとえば、数値の`toString`メソッドの説明は、MDNでは[「Number.prototype.toString()」というタイトルのページ](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)に書かれています。`toString`がプリミティブ型の`number`に生えているものだと思っていると、「Number.prototypeは何だろう」「number型を調べているはずなのに、なぜNumberオブジェクトのページに書いてあるんだろう」などといった疑問を持つかもしれません。
 
 自動ボックス化とラッパーオブジェクトを知っていると、この疑問が解消します。`number`にはメソッドもフィールドもありません。メソッドなどがあるように見えるのは、自動ボックス化で`number`が`Number`オブジェクトに変換されるためです。したがって、`toString`の説明が`Number`オブジェクトのページに書いてあることが腑に落ちます。また、`Number.prototype`が表す意味は「`Number`オブジェクトのインスタンスに生えている」ということも理解できます。
 
 ## ラッパーオブジェクトとTypeScriptの型
+
+<!-- textlint-disable prh -->
 
 TypeScriptでは、ラッパーオブジェクトの型も定義されています。次のように、ラッパーオブジェクトの型を使って、型注釈を書くこともできます。ラッパーオブジェクト型の変数にプリミティブ型の値を代入するのも可能です。
 
@@ -106,6 +108,8 @@ const num1: Number = 0;
 // ✅正しい
 const num2: number = 0;
 ```
+
+<!-- textlint-enable prh -->
 
 <TweetILearned>
 

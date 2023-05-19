@@ -55,7 +55,7 @@ function forever(): never {
 }
 ```
 
-作り得ない値も`never`型になります。たとえば、数値型と文字列型の両方に代入可能な値は作れません。そのため、数値型と文字列型の[インターセクション型](../values-types-variables/intersection.md)は`never`型になります。
+作り得ない値も`never`型になります。たとえば、number型とstring型の両方に代入可能な値は作れません。そのため、number型とstring型の[インターセクション型](../values-types-variables/intersection.md)は`never`型になります。
 
 ```ts twoslash
 type NumberString = number & string;

@@ -21,7 +21,7 @@ TypeScriptの関数には引数の双変性(parameter bivariance)という性質
 2. `number | null`
 3. `number | null | undefined`
 
-`number`は`number | null`より狭い型です。`number | null`の範囲には`1`や`0.5`などの数値型とnull型があります。`number`型の範囲にあるのは数値型だけです。最後の`number | null | undefined`はこの中でもっとも範囲が広い型です。
+`number`は`number | null`より狭い型です。`number | null`の範囲には`1`や`0.5`などのnumber型とnull型があります。`number`型の範囲にあるのはnumber型だけです。最後の`number | null | undefined`はこの中でもっとも範囲が広い型です。
 
 | 型                                               | 範囲の広さ | 取れる値の例                       |
 | ------------------------------------------------ | ---------- | ---------------------------------- |
