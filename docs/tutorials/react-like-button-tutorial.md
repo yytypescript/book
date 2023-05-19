@@ -6,6 +6,8 @@
 
 Reactの専門書と比べて、本書の解説は詳しさや正確さは劣ります。それでも、初めてReactに触れる方でも読み進められるよう、Reactについて随時ワンポイント解説をしていくので、安心してお読みください。
 
+このチュートリアルで作成するいいねボタンの最終的な成果物は[デモサイト](https://like-button.typescriptbook.jp)で確認できます。チュートリアルを開始する前に事前に触ってみることで、各ステップでどんな実装をしているかのイメージが掴みやすくなります。また、完成形のソースコードは[GitHub](https://github.com/yytypescript/like-button)で確認することができます。
+
 ## Reactとは？
 
 ReactはFacebook社が開発した、ウェブアプリケーションのUIを作るためのパッケージです。JavaScriptやTypeScriptだけでもインタラクティブなUIは実装できます。しかし、UIが複雑になるとReactなしではコードの記述量が増大したり、可読性が悪くなったりと難易度が上がります。なんといっても、UIが今どのような状態なのかを管理するのは、プログラマが把握しきれない複雑さになることがあります。Reactを使うと、複雑なUIやインタラクションを短く簡潔に読みやすく書けるようになり、状態の管理も分かりやすくなります。
@@ -104,9 +106,9 @@ Reactには、小さいコンポーネントを組み合わせ、大きなアプ
 
 このチュートリアルをやるに当たって、必要なツールがあります。それらはここにリストアップしておくのであらかじめ用意しておいてください。
 
-- Node.js
+- Node.js (このチュートリアルではv18.15.0で動作確認しています)
 - NPM
-- Yarn
+- Yarn v1系 (このチュートリアルはv1.22.19で動作確認しています)
 - VS CodeやWebStormなどのエディター
 
 ## Yarnのインストール
@@ -121,29 +123,53 @@ npm install -g yarn
 
 ## プロジェクトを作る
 
-まず、`npx create-react-app`コマンドでReactプロジェクトのひながたを生成します。
+まず、`yarn create`コマンドでReactプロジェクトのひながたを生成します。
 
 ```sh
-npx create-react-app like-button --template typescript
+yarn create react-app like-button --template typescript
 ```
 
-1分ほどするとひながたの生成が完了します。like-buttonディレクトリが生成されるので、そのディレクトリに移動すると、ひながたが生成されているのが分かります。
+1分ほどするとひながたの生成が完了します。like-buttonディレクトリが生成されるので、次のコマンドを実行してそのディレクトリに移動すると、ひながたが生成されているのが分かります。
 
 ```sh
 cd ./like-button
-ls -a1
+```
 
+```text title="生成後のディレクトリ構成"
 .
-..
-.git
-.gitignore
-README.md
-node_modules
-package.json
-public
-src
-tsconfig.json
-yarn.lock
+├── .gitignore
+├── README.md
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── App.css
+│   ├── App.test.tsx
+│   ├── App.tsx
+│   ├── index.css
+│   ├── index.tsx
+│   ├── logo.svg
+│   ├── react-app-env.d.ts
+│   ├── reportWebVitals.ts
+│   └── setupTests.ts
+├── tsconfig.json
+└── yarn.lock
+```
+
+create-react-appではReactのインストールも自動で行われます。インストールされたReactのバージョンを確認するには次のコマンドを用います。
+
+```sh
+yarn list react
+```
+
+```text title="yarn list reactの実行結果"
+yarn list v1.22.19
+└─ react@18.2.0
 ```
 
 このディレクトリにて`yarn start`を実行すると、Reactのローカル開発サーバーが起動します。
@@ -163,7 +189,7 @@ CtrlキーとCキーを同時に押すと、コマンドを中断することが
 
 ひながた初期状態の上のページはsrc/App.tsxの内容が描画されています。ためしに、src/App.tsxを変更してみましょう。App.tsxの`<header>`要素の中身を消して、「TypeScriptはいいぞ」に書き換えてみましょう。
 
-```tsx twoslash {8} title="App.tsx"
+```tsx twoslash {7} title="App.tsx"
 // @noErrors
 import React from "react";
 import "./App.css";
