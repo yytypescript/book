@@ -166,7 +166,6 @@ CtrlキーとCキーを同時に押すと、コマンドを中断することが
 ```tsx twoslash {8} title="App.tsx"
 // @noErrors
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
