@@ -599,7 +599,7 @@ const fetchImage = async (): Promise<Image> => {
 
 <https://raw.githubusercontent.com/yytypescript/random-cat/main/pages/index.module.css>
 
-このスタイルを`IndexPage`コンポーネントに当てます。まず、`index.modules.css`をインポートします。`.modules.css`で終わるファイルはCSSモジュール(CSS Modules)と言うもので、CSSファイル内で定義したクラス名をTypeScriptからオブジェクトとして参照できるようになります。次に、各要素に`className`属性でクラス名を指定してください。
+このスタイルを`IndexPage`コンポーネントに当てます。まず、`index.module.css`をインポートします。`.module.css`で終わるファイルはCSSモジュール(CSS Modules)と言うもので、CSSファイル内で定義したクラス名をTypeScriptからオブジェクトとして参照できるようになります。次に、各要素に`className`属性でクラス名を指定してください。
 
 ```tsx twoslash {3,8,9,12,13} title="pages/index.tsx"
 import { GetServerSideProps, NextPage } from "next";
