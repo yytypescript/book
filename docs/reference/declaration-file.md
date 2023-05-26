@@ -142,7 +142,7 @@ hello("taro");
 // @log: "hello, taro"
 ```
 
-実際のモジュールの型定義ファイルの例として`jest`の型定義ファイルを見てみましょう。`beforeAll`などの関数が型定義ファイル内でアンビエント宣言されているのが確認できます。これによりモジュールの読み込みをせずに、これらの関数を直接記述することができます。
+実際のモジュールの型定義ファイルの例として`jest`の型定義ファイルを見てみましょう。`beforeAll`などの関数が型定義ファイル内でアンビエント宣言されているのが確認できます。これによりモジュールの読み込みをしなくても、TypeScriptが`beforeAll`を関数として認識することができます。
 
 ```ts title="node_modules/@types/jest/index.d.ts" twoslash
 // @noErrors
@@ -155,6 +155,77 @@ declare namespace jest {
 
 ### namespace
 
+`namespace`キーワードを使うことで名前空間を定義することができます。
+名前空間を定義することで、型名の衝突を避けることができます。
+
+`Element`という型をライブラリの型として定義してライブラリ利用者が参照できるようにしたいと考えみます。この型はTypeScriptの`lib.dom.d.ts`にすでに定義されているため、そのまま同じグローバルな空間に定義をすると名前が衝突してしまいます。
+
+```ts title="node_modules/typescript/lib/lib.dom.d.ts" twoslash
+interface Element
+  extends Node,
+    ARIAMixin,
+    Animatable,
+    ChildNode,
+    InnerHTML,
+    NonDocumentTypeChildNode,
+    ParentNode,
+    Slottable {
+  readonly attributes: NamedNodeMap;
+  /** Allows for manipulation of element's class content attribute as a set of whitespace-separated tokens through a DOMTokenList object. */
+  readonly classList: DOMTokenList;
+
+  // 省略
+}
+```
+
+次のコードは`namespace`を使わずにライブラリ独自の型として`Element`定義している例です。TypeScriptでは同じインターフェースが定義された場合は宣言のマージが発生するため、`lib.dom.d.ts`で定義されている型とマージされるため、`attributes`プロパティなど複数のプロパティを指定を求められてしまいます。
+
+```ts twoslash
+// hello.d.ts
+// @showEmittedFile: index.d.ts
+interface Element {
+  id: number;
+}
+
+// index.ts
+// @errors: 2740
+const e: Element = {
+  id: 1,
+};
+```
+
+名前空間を定義することで衝突を避けてライブラリ独自の型を定義をすることができます。
+
+```ts twoslash
+// @filename: hello.d.ts
+namespace Hello {
+  interface Element {
+    id: number;
+  }
+}
+
+// @filename: index.ts
+// @errors: 2740
+const e: Hello.Element = {
+  id: 1,
+};
+```
+
+Reactの型定義ファイルでは、次のように`namespace JSX`で名前空間が定義されて`Element`の型が定義がされています。
+
+```ts twoslash
+// @filename: node_modules/@types/react/index.d.ts
+declare global {
+  namespace JSX {
+    interface Element extends React.ReactElement<any, any> {}
+
+    // 省略
+  }
+}
+```
+
 ### module
+
+非推奨 namespaceを利用するのと同じ意味
 
 ### トリプルスラッシュ・ディレクティブ
