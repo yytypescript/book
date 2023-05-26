@@ -47,7 +47,7 @@ TypeScriptの学習にはJavaScriptの学習が欠かせません。ここでは
 | リソース                                                             | 特徴                                                                                                                                                                                                                                                                   |
 | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [MDN Web Docs](https://developer.mozilla.org/ja/docs/Web/JavaScript) | JavaScriptのシンタックスや機能について記載されたWeb上のドキュメントです。JavaScriptに限らずHTMLやCSS、WebAPIなどWebに関わる技術について網羅的にカバーしており、さまざまな場面でリファレンスとして機能します。Mozillaの運営の元、オープンソースの形で執筆されています。 |
-| [JavaScript Primer 迷わないための入門書](https://jsprimer.net)       | ES2015以降の機能をベースにしてJavaScriptについて一から学ぶことができるWeb上のドキュメントです。読みやすいように書籍版としても出版されているので、書籍で読みたい方はAmazonや達人出版会の方から入手できます。                                                            |
+| [JavaScript Primer 迷わないための入門書](https://jsprimer.net)       | ES2015以降の機能をベースにしてJavaScriptについて一から学ぶことができるWeb上のドキュメントです。読みやすいように書籍版としても出版されており、書籍で読みたい方はAmazonや達人出版会の方から入手することができます。                                                      |
 
 本書と同じく、両者共にコンテンツ自体がGitHubで管理されているため、プルリクエストやissueを作成して貢献することが可能な点が特徴的です。
 
@@ -177,7 +177,7 @@ TypeScriptがはじめてのプログラミング言語となる方は「[TypeSc
 
 ハンドブックの「JavaScriptの解説は専門家に任せる」という執筆の制約からJavaScriptの機能やシンタックスについての解説は基本的に無いため、このページではJavaScriptの学習リソースが提示された上で「TypeScriptを学ぶためにJavaScriptを学ぼう」という旨で締められてJavaScriptの学習を促されます。
 
-#### 🧙 JavaScriptの経験がある読者
+#### 🧙 JavaScriptの経験がある学習者
 
 JavaScriptについての知識や経験があるなら「[TypeScript for JavaScript Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)」のページから読むことをオススメします。このページは非常に有用であり、次のようなTypeScriptの中枢を占める重要な機能や概念について高速で知ることが可能です。
 
@@ -188,7 +188,7 @@ JavaScriptについての知識や経験があるなら「[TypeScript for JavaSc
 
 このページを読めばTypeScriptでの重要な概念については把握することができるため、ハンドブックではそれらの知識をさらに拡張していけばよいことになります。
 
-#### 👨‍🚀 オブジェクト指向プログラミングの経験がある読者
+#### 👨‍🚀 オブジェクト指向プログラミングの経験がある学習者
 
 JavaやC#などのオブジェクト指向プログラミング(OOP)の経験がある学習者は「[TypeScript for Java/C# Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html)」のページを読むことでTypeScriptにおいて、クラスやオブジェクト指向の考え方の違いについて学ぶことができます。
 
@@ -196,7 +196,7 @@ JavaやC#などのオブジェクト指向プログラミング(OOP)の経験が
 
 [構造的部分型(structural subtyping)](reference/values-types-variables/structural-subtyping.md)
 
-#### 🦸‍♂️ 関数型プログラミングの経験がある読者
+#### 🦸‍♂️ 関数型プログラミングの経験がある学習者
 
 HaskellやMLなどの関数型プログラミング(FP)の経験がある学習者は「[TypeScript for Functional Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html)」のページを読むことで、それらの関数型言語との類似機能や違いなどを学びながらTypeScriptについて知ることができます。
 
