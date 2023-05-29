@@ -72,7 +72,7 @@ console.log(addresses.get("太郎"));
 
 ### 標準ライブラリの型定義の参照方法
 
-標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのlibディレクトリで確認することができます。
-<https://github.com/microsoft/TypeScript/tree/master/lib>
+標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのsrc/libディレクトリで確認することができます。
+<https://github.com/microsoft/TypeScript/tree/main/src/lib>
 
-`Array.prototype.map()`の型は [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/master/lib/lib.es5.d.ts#L1170) のファイルで確認できます。
+`Array.prototype.map()`の型は [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/main/src/lib/es5.d.ts#L1246) のファイルで確認できます。
