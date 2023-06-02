@@ -213,6 +213,9 @@ const e: Hello.Element = {
 
 Reactの型定義ファイルでは、次のように`namespace JSX`で名前空間が定義されて`Element`の型が定義がされています。
 
+`declare global` と `declare namespace`の違いについて
+型定義ファイルでは同じ振る舞いをするため違いはない。`declare global`と記述をすることで、グローバルスコープに名前空間を定義するということを開発者の意図として明示できる？
+
 ```ts twoslash
 // @filename: node_modules/@types/react/index.d.ts
 declare global {
@@ -226,6 +229,31 @@ declare global {
 
 ### module
 
-非推奨 namespaceを利用するのと同じ意味
+TypeScript1.5以前では、`module`キーワードが「内部モジュール（名前空間）」を定義するために使用されていました。これは現在の`namespace`の機能と同等です。しかし、この名前がESModuleの「外部モジュール」の定義とキーワード名が重複し、混乱を招いてしまう可能性があったため、TypeScript1.5から「内部モジュール」は「名前空間」と呼ばれるように変更され、`namespace`キーワードが新たに導入されました。
+
+現在では、`module`キーワードは非推奨となっているため、`namespace`キーワードの使用をするようにしてください。
 
 ### トリプルスラッシュ・ディレクティブ
+
+型定義ファイルの先頭で見かける3つのスラッシュ(`///`)ではじめるコメント行をトリプルスラッシュ・ディレクティブと呼びます。これは、TypeScript独自の形式でコンパイラに対して指示を出す機能を持っています。
+
+トリプルスラッシュ・ディレクティブにはいくつかの種類が存在しており、ここでは多くの型定義ファイルで目にする代表的なディレクティブを2つ紹介します。
+
+#### `/// <reference path="..." />` (参照ディレクティブ)
+
+参照ディレクティブはコンパイラに型定義ファイル間の依存関係を宣言でき、`path`で指定された型定義ファイルを追加でコンパイル時に読み込むように指示を与えることができます。たとえば、次の例では`index.d.ts`をコンパイラが読み込む際に追加で`global.d.ts`を読み込みます。
+
+```ts title="node_modules/@types/react/index.d.ts" ts
+/// <reference path="global.d.ts" />
+```
+
+#### `/// <reference types="..." />` (型ディレクティブ)
+
+型ディレクティブはnpmパッケージへの依存関係を宣言できます。宣言されたパッケージの依存を解決する処理はimport文でのパッケージの解決と似た処理のため、型ディレクティブは型のimportのようなものとも考えられます。
+
+次の例はexpressの型定義ファイルの一部です。型ディレクティブで`serve-static`パッケージの型定義ファイルに依存していることが示されています。
+
+```ts title="node_modules/@types/express/index.d.ts" ts
+/// <reference types="express-serve-static-core" />
+/// <reference types="serve-static" />
+```
