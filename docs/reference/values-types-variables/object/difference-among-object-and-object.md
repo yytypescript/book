@@ -19,7 +19,7 @@ let b: Object;
 let c: {};
 ```
 
-これらはどれもobject型の値ならどんなものでも代入可能になる型です。
+これらはどれもオブジェクトの型の値ならどんなものでも代入可能になる型です。
 
 ```ts twoslash
 const a: object = {}; // OK
@@ -27,13 +27,17 @@ const b: Object = {}; // OK
 const c: {} = {}; // OK
 ```
 
-## object型、object型、{}型の違い
+<!-- textlint-disable prh -->
+
+## object型、Object型、{}型の違い
+
+<!-- textlint-enable prh -->
 
 `object`型や`Object`型、`{}`型の3つは類似する部分がありますが、`object`型と他の2つは異なる点があります。
 
 ### object型
 
-`object`型はobject型の値だけが代入できる型です。JavaScriptの値はプリミティブ型かobject型かの2つに大分されるので、`object`型はプリミティブ型が代入できない型とも言えます。
+`object`型はオブジェクトだけが代入できる型です。JavaScriptの値はプリミティブ型かオブジェクトの2つに大分されるので、`object`型はプリミティブ型が代入できない型とも言えます。
 
 ```ts twoslash
 // @errors: 2322
@@ -75,7 +79,7 @@ a = undefined;
 
 [ボックス化 (boxing)](../boxing.md)
 
-`Object`型は[TypeScriptの公式ドキュメントで使うべきでないとされています](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#number-string-boolean-symbol-and-object)。理由はプリミティブ型も代入できてしまうためです。もしobject型ならなんでも代入可にしたい場合は、代わりに`object`型を検討すべきです。
+`Object`型は[TypeScriptの公式ドキュメントで使うべきでないとされています](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#number-string-boolean-symbol-and-object)。理由はプリミティブ型も代入できてしまうためです。もしオブジェクトならなんでも代入可にしたい場合は、代わりに`object`型を検討すべきです。
 
 ### {}型
 

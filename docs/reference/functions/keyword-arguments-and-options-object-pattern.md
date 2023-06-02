@@ -54,7 +54,7 @@ function func({ x, y, z }) {
 
 ## Options Objectパターンの型注釈
 
-TypeScriptでOptions Objectパターンを使うときには、引数の型注釈が必要になります。型注釈はobject型を書きます。
+TypeScriptでOptions Objectパターンを使うときには、引数の型注釈が必要になります。型注釈はオブジェクトの型を書きます。
 
 ```ts twoslash
 function func({ x, y, z }: { x: number; y: number; z: number }) {
@@ -62,7 +62,7 @@ function func({ x, y, z }: { x: number; y: number; z: number }) {
 }
 ```
 
-object型の記述が長すぎる場合には、TypeScriptの型エイリアス(type alias)を用いて、引数の型を分けて書くと可読性が良くなります。
+オブジェクトの型の記述が長すぎる場合には、TypeScriptの型エイリアス(type alias)を用いて、引数の型を分けて書くと可読性が良くなります。
 
 ```ts twoslash
 type Options = {
@@ -257,7 +257,7 @@ func({ hoge: 123 });
 
 ## デフォルト引数の型注釈
 
-TypeScriptでOptions Objectにデフォルト引数をもたせたい場合は、引数名のところにデフォルト値を書いた上で、object型の型注釈にてオプションプロパティを指定する`?`を書きます。
+TypeScriptでOptions Objectにデフォルト引数をもたせたい場合は、引数名のところにデフォルト値を書いた上で、オブジェクトの型注釈にてオプションプロパティを指定する`?`を書きます。
 
 ```ts twoslash
 function func({ x, y = 0, z = 0 }: { x: number; y?: number; z?: number }) {

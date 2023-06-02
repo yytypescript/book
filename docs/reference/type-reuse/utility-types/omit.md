@@ -3,13 +3,13 @@ description: 任意のプロパティを除いたオブジェクト型を作る
 title: "Omit<T, Keys>"
 ---
 
-`Omit<T, Keys>`は、object型`T`から`Keys`で指定したプロパティを除いたobject型を返すユーティリティ型です。
+`Omit<T, Keys>`は、オブジェクトの型`T`から`Keys`で指定したプロパティを除いたobject型を返すユーティリティ型です。
 
 ## Omit&lt;T, Keys>の型引数
 
 ### T
 
-型引数`T`にはobject型を渡します。
+型引数`T`にはオブジェクトの型を渡します。
 
 ### Keys
 

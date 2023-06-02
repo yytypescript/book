@@ -106,9 +106,9 @@ function isNumberArray(value: unknown): value is number[] {
 }
 ```
 
-### unknown型をobject型に絞り込む
+### unknown型をオブジェクトの型に絞り込む
 
-unknown型をobject型に絞り込むには、`typeof`演算子を用います。
+unknown型をオブジェクトの型に絞り込むには、`typeof`演算子を用います。
 
 ```ts twoslash
 type Email = {

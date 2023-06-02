@@ -9,7 +9,7 @@ title: Required<T>
 
 ### T
 
-型引数`T`にはobject型を表す型を代入します。
+型引数`T`にはオブジェクトの型を表す型を代入します。
 
 ## Requiredの使用例
 
