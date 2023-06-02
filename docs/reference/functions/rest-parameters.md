@@ -46,7 +46,7 @@ function func(...params, param1) {}
 
 ## 残余引数の型注釈
 
-TypeScriptで残余引数に型注釈するには、配列の型を書きます。たとえば、残余引数が数値型なら、`number[]`のように書きます。
+TypeScriptで残余引数に型注釈するには、配列の型を書きます。たとえば、残余引数がnumber型なら、`number[]`のように書きます。
 
 ```ts twoslash
 function func(...params: number[]) {

@@ -1,11 +1,15 @@
 ---
-sidebar_label: 数値型
+sidebar_label: number型
 slug: /reference/values-types-variables/number
 ---
 
-# 数値型 (number type)
+<!-- textlint-disable prh -->
 
-JavaScriptの数値型は、1や-1などの整数と0.1などの小数を含めた数値の型です。PHPなどの言語では、数値について整数を表す型(int)と小数を表す型(floatやdouble)の2つの型を持ちます。Javaなどの言語では、整数型をさらに32ビットと64ビットに細分化する言語もあります。JavaScriptには、整数と小数を型レベルで区別するものはありません。どちらも数値型で表現します。
+# number型 (数値型)
+
+<!-- textlint-enable prh -->
+
+JavaScriptのnumber型は、1や-1などの整数と0.1などの小数を含めた数値の型です。PHPなどの言語では、数値について整数を表す型(int)と小数を表す型(floatやdouble)の2つの型を持ちます。Javaなどの言語では、整数型をさらに32ビットと64ビットに細分化する言語もあります。JavaScriptには、整数と小数を型レベルで区別するものはありません。どちらもnumber型で表現します。
 
 ## 数値リテラル
 
@@ -73,9 +77,9 @@ JavaScriptの数値リテラルのプロパティを直接参照する場合、�
 (5).toString();
 ```
 
-## 数値型の型注釈
+## number型の型注釈
 
-TypeScriptで数値型の型注釈は`number`を用います。
+TypeScriptでnumber型の型注釈は`number`を用います。
 
 ```ts twoslash
 const count: number = 123;
@@ -85,11 +89,11 @@ const count: number = 123;
 
 ## 数値の範囲
 
-JavaScriptの数値型は、IEEE 754の倍精度浮動小数です。64ビットのうち、52ビットが数値の格納に、11ビットが小数の位置に、1ビットが正負符号に使われます。正確に扱える数値は`-(2^53 − 1)`から`2^53 − 1`の間です。整数について言うと、他言語の64ビット整数型の範囲より狭いので注意しましょう。
+JavaScriptのnumber型は、IEEE 754の倍精度浮動小数です。64ビットのうち、52ビットが数値の格納に、11ビットが小数の位置に、1ビットが正負符号に使われます。正確に扱える数値は`-(2^53 − 1)`から`2^53 − 1`の間です。整数について言うと、他言語の64ビット整数型の範囲より狭いので注意しましょう。
 
 ## 特殊な数値
 
-JavaScriptの数値型には、`NaN`と`Infinity`という特殊な値があります。
+JavaScriptのnumber型には、`NaN`と`Infinity`という特殊な値があります。
 
 ### NaN
 

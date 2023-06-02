@@ -1073,7 +1073,7 @@ function isDuck(animal: Animal): animal is Duck {
 
 ### `keyof` keyof型演算子 (keyof) ![ts]
 
-オブジェクト型からプロパティ名を型として返す型演算子です。
+オブジェクトの型からプロパティ名を型として返す型演算子です。
 
 ### `n` bigintリテラル (bigint literal) ![js]
 

@@ -215,7 +215,7 @@ HaskellやMLなどの関数型プログラミング(FP)の経験がある学習�
 | [Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html) | 日常的に使用するあらゆる型についての説明                                         |
 | [Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)           | 型の絞り込みについての説明                                                       |
 | [More on Functions](https://www.typescriptlang.org/docs/handbook/2/functions.html)   | 関数の型についての詳細説明                                                       |
-| [Object Types](https://www.typescriptlang.org/docs/handbook/2/objects.html)          | オブジェクト型についての詳細説明                                                 |
+| [Object Types](https://www.typescriptlang.org/docs/handbook/2/objects.html)          | オブジェクトの型についての詳細説明                                               |
 | Type Manipulation                                                                    | 型から新しい型を作成するための方法について解説したページを収めたセクションです。 |
 | [Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)               | アクセス修飾子やクラスの型注釈の方法などの説明                                   |
 | [Modules](https://www.typescriptlang.org/docs/handbook/2/modules.html)               | モジュール解決などについての説明                                                 |

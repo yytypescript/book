@@ -1,14 +1,22 @@
 ---
-sidebar_label: 文字列型
+sidebar_label: string型
 ---
 
-# 文字列型 (string type)
+<!-- textlint-disable prh -->
+
+# string型 (文字列型)
+
+<!-- textlint-enable prh -->
 
 ## 文字列リテラル
 
+<!-- textlint-disable prh -->
+
 Javaなどの言語では、ダブルクォートで文字列リテラル(String型)を表現し、シングルクォートで文字リテラル(char型)を表現するといったように、使うクォートで型が変わります。
 
-一方JavaScriptでは、ダブルクォートでもシングルクォートでもまったく同じ文字列型になります。この点はPHPと同様です。またバッククォート(`` ` ``)を使っても文字列型になります。
+<!-- textlint-enable prh -->
+
+一方JavaScriptでは、ダブルクォートでもシングルクォートでもまったく同じstring型になります。この点はPHPと同様です。またバッククォート(`` ` ``)を使ってもstring型になります。
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -77,7 +85,7 @@ console.log(`現在、${count}名が見ています。`);
 
 ## 文字列の型注釈
 
-TypeScriptの文字列型の型注釈は`string`を用います。
+TypeScriptのstring型の型注釈は`string`を用います。
 
 ```ts twoslash
 const message: string = "Hello";
@@ -87,7 +95,7 @@ const message: string = "Hello";
 
 ## 文字列結合
 
-JavaScriptの文字列結合は文字列結合演算子(`+`)を用います。数値型の加算でも同じ演算子が使われます。
+JavaScriptの文字列結合は文字列結合演算子(`+`)を用います。number型の加算でも同じ演算子が使われます。
 
 <!--prettier-ignore-->
 ```ts twoslash

@@ -47,7 +47,7 @@ const bar = ([a, b]) => {};
 
 ## 分割代入引数の型注釈
 
-TypeScriptでオブジェクトを分割代入する場合、分割代入引数の右にオブジェクト型の型注釈を書きます。
+TypeScriptでオブジェクトを分割代入する場合、分割代入引数の右にオブジェクトの型注釈を書きます。
 
 ```ts twoslash
 function foo({ a, b }: { a: number; b: number }) {}

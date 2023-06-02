@@ -1,23 +1,27 @@
 ---
-sidebar_label: 論理型
+sidebar_label: boolean型
 ---
 
-# 論理型 (boolean type)
+<!-- textlint-disable prh -->
 
-JavaScriptの論理型(boolean type)は、`true`と`false`の論理値からなる型です。
+# boolean型 (論理型)
 
-## 論理型リテラル
+<!-- textlint-enable prh -->
 
-JavaScriptの論理型リテラルは`true`または`false`を用いて次のように書きます。
+JavaScriptのboolean型は、`true`と`false`の論理値からなる型です。
+
+## boolean型リテラル
+
+JavaScriptのboolean型リテラルは`true`または`false`を用いて次のように書きます。
 
 ```ts twoslash
 const isOk = true;
 const isPanda = false;
 ```
 
-## 論理型の型注釈
+## boolean型の型注釈
 
-TypeScriptの論理型の型注釈は`boolean`を使います。
+TypeScriptのboolean型の型注釈は`boolean`を使います。
 
 ```ts twoslash
 const isOk: boolean = true;

@@ -16,7 +16,7 @@ const keys1 = ["a", "b", "c"];
 const keys2 = Object.keys(obj); // keys1より保守性が高い
 ```
 
-上は変数の再利用の例です。TypeScriptには変数の再利用の型バージョンがあります。それが型の再利用です。たとえば、あるオブジェクト型からキーの型を導き出すことができます。
+上は変数の再利用の例です。TypeScriptには変数の再利用の型バージョンがあります。それが型の再利用です。たとえば、あるオブジェクトの型からキーの型を導き出すことができます。
 
 ```ts twoslash
 type Obj = { a: string; b: string; c: string };

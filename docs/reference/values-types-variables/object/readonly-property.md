@@ -2,7 +2,7 @@
 sidebar_label: オブジェクト型のreadonlyプロパティ
 ---
 
-# オブジェクト型のreadonlyプロパティ (readonly property)
+# オブジェクトの型のreadonlyプロパティ (readonly property)
 
 TypeScriptでは、オブジェクトのプロパティを読み取り専用にすることができます。読み取り専用にしたいプロパティには`readonly`修飾子をつけます。読み取り専用のプロパティに値を代入しようとすると、TypeScriptコンパイラーが代入不可の旨を警告するようになります。
 
