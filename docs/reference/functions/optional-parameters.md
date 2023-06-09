@@ -45,7 +45,7 @@ hello();
 
 ## オプション引数の取り回し
 
-オプション引数は、型が`undefined`とのユニオン型になるため、そのままでは使えません。たとえば、次のコードは文字列の`toUpperCase`メソッドを呼び出すコードです。これはコンパイルエラーになります。なぜなら、`person`が`undefined`型である可能性があるからです。そして、`undefined`には`toUpperCase`メソッドがありません。
+オプション引数は、型が`undefined`とのユニオン型になるため、そのままでは使えません。たとえば、次のコードはstringの`toUpperCase`メソッドを呼び出すコードです。これはコンパイルエラーになります。なぜなら、`person`が`undefined`型である可能性があるからです。そして、`undefined`には`toUpperCase`メソッドがありません。
 
 ```ts twoslash
 // @errors: 2532
