@@ -178,19 +178,19 @@ interface Element
 }
 ```
 
-次のコードは`namespace`を使わずにライブラリ独自の型として`Element`定義している例です。TypeScriptでは同じインターフェースが定義された場合は宣言のマージが発生するため、`lib.dom.d.ts`で定義されている型とマージされるため、`attributes`プロパティなど複数のプロパティを指定を求められてしまいます。
+次のコードは`namespace`を使わずにライブラリ独自の型として`Element`を定義している例です。TypeScriptでは同じインターフェースが定義された場合は宣言のマージが発生するため、`lib.dom.d.ts`で定義されている型とマージされるため、`attributes`プロパティなど複数プロパティの指定を求められてしまいます。
 
 ```ts twoslash
 // hello.d.ts
 // @showEmittedFile: index.d.ts
 interface Element {
-  id: number;
+  id: string;
 }
 
 // index.ts
 // @errors: 2740
 const e: Element = {
-  id: 1,
+  id: "1",
 };
 ```
 
@@ -244,6 +244,7 @@ TypeScript1.5以前では、`module`キーワードが「内部モジュール�
 参照ディレクティブはコンパイラに型定義ファイル間の依存関係を宣言でき、`path`で指定された型定義ファイルを追加でコンパイル時に読み込むように指示を与えることができます。たとえば、次の例では`index.d.ts`をコンパイラが読み込む際に追加で`global.d.ts`を読み込みます。
 
 ```ts title="node_modules/@types/react/index.d.ts" twoslash
+// @noErrors
 /// <reference path="global.d.ts" />
 ```
 
@@ -254,6 +255,7 @@ TypeScript1.5以前では、`module`キーワードが「内部モジュール�
 次の例はexpressの型定義ファイルの一部です。型ディレクティブで`serve-static`パッケージの型定義ファイルに依存していることが示されています。
 
 ```ts title="node_modules/@types/express/index.d.ts" twoslash
+// @noErrors
 /// <reference types="express-serve-static-core" />
 /// <reference types="serve-static" />
 ```
