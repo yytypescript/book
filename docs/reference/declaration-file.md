@@ -243,7 +243,7 @@ TypeScript1.5以前では、`module`キーワードが「内部モジュール�
 
 参照ディレクティブはコンパイラに型定義ファイル間の依存関係を宣言でき、`path`で指定された型定義ファイルを追加でコンパイル時に読み込むように指示を与えることができます。たとえば、次の例では`index.d.ts`をコンパイラが読み込む際に追加で`global.d.ts`を読み込みます。
 
-```ts title="node_modules/@types/react/index.d.ts" ts
+```ts title="node_modules/@types/react/index.d.ts" twoslash
 /// <reference path="global.d.ts" />
 ```
 
@@ -253,7 +253,7 @@ TypeScript1.5以前では、`module`キーワードが「内部モジュール�
 
 次の例はexpressの型定義ファイルの一部です。型ディレクティブで`serve-static`パッケージの型定義ファイルに依存していることが示されています。
 
-```ts title="node_modules/@types/express/index.d.ts" ts
+```ts title="node_modules/@types/express/index.d.ts" twoslash
 /// <reference types="express-serve-static-core" />
 /// <reference types="serve-static" />
 ```
