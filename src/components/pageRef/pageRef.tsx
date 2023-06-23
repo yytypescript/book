@@ -1,7 +1,12 @@
 import DocCard from "@theme/DocCard";
-import React from "react";
+import React, { FC } from "react";
 
-export default function PageRef({ link, title }: any) {
+export type Props = {
+  readonly link: string;
+  readonly title: string;
+};
+
+const PageRef: FC<Props> = ({ link, title }) => {
   try {
     const { metadata } = require("@site/docs" + link.replace(/^\/+/, "/"));
     return (
@@ -22,4 +27,5 @@ export default function PageRef({ link, title }: any) {
       </p>
     );
   }
-}
+};
+export default PageRef;

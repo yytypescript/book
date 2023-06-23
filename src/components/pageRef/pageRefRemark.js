@@ -38,7 +38,7 @@ const pageRef = () => (node) => {
   if (linkFound) {
     node.children.unshift({
       type: /** @type {any} */ ("import"),
-      value: 'import PageRef from "@site/src/components/PageRef";',
+      value: 'import PageRef from "@site/src/components/pageRef/pageRef";',
     });
   }
 };

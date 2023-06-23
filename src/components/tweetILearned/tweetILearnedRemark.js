@@ -10,6 +10,7 @@
 exports.tweetILearned = () => (node) => {
   node.children.unshift({
     type: /** @type {any} */ ("import"),
-    value: 'import TweetILearned from "@site/src/components/TweetILearned";',
+    value:
+      'import TweetILearned from "@site/src/components/tweetILearned/tweetILearned";',
   });
 };

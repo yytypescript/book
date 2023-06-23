@@ -14,7 +14,7 @@ Next.jsはVercel社が開発しています。同社は[Vercel](https://vercel.c
 
 このチュートリアルでは、題して「猫画像ジェネレーター」です。どんなものかというと、ボタンを押したら、猫画像のAPIから画像のURLを取得し、ランダムに可愛い猫画像を表示するシンプルなウェブアプリケーションです。
 
-<video width="600" controls="controls" loop="controls" autoplay="autoplay" muted="muted" playsinline="playsinline">
+<video width="600" controls="controls" loop="controls" autoPlay="autoplay" muted="muted" playsInline="playsinline">
   <source src="/tutorials/nextjs/demo.mp4" type="video/mp4" />
 </video>
 
@@ -490,7 +490,7 @@ const fetchImage = async (): Promise<Image> => {
 
 これでクリックしたら画像が更新されるようになります。うまく動いているかブラウザで確認してみてください。
 
-<video width="600" controls="controls" loop="controls" autoplay="autoplay" muted="muted" playsinline="playsinline">
+<video width="600" controls="controls" loop="controls" autoPlay="autoplay" muted="muted" playsInline="playsinline">
   <source src="/tutorials/nextjs/cat-image-is-changed-when-click-the-button.mp4" type="video/mp4" />
 </video>
 

@@ -84,7 +84,7 @@ image: /img/ogp.png
 ```
 
 :::caution
-Markdownのリンクテキストは無視され、リンク先のタイトルが採用されます。たとえば、function.mdのタイトルが「関数について」で、Markdownが`[ファンクション](./function.md)`のとき、「ファンクション」は無視され、ウェブサイト上の表示は「関数について」が採用されます。
+Markdownのリンクテキストは無視され、リンク先のタイトルが採用されます。たとえば、function.mdのタイトルが「関数について」で、Markdownが<code>&#91;ファンクション]&#40;./function.md)</code>のとき、「ファンクション」は無視され、ウェブサイト上の表示は「関数について」が採用されます。
 :::
 
 ## インラインコード
@@ -239,6 +239,7 @@ const x = value;
 
 `^|`を書いたところにVS Codeでのコード補完の様子を再現できます。
 
+<!--prettier-ignore-->
 ````markdown
 ```ts twoslash
 // @noErrors
@@ -426,6 +427,7 @@ export default MyComponent;
 
 自動整形をされたくないコードブロック場合は、`<!--prettier-ignore-->`を直前に書きます。
 
+<!--prettier-ignore-->
 ````markdown {4}
 ```ts
 f = x => x;

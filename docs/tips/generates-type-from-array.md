@@ -45,7 +45,7 @@ type Currency = typeof currencies;
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
 
-type Currency = typeof currencies[2];
+type Currency = (typeof currencies)[2];
 //   ^?
 ```
 
@@ -66,7 +66,7 @@ type Currency = typeof currencies[0] | typeof currencies[1] | typeof currencies[
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
 
-type Currency = typeof currencies[number];
+type Currency = (typeof currencies)[number];
 //   ^?
 ```
 

@@ -70,7 +70,7 @@ const conf = {
 };
 type Language = keyof typeof conf;
 // ---cut---
-type ConfirmationMessage = typeof conf[Language];
+type ConfirmationMessage = (typeof conf)[Language];
 //   ^?
 ```
 
@@ -101,7 +101,7 @@ const conf = {
   zh: "您确定吗？",
 } as const;
 
-type ConfirmationMessage = typeof conf[keyof typeof conf];
+type ConfirmationMessage = (typeof conf)[keyof typeof conf];
 //   ^?
 ```
 

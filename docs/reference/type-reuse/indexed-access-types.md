@@ -69,7 +69,7 @@ type T = MixedArray[number];
 
 ```ts twoslash
 const stateList = ["open", "closed"] as const;
-type State = typeof stateList[number];
+type State = (typeof stateList)[number];
 //   ^?
 ```
 
