@@ -119,7 +119,7 @@ function initNum() {
 // @strictNullChecks: true
 let num: number;
 num = initNum();
-console.log(num! * 2);
+console.log(num * 2);
 function initNum() {
   return 2;
 }
