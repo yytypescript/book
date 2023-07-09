@@ -173,7 +173,9 @@ textlintのprhルールが無効になるエリア
 
 ```markdown title="NG"
 <!--textlint-disable-->
+
 無効化したいテキスト
+
 <!--textlint-enable-->
 ```
 

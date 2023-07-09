@@ -5,7 +5,7 @@
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
 
-type Currency = typeof currencies[number];
+type Currency = (typeof currencies)[number];
 //   ^?
 ```
 
@@ -17,7 +17,7 @@ type Currency = typeof currencies[number];
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
-type Currency = typeof currencies[2];
+type Currency = (typeof currencies)[2];
 //   ^?
 ```
 
@@ -27,7 +27,7 @@ type Currency = typeof currencies[2];
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
 const index = 2 as const;
 // @errors: 2749
-type Currency = typeof currencies[index];
+type Currency = (typeof currencies)[index];
 ```
 
 `2`が値として解釈されるコードではエラーになってしまいました。
@@ -37,7 +37,7 @@ type Currency = typeof currencies[index];
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
 type Index = 2;
-type Currency = typeof currencies[Index];
+type Currency = (typeof currencies)[Index];
 //   ^?
 ```
 
@@ -55,7 +55,7 @@ type Currency = typeof currencies[Index];
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
-type Currency = typeof currencies[0 | 1 | 2 | 3 | 4 | 5];
+type Currency = (typeof currencies)[0 | 1 | 2 | 3 | 4 | 5];
 //   ^?
 ```
 

@@ -1,12 +1,13 @@
 import Link from "@docusaurus/Link";
-import useThemeContext from "@theme/hooks/useThemeContext";
 import clsx from "clsx";
 import type * as monaco from "monaco-editor";
 import Highlight, { defaultProps } from "prism-react-renderer";
+import { useColorMode } from "@docusaurus/theme-common";
 import darkTheme from "prism-react-renderer/themes/vsDark";
 import lightTheme from "prism-react-renderer/themes/vsLight";
 import * as React from "react";
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { useIsDarkMode } from "../useIsDarkMode";
 import styles from "./index.module.css";
 import {
   findByPoint,
@@ -17,7 +18,6 @@ import {
 } from "./model";
 import useStore from "./useStore";
 
-const reactDts = require("!!raw-loader!@types/react/index.d.ts").default;
 const initialCode = "// ここに解読するコードを入力してください\n\n";
 
 type CodeReadingAssistantProps = Readonly<{
@@ -64,13 +64,13 @@ const Main: React.FC<MainProps> = ({
   });
   const [secondaryHighlightedPosition, setSecondaryHighlightedPosition] =
     useState<Position | undefined>();
-  const { isDarkTheme } = useThemeContext();
+  const isDarkMode = useIsDarkMode();
 
   return (
     <main
       className={clsx(
         styles.container,
-        isDarkTheme ? styles.darkTheme : styles.theme
+        isDarkMode ? styles.darkTheme : styles.theme
       )}
       data-clarity-mask="True"
     >
@@ -117,7 +117,7 @@ const Editor: React.FC<EditorProps> = ({
   highlightedPosition,
   secondaryHighlightedPosition,
 }) => {
-  const { isDarkTheme } = useThemeContext();
+  const isDarkMode = useIsDarkMode();
   const monaco = useMonaco();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>();
@@ -139,10 +139,15 @@ const Editor: React.FC<EditorProps> = ({
         strict: true,
         typeRoots: ["node_modules/@types"],
       });
-      monaco.languages.typescript.typescriptDefaults.addExtraLib(
-        reactDts,
-        `file:///node_modules/@types/react/index.d.ts`
-      );
+      fetch("https://unpkg.com/@types/react@18.2.14/index.d.ts")
+        .then((data) => data.text())
+        .then((source) =>
+          monaco.languages.typescript.typescriptDefaults.addExtraLib(
+            source,
+            `file:///node_modules/@types/react/index.d.ts`
+          )
+        )
+        .catch(console.error);
       monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
         noSemanticValidation: false,
         noSyntaxValidation: false,
@@ -157,7 +162,7 @@ const Editor: React.FC<EditorProps> = ({
       const modelUri = monaco.Uri.file("code.tsx");
       const codeModel = monaco.editor.createModel(code, "typescript", modelUri);
       const editor = monaco.editor.create(containerRef.current, {
-        theme: isDarkTheme ? "my-dark" : "light",
+        theme: isDarkMode ? "my-dark" : "light",
         minimap: { enabled: false },
         automaticLayout: true,
         glyphMargin: true,
@@ -228,9 +233,9 @@ const Editor: React.FC<EditorProps> = ({
 
   useEffect(() => {
     editorRef.current?.updateOptions({
-      theme: isDarkTheme ? "my-dark" : "light",
+      theme: isDarkMode ? "my-dark" : "light",
     });
-  }, [isDarkTheme]);
+  }, [isDarkMode]);
 
   return <div ref={containerRef} style={{ height: "100%" }} />;
 };
@@ -358,13 +363,13 @@ const useFragments = ({
 };
 
 const Code: React.FC<Readonly<{ code: string }>> = ({ code }) => {
-  const { isDarkTheme } = useThemeContext();
+  const isDarkMode = useIsDarkMode();
   return (
     <Highlight
       {...defaultProps}
       code={code}
       language="tsx"
-      theme={isDarkTheme ? darkTheme : lightTheme}
+      theme={isDarkMode ? darkTheme : lightTheme}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={clsx(className, styles.code)}>
