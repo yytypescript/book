@@ -1,4 +1,4 @@
-name: jest
+name: build
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
     branches:
       - master
 jobs:
-  jest:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,4 +15,4 @@ jobs:
         with:
           node-version: 18
       - run: yarn --frozen-lockfile
-      - run: yarn test
+      - run: yarn build

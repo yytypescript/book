@@ -30,3 +30,4 @@ yarn-error.log*
 !/.yarn/releases
 !/.yarn/sdks
 /.pnp.*
+.vercel
