@@ -3,9 +3,9 @@ title: await
 slug: /reference/asynchronous/await
 ---
 
-`Promise`を利用した非同期処理をより簡単に書ける構文として`async /await`が存在します。
+`Promise`を利用した非同期処理をより簡単に書ける構文として`async`/`await`が存在します。
 この構文を利用することで、非同期処理をより同期処理と同じような文脈で書くことができるようになります。
-`async / await`は基本セットで使いますが、本ページでは`await`を主に取り上げます。
+`async`/`await`は基本セットで使いますが、本ページでは`await`を主に取り上げます。
 
 ### `await`
 

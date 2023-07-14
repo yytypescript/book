@@ -170,7 +170,7 @@ const promise1: Promise<number> = Promise.resolve(1);
 const promise2: Promise<string> = promise1.then((value) => `${value}`);
 ```
 
-上記例は`then()`のたびに新しく定数を定義していますが。上述のとおり`then()`でメソッドチェーンできます。
+上記例は`Promise.prototype.then()`のたびに新しく定数を定義していますが。上述のとおり`Promise.prototype.then()`でメソッドチェーンできます。
 
 ```ts twoslash
 const promise: Promise<boolean> = Promise.resolve("1")
@@ -220,7 +220,7 @@ const promise1: Promise<number> = Promise.reject(new Error());
 const promise2: Promise<string> = promise1.catch((e) => e.message);
 ```
 
-`catch()`は`Promise`が履行されている状態だと実行されません。そのため`catch()`のあとに`then()`をつなげると実行されたときの型と実行されなかったときの型の両方を考える必要があります。
+`Promise.prototype.catch()`は`Promise`が履行されている状態だと実行されません。そのため`Promise.prototype.catch()`のあとに`Promise.prototype.then()`をつなげると実行されたときの型と実行されなかったときの型の両方を考える必要があります。
 
 ```ts twoslash
 Promise.resolve(1)
@@ -233,7 +233,7 @@ Promise.resolve(1)
   });
 ```
 
-ただし`catch()`のあとに`then()`を書くというより、`then()`のあとに`catch()`を書くほうが多いでしょう。
+ただし`Promise.prototype.catch()`のあとに`Promise.prototype.then()`を書くというより、`Promise.prototype.then()`のあとに`Promise.prototype.catch()`を書くほうが多いでしょう。
 
 ```ts twoslash
 Promise.resolve(1)
