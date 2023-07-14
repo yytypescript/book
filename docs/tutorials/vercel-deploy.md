@@ -17,39 +17,43 @@ Next.jsを開発しているVercel社が提供しているフロントエンド�
 今回のチュートリアルではGitHubリポジトリとの連携を利用してデプロイ環境を構築するために、次のものが必要です。
 
 - GitHubアカウント
-- ハンズオンで作成した猫画像ジェネレータのGitHubリポジトリ
+- 「[Next.jsで猫画像ジェネレーターを作ろう](./nextjs.md)」で作成したコードと、それをpush済みのGitHubリポジトリ
+  - 上のチュートリアルを実施された方は、ご自身のGitHubアカウントのリポジトリにコードをpushしておいてください。
+  - 自分で作ったコードでなくても構わない方は、本書が提供する[random-catリポジトリ](https://github.com/yytypescript/random-cat)を[フォーク](https://docs.github.com/ja/get-started/quickstart/fork-a-repo)しておくのでも構いません。
 
 ## デプロイの流れ
 
-- アカウント作成
-- Vercelにログイン
-- デプロイ環境を構築するGitHubリポジトリを連携
+- Vercelアカウントを作成する
+- Vercelにログインする
+- GitHubリポジトリを連携する
 
-## アカウント作成
+## Vercelアカウントを作成する
 
-すでにアカウントをお持ちの方はこの手順はスキップして次のログインへお進みください。
+:::note
+Vercelのアカウントをすでにお持ちの方は、この手順を飛ばしてください。
+:::
 
-最初に[Vercel](https://vercel.com/signup)にアクセスをして、GitHubアカウントでVercelのアカウントを作成しましょう。
-アカウント作成後に連携するGitHubリポジトリの選択画面が表示されるので、「GitHubリポジトリを連携」にお進みください。
+最初に[Vercel](https://vercel.com/signup)にアクセスをして、GitHubアカウントでVercelのアカウントを作成しましょう。アカウント作成後に連携するGitHubリポジトリの選択画面が表示されるので、「GitHubリポジトリを連携する」にお進みください。
 
-## Vercelへログイン
+## Vercelにログインする
 
 [Vercelのログイン画面](https://vercel.com/login)に遷移してGitHubアカウントでログインをします。
 
-## GitHubリポジトリを連携
+## GitHubリポジトリを連携する
 
 [VercelのGitHubリポジトリ連携のページ](https://vercel.com/new)へアクセスして猫画像ジェネレーターのGitHubリポジトリを検索して「Import」ボタンをクリックします。
+
 ![連携するGitHubリポジトリの選択](vercel-deploy/screen1.png)
 
 プロジェクトの設定画面が表示されるので、設定はデフォルトのままで「Deploy」ボタンをクリックしてください。
+
 ![プロジェクトの設定画面](vercel-deploy/screen2.png)
 
-デプロイ完了画面が表示されればデプロイは完了です。🎉
-画面のプレビュー表示がリンクになっており、クリックすることでデプロイされたアプリを表示することができます。
+デプロイ完了画面が表示されればデプロイは完了です。🎉画面のプレビュー表示がリンクになっており、クリックすることでデプロイされたアプリを表示することができます。
+
 ![デプロイ完了画面](vercel-deploy/screen3.png)
 
-`Continue To Dashboard`のボタンをクリックすることでプロジェクトのダッシュボードページへ遷移できます。
-ダッシュボード上でVercelが自動生成したドメインを確認できます。このドメインはプロジェクトが存続している限り変更されないため、このURLを他の人に共有することでアプリを公開することができます。
+「Continue To Dashboard」のボタンをクリックすることでプロジェクトのダッシュボードページへ遷移できます。ダッシュボード上でVercelが自動生成したドメインを確認できます。このドメインはプロジェクトが存続している限り変更されないため、このURLを他の人に共有することでアプリを公開することができます。
 
 ![ダッシュボード](vercel-deploy/screen6.png)
 
@@ -59,35 +63,32 @@ Next.jsを開発しているVercel社が提供しているフロントエンド�
 
 実際に猫画像ジェネレーターのコードの一部を修正して自動デプロイを実行してみましょう。
 
-次のようにボタンのデザインを変更してGitHubリポジトリでプルリクエストを作成してください。
+次のようにボタンの文言を「他のにゃんこも見る」を「One more cat!」に変更してGitHubリポジトリでプルリクエストを作成してください。
 
-<!-- twoslashで記述するとコンパイルエラーが発生するのでtwoslashの指定はスキップしています -->
-
-```tsx {10-21} title="src/pages/index.tsx"
-const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
-  const [catImageUrl, setCatImageUrl] = useState(initialCatImageUrl);
-
+```tsx twoslash {13} title="src/pages/index.tsx"
+import { NextPage } from "next";
+import { useState } from "react";
+type Props = { initialImageUrl: string };
+type Image = { url: string };
+declare function fetchImage(): Promise<Image>;
+declare const styles: any;
+// ---cut---
+const IndexPage: NextPage<Props> = ({ initialImageUrl }) => {
+  const [imageUrl, setImageUrl] = useState(initialImageUrl);
+  const [loading, setLoading] = useState(false);
   const handleClick = async () => {
-    const image = await fetchCatImage();
-    setCatImageUrl(image.url);
+    setLoading(true);
+    const newImage = await fetchImage();
+    setImageUrl(newImage.url);
+    setLoading(false);
   };
-
   return (
-    <div>
-      <button
-        onClick={handleClick}
-        style={{
-          backgroundColor: "#319795",
-          border: "none",
-          borderRadius: "4px",
-          color: "white",
-          padding: "4px 8px",
-        }}
-      >
-        きょうのにゃんこ🐱
+    <div className={styles.page}>
+      <button onClick={handleClick} className={styles.button}>
+        One more cat!
       </button>
-      <div style={{ marginTop: 8, maxWidth: 500 }}>
-        <img src={catImageUrl} width="100%" height="auto" alt="猫" />
+      <div className={styles.frame}>
+        {loading || <img src={imageUrl} className={styles.img} />}
       </div>
     </div>
   );
@@ -96,7 +97,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
 
 Vercelは連携しているGitHubリポジトリに新たにブランチがプッシュされると自動でビルドが実行されて、プレビュー環境をデプロイしてくれます。
 
-プルリクエストを作成するとVercel BOTが画像のようにビルドのステータスとプレビュー環境のURLをコメントとしてくれるので、`Visit Preview`のリンクをクリックすることでレビュアーは簡単に新しい変更の確認をすることができます。
+プルリクエストを作成するとVercel BOTが画像のようにビルドのステータスとプレビュー環境のURLをコメントとしてくれるので、「Visit Preview」のリンクをクリックすることでレビュアーは簡単に新しい変更の確認をすることができます。
 
 ![VercelのBOTがプルリクエストのプレビュー環境のURLをコメント](vercel-deploy/screen4.png)
 
@@ -104,7 +105,7 @@ Vercelは連携しているGitHubリポジトリに新たにブランチがプ�
 
 ![プルリクエストのステータスチェック](vercel-deploy/screen5.png)
 
-`Merge pull request`ボタンをクリックして、このプルリクエストをマージしてみましょう。ベースブランチに新しくブランチがマージされると本番環境に更新が自動でデプロイされます。
+「Merge pull request」ボタンをクリックして、このプルリクエストをマージしてみましょう。ベースブランチに新しくブランチがマージされると本番環境に更新が自動でデプロイされます。
 
 先ほど確認した本番環境のURLにアクセスをすることで、ボタンのデザインが変更されており今回の修正が本番環境に自動でデプロイされたのを確認できます。😺
 
