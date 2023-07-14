@@ -12,7 +12,7 @@ const tsconfigForTwoslash = require(__dirname + "/tsconfig.twoslash.json");
 const config = {
   title: "TypeScript入門『サバイバルTypeScript』",
   tagline: "Dinosaurs are cool",
-  favicon: "img/favicon.ico",
+  favicon: "img/logo.svg",
   url: "https://typescriptbook.jp",
   baseUrl: "/",
   organizationName: "yytypescript",
