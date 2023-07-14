@@ -9,7 +9,7 @@ TypeScriptに元々用意されている型ガードとしては`typeof`や`inst
 
 ## ユーザー定義の型ガード関数
 
-ユーザー定義の型ガード関数を作るためにはType predicateを使用します。Type predicateの宣言は戻り値が`boolean`型の関数に対して適用でき、戻り値の型の部分を次のように書き替えます。
+ユーザー定義の型ガード関数を作るためにはType predicateを使用します。Type predicateの宣言は戻り値がboolean型の関数に対して適用でき、戻り値の型の部分を次のように書き替えます。
 
 ```ts twoslash
 class Animal {}
