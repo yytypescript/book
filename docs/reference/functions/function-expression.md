@@ -10,7 +10,7 @@ sidebar_label: 関数式
 
 関数式の構文は、[関数宣言]と同じです。
 
-[関数宣言]: ./function-expression.md
+[関数宣言]: ./function-declaration.md
 
 <!--prettier-ignore-->
 ```js twoslash
