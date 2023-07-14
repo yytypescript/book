@@ -48,7 +48,7 @@ WindowsやmacOS、Linux向けにデスクトップアプリケーションを作
 
 サーバーレスとは、サーバーの構築や保守なしに、サーバーサイドのプログラムを実行できる仕組みです。通常、バックエンドアプリケーションを動かそうとすると、Linuxなどのサーバーを立てたり、メンテナンスする必要が出てきます。サーバーレスでは、AWSなどのクラウドベンダーがJavaScriptなどのマネージド実行環境を提供することで、アプリケーション開発者はサーバーを保守する必要がなくなります。開発者はJavaScriptの関数を書いたファイルをアップロードするだけで、バックエンドなどのウェブサービスを公開できます。このような関数を実行するクラウドサービスのことをFaaS(Function as a Service)と言います。
 
-JavaScriptをサポートしているFaaSは多数あります。もっとも有名なのがAWSの[Lambda](https://aws.amazon.com/lambda/)です。この他に、[Google Cloud Functions](https://cloud.google.com/functions)、Next.jsと親和性の高いVercelの[Serverless Functions](https://vercel.com/docs/functions/introduction)、静的サイトホスティングで有名なNetlifyの[Netlify Functions](https://www.netlify.com/products/functions/)、世界90カ国194の都市にエッジを持つCDN Cloudflareの[Cloudflare Workers](https://workers.cloudflare.com/)などがあります。これらのサービスを用いると、TypeScriptでサーバーレスなウェブアプリケーションを提供できます。
+JavaScriptをサポートしているFaaSは多数あります。もっとも有名なのがAWSの[Lambda](https://aws.amazon.com/lambda/)です。この他に、[Google Cloud Functions](https://cloud.google.com/functions)やMicrosoftの[Azure Functions](https://azure.microsoft.com/ja-jp/products/functions/)、Next.jsと親和性の高いVercelの[Serverless Functions](https://vercel.com/docs/functions/introduction)、静的サイトホスティングで有名なNetlifyの[Netlify Functions](https://www.netlify.com/products/functions/)、世界90カ国194の都市にエッジを持つCDN Cloudflareの[Cloudflare Workers](https://workers.cloudflare.com/)などがあります。これらのサービスを用いると、TypeScriptでサーバーレスなウェブアプリケーションを提供できます。
 
 ## インフラ構成管理 (IaC)
 
