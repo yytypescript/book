@@ -217,6 +217,8 @@ JSXを書いたJavaScriptファイルは拡張子を.jsxにします。同様に
 
 :::
 
+[JSX](../reference/jsx/README.md)
+
 書き換えたらファイルを保存し、ブラウザで確認してみてください。ブラウザに書いた文言が表示されていればOKです。
 
 ![変更が反映された状態](react-like-button-tutorial/screen2.png)
