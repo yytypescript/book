@@ -57,7 +57,7 @@ function showMonth(month: string | number) {
 
 この変更によりエラーとなっていた`month`の`toFixed`メソッドの呼び出しの型エラーが解消されます。
 
-これは制御フロー分析により`month`変数が`string`型の場合は早期リータンにより関数が終了し、`month`の`toFixed`メソッドが実行されるタイミングでは`month`変数は`number`型のみであるとTypeScriptが判断するためです。
+これは制御フロー分析により`month`変数が`string`型の場合は早期リターンにより関数が終了し、`month`の`toFixed`メソッドが実行されるタイミングでは`month`変数は`number`型のみであるとTypeScriptが判断するためです。
 
 ## 型ガード
 
