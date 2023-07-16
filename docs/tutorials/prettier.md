@@ -17,7 +17,7 @@ Prettierはコードのフォーマットを自動整形するツールです。
 
 - JavaScript
 - TypeScript
-- JSX
+- [JSX](./../reference/jsx/README.md)
 - Flow
 - JSON
 - HTML

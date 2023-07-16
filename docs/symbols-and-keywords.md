@@ -541,7 +541,7 @@ const result = func<string>("hello");
 
 ### `<` JSX ![ts]
 
-JSXと呼ばれるXMLリテラルの開始に現れる記号です。
+[JSX](./reference/jsx/README.md)と呼ばれるXMLリテラルの開始に現れる記号です。
 
 ```tsx twoslash title="Hello.tsx"
 function Hello() {

@@ -294,6 +294,15 @@ module.exports = {
         },
         {
           type: "category",
+          label: "JSX",
+          link: {
+            type: "doc",
+            id: "reference/jsx/README",
+          },
+          items: [],
+        },
+        {
+          type: "category",
           label: "組み込みAPI",
           link: {
             type: "generated-index",
