@@ -39,7 +39,7 @@ op.multiply(6); // 12
 op.divide(3); // 4
 ```
 
-演算ごとにステートメントを分ける必要があります。このような場合メソッドチェインを使って処理を連続させることができます。
+演算ごとにステートメントを分ける必要があります。このような場合メソッドチェーンを使って処理を連続させることができます。
 
 ```ts twoslash
 class Operator {
@@ -74,7 +74,7 @@ const op: Operator = new Operator(0);
 op.sum(5).subtract(3).multiply(6).divide(3); // 4
 ```
 
-`op.sum(), op.subtract(), op.multiply(). op.divide()`の戻り値の型を`Operator`に変更しました。これによりメソッドチェインが可能になりました。
+`op.sum(), op.subtract(), op.multiply(). op.divide()`の戻り値の型を`Operator`に変更しました。これによりメソッドチェーンが可能になりました。
 
 ここで、このクラス`Operator`を拡張して累乗の計算を追加したいとします。すると新しいクラス`NewOperator`は次のようになるでしょう。
 
