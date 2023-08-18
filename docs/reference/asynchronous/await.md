@@ -129,25 +129,6 @@ async function main() {
 }
 ```
 
-### 拒否された`Promise`を`await`したとき
-
-拒否された`Promise`を`await`したときは、`await`の呼び出し元で例外が発生します。
-
-```ts twoslash
-async function request(): Promise<string> {
-  throw new Error("error");
-}
-
-async function main() {
-  try {
-    await request();
-  } catch (error) {
-    console.log(error);
-    // @log: error
-  }
-}
-```
-
 ### `then-catch`を`try-catch`に書き換える
 
 `Promise`の`then`と`catch`を`try-catch`に書き換えることができます。次の`main2`関数は`main1`関数を`try-catch`で書き換えたものです。
@@ -179,22 +160,71 @@ async function main2() {
 }
 ```
 
-### 拒否された`Promise`を`catch`する
+### 拒否された`Promise`を`return`するとき
 
-拒否された`Promise`をそのまま関数の戻り値にしてしまうと拒否されたまま呼び出し元に戻されます。もし拒否された`Promise`を捕捉したい場合は、`return await`として例外を捕捉する必要があります。もしこの`Promise`が拒否されてなく、履行されている場合はそのまま呼び出し元に値を返します。
+#### `return`の前に`await`する
+
+拒否された`Promise`を`return`する前に`await`したときは、その関数内で例外が発生します。
 
 ```ts twoslash
-function request(): Promise<string> {
+async function request(): Promise<unknown> {
   throw new Error("error");
 }
 
-async function main() {
+async function main(): Promise<unknown> {
   try {
     // return await とすることでcatchで例外を捕捉できる
     return await request();
-  } catch (error) {
-    console.log(error);
+  } catch {
+    console.log("error");
     // @log: error
+  } finally {
+    console.log("finally");
+    // @log: finally
   }
 }
+
+main()
+  .then(() => {
+    console.log("then");
+    // @log: then
+  })
+  .catch(() => {
+    console.log("catch");
+  });
 ```
+
+このような例であれば表示されるものは`error`と`finally`、そして`then`が表示されます。
+
+#### `return`の前に`await`しない (ただ`return`する)
+
+拒否された`Promise`をそのまま関数の戻り値にしてしまうと拒否されたまま呼び出し元に戻されます。
+
+```ts twoslash
+function request(): Promise<unknown> {
+  throw new Error("error");
+}
+
+// try -> finally -> return -> catch()
+async function main(): Promise<unknown> {
+  try {
+    return request();
+  } catch {
+    console.log("error");
+  } finally {
+    console.log("finally");
+    // @log: finally
+  }
+}
+
+main()
+  .then(() => {
+    console.log("then");
+  })
+  .catch(() => {
+    console.log("catch");
+    // @log: catch
+  });
+```
+
+このような例であれば表示されるものは`finally`と`catch`が表示されます。
