@@ -33,6 +33,7 @@ Prettierはコードのフォーマットを自動整形するツールです。
 - Markdown
 - MDX
 - YAML
+- Svelte
 
 ## なぜPrettierを導入するのか
 
@@ -139,9 +140,6 @@ console.log("Hello,World "
 
 ```shell
 yarn prettier src
-const hello = (name: string) => {
-  console.log("Hello,World " + name);
-};
 ```
 
 整形結果が表示されていますが、`helloWorld.ts`を確認するとファイル内容が変更されていないことに気づくと思います。`prettier`コマンドをオプションなしで実行した場合は整形結果だけが表示されて、ファイルの書き換えは実行されません。
@@ -224,9 +222,10 @@ yarn prettier --write src
 
 設定ファイルで記述した整形ルールで`helloWorld.ts`が変更されているのを確認できます。
 
+<!--prettier-ignore-->
 ```ts twoslash title="src/helloWorld.ts"
 const hello = (name: string) => {
-  console.log("Hello,World " + name);
+  console.log('Hello,World ' + name);
 };
 ```
 
