@@ -222,9 +222,10 @@ yarn prettier --write src
 
 設定ファイルで記述した整形ルールで`helloWorld.ts`が変更されているのを確認できます。
 
+<!--prettier-ignore-->
 ```ts twoslash title="src/helloWorld.ts"
 const hello = (name: string) => {
-  console.log("Hello,World " + name);
+  console.log('Hello,World ' + name);
 };
 ```
 
