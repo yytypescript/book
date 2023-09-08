@@ -13,7 +13,7 @@
 const foo: never = 1;
 ```
 
-たとえany型でも代入は不可能です。
+たとえ`any`型でも代入は不可能です。
 
 ```ts twoslash
 // @errors: 2322
