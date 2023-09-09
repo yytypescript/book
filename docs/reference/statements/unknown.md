@@ -44,7 +44,7 @@ number型である変数`int`に対しても代入が失敗しているのは、
 また、unknown型はプロパティへのアクセス、メソッドの呼び出しも許されません。
 
 ```ts twoslash
-// @errors: 2571
+// @errors: 18046
 const value: unknown = 10;
 value.toFixed();
 

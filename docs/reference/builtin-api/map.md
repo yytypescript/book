@@ -89,10 +89,14 @@ console.log(map.has(undefined));
 
 `NaN`同士は厳密等価ではありませんが、例外的に同じキーとみなされます。
 
-```ts twoslash
+```js twoslash
+// JavaScript
+
 console.log(NaN === NaN);
 // @log: false
+```
 
+```ts twoslash
 const map = new Map<number, number>();
 map.set(NaN, 1);
 map.set(NaN, 2);
@@ -102,12 +106,16 @@ console.log(map);
 
 オブジェクトは等価でも厳密等価でもないため、別のキーとみなされます。
 
-```ts twoslash
+```js twoslash
+// JavaScript
+
 console.log({} == {});
 // @log: false
 console.log({} === {});
 // @log: false
+```
 
+```ts twoslash
 const map = new Map<object, number>();
 map.set({}, 1);
 map.set({}, 2);
@@ -204,7 +212,7 @@ console.log(map.has("b"));
 要素が存在するかを`has`チェックしてから、`get`で要素を取得するコードはTypeScriptではうまく書けません。
 
 ```ts twoslash
-// @errors: 2532
+// @errors: 18048
 const map = new Map([["a", 1]]);
 if (map.has("a")) {
   // TypeScriptは"a"があることを認識しない

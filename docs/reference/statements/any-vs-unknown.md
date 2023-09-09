@@ -59,7 +59,7 @@ const unknown6: unknown = {
 };
 
 // ---cut---
-// @errors: 2571
+// @errors: 18046
 console.log(unknown4.toFixed());
 console.log(unknown5.length);
 console.log(unknown6.name);
@@ -93,7 +93,7 @@ const unknown6: unknown = {
 };
 
 // ---cut---
-// @errors: 2571
+// @errors: 18046
 console.log(unknown6.x.y.z);
 ```
 

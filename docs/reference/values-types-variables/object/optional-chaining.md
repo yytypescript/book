@@ -27,7 +27,9 @@ const book = undefined;
 const title = book === null || book === undefined ? undefined : book.title;
 console.log(title);
 // @log: undefined
+```
 
+```js twoslash
 const book = { title: "サバイバルTypeScript" };
 const title = book === null || book === undefined ? undefined : book.title;
 console.log(title);
@@ -58,7 +60,9 @@ const title = book?.title;
 //                ^^オプショナルチェーン
 console.log(title);
 // @log: undefined
+```
 
+```js twoslash
 const book = { title: "サバイバルTypeScript" };
 const title = book?.title;
 console.log(title);
@@ -72,7 +76,9 @@ const book = undefined;
 const authorEmail = book?.author?.email;
 console.log(authorEmail);
 // @log: undefined
+```
 
+```js twoslash
 const book = { author: { email: "alice@example.com" } };
 const authorEmail = book?.author?.email;
 console.log(authorEmail);
@@ -85,7 +91,9 @@ console.log(authorEmail);
 const book = null;
 console.log(book?.title);
 // @log: undefined
+```
 
+```js twoslash
 const book = { author: null };
 console.log(book.author?.name);
 // @log: undefined
@@ -100,7 +108,9 @@ const increment = undefined;
 const result = increment?.(1);
 console.log(result);
 // @log: undefined
+```
 
+```js twoslash
 const increment = (n) => n + 1;
 const result = increment?.(1);
 console.log(result);
@@ -113,7 +123,9 @@ console.log(result);
 const book = { getPrice: undefined };
 console.log(book.getPrice?.());
 // @log: undefined
+```
 
+```js twoslash
 const book = {
   getPrice() {
     return 0;
@@ -132,7 +144,9 @@ const books = undefined;
 const title = books?.[0];
 console.log(title);
 // @log: undefined
+```
 
+```js twoslash
 const books = ["サバイバルTypeScript"];
 const title = books?.[0];
 console.log(title);

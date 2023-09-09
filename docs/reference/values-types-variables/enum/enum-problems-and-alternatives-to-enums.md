@@ -16,7 +16,11 @@ TypeScriptの列挙型に目を向けると、構文もJavaScriptに無いもの
 
 数値列挙型は、`number`型なら何でも代入できるという型安全上の問題点があります。次の例は、値が`0`と`1`のメンバーだけからなる列挙型ですが、実際にはそれ以外の数値を代入できてしまいます。
 
+この問題はTypeScript5.0未満で発生します。
+
 ```ts twoslash
+// TypeScript v4.9.5
+// @noErrors
 enum ZeroOrOne {
   Zero = 0,
   One = 1,
@@ -24,7 +28,19 @@ enum ZeroOrOne {
 const zeroOrOne: ZeroOrOne = 9; // コンパイルエラーは起きません！
 ```
 
-列挙型には、列挙型オブジェクトに値でアクセスすると、メンバー名を得られる仕様があります。これにも問題があります。メンバーに無い値でアクセスしたら、コンパイルエラーになってほしいところですが、そうなりません。
+TypeScript5.0からは改善されており、コンパイルエラーとなります。
+
+```ts twoslash
+// TypeScript v5.0.4
+// @errors: 2322
+enum ZeroOrOne {
+  Zero = 0,
+  One = 1,
+}
+const zeroOrOne: ZeroOrOne = 9;
+```
+
+列挙型には、列挙型オブジェクトに値でアクセスすると、メンバー名を得られる仕様があります。メンバーに無い値でアクセスしたら、コンパイルエラーになってほしいところですが、そうなりません。
 
 ```ts twoslash
 enum ZeroOrOne {

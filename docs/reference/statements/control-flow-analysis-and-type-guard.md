@@ -86,7 +86,7 @@ function showMonth(month: string | number) {
 JavaScriptにおいて`null`はオブジェクトであるため、次の型ガードを書いた場合は`date`変数は`Date | null`に絞り込まれ`null`となる可能性が残ってしまい型エラーが発生します。
 
 ```ts twoslash
-// @errors: 2531
+// @errors: 18047
 function getMonth(date: string | Date | null) {
   if (typeof date === "object") {
     console.log(date.getMonth() + 1);

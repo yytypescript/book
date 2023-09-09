@@ -48,7 +48,7 @@ hello();
 オプション引数は、型が`undefined`とのユニオン型になるため、そのままでは使えません。たとえば、次のコードはstringの`toUpperCase`メソッドを呼び出すコードです。これはコンパイルエラーになります。なぜなら、`person`が`undefined`型である可能性があるからです。そして、`undefined`には`toUpperCase`メソッドがありません。
 
 ```ts twoslash
-// @errors: 2532
+// @errors: 18048
 function hello(person?: string) {
   return "Hello " + person.toUpperCase();
 }
