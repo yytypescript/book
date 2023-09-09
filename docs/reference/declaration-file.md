@@ -76,21 +76,23 @@ declare function greeter(person: Person): string;
 
 ### 型定義ファイル有り
 
-型定義ファイルが含まれているパッケージの場合は特別な作業は必要ありません。
+NPMのパッケージの紹介ページを見るとパッケージ名称の右にTSのアイコンが表示されている場合があります。これは型定義ファイルが存在することを示しています。
+これは、パッケージ開発者がTypeScriptで開発しているか、JavaScriptで開発しているが型定義ファイルを同梱していることを示しています。型定義ファイルが含まれているパッケージの場合は特別な作業は必要ありません。
 
-例としてdate libraryの[moment](https://github.com/moment/moment)はJavaScriptで構築されていますが、`moment.d.ts`を同封しています。そのままinstallを行うだけで定義ファイルの恩恵を受けられます。
+例としてdate libraryの[date-fns](https://date-fns.org/)はJavaScriptで構築されていますが、`typings.d.ts`を同封しています。そのままinstallを行うだけで定義ファイルの恩恵を受けられます。
 
 ```bash
-npm install moment
+npm install date-fns
 ```
 
 型定義ファイル有りの場合は、設定なく型情報を参照することができます。
 
 ### 型定義ファイル有りだが別途インストールが必要
 
-もし、パッケージに型定義ファイルが同梱されていない場合は別途インストールする必要があります。
+NPMのパッケージの紹介ページを見るとパッケージ名称の右にDTのアイコンが表示されている場合があります。これは型定義ファイルがこのパッケージ自身には含まれていないが、[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)に登録されていることを示しています。
+この場合は、パッケージをインストールした後に別途型定義ファイルをインストールする必要があります。定義ファイルのインストールも`npm`コマンドを利用します。
 
-[TypeSearch](https://microsoft.github.io/TypeSearch/)からパッケージ名を検索しインストールを行います。TypeSearchのリポジトリは[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)であり、ここに多くのライブラリの定義ファイルが一元管理されています。定義ファイルのインストールも`npm`コマンドを利用します。
+例として[Express](https://expressjs.com/)はJavaScriptで構築されていますが、型定義ファイルは`@types/express`というパッケージとして別途インストールする必要があります。
 
 [Express](https://expressjs.com/)本体と定義ファイルのインストール例は次のようになります。
 
