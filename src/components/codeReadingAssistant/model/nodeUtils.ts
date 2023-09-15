@@ -21,7 +21,7 @@ export const posOf = (sourceFile: SourceFile, point: Point): number => {
       point.line - 1,
       point.column - 1
     );
-  } catch (e) {
+  } catch (e: any) {
     console.error(Object.assign(e, { point }));
     return NaN;
   }

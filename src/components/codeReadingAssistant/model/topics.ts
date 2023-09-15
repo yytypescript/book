@@ -701,7 +701,7 @@ const syntaxKindTopicDetails: {
     ],
   },
   //         AwaitKeyword = 132,
-  [SyntaxKind.AsyncKeyword]: {
+  [SyntaxKind.AwaitKeyword]: {
     name: "async",
     links: [],
   },
@@ -839,8 +839,8 @@ const syntaxKindTopicDetails: {
       },
     ],
   },
-  //         OfKeyword = 159,
-  [SyntaxKind.TypeAliasDeclaration]: {
+  // OfKeyword = 159,
+  [SyntaxKind.OfKeyword]: {
     name: "型エイリアス",
     links: [
       page(
