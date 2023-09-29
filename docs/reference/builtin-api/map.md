@@ -108,7 +108,7 @@ console.log(map);
 
 ```js twoslash
 // JavaScript
-
+// @noErrors
 console.log({} == {});
 // @log: false
 console.log({} === {});

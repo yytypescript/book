@@ -109,6 +109,7 @@ object型は、同じプロパティと値のペアの比較をしても、ま�
 
 ```js twoslash
 // JavaScript
+// @noErrors
 
 console.log({} == {});
 // @log: false
