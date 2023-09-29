@@ -702,8 +702,13 @@ const syntaxKindTopicDetails: {
   },
   //         AwaitKeyword = 132,
   [SyntaxKind.AwaitKeyword]: {
-    name: "async",
-    links: [],
+    name: "await",
+    links: [
+      page(
+        "Promise / async / await",
+        "https://typescriptbook.jp/reference/promise-async-await"
+      ),
+    ],
   },
   [SyntaxKind.BooleanKeyword]: {
     name: "論理型",
@@ -841,11 +846,11 @@ const syntaxKindTopicDetails: {
   },
   // OfKeyword = 159,
   [SyntaxKind.OfKeyword]: {
-    name: "型エイリアス",
+    name: "for-of文",
     links: [
       page(
-        "型エイリアス (type alias)",
-        "https://typescriptbook.jp/reference/values-types-variables/type-alias"
+        "for-of文 - 拡張for文",
+        "https://typescriptbook.jp/reference/statements/for-of"
       ),
     ],
   },
