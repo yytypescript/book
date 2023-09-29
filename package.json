@@ -61,7 +61,7 @@
   "devDependencies": {
     "@babel/helper-get-function-arity": "^7.16.7",
     "@docusaurus/module-type-aliases": "2.4.1",
-    "@tsconfig/docusaurus": "^2.0.0",
+    "@tsconfig/docusaurus": "2.0.0",
     "@types/jest": "^27.4.0",
     "@types/pako": "^2.0.0",
     "@types/react": "^18.2.14",
