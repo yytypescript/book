@@ -46,7 +46,7 @@ JavaScriptの自動ボックス化で変換先となるオブジェクトをラ�
 プリミティブ型の`undefined`と`null`にはラッパーオブジェクトがありません。したがって、メソッドやフィールドの参照は常にエラーが発生します。
 
 ```ts twoslash
-// @errors: 2531 2532
+// @errors: 18050
 null.toString();
 undefined.toString();
 ```

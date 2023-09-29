@@ -12,14 +12,15 @@ sidebar_label: 等価であるということ
 
 次の例は同然ではないかと思うかもしれません。
 
-```ts twoslash
+```js twoslash
+// JavaScript
+
 console.log(null === undefined);
 // @log: false
 console.log(0 === 0n);
 // @log: false
 console.log(0 === "0");
 // @log: false
-// @noErrors
 ```
 
 `0n`はnumber型ではなくbigint型のことです。
@@ -66,7 +67,9 @@ console.log("" == false);
 
 `NaN`はnumber型の値ですが、どの値と比較をしても`false`を返します。たとえそれが`NaN`同士の比較であっても`false`を返します。
 
-```ts twoslash
+```js twoslash
+// JavaScript
+
 console.log(NaN == NaN);
 // @log: false
 console.log(NaN === NaN);
@@ -104,7 +107,10 @@ console.log(sym === sym);
 
 object型は、同じプロパティと値のペアの比較をしても、まったく同じ変数名を参照しない限り`false`を返します。これはオブジェクトについて理解がある人にとっては当然の挙動です。
 
-```ts twoslash
+```js twoslash
+// JavaScript
+// @noErrors
+
 console.log({} == {});
 // @log: false
 console.log({} === {});

@@ -286,9 +286,9 @@ console.log(value);
 この仕様は、意図しない変数の上書きに気づきにくく、不具合の要因になることがしばしばあります。`const`や`let`は変数名が重複している場合は、エラーになります。つまり、`var`よりも安全なコーディングが行えます。
 
 ```js twoslash
+// @errors: 2451
 let value = 1;
 let value = 2; // 構文エラー
-// @error: SyntaxError: Identifier 'value' has already been declared
 ```
 
 関数宣言で作った関数は`var`に相当します。そのため、重複した関数名で関数が作れてしまいます。
@@ -307,10 +307,9 @@ foo();
 アロー関数は、変数宣言と同じ構文で作るため、`var`を避けて`let`または`const`を使うコーディングをしている限り、関数名の重複が起こりえません。
 
 ```js twoslash
+// @errors: 2451
 const foo = () => {};
 const foo = () => {};
-//    ^^^構文エラー
-// @error: SyntaxError: Identifier 'foo' has already been declared
 ```
 
 もちろん、アロー関数でも`var`を用いて関数を作った場合は、関数名が重複できてしまいます。しかし、最近のJavaScriptのベストプラクティスでは、`var`を使わないことが推奨されています。そのため、関数宣言と比べて、アロー関数のほうがずっと関数名重複のミスを低減できる状況が多いです。
@@ -523,7 +522,9 @@ const str = "foo";
 const obj = { value: str };
 const func = (n) => n + 1;
 const nums = [1, 2, 3];
+```
 
+```js twoslash
 // 変数宣言の間にある関数宣言
 const str = "foo";
 const obj = { value: str };

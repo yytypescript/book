@@ -116,7 +116,7 @@ if (Number.isNaN(price)) {
 
 `NaN`は特殊で、等号比較では常に`false`になるので注意してください。
 
-```ts twoslash
+```js twoslash
 console.log(NaN == NaN);
 // @log: false
 console.log(NaN === NaN);

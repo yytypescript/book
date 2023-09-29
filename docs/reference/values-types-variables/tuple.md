@@ -106,6 +106,8 @@ TypeScriptで非同期プログラミングをする時に、時間のかかる�
 [ジェネリクス (generics)](/reference/generics)
 
 ```ts twoslash
+// @module: esnext
+// @target: esnext
 import fs from "fs";
 
 declare function yyAsync(): Promise<number>;
@@ -131,6 +133,8 @@ async function takes5Seconds(): Promise<number> {
 この関数をそのまま実行すると3 + 5 = 8秒かかってしまいます。
 
 ```ts twoslash
+// @module: esnext
+// @target: esnext
 import fs from "fs";
 
 declare function takes3Seconds(): Promise<string>;
@@ -143,6 +147,8 @@ const num: number = await takes5Seconds();
 これを`Promise.all()`を使うことで次のように書くことができます。このときかかる時間は関数の中でもっとも時間がかかる関数、つまり5秒です。
 
 ```ts twoslash
+// @module: esnext
+// @target: esnext
 import fs from "fs";
 
 declare function takes3Seconds(): Promise<string>;
@@ -157,6 +163,8 @@ const tuple: [string, number] = await Promise.all([
 このとき`Promise.all()`の戻り値を受けた変数`tuple`は`[string, number]`です。実行する関数の`Promise<T>`のジェネリクスの部分とタプルの型の順番は一致します。つまり次のように入れ替えたら、入れ変えた結果のタプルである`[number, string]`が得られます。
 
 ```ts twoslash
+// @module: esnext
+// @target: esnext
 import fs from "fs";
 
 declare function takes3Seconds(): Promise<string>;

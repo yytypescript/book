@@ -39,6 +39,7 @@ func(1, 2, 3);
 残余引数は必ず最後の引数でなければなりません。残余引数を複数持たせることはできません。また、残余引数の後に普通の引数を置くこともできません。
 
 ```js twoslash
+// @errors: 1014
 // 構文エラーになるコード
 function func(...params1, ...params2) {}
 function func(...params, param1) {}
