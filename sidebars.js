@@ -16,11 +16,12 @@ module.exports = {
 
   // But you can create a sidebar manually
   tutorialSidebar: [
+    "README",
     {
       type: "category",
-      label: "はじめに",
+      label: "本書について",
       collapsed: true,
-      link: { type: "doc", id: "README" },
+      link: { type: "doc", id: "about" },
       items: ["license"],
     },
     {
