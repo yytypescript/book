@@ -38,7 +38,7 @@ npm install -g yarn
 
 ## Next.jsをセットアップする
 
-最初に`create-next-app`コマンドでプロジェクトを作成します。TypeScriptをベースにしたプロジェクトを作成するために `--example with-typescript` を指定します。`random-cat` はリポジトリ名となる部分です。この部分は好きな名前でも構いませんが、本チュートリアルでは`random-cat`として話を進めます。
+最初に`yarn create next-app`コマンドでプロジェクトを作成します。TypeScriptをベースにしたプロジェクトを作成するために `--example with-typescript` を指定します。`random-cat` はリポジトリ名となる部分です。この部分は好きな名前でも構いませんが、本チュートリアルでは`random-cat`として話を進めます。
 
 ```sh
 yarn create next-app --example with-typescript random-cat
