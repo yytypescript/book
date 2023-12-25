@@ -38,7 +38,7 @@ npm install -g yarn
 
 ## Next.jsをセットアップする
 
-最初に`create-next-app`コマンドでプロジェクトを作成します。TypeScriptをベースにしたプロジェクトを作成するために `--example with-typescript` を指定します。`random-cat` はリポジトリ名となる部分です。この部分は好きな名前でも構いませんが、本チュートリアルでは`random-cat`として話を進めます。
+最初に`yarn create next-app`コマンドでプロジェクトを作成します。TypeScriptをベースにしたプロジェクトを作成するために `--example with-typescript` を指定します。`random-cat` はリポジトリ名となる部分です。この部分は好きな名前でも構いませんが、本チュートリアルでは`random-cat`として話を進めます。
 
 ```sh
 yarn create next-app --example with-typescript random-cat
@@ -498,7 +498,7 @@ const fetchImage = async (): Promise<Image> => {
 
 Reactはクライアントサイドでのレンダリングに特化していますが、Next.jsはサーバーサイドレンダリング(server-side rendering; SSR)をサポートしています。これにより、初回読み込みの速度を向上させることができ、SEOやパフォーマンスにもよい影響を与えます。
 
-SSRはウェブアプリケーションのレンダリングをサーバーサイドで行う技術のことです。通常、クライアントサイドレンダリング(CSR)では、ブラウザがHTML、CSS、JavaScriptファイルをダウンロードして、JavaScriptを使用してページをレンダリングします。これに対して、SSRではサーバーがHTMLを生成し、ブラウザに送信します。
+SSRはウェブアプリケーションのレンダリングをサーバーサイドで行う技術のことです。通常、クライアントサイドレンダリング(client-side rendering; CSR)では、ブラウザがHTML、CSS、JavaScriptファイルをダウンロードして、JavaScriptを使用してページをレンダリングします。これに対して、SSRではサーバーがHTMLを生成し、ブラウザに送信します。
 
 Next.jsでSSRを行うには、次のデータフェッチAPIの関数を使います。
 

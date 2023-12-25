@@ -6,11 +6,15 @@ slug: /tutorials
 
 この章では、TypeScriptを使った実践的な開発の流れを学びます。次のチュートリアルを用意しています。
 
-- フロントエンドアプリケーション(ReactとNext.js)
-- Jestを使った単体テスト
-- Reactコンポーネントのテスト
-- Prettierを使ったコードの自動整形
-- eslintを使ったコーディング規約の自動チェック
+- [開発環境の準備](./setup.md)
+- [簡単な関数を作ってみよう](./make-a-simple-function-via-cli.md)
+- [Reactでいいねボタンを作ろう](./react-like-button-tutorial.md)
+- [Next.jsで猫画像ジェネレーターを作ろう](./nextjs.md)
+- [Vercelにデプロイしてみよう](./vercel-deploy.md)
+- [Jestでテストを書こう](./jest.md)
+- [Reactコンポーネントのテストを書こう](./component-test.md)
+- [Prettierでコード整形を自動化しよう](./prettier.md)
+- [ESLintでコーディング規約を自動化しよう](./eslint.md)
 
 この章の目的は、「もし実務でTypeScriptを使ったらどんな開発になるのか？」について体験することです。この章を進めるにあたって、TypeScriptの知識はまだ無くても構いません。解説の手順どおりに進めることで、開発を追体験できるようになっています。
 

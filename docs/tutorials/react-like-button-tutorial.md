@@ -161,7 +161,7 @@ cd ./like-button
 └── yarn.lock
 ```
 
-create-react-appではReactのインストールも自動で行われます。インストールされたReactのバージョンを確認するには次のコマンドを用います。
+`yarn create react-app`ではReactのインストールも自動で行われます。インストールされたReactのバージョンを確認するには次のコマンドを用います。
 
 ```sh
 yarn list react
