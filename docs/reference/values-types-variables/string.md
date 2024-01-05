@@ -1,12 +1,7 @@
 ---
 sidebar_label: string型
+title: string型 (文字列型)
 ---
-
-<!-- textlint-disable prh -->
-
-# string型 (文字列型)
-
-<!-- textlint-enable prh -->
 
 ## 文字列リテラル
 
