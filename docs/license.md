@@ -36,13 +36,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## CC BA-SAの表示義務の詳細
+## CC BY-SAの表示義務の詳細
 
 CC BY-SA 4.0では具体的な表示義務の方法に定めがないため、本書では表示ポリシーを次のように定めます。
 
-### CC BA-SAの表示ポリシー
+### CC BY-SAの表示ポリシー
 
-本書コンテンツを再公開・二次創作する場合は、CC BA-SAの表示について次のことを行う必要があります。
+本書コンテンツを再公開・二次創作する場合は、CC BY-SAの表示について次のことを行う必要があります。
 
 1. 本書のタイトル『サバイバルTypeScript』を明記してください。
 1. ウェブサイトやHTML形式で再公開される場合、ページごとに本書の該当する元ページに直接ハイパーリンクしてください。
