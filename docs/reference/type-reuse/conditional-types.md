@@ -4,7 +4,16 @@ sidebar_label: Conditional Types
 
 # Conditional Types
 
-Conditional Typesはちょうどプログラミング言語の三項演算子のように`?`と`:`を使って`T extends U ? X : Y`のように書きます。これは`T`が`U`に割り当て可能である場合、`X`になり、そうでない場合は`Y`になります。
+Conditional Typesは日本語では条件付き型、型の条件分岐、条件型などと呼ばれ、ちょうど三項演算子のように`?`と`:`を使って`T extends U ? X : Y`のように書きます。これは`T`が`U`に割り当て可能である場合、`X`になり、そうでない場合は`Y`になります。
+
+このような場合だと型は`true`になります。
+
+```ts twoslash
+type IsString<T> = T extends string ? true : false;
+
+const a: IsString<"a"> = true;
+//    ^?
+```
 
 たとえば、あるobject型のプロパティを読み取り専用にする`Readonly<T>`というユーティリティ型があります。`Readonly<T>`はそのオブジェクトの直下のプロパティを読み取り専用にしますが、ネストしたオブジェクトのプロパティは読み取り専用にしません。たとえば、次のようなオブジェクトがあるとします。
 
@@ -19,7 +28,7 @@ type Person = {
 };
 ```
 
-このとき`Readonly<Person>`では`address`のプロパティの`country`と`city`は読み取り専用になっていません。上書きが可能です。
+このとき`Readonly<Person>`では`address`プロパティ自体は読み取り専用になっており書き換えることはできませんが、`address`のプロパティの`country`と`city`は読み取り専用になっていません。上書きが可能です。
 
 ```ts twoslash
 type Person = {
@@ -43,11 +52,15 @@ const kimberley: Readonly<Person> = {
 
 kimberley.name = "Kim";
 kimberley.age = 25;
+kimberley.address = {
+  country: "United States",
+  city: "Seattle",
+};
 kimberley.address.country = "United States";
 kimberley.address.city = "Seattle";
 ```
 
-このように`address.country`と`address.city`は書き換え可能です。これを解決するには`Readonly<T>`を再帰的に適用する必要があります。このような場合にMapped TypesとConditional Typesを組み合わせて使います。
+これを解決するには`Readonly<T>`を再帰的に適用する必要があります。このような場合にMapped TypesとConditional Typesを組み合わせて使います。
 
 ```ts twoslash
 type Freeze<T> = Readonly<{
@@ -83,6 +96,10 @@ const kimberley: Freeze<Person> = {
 
 kimberley.name = "Kim";
 kimberley.age = 25;
+kimberley.address = {
+  country: "United States",
+  city: "Seattle",
+};
 kimberley.address.country = "United States";
 kimberley.address.city = "Seattle";
 ```
