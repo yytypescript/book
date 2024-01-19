@@ -82,7 +82,7 @@
     "zod": "^3.20.6"
   },
   "engines": {
-    "node": "18.x",
+    "node": "20.x",
     "yarn": "^1.22.17"
   },
   "packageManager": "yarn@1.22.17"
