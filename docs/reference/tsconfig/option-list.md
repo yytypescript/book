@@ -4,6 +4,8 @@ description: TSConfigのオプション一覧
 
 # オプションの一覧
 
+最新の情報は[TypeScriptのTSConfigリファレンス](https://www.typescriptlang.org/ja/tsconfig)もご参照ください。
+
 ## ルートオプション
 
 TSConfigのルートのオプションです。これらは、型チェックを対象とするファイルなどのプロジェクト全体に関する設定です。

@@ -380,6 +380,7 @@ module.exports = {
           },
           items: [
             "reference/tsconfig/tsconfig.json-settings",
+            "reference/tsconfig/option-list",
             "reference/tsconfig/strict",
             "reference/tsconfig/noimplicitany",
             "reference/tsconfig/strictnullchecks",
