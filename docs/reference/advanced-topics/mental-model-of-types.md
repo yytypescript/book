@@ -47,7 +47,7 @@ type Intersection = A & B;
 
 [number型の表現範囲](reference/values-types-variables/number)
 
-さて、重要な型の概念として、型理論では Unit 型と呼ばれる型があります。Unit 型とはそのまま単位(unit)的な型であり、値をひとつしか持たないような型です。思い出してほしいのは、TypeScriptには[リテラル型](/values-types-variables/literal-types)という型がありました。TypeScript における Unit 型はこのリテラル型が相当します。
+さて、重要な型の概念として、型理論ではユニット型(Unit type)と呼ばれる型があります。ユニット型とはそのまま単位的(unit)な型であり、値をひとつしか持たないような型です。思い出してほしいのは、TypeScriptには[リテラル型](/values-types-variables/literal-types)という型がありました。TypeScript におけるユニット型はこのリテラル型などが相当します。
 
 ```ts twoslash
 type One = 1;
@@ -56,4 +56,68 @@ const one: One = 1;
 
 リテラル型は値リテラルをそのまま型として表現できる型であり、`number` や `string` などのプリミティブ型にはそれぞれ具体的な値のリテラルによって作成されるリテラル型が存在します。
 
+- 文字列リテラル型 : `"st"`, `"@"`, ...
+- 数値リテラル型 : `1`, `3.14`, `-2`, ...
+- 真偽値リテラル型 : `ture`, `false` のふたつのみ
+
 型は値の集合でしたが、具体的な値はこのようにリテラルで表現でき、さらにそのリテラルを使ったリテラル型と一対一で対応します。
+
+型は具体的な値の集合としてみなすことができました。リテラル型は具体的な値と一対一の他対応となるので、リテラル型を要素として集合を作ってみると考えてもよいでしょう。たとえば、真偽値のリテラル型は `ture` と `false` というふたつだけでした。このふたつはリテラル型なので値をひとつしかもたないユニット型です。型が集合だとするとユニット型も集合ですが、このような単一の要素のみからなる集合を単集合(singleton)と言います。というふたつの単集合`true` と `false` を合成してふたつの型(あるいは値)から和集合を作成するとよく知っている `boolean` の型を得ることができます。
+
+```ts twoslash
+// true と false の和集合
+type Bool = true | false;
+```
+
+このようにユニオン型で作成した型 `Bool` は `boolean` 型と同一です。
+
+TypeScript には文字列や数値のリテラル型以外にもユニット型が存在しています。たとえば `undefined` と `null` という値はそれぞれ `undefined` 型と `null` 型に属しています。
+
+```ts twoslash
+type U = undefined;
+const u: U = undefined;
+
+type N = null;
+const n: N = null;
+```
+
+逆に `undefiend` 型と `null` 型の要素はそれぞれ `undefined` と `null` しかありません。これらの型は集合としての要素をそれぞれひとつしか持っていないのでユニット型です。
+
+## ボトム型
+
+ユニット型が値をひとつしか持たない型なら、値をまったく持たない型も存在しています。そのような型をボトム型(Bottom type)と呼びます。型が集合であるとするとき、ボトム型は空集合(Empty set)に相当し、空型(Empty type)とも呼ばれることがあります。
+
+ボトム型は値をまったく持たない型として、例外が発生する関数の返り値の型として利用されますが、TypeScriptでのボトム型はまさに `never`型です。
+
+```ts twoslash
+function neverReturn(): never {
+  throw new Error("決して返ってこない関数");
+}
+```
+
+`never` 型は集合としては空集合であり、値をひとつも持たないため、その型の変数にはどのような要素も割り当てることができません。
+
+```ts twoslash
+const n: never = 42;
+```
+
+## トップ型
+
+ボトム型が値をまったく持たない型なら、すべての値を持つような型も存在しています。そのような型をトップ型(Top type)と呼びます。
+
+トップ型はすべての値をもっており、その型の変数にはあらゆる値を割り当てることができます。オブジェクト指向言語であれば大抵は型階層のルート位置に存在している型であり、TypeScript では `unknown` 型がトップ型に相当します。
+
+```ts twoslash
+const u1: unknown = 42;
+const u2: unknown = "st";
+const u3: unknown = { p: 1 };
+const u4: unknown = null;
+const u5: unknown = () => 2;
+```
+
+ボトム型が空集合に相当するなら、トップ型は全体集合に相当すると言えるでしょう。
+
+```ts twoslash
+declare const u: unknown;
+type t: {} | null | undefined = u;
+```
