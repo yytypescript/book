@@ -32,7 +32,10 @@ sidebar_label: 型のメンタルモデル
 
 ユニオン型とインターセクション型はまさに和集合と共通部分を作る演算に相当します。
 
-```ts twoslash
+```ts twoslash title="型の和集合と共通部分"
+type A = { fst: string };
+type B = { snd: number };
+
 type Union = A | B;
 type Intersection = A & B;
 ```
@@ -49,9 +52,9 @@ type Intersection = A & B;
 
 さて、重要な型の概念として、型理論ではユニット型(Unit type)と呼ばれる型があります。ユニット型とはそのまま単位的(unit)な型であり、値をひとつしか持たないような型です。思い出してほしいのは、TypeScriptには[リテラル型](/values-types-variables/literal-types)という型がありました。TypeScript におけるユニット型はこのリテラル型などが相当します。
 
-```ts twoslash
-type One = 1;
-const one: One = 1;
+```ts twoslash title="リテラル型はユニット型"
+type Unit = 1;
+const one: Unit = 1;
 ```
 
 リテラル型は値リテラルをそのまま型として表現できる型であり、`number` や `string` などのプリミティブ型にはそれぞれ具体的な値のリテラルによって作成されるリテラル型が存在します。
@@ -64,8 +67,7 @@ const one: One = 1;
 
 型は具体的な値の集合としてみなすことができました。リテラル型は具体的な値と一対一の他対応となるので、リテラル型を要素として集合を作ってみると考えてもよいでしょう。たとえば、真偽値のリテラル型は `ture` と `false` というふたつだけでした。このふたつはリテラル型なので値をひとつしかもたないユニット型です。型が集合だとするとユニット型も集合ですが、このような単一の要素のみからなる集合を単集合(singleton)と言います。というふたつの単集合`true` と `false` を合成してふたつの型(あるいは値)から和集合を作成するとよく知っている `boolean` の型を得ることができます。
 
-```ts twoslash
-// true と false の和集合
+```ts twoslash title="true と false の和集合"
 type Bool = true | false;
 ```
 
@@ -98,6 +100,7 @@ function neverReturn(): never {
 `never` 型は集合としては空集合であり、値をひとつも持たないため、その型の変数にはどのような要素も割り当てることができません。
 
 ```ts twoslash
+// @errors: 1206 2322
 const n: never = 42;
 ```
 
@@ -119,5 +122,5 @@ const u5: unknown = () => 2;
 
 ```ts twoslash
 declare const u: unknown;
-type t: {} | null | undefined = u;
+const t: {} | null | undefined = u;
 ```
