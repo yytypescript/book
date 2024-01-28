@@ -48,9 +48,9 @@ type Intersection = A & B;
 
 まずは単に型は値の集合であると考えてください。たとえば、`number` 型という数値を表す型ですが、この型が集合であるとするとその要素は具体的な `number` 型の値である数値です。たとえば `1` や `3.14` などの数値がこの集合の要素となります。次の章で述べたように `number` 型で表現可能な範囲は有限であり、それらの範囲の要素に `NaN` と `Infinity` などの特殊な定数を加えた集合が `number` 型の集合ということになります。
 
-[number型の表現範囲](reference/values-types-variables/number)
+[number型の表現範囲](../values-types-variables/number/README.md)
 
-さて、重要な型の概念として、型理論ではユニット型(Unit type)と呼ばれる型があります。ユニット型とはそのまま単位的(unit)な型であり、値をひとつしか持たないような型です。思い出してほしいのは、TypeScriptには[リテラル型](/values-types-variables/literal-types)という型がありました。TypeScript におけるユニット型はこのリテラル型などが相当します。
+さて、重要な型の概念として、型理論ではユニット型(Unit type)と呼ばれる型があります。ユニット型とはそのまま単位的(unit)な型であり、値をひとつしか持たないような型です。思い出してほしいのは、TypeScriptには[リテラル型](../values-types-variables/literal-types.md)という型がありました。TypeScript におけるユニット型はこのリテラル型などが相当します。
 
 ```ts twoslash title="リテラル型はユニット型"
 type Unit = 1;
