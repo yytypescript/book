@@ -171,6 +171,7 @@ module.exports = {
             "reference/values-types-variables/typeof-operator",
             "reference/values-types-variables/equality",
             "reference/values-types-variables/truthy-falsy-values",
+            "reference/values-types-variables/mental-model-of-types",
           ],
         },
         {
@@ -415,7 +416,6 @@ module.exports = {
             "reference/advanced-topics/tsconfig-for-dual-package-developers",
             "reference/advanced-topics/generator",
             "reference/advanced-topics/getters-and-setters",
-            "reference/advanced-topics/mental-model-of-types",
           ],
         },
       ],
