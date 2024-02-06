@@ -1,12 +1,7 @@
 ---
 sidebar_label: boolean型
+title: boolean型 (論理型)
 ---
-
-<!-- textlint-disable prh -->
-
-# boolean型 (論理型)
-
-<!-- textlint-enable prh -->
 
 JavaScriptのboolean型は、`true`と`false`の論理値からなる型です。
 

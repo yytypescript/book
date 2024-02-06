@@ -1,12 +1,7 @@
 ---
 sidebar_label: bigint型
+title: bigint型(長整数型)
 ---
-
-<!-- textlint-disable prh -->
-
-# bigint型(長整数型)
-
-<!-- textlint-enable prh -->
 
 JavaScriptのbigint型は、number型よりも大きな整数を扱えるプリミティブ型です。
 
