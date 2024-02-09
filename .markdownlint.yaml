@@ -8,27 +8,4 @@ heading-style:
   style: atx
 ul-indent:
   indent: 2
-no-inline-html:
-  allowed_elements:
-    - small
-    - code
-    - dl
-    - dt
-    - dd
-    - figure
-    - figcaption
-    - img
-    - ruby
-    - rt
-    - rp
-    - details
-    - summary
-    - kbd
-    - TweetILearned
-    - head
-    - title
-    - iframe
-    - br
-    - a
-    - video
-    - source
+no-inline-html: false # JSXに反応してしまうのでfalse
