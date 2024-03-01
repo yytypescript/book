@@ -34,15 +34,30 @@ sidebar_label: 型のメンタルモデル
 
 [ユニオン型](./union.md)と[インターセクション型](./intersection.md)はまさに和集合と共通部分を作る演算に相当します。
 
-```ts twoslash title="型の和集合と共通部分"
-type A = { fst: string };
-type B = { snd: number };
+```ts twoslash
+type A = { a: string };
+type B = { b: number };
 
+// AとBの和集合を表現する型
 type Union = A | B;
+
+// AとBの共通部分を表現する型
 type Intersection = A & B;
 ```
 
-直感的にはユニオン型はふたつの集合の和を表現する型であり、インターセクション型はふたつの型の共通部分を表現する型です。ユニオン型は型の絞り込みなどにおいて特に重要な役割を果たします。
+直感的にはユニオン型はふたつの集合の和集合を表現する型であり、インターセクション型はふたつの型の共通部分を表現する型です。特にユニオン型は型の絞り込みなどにおいて特に重要な役割を果たします。
+
+```ts twoslash
+type StrOrNum = string | number;
+
+function narrowUnion(param: StrOrNum) {
+  if (typeof param === "string") {
+    console.log(param.toUpperCase());
+  } else {
+    console.log(param * 3);
+  }
+}
+```
 
 このふたつの型は複数の型から新しい型を合成できるという点で演算として重要ですが、特定の型そのものが集合としてどのように解釈できるかを次に紹介する３つの型で解説していきます。
 
