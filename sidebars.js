@@ -357,6 +357,7 @@ module.exports = {
             "reference/type-reuse/indexed-access-types",
             "reference/type-reuse/conditional-types",
             "reference/type-reuse/infer",
+            "reference/type-reuse/union-distribution",
           ],
         },
         {
