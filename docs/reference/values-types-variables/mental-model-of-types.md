@@ -184,7 +184,9 @@ TypeScriptは元来、JavaScriptに対してオプショナルに型付けを行
 
 部分型関係の説明において、型と型の関係性は階層構造で捉えることができると述べましたが、包含関係は階層構造について少し見方を変えた構造であると言えます。
 
-// 階層構造と集合の包含関係の比較図式を入れる
+<figure><figcaption>集合的と見方と階層的な見方</figcaption>
+<img src="/reference/values-types-variables/mental-model-of-types/2way-views-types.svg" width="480" />
+</figure>
 
 トップ型である`unknown`型はあらゆる型の基本型、つまり上位型として振る舞い、あらゆる型は`unknown`型の部分型となります。したがって、型を集合として解釈したとき、`unknown`型はTypeScriptにおけるあらゆる値を含む集合となります。つまり全体集合であり、あらゆる型は`unknown`型の部分集合とみなすことができます。
 
@@ -192,7 +194,9 @@ TypeScriptは元来、JavaScriptに対してオプショナルに型付けを行
 
 このように部分型関係を集合の包含関係として捉えることで、より直感的に型の互換性についての推論が可能となります。たとえば、ふたつの集合の和集合は共通部分を包含します。
 
-// 和集合と共通部分の包含
+<figure><figcaption>ユニオン型とインターセクション型の包含関係</figcaption>
+<img src="/reference/values-types-variables/mental-model-of-types/union-intersection-inclusion.svg" width="480" />
+</figure>
 
 ユニオン型とインターセクション型は和集合と共通部分に相当していたので、包含関係からインターセクション型がユニオン型の部分型となることが推論されます。実際に検証してみると、ユニオン型の変数にインターセクション型の変数を割りあてることが可能です。
 
