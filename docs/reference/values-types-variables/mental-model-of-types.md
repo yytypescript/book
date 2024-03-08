@@ -34,7 +34,7 @@ sidebar_label: 型のメンタルモデル
 
 [ユニオン型](./union.md)と[インターセクション型](./intersection.md)はまさに和集合と共通部分を作る演算に相当します。
 
-```ts twoslash
+```ts twoslash twoslash title="型の和集合と共通部分"
 type A = { a: string };
 type B = { b: number };
 
@@ -73,12 +73,12 @@ function narrowUnion(param: StrOrNum) {
 
 TypeScriptでは`null`というひとつの値を持つ`null`型と、`undefined`というひとつの値を持つ`undefined`型がユニット型に相当します。
 
-```ts twoslash
-type U = undefined;
-const u: U = undefined;
-
+```ts twoslash title="nullとundefinedはユニット型"
 type N = null;
 const n: N = null;
+
+type U = undefined;
+const u: U = undefined;
 ```
 
 さらに思い出してほしいのは、TypeScriptには[リテラル型](../values-types-variables/literal-types.md)という型がありました。TypeScriptではこのリテラル型もユニット型に相当します。
@@ -152,7 +152,7 @@ const u5: unknown = () => 2;
 
 ボトム型が空集合に相当するなら、トップ型は全体集合に相当すると言えるでしょう。TypeScriptは`unknown`型を`{} | null | undefind`というユニオン型相当として扱い、相互に割当可能としています。
 
-```ts twoslash
+```ts twoslash twoslash title="unknown型相当の特殊なユニオン型"
 declare const u: unknown;
 const t: {} | null | undefined = u;
 ```
