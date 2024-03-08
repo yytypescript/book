@@ -46,6 +46,23 @@
   letter-spacing: 0.01rem;
 }
 
+.markdown .themed svg {
+  max-width: 100%;
+  height: auto;
+}
+.markdown .themed svg [fill="#fff"] {
+  fill: var(--ifm-background-surface-color);
+}
+.markdown .themed svg [stroke="#fff"] {
+  stroke: var(--ifm-background-surface-color);
+}
+.markdown .themed svg [fill="#000"] {
+  fill: var(--ifm-color-content);
+}
+.markdown .themed svg [stroke="#000"] {
+  stroke: var(--ifm-color-content);
+}
+
 code {
   border-color: var(--ifm-code-background);
   border-radius: 0;
