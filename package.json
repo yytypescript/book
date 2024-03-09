@@ -25,7 +25,8 @@
     "textlint:fix": "npx textlint --fix 'docs/**/*.md'",
     "typecheck": "tsc --noEmit",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "write-translations": "docusaurus write-translations"
+    "write-translations": "docusaurus write-translations",
+    "create-gpts-knowledge": "command -v bun >/dev/null 2>&1 && bun gpts/create-knowledge.ts || { echo 'bun is not installed. Please install it following by https://bun.sh/docs/installation' >&2; }"
   },
   "browserslist": {
     "production": [
