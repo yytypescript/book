@@ -41,8 +41,9 @@ function findMarkdownFiles(
  */
 function extractContent(filePath: string): MarkdownPage | null {
   const content = fs.readFileSync(filePath, "utf8");
-  const titleMatch = content.match(/^#\s(.+)/);
+  const titleMatch = content.match(/#\s(.+)/);
   const title = titleMatch ? titleMatch[1] : "Untitled";
+
   const urlPath = filePath
     .substring(filePath.indexOf("/docs/") + 1)
     .replace(/\.md$/, "")
