@@ -42,7 +42,7 @@ sidebar_label: 型のメンタルモデル
 
 集合の演算は集合から新しい集合を作り出すような操作であり、そのような演算にはいくつも種類があります。TypeScriptではそのような演算の中で和集合と共通部分を演算に相当する[ユニオン型](./union.md)と[インターセクション型](./intersection.md)が備わっています。
 
-```ts twoslash twoslash title="型の和集合と共通部分"
+```ts twoslash twoslash
 type A = { a: string };
 type B = { b: number };
 
@@ -164,7 +164,7 @@ const u4: unknown = null;
 const u5: unknown = () => 2;
 ```
 
-ボトム型が空集合に相当するなら、トップ型は全体集合に相当すると言えるでしょう。TypeScriptは`unknown`型を`{} | null | undefind`というユニオン型相当として扱い、相互に割当可能としています。
+ボトム型が空集合に相当するなら、トップ型は全体集合に相当すると言えるでしょう。なおTypeScriptでは`{} | null | undefind`という特殊なユニオン型を`unknown`型相当として扱い、相互に割当可能としています。
 
 ```ts twoslash twoslash title="unknown型相当の特殊なユニオン型"
 declare const u: unknown;
