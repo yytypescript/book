@@ -171,6 +171,7 @@ module.exports = {
             "reference/values-types-variables/typeof-operator",
             "reference/values-types-variables/equality",
             "reference/values-types-variables/truthy-falsy-values",
+            "reference/values-types-variables/mental-model-of-types",
           ],
         },
         {
