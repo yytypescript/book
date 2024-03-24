@@ -1,0 +1,21 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+
+[*.{py,rs,php,go,kt,swift,java,zig}]
+indent_size = 4
+
+[*.{go,mk},Makefile]
+indent_style = tab
+
+[*.mk,Makefile]
+indent_size = 8
+
+[*.md]
+trim_trailing_whitespace = false
