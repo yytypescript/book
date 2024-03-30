@@ -26,7 +26,7 @@ getIndexFromArray(fruits, "apple");
 getIndexFromArray(fruits, "peach");
 ```
 
-上の例だと`getIndexFromArray`の第二引数には配列に含まれていない`peach`という文字列を指定することができてしまいます。しかし配列に含まれている要素のみを許容したいです。そこで`NoInfer`を利用することにより`T`の型推論を防ぐことができます。
+このとき`T`は`"grape" | "apple" | "banana" | "peach"`と推論されてしまいます。しかし第二引数には配列に含まれている要素のみを許容したいです。そこで`NoInfer`を利用することにより`T`の型推論を防ぐことができます。
 
 ```ts twoslash
 function getIndexFromArray<T extends string>(
