@@ -13,23 +13,23 @@ title: NoInfer<T>
 
 ## NoInferの使用例
 
-まずはNoInferを使用しなかった場合の例です。ジェネリクスを使って`getElementFromArray`という関数を定義します
+まずはNoInferを使用しなかった場合の例です。ジェネリクスを使って`getIndexFromArray`という関数を定義します
 
 ```ts
-function getElementFromArray<T extends string>(elements: T[], item: T): number {
+function getIndexFromArray<T extends string>(elements: T[], item: T): number {
   return elements.findIndex((element) => element === item);
 }
 
 type Fruit = "grape" | "apple" | "banana";
 const fruits: Fruit[] = ["grape", "apple", "banana"];
-getElementFromArray(fruits, "apple");
-getElementFromArray(fruits, "peach");
+getIndexFromArray(fruits, "apple");
+getIndexFromArray(fruits, "peach");
 ```
 
-上の例だと`getElementFromArray`の第二引数には配列に含まれていない`peach`という文字列を指定することができてしまいます。しかし配列に含まれている要素のみを許容したいです。そこで`NoInfer`を利用することにより`T`の型推論を防ぐことができます。
+上の例だと`getIndexFromArray`の第二引数には配列に含まれていない`peach`という文字列を指定することができてしまいます。しかし配列に含まれている要素のみを許容したいです。そこで`NoInfer`を利用することにより`T`の型推論を防ぐことができます。
 
 ```ts twoslash
-function getElementFromArray<T extends string>(
+function getIndexFromArray<T extends string>(
   elements: T[],
   item: NoInfer<T>
 ): number {
@@ -38,9 +38,9 @@ function getElementFromArray<T extends string>(
 
 type Fruit = "grape" | "apple" | "banana";
 const fruits: Fruit[] = ["grape", "apple", "banana"];
-getElementFromArray(fruits, "apple");
+getIndexFromArray(fruits, "apple");
 // @errors: 2345
-getElementFromArray(fruits, "peach");
+getIndexFromArray(fruits, "peach");
 ```
 
 ## 関連情報
