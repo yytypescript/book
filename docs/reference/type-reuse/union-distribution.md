@@ -20,9 +20,10 @@ type Wrapper<T> = {
 type Wrapper<T> = {
   value: T;
 };
+
 // ---cut---
 type IntOrStr = Wrapper<number | string>;
-// ^?
+//    ^?
 ```
 
 予想通りの結果が出ますが、実はこれはユニオン分配によって`Wrapper<number> | Wrapper<string>`として評価されたあとの結果を示しています。
