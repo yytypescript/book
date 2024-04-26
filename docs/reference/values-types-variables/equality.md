@@ -109,7 +109,6 @@ object型は、同じプロパティと値のペアの比較をしても、ま�
 
 ```js twoslash
 // JavaScript
-// @noErrors
 
 console.log({} == {});
 // @log: false
@@ -122,6 +121,7 @@ console.log({ equipment: "glasses" } === { equipment: "glasses" });
 const obj = { hair: "blond" };
 console.log(obj === obj);
 // @log: true
+// @noErrors
 ```
 
 ## まとめ

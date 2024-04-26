@@ -5,8 +5,11 @@ on:
 jobs:
   check_pull_requests:
     runs-on: ubuntu-latest
+    permissions:
+      issues: read
+      pull-requests: write
     steps:
-      - uses: nearform/github-action-check-linked-issues@v1
+      - uses: nearform-actions/github-action-check-linked-issues@v1
         with:
           exclude-branches: "release/**, dependabot/**"
           custom-body-comment: |-

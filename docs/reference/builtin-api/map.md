@@ -108,11 +108,12 @@ console.log(map);
 
 ```js twoslash
 // JavaScript
-// @noErrors
+
 console.log({} == {});
 // @log: false
 console.log({} === {});
 // @log: false
+// @noErrors
 ```
 
 ```ts twoslash

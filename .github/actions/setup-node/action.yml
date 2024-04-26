@@ -1,0 +1,9 @@
+name: 'Setup Node'
+description: 'Set up GitHub Actions workflow with a specific version of node.js'
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20

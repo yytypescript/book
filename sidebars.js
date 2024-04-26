@@ -171,6 +171,7 @@ module.exports = {
             "reference/values-types-variables/typeof-operator",
             "reference/values-types-variables/equality",
             "reference/values-types-variables/truthy-falsy-values",
+            "reference/values-types-variables/mental-model-of-types",
           ],
         },
         {
@@ -355,6 +356,9 @@ module.exports = {
             },
             "reference/type-reuse/mapped-types",
             "reference/type-reuse/indexed-access-types",
+            "reference/type-reuse/conditional-types",
+            "reference/type-reuse/infer",
+            "reference/type-reuse/union-distribution",
           ],
         },
         {
@@ -381,6 +385,7 @@ module.exports = {
           },
           items: [
             "reference/tsconfig/tsconfig.json-settings",
+            "reference/tsconfig/option-list",
             "reference/tsconfig/strict",
             "reference/tsconfig/noimplicitany",
             "reference/tsconfig/strictnullchecks",
