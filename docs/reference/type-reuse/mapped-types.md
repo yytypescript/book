@@ -30,7 +30,7 @@ type Butterfly = {
   [key in SystemSupportLanguage]: string;
 };
 // ---cut---
-// @errors: 2322
+// @errors: 2353
 const butterflies: Butterfly = {
   en: "Butterfly",
   fr: "Papillon",
