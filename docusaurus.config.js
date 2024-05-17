@@ -148,14 +148,6 @@ const config = {
         indexName: "typescriptbook",
         contextualSearch: true,
       },
-      announcementBar: {
-        id: "support_us",
-        content:
-          '<a href="https://tskaigi.org/?utm_source=typescriptbook.jp&utm_medium=referral" style="text-decoration: none; font-weight: bold;">国内最大級のTypeScriptカンファレンス！ TSKaigi・2024/5/11(土)</a>',
-        backgroundColor: "#2e5497",
-        textColor: "#ffffff",
-        isCloseable: true,
-      },
     }),
   plugins: [
     [
