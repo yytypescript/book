@@ -1,7 +1,7 @@
 import React from "react";
 import nl2br from "react-nl2br";
 
-export default function TweetILearned({
+export default function PostILearned({
   children,
 }: {
   readonly children: Child | Child[];
@@ -15,14 +15,12 @@ export default function TweetILearned({
       <div className="admonition-content">
         <p>{nl2br(texts)}</p>
         <a
-          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-            texts
-          )}`}
+          href={`https://x.com/intent/post?text=${encodeURIComponent(texts)}`}
           target="_blank"
           className="button button--info"
           style={{ textDecoration: "none" }}
         >
-          この内容をツイートする
+          この内容をXにポストする
         </a>
       </div>
     </div>

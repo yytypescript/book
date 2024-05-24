@@ -70,7 +70,7 @@ switch (x) {
 
 こうすると、JavaScriptの実行時エラーも、TypeScriptのコンパイルエラーも発生しなくなります。
 
-<TweetILearned>
+<PostILearned>
 
 🌏JavaScriptのswitchは全体で1つの変数スコープ
 😕caseレベルのスコープはない
@@ -81,4 +81,4 @@ switch (x) {
 
 ✅caseに{}を書くと固有のスコープが作れる
 
-</TweetILearned>
+</PostILearned>

@@ -548,33 +548,33 @@ f = x => x;
 
 ## 「学びをシェアする」ブロック
 
-「学びをシェアする」ブロックは、読者がページの内容をTwitterでシェアしやすくするブロックです。`<TweetILearned>`で囲った範囲がツイート内容になります。
+「学びをシェアする」ブロックは、読者がページの内容をXでシェアしやすくするブロックです。`<PostILearned>`で囲った範囲がポスト内容になります。
 
 ```markdown title="学びをシェアするブロックの書き方例"
-<TweetILearned>
+<PostILearned>
 
 ・JavaScriptの変数宣言はletとconstがある
 ・letは再代入OK、constは再代入NG
 ・基本的にconstを使うとよい
 
-</TweetILearned>
+</PostILearned>
 ```
 
 表示例:
 
-<TweetILearned>
+<PostILearned>
 
 ・JavaScriptの変数宣言はletとconstがある
 ・letは再代入OK、constは再代入NG
 ・基本的にconstを使うとよい
 
-</TweetILearned>
+</PostILearned>
 
 :::caution 「学びをシェアする」ブロックの注意点
 
-- `<TweetILearned>`の直後と`</TweetILearned>`の直前には空行が必要です。
-- Twitterはツイート内容に文字数制限があるため、分量には注意してください。「『サバイバルTypeScript』より」が末尾に追加されることを想定した分量にしてください。
-- ツイート内容にはMarkdownの記法を使わないでください。特にリスト記法は「・」で代用してください。
-- ツイート内容にはURLを含めないでください。URLを含んだツイートはタイムラインに表示されにくい傾向があるからです。
+- `<PostILearned>`の直後と`</PostILearned>`の直前には空行が必要です。
+- Xはポスト内容に文字数制限があるため、分量には注意してください。「『サバイバルTypeScript』より」が末尾に追加されることを想定した分量にしてください。
+- ポスト内容にはMarkdownの記法を使わないでください。特にリスト記法は「・」で代用してください。
+- ポスト内容にはURLを含めないでください。URLを含んだポストはタイムラインに表示されにくい傾向があるからです。
 
 :::

@@ -125,10 +125,10 @@ console.log(Numbers.Zero + Numbers.One);
 
 ReactやNext.jsの雛形生成ツールによって作成されたtsconfig.jsonでは、`isolatedModules`が有効化されています。これは、ReactやNextが内部でBabelを使用しているためです。`isolatedModules`をfalseに変えてしまうとビルドできなくなる可能性があるため、設定を変更しないようにしましょう。
 
-<TweetILearned>
+<PostILearned>
 
 ✅isolatedModulesはファイル単位での変換を前提に解釈できないコードをチェックする
 🚧Babelなどのトランスパイラとの互換性向上のために存在する
 👍isolatedModulesは有効にしよう
 
-</TweetILearned>
+</PostILearned>

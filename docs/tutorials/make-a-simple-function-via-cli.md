@@ -140,11 +140,11 @@ console.log(increment(999));
 
 型注釈の部分はTypeScript固有のものです。それが書いてあるとブラウザやNode.jsでは実行できません。なので、TypeScriptコンパイラはJavaScript実行環境で動かす用のJavaScriptファイルを生成してくれます。開発者はこの成果物のJavaScriptファイルを本番環境にデプロイすることになります。
 
-<TweetILearned>
+<PostILearned>
 
 ・JavaScriptからTypeScriptへの書き換えは拡張子を.tsにする
 ・コンパイラは型の問題を教えてくれる
 ・型注釈を書き加えると、コンパイラはより細かいチェックをしてくれる
 ・コンパイラが生成したJSをデプロイして使う
 
-</TweetILearned>
+</PostILearned>

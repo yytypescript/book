@@ -80,7 +80,7 @@ str.toU;
 
 `strictBindCallApply`は有効にするのがお勧めです。
 
-<TweetILearned>
+<PostILearned>
 
 TypeScriptのstrictBindCallApplyはbind、call、applyの型チェックを厳しくするコンパイラオプション
 
@@ -93,7 +93,7 @@ TypeScriptのstrictBindCallApplyはbind、call、applyの型チェックを厳�
 💚戻り値に型がつく
 👍有効化推奨
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

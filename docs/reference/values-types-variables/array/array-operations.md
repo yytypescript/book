@@ -127,7 +127,7 @@ console.log(reversed);
 // @log: [ 3, 2, 1 ]
 ```
 
-<TweetILearned>
+<PostILearned>
 
 ・JavaScriptの配列メソッドには、破壊的なものと非破壊的なものがある
 ・破壊的なものは、配列に変更を加える
@@ -135,4 +135,4 @@ console.log(reversed);
 ・非破壊に思えるメソッドが実は破壊的なこともあるから要注意
 ・配列をコピーしてから破壊的操作をすると安全
 
-</TweetILearned>
+</PostILearned>

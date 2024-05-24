@@ -287,7 +287,7 @@ func();
 // @log: 0 0 0
 ```
 
-<TweetILearned>
+<PostILearned>
 
 ・Pythonのキーワード引数相当の構文はJavaScript/TypeScriptにはない
 ・代わりにOptions Objectパターンが使える
@@ -296,7 +296,7 @@ func();
 ②引数追加時に古いコードを壊さない
 ③デフォルト引数が省略できる
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

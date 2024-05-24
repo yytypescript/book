@@ -196,7 +196,7 @@ console.log(title);
 // @log: "デフォルトタイトル"
 ```
 
-<TweetILearned>
+<PostILearned>
 
 ・JavaScriptのオプショナルチェーン?.は安全にプロパティを参照する方法
 ・値がnullかundefinedのときundefinedが返る
@@ -206,7 +206,7 @@ console.log(title);
 ・TypeScriptでは値の型とundefinedのユニオン型になる
 ・Null合体演算子と相性がいい
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

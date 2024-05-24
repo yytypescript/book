@@ -116,7 +116,7 @@ function foo(x = 1) {}
 //           ^?
 ```
 
-<TweetILearned>
+<PostILearned>
 
 ・JavaScriptのデフォルト引数は引数がundefinedのとき使われる値
 ・構文: function 関数名(引数: 型 = デフォルト値) {}
@@ -125,4 +125,4 @@ function foo(x = 1) {}
 ・簡単な初期化処理も書ける
 ・TypeScriptでは型推論が効く
 
-</TweetILearned>
+</PostILearned>
