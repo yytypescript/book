@@ -139,7 +139,7 @@ console.log(red);
 // @log: 0
 ```
 
-<TweetILearned>
+<PostILearned>
 
 ・JavaScriptの分割代入はプロパティを取り出せる。
 ・同じ変数名を使う場合、コードが簡潔になる。
@@ -147,7 +147,7 @@ console.log(red);
 ・入れ子のプロパティも取り出せる。
 ・デフォルト値も指定できる。
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

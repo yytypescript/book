@@ -125,7 +125,7 @@ const obj: Obj = {
 };
 ```
 
-<TweetILearned>
+<PostILearned>
 
 ⚙️TypeScriptのstrictFunctionTypesは、引数型の変性のチェックを厳しくするコンパイルオプション
 ☹️TypeScriptの引数は双変で安心できない
@@ -133,7 +133,7 @@ const obj: Obj = {
 ✅strictFunctionTypesは反変にしてくれる
 👍有効化推奨のオプション
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

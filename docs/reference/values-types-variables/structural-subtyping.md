@@ -482,7 +482,7 @@ const productId: ProductId = userId; // 代入不可
 
 構造的型付けを理解し、適切に活用することで、より安全で保守しやすいコードを書くことができるでしょう。
 
-<TweetILearned>
+<PostILearned>
 
 ・TypeScriptは構造的型付け
 ・構造的型付けは型名より構造を重視
@@ -490,4 +490,4 @@ const productId: ProductId = userId; // 代入不可
 ・privateやブランド型で名前的型付けを模倣できる
 ・構造的型付けは意図しない互換性に注意
 
-</TweetILearned>
+</PostILearned>

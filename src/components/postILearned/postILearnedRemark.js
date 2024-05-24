@@ -7,10 +7,10 @@
 /**
  * @type {(settings: [never]) => (node: Root) => void}
  */
-exports.tweetILearned = () => (node) => {
+exports.postILearned = () => (node) => {
   node.children.unshift({
     type: /** @type {any} */ ("import"),
     value:
-      'import TweetILearned from "@site/src/components/tweetILearned/tweetILearned";',
+      'import PostILearned from "@site/src/components/postILearned/postILearned";',
   });
 };
