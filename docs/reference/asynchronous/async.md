@@ -65,7 +65,7 @@ requestAsync().then((result) => {
 
 ### `async`関数の宣言
 
-JavaScriptにはみっつの関数の宣言方法がありますが、それらを`async`関数として宣言することもできます。
+JavaScriptには３つの関数の宣言方法がありますが、それらを`async`関数として宣言することもできます。
 
 ```ts twoslash
 async function requestAsync1(): Promise<number> {
