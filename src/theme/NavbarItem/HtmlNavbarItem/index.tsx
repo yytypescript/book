@@ -4,9 +4,17 @@ import { Props } from "@theme/NavbarItem/HtmlNavbarItem";
 import { Bot } from "../../../components/icons/Bot";
 
 export default function HtmlNavbarItemWrapper(props: Props) {
+  // モバイルの場合はメニューのリスト項目として表示するためにラップする要素を変更
+  const Item = ({ children }: { children: React.ReactNode }) =>
+    props.mobile ? (
+      <li className="menu__list-item">{children}</li>
+    ) : (
+      <div className="navbar__item">{children}</div>
+    );
+
   if (props.value === "custom-ask-to-ai-link") {
     return (
-      <div className="navbar__item">
+      <Item>
         <a
           style={{
             color: "white",
@@ -15,6 +23,7 @@ export default function HtmlNavbarItemWrapper(props: Props) {
             padding: "4px 16px",
             borderRadius: "48px",
             gap: "4px",
+            width: "fit-content",
           }}
           href="https://chat.openai.com/g/g-EzVTRSzR7-sabaibarutypescript"
           target="_blank"
@@ -37,7 +46,7 @@ export default function HtmlNavbarItemWrapper(props: Props) {
             ></path>
           </svg>
         </a>
-      </div>
+      </Item>
     );
   }
 
