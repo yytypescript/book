@@ -68,6 +68,11 @@ const config = {
             label: "GitHub",
             position: "right",
           },
+          {
+            type: "html",
+            position: "right",
+            value: `custom-ask-to-ai-link`,
+          },
         ],
       },
       footer: {
