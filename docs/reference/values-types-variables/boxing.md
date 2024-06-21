@@ -111,13 +111,13 @@ const num2: number = 0;
 
 <!-- textlint-enable prh -->
 
-<TweetILearned>
+<PostILearned>
 
 ・ボックス化とはプリミティブをオブジェクトに変換すること
 ・JavaScriptでプリミティブがオブジェクトのように扱えるのは、自動ボックス化のおかげ
 ・TypeScriptではラッパーオブジェクト(例:String)よりもプリミティブ型(例:string)で型注釈すべし
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

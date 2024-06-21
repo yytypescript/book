@@ -70,7 +70,7 @@ TypeScript の大きな利点として、型の制約を自由にコントロー
 
 TypeScriptの型システムで疲弊しそうになったら、「がんばらないTypeScript」のアプローチを思い出してみてください。
 
-<TweetILearned>
+<PostILearned>
 
 ・any型はどんな型でも代入を許す
 ・any型は型チェックされない
@@ -78,7 +78,7 @@ TypeScriptの型システムで疲弊しそうになったら、「がんばら�
 ・anyは使いようによっては悪くない
 ・がんばらないTypeScriptという考え方もある
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

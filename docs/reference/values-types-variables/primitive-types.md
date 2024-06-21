@@ -45,11 +45,11 @@ null.toString(); // エラーになる
 
 上のプリミティブ型以外は、JavaScriptにおいてはすべてオブジェクトと考えて問題ありません。配列や正規表現オブジェクトなどもすべてオブジェクトです。
 
-<TweetILearned>
+<PostILearned>
 
 ・JSのプリミティブ型はイミュータブルでプロパティを持たない
 ・プリミティブをオブジェクトのように扱える「オートボクシング」がある
 ・プリミティブは7種類: boolean, number, string, undefined, null, symbol, bigint
 ・それ以外は全部オブジェクト
 
-</TweetILearned>
+</PostILearned>

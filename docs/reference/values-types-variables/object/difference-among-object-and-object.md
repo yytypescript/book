@@ -111,7 +111,7 @@ a = undefined;
 ![](difference-among-object-and-object/image1.png)
 
 <!-- textlint-disable prh -->
-<TweetILearned>
+<PostILearned>
 
 TypeScriptにはよく似た型にobject、Object、{}がある。どれも「オブジェクト」を指す型。
 
@@ -119,6 +119,6 @@ TypeScriptにはよく似た型にobject、Object、{}がある。どれも「�
 1️⃣object型: オブジェクトのみ代入可能
 2️⃣Object型、{}型: オブジェクトとnull、undefinedを除くプリミティブ型が代入可能
 
-</TweetILearned>
+</PostILearned>
 
 <!-- textlint-enable prh -->

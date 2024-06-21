@@ -356,7 +356,7 @@ function foo() {
 
 コードに書かれた順序が、関数呼び出し、関数宣言の順になるだけで、関数の巻き上げには問題点はありません。
 
-<TweetILearned>
+<PostILearned>
 
 JavaScriptのアロー関数の特徴
 
@@ -368,7 +368,7 @@ JavaScriptのアロー関数の特徴
 ・関数の宣言重複が起きにくい
 ・巻き上げが起きにくい
 
-</TweetILearned>
+</PostILearned>
 
 ## 従来の関数とアロー関数の使い分け
 

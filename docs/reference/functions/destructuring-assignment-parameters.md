@@ -207,7 +207,7 @@ bmi({ weight, height });
 
 [Shorthand property names](../values-types-variables/object/shorthand-property-names.md)
 
-<TweetILearned>
+<PostILearned>
 
 ・分割代入引数は関数でobjectや配列を部分的に使うときに便利
 ・objectは中カッコで引数を書く
@@ -218,7 +218,7 @@ bmi({ weight, height });
 ・既定値も指定可
 → function foo({ a = 0})
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

@@ -102,7 +102,7 @@ type Increment = typeof increment;
 //   ^?
 ```
 
-<TweetILearned>
+<PostILearned>
 
 ・TypeScriptでは関数の型が宣言できる
 例: type Func = (n: number) => number
@@ -112,4 +112,4 @@ type Increment = typeof increment;
 ・通常はアロー関数風の型宣言を使う
 ・typeofで関数から型を導くこともできる
 
-</TweetILearned>
+</PostILearned>

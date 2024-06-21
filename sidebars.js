@@ -171,6 +171,7 @@ module.exports = {
             "reference/values-types-variables/typeof-operator",
             "reference/values-types-variables/equality",
             "reference/values-types-variables/truthy-falsy-values",
+            "reference/values-types-variables/mental-model-of-types",
           ],
         },
         {
@@ -351,6 +352,7 @@ module.exports = {
                 "reference/type-reuse/utility-types/omit",
                 "reference/type-reuse/utility-types/exclude",
                 "reference/type-reuse/utility-types/extract",
+                "reference/type-reuse/utility-types/no-infer",
               ],
             },
             "reference/type-reuse/mapped-types",

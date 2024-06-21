@@ -29,11 +29,11 @@ switch (s) {
 
 [noFallthroughCasesInSwitch](../tsconfig/nofallthroughcasesinswitch.md)
 
-<TweetILearned>
+<PostILearned>
 
 😴JavaScriptのswitchのcaseには、分岐を抜けさせる働きがない
 ⏩breakを書かないと次の分岐も実行される(フォールスルー)
 🐞フォールスルーはバグになりがち
 ✅TypeScriptではnoFallthroughCasesInSwitchを有効にするとフォールスルーが検出される
 
-</TweetILearned>
+</PostILearned>

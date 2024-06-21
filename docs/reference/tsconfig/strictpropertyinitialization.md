@@ -71,7 +71,7 @@ class Foo {
 }
 ```
 
-<TweetILearned>
+<PostILearned>
 
 TypeScriptのstrictPropertyInitializationはプロパティの初期化を必須にするコンパイラオプション。
 
@@ -79,7 +79,7 @@ TypeScriptのstrictPropertyInitializationはプロパティの初期化を必須
 ✅コンストラクタで初期化OR初期化子が必須になる
 🙆🏻‍♂️undefinedとのユニオン型で型注釈するのはOK
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 
