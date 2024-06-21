@@ -277,7 +277,7 @@ function toCSS(shape: Shape) {
 }
 ```
 
-<TweetILearned>
+<PostILearned>
 
 🦄TypeScriptの判別可能なユニオン型
 ・ディスクリミネータを持つオブジェクトの型からなるユニオン型
@@ -287,7 +287,7 @@ function toCSS(shape: Shape) {
 ・各オブジェクト共通のプロパティキー(しるし的なもの)
 ・使える型は、リテラル型、null、undefined
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

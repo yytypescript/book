@@ -116,14 +116,14 @@ const increment = num => num + 1;
 [1, 2, 3].map((num) => num + 1); // 型注釈が省略可
 ```
 
-<TweetILearned>
+<PostILearned>
 
 ・JavaScriptのアロー関数は()=>{}のように短く書ける
 ・引数が1つの場合、()は省略できる
 ・処理が1行の場合、{}は省略できる(簡潔文体)
 ・TypeScriptでは引数カッコ省略時に型注釈が書けない
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

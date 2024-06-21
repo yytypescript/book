@@ -482,7 +482,7 @@ console.log(map.toString);
 
 [Record<Keys, Type>](../type-reuse/utility-types/record.md)
 
-<TweetILearned>
+<PostILearned>
 
 🗺Mapはキーと値のペアを扱うJSビルトインのAPI
 📝TypeScriptではMap<string, number>のように型注釈する
@@ -493,4 +493,4 @@ console.log(map.toString);
 → Mapはキーに任意の型が使える
 → Mapはキーの順序が挿入順保証
 
-</TweetILearned>
+</PostILearned>

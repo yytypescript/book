@@ -139,7 +139,7 @@ ESLintは、コマンドひとつでチェックが行なえます。チェッ�
 
 ESLintを導入すると、開発者は規約の運用や心理的ストレスから開放され、**開発などのより重要な仕事に集中できるようになります**。
 
-<TweetILearned>
+<PostILearned>
 
 📝TypeScriptは同じ意味処理でも異なる書き方が可能
 💥チーム開発では書き方の違いが問題になることも…
@@ -147,7 +147,7 @@ ESLintを導入すると、開発者は規約の運用や心理的ストレス�
 😵でも、規約には運用の手間や心理的な課題もある
 ✅この課題はESLintで解決できる！
 
-</TweetILearned>
+</PostILearned>
 
 ### リンターとは
 
@@ -180,7 +180,7 @@ ESLintは一般的に「リンター(linter)」というジャンルのツール
 
 </figure>
 
-<TweetILearned>
+<PostILearned>
 
 🧵リンター：コードを静的解析し問題点を指摘するツール。ESLintはリンター。
 🔀コンパイラ：静的解析もするが、別言語への変換が主目的。tscはコンパイラ。
@@ -189,7 +189,7 @@ ESLintは一般的に「リンター(linter)」というジャンルのツール
 ・tsc：型のチェックが得意
 ・ESLint：コーディング規約のチェックが得意
 
-</TweetILearned>
+</PostILearned>
 
 ## ESLintでJavaScriptをリントしよう
 

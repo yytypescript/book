@@ -91,7 +91,7 @@ type State = (typeof stateList)[number];
 //   ^?
 ```
 
-<TweetILearned>
+<PostILearned>
 
 TypeScriptのインデックスアクセス型は、プロパティや配列要素の型を参照できる
 
@@ -100,4 +100,4 @@ TypeScriptのインデックスアクセス型は、プロパティや配列要�
 🔑keyofと組み合わせると全プロパティの型が取れる
 🧲typeofと組み合わせると配列値から要素型が取れる
 
-</TweetILearned>
+</PostILearned>

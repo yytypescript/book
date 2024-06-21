@@ -7,7 +7,7 @@ slug: /reference/asynchronous/promise
 
 ## `Promise`がなかった時代のこと
 
-次のみっつのAPIがあるとしてこれらで得た結果を表示する処理を考えてみます。
+次の３つのAPIがあるとしてこれらで得た結果を表示する処理を考えてみます。
 
 1. API1: リクエストを送り、結果を受け取る
 1. API2: API1の結果を使ってリクエストを送り、結果を受け取る
@@ -39,7 +39,7 @@ function request3(result2, callback) {
 }
 ```
 
-これらの関数を組み合わせてみっつのAPIリクエストを順次実装すると次のようになります。
+これらの関数を組み合わせて３つのAPIリクエストを順次実装すると次のようになります。
 
 ```js twoslash
 request1((result1) => {
@@ -88,7 +88,7 @@ function request3(result2) {
 }
 ```
 
-戻り値が`Promise`になり、コールバック関数を示す引数がなくなりました。`Promise`を返す関数を使うと次のようにみっつのAPIリクエストを実装できます。
+戻り値が`Promise`になり、コールバック関数を示す引数がなくなりました。`Promise`を返す関数を使うと次のように３つのAPIリクエストを実装できます。
 
 ```js twoslash
 request1()
@@ -158,7 +158,7 @@ function request(): Promise<string> {
 
 ## `Promise`のメソッド
 
-`Promise<T>`には覚えておくべきメソッドがみっつあります。
+`Promise<T>`には覚えておくべきメソッドが３つあります。
 
 ### 待ち受けた非同期処理の結果をコールバックで実行する - `Promise.prototype.then()`
 
@@ -449,7 +449,7 @@ Promise.race([request1(), request2(), request3()])
 
 ### `Promise`の状態
 
-文章中にも何度も出てきましたが、`Promise`にはみっつの状態があります。
+文章中にも何度も出てきましたが、`Promise`には３つの状態があります。
 
 - pending
 - fulfilled

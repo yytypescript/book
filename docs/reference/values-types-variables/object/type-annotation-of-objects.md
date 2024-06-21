@@ -134,14 +134,14 @@ box = { wtdih: 1080, hihget: 720 }; // スペルミス
 
 オブジェクトを型注釈する場合は、`object`型はできるだけ使わずに、プロパティまで型を定義することをお勧めします。
 
-<TweetILearned>
+<PostILearned>
 
 ・TypeScriptでオブジェクトを型注釈するには、プロパティキーごとに型を定義する
 例: { width: number; height: number}
 ・変数にオブジェクトを代入すると型推論が効く
 ・安全性の観点からobject型を用いるのは避ける
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

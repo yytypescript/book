@@ -105,7 +105,7 @@ for (const x in arr) {
 }
 ```
 
-<TweetILearned>
+<PostILearned>
 
 ・TypeScript/JavaScriptで配列をループするには主に3つの方法がある。
 ① for文
@@ -115,7 +115,7 @@ for (const x in arr) {
 ・for-of文はfor文よりもループをシンプルに書ける
 ・配列にはforEachやmapメソッドがある
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

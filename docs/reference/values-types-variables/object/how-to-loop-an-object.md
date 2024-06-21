@@ -125,7 +125,7 @@ for (const value of Object.values(foo)) {
 
 for-in文と異なり、`hasOwnProperty`のチェックが不要です。
 
-<TweetILearned>
+<PostILearned>
 
 JavaScriptやTypeScriptのオブジェクトプロパティをループするには次の方法がある。
 
@@ -136,7 +136,7 @@ JavaScriptやTypeScriptのオブジェクトプロパティをループするに
 
 ⚠️ for-in文はhasOwnPropertyのチェックが必要。
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

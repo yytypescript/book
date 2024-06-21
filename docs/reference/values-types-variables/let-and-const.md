@@ -44,13 +44,13 @@ y = 1;
 
 初めて JavaScript を書く場合に、`let`と`const`のどちらの変数宣言を使えばよいか悩む場合があるかもしれません。基本は`const`で変数宣言をして必要な場合にのみ、`let`を使うのがオススメです。`const`で変数宣言することで再代入を禁止して、意図せず変数が書き換えられることを予防できるので、より安全なコードになります。
 
-<TweetILearned>
+<PostILearned>
 
 ・JavaScriptの変数宣言はletとconstがある
 ・letは再代入OK、constは再代入NG
 ・基本的にconstを使うとよい
 
-</TweetILearned>
+</PostILearned>
 
 ## constは可変オブジェクトを保護しない
 

@@ -352,6 +352,7 @@ module.exports = {
                 "reference/type-reuse/utility-types/omit",
                 "reference/type-reuse/utility-types/exclude",
                 "reference/type-reuse/utility-types/extract",
+                "reference/type-reuse/utility-types/no-infer",
               ],
             },
             "reference/type-reuse/mapped-types",

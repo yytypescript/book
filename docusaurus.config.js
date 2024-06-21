@@ -2,8 +2,8 @@
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const {
-  tweetILearned,
-} = require("./src/components/tweetILearned/tweetILearnedRemark");
+  postILearned,
+} = require("./src/components/postILearned/postILearnedRemark");
 const { pageRef } = require("./src/components/pageRef/pageRefRemark");
 const remarkBreaks = require("remark-breaks");
 const tsconfigForTwoslash = require(__dirname + "/tsconfig.twoslash.json");
@@ -33,7 +33,7 @@ const config = {
           editUrl: "https://github.com/yytypescript/book/edit/master/",
           routeBasePath: "/",
           numberPrefixParser: false,
-          remarkPlugins: [remarkBreaks, pageRef, tweetILearned],
+          remarkPlugins: [remarkBreaks, pageRef, postILearned],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -147,14 +147,6 @@ const config = {
         apiKey: "99655de886960eadb0eca65591529110",
         indexName: "typescriptbook",
         contextualSearch: true,
-      },
-      announcementBar: {
-        id: "support_us",
-        content:
-          '<a href="https://tskaigi.org/?utm_source=typescriptbook.jp&utm_medium=referral" style="text-decoration: none; font-weight: bold;">国内最大級のTypeScriptカンファレンス！ TSKaigi・2024/5/11(土)</a>',
-        backgroundColor: "#2e5497",
-        textColor: "#ffffff",
-        isCloseable: true,
       },
     }),
   plugins: [

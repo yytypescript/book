@@ -83,11 +83,11 @@ typeof null;
 
 TypeScriptでも、こうした仕様バグは修正されていません。なぜかというと、TypeScriptはあくまでJavaScriptに型をプラスした言語というスタンスだからです。
 
-<TweetILearned>
+<PostILearned>
 
 TypeScriptが解決しないこと
 
 ・JavaScriptの実行時パフォーマンス改善
 ・JSの仕様バグの解決
 
-</TweetILearned>
+</PostILearned>

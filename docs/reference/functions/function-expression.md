@@ -154,7 +154,7 @@ const factorial = function (n) {
 };
 ```
 
-<TweetILearned>
+<PostILearned>
 
 ・関数式はfunction式を使った関数
 ・関数式は関数名が省略可。匿名関数と呼ばれる。
@@ -162,7 +162,7 @@ const factorial = function (n) {
 ・型注釈の書き方は関数宣言と同じ
 ・関数式の関数名は、関数内部からのみ参照可
 
-</TweetILearned>
+</PostILearned>
 
 ## 関連情報
 

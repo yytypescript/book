@@ -251,7 +251,7 @@ function func(value: "yes" | "no"): void {
 }
 ```
 
-<TweetILearned>
+<PostILearned>
 
 TypeScriptのneverは「値を持たない」型。
 
@@ -261,4 +261,4 @@ TypeScriptのneverは「値を持たない」型。
 👐voidとは異なる
 ✅網羅性チェックに応用できる
 
-</TweetILearned>
+</PostILearned>
