@@ -44,7 +44,7 @@ type InvariantFunction<in out I, in out O> = BivariantFunction<I, O>;
 
 ## クラスの継承関係を使った例
 
-継承関係がわかりやすくなるように適当なクラス`A`, `B`, `C`を定義します。`A`は`B`を継承し、`B`は`C`を継承しており、メソッドを追加しました。
+継承関係がわかりやすくなるようにクラス`A`, `B`, `C`を定義します。`A`は`B`を継承し、`B`は`C`を継承しており、メソッドを追加しました。
 
 ```ts twoslash
 class A {
@@ -160,9 +160,7 @@ type B = null | undefined;
 type C = null | undefined | string;
 ```
 
-このとき`A`は`B`の部分型であり、`B`は`C`の部分型です。
-
-こちらも
+このとき`A`は`B`の部分型であり、`B`は`C`の部分型です。言い換えると`A extends B`、`B extends C`です。
 
 ```ts twoslash
 // @strictFunctionTypes: false
