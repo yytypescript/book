@@ -64,7 +64,7 @@ type Person = Omit<User, Optional>;
 // このPersonは下の型になる
 ```
 
-`User`の`createdAt`,、`updatedAt`の`At`は大文字から始まりますが、これに気づかずに小文字で書いてしまったため、`Omit`の結果は`createdAt`と`updatedAt`を含んでしまいます。
+`User`の`createdAt`、`updatedAt`の`At`は大文字から始まりますが、これに気づかずに小文字で書いてしまったため、`Omit`の結果は`createdAt`と`updatedAt`を含んでしまいます。
 
 ## 関連情報
 
