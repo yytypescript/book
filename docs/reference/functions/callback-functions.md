@@ -18,7 +18,7 @@ sidebar_label: "コールバック関数"
 
 ```ts twoslash
 function greetNewUser(func: (name: string) => string) {
-  console.log(func("ご新規さん"));
+  console.log(func("ご新規"));
 }
 
 function hello(name: string) {
