@@ -367,9 +367,9 @@ obj = { name: "John", age: 20 };
 obj.name = "Tom";
 ```
 
-### オプションプロパティー
+### オプションプロパティ
 
-- [オプショナルプロパティー](reference/values-types-variables/object/optional-property.md)`?`をつけたプロパティは省略可能。
+- [オプションプロパティ](reference/values-types-variables/object/optional-property.md)`?`をつけたプロパティは省略可能。
 
 ```typescript twoslash
 let obj: { name: string; age?: number };
@@ -1417,13 +1417,15 @@ const key2: Key = "y"; // 代入OK
 const key3: Key = "z"; // 代入不可
 ```
 
+`type Key = keyof Point = "x" | "y"`となる。
+
 ### ユーティリティ型
 
 - TypeScriptは、既存の型から新しい型を作成するためのさまざまな一般的な型操作を提供している。
 
 #### Required
 
-- [`Required`](reference/type-reuse/utility-types/required.md)は、オプションプロパティーを必須プロパティーにするユーティリティ型。
+- [`Required`](reference/type-reuse/utility-types/required.md)は、オプションプロパティを必須プロパティにするユーティリティ型。
 
 ```typescript twoslash
 type Person = {
