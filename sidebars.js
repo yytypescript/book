@@ -374,6 +374,7 @@ module.exports = {
             "reference/generics/type-variables",
             "reference/generics/type-parameter-constraint",
             "reference/generics/default-type-parameter",
+            "reference/generics/variance",
           ],
         },
         {
