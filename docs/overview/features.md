@@ -53,7 +53,9 @@ TypeScriptでは、高度な型システムを用いて複雑な型を表現で�
 2. **タプル型**: 配列の各要素に異なる型を指定できる型です。これにより、異なる型の組み合わせを簡潔に表現できます。
 
    ```typescript
-   type Point2D = [number, number];
+   type Response = [number, string];
+
+   const response: Response = [200, "OK"];
    ```
 
 ## 複数の言語パラダイムのサポート
