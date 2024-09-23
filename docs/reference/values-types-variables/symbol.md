@@ -33,6 +33,39 @@ TypeScriptでシンボルの型注釈は`symbol`を用います。
 const s: symbol = Symbol();
 ```
 
+## symbol型を使う上での注意点
+
+symbol型を直接`JSON.stringify()`に渡すと`undefined`が返ります。
+
+```ts twoslash
+console.log(JSON.stringify(Symbol("many")));
+// @log: undefined
+```
+
+また、symbol型をプロパティに含むオブジェクトを`JSON.stringify()`に渡すと、symbol型をプロパティに含むキーは消滅します。
+
+```ts twoslash
+console.log(
+  JSON.stringify({
+    x: Symbol("many"),
+    y: "hello",
+  })
+);
+// @log: { "y": "hello" }
+```
+
+同様に、symbol型をキーに含むオブジェクトを`JSON.stringify()`に渡すと、symbol型のキーは消滅します。
+
+```ts twoslash
+console.log(
+  JSON.stringify({
+    [Symbol("many")]: "hello",
+    y: "hello",
+  })
+);
+// @log: { "y": "hello" }
+```
+
 ## シンボルの用途
 
 JavaScriptにシンボルが導入された動機は、JavaScriptの組み込みAPIの下位互換性を壊さずに新たなAPIを追加することでした。要するに、JavaScript本体をアップデートしやすくするために導入されたものです。したがって、アプリケーションを開発する場合に限っては、シンボルを駆使してコードを書く機会はそう多くはありません。
