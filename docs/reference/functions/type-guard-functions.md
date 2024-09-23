@@ -128,7 +128,7 @@ function noAnnotation(x: unknown) {
 }
 ```
 
-:::danger
+:::caution
 5.5以降であっても、単にboolean型を返す関数として型注釈した場合には型ガード関数としては利用できないことに注意していください。
 :::
 
