@@ -50,3 +50,19 @@ const i = 2n + BigInt(3);
 console.log(i);
 // @log: 5n
 ```
+
+## bigint型を使う上での注意点
+
+bigint型を直接`JSON.stringify()`に渡すと、TypeErrorが発生します。
+
+```ts twoslash
+JSON.stringify(12n);
+// @error: TypeError: Do not know how to serialize a BigInt
+```
+
+また、bigint型を含むオブジェクトを`JSON.stringify()`に渡しても、TypeErrorが発生します。
+
+```ts twoslash
+JSON.stringify({ x: 12n });
+// @error: TypeError: Do not know how to serialize a BigInt
+```
