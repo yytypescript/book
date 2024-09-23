@@ -87,11 +87,11 @@ function isNumber(x: unknown): x is number {
 型ガード関数の説明で見たように、型注釈に型述語を用いることは単に`boolean`型を返す関数であると型注釈するのとは異なる効果があり、制御フロー分析で型の絞り込みを行うためには型述語を利用する必要がありました。
 
 ```ts twoslash
-// 型述語を持つので型ガード関数として機能する
+// 型述語が注釈されているので型ガード関数として機能する
 function typeGuard(x: unknown): x is number {
   return typeof x === "number";
 }
-// 単にboolean型の値を返す関数
+// 単にboolean型の値を返す関数で型ガード関数として機能しない
 function notTypeGuard(x: unknown): boolean {
   return typeof x === "number";
 }
@@ -122,11 +122,15 @@ if (notTypeGuard(input)) {
 ただし、TypeScript 5.5からは型述語の注釈無しの次のような関数でも型ガード関数として機能するようになりました。関数の実体から型述語の型推論が可能となっているので、`x is number`という型述語が推論されて型ガード関数となります。
 
 ```ts twoslash
+// 返り値の注釈がないこの関数は x is number という型述語で推論される
 function noAnnotation(x: unknown) {
-  // x is number という型述語で推論される
   return typeof x === "number";
 }
 ```
+
+:::danger
+5.5以降であっても、単にboolean型を返す関数として型注釈した場合には型ガード関数としては利用できないことに注意していください。
+:::
 
 この型述語の機能強化によって配列の`filter`メソッドなどで使用するコールバック関数の型述語の記述なしで正確に型を推論できるようになるなどの改善が得られます。
 
