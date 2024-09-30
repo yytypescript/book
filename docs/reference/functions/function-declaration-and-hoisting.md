@@ -32,11 +32,23 @@ const hello = function () {
 
 以上のように、関数宣言と関数式には巻き上げの有無の違いがあります。関数式の場合は、関数定義と実行の順番を意識する必要が出てくるわけです。
 
-TypeScriptでは、定義前の関数を呼び出そうとするとコンパイラーが指摘してくれます。
+TypeScriptでは、定義前の関数式を呼び出そうとするとコンパイラーが指摘してくれます。
 
 ```ts twoslash
 hello();
 // @errors: 2448 2454
 
 const hello = function () {};
+```
+
+関数宣言の場合は、JavaScriptと同じくエラーは発生しません。
+
+巻き上げにより実行されるため、コンパイラーからの指摘はありません。
+
+```ts
+hello(); // Hello World
+
+function hello() {
+  console.log("Hello World");
+}
 ```
