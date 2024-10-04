@@ -1528,7 +1528,7 @@ type T3 = Extract<T1, T2>;
 
 #### NonNullable
 
-- `NonNullable`は、nullまたはundefinedを含む型からいずれも除外するユーティリティ型。
+- [`NonNullable`](reference/type-reuse/utility-types/nonnullable.md)は、nullまたはundefinedを含む型からいずれも除外するユーティリティ型。
 
 ```typescript twoslash
 type T1 = string | null | undefined;
