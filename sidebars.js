@@ -353,6 +353,7 @@ module.exports = {
                 "reference/type-reuse/utility-types/exclude",
                 "reference/type-reuse/utility-types/extract",
                 "reference/type-reuse/utility-types/no-infer",
+                "reference/type-reuse/utility-types/nonnullable",
               ],
             },
             "reference/type-reuse/mapped-types",
