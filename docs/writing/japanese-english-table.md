@@ -43,9 +43,9 @@
   - 宣言マージ
 - Assertion functions
   - アーサーション関数
+- Type predicate
+  - 型述語
 
 <!--textlint-enable prh-->
 
 ## 日本語が不明
-
-- Type predicate
