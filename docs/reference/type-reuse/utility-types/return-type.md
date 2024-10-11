@@ -11,7 +11,7 @@ title: "ReturnType<T>"
 
 型引数`T`には、関数の型を渡します。
 
-## NonNullableの使用例
+## ReturnTypeの使用例
 
 ```ts twoslash
 // @errors: 2344
