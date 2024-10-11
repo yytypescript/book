@@ -1536,6 +1536,19 @@ type T2 = NonNullable<T1>;
 //   ^?
 ```
 
+### ReturnType
+
+- [`ReturnType`](reference/type-reuse/utility-types/return-type.md)は、関数の戻り値の型を取得するユーティリティ型。
+
+```typescript twoslash
+function stringify(value: number): string {
+  return `${value}`;
+}
+
+type StringifyReturnType = ReturnType<typeof stringify>;
+//   ^?
+```
+
 ### Mapped types
 
 - [Mapped types](reference/type-reuse/mapped-types.md)を使うと、既存の型から新しい型を生成できる。
