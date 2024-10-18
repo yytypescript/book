@@ -355,6 +355,7 @@ module.exports = {
                 "reference/type-reuse/utility-types/no-infer",
                 "reference/type-reuse/utility-types/nonnullable",
                 "reference/type-reuse/utility-types/return-type",
+                "reference/type-reuse/utility-types/awaited",
               ],
             },
             "reference/type-reuse/mapped-types",
