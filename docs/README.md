@@ -1536,7 +1536,7 @@ type T2 = NonNullable<T1>;
 //   ^?
 ```
 
-### ReturnType
+#### ReturnType
 
 - [`ReturnType`](reference/type-reuse/utility-types/return-type.md)は、関数の戻り値の型を取得するユーティリティ型。
 
@@ -1546,6 +1546,20 @@ function stringify(value: number): string {
 }
 
 type StringifyReturnType = ReturnType<typeof stringify>;
+//   ^?
+```
+
+#### Awaited
+
+- [`Awaited`](reference/type-reuse/utility-types/awaited.md)は、Promiseの戻り値の型を取得するユーティリティ型。
+
+```typescript twoslash
+const promise1 = Promise.resolve("data");
+const promise2 = Promise.resolve(Promise.resolve("data"));
+
+type Data1 = Awaited<typeof promise1>;
+//   ^?
+type Data2 = Awaited<typeof promise2>;
 //   ^?
 ```
 
