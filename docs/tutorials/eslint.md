@@ -1060,6 +1060,10 @@ npx eslint .
 
 [vs codeとeslintを統合しよう]: #vs-codeとeslintを統合しよう
 
+:::info
+このステップはVS Codeを使っている方向けの内容です。WebStormなどのJetBrains IDEを使っている方は、[JetBrains IDEとESLintを統合しよう]を参照してください。これからVS Codeを導入する方は、[VS Codeの公式サイト](https://code.visualstudio.com/download)からダウンロードしてください。
+:::
+
 ここでは、Visual Studio Code(VS Code)に、ESLintを組み込む方法を説明します。
 
 ESLintはコマンドひとつでコーディング規約をチェックできるようになり、それだけでも便利です。しかし、VS CodeとESLintを統合するとさらに便利になります。コードを書いているときに、リアルタイムで問題点のフィードバックが得られるようになるからです。
@@ -1077,6 +1081,10 @@ VS CodeとESLintを統合するには、[ESLintの拡張](https://marketplace.vi
 ## JetBrains IDEとESLintを統合しよう
 
 [jetbrains ideとeslintを統合しよう]: #jetbrains-ideとeslintを統合しよう
+
+:::info
+このステップはJetBrains IDE(WebStorm、IntelliJ IDEA、PyCharmなど)を使っている方向けの内容です。VS Codeを使っている方は、[VS CodeとESLintを統合しよう]を参照してください。
+:::
 
 ここでは、WebStormなどのJetBrains IDEに、ESLintを組み込む方法を説明します。
 
