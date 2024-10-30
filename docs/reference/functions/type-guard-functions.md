@@ -6,7 +6,7 @@ sidebar_label: 型ガード関数
 
 TypeScriptのコンパイラは`if`や`switch`といった制御フローの各場所での変数の型を分析しており、この機能を[制御フロー分析](../statements/control-flow-analysis-and-type-guard.md)(control flow analysis)と呼びます。
 
-制御フロー分析の活用として、`if`や`switch`といった制御構造で型ガードを使用することによって各場所での変数を特定の型を絞り込みことができます。
+制御フロー分析の活用として、`if`や`switch`といった制御構造で型ガードを使用することによって各場所での変数を特定の型に絞り込むことができます。
 
 TypeScriptに元々用意されている型ガードとしては`typeof`や`instanceof`がありますが、これ以外にもユーザーが独自に型ガードを定義することができます。
 
