@@ -106,99 +106,100 @@ Reactには、小さいコンポーネントを組み合わせ、大きなアプ
 
 このチュートリアルをやるに当たって、必要なツールがあります。それらはここにリストアップしておくのであらかじめ用意しておいてください。
 
-- Node.js (このチュートリアルではv18.15.0で動作確認しています)
-- NPM
-- Yarn v1系 (このチュートリアルはv1.22.19で動作確認しています)
+- Node.js (このチュートリアルではv20.18.0で動作確認しています)
+- NPM (v10.8.2で動作確認しています)
 - VS CodeやWebStormなどのエディター
-
-## Yarnのインストール
-
-チュートリアルではパッケージ管理ツールとして Yarn を利用しているので、最初にインストールをしておきます。
-
-すでにインストール済みの方はここのステップはスキップして大丈夫です。
-
-```sh
-npm install -g yarn
-```
 
 ## プロジェクトを作る
 
-まず、`yarn create`コマンドでReactプロジェクトのひながたを生成します。
+まず、`npm create`コマンドでReactプロジェクトのひながたを生成します。
 
 ```sh
-yarn create react-app like-button --template typescript
+npm create vite@latest like-button -- --template react-swc-ts
 ```
 
-1分ほどするとひながたの生成が完了します。like-buttonディレクトリが生成されるので、次のコマンドを実行してそのディレクトリに移動すると、ひながたが生成されているのが分かります。
+1分ほどするとひながたの生成が完了します。`like-button`ディレクトリが生成されるので、次のコマンドを実行してそのディレクトリに移動すると、ひながたが生成されているのが分かります。
 
 ```sh
-cd ./like-button
+cd like-button
 ```
 
 ```text title="生成後のディレクトリ構成"
 .
-├── .gitignore
-├── README.md
+├── eslint.config.js
+├── index.html
 ├── package.json
 ├── public
-│   ├── favicon.ico
-│   ├── index.html
-│   ├── logo192.png
-│   ├── logo512.png
-│   ├── manifest.json
-│   └── robots.txt
+│   └── vite.svg
+├── README.md
 ├── src
 │   ├── App.css
-│   ├── App.test.tsx
 │   ├── App.tsx
+│   ├── assets
+│   │   └── react.svg
 │   ├── index.css
-│   ├── index.tsx
-│   ├── logo.svg
-│   ├── react-app-env.d.ts
-│   ├── reportWebVitals.ts
-│   └── setupTests.ts
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── tsconfig.app.json
 ├── tsconfig.json
-└── yarn.lock
+├── tsconfig.node.json
+└── vite.config.ts
 ```
 
-`yarn create react-app`ではReactのインストールも自動で行われます。インストールされたReactのバージョンを確認するには次のコマンドを用います。
+ひながたのディレクトリに移動したら、次のコマンドを実行してライブラリなど依存パッケージをインストールします。
 
 ```sh
-yarn list react
+npm install
 ```
 
-```text title="yarn list reactの実行結果"
-yarn list v1.22.19
-└─ react@18.2.0
-```
-
-このディレクトリにて`yarn start`を実行すると、Reactのローカル開発サーバーが起動します。
+これを実行するとReactもインストールされます。インストールされたReactのバージョンを確認するには次のコマンドを用います。
 
 ```sh
-yarn start
+npm list react
 ```
 
-開発サーバーが起動すると自動的にブラウザが開かれ、ひながたアプリの様子が確認できます。ブラウザが起動しない場合は、ターミナルに表示されているURLをブラウザで開いてください。
+```text title="npm list reactの実行結果"
+like-button@0.0.0 /Users/test/like-button
+├─┬ react-dom@18.3.1
+│ └── react@18.3.1 deduped
+└── react@18.3.1
+```
 
-![ひながた初期状態の画面](react-like-button-tutorial/screen1.png)
+このディレクトリにて次のコマンドを実行すると、Reactのローカル開発サーバーが起動します。
 
-Reactのローカル開発サーバーを停止する場合は、Ctrl + Cキーを押してください。
-CtrlキーとCキーを同時に押すと、コマンドを中断することができます。
+```sh
+npm run dev
+```
+
+コマンドを実行すると、次のようなメッセージが表示されます。ここに表示されているURLをブラウザで開くと、ひながたアプリの様子が確認できます。
+
+```text title="npm run devの実行結果"
+  VITE v5.4.10  ready in 262 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+
+![ViteとReactのロゴが表示された、カウントが0のVite + Reactスターターページ](react-like-button-tutorial/screen1.png)
+
+<!-- TODO: 上の画像をおきかえる -->
+
+Reactのローカル開発サーバーを停止する場合は、<kbd>Ctrl</kbd> + <kbd>C</kbd>キーを押してください。<kbd>Ctrl</kbd>キーと<kbd>C</kbd>キーを同時に押すと、コマンドを中断することができます。
 
 ここからは実際にコードを書いて行きますので、生成したlike-buttonプロジェクトをお好みのエディターで開いてください。
 
-ひながた初期状態の上のページはsrc/App.tsxの内容が描画されています。ためしに、src/App.tsxを変更してみましょう。App.tsxの`<header>`要素の中身を消して、「TypeScriptはいいぞ」に書き換えてみましょう。
+ひながた初期状態の上のページはsrc/App.tsxの内容が描画されています。ためしに、src/App.tsxを変更してみましょう。App.tsxを、次のような内容にまるっと書き換えてください。
 
-```tsx twoslash {7} title="App.tsx"
+```tsx twoslash title="src/App.tsx"
 // @noErrors
-import React from "react";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">TypeScriptはいいぞ</header>
-    </div>
+    <>
+      <h1>TypeScriptはいいぞ</h1>
+    </>
   );
 }
 
@@ -221,7 +222,7 @@ JSXを書いたJavaScriptファイルは拡張子を.jsxにします。同様に
 
 書き換えたらファイルを保存し、ブラウザで確認してみてください。ブラウザに書いた文言が表示されていればOKです。
 
-![変更が反映された状態](react-like-button-tutorial/screen2.png)
+![「TypeScriptはいいぞ」というテキストが表示されたWebページのスクリーンショット](react-like-button-tutorial/screen2.png)
 
 ## ボタンを作る場所を用意する
 
@@ -229,17 +230,14 @@ JSXを書いたJavaScriptファイルは拡張子を.jsxにします。同様に
 
 まず、先ほど「TypeScriptはいいぞ」と書いたところを`<LikeButton />`に変えます。次に、`LikeButton`関数を作ります。次のコードのようになるようにしてください。
 
-```tsx twoslash {7-9,14-16} title="App.tsx"
-import React from "react";
+```tsx twoslash {6,11-13} title="src/App.tsx"
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <LikeButton />
-      </header>
-    </div>
+    <>
+      <LikeButton />
+    </>
   );
 }
 
@@ -251,6 +249,8 @@ export default App;
 ```
 
 この`LikeButton`関数が、これからいいねボタンを作っていく場所になります。
+
+![「いいねボタン予定地」というテキストが中央に表示されたブラウザウィンドウのスクリーンショット](react-like-button-tutorial/screen3.png)
 
 :::tip ワンポイント解説: 関数コンポーネント
 
@@ -278,7 +278,7 @@ JSXとHTMLのその他の違いについては、[Reactの公式ドキュメン�
 
 まずは、`LikeButton`関数の`span`タグのテキストを`♥ {count}`にします。この`count`は変数なので、その変数も一緒に定義します。
 
-```tsx twoslash {2-3} title="App.tsx"
+```tsx twoslash {2-3} title="src/App.tsx"
 function LikeButton() {
   const count = 999;
   return <span>♥ {count}</span>;
@@ -289,7 +289,7 @@ function LikeButton() {
 
 次に、CSSのクラスを割り当てるために、`span`タグに`className`属性を追加します。
 
-```tsx twoslash {3} title="App.tsx"
+```tsx twoslash {3} title="src/App.tsx"
 function LikeButton() {
   const count = 999;
   return <span className="likeButton">♥ {count}</span>;
@@ -304,7 +304,7 @@ HTMLではCSSクラスを指定するのに`class`属性を用いるので、こ
 
 続いて、`likeButton`クラスのCSSを書いていきます。Reactではスタイルシートを実装するのにいくつか方法がありますが、ここではApp.cssにCSSを書く方法にします。次のCSSをApp.cssの最後に追加してください。
 
-```css title="App.css"
+```css title="src/App.css"
 .likeButton {
   background-color: rgb(231, 76, 60);
   color: white;
@@ -316,14 +316,13 @@ HTMLではCSSクラスを指定するのに`class`属性を用いるので、こ
 
 App.cssに上の内容を書いたら、ブラウザで確認してみましょう。スタイルが効いていれば、次の図のような表示になっているはずです。
 
-![スタイルが効いている様子](react-like-button-tutorial/screen3.png)
+![赤色の背景の上にハートアイコンと数字「999」が表示された「いいね」ボタンがブラウザの中央に配置されているスクリーンショット](react-like-button-tutorial/screen4.png)
 
 :::caution トラブルシューティング
 
 App.cssはApp.tsxで`import`しているので特に何もしなくても`LikeButton`コンポーネントのスタイルに反映されます。もし、スタイルが反映されていないようなら、App.tsxにApp.cssを`import`するコードがあるか確認してください。
 
-```tsx twoslash {2} title="App.tsx"
-import React from "react";
+```tsx twoslash {1} title="src/App.tsx"
 import "./App.css"; // この行があるか確認する
 
 function App() {
@@ -341,25 +340,42 @@ function App() {
 
 現状のボタンは`count`変数を表示していますが、この変数は固定値になっています。この値が変動できるように、Reactの`useState`関数を使い、カウント数の状態をReactに管理させるようにします。
 
-```tsx twoslash {1,7} title="App.tsx"
-import React, { useState } from "react";
-//          ^^^^^^^^^^^^^^ここも追加
+```tsx twoslash {2,13} title="App.tsx"
+import "./App.css";
+import { useState } from "react"; // この行を追加
 
-/* ... */
+function App() {
+  return (
+    <>
+      <LikeButton />
+    </>
+  );
+}
 
 function LikeButton() {
   const [count, setCount] = useState(999); // このように書き換える
   return <span className="likeButton">♥ {count}</span>;
 }
+
+export default App;
 ```
 
 この`useState`は関数コンポーネントに状態を持たせるためのReactの機能です。`useState`の戻り値を`count`と`setCount`の2つの変数に代入しています。`count`には`999`のような値が代入され、`setCount`には`count`の値を変更する関数が代入されます。
 
 次に、`span`要素をクリックしたときに、`count`の値を増加する`handleClick`関数を実装します。この関数では、現在の`count`の値に1を足した値を`setCount`関数に渡すようにします。そして、`span`要素の`onClick`属性に`handleClick`関数を渡します。
 
-```tsx twoslash {3-5,7} title="App.tsx"
-import React, { useState } from "react";
-// ---cut---
+```tsx twoslash {14-16,18} title="src/App.tsx"
+import "./App.css";
+import { useState } from "react";
+
+function App() {
+  return (
+    <>
+      <LikeButton />
+    </>
+  );
+}
+
 function LikeButton() {
   const [count, setCount] = useState(999);
   const handleClick = () => {
@@ -371,6 +387,8 @@ function LikeButton() {
     </span>
   );
 }
+
+export default App;
 ```
 
 これで、ボタンをクリックしたらいいねの数が増えるようになります。
