@@ -4,10 +4,28 @@ sidebar_label: constアサーション「as const」
 
 # constアサーション「as const」 (const assertion)
 
-オブジェクトリテラルの末尾に`as const`を記述すればプロパティが`readonly`でリテラルタイプで指定した物と同等の扱いになります。
+変数宣言のときに、末尾に`as const`をつけるとその値をreadonlyにした上で、リテラル型にしてくれます。
+プリミティブ型の値だとそこまでうま味を感じにくいですが、配列やオブジェクトリテラルに対して使うと便利です。
 
 ```ts twoslash
-const pikachu = {
+const str1 = "hello";
+//    ^?
+const str2 = "hello" as const; // これはas constがなくても同じ
+//    ^?
+const array1 = [1, 2, 3];
+//    ^?
+const array2 = [1, 2, 3] as const;
+//    ^?
+const obj1 = {
+  //    ^?
+  name: "pikachu",
+  no: 25,
+  genre: "mouse pokémon",
+  height: 0.4,
+  weight: 6.0,
+};
+const obj2 = {
+  //    ^?
   name: "pikachu",
   no: 25,
   genre: "mouse pokémon",
@@ -16,19 +34,32 @@ const pikachu = {
 } as const;
 ```
 
-代入はもちろんできません。
+readonlyになるため代入はもちろんできません。
 
 ```ts twoslash
-// @errors: 2540
-const pikachu = {
+const array1 = [1, 2, 3];
+const array2 = [1, 2, 3] as const;
+const obj1 = {
+  name: "pikachu",
+  no: 25,
+  genre: "mouse pokémon",
+  height: 0.4,
+  weight: 6.0,
+};
+const obj2 = {
   name: "pikachu",
   no: 25,
   genre: "mouse pokémon",
   height: 0.4,
   weight: 6.0,
 } as const;
+
+// @errors: 2540
 // ---cut---
-pikachu.name = "raichu";
+array1[0] = 4;
+array2[0] = 4;
+obj1.name = "raichu";
+obj2.name = "raichu";
 ```
 
 ## `readonly`と`const assertion`の違い
