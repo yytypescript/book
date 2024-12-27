@@ -160,7 +160,7 @@ const res2 = {
 
 `as const`と組み合わせて`as const satisfies T`と書くことができます。
 
-これは型`T`を満たしていることを示した上で絞り込みを行い、さらにリテラル型にしてreadonlyにするという`as const`と`satisfies`の機能をあわせ持っています。
+これは型`T`を満たしていることを検証した上で絞り込みを行い、さらにリテラル型にしてreadonlyにするという`as const`と`satisfies`の機能をあわせ持っています。
 
 ```ts twoslash
 type SuccessResponse = {
