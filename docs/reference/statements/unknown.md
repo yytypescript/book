@@ -66,7 +66,7 @@ unknownはanyよりも安全な不明型ですが、そのままでは実用で�
 const value: unknown = "";
 // 型ガード
 if (typeof value === "string") {
-  // ここブロックではvalueはstring型として扱える
+  // ここでは、valueをstring型として扱える
   console.log(value.toUpperCase());
 }
 ```
@@ -83,9 +83,9 @@ function isObject(value: unknown): value is object {
 const value: unknown = { a: 1, b: 2 };
 // 型ガード
 if (isObject(value)) {
+  // ここでは、valueをobject型として扱える
   console.log(Object.keys(value));
   //                      ^?
-  // ここでは、valueはobject型として扱える
 }
 ```
 
@@ -118,10 +118,7 @@ type Email = {
   subject: string;
 };
 function isEmail(value: unknown): value is Email {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-  return true;
+  return typeof value !== "object" || value === null;
 }
 ```
 
