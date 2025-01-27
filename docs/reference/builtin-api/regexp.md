@@ -88,7 +88,7 @@ console.log(str.match(regex2));
 次の例ではNamed capturing groupsとして`pref`と`ward`にはそれぞれ`"静岡県"`と`"磐田市"`がマッチしますがTypeScriptはそのプロパティに値が設定されていることを保証しません。値の取得はオプショナルチェーンを使うとよいでしょう。
 
 ```ts twoslash
-const regex = /(?<pref>.+[都|道|府|県])(?<ward>.+[市|区|町|村])/gu;
+const regex = /(?<pref>.+[都道府県])(?<ward>.+[市区町村])/gu;
 const str = "静岡県磐田市気子島";
 const match = regex.exec(str);
 
