@@ -42,6 +42,33 @@ class Person {
 new Person("Alice");
 ```
 
+## コンストラクタを非同期化する
+
+TypeScriptでは、コンストラクタを非同期化することはできません。次のような書きかたをすることはできません。
+
+```ts
+class Person {
+  constructor(name: string) {
+    // ...
+  }
+}
+```
+
+どうしても非同期化したい場合は、クラスのインスタンスを返すファクトリーメソッドを用意して、そのメソッドの中で非同期処理を実行するようにします。
+
+```ts
+class Person {
+  static async create(name: string): Promise<Person> {
+    // 非同期処理
+    return new Person(name);
+  }
+
+  constructor(name: string) {
+    // ...
+  }
+}
+```
+
 ## 関連情報
 
 [constructor shorthand](constructor-shorthand.md)
