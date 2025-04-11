@@ -37,6 +37,17 @@ type ReadonlyPerson = {
 
 `Readonly<T>`が読み取り専用にするのは、オブジェクトの型`T`直下のプロパティのみです。プロパティがオブジェクトだった場合、それが持つプロパティまでは読み取り専用にならないので注意してください。
 
+## Readonlyの実装
+
+`Readonly<T>`は次のように実装されています。
+
+```ts twoslash
+// @noErrors: 2300
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+```
+
 ## 関連情報
 
 [オブジェクト型のreadonlyプロパティ (readonly property)](../../values-types-variables/object/readonly-property.md)

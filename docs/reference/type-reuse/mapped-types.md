@@ -6,7 +6,7 @@ sidebar_label: Mapped Types
 
 インデックス型では設定時はどのようなキーも自由に設定できてしまい、アクセス時は毎回`undefined`かどうかの型チェックが必要です。入力の形式が決まっているのであればMapped Typesの使用を検討できます。
 
-Mapped Typesは主にユニオン型と組み合わせて使います。先ほどシステムがサポートする言語を定義しました。
+Mapped Typesは主にユニオン型と組み合わせて使います。ここにサポートする言語を定義します。
 
 ```ts twoslash
 type SystemSupportLanguage = "en" | "fr" | "it" | "es";
@@ -40,7 +40,9 @@ const butterflies: Butterfly = {
 };
 ```
 
-プロパティを読み取り専用にする`readonly`をそのオブジェクトのすべてのプロパティに適用する`Readonly<T>`というユーティリティ型があります。他にもユーティリティ型はありますが、それらについては専門のページがありますのでここでは割愛します。
+## Mapped Typesを使ったユーティリティ型の紹介とその実現方法
+
+プロパティを読み取り専用にする`readonly`をそのオブジェクトのすべてのプロパティに適用する`Readonly<T>`というユーティリティ型があります。
 
 [Readonly&lt;T>](utility-types/readonly.md)
 
@@ -56,6 +58,47 @@ type Readonly<T> = {
 `keyof T`という見慣れない表現が登場しましたが、これはオブジェクトのキーをユニオン型に変更するものだと解釈してください。`keyof`の詳細は型演算子をご覧ください。
 
 [keyof型演算子](keyof-type-operator.md)
+
+### mapping modifier
+
+`-`を先頭につけ`-readonly`とすることで、逆に読み取り専用となっているプロパティを変更可能にする`Mutable<T>`を作ることもできます（これはユーティリティ型にはありません）。このときの`-`をmapping modifierと呼びます。
+
+```ts twoslash
+type SystemSupportLanguage = "en" | "fr" | "it" | "es";
+type Butterfly = {
+  [key in SystemSupportLanguage]: string;
+};
+// ---cut---
+// @errors: 2540
+type ImmutableButterfly = Readonly<Butterfly>;
+type MutableButterfly = {
+  -readonly [key in SystemSupportLanguage]: string;
+};
+
+const immutableButterfly: ImmutableButterfly = {
+  en: "Butterfly",
+  fr: "Papillon",
+  it: "Farfalla",
+  es: "Mariposa",
+};
+
+immutableButterfly.en = "Schmetterling";
+
+const mutableButterfly: MutableButterfly = {
+  en: "Butterfly",
+  fr: "Papillon",
+  it: "Farfalla",
+  es: "Mariposa",
+};
+
+mutableButterfly.en = "Schmetterling"; // OK
+```
+
+mapping modifier(`-`)は他にもオプション修飾子の前につけて`-?`とすることで、オプション修飾子を取り除くことができます。これを使うことで、`Partial<T>`の逆の効果を持つ`Required<T>`を実装することができます。
+
+[Partial&lt;T>](utility-types/partial.md)
+
+[Required&lt;T>](utility-types/required.md)
 
 ## Mapped Typesには追加のプロパティが書けない
 

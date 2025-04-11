@@ -33,6 +33,31 @@ type RequiredPerson = {
 };
 ```
 
+## Requiredの実装
+
+`Required<T>`は次のように実装されています。
+
+```ts twoslash
+// @noErrors: 2300
+type Required<T> = {
+  [P in keyof T]-?: T[P];
+};
+```
+
+`Partial<T>`と参照してみると違いがわかります。
+
+```ts twoslash
+// @noErrors: 2300
+type Partial<T> = {
+  [P in keyof T]?: T[P];
+};
+```
+
+異なる部分は`-?`と`?`の部分です。`?`はオプション修飾子で、プロパティがオプショナルになります。`-?`はオプション修飾子を取り除くことを意味します。したがって、`Required<T>`は、`T`のすべてのプロパティからオプショナルであることを意味する`?`を取り除いた型を生成します。
+このときの`-`をmapping modifierと呼びます。
+
 ## 関連情報
 
 [Partial&lt;T>](partial.md)
+
+[Mapped Types](../mapped-types.md)
