@@ -33,6 +33,19 @@ type PartialPerson = {
 };
 ```
 
+## Partialの実装
+
+`Partial<T>`は次のように実装されています。
+
+```ts twoslash
+// @noErrors: 2300
+type Partial<T> = {
+  [P in keyof T]?: T[P];
+};
+```
+
+`?`はオプション修飾子と呼ばれるもので、この修飾子をつけることでプロパティがオプショナルになります。`Partial<T>`は、`T`のすべてのプロパティにこの修飾子をつけた型を生成します。
+
 ## Partialを用いたOptions Objectパターンの例
 
 `Partial`をOptions Objectパターンに応用すると、省略可能でありながら見やすい関数を実装できます。
