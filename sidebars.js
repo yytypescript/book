@@ -361,9 +361,18 @@ module.exports = {
             },
             "reference/type-reuse/mapped-types",
             "reference/type-reuse/indexed-access-types",
-            "reference/type-reuse/conditional-types",
-            "reference/type-reuse/infer",
-            "reference/type-reuse/union-distribution",
+            {
+              type: "category",
+              label: "Conditional Types",
+              link: {
+                type: "doc",
+                id: "reference/type-reuse/conditional-types/README",
+              },
+              items: [
+                "reference/type-reuse/conditional-types/infer",
+                "reference/type-reuse/conditional-types/distributive-conditional-types",
+              ],
+            },
           ],
         },
         {
