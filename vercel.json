@@ -160,6 +160,14 @@
     {
       "source": "/tutorials/tsconfig.json-settings",
       "destination": "/reference/tsconfig/tsconfig.json-settings"
+    },
+    {
+      "source": "/reference/type-reuse/infer",
+      "destination": "/reference/type-reuse/conditional-types/infer"
+    },
+    {
+      "source": "/reference/type-reuse/union-distribution",
+      "destination": "/reference/type-reuse/conditional-types/distributive-conditional-types"
     }
   ]
 }

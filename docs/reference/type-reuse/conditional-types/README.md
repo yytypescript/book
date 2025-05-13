@@ -1,4 +1,5 @@
 ---
+slug: /reference/type-reuse/conditional-types
 sidebar_label: Conditional Types
 ---
 
@@ -109,6 +110,6 @@ kimberley.address.city = "Seattle";
 `[P in keyof T]`の部分についてはMapped Typesのページで説明していますのでここでは簡潔に説明します。`keyof T`はオブジェクトのキーをユニオン型に変更するものです。`kimberley`の場合は`"name" | "age" | "address"`になります。`in`はその中のどれかを意味します。
 `T[P]`でオブジェクトのあるキーにおけるプロパティの型を取得します。その型が`object`であれば再起的に`Freeze<T[P]>`を適用し、そうでなければ`T[P]`をそのまま使います。
 
-[Mapped Types](../type-reuse/mapped-types.md)
+[Mapped Types](../mapped-types.md)
 
 これによってオブジェクトを再帰的に凍結することができました。

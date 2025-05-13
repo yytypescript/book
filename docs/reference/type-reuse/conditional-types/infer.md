@@ -32,7 +32,7 @@ type X = ReturnType<typeof request>;
 
 `typeof`は変数から型を取得する演算子です。JavaScriptの`typeof`とは異なるので注意してください。
 
-[typeof型演算子](./typeof-type-operator.md)
+[typeof型演算子](../typeof-type-operator.md)
 
 このように関数`request`の型から戻り値の型を取得することができました。
 

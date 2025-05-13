@@ -267,7 +267,7 @@ declare const t9: IsSubType<C, A>;
 
 ユニオン型も見てみましょう。なお、こちらはユニオン型であるためDistributive Conditional Typeを使用します。
 
-[Distributive Conditional Types](../type-reuse/union-distribution.md)
+[Distributive Conditional Types](../type-reuse/conditional-types/distributive-conditional-types.md)
 
 ```ts twoslash
 type IsSubType<T, U> = [T] extends [U] ? true : false;
