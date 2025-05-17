@@ -19,7 +19,7 @@ sidebar_label: トップ
 :::note
 本書『サバイバルTypeScript』は実務でTypeScriptを使う開発者のための入門書です。そして、このページはTypeScriptの特徴を最速で把握できるよう、数百ページからなる本書のコンテンツをつまみ食いした要約です。
 
-» [本書ついて詳しく知る](./about.md)
+» [本書について詳しく知る](./about.md)
 » [とにかく今すぐTypeScriptを書いてみたい](./tutorials/README.md)
 :::
 
