@@ -81,6 +81,22 @@ module.exports = {
 
 既存ページを変更する場合は、docsディレクトリから当該ファイルを探して編集してください。
 
+### 既存ページを移動する場合
+
+1. ファイルを移動、またはファイル名を変更します。
+2. `sidebars.js`の該当ページのパスを新しいパスに更新します。
+3. `vercel.json`の`redirects`に旧URLから新URLへのリダイレクト設定を追加します。
+4. `yarn build`を実行し、リンク切れがないか確認します。
+
+たとえば、`docs/tutorials/setup.md` を `docs/getting-started/setup.md` に移動した場合は、`sidebars.js` の
+`"tutorials/setup"` を `"getting-started/setup"` に修正し、`vercel.json` の `redirects` には次の設定を追加します。
+
+```json title="vercel.json"
+{ "source": "/tutorials/setup", "destination": "/getting-started/setup" }
+```
+
+これらの変更後、`yarn build` を実行してリンク切れがないか確認します。
+
 ### コンテンツ編集時に知っておくとよいこと
 
 [VS Code](vscode.md)
