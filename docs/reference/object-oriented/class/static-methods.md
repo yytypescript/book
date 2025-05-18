@@ -32,10 +32,21 @@ class SomeClass
 SomeClass::doSomething();
 ```
 
-JavaScriptにはJavaのような静的メソッドの機能がありません。代わりに、クラスのプロパティに後から関数を代入することで似たようなことができます。
+JavaScriptにもES2015（ES6）以降、staticキーワードを使った静的メソッドの宣言ができます。
 
-```js title="JavaScript" twoslash
-class SomeClass {}
+```js title="JavaScript（ES2015以降）" twoslash
+class SomeClass {
+  static doSomething() {
+    // ...
+  }
+}
+SomeClass.doSomething();
+```
+
+ES2015より前のJavaScriptでは、クラスのプロパティに後から関数を代入することで静的メソッドと同様の機能を実現していました。
+
+```js title="JavaScript（ES2015より前）" twoslash
+function SomeClass() {}
 SomeClass.doSomething = function () {
   // ...
 };
