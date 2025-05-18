@@ -32,9 +32,9 @@ class SomeClass
 SomeClass::doSomething();
 ```
 
-JavaScriptにもES2015（ES6）以降、staticキーワードを使った静的メソッドの宣言ができます。
+JavaScriptにもstaticキーワードを使った静的メソッドの宣言ができます。
 
-```js title="JavaScript（ES2015以降）" twoslash
+```js title="JavaScript" twoslash
 class SomeClass {
   static doSomething() {
     // ...
@@ -43,17 +43,7 @@ class SomeClass {
 SomeClass.doSomething();
 ```
 
-ES2015より前のJavaScriptでは、クラスのプロパティに後から関数を代入することで静的メソッドと同様の機能を実現していました。
-
-```js title="JavaScript（ES2015より前）" twoslash
-function SomeClass() {}
-SomeClass.doSomething = function () {
-  // ...
-};
-SomeClass.doSomething();
-```
-
-TypeScriptでは、Java風の静的メソッドの書き方ができるようになっています。TypeScriptで静的メソッドを宣言するにはstaticキーワードを用います。
+TypeScriptでも同様に、staticキーワードを用いて静的メソッドを宣言できます。
 
 ```ts title="TypeScript" twoslash
 class SomeClass {
