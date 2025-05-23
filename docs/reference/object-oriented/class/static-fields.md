@@ -31,7 +31,7 @@ JavaScriptやTypeScriptでもstaticキーワードを使った静的フィール
 
 ```js title="JavaScript" twoslash
 class SomeClass {
-  static field = 123;
+  static field: number = 123;
 }
 console.log(SomeClass.field);
 // @log: 123
