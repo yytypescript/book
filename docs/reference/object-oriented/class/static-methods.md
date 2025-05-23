@@ -32,7 +32,7 @@ class SomeClass
 SomeClass::doSomething();
 ```
 
-JavaScriptにもstaticキーワードを使った静的メソッドの宣言ができます。
+JavaScriptやTypeScriptでもstaticキーワードを使った静的メソッドの宣言ができます。
 
 ```js title="JavaScript" twoslash
 class SomeClass {
@@ -40,18 +40,6 @@ class SomeClass {
     // ...
   }
 }
-SomeClass.doSomething();
-```
-
-TypeScriptでも同様に、staticキーワードを用いて静的メソッドを宣言できます。
-
-```ts title="TypeScript" twoslash
-class SomeClass {
-  static doSomething() {
-    // ...
-  }
-}
-
 SomeClass.doSomething();
 ```
 
