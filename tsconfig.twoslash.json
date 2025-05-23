@@ -4,7 +4,7 @@
     "target": "es2016",
     "allowJs": true,
     "strict": true,
-    "types": ["node"],
+    "types": ["node", "css-modules"],
     "downlevelIteration": true
   }
 }
