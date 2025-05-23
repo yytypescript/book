@@ -27,22 +27,12 @@ class SomeClass
 var_dump(SomeClass::$field); //=> int(123)
 ```
 
-JavaScriptにはJavaのような静的フィールドの機能がありません。代わりに、クラスのプロパティに後から値を代入することで似たようなことができます。
-
-```js title="JavaScript" twoslash
-class SomeClass {}
-SomeClass.field = 123;
-console.log(SomeClass.field);
-// @log: 123
-```
-
-TypeScriptでは、Java風の静的フィールドの書き方ができるようになっています。TypeScriptで静的フィールドを宣言するにはstaticキーワードを用います。
+JavaScriptやTypeScriptでもstaticキーワードを使った静的フィールドの宣言ができます。
 
 ```ts title="TypeScript" twoslash
 class SomeClass {
   static field: number = 123;
 }
-
 console.log(SomeClass.field);
 // @log: 123
 ```
