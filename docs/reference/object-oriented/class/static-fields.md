@@ -29,7 +29,7 @@ var_dump(SomeClass::$field); //=> int(123)
 
 JavaScriptやTypeScriptでもstaticキーワードを使った静的フィールドの宣言ができます。
 
-```js title="JavaScript" twoslash
+```ts title="TypeScript" twoslash
 class SomeClass {
   static field: number = 123;
 }
