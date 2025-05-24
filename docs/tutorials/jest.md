@@ -22,7 +22,7 @@ JestはJavaScriptのテストフレームワークです。TypeScriptでテス�
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v16以上
+- Node.js v22以上
 - Yarn v1系 (このチュートリアルはv1.22.19で動作確認しています)
 
 Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
@@ -82,7 +82,7 @@ Jestをプロジェクトにインストールしましょう。インストー�
 これらのインストールは次のコマンドで、一度にインストールできます。
 
 ```shell
-yarn add -D 'jest@^28.0.0' 'ts-jest@^28.0.0' '@types/jest@^28.0.0'
+yarn add -D 'jest@^29.7.0' 'ts-jest@^29.3.4' '@types/jest@^29.5.14'
 ```
 
 `jest`はJest本体です。JavaScriptだけのプロジェクトであれば、このパッケージを入れるだけでテストが始められます。`ts-jest`は、JestをTypeScriptに対応させるためのものです。`ts-jest`を入れると、TypeScriptで書いたテストコードを、コンパイルの手間なしにそのまま実行できるようになります。`@types/jest`はJestのAPIの型定義ファイルです。TypeScriptの型情報を付与されるので、テストコードの型チェックが行えるようになります。
