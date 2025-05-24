@@ -220,7 +220,7 @@ cd eslint-tutorial
 ESLintはYarnでインストールしましょう。ESLintは開発時だけ使うパッケージなので、`yarn add`コマンドには`-D`オプションをつけてインストールします。
 
 ```shell
-yarn add -D 'eslint@^8.57'
+yarn add -D 'eslint@^9'
 ```
 
 :::info
@@ -552,7 +552,7 @@ shareable configは、誰かが設定したルールのプリセットです。�
 ```shell
 yarn add -D \
   'eslint-config-airbnb-base@^15' \
-  'eslint-plugin-import@^2.31'
+  'eslint-plugin-import@^2'
 ```
 
 次に、設定ファイル`.eslintrc.js`の`rules`を消します。その上で、`extends: ["airbnb-base"]`を追加してください。
@@ -756,9 +756,9 @@ ESLint本体と[TypeScript ESLint]の両方をインストールします。
 
 ```shell
 yarn add -D \
-  'eslint@^8.57' \
-  '@typescript-eslint/parser@^5.62' \
-  '@typescript-eslint/eslint-plugin@^5.62'
+  'eslint@^9' \
+  '@typescript-eslint/parser@^8' \
+  '@typescript-eslint/eslint-plugin@^8'
 ```
 
 TypeScript ESLintは2つのパッケージから成ります。`@typescript-eslint/parser`は、ESLintにTypeScriptの構文を理解させるためのパッケージです。`@typescript-eslint/eslint-plugin`は、TypeScript向けのルールを追加するパッケージです。
@@ -790,7 +790,7 @@ ESLintの[200以上のルール](https://eslint.org/docs/rules/)に加えて、T
 ```shell
 yarn add -D \
   'eslint-config-airbnb-base@^15' \
-  'eslint-plugin-import@^2.31' \
+  'eslint-plugin-import@^2' \
   'eslint-config-airbnb-typescript@^18'
 ```
 
