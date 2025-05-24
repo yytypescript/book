@@ -220,7 +220,7 @@ cd eslint-tutorial
 ESLintはYarnでインストールしましょう。ESLintは開発時だけ使うパッケージなので、`yarn add`コマンドには`-D`オプションをつけてインストールします。
 
 ```shell
-yarn add -D 'eslint@^9'
+yarn add -D 'eslint@^8'
 ```
 
 :::info
@@ -756,9 +756,9 @@ ESLint本体と[TypeScript ESLint]の両方をインストールします。
 
 ```shell
 yarn add -D \
-  'eslint@^9' \
-  '@typescript-eslint/parser@^8' \
-  '@typescript-eslint/eslint-plugin@^8'
+  'eslint@^8' \
+  '@typescript-eslint/parser@^7' \
+  '@typescript-eslint/eslint-plugin@^7'
 ```
 
 TypeScript ESLintは2つのパッケージから成ります。`@typescript-eslint/parser`は、ESLintにTypeScriptの構文を理解させるためのパッケージです。`@typescript-eslint/eslint-plugin`は、TypeScript向けのルールを追加するパッケージです。
