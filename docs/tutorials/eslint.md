@@ -41,7 +41,7 @@ sidebar_label: ESLintでコーディング規約を自動化しよう
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v16以上
+- Node.js v22以上
 - NPM v7系以上
 - Yarn v1系 (このチュートリアルはv1.22.18で動作確認しています)
 
@@ -701,7 +701,7 @@ echo '{"name": "eslint-typescript-tutorial","license": "UNLICENSED"}' > package.
 TypeScript ESLintを使うには、TypeScript環境を構築しておく必要があります。まず、`typescript`を導入しておいてください。合わせてNode.jsの型定義`@types/node`もインストールしておきます。この型情報は、`.eslintrc.js`などのNode.js環境で実行されるファイルをESLintでチェックするときに利用されます。
 
 ```shell
-yarn add -D 'typescript@^4.6' '@types/node@^16'
+yarn add -D 'typescript@^5.8' '@types/node@^20'
 ```
 
 TypeScriptコンパイラの設定ファイルも作っておきます。
