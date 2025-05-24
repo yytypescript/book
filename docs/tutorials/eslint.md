@@ -701,7 +701,7 @@ echo '{"name": "eslint-typescript-tutorial","license": "UNLICENSED"}' > package.
 TypeScript ESLintを使うには、TypeScript環境を構築しておく必要があります。まず、`typescript`を導入しておいてください。合わせてNode.jsの型定義`@types/node`もインストールしておきます。この型情報は、`.eslintrc.js`などのNode.js環境で実行されるファイルをESLintでチェックするときに利用されます。
 
 ```shell
-yarn add -D 'typescript@^5.8' '@types/node@^20'
+yarn add -D 'typescript@^5.8' '@types/node@^22'
 ```
 
 TypeScriptコンパイラの設定ファイルも作っておきます。
