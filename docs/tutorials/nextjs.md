@@ -667,7 +667,53 @@ export async function fetchImage(): Promise<Image> {
 
 また、`npm run dev`を実行しているターミナルには、サーバーサイドのログとして「fetchImage: 画像情報を取得しました」と表示されているはずです。これにより、`fetchImage`関数がサーバーサイドで実行されていることが確認できます。
 
-このチュートリアルでは、ボタンクリック時にThe Cat APIを呼び出すために、サーバーアクションを使うのはやりすぎ感があります。しかし、もしもAPI呼び出しにAPIキーなどの秘密情報が必要な場合、サーバーアクションはAPIキーをクライアントに公開せずに安全に使用できるため、非常に便利です。認証情報を必要としないAPI呼び出しは実務では稀なため、サーバーアクションは押さえておきたい機能です。
+## APIキーを使う
+
+The Cat APIは、APIキーを使わずに利用できるAPIです。しかし、実務で作るアプリケーションで利用するAPIでは、APIキーが必要になることが多いです。ここでは、APIキーをNext.jsでどう使ったらいいかを学び、実務で活かせるスキルを身につけてみましょう。
+
+Next.jsでは、環境変数を使ってAPIキーを管理するのが一般的です。環境変数は`.env`ファイルに定義します。例として、`CAT_API_KEY`という環境変数を使うことにします。プロジェクトのルートディレクトリに`.env`というファイルを作成し、次のように記述してください。
+
+```bash title=".env"
+CAT_API_KEY=DEMO_KEY
+```
+
+次に、環境変数をロードするためのコードを追加します。`app/env.ts`というファイルを作成し、次のように書いてください。
+
+```ts twoslash title="app/env.ts"
+if (!process.env.CAT_API_KEY) {
+  throw new Error("環境変数 CAT_API_KEY が設定されていません");
+}
+
+export const CAT_API_KEY = process.env.CAT_API_KEY;
+```
+
+最後に、`fetch-image.ts`を次のように編集します。
+
+```tsx twoslash {3,10-12} title="app/fetch-image.ts"
+// @filename: fetch-image.ts
+// ---cut---
+"use server";
+
+import { CAT_API_KEY } from "./env"; // 追加
+
+type Image = {
+  url: string;
+};
+
+export async function fetchImage(): Promise<Image> {
+  const res = await fetch("https://api.thecatapi.com/v1/images/search", {
+    headers: { "x-api-key": CAT_API_KEY }, // 追加
+  });
+  const images = await res.json();
+  console.log("fetchImage: 画像情報を取得しました", images);
+  return images[0];
+}
+// ---cut-after---
+// @filename: env.ts
+export declare const CAT_API_KEY: string;
+```
+
+このようにAPIキーを環境変数として管理することで、ソースコードにAPIキーを直接書かずに済みます。
 
 ## ビジュアルを作り込む
 
