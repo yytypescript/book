@@ -41,7 +41,7 @@ sidebar_label: ESLintでコーディング規約を自動化しよう
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v16以上
+- Node.js v22以上
 - NPM v7系以上
 - Yarn v1系 (このチュートリアルはv1.22.18で動作確認しています)
 
@@ -701,7 +701,7 @@ echo '{"name": "eslint-typescript-tutorial","license": "UNLICENSED"}' > package.
 TypeScript ESLintを使うには、TypeScript環境を構築しておく必要があります。まず、`typescript`を導入しておいてください。合わせてNode.jsの型定義`@types/node`もインストールしておきます。この型情報は、`.eslintrc.js`などのNode.js環境で実行されるファイルをESLintでチェックするときに利用されます。
 
 ```shell
-yarn add -D 'typescript@^4.6' '@types/node@^16'
+yarn add -D 'typescript@^5.5' '@types/node@^22'
 ```
 
 TypeScriptコンパイラの設定ファイルも作っておきます。
@@ -757,8 +757,8 @@ ESLint本体と[TypeScript ESLint]の両方をインストールします。
 ```shell
 yarn add -D \
   'eslint@^8' \
-  '@typescript-eslint/parser@^5' \
-  '@typescript-eslint/eslint-plugin@^5'
+  '@typescript-eslint/parser@^7' \
+  '@typescript-eslint/eslint-plugin@^7'
 ```
 
 TypeScript ESLintは2つのパッケージから成ります。`@typescript-eslint/parser`は、ESLintにTypeScriptの構文を理解させるためのパッケージです。`@typescript-eslint/eslint-plugin`は、TypeScript向けのルールを追加するパッケージです。
@@ -791,7 +791,7 @@ ESLintの[200以上のルール](https://eslint.org/docs/rules/)に加えて、T
 yarn add -D \
   'eslint-config-airbnb-base@^15' \
   'eslint-plugin-import@^2' \
-  'eslint-config-airbnb-typescript@^17'
+  'eslint-config-airbnb-typescript@^18'
 ```
 
 `eslint-config-airbnb-base`はJavaScript向けのshareable configです。これを上書きして、TypeScript ESLintのルールを追加したり、TypeScriptコンパイラがチェックするためESLintでチェックする必要がないルールを除外する設定を加えるのが`eslint-config-airbnb-typescript`です。`eslint-plugin-import`は依存関係上、導入が必要なパッケージです。
