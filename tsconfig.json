@@ -1,26 +1,8 @@
 {
   // This file is not used in compilation. It is here just for a nice editor experience.
-  "extends": "@tsconfig/docusaurus/tsconfig.json",
+  "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ES2015",
-    "baseUrl": ".",
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "moduleResolution": "node",
-    "downlevelIteration": false,
-    "checkJs": true,
-    "skipLibCheck": true,
-    "types": [
-      "node",
-      "jest",
-      "@docusaurus/module-type-aliases",
-      "@docusaurus/theme-classic"
-    ]
+    "baseUrl": "."
   },
-  "include": ["src/"],
-  "exclude": [
-    "node_modules/",
-    "src/components/codeReadingAssistant/sampleCodes"
-  ]
+  "exclude": [".docusaurus", "build"]
 }

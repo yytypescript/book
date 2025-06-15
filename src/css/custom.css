@@ -4,233 +4,27 @@
  * work well for content-centric websites.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
-
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #007acc;
-  --ifm-color-primary-dark: #006eb8;
-  --ifm-color-primary-darker: #0068ad;
-  --ifm-color-primary-darkest: #00558f;
-  --ifm-color-primary-light: #0086e0;
-  --ifm-color-primary-lighter: #008ceb;
-  --ifm-color-primary-lightest: #0a9dff;
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
-  --ifm-font-size-base: 17px;
-  --ifm-code-padding-horizontal: 0.1rem;
-  --ifm-code-padding-vertical: 0;
-  --ifm-line-height-base: 1.8;
-  --ifm-font-family-base: "Noto Sans JP", sans-serif;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-.markdown h1:first-child {
-  --ifm-h1-font-size: 2rem;
-  font-weight: 700;
-}
-
-.markdown > h2 {
-  --ifm-h2-font-size: 1.5rem;
-}
-
-.markdown > h3 {
-  --ifm-h3-font-size: 1.25rem;
-}
-
-.markdown {
-  font-weight: 400;
-}
-
-.markdown p {
-  text-align: justify;
-  word-wrap: break-word;
-  letter-spacing: 0.01rem;
-}
-
-.markdown .themed svg {
-  max-width: 100%;
-  height: auto;
-}
-.markdown .themed svg [fill="#fff"] {
-  fill: var(--ifm-background-surface-color);
-}
-.markdown .themed svg [stroke="#fff"] {
-  stroke: var(--ifm-background-surface-color);
-}
-.markdown .themed svg [fill="#000"] {
-  fill: var(--ifm-color-content);
-}
-.markdown .themed svg [stroke="#000"] {
-  stroke: var(--ifm-color-content);
-}
-
-code {
-  border-color: var(--ifm-code-background);
-  border-radius: 0;
-}
-
-p > code {
-  margin: 0 var(--ifm-code-padding-horizontal);
-}
-
-.markdown > pre.prism-code {
-  margin-bottom: 0;
-}
-.markdown .footnotes {
-  font-size: 0.85rem;
-}
-
-.markdown video {
-  max-width: 100%;
-  height: auto;
-}
-
-.docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.1);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
-}
-
-html[data-theme="dark"] .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.prism-code {
-  counter-reset: line-number;
-}
-
-.prism-code .token-line::before {
-  counter-increment: line-number;
-  content: counter(line-number);
-  margin-right: 1rem;
-  opacity: 0.4;
-  font-size: 0.85rem;
-  user-select: none;
-  min-width: 1rem;
-  display: inline-block;
-  position: sticky;
-}
-
-/* 3行以内のコードブロックは行番号を表示しないスタイル */
-.prism-code .token-line:only-child::before,
-.prism-code .token-line:first-child:nth-last-child(2)::before,
-.prism-code .token-line:first-child:nth-last-child(2) ~ .token-line::before,
-.prism-code .token-line:first-child:nth-last-child(3)::before,
-.prism-code .token-line:first-child:nth-last-child(3) ~ .token-line::before {
-  display: none;
-}
-
-code {
-  counter-reset: step;
-  counter-increment: step 0;
-}
-
-code .line::before {
-  content: counter(step);
-  counter-increment: step;
-  width: 1rem;
-  margin-right: 1rem;
-  display: inline-block;
-  text-align: right;
-  font-size: 0.85rem;
-  color: rgba(115, 138, 148, 0.4);
-}
-
-code .meta-line::before {
-  content: "";
-  width: 1rem;
-  margin-right: 1rem;
-  display: inline-block;
-}
-
-/* 3行以内のコードブロックは行番号を表示しないスタイル */
-code .line:only-child::before,
-code .line:first-child:nth-last-child(2)::before,
-code .line:first-child:nth-last-child(2) ~ .line::before,
-code .line:first-child:nth-last-child(2) ~ .meta-line::before,
-code .line:first-child:nth-last-child(3)::before,
-code .line:first-child:nth-last-child(3) ~ .line::before,
-code .line:first-child:nth-last-child(3) ~ .meta-line::before {
-  display: none;
-}
-
-[data-theme="light"] .shiki.min-dark {
-  display: none;
-}
-
-[data-theme="dark"] .shiki.min-light {
-  display: none;
-}
-
-pre .popover,
-pre .error,
-pre .error-behind,
-pre .inline-completions,
-pre .logger {
-  font-size: 0.85rem;
-}
-
-pre .error {
-  background-color: var(--ifm-color-danger-contrast-background) !important;
-  color: var(--ifm-font-color-base) !important;
-}
-
-pre .inline-completions ul.dropdown {
-  width: auto !important;
-}
-
-pre .inline-completions ul.dropdown li {
-  margin-right: 1rem;
-}
-
-pre code {
-  word-wrap: normal;
-  white-space: nowrap;
-}
-
-/** Support for showing console log/warn/errors inline */
-pre .logger {
-  display: flex;
-  align-items: center;
-  color: black;
-  margin: 3px 0;
-  padding: 3px 0;
-  padding-left: 8px;
-  width: 100%;
-  white-space: pre-wrap;
-}
-pre .logger svg {
-  margin-right: 9px;
-  height: 15px;
-  flex-shrink: 0;
-}
-pre .logger.error-log {
-  background-color: var(--ifm-color-danger-contrast-background);
-  color: var(--ifm-color-danger-contrast-foreground);
-  border-left: 2px solid var(--ifm-color-danger-dark);
-}
-pre .logger.warn-log {
-  background-color: var(--ifm-color-warning-contrast-background);
-  border-left: 2px solid var(--ifm-color-warning-dark);
-  color: var(--ifm-color-warning-contrast-foreground);
-}
-pre .logger.log-log {
-  background-color: var(--ifm-color-secondary-contrast-background);
-  border-left: 2px solid var(--ifm-color-secondary-dark);
-  color: var(--ifm-color-secondary-contrast-foreground);
-}
-pre .logger.log-log svg {
-  margin-left: 6px;
-  margin-right: 11px;
-}
-
-.markdown figure {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 0 var(--ifm-paragraph-margin-bottom);
-}
-
-.admonition h5 {
-  text-transform: unset !important;
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }

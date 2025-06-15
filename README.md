@@ -1,39 +1,41 @@
-# サバイバルTypeScript
+# Website
 
-TypeScriptの入門書です。
+This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
-https://typescriptbook.jp/
+## Installation
 
-## 特徴
+```bash
+yarn
+```
 
-### 実務指向
+## Local Development
 
-「TypeScriptを最短ルートで実務で使えるように読者を導く」を目標に、実務で必須な知識に厳選した内容になっています。実務利用が希なTypeScript機能は、過学習になるため意図的に省いています。逆に、TypeScript範囲外のことでも実務利用が頻繁な知識はふんだんに盛り込んでいます。
+```bash
+yarn start
+```
 
-### 自然な学習の流れ
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-まず、プログラマーの言語学習の自然な流れを意識した章立てになっています。次の順で章立てされているため、ストレス少なめで学習していけます。
+## Build
 
-1. あらまし: TypeScriptがどんなものか概要を知る
-2. 作って学ぶ: TypeScriptで動くものを書いて、雰囲気をつかむ
-3. 読んで学ぶ: TypeScriptの各言語機能を深堀りする
+```bash
+yarn build
+```
 
-次に、TypeScriptを知るのに必須なJavaScriptの知識も並行して学べるようになっています。
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-さらに、他言語での知識がTypeScript学習に活かせるよう工夫しています。TypeScript学習者の多くが他言語経験者です。Java、Python、PHP、Rubyなどの他言語と対比しながらTypeScriptを学べるようになっています。
+## Deployment
 
-### オープンソース
+Using SSH:
 
-本書はオープンソースです。無料で読めるだけでなく、執筆にも携わることができます。
+```bash
+USE_SSH=true yarn deploy
+```
 
-## 執筆に参加するには
+Not using SSH:
 
-執筆に参加する方法は次のページをご覧ください。
+```bash
+GIT_USER=<Your GitHub username> yarn deploy
+```
 
-https://typescriptbook.jp/writing
-
-## コントリビューター
-
-数々のPRありがとうございます！
-
-[![](https://contrib.rocks/image?repo=yytypescript/book)](https://github.com/yytypescript/book/graphs/contributors)
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
