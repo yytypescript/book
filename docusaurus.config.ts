@@ -1,6 +1,17 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import type * as Twoslash from "remark-shiki-twoslash";
+import rehypeRaw, { type Options as RehypeRawOptions } from "rehype-raw";
+
+const rehypeRawOptions: RehypeRawOptions = {
+  passThrough: [
+    "mdxjsEsm",
+    "mdxJsxTextElement",
+    "mdxJsxFlowElement",
+    "mdxFlowExpression",
+  ],
+};
 
 const config: Config = {
   title: "TypeScript入門『サバイバルTypeScript』",
@@ -29,6 +40,7 @@ const config: Config = {
           editUrl: "https://github.com/yytypescript/book/edit/master/",
           routeBasePath: "/",
           numberPrefixParser: false,
+          rehypePlugins: [[rehypeRaw, rehypeRawOptions]],
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -39,8 +51,14 @@ const config: Config = {
         },
       } satisfies Preset.Options,
     ],
+    [
+      "docusaurus-preset-shiki-twoslash",
+      {
+        themes: ["min-light", "min-dark"],
+        defaultCompilerOptions: {},
+      } satisfies Twoslash.Options,
+    ],
   ],
-
   themeConfig: {
     // Replace with your project's social card
     image: "img/docusaurus-social-card.jpg",
