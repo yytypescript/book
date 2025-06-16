@@ -1,69 +1,41 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
-
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
-
+  title: "TypeScript入門『サバイバルTypeScript』",
+  tagline: "Dinosaurs are cool",
+  favicon: "img/favicon.ico",
+  url: "https://typescriptbook.jp",
+  baseUrl: "/",
+  organizationName: "yytypescript",
+  projectName: "book",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "throw",
+  i18n: {
+    defaultLocale: "ja",
+    locales: ["ja"],
+  },
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
-
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
-
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
-
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-  },
-
   presets: [
     [
-      'classic',
+      "classic",
       {
         docs: {
-          sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          sidebarPath: "./sidebars.ts",
+          editUrl: "https://github.com/yytypescript/book/edit/master/",
+          routeBasePath: "/",
+          numberPrefixParser: false,
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
+        },
+        googleAnalytics: {
+          trackingID: "UA-43572771-14",
+          anonymizeIP: true,
         },
       } satisfies Preset.Options,
     ],
@@ -71,78 +43,119 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: 'My Site',
+      title: "サバイバルTypeScript",
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: "サバイバルTypeScript",
+        src: "img/logo.svg",
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
+          href: "https://github.com/yytypescript/book",
+          label: "GitHub",
+          position: "right",
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
+          type: "html",
+          position: "right",
+          value: "custom-ask-to-ai-link",
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: 'Docs',
+          title: "サバイバルTypeScript",
           items: [
+            { label: "第1章 はじめに", to: "/" },
+            { label: "第2章 TypeScriptのあらまし", to: "/overview" },
+            { label: "第3章 作って学ぶTypeScript", to: "/tutorials" },
+            { label: "第4章 読んで学ぶTypeScript", to: "/reference" },
+            { label: "第5章 Tips", to: "/tips" },
+          ],
+        },
+        {
+          title: "ユーティリティ",
+          items: [
+            { label: "記号とキーワード", to: "/symbols-and-keywords" },
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: "TypeScript解読アシスタント",
+              to: "/code-reading-assistant",
             },
           ],
         },
         {
-          title: 'Community',
+          title: "執筆に参加したい方",
           items: [
+            { label: "概要", to: "/writing" },
+            { label: "CONTRIBUTING", to: "/writing/contributing" },
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: "はじめて執筆する方へ",
+              to: "/writing/getting-started",
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: "チケット駆動",
+              to: "/writing/ticket-driven",
             },
             {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
+              label: "環境構築からプルリクエストまでの流れ",
+              to: "/writing/how-to-change",
             },
+            { label: "Markdown", to: "/writing/markdown" },
+            { label: "PDR", to: "/writing/pdr" },
           ],
         },
         {
-          title: 'More',
+          title: "コミュニティー",
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: "GitHub",
+              href: "https://github.com/yytypescript/book",
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: "Connpass",
+              href: "https://yyts.connpass.com/",
+            },
+            {
+              label: "Discord",
+              href: "https://discord.gg/DTwRgzt",
+            },
+            {
+              label: "Twitter",
+              href: "https://twitter.com/yytypescript",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} YYTypeScript. <a href="/license">Licensed under CC BY-SA 4.0 and MIT(partially)</a>`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
+    // algolia: {
+    //   appId: "5N3JHNPACB",
+    //   apiKey: "99655de886960eadb0eca65591529110",
+    //   indexName: "typescriptbook",
+    //   contextualSearch: true,
+    // },
   } satisfies Preset.ThemeConfig,
+  plugins: [
+    // [
+    //   "@gracefullight/docusaurus-plugin-microsoft-clarity",
+    //   { projectId: "9wrel6kg8q" },
+    // ],
+    // "./src/components/codeReadingAssistant/docusaurusPlugin.js",
+  ],
+  scripts: [
+    {
+      src: "https://plausible.io/js/script.js",
+      defer: true,
+      "data-domain": "typescriptbook.jp",
+    },
+  ],
 };
 
 export default config;

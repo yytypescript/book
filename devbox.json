@@ -2,7 +2,8 @@
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.2/.schema/devbox.schema.json",
   "packages": [
     "nodejs@22",
-    "bun@latest"
+    "bun@latest",
+    "biome@latest"
   ],
   "shell": {
     "init_hook": [
