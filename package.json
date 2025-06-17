@@ -23,6 +23,7 @@
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-nl2br": "^1.0.4",
     "rehype-raw": "^7.0.0"
   },
   "devDependencies": {

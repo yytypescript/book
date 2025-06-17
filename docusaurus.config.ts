@@ -3,6 +3,7 @@ import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 import type * as Twoslash from "remark-shiki-twoslash";
 import rehypeRaw, { type Options as RehypeRawOptions } from "rehype-raw";
+import pluginPageRef from "./src/plugins/docusaurus-plugin-page-ref";
 
 const rehypeRawOptions: RehypeRawOptions = {
   passThrough: [
@@ -40,6 +41,7 @@ const config: Config = {
           editUrl: "https://github.com/yytypescript/book/edit/master/",
           routeBasePath: "/",
           numberPrefixParser: false,
+          remarkPlugins: [[pluginPageRef, {}]],
           rehypePlugins: [[rehypeRaw, rehypeRawOptions]],
         },
         theme: {
@@ -58,7 +60,6 @@ const config: Config = {
         defaultCompilerOptions: {},
       } satisfies Twoslash.Options,
     ],
-    ["#docusaurus-preset-page-ref", {}],
   ],
   themeConfig: {
     // Replace with your project's social card

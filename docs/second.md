@@ -7,7 +7,6 @@ sidebar_label: せかんど
 
 にほんごああああああああああああああああ
 
-import PageRef from '@theme/PageRef';
 
 
 ```ts twoslash
