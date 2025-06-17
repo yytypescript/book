@@ -1,11 +1,11 @@
 ---
 sidebar_position: 1
-sidebar_label: サイドバー
+sidebar_label: せかんど
 ---
 
-# ああああああああ
+# いいいいいいいいい
 
-にほんご
+にほんごああああああああああああああああ
 
 import PageRef from '@theme/PageRef';
 
