@@ -44,6 +44,6 @@
     "node": ">=18.0"
   },
   "imports": {
-    "#docusaurus-preset-page-ref": "./src/presets/page-ref/index.ts"
+    "#docusaurus-preset-page-ref": "./src/plugins/docusaurus-preset-page-ref/index.ts"
   }
 }

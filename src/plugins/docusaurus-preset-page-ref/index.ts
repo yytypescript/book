@@ -5,8 +5,8 @@ import type {
   PresetConfig,
 } from "@docusaurus/types";
 import type { Options as PresetClassicOptions } from "@docusaurus/preset-classic";
-import themePlugin from "./theme";
-import remarkPlugin from "./remark";
+import themePlugin from "../docusaurus-theme-page-ref";
+import remarkPlugin from "../docusaurus-plugin-page-ref";
 
 type Options = object;
 
