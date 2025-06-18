@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [".devbox", "build", ".docusaurus"]
+    "ignore": [".devbox", "build", ".docusaurus", ".next", ".source"]
   },
   "formatter": {
     "enabled": true,
