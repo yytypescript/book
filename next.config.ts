@@ -7,6 +7,9 @@ const config: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true, // We run ESLint checks in our CI/CD pipeline (GitHub Actions) so we can safely disable it during the build process to improve performance.
   },
+  typescript: {
+    ignoreBuildErrors: true, // We run TypeScript checks in our CI/CD pipeline (GitHub Actions) so we can safely disable it during the build process to improve performance.
+  },
   images: {
     dangerouslyAllowSVG: true, // since contrib.rocks provides SVG images.
     contentDispositionType: "attachment", // to prevent scripts embedded in the SVG image from executing.
