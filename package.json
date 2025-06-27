@@ -9,21 +9,28 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
-    "next": "15.3.3",
+    "@suin/auto-page-card": "^2.0.0",
+    "@suin/fumadocs-page-card": "^1.0.0",
+    "esbuild": "^0.25.5",
+    "fumadocs-core": "15.5.4",
+    "fumadocs-mdx": "11.6.9",
+    "fumadocs-twoslash": "^3.1.4",
+    "fumadocs-ui": "15.5.4",
+    "mermaid": "^11.7.0",
+    "next": "15.3.4",
+    "next-themes": "^0.4.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "fumadocs-ui": "15.5.3",
-    "fumadocs-core": "15.5.3",
-    "fumadocs-mdx": "11.6.9"
+    "shiki-twoslash-fix": "*"
   },
   "devDependencies": {
-    "@types/node": "24.0.1",
+    "@types/node": "24.0.4",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "typescript": "^5.8.3",
+    "typescript": "*",
     "@types/mdx": "^2.0.13",
     "@tailwindcss/postcss": "^4.1.10",
     "tailwindcss": "^4.1.10",
-    "postcss": "^8.5.5"
+    "postcss": "^8.5.6"
   }
 }

@@ -5,13 +5,37 @@ description: Components
 
 ## Code Block
 
-```js
-console.log('Hello World');
+```typescript twoslash
+const a = 1;
+// @log: aaaaaaaaaaaa
+const b = 1;
+// @log: aaaaaaaaaaaa
 ```
 
-## Cards
+```typescript title="Code with title"
+const a = 1;
+```
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
-</Cards>
+```mermaid
+graph TD;
+subgraph AA [Consumers]
+A[Mobile app];
+B[Web app];
+C[Node.js client];
+end
+subgraph BB [Services]
+E[REST API];
+F[GraphQL API];
+G[SOAP API];
+end
+Z[GraphQL API];
+A --> Z;
+B --> Z;
+C --> Z;
+Z --> E;
+Z --> F;
+Z --> G;
+```
+
+
+[inner link](./license.mdx)
