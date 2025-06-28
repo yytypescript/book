@@ -1,0 +1,747 @@
+---
+title: Markdown記法
+description: 本書で執筆可能なMarkdown記法の一覧です。
+---
+
+## 見出し
+
+```markdown
+# 見出し1
+## 見出し2
+### 見出し3
+#### 見出し4
+##### 見出し5
+###### 見出し6
+```
+
+<Callout type="warning">
+アクセシビリティのために、見出し2から始めてください。
+</Callout>
+
+### 見出しのアンカー [#custom-anchor]
+
+`[#<id>]`を付けると、見出しのアンカーをカスタマイズできます。
+
+```markdown
+### 見出しのアンカー [#custom-anchor]
+```
+
+### **見出し**~の~ _中_ <small>の</small>`Markdown`と目次
+
+見出しの中のMarkdownはそのまま目次にも反映されます。
+
+```markdown
+### **見出し**~の~ _中_ <small>の</small>`Markdown`と目次
+```
+
+<Callout type="warning">
+見出しをリンクにしないでください。`## [見出し](link){:markdown}`のように見出しに直接リンクをつけると、目次をクリックできなくなりUXが悪くなります。
+</Callout>
+
+### 目次に出さない見出し [!toc]
+
+`[!toc]`を付けると、目次に出力されません。
+
+```markdown
+### 目次に出さない見出し [!toc]
+```
+
+## 文字装飾
+
+```markdown
+Hello World, **Bold**, _Italic_, ~~Strike~~
+```
+
+Hello World, **Bold**, _Italic_, ~~Strike~~
+
+## コード
+
+`` ` ``で囲った部分はコードとして表示されます。
+
+```markdown
+`x`と`y`
+```
+
+`` ` ``をコードで表示する場合は、二重の``` `` ```とスペースで囲みます。
+
+```markdown
+JavaScriptの`` `string` ``はテンプレートリテラルです。
+```
+
+JavaScriptの`` `string` ``はテンプレートリテラルです。
+
+### コード + シンタックスハイライト
+
+コードの最後に`{:<language>}`のように書くと、シンタックスハイライトが適用されます。
+
+```markdown
+`print("Hello"){:python}`は`console.log("Hello"){:js}`と同じです。
+```
+
+`print("Hello"){:python}`は`console.log("Hello"){:js}`と同じです。
+
+## 引用
+
+```markdown
+> Quote here
+```
+
+> Quote here
+
+## リスト
+
+リストのアイテムは`-`を使用します。
+
+```markdown
+- アイテム1
+- アイテム2
+  - サブアイテム1
+  - サブアイテム2
+```
+
+## 番号付きリスト
+
+```markdown
+1. アイテム1
+2. アイテム2
+  1. サブアイテム1
+  2. サブアイテム2
+```
+
+## リンク
+
+```markdown
+[リンクテキスト](https://example.com)
+```
+
+[リンクテキスト](https://example.com)
+
+### ページカード
+
+トップレベルのリンクのうち、`./`もしくは`../`で始まり、`.mdx`で終わるものは、ページカードとして表示されます。[^@suin/auto-page-card]
+
+```markdown
+[Markdownについて](./markdown.mdx)
+```
+
+[Markdownについて](./markdown.mdx)
+
+<Callout type="warning">
+`[テキスト](リンク)`のうち、テキストの部分はページカードでは使われませんが、GitHubなどでMarkdownのプレビューを見たときに、リンクとして表示されるようリンクテキストは意味のあるものを指定してください。
+</Callout>
+
+## 画像
+
+画像は`/public`ディレクトリ内のパスを指定します。たとえば、`/public/image.png`は`![](/image.png)`のように記述します。
+
+```markdown
+![画像の説明](/image.png)
+```
+
+## テーブル
+
+```markdown
+| ヘッダー1 | ヘッダー2 |
+|-----------|-----------|
+| データ1   | データ2   |
+| データ3   | データ4   |
+```
+
+| ヘッダー1 | ヘッダー2 |
+|-----------|-----------|
+| データ1   | データ2   |
+| データ3   | データ4   |
+
+<Callout type="warning">
+テーブルを使う際は、モバイルで表示崩れしないか必ず確認してください。
+</Callout>
+
+## コードブロック
+
+````markdown
+```typescript
+const message = "Hello World";
+```
+````
+
+```typescript
+const message = "Hello World";
+```
+
+### コードブロック + ファイル名
+
+コードブロックのメタ部に`title="<filename>"`を指定すると、ファイル名が表示されます。
+
+````markdown
+```typescript title="hello-world.ts"
+const message = "Hello World";
+```
+````
+
+```typescript title="hello-world.ts"
+const message = "Hello World";
+```
+
+### コードブロック + 行番号
+
+コードブロックのメタ部に`lineNumbers`を指定すると、行番号が表示されます。
+
+````markdown
+```typescript lineNumbers
+function greet() {
+  return "Hello, World!";
+}
+```
+````
+
+```typescript lineNumbers
+function greet() {
+  return "Hello, World!";
+}
+```
+
+`lineNumbers=4`のように、行番号を4から始めることもできます。
+
+````markdown
+```typescript lineNumbers=4
+const message = greet();
+console.log(message);
+// Prints "Hello, World!"
+```
+````
+
+```typescript lineNumbers=4
+const message = greet();
+console.log(message);
+// Prints "Hello, World!"
+```
+
+### コードブロック + Diff
+
+`[!code --]`や`[!code ++]`を使うことで、コードブロック内の行のdiffのような追加や削除を示すことができます。[^@shikijs/transformers]
+
+{/* We can't use `markdown` for language indication here because it conflicts with the [!code] tags */}
+
+````text
+```typescript
+console.log("js"); // [!code --]
+console.log("ts"); // [!code ++]
+```
+````
+
+```typescript
+console.log("js"); // [!code --]
+console.log("ts"); // [!code ++]
+```
+
+### コードブロック + 行ハイライト
+
+`[!code highlight]`を使うことで、コードブロック内の特定の行をハイライトできます。[^@shikijs/transformers]
+
+{/* We can't use `markdown` for language indication here because it conflicts with the [!code] tags */}
+
+````text
+```typescript
+console.log("Not highlighted");
+console.log("Highlighted"); // [!code highlight]
+console.log("Not highlighted");
+```
+````
+
+```typescript
+console.log("Not highlighted");
+console.log("Highlighted"); // [!code highlight]
+console.log("Not highlighted");
+```
+
+### コードブロック + 単語ハイライト
+
+`[!code word:<word>]`を使うことで、コードブロック内の特定の単語をハイライトできます。[^@shikijs/transformers]<small>(次の例は`[\!code]`となっていますが、`[!code]`に読み替えてください。)</small>
+
+````text
+```typescript
+// [\!code word:Hello]
+const message = "Hello World";
+console.log(message); // prints Hello World
+```
+````
+
+```typescript
+// [!code word:Hello]
+const message = "Hello World";
+console.log(message); // prints Hello World
+```
+
+`[!code word:<word>:<lines>]`のように、特定の単語を特定の行数分ハイライトすることもできます。たとえば、`foo:2`はコメントの次の行と更にその次の行の`foo`をハイライトします。<small>(次の例は`[\!code]`となっていますが、`[!code]`に読み替えてください。)</small>
+
+````
+```typescript
+// [\!code word:foo:2]
+// foo bar
+// foo bar
+// foo bar
+// [\!code word:bar:2]
+// foo bar
+// foo bar
+// foo bar
+```
+````
+
+```typescript
+// [!code word:foo:2]
+// foo bar
+// foo bar
+// foo bar
+// [!code word:bar:2]
+// foo bar
+// foo bar
+// foo bar
+```
+
+## パッケージインストール
+
+コードブロックの言語に`package-install`を設定すると、npm、pnpm、yarn、bunのパッケージのインストールコマンドを生成できます。[^fumadocs-docgen]
+
+````markdown
+```package-install
+npm i vitest -D
+```
+````
+
+```package-install
+npm i vitest -D
+```
+
+## Mermaid
+
+`<Mermaid>{:xml}`コンポーネントを使うことで、Mermaidの図を表示できます。
+
+<Tabs items={["Flowchart", "Class", "Sequence"]}>
+  <Tab value="Flowchart">
+  ```mdx title="mdx"
+  <Mermaid
+    chart="
+  flowchart LR
+    Start --> End
+  "/>
+  ```
+  <Mermaid
+    chart="
+flowchart LR
+  Start --> End
+"/>
+  </Tab>
+  <Tab value="Class">
+  ```mdx title="mdx"
+  <Mermaid
+    chart="
+  classDiagram
+    class Object {
+      name: string
+      tell(message: Message) Reply
+    }
+  "/>
+  ```
+  <Mermaid
+    chart="
+classDiagram
+  class Object {
+    name: string
+    tell(message: Message) Reply
+  }
+"/>
+  </Tab>
+  <Tab value="Sequence">
+  ```mdx title="mdx"
+  <Mermaid
+    chart="
+  sequenceDiagram
+    Alice->>Bob: Hello Bob, how are you?
+    Bob-->>Alice: I am good thanks!
+  "/>
+  ```
+  <Mermaid
+    chart="
+sequenceDiagram
+  Alice->>Bob: Hello Bob, how are you?
+  Bob-->>Alice: I am good thanks!
+"/>
+  </Tab>
+</Tabs>
+
+## Twoslash
+
+コードブロックのメタ部に`twoslash`を指定すると、TypeScriptのコンパイラーから得られる情報を表示できます。[^twoslash]
+
+### Twoslash 型推論
+
+`^?`で指し示したシンボルの型を表示できます。
+
+````markdown title="Markdown"
+```typescript twoslash
+const value = [true, 1] as const;
+//    ^?
+type Key = keyof any;
+//   ^?
+```
+````
+
+```typescript twoslash title="Result"
+const value = [true, 1] as const;
+//    ^?
+type Key = keyof any;
+//   ^?
+```
+
+### Twoslash コンパイルエラー
+
+`@errors: <error code>`で期待するエラーメッセージを表示できます。
+
+````markdown title="Markdown"
+```typescript twoslash
+// @errors: 7006
+function fn(anyValue) {}
+```
+````
+
+```typescript twoslash title="Result"
+// @noImplicitAny: true
+// @errors: 7006
+function fn(anyValue) {}
+```
+
+### Twoslash コンパイルエラーの抑制
+
+`@noErrors`でコンパイルエラーを無視できます。
+
+````markdown title="Markdown"
+```typescript twoslash
+// @noErrors
+function fn(anyValue) {}
+//          ^?
+```
+````
+
+```typescript twoslash title="Result"
+// @noImplicitAny: true
+// @noErrors
+function fn(anyValue) {}
+//          ^?
+```
+
+### Twoslash コンパイラーオプションの指定
+
+`@<key>: <value>`でTypeScriptのコンパイラーオプションを指定できます。
+
+````markdown title="Markdown"
+```typescript twoslash
+// @noImplicitAny: false
+function fn(anyValue) {}
+//          ^?
+```
+````
+
+```typescript twoslash title="Result"
+// @noImplicitAny: false
+function fn(anyValue) {}
+//          ^?
+```
+
+<Callout type="info">
+デフォルトのコンパイラオプションは`tsconfig.twoslash.json`をご覧ください。
+</Callout>
+
+### Twoslash 実行結果の表示
+
+`@log`、`@warn`、`@error`で、実行結果を表示できます。
+
+````markdown title="Markdown"
+```typescript twoslash
+// @noErrors
+console.log(123);
+// @log: 123
+console.warn("メッセージ");
+// @warn: メッセージ
+const x = value;
+// @error: ReferenceError: value is not defined
+```
+````
+
+```typescript twoslash title="Result"
+// @noErrors
+console.log(123);
+// @log: 123
+console.warn("メッセージ");
+// @warn: メッセージ
+const x = value;
+// @error: ReferenceError: value is not defined
+```
+
+### Twoslash コード補完
+
+`^|`でコード補完を表示できます。
+
+````markdown title="Markdown"
+```typescript twoslash
+// @noErrors
+"Hello World".ma
+//              ^|
+```
+````
+
+```typescript twoslash title="Result"
+// @noErrors
+"Hello World".ma
+//              ^|
+```
+
+### Twoslash トランスパイル結果
+
+`@showEmit`でトランスパイル結果を表示できます。
+
+````markdown title="Markdown"
+```typescript twoslash
+// @showEmit
+export type Type = string | number;
+export function fn<T extends Type>(value: T): T {
+  return value;
+}
+```
+````
+
+```typescript twoslash title="Result"
+// @showEmit
+export type Type = string | number;
+export function fn<T extends Type>(value: T): T {
+  return value;
+}
+```
+
+### Twoslash 型定義ファイルの表示
+
+`@showEmit`、`@declaration: true`、`@showEmittedFile: index.d.ts`をセットで指定すると、型定義ファイルへのトランスパイル結果が表示できます。
+
+````markdown title="Markdown"
+```typescript twoslash
+// @showEmit
+// @declaration: true
+// @showEmittedFile: index.d.ts
+export type Type = string | number;
+export function fn<T extends Type>(value: T): T {
+  return value;
+}
+```
+````
+
+```typescript twoslash title="Result"
+// @showEmit
+// @declaration: true
+// @showEmittedFile: index.d.ts
+export type Type = string | number;
+export function fn<T extends Type>(value: T): T {
+  return value;
+}
+```
+
+### Twoslash 単語ハイライト
+
+2つ以上連続する`^`で単語をハイライトできます。
+
+````markdown title="Markdown"
+```typescript twoslash
+const message = "Hello World";
+//               ^^^^^
+console.log(message);
+```
+````
+
+```typescript twoslash title="Result"
+const message = "Hello World";
+//               ^^^^^
+console.log(message);
+```
+
+<Callout type="info">
+`^`をコメントとして使いたい場合は、`^`に続けてスペース以外の文字を書いてください。`^^^ text`のように間にスペースがあるとハイライトになるので注意してください。
+
+````markdown title="Markdown"
+```typescript twoslash
+1234567890;
+//     ^^^これはコメントです
+1234567890;
+//     ^^^ これはハイライトです
+```
+````
+
+```typescript twoslash title="Result"
+1234567890;
+//     ^^^これはコメントです
+1234567890;
+//     ^^^ これはハイライトです
+```
+</Callout>
+
+### Twoslash 割愛
+
+`---cut---`を使うと、それ以前のコードを非表示にできます。
+
+````markdown title="Markdown"
+```typescript twoslash
+"line 1";
+// ---cut---
+"line 3";
+```
+````
+
+```typescript twoslash title="Result"
+"line 1";
+// ---cut---
+"line 3";
+```
+
+`---cut-after---`を使うと、それ以降のコードを非表示にできます。
+
+````markdown title="Markdown"
+```typescript twoslash
+"line 1";
+// ---cut-after---
+"line 3";
+```
+````
+
+```typescript twoslash title="Result"
+"line 1";
+// ---cut-after---
+"line 3";
+```
+
+## Callout
+
+`<Callout>{:xml}`コンポーネントを使うと、情報を強調できます。
+
+```mdx
+<Callout>Default</Callout>
+<Callout type="info">Info</Callout>
+<Callout type="warning">Warning</Callout>
+<Callout type="error">Error</Callout>
+<Callout type="success">Success</Callout>
+<Callout title="Title">Body</Callout>
+```
+
+<Callout>Default</Callout>
+<Callout type="info">Info</Callout>
+<Callout type="warning">Warning</Callout>
+<Callout type="error">Error</Callout>
+<Callout type="success">Success</Callout>
+<Callout title="Title">Body</Callout>
+
+## Steps
+
+`<Steps>{:xml}`コンポーネントを使うと、ステップバイステップのガイドを作成できます。
+
+```mdx
+import { Step, Steps } from "fumadocs-ui/components/steps";
+
+<Steps>
+  <Step>
+  **Plan**
+
+  いいことを思いつく。
+  </Step>
+  <Step>
+  **Do**
+  
+  いいコードを書いてデプロイ。
+  </Step>
+  <Step>
+  **Check**
+
+  反応を見る。
+  </Step>
+  <Step>
+  **Action**
+
+  もっと良くする。
+  </Step>
+</Steps>
+```
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+
+<Steps>
+  <Step>
+  **Plan**
+
+  いいことを思いつく。
+  </Step>
+  <Step>
+  **Do**
+  
+  いいコードを書いてデプロイ。
+  </Step>
+  <Step>
+  **Check**
+
+  反応を見る。
+  </Step>
+  <Step>
+  **Action**
+
+  もっと良くする。
+  </Step>
+</Steps>
+
+https://fumadocs.dev/docs/ui/components/steps
+
+## Files
+
+`<Files>{:xml}`コンポーネントを使うと、ファイル構造を表示できます。
+
+```mdx
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+<Files>
+  <Folder name="app" defaultOpen>
+    <File name="layout.tsx" />
+    <File name="page.tsx" />
+    <File name="global.css" />
+  </Folder>
+  <Folder name="components">
+    <File name="button.tsx" />
+    <File name="tabs.tsx" />
+    <File name="dialog.tsx" />
+  </Folder>
+  <File name="package.json" />
+</Files>
+```
+
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+<Files>
+  <Folder name="app" defaultOpen>
+    <File name="layout.tsx" />
+    <File name="page.tsx" />
+    <File name="global.css" />
+  </Folder>
+  <Folder name="components">
+    <File name="button.tsx" />
+    <File name="tabs.tsx" />
+    <File name="dialog.tsx" />
+  </Folder>
+  <File name="package.json" />
+</Files>
+
+https://fumadocs.dev/docs/ui/components/files
+
+## コメント
+
+コメントは`{/* コメント */}{:mdx}`のように書きます。これはMDXのコメントで、HTMLのコメント`<!-- コメント -->{:html}`は使用できません。
+
+```mdx
+{/* コメント */}
+```
+
+[^@suin/auto-page-card]: この機能は[@suin/auto-page-card](https://github.com/suin/auto-page-card)によって実現されています。
+[^@shikijs/transformers]: この機能は[@shikijs/transformers](https://shiki.style/packages/transformers)によって実現されています。
+[^fumadocs-docgen]: この機能は[fumadocs-docgen](https://fumadocs.dev/docs/headless/mdx/install)によって実装されています。
+[^twoslash]: この機能は[fumadocs-twoslash](https://fumadocs.dev/docs/ui/markdown/twoslash)、[@shikijs/twoslash](https://shiki.style/packages/twoslash)、[twoslash](https://github.com/twoslashes/twoslash)の組み合わせによって実現されています。

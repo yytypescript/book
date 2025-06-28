@@ -28,6 +28,10 @@ const config: NextConfig = {
         source: "/:path*.mdx",
         destination: "/llms.mdx/:path*",
       },
+      {
+        source: "/:path*.ast.json",
+        destination: "/ast.json/:path*",
+      },
     ];
   },
   reactStrictMode: true,
