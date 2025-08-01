@@ -121,7 +121,6 @@ const array2 = [1, "2", 3] satisfies (string | number)[];
 タプル型の場合は個々に型の絞り込みを行います。
 
 ```ts twoslash
-// prettier-ignore
 const tuple1: [string | number, string | number, string | number] = [1, "2", 3];
 //    ^?
 const tuple2 = [1, "2", 3] satisfies [
@@ -135,7 +134,6 @@ const tuple2 = [1, "2", 3] satisfies [
 オブジェクトのプロパティにあるユニオン型にも効果があります。
 
 ```ts twoslash
-// prettier-ignore
 type SuccessResponse = {
   success: true;
   data: object;
@@ -165,7 +163,6 @@ const res2 = {
 これは型`T`を満たしていることを検証した上で絞り込みを行い、さらにリテラル型にしてreadonlyにするという`as const`と`satisfies`の機能をあわせ持っています。
 
 ```ts twoslash
-// prettier-ignore
 type SuccessResponse = {
   success: true;
   data: object;
