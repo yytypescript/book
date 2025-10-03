@@ -46,9 +46,10 @@ new Person("Alice");
 
 TypeScriptでは、コンストラクタを非同期化することはできません。次のような書きかたをすることはできません。
 
+<!--prettier-ignore-->
 ```ts
 class Person {
-  constructor(name: string) {
+  async constructor(name: string) {
     // ...
   }
 }
