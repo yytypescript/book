@@ -100,6 +100,44 @@ mapping modifier(`-`)は他にもオプション修飾子の前につけて`-?`�
 
 [Required&lt;T>](utility-types/required.md)
 
+## インデックスアクセスの注意点
+
+`{ [K in string]: ... }`のようにキーに`string`など、リテラル型でない型を指定した場合は、インデックスアクセスに注意してください。存在しないキーにアクセスしても、キーが必ずあるかのようにあつかわれるためです。
+
+次の例のように、`{ [K in string]: number }`型の`dict`オブジェクトには、`a`キーはあるのに対し、`b`キーはありません。しかし、`dict.b`は`number`として推論されます。
+
+```ts twoslash
+// @noUncheckedIndexedAccess: false
+const dict: { [K in string]: number } = { a: 1 };
+dict.b;
+//   ^?
+```
+
+実際の`dict.b`の値は`undefined`になるので、もしも`dict.b`のメソッドを呼び出すと実行時エラーになります。
+
+```ts twoslash
+const dict: { [K in string]: number } = { a: 1 };
+console.log(dict.b);
+// @log: undefined
+dict.b.toFixed(); // 実行時エラーが発生する
+// @noUncheckedIndexedAccess: false
+```
+
+このような挙動は、型チェックで実行時エラーを減らしたいと考える開発者にとっては不都合です。
+
+この問題に対処するため、TypeScriptにはコンパイラオプション`noUncheckedIndexedAccess`が用意されています。これを有効にすると、インデックスアクセスの結果の型が`T | undefined`になります。つまり、`undefined`の可能性を考慮した型になるわけです。そのため、`dict.b`のメソッドを呼び出すコードはコンパイルエラーになり、型チェックの恩恵が得られます。
+
+```ts twoslash
+// @errors: 18048
+// @noUncheckedIndexedAccess: true
+const dict: { [K in string]: number } = { a: 1 };
+dict.b;
+//   ^?
+dict.b.toFixed();
+```
+
+[noUncheckedIndexedAccess](../tsconfig/nouncheckedindexedaccess.md)
+
 ## Mapped Typesには追加のプロパティが書けない
 
 Mapped Typesは追加のプロパティが定義できません。ここは、[インデックス型]とは異なる点です。
