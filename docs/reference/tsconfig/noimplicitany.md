@@ -55,7 +55,7 @@ class Bar {
 
 ## 関数の戻り値の型
 
-関数の戻り値の型は型注釈がなくても、TypeScriptが型推論可能なため暗黙のanyにはなりません。したがって、型注釈の無い戻り値は、`noImplicitAny`を有効にしても警告は出ません。
+関数の戻り値は、多くの場合は推論されるため暗黙の`any`にはなりません。したがって、戻り値に型注釈が無くても、`noImplicitAny`では警告されません（`noImplicitAny`の対象は「暗黙のany」だけです）。
 
 ```ts twoslash
 function foo() {
@@ -63,8 +63,6 @@ function foo() {
   return 1;
 }
 ```
-
-戻り値の型注釈を必須にしたい場合は、[`noImplicitReturns`](./noimplicitreturns.md)を有効にしてください。
 
 <PostILearned>
 
