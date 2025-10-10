@@ -193,6 +193,7 @@ module.exports = {
             "reference/statements/exception",
             "reference/statements/never",
             "reference/statements/control-flow-analysis-and-type-guard",
+            "reference/statements/switch-true-narrowing",
             "reference/statements/unknown",
             "reference/statements/any-vs-unknown",
           ],
