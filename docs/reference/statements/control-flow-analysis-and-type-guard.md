@@ -125,11 +125,11 @@ function getMonth(date: string | Date) {
 interface Wizard {
   castMagic(): void;
 }
-interface SwordMan {
+interface Swordsman {
   slashSword(): void;
 }
 
-function attack(player: Wizard | SwordMan) {
+function attack(player: Wizard | Swordsman) {
   if ("castMagic" in player) {
     player.castMagic();
   } else {
@@ -147,7 +147,7 @@ function isWizard(player: Player): player is Wizard {
   return "castMagic" in player;
 }
 
-function attack(player: Wizard | SwordMan) {
+function attack(player: Wizard | Swordsman) {
   if (isWizard(player)) {
     player.castMagic();
   } else {
