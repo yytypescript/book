@@ -10,18 +10,18 @@ type PersonKey = keyof Person;
 //    ^?
 ```
 
-2つ以上のプロパティがあるオブジェクトの型に`keyof`を使った場合は、すべてのプロパティ名がユニオン型で返されます。
+2つ以上のプロパティがあるオブジェクトの型に`keyof`を使うと、各プロパティ名の文字列リテラル型が`|`で結合されたユニオン型が返されます。
 
 ```ts twoslash
-// @noErrors
 type Book = {
   title: string;
   price: number;
   rating: number;
 };
 type BookKey = keyof Book;
+//   ^?
 // 上は次と同じ意味になる
-type BookKey = "title" | "price" | "rating";
+// type BookKey = "title" | "price" | "rating";
 ```
 
 インデックス型に`keyof`を使うと、インデックスキーの型が返ります。
