@@ -4,7 +4,7 @@ sidebar_label: switch (true) による型の絞り込み
 
 # `switch (true)` による型の絞り込み (`switch (true)` Narrowing)
 
-一般的な条件分岐の方法として `switch` 文があります。`switch`文は`case`節の値によって異なるコードを実行します。通常、`case`節には文字列や数値ですが、TypeScript では `switch (true)` を使用して、特定の条件に基づいて型を絞り込むことができます。
+一般的な条件分岐の方法として`switch`文があります。`switch`文は`case`節の値によって異なるコードを実行します。通常、`case`節には文字列や数値を指定しますが、TypeScript では`switch (true)`を使用すると、各`case`節で真偽値を返す式を評価できます。TypeScriptのコントロールフロー解析により、`true`と評価された`case`ブロック内では、その条件に基づいて型が自動的に絞り込まれます。
 
 ```ts twoslash
 function handleValue(value: string | number | boolean): void {
@@ -24,7 +24,7 @@ function handleValue(value: string | number | boolean): void {
 }
 ```
 
-型の絞り込みであれば`instanceof`に対しても使用することができます。次の例の`UserError`と`SystemError`はどちらも`Error`を継承したクラスであり、独自に`user`と`system`プロパティを持っています。`switch (true)`を使用して、どちらのエラーかを判別し、それぞれのプロパティにアクセスしています。
+型の絞り込みであれば`instanceof`に対しても同様に使用することができます。次の例の`UserError`と`SystemError`は独自に`user`と`system`プロパティを持っているクラスです。`switch (true)`を使用して、どちらのエラーかを判別し、それぞれのプロパティにアクセスしています。
 
 ```ts twoslash
 class UserError extends Error {
@@ -46,7 +46,7 @@ class SystemError extends Error {
 }
 
 // ---cut---
-function handleError(error: Error): void {
+function handleError(error: UserError | SystemError): void {
   switch (true) {
     case error instanceof UserError:
       console.log(`User error for ${error.user}: ${error.message}`);
@@ -60,48 +60,38 @@ function handleError(error: Error): void {
 }
 ```
 
-独自のユーザー定義型ガードを使用して、`switch (true)`の条件をより明確にすることもできます。
+独自のユーザー定義型ガードを`switch (true)`に使用することもできます。
 
 ```ts twoslash
-type Admin = {
-  type: "ADMIN";
-  level: number;
-};
-type Organizer = {
-  type: "ORGANIZER";
-  validUntil: Date;
-};
+type Panda = string;
+type Broccoli = number;
 type User = {
-  type: "USER";
   name: string;
 };
-type Account = Admin | Organizer | User;
 
-const isAdmin = (account: Account): account is Admin => {
-  return account.type === "ADMIN";
+const isPanda = (value: unknown): value is Panda => {
+  return true;
 };
-const isOrganizer = (account: Account): account is Organizer => {
-  return account.type === "ORGANIZER";
+const isBroccoli = (value: unknown): value is Broccoli => {
+  return true;
 };
-const isUser = (account: Account): account is User => {
-  return account.type === "USER";
+const isUser = (value: unknown): value is User => {
+  return true;
 };
 
-function handleAccount(account: Account): void {
+// ---cut---
+
+function handleValue(value: Panda | Broccoli | User): void {
   switch (true) {
-    case isAdmin(account):
-      console.log(account.level);
+    case isPanda(value):
+      console.log("I am a panda");
       break;
-    case isOrganizer(account):
-      console.log(account.validUntil);
+    case isBroccoli(value):
+      console.log("I am broccoli");
       break;
-    case isUser(account):
-      console.log(account.name);
+    case isUser(value):
+      console.log(value.name);
       break;
   }
 }
 ```
-
-もっとも、この例は判別可能なユニオン型としても書けるので、あえて`switch (true)`を使う必要はありません。
-
-[判別可能なユニオン型](../values-types-variables/discriminated-union.md)
