@@ -320,7 +320,7 @@ const element = <div>{/* This is a comment */}</div>;
 
 まず初めに、型変数`T`を用いたコンポーネントを定義します。ここでは`ItemType`という名前で型を作り、それがプロパティ`prop`を介して型`T`を受け取るように設計します。
 
-```tsx twoslash
+```tsx
 type ItemType<T> = {
   prop: T;
 };

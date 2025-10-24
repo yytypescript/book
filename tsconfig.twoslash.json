@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "es2016",
+    "target": "esnext",
     "allowJs": true,
     "strict": true,
     "types": ["node", "css-modules"],

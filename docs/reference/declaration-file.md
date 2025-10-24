@@ -162,7 +162,7 @@ declare namespace jest {
 
 `Element`という型をライブラリの型として定義してライブラリ利用者が参照できるようにしたいと考えみます。この型はTypeScriptの`lib.dom.d.ts`にすでに定義されているため、そのまま同じグローバルな空間に定義をすると名前が衝突してしまいます。
 
-```ts title="node_modules/typescript/lib/lib.dom.d.ts" twoslash
+```ts title="node_modules/typescript/lib/lib.dom.d.ts"
 interface Element
   extends Node,
     ARIAMixin,
