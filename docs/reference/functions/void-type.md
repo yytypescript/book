@@ -35,24 +35,19 @@ function fn(): void {
 
 void型の代わりに、undefined型を関数の戻り値の型注釈に用いる書き方もできます。ただし、これは一般的な書き方ではありません。
 
-### 戻り値がundefinedのときはreturnが必須
+### undefined型を用いるべきときとそうでないとき
 
-戻り値型がundefined型の場合は、`return`が無いとコンパイルエラーになります。この点はvoid型と異なる点です。
-
-```ts twoslash
-// @errors: 2355
-function fn(): undefined {}
-```
-
-このコンパイルエラーは、`return`を加えることで解消しますが、戻り値を返さないことを意図するのであれば、`void`型を使うほうがよいです。
+戻り値型に`undefined`型を注釈することもできます。型の扱いとしては`void`との違いはありません。しがって、次のコードはコンパイルエラーになりません。
 
 ```ts twoslash
 function fn(): undefined {
-  return;
+  // 戻り値のない関数
 }
 ```
 
-戻り値が`undefined`を含みうる関数の場合は、undefined型を含んだユニオン型を使うのが一般的です。
+しかし、戻り値がない関数を意図している場合は、`void`を使うほうが自然です。
+
+一方で戻り値が`undefined`を含みうる関数の場合は、undefined型を含んだユニオン型を使うのが一般的です。
 
 ```ts twoslash
 function getIfExists(numbers: number[], search: number): number | undefined {
