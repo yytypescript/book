@@ -933,7 +933,7 @@ module.exports = {
 
 `parser`で設定したパーサーを使って、ESLintはJavaScriptやTypeScriptの構文を解析します。上の例では、TypeScriptパーサーを指定しています。この指定がないと、ESLintはTypeScriptを解釈できず、エラーが発生します。
 
-TypeScriptはJavaScriptの構文を拡張した言語です。なので、このパーサーさえ入れておけば、TypeScriptに限らずJavaScriptのこのパーサーひとつで対応できます。要するに、このパーサーひとつで、TypeScriptとJavaScriptのファイルどちらもリントできるようになります。
+TypeScriptはJavaScriptの構文を拡張した言語です。なので、このパーサーさえ入れておけば、TypeScriptに限らずJavaScriptもこのパーサーひとつで対応できます。要するに、このパーサーひとつで、TypeScriptとJavaScriptのファイルどちらもリントできるようになります。
 
 #### `plugins`
 
