@@ -55,7 +55,7 @@ void change(int &n) {  // 仮引数nは値型変数の参照渡し
 int main() {
     int a = 1;  // 値型変数
     change(a);  // 実引数は値型変数a
-    printf("%d\n", a); //=> 2  // 仮引数への代入が実引数に影響する
+    printf("%d\n", a); //=> 2
 }
 ```
 
