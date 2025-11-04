@@ -41,6 +41,7 @@ int main() {
     int a = 1;              // 値型変数
     change(a);              // 実引数は値型変数a
     std::println("{}", a);  //=> 1
+    return 0;
 }
 ```
 
@@ -61,6 +62,7 @@ int main() {
     int a = 1;              // 値型変数
     change(a);              // 実引数は値型変数a
     std::println("{}", a);  //=> 2
+    return 0;
 }
 ```
 
