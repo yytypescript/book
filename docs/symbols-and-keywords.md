@@ -1,40 +1,40 @@
-# 索引:記号とキーワード
+# Chỉ mục: Ký hiệu và từ khóa
 
-JavaScriptやTypeScriptのコードには`?.`のような記号や`as`のようなキーワードが使われます。こういった記号やキーワードはGoogleで検索しづらく、意味を調べるのは難しいものです。
+Trong code JavaScript và TypeScript có sử dụng các ký hiệu như `?.` và từ khóa như `as`. Các ký hiệu và từ khóa như vậy rất khó tìm kiếm trên Google, việc tra cứu ý nghĩa của chúng không hề dễ dàng.
 
-この索引は、JavaScriptとTypeScriptの記号やキーワードから、その名前や意味を調べられるようにするためのものです。コードを読んでいて未知の記号やキーワードに出くわしたら、その意味や使い方を調べる手がかりにしてください。
+Chỉ mục này giúp bạn tra cứu tên và ý nghĩa của các ký hiệu và từ khóa trong JavaScript và TypeScript. Khi đọc code mà gặp phải ký hiệu hoặc từ khóa không biết, hãy sử dụng đây làm manh mối để tra cứu ý nghĩa và cách sử dụng.
 
-ここで扱う記号とキーワードには、JavaScript由来のもの、つまり、JavaScriptとTypeScriptに共通して使えるものと、TypeScriptでのみ使えるものを併記しています。JavaScript由来のものには![js]のマークを、TypeScript固有のものには![ts]マークを表示しています。
+Các ký hiệu và từ khóa được đề cập ở đây bao gồm cả những thứ có nguồn gốc từ JavaScript (có thể sử dụng chung cho cả JavaScript và TypeScript) và những thứ chỉ có thể sử dụng trong TypeScript. Những thứ có nguồn gốc từ JavaScript được đánh dấu ![js], những thứ riêng của TypeScript được đánh dấu ![ts].
 
 <!--
-:::編集者ノート:::
-記号はASCIIコード順です。
-キーワードはアルファベット順です。
+:::Ghi chú cho người biên tập:::
+Ký hiệu được sắp xếp theo thứ tự ASCII code.
+Từ khóa được sắp xếp theo thứ tự alphabet.
 -->
 
 [js]: /img/js.svg
 [ts]: /img/ts.svg
 
-## 記号
+## Ký hiệu
 
-### `!` 論理否定演算子 (logical not operator) ![js]
+### `!` Toán tử phủ định logic (logical not operator) ![js]
 
-真値と偽値を反転します。
+Đảo ngược giá trị truthy và falsy.
 
-### `!` 非Nullアサーション (non-null assertion operator) ![ts]
+### `!` Non-null assertion (non-null assertion operator) ![ts]
 
-値がnullやundefinedでないことを宣言し、コンパイラーに値を非Nullとして解釈させます。
+Khai báo rằng giá trị không phải null hoặc undefined, yêu cầu compiler hiểu giá trị là non-null.
 
 ```ts twoslash
 function firstChar(text: string | undefined) {
-  // コンパイルエラーにならない
+  // Không gây lỗi compile
   return text!.charAt(0);
 }
 ```
 
-### `!` 明確な割り当てアサーション演算子 (definite assignment assertion operator) ![ts]
+### `!` Toán tử definite assignment assertion (definite assignment assertion operator) ![ts]
 
-クラスのプロパティが型アノテーションで示された型でセットされていることをコンパイラーに伝える記号です。
+Ký hiệu để báo cho compiler biết rằng property của class đã được gán giá trị đúng kiểu như được chỉ định trong type annotation.
 
 ```ts twoslash
 class Example {
@@ -42,7 +42,7 @@ class Example {
 }
 ```
 
-または、変数の値が型アノテーションで示された型でセットされていることをコンパイラーに伝える記号です。
+Hoặc là ký hiệu để báo cho compiler biết rằng biến đã được gán giá trị đúng kiểu như được chỉ định trong type annotation.
 
 ```ts twoslash
 let numbers!: number[];
@@ -52,33 +52,33 @@ let numbers!: number[];
 
 ### `!!` Double Bang ![js]
 
-double bangはJavaScriptで定義されている演算子ではなく、論理否定演算子を2つ連続したイディオムです。値がtruthyかを求めるときに使われます。
+Double bang không phải là toán tử được định nghĩa trong JavaScript, mà là idiom sử dụng hai toán tử phủ định logic liên tiếp. Được sử dụng để kiểm tra xem giá trị có truthy hay không.
 
-### `!=` 不等価演算子 (inequality operator) ![js]
+### `!=` Toán tử bất đẳng (inequality operator) ![js]
 
-左の値と右の値が異なるか判定します。型が異なる場合は型変換されて比較されます。
+Kiểm tra xem giá trị bên trái và bên phải có khác nhau không. Nếu kiểu khác nhau sẽ được chuyển đổi kiểu rồi so sánh.
 
 ```js twoslash
 "1" != 1;
 // @log: false
 ```
 
-### `!==` 厳密不等価演算子 (strict inequality operator) ![js]
+### `!==` Toán tử bất đẳng nghiêm ngặt (strict inequality operator) ![js]
 
-型を含めて左の値と右の値が異なるか判定します。
+Kiểm tra xem giá trị bên trái và bên phải có khác nhau không, bao gồm cả kiểu.
 
 ```js twoslash
 1 !== "1";
 // @log: true
 ```
 
-### `"` 文字列リテラル (string literal) ![js]
+### `"` String literal (string literal) ![js]
 
-`"foo"`のように文字列リテラルの開始と終了に使われる記号です。
+Ký hiệu được sử dụng để bắt đầu và kết thúc string literal như `"foo"`.
 
-### `#` プライベートプロパティ (private property) ![js]
+### `#` Private property (private property) ![js]
 
-クラスのプロパティのうち`#`で始まるプロパティはプライベートになります。
+Trong các property của class, những property bắt đầu bằng `#` sẽ là private.
 
 ```js twoslash
 class ExampleClass {
@@ -89,13 +89,13 @@ class ExampleClass {
 }
 ```
 
-### `$` ドル変数 (dollar variable) ![js]
+### `$` Biến dollar (dollar variable) ![js]
 
-慣習的にjQueryなどのライブラリで変数として使われることがあります。変数名として`$`が使われる場合は、JavaScriptとしては変数以上の特別な意味はありません。
+Theo quy ước, đôi khi được sử dụng làm biến trong các thư viện như jQuery. Khi `$` được sử dụng làm tên biến, trong JavaScript nó không có ý nghĩa đặc biệt nào ngoài việc là một biến.
 
-### `$` 文字列中の変数展開 (placeholder) ![js]
+### `$` Placeholder trong string (placeholder) ![js]
 
-テンプレートリテラル内で変数を展開するときに用いられる記号です。
+Ký hiệu được sử dụng để mở rộng biến trong template literal.
 
 ```js twoslash
 const name = "John";
@@ -103,22 +103,22 @@ console.log(`Hi, ${name}.`);
 // @log: "Hi, John."
 ```
 
-### `%` 剰余演算子 (reminder operator) ![js]
+### `%` Toán tử chia lấy dư (reminder operator) ![js]
 
-左の値を右の値で割った余りを計算します。
+Tính phần dư khi chia giá trị bên trái cho giá trị bên phải.
 
 ```js twoslash
 12 % 5;
 // @log: 2
 ```
 
-### `%=` 剰余代入 (reminder assignment) ![js]
+### `%=` Gán chia lấy dư (reminder assignment) ![js]
 
-左の変数の値に右の値で割り算した余りを左の変数に割り当てます。
+Gán phần dư khi chia giá trị của biến bên trái cho giá trị bên phải vào biến bên trái.
 
-### `&` ビット論理積 (bitwise and) ![js]
+### `&` Bitwise AND (bitwise and) ![js]
 
-左の値と右の値で共にビットが1である位置のビットを1に します。
+Đặt bit thành 1 ở những vị trí mà cả giá trị bên trái và bên phải đều có bit là 1.
 
 ```js twoslash
 const a = 1;
@@ -127,12 +127,12 @@ const b = 5;
 // @log: 00000101
 console.log(a & b);
 // @log: 00000001
-// 出力: 1
+// Output: 1
 ```
 
-### `&` インターセクション型 (intersection type) ![ts]
+### `&` Intersection type (intersection type) ![ts]
 
-複数の型を組み合わせたインターセクション型を定義します。
+Định nghĩa intersection type kết hợp nhiều kiểu.
 
 ```ts twoslash
 interface Swordsman {
@@ -144,11 +144,11 @@ interface Wizard {
 type MagicalSwordsman = Swordsman & Wizard;
 ```
 
-[インターセクション型 (intersection type)](reference/values-types-variables/intersection.md)
+[Intersection type](reference/values-types-variables/intersection.md)
 
-### `&=` ビット論理積代入 (bitwise and assignment) ![js]
+### `&=` Gán bitwise AND (bitwise and assignment) ![js]
 
-左の変数の値と右の値で共にビットが1である位置のビットを1にした結果を左の変数に割り当てます。
+Gán kết quả bitwise AND của giá trị biến bên trái và giá trị bên phải vào biến bên trái.
 
 ```js twoslash
 let a = 1;
@@ -158,14 +158,14 @@ const b = 5;
 a &= b;
 console.log(a);
 // @log: 00000001
-// 出力: 1
+// Output: 1
 ```
 
-### `&&` 論理積 (logical and) ![js]
+### `&&` Toán tử AND logic (logical and) ![js]
 
-左の値がtruthyな場合は右の値を返します。そうでないときは左の値を返します。
+Nếu giá trị bên trái là truthy thì trả về giá trị bên phải. Nếu không thì trả về giá trị bên trái.
 
-特にboolean値が与えられた場合は、双方とも`true`のときに`true`を返し、そうでないときに`false`を返します。
+Đặc biệt khi cả hai là giá trị boolean, trả về `true` nếu cả hai đều `true`, ngược lại trả về `false`.
 
 ```js twoslash
 console.log(true && true);
@@ -177,9 +177,9 @@ console.log(1 && "");
 // @log: ""
 ```
 
-### `&&=` 論理積代入 (logical and assignment) ![js]
+### `&&=` Gán AND logic (logical and assignment) ![js]
 
-左の変数と右の値の`&&`論理積の結果を左の変数に割り当てます。
+Gán kết quả AND logic `&&` của biến bên trái và giá trị bên phải vào biến bên trái.
 
 ```js twoslash
 let a = true;
@@ -190,13 +190,13 @@ console.log(a);
 // @log: 1
 ```
 
-### `'` 文字列リテラル (string literal) ![js]
+### `'` String literal (string literal) ![js]
 
-`'foo'`のように文字列リテラルの開始と終了に使われる記号です。
+Ký hiệu được sử dụng để bắt đầu và kết thúc string literal như `'foo'`.
 
-### `()` 即時実行関数の一部 (IIFE: immediately invoked function expression) ![js]
+### `()` Một phần của hàm thực thi ngay lập tức (IIFE: immediately invoked function expression) ![js]
 
-定義されるとすぐ実行される即時実行関数式(IIFE; Immediately Invoked Function Expression)の一部に用いられる書き方です。即時実行関数式そのものがデザインパターンで、その一部である`()`は関数呼び出しのカッコであり、JavaScriptの特別な演算子や構文というわけではありません。即時実行関数式は即時関数と呼ばれることがあります。
+Cách viết được sử dụng như một phần của IIFE (Immediately Invoked Function Expression) - hàm được thực thi ngay khi định nghĩa. Bản thân IIFE là một design pattern, và `()` trong đó là dấu ngoặc gọi hàm, không phải là toán tử hay cú pháp đặc biệt của JavaScript. IIFE đôi khi được gọi là "hàm thực thi ngay lập tức".
 
 ```js
 (function () {})();
@@ -207,13 +207,13 @@ console.log(a);
 //        ^^
 ```
 
-### `*` 乗算演算子 (multiplication operator) ![js]
+### `*` Toán tử nhân (multiplication operator) ![js]
 
-左の値と右の値を掛け算します。
+Nhân giá trị bên trái với giá trị bên phải.
 
-### `*` ジェネレーター関数の宣言 (generator) ![js]
+### `*` Khai báo generator function (generator) ![js]
 
-`Generator`オブジェクトを返すジェネレーター関数を宣言するときに用いられる記号です。
+Ký hiệu được sử dụng khi khai báo generator function trả về object `Generator`.
 
 ```js twoslash
 function* numberGenerator() {
@@ -223,9 +223,9 @@ function* numberGenerator() {
 }
 ```
 
-### `*` yield\*式 (yield) ![js]
+### `*` Biểu thức yield\* (yield) ![js]
 
-別のジェネレーターに移譲する式を書くときに用いられる記号です。
+Ký hiệu được sử dụng khi viết biểu thức ủy thác cho generator khác.
 
 ```js twoslash
 function* func1() {
@@ -234,49 +234,49 @@ function* func1() {
 
 function* func2() {
   yield* func1();
-  //   ^ここ
+  //   ^Ở đây
 }
 ```
 
-### `*=` 乗算代入 (multiplication assignment) ![js]
+### `*=` Gán nhân (multiplication assignment) ![js]
 
-左の変数の値と右の値を掛け算した結果を左の変数に割り当てます。
+Gán kết quả nhân giá trị của biến bên trái với giá trị bên phải vào biến bên trái.
 
-### `**` べき乗演算子 (exponentiation) ![js]
+### `**` Toán tử lũy thừa (exponentiation) ![js]
 
-左の値を右の値でべき乗します。
+Lũy thừa giá trị bên trái với giá trị bên phải.
 
 ```js twoslash
 2 ** 3;
 // @log: 8
 ```
 
-### `**=` べき乗代入 (exponentiation assignment) ![js]
+### `**=` Gán lũy thừa (exponentiation assignment) ![js]
 
-左の変数の値を右の値でべき乗した結果を左の変数に割り当てます。
+Gán kết quả lũy thừa giá trị của biến bên trái với giá trị bên phải vào biến bên trái.
 
-### `+` 単項正値演算子 ![js]
+### `+` Toán tử dương đơn nguyên ![js]
 
-number型に変換します。
+Chuyển đổi thành kiểu number.
 
 ```js twoslash
 +"1";
 // @log: 1
 ```
 
-### `+` 加算演算子 (addition operator) ![js]
+### `+` Toán tử cộng (addition operator) ![js]
 
-2つの値を足し算します。
+Cộng hai giá trị.
 
-### `+` 文字列結合演算子 (concatenation operator) ![js]
+### `+` Toán tử nối string (concatenation operator) ![js]
 
-2つの文字列を結合します。
+Nối hai string.
 
-### `+` 修飾子の付加 ![ts]
+### `+` Thêm modifier ![ts]
 
-`readonly`や`?`などの修飾子を追加します。
+Thêm các modifier như `readonly` hoặc `?`.
 
-何も指定しない場合は暗黙的に`+`が付与されるので`+`を実際に利用する機会はおそらくありません。
+Nếu không chỉ định gì thì `+` sẽ được thêm ngầm định, nên có lẽ không có cơ hội thực sự sử dụng `+`.
 
 ```ts twoslash
 type MyPartial<T> = {
@@ -288,13 +288,13 @@ type MyReadonly<T> = {
 };
 ```
 
-### `+=` 加算代入 (addition assignment) ![js]
+### `+=` Gán cộng (addition assignment) ![js]
 
-左の変数の値とに右の値を足し算した結果を左の変数に割り当てます。
+Gán kết quả cộng giá trị của biến bên trái với giá trị bên phải vào biến bên trái.
 
-### `++` インクリメント (increment) ![js]
+### `++` Increment (increment) ![js]
 
-変数に`1`を足す演算子です。
+Toán tử cộng `1` vào biến.
 
 ```js twoslash
 let x = 3;
@@ -303,9 +303,9 @@ console.log(x);
 // @log: 4
 ```
 
-### `,` 関数引数の区切り ![js]
+### `,` Phân cách argument của hàm ![js]
 
-複数の引数を関数に与えたり、複数の引数を受け取る関数宣言に用いる記号です。
+Ký hiệu được sử dụng để truyền nhiều argument cho hàm hoặc khai báo hàm nhận nhiều argument.
 
 ```js twoslash
 function plus(x, y, z) {
@@ -314,17 +314,17 @@ function plus(x, y, z) {
 plus(1, 2, 3);
 ```
 
-### `,` 配列要素の区切り ![js]
+### `,` Phân cách phần tử array ![js]
 
-複数の要素を持つ配列を宣言するときに用いる記号です。
+Ký hiệu được sử dụng khi khai báo array có nhiều phần tử.
 
 ```js twoslash
 const numbers = [1, 2, 3];
 ```
 
-### `,` オブジェクトプロパティの区切り ![js]
+### `,` Phân cách property của object ![js]
 
-複数のプロパティを持つオブジェクトを宣言するときに用いる記号です。
+Ký hiệu được sử dụng khi khai báo object có nhiều property.
 
 ```js twoslash
 const data = {
@@ -334,17 +334,17 @@ const data = {
 };
 ```
 
-### `,` タプル型の要素の区切り ![ts]
+### `,` Phân cách phần tử của tuple type ![ts]
 
-複数の要素を持つタプル型を宣言するときに用いる記号です。
+Ký hiệu được sử dụng khi khai báo tuple type có nhiều phần tử.
 
 ```ts twoslash
 type Tuple = [number, string, boolean];
 ```
 
-### `,` カンマ演算子 (comma operator) ![js]
+### `,` Toán tử phẩy (comma operator) ![js]
 
-左から右に式を評価をして、一番右の評価した値を返します。
+Đánh giá các biểu thức từ trái sang phải và trả về giá trị của biểu thức bên phải cùng.
 
 ```js twoslash
 let x = -1;
@@ -353,22 +353,22 @@ console.log(a);
 // @log: true
 ```
 
-### `-` 単項負値演算子 ![js]
+### `-` Toán tử âm đơn nguyên ![js]
 
-正負を反転してnumber型に変換します。
+Đảo dấu và chuyển đổi thành kiểu number.
 
 ```js twoslash
 -"1";
 // @log: -1
 ```
 
-### `-` 減算演算子 (subtraction operator) ![js]
+### `-` Toán tử trừ (subtraction operator) ![js]
 
-2つの値を引き算します。
+Trừ hai giá trị.
 
-### `-` 修飾子の削除 ![ts]
+### `-` Xóa modifier ![ts]
 
-`readonly`や`?`などの修飾子を削除します。
+Xóa các modifier như `readonly` hoặc `?`.
 
 ```ts twoslash
 type MyRequired<T> = {
@@ -380,13 +380,13 @@ type Writable<T> = {
 };
 ```
 
-### `-=` 減算代入 (subtraction assignment) ![js]
+### `-=` Gán trừ (subtraction assignment) ![js]
 
-左の変数の値から右の値を引き算した結果を左の変数に割り当てます。
+Gán kết quả trừ giá trị của biến bên trái cho giá trị bên phải vào biến bên trái.
 
-### `--` デクリメント (decrement) ![js]
+### `--` Decrement (decrement) ![js]
 
-変数に`1`を引き算する演算子です。
+Toán tử trừ `1` từ biến.
 
 ```js twoslash
 let x = 3;
@@ -395,9 +395,9 @@ console.log(x);
 // @log: 2
 ```
 
-### `.` プロパティへのアクセス (dot operator) ![js]
+### `.` Truy cập property (dot operator) ![js]
 
-オブジェクトのプロパティにアクセスするときに用いる記号です。
+Ký hiệu được sử dụng khi truy cập property của object.
 
 ```js twoslash
 const object = { property: 123 };
@@ -405,9 +405,9 @@ object.property;
 // @log: 123
 ```
 
-### `...` スプレッド構文 (spread syntax) ![js]
+### `...` Spread syntax (spread syntax) ![js]
 
-配列などの反復可能オブジェクトを関数の引数にする構文です。
+Cú pháp để chuyển iterable object như array thành argument của hàm.
 
 ```js twoslash
 function sum(x, y, z) {
@@ -418,7 +418,7 @@ console.log(sum(...numbers));
 // @log: 6
 ```
 
-または、配列などの反復可能オブジェクトを配列要素に展開する構文です。
+Hoặc cú pháp để mở rộng iterable object như array thành các phần tử của array.
 
 ```js twoslash
 const numbers = [1, 2, 3];
@@ -427,7 +427,7 @@ console.log(newNumbers);
 // @log: [ 0, 1, 2, 3, 4 ]
 ```
 
-または、オブジェクトのプロパティを展開する構文です。
+Hoặc cú pháp để mở rộng các property của object.
 
 ```js twoslash
 const object = { x: 1, y: 2 };
@@ -436,9 +436,9 @@ console.log(newObject);
 // @log: { x: 1, y: 2, z: 3 }
 ```
 
-### `...` 残余構文 (rest syntax) ![js]
+### `...` Rest syntax (rest syntax) ![js]
 
-関数の残りの引数をひとつの配列として受け取るのに用いられる構文です。
+Cú pháp để nhận các argument còn lại của hàm như một array.
 
 ```js twoslash
 function func(a, b, ...rest) {
@@ -448,7 +448,7 @@ console.log(func(1, 2, 3, 4, 5));
 // @log: [ 3, 4, 5 ]
 ```
 
-または、配列などの反復可能オブジェクトの残りの要素を取り出す構文です。
+Hoặc cú pháp để lấy các phần tử còn lại của iterable object như array.
 
 ```js twoslash
 const numbers = [1, 2, 3, 4, 5];
@@ -457,7 +457,7 @@ console.log(rest);
 // @log: [ 3, 4, 5 ]
 ```
 
-または、オブジェクトの残りのプロパティを取り出す構文です。
+Hoặc cú pháp để lấy các property còn lại của object.
 
 ```js twoslash
 const object = { a: 1, b: 2, c: 3, d: 4 };
@@ -466,57 +466,57 @@ console.log(rest);
 // @log: { c: 3, d: 4 }
 ```
 
-### `/` 除算演算子 (division operator) ![js]
+### `/` Toán tử chia (division operator) ![js]
 
-左の値を右の値で割り算します。
+Chia giá trị bên trái cho giá trị bên phải.
 
-### `/` 正規表現リテラル (regular expression literal) ![js]
+### `/` Regular expression literal (regular expression literal) ![js]
 
-`/[0-9]+/`のような正規表現リテラルの前後に書かれる記号です。
+Ký hiệu được viết trước và sau regular expression literal như `/[0-9]+/`.
 
-### `/=` 除算代入 (division assignment) ![js]
+### `/=` Gán chia (division assignment) ![js]
 
-左の変数の値を右の値で割り算した結果を左の変数に割り当てます。
+Gán kết quả chia giá trị của biến bên trái cho giá trị bên phải vào biến bên trái.
 
-### `//` 一行コメント (one line comment) ![js]
+### `//` Comment một dòng (one line comment) ![js]
 
-行コメントの開始を表す記号です。
+Ký hiệu biểu thị bắt đầu comment dòng.
 
-### `/*` 複数行コメント (multiline comment) ![js]
+### `/*` Comment nhiều dòng (multiline comment) ![js]
 
-複数行コメントの開始を表す記号です。
+Ký hiệu biểu thị bắt đầu comment nhiều dòng.
 
 ```js
 /*
- コメント
+ Comment
  */
 ```
 
 ### `/**` JSDoc
 
-慣習的にJSDocなどのドキュメンテーションコメントの開始を表す記号です。これはJavaScriptやTypeScriptの構文ではなく、複数行コメントを用いたドキュメンテーションに慣習的に用いられるものです。
+Theo quy ước, ký hiệu biểu thị bắt đầu documentation comment như JSDoc. Đây không phải là cú pháp của JavaScript hay TypeScript, mà là quy ước sử dụng comment nhiều dòng cho documentation.
 
-### `:` オブジェクトの一部 ![js]
+### `:` Một phần của object ![js]
 
-オブジェクトプロパティのキーと値の対関係を表すのに用いられる記号です。
+Ký hiệu được sử dụng để biểu thị quan hệ key-value của property trong object.
 
 ```js twoslash
 const object = { a: 1, b: 2, c: 3, d: 4 };
 ```
 
-### `:` 三項演算子の一部 (conditional operator) ![js]
+### `:` Một phần của toán tử ba ngôi (conditional operator) ![js]
 
-`a ? b : c`のような三項演算子のelseを表すのに用いられる記号です。
+Ký hiệu biểu thị phần else trong toán tử ba ngôi như `a ? b : c`.
 
-### `:` 型アノテーション (type annotation) ![ts]
+### `:` Type annotation (type annotation) ![ts]
 
-変数の型アノテーションに用いられる記号です。
+Ký hiệu được sử dụng cho type annotation của biến.
 
 ```ts twoslash
 const variable: number = 20;
 ```
 
-または、関数の引数や戻り値の型アノテーションに用いられる記号です。
+Hoặc ký hiệu được sử dụng cho type annotation của parameter và return type của hàm.
 
 ```ts twoslash
 function numberToString(x: number): string {
@@ -524,24 +524,24 @@ function numberToString(x: number): string {
 }
 ```
 
-### `<` 小なり演算子 (less than operator) ![js]
+### `<` Toán tử nhỏ hơn (less than operator) ![js]
 
-左の値が右の値よりも小さいか判定します。
+Kiểm tra xem giá trị bên trái có nhỏ hơn giá trị bên phải không.
 
-### `<` ジェネリクス (generic) ![ts]
+### `<` Generics (generic) ![ts]
 
-ジェネリクスの型引数の開始に用いられる記号です。
+Ký hiệu được sử dụng để bắt đầu type argument của generics.
 
 ```ts twoslash
 function func<T>(x: T) {}
 const result = func<string>("hello");
 ```
 
-[ジェネリクス (generics)](/reference/generics)
+[Generics](/reference/generics)
 
 ### `<` JSX ![ts]
 
-[JSX](./reference/jsx/README.md)と呼ばれるXMLリテラルの開始に現れる記号です。
+Ký hiệu xuất hiện ở đầu XML literal được gọi là [JSX](./reference/jsx/README.md).
 
 ```tsx twoslash title="Hello.tsx"
 function Hello() {
@@ -549,22 +549,22 @@ function Hello() {
 }
 ```
 
-### `<` 型アサーション (type assertion) ![ts]
+### `<` Type assertion (type assertion) ![ts]
 
-型アサーションに用いられる記号です。`as`の別の書き方です。
+Ký hiệu được sử dụng cho type assertion. Đây là cách viết khác của `as`.
 
 ```ts twoslash
 let someValue: unknown = "this is a string";
 let strLength: number = (<string>someValue).length;
 ```
 
-### `<=` 小なりイコール演算子 (less than or equal) ![js]
+### `<=` Toán tử nhỏ hơn hoặc bằng (less than or equal) ![js]
 
-左の値が右の値以下か判定します。
+Kiểm tra xem giá trị bên trái có nhỏ hơn hoặc bằng giá trị bên phải không.
 
-### `<<` ビット左シフト演算子 (left shift operator) ![js]
+### `<<` Toán tử dịch bit trái (left shift operator) ![js]
 
-左の値のビットを右の値の数だけ左にずらします。
+Dịch bit của giá trị bên trái sang trái một số lượng bằng giá trị bên phải.
 
 ```js twoslash
 const a = 1;
@@ -572,12 +572,12 @@ const a = 1;
 const b = 3;
 console.log(a << b);
 // @log: 00001000
-// 出力: 8
+// Output: 8
 ```
 
-### `<<=` 左シフト代入 (left shift assignment) ![js]
+### `<<=` Gán dịch trái (left shift assignment) ![js]
 
-左の変数の値のビットを右の値の数だけ左にずらした結果を左の変数に割り当てます。
+Gán kết quả dịch bit của giá trị biến bên trái sang trái một số lượng bằng giá trị bên phải vào biến bên trái.
 
 ```js twoslash
 let a = 1;
@@ -586,52 +586,52 @@ const b = 3;
 a <<= b;
 console.log(a);
 // @log: 00001000
-// 出力: 8
+// Output: 8
 ```
 
-### `=` 代入演算子 (assignment) ![js]
+### `=` Toán tử gán (assignment) ![js]
 
-左の変数に右の値を割り当てます。
+Gán giá trị bên phải vào biến bên trái.
 
-### `==` 等価演算子 (equality) ![js]
+### `==` Toán tử bằng (equality) ![js]
 
-左の値と右の値が等しいか判定します。型が異なる場合は型変換されて比較されます。
+Kiểm tra xem giá trị bên trái và bên phải có bằng nhau không. Nếu kiểu khác nhau sẽ được chuyển đổi kiểu rồi so sánh.
 
 ```js twoslash
 "1" == 1;
 // @log: true
 ```
 
-### `===` 厳密等価演算子 (strict equality) ![js]
+### `===` Toán tử bằng nghiêm ngặt (strict equality) ![js]
 
-型を含めて左の値と右の値が等しいか判定します。
+Kiểm tra xem giá trị bên trái và bên phải có bằng nhau không, bao gồm cả kiểu.
 
 ```js twoslash
 "1" === 1;
 // @log: false
 ```
 
-### `=>` アロー関数の一部 (arrow function) ![js]
+### `=>` Một phần của arrow function (arrow function) ![js]
 
-アロー関数の引数と関数ボディーの間に書かれる記号です。
+Ký hiệu được viết giữa argument và body của arrow function.
 
 ```js twoslash
 const increment = (num) => num + 1;
-//                 ^^^ 引数
-//                         ^^^^^^^ 関数ボディ
+//                 ^^^ argument
+//                         ^^^^^^^ function body
 ```
 
-### `>` 大なり演算子 (greater than) ![js]
+### `>` Toán tử lớn hơn (greater than) ![js]
 
-左の値が右の値よりも大きいか判定します。
+Kiểm tra xem giá trị bên trái có lớn hơn giá trị bên phải không.
 
-### `>=` 大なりイコール演算子 (greater than or equal) ![js]
+### `>=` Toán tử lớn hơn hoặc bằng (greater than or equal) ![js]
 
-左の値が右の値以上か判定します。
+Kiểm tra xem giá trị bên trái có lớn hơn hoặc bằng giá trị bên phải không.
 
-### `>>` ビット右シフト演算子 (right shift) ![js]
+### `>>` Toán tử dịch bit phải (right shift) ![js]
 
-左の値のビットを右の値の数だけ右にずらします。
+Dịch bit của giá trị bên trái sang phải một số lượng bằng giá trị bên phải.
 
 ```js twoslash
 const a = 8;
@@ -639,16 +639,16 @@ const a = 8;
 const b = 3;
 console.log(a >> b);
 // @log: 00000001
-// 出力: 1
+// Output: 1
 ```
 
-### `>>=` 右シフト代入 (right shift assignment) ![js]
+### `>>=` Gán dịch phải (right shift assignment) ![js]
 
-左の変数の値のビットを右の値の数だけ右にずらした結果を左の変数に割り当てます。
+Gán kết quả dịch bit của giá trị biến bên trái sang phải một số lượng bằng giá trị bên phải vào biến bên trái.
 
-### `>>>` 符号なし右シフト演算子 (unsigned right shift) ![js]
+### `>>>` Toán tử dịch phải không dấu (unsigned right shift) ![js]
 
-左の値のビットを右の値の数だけ右にずらします。左に入る符号ビットは常に0になります。
+Dịch bit của giá trị bên trái sang phải một số lượng bằng giá trị bên phải. Bit dấu ở bên trái luôn là 0.
 
 ```js twoslash
 const a = -2;
@@ -656,42 +656,42 @@ const a = -2;
 const b = 3;
 console.log(a >>> b);
 // @log: 00011111111111111111111111111111
-// 出力: 536870911
+// Output: 536870911
 ```
 
-### `>>>=` 符号なし右シフト代入 (unsigned right shift assignment) ![js]
+### `>>>=` Gán dịch phải không dấu (unsigned right shift assignment) ![js]
 
-左の変数の値のビットを右の値の数だけ右にずらした結果を左の変数に割り当てます。左に入る符号ビットは常に0になります。
+Gán kết quả dịch bit của giá trị biến bên trái sang phải một số lượng bằng giá trị bên phải vào biến bên trái. Bit dấu ở bên trái luôn là 0.
 
-### `?` 三項演算子の一部 (conditional operator) ![js]
+### `?` Một phần của toán tử ba ngôi (conditional operator) ![js]
 
-三項演算子`a ? b : c`の一部で、条件式の終わりに置かれる記号です。
+Một phần của toán tử ba ngôi `a ? b : c`, ký hiệu được đặt ở cuối biểu thức điều kiện.
 
-### `?` オプション修飾子 (optional property) ![ts]
+### `?` Optional modifier (optional property) ![ts]
 
-オブジェクトのプロパティを任意プロパティとして定義します。
+Định nghĩa property của object là optional property.
 
 ```ts twoslash
 interface User {
   name: string;
-  // name は必須
+  // name là bắt buộc
   age?: number;
-  // age は任意
+  // age là tùy chọn
 }
 const user: User = { name: "taro" };
 ```
 
-または、関数の引数を必須ではなくします。
+Hoặc làm cho argument của hàm không bắt buộc.
 
 ```ts twoslash
 function func(x?: number) {}
 func();
-// xがなくてもOK
+// Không có x cũng OK
 ```
 
-### `?.` オプショナルチェーン (optional chaining) ![js]
+### `?.` Optional chaining (optional chaining) ![js]
 
-プロパティのアクセス元が`null`または`undefined`のときにエラーを発生させずに`undefined`を返します。
+Khi nguồn truy cập property là `null` hoặc `undefined`, trả về `undefined` mà không gây lỗi.
 
 ```js twoslash
 const user = null;
@@ -701,9 +701,9 @@ console.log(user?.name);
 // @log: undefined
 ```
 
-### `??` Null合体 (nullish coalescing operator) ![js]
+### `??` Nullish coalescing (nullish coalescing operator) ![js]
 
-左の値が`null`または`undefined`のときに右の値を返します。そうでない場合は左の値を返します。
+Khi giá trị bên trái là `null` hoặc `undefined`, trả về giá trị bên phải. Nếu không thì trả về giá trị bên trái.
 
 ```js twoslash
 console.log(undefined ?? 1);
@@ -712,9 +712,9 @@ console.log(2 ?? 1);
 // @log: 2
 ```
 
-### `??=` Null合体代入 (logical nullish assignment) ![js]
+### `??=` Gán nullish coalescing (logical nullish assignment) ![js]
 
-左の変数の値が`null`または`undefined`の場合のみ右の値を左の変数に割り当てます。
+Chỉ khi giá trị của biến bên trái là `null` hoặc `undefined` mới gán giá trị bên phải vào biến bên trái.
 
 ```js twoslash
 const user1 = { name: undefined };
@@ -728,17 +728,17 @@ console.log(user2.name);
 // @log: kaori
 ```
 
-### `@` デコレーター (decorator) ![ts]
+### `@` Decorator (decorator) ![ts]
 
-デコレーターはクラスやクラスメンバーに注釈を追加するもので、デコレーターを使うのに用いられる記号です。
+Decorator là thứ thêm annotation vào class hoặc class member, ký hiệu được sử dụng khi dùng decorator.
 
-### `[` 配列リテラル (array literal notation) ![js]
+### `[` Array literal (array literal notation) ![js]
 
-`[1, 2, 3]`のような配列リテラルの開始に用いられる記号です。
+Ký hiệu được sử dụng để bắt đầu array literal như `[1, 2, 3]`.
 
-### `[` アクセッサー (bracket notation) ![js]
+### `[` Accessor (bracket notation) ![js]
 
-配列の要素やオブジェクトのプロパティにアクセスするときに用いられる記号です。
+Ký hiệu được sử dụng khi truy cập phần tử của array hoặc property của object.
 
 ```js twoslash
 const numbers = [1, 2, 3];
@@ -749,18 +749,18 @@ object["a"];
 // @log: 1
 ```
 
-### `[` 配列の分割代入 (destructuring assignment) ![js]
+### `[` Destructuring assignment của array (destructuring assignment) ![js]
 
-配列などの反復可能オブジェクトの分割代入の開始に用いられる記号です。
+Ký hiệu được sử dụng để bắt đầu destructuring assignment của iterable object như array.
 
 ```js twoslash
 const numbers = [1, 2, 3];
 const [first, ...rest] = numbers;
-// 分割代入
+// Destructuring assignment
 console.log(first, rest);
 // @log: 1 [ 2, 3 ]
 
-// 分割代入
+// Destructuring assignment
 function func([first, ...rest]) {
   console.log(first, rest);
 }
@@ -768,9 +768,9 @@ func([1, 2, 3]);
 // @log: 1 [ 2, 3 ]
 ```
 
-### `[` インデックス型 (index signature) ![ts]
+### `[` Index signature (index signature) ![ts]
 
-インデックス型(index signature)の開始に用いられる記号です。
+Ký hiệu được sử dụng để bắt đầu index signature.
 
 ```ts twoslash
 type StringKeysAndStringValues = {
@@ -778,11 +778,11 @@ type StringKeysAndStringValues = {
 };
 ```
 
-[インデックス型 (index signature)](reference/values-types-variables/object/index-signature.md)
+[Index signature](reference/values-types-variables/object/index-signature.md)
 
-### `[]` 配列型 (array type) ![ts]
+### `[]` Array type (array type) ![ts]
 
-配列型を表現するのに用いられる記号です。
+Ký hiệu được sử dụng để biểu diễn array type.
 
 ```ts twoslash
 class Foo {}
@@ -791,17 +791,17 @@ let names: string[];
 type FooList = Foo[];
 ```
 
-### `\` 文字列エスケープシーケンス (escaping character) ![js]
+### `\` Escape sequence trong string (escaping character) ![js]
 
-文字列のエスケープシーケンスの開始に用いられる記号です。
+Ký hiệu được sử dụng để bắt đầu escape sequence trong string.
 
 ```js twoslash
 const lineBreak = "\n";
 ```
 
-### `^` ビット排他的論理和 (bitwise xor) ![js]
+### `^` Bitwise XOR (bitwise xor) ![js]
 
-左の値と右の値でビットの値が異なる位置のビットを1にします。
+Đặt bit thành 1 ở những vị trí mà bit của giá trị bên trái và bên phải khác nhau.
 
 ```js twoslash
 const a = 1;
@@ -810,44 +810,44 @@ const b = 5;
 // @log: 00000101
 console.log(a ^ b);
 // @log: 00000100
-// 出力: 4
+// Output: 4
 ```
 
-### `^=` ビット排他的論理和代入 (bitwise xor assignment) ![js]
+### `^=` Gán bitwise XOR (bitwise xor assignment) ![js]
 
-左の変数の値と右の値でビットの値が異なる位置のビットを1にした結果を左の変数に割り当てます。
+Gán kết quả bitwise XOR của giá trị biến bên trái và giá trị bên phải vào biến bên trái.
 
-### `_` 数値の区切り文字 ![js]
+### `_` Ký tự phân cách số ![js]
 
-数値の可読性のために、桁区切りとして用いられる記号です。
+Ký hiệu được sử dụng làm dấu phân cách hàng để tăng khả năng đọc số.
 
 ```js twoslash
 const hyakuman = 1_000_000;
 ```
 
-### `_` アンダースコア変数 ![js]
+### `_` Biến underscore ![js]
 
-慣習的にlodashなどのライブラリで変数として使われることがあります。変数名として`_`が使われる場合は、JavaScriptとしては変数以上の特別な意味はありません。
+Theo quy ước, đôi khi được sử dụng làm biến trong các thư viện như lodash. Khi `_` được sử dụng làm tên biến, trong JavaScript nó không có ý nghĩa đặc biệt nào ngoài việc là một biến.
 
-また、慣習的に使わない変数の受け取り先に使われることがあります。たとえば、2つの引数を受け取るコールバック関数で、第2引数だけを使う場合、第1引数をアンダースコアにする書き方をするコードが中にはあります。
+Ngoài ra, theo quy ước đôi khi được sử dụng làm nơi nhận biến không dùng. Ví dụ, trong callback function nhận 2 argument mà chỉ dùng argument thứ hai, có code sử dụng underscore cho argument thứ nhất.
 
 ```js twoslash
 [1, 2, 3].map((_, index) => {
-  //  _ は 1, 2, 3のような要素値。それを使わないという意味で _ にしている
+  //  _ là giá trị phần tử như 1, 2, 3. Đặt _ để biểu thị không sử dụng nó
 });
 ```
 
-### `` ` `` テンプレートリテラル (template literal) ![js]
+### `` ` `` Template literal (template literal) ![js]
 
-テンプレートリテラル(テンプレート文字列)の前後に置かれる記号です。
+Ký hiệu được đặt trước và sau template literal (template string).
 
 ```js
 `string text`;
 ```
 
-### `{` ブロック文 (block) ![js]
+### `{` Block statement (block) ![js]
 
-if文やfor文などの構文に付随して使われる記号です。
+Ký hiệu được sử dụng kèm với các cú pháp như if statement hoặc for statement.
 
 ```js twoslash
 let isOK = false;
@@ -859,7 +859,7 @@ if (isOK) {
 }
 ```
 
-if文やfor文などの構文を伴わないブロック文は、単に変数のスコープを分けることを目的にしていることがあります。
+Block statement không đi kèm với cú pháp như if hoặc for đôi khi chỉ nhằm mục đích tách biệt scope của biến.
 
 ```js twoslash
 {
@@ -867,21 +867,21 @@ if文やfor文などの構文を伴わないブロック文は、単に変数の
 }
 {
   const value = 2;
-  // 上と同じ変数名で初期化しているが、スコープが別になるためエラーにならない。
+  // Khởi tạo với cùng tên biến như trên, nhưng không lỗi vì scope khác nhau.
 }
 ```
 
-### `{` オブジェクトの分割代入 (destructuring assignment) ![js]
+### `{` Destructuring assignment của object (destructuring assignment) ![js]
 
-オブジェクトの分割代入に用いられる記号です。
+Ký hiệu được sử dụng cho destructuring assignment của object.
 
 ```js twoslash
 const object = { a: 1, b: 2, c: 3, d: 4 };
-const { a, b, ...rest } = object; // 分割代入
+const { a, b, ...rest } = object; // Destructuring assignment
 console.log(a, b, rest);
 // @log: 1 2 { c: 3, d: 4 }
 
-// 分割代入
+// Destructuring assignment
 function func({ a, b, ...rest }) {
   console.log(a, b, rest);
 }
@@ -889,9 +889,9 @@ func(object);
 // @log: 1 2 { c: 3, d: 4 }
 ```
 
-### `|` ビット論理和 (bitwise or) ![js]
+### `|` Bitwise OR (bitwise or) ![js]
 
-左の値と右の値でどちらのビットが1である位置のビットを1にします。
+Đặt bit thành 1 ở những vị trí mà một trong hai giá trị bên trái hoặc bên phải có bit là 1.
 
 ```js twoslash
 const a = 0b010;
@@ -900,9 +900,9 @@ console.log((a | b) === 0b111);
 // @log: true
 ```
 
-### `|` ユニオン型 (union type) ![ts]
+### `|` Union type (union type) ![ts]
 
-複数の型を組み合わせたユニオン型を定義します。
+Định nghĩa union type kết hợp nhiều kiểu.
 
 ```ts twoslash
 type ID = string | number;
@@ -911,15 +911,15 @@ const id2 = 100; // OK
 const id3 = true; // ERROR
 ```
 
-### `|=` ビット論理和代入 (bitwise or assignment) ![js]
+### `|=` Gán bitwise OR (bitwise or assignment) ![js]
 
-左の変数の値と右の値でどちらかがのビットが1である位置のビットを1にした結果を左の変数に割り当てます。
+Gán kết quả bitwise OR của giá trị biến bên trái và giá trị bên phải vào biến bên trái.
 
-### `||` 論理和 (logical or) ![js]
+### `||` Toán tử OR logic (logical or) ![js]
 
-左の値がtruthyな場合はそれを返します。そうでないときは右の値を返します。
+Nếu giá trị bên trái là truthy thì trả về nó. Nếu không thì trả về giá trị bên phải.
 
-特にboolean値の場合は、ひとつでも`true`のときに`true`を返し、そうでない場合に`false`を返します。
+Đặc biệt với giá trị boolean, trả về `true` nếu ít nhất một cái là `true`, ngược lại trả về `false`.
 
 ```js twoslash
 console.log(true || false);
@@ -931,9 +931,9 @@ console.log(false || "abc");
 // @log: "abc"
 ```
 
-### `||=` 論理和代入 (logical or assignment) ![js]
+### `||=` Gán OR logic (logical or assignment) ![js]
 
-左の変数と右の値の`||`論理和の結果を左の変数に割り当てます。
+Gán kết quả OR logic `||` của biến bên trái và giá trị bên phải vào biến bên trái.
 
 ```js twoslash
 let a = false;
@@ -943,21 +943,21 @@ console.log(a);
 // @log: 1
 ```
 
-### `~` ビット否定演算子 (bitwise not) ![js]
+### `~` Toán tử NOT bitwise (bitwise not) ![js]
 
-ビットを反転します。
+Đảo ngược các bit.
 
 ```js twoslash
 const a = 1;
 // @log: 00000001
 console.log(~a);
 // @log: 11111110
-// 出力: -2
+// Output: -2
 ```
 
 ### `~~` Double Tilde ![js]
 
-ビット否定演算子を2つ重ねたもので、小数点以下を消し去る計算をするイディオムです。JavaScriptにこういう演算子があるわけではなく慣習的なものです。double tildeの計算結果は、正の数については`Math.floor`と同じに、負の数は`Math.ceil`と同じになります。
+Là idiom sử dụng hai toán tử NOT bitwise để loại bỏ phần thập phân. Đây không phải là toán tử trong JavaScript mà là quy ước. Kết quả của double tilde giống với `Math.floor` cho số dương và giống với `Math.ceil` cho số âm.
 
 ```js twoslash
 ~~1.5;
@@ -975,15 +975,15 @@ Math.ceil(-1.5);
 // @log: -1
 ```
 
-## キーワード
+## Từ khóa
 
-### `as` 型アサーション (type assertion) ![ts]
+### `as` Type assertion (type assertion) ![ts]
 
-TypeScriptコンパイラーが解釈した型を上書きする「型アサーション」に用いられるキーワードです。
+Từ khóa được sử dụng cho "type assertion" để ghi đè kiểu mà TypeScript compiler đã suy luận.
 
-### `as const` constアサーション (const assertion) ![ts]
+### `as const` Const assertion (const assertion) ![ts]
 
-変数に含まれるハードコーディングされた値をそのリテラル型で宣言し、読み取り専用にします。
+Khai báo giá trị hardcode trong biến là literal type của nó và làm cho nó chỉ đọc.
 
 ```ts twoslash
 let hello = "hello";
@@ -998,11 +998,11 @@ const fox = { caniformia: "Fox" } as const;
 
 ### `const` const ![js]
 
-ブロックスコープを持つ定数定義です。スコープ内では再代入も再宣言もできません。
+Khai báo hằng số có block scope. Không thể gán lại hoặc khai báo lại trong scope.
 
-### `get` ゲッター (get) ![js]
+### `get` Getter (get) ![js]
 
-オブジェクトのプロパティが参照されたときに対応する関数が呼ばれます。
+Khi property của object được tham chiếu, hàm tương ứng được gọi.
 
 ```js twoslash
 const exam = {
@@ -1016,21 +1016,21 @@ console.log(exam.best);
 // @log: 100
 ```
 
-### `in` in演算子 (in operator) ![js]
+### `in` Toán tử in (in operator) ![js]
 
-プロパティがオブジェクトにある場合に`true`を返す演算子です。
+Toán tử trả về `true` nếu property có trong object.
 
 ```js twoslash
-const book = { name: "サバイバルTypeScript" };
+const book = { name: "Survival TypeScript" };
 console.log("name" in book);
 // @log: true
 console.log("price" in book);
 // @log: false
 ```
 
-### `in` for-in構文 ![js]
+### `in` Cú pháp for-in ![js]
 
-オブジェクトの列挙可能プロパティをループするfor-in構文です。
+Cú pháp for-in để lặp qua các enumerable property của object.
 
 ```js twoslash
 const drink = { name: "Coffee", price: 500 };
@@ -1041,7 +1041,7 @@ for (const property in drink) {
 
 ### `in` Mapped Types ![ts]
 
-Mapped Typesに現れる`in`です。
+`in` xuất hiện trong Mapped Types.
 
 ```ts twoslash
 type MappedType = {
@@ -1051,9 +1051,9 @@ type MappedType = {
 
 [Mapped Types](reference/type-reuse/mapped-types.md)
 
-### `is` 型アサーション関数の一部 (user-defined type guard) ![ts]
+### `is` Một phần của type assertion function (user-defined type guard) ![ts]
 
-型ガードに用いる型アサーション関数の戻り値の型アノテーション部分に用いられるキーワードです。
+Từ khóa được sử dụng trong phần type annotation của return type của type assertion function dùng cho type guard.
 
 ```ts twoslash
 class Animal {
@@ -1071,34 +1071,34 @@ function isDuck(animal: Animal): animal is Duck {
 }
 ```
 
-### `keyof` keyof型演算子 (keyof) ![ts]
+### `keyof` Toán tử kiểu keyof (keyof) ![ts]
 
-オブジェクトの型からプロパティ名を型として返す型演算子です。
+Toán tử kiểu trả về tên property từ kiểu object dưới dạng kiểu.
 
-### `n` bigintリテラル (bigint literal) ![js]
+### `n` Bigint literal (bigint literal) ![js]
 
-数字がbigintリテラルであることを表すのに用いる記号です。
+Ký hiệu biểu thị số là bigint literal.
 
 ```js
-100n; // bigint型の100
+100n; // bigint 100
 ```
 
-### `typeof` typeof演算子 (typeof) ![js]
+### `typeof` Toán tử typeof (typeof) ![js]
 
-与えられた値の型を表す文字列を返します。
+Trả về string biểu thị kiểu của giá trị được cho.
 
 ```js twoslash
 console.log(typeof 123);
 // @log: "number"
 ```
 
-### `typeof` typeof型演算子 (typeof) ![ts]
+### `typeof` Toán tử kiểu typeof (typeof) ![ts]
 
-変数から型を抽出する演算子です。
+Toán tử trích xuất kiểu từ biến.
 
-### `set` セッター (set) ![js]
+### `set` Setter (set) ![js]
 
-オブジェクトのプロパティを変更するときに対応する関数が呼ばれます。
+Khi property của object bị thay đổi, hàm tương ứng được gọi.
 
 ```js twoslash
 const prize = {
@@ -1120,18 +1120,18 @@ console.log(prize.history);
 // @log: [ 'Stanislas Wawrinka', 'Rafael Nadal Parera', 'Novak Đoković' ]
 ```
 
-### `void` void演算子 (void) ![js]
+### `void` Toán tử void (void) ![js]
 
-戻り値を`undefined`にします。
+Làm cho return value thành `undefined`.
 
 ```js twoslash
 console.log(void 123);
 // @log: undefined
 ```
 
-### `void` void型 (void) ![ts]
+### `void` Kiểu void (void) ![ts]
 
-戻り値が`undefined`あるいはない場合に使用します。
+Được sử dụng khi return value là `undefined` hoặc không có.
 
 ```ts twoslash
 function returnUndefined(num: number): void {
@@ -1143,4 +1143,4 @@ function returnUndefined(num: number): void {
 }
 ```
 
-[void型](reference/functions/void-type.md)
+[Kiểu void](reference/functions/void-type.md)

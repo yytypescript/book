@@ -1,18 +1,18 @@
-# TypeScript Playgroundの使い方
+# Cách sử dụng TypeScript Playground
 
-## TypeScript Playgroundとは
+## TypeScript Playground là gì
 
-公式が提供している Web で TypeScript を手軽に試すことができる実行環境です。
+Là môi trường thực thi được cung cấp chính thức, cho phép bạn dễ dàng thử nghiệm TypeScript trên Web.
 
-## TypeScript Playgroundを使う
+## Sử dụng TypeScript Playground
 
-[TypeScript Playground](https://www.typescriptlang.org/play) にアクセスすれば、すぐに使いはじめることができます。
+Truy cập [TypeScript Playground](https://www.typescriptlang.org/play) là bạn có thể sử dụng ngay.
 
-### プログラムの実行結果を確認する
+### Kiểm tra kết quả thực thi chương trình
 
-Playground にアクセスできたら、早速コードを実行してみましょう。
+Khi đã truy cập Playground, hãy thử chạy code ngay.
 
-次のサンプルコードを Playground のエディターに入力します。
+Nhập sample code sau vào editor của Playground.
 
 ```ts
 function add(a: number, b: number) {
@@ -22,19 +22,19 @@ function add(a: number, b: number) {
 console.log(add(1, 2));
 ```
 
-入力が終わったらエディターの上部にある`RUN`をクリックして、コードを実行できます。
+Sau khi nhập xong, click `RUN` ở phía trên editor để thực thi code.
 
-実行後は右側の`Logs`のタブで実行結果が確認できます。
+Sau khi thực thi, bạn có thể kiểm tra kết quả thực thi trong tab `Logs` bên phải.
 
 ![](how-to-use-typescript-playground/image1.png)
 
-### JavaScriptのコンパイル結果を確認する
+### Kiểm tra kết quả compile sang JavaScript
 
-TypeScript を書いていると実際に生成される JavaScript のコードを確認したい時があると思います。そんな時は、右側の`.JS`タブを開くことで生成される JavaScript のコードを確認することができます。
+Khi viết TypeScript, đôi khi bạn muốn xác nhận code JavaScript được tạo ra. Trong trường hợp đó, mở tab `.JS` bên phải để xác nhận code JavaScript được tạo ra.
 
-試しに TypeScript 固有の機能である`enum`のコンパイル結果を確認してみます。
+Hãy thử kiểm tra kết quả compile của `enum` - tính năng đặc trưng của TypeScript.
 
-エディターに次のコードを入力して`.JS`タブを開いてみてください。
+Nhập code sau vào editor và mở tab `.JS`.
 
 ```ts
 enum Color {
@@ -46,13 +46,13 @@ enum Color {
 console.log(Color.RED);
 ```
 
-TypeScript が`enum`をどのように JavaScript へコンパイルしているか簡単に確認することができます。
+Bạn có thể dễ dàng xác nhận TypeScript compile `enum` sang JavaScript như thế nào.
 
 ![](how-to-use-typescript-playground/image2.png)
 
-### コンパイルエラーの確認方法
+### Cách kiểm tra lỗi compile
 
-次のサンプルコードをエディター上で入力してみてください。エディター上に表示される赤の波線にマウスオーバーをすることでリアルタイムにコンパイルエラーを確認することができます。
+Hãy thử nhập sample code sau trong editor. Bạn có thể xác nhận lỗi compile realtime bằng cách di chuột qua đường gợn sóng đỏ hiển thị trên editor.
 
 ```ts
 let value = "1";
@@ -60,47 +60,45 @@ value = 1;
 value = true;
 ```
 
-また、エディターでマウスオーバーをする以外にも右側の`Errors`タブを表示して、すべてのエラーを一覧で確認することができます。
+Ngoài việc di chuột trong editor, bạn cũng có thể hiển thị tab `Errors` bên phải để xem danh sách tất cả lỗi.
 
 ![](how-to-use-typescript-playground/image3.png)
 
-### 型定義の確認方法
+### Cách kiểm tra type definition
 
-`.D.TS`タブを開くことでエディターのコードから生成される型定義を確認することができます。
+Mở tab `.D.TS` để xác nhận type definition được tạo từ code trong editor.
 
 ```ts
-// コード
+// Code
 function add(a: number, b: number) {
   return a + b;
 }
 
-// .D.TSの出力
+// Output .D.TS
 declare function add(a: number, b: number): number;
 ```
 
-### 書いたコードを共有する
+### Chia sẻ code đã viết
 
-↓のURLを開いてみてください。エディターにコードが入力された状態で TypeScript Playground が表示されます。
+Hãy mở URL sau. TypeScript Playground sẽ hiển thị với code đã được nhập sẵn trong editor.
 
 <https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwChF3FTioRSllEAaioBuFgF8WLCAgDOcADbEAdArgBzLOgwBGSgCZ69EUA>
 
-TypeScript Playground はページのURLを共有するだけで書いたコードを他の人に共有することができます。
+TypeScript Playground có thể chia sẻ code đã viết với người khác chỉ bằng cách chia sẻ URL của trang.
 
-これは
+Cơ chế hoạt động như sau:
 
-1. エディターのコードを文字列圧縮ライブラリで圧縮して文字列をURLに設定する &#x20;
-2. URLを共有する &#x20;
-3. 共有されたURLが開かれる時に圧縮された文字列をデコードしてエディターに展開する
+1. Nén code của editor bằng thư viện nén chuỗi và đặt chuỗi vào URL
+2. Chia sẻ URL
+3. Khi URL được chia sẻ được mở, giải nén chuỗi đã nén và hiển thị trong editor
 
-という仕組みでコードが共有されています。
+Mở Playground mới và nhập code giống với link trên vào editor, bạn sẽ thấy URL giống nhau được tạo ra.
 
-新規で Playground を開き上記のリンク先と同じコードをエディターに入力すると、同じURLが生成されるのを確認できます。
+### Chia sẻ code ở nhiều định dạng khác nhau
 
-### 色々な形式でコードを共有する
+Từ tab `Export` ở phía trên, bạn có thể xuất text để chia sẻ code ở nhiều định dạng khác nhau.
 
-上部の`Export`タブから色々な形式でコードを共有するためのテキストを出力することができます。
-
-たとえば`Copy as Markdown Link with Preview`を選択した場合は次のような形式のテキストを出力することができます。
+Ví dụ, nếu chọn `Copy as Markdown Link with Preview`, bạn có thể xuất text theo định dạng sau.
 
 ````markdown
 ```
@@ -112,27 +110,26 @@ function add(a:number, b:number) {
 [Playground Link](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAQwCaoBTIFxhAWwCMBTAJwBpFDcCTSBKRAbwFgAoRTxU4qEUpMkQBqKgG52AX3bsICAM5wANsQB0SuAHMs6DAEZKAJnr0xQA)
 ````
 
-## TypeScript Playgroundの設定方法
+## Cách cấu hình TypeScript Playground
 
-### TypeScript のバージョンの設定
+### Cấu hình phiên bản TypeScript
 
-左上のバージョンが記載されたタブをクリックすることで、実行する TypeScript のバージョンを変更することができます。
+Click vào tab hiển thị phiên bản ở góc trên bên trái để thay đổi phiên bản TypeScript thực thi.
 
-デフォルトでは TypeScript のバージョンは 4.1 以上なので、次のサンプルコードはコンパイルエラーが発生しません。
+Mặc định, phiên bản TypeScript là 4.1 trở lên, nên sample code sau không gây lỗi compile.
 
-バージョンを 4.1 未満に変更してみてください。TypeScript のバージョンが変更されたことで
-`Template Literal Types`が非対応となりコンパイルエラーが発生するのが確認できます。
+Hãy thử thay đổi phiên bản xuống dưới 4.1. Bạn sẽ thấy lỗi compile phát sinh do phiên bản TypeScript thay đổi khiến `Template Literal Types` không được hỗ trợ.
 
 ```ts
 type LocaleLang = "en" | "ja" | "fr";
 type LocaleId = `locale_${LocaleLang}`;
 ```
 
-### TS Config の設定
+### Cấu hình TS Config
 
-画面上部の`TS Config`のタブをクリックすることで TS Config の設定をすることができます。
+Click vào tab `TS Config` ở phía trên màn hình để cấu hình TS Config.
 
-次のサンプルコードをエディターに入力して、出力される JavaScript のコードを`.JS`で確認をするとデフォルトでは
+Nhập sample code sau vào editor và xác nhận code JavaScript được xuất ra trong `.JS`, mặc định sẽ là:
 
 ```ts
 export function add(a: number, b: number) {
@@ -140,7 +137,7 @@ export function add(a: number, b: number) {
 }
 ```
 
-Playground の初期設定では`module: 'esnext'`が選択されているので、次の出力結果になります。
+Cấu hình ban đầu của Playground chọn `module: 'esnext'`, nên kết quả xuất ra như sau.
 
 ```js
 export function add(a, b) {
@@ -148,7 +145,7 @@ export function add(a, b) {
 }
 ```
 
-`TS Config`タブを開き`Module`の設定を`CommonJS`に変更をしてみます。TS Config の設定が変更されて`CommonJS`形式で出力される JavaScript のコードを確認することができます。
+Mở tab `TS Config` và thay đổi cấu hình `Module` thành `CommonJS`. Cấu hình TS Config được thay đổi và bạn có thể xác nhận code JavaScript được xuất ra theo định dạng `CommonJS`.
 
 ```js
 "use strict";

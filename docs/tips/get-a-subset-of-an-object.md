@@ -11,23 +11,23 @@ const profile = {
   name: "suin",
   twitter: "suin",
   github: "suin",
-  country: "JP",
-  prefecture: "東京都",
-  city: "千代田区",
-  address: "丸の内2-4-1",
-  building: "丸ビル",
-  zipcode: "100-6390",
+  country: "VN",
+  city: "Ha Noi",
+  district: "Hoan Kiem",
+  address: "1 Ba Trieu",
+  building: "Toa nha ABC",
+  zipcode: "100000",
 };
 
 // Muốn lấy object chỉ có 6 property dưới đây từ object có 9 property ở trên
 
 const address = {
-  country: "JP",
-  prefecture: "東京都",
-  city: "千代田区",
-  address: "丸の内2-4-1",
-  building: "丸ビル",
-  zipcode: "100-6390",
+  country: "VN",
+  city: "Ha Noi",
+  district: "Hoan Kiem",
+  address: "1 Ba Trieu",
+  building: "Toa nha ABC",
+  zipcode: "100000",
 };
 ```
 
@@ -40,12 +40,12 @@ const profile = {
   name: "suin",
   twitter: "suin",
   github: "suin",
-  country: "JP",
-  prefecture: "東京都",
-  city: "千代田区",
-  address: "丸の内2-4-1",
-  building: "丸ビル",
-  zipcode: "100-6390",
+  country: "VN",
+  city: "Ha Noi",
+  district: "Hoan Kiem",
+  address: "1 Ba Trieu",
+  building: "Toa nha ABC",
+  zipcode: "100000",
 };
 // ---cut---
 const sns = (({ twitter, github }) => ({ twitter, github }))(profile);
@@ -72,23 +72,23 @@ const profile = {
   name: "suin",
   twitter: "suin",
   github: "suin",
-  country: "JP",
-  prefecture: "東京都",
-  city: "千代田区",
-  address: "丸の内2-4-1",
-  building: "丸ビル",
-  zipcode: "100-6390",
+  country: "VN",
+  city: "Ha Noi",
+  district: "Hoan Kiem",
+  address: "1 Ba Trieu",
+  building: "Toa nha ABC",
+  zipcode: "100000",
 };
 // ---cut---
 const address = (({ name, twitter, github, ...rest }) => rest)(profile);
 //    ^?
 //=> {
-//   "country": "JP",
-//   "prefecture": "東京都",
-//   "city": "千代田区",
-//   "address": "丸の内2-4-1",
-//   "building": "丸ビル",
-//   "zipcode": "100-6390"
+//   "country": "VN",
+//   "city": "Ha Noi",
+//   "district": "Hoan Kiem",
+//   "address": "1 Ba Trieu",
+//   "building": "Toa nha ABC",
+//   "zipcode": "100000"
 // }
 ```
 
@@ -99,12 +99,12 @@ const profile = {
   name: "suin",
   twitter: "suin",
   github: "suin",
-  country: "JP",
-  prefecture: "東京都",
-  city: "千代田区",
-  address: "丸の内2-4-1",
-  building: "丸ビル",
-  zipcode: "100-6390",
+  country: "VN",
+  city: "Ha Noi",
+  district: "Hoan Kiem",
+  address: "1 Ba Trieu",
+  building: "Toa nha ABC",
+  zipcode: "100000",
 };
 // ---cut---
 // @errors: 2790
@@ -155,12 +155,12 @@ import _ from "lodash";
 
 const address = _.omit(profile, ["name", "twitter", "github"]);
 //=> {
-//   "country": "JP",
-//   "prefecture": "東京都",
-//   "city": "千代田区",
-//   "address": "丸の内2-4-1",
-//   "building": "丸ビル",
-//   "zipcode": "100-6390"
+//   "country": "VN",
+//   "city": "Ha Noi",
+//   "district": "Hoan Kiem",
+//   "address": "1 Ba Trieu",
+//   "building": "Toa nha ABC",
+//   "zipcode": "100000"
 // }
 ```
 

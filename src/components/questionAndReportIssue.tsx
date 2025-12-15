@@ -13,28 +13,28 @@ export const QuestionAndReportIssue: FC<Props> = ({ editUrl }) => {
     <ul style={{ fontSize: "0.8em", listStyle: "none", padding: 0 }}>
       <li>
         <a
-          href={`${baseUrl}/issues/new?labels=%E8%AA%AD%E8%80%85%E3%81%AE%E8%B3%AA%E5%95%8F&title=質問です&body=${encodeURIComponent(
-            `<!--ここに質問内容を書いてください。-->\n\n\n関連ページ: ${editUrl}`
+          href={`${baseUrl}/issues/new?labels=question&title=Câu hỏi&body=${encodeURIComponent(
+            `<!--Vui lòng viết câu hỏi của bạn ở đây.-->\n\n\nTrang liên quan: ${editUrl}`
           )}`}
           target="_blank"
           style={{ fontWeight: "bold" }}
         >
-          質問する
+          Đặt câu hỏi
         </a>{" "}
         ─
-        読んでも分からなかったこと、TypeScriptで分からないこと、お気軽にGitHubまで🙂
+        Nếu bạn có thắc mắc sau khi đọc hoặc câu hỏi về TypeScript, hãy gửi đến GitHub nhé 🙂
       </li>
       <li>
         <a
-          href={`${baseUrl}/issues/new?labels=誤字&body=${encodeURIComponent(
+          href={`${baseUrl}/issues/new?labels=typo&body=${encodeURIComponent(
             editUrl
           )}`}
           target="_blank"
           style={{ fontWeight: "bold" }}
         >
-          問題を報告する
+          Báo cáo lỗi
         </a>{" "}
-        ─ 文章やサンプルコードなどの誤植はお知らせください。
+        ─ Vui lòng thông báo nếu bạn phát hiện lỗi chính tả trong văn bản hoặc sample code.
       </li>
     </ul>
   );
