@@ -1,37 +1,37 @@
 ---
-sidebar_label: "デフォルト引数"
+sidebar_label: "Default parameter"
 ---
 
-# デフォルト引数 (default parameter)
+# Default parameter
 
-引数の値が`undefined`のとき、代わりの値を指定できるのがデフォルト引数(default parameter)です。
+Default parameter cho phép chỉ định giá trị thay thế khi giá trị của tham số là `undefined`.
 
-## デフォルト引数の構文
+## Cú pháp default parameter
 
-JavaScriptのデフォルト引数は、引数の右に`=`とデフォルト値を書きます。
+Trong JavaScript, default parameter được viết bằng cách thêm `=` và giá trị mặc định bên phải tham số.
 
 ```js twoslash
-// 関数宣言
-function 関数名(引数 = デフォルト値) {}
-// アロー関数
-(引数 = デフォルト値) => {};
+// Function declaration
+function tên_function(tham_số = giá_trị_mặc_định) {}
+// Arrow function
+(tham_số = giá_trị_mặc_định) => {};
 ```
 
-TypeScriptで、型注釈とデフォルト引数の両方を書く場合は、型注釈のほうを先に書きます。
+Trong TypeScript, khi viết cả type annotation và default parameter, type annotation được viết trước.
 
 ```ts twoslash
-interface 型 {}
-declare const デフォルト値: 型;
+interface Kiểu {}
+declare const giá_trị_mặc_định: Kiểu;
 // ---cut---
-// 関数宣言
-function 関数名(引数: 型 = デフォルト値) {}
-// アロー関数
-(引数: 型 = デフォルト値) => {};
+// Function declaration
+function tên_function(tham_số: Kiểu = giá_trị_mặc_định) {}
+// Arrow function
+(tham_số: Kiểu = giá_trị_mặc_định) => {};
 ```
 
-## `undefined`のときデフォルト値が使われる
+## Giá trị mặc định được sử dụng khi là `undefined`
 
-JavaScriptの引数は省略すると`undefined`になります。
+Trong JavaScript, khi bỏ qua tham số, nó sẽ trở thành `undefined`.
 
 ```js twoslash
 function foo(x) {
@@ -41,7 +41,7 @@ foo();
 // @log: undefined
 ```
 
-デフォルト引数は、引数が`undefined`のときに、その値が変わりに代入されます。たとえば、次の例の関数呼び出しは、引数を渡していないので`x`は`undefined`です。そのため、デフォルト値`1`が代入されます。
+Default parameter sẽ được gán giá trị thay thế khi tham số là `undefined`. Ví dụ, trong lời gọi function sau, không truyền tham số nên `x` là `undefined`. Do đó, giá trị mặc định `1` được gán.
 
 ```ts twoslash
 function foo(x = 1) {
@@ -51,7 +51,7 @@ foo();
 // @log: 1
 ```
 
-次のように、引数に`undefined`を渡す場合も、デフォルト値が代入されます。
+Khi truyền `undefined` làm tham số như sau, giá trị mặc định cũng được gán.
 
 ```ts twoslash
 function foo(x = 1) {
@@ -62,7 +62,7 @@ foo(undefined);
 // @log: 1
 ```
 
-引数が`null`のときは、デフォルト引数は適用されません。ご注意ください。
+Lưu ý rằng khi tham số là `null`, default parameter không được áp dụng.
 
 ```js twoslash {4}
 function foo(x = 1) {
@@ -72,9 +72,9 @@ foo(null);
 // @log: null
 ```
 
-## 引数リストの途中に書ける
+## Có thể viết ở giữa danh sách tham số
 
-JavaScriptのデフォルト引数は、デフォルト値を持たない引数の前に書くこともできます。
+Trong JavaScript, default parameter có thể được viết trước các tham số không có giá trị mặc định.
 
 ```js twoslash
 function foo(x, y = 2, z) {
@@ -84,32 +84,32 @@ foo(1, undefined, 3);
 // @log: 1 2 3
 ```
 
-## 初期化処理が書ける
+## Có thể viết logic khởi tạo
 
-JavaScriptのデフォルト値には式が書けます。
+Trong JavaScript, bạn có thể viết expression làm giá trị mặc định.
 
 ```js twoslash
 function foo(x = 2 * 2) {}
 ```
 
-式が書けるので、関数呼び出しも書けます。
+Vì có thể viết expression, nên cũng có thể viết lời gọi function.
 
 ```js twoslash
 function foo(x = parseInt("1.5")) {}
 ```
 
-### 非同期処理は書けない
+### Không thể viết xử lý không đồng bộ
 
-ただし、`await`を使って、非同期関数を呼び出すような処理は書けません。
+Tuy nhiên, bạn không thể viết xử lý gọi async function bằng cách sử dụng `await`.
 
 ```ts twoslash
 // @errors: 2524
 async function foo(x = await Promise.resolve(1)) {}
 ```
 
-## 型推論が効く
+## Type inference hoạt động
 
-TypeScriptでは、デフォルト引数があると、引数の型推論が効きます。そのため、デフォルト引数が型注釈を省略することもできます。
+Trong TypeScript, khi có default parameter, type inference cho tham số sẽ hoạt động. Do đó, bạn có thể bỏ qua type annotation khi có default parameter.
 
 ```ts twoslash
 function foo(x = 1) {}
@@ -118,11 +118,11 @@ function foo(x = 1) {}
 
 <PostILearned>
 
-・JavaScriptのデフォルト引数は引数がundefinedのとき使われる値
-・構文: function 関数名(引数: 型 = デフォルト値) {}
-・nullのときはデフォルト値にならない
-・引数の途中に書ける
-・簡単な初期化処理も書ける
-・TypeScriptでは型推論が効く
+・Default parameter trong JavaScript là giá trị được sử dụng khi tham số là undefined
+・Cú pháp: function tên_function(tham_số: Kiểu = giá_trị_mặc_định) {}
+・Không trở thành giá trị mặc định khi là null
+・Có thể viết ở giữa danh sách tham số
+・Cũng có thể viết logic khởi tạo đơn giản
+・Trong TypeScript, type inference hoạt động
 
 </PostILearned>

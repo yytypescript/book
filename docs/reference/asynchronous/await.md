@@ -3,18 +3,18 @@ title: await
 slug: /reference/asynchronous/await
 ---
 
-`Promise`を利用した非同期処理をより簡単に書ける構文として`async`/`await`が存在します。
-この構文を利用することで、非同期処理をより同期処理と同じような文脈で書くことができるようになります。
-`async`/`await`は基本セットで使いますが、本ページでは`await`を主に取り上げます。
+`async`/`await` là cú pháp giúp viết xử lý bất đồng bộ sử dụng `Promise` một cách đơn giản hơn.
+Với cú pháp này, bạn có thể viết xử lý bất đồng bộ giống như xử lý đồng bộ hơn.
+`async`/`await` thường được sử dụng cùng nhau, nhưng trong trang này chúng ta sẽ tập trung vào `await`.
 
 ### `await`
 
-`await`は`Promise`の値が解決されるまで実行を待機して、解決された値を返します。
+`await` chờ cho đến khi giá trị của `Promise` được resolve và trả về giá trị đã resolve.
 
-`await`の注意点として**基本的に`await`は`async`関数の中でしか使えません。**
+Lưu ý rằng **về cơ bản `await` chỉ có thể sử dụng bên trong function `async`.**
 
 ```ts twoslash
-// 1秒後に値を返す
+// Trả về giá trị sau 1 giây
 function request(): Promise<string> {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -23,7 +23,7 @@ function request(): Promise<string> {
   });
 }
 
-// この書き方はできない
+// Không thể viết như thế này
 // const result = await request();
 // console.log(result);
 
@@ -36,16 +36,16 @@ async function main() {
 main();
 ```
 
-この例では`await request()`の行で`request()`が`Promise`を解決するまで1秒待機し、コンソールに`"hello"`と表示します。
+Trong ví dụ này, tại dòng `await request()`, chương trình sẽ chờ 1 giây cho đến khi `request()` resolve `Promise`, sau đó hiển thị `"hello"` ra console.
 
-### `async`/`await`で書き直す
+### Viết lại bằng `async`/`await`
 
-最後に３つのAPI呼び出しのコードを`async`/`await`を利用して書き直してみます。
+Cuối cùng, hãy viết lại code gọi 3 API bằng cách sử dụng `async`/`await`.
 
-このように`async`/`await`を利用することで、非同期の処理を同期処理のようにスッキリ書くことができるようになります。
+Như vậy, bằng cách sử dụng `async`/`await`, bạn có thể viết xử lý bất đồng bộ một cách gọn gàng giống như xử lý đồng bộ.
 
 ```ts twoslash
-// 非同期でAPIにリクエストを投げて値を取得する処理
+// Xử lý gọi API bất đồng bộ để lấy giá trị
 function request1(): Promise<number> {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -54,7 +54,7 @@ function request1(): Promise<number> {
   });
 }
 
-// 受け取った値を別のAPIにリクエストを投げて値を取得する処理
+// Xử lý nhận giá trị và gọi API khác để lấy giá trị
 function request2(result1: number): Promise<number> {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -63,7 +63,7 @@ function request2(result1: number): Promise<number> {
   });
 }
 
-// 受け取った値を別のAPIにリクエストを投げて値を取得する処理
+// Xử lý nhận giá trị và gọi API khác để lấy giá trị
 function request3(result2: number): Promise<number> {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -83,22 +83,22 @@ async function main() {
 main();
 ```
 
-### `Promise`を直接`await`する
+### `await` trực tiếp một `Promise`
 
-関数を作らずに`Promise`を直接`await`することもできます。
+Bạn cũng có thể `await` một `Promise` trực tiếp mà không cần tạo function.
 
 ```ts twoslash
 async function main() {
-  // 1秒後に値を返す
+  // Trả về giá trị sau 1 giây
   await new Promise((resolve) => {
     setTimeout(() => resolve, 1000);
   });
 }
 ```
 
-### `async`関数を`await`する
+### `await` một function `async`
 
-`async`関数を`await`することもできます。
+Bạn cũng có thể `await` một function `async`.
 
 ```ts twoslash
 async function request(): Promise<string> {
@@ -112,9 +112,9 @@ async function main() {
 }
 ```
 
-### `await`したときの型注釈
+### Type annotation khi `await`
 
-`Promise`, `async`関数の戻り値の型注釈は`Promise<T>`の`T`になります。
+Type annotation của giá trị trả về khi `await` một `Promise` hoặc function `async` là `T` trong `Promise<T>`.
 
 ```ts twoslash
 async function request(): Promise<string> {
@@ -123,15 +123,15 @@ async function request(): Promise<string> {
 
 async function main() {
   const result: string = await request();
-  // stringになる
+  // Kiểu là string
   console.log(result);
   // @log: "hello"
 }
 ```
 
-### `then-catch`を`try-catch`に書き換える
+### Viết lại `then-catch` bằng `try-catch`
 
-`Promise`の`then`と`catch`を`try-catch`に書き換えることができます。次の`main2`関数は`main1`関数を`try-catch`で書き換えたものです。
+Bạn có thể viết lại `then` và `catch` của `Promise` bằng `try-catch`. Function `main2` dưới đây là phiên bản viết lại của function `main1` bằng `try-catch`.
 
 ```ts twoslash
 async function request(): Promise<string> {
@@ -160,11 +160,11 @@ async function main2() {
 }
 ```
 
-### 拒否された`Promise`を`return`するとき
+### Khi `return` một `Promise` bị reject
 
-#### `return`の前に`await`する
+#### `await` trước khi `return`
 
-拒否された`Promise`を`return`する前に`await`したときは、その関数内で例外が発生します。
+Khi `await` một `Promise` bị reject trước khi `return`, exception sẽ được throw trong function đó.
 
 ```ts twoslash
 async function request(): Promise<unknown> {
@@ -173,7 +173,7 @@ async function request(): Promise<unknown> {
 
 async function main(): Promise<unknown> {
   try {
-    // return await とすることでcatchで例外を捕捉できる
+    // Bằng cách sử dụng return await, exception có thể được bắt trong catch
     return await request();
   } catch {
     console.log("error");
@@ -194,11 +194,11 @@ main()
   });
 ```
 
-このような例であれば表示されるものは`error`と`finally`、そして`then`が表示されます。
+Trong ví dụ như thế này, các giá trị hiển thị sẽ là `error`, `finally`, và `then`.
 
-#### `return`の前に`await`しない (ただ`return`する)
+#### Không `await` trước khi `return` (chỉ `return`)
 
-拒否された`Promise`をそのまま関数の戻り値にしてしまうと拒否されたまま呼び出し元に戻されます。
+Nếu `return` một `Promise` bị reject trực tiếp mà không `await`, nó sẽ được trả về cho caller trong trạng thái bị reject.
 
 ```ts twoslash
 function request(): Promise<unknown> {
@@ -227,4 +227,4 @@ main()
   });
 ```
 
-このような例であれば表示されるものは`finally`と`catch`が表示されます。
+Trong ví dụ như thế này, các giá trị hiển thị sẽ là `finally` và `catch`.

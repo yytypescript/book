@@ -2,11 +2,11 @@
 title: Set<T>
 ---
 
-`Set`はJavaScriptの組み込みAPIのひとつで、値のコレクションを扱うためのオブジェクトです。`Set`には重複する値が格納できません。`Set`に格納された値は一意(unique)になります。
+`Set` là một trong những built-in API của JavaScript, là object để xử lý collection các giá trị. `Set` không thể lưu trữ giá trị trùng lặp. Các giá trị được lưu trong `Set` là duy nhất (unique).
 
-## Setオブジェクトの作り方
+## Cách tạo đối tượng Set
 
-`Set`オブジェクトを新たに作るには、`Set`クラスを`new`します。コンストラクタに配列を渡すと、値が`Set`に格納されます。
+Để tạo object `Set` mới, dùng `new` với class `Set`. Khi truyền mảng vào constructor, các giá trị sẽ được lưu vào `Set`.
 
 ```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -14,7 +14,7 @@ console.log(fruits);
 // @log: Set { 'apple', 'orange', 'banana' }
 ```
 
-コンストラクタに渡す配列の中に重複がある場合、重複した値は取り除かれます。
+Nếu trong mảng truyền vào constructor có giá trị trùng lặp, các giá trị trùng sẽ bị loại bỏ.
 
 ```ts twoslash
 const fruits = new Set(["apple", "apple", "apple"]);
@@ -22,7 +22,7 @@ console.log(fruits);
 // @log: Set { 'apple' }
 ```
 
-コンストラクタ引数を省略した場合、空の`Set`オブジェクトが作られます。
+Nếu bỏ qua tham số constructor, sẽ tạo object `Set` rỗng.
 
 ```ts twoslash
 const fruits = new Set();
@@ -30,16 +30,16 @@ console.log(fruits);
 // @log: Set {}
 ```
 
-空の`Set`オブジェクトのTypeScript上の型は`Set<unknown>`になります。これでは後から`Set`に値を追加できないので、空の`Set`を作るときは、`Set`の型変数を指定する必要があります。
+Object `Set` rỗng trong TypeScript có kiểu `Set<unknown>`. Với kiểu này không thể thêm giá trị vào `Set` sau này, nên khi tạo `Set` rỗng cần chỉ định type variable của `Set`.
 
 ```ts
 const fruits = new Set<string>();
-//                    ^^^^^^^^ 型変数を指定
+//                    ^^^^^^^^ Chỉ định type variable
 ```
 
-## Setの型注釈
+## Type annotation cho Set
 
-TypeScriptで`Set`の型注釈をする場合は、`Set<string>`のようにSet要素の型を型変数に指定します。
+Khi type annotation cho `Set` trong TypeScript, chỉ định kiểu của phần tử Set vào type variable như `Set<string>`.
 
 ```ts twoslash
 function doSomething(strings: Set<string>) {
@@ -47,11 +47,11 @@ function doSomething(strings: Set<string>) {
 }
 ```
 
-## Setの操作
+## Thao tác với Set
 
-### 値を追加する - `Set.prototype.add()`
+### Thêm giá trị - `Set.prototype.add()`
 
-`Set`に値を追加するには`add`メソッドを用います。同じ値は何度追加しても増えないようになっています。
+Để thêm giá trị vào `Set`, sử dụng method `add`. Giá trị giống nhau dù thêm nhiều lần cũng không tăng.
 
 ```ts twoslash
 const fruits = new Set<string>();
@@ -61,7 +61,7 @@ console.log(fruits);
 // @log: Set (1) {"apple"}
 ```
 
-追加した値は最後に足されます。すでに存在する値は、追加されず順番は変わりません。
+Giá trị được thêm vào cuối cùng. Giá trị đã tồn tại sẽ không được thêm và thứ tự không thay đổi.
 
 ```ts twoslash
 const numbers = new Set<number>();
@@ -71,9 +71,9 @@ console.log(numbers);
 // @log: Set (3) {1, 2, 3}
 ```
 
-### 値を削除する - `Set.prototype.delete()`
+### Xóa giá trị - `Set.prototype.delete()`
 
-`Set`から値を取り除くには、`delete`メソッドを使います。
+Để xóa giá trị khỏi `Set`, sử dụng method `delete`.
 
 ```ts twoslash
 const numbers = new Set([1, 2, 3]);
@@ -82,9 +82,9 @@ console.log(numbers);
 // @log: Set (2) {1, 2}
 ```
 
-### 値の有無を確認する - `Set.prototype.has()`
+### Kiểm tra sự tồn tại của giá trị - `Set.prototype.has()`
 
-`Set`に値が存在するかどうかは`has`メソッドで調べられます。
+Để kiểm tra xem giá trị có tồn tại trong `Set` hay không, sử dụng method `has`.
 
 ```ts twoslash
 const numbers = new Set([1, 2, 3]);
@@ -94,9 +94,9 @@ console.log(numbers.has(999));
 // @log: false
 ```
 
-### 値の個数を取得する - `Set.prototype.size()`
+### Lấy số lượng giá trị - `Set.prototype.size()`
 
-`Set`にいくつ値が登録されているかを調べるには、`size`フィールドの値を見ます。
+Để kiểm tra có bao nhiêu giá trị đã đăng ký trong `Set`, xem giá trị của field `size`.
 
 ```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -104,9 +104,9 @@ console.log(fruits.size);
 // @log: 3
 ```
 
-### Setを空っぽにする - `Set.prototype.clear()`
+### Làm rỗng Set - `Set.prototype.clear()`
 
-`Set`に登録された値をすべて削除するには`clear`メソッドを使います。
+Để xóa tất cả giá trị đã đăng ký trong `Set`, sử dụng method `clear`.
 
 ```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -115,23 +115,23 @@ console.log(fruits);
 // @log: Set (0) {}
 ```
 
-### Setをループする
+### Lặp qua Set
 
-`Set`オブジェクトはfor-of構文でループできます。
+Object `Set` có thể lặp bằng cú pháp for-of.
 
 ```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
 
 for (const fruit of fruits) {
-  console.log(fruit); // "apple"、"orange"、"banana"の順で出力される
+  console.log(fruit); // Output theo thứ tự "apple", "orange", "banana"
 }
 ```
 
-[for-of文 - 拡張for文](../statements/for-of.md)
+[for-of statement - Enhanced for statement](../statements/for-of.md)
 
-### Setを配列に変換する
+### Chuyển Set thành mảng
 
-`Set`オブジェクトを配列に変換するには、スプレッド構文を用います。
+Để chuyển object `Set` thành mảng, sử dụng spread syntax.
 
 ```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -140,11 +140,11 @@ console.log(array);
 // @log: ["apple", "orange", "banana"]
 ```
 
-[配列のスプレッド構文「...」(spread syntax)](../values-types-variables/array/spread-syntax-for-array.md)
+[Spread syntax cho mảng "..." (spread syntax)](../values-types-variables/array/spread-syntax-for-array.md)
 
-## Setは直接JSONにできない
+## Set không thể chuyển trực tiếp thành JSON
 
-`Set`オブジェクトは`JSON.stringify`にかけても、`Set`に登録されている値はJSONになりません。
+Khi đưa object `Set` qua `JSON.stringify`, các giá trị đã đăng ký trong `Set` sẽ không trở thành JSON.
 
 ```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -152,7 +152,7 @@ console.log(JSON.stringify(fruits));
 // @log: "{}"
 ```
 
-SetオブジェクトのデータをJSON化したい場合は、一度配列にするなどひと手間必要です。
+Khi muốn chuyển dữ liệu của object Set thành JSON, cần một bước như chuyển thành mảng trước.
 
 ```ts twoslash
 const fruits = new Set(["apple", "orange", "banana"]);
@@ -161,11 +161,11 @@ console.log(JSON.stringify(array));
 // @log: ["apple","orange","banana"]
 ```
 
-## レシピ
+## Recipe
 
-### 配列から重複要素を取り除く
+### Loại bỏ phần tử trùng lặp khỏi mảng
 
-「`Set`に渡した値は重複しない」という特性を使って、配列から値が重複する要素を取り除く処理に応用できます。
+Sử dụng đặc tính "giá trị truyền vào `Set` không bị trùng lặp", có thể áp dụng cho việc loại bỏ các phần tử có giá trị trùng lặp khỏi mảng.
 
 ```js twoslash
 const array1 = [0, 0, 1, 1, 2, 2];

@@ -1,56 +1,56 @@
-# tsconfig.jsonを設定する
+# Cấu hình tsconfig.json
 
-Node.jsはそれ自身ではTypeScriptをサポートしているわけではないため、TypeScriptの導入をする時はTypeScriptの設定ファイルであるtsconfig.jsonが必要です。
+Node.js không tự support TypeScript, nên khi đưa TypeScript vào cần có file cấu hình TypeScript là tsconfig.json.
 
-## 初めてのtsconfig.json
+## tsconfig.json đầu tiên
 
-typescriptがpackage.jsonのdependencies(devDependencies)に入っているプロジェクトで以下を実行してください。
+Trong project có typescript trong dependencies (hoặc devDependencies) của package.json, chạy lệnh sau:
 
 ```bash
 npx tsc --init
 ```
 
-typescriptがグローバルインストールされていれば次のように実行することもできます。
+Nếu typescript được cài global có thể chạy như sau:
 
 ```bash
 tsc --init
 ```
 
-tsconfig.jsonが作成されます。すでにtsconfig.jsonがある時は上書きされませんのでいったん既存のtsconfig.jsonを別名に変更するなど、一度tsconfig.jsonと名のつくファイルが存在しないようにしてください。
+tsconfig.json sẽ được tạo. Nếu đã có tsconfig.json sẵn thì không bị ghi đè, nên hãy đổi tên tsconfig.json hiện có sang tên khác để không còn file có tên tsconfig.json.
 
-公式にあるtsconfig.jsonの説明はこちらです。
+Giải thích chính thức về tsconfig.json ở đây:
 
 <https://www.typescriptlang.org/docs/handbook/tsconfig-json.html>
 
-すべてのオプションの解説をすると余白が足りないので、ここでは用途を抽出して、次の観点で説明します。
+Giải thích tất cả option sẽ không đủ chỗ, nên ở đây tôi sẽ trích xuất các use case và giải thích theo các góc độ sau:
 
-- `target`の決め方
-- フロントエンドとバックエンド
-- 2020年版スクラッチからつくるなら
+- Cách quyết định `target`
+- Frontend và backend
+- Phiên bản 2020 nếu tạo từ đầu
 
 ## `target`
 
-TypeScriptは最終的にJavaScriptにコンパイルされます。このオプションはそのときにどのバージョンのJavaScript向けに出力するかといったものです。
+TypeScript cuối cùng sẽ được compile sang JavaScript. Option này quy định output sang JavaScript phiên bản nào.
 
-`target`を設定すれば、TypeScriptはその`target`の時点で使用できるオブジェクト、関数の定義ファイルが読み込まれます。つまり、あまりにも古いバージョンの`target`を指定すると昨今当然のように使っているオブジェクトや関数を使うことができないかもしれません。
+Khi set `target`, TypeScript sẽ load definition file của các object và function có thể dùng tại thời điểm `target` đó. Nghĩa là nếu chỉ định `target` quá cũ, có thể không dùng được các object và function thường dùng ngày nay.
 
-`target`を最新にしても、動作する環境が古いままだと使うことはできません。TypeScriptはコーディング中はあたかもそのオブジェクト、関数があるかのように入力補完をしますが、実際に動く`js`の実行環境がそのバージョンのオブジェクトや関数を持っているかどうかは別問題だからです。とはいえ構文に新たな記法が生まれた場合、生まれるより前の`target`に設定すると新たな記法で書いていたとしてもコンパイル時にその`target`で有効な構文に変換してくれます。有名な例では関数の表記です。たとえば`"target": "es5"`を指定した場合は`() => {}`といった`"target": "es2015"`から使えるアロー関数などの構文を`ES5`でも動く`function() {}`という形式にコンパイルしてくれます。
+Ngay cả khi đặt `target` mới nhất, nếu môi trường chạy vẫn cũ thì không dùng được. TypeScript sẽ autocomplete như thể object, function đó tồn tại khi code, nhưng việc môi trường thực thi `js` có object hay function phiên bản đó hay không là vấn đề khác. Tuy nhiên, khi có cú pháp mới được sinh ra, nếu set `target` trước khi cú pháp đó ra đời thì khi compile sẽ chuyển đổi sang cú pháp hợp lệ cho `target` đó. Ví dụ nổi tiếng là cách viết function. Ví dụ nếu chỉ định `"target": "es5"`, các cú pháp như arrow function `() => {}` có từ `"target": "es2015"` sẽ được compile sang dạng `function() {}` chạy được trên `ES5`.
 
 ### `lib`
 
-使いたい`target`には使いたい機能がない、でも使いたい。そのような時は`lib`オプションを指定することで使うことができるようになります。
+Muốn dùng tính năng không có trong `target` muốn dùng? Khi đó có thể chỉ định option `lib` để sử dụng được.
 
-このような最新バージョンにはある、または現時点では実装には至っていないが提案中(proposal)である機能を取り入れて使えるようにする物を通称ポリフィルと言います。ポリフィルについてさらに詳しく知りたい方は、[What is a polyfill?](https://remysharp.com/2010/10/08/what-is-a-polyfill) (この単語の創案者である Remy Sharp による記事)をご覧ください。
+Các thứ như vậy cho phép dùng tính năng có trong phiên bản mới nhất hoặc đang trong giai đoạn proposal chưa được implement được gọi chung là polyfill. Muốn biết thêm về polyfill, xem [What is a polyfill?](https://remysharp.com/2010/10/08/what-is-a-polyfill) (bài viết của Remy Sharp - người tạo ra từ này).
 
-`lib`は必ず指定する必要はありません。`target`を指定すればその`target`で使われているライブラリは自動的に追加されます。指定した`target`では実装されていないライブラリや、必要がないライブラリを除外したいときに使います。
+`lib` không bắt buộc phải chỉ định. Khi chỉ định `target`, library dùng trong `target` đó sẽ tự động được thêm vào. Dùng khi muốn thêm library chưa được implement trong `target` đã chỉ định, hoặc muốn loại trừ library không cần thiết.
 
-指定は必ずしも必要ないとは申しあげましたがNode.jsでは構文(`syntax`)のサポートよりもAPIのサポートが先に行われることがあるため`target`ではまだサポートしていないがNode.jsで使えるようになっているAPIを`lib`を指定することによって使えるようにすることがあります。
+Tuy nói không nhất thiết phải chỉ định, nhưng trong Node.js đôi khi API được support trước khi syntax được support, nên có thể chỉ định `lib` để dùng API mà Node.js đã hỗ trợ nhưng `target` chưa support.
 
-#### `lib`を指定する上での注意
+#### Lưu ý khi chỉ định `lib`
 
-`lib`を指定すると、明示的にどの`target`の`lib`を使うかも明記しなければいけません。
+Khi chỉ định `lib`, phải ghi rõ dùng `lib` của `target` nào.
 
-次のような`lib`を指定しない`target`の書き方は問題がありません。
+Cách viết `target` không chỉ định `lib` như sau là OK:
 
 ```json
 {
@@ -61,7 +61,7 @@ TypeScriptは最終的にJavaScriptにコンパイルされます。このオプ
 }
 ```
 
-`lib`を指定すると、明示的にどの`target`の`lib`を使うかも明記しなければいけません。
+Khi chỉ định `lib`, phải ghi rõ dùng `lib` của `target` nào:
 
 ```json
 {
@@ -78,47 +78,47 @@ TypeScriptは最終的にJavaScriptにコンパイルされます。このオプ
 }
 ```
 
-`lib`の先頭要素の`"es2018"`を省いてしまうとライブラリの多くが存在しない状態になります。
+Nếu bỏ qua phần tử đầu `"es2018"` trong `lib`, nhiều library sẽ không tồn tại.
 
-### `target`は何を指定したらいいか
+### Nên chỉ định `target` là gì
 
-あえて古いコードで動かしている、または古いNode.jsを使っているといった事情がなければ最新に近い物を指定することは問題ありません。2020/09現在はLTSとしてNode.js 14.xが登場しています。Node.js 14.xであれば`"target": "es2020"`は無難な選択肢です。
+Nếu không có lý do đặc biệt như phải chạy trên code cũ hoặc dùng Node.js cũ, chỉ định gần với phiên bản mới nhất là không vấn đề gì. Tính đến 09/2020, Node.js 14.x đã ra mắt như LTS. Với Node.js 14.x thì `"target": "es2020"` là lựa chọn an toàn.
 
-またBabelなどの専用のコンパイラやモジュールバンドラに処理を任せたい場合は`target`に`"esnext"`を指定して、そこからバージョンに合わせたコンパイルを各々にお願いすることになります。
+Ngoài ra, nếu muốn giao xử lý cho compiler chuyên dụng như Babel hoặc module bundler, chỉ định `target` là `"esnext"` rồi từ đó nhờ từng cái compile theo version.
 
-Node.jsのバージョンごとにサポートされているEcmaScriptの機能は [node.green](https://node.green) で確認することができます。
+Tính năng EcmaScript được support theo từng version Node.js có thể kiểm tra tại [node.green](https://node.green).
 
-## フロントエンドとバックエンド
+## Frontend và backend
 
-フロントエンドとバックエンドはモジュールの読み込み方法が異なっています。詳細は`import / export / require`のページをご覧ください。次の設定は使う場面で切り替えるべき項目です。
+Frontend và backend có cách load module khác nhau. Chi tiết xem trang về `import / export / require`:
 
 [import / export /require](../import-export-require.md)
 
-ここで登場するモジュールという言葉ですが、この言葉に馴染みのない方はそのコードのファイルが読み込む他のファイルの中にあるコードぐらいに捉えてください。それらは同じプロジェクト内の他のファイルの中のコードでもあれば`npm install`したものでもあります。とくに`npm install`したものであればこれらをパッケージと呼びます。
+Từ module ở đây, người chưa quen hãy hiểu là code trong các file khác mà code đó load. Chúng có thể là code trong file khác trong cùng project, hoặc từ `npm install`. Đặc biệt, các thứ từ `npm install` được gọi là package.
 
 ### `module`
 
-このオプションは出力されるJavaScriptがどのようにモジュールを読み込むか指定します。
+Option này chỉ định JavaScript được output sẽ load module như thế nào.
 
-モジュール読み込みの仕組みが異なっているライブラリの互換性は一般的にはないものと考えてください。そしてこれは**フロントエンドとバックエンドでは異なります**。
+Hãy coi các library có cơ chế load module khác nhau nói chung là không tương thích. Và điều này **khác nhau giữa frontend và backend**.
 
 #### `commonjs`
 
-バックエンド(サーバーサイド)で使われているモジュール読み込みの解決方法です。作成しているモジュールやパッケージがバックエンドでの動作だけを保証したい場合はもっとも無難な選択です。
+Cách giải quyết load module dùng ở backend (server-side). Nếu module hoặc package đang tạo chỉ cần đảm bảo hoạt động ở backend thì đây là lựa chọn an toàn nhất.
 
 #### `es2015, es2020, esnext`
 
-通称`esmodule`と呼ばれるモジュール読み込みの解決方法です。フロントエンドで使われています。Node.jsは13.2.0でバックエンドでも同様にこのモジュール解決方法をサポートしましたが2020年現在は対応しているパッケージは少ないです。
+Cách giải quyết load module gọi là `esmodule`. Được dùng ở frontend. Node.js từ 13.2.0 cũng support cách giải quyết module này ở backend, nhưng tính đến 2020 ít package support.
 
-このような違いがあるため、使う場面がバックエンドなら`commonjs`を、フロントエンドなら`es2015, es2020, esnext`を指定することが望ましいです。
+Do có sự khác biệt này, nếu dùng ở backend thì chỉ định `commonjs`, frontend thì chỉ định `es2015, es2020, esnext`.
 
-## 2020年版スクラッチから作るなら
+## Phiên bản 2020 nếu tạo từ đầu
 
-スクラッチから作るということは現在の資産との整合性の都合、しがらみが一切ない状態です。ここから作るならこれだけは満たしておけば型に満ちたプログラミングができるという紹介です。
+Tạo từ đầu nghĩa là không có vướng mắc gì về tính nhất quán với tài sản hiện có. Đây là giới thiệu những gì cần có để lập trình đầy type.
 
-しがらみがないという条件のもと、Node.jsは14.xを使っているものとします。
+Với điều kiện không vướng mắc, giả sử dùng Node.js 14.x.
 
-### バックエンドの場合
+### Trường hợp backend
 
 ```json
 {
@@ -144,7 +144,7 @@ Node.jsのバージョンごとにサポートされているEcmaScriptの機能
 }
 ```
 
-### フロントエンドの場合
+### Trường hợp frontend
 
 ```json
 {
@@ -171,6 +171,6 @@ Node.jsのバージョンごとにサポートされているEcmaScriptの機能
 }
 ```
 
-### 異なる箇所について
+### Về phần khác nhau
 
-これらふたつのtsconfig.jsonの設定で異なるのは`module, lib, jsx`です。フロントエンドであれば`lib`に`dom`を加えることもあります(ただし、これは`"target": "es2020"`に組み込まれています)。さらに`jsx`を使うのであれば`tsx`をどのようにしてjsのファイルに出力コンパイルしたいかを`jsx`オプションで指定します。
+Phần khác nhau trong 2 cấu hình tsconfig.json này là `module, lib, jsx`. Nếu là frontend có thể thêm `dom` vào `lib` (tuy nhiên điều này đã có trong `"target": "es2020"`). Hơn nữa, nếu dùng `jsx` thì chỉ định bằng option `jsx` cách muốn compile output `tsx` sang file js.

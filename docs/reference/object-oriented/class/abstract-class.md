@@ -1,14 +1,14 @@
 ---
-sidebar_label: 抽象クラス
+sidebar_label: Abstract class
 ---
 
-# 抽象クラス (abstract class)
+# Abstract class (abstract class)
 
-JavaやPHPなどの言語では、`abstract`修飾子を使って抽象クラスを定義できます。抽象クラスは、直接インスタンスを作れないクラスのことです。JavaScriptには抽象クラスを定義する構文はありません。一方、TypeScriptには`abstract`修飾子があり抽象クラスを表現できます。
+Trong các ngôn ngữ như Java hay PHP, có thể định nghĩa abstract class bằng modifier `abstract`. Abstract class là class không thể tạo instance trực tiếp. JavaScript không có cú pháp để định nghĩa abstract class. Ngược lại, TypeScript có modifier `abstract` để biểu diễn abstract class.
 
-`abstract`は抽象クラスを作成する時に宣言します。抽象クラスとは直接インスタンス化(`new`)することができず、必ずスーパークラスとして利用することを保証するものです。抽象クラス内のメソッドにも`abstract`宣言を行うことができます。`interface`と同じようにサブクラスは抽象メソッドを実装する必要があります。
+`abstract` được khai báo khi tạo abstract class. Abstract class là class không thể được khởi tạo trực tiếp (`new`), và đảm bảo chỉ được sử dụng như superclass. Method trong abstract class cũng có thể khai báo `abstract`. Tương tự như `interface`, subclass phải implement abstract method.
 
-`Food`クラスを抽象クラスに変更し、"要冷蔵"メソッド`keepRefrigerated()`を抽象メソッドとして追加すると`Meat`クラスでエラーが発生します。これは`Meat`クラスに`keepRefrigerated`メソッドが実装されていないからです。
+Khi thay đổi class `Food` thành abstract class và thêm method "cần bảo quản lạnh" `keepRefrigerated()` như một abstract method, class `Meat` sẽ báo lỗi. Lý do là class `Meat` chưa implement method `keepRefrigerated`.
 
 ```ts twoslash
 // @errors: 2515
@@ -24,7 +24,7 @@ abstract class Food {
 class Meat extends Food {}
 ```
 
-`keepRefrigerated()`メソッドを実装することによりエラーはなくなります。
+Implement method `keepRefrigerated()` để xóa lỗi.
 
 ```ts twoslash
 abstract class Food {
@@ -43,43 +43,43 @@ class Meat extends Food {
 }
 ```
 
-## JavaScriptへのコンパイルしたときに起こること
+## Điều gì xảy ra khi compile sang JavaScript
 
-TypeScriptの抽象クラスは、JavaScriptにコンパイルしたとき、消されることなく残ります。何も中身がない抽象クラスを定義してコンパイルしてみるとどうなるでしょうか。
+Abstract class của TypeScript vẫn tồn tại sau khi compile sang JavaScript, không bị xóa. Khi định nghĩa một abstract class rỗng và compile thì kết quả sẽ như thế nào?
 
 ```ts twoslash
 abstract class AbstractClass {}
 ```
 
-上のTypeScriptをコンパイルすると、次のJavaScriptが生成されます。
+Compile TypeScript trên sẽ sinh ra JavaScript sau:
 
-```ts twoslash title="コンパイル結果"
+```ts twoslash title="Kết quả compile"
 // @showEmit
 // @alwaysStrict: false
 abstract class AbstractClass {}
 ```
 
-このように、抽象クラスは`abstract`修飾子が外され、ただのクラスとしてコンパイルされます。
+Như vậy, abstract class được compile thành class thông thường với modifier `abstract` bị loại bỏ.
 
-抽象メソッドは、コンパイル時に消されます。たとえば、次の実装の中身がある`concreteMethod`は残りますが、抽象メソッドの`abstractMethod`は消えます。
+Abstract method bị xóa khi compile. Ví dụ, `concreteMethod` có implementation sẽ được giữ lại, nhưng abstract method `abstractMethod` sẽ bị xóa.
 
 ```ts twoslash
 abstract class AbstractClass {
   concreteMethod(): void {
-    /* 実装の中身 */
+    /* 實装の中身 */
   }
   abstract abstractMethod(): void;
 }
 ```
 
-上のTypeScriptのコンパイル結果は次のようになります。
+Kết quả compile TypeScript trên như sau:
 
-```ts twoslash title="コンパイル結果"
+```ts twoslash title="Kết quả compile"
 // @showEmit
 // @alwaysStrict: false
 abstract class AbstractClass {
   concreteMethod(): void {
-    /* 実装の中身 */
+    /* 實装の中身 */
   }
   abstract abstractMethod(): void;
 }

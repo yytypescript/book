@@ -1,6 +1,6 @@
 # undefined型
 
-JavaScriptのundefinedは未定義を表すプリミティブな値です。変数に値がセットされていないとき、戻り値が無い関数、オブジェクトに存在しないプロパティにアクセスしたとき、配列に存在しないインデックスでアクセスしたときなどに現れます。
+undefined trong JavaScript là giá trị primitive biểu thị chưa được định nghĩa. Xuất hiện khi biến chưa được gán giá trị, hàm không có return value, truy cập property không tồn tại trong object, truy cập index không tồn tại trong array, v.v.
 
 ```js twoslash
 let name;
@@ -20,18 +20,18 @@ console.log(arr[1]);
 // @log: undefined
 ```
 
-## undefinedリテラル
+## undefined literal
 
-JavaScriptでは同じプリミティブ型でも、boolean型やnumber型がリテラルがあるのに対し、`undefined`にはリテラルはありません。実は`undefined`は変数です。グローバル定数のようなものと理解して構いません。
+Trong JavaScript, các primitive type như boolean hay number có literal, nhưng `undefined` không có literal. Thực ra `undefined` là một biến. Có thể hiểu nó như một global constant.
 
-## undefinedの型注釈
+## Type annotation của undefined
 
-TypeScriptでundefined型の型注釈を行うには、`undefined`を用います。
+Để type annotation cho undefined trong TypeScript, sử dụng `undefined`.
 
 ```ts twoslash
 const x: undefined = undefined;
 ```
 
-戻り値のない関数は`undefined`になりますが、TypeScriptで戻り値なしを型注釈で表現する場合、`undefined`ではなく`void`を用います。詳しくは関数の説明をご覧ください。
+Hàm không có return value sẽ trả về `undefined`, nhưng trong TypeScript để type annotation cho hàm không có return value, dùng `void` thay vì `undefined`. Xem chi tiết tại phần giải thích về hàm.
 
 [戻り値がない関数とvoid型 (void type)](../functions/void-type.md)

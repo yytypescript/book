@@ -2,9 +2,9 @@
 sidebar_label: 例外処理
 ---
 
-# 例外処理 (exception)
+# Xử lý exception (exception)
 
-JavaScriptにはJavaに似た例外処理の構文があります。例外には`Error`オブジェクトを使い、throw構文で例外を投げます。try-catch構文で例外を捕捉できます。
+JavaScript có cú pháp xử lý exception tương tự Java. Exception sử dụng object `Error`, và dùng cú pháp throw để ném exception. Có thể bắt exception bằng cú pháp try-catch.
 
 ```js twoslash
 try {
@@ -15,25 +15,25 @@ try {
 }
 ```
 
-## throw構文
+## Cú pháp throw
 
-JavaScriptのthrowは例外を投げる構文です。例外として投げるオブジェクトはErrorオブジェクトを使うのが一般的です。
+Cú pháp throw trong JavaScript dùng để ném exception. Thông thường sử dụng object Error làm object được ném.
 
 ```js twoslash
 throw new Error("network error!");
 ```
 
-JavaScriptのthrowはJavaなどと異なり、何でも投げることができます。プリミティブ型でさえ投げれます。
+Khác với Java và các ngôn ngữ khác, throw trong JavaScript có thể ném bất cứ thứ gì. Ngay cả kiểu primitive cũng có thể ném.
 
 ```js twoslash
 throw "just a string";
 ```
 
-これはアンチパターンです。throwが何でも投げられるとしても、Errorオブジェクトを用いるべきです。Errorオブジェクトを使ったほうがコードの読み手に意外性を与えないからです。加えて、スタックトレースが追えるのはErrorオブジェクトだけだからです。
+Đây là anti-pattern. Dù throw có thể ném bất cứ thứ gì, bạn nên sử dụng object Error. Sử dụng object Error giúp người đọc code không bất ngờ. Hơn nữa, chỉ có object Error mới có thể theo dõi stack trace.
 
-## try-catch構文
+## Cú pháp try-catch
 
-JavaScriptで例外を捉えるにはtry-catch構文を使います。例外が投げられる可能性がある部分をtryブロックで囲み、catchブロックで捉えた例外に対する処理を行います。
+Để bắt exception trong JavaScript, sử dụng cú pháp try-catch. Bọc phần có khả năng ném exception trong block try, và xử lý exception được bắt trong block catch.
 
 ```js twoslash
 try {
@@ -43,9 +43,9 @@ try {
 }
 ```
 
-### catchの型
+### Kiểu của catch
 
-TypeScriptではcatchの変数の型はデフォルトで`any`型になります。
+Trong TypeScript, kiểu của biến trong catch mặc định là kiểu `any`.
 
 ```ts twoslash
 // @useUnknownInCatchVariables: false
@@ -56,37 +56,37 @@ try {
 }
 ```
 
-型が`Error`オブジェクトの型ではなく`any`型になるのは、JavaScriptの仕様上どんな値がthrowされるか分からないためです。
+Lý do kiểu không phải là kiểu object `Error` mà là kiểu `any` là do theo đặc tả của JavaScript, không thể biết giá trị nào sẽ được throw.
 
-TypeScriptのコンパイラーオプションの`useUnknownInCatchVariables`を有効にすると、catchの変数の型が`unknown`型になります。「どんな値がthrowされるか分からない」ことを型として正確に表現できるため、より型安全にしたい場合は、このオプションを有効化するとよいでしょう。
+Khi bật compiler option `useUnknownInCatchVariables` của TypeScript, kiểu của biến trong catch sẽ trở thành kiểu `unknown`. Vì điều này thể hiện chính xác hơn việc "không biết giá trị nào sẽ được throw" dưới dạng kiểu, nên nếu muốn type-safe hơn, bạn nên bật option này.
 
 [useUnknownInCatchVariables](../tsconfig/useunknownincatchvariables.md)
 
 [undefined型](../values-types-variables/undefined.md)
 
-### catchの分岐
+### Phân nhánh trong catch
 
-JavaやPHPでは捉えるエラーの型に対応するcatchを複数書けますが、JavaScriptとTypeScriptではcatchは1つしか書けません。JavaScriptでエラーの型によってエラーハンドリングを分岐したい場合は、catchブロックの中で分岐を書く方法で対応します。
+Trong Java hoặc PHP, có thể viết nhiều catch tương ứng với kiểu error cần bắt, nhưng trong JavaScript và TypeScript chỉ có thể viết một catch. Nếu muốn phân nhánh xử lý error theo kiểu error trong JavaScript, cần viết phân nhánh trong block catch.
 
 ```ts twoslash
 try {
   // ...
 } catch (e) {
   if (e instanceof TypeError) {
-    // TypeErrorに対する処理
+    // Xử lý cho TypeError
   } else if (e instanceof RangeError) {
-    // RangeErrorに対する処理
+    // Xử lý cho RangeError
   } else if (e instanceof EvalError) {
-    // EvalErrorに対する処理
+    // Xử lý cho EvalError
   } else {
-    // その他のエラー
+    // Các error khác
   }
 }
 ```
 
-### try-catchはブロックスコープ
+### try-catch là block scope
 
-JavaScriptのtry-catch文内の変数はブロックスコープになります。そのため、try-catch内で宣言された変数は、try-catchの外では参照できません。
+Biến trong câu lệnh try-catch của JavaScript có block scope. Do đó, biến được khai báo trong try-catch không thể tham chiếu bên ngoài try-catch.
 
 ```ts twoslash
 // @errors: 2304
@@ -94,11 +94,11 @@ async function fetchData() {
   try {
     const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
     const data = await res.json();
-    console.log(data); // dataが参照できる
+    console.log(data); // data có thể tham chiếu
   } catch (e: unknown) {
     return;
   }
-  console.log(data); // dataが参照できない
+  console.log(data); // data không thể tham chiếu
 }
 
 fetchData();
@@ -106,7 +106,7 @@ fetchData();
 
 [変数のスコープ (scope)](variable-scope.md)
 
-try-catch文の外でも変数を参照したい場合は、tryの前に代入用の変数をlet宣言しておく必要があります。
+Nếu muốn tham chiếu biến bên ngoài câu lệnh try-catch, cần khai báo biến bằng let trước try.
 
 ```ts twoslash
 async function fetchData() {
@@ -117,15 +117,15 @@ async function fetchData() {
   } catch (e: unknown) {
     return;
   }
-  console.log(data); // dataが参照できる
+  console.log(data); // data có thể tham chiếu
 }
 
 fetchData();
 ```
 
-### finallyブロック
+### Block finally
 
-JavaScriptにもJavaやPHPと同じようにfinallyが書けます。finallyは例外が発生しようがしまいが必ず実行される処理です。finallyはtry-catchの後に書きます。finally内の処理はtryとcatchの処理が実行された後に実行されます。
+JavaScript cũng có thể viết finally giống như Java và PHP. finally là phần xử lý luôn được thực thi dù có xảy ra exception hay không. finally được viết sau try-catch. Xử lý trong finally được thực thi sau khi xử lý của try và catch được thực thi.
 
 ```js twoslash
 try {

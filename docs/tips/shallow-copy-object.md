@@ -1,14 +1,14 @@
-# オブジェクトを浅くコピーする
+# Copy nông object
 
-オブジェクトとは色々なキーとプロパティの組み合わせをひとつのモノとして扱うことができます。
+Object có thể xử lý nhiều tổ hợp key và property như một thứ duy nhất.
 
-オブジェクトを扱っているとき、そのインスタンスに対する比較や代入は他の言語と同じように参照の比較、代入です。その参照をほかのどこかで持たれているとそこで書き換えられる可能性があります。
+Khi xử lý object, so sánh hoặc gán instance giống như các ngôn ngữ khác là so sánh và gán tham chiếu. Nếu tham chiếu đó được giữ ở đâu đó khác, có thể bị viết lại ở đó.
 
-## インスタンスを安易に上書きすると起こる弊害
+## Tác hại khi ghi đè instance một cách bừa bãi
 
-たとえば生活習慣病に関するサービスを作るとします。そのサービスでは一日の食事を入力するとその食事から熱量 (カロリー) が計算され、さらに将来的に生活習慣病 (少々異なりますがMetabolic Syndromeとします) になるかどうか判定できるとします。
+Ví dụ giả sử bạn đang tạo service liên quan đến bệnh lối sống. Service đó nhập bữa ăn trong ngày và tính nhiệt lượng (calo) từ bữa ăn đó, hơn nữa có thể đoán xem tương lai có bị bệnh lối sống (gọi là Metabolic Syndrome tuy hơi khác) hay không.
 
-ここで一日の食事を意味するオブジェクトの型として`MealsPerDay`を定義し、一日に摂取した食事の熱量からいずれ生活習慣病になるかどうか判定する関数`willBeMetabo()`を定義すれば次のようになります。
+Ở đây định nghĩa type `MealsPerDay` nghĩa là object của bữa ăn trong ngày, và định nghĩa function `willBeMetabo()` đoán xem có bị bệnh lối sống hay không từ nhiệt lượng bữa ăn trong ngày.
 
 ```ts twoslash
 // @noErrors
@@ -23,7 +23,7 @@ function willBeMetabo(meals: MealsPerDay): boolean {
 }
 ```
 
-使い方としては次のようになります。
+Cách sử dụng như sau.
 
 ```ts twoslash
 type MealsPerDay = {
@@ -46,9 +46,9 @@ willBeMetabo(meals);
 // @log: false
 ```
 
-ですが、これだけだと食べ物ではないもの、たとえばネジなどの不正な入力があったときにサービスが予想しない反応をしかねません。そこで入力されているものが本当に食事かどうかをバリデーションする関数として`isMeals()`を定義します。この関数は食事ではないものが与えられると例外を投げます。
+Tuy nhiên, chỉ như vậy thì khi có input không hợp lệ như đồ không phải thức ăn như ốc vít, service có thể phản ứng không như mong đợi. Vì vậy định nghĩa function `isMeals()` để validate xem input có thực sự là bữa ăn hay không. Function này throw exception khi nhận được thứ không phải bữa ăn.
 
-`isMeals()`の構造は単純です。朝食、昼食、夕食をそれぞれそれが食事であるかどうかを判定するだけです。ひとつの食事が食事であるかを判定する関数`isMeal()`があるとすれば内部でそれを呼ぶだけです。`isMeal()`の実装については今回は重要ではないため省略します。
+Cấu trúc của `isMeals()` đơn giản. Chỉ cần đoán từng bữa sáng, trưa, tối xem có phải bữa ăn hay không. Nếu có function `isMeal()` đoán một bữa ăn có phải bữa ăn hay không thì chỉ cần gọi nó bên trong. Triển khai `isMeal()` không quan trọng lần này nên bỏ qua.
 
 ```ts twoslash
 type MealsPerDay = {
@@ -71,7 +71,7 @@ function isMeals(meals: MealsPerDay): void {
 }
 ```
 
-今回のユースケースでは`isMeals()`でバリデーションを行ったあとその食事を`willBeMetabo()`で判定します。食べられないものが与られたときは例外を捕捉して対応できればよいので大まかにはこのような形になるでしょう。
+Trong use case lần này, sau khi validate bằng `isMeals()` thì đoán bữa ăn đó bằng `willBeMetabo()`. Khi nhận được thứ không ăn được, chỉ cần catch exception và xử lý nên đại khái như sau.
 
 ```ts twoslash
 // @noErrors
@@ -95,7 +95,7 @@ function shouldBeCareful(meals: MealsPerDay): boolean {
 }
 ```
 
-ここで`isMeals()`の制作者あるいは維持者が何を思ってか`isMeals()`に自分の好きなコッテコテギトギトの食事を、もとのインスタンスを上書きするようにプログラムを書いたとします。この変更によって前述のとても健康的で500 kcalにも満たない食事をしているはずのユーザーが`isMeals()`を19,800 kcalものカロリー爆弾を摂取していることになります。
+Ở đây giả sử người tạo hoặc bảo trì `isMeals()` vì lý do gì đó đã viết chương trình ghi đè instance gốc bằng bữa ăn béo ngậy yêu thích của mình. Thay đổi này khiến user đang ăn rất lành mạnh chưa đến 500 kcal bị `isMeals()` biến thành đang ăn bom calo 19,800 kcal.
 
 ```ts twoslash
 type MealsPerDay = {
@@ -146,25 +146,25 @@ willBeMetabo(meals);
 // @log: true
 ```
 
-`isMeals()`を呼んでしまったらもうどのような食事が与えられても`willBeMetabo()`は誰もが生活習慣病に一直線であると判別されることになります。変数`meals`の変更は`isMeals()`内に留まらず、外側にも影響を与えます。
+Khi đã gọi `isMeals()`, bất kể bữa ăn nào được đưa vào, `willBeMetabo()` sẽ đoán ai cũng đang trên đường đến bệnh lối sống. Thay đổi biến `meals` không chỉ dừng lại trong `isMeals()` mà còn ảnh hưởng ra bên ngoài.
 
-### 今回の問題
+### Vấn đề lần này
 
-今回の例は`isMeals()`が悪さをしました。この関数が自分たちで作ったものであればすぐに原因を見つけることができるでしょう。このような問題のある関数を書かないようにすることはもちろん大事なことですが、未熟なチームメイトがいればこのような関数を書くかもしれません。人類が過ちを犯さない前提よりも過ちを犯すことがないようにする設計の方が大事です。
+Lần này ví dụ `isMeals()` gây hại. Nếu function này do chính mình tạo thì có thể tìm nguyên nhân ngay. Không viết function có vấn đề như vậy tất nhiên quan trọng, nhưng nếu có teammate chưa thành thạo thì có thể viết function như vậy. Thiết kế ngăn không cho con người mắc lỗi quan trọng hơn giả định con người không mắc lỗi.
 
-`isMeals()`が外部から持ってきたパッケージだとすると問題です。自分たちでこのパッケージに手を加えることは容易ではないため (できなくはありません) 。制作者にプルリクエストを出してバグフィックスが行われるまで開発を止めるというのも現実的ではありません。
+Nếu `isMeals()` là package lấy từ bên ngoài thì có vấn đề. Tự mình sửa package này không dễ (không phải không thể). Gửi pull request cho người tạo và dừng phát triển cho đến khi bug được fix cũng không thực tế.
 
-### どうすればよかったのか
+### Nên làm thế nào
 
-そもそもインスタンスを書き換えられないようにしてしまうか、元のインスタンスが破壊されないようにスケープゴートのインスタンスを用意するのが一般的です。前者はバリューオブジェクトと呼ばれるものが代表します。ここで紹介するのは後者のスケープゴート、つまりコピーを用意する方法です。
+Nên làm cho instance không thể bị viết lại, hoặc chuẩn bị instance scapegoat để instance gốc không bị phá hủy. Phương pháp trước được đại diện bởi value object. Ở đây giới thiệu phương pháp sau, scapegoat, tức là chuẩn bị copy.
 
-## 浅いコピー (shallow copy) とは
+## Shallow copy là gì
 
-題名にもあるとおり**浅い**とは何を指しているのでしょうか？それはオブジェクトのコピーをするにあたりオブジェクトがいかに深い構造になっていても (ネストしていても) 第一階層のみをコピーすることに由来します。当然対義語は深いコピー (deep copy) です。
+Như tiêu đề, **nông** nghĩa là gì? Đó là khi copy object, dù object có cấu trúc sâu đến đâu (nested) thì chỉ copy tầng đầu tiên. Tất nhiên từ đối nghịch là deep copy.
 
-### 浅いコピーをしたオブジェクトは等しくない
+### Object đã shallow copy không bằng nhau
 
-浅いコピーをする関数を`shallowCopy()`とします。実装は難しくありませんが今回は挙動についてのみ触れたいため言及は後にします。浅いコピーをしたオブジェクトとそのオリジナルは`===`で比較すると`false`を返します。これはコピーの原義から当然の挙動であり、もし`true`を返すようであればそれはコピーに失敗していることになります。
+Giả sử function shallow copy là `shallowCopy()`. Triển khai không khó nhưng lần này chỉ muốn nói về hành vi nên để sau. Object đã shallow copy và original khi so sánh bằng `===` trả về `false`. Điều này tự nhiên theo định nghĩa của copy, nếu trả về `true` thì copy đã thất bại.
 
 ```ts twoslash
 declare function shallowCopy(obj: object): object;
@@ -177,7 +177,7 @@ console.log(object1 === object2);
 // @log: false
 ```
 
-次の例は先ほどのインスタンスの上書きを浅いコピーをすることにより防いでいる例です。`meals`のインスタンスは変化せず`isMeals()`に引数として与えた`scapegoat`だけが変更されます。
+Ví dụ sau ngăn chặn ghi đè instance bằng shallow copy. Instance `meals` không thay đổi và chỉ `scapegoat` được truyền làm tham số cho `isMeals()` bị thay đổi.
 
 ```ts twoslash
 type MealsPerDay = {
@@ -214,9 +214,9 @@ console.log(scapegoat);
 // @log: { breakfast: "a beef steak", lunch: "a bucket of ice cream", dinner: "3 pizzas" }
 ```
 
-### 浅いコピーで防ぎきれない場合
+### Trường hợp shallow copy không ngăn được
 
-先ほども述べたように浅いコピーはオブジェクトの第一階層のみをコピーします。そのためもしオブジェクトが深い、複雑な階層を持っている場合、それらをすべてコピーしているのではなく、第二階層以降は単なる参照になります。次の例は浅いコピーのプロパティにオブジェクトがある場合、それがコピーではなく参照になっていることを示しています。
+Như đã nói, shallow copy chỉ copy tầng đầu tiên của object. Vì vậy nếu object có cấu trúc sâu, phức tạp, nó không copy tất cả mà tầng thứ hai trở đi chỉ là tham chiếu. Ví dụ sau cho thấy khi property của shallow copy có object, nó là tham chiếu chứ không phải copy.
 
 ```ts twoslash
 declare function shallowCopy(meals: NestObject): NestObject;
@@ -237,12 +237,12 @@ console.log(object1.nest === object2.nest);
 // @log: true
 ```
 
-完全なコピーを作りたい場合は浅いコピーと一緒に出てきた深いコピーを使います。
-深いコピーについて今回は深く触れません。浅いコピーに比べ深いコピーはコピーに時間がかかり、さらに参照ではなく実体をコピーするため、記憶領域を同じ量確保しなければなりません。何でもかんでも深いコピーをするとあっという間に時間的、空間的な領域を浪費します。浅いコピーでこと足りる場合は浅いコピーを使用する方がよいでしょう。
+Nếu muốn tạo copy hoàn chỉnh, sử dụng deep copy đã đề cập cùng với shallow copy.
+Lần này không đi sâu vào deep copy. So với shallow copy, deep copy tốn thời gian copy hơn, và vì copy thực thể chứ không phải tham chiếu, cần cấp phát cùng lượng bộ nhớ. Nếu deep copy tràn lan sẽ nhanh chóng lãng phí tài nguyên thời gian và không gian. Khi shallow copy đủ dùng thì nên sử dụng shallow copy.
 
-### 浅いコピーを実装する
+### Triển khai shallow copy
 
-浅いコピーの実装は昨今のJSでは大変楽になっており、次のコードで完成です。
+Triển khai shallow copy trong JS hiện đại rất dễ, chỉ cần code sau là xong.
 
 ```ts twoslash
 const sample: object = {
@@ -253,9 +253,9 @@ const sample: object = {
 const shallowCopied: object = { ...sample };
 ```
 
-もちろん変数`sample`はオブジェクトである必要があります。この`...`はスプレッド構文です。スプレッド構文については関数の章を参照ください。
+Tất nhiên biến `sample` phải là object. `...` này là spread syntax. Về spread syntax hãy xem chương function.
 
-オブジェクトのコピーにスプレッド構文を使えるようになったのはES2018からです。たとえば次のような浅いコピーの例を
+Có thể sử dụng spread syntax để copy object từ ES2018. Ví dụ shallow copy như sau
 
 ```ts twoslash
 const sample: object = {
@@ -266,7 +266,7 @@ const sample: object = {
 const shallowCopied: object = { ...sample };
 ```
 
-ES2018でコンパイルすると次のようになります。
+khi compile với ES2018 sẽ thành như sau.
 
 ```ts twoslash
 const sample = {
@@ -276,7 +276,7 @@ const sample = {
 const shallowCopied = { ...sample };
 ```
 
-ほぼ同じですがES2017でコンパイルすると次のようになります。
+Gần như giống nhau nhưng khi compile với ES2017 sẽ thành như sau.
 
 ```ts twoslash
 const sample = {
@@ -286,15 +286,15 @@ const sample = {
 const shallowCopied = Object.assign({}, sample);
 ```
 
-となります。スプレッド構文が実装される前はこの`Object.assign()`を使っていました。このふたつはまったく同じものではありませんが`Object.assign({}, obj)`を`{...obj}`のほぼ代替として使うことができます。
+Trước khi spread syntax được triển khai, sử dụng `Object.assign()` này. Hai cái này không hoàn toàn giống nhau nhưng có thể sử dụng `Object.assign({}, obj)` gần như thay thế cho `{...obj}`.
 
-## コピー用のAPIを使う
+## Sử dụng API để copy
 
-JavaScriptではオブジェクトによって、浅いコピーを簡潔に書くためのAPIが提供されているものがあります。`Map`や`Set`はそれが利用できます。
+Trong JavaScript, tùy object có API được cung cấp để viết shallow copy ngắn gọn. `Map` và `Set` có thể sử dụng điều đó.
 
-### `Map<K, V>`のコピー
+### Copy `Map<K, V>`
 
-`Map`をコピーする場合は、`Map`コンストラクタにコピーしたい`Map`オブジェクトを渡します。
+Khi copy `Map`, truyền object `Map` muốn copy vào constructor `Map`.
 
 ```ts twoslash
 const map1 = new Map([
@@ -302,7 +302,7 @@ const map1 = new Map([
   [".ts", "TS"],
 ]);
 const map2 = new Map(map1);
-// 要素は同一だが、Mapインスタンスは異なる
+// Phần tử giống nhau nhưng instance Map khác nhau
 console.log(map2);
 // @log: Map (2) {".js" => "JS", ".ts" => "TS"}
 console.log(map1 !== map2);
@@ -311,14 +311,14 @@ console.log(map1 !== map2);
 
 [Map](../reference/builtin-api/map.md)
 
-### `Set<T>`のコピー
+### Copy `Set<T>`
 
-`Set`をコピーする場合は、`Set`コンストラクタにコピーしたい`Set`オブジェクトを渡します。
+Khi copy `Set`, truyền object `Set` muốn copy vào constructor `Set`.
 
 ```ts twoslash
 const set1 = new Set([1, 2, 3]);
 const set2 = new Set(set1);
-// 要素は同一だが、Setのインスタンスは異なる
+// Phần tử giống nhau nhưng instance Set khác nhau
 console.log(set2);
 // @log: Set (3) {1, 2, 3}
 console.log(set1 !== set2);
@@ -327,17 +327,17 @@ console.log(set1 !== set2);
 
 [Set](../reference/builtin-api/set.md)
 
-### `Array<T>`のコピー
+### Copy `Array<T>`
 
-配列をコピーする方法はいくつかありますが、もっとも簡単なのは配列のスプレッド構文を用いたものです。
+Có nhiều cách copy array, nhưng đơn giản nhất là sử dụng spread syntax của array.
 
 ```ts twoslash
 const array1 = [1, 2, 3];
 const array2 = [...array1];
 ```
 
-このときスプレッド構文`...`を書き忘れると配列の配列`T[][]`型ができあがるので気をつけてください。
+Khi đó nếu quên viết spread syntax `...` sẽ tạo ra array của array `T[][]` nên hãy cẩn thận.
 
-## 関連情報
+## Thông tin liên quan
 
-[スプレッド構文](../reference/values-types-variables/array/spread-syntax-for-array.md)
+[Spread syntax](../reference/values-types-variables/array/spread-syntax-for-array.md)

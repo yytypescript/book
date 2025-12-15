@@ -1,14 +1,14 @@
-# switchと変数スコープ
+# switch và variable scope
 
-JavaScriptでは、`switch`ごとに変数スコープが作られます。
+Trong JavaScript, mỗi `switch` tạo ra một variable scope riêng.
 
 ```ts twoslash
 switch (
-  true // 変数スコープその1
+  true // Variable scope 1
 ) {
   default:
     switch (
-      true // 変数スコープその2
+      true // Variable scope 2
     ) {
       default:
       // ...
@@ -16,9 +16,9 @@ switch (
 }
 ```
 
-## caseの変数スコープはない
+## case không có variable scope riêng
 
-`case`ごとには変数スコープが作られません。複数の`case`がある場合、`switch`全体で変数スコープを共有します。そのため、複数の`case`で同じ変数名を宣言すると実行時エラーが発生します。
+Mỗi `case` không tạo ra variable scope riêng. Khi có nhiều `case`, toàn bộ `switch` chia sẻ chung một variable scope. Do đó, khi khai báo cùng tên biến ở nhiều `case` sẽ xảy ra lỗi runtime.
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -35,7 +35,7 @@ switch (x) {
 // @noErrors
 ```
 
-TypeScriptでは、同じ変数名を宣言するとコンパイルエラーを出します。
+Trong TypeScript, khi khai báo cùng tên biến sẽ xuất hiện lỗi compile.
 
 ```ts twoslash
 // @errors: 2451
@@ -50,9 +50,9 @@ switch (x) {
 }
 ```
 
-## caseに変数スコープを作る方法
+## Cách tạo variable scope cho case
 
-caseに変数スコープを作るには、中カッコでcase節を囲みます。
+Để tạo variable scope cho case, bọc case bằng dấu ngoặc nhọn.
 
 ```ts twoslash
 let x = 1;
@@ -68,17 +68,17 @@ switch (x) {
 }
 ```
 
-こうすると、JavaScriptの実行時エラーも、TypeScriptのコンパイルエラーも発生しなくなります。
+Khi làm như vậy, cả lỗi runtime của JavaScript và lỗi compile của TypeScript đều không xảy ra.
 
 <PostILearned>
 
-🌏JavaScriptのswitchは全体で1つの変数スコープ
-😕caseレベルのスコープはない
+🌏switch trong JavaScript có chung một variable scope cho toàn bộ
+😕Không có scope riêng ở mức case
 
-もしも複数のcaseで同じ変数名を宣言すると…
-🔥JavaScript → 実行時エラー
-⛔️TypeScript → コンパイルエラー
+Nếu khai báo cùng tên biến ở nhiều case...
+🔥JavaScript → Lỗi runtime
+⛔️TypeScript → Lỗi compile
 
-✅caseに{}を書くと固有のスコープが作れる
+✅Viết {} ở case sẽ tạo scope riêng
 
 </PostILearned>

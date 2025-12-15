@@ -1,6 +1,6 @@
-# 配列から全要素の型を生成する
+# Tạo type của tất cả phần tử từ array
 
-前ページでは、配列から全要素の型を生成する方法が登場しました。
+Ở trang trước, đã giới thiệu cách tạo type của tất cả phần tử từ array.
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -9,11 +9,11 @@ type Currency = (typeof currencies)[number];
 //   ^?
 ```
 
-`typeof currencies[number]`という書き方は、初めて見ると理解に苦しむコードかもしれません。そのためより詳しく説明します。
+Cách viết `typeof currencies[number]` có thể khó hiểu khi lần đầu nhìn thấy. Vì vậy sẽ giải thích chi tiết hơn.
 
-## 前ページのコードを観察する
+## Quan sát code ở trang trước
 
-配列からある要素の型を生成するコードについて、前ページに続き通貨の配列でもう一度確認します。
+Về code tạo type của một phần tử từ array, tiếp tục từ trang trước, xác nhận lại với array tiền tệ.
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -21,7 +21,7 @@ type Currency = (typeof currencies)[2];
 //   ^?
 ```
 
-ここで、`typeof currencies[2]`の`2`は、前ページでリテラル型と説明していますが本当でしょうか？次のコードで確認してみます。
+Ở đây, `2` trong `typeof currencies[2]` được giải thích là literal type ở trang trước, nhưng có thực sự như vậy không? Hãy xác nhận bằng code sau.
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -30,9 +30,9 @@ const index = 2 as const;
 type Currency = (typeof currencies)[index];
 ```
 
-`2`が値として解釈されるコードではエラーになってしまいました。
+Code trong đó `2` được hiểu là value đã bị lỗi.
 
-では明確にリテラル型だとわかるコードも試してみましょう。
+Vậy hãy thử code mà rõ ràng là literal type.
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -41,17 +41,17 @@ type Currency = (typeof currencies)[Index];
 //   ^?
 ```
 
-これで`typeof currencies[2]`の`2`はリテラル型であることがはっきりしました。
+Như vậy đã rõ ràng `2` trong `typeof currencies[2]` là literal type.
 
-## 数値のリテラル型と`number`型
+## Literal type của số và `number` type
 
-`2`のリテラル型と`number`型の関係を集合で表現すると、`2`⊂`number`と書くことができます。他の表現をすると、`0`、`1`、`2`..など数値のリテラル型のいずれかの型として振る舞うのが`number`型です。
+Mối quan hệ giữa literal type của `2` và `number` type có thể biểu diễn bằng tập hợp là `2`⊂`number`. Nói cách khác, `number` type hoạt động như một trong các literal type của số như `0`, `1`, `2`...
 
-「いずれかの型」といえばユニオン型の出番です。
+Khi nói đến "một trong các type" thì đó là union type.
 
-[ユニオン型 (union type)](../reference/values-types-variables/union.md)
+[Union type](../reference/values-types-variables/union.md)
 
-`number`型の代わりにリテラルのユニオン型を使ってみましょう。
+Hãy thử sử dụng union type của literal thay cho `number` type.
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -59,11 +59,11 @@ type Currency = (typeof currencies)[0 | 1 | 2 | 3 | 4 | 5];
 //   ^?
 ```
 
-`0 | 1 | 2 | 3 | 4 | 5`型でも`currencies`配列から全要素の型を生成することができました。このように`number`型は数値のリテラル型のワイルドカードとして振る舞うことがわかります。
+Với type `0 | 1 | 2 | 3 | 4 | 5` cũng có thể tạo type của tất cả phần tử từ array `currencies`. Như vậy có thể thấy `number` type hoạt động như wildcard của literal type số.
 
-## 一般化する
+## Tổng quát hóa
 
-このページの締めくくりに一般化したコードを示します。
+Để kết thúc trang này, đây là code tổng quát hóa.
 
 ```ts twoslash
 type List = (string | number | boolean)[];
@@ -71,16 +71,16 @@ type Elem = List[number];
 //   ^?
 ```
 
-`List`型から`List[number]`という書き方ですべての要素の型である`string | number | boolean`が生成できました。
+Từ type `List`, bằng cách viết `List[number]` đã tạo được `string | number | boolean` là type của tất cả phần tử.
 
-### アンチパターンの紹介
+### Giới thiệu anti-pattern
 
-次のように具体的なインデックスで同じ型を生成することは可能ですが、アンチパターンなので注意してください。
+Có thể tạo cùng type bằng index cụ thể như sau, nhưng hãy chú ý đây là anti-pattern.
 
 ```ts twoslash
 type List = (string | number | boolean)[];
-type Elem = List[0]; // 避けるべき書き方
+type Elem = List[0]; // Cách viết nên tránh
 //   ^?
 ```
 
-この書き方がアンチパターンである理由は`List`型をタプル型だと混乱させてしまう可能性があるためです。`List[0]`は特定の要素から型を生成しているため、各要素の型が同じ型ではない、つまり`List`が配列型ではなくタプル型だからこの書き方をしていると誤解させる可能性があります。配列型はどの要素の型も同じものとして扱うので、`List[number]`の書き方が適切です。
+Lý do cách viết này là anti-pattern là vì có thể gây nhầm lẫn type `List` là tuple type. `List[0]` tạo type từ phần tử cụ thể, nên có thể gây hiểu lầm rằng type của mỗi phần tử không giống nhau, nghĩa là `List` là tuple type chứ không phải array type. Vì array type coi type của tất cả phần tử là giống nhau, nên cách viết `List[number]` là phù hợp.

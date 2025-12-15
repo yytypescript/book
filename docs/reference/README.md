@@ -2,10 +2,10 @@
 slug: /reference
 ---
 
-# 読んで学ぶTypeScript
+# Đọc và học TypeScript
 
-本章では、TypeScriptの言語機能をひとつひとつ解説します。解説の範囲はTypeScriptに留まらず、JavaScriptについても必要なものを解説します。これは、TypeScript学習者がJavaScriptも並行して学ぶことが多いためです。
+Chương này giải thích từng tính năng ngôn ngữ của TypeScript. Phạm vi giải thích không chỉ giới hạn ở TypeScript mà còn bao gồm những phần cần thiết về JavaScript. Điều này là do những người học TypeScript thường học JavaScript song song.
 
-どの機能がTypeScriptのものか、JavaScriptのものかがわかるように配慮しています。JavaScriptの機能については「JavaScriptの〜は」などと、TypeScriptの機能については「TypeScriptの〜は」などのように言語名を文中に記すようにしています。言語名が随所に出てくるため、読んでいてくどいと思われるかもしれませんが、どの機能がどちらの言語のものかを明確に理解しておくことは重要なので、ご辛抱いただければ幸いです。
+Chúng tôi đã cân nhắc để bạn có thể biết tính năng nào là của TypeScript, tính năng nào là của JavaScript. Với các tính năng JavaScript, chúng tôi viết trong văn bản như "Trong JavaScript~", với các tính năng TypeScript thì viết "Trong TypeScript~". Vì tên ngôn ngữ xuất hiện ở nhiều nơi, bạn có thể cảm thấy hơi rườm rà khi đọc, nhưng việc hiểu rõ tính năng nào thuộc ngôn ngữ nào là rất quan trọng, mong bạn thông cảm.
 
-本章の流れは、コード上の小さいパーツから大きいパーツに行くように構成しています。値や変数から始まり、文、関数、そしてクラスなどのオブジェクト指向プログラミング要素、さらにモジュールといったように、読み進めるにしたがって粒度の大きい要素についての話になっていきます。
+Chương này được cấu trúc đi từ các thành phần nhỏ đến lớn trong code. Bắt đầu từ value và variable, đến statement, function, rồi đến các yếu tố lập trình hướng đối tượng như class, và module - khi bạn đọc tiếp, câu chuyện sẽ về các yếu tố có độ chi tiết lớn hơn.

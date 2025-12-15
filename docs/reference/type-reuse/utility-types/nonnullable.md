@@ -1,19 +1,19 @@
 ---
-description: nullとundefinedを除外する
+description: Loại bỏ null và undefined
 title: "NonNullable<T>"
 ---
 
-`NonNullable<T>`は、ユニオン型`T`から`null`と`undefined`を取り除いたユニオン型を返すユーティリティ型です。
+`NonNullable<T>` là utility type trả về union type sau khi loại bỏ `null` và `undefined` khỏi union type `T`.
 
-名前は`NonNullable`ですが`undefined`も取り除くことができます。
+Mặc dù tên là `NonNullable` nhưng cũng có thể loại bỏ `undefined`.
 
-## NonNullable&lt;T>の型引数
+## Type argument của NonNullable&lt;T>
 
 ### T
 
-型引数`T`には、`null`と`undefined`を取り除きたいユニオン型を渡します。
+Type argument `T` nhận union type muốn loại bỏ `null` và `undefined`.
 
-## NonNullableの使用例
+## Ví dụ sử dụng NonNullable
 
 ```ts twoslash
 type String1 = NonNullable<string>;
@@ -26,7 +26,7 @@ type String4 = NonNullable<string | null | undefined>;
 //   ^?
 ```
 
-`NonNullable<null>`と`NonNullable<undefined>`は`never`型になります。
+`NonNullable<null>` và `NonNullable<undefined>` trở thành kiểu `never`:
 
 ```ts twoslash
 type Never1 = NonNullable<null>;

@@ -1,8 +1,8 @@
-# デフォルト型引数
+# Default type parameter
 
-関数の引数にデフォルト値を指定するように、ジェネリクスでもデフォルトの型引数を指定することができます。
+Giống như chỉ định giá trị mặc định cho tham số của hàm, trong generics cũng có thể chỉ định default type parameter.
 
-例としてエラーイベントを表す`MyErrorEvent`という型を定義してみます。この型は発生した任意のエラーオブジェクトとその種類を文字列で保持する型です。
+Ví dụ, hãy định nghĩa một kiểu `MyErrorEvent` biểu diễn error event. Kiểu này lưu trữ một error object bất kỳ và loại của nó dưới dạng string.
 
 ```ts twoslash
 type MyErrorEvent<T> = {
@@ -11,7 +11,7 @@ type MyErrorEvent<T> = {
 };
 ```
 
-この型は次のように利用できます。
+Kiểu này có thể được sử dụng như sau.
 
 ```ts twoslash
 type MyErrorEvent<T> = {
@@ -37,7 +37,7 @@ const networkErrorEvent: MyErrorEvent<NetworkError> = {
 };
 ```
 
-例外処理を記述する時に`NetworkError`のように対応するエラークラスをすべて用意することはなく、標準の`Error`で対応してしまうケースも多くありますが、今の状態では`MyErrorEvent`のジェネリクスの型`T`を常に指定する必要があり非常に面倒です。
+Khi viết xử lý exception, thường không chuẩn bị đầy đủ các error class tương ứng như `NetworkError`, mà xử lý bằng `Error` chuẩn trong nhiều trường hợp. Tuy nhiên, ở trạng thái hiện tại, phải luôn chỉ định kiểu `T` của generics trong `MyErrorEvent`, điều này rất phiền phức.
 
 ```ts twoslash
 type MyErrorEvent<T> = {
@@ -46,14 +46,14 @@ type MyErrorEvent<T> = {
 };
 // ---cut---
 // @errors: 2314
-// 型 T が必須なので、MyErrorEvent<Error>と指定する必要がある。
+// Kiểu T là bắt buộc nên phải chỉ định MyErrorEvent<Error>.
 const errorEvent: MyErrorEvent = {
   error: new Error("エラーです"),
   type: "syntax",
 };
 ```
 
-そこで、`<T = Error>`とすることでデフォルト型引数として`Error`を指定します。
+Do đó, bằng cách viết `<T = Error>`, ta chỉ định `Error` làm default type parameter.
 
 ```ts twoslash
 type MyErrorEvent<T = Error> = {
@@ -62,7 +62,7 @@ type MyErrorEvent<T = Error> = {
 };
 ```
 
-デフォルト型引数として`Error`を指定することでジェネリクスの型`T`は必要な時だけ指定して、何も指定してない場合は自動で`Error`とすることができます。
+Bằng cách chỉ định `Error` làm default type parameter, kiểu `T` của generics chỉ cần chỉ định khi cần thiết, và nếu không chỉ định gì thì tự động trở thành `Error`.
 
 ```ts twoslash
 type MyErrorEvent<T = Error> = {
@@ -77,7 +77,7 @@ class NetworkError extends Error {
 }
 // ---cut---
 
-// デフォルト型引数を指定した事で Error の型指定を省略できる
+// Nhờ chỉ định default type parameter, có thể bỏ qua chỉ định kiểu Error
 const errorEvent: MyErrorEvent = {
   error: new Error("エラーです"),
   type: "syntax",
@@ -89,13 +89,13 @@ const networkErrorEvent: MyErrorEvent<NetworkError> = {
 };
 ```
 
-## 型引数の制約と併用する
+## Kết hợp với type parameter constraint
 
-ある型の部分型であることを指定しながら、かつ省略時はデフォルト型を指定する合わせ技もできます。型引数の制約については専門のページがありますのでそちらを参照してください。
+Bạn cũng có thể kết hợp việc chỉ định kiểu là subtype của một kiểu nào đó với việc chỉ định default type khi bỏ qua. Về type parameter constraint, có trang chuyên biệt, vui lòng tham khảo.
 
-[型引数の制約](type-parameter-constraint.md)
+[Type parameter constraint](type-parameter-constraint.md)
 
-`MyErrorEvent`に与えられる型`T`を`Error`のサブクラスに限定しつつ、省略時は`SyntaxError`としたい場合は次のような書き方になります。
+Nếu muốn giới hạn kiểu `T` được truyền vào `MyErrorEvent` là subclass của `Error`, đồng thời khi bỏ qua thì mặc định là `SyntaxError`, cú pháp như sau:
 
 ```ts twoslash
 type MyErrorEvent<T extends Error = SyntaxError> = {
@@ -104,7 +104,7 @@ type MyErrorEvent<T extends Error = SyntaxError> = {
 };
 ```
 
-型引数の制約とデフォルト型引数の両立をする場合はデフォルト型引数が制約を満たしている必要があります。
+Khi kết hợp type parameter constraint và default type parameter, default type parameter phải thỏa mãn constraint.
 
 ```ts twoslash
 // @errors: 2344
@@ -115,11 +115,11 @@ interface Serializable<T extends string | number = bigint> {
 }
 ```
 
-この例は`string | number`型に制約しているにもかかわらず、デフォルト型引数に`bigint`型を指定しています。そのため制約を満足することができずTypeScriptから指摘を受けます。
+Ví dụ này constraint kiểu `string | number` nhưng lại chỉ định `bigint` làm default type parameter. Do đó không thỏa mãn constraint và TypeScript sẽ báo lỗi.
 
-## デフォルト型引数をジェネリクスで指定する
+## Chỉ định default type parameter bằng generics
 
-ジェネリクスが複数あるとき、デフォルト型引数をデフォルト型引数で指定できます。
+Khi có nhiều generics, có thể chỉ định default type parameter bằng default type parameter khác.
 
 ```ts twoslash
 class Aubergine<A, B = A, C = B> {
@@ -137,7 +137,7 @@ class Aubergine<A, B = A, C = B> {
 }
 ```
 
-デフォルト型引数は左から順に参照されるため、左にあるジェネリクスが右のジェネリクスを指定することはできません。
+Default type parameter được tham chiếu từ trái sang phải, nên generics bên trái không thể chỉ định generics bên phải.
 
 ```ts twoslash
 // @errors: 2744 2706

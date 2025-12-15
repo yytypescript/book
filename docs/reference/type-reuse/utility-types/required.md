@@ -1,17 +1,17 @@
 ---
-description: 全プロパティを必須にする
+description: Biến tất cả property thành bắt buộc
 title: Required<T>
 ---
 
-`Required<T>`は、`T`のすべてのプロパティからオプショナルであることを意味する`?`を取り除くユーティリティ型です。
+`Required<T>` là utility type loại bỏ `?` (nghĩa là optional) khỏi tất cả các property của `T`.
 
-## Required&lt;T>の型引数
+## Type argument của Required&lt;T>
 
 ### T
 
-型引数`T`にはオブジェクトの型を表す型を代入します。
+Type argument `T` nhận kiểu biểu diễn object type.
 
-## Requiredの使用例
+## Ví dụ sử dụng Required
 
 ```ts twoslash
 type Person = {
@@ -23,7 +23,7 @@ type RequiredPerson = Required<Person>;
 //    ^?
 ```
 
-上の`RequiredPerson`は次と同じ型になります。
+`RequiredPerson` ở trên sẽ giống với kiểu sau:
 
 ```ts twoslash
 type RequiredPerson = {
@@ -33,9 +33,9 @@ type RequiredPerson = {
 };
 ```
 
-## Requiredの実装
+## Implementation của Required
 
-`Required<T>`は次のように実装されています。
+`Required<T>` được implement như sau:
 
 ```ts twoslash
 // @noErrors: 2300
@@ -44,7 +44,7 @@ type Required<T> = {
 };
 ```
 
-`Partial<T>`と参照してみると違いがわかります。
+So sánh với `Partial<T>` sẽ thấy sự khác biệt:
 
 ```ts twoslash
 // @noErrors: 2300
@@ -53,10 +53,10 @@ type Partial<T> = {
 };
 ```
 
-異なる部分は`-?`と`?`の部分です。`?`はオプション修飾子で、プロパティがオプショナルになります。`-?`はオプション修飾子を取り除くことを意味します。したがって、`Required<T>`は、`T`のすべてのプロパティからオプショナルであることを意味する`?`を取り除いた型を生成します。
-このときの`-`をmapping modifierと呼びます。
+Phần khác nhau là `-?` và `?`. `?` là optional modifier, làm cho property trở thành optional. `-?` có nghĩa là loại bỏ optional modifier. Do đó, `Required<T>` tạo ra kiểu với `?` (nghĩa là optional) bị loại bỏ khỏi tất cả các property của `T`.
+Dấu `-` này được gọi là mapping modifier.
 
-## 関連情報
+## Thông tin liên quan
 
 [Partial&lt;T>](partial.md)
 

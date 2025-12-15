@@ -1,29 +1,29 @@
-# クラスのreadonly修飾子
+# Readonly modifier trong class
 
-TypeScriptでは、フィールドにreadonly修飾子をつけると、そのフィールドを読み取り専用にできます。
+Trong TypeScript, thêm readonly modifier cho field để biến field đó thành chỉ đọc.
 
-読み取り専用フィールドは、コンストラクタかフィールド初期化子でのみ値を代入できます。
+Field chỉ đọc chỉ có thể gán giá trị trong constructor hoặc field initializer.
 
 ```ts twoslash
 class Octopus {
   readonly name: string;
-  readonly legs = 8; // フィールド初期化子での代入はOK
+  readonly legs = 8; // Gán trong field initializer là OK
 
   constructor() {
-    this.name = "たこちゃん"; // コンストラクターでの代入はOK
+    this.name = "たこちゃん"; // Gán trong constructor là OK
   }
 }
 ```
 
-読み取り専用フィールドは、再代入しようとするとコンパイルエラーになります。
+Field chỉ đọc sẽ báo lỗi compile khi cố gắng gán lại giá trị.
 
 ```ts twoslash
 class Octopus {
   readonly name: string;
-  readonly legs = 8; // フィールド初期化子での代入はOK
+  readonly legs = 8; // Gán trong field initializer là OK
 
   constructor() {
-    this.name = "たこちゃん"; // コンストラクターでの代入はOK
+    this.name = "たこちゃん"; // Gán trong constructor là OK
   }
 }
 // ---cut---
@@ -32,7 +32,7 @@ const octopus = new Octopus();
 octopus.legs = 16;
 ```
 
-メソッド内の処理であっても、読み取り専用フィールドへの再代入は許されません。
+Ngay cả trong xử lý của method, việc gán lại giá trị cho field chỉ đọc cũng không được phép.
 
 ```ts twoslash
 // @errors: 2540
@@ -45,8 +45,8 @@ class Octopus {
 }
 ```
 
-## 関連情報
+## Thông tin liên quan
 
-[オブジェクト型のreadonlyプロパティ (readonly property)](../../values-types-variables/object/readonly-property.md)
+[Readonly property của object type (readonly property)](../../values-types-variables/object/readonly-property.md)
 
-[インターフェースのreadonly修飾子](../interface/readonly-modifier-in-interfaces.md)
+[Readonly modifier của interface](../interface/readonly-modifier-in-interfaces.md)

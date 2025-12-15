@@ -1,6 +1,6 @@
-# 関数はオブジェクト
+# Function là object
 
-JavaScriptの関数はオブジェクトです。したがって、関数にプロパティを持たせることができます。
+Function trong JavaScript là object. Do đó, bạn có thể gắn property cho function.
 
 ```js twoslash
 function hello() {

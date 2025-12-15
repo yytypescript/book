@@ -1,21 +1,21 @@
 ---
-description: 任意のプロパティだけを持つオブジェクト型を作る
+description: Tạo object type chỉ chứa các property tùy ý
 title: "Pick<T, Keys>"
 ---
 
-`Pick<T, Keys>`は、型`T`から`Keys`に指定したキーだけを含むオブジェクトの型を返すユーティリティ型です。
+`Pick<T, Keys>` là utility type trả về object type chỉ chứa các key được chỉ định trong `Keys` từ kiểu `T`.
 
-## Pick&lt;T, Keys>の型引数
+## Type argument của Pick&lt;T, Keys>
 
 ### T
 
-型引数`T`にはオブジェクトの型を代入します。
+Type argument `T` nhận object type.
 
 ### Keys
 
-`Keys`にはオブジェクトの型`T`のプロパティキーを指定します。object型`T`に存在しないプロパティーキーを指定するとコンパイルエラーになります。
+`Keys` chỉ định property key của object type `T`. Nếu chỉ định property key không tồn tại trong object type `T`, sẽ gây compile error.
 
-## Pickの使用例
+## Ví dụ sử dụng Pick
 
 ```ts twoslash
 type User = {
@@ -31,7 +31,7 @@ type User = {
 type Person = Pick<User, "surname" | "middleName" | "givenName">;
 ```
 
-上の`Person`は次の型と同じになります。
+`Person` ở trên sẽ giống với kiểu sau:
 
 ```ts twoslash
 type Person = {
@@ -41,9 +41,9 @@ type Person = {
 };
 ```
 
-## Pickで型の変更に追従する例
+## Ví dụ về việc theo dõi thay đổi kiểu với Pick
 
-書籍を扱うサービスを作ったとして、書籍を意味するオブジェクト`Book`が次のように定義されているとします。
+Giả sử bạn tạo dịch vụ xử lý sách và object `Book` biểu diễn sách được định nghĩa như sau:
 
 ```ts twoslash
 type Book = {
@@ -55,7 +55,7 @@ type Book = {
 };
 ```
 
-これを参考にして`Book`を作成するための入力データとして`BookInputData`を作るとします。これは外部からのリクエストで作成され、`id, createdAt, updatedAt`はこのサービスで後付けで割り当てられるとすれば`BookInputData`は次になります。
+Tham khảo điều này, giả sử bạn tạo `BookInputData` làm input data để tạo `Book`. Nó được tạo từ request bên ngoài, và `id, createdAt, updatedAt` được gán sau đó bởi dịch vụ này, thì `BookInputData` sẽ như sau:
 
 ```ts twoslash
 type BookInputData = {
@@ -64,7 +64,7 @@ type BookInputData = {
 };
 ```
 
-ここで`author`プロパティが`string`ではなく`Person`になる必要があったとします。`Book, BookInputData`を独立して定義しているとこの変更のために都度、各々の`author`プロパティを変更する必要があります。
+Giả sử property `author` cần phải là `Person` thay vì `string`. Nếu định nghĩa `Book, BookInputData` độc lập, bạn phải thay đổi property `author` của mỗi cái khi có thay đổi này.
 
 ```ts twoslash
 type Person = {
@@ -87,9 +87,9 @@ type BookInputData = {
 };
 ```
 
-これらの定義が近くにある状態ならまだしも、異なるファイルにあれば非常に探し辛くなります。
+Nếu các định nghĩa này gần nhau thì còn tốt, nhưng nếu ở các file khác nhau sẽ rất khó tìm.
 
-そこで`BookInputData`を`Pick<T, K>`を使って定義しなおします。
+Do đó, định nghĩa lại `BookInputData` sử dụng `Pick<T, K>`:
 
 ```ts twoslash
 type Person = {
@@ -108,8 +108,8 @@ type Book = {
 type BookInputData = Pick<Book, "title" | "author">;
 ```
 
-このようにすれば`BookInputData`は少なくとも`Book`とコード上の繋がりができる上に、`author`プロパティの型変更を自動で追従してくれるようになります。
+Với cách này, `BookInputData` ít nhất có liên kết với `Book` trong code, và sẽ tự động theo dõi thay đổi kiểu của property `author`.
 
-## 関連情報
+## Thông tin liên quan
 
 [Omit&lt;T, Keys>](omit.md)

@@ -1,28 +1,28 @@
 ---
-description: null・undefinedのチェックを厳しくする
+description: Làm nghiêm ngặt check null và undefined
 tags: [strict]
 image: /img/strictNullChecks.png
 ---
 
 # strictNullChecks
 
-`strictNullChecks`は`null`や`undefined`のチェックを厳しくするコンパイラオプションです。
+`strictNullChecks` là compiler option làm nghiêm ngặt check `null` và `undefined`.
 
-- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
-- 追加されたバージョン: 2.0
-- TypeScript公式が有効化推奨
+- Mặc định: `true` nếu [strict](./strict.md) được bật, ngược lại là `false`
+- Phiên bản thêm vào: 2.0
+- TypeScript khuyến nghị nên bật
 
-## `null`と`undefined`が代入できる危険性
+## Nguy cơ của việc có thể gán `null` và `undefined`
 
-TypeScriptでは`strictNullChecks`が`false`の場合、`null`と`undefined`の代入がチェックされません。非null型や非undefined型の変数にも、`null`と`undefined`が代入できます。
+Trong TypeScript khi `strictNullChecks` là `false`, việc gán `null` và `undefined` không được check. Có thể gán `null` và `undefined` vào biến non-null type hoặc non-undefined type.
 
-```ts twoslash title="strictNullChecksがfalseの場合"
+```ts twoslash title="Khi strictNullChecks là false"
 // @strictNullChecks: false
 const date: Date = null; // OK
 const error: Error = undefined; // OK
 ```
 
-`null`や`undefined`にはプロパティが存在しません。そのため、JavaScript実行時にエラーになります。
+`null` và `undefined` không có property. Do đó khi chạy JavaScript sẽ báo lỗi:
 
 ```ts twoslash
 const date: Date = null; // OK
@@ -32,20 +32,20 @@ date.getDay();
 // @strictNullChecks: false
 ```
 
-`strictNullChecks`が`true`の場合、非null型への`null`の代入、非undefined型への`undefined`の代入それぞれがコンパイルエラーになります。
+Khi `strictNullChecks` là `true`, việc gán `null` vào non-null type, gán `undefined` vào non-undefined type sẽ báo compile error:
 
-```ts twoslash title="strictNullChecksがtrueの場合"
+```ts twoslash title="Khi strictNullChecks là true"
 // @strictNullChecks: true
 // @errors: 2322
 const date: Date = null;
 const error: Error = undefined;
 ```
 
-## 関数の戻り値の型への影響
+## Ảnh hưởng đến return value type của function
 
-`strictNullChecks`の設定によって、関数の戻り値の型が変わることがあります。配列の`find`メソッドの戻り値の型は、要素の型もしくは`undefined`です。しかし、`strictNullChecks`が`false`の場合、戻り値が`undefined`になる可能性をコンパイラが考えなくなります。戻り値に`null`が入る可能性がある関数、たとえば`getElementById`の場合も同様です。
+Cấu hình `strictNullChecks` có thể thay đổi return value type của function. Return value type của method `find` của array là type của phần tử hoặc `undefined`. Tuy nhiên, khi `strictNullChecks` là `false`, compiler sẽ không xem xét khả năng return value là `undefined`. Tương tự với function có thể trả về `null` như `getElementById`.
 
-```ts twoslash title="strictNullChecksがfalseの場合"
+```ts twoslash title="Khi strictNullChecks là false"
 // @strictNullChecks: false
 const result = [1, 2, 3].find((x) => x == 1);
 //    ^?
@@ -53,9 +53,9 @@ const element = document.getElementById("main");
 //    ^?
 ```
 
-`strictNullChecks`が`true`の場合は、`undefined`や`null`が戻り値になる可能性をコンパイラが考慮します。そのため、`find`なら要素の型と`undefined`のユニオン型に、`getElementById`なら`HTMLElement | null`になります。
+Khi `strictNullChecks` là `true`, compiler sẽ xem xét khả năng return value là `undefined` hoặc `null`. Do đó `find` sẽ là union type của type phần tử và `undefined`, `getElementById` sẽ là `HTMLElement | null`:
 
-```ts twoslash title="strictNullChecksがtrueの場合"
+```ts twoslash title="Khi strictNullChecks là true"
 // @strictNullChecks: true
 const result = [1, 2, 3].find((x) => x == 1);
 //    ^?
@@ -63,11 +63,11 @@ const element = document.getElementById("main");
 //    ^?
 ```
 
-この設定の効果は、ユーザー定義の型ガード関数にも及びます。たとえば、関数の戻り値を`string | undefined`と型注釈したとしても、`strictNullChecks`が`false`の場合は`string`型になります。
+Hiệu ứng của cấu hình này cũng ảnh hưởng đến user-defined type guard function. Ví dụ, ngay cả khi type annotate return value của function là `string | undefined`, nếu `strictNullChecks` là `false` thì sẽ trở thành `string` type:
 
-```ts twoslash title="strictNullChecksがfalseの場合"
+```ts twoslash title="Khi strictNullChecks là false"
 // @strictNullChecks: false
-// ユーザー定義の型ガード関数
+// User-defined type guard function
 function getStringOrUndefined(): string | undefined {
   return undefined;
 }
@@ -75,19 +75,19 @@ const value = getStringOrUndefined();
 //    ^?
 ```
 
-## `strictNullChecks`は有効にしよう
+## Nên bật `strictNullChecks`
 
-`null`や`undefined`を期待しない変数にそれらが代入できるのは危険です。また、関数の戻り値に`null`や`undefined`が入る可能性が見えなくなることも、思わぬバグを生む原因になります。`strictNullChecks`は`true`を設定するのがお勧めです。
+Việc có thể gán `null` hoặc `undefined` vào biến không mong đợi chúng là nguy hiểm. Ngoài ra, việc không thấy được khả năng return value của function là `null` hoặc `undefined` cũng là nguyên nhân gây bug không mong muốn. Khuyến nghị nên set `strictNullChecks` thành `true`.
 
 <PostILearned>
 
-😱TypeScriptデフォルトでnullとundefinedの代入チェックをしない(どんな型にも代入できる)
-✅コンパイラオプションstrictNullChecksをtrueにすると、nullとundefinedの代入がチェックされる
-👍strictNullChecksは有効にしよう
+😱TypeScript mặc định không check việc gán null và undefined (có thể gán vào bất kỳ type nào)
+✅Đặt compiler option strictNullChecks thành true để check việc gán null và undefined
+👍Nên bật strictNullChecks
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
 [strict](./strict.md)
 

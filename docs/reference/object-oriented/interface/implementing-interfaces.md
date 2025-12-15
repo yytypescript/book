@@ -1,6 +1,6 @@
-# インターフェースを実装する
+# Implement interface
 
-TypeScriptでは、クラスがインターフェースを実装できます。実装するには`implements`キーワードを用います。
+Trong TypeScript, class có thể implement interface. Để implement, sử dụng từ khóa `implements`.
 
 ```ts twoslash
 interface Human {
@@ -14,7 +14,7 @@ class Developer implements Human {
 }
 ```
 
-インターフェースを複数指定することもできます。そのときは`,`でインターフェースを区切り列挙します。
+Có thể chỉ định nhiều interface. Trong trường hợp đó, liệt kê các interface phân tách bằng dấu `,`.
 
 ```ts twoslash
 interface Human {
@@ -36,7 +36,7 @@ class TypeScriptProgrammer implements Human, Programmer {
 }
 ```
 
-インターフェースで定義されたフィールドをクラスで実装するには、クラス側にはフィールドを定義します。
+Để implement field được định nghĩa trong interface ở class, định nghĩa field ở phía class.
 
 ```ts twoslash
 interface Human {

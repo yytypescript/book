@@ -1,20 +1,20 @@
 ---
-sidebar_label: "コールバック関数"
+sidebar_label: "Callback function"
 ---
 
-# コールバック関数 (callback functions)
+# Callback function
 
-コールバック関数とは、関数の引数として渡される関数です。関数の中で引数で指定した関数を呼び出す（コールバックする）ことで関数の振る舞いを制御したり、非同期な結果を受け取ることができます。
-コールバック関数という言語レベルの構文が存在する訳ではなく、設計パターンのひとつとしてコールバック関数と呼ばれています。
+Callback function là function được truyền làm tham số của một function khác. Bằng cách gọi (callback) function được chỉ định qua tham số bên trong function, bạn có thể kiểm soát hành vi của function hoặc nhận kết quả không đồng bộ.
+Callback function không phải là cú pháp cấp ngôn ngữ, mà được gọi là callback function như một design pattern.
 
-## コールバック関数の使い方
+## Cách sử dụng callback function
 
-### 関数の振る舞いの制御
+### Kiểm soát hành vi của function
 
-コールバック関数はある関数の振る舞いの一部を外側から制御したい時に利用できます。
+Callback function có thể được sử dụng khi bạn muốn kiểm soát một phần hành vi của function từ bên ngoài.
 
-`greetNewUser`は「ご新規さん」に挨拶をする関数です。
-`hello`関数と`goodMorning`関数をそれぞれコールバック関数として渡すことで、どのように挨拶するかの振る舞いを制御しています。
+`greetNewUser` là function chào mừng "ご新規さん" (khách hàng mới).
+Bằng cách truyền function `hello` và `goodMorning` làm callback function, bạn có thể kiểm soát cách chào mừng.
 
 ```ts twoslash
 function greetNewUser(func: (name: string) => string) {
@@ -22,26 +22,26 @@ function greetNewUser(func: (name: string) => string) {
 }
 
 function hello(name: string) {
-  return `こんにちは！${name}さん！！`;
+  return `こんにちは!${name}さん!!`;
 }
 
 function goodMorning(name: string) {
-  return `おはようございます！${name}さん！！`;
+  return `おはようございます!${name}さん!!`;
 }
 
-// こんにちは！ご新規さん!!
+// こんにちは!ご新規さん!!
 greetNewUser(hello);
 
-// おはようございます！ご新規さん!!
+// おはようございます!ご新規さん!!
 greetNewUser(goodMorning);
 ```
 
-### 非同期な結果の受け取り
+### Nhận kết quả không đồng bộ
 
-コールバック関数は非同期な関数の結果を受け取って処理をしたい場合にも利用できます。
+Callback function cũng có thể được sử dụng khi bạn muốn nhận và xử lý kết quả của function không đồng bộ.
 
-次の例はNode.jsのfsモジュールのファイル読み込みのサンプルコードです。
-ファイルの読み込みが非同期で実行され、読み込みが完了した後にコールバック関数が呼ぶことで、非同期な読み込み結果を呼び出し側へ渡すことができます。
+Ví dụ sau là sample code đọc file của fs module trong Node.js.
+Việc đọc file được thực thi không đồng bộ, và sau khi đọc hoàn tất, callback function được gọi để truyền kết quả đọc không đồng bộ về phía gọi.
 
 ```ts twoslash
 import fs from "fs";
@@ -54,17 +54,15 @@ fs.readFile("./user.txt", "utf-8", (err, data) => {
 });
 ```
 
-### コールバック関数地獄
+### Callback hell
 
-次のサンプルコードは
+Sample code sau thực hiện đọc file theo trình tự:
 
-1. Aファイルを読み込み
-2. Aファイルに記述されたBファイルを読み込む
-3. Bファイルに記述されたCファイルを読み込む
+1. Đọc file A
+2. Đọc file B được ghi trong file A
+3. Đọc file C được ghi trong file B
 
-という形でファイル読み込みをしています。
-
-このようにコールバック関数の中でコールバック関数を呼び出すことでネストが深くなり、コードが読みづらくなる問題をコールバック地獄と呼びます。
+Khi gọi callback function bên trong callback function như thế này, việc lồng nhau (nesting) trở nên sâu và code khó đọc hơn, vấn đề này được gọi là callback hell.
 
 ```ts twoslash
 import fs from "fs";
@@ -78,9 +76,9 @@ fs.readFile("./a.txt", "utf-8", (err, data) => {
 });
 ```
 
-このような場合には、コールバック関数を使用せずにPromiseを利用することで解消ができます。
+Trong trường hợp như thế này, bạn có thể giải quyết bằng cách sử dụng Promise thay vì callback function.
 
-コールバック地獄の問題を解消するために、Promiseが登場して以降は非同期処理の結果を取得する場合には、コールバック関数を用いずにPromiseを利用することが一般的になっています。
+Sau khi Promise ra đời để giải quyết vấn đề callback hell, việc sử dụng Promise thay vì callback function để lấy kết quả xử lý không đồng bộ đã trở nên phổ biến.
 
 ```ts twoslash
 import { promises as fs } from "fs";
@@ -91,12 +89,12 @@ fs.readFile("a.txt", "utf-8")
   .then((data) => console.log(data));
 ```
 
-## コールバック関数の型定義
+## Định nghĩa kiểu cho callback function
 
-コールバック関数の型は`(arg: [引数の型]) => [戻り値の型]`と記述します。
-コールバック関数はただの関数なので、引数の型として関数の型宣言をしているだけです。
+Kiểu của callback function được viết dưới dạng `(arg: [kiểu của tham số]) => [kiểu giá trị trả về]`.
+Callback function chỉ là một function, nên đây chỉ là khai báo kiểu function làm kiểu của tham số.
 
-[関数の型宣言](./function-type-declaration.md)
+[Khai báo kiểu function](./function-type-declaration.md)
 
 ```ts twoslash
 function greetNewUser(func: (name: string) => string) {
@@ -104,14 +102,14 @@ function greetNewUser(func: (name: string) => string) {
 }
 ```
 
-## 同期型と非同期型
+## Callback đồng bộ và không đồng bộ
 
-使い方の例でも見たように、コールバック関数には同期型と非同期型が存在します。
+Như đã thấy trong các ví dụ cách sử dụng, callback function có loại đồng bộ và không đồng bộ.
 
-### 同期型のコールバック関数
+### Callback function đồng bộ
 
-同期型のコールバック関数は同期的にすぐに呼ばれるコールバック関数です。
-代表的な例としては、標準APIの`Array.map`の引数が同期型のコールバック関数を受け取ります。
+Callback function đồng bộ là callback được gọi ngay lập tức một cách đồng bộ.
+Ví dụ điển hình là tham số của `Array.map` trong standard API nhận callback function đồng bộ.
 
 ```ts twoslash
 const numbers = [1, 2, 3];
@@ -123,13 +121,13 @@ const doubles = numbers.map((n: number) => {
 console.log(doubles);
 ```
 
-### 非同期型のコールバック関数
+### Callback function không đồng bộ
 
-非同期型のコールバック関数はAPIリクエストなど非同期に呼ばれるコールバック関数です。
-代表的な例としては、`setTimeout`の引数が非同期型のコールバック関数を受け取ります。
+Callback function không đồng bộ là callback được gọi không đồng bộ như API request.
+Ví dụ điển hình là tham số của `setTimeout` nhận callback function không đồng bộ.
 
-次の例では、`setTimeout`に渡したコールバック関数が1秒後に非同期に呼ばれ、
-`hello`, `This is callback function!`の順番でコンソールに結果が表示されます。
+Trong ví dụ sau, callback function được truyền cho `setTimeout` được gọi không đồng bộ sau 1 giây,
+và kết quả hiển thị trên console theo thứ tự `hello`, `This is callback function!`.
 
 ```ts twoslash
 setTimeout(() => {
@@ -142,12 +140,12 @@ console.log("hello");
 // This is callback function!
 ```
 
-### 同期型コールバック関数と非同期処理
+### Callback function đồng bộ và xử lý không đồng bộ
 
-`Array.map`などの同期型コールバック関数にPromiseを返す非同期関数を渡した場合は、どうなるでしょうか？
+Điều gì xảy ra khi truyền async function trả về Promise cho callback function đồng bộ như `Array.map`?
 
-`doublePromise`は渡された値を2倍にする処理を非同期に実行して値を返す非同期関数です。
-このとき`doublePromise`は非同期関数のため2倍した値ではなくPromiseを返すため、`doubles`はPromiseの配列となります。
+`doublePromise` là async function thực thi xử lý nhân đôi giá trị được truyền một cách không đồng bộ và trả về giá trị.
+Lúc này, vì `doublePromise` là async function nên không trả về giá trị đã nhân đôi mà trả về Promise, do đó `doubles` trở thành mảng các Promise.
 
 ```ts twoslash
 function doublePromise(n: number): Promise<number> {
@@ -165,7 +163,7 @@ const doubles = numbers.map(doublePromise);
 console.log(doubles);
 ```
 
-同期型のコールバック関数に非同期関数を渡した場合は、Promiseの結果を解決するようにする必要があります。
+Khi truyền async function cho callback function đồng bộ, bạn cần resolve kết quả Promise.
 
 ```ts twoslash
 function doublePromise(n: number): Promise<number> {
@@ -185,8 +183,8 @@ function doublePromise(n: number): Promise<number> {
 })();
 ```
 
-`Array.map`はコールバック関数として非同期関数も受け取るように型指定がされているため、型エラーは発生しません。
-コールバック関数の型指定が同期関数だけ受け取る場合は、非同期関数を渡した時に型エラーが発生します。
+`Array.map` được định nghĩa kiểu để chấp nhận cả async function làm callback function, nên không xảy ra lỗi kiểu.
+Nếu định nghĩa kiểu callback function chỉ chấp nhận synchronous function, sẽ xảy ra lỗi kiểu khi truyền async function.
 
 ```ts twoslash
 // @errors: 2345

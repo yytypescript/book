@@ -2,59 +2,59 @@
 sidebar_label: 変数のスコープ
 ---
 
-# 変数のスコープ (scope)
+# Variable scope (scope)
 
-スコープ(scope)とは、変数がどこから参照できるかを定めた変数の有効範囲のことです。JavaScriptには大きく分けてグローバルスコープとローカルスコープの2つがあります。
+Scope là phạm vi hiệu lực của biến, xác định biến có thể được tham chiếu từ đâu. Trong JavaScript có 2 loại scope chính là global scope và local scope.
 
-## グローバルスコープ
+## Global scope
 
-グローバルスコープ(global scope)はプログラムのどこからでも参照できる変数です。JavaScriptにはグローバルオブジェクト(global object)と呼ばれるオブジェクトがたったひとつ存在します。ブラウザでは`window`オブジェクトがグローバルオブジェクトです。
+Global scope là biến có thể được tham chiếu từ bất kỳ đâu trong chương trình. Trong JavaScript, có duy nhất một object được gọi là global object. Trong trình duyệt, object `window` là global object.
 
-グローバル変数は、グローバルオブジェクトのプロパティになります。ブラウザでは、`window`オブジェクトのプロパティになっていることになります。日付の`Date`クラスや、デバッグに使う`console`オブジェクトなどの組み込みAPIはすべて`window`オブジェクトのプロパティです。グローバル変数へのアクセスはwindowを省略して書くことができます。
+Biến global trở thành property của global object. Trong trình duyệt, nghĩa là trở thành property của object `window`. Các built-in API như class `Date` cho ngày tháng hay object `console` dùng cho debug đều là property của object `window`. Truy cập vào biến global có thể bỏ qua window.
 
 ```js twoslash
 Date === window.Date; //=> true
 console === window.console; //=> true
 ```
 
-ローカルスコープ以外で`var`を用いて変数宣言すると、グローバル変数になります。ただ、`var`の使用は本書としては非推奨です。
+Khai báo biến bằng `var` ngoài local scope sẽ trở thành biến global. Tuy nhiên, cuốn sách này không khuyến khích sử dụng `var`.
 
 [varはもう使わない](../values-types-variables/vars-problems.md)
 
-## ローカルスコープ
+## Local scope
 
-ローカルスコープ(local scope)は、一定範囲にだけ効く変数スコープです。
+Local scope là variable scope chỉ có hiệu lực trong một phạm vi nhất định.
 
-### 関数スコープ
+### Function scope
 
-関数スコープ(function scope)は、関数内でのみ参照できる範囲です。関数内で宣言された変数は、関数の外から参照できません。
+Function scope là phạm vi chỉ có thể tham chiếu trong hàm. Biến được khai báo trong hàm không thể tham chiếu từ bên ngoài hàm.
 
 ```js twoslash
 function func() {
   const variable = 123;
-  return variable; // 参照できる
+  return variable; // Có thể tham chiếu
 }
-console.log(variable); // 参照できない
+console.log(variable); // Không thể tham chiếu
 ```
 
-### レキシカルスコープ
+### Lexical scope
 
-レキシカルスコープ(lexical scope)変数とは、関数を定義した地点から参照できる、関数の外の変数を言います。
+Lexical scope là các biến bên ngoài hàm mà có thể tham chiếu từ điểm định nghĩa hàm.
 
 ```js twoslash
 const x = 100;
 
 function a() {
-  console.log(x); // 関数の外の変数が見える
+  console.log(x); // Có thể thấy biến bên ngoài hàm
 }
 
 a();
 // @log: 100
 ```
 
-### ブロックスコープ
+### Block scope
 
-ブロックスコープ(block scope)は、ブレース`{ }`で囲まれた範囲だけ有効なスコープです。ブロックスコープ内の変数は、ブロックの外から参照できません。
+Block scope là scope chỉ có hiệu lực trong phạm vi được bao bọc bởi dấu ngoặc nhọn `{ }`. Biến trong block scope không thể tham chiếu từ bên ngoài block.
 
 <!--prettier-ignore-->
 ```js twoslash
@@ -63,53 +63,53 @@ a();
   console.log(x);
 // @log: 100
 }
-console.log(x); // xを参照できない
+console.log(x); // Không thể tham chiếu x
 // @error: ReferenceError: x is not defined
 ```
 
-ブロックスコープはif構文などのブレースにも作用します。条件分岐の中で変数宣言された変数は、条件分岐の外からは参照できないので注意しましょう。
+Block scope cũng áp dụng cho dấu ngoặc nhọn trong câu lệnh if. Cần chú ý rằng biến được khai báo trong điều kiện phân nhánh không thể tham chiếu từ bên ngoài điều kiện phân nhánh.
 
 ```js twoslash
 if (navigator.userAgent.includes("Firefox")) {
   const browser = "Firefox";
 } else {
-  const browser = "Firefox以外";
+  const browser = "Không phải Firefox";
 }
-console.log(browser); // 参照できずエラー
+console.log(browser); // Không thể tham chiếu và gây lỗi
 ```
 
-上の例は、ブロックスコープの外で変数宣言するように書き換える必要があります。
+Ví dụ trên cần viết lại để khai báo biến bên ngoài block scope.
 
 ```js twoslash
 let browser;
 if (navigator.userAgent.includes("Firefox")) {
   browser = "Firefox";
 } else {
-  browser = "Firefox以外";
+  browser = "Không phải Firefox";
 }
 console.log(browser); // OK
 ```
 
-## 意図しないグローバル変数への代入
+## Gán vào biến global không mong muốn
 
-JavaScriptではローカルスコープの変数に代入したつもりが、グローバル変数に代入してしまっていたといった事故が起こりえます。ローカル変数を宣言する場合は、`let`や`const`を用いますが、これを書き忘れた変数代入は、グローバル変数になってしまいます。
+Trong JavaScript có thể xảy ra sự cố là định gán vào biến local scope nhưng lại gán vào biến global. Khi khai báo biến local, sử dụng `let` hoặc `const`, nhưng nếu quên viết chúng, việc gán biến sẽ trở thành biến global.
 
 ```js twoslash
 function func() {
-  foo = "ローカル変数のつもり";
+  foo = "Định là biến local";
 }
 func();
 console.log(window.foo);
-// @log: "ローカル変数のつもり"
+// @log: "Định là biến local"
 ```
 
-JavaScriptで変数を扱う際は、誤ってグローバル変数を作ってしまわないよう注意が必要です。一方、TypeScriptでは変数宣言されていない変数に代入しようとすると、コンパイラが指摘してくれます。
+Khi xử lý biến trong JavaScript, cần chú ý để không vô tình tạo biến global. Ngược lại, trong TypeScript, khi cố gán vào biến chưa được khai báo, compiler sẽ chỉ ra.
 
 ```ts twoslash
 // @errors: 2304
 function func() {
-  foo = "ローカル変数のつもり";
+  foo = "Định là biến local";
 }
 ```
 
-意図しないグローバル変数への代入は、JavaScriptの残念な仕様と言えますが、TypeScriptを使っているとこういったトラブルも発見しやすくなります。
+Gán vào biến global không mong muốn có thể nói là đặc tả đáng tiếc của JavaScript, nhưng khi sử dụng TypeScript, những vấn đề như vậy cũng dễ phát hiện hơn.

@@ -1,30 +1,30 @@
 ---
-description: 個別にコンパイルされるモジュールをサポートする
+description: Hỗ trợ các module được compile riêng lẻ
 ---
 
 # isolatedModules
 
-`isolatedModules`は、各ファイルを独立して変換する際に、解釈できないコードがある場合に警告するコンパイラオプションです。
+`isolatedModules` là compiler option cảnh báo khi có code không thể phân tích được khi transform từng file độc lập.
 
-- デフォルト: `false`
-- 追加されたバージョン: 1.5
+- Mặc định: `false`
+- Phiên bản thêm vào: 1.5
 
-## `isolatedModules`はトランスパイラ向けのオプション
+## `isolatedModules` là option dành cho transpiler
 
-TypeScriptをJavaScriptに変換する際、複数のファイルが関連することがあります。しかし、Babelのようなトランスパイラは、1ファイルずつ処理するため、一部コードが正しく解釈されないことがあります。
+Khi chuyển TypeScript sang JavaScript, nhiều file có thể liên quan đến nhau. Tuy nhiên, các transpiler như Babel xử lý từng file một nên một số code có thể không được phân tích đúng.
 
-具体的には、`const enum`や`namespace`などの機能を使用すると、実行時に問題が発生することがあります。`isolatedModules`は、このような問題を回避するために、正しく解釈できないコードがある場合に警告します。
+Cụ thể, khi sử dụng các tính năng như `const enum` hoặc `namespace` có thể gây ra vấn đề runtime. `isolatedModules` sẽ cảnh báo khi có code không thể phân tích đúng để tránh các vấn đề này.
 
-## `isolatedModules`が有効な場合に機能しないコード
+## Code không hoạt động khi `isolatedModules` được bật
 
-以下は、`isolatedModules`が有効な場合に機能しないコードの例です。
+Dưới đây là các ví dụ code không hoạt động khi `isolatedModules` được bật.
 
-### 値でない識別子のエクスポート
+### Export identifier không phải là giá trị
 
-TypeScriptでは、インポートした型を再エクスポートすることができます。
-これは、複数のモジュールから型や関数をまとめてエクスポートする際に便利です。ただし、`isolatedModules`が有効な場合、型を再エクスポートする際に`export type`を使わないとエラーが発生します。
+TypeScript cho phép re-export type đã import.
+Điều này hữu ích khi gom type và function từ nhiều module để export. Tuy nhiên, khi `isolatedModules` được bật, nếu re-export type mà không dùng `export type` sẽ báo lỗi.
 
-**問題のあるコード:**
+**Code có vấn đề:**
 
 ```ts title="someModule.ts" twoslash
 export type SomeType = any;
@@ -43,14 +43,14 @@ export function hello() {
 // ---cut---
 import { SomeType, hello } from "./someModule";
 
-// someTypeは値?それとも型?トランスパイラには判断できない
+// someType là giá trị hay là type? Transpiler không thể phân biệt
 export { SomeType, hello };
 // @error: Re-exporting a type when the '--isolatedModules' flag is provided requires using 'export type'.
 ```
 
-**解決策：**
+**Giải pháp:**
 
-`export type`を使用して型を再エクスポートすることで、エラーを回避できます。
+Sử dụng `export type` để re-export type sẽ tránh được lỗi.
 
 ```ts title="index.ts" twoslash
 // @filename: "someModule.ts"
@@ -62,37 +62,37 @@ export function hello() {
 // ---cut---
 import { SomeType, hello } from "./someModule";
 
-export type { SomeType }; // 型だと判定できる
+export type { SomeType }; // Có thể xác định được là type
 export { hello };
 ```
 
-### モジュールでないファイル
+### File không phải module
 
-`isolatedModules` が設定されている場合、すべての実装ファイルは モジュールでなければなりません。モジュールとは、`import`や`export`の構文を使用していることを意味します。ファイルがモジュールでない場合、エラーが発生します。
+Khi `isolatedModules` được bật, tất cả các implementation file phải là module. Module có nghĩa là file sử dụng cú pháp `import` hoặc `export`. Nếu file không phải module sẽ báo lỗi.
 
-**問題のあるコード:**
+**Code có vấn đề:**
 
 ```ts title="index.ts" twoslash
 function fn() {}
 // @error: 'index.ts' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
 ```
 
-**解決策：**
+**Giải pháp:**
 
-ファイルをモジュール化するために、空の`export {}`文を追加します。
+Thêm câu lệnh `export {}` rỗng để biến file thành module.
 
 ```ts title="index.ts" twoslash
 function fn() {}
 
-// 空の export文を追加することでモジュール化する
+// Thêm câu lệnh export rỗng để biến thành module
 export {};
 ```
 
-### const enum メンバーへの参照
+### Tham chiếu đến member của const enum
 
-TypeScriptでは、`const enum`のメンバーに参照すると、生成されるJavaScriptではその参照が実際の値に置き換えられます。しかし、他のトランスパイラは、メンバー値に関する情報がないため、参照を置き換えることができません。そのため、実行時にエラーが発生します。
+Trong TypeScript, khi tham chiếu đến member của `const enum`, trong JavaScript được generate ra, tham chiếu đó sẽ được thay thế bằng giá trị thực tế. Tuy nhiên, các transpiler khác không có thông tin về giá trị member nên không thể thay thế tham chiếu. Do đó sẽ xảy ra lỗi runtime.
 
-**問題のあるコード:**
+**Code có vấn đề:**
 
 ```ts title="index.ts" twoslash
 declare const enum Numbers {
@@ -104,9 +104,9 @@ console.log(Numbers.Zero + Numbers.One);
 // @error: Cannot access ambient const enums when the '--isolatedModules' flag is provided.
 ```
 
-**解決策:**
+**Giải pháp:**
 
-`const enum`の代わりに、通常の`enum`を使用することで、エラーを回避できます。
+Thay vì `const enum`, sử dụng `enum` thông thường sẽ tránh được lỗi.
 
 ```ts title="numbers.ts" twoslash
 enum Numbers {
@@ -114,21 +114,21 @@ enum Numbers {
   One = 1,
 }
 
-// 通常の enum への参照は許可されます
+// Tham chiếu đến enum thông thường được cho phép
 console.log(Numbers.Zero + Numbers.One);
 ```
 
-`isolatedModules`は、このような問題を回避するためのコンパイラオプションです。
-警告を出してくれることにより、コンパイラが正しく解釈できないコードの存在に気がつくことができます。
+`isolatedModules` là compiler option để tránh các vấn đề này.
+Nhờ có cảnh báo, chúng ta có thể nhận biết được sự tồn tại của code mà compiler không thể phân tích đúng.
 
-## `create-react-app`や`create-next-app`で生成されたtsconfig.jsonの`isolatedModules`をfalseにしてはいけない
+## Không nên đặt `isolatedModules` thành false trong tsconfig.json được tạo bởi `create-react-app` hoặc `create-next-app`
 
-ReactやNext.jsの雛形生成ツールによって作成されたtsconfig.jsonでは、`isolatedModules`が有効化されています。これは、ReactやNextが内部でBabelを使用しているためです。`isolatedModules`をfalseに変えてしまうとビルドできなくなる可能性があるため、設定を変更しないようにしましょう。
+Trong tsconfig.json được tạo bởi các công cụ scaffold của React hoặc Next.js, `isolatedModules` được bật. Đây là vì React và Next sử dụng Babel bên trong. Nếu đổi `isolatedModules` thành false có thể khiến build bị lỗi, nên không nên thay đổi cấu hình này.
 
 <PostILearned>
 
-✅isolatedModulesはファイル単位での変換を前提に解釈できないコードをチェックする
-🚧Babelなどのトランスパイラとの互換性向上のために存在する
-👍isolatedModulesは有効にしよう
+✅isolatedModules check code không thể phân tích được dựa trên giả định transform từng file
+🚧Tồn tại để cải thiện khả năng tương thích với các transpiler như Babel
+👍Nên bật isolatedModules
 
 </PostILearned>

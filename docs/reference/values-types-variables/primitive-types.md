@@ -4,52 +4,52 @@ sidebar_label: プリミティブ型
 
 # プリミティブ型 (primitive types)
 
-JavaScriptのデータ型は、プリミティブ型とオブジェクトの2つに分類されます。
+Data type trong JavaScript được phân loại thành primitive type và object.
 
-## イミュータブル特性
+## Đặc tính immutable
 
-JavaScriptのプリミティブ型の1つ目の特徴は、値を直接変更できない点です。つまりイミュータブル(immutable)です。一方、オブジェクトには、値を後で変更できるというミュータブル特性(mutable)があります。
+Đặc điểm thứ nhất của primitive type trong JavaScript là không thể thay đổi giá trị trực tiếp. Nghĩa là immutable. Ngược lại, object có đặc tính mutable - có thể thay đổi giá trị sau này.
 
-## プロパティを持たない
+## Không có property
 
-JavaScriptのプリミティブ型の2つ目の特徴は、基本的にプロパティがないことです。プリミティブ型の`null`と`undefined`にはプロパティがありません。
+Đặc điểm thứ hai của primitive type trong JavaScript là cơ bản không có property. Primitive type `null` và `undefined` không có property.
 
 ```js
 null.toString(); // エラーになる
 ```
 
-ところが、文字列や数値などのプリミティブ型は、プロパティを持ったオブジェクトとして扱えます。
+Tuy nhiên, primitive type như string hay number có thể xử lý như object có property.
 
 ```js
 "name".length; // 4
 ```
 
-このように、プリミティブ型をまるでオブジェクトのように扱えるのはJavaScriptの特徴です。JavaScriptには、プリミティブ型をオブジェクトに自動変換する機能があります。この機能はオートボクシング(autoboxing)、自動ボックス化と呼ばれます。
+Như vậy, việc có thể xử lý primitive type như object là đặc điểm của JavaScript. JavaScript có chức năng tự động chuyển đổi primitive type sang object. Chức năng này gọi là autoboxing hoặc auto-boxing.
 
 [ボックス化 (boxing)](boxing.md)
 
-## プリミティブ型の種類
+## Các loại primitive type
 
-プリミティブ型は次の7つがあります。
+Primitive type có 7 loại sau.
 
 <!-- textlint-disable prh -->
 
-1. boolean型(論理型): `true`または`false`の真偽値。
-2. number型(数値型): `0`や`0.1`のような数値。
-3. string型(文字列型): `"Hello World"`のような文字列。
-4. undefined型: 値が未定義であることを表す型。
-5. null型: 値がないことを表す型。
-6. symbol型(シンボル型): 一意で不変の値。
-7. bigint型(長整数型): `9007199254740992n`のようなnumber型では扱えない大きな整数型。
+1. boolean型(論理型): Giá trị boolean `true` hoặc `false`.
+2. number型(数値型): Số như `0` hay `0.1`.
+3. string型(文字列型): Chuỗi như `"Hello World"`.
+4. undefined型: Type biểu thị giá trị chưa được định nghĩa.
+5. null型: Type biểu thị không có giá trị.
+6. symbol型(シンボル型): Giá trị duy nhất và immutable.
+7. bigint型(長整数型): Số nguyên lớn như `9007199254740992n` mà number型 không xử lý được.
 <!-- textlint-enable prh -->
 
-上のプリミティブ型以外は、JavaScriptにおいてはすべてオブジェクトと考えて問題ありません。配列や正規表現オブジェクトなどもすべてオブジェクトです。
+Ngoài các primitive type trên, tất cả đều có thể coi là object trong JavaScript. Array, regular expression object v.v. đều là object.
 
 <PostILearned>
 
-・JSのプリミティブ型はイミュータブルでプロパティを持たない
-・プリミティブをオブジェクトのように扱える「オートボクシング」がある
-・プリミティブは7種類: boolean, number, string, undefined, null, symbol, bigint
-・それ以外は全部オブジェクト
+・Primitive type của JS là immutable và không có property
+・Có "autoboxing" cho phép xử lý primitive như object
+・Primitive có 7 loại: boolean, number, string, undefined, null, symbol, bigint
+・Ngoài ra tất cả đều là object
 
 </PostILearned>

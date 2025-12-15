@@ -41,6 +41,7 @@ https://typescriptbook.jp/writing
 ## Launch
 
 ```bash
+nvm use 20
 yarn install
 yarn start
 ```

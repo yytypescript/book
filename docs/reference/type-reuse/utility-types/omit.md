@@ -1,21 +1,21 @@
 ---
-description: 任意のプロパティを除いたオブジェクト型を作る
+description: Tạo object type loại bỏ các property tùy ý
 title: "Omit<T, Keys>"
 ---
 
-`Omit<T, Keys>`は、オブジェクトの型`T`から`Keys`で指定したプロパティを除いたobject型を返すユーティリティ型です。
+`Omit<T, Keys>` là utility type trả về object type sau khi loại bỏ các property được chỉ định trong `Keys` từ object type `T`.
 
-## Omit&lt;T, Keys>の型引数
+## Type argument của Omit&lt;T, Keys>
 
 ### T
 
-型引数`T`にはオブジェクトの型を渡します。
+Type argument `T` nhận object type.
 
 ### Keys
 
-`Keys`には引数`T`のプロパティキーを指定します。ここで指定したプロパティキーと一致するプロパティを`T`から除去します。
+`Keys` chỉ định property key của argument `T`. Loại bỏ các property khớp với property key được chỉ định ở đây khỏi `T`.
 
-## Omitの使用例
+## Ví dụ sử dụng Omit
 
 ```ts twoslash
 type User = {
@@ -32,7 +32,7 @@ type Optional = "age" | "address" | "nationality" | "createdAt" | "updatedAt";
 type Person = Omit<User, Optional>;
 ```
 
-上の`Person`型は次の型と同じになります。
+Kiểu `Person` ở trên sẽ giống với kiểu sau:
 
 ```ts twoslash
 type Person = {
@@ -42,9 +42,9 @@ type Person = {
 };
 ```
 
-## Omitの注意点
+## Lưu ý khi sử dụng Omit
 
-`Omit<T, Keys>`の`Keys`に`T`には無いプロパティキーを指定しても、TypeScriptコンパイラーは指摘しません。たとえば、`Keys`にタイポがあっても検出できないので注意が必要です。
+TypeScript compiler không chỉ ra lỗi ngay cả khi chỉ định property key không tồn tại trong `T` cho `Keys` của `Omit<T, Keys>`. Ví dụ, cần chú ý vì không thể phát hiện typo trong `Keys`.
 
 ```ts twoslash
 type User = {
@@ -64,8 +64,8 @@ type Person = Omit<User, Optional>;
 // このPersonは下の型になる
 ```
 
-`User`の`createdAt`、`updatedAt`の`At`は大文字から始まりますが、これに気づかずに小文字で書いてしまったため、`Omit`の結果は`createdAt`と`updatedAt`を含んでしまいます。
+`At` của `createdAt` và `updatedAt` trong `User` bắt đầu bằng chữ hoa, nhưng do không nhận ra điều này và viết bằng chữ thường, kết quả của `Omit` vẫn bao gồm `createdAt` và `updatedAt`.
 
-## 関連情報
+## Thông tin liên quan
 
 [Pick&lt;T, Keys>](pick.md)

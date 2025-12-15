@@ -1,19 +1,19 @@
 ---
-sidebar_label: "インターフェース"
+sidebar_label: "Interface"
 slug: /reference/object-oriented/interface
 ---
 
-# インターフェース (interface)
+# Interface (interface)
 
-インターフェースはクラスが実装すべきフィールドやメソッドを定義した型です。クラスはインターフェースを実装することで、インターフェースが求めるメソッド名や引数の型に則っているかをチェックすることができます。
+Interface là kiểu định nghĩa field và method mà class cần implement. Class implement interface để có thể kiểm tra xem có tuân theo tên method và kiểu tham số mà interface yêu cầu hay không.
 
-JavaやPHPなどの言語では、インターフェースが定義できますが、JavaScriptにはそれに相当する構文がありません。一方、TypeScriptにはインターフェースがあります。
+Trong các ngôn ngữ như Java hay PHP có thể định nghĩa interface, nhưng JavaScript không có cú pháp tương ứng. Ngược lại, TypeScript có interface.
 
-TypeScriptで定義されたインターフェースは、コンパイルチェックに活用された後、JavaScriptコードを生成する過程で消されるため、インターフェースがJavaScript実行時に影響することはありません。
+Interface được định nghĩa trong TypeScript, sau khi được sử dụng để kiểm tra compile, sẽ bị xóa trong quá trình sinh ra code JavaScript, nên interface không ảnh hưởng khi chạy JavaScript.
 
-## インターフェースを定義する
+## Định nghĩa interface
 
-TypeScriptでは`interface`キーワードでインターフェースを定義できます。
+Trong TypeScript có thể định nghĩa interface bằng từ khóa `interface`.
 
 ```ts twoslash
 interface SomeInterface {
@@ -22,7 +22,7 @@ interface SomeInterface {
 }
 ```
 
-TypeScriptではメソッドだけでなく、パブリックフィールドも定義できます。
+Trong TypeScript không chỉ method mà còn có thể định nghĩa public field.
 
 ```ts twoslash
 interface SomeInterface {
@@ -30,11 +30,11 @@ interface SomeInterface {
 }
 ```
 
-## インターフェースと構造的部分型
+## Interface và structural subtyping
 
-Javaなどのオブジェクト指向言語ではクラスの抽象的な型定義として利用されます。そのため、インターフェース単体では利用されず、特定のクラスがインターフェースを継承し実装を追加することで初めて効果を発揮します。
+Trong các ngôn ngữ OOP như Java, interface được sử dụng như định nghĩa kiểu trừu tượng của class. Do đó, interface không được sử dụng đơn lẻ mà phát huy hiệu quả khi class cụ thể kế thừa interface và thêm implementation.
 
-TypeScriptでもインターフェースをクラスに実装させることはできますが、それに加えて、TypeScriptは構造的部分型なので、インターフェースと実装関係がないオブジェクトの型注釈としても利用できます。
+Trong TypeScript cũng có thể cho class implement interface, ngoài ra vì TypeScript là structural subtyping nên cũng có thể sử dụng làm type annotation cho object không có quan hệ implement với interface.
 
 ```ts twoslash
 interface Person {
@@ -48,4 +48,4 @@ const taro: Person = {
 };
 ```
 
-[構造的部分型 (structural subtyping)](../../values-types-variables/structural-subtyping.md)
+[Structural subtyping (structural subtyping)](../../values-types-variables/structural-subtyping.md)

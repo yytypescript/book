@@ -1,21 +1,21 @@
-# JavaScriptとTypeScriptのオブジェクト指向機能の比較
+# So sánh tính năng OOP giữa JavaScript và TypeScript
 
-簡易な一覧ですが、型に関する機能が拡張されていることがわかると思います。
+Đây là bảng so sánh đơn giản, cho thấy TypeScript mở rộng nhiều tính năng liên quan đến kiểu dữ liệu.
 
-| 機能名                     | JavaScript | TypeScript |
+| Tính năng                  | JavaScript | TypeScript |
 | :------------------------- | :--------- | :--------- |
-| クラス構文                 | ○          | ○          |
-| クラス継承                 | ○          | ○          |
+| Cú pháp class              | ○          | ○          |
+| Kế thừa class              | ○          | ○          |
 | super                      | ○          | ○          |
-| コンストラクタ             | ○          | ○          |
-| 抽象クラス(abstract)       | ✕          | ○          |
-| 抽象メソッド               | ✕          | ○          |
-| アクセス修飾子             | △          | ○          |
-| インターフェース           | ✕          | ○          |
-| ジェネリクス               | ✕          | ○          |
-| 静的プロパティ             | △          | ○          |
-| 静的メソッド               | △          | ○          |
-| finalクラス / sealedクラス | ✕          | ✕          |
-| finalメソッド              | ✕          | ✕          |
+| Constructor                | ○          | ○          |
+| Abstract class             | ✕          | ○          |
+| Abstract method            | ✕          | ○          |
+| Access modifier            | △          | ○          |
+| Interface                  | ✕          | ○          |
+| Generics                   | ✕          | ○          |
+| Static property            | △          | ○          |
+| Static method              | △          | ○          |
+| Final class / Sealed class | ✕          | ✕          |
+| Final method               | ✕          | ✕          |
 
-クラスにかかわらずTypeScriptの特徴となるのはコーディング中に型が不適切な場合はコンパイルエラーを教えてくれることです。JavaScriptの場合は基本的に実行を行い不正な型が発生した場合に型エラーを知ることになります。TypeScriptコードに問題がなく型安全と判断された場合に限りコンパイルを行うことができます。また出力されたJavaScriptファイルには型情報は除かれます。
+Đặc điểm nổi bật của TypeScript không chỉ ở class mà còn ở chỗ nó báo lỗi compile khi kiểu dữ liệu không phù hợp ngay trong lúc code. Với JavaScript, về cơ bản bạn chỉ biết lỗi kiểu dữ liệu khi chạy chương trình và gặp kiểu không hợp lệ. TypeScript chỉ compile khi code được đánh giá là type-safe và không có vấn đề. Ngoài ra, thông tin kiểu sẽ bị loại bỏ trong file JavaScript output.

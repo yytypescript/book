@@ -3,30 +3,30 @@ title: JSX
 slug: /reference/jsx
 ---
 
-JSX（JavaScript XML）は、コンポーネント指向のJavaScriptライブラリやフレームワーク（特にReact）で一般的に採用されている、JavaScriptの拡張構文です。JSXを用いると、JavaScriptのコード内にHTMLタグのような構文が埋め込み可能となり、より直感的かつ読みやすい形でUIのコードを表現することができます。それによって、開発者のコーディング体験や開発、デバッグの効率が上がります。
+JSX (JavaScript XML) là cú pháp mở rộng của JavaScript, thường được áp dụng trong các library và framework JavaScript hướng component (đặc biệt là React). Sử dụng JSX cho phép nhúng cú pháp giống HTML tag vào trong code JavaScript, giúp biểu diễn code UI một cách trực quan và dễ đọc hơn. Nhờ đó, trải nghiệm coding, phát triển và debug của developer được cải thiện.
 
-## JSXとECMAScriptの違い
+## Sự khác biệt giữa JSX và ECMAScript
 
-JavaScriptの文法はECMAScriptという言語仕様で規定されています。一方、JSXはJavaScriptの構文を独自に拡張した言語です。そのため、JSXはECMAScriptの言語仕様に盛り込まれていません。ブラウザがJavaScriptエンジンを実装する場合は、ECMAScript(標準)に準拠するため、ブラウザで直接JSXを解釈し、実行することができない現状があります。この問題を解消するためには、JSXをブラウザが認識できるJavaScriptに変換する、いわゆるトランスパイルという過程が必要となります。このトランスパイル作業を助けるツールとして、BabelやTypeScriptコンパイラーが使われます。
+Cú pháp JavaScript được quy định bởi đặc tả ngôn ngữ gọi là ECMAScript. Mặt khác, JSX là ngôn ngữ mở rộng cú pháp JavaScript một cách độc lập. Do đó, JSX không được đưa vào đặc tả ngôn ngữ ECMAScript. Khi browser implement JavaScript engine, nó tuân thủ ECMAScript (tiêu chuẩn), nên hiện tại browser không thể trực tiếp hiểu và thực thi JSX. Để giải quyết vấn đề này, cần quá trình gọi là transpile - chuyển đổi JSX thành JavaScript mà browser có thể nhận dạng. Các tool hỗ trợ công việc transpile này là Babel và TypeScript compiler.
 
-## JSX構文とHTML構文の違い
+## Sự khác biệt giữa cú pháp JSX và cú pháp HTML
 
-初見では異なると気づきにくいかもしれませんが、実はJSXとHTMLはまったく同じではありません。構文のレベルにおいてJSXとHTMLの間には複数の違いが存在します。一例を挙げると、属性名の表記方法や、スタイルの指定方法、自己終了タグの書き方などが異なります。これらの詳細については後程の「属性」セクションでより詳しく説明します。覚えておくべき重要なポイントとしては、JSXがHTMLとJavaScriptのハイブリッドであるため、両者の規則や慣例を調和させる形で設計されているという点です。
+Nhìn lần đầu có thể khó nhận ra sự khác biệt, nhưng thực tế JSX và HTML không hoàn toàn giống nhau. Ở cấp độ cú pháp, có nhiều sự khác biệt giữa JSX và HTML. Ví dụ, cách viết tên thuộc tính, cách chỉ định style, cách viết self-closing tag, v.v. đều khác nhau. Chi tiết về những điều này sẽ được giải thích kỹ hơn trong phần "Thuộc tính" sau. Điểm quan trọng cần nhớ là JSX là hybrid của HTML và JavaScript, nên được thiết kế để hài hòa các quy tắc và quy ước của cả hai.
 
-## JSX構文
+## Cú pháp JSX
 
-### 要素
+### Element
 
-JSXでもっとも一般的な形式は、ネスト可能な要素（タグ）を使ってコンポーネントを表現するものです。
+Dạng phổ biến nhất trong JSX là biểu diễn component bằng element (tag) có thể nest.
 
 ```tsx twoslash
 const element = <br />;
-// 描画結果: <br/>
+// Kết quả render: <br/>
 ```
 
-### 入れ子の要素
+### Element lồng nhau
 
-JSX要素はHTMLのようにネストすることができます。たとえば、`div`要素内に2つの`br`要素がネストされている状況を考えてみましょう。
+JSX element có thể nest giống như HTML. Ví dụ, xem xét tình huống 2 element `br` được nest trong element `div`.
 
 ```tsx twoslash
 const element = (
@@ -35,25 +35,25 @@ const element = (
     <br />
   </div>
 );
-// 描画結果: <div><br/><br/></div>
+// Kết quả render: <div><br/><br/></div>
 ```
 
-これらは簡単な例ですが、属性や子要素を追加してより複雑なコンポーネントを表現することも可能です。
+Đây là những ví dụ đơn giản, nhưng cũng có thể thêm attribute và child element để biểu diễn component phức tạp hơn.
 
-### テキスト要素
+### Text element
 
-JSX内では、要素に直接テキストを書くことができます。
+Trong JSX, có thể viết text trực tiếp vào element.
 
 ```tsx twoslash
 const element = <h1>I'm a text element.</h1>;
-// 描画結果: <h1>I&#x27;m a text element.</h1>
+// Kết quả render: <h1>I&#x27;m a text element.</h1>
 ```
 
-上記のように、要素の中に直接テキストを書くと、そのテキストはそのままの形で出力されます。
+Như trên, khi viết text trực tiếp vào element, text đó được output nguyên dạng.
 
-#### 空白と要素
+#### Khoảng trắng và element
 
-JSXでは、要素間のスペースは自動的に無視されます。たとえば、
+Trong JSX, khoảng trắng giữa các element được tự động bỏ qua. Ví dụ,
 
 <!--prettier-ignore-->
 ```tsx twoslash
@@ -64,12 +64,12 @@ const element = (
     .
   </p>
 );
-// 描画結果: <p>This is a<strong>pen</strong>.</p>
+// Kết quả render: <p>This is a<strong>pen</strong>.</p>
 ```
 
-上記のコードは「This is a**pen**.」として「a」と「pen」の分かち書きがない状態でレンダリングされてしまいます。
+Code trên được render thành "This is a**pen**." với "a" và "pen" không có khoảng trắng phân cách.
 
-これを回避するには、文字列をJavaScriptの式として書くことです。
+Để tránh điều này, viết chuỗi như biểu thức JavaScript.
 
 <!--prettier-ignore-->
 ```tsx twoslash
@@ -80,32 +80,32 @@ const element = (
     .
   </p>
 );
-// 描画結果: <p>This is a<!-- --> <strong>pen</strong>.</p>
+// Kết quả render: <p>This is a<!-- --> <strong>pen</strong>.</p>
 ```
 
-こうすると、正しく「This is a pen.」としてレンダリングされます。
+Như vậy, nó sẽ được render đúng thành "This is a pen.".
 
-### 属性
+### Thuộc tính
 
-JSX属性の名前は、JavaScriptの命名規則に従いcamelCaseで記述することが推奨されています。この命名規則は、HTML内のアトリビュートとは異なる点に注意が必要です。
+Tên thuộc tính JSX được khuyến khích viết theo camelCase theo quy ước đặt tên JavaScript. Cần chú ý điểm này khác với attribute trong HTML.
 
-### 標準HTML属性
+### Thuộc tính HTML tiêu chuẩn
 
-JSXでは、HTML属性と同じように要素に属性を与えることができます。
+Trong JSX, có thể gán thuộc tính cho element giống như HTML attribute.
 
 ```tsx twoslash
 const element1 = <img src="image.jpg" alt="A beautiful scene" />;
 const element2 = <a href="http://example.com">Visit our website</a>;
 ```
 
-ただし、`class`属性はJavaScriptの予約語であるため、代わりに`className`を使用します。たとえば、次のコードでは`h1`要素に`className`属性を適用しています。
+Tuy nhiên, vì thuộc tính `class` là từ dành riêng của JavaScript, nên sử dụng `className` thay thế. Ví dụ, trong code sau áp dụng thuộc tính `className` cho element `h1`.
 
 ```tsx twoslash
 const element = <h1 className="greeting">Hello, world!</h1>;
-// 描画結果: <h1 class='greeting'>Hello, world!</h1>
+// Kết quả render: <h1 class='greeting'>Hello, world!</h1>
 ```
 
-JSXで用いる属性は、JavaScriptのDOMのプロパティ名です。したがって、いくつかのHTML属性はJSXでは異なる名前を持ちます。次の表は、いくつかの一般的なHTML属性と対応するJSX属性名を示しています。
+Thuộc tính sử dụng trong JSX là tên property của DOM trong JavaScript. Do đó, một số HTML attribute có tên khác trong JSX. Bảng sau hiển thị một số HTML attribute phổ biến và tên thuộc tính JSX tương ứng.
 
 | HTML          | JSX           |
 | ------------- | ------------- |
@@ -118,84 +118,84 @@ JSXで用いる属性は、JavaScriptのDOMのプロパティ名です。した�
 | `cellspacing` | `cellSpacing` |
 | `rowspan`     | `rowSpan`     |
 
-### スタイル属性
+### Thuộc tính style
 
-HTMLでは、スタイル属性は一般的に文字列です。
+Trong HTML, thuộc tính style thường là chuỗi.
 
 ```html
 <div style="background-color: yellow; color: blue;">Hello!</div>
 ```
 
-一方、JSXではスタイル属性はオブジェクトでなければなりません。
+Mặt khác, trong JSX thuộc tính style phải là object.
 
 ```jsx
 <div style={{ backgroundColor: "yellow", color: "blue" }}>Hello!</div>;
-// 描画結果: <div style='background-color:yellow;color:blue'>Hello!</div>
+// Kết quả render: <div style='background-color:yellow;color:blue'>Hello!</div>
 ```
 
-### 真偽属性
+### Thuộc tính boolean
 
-真偽属性は要素に特定の特性を指定します。たとえば、input要素には"disabled"というboolean型の属性があり、その値に真を指定するとinput要素は無効になります。
+Thuộc tính boolean chỉ định đặc tính cụ thể cho element. Ví dụ, element input có thuộc tính kiểu boolean gọi là "disabled", và khi chỉ định giá trị true thì element input sẽ bị vô hiệu hóa.
 
 ```tsx twoslash
 const element = <input disabled />;
-// 描画結果: <input disabled=''/>
+// Kết quả render: <input disabled=''/>
 ```
 
-属性の値として`{true}`を付けて明示的に指定することもできます。
+Cũng có thể chỉ định rõ ràng bằng cách thêm `{true}` làm giá trị thuộc tính.
 
 ```tsx twoslash
 const element = <input disabled={true} />;
-// 描画結果: <input disabled=''/>
+// Kết quả render: <input disabled=''/>
 ```
 
-しかし、一般的には属性値がtrueの場合、値の部分を省略することが推奨されます。このように記述すると、コードが短くシンプルになるためです。したがって、上記の例のように属性名のみを指定することで、その属性を有効にすることができます。
+Tuy nhiên, thường khuyến khích bỏ qua phần giá trị khi giá trị thuộc tính là true. Vì viết như vậy code sẽ ngắn và đơn giản hơn. Do đó, như ví dụ trên, chỉ cần chỉ định tên thuộc tính là có thể kích hoạt thuộc tính đó.
 
-### 式
+### Biểu thức
 
-JSX内ではJavaScriptの式を埋め込むことが可能です。これにより、動的な値をJSX内に簡単に導入することができます。
+Trong JSX có thể nhúng biểu thức JavaScript. Nhờ đó, có thể dễ dàng đưa giá trị động vào JSX.
 
-### 基本的な式
+### Biểu thức cơ bản
 
-JavaScriptの式をJSX内部に埋め込むためには、波カッコ`{}`を使います。次の例では、変数`name`の値を`<h1>`要素内に埋め込んでいます。
+Để nhúng biểu thức JavaScript vào trong JSX, sử dụng dấu ngoặc nhọn `{}`. Trong ví dụ sau, giá trị của biến `name` được nhúng vào element `<h1>`.
 
 ```tsx twoslash
 const name = "Josh Perez";
 const greeting = <h1>Hello, {name}</h1>;
-// 描画結果: <h1>Hello, <!-- -->Josh Perez</h1>
+// Kết quả render: <h1>Hello, <!-- -->Josh Perez</h1>
 ```
 
-ここでは、JavaScriptの変数を埋め込んでいますが、式としての評価結果が挿入されるので、JavaScriptの演算やメソッドの呼び出しも可能です。
+Ở đây đang nhúng biến JavaScript, nhưng vì kết quả đánh giá biểu thức được chèn vào, nên cũng có thể thực hiện phép toán JavaScript và gọi method.
 
 ```tsx twoslash
 const a = 10;
 const b = 20;
 const sum = <h1>{a + b}</h1>;
-// 描画結果: <h1>30</h1>
+// Kết quả render: <h1>30</h1>
 
 const name = "Josh Perez";
 const greeting = <h1>Hello, {name.toUpperCase()}</h1>;
-// 描画結果: <h1>Hello, <!-- -->JOSH PEREZ</h1>
+// Kết quả render: <h1>Hello, <!-- -->JOSH PEREZ</h1>
 ```
 
-### 条件式
+### Biểu thức điều kiện
 
-JavaScriptのif文は式ではなく文であるため、JSXの式の中に直接書くことはできません。条件式が必要な場合には三項演算子を用います。
+Vì câu lệnh if của JavaScript là statement chứ không phải expression, nên không thể viết trực tiếp trong expression của JSX. Khi cần biểu thức điều kiện, sử dụng toán tử ba ngôi.
 
 ```tsx twoslash
 const isUser = true;
 const greeting = isUser ? <h1>Welcome back!</h1> : <h1>Please sign up.</h1>;
 ```
 
-このように、三項演算子`条件式 ? 真の場合の値 : 偽の場合の値`を使うことで、JSX内で条件によって表示を切り替えることが可能です。
+Như vậy, bằng cách sử dụng toán tử ba ngôi `điều kiện ? giá trị khi true : giá trị khi false`, có thể chuyển đổi hiển thị theo điều kiện trong JSX.
 
-### 短絡評価
+### Short-circuit evaluation
 
-JavaScriptの論理演算子を使用して、短絡評価を行うことも可能です。これを使用すると、特定の条件下でのみ要素を表示したり、デフォルトの値を提供したりします。
+Cũng có thể thực hiện short-circuit evaluation bằng toán tử logic của JavaScript. Sử dụng điều này để chỉ hiển thị element trong điều kiện cụ thể hoặc cung cấp giá trị mặc định.
 
-### 論理AND演算子(`&&`)による短絡評価
+### Short-circuit evaluation bằng toán tử AND logic (`&&`)
 
-論理AND演算子`&&`は、最初の要素が`false`またはfalsyな値（`false`、`null`、`undefined`、`""`、`0`、`NaN`）の場合その値をそのまま返し、それ以外の場合には2番目の値を返します。
+Toán tử AND logic `&&` trả về giá trị đó nếu phần tử đầu tiên là `false` hoặc giá trị falsy (`false`, `null`, `undefined`, `""`, `0`, `NaN`), nếu không thì trả về giá trị thứ hai.
 
 ```tsx twoslash
 declare const isLoggedIn: boolean;
@@ -203,11 +203,11 @@ declare const isLoggedIn: boolean;
 const message = isLoggedIn && <h1>Welcome back!</h1>;
 ```
 
-この例では、`isLoggedIn`がtruthyの場合にのみ、`<h1>Welcome back!</h1>`が表示されます。
+Trong ví dụ này, chỉ khi `isLoggedIn` là truthy thì `<h1>Welcome back!</h1>` mới được hiển thị.
 
-### 論理OR演算子(`||`)による短絡評価
+### Short-circuit evaluation bằng toán tử OR logic (`||`)
 
-論理OR演算子 `||`は、最初のオペランドがtruthyな値の場合にその値をそのまま返し、それ以外の場合には2番目の値を返します。
+Toán tử OR logic `||` trả về giá trị đó nếu operand đầu tiên là giá trị truthy, nếu không thì trả về giá trị thứ hai.
 
 ```tsx twoslash
 declare const isLoggedIn: boolean;
@@ -215,11 +215,11 @@ declare const isLoggedIn: boolean;
 const message = isLoggedIn || <h1>Please sign up.</h1>;
 ```
 
-この例では、`isLoggedIn`がfalsyな値（`undefined`、`null`、`""`、`0`、`NaN`）の場合にのみ、`<h1>Please sign up.</h1>`が表示されます。
+Trong ví dụ này, chỉ khi `isLoggedIn` là giá trị falsy (`undefined`, `null`, `""`, `0`, `NaN`) thì `<h1>Please sign up.</h1>` mới được hiển thị.
 
-### Null合体演算子(`??`)による短絡評価
+### Short-circuit evaluation bằng toán tử Nullish coalescing (`??`)
 
-Null合体演算子(nullish coalescing operator)`??`は、最初のオペランドが`null`または`undefined`の場合にのみ2番目の値を返します。そのため、最初のオペランドが`false`、`0`、`NaN`、空文字列であっても、その値が保持されます。
+Toán tử Nullish coalescing `??` chỉ trả về giá trị thứ hai khi operand đầu tiên là `null` hoặc `undefined`. Do đó, ngay cả khi operand đầu tiên là `false`, `0`, `NaN`, chuỗi rỗng, giá trị đó vẫn được giữ lại.
 
 ```tsx twoslash
 declare const input: { name?: string };
@@ -227,13 +227,13 @@ declare const input: { name?: string };
 const message = input.name ?? <p>No input provided.</p>;
 ```
 
-この例では、`input.name`が`null`または`undefined`の場合にのみ、`<p>No input provided.</p>`が表示されます。
+Trong ví dụ này, chỉ khi `input.name` là `null` hoặc `undefined` thì `<p>No input provided.</p>` mới được hiển thị.
 
-### ループ(反復処理)
+### Loop (xử lý lặp)
 
-JavaScriptの`for-of`ループなど、JSX内では文を直接使用することができないため、配列の反復処理を行う際は`Array.prototype.map`関数のような式を使用します。式とは、値を返すコードの片段のことで、それに対して文は値を生成しません。JSXは基本的には式ベースのシンタックスですので、式が使われます。
+Vì không thể sử dụng trực tiếp statement như `for-of` loop của JavaScript trong JSX, nên khi thực hiện xử lý lặp trên array, sử dụng expression như hàm `Array.prototype.map`. Expression là đoạn code trả về giá trị, ngược lại statement không tạo ra giá trị. JSX về cơ bản là cú pháp dựa trên expression nên sử dụng expression.
 
-`Array.prototype.map`関数は配列の各要素に対して関数を適用し、その結果で新たな配列を作成します。これを利用して、一連の要素を作ることができます。次にサンプルコードを示します。
+Hàm `Array.prototype.map` áp dụng function cho mỗi phần tử của array và tạo array mới với kết quả đó. Sử dụng điều này để tạo một loạt element. Dưới đây là sample code.
 
 ```tsx twoslash
 const numbers = [1, 2, 3];
@@ -244,32 +244,32 @@ const list = (
     ))}
   </ul>
 );
-// 描画結果: <ul><li>1</li><li>2</li><li>3</li></ul>
+// Kết quả render: <ul><li>1</li><li>2</li><li>3</li></ul>
 ```
 
-この例では、`numbers`という配列の各要素に対して関数が適用され、その結果から新たな`<li>`要素で構成された配列が作成されます。そして、その配列は`<ul>`要素に展開され`list`に代入されます。
+Trong ví dụ này, function được áp dụng cho mỗi phần tử của array `numbers`, và array mới gồm các element `<li>` được tạo từ kết quả đó. Sau đó, array đó được mở rộng vào element `<ul>` và gán vào `list`.
 
-また、Reactでは配列内の要素に一意な`key`プロパティを追加することが推奨されます。これは、ReactがDOMの変更を効率的に追跡するために使用されます。上記の例では、`key`として数値を文字列に変換したものを使用しています。
+Ngoài ra, trong React khuyến khích thêm property `key` duy nhất cho các element trong array. Điều này được sử dụng để React theo dõi thay đổi DOM một cách hiệu quả. Trong ví dụ trên, số được chuyển đổi thành chuỗi được sử dụng làm `key`.
 
-### 自己終了タグ
+### Self-closing tag
 
-JSXでは、XMLのように自己終了タグ(self-closing tags)が使用できます。これは、開始タグと終了タグの間に何も内容を持たない要素について使用します。
+Trong JSX, có thể sử dụng self-closing tag giống như XML. Điều này được sử dụng cho element không có nội dung giữa opening tag và closing tag.
 
 ```tsx twoslash
 const element = <img src="myImage.jpg" alt="" />;
 ```
 
-その要素が内容を持たない場合でも、`<img></img>`のように書くことは文法的には可能です。しかし、一般的には`<img />`のように自己終了タグを書くことが推奨されます。これは可読性の観点から、タグが内容を持たないことを明示するためです。
+Ngay cả khi element đó không có nội dung, viết `<img></img>` cũng có thể về mặt cú pháp. Tuy nhiên, thường khuyến khích viết self-closing tag như `<img />`. Đây là để làm rõ rằng tag không có nội dung từ quan điểm dễ đọc.
 
-### フラグメント
+### Fragment
 
-一般的にJSX要素は、ひとつの親要素内にすべての子要素をネストしなければなりません。これは、JSXが最終的にひとつのルートノードを返すことを要求するためです。しかし、この要求はしばしばReactのDOM構造に余計な要素を追加することを強制してしまいます。これを解決するためにReactが提供する機能が「フラグメント」です。
+Thông thường JSX element phải nest tất cả child element trong một parent element. Điều này là do JSX yêu cầu cuối cùng trả về một root node. Tuy nhiên, yêu cầu này thường buộc phải thêm element thừa vào cấu trúc DOM của React. Chức năng React cung cấp để giải quyết điều này là "Fragment".
 
-フラグメントを使うと、ひとつの親要素なしに、複数の要素を同時に返すことができます。これにより、無駄なDOMノードの生成を防ぎつつ、構造をくずさずに複数の要素をレンダリングすることができます。
+Sử dụng Fragment, có thể trả về nhiều element cùng lúc mà không cần một parent element. Nhờ đó, có thể render nhiều element mà không phá vỡ cấu trúc và ngăn việc tạo DOM node thừa.
 
-### JSXでのフラグメントの使用
+### Sử dụng Fragment trong JSX
 
-フラグメントは`<React.Fragment>`タグを使って明示的に表現することができます。次の例では、`h1`と`h2`要素がフラグメント内にまとめられています。
+Fragment có thể được biểu diễn rõ ràng bằng tag `<React.Fragment>`. Trong ví dụ sau, element `h1` và `h2` được gom trong fragment.
 
 ```tsx twoslash
 const element = (
@@ -278,10 +278,10 @@ const element = (
     <h2>Good to see you here.</h2>
   </React.Fragment>
 );
-// 描画結果: <h1>Hello!</h1><h2>Good to see you here.</h2>
+// Kết quả render: <h1>Hello!</h1><h2>Good to see you here.</h2>
 ```
 
-ただ、より簡潔にフラグメントを表現するために`<>...</>`というショートハンド（短縮形）がよく使われます。次の例では、`<React.Fragment>`タグが`<>...</>`に置き換えられています。
+Tuy nhiên, để biểu diễn fragment ngắn gọn hơn, shorthand `<>...</>` thường được sử dụng. Trong ví dụ sau, tag `<React.Fragment>` được thay thế bằng `<>...</>`.
 
 ```tsx twoslash
 const element = (
@@ -290,35 +290,35 @@ const element = (
     <h2>Good to see you here.</h2>
   </>
 );
-// 描画結果: <h1>Hello!</h1><h2>Good to see you here.</h2>
+// Kết quả render: <h1>Hello!</h1><h2>Good to see you here.</h2>
 ```
 
-いずれの形式でも、フラグメントを使うことで`h1`と`h2`要素は同一階層に配置され、それらをラップする余計なHTML要素を追加せずにレンダリングされます。フラグメントは、Reactアプリケーションのレンダリングパフォーマンスを持続的に向上させるツールとなります。
+Dù ở dạng nào, bằng cách sử dụng fragment, element `h1` và `h2` được đặt cùng cấp và được render mà không thêm HTML element wrap thừa. Fragment là công cụ để liên tục cải thiện hiệu suất render của ứng dụng React.
 
-### JSX内のコメント
+### Comment trong JSX
 
-コメントはコードの読み易さを向上させる重要な要素です。しかし、JSX内のコメントは少し特殊で、明示的にJavaScriptのブロック、つまり波カッコ `{}` 内に書く必要があります。
+Comment là yếu tố quan trọng để cải thiện tính dễ đọc của code. Tuy nhiên, comment trong JSX hơi đặc biệt và cần viết rõ ràng trong block JavaScript, tức là trong dấu ngoặc nhọn `{}`.
 
-### 一行コメント
+### Comment một dòng
 
-JSX内では一行コメントを書く方法は次の通りです。
+Cách viết comment một dòng trong JSX như sau.
 
 ```tsx twoslash
 const element = <div>{/* This is a comment */}</div>;
-// 描画結果: <div></div>
+// Kết quả render: <div></div>
 ```
 
-このように、コメントは `{/* */}` の形式で書かれます。この書き方により、コメントはブラウザに表示されず、ただ開発者を支援するために存在します。
+Như vậy, comment được viết theo dạng `{/* */}`. Với cách viết này, comment không hiển thị trên browser mà chỉ tồn tại để hỗ trợ developer.
 
-### ジェネリクス
+### Generics
 
-ジェネリクスを活用することで、一度定義したコンポーネントや関数を、各種の型に対応可能な形で再利用できます。ここではジェネリクス型を用いたReactコンポーネントの定義とその利用について、詳しく見ていきましょう。
+Bằng cách sử dụng generics, có thể tái sử dụng component hoặc function đã định nghĩa một lần ở dạng có thể tương thích với nhiều type khác nhau. Ở đây, hãy xem chi tiết về định nghĩa và sử dụng React component với generics type.
 
-[ジェネリクス](../generics/README.md)
+[Generics](../generics/README.md)
 
-### ジェネリックコンポーネントの定義
+### Định nghĩa generic component
 
-まず初めに、型変数`T`を用いたコンポーネントを定義します。ここでは`ItemType`という名前で型を作り、それがプロパティ`prop`を介して型`T`を受け取るように設計します。
+Đầu tiên, định nghĩa component sử dụng type variable `T`. Ở đây tạo type với tên `ItemType` và thiết kế để nó nhận type `T` qua property `prop`.
 
 ```tsx
 type ItemType<T> = {
@@ -328,13 +328,13 @@ type ItemType<T> = {
 const Item = <T,>({ prop }: ItemType<T>) => <>{prop}</>;
 ```
 
-上記の`Item`という名前のコンポーネントには、ジェネリクス型を適用しています。そのため、あらゆる型を`prop`として受け取ることが可能になります。
+Component có tên `Item` ở trên được áp dụng generics type. Do đó, có thể nhận bất kỳ type nào làm `prop`.
 
-注目すべき点として、`<T>`の書き方について説明します。もしジェネリクスとして `<T>`だけを記述する場合、TypeScriptはそれがJSXのタグと混同してしまう可能性があります。これは、TypeScriptのパーサーが `<T>`と読み取ったとき、それがジェネリクス開始を示すものなのかJSX要素の開始を示すものなのかを特定するのが難しいためです。この混同を避けるためには、ジェネリクスの開始を示す `<T>`に `,`を追加し、`<T,>`と記述する必要があります。
+Điểm đáng chú ý là giải thích về cách viết `<T>`. Nếu chỉ viết `<T>` làm generics, TypeScript có thể nhầm lẫn nó với tag JSX. Điều này là do khi TypeScript parser đọc `<T>`, khó xác định được nó là bắt đầu generics hay bắt đầu JSX element. Để tránh nhầm lẫn này, cần thêm `,` vào `<T>` chỉ bắt đầu generics và viết thành `<T,>`.
 
-### ジェネリックコンポーネントの利用
+### Sử dụng generic component
 
-ここで、上記で定義したジェネリクス型のコンポーネントを利用してみます。
+Bây giờ, hãy sử dụng component generics type đã định nghĩa ở trên.
 
 ```tsx twoslash
 // @errors: 2322
@@ -347,15 +347,15 @@ const item1 = <Item<string> prop="a" />; // OK
 const item2 = <Item<number> prop="a" />; // Error
 ```
 
-`Item`コンポーネントに対して`string`という型引数を渡し、その`prop`プロパティとして`a`という文字列値を渡しています。これは問題ありません。しかし、次の行では、`Item`コンポーネントに対して`number`という型引数を渡しているのに、その`prop`プロパティとして`a`という文字列値を渡しています。これにより、TypeScriptは型エラーを発生させます。これで、型安全性が確保されていることが確認できます。
+Đang truyền type argument `string` cho component `Item` và truyền giá trị chuỗi `a` làm property `prop`. Điều này không có vấn đề. Tuy nhiên, dòng tiếp theo truyền type argument `number` cho component `Item` nhưng lại truyền giá trị chuỗi `a` làm property `prop`. Do đó, TypeScript phát sinh lỗi type. Như vậy, có thể xác nhận type safety được đảm bảo.
 
-## JSXのベストプラクティス
+## Best practice của JSX
 
-JSXにおけるベストプラクティスは、効果的で読みやすいコードを書くために役立ちます。次にいくつかの主要なベストプラクティスを示します。
+Best practice trong JSX hữu ích để viết code hiệu quả và dễ đọc. Dưới đây là một số best practice chính.
 
-### コンポーネント名は常に大文字ではじめる
+### Tên component luôn bắt đầu bằng chữ hoa
 
-Reactは小文字で始まるコンポーネントをDOMタグとして認識します。したがって、コンポーネント名は常に大文字ではじめることを推奨します。
+React nhận dạng component bắt đầu bằng chữ thường là DOM tag. Do đó, khuyến khích tên component luôn bắt đầu bằng chữ hoa.
 
 ```tsx twoslash
 // Good
@@ -369,9 +369,9 @@ const myComponent = () => {
 };
 ```
 
-### マルチラインのJSXはカッコで囲む
+### Bao multiline JSX trong ngoặc đơn
 
-複数行に渡るJSXは可読性を上げるためにカッコで囲むことを推奨します。
+Khuyến khích bao JSX trải dài nhiều dòng trong ngoặc đơn để tăng tính dễ đọc.
 
 ```tsx {3-7,12-14} twoslash
 // Good
@@ -392,39 +392,39 @@ const Bad = () => {
 };
 ```
 
-### 自己終了タグを利用する
+### Sử dụng self-closing tag
 
-通常、JSX要素は開始タグと終了タグの間に子要素を配置して記述します。しかし内容が空の場合、すなわち子要素を持たない場合、自己終了タグという短縮形を使用することができます。自己終了タグでは、開始タグと終了タグをひとつのタグにまとめることができます。
+Thông thường, JSX element được viết bằng cách đặt child element giữa opening tag và closing tag. Tuy nhiên, khi nội dung rỗng, tức không có child element, có thể sử dụng dạng rút gọn gọi là self-closing tag. Với self-closing tag, có thể gộp opening tag và closing tag thành một tag.
 
-次の2つの表現は同等です：
+Hai biểu diễn sau là tương đương:
 
 ```tsx twoslash
-// 長いバージョン
+// Version dài
 const a = <input></input>;
-// 短いバージョン（自己終了タグ）
+// Version ngắn (self-closing tag)
 const b = <input />;
 ```
 
-前者の例では、`<input></input>`という形で開始タグと終了タグを明示的に記述しています。一方、後者の例では、`<input />`という形で開始タグと終了タグをひとつにまとめた自己終了タグを利用しています。どちらの記述も完全に同じ動作をしますが、後者の形が簡潔であり一般的に好まれます。
+Ví dụ trước viết rõ ràng opening tag và closing tag ở dạng `<input></input>`. Mặt khác, ví dụ sau sử dụng self-closing tag gộp opening tag và closing tag thành một ở dạng `<input />`. Cả hai cách viết đều hoạt động hoàn toàn giống nhau, nhưng dạng sau ngắn gọn và thường được ưa thích hơn.
 
-### `true`の場合は真偽属性を省略する
+### Bỏ qua thuộc tính boolean khi là `true`
 
-JSXでは、属性の値が`true`の場合、その属性名だけ記述することで属性の値を省略することが可能です。この書き方を真偽属性と呼びます。
+Trong JSX, khi giá trị thuộc tính là `true`, có thể bỏ qua giá trị và chỉ viết tên thuộc tính. Cách viết này gọi là thuộc tính boolean.
 
-次の2つの表現は同等です：
+Hai biểu diễn sau là tương đương:
 
 ```tsx twoslash
-// 長いバージョン
+// Version dài
 const a = <input required={true} />;
-// 短いバージョン（真偽属性）
+// Version ngắn (thuộc tính boolean)
 const b = <input required />;
 ```
 
-前者の例では、`required`という属性に対して`{true}`（即ち真）を明示的に設定しています。一方、後者の例では、属性が真であることを示すために`required`という属性名だけを記述しています。どちらの記述も完全に同じ動作をしますが、後者の形が簡潔であり一般的に好まれます。
+Ví dụ trước thiết lập rõ ràng `{true}` (tức là true) cho thuộc tính `required`. Mặt khác, ví dụ sau chỉ viết tên thuộc tính `required` để chỉ ra thuộc tính là true. Cả hai cách viết đều hoạt động hoàn toàn giống nhau, nhưng dạng sau ngắn gọn và thường được ưa thích hơn.
 
-### マップ関数内で一意の`key`プロパティを使用する
+### Sử dụng property `key` duy nhất trong hàm map
 
-`map`関数を使用してリストを作成する際には、各要素に一意の`key`プロパティを付与することを推奨します。これによりReactは変更、追加、削除を効率的に適用できます。
+Khi tạo list bằng hàm `map`, khuyến khích gán property `key` duy nhất cho mỗi element. Nhờ đó React có thể áp dụng thay đổi, thêm, xóa một cách hiệu quả.
 
 ```tsx twoslash
 declare const numbers: number[];
@@ -434,51 +434,51 @@ const listItems = numbers.map((number) => (
 ));
 ```
 
-## JSXとコンパイル
+## JSX và compile
 
-JSXはJavaScriptの一部ではないため、ブラウザで直接実行することはできません。デフォルトでは、JSX構文はJavaScript構文にないものであり、そのまま実行してもブラウザは理解できません。そのため、JSXをJavaScriptにコンパイル（または変換）する必要があります。
+JSX không phải là một phần của JavaScript nên không thể thực thi trực tiếp trên browser. Mặc định, cú pháp JSX không có trong cú pháp JavaScript, và ngay cả khi thực thi nguyên dạng, browser cũng không thể hiểu. Do đó, cần compile (hoặc chuyển đổi) JSX thành JavaScript.
 
-TypeScriptでは、こうしたJSXのコンパイル方法を指定するために、"jsx"という名前のフラグを `tsconfig.json` 内で設定します。このフラグには次の5つの値を設定することができます。
+Trong TypeScript, để chỉ định phương pháp compile JSX như vậy, thiết lập flag tên "jsx" trong `tsconfig.json`. Flag này có thể thiết lập 5 giá trị sau.
 
-1. "react"：この設定を選択すると、JSXはJavaScriptへと変換されます。そして、出力される.jsファイルでは、それぞれのJSX要素は対応する`React.createElement`呼び出しに変換されます。これはReactというライブラリが、JSXをどのように標準的なJavaScriptに変換するかを指定しています。
-2. "react-jsx"：元のJSX要素は`_jsx`呼び出しに変換され、出力された.jsファイルに含まれます。これにより、ある程度のパフォーマンスの向上が期待できます。
-3. "react-jsxdev"：こちらも元のJSX要素は`_jsx`呼び出しに変換されますが、このモードは開発環境でのみ使用することを目的としています。ここで生成される`_jsxの`呼び出しは、開発中のデバッグを容易にするような追加のランタイムチェックを含みます。
-4. "preserve"：このモードはJSXをそのままの形で出力ファイルに残します。つまり、元のJSX構文は変更されず、出力されるファイル拡張子は.jsxであることが期待されます。さらなる変換ステップ（たとえばBabel等のトランスパイラ）のためにJSXをそのまま保持する必要がある場合に使用します。
-5. "react-native"：このオプションもJSXをそのままの形で出力します。ただし、出力するファイル拡張子は.jsのままであることが期待されます。これは主にReact Nativeの開発環境で使用されます。
+1. "react": Khi chọn thiết lập này, JSX được chuyển đổi thành JavaScript. Và trong file .js output, mỗi JSX element được chuyển đổi thành cuộc gọi `React.createElement` tương ứng. Điều này chỉ định cách library React chuyển đổi JSX thành JavaScript tiêu chuẩn.
+2. "react-jsx": JSX element gốc được chuyển đổi thành cuộc gọi `_jsx` và được bao gồm trong file .js output. Nhờ đó, có thể kỳ vọng cải thiện hiệu suất ở một mức độ nào đó.
+3. "react-jsxdev": Tương tự, JSX element gốc được chuyển đổi thành cuộc gọi `_jsx`, nhưng mode này được thiết kế để chỉ sử dụng trong môi trường development. Cuộc gọi `_jsx` được tạo ở đây bao gồm kiểm tra runtime bổ sung để dễ dàng debug trong quá trình development.
+4. "preserve": Mode này giữ nguyên JSX trong file output. Nghĩa là, cú pháp JSX gốc không bị thay đổi, và extension file output được kỳ vọng là .jsx. Sử dụng khi cần giữ nguyên JSX cho bước chuyển đổi tiếp theo (ví dụ transpiler như Babel).
+5. "react-native": Option này cũng giữ nguyên JSX trong output. Tuy nhiên, extension file output được kỳ vọng vẫn là .js. Điều này chủ yếu được sử dụng trong môi trường development React Native.
 
-上記の設定により、JSXの構文をどのようにJavaScriptにコンパイルするかを制御できます。そして、TypeScriptとJSXを一緒に使う際には、これらの設定が不可欠となります。
+Với các thiết lập trên, có thể kiểm soát cách cú pháp JSX được compile thành JavaScript. Và khi sử dụng TypeScript cùng JSX, các thiết lập này là không thể thiếu.
 
-それぞれのフラグでどのようにコンパイルされるのか、次のサンプルコードのコンパイル結果を見てみましょう。
+Hãy xem kết quả compile của sample code sau với mỗi flag.
 
-```tsx twoslash title="コンパイル前のTypeScript"
+```tsx twoslash title="TypeScript trước khi compile"
 const HelloWorld = () => <h1>Hello world</h1>;
 ```
 
-```tsx twoslash title="reactのコンパイル結果(JavaScriptコード)"
+```tsx twoslash title="Kết quả compile react (JavaScript code)"
 // @jsx: react
 // @showEmit
 const HelloWorld = () => <h1>Hello world</h1>;
 ```
 
-```tsx twoslash title="react-jsxのコンパイル結果(JavaScriptコード)"
+```tsx twoslash title="Kết quả compile react-jsx (JavaScript code)"
 // @jsx: react-jsx
 // @showEmit
 const HelloWorld = () => <h1>Hello world</h1>;
 ```
 
-```tsx twoslash title="react-jsxdevのコンパイル結果(JavaScriptコード)"
+```tsx twoslash title="Kết quả compile react-jsxdev (JavaScript code)"
 // @jsx: react-jsxdev
 // @showEmit
 const HelloWorld = () => <h1>Hello world</h1>;
 ```
 
-```tsx twoslash title="preserveのコンパイル結果(JavaScriptコード)"
+```tsx twoslash title="Kết quả compile preserve (JavaScript code)"
 // @jsx: preserve
 // @showEmit
 const HelloWorld = () => <h1>Hello world</h1>;
 ```
 
-```tsx twoslash title="react-nativeのコンパイル結果(JavaScriptコード)"
+```tsx twoslash title="Kết quả compile react-native (JavaScript code)"
 // @jsx: react-native
 // @showEmit
 const HelloWorld = () => <h1>Hello world</h1>;

@@ -1,16 +1,16 @@
 ---
-description: JavaScriptのstrictモードを有効にする
+description: Bật chế độ strict mode của JavaScript
 tags: [strict]
 ---
 
 # alwaysStrict
 
-`alwaysStrict`はJavaScriptのstrictモードを有効にするコンパイラオプションです。
+`alwaysStrict` là compiler option để bật strict mode của JavaScript.
 
-- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
-- 追加されたバージョン: 2.1
-- TypeScript公式が有効化推奨
+- Mặc định: `true` nếu [strict](./strict.md) được bật, ngược lại là `false`
+- Phiên bản thêm vào: 2.1
+- TypeScript khuyến nghị nên bật
 
-## 解説
+## Giải thích
 
-`'use strict'`を各ファイルの先頭に付加します。
+Thêm `'use strict'` vào đầu mỗi file.

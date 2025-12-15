@@ -2,31 +2,31 @@
 sidebar_label: 三項演算子
 ---
 
-# 三項演算子 (ternary operator)
+# Toán tử ba ngôi (ternary operator)
 
-JavaScriptの三項演算子(ternary operator)は、条件分岐ができる演算子です。条件式、真の場合の値、偽の場合の値の三項を取るため三項演算子と呼ばれています。
+Toán tử ba ngôi (ternary operator) trong JavaScript là toán tử có thể thực hiện điều kiện phân nhánh. Được gọi là toán tử ba ngôi vì nhận ba toán hạng: biểu thức điều kiện, giá trị khi đúng, và giá trị khi sai.
 
 ```js
-条件式 ? 真の場合の値 : 偽の場合の値;
+điều_kiện ? giá_trị_khi_đúng : giá_trị_khi_sai;
 ```
 
-演算の結果は変数に代入できます。
+Kết quả của phép toán có thể được gán cho biến.
 
 ```js twoslash
 const age = 20;
-const drink = age >= 20 ? "ビール" : "ジュース";
+const drink = age >= 20 ? "Bia" : "Nước trái cây";
 console.log(drink);
-// @log: "ビール"
+// @log: "Bia"
 ```
 
-条件分岐といえばif-elseですが、if-elseは構文なので上のようにif-elseを直接、値を返すような書き方はできません。
+Nói đến điều kiện phân nhánh là if-else, nhưng vì if-else là câu lệnh nên không thể viết như trên để trực tiếp trả về giá trị.
 
 ```js
-// こうした書き方はできない
-const drink = if (age >= 20) "ビール" else "ジュース";
+// Không thể viết như thế này
+const drink = if (age >= 20) "Bia" else "Nước trái cây";
 ```
 
-三項演算子は条件をネストできます。
+Toán tử ba ngôi có thể lồng nhau.
 
 ```js twoslash
 const extension = "ts";
@@ -37,10 +37,10 @@ const language =
     ? "TypeScript"
     : extension === "java"
     ? "Java"
-    : "不明";
+    : "Không xác định";
 ```
 
-上のコードと同等の処理をif-elseで書くと次のようになります。
+Viết xử lý tương đương bằng if-else như sau.
 
 ```js twoslash
 const extension = "ts";
@@ -52,11 +52,11 @@ if (extension === "js") {
 } else if (extension === "java") {
   language = "Java";
 } else {
-  language = "不明";
+  language = "Không xác định";
 }
 ```
 
-## 関連情報
+## Thông tin liên quan
 
 [if-else文](if-else.md)
 

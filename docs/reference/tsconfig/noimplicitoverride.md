@@ -1,19 +1,19 @@
 ---
-description: メソッドオーバーライドにoverrideキーワードを必須にする
+description: Bắt buộc dùng override keyword khi override method
 ---
 
 # noImplicitOverride
 
-`noImplicitOverride`はメソッドオーバーライドにoverrideキーワードを必須にするコンパイラオプションです。
+`noImplicitOverride` là compiler option bắt buộc dùng override keyword khi override method.
 
-- デフォルト: `false`
-- 追加されたバージョン: 4.3
+- Mặc định: `false`
+- Phiên bản thêm vào: 4.3
 
-## 解説
+## Giải thích
 
-サブクラスがスーパークラスのメソッドを拡張したときに`override`のキーワードをメソッドの前に書くことを強制します。これはスーパークラスの拡張しているメソッドが取り除かれたり、名称が変更されたことを検知することに役立ちます。
+Bắt buộc phải viết keyword `override` trước method khi subclass override method của superclass. Điều này giúp phát hiện khi method đang được override bị xóa hoặc đổi tên trong superclass.
 
-たとえば、トグルボタン (クリックするとオン、オフを繰り返すボタン) のクラスが次のようになっているとします。
+Ví dụ, giả sử có class của toggle button (button click để bật tắt lặp lại) như sau:
 
 ```ts twoslash
 class ToggleButton {
@@ -47,7 +47,7 @@ class ToggleButton {
 }
 ```
 
-ここで値のオンオフの切り替えを何回したかを数えられるサブクラス`ToggleCountButton`を考えます。すると`ToggleCountButton`は次のようになります。
+Giờ xét subclass `ToggleCountButton` có thể đếm số lần đã toggle on/off. `ToggleCountButton` sẽ như sau:
 
 ```ts twoslash
 class ToggleButton {
@@ -104,7 +104,7 @@ class ToggleCountButton extends ToggleButton {
 }
 ```
 
-ここでスーパークラスの`ToggleButton`が「オンオフの切り替えにメソッドはふたつも要らない！セッターで十分だ」と変更されたとします。
+Giờ giả sử superclass `ToggleButton` được thay đổi thành "Không cần hai method để toggle on/off! Setter là đủ":
 
 ```ts twoslash
 class ToggleButton {
@@ -129,9 +129,9 @@ class ToggleButton {
 }
 ```
 
-するとサブクラスでオーバーライドしたはずのメソッド`enable(), disable()`が意味のないメソッドとして残ることになります。
+Khi đó các method `enable(), disable()` vốn được override trong subclass sẽ trở thành method vô nghĩa.
 
-`noImplicitOverride`はオーバーライドしているメソッドに`override`キーワードをつけることによってスーパークラスに同名のメソッドがないかを確認させます。`override`キーワードがついているにもかかわらずオーバーライド元となるメソッドが存在しないと次のようなエラーが発生します。
+`noImplicitOverride` yêu cầu thêm keyword `override` vào method đang override để kiểm tra xem có method cùng tên trong superclass hay không. Khi có keyword `override` nhưng không tồn tại method để override sẽ báo lỗi như sau:
 
 ```ts twoslash
 class ToggleButton {

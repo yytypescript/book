@@ -1,6 +1,6 @@
 # any型
 
-TypeScriptのany型は、どんな型でも代入を許す型です。プリミティブ型であれオブジェクトであれ何を代入してもエラーになりません。
+any型trong TypeScript là kiểu cho phép gán bất kỳ giá trị nào. Dù là primitive type hay object, bạn có thể gán gì vào cũng không gây lỗi.
 
 ```ts twoslash
 let value: any;
@@ -9,7 +9,7 @@ value = "string"; // OK
 value = { name: "オブジェクト" }; // OK
 ```
 
-また、any型の変数については、これ以上コンパイラーが型チェックを行いません。実行してみるとエラーになるようなコードでも、コンパイラーはその問題を指摘しません。次の例では、数値を変数`str`に代入しています。しかし、2行目の`toLowerCase`はstring型のメソッドでnumber型には存在しないため、実行してみるとエラーになります。このような単純な矛盾はTypeScriptコンパイラーで発見できますが、型注釈でanyにした値についてはコンパイラーが警告しなくなります。
+Ngoài ra, với biến kiểu any, compiler sẽ không thực hiện type checking nữa. Ngay cả code sẽ lỗi khi chạy, compiler cũng không cảnh báo. Trong ví dụ sau, ta gán số vào biến `str`. Tuy nhiên `toLowerCase` ở dòng 2 là method của string mà không tồn tại trong number, nên khi chạy sẽ gây lỗi. Mâu thuẫn đơn giản như vậy TypeScript compiler có thể phát hiện được, nhưng với giá trị được type annotation là any thì compiler sẽ không cảnh báo.
 
 ```ts twoslash
 const str: any = 123;
@@ -17,11 +17,11 @@ str.toLowerCase();
 // @error: TypeError: str.toLowerCase is not a function
 ```
 
-## 暗黙のany
+## Implicit any
 
-型を省略してコンテキストから型が推論できない時、TypeScriptは暗黙的に型をany型として扱います。たとえば、引数の型注釈を省略した場合です。
+Khi bỏ qua type annotation và không thể suy luận type từ context, TypeScript sẽ ngầm định coi type là any. Ví dụ như khi bỏ qua type annotation của tham số.
 
-次の例では `name` 変数がany型として判定されるため、型チェックは問題なく通ってしまいます。しかし、number型の値で `toUpperCase()` のメソッドの呼び出しが実行されるため、未定義メソッドとしてエラーが発生します。
+Trong ví dụ sau, biến `name` được xác định là any nên type checking sẽ pass. Tuy nhiên vì giá trị number gọi method `toUpperCase()` nên sẽ phát sinh lỗi undefined method.
 
 ```ts twoslash
 function hello(name) {
@@ -34,9 +34,9 @@ hello(1);
 // @noImplicitAny: false
 ```
 
-このように暗黙のanyは型チェックをすり抜けて実行時エラーを引き起こす可能性があります。TypeScriptでは暗黙のanyを規制するオプションとして `noImplicitAny` が用意されています。
+Như vậy implicit any có thể vượt qua type checking và gây runtime error. TypeScript cung cấp option `noImplicitAny` để kiểm soát implicit any.
 
-tsconfig.json にて `noImplicitAny: true` を設定することで、TypeScriptが型をany型と推測した場合にエラーが発生するようになります。
+Bằng cách setting `noImplicitAny: true` trong tsconfig.json, khi TypeScript suy luận type là any sẽ phát sinh lỗi.
 
 ```ts twoslash
 // @errors: 7006
@@ -47,36 +47,36 @@ function hello(name) {
 
 [noImplicitAny](../tsconfig/noimplicitany.md)
 
-## anyは悪？
+## any có tệ không?
 
-any型はコンパイラーのチェックを抑制したいときに用いる特別な型です。any型を濫用すると、型チェックが弱くなりバグの発見できなくなる恐れがあります。anyは型のチェックを放棄した型とも言えますが、一概に悪いとは言い切れません。理由なくanyを使うのは問題ですが、どうしてもanyを使わないとならない場面や、型安全性を妥協した上で、まずは動くコードを形にすることを優先するといったこともありえます。anyをどこまで許容するか、型チェックをどこまで厳格にするかは、チームの熟練度やプロジェクトの方針によるところが大きいです。
+any là type đặc biệt dùng khi muốn vô hiệu hóa compiler check. Lạm dụng any sẽ làm yếu type checking và khó phát hiện bug. Có thể nói any là type từ bỏ type checking, nhưng không phải lúc nào cũng tệ. Dùng any vô cớ là vấn đề, nhưng có những trường hợp buộc phải dùng any, hoặc ưu tiên tạo code chạy được trước rồi mới lo type safety sau. Mức độ chấp nhận any, mức độ nghiêm ngặt của type checking phụ thuộc nhiều vào trình độ team và định hướng dự án.
 
-## 「がんばらないTypeScript」
+## "TypeScript không cố gắng quá"
 
-TypeScriptは型チェックにより安全にコードを書くことができる静的型付け言語です。
-今までJavaScriptなどの動的型付き言語を書いていた人にとっては、実装時に静的な型を書くことに難しさを感じるかもしれません。
+TypeScript là ngôn ngữ static typing giúp viết code an toàn hơn nhờ type checking.
+Với người đã quen viết dynamic typing language như JavaScript, việc viết static type khi implement có thể cảm thấy khó khăn.
 
-実際に慣れない頃はコンパイルエラーが出ている原因を調べて解消するのに1日を費やす場合もあります。
+Thực tế khi chưa quen, có thể mất cả ngày để tìm hiểu và giải quyết nguyên nhân compile error.
 
-TypeScriptには「がんばらないTypeScript」というアプローチがあります。
+TypeScript có approach "TypeScript không cố gắng quá".
 
-TypeScript の大きな利点として、型の制約を自由にコントロールすることができる点があります。ここで紹介されている any型 もそのひとつです。たとえば、コンパイルエラーで詰まった時に any型 を指定すれば、とりあえずコンパイルエラーを解消することができます。
+Ưu điểm lớn của TypeScript là có thể tự do control các ràng buộc về type. any cũng là một trong số đó. Ví dụ khi gặp khó với compile error, chỉ cần dùng any là có thể giải quyết compile error tạm thời.
 
-また、既存のJavaScriptプロジェクトにTypeScriptを導入する際には大量のコンパイルエラーが発生する可能性があります。それらのコンパイルエラーをすべて解消するまでTypeScriptの導入を終わらせられないと、途中で挫折して結局TypeScriptの導入ができないという状況になるかもしれません。そんな場合は any型 などを積極的に利用して、とりあえずコンパイルエラーを解消して段階的に型付けをしていくのもひとつの手段です。
+Ngoài ra khi đưa TypeScript vào dự án JavaScript có sẵn có thể phát sinh rất nhiều compile error. Nếu không giải quyết hết compile error thì không thể hoàn thành việc đưa TypeScript vào, có thể dẫn đến bỏ cuộc giữa chừng. Trong trường hợp đó, tích cực sử dụng any để giải quyết compile error, sau đó từng bước typing dần cũng là một phương án.
 
-すべてが型安全な実装になっている状態が理想ですが、一部分だけが型安全な実装になっているだけでも、型チェックがまったくないJavaScriptだけのときよりも大きな恩恵を受けることができます。
+Lý tưởng là toàn bộ implementation đều type-safe, nhưng ngay cả chỉ một phần type-safe thôi cũng đã nhận được lợi ích lớn so với chỉ dùng JavaScript hoàn toàn không có type checking.
 
-型による制約はコードをより安全に書くためのひとつの手段にすぎません。型の制約に時間を費やして、動くモノが作れないのは本末転倒です。
+Ràng buộc bởi type chỉ là một phương tiện để viết code an toàn hơn. Dành thời gian cho ràng buộc type mà không tạo được thứ chạy được thì đánh mất đi mục đích.
 
-TypeScriptの型システムで疲弊しそうになったら、「がんばらないTypeScript」のアプローチを思い出してみてください。
+Khi cảm thấy mệt mỏi với type system của TypeScript, hãy nhớ đến approach "TypeScript không cố gắng quá".
 
 <PostILearned>
 
-・any型はどんな型でも代入を許す
-・any型は型チェックされない
-・型推論できない変数は暗黙的にany型になる
-・anyは使いようによっては悪くない
-・がんばらないTypeScriptという考え方もある
+・any cho phép gán bất kỳ type nào
+・any không được type checking
+・Biến không thể type inference sẽ ngầm định là any
+・any không hẳn là tệ tùy cách dùng
+・Có tư duy "TypeScript không cố gắng quá"
 
 </PostILearned>
 

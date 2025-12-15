@@ -2,27 +2,27 @@
 title: Error
 ---
 
-`Error`はJavaScriptの組み込みAPIのひとつで例外を取り扱うためのオブジェクトです。
+`Error` là một trong những built-in API của JavaScript, là object để xử lý exception.
 
-## Errorオブジェクトの作り方
+## Cách tạo đối tượng Error
 
-`Error`オブジェクトを作るには`Error`クラスを`new`します。例外を投げるためには`throw`を使います。
+Để tạo đối tượng `Error`, dùng `new` với class `Error`. Để ném (throw) exception, sử dụng `throw`.
 
 ```ts twoslash
 throw new Error();
 ```
 
-## JavaScriptではErrorクラス以外も例外としてthrowできる
+## Trong JavaScript có thể throw bất kỳ giá trị nào, không chỉ Error
 
-とはいえ、JavaScriptでは例外を表す`Error`クラスとそのサブクラスだけを`throw`できるのではなく、どのような値も`throw`できます。
+Tuy nhiên, trong JavaScript không chỉ có thể `throw` class `Error` và các subclass của nó để biểu thị exception, mà có thể `throw` bất kỳ giá trị nào.
 
 ```ts twoslash
 throw "id is not string!";
 ```
 
-## Errorクラスのサブクラス
+## Subclass của Error
 
-組み込みAPIとして`Error`には次のサブクラスがあります。
+Trong built-in API, `Error` có các subclass sau:
 
 - EvalError
 - InternalError
@@ -32,7 +32,7 @@ throw "id is not string!";
 - TypeError
 - URIError
 
-また`Error`を拡張し独自のサブクラスを定義することもできます。
+Ngoài ra cũng có thể extend `Error` để định nghĩa subclass riêng.
 
 ```ts twoslash
 class CustomeError extends Error {
@@ -51,13 +51,13 @@ console.log(err.stack);
 // @log: "Error: FAILED! ..."
 ```
 
-## 例外を捕捉する
+## Bắt exception
 
-`throw`された例外は`catch`で捕捉できます。ですが先ほど述べたようにJavaScriptはどのような値も`throw`できるので`catch`した値の型は定まらず`any`型か`unknown`型として解釈されます。どちらの型になるかはtsconfig.jsonの`useUnknownInCatchVariables`の設定により決まります。
+Exception được `throw` có thể bắt bằng `catch`. Tuy nhiên như đã đề cập, JavaScript có thể `throw` bất kỳ giá trị nào nên kiểu của giá trị `catch` được không xác định và được hiểu là kiểu `any` hoặc `unknown`. Kiểu nào được sử dụng phụ thuộc vào cấu hình `useUnknownInCatchVariables` trong tsconfig.json.
 
 [useunknownincatchvariables](../tsconfig/useunknownincatchvariables.md)
 
-もし捕捉した値があるクラスのインスタンスまたはある型であるかを判定したい場合は`instanceof`, `keyof`あるいは型ガードを使います。
+Nếu muốn kiểm tra xem giá trị đã bắt có phải là instance của một class nào đó hoặc có phải một kiểu nào đó hay không, sử dụng `instanceof`, `keyof` hoặc type guard.
 
 ```ts twoslash
 try {

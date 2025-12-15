@@ -1,17 +1,17 @@
 ---
-description: switch文のfallthroughを禁止する
+description: Cấm fallthrough trong switch statement
 ---
 
 # noFallthroughCasesInSwitch
 
-`noFallthroughCasesInSwitch`はswitch文のfallthroughを禁止するコンパイラオプションです。
+`noFallthroughCasesInSwitch` là compiler option cấm fallthrough trong switch statement.
 
-- デフォルト: `false`
-- 追加されたバージョン: 1.8
+- Mặc định: `false`
+- Phiên bản thêm vào: 1.8
 
-## 解説
+## Giải thích
 
-`fallthrough`とは`switch`における`case`文で`break`または`return`を行わないことを意味します。`case`文が空でない場合に限り`break`や`return`が行われているかを厳密に評価します。
+`fallthrough` có nghĩa là không thực hiện `break` hoặc `return` trong `case` statement của `switch`. Chỉ khi `case` statement không rỗng thì mới kiểm tra nghiêm ngặt xem có `break` hay `return` hay không.
 
 ```ts twoslash
 function daysOfMonth(month: number): number {
@@ -41,7 +41,7 @@ function daysOfMonth(month: number): number {
 }
 ```
 
-ある月の日数を求める関数`daysOfMonth()`を定義しましたがこの関数には`fallthrough`が存在します。このオプションを有効にすると次のようなエラーが発生します。
+Đã định nghĩa function `daysOfMonth()` để tính số ngày của một tháng nhưng function này có `fallthrough`. Khi bật option này sẽ báo lỗi như sau:
 
 ```ts twoslash
 // @noFallthroughCasesInSwitch: true
@@ -73,9 +73,9 @@ function daysOfMonth(month: number): number {
 }
 ```
 
-`case 1, case 3, case 5, ....`が`fallthrough`とみなされないのは`case`文の実行部分が`break`だけで何もしないからです。
+`case 1, case 3, case 5, ....` không được coi là `fallthrough` vì phần thực thi của `case` statement chỉ có `break` và không làm gì cả.
 
-これを回避するためには`case`では漏れなく`break`あるいは`return`をするように設計します。
+Để tránh lỗi này, thiết kế sao cho mỗi `case` đều có `break` hoặc `return`.
 
 ```ts twoslash
 function daysOfMonth(month: number): number {

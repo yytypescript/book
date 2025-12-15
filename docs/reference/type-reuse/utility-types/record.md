@@ -1,30 +1,30 @@
 ---
-description: キー・バリューからオブジェクト型を作る
+description: Tạo object type từ key-value
 title: "Record<Keys, Type>"
 ---
 
-`Record<Keys, Type>`はプロパティのキーが`Keys`であり、プロパティの値が`Type`であるオブジェクトの型を作るユーティリティ型です。
+`Record<Keys, Type>` là utility type tạo object type với property key là `Keys` và property value là `Type`.
 
-## Record&lt;Keys, Type>の型引数
+## Type argument của Record&lt;Keys, Type>
 
 ### Keys
 
-オブジェクトのプロパティーキーを指定します。`Keys`に代入できる型は、`string`、`number`、`symbol`とそれぞれのリテラル型です。
+Chỉ định property key của object. Kiểu có thể gán cho `Keys` là `string`, `number`, `symbol` và literal type của chúng.
 
 ### Type
 
-オブジェクトのプロパティの値の型を指定します。任意の型が代入できます。
+Chỉ định kiểu của property value của object. Có thể gán bất kỳ kiểu nào.
 
-## Recordの使用例
+## Ví dụ sử dụng Record
 
-キーが`string`で値が`number`のインデックス型を定義する。
+Định nghĩa index type với key là `string` và value là `number`:
 
 ```ts twoslash
 type StringNumber = Record<string, number>;
 const value: StringNumber = { a: 1, b: 2, c: 3 };
 ```
 
-キーが`firstName`、`middleName`、`familyName`で、値が文字列になるオブジェクトの型を定義する。
+Định nghĩa object type với key là `firstName`, `middleName`, `familyName` và value là string:
 
 ```ts twoslash
 type Person = Record<"firstName" | "middleName" | "lastName", string>;
@@ -35,11 +35,11 @@ const person: Person = {
 };
 ```
 
-## インデックスアクセスの注意点
+## Lưu ý về index access
 
-`Record<string, ...>`のようにキーに`string`など、リテラル型でない型を指定した場合は、インデックスアクセスに注意してください。存在しないキーにアクセスしても、キーが必ずあるかのようにあつかわれるためです。
+Khi chỉ định kiểu không phải literal type như `string` cho key như `Record<string, ...>`, cần chú ý về index access. Bởi vì ngay cả khi truy cập key không tồn tại, nó vẫn được xử lý như thể key đó luôn tồn tại.
 
-次の例のように、`Record<string, number>`型の`dict`オブジェクトには、`a`キーはあるのに対し、`b`キーはありません。しかし、`dict.b`は`number`として推論されます。
+Trong ví dụ sau, object `dict` có kiểu `Record<string, number>` có key `a` nhưng không có key `b`. Tuy nhiên, `dict.b` vẫn được suy luận là `number`.
 
 ```ts twoslash
 // @noUncheckedIndexedAccess: false
@@ -48,7 +48,7 @@ dict.b;
 //   ^?
 ```
 
-実際の`dict.b`の値は`undefined`になるので、もしも`dict.b`のメソッドを呼び出すと実行時エラーになります。
+Giá trị thực tế của `dict.b` là `undefined`, nên nếu gọi method của `dict.b` sẽ gây lỗi runtime.
 
 ```ts twoslash
 const dict: Record<string, number> = { a: 1 };
@@ -58,9 +58,9 @@ dict.b.toFixed(); // 実行時エラーが発生する
 // @noUncheckedIndexedAccess: false
 ```
 
-このような挙動は、型チェックで実行時エラーを減らしたいと考える開発者にとっては不都合です。
+Hành vi này không thuận lợi cho các developer muốn giảm runtime error thông qua type checking.
 
-この問題に対処するため、TypeScriptにはコンパイラオプション`noUncheckedIndexedAccess`が用意されています。これを有効にすると、インデックスアクセスの結果の型が`T | undefined`になります。つまり、`undefined`の可能性を考慮した型になるわけです。そのため、`dict.b`のメソッドを呼び出すコードはコンパイルエラーになり、型チェックの恩恵が得られます。
+Để giải quyết vấn đề này, TypeScript cung cấp compiler option `noUncheckedIndexedAccess`. Khi bật option này, kết quả của index access sẽ có kiểu `T | undefined`. Tức là kiểu này sẽ xem xét khả năng là `undefined`. Do đó, code gọi method của `dict.b` sẽ gây compile error và bạn có thể hưởng lợi từ type checking.
 
 ```ts twoslash
 // @errors: 18048
@@ -73,7 +73,7 @@ dict.b.toFixed();
 
 [noUncheckedIndexedAccess](../../tsconfig/nouncheckedindexedaccess.md)
 
-一方、`Record`のキーが`"firstName" | "lastName"`のようなリテラル型だけで構成される場合は、`noUncheckedIndexedAccess`の設定にかかわらず、この問題は発生しません。キーが限定されているため、存在しないキーへのアクセスはコンパイルエラーになるからです。
+Mặt khác, khi key của `Record` chỉ bao gồm literal type như `"firstName" | "lastName"`, vấn đề này không xảy ra bất kể cài đặt `noUncheckedIndexedAccess`. Vì key bị giới hạn, truy cập key không tồn tại sẽ gây compile error.
 
 ```ts twoslash
 // @noUncheckedIndexedAccess: false
@@ -89,7 +89,7 @@ const firstName = person.firstName;
 person.b; // 存在しないキーへのアクセス
 ```
 
-キーが`string`のときは`noUncheckedIndexedAccess`を有効にすると、コンパイラーは`undefined`を含めるようになりますが、キーがリテラル型(またはリテラル型のユニオン)のときは、コンパイラーは`undefined`を含めないようになります。キーが必ずあることが、リテラル型によるキー指定によって自明だからです。
+Khi key là `string`, nếu bật `noUncheckedIndexedAccess`, compiler sẽ bao gồm `undefined`, nhưng khi key là literal type (hoặc union của literal type), compiler sẽ không bao gồm `undefined`. Bởi vì việc key luôn tồn tại đã tự rõ ràng do việc chỉ định key bằng literal type.
 
 ```ts twoslash
 // @noUncheckedIndexedAccess: true
@@ -103,10 +103,10 @@ const firstName = person.firstName; // undefinedは含まれない
 //    ^?
 ```
 
-## 関連情報
+## Thông tin liên quan
 
-[インデックス型 (index signature)](../../values-types-variables/object/index-signature.md)
+[Index signature](../../values-types-variables/object/index-signature.md)
 
-[マップ型 (Mapped Types)](../mapped-types.md)
+[Mapped Types](../mapped-types.md)
 
 [Map<K, V>](../../builtin-api/map.md)

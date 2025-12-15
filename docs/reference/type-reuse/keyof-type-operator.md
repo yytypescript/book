@@ -1,6 +1,6 @@
-# keyof型演算子
+# keyof type operator
 
-`keyof`はオブジェクトの型からプロパティ名を型として返す型演算子です。たとえば、`name`プロパティを持つ型に対して、`keyof`を使うと文字列リテラル型の`"name"`が得られます。
+`keyof` là type operator trả về tên các property của một object type dưới dạng kiểu. Ví dụ, khi sử dụng `keyof` với một kiểu có property `name`, bạn sẽ nhận được string literal type `"name"`.
 
 ```ts twoslash
 type Person = {
@@ -10,7 +10,7 @@ type PersonKey = keyof Person;
 //    ^?
 ```
 
-2つ以上のプロパティがあるオブジェクトの型に`keyof`を使うと、各プロパティ名の文字列リテラル型が`|`で結合されたユニオン型が返されます。
+Khi sử dụng `keyof` với object type có từ 2 property trở lên, kết quả sẽ là union type kết hợp các string literal type của từng tên property bằng `|`.
 
 ```ts twoslash
 type Book = {
@@ -24,7 +24,7 @@ type BookKey = keyof Book;
 // type BookKey = "title" | "price" | "rating";
 ```
 
-インデックス型に`keyof`を使うと、インデックスキーの型が返ります。
+Khi sử dụng `keyof` với index type, kết quả sẽ là kiểu của index key.
 
 ```ts twoslash
 type MapLike = { [K: string]: any };
@@ -32,9 +32,9 @@ type MapKeys = keyof MapLike;
 //    ^?
 ```
 
-キーが`string`のインデックス型は、`string`ではなく`string | number`が返ります。number型のキーアクセスの`obj[0]`は`obj["0"]`と同じになるからです。
+Với index type có key là `string`, kết quả trả về sẽ là `string | number` thay vì chỉ `string`. Lý do là vì truy cập key kiểu number như `obj[0]` tương đương với `obj["0"]`.
 
-Mapped Typesに`keyof`を使うと、そのキーの型が返ります。
+Khi sử dụng `keyof` với Mapped Types, kết quả sẽ là kiểu của các key đó.
 
 ```ts twoslash
 type MapLike = { [K in "x" | "y" | "z"]: any };
@@ -42,28 +42,28 @@ type MapKeys = keyof MapLike;
 //    ^?
 ```
 
-プロパティを持たないオブジェクトの型に`keyof`を使うと`never`型が返ります。
+Khi sử dụng `keyof` với object type không có property nào, kết quả sẽ là kiểu `never`.
 
 ```ts twoslash
 type What = keyof {};
 //   ^?
 ```
 
-`any`型に`keyof`を使うと`string | number | symbol`型が返ります。
+Khi sử dụng `keyof` với kiểu `any`, kết quả sẽ là kiểu `string | number | symbol`.
 
 ```ts twoslash
 type AnyKeys = keyof any;
 //    ^?
 ```
 
-## keyofのメリット
+## Ưu điểm của keyof
 
-`keyof`のメリットは、保守性が上がる点です。オブジェクトの型とは別にプロパティ名のユニオン型を定義していると、オブジェクトの型のプロパティを変更したときに、そのユニオン型のほうも修正が必要になります。`keyof`を使って、オブジェクトの型からキーを導出するようにしておけば、変更箇所はオブジェクトの型のところだけになります。
+Ưu điểm của `keyof` là tăng khả năng bảo trì code. Nếu bạn định nghĩa union type của các tên property riêng biệt với object type, khi thay đổi property của object type, bạn cũng phải sửa union type đó. Nếu sử dụng `keyof` để trích xuất key từ object type, bạn chỉ cần thay đổi ở object type.
 
-加えて、プロパティが何十個もあるようなオブジェクトを想像してみてください。そのプロパティ名のユニオン型を定義する必要が出てきたとします。その際に、プロパティ名をすべて転記するとなると、転記漏れや書き間違いもあるでしょう。そういう場合は`keyof`を使うとそもそも書き写す必要がないため、便利な上に安全なコーディングができます。
+Ngoài ra, hãy tưởng tượng một object có hàng chục property. Nếu bạn cần định nghĩa union type của các tên property đó và phải copy tất cả tên property, rất dễ bỏ sót hoặc viết sai. Trong trường hợp này, `keyof` rất tiện lợi và an toàn vì không cần phải copy thủ công.
 
-## keyofはMapped Typesと一緒に使われる
+## keyof thường được sử dụng cùng Mapped Types
 
-keyofは単体で使うことよりMapped Typesと組み合わせて使われることが多いです。
+keyof thường được sử dụng kết hợp với Mapped Types hơn là sử dụng riêng lẻ.
 
-[マップ型 (Mapped Types)](mapped-types.md)
+[Mapped Types](mapped-types.md)

@@ -1,10 +1,10 @@
-# シングルプロセス・シングルスレッドとコールバック
+# Single process, single thread và callback
 
-コンピューティング。特に並列、並行処理をするプログラミングに入ってくるとプロセス、スレッドという言葉を耳にするようになります。
+Computing. Đặc biệt khi bạn bắt đầu lập trình xử lý song song và đồng thời, bạn sẽ nghe thấy các từ process và thread.
 
-JavaScriptはシングルプロセス、シングルスレッドの言語です。これは言い換えるとすべてのプログラムは直列に処理されることを意味します。シングルスレッドの言語はコールスタックも1個です。
+JavaScript là ngôn ngữ single process, single thread. Điều này có nghĩa là tất cả các chương trình được xử lý tuần tự. Ngôn ngữ single thread cũng chỉ có 1 call stack.
 
-コールスタックとは実行している関数の呼び出しの順序を司っているものです。スタックという言葉自体は関数の再帰呼び出しを誤って無限ループにしてしまった時に目にしたことがある人が多いのではないでしょうか。
+Call stack là thứ quản lý thứ tự gọi của các function đang thực thi. Bản thân từ stack có lẽ nhiều người đã từng nhìn thấy khi vô tình tạo vòng lặp vô hạn trong recursive function call.
 
 ```ts twoslash
 function stack(): never {
@@ -18,13 +18,13 @@ stack();
 RangeError: Maximum call stack size exceeded
 ```
 
-## ブロッキング
+## Blocking
 
-直列に処理されるということは、時間のかかる処理があるとその間は他の処理が実行されないことを意味します。
+Xử lý tuần tự có nghĩa là khi có xử lý tốn thời gian, các xử lý khác sẽ không được thực thi trong khoảng thời gian đó.
 
-ブラウザでAJAX通信を実装したことがある方は多いでしょう。AJAXはリクエストを送信してからレスポンスを受信するまでの間は待ち時間になりますが、直列で処理するのであればJavaScriptはこの間も他の処理ができないことになります。これをブロッキングと言います。
+Nhiều người có lẽ đã từng implement giao tiếp AJAX trong browser. AJAX có thời gian chờ từ khi gửi request đến khi nhận response, nhưng nếu xử lý tuần tự thì JavaScript sẽ không thể thực hiện xử lý khác trong khoảng thời gian đó. Đây được gọi là blocking.
 
-JavaScriptはブラウザで発生するクリック、各種input要素からの入力、ブラウザの履歴の戻る進むなど、各種イベントをハンドリングできる言語ですが、時間のかかる処理が実行されている間はブロッキングが起こるためこれらの操作をハンドリングできなくなります。画面の描画もJavaScriptに任せていた場合はさらに画面が止まったように見えるでしょう。
+JavaScript có thể handle các event xảy ra trong browser như click, input từ các element input, back forward của browser history, v.v., nhưng trong khi xử lý tốn thời gian đang được thực thi, blocking xảy ra nên không thể handle các thao tác này. Nếu việc render màn hình cũng được giao cho JavaScript thì màn hình sẽ trông như bị đóng băng.
 
 ```ts twoslash
 declare function ajax(url: string): Promise<unknown>;
@@ -40,31 +40,31 @@ if (!ajaxDone()) {
 }
 ```
 
-上記のメソッドたちはどれも実在するメソッドではありませんが、おおよその意味を理解していただければ問題ありません。これを先入観なく見ると
+Các method trên không phải là method thực sự tồn tại, nhưng nếu bạn hiểu được ý nghĩa đại khái thì không có vấn đề. Nhìn điều này mà không có định kiến trước có thể thấy
 
-1. AJAXを開始する
-2. 3000ms待つ
-3. AJAXが終わっていなかったら
-   1. AJAXを中止する
+1. Bắt đầu AJAX
+2. Chờ 3000ms
+3. Nếu AJAX chưa xong
+   1. Hủy AJAX
 
-のように見えるかもしれませんが、これはその意図した動作にはなりません。実際には次のようになります。
+nhưng điều này không hoạt động như dự định. Thực tế sẽ như sau.
 
-1. AJAXをして、結果を取得する（ブロックして戻ってきたら2に進む)
-2. 3000ms待つ
-3. AJAXが終わっていなかったら(すでに終了している)
-4. AJAXを中止する
+1. AJAX và lấy kết quả (block và khi quay lại thì tiến sang 2)
+2. Chờ 3000ms
+3. Nếu AJAX chưa xong (đã kết thúc rồi)
+4. Hủy AJAX
 
-となります。もちろん`ajaxDone()`は`ajax()`の時点で結果にかかわらず終了しているため`cancelAjax()`は実行されません。
+Tất nhiên `ajaxDone()` đã kết thúc bất kể kết quả thế nào tại thời điểm `ajax()`, nên `cancelAjax()` không được thực thi.
 
-## ノンブロッキング
+## Non-blocking
 
-ブロッキングの逆の概念です。Node.jsはノンブロッキングI/Oを取り扱うことができます。
+Đây là khái niệm ngược lại với blocking. Node.js có thể xử lý non-blocking I/O.
 
-これは入出力の処理が終わるまで待たずにすぐに呼び出し元に結果を返し、追って別の方法で結果を伝える方式を指します。
+Điều này chỉ phương thức trả về kết quả cho caller ngay lập tức mà không đợi xử lý input/output kết thúc, và sau đó thông báo kết quả bằng cách khác.
 
-ここで指している入出力とはアプリケーションが動くマシン(サーバー)が主にリポジトリと呼ばれるようなファイル、リクエスト、DBなど他のデータがある場所へのアクセスを指す時に使われます。
+Input/output ở đây thường được sử dụng khi nói đến việc truy cập đến nơi có data khác như file, request, DB, v.v., được gọi là repository, từ máy (server) mà application đang chạy.
 
-ノンブロッキングかわかりやすい例としては次のようなものがあります。
+Ví dụ dễ hiểu về non-blocking là như sau.
 
 ```ts twoslash
 console.log("first");
@@ -76,9 +76,9 @@ setTimeout(() => {
 console.log("third");
 ```
 
-`setTimeout()`は実際に存在する関数です。第2引数では指定したミリ秒後に第1引数の関数を実行します。ここでは1000を指定しているので、1000ミリ秒、つまり1秒後となります。
+`setTimeout()` là function thực sự tồn tại. Tham số thứ 2 chỉ định sau bao nhiêu millisecond thì thực thi function ở tham số thứ 1. Ở đây chỉ định 1000, tức là 1000 millisecond, nghĩa là 1 giây sau.
 
-JavaScriptを始めて日が浅い方はこのコードに対する出力を次のように考えます。
+Những người mới bắt đầu với JavaScript thường nghĩ output cho code này là:
 
 ```text
 first
@@ -86,7 +86,7 @@ second
 third
 ```
 
-実際の出力は以下です。
+Output thực tế là:
 
 ```text
 first
@@ -94,9 +94,9 @@ third
 second
 ```
 
-`setTimeout()`がノンブロッキングな関数です。この関数は実行されると第1引数の関数をいったん保留し、処理を終えます。そのため次の`console.log('third')`が実行され、1000ミリ秒後に第1引数の関数が実行され、中にある`console.log('second')`が実行されます。
+`setTimeout()` là function non-blocking. Khi function này được thực thi, nó tạm giữ function ở tham số thứ 1 và kết thúc xử lý. Vì vậy `console.log('third')` tiếp theo được thực thi, và sau 1000 millisecond, function ở tham số thứ 1 được thực thi và `console.log('second')` bên trong được thực thi.
 
-1000ミリ秒は待ちすぎ、もっと短ければ意図する順番通りに表示される。と思われるかもしれませんが、基本的に意図するとおりにはなりません。以下は第2引数を1000ミリ秒から0ミリ秒に変更した例ですが、出力される内容は変更前と変わりません。
+1000 millisecond là chờ quá lâu, nếu ngắn hơn thì sẽ hiển thị theo thứ tự dự định. Bạn có thể nghĩ như vậy, nhưng về cơ bản nó không hoạt động như dự định. Dưới đây là ví dụ thay đổi tham số thứ 2 từ 1000 millisecond thành 0 millisecond, nhưng nội dung output không thay đổi so với trước khi thay đổi.
 
 ```ts twoslash
 console.log("first");
@@ -114,39 +114,39 @@ console.log("third");
 // @log: 'second'
 ```
 
-現実世界の料理に例えてみるとわかりやすいかもしれません。お米を炊いている40分間、ずっと炊飯器の前で待機する料理人はおらず、その間に別のおかずを作るでしょう。
+Ví von với nấu ăn trong thế giới thực có thể dễ hiểu hơn. Trong 40 phút nấu cơm, không có đầu bếp nào đứng đợi trước nồi cơm điện, mà trong thời gian đó sẽ làm các món ăn kèm khác.
 
-時間はかかるものの待機が多い作業、炊飯器なら炊飯ボタンを押したら炊き上がるまでの間待たずに他の処理の実行に移ることがノンブロッキングを意味します。
+Công việc tốn thời gian nhưng phần lớn là chờ đợi, với nồi cơm điện thì sau khi nhấn nút nấu cơm, không cần chờ đến khi cơm chín mà chuyển sang thực hiện xử lý khác - đó là ý nghĩa của non-blocking.
 
-## ノンブロッキングを成し遂げるための立役者
+## Những người hùng thầm lặng để đạt được non-blocking
 
-ノンブロッキングを語る上で欠かせない、必ず目にすることになるであろう縁の下の力持ちを紹介します。
+Để nói về non-blocking, giới thiệu những người hỗ trợ âm thầm mà bạn chắc chắn sẽ gặp.
 
-### メッセージキュー
+### Message queue
 
-メッセージキューとはユーザーからのイベントや、ブラウザからのイベントなどを一時的に蓄えておく領域です。メッセージキューに蓄積されたイベントはコールスタックが空のときにひとつずつコールスタックに戻されます。
+Message queue là vùng lưu trữ tạm thời các event từ user, event từ browser, v.v. Các event tích lũy trong message queue được đưa từng cái một vào call stack khi call stack trống.
 
-### コールバック
+### Callback
 
-`setTimeout()`のときに説明した**いったん保留した関数**は、いわゆるコールバック関数と呼ばれます。前項で述べた、**追って別の方法で伝える**というのは、このコールバック関数のことです。
+**Function tạm giữ** đã giải thích trong `setTimeout()` được gọi là callback function. **Thông báo bằng cách khác sau đó** được đề cập ở mục trước chính là callback function này.
 
-コールバック関数は、ある関数が条件を満たした時、前項の例だと1000ミリ秒後に、メッセージキューに蓄積されます。メッセージキューに蓄積されるだけなので、実際に実行されるのはコールスタックが空になるまでさらに時間がかかります。
+Callback function được tích lũy trong message queue khi một function thỏa mãn điều kiện, trong ví dụ mục trước là sau 1000 millisecond. Vì chỉ được tích lũy trong message queue, nên thực tế còn mất thêm thời gian cho đến khi call stack trống thì mới được thực thi.
 
-いままで`setTimeout()`は第2引数のミリ秒だけ遅延させてコールバック関数を実行すると説明していましたが、厳密にはミリ秒経過後にメッセージキューに戻すだけで、そのコールバック関数が即座に実行されるわけではありません。
+Cho đến nay đã giải thích `setTimeout()` delay callback function bằng số millisecond của tham số thứ 2 rồi thực thi, nhưng nghiêm túc mà nói thì chỉ đưa lại vào message queue sau khi số millisecond trôi qua, và callback function đó không được thực thi ngay lập tức.
 
-### イベントループ
+### Event loop
 
-イベントループは単純な無限ループです。常にコールスタックを監視しており、イベントがあればそれを実行します。普通の関数呼び出しのスタック以外にもメッセージキューが戻してきたイベントも処理します。現時点では詳しくは説明しませんが、ずっとイベントをどうにかしてくれているやつがいるなー、程度の認識でオッケーです！
+Event loop là vòng lặp vô hạn đơn giản. Nó liên tục giám sát call stack, và nếu có event thì thực thi nó. Ngoài stack của function call bình thường, nó cũng xử lý event mà message queue đưa lại. Hiện tại không giải thích chi tiết, nhưng hãy nhận thức rằng có một cái gì đó luôn xử lý event cho bạn là được!
 
-## ノンブロッキングの弊害
+## Tác hại của non-blocking
 
-ノンブロッキングにはたくさんいいところがあって頼れる仲間ですが、そのノンブロッキングが時として唐突に牙を剥くことがあります。こわいですねぇ。
+Non-blocking có nhiều điểm tốt và là đồng đội đáng tin cậy, nhưng non-blocking đôi khi đột nhiên cắn lại bạn. Đáng sợ nhỉ.
 
-### コールバック地獄(Callback hell)
+### Callback hell
 
-コールバック界における**負の産物**です。
+Đây là **sản phẩm tiêu cực** trong thế giới callback.
 
-一般的にコールバックは、ある一定の時間を要する処理結果を後から受け取るために使われます。コールバックを採用している関数は主に次のような形をしています。
+Nói chung, callback được sử dụng để nhận kết quả xử lý tốn một khoảng thời gian nhất định sau đó. Function sử dụng callback chủ yếu có dạng như sau.
 
 ```ts twoslash
 function ajax(uri: string, callback: (res: Response) => void): void {
@@ -154,7 +154,7 @@ function ajax(uri: string, callback: (res: Response) => void): void {
 }
 ```
 
-この関数を使う時はこのようになります。
+Khi sử dụng function này sẽ như thế này.
 
 ```ts twoslash
 declare function ajax(uri: string, callback: (res: Response) => void): void;
@@ -164,7 +164,7 @@ ajax("https://...", (res: Response) => {
 });
 ```
 
-ここで、この関数`ajax()`の結果を受けてさらに`ajax()`を使いたいとすると、このようになってしまいます。
+Ở đây, nếu muốn sử dụng `ajax()` tiếp dựa trên kết quả của function `ajax()` này, sẽ thành như thế này.
 
 ```ts twoslash
 declare function ajax(uri: string, callback: (res: Response) => void): void;
@@ -176,7 +176,7 @@ ajax("https://...", (res1: Response) => {
 });
 ```
 
-インデント(ネスト)が深くなります。これが何度も続くと見るに堪えなくなります。
+Indent (nest) trở nên sâu. Nếu điều này tiếp tục nhiều lần sẽ không thể nhìn nổi.
 
 ```ts twoslash
 declare function ajax(uri: string, callback: (res: Response) => void): void;
@@ -196,6 +196,6 @@ ajax("https://...", (res1: Response) => {
 });
 ```
 
-このコールバック地獄を解消する画期的なクラスとして`Promise`が登場し主要なブラウザとNode.jsではビルトインオブジェクトとして使うことができます。こちらの説明については本書に専用のページがありますのでそちらをご参照ください。
+Class đột phá để giải quyết callback hell này là `Promise`, và có thể sử dụng như built-in object trong các browser chính và Node.js. Giải thích về điều này có trang riêng trong sách này, vui lòng tham khảo.
 
-[非同期処理](./asynchronous/README.md)
+[Xử lý bất đồng bộ](./asynchronous/README.md)

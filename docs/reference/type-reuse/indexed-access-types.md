@@ -1,10 +1,10 @@
 ---
-sidebar_label: インデックスアクセス型
+sidebar_label: Indexed Access Types
 ---
 
-# インデックスアクセス型 (indexed access types)
+# Indexed Access Types
 
-TypeScriptのインデックスアクセス型(indexed access type)は、プロパティの型や配列要素の型を参照する方法を提供します。
+Indexed access types trong TypeScript cung cấp cách để truy cập kiểu của property hoặc phần tử mảng.
 
 ```ts twoslash
 type A = { foo: number };
@@ -12,18 +12,18 @@ type Foo = A["foo"];
 //   ^?
 ```
 
-## インデックスアクセス型の構文
+## Cú pháp Indexed Access Types
 
-インデックスアクセス型は、型に対してブラケット表記法を使います。
+Indexed access types sử dụng bracket notation với kiểu.
 
 ```ts
-オブジェクト型["プロパティ名"];
-配列型[number];
+ObjectType["propertyName"];
+ArrayType[number];
 ```
 
-## オブジェクトの型とインデックスアクセス型
+## Object Types và Indexed Access Types
 
-インデックスアクセス型には[ユニオン型](../values-types-variables/union.md)も使えます。
+Indexed access types cũng có thể sử dụng với [union type](../values-types-variables/union.md).
 
 ```ts twoslash
 type Person = { name: string; age: number };
@@ -31,7 +31,7 @@ type T = Person["name" | "age"];
 //   ^?
 ```
 
-[`keyof`型演算子](keyof-type-operator.md)と組み合わせると、オブジェクトの全プロパティの型がユニオン型で得られます。
+Kết hợp với [type operator `keyof`](keyof-type-operator.md), bạn có thể lấy union type của tất cả các property trong object.
 
 ```ts twoslash
 type Foo = { a: number; b: string; c: boolean };
@@ -39,7 +39,7 @@ type T = Foo[keyof Foo];
 //   ^?
 ```
 
-もしもオブジェクトの型に存在しないプロパティ名を指定すると、コンパイラが警告を出します。
+Nếu chỉ định tên property không tồn tại trong object type, compiler sẽ báo lỗi.
 
 ```ts twoslash
 // @errors: 2339
@@ -47,9 +47,9 @@ type Account = { name: string };
 type T = Account["password"];
 ```
 
-## 配列型とインデックスアクセス型
+## Array Types và Indexed Access Types
 
-[配列型](../values-types-variables/array/type-annotation-of-array.md)の要素の型を参照するのにもインデックスアクセス型が使えます。要素の型を参照するには、配列型に`[number]`をつけます。
+Indexed access types cũng có thể dùng để truy cập kiểu phần tử của [array type](../values-types-variables/array/type-annotation-of-array.md). Để truy cập kiểu phần tử, thêm `[number]` vào array type.
 
 ```ts twoslash
 type StringArray = string[];
@@ -57,7 +57,7 @@ type T = StringArray[number];
 //   ^?
 ```
 
-要素がユニオン型の配列型に対しても使えます。
+Cũng hoạt động với array type có phần tử là union type.
 
 ```ts twoslash
 type MixedArray = (string | undefined)[];
@@ -65,7 +65,7 @@ type T = MixedArray[number];
 //   ^?
 ```
 
-[`typeof`型演算子](typeof-type-operator.md)と組み合わせると、配列の値から要素の型を導くこともできます。
+Kết hợp với [type operator `typeof`](typeof-type-operator.md), bạn có thể trích xuất kiểu phần tử từ giá trị mảng.
 
 ```ts twoslash
 const array = [null, "a", "b"];
@@ -73,9 +73,9 @@ type T = (typeof array)[number];
 //   ^?
 ```
 
-## タプル型とインデックスアクセス型
+## Tuple Types và Indexed Access Types
 
-インデックスアクセス型は[タプル型](../values-types-variables/tuple.md)の要素の型を参照するのにも使えます。タプル型の要素の型を参照するには、ブラケット記法に[数値リテラル型](../values-types-variables/literal-types.md)を書きます。
+Indexed access types cũng có thể dùng để truy cập kiểu phần tử của [tuple type](../values-types-variables/tuple.md). Để truy cập kiểu phần tử của tuple, sử dụng [numeric literal type](../values-types-variables/literal-types.md) trong bracket notation.
 
 ```ts twoslash
 type Tuple = [string, number];
@@ -83,7 +83,7 @@ type T = Tuple[0];
 //   ^?
 ```
 
-[`typeof`型演算子](typeof-type-operator.md)と組み合わせると、タプル型の値から要素の型を導くこともできます。
+Kết hợp với [type operator `typeof`](typeof-type-operator.md), bạn có thể trích xuất kiểu phần tử từ giá trị tuple.
 
 ```ts twoslash
 const stateList = ["open", "closed"] as const;

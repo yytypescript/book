@@ -2,85 +2,85 @@
 title: Date
 ---
 
-Dateは時刻のためのJavaScriptの読み込みクラスです。DateオブジェクトはUTC(協定世界時)の1970/01/01からの経過ミリ秒を表す数値を含んでいます。
+Date là class built-in của JavaScript để xử lý thời gian. Đối tượng Date chứa giá trị số biểu thị số mili giây đã trôi qua kể từ 00:00:00 UTC ngày 01/01/1970.
 
-## はじめに、Dateオブジェクトについて
+## Giới thiệu về đối tượng Date
 
-JavaScriptの組み込み`Date`オブジェクトの使用にはいくつかの注意が必要です。次に、主な問題点を挙げます。
+Việc sử dụng đối tượng `Date` built-in của JavaScript cần một số lưu ý. Dưới đây là các vấn đề chính:
 
-1. **非直感的な動作**: `Date`オブジェクトは、常識的には存在しない日付を解析しようとすると自己補正を試みます。たとえば、存在しない日付である2月30日を`Date`オブジェクトとして表現しようとすると、JavaScriptはこれを3月1日に補正します。これは読み手に混乱をもたらし、予期しない結果を生む可能性があります。
-2. **フォーマットが手間**: `Date`オブジェクトを特定のフォーマットで表示するためには、しばしば独自のフォーマット関数を作成する必要があります。これは手間がかかるだけでなく、バグの原因ともなり得ます。
-3. **タイムゾーンの扱い**: JavaScriptの`Date`オブジェクトは、常にローカルタイムゾーンで時間を表示します。しかし、ユーザーが世界中のさまざまな時間帯に分散している場合、これは非常に混乱を招きます。
+1. **Hoạt động không trực quan**: Đối tượng `Date` sẽ cố gắng tự điều chỉnh khi phân tích các ngày không tồn tại. Ví dụ, khi cố biểu diễn ngày 30 tháng 2 (ngày không tồn tại) bằng đối tượng `Date`, JavaScript sẽ điều chỉnh thành ngày 1 tháng 3. Điều này có thể gây nhầm lẫn và dẫn đến kết quả không mong đợi.
+2. **Format tốn công**: Để hiển thị đối tượng `Date` theo format cụ thể, thường phải tự tạo hàm format riêng. Việc này không chỉ tốn công mà còn có thể gây ra bug.
+3. **Xử lý timezone**: Đối tượng `Date` của JavaScript luôn hiển thị thời gian theo timezone local. Tuy nhiên, khi người dùng phân tán ở nhiều múi giờ khác nhau trên thế giới, điều này có thể gây nhầm lẫn.
 
-以上のような問題を解決するために、`date-fns`や`Day.js`のようなサードパーティのライブラリの使用を推奨します。これらのライブラリは、シンプルで一貫したAPIと豊富な日付操作関数を提供し、タイムゾーンの問題を適切に処理します。また、日付を表示するための多くのフォーマットオプションも提供します。
+Để giải quyết các vấn đề trên, khuyến nghị sử dụng các thư viện third-party như `date-fns` hoặc `Day.js`. Các thư viện này cung cấp API đơn giản, nhất quán và nhiều hàm thao tác ngày tháng, đồng thời xử lý vấn đề timezone một cách phù hợp. Ngoài ra, chúng còn cung cấp nhiều tùy chọn format để hiển thị ngày tháng.
 
-したがって、シンプルなタスクにはJavaScriptの組み込み`Date`オブジェクトが適していますが、より複雑な日付や時間の操作が必要な場合は、適切なサードパーティのライブラリを選択することを検討してください。これにより、日付と時間に関連する操作がより確実で効率的になります。
+Do đó, với các tác vụ đơn giản, đối tượng `Date` built-in của JavaScript là phù hợp, nhưng khi cần thao tác ngày giờ phức tạp hơn, hãy cân nhắc sử dụng thư viện third-party phù hợp. Điều này giúp các thao tác liên quan đến ngày giờ trở nên chắc chắn và hiệu quả hơn.
 
-### サードパティーの日付ライブラリ
+### Thư viện date third-party
 
 #### [date-fns](https://date-fns.org/)
 
-オブジェクトというよりは関数として日付の操作をします。直接Dateオブジェクトを操作する上での煩わしい点をカバーします。
+Thao tác ngày tháng theo dạng function hơn là object. Giải quyết các điểm phiền phức khi thao tác trực tiếp với đối tượng Date.
 
 #### [Day.js](https://day.js.org/)
 
-軽量な日付操作のためのオブジェクトを提供します。後述するMoment.jsとAPIに互換性があり、Moment.jsを使っているプロジェクトでの乗り換え先に検討されることがあります。
+Cung cấp object nhẹ để thao tác ngày tháng. Có API tương thích với Moment.js (được đề cập sau), nên thường được cân nhắc làm thư viện thay thế cho các project đang dùng Moment.js.
 
 #### [Moment.js](https://momentjs.com/)
 
-日付操作のためのパッケージとして絶大な知名度がありますが現在は新規開発は行われておらず、積極的に新規プロジェクトで導入する必要はありません。
+Package có độ nổi tiếng rất lớn cho xử lý ngày tháng, nhưng hiện tại không còn phát triển mới nữa, không cần thiết phải sử dụng cho các project mới.
 
-## Dateの操作
+## Thao tác với Date
 
-### 年を取得する - `Date.prototype.getFullYear()`
+### Lấy năm - `Date.prototype.getFullYear()`
 
-年を取得します。誤って`Date.prototype.getYear()`を使用しないでください。
+Lấy năm. Không được nhầm lẫn sử dụng `Date.prototype.getYear()`.
 
-### 年の下2-3桁を取得する - `Date.prototype.getYear()`
+### Lấy 2-3 chữ số cuối của năm - `Date.prototype.getYear()`
 
-**非推奨です**。与えられた日付の年数を表す数値から1900を引いた値を返します。代わりに`Date.prototype.getFullYear()`を使ってください。
+**Không khuyến nghị**. Trả về giá trị số biểu thị năm của ngày đã cho trừ đi 1900. Thay vào đó hãy sử dụng `Date.prototype.getFullYear()`.
 
-### 月を取得する - `Date.prototype.getMonth()`
+### Lấy tháng - `Date.prototype.getMonth()`
 
-月を取得しますが、0-11を返すため実際の月にするためには1を加算してください。
+Lấy tháng, nhưng trả về 0-11 nên cần cộng thêm 1 để có tháng thực tế.
 
-### 日を取得する - `Date.prototype.getDate()`
+### Lấy ngày - `Date.prototype.getDate()`
 
-日を取得します。誤って`Date.prototype.getDay()`を使用しないでください。
+Lấy ngày. Không được nhầm lẫn sử dụng `Date.prototype.getDay()`.
 
-### 曜日を取得する - `Date.prototype.getDay()`
+### Lấy thứ trong tuần - `Date.prototype.getDay()`
 
-曜日を取得します。0-6を返します。０が日曜日、1が月曜日のようになっています。
+Lấy thứ trong tuần. Trả về 0-6. 0 là Chủ nhật, 1 là Thứ hai, v.v.
 
-### 時を取得する - `Date.prototype.getHours()`
+### Lấy giờ - `Date.prototype.getHours()`
 
-時を取得します。
+Lấy giờ.
 
-### 分を取得する - `Date.prototype.getMinutes()`
+### Lấy phút - `Date.prototype.getMinutes()`
 
-分を取得します。
+Lấy phút.
 
-### 秒を取得する - `Date.prototype.getSeconds()`
+### Lấy giây - `Date.prototype.getSeconds()`
 
-秒を取得します。
+Lấy giây.
 
-### ミリ秒を取得する - `Date.prototype.getMilliseconds()`
+### Lấy mili giây - `Date.prototype.getMilliseconds()`
 
-ミリ秒を取得します。
+Lấy mili giây.
 
-### UTC 1970/01/01 00:00:00からの経過ミリ秒を取得する - `Date.prototype.getTime()`
+### Lấy số mili giây từ UTC 1970/01/01 00:00:00 - `Date.prototype.getTime()`
 
-協定世界時の1970/01/01 00:00:00からの経過ミリ秒単位の数値で返します。
+Trả về giá trị số mili giây đã trôi qua kể từ 00:00:00 ngày 01/01/1970 theo giờ UTC.
 
-### ISO8601に準じた文字列に変換する - `Date.prototype.toJSON()`
+### Chuyển đổi sang chuỗi theo chuẩn ISO8601 - `Date.prototype.toJSON()`
 
-ISO8601に準じた文字列を返します。ISO8601は`YYYY-MM-DDThh:mm:ss.sssZ`の形式です。
+Trả về chuỗi theo chuẩn ISO8601. ISO8601 có định dạng `YYYY-MM-DDThh:mm:ss.sssZ`.
 
-## コラム: Dateの問題点の由来
+## Chuyên mục: Nguồn gốc vấn đề của Date
 
-Dateの設計はとてもプリミティブであるため、yyyy年m月d日のような一般的な日付書式への変換には少なくないコードが必要です。
+Thiết kế của Date rất primitive nên cần khá nhiều code để chuyển đổi sang định dạng ngày thông thường như yyyy年m月d日.
 
-```ts twoslash title="Dateの日付フォーマット処理"
+```ts twoslash title="Xử lý format ngày của Date"
 const d = new Date();
 const year = d.getFullYear();
 const month = d.getMonth() + 1;
@@ -88,33 +88,33 @@ const day = d.getDate();
 console.log(`${year}年${month}月${day}日`);
 ```
 
-他にもDateにはタイムゾーンの具体的な識別（例：'America/Los_Angeles'）や、タイムゾーンの変換に便利なメソッドがありません。使い勝手の悪さから、[Moment.js](https://momentjs.com/)や[date-fns](https://date-fns.org/)といったサードパーティの日付ライブラリにお世話になった人も多いのではないでしょうか。あまりの不評もあって、[Temporal](https://tc39.es/proposal-temporal/docs/ja/index.html)というモダンな日付ビルトインAPIも検討されはじめています。
+Ngoài ra, Date không có method tiện lợi để xác định cụ thể timezone (ví dụ: 'America/Los_Angeles') hoặc chuyển đổi timezone. Do khó sử dụng, nhiều người đã phải nhờ đến các thư viện date third-party như [Moment.js](https://momentjs.com/) hoặc [date-fns](https://date-fns.org/). Do phản hồi quá tiêu cực, built-in API ngày tháng hiện đại [Temporal](https://tc39.es/proposal-temporal/docs/ja/index.html) cũng đã bắt đầu được cân nhắc.
 
-ところで、Dateはどうしてこのような微妙な実装になっているのでしょうか。これには歴史が関係します。JavaScriptを実装するのにブレンダン・アイク氏に与えられたのは、わずか10日だったそうです。この工期には日付処理の実装も含まれていました。日付処理は複雑でフルスクラッチで作ったら時間がかかるものです。工期短縮のため、実装は当時のJavaの`java.util.Date`から移植されることになりました[^1]。
+Nhân tiện, tại sao Date lại có implementation khá tệ như vậy? Điều này có liên quan đến lịch sử. Brendan Eich, người implement JavaScript, chỉ được cho 10 ngày để hoàn thành[^1]. Trong thời hạn này cũng bao gồm cả implementation xử lý ngày tháng. Xử lý ngày tháng khá phức tạp và nếu tự làm từ đầu sẽ mất nhiều thời gian. Để rút ngắn thời gian, implementation đã được chuyển từ `java.util.Date` của Java thời đó.
 
 [^1]: https://maggiepint.com/2017/04/09/fixing-javascript-date-getting-started/
 
-Javaの日付処理を知っている人なら「Java由来なら、どうしてこんなひどい実装になったんだ！？」と思われるかもしれません。今のJavaの日付処理はとても立派なものです。実は、当時のJavaの`java.util.Date`は今のJavaの日付処理とは、全然異なるものだったのです。それは評判の良くないものだったそうです。
+Những người biết về xử lý ngày tháng của Java có thể nghĩ "Nếu xuất phát từ Java, sao lại có implementation tệ đến vậy!?". Xử lý ngày tháng của Java hiện tại rất tốt. Thực ra, `java.util.Date` của Java thời đó hoàn toàn khác với xử lý ngày tháng của Java hiện tại. Nó có tiếng là không tốt.
 
-当時の[Java(1.0系)の`java.util.Date`のドキュメント](http://web.mit.edu/java_v1.0.2/www/javadoc/java.util.Date.html)。見てみると、たしかにJavaScriptのDateとインターフェースがそっくりです。移植されたというのが、ここからも垣間見えます。
+[Tài liệu `java.util.Date` của Java (phiên bản 1.0)](http://web.mit.edu/java_v1.0.2/www/javadoc/java.util.Date.html) thời đó. Nhìn vào thì thấy interface rất giống với Date của JavaScript. Có thể thấy được dấu vết của việc chuyển đổi.
 
-![Java(1.0系)のjava.util.Dateのリファレンスには、JavaScriptのDateと似たようなインターフェイスが並ぶ](date/java-date.png)
+![Reference của java.util.Date của Java (phiên bản 1.0) có interface tương tự như Date của JavaScript](date/java-date.png)
 
-あまりにもそっくり移植されてしまったため、[2000年問題]のバグまで引き継いでしまったそうです[^2]。
+Do được chuyển đổi quá giống, thậm chí cả bug [vấn đề năm 2000] cũng được kế thừa[^2].
 
-[2000年問題]: https://ja.wikipedia.org/wiki/2000%E5%B9%B4%E5%95%8F%E9%A1%8C
+[vấn đề năm 2000]: https://ja.wikipedia.org/wiki/2000%E5%B9%B4%E5%95%8F%E9%A1%8C
 
-![2000年問題の「バグ」をjava.util.Dateから引き継いだと指摘するMozillaによるスライド](date/mozilla-slide.png)
+![Slide của Mozilla chỉ ra rằng "bug" của vấn đề năm 2000 đã được kế thừa từ java.util.Date](date/mozilla-slide.png)
 
 [^2]: https://www.mozilla.org/js/language/ICFP-Keynote.ppt
 
-```js twoslash title="2000年問題のバグ"
+```js twoslash title="Bug của vấn đề năm 2000"
 console.log(new Date(1999, 3, 1).getYear());
 // @log: 99
 console.log(new Date(2000, 3, 1).getYear());
 // @log: 100
 ```
 
-バグと言いましたが、今となっては[仕様になっています](https://tc39.es/ecma262/#sec-date.prototype.getyear)。
+Tuy gọi là bug, nhưng hiện tại [đã trở thành specification](https://tc39.es/ecma262/#sec-date.prototype.getyear).
 
-Javaでは1.0の`java.util.Date`が良くなかったため、Java 1.1のリリースですぐに非推奨になり、新しい日付処理に置き換えられていきました。その結果、Javaの日付ライブラリは十分に使いやすいものになっています。Javaを真似したJavaScriptはその後どうなったかというと、20年以上Dateはそのままです。
+Trong Java, do `java.util.Date` phiên bản 1.0 không tốt nên ngay lập tức bị deprecated trong Java 1.1 và được thay thế bằng xử lý ngày tháng mới. Kết quả là thư viện date của Java hiện đã đủ dễ sử dụng. Còn JavaScript vốn bắt chước Java thì sau đó như thế nào? Date vẫn giữ nguyên trong hơn 20 năm.

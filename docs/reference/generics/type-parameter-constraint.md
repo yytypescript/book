@@ -1,11 +1,11 @@
-# 型引数の制約
+# Type parameter constraint
 
-TypeScriptではジェネリクスの型引数を特定の型に限定することができます。
+Trong TypeScript, có thể giới hạn type parameter của generics vào một kiểu cụ thể.
 
-## ジェネリクス型引数で直面する問題
+## Vấn đề gặp phải với generic type parameter
 
-`changeBackgroundColor()`という関数を例に考えてみます。この関数は指定されたHTML要素の背景色を変更して、そのHTML要素を返す関数です。
-ジェネリクス型`T`を定義することで`HTMLButtonElement`や`HTMLDivElement`などの任意のHTML要素を受け取れるようにしています。
+Hãy xem xét hàm `changeBackgroundColor()` làm ví dụ. Hàm này thay đổi màu nền của HTML element được chỉ định và trả về HTML element đó.
+Bằng cách định nghĩa generic type `T`, hàm có thể nhận bất kỳ HTML element nào như `HTMLButtonElement` hay `HTMLDivElement`.
 
 ```ts twoslash
 // @errors: 2339
@@ -16,24 +16,24 @@ function changeBackgroundColor<T>(element: T) {
 }
 ```
 
-このコードはコンパイルに失敗します。ジェネリクスの型`T`は任意の型が指定可能なので、渡す型によっては`style`プロパティが存在しない場合があるからです。コンパイラは存在しないプロパティへの参照が発生する可能性を検知してコンパイルエラーとしているのです。
+Code này compile thất bại. Vì generic type `T` có thể là bất kỳ kiểu nào, nên tùy theo kiểu được truyền vào, có thể không tồn tại property `style`. Compiler phát hiện khả năng tham chiếu đến property không tồn tại và báo compile error.
 
-`any`を使えばコンパイルエラーを回避することは可能ですが型のチェックがされません。将来バグが発生する危険性もあるので、できる限り避けたいところです。
+Dù có thể tránh compile error bằng cách dùng `any`, nhưng type sẽ không được kiểm tra. Điều này có nguy cơ gây lỗi trong tương lai nên tốt nhất nên tránh.
 
 ```ts twoslash
 function changeBackgroundColor<T>(element: T) {
-  // any に型アサーションすればコンパイルエラーは回避できる
-  // 型チェックされないのでバグの可能性
+  // Có thể tránh compile error bằng type assertion sang any
+  // Nhưng type không được kiểm tra nên có khả năng gây lỗi
   (element as any).style.backgroundColor = "red";
   return element;
 }
 ```
 
-## 型引数に制約をつける
+## Áp dụng constraint cho type parameter
 
-TypeScriptでは`extends`キーワードを用いることでジェネリクスの型`T`を特定の型に限定することができます。
+Trong TypeScript, có thể giới hạn generic type `T` vào một kiểu cụ thể bằng cách sử dụng keyword `extends`.
 
-今回の例では`<T extends HTMLElement>`とすることで型`T`は必ず`HTMLElement`またはそのサブタイプの`HTMLButtonElement`や`HTMLDivElement`であることが保証されるため`style`プロパティに安全にアクセスできるようになります。
+Trong ví dụ này, bằng cách viết `<T extends HTMLElement>`, kiểu `T` được đảm bảo là `HTMLElement` hoặc subtype của nó như `HTMLButtonElement` hay `HTMLDivElement`, do đó có thể truy cập property `style` một cách an toàn.
 
 ```ts twoslash
 function changeBackgroundColor<T extends HTMLElement>(element: T) {
@@ -42,7 +42,7 @@ function changeBackgroundColor<T extends HTMLElement>(element: T) {
 }
 ```
 
-この`extends`キーワードはインターフェースに対しても使います。インターフェースは実装のときは`implements`キーワードを使いますが型引数に使うときは`implements`を使わず同様に`extends`を使います。
+Keyword `extends` này cũng được dùng cho interface. Interface khi implement sử dụng keyword `implements`, nhưng khi dùng cho type parameter thì không dùng `implements` mà vẫn dùng `extends`.
 
 ```ts twoslash
 interface ValueObject<T> {
@@ -74,4 +74,4 @@ class Entity<ID extends ValueObject<unknown>> {
 }
 ```
 
-`Entity`クラスは`ValueObject`インターフェースを実装しているクラスをIDとして受ける構造になっていますが19行目にあるようにこのときの型引数の制約は`implements`ではなく`extends`でなければなりません。
+Class `Entity` có cấu trúc nhận class implement interface `ValueObject` làm ID, nhưng như ở dòng 19, type parameter constraint lúc này phải dùng `extends` chứ không phải `implements`.

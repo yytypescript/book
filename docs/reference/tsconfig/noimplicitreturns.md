@@ -1,21 +1,21 @@
 ---
-description: 関数のすべての分岐できちんと`return`を書いているかを検査する
+description: Kiểm tra xem tất cả các nhánh của function đều có `return` đúng cách hay không
 ---
 
 # noImplicitReturns
 
-`noImplicitReturns`は、直訳すると「暗黙的なreturnの禁止」という意味で、関数のすべての分岐できちんと値を返しているかを検査するオプションです。
+`noImplicitReturns` nếu dịch trực tiếp có nghĩa là "cấm return ngầm định", là option kiểm tra xem tất cả các nhánh của function đều trả về giá trị đúng cách hay không.
 
-- デフォルト: `false`
-- 追加されたバージョン: 1.8
+- Mặc định: `false`
+- Phiên bản thêm vào: 1.8
 
-## 解説
+## Giải thích
 
-JavaScriptでは、関数が明示的に`return`をしなくても、暗黙的に`undefined`を返す仕様があります。
+Trong JavaScript, ngay cả khi function không có `return` rõ ràng, nó vẫn ngầm định trả về `undefined`.
 
 ```js twoslash
 function doSomething() {
-  // return文がない
+  // không có return statement
 }
 
 const value = doSomething();
@@ -23,7 +23,7 @@ console.log(value);
 // @log: undefined
 ```
 
-つまり、上の関数は次のような`return undefined`を書いた関数と同じ意味になります。
+Nghĩa là function trên tương đương với function có viết `return undefined` như sau:
 
 ```js twoslash
 function doSomething() {
@@ -31,20 +31,20 @@ function doSomething() {
 }
 ```
 
-この仕様にはひとつ問題があります。「本当に`undefined`を返したくて`return`文を省略したのか」「`return`文を書き忘れて、意図せず`undefined`を返しているのか」がはっきりしないという問題です。もし単なる書き忘れだった場合は、バグにつながります。
+Spec này có một vấn đề: không rõ ràng là "có thực sự muốn trả về `undefined` nên bỏ qua `return` statement" hay "quên viết `return` statement dẫn đến vô tình trả về `undefined`". Nếu chỉ là quên viết sẽ dẫn đến bug.
 
 ```js twoslash
 function getValue(map, key) {
   if (key in map) {
     return map[key];
   }
-  // この経路では、undefinedを返すことを意図している？
-  // それとも本当はnullを返したかった？
-  // もしくは例外を投げるべきだった？
+  // Ở nhánh này, có thực sự muốn trả về undefined không?
+  // Hay thực ra muốn trả về null?
+  // Hoặc nên throw exception?
 }
 ```
 
-そのため、JavaScriptのベストプラクティスとしては、本当に`undefined`を返すつもりなら、明示的に`return`文を書くことが推奨されています。
+Vì vậy, best practice trong JavaScript là nếu thực sự muốn trả về `undefined`, nên viết rõ ràng `return` statement.
 
 ```js
 function getValue(map, key) {
@@ -55,7 +55,7 @@ function getValue(map, key) {
 }
 ```
 
-関数が複雑になるほど、どこかの分岐で`return`の書き忘れ事故が発生しやすくなります。次の例はさほど複雑でないものの、「境界値の処理を忘れる」という典型的なミスを含んだ例です。
+Càng phức tạp function, càng dễ xảy ra sự cố quên viết `return` ở một nhánh nào đó. Ví dụ sau tuy không quá phức tạp nhưng chứa lỗi điển hình là "quên xử lý giá trị biên":
 
 ```ts twoslash
 // @noImplicitReturns: false
@@ -66,15 +66,15 @@ function negaposi(num: number) {
   if (num < 0) {
     return "negative";
   }
-  // num === 0 の経路で return を書き忘れている
-  // → この関数は暗黙的に undefined を返す
+  // Quên viết return ở nhánh num === 0
+  // → Function này ngầm định trả về undefined
 }
 
 console.log(negaposi(0));
 // @log: undefined
 ```
 
-`noImplicitReturns`を有効にすると、`return`を書き忘れた関数を検出できるようになります。たとえば、次のようなコードはエラーになります。
+Khi bật `noImplicitReturns`, có thể phát hiện function quên viết `return`. Ví dụ, code sau sẽ báo lỗi:
 
 ```ts twoslash
 // @noImplicitReturns: true
@@ -86,11 +86,11 @@ function negaposi(num: number) {
   if (num < 0) {
     return "negative";
   }
-  // return忘れ
+  // Quên return
 }
 ```
 
-すべての経路で値を返すように修正すると、コンパイルが通ります。
+Sửa để tất cả các nhánh đều trả về giá trị sẽ compile được:
 
 ```ts twoslash
 // @noImplicitReturns: true
@@ -101,15 +101,15 @@ function negaposi(num: number) {
   if (num < 0) {
     return "negative";
   }
-  return "zero"; // return漏れを修正
+  return "zero"; // Sửa chỗ thiếu return
 }
 ```
 
-## `return`なしが許容されるケース
+## Trường hợp được phép không có `return`
 
-`noImplicitReturns`を有効にした場合でも、利便性のために`return`なしが許容されるケースがあります。
+Ngay cả khi bật `noImplicitReturns`, vẫn có các trường hợp không có `return` được phép vì tiện lợi.
 
-まず、`throw`で終わる分岐は許容されます。
+Đầu tiên, nhánh kết thúc bằng `throw` được phép:
 
 ```ts twoslash
 // @noImplicitReturns: true
@@ -120,41 +120,41 @@ function negaposi(num: number) {
   if (num < 0) {
     return "negative";
   }
-  throw new Error("this is 0"); // returnなしでもエラーにならない
+  throw new Error("this is 0"); // Không có return nhưng không báo lỗi
 }
 ```
 
-次に、戻り値の型注釈が`void`の場合も`return`なしが許容されます。
+Tiếp theo, khi type annotation của return value là `void` cũng được phép không có `return`:
 
 ```ts twoslash
 // @noImplicitReturns: true
 function log(message?: string): void {
-  //                            ^^^^型注釈
+  //                            ^^^^type annotation
   if (!message) {
     return;
   }
   console.log(message);
-  // returnなしでもエラーにならない
+  // Không có return nhưng không báo lỗi
 }
 ```
 
-戻り値の型注釈が`string | void`のようなユニオン型の場合も`return`なしの経路が許容されます。
+Khi type annotation của return value là union type như `string | void` cũng cho phép nhánh không có `return`:
 
 ```ts twoslash
 // @noImplicitReturns: true
 function negaposi(num: number): string | void {
-  //                            ^^^^^^^^^^^^^型注釈
+  //                            ^^^^^^^^^^^^^type annotation
   if (num > 0) {
     return "positive";
   }
   if (num < 0) {
     return "negative";
   }
-  // returnなしでもエラーにならない
+  // Không có return nhưng không báo lỗi
 }
 ```
 
-`void`がユニオン型に含まれない場合、たとえ`undefined`が含まれていても、何も返さない経路があるとエラーになります。
+Nếu `void` không có trong union type, ngay cả khi có `undefined` thì nhánh không trả về gì vẫn báo lỗi:
 
 ```ts twoslash
 // @noImplicitReturns: true
@@ -166,11 +166,11 @@ function negaposi(num: number): string | undefined {
   if (num < 0) {
     return "negative";
   }
-  // ここにreturnが必要
+  // Cần return ở đây
 }
 ```
 
-`noImplicitReturns`の警告を抑えるために、戻り値の型を`void`と別の型で構成するよりも、しっかり`return undefined`を書き、戻り値の型注釈も`string | undefined`とするほうが、意外性の少ないコードになるので、特に事情がない限りそう書くようにしましょう。
+Thay vì dùng type gồm `void` với type khác để bỏ qua cảnh báo của `noImplicitReturns`, nên viết rõ ràng `return undefined` và type annotation của return value là `string | undefined` để code ít bất ngờ hơn, trừ khi có lý do đặc biệt.
 
 ```ts twoslash
 // @noImplicitReturns: true
@@ -185,18 +185,18 @@ function negaposi(num: number): string | undefined {
 }
 ```
 
-最後に、戻り値の型注釈が`any`の場合も`return`なしが許容されます。
+Cuối cùng, khi type annotation của return value là `any` cũng cho phép không có `return`:
 
 ```ts twoslash
 // @noImplicitReturns: true
 function log(message?: string): any {
-  //                            ^^^型注釈
+  //                            ^^^type annotation
   if (!message) {
     return;
   }
   console.log(message);
-  // returnなしでもエラーにならない
+  // Không có return nhưng không báo lỗi
 }
 ```
 
-注意点として`any`は`noImplicitReturns`の警告を抑えるだけでなく、他の型チェックも放棄するので、コードの安全性を損なう可能性があります。特段の理由がない限り、`noImplicitReturns`についての警告を抑えるためだけに`any`を使うのは避けましょう。
+Lưu ý là `any` không chỉ bỏ qua cảnh báo của `noImplicitReturns` mà còn bỏ qua cả type check khác nên có thể làm giảm độ an toàn của code. Trừ khi có lý do đặc biệt, không nên dùng `any` chỉ để bỏ qua cảnh báo của `noImplicitReturns`.

@@ -1,8 +1,8 @@
-# 公称型クラス
+# Nominal typing class
 
-TypeScriptでは、クラスに1つでも非パブリックなプロパティがあると、そのクラスだけ構造的部分型ではなく公称型(nominal typing)になります。
+Trong TypeScript, nếu class có ít nhất một property không public, class đó sẽ trở thành nominal typing thay vì structural subtyping.
 
-たとえば、`UserId`クラスと`GroupId`クラスで同名になってしまっている`id`プロパティをプライベートにするだけで、相互の代入が不可能になります。
+Ví dụ, chỉ cần đặt property `id` trùng tên trong class `UserId` và `GroupId` thành private là không thể gán lẫn nhau.
 
 ```ts twoslash
 // @errors: 2322
@@ -25,8 +25,8 @@ class GroupId {
 const userId: UserId = new GroupId("...");
 ```
 
-この方法はフィールドに限らず、プライベートメソッドや`protected`プロパティでも同じ効果があります。
+Cách này không chỉ áp dụng cho field mà còn có hiệu quả tương tự với private method hoặc `protected` property.
 
-## 関連情報
+## Thông tin liên quan
 
-[構造的部分型 (structural subtyping)](../../values-types-variables/structural-subtyping.md)
+[Structural subtyping (structural subtyping)](../../values-types-variables/structural-subtyping.md)

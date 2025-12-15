@@ -1,30 +1,30 @@
 ---
-description: bind、call、applyの型チェックを厳しくする
+description: Làm nghiêm ngặt type check của bind, call, apply
 tags: [strict]
 ---
 
 # strictBindCallApply
 
-`strictBindCallApply`は`bind`、`call`、`apply`の型チェックを厳しくするコンパイラオプションです。
+`strictBindCallApply` là compiler option làm nghiêm ngặt type check của `bind`, `call`, `apply`.
 
-- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
-- 追加されたバージョン: 3.2
-- TypeScript公式が有効化推奨
+- Mặc định: `true` nếu [strict](./strict.md) được bật, ngược lại là `false`
+- Phiên bản thêm vào: 3.2
+- TypeScript khuyến nghị nên bật
 
-## `bind`、`call`、`apply`が型チェックされない
+## `bind`, `call`, `apply` không được type check
 
-`strictBindCallApply`が`false`(TypeScriptのデフォルト)の場合、ビルトイン関数`bind`、`call`、`apply`の引数の型をチェックしません。
+Khi `strictBindCallApply` là `false` (mặc định của TypeScript), không check type của tham số của built-in function `bind`, `call`, `apply`.
 
 ```ts twoslash
 // @strictBindCallApply: false
-// 引数が文字列型の関数
+// Function có tham số kiểu string
 function fn(x: string) {}
 
-// 渡す引数は数値型だが、警告は出ない
+// Tham số truyền vào là kiểu number nhưng không cảnh báo
 fn.call(undefined, 122);
 ```
 
-`bind`、`call`、`apply`で呼び出す関数の戻り値型注釈は無視され、戻り値の型は`any`になります。
+Type annotation của return value của function được gọi bằng `bind`, `call`, `apply` bị bỏ qua, type của return value sẽ là `any`.
 
 ```ts twoslash
 // @strictBindCallApply: false
@@ -35,7 +35,7 @@ const x = fn.call(undefined);
 //    ^?
 ```
 
-`strictBindCallApply`が`false`の場合、実行時エラーが発生する恐れがあります。
+Khi `strictBindCallApply` là `false`, có nguy cơ xảy ra lỗi runtime.
 
 ```ts twoslash
 function fn(x: string) {
@@ -46,9 +46,9 @@ const x = fn.call(undefined, 123);
 // @strictBindCallApply: false
 ```
 
-## `bind`、`call`、`apply`の型チェックを行う
+## Type check của `bind`, `call`, `apply`
 
-`strictBindCallApply`を`true`にすると、`bind`、`call`、`apply`の型チェックが行われます。
+Đặt `strictBindCallApply` thành `true` để type check `bind`, `call`, `apply`.
 
 ```ts twoslash
 // @errors: 2345
@@ -56,7 +56,7 @@ function fn(x: string) {}
 fn.call(undefined, 123);
 ```
 
-加えて、戻り値の型は呼び出す関数の戻り値型になります。
+Thêm nữa, type của return value sẽ là return value type của function được gọi.
 
 ```ts twoslash
 function fn(): string {
@@ -66,7 +66,7 @@ const x = fn.call(undefined);
 //    ^?
 ```
 
-戻り値に型がつくため、補完が効くメリットもあります。
+Nhờ return value có type nên còn có lợi ích là có autocomplete.
 
 ```ts twoslash
 // @noErrors
@@ -78,23 +78,23 @@ str.toU;
 //     ^|
 ```
 
-`strictBindCallApply`は有効にするのがお勧めです。
+Khuyến nghị nên bật `strictBindCallApply`.
 
 <PostILearned>
 
-TypeScriptのstrictBindCallApplyはbind、call、applyの型チェックを厳しくするコンパイラオプション
+strictBindCallApply của TypeScript là compiler option làm nghiêm ngặt type check của bind, call, apply
 
-【falseの場合】
-❌引数の型チェックがされない
-⚠️戻り値はanyになる
+【Khi false】
+❌Không check type của tham số
+⚠️Return value trở thành any
 
-【trueの場合】
-✅引数の型チェックがされる
-💚戻り値に型がつく
-👍有効化推奨
+【Khi true】
+✅Check type của tham số
+💚Return value có type
+👍Khuyến nghị nên bật
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
 [strict](./strict.md)

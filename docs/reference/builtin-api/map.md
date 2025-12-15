@@ -2,11 +2,11 @@
 title: Map<K, V>
 ---
 
-`Map`はJavaScriptの組み込みAPIのひとつで、キーと値のペアを取り扱うためのオブジェクトです。`Map`にはひとつのキーについてはひとつの値のみを格納できます。
+`Map` là một trong những built-in API của JavaScript, là object để xử lý cặp key-value. Trong `Map`, một key chỉ có thể lưu trữ một giá trị duy nhất.
 
-## Mapオブジェクトの作り方
+## Cách tạo đối tượng Map
 
-`Map`オブジェクトを作るには`Map`クラスを`new`します。たとえば、キーが`string`、値が`number`の`Map<string, number>`は次のように作ります。
+Để tạo đối tượng `Map`, dùng `new` với class `Map`. Ví dụ, để tạo `Map<string, number>` với key là `string` và value là `number`:
 
 ```ts twoslash
 const map = new Map<string, number>();
@@ -15,9 +15,9 @@ console.log(map.get("a"));
 // @log: 1
 ```
 
-コンストラクタにキーと値の[タプル型]`[K, V]`の配列`[K, V][]`を渡すと`Map<K, V>`オブジェクトが作られます。
+Khi truyền mảng [tuple type] `[K, V][]` là `[K, V][]` vào constructor, sẽ tạo object `Map<K, V>`.
 
-[タプル型](../values-types-variables/tuple.md)
+[tuple type](../values-types-variables/tuple.md)
 
 ```ts twoslash
 const map = new Map<string, number>([
@@ -29,7 +29,7 @@ console.log(map);
 // @log: Map (3) {"a" => 1, "b" => 2, "c" => 3}
 ```
 
-`Map`の型変数を省略した場合、TypeScriptはコンストラクタ引数から`Map<K, V>`の型を推論します。
+Nếu bỏ qua type variable của `Map`, TypeScript sẽ suy luận kiểu `Map<K, V>` từ tham số constructor.
 
 ```ts twoslash
 const map = new Map([
@@ -41,7 +41,7 @@ map;
 //^?
 ```
 
-コンストラクタ引数を省略した場合、空の`Map`が作られます。
+Nếu bỏ qua tham số constructor, sẽ tạo `Map` rỗng.
 
 ```ts twoslash
 const map = new Map<string, number>();
@@ -49,26 +49,26 @@ console.log(map);
 // @log: Map(0) {}
 ```
 
-型引数とコンストラクタ引数の両方を省略した場合、`Map<any, any>`型になります。
+Nếu bỏ qua cả type argument và constructor argument, sẽ có kiểu `Map<any, any>`.
 
 ```ts twoslash
 const map = new Map();
 //    ^?
 ```
 
-## Mapの型注釈
+## Type annotation cho Map
 
-TypeScriptでMapの型注釈をする場合は、`Map<string, number>`のようにMap要素の型を型変数に指定します。
+Khi type annotation cho Map trong TypeScript, chỉ định kiểu của phần tử Map vào type variable như `Map<string, number>`.
 
 ```ts twoslash
 function doSomething(map: Map<string, number>) {}
 ```
 
-## Mapのキーは厳密等価で判定される
+## Key của Map được so sánh bằng strict equality
 
-`Map`のキーが同じかどうかは厳密等価(`===`)で判定します。等価(`==`)ではありません。
+Việc key của `Map` có giống nhau hay không được xác định bằng strict equality (`===`). Không phải equality (`==`).
 
-たとえば、`null`と`undefined`は等価ですが、厳密等価では等しくありません。
+Ví dụ, `null` và `undefined` bằng nhau với equality, nhưng không bằng nhau với strict equality.
 
 ```ts twoslash
 console.log(null == undefined);
@@ -77,7 +77,7 @@ console.log(null === undefined);
 // @log: false
 ```
 
-そのため、`Map`は`null`と`undefined`を異なるキーとみなします。
+Do đó, `Map` coi `null` và `undefined` là các key khác nhau.
 
 ```ts twoslash
 const map = new Map<any, any>([[null, 1]]);
@@ -87,7 +87,7 @@ console.log(map.has(undefined));
 // @log: false
 ```
 
-`NaN`同士は厳密等価ではありませんが、例外的に同じキーとみなされます。
+`NaN` với nhau không bằng nhau với strict equality, nhưng ngoại lệ được coi là cùng key.
 
 ```js twoslash
 // JavaScript
@@ -104,7 +104,7 @@ console.log(map);
 // @log: Map (1) {NaN => 2}
 ```
 
-オブジェクトは等価でも厳密等価でもないため、別のキーとみなされます。
+Object không bằng nhau với cả equality và strict equality nên được coi là key khác nhau.
 
 ```js twoslash
 // JavaScript
@@ -124,11 +124,11 @@ console.log(map);
 // @log: Map (2) {{} => 1, {} => 2}
 ```
 
-## Mapの操作
+## Thao tác với Map
 
-### 要素をセットする - `Map.prototype.set()`
+### Set phần tử - `Map.prototype.set()`
 
-`Map`にキーと値のペアを追加するには`set`メソッドを使います。
+Để thêm cặp key-value vào `Map`, sử dụng method `set`.
 
 ```ts twoslash
 const map = new Map<string, number>();
@@ -137,7 +137,7 @@ console.log(map);
 // @log: Map (1) {"a" => 1}
 ```
 
-すでにキーがある場合は、値を上書きします。
+Nếu key đã tồn tại, sẽ ghi đè giá trị.
 
 ```ts twoslash
 const map = new Map([["a", 1]]);
@@ -146,9 +146,9 @@ console.log(map);
 // @log: Map (1) {"a" => 5}
 ```
 
-### 値を取得する - `Map.prototype.get()`
+### Lấy giá trị - `Map.prototype.get()`
 
-`Map`からキーをもとに要素を取得するには`get`メソッドを使います。
+Để lấy phần tử từ `Map` dựa trên key, sử dụng method `get`.
 
 ```ts twoslash
 const map = new Map([["a", 1]]);
@@ -156,7 +156,7 @@ console.log(map.get("a"));
 // @log: 1
 ```
 
-`get`メソッドは、キーが存在しない場合、`undefined`を返します。
+Method `get` trả về `undefined` nếu key không tồn tại.
 
 ```ts twoslash
 const map = new Map([["a", 1]]);
@@ -164,7 +164,7 @@ console.log(map.get("b"));
 // @log: undefined
 ```
 
-Null合体演算子と組み合わせることによって`get`メソッドで値を取得できなかったときにデフォルトの値を代入することができます。
+Kết hợp với toán tử Null coalescing có thể gán giá trị mặc định khi không lấy được giá trị bằng method `get`.
 
 ```ts twoslash
 const map = new Map([["a", 1]]);
@@ -172,9 +172,9 @@ console.log(map.get("b") ?? 2);
 // @log: 2
 ```
 
-### 特定の要素を削除する - `Map.prototype.delete()`
+### Xóa phần tử cụ thể - `Map.prototype.delete()`
 
-`Map`からキーを指定して要素を削除するには`delete`メソッドを使います。
+Để xóa phần tử khỏi `Map` bằng cách chỉ định key, sử dụng method `delete`.
 
 ```ts twoslash
 const map = new Map([
@@ -186,7 +186,7 @@ console.log(map);
 // @log: Map (1) {"b" => 2}
 ```
 
-`delete`の戻り値は、キーが存在した場合`true`、そうでない場合`false`になります。
+Giá trị trả về của `delete` là `true` nếu key tồn tại, ngược lại là `false`.
 
 ```ts twoslash
 const map = new Map([["a", 1]]);
@@ -196,9 +196,9 @@ console.log(map.delete("b"));
 // @log: false
 ```
 
-### キーの有無を確認する - `Map.prototype.has()`
+### Kiểm tra sự tồn tại của key - `Map.prototype.has()`
 
-`Map`にキーが存在するかどうかを調べるには`has`メソッドを使います。
+Để kiểm tra xem key có tồn tại trong `Map` hay không, sử dụng method `has`.
 
 ```ts twoslash
 const map = new Map([["a", 1]]);
@@ -208,21 +208,21 @@ console.log(map.has("b"));
 // @log: false
 ```
 
-:::tip 存在確認からの要素取得
+:::tip Lấy phần tử sau khi kiểm tra tồn tại
 
-要素が存在するかを`has`チェックしてから、`get`で要素を取得するコードはTypeScriptではうまく書けません。
+Code kiểm tra tồn tại bằng `has` rồi mới lấy phần tử bằng `get` không thể viết tốt trong TypeScript.
 
 ```ts twoslash
 // @errors: 18048
 const map = new Map([["a", 1]]);
 if (map.has("a")) {
-  // TypeScriptは"a"があることを認識しない
+  // TypeScript không nhận biết có "a"
   const n = map.get("a");
   n * 2;
 }
 ```
 
-この場合、`get`で値を取得して、その値が`undefined`でないことをチェックするとうまくいきます。
+Trong trường hợp này, lấy giá trị bằng `get` rồi kiểm tra giá trị đó khác `undefined` sẽ hoạt động tốt.
 
 ```ts twoslash
 const map = new Map([["a", 1]]);
@@ -234,9 +234,9 @@ if (typeof n === "number") {
 
 :::
 
-### 要素の個数を取得する - `Map.prototype.size()`
+### Lấy số lượng phần tử - `Map.prototype.size()`
 
-`Map`に登録されている要素数を調べるには`size`フィールドの値を見ます。
+Để kiểm tra số lượng phần tử đã đăng ký trong `Map`, xem giá trị của field `size`.
 
 ```ts twoslash
 const map = new Map([
@@ -248,9 +248,9 @@ console.log(map.size);
 // @log: 3
 ```
 
-### 全要素を削除する - `Map.prototype.clear()`
+### Xóa tất cả phần tử - `Map.prototype.clear()`
 
-`Map`に登録されている要素をすべて削除するには`clear`メソッドを使います。
+Để xóa tất cả phần tử đã đăng ký trong `Map`, sử dụng method `clear`.
 
 ```ts twoslash
 const map = new Map([
@@ -265,9 +265,9 @@ console.log(map.size);
 // @log: 0
 ```
 
-### キーを列挙する - `Map.prototype.keys()`
+### Liệt kê key - `Map.prototype.keys()`
 
-`keys`メソッドはキーの反復可能オブジェクトを返します。
+Method `keys` trả về iterable object của các key.
 
 ```ts twoslash
 const map = new Map([
@@ -280,9 +280,9 @@ console.log(keys);
 // @log: ["a", "b", "c"]
 ```
 
-### 値を列挙する - `Map.prototype.values()`
+### Liệt kê value - `Map.prototype.values()`
 
-`values`メソッドは値の反復可能オブジェクトを返します。
+Method `values` trả về iterable object của các giá trị.
 
 ```ts twoslash
 const map = new Map([
@@ -295,9 +295,9 @@ console.log(values);
 // @log: [1, 2, 3]
 ```
 
-### キーと値のペアを列挙する - `Map.prototype.entries()`
+### Liệt kê cặp key-value - `Map.prototype.entries()`
 
-`entries`メソッドはキーと値の反復可能オブジェクトを返します。
+Method `entries` trả về iterable object của key và value.
 
 ```ts twoslash
 const map = new Map([
@@ -310,9 +310,9 @@ console.log(keyValues);
 // @log: [["a", 1], ["b", 2], ["c", 3]]
 ```
 
-### キーと値のペアを反復する
+### Lặp qua các cặp key-value
 
-`Map`は`for...of`で反復できます。反復の順序は登録された順です。
+`Map` có thể lặp bằng `for...of`. Thứ tự lặp là theo thứ tự đã đăng ký.
 
 ```ts twoslash
 const map = new Map([
@@ -323,15 +323,15 @@ const map = new Map([
 
 for (const [key, value] of map) {
   console.log(key, value);
-  // "a", 1
+  // Output theo thứ tự "a", 1
   // "b", 2
-  // "c", 3 の順で出力される
+  // "c", 3
 }
 ```
 
-### 複製する
+### Sao chép
 
-`Map`オブジェクトを複製(シャローコピー)するには、MapオブジェクトをMapコンストラクタに渡します。
+Để sao chép (shallow copy) object `Map`, truyền object Map vào constructor Map.
 
 ```ts twoslash
 const map1 = new Map([["a", 1]]);
@@ -340,9 +340,9 @@ console.log(map2);
 // @log: Map (1) {"a" => 1}
 ```
 
-## Mapは直接JSONにできない
+## Map không thể chuyển trực tiếp thành JSON
 
-`Map`オブジェクトはJSON.stringifyにかけても、登録されている要素はJSONになりません。
+Khi đưa object `Map` qua JSON.stringify, các phần tử đã đăng ký sẽ không trở thành JSON.
 
 ```ts twoslash
 const map = new Map([
@@ -354,7 +354,7 @@ console.log(JSON.stringify(map));
 // @log: "{}"
 ```
 
-`Map`をJSON化する場合は、一度オブジェクトにする必要があります。
+Khi muốn chuyển `Map` thành JSON, cần chuyển thành object trước.
 
 ```ts twoslash
 const map = new Map([
@@ -367,11 +367,11 @@ console.log(JSON.stringify(obj));
 // @log: "{"a":1,"b":2,"c":3}"
 ```
 
-## 他の型との相互運用
+## Tương tác với các kiểu khác
 
-### Mapを配列にする
+### Chuyển Map thành mảng
 
-`Map<K, V>`にスプレッド構文を使うと、タプル型配列`[K, V][]`が得られます。
+Sử dụng spread syntax với `Map<K, V>` sẽ được mảng tuple type `[K, V][]`.
 
 ```ts twoslash
 const map = new Map([
@@ -384,9 +384,9 @@ console.log(keyValues);
 // @log: [["a", 1], ["b", 2], ["c", 3]]
 ```
 
-### オブジェクトをMapにする
+### Chuyển object thành Map
 
-オブジェクトを`Map`に変換するには、`Object.entries`の戻り値をMapコンストラクタに渡します。
+Để chuyển object thành `Map`, truyền giá trị trả về của `Object.entries` vào constructor Map.
 
 ```ts twoslash
 const obj = { a: 1, b: 2, c: 3 };
@@ -395,9 +395,9 @@ console.log(map);
 // @log: Map (3) {"a" => 1, "b" => 2, "c" => 3}
 ```
 
-### Mapをオブジェクトにする
+### Chuyển Map thành object
 
-Mapをオブジェクトにするには、`Object.fromEntries`にMapオブジェクトを渡します。
+Để chuyển Map thành object, truyền object Map vào `Object.fromEntries`.
 
 ```ts twoslash
 const map = new Map([
@@ -410,20 +410,20 @@ console.log(obj);
 // @log: { "a": 1, "b": 2, "c": 3 }
 ```
 
-## Mapとオブジェクトの違い
+## Sự khác biệt giữa Map và object
 
-キーと値のペアが表現ができるという点で、`Map`とオブジェクトは似ていますが、次の違いがあります。
+Về điểm có thể biểu diễn cặp key-value, `Map` và object tương tự nhau, nhưng có các điểm khác biệt sau:
 
-| 違い                     | `Map`        | オブジェクト       |
-| ------------------------ | ------------ | ------------------ |
-| プロトタイプキーの上書き | 起きない     | 起こりうる         |
-| キーに使える型           | 任意の型     | `string`か`symbol` |
-| 反復の順序               | 挿入順       | 複雑なロジック     |
-| JSON化                   | 直接できない | 直接できる         |
+| Điểm khác biệt                    | `Map`               | Object             |
+| --------------------------------- | ------------------- | ------------------ |
+| Ghi đè prototype key              | Không xảy ra        | Có thể xảy ra      |
+| Kiểu có thể dùng làm key          | Bất kỳ kiểu nào     | `string` hoặc `symbol` |
+| Thứ tự lặp                        | Theo thứ tự chèn    | Logic phức tạp     |
+| Chuyển thành JSON                 | Không thể trực tiếp | Trực tiếp được     |
 
-### プロトタイプキーの上書き
+### Ghi đè prototype key
 
-オブジェクトはプロトタイプのキーを上書きする可能性があります。
+Object có thể ghi đè key của prototype.
 
 ```js twoslash
 const obj = {};
@@ -434,7 +434,7 @@ console.log(obj.toString);
 // @log: 1
 ```
 
-`Map`は要素をセットしてもプロトタイプのキーを上書きする心配がありません。要素とプロトタイプは別の領域にあるためです。
+`Map` không lo ngại ghi đè key của prototype khi set phần tử. Bởi vì phần tử và prototype ở các vùng riêng biệt.
 
 ```ts twoslash
 const map = new Map<string, any>();
@@ -445,52 +445,52 @@ console.log(map.toString);
 // @log: function toString() { [native code] }
 ```
 
-### キーに使える型
+### Kiểu có thể dùng làm key
 
-オブジェクトのキーに使える型は`string`型か`symbol`型のどちらです。`Map`は任意の型をキーにできます。
+Kiểu có thể dùng làm key của object là kiểu `string` hoặc kiểu `symbol`. `Map` có thể dùng bất kỳ kiểu nào làm key.
 
-### 反復の順序
+### Thứ tự lặp
 
-オブジェクトのプロパティの反復順序は、書いた順や追加した順ではなく、複雑なロジックになっています。
+Thứ tự lặp qua property của object không phải theo thứ tự viết hoặc thêm vào, mà theo logic phức tạp.
 
-[オブジェクトをループする方法](../values-types-variables/object/how-to-loop-an-object.md)
+[Cách lặp qua object](../values-types-variables/object/how-to-loop-an-object.md)
 
-`Map`の要素の反復順序は要素を追加した順であることが保証されています。
+Thứ tự lặp qua phần tử của `Map` được đảm bảo theo thứ tự thêm phần tử.
 
-### JSON化
+### Chuyển thành JSON
 
-オブジェクトはそのまま`JSON.stringify`でJSON化できます。`Map`は`JSON.stringify`しても要素はJSONになりません。一度`Map`をオブジェクトに変換する必要があります。
+Object có thể chuyển trực tiếp thành JSON bằng `JSON.stringify`. `Map` khi `JSON.stringify` thì phần tử không trở thành JSON. Cần chuyển `Map` thành object trước.
 
-### Mapとオブジェクトの書き方比較
+### So sánh cách viết Map và object
 
-`Map`とオブジェクトは似た操作ができます。次がその対応表です。
+`Map` và object có thể thực hiện các thao tác tương tự. Dưới đây là bảng tương ứng:
 
-|                | `Map`                 | オブジェクト              |
-| -------------- | --------------------- | ------------------------- |
-| 型注釈の書き方 | `Map<K, V>`           | `Record<K, V>`            |
-| 初期化         | `new Map([["a", 1]])` | `{ a: 1 }`                |
-| 要素のセット   | `map.set(key, value)` | `obj[key] = value`        |
-| 値の取得       | `map.get(key)`        | `obj[key]`                |
-| 要素の削除     | `map.delete(key)`     | `delete obj.key`          |
-| キーの有無確認 | `map.has(key)`        | `key in obj`              |
-| 要素数の取得   | `map.size`            | `Object.keys(obj).length` |
-| 全要素削除     | `map.clear()`         | -                         |
-| キーの列挙     | `map.keys()`          | `Object.keys(obj)`        |
-| 値の列挙       | `map.values()`        | `Object.values(obj)`      |
-| 要素の列挙     | `map.entries()`       | `Object.entries(obj)`     |
-| 複製           | `new Map(map)`        | `{ ...obj }`              |
+|                          | `Map`                 | Object                |
+| ------------------------ | --------------------- | --------------------- |
+| Cách viết type annotation | `Map<K, V>`           | `Record<K, V>`        |
+| Khởi tạo                 | `new Map([["a", 1]])` | `{ a: 1 }`            |
+| Set phần tử              | `map.set(key, value)` | `obj[key] = value`    |
+| Lấy giá trị              | `map.get(key)`        | `obj[key]`            |
+| Xóa phần tử              | `map.delete(key)`     | `delete obj.key`      |
+| Kiểm tra key             | `map.has(key)`        | `key in obj`          |
+| Lấy số lượng phần tử     | `map.size`            | `Object.keys(obj).length` |
+| Xóa tất cả phần tử       | `map.clear()`         | -                     |
+| Liệt kê key              | `map.keys()`          | `Object.keys(obj)`    |
+| Liệt kê value            | `map.values()`        | `Object.values(obj)`  |
+| Liệt kê phần tử          | `map.entries()`       | `Object.entries(obj)` |
+| Sao chép                 | `new Map(map)`        | `{ ...obj }`          |
 
 [Record<Keys, Type>](../type-reuse/utility-types/record.md)
 
 <PostILearned>
 
-🗺Mapはキーと値のペアを扱うJSビルトインのAPI
-📝TypeScriptではMap<string, number>のように型注釈する
-🔬キーは厳密等価で判定される
-🔪Mapは直接JSON化できない
+Map là built-in API của JS để xử lý cặp key-value
+Type annotation trong TypeScript: Map<string, number>
+Key được so sánh bằng strict equality
+Map không thể chuyển trực tiếp thành JSON
 
-⚖️Mapとオブジェクトの違い
-→ Mapはキーに任意の型が使える
-→ Mapはキーの順序が挿入順保証
+Sự khác biệt giữa Map và object
+→ Map có thể dùng bất kỳ kiểu nào làm key
+→ Map đảm bảo thứ tự key theo thứ tự chèn
 
 </PostILearned>

@@ -1,41 +1,41 @@
 ---
-description: 引数型の変性のチェックを厳しくする
+description: Làm nghiêm ngặt check variance của parameter type
 tags: [strict]
 ---
 
 # strictFunctionTypes
 
-`strictFunctionTypes`は引数型の変性のチェックを厳しくするコンパイラオプションです。
+`strictFunctionTypes` là compiler option làm nghiêm ngặt check variance của parameter type.
 
-- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
-- 追加されたバージョン: 2.6
-- TypeScript公式が有効化推奨
+- Mặc định: `true` nếu [strict](./strict.md) được bật, ngược lại là `false`
+- Phiên bản thêm vào: 2.6
+- TypeScript khuyến nghị nên bật
 
-## 引数の双変性は安心できない
+## Bivariance của parameter là không an toàn
 
-TypeScriptの関数には引数の双変性(parameter bivariance)という性質があります。どういうことか、順を追って見ていきましょう。
+Function trong TypeScript có tính chất bivariance của parameter (parameter bivariance). Hãy xem từng bước để hiểu rõ:
 
-まず、次の3つの型の範囲を考えてみましょう。
+Đầu tiên, xét phạm vi của 3 type sau:
 
 1. `number`
 2. `number | null`
 3. `number | null | undefined`
 
-`number`は`number | null`より狭い型です。`number | null`の範囲には`1`や`0.5`などのnumber型とnull型があります。`number`型の範囲にあるのはnumber型だけです。最後の`number | null | undefined`はこの中でもっとも範囲が広い型です。
+`number` là type hẹp hơn `number | null`. Phạm vi của `number | null` gồm các giá trị number type như `1`, `0.5` và null type. Phạm vi của `number` type chỉ gồm number type. `number | null | undefined` là type rộng nhất trong các type trên.
 
-| 型                                               | 範囲の広さ | 取れる値の例                       |
-| ------------------------------------------------ | ---------- | ---------------------------------- |
-| `number`                                         | 狭い       | `1`、`0.5`...                      |
-| <code>number &#124; null</code>                  | 広い       | `1`、`0.5`...、`null`              |
-| <code>number &#124; null &#124; undefined</code> | より広い   | `1`、`0.5`...、`null`、`undefined` |
+| Type                                             | Độ rộng phạm vi | Ví dụ giá trị                      |
+| ------------------------------------------------ | --------------- | ---------------------------------- |
+| `number`                                         | Hẹp             | `1`, `0.5`...                      |
+| <code>number &#124; null</code>                  | Rộng            | `1`, `0.5`..., `null`              |
+| <code>number &#124; null &#124; undefined</code> | Rộng hơn        | `1`, `0.5`..., `null`, `undefined` |
 
-続いて、次の変数`func`について考えてみましょう。この変数の型は、引数に`number | null`を取る関数です。
+Tiếp theo, xét biến `func` sau. Type của biến này là function nhận parameter `number | null`:
 
 ```ts twoslash
 let func: (n: number | null) => any;
 ```
 
-この変数`func`に代入できる値はどんな型でしょうか。当然、型注釈と同じ関数は問題なく代入できます。
+Giá trị type nào có thể gán vào biến `func` này? Đương nhiên, function cùng type với type annotation có thể gán được:
 
 ```ts twoslash
 let func: (n: number | null) => any;
@@ -43,7 +43,7 @@ let func: (n: number | null) => any;
 func = (n: number | null) => {}; // OK
 ```
 
-引数`number | null`より広い`number | null | undefined`を受ける関数は代入できるでしょうか。これも大丈夫です。
+Function nhận `number | null | undefined` rộng hơn parameter `number | null` thì có gán được không? Điều này cũng OK:
 
 ```ts twoslash
 let func: (n: number | null) => any;
@@ -51,9 +51,9 @@ let func: (n: number | null) => any;
 func = (n: number | null | undefined) => {}; // OK
 ```
 
-このような引数型の範囲を広められる特性を**引数の反変性(parameter contravariance)**と言います。
+Đặc tính có thể mở rộng phạm vi parameter type như vậy được gọi là **contravariance của parameter (parameter contravariance)**.
 
-引数`number | null`より狭い`number`を取る関数は代入できるでしょうか。これもTypeScriptでは代入できます。
+Function nhận `number` hẹp hơn parameter `number | null` thì có gán được không? Trong TypeScript điều này cũng có thể gán được:
 
 ```ts twoslash
 // @strictFunctionTypes: false
@@ -62,79 +62,79 @@ let func: (n: number | null) => any;
 func = (n: number) => {}; // OK
 ```
 
-このような引数型の範囲を狭められる特性を**引数の共変性(parameter covariance)**と言います。
+Đặc tính có thể thu hẹp phạm vi parameter type như vậy được gọi là **covariance của parameter (parameter covariance)**.
 
-TypeScriptの関数型は、引数の反変性と引数の共変性の両特性を持っています。この両特性は一言で、**引数の双変性**と言います。
+Function type trong TypeScript có cả hai đặc tính contravariance và covariance của parameter. Hai đặc tính này gộp lại được gọi là **bivariance của parameter**.
 
-引数の双変性は危険な側面があります。`null`が渡せる`func`関数に、`number`だけが来ることを前提とした関数を代入しているためです。もしも、`func`に`null`を渡すと、実行時エラーが発生します。
+Bivariance của parameter có khía cạnh nguy hiểm. Vì đang gán function chỉ nhận `number` vào function `func` có thể nhận `null`. Nếu truyền `null` vào `func`, sẽ xảy ra lỗi runtime:
 
 ```ts twoslash
-// nullも来る可能性がある関数型
+// Function type có thể nhận null
 let func: (n: number | null) => any;
-// numberを前提とした関数を代入
+// Gán function chỉ nhận number
 func = (n: number) => n.toString();
-// funcにはnullが渡せる → 矛盾が実行時エラーを生む
+// func có thể truyền null → Mâu thuẫn gây lỗi runtime
 func(null);
 // @error: Cannot read properties of null (reading 'toString')
 // @strictFunctionTypes: false
 ```
 
-こうした実行時エラーが起きないようにするには、引数型は反変だけが許されるべきです。そして、もし共変ならコンパイルエラーで知らせてほしいところです。ところが、TypeScriptは引数型は双変(つまり共変もOK)であるため、安心できない仕様になっています。
+Để tránh lỗi runtime như vậy, parameter type chỉ nên cho phép contravariance. Và nếu là covariance thì nên báo compile error. Tuy nhiên, TypeScript cho phép parameter type là bivariance (tức covariance cũng OK) nên không an toàn.
 
-## 引数の共変性を許さない`strictFunctionTypes`
+## `strictFunctionTypes` không cho phép covariance của parameter
 
-上の課題を解決するのが、コンパイラオプション`strictFunctionTypes`です。これを`true`にすると、引数が反変になります。もし、共変の引数にした場合、TypeScriptが警告を出します。
+Giải quyết vấn đề trên là compiler option `strictFunctionTypes`. Đặt thành `true` thì parameter sẽ trở thành contravariant. Nếu parameter là covariant thì TypeScript sẽ cảnh báo:
 
 ```ts twoslash
 // @errors: 2322
 let func: (n: number | null) => any;
-// 不変
+// Invariant
 func = (n: number | null) => {}; // OK
-// 反変
+// Contravariant
 func = (n: number | null | undefined) => {}; // OK
-// 共変
+// Covariant
 func = (n: number) => {}; // NG
 ```
 
-`strictFunctionTypes`は思いがけない実行時エラーを防ぐのに役立ちます。`strictFunctionTypes`は`true`を設定するのがお勧めです。
+`strictFunctionTypes` giúp ngăn chặn lỗi runtime không mong muốn. Khuyến nghị nên set `strictFunctionTypes` thành `true`.
 
-## メソッド型はチェックされない
+## Method type không được check
 
-`strictFunctionTypes`のチェックが働くのは関数型だけです。メソッド型には働きません。
+Check của `strictFunctionTypes` chỉ áp dụng cho function type. Không áp dụng cho method type:
 
 ```ts twoslash
 interface Obj {
-  // メソッド型
+  // Method type
   method(n: number | null): any;
 }
 const obj: Obj = {
-  method: (n: number) => {}, // チェックされない
+  method: (n: number) => {}, // Không được check
 };
 ```
 
-インターフェースのメソッドでも、**関数型で定義されたメソッド**は`strictFunctionTypes`のチェックが働きます。
+Ngay cả với method của interface, **method được định nghĩa bằng function type** sẽ được check bởi `strictFunctionTypes`:
 
 ```ts twoslash
 // @errors: 2322
 interface Obj {
-  // 関数型
+  // Function type
   method: (n: number | null) => any;
 }
 const obj: Obj = {
-  method: (n: number) => {}, // チェックが働く
+  method: (n: number) => {}, // Check hoạt động
 };
 ```
 
 <PostILearned>
 
-⚙️TypeScriptのstrictFunctionTypesは、引数型の変性のチェックを厳しくするコンパイルオプション
-☹️TypeScriptの引数は双変で安心できない
-🔥実行時エラーが起こることも
-✅strictFunctionTypesは反変にしてくれる
-👍有効化推奨のオプション
+⚙️strictFunctionTypes của TypeScript là compile option làm nghiêm ngặt check variance của parameter type
+☹️Parameter của TypeScript là bivariant nên không an toàn
+🔥Có thể xảy ra lỗi runtime
+✅strictFunctionTypes biến thành contravariant
+👍Option khuyến nghị nên bật
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
 [strict](./strict.md)

@@ -1,19 +1,19 @@
 ---
-description: 型推論を防ぐ
+description: Ngăn chặn type inference
 title: NoInfer<T>
 ---
 
-`NoInfer<T>`は、`T`の型推論を防ぐためのユーティリティ型です。
+`NoInfer<T>` là utility type để ngăn chặn type inference của `T`.
 
-## NoInfer&lt;T>の型引数
+## Type argument của NoInfer&lt;T>
 
 ### T
 
-型引数`T`には推論を防ぎたい型を代入します。
+Type argument `T` nhận kiểu muốn ngăn chặn inference.
 
-## NoInferの使用例
+## Ví dụ sử dụng NoInfer
 
-まずはNoInferを使用しなかった場合の例です。ジェネリクスを使って`getIndexFromArray`という関数を定義します
+Trước tiên là ví dụ không sử dụng NoInfer. Định nghĩa function `getIndexFromArray` sử dụng generics:
 
 ```ts
 function getIndexFromArray<T extends string>(elements: T[], item: T): number {
@@ -26,7 +26,7 @@ getIndexFromArray(fruits, "apple");
 getIndexFromArray(fruits, "peach");
 ```
 
-このとき`T`は`"grape" | "apple" | "banana" | "peach"`と推論されてしまいます。しかし第二引数には配列に含まれている要素のみを許容したいです。そこで`NoInfer`を利用することにより`T`の型推論を防ぐことができます。
+Khi đó `T` bị suy luận là `"grape" | "apple" | "banana" | "peach"`. Tuy nhiên, chúng ta chỉ muốn cho phép các phần tử có trong mảng làm argument thứ 2. Do đó, bằng cách sử dụng `NoInfer`, có thể ngăn chặn type inference của `T`.
 
 ```ts twoslash
 function getIndexFromArray<T extends string>(
@@ -43,6 +43,6 @@ getIndexFromArray(fruits, "apple");
 getIndexFromArray(fruits, "peach");
 ```
 
-## 関連情報
+## Thông tin liên quan
 
-[Infer](../../values-types-variables/type-inference.md)
+[Type Inference](../../values-types-variables/type-inference.md)

@@ -1,56 +1,56 @@
 ---
-sidebar_label: 関数式
+sidebar_label: Function expression
 ---
 
-# 関数式 (function expression)
+# Function expression
 
-関数式はJavaScriptで関数を作る方法のひとつで、function**式**を用います。
+Function expression là một trong những cách tạo function trong JavaScript, sử dụng function **expression**.
 
-## 関数式の構文
+## Cú pháp function expression
 
-関数式の構文は、[関数宣言]と同じです。
+Cú pháp function expression giống với [function declaration].
 
-[関数宣言]: ./function-declaration.md
+[function declaration]: ./function-declaration.md
 
 <!--prettier-ignore-->
 ```js twoslash
 // @noImplicitAny: false
-function 関数名(引数) {
-  // 処理内容
+function tên_function(tham_số) {
+  // Nội dung xử lý
 };
 ```
 
-[関数宣言]は文でしたが、関数式は式です。式とは、評価した結果が値になるものを言います。関数式は値になるので、変数に直接代入できます。
+[Function declaration] là statement, còn function expression là expression. Expression là thứ mà khi được đánh giá sẽ trả về một giá trị. Vì function expression trở thành giá trị, nó có thể được gán trực tiếp vào biến.
 
 ```js twoslash
 // @noImplicitAny: false
-const 変数名 = function 関数名(引数) {
-  // 処理内容
+const tên_biến = function tên_function(tham_số) {
+  // Nội dung xử lý
 };
 ```
 
-## 関数名の省略
+## Bỏ qua tên function
 
 <!--textlint-disable prh-->
 
-関数式は、関数名を省略できます。名前がない関数なので、匿名関数や無名関数とも呼ばれます。
+Function expression có thể bỏ qua tên function. Vì không có tên, nó còn được gọi là anonymous function hoặc unnamed function.
 
 <!--textlint-enable prh-->
 
 ```js twoslash
-const 変数名 = function () {};
-//                     ^関数名を省略
+const tên_biến = function () {};
+//                     ^Bỏ qua tên function
 ```
 
-関数式を呼び出すには、変数名を使います。
+Để gọi function expression, bạn sử dụng tên biến.
 
 ```js twoslash
-const 変数名 = function () {};
+const tên_biến = function () {};
 // ---cut---
-変数名(); // 呼び出し
+tên_biến(); // Gọi function
 ```
 
-たとえば、次の関数宣言で書かれたincrement関数を、
+Ví dụ, nếu viết lại function increment được viết bằng function declaration sau:
 
 ```js twoslash
 function increment(n) {
@@ -58,7 +58,7 @@ function increment(n) {
 }
 ```
 
-関数式に書き直すと次のようになります。
+Thành function expression, sẽ trở thành:
 
 ```js twoslash
 const increment = function (n) {
@@ -66,7 +66,7 @@ const increment = function (n) {
 };
 ```
 
-関数式は、オブジェクトのプロパティに直接代入することもできます。
+Function expression cũng có thể được gán trực tiếp vào property của object.
 
 ```ts twoslash
 const オブジェクト = {
@@ -74,7 +74,7 @@ const オブジェクト = {
 };
 ```
 
-関数式は、別の関数の引数に直接渡すこともできます。たとえば、ボタンがクリックされたときの処理を指定するときに関数式を用います。
+Function expression cũng có thể được truyền trực tiếp làm tham số của function khác. Ví dụ, function expression được sử dụng khi chỉ định xử lý khi button được click.
 
 ```js twoslash
 button.addEventListener("click", function (event) {
@@ -82,18 +82,18 @@ button.addEventListener("click", function (event) {
 });
 ```
 
-## 関数式と型注釈
+## Function expression và type annotation
 
-TypeScriptでは、関数宣言と同様に引数の型注釈が書けます。
+Trong TypeScript, bạn có thể viết type annotation cho tham số giống như function declaration.
 
 ```ts twoslash
 const increment = function (n: number) {
-  //                         ^^^^^^^^引数の型注釈
+  //                         ^^^^^^^^Type annotation cho tham số
   return n + 1;
 };
 ```
 
-引数の型注釈を省略した場合、その型は`any`になります。
+Khi bỏ qua type annotation cho tham số, kiểu của nó sẽ là `any`.
 
 ```ts twoslash
 const increment = function (n) {};
@@ -101,25 +101,25 @@ const increment = function (n) {};
 // @noImplicitAny: false
 ```
 
-関数型の変数に関数式を代入する場合は、引数の型注釈を省略しても、型推論が効きます。変数の型情報から、引数の型がわかるからです。
+Khi gán function expression vào biến có kiểu function, ngay cả khi bỏ qua type annotation cho tham số, type inference vẫn hoạt động. Vì kiểu của tham số có thể được biết từ thông tin kiểu của biến.
 
 ```ts twoslash
 type UseString = (value: string) => void;
-let useString: UseString; // 関数型の変数
-useString = function (value) {}; // 関数型変数に関数式を代入
+let useString: UseString; // Biến kiểu function
+useString = function (value) {}; // Gán function expression vào biến kiểu function
 //                    ^?
 ```
 
-TypeScriptの関数式では、戻り値の型注釈も書けます。
+Trong function expression của TypeScript, bạn cũng có thể viết type annotation cho giá trị trả về.
 
 ```ts twoslash
 const getZero = function (): number {
-  //                         ^^^^^^戻り値の型注釈
+  //                         ^^^^^^Type annotation cho giá trị trả về
   return 0;
 };
 ```
 
-戻り値の型注釈を省略した場合、関数のロジックから型が推論されます。
+Khi bỏ qua type annotation cho giá trị trả về, kiểu sẽ được suy luận từ logic của function.
 
 ```ts twoslash
 const getZero = function () {
@@ -129,45 +129,45 @@ const num = getZero();
 //    ^?
 ```
 
-## 関数式の関数名
+## Tên function của function expression
 
-JavaScriptでは、function式に関数名を書いた場合、その関数名は関数の処理内部からのみ参照できます。これは再帰関数を書くときに活用されます。次の例は、与えられた数値`n`の階乗を求める関数です。関数名の`fact`はその関数の中でのみ使えます。関数の外からは`factorial`で呼び出す必要があります。
+Trong JavaScript, khi viết tên function trong function expression, tên function đó chỉ có thể được tham chiếu từ bên trong xử lý của function. Điều này được sử dụng khi viết recursive function. Ví dụ sau là function tính giai thừa của số `n` được cho. Tên function `fact` chỉ có thể được sử dụng bên trong function đó. Từ bên ngoài function, phải gọi bằng `factorial`.
 
 ```js twoslash
 const factorial = function fact(n) {
   if (n <= 1) {
     return 1;
   }
-  return n * fact(n - 1); // 関数名を使い再帰呼び出し
+  return n * fact(n - 1); // Gọi đệ quy bằng tên function
 };
 ```
 
-上の例は、次のように変数名を使った再帰呼び出しに書き換えることもできます。
+Ví dụ trên cũng có thể được viết lại thành gọi đệ quy bằng tên biến như sau.
 
 ```js {6} twoslash
-//                        ↓関数名を省略
+//                        ↓Bỏ qua tên function
 const factorial = function (n) {
   if (n <= 1) {
     return 1;
   }
-  return n * factorial(n - 1); // 変数名を使った再帰呼び出し
+  return n * factorial(n - 1); // Gọi đệ quy bằng tên biến
 };
 ```
 
 <PostILearned>
 
-・関数式はfunction式を使った関数
-・関数式は関数名が省略可。匿名関数と呼ばれる。
-・関数式は変数や引数などに直接代入できる
-・型注釈の書き方は関数宣言と同じ
-・関数式の関数名は、関数内部からのみ参照可
+・Function expression là function sử dụng function expression
+・Function expression có thể bỏ qua tên function. Được gọi là anonymous function.
+・Function expression có thể được gán trực tiếp vào biến hoặc tham số
+・Cách viết type annotation giống với function declaration
+・Tên function của function expression chỉ có thể tham chiếu từ bên trong function
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
-[関数式とアロー関数の違い](function-expression-vs-arrow-functions.md)
+[Sự khác biệt giữa function expression và arrow function](function-expression-vs-arrow-functions.md)
 
-[関数宣言](./function-declaration.md)
+[Function declaration](./function-declaration.md)
 
-[アロー関数](./arrow-functions.md)
+[Arrow function](./arrow-functions.md)

@@ -1,14 +1,14 @@
 ---
-sidebar_label: "分割代入引数"
+sidebar_label: "Destructuring assignment parameter"
 ---
 
-# 分割代入引数 (destructuring assignment parameter)
+# Destructuring assignment parameter
 
-JavaScriptでは分割代入構文は関数の引数でも使えます。引数がオブジェクトや配列の場合、そのオブジェクトや配列の一部だけを関数で利用したい場合に、分割代入引数が便利です。
+Trong JavaScript, cú pháp destructuring assignment cũng có thể được sử dụng cho tham số của function. Khi tham số là object hoặc array, destructuring assignment parameter rất tiện lợi nếu bạn chỉ muốn sử dụng một phần của object hoặc array đó trong function.
 
-## 分割代入引数の構文
+## Cú pháp destructuring assignment parameter
 
-JavaScriptでは、オブジェクトの分割代入引数の構文は中カッコ中に、オブジェクトのプロパティ名を書きます。引数名はプロパティ名と一致する必要があります。
+Trong JavaScript, cú pháp destructuring assignment parameter cho object được viết bằng cách đặt tên property của object trong ngoặc nhọn. Tên tham số phải trùng với tên property.
 
 ```js twoslash
 function foo({ a, b }) {
@@ -18,7 +18,7 @@ foo({ a: 1, b: 2, c: 3 });
 // @log: 1 2
 ```
 
-プロパティ名を別の引数名で受け取るには、`:`の後に引数名を指定します。
+Để nhận property với tên tham số khác, bạn chỉ định tên tham số sau dấu `:`.
 
 ```js twoslash
 function foo({ a: x, b: y }) {
@@ -28,7 +28,7 @@ foo({ a: 1, b: 2 });
 // @log: 1 2
 ```
 
-配列の分割代入引数は、カギカッコの中に配列要素を代入する変数名を書きます。配列要素に対応する引数名は自由に決められます。
+Destructuring assignment parameter cho array được viết bằng cách đặt tên biến sẽ được gán phần tử array trong ngoặc vuông. Bạn có thể tự do chọn tên tham số tương ứng với phần tử array.
 
 ```js twoslash
 function bar([a, b]) {
@@ -38,23 +38,23 @@ bar([1, 2, 3]);
 // @log: 1 2
 ```
 
-分割代入引数はアロー関数でも使えます。
+Destructuring assignment parameter cũng có thể được sử dụng với arrow function.
 
 ```js twoslash
 const foo = ({ a, b }) => {};
 const bar = ([a, b]) => {};
 ```
 
-## 分割代入引数の型注釈
+## Type annotation cho destructuring assignment parameter
 
-TypeScriptでオブジェクトを分割代入する場合、分割代入引数の右にオブジェクトの型注釈を書きます。
+Trong TypeScript, khi destructure object, type annotation cho object được viết bên phải destructuring assignment parameter.
 
 ```ts twoslash
 function foo({ a, b }: { a: number; b: number }) {}
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^型注釈
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^Type annotation
 ```
 
-配列を分割代入する場合も、分割代入引数の右に配列型の型注釈を書きます。
+Khi destructure array, type annotation cho array type cũng được viết bên phải destructuring assignment parameter.
 
 ```ts twoslash
 // @noUncheckedIndexedAccess: false
@@ -62,7 +62,7 @@ function bar([num1]: number[]) {}
 //            ^?
 ```
 
-型注釈が配列型の場合、コンパイラオプション`noUncheckedIndexedAccess`を有効にした場合、分割代入引数は`undefined`とのユニオン型になります。
+Khi type annotation là array type và compiler option `noUncheckedIndexedAccess` được bật, destructuring assignment parameter sẽ trở thành union type với `undefined`.
 
 ```ts twoslash
 // @noUncheckedIndexedAccess: true
@@ -72,7 +72,7 @@ function bar([num1]: number[]) {}
 
 [noUncheckedIndexedAccess](../tsconfig/nouncheckedindexedaccess.md)
 
-配列の分割代入引数の型注釈をタプル型にすると、`noUncheckedIndexedAccess`が有効な場合でも、`undefined`とのユニオン型にはなりません。
+Nếu type annotation của destructuring assignment parameter cho array là tuple type, ngay cả khi `noUncheckedIndexedAccess` được bật, nó sẽ không trở thành union type với `undefined`.
 
 ```ts twoslash
 // @noUncheckedIndexedAccess: true
@@ -80,9 +80,9 @@ function bar([num1, num2]: [number, number]) {}
 //            ^?
 ```
 
-## 既定値とコンパイルエラー
+## Giá trị mặc định và lỗi compile
 
-JavaScriptでは、分割代入引数に対応するオブジェクトプロパティや配列要素が無い場合、`undefined`が代入されます。
+Trong JavaScript, nếu không có object property hoặc array element tương ứng với destructuring assignment parameter, `undefined` sẽ được gán.
 
 ```js twoslash
 function foo({ a }) {
@@ -97,7 +97,7 @@ bar([]);
 // @log: undefined
 ```
 
-一方、TypeScriptでは分割代入引数に対応するオブジェクトプロパティや配列要素が無いと、コンパイルエラーになります。
+Mặt khác, trong TypeScript, nếu không có object property hoặc array element tương ứng với destructuring assignment parameter, sẽ xảy ra lỗi compile.
 
 ```ts twoslash
 // @errors: 2345
@@ -107,17 +107,17 @@ foo({});
 bar([]);
 ```
 
-## 分割代入引数のデフォルト引数
+## Default parameter cho destructuring assignment parameter
 
-JavaScriptで分割代入引数のデフォルト引数を指定する場合、引数名の後に`=`と既定値を書きます。
+Trong JavaScript, để chỉ định default parameter cho destructuring assignment parameter, bạn viết `=` và giá trị mặc định sau tên tham số.
 
 ```js twoslash
 function foo({ a = 0 }) {
-  //             ^^^既定値の指定
+  //             ^^^Chỉ định giá trị mặc định
   console.log(a);
 }
 function bar([a = 0]) {
-  //            ^^^既定値の指定
+  //            ^^^Chỉ định giá trị mặc định
   console.log(a);
 }
 foo({});
@@ -126,23 +126,23 @@ bar([]);
 // @log: 0
 ```
 
-TypeScriptでデフォルト引数を型注釈する場合、オブジェクトではプロパティを`?`でオプションにします。
+Trong TypeScript, khi thêm type annotation cho default parameter, bạn đánh dấu property là optional bằng `?` cho object.
 
 ```ts twoslash
 function foo({ a = 0 }: { a?: number | string }) {}
 //             ^?
 ```
 
-プロパティの既定値からプロパティの型が予想できる場合、型注釈を省略できる場合もあります。
+Nếu kiểu của property có thể được suy luận từ giá trị mặc định, type annotation có thể được bỏ qua.
 
 ```ts twoslash
 function foo({ a = 0 }) {}
 //             ^?
 ```
 
-## 分割代入引数の全体の既定値
+## Giá trị mặc định cho toàn bộ destructuring assignment parameter
 
-分割代入引数の全体の既定値を指定する場合、分割代入構文の後に`=`と既定値を書きます。この既定値は、引数全体が無い、または、`undefined`の場合に採用されます。
+Để chỉ định giá trị mặc định cho toàn bộ destructuring assignment parameter, bạn viết `=` và giá trị mặc định sau cú pháp destructuring assignment. Giá trị mặc định này được sử dụng khi toàn bộ tham số không có hoặc là `undefined`.
 
 ```js twoslash
 function foo({ a, b } = { a: 0, b: 0 }) {
@@ -162,15 +162,15 @@ bar([1]);
 // @log: 1 undefined
 ```
 
-TypeScriptでは、引数全体の既定値は型注釈の後に書きます。
+Trong TypeScript, giá trị mặc định cho toàn bộ tham số được viết sau type annotation.
 
 ```ts twoslash
-//                ................型注釈の位置
+//                ................Vị trí type annotation
 function foo({ a }: { a?: number } = { a: 0 }) {}
-//                                 ^^^^^^^^^^既定値の位置
+//                                 ^^^^^^^^^^Vị trí giá trị mặc định
 ```
 
-各プロパティの既定値と引数全体の既定値の両方を指定することもできます。この場合、引数全体を省略すると、各プロパティの既定値が使われます。
+Bạn cũng có thể chỉ định cả giá trị mặc định cho từng property và giá trị mặc định cho toàn bộ tham số. Trong trường hợp này, khi bỏ qua toàn bộ tham số, giá trị mặc định của từng property sẽ được sử dụng.
 
 ```ts twoslash
 type Obj = { a?: number; b?: number };
@@ -187,21 +187,21 @@ foo({ a: 1, b: 2 });
 // @log: 3
 ```
 
-## 呼び出し時のプロパティ名の省略
+## Bỏ qua tên property khi gọi
 
-JavaScriptでは、分割代入引数の引数名と同じ変数が定義済みであれば、オブジェクトリテラルのプロパティ名を省略し、変数だけ渡すことができます。
+Trong JavaScript, nếu biến có cùng tên với destructuring assignment parameter đã được định nghĩa, bạn có thể bỏ qua tên property trong object literal và chỉ truyền biến.
 
 ```ts twoslash
 function bmi({ height, weight }: { height: number; weight: number }) {}
 
-// プロパティ名と同じ変数
+// Biến có cùng tên với property
 const height = 170;
 const weight = 65;
 
-// プロパティ名を省略しない呼び出し
+// Gọi không bỏ qua tên property
 bmi({ height: height, weight: weight });
 
-// プロパティ名を省略した呼び出し
+// Gọi bỏ qua tên property
 bmi({ weight, height });
 ```
 
@@ -209,19 +209,19 @@ bmi({ weight, height });
 
 <PostILearned>
 
-・分割代入引数は関数でobjectや配列を部分的に使うときに便利
-・objectは中カッコで引数を書く
+・Destructuring assignment parameter tiện lợi khi sử dụng một phần của object hoặc array trong function
+・Đối với object, viết tham số trong ngoặc nhọn
 → function foo({ a, b })
-・配列はカギカッコで引数を書く
+・Đối với array, viết tham số trong ngoặc vuông
 → function foo([a, b])
-・型注釈は分割代入の後に書く
-・既定値も指定可
+・Type annotation được viết sau destructuring assignment
+・Cũng có thể chỉ định giá trị mặc định
 → function foo({ a = 0})
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
-[オブジェクトの分割代入](../values-types-variables/object/destructuring-assignment-from-objects.md)
+[Destructuring assignment từ object](../values-types-variables/object/destructuring-assignment-from-objects.md)
 
-[配列の分割代入](../values-types-variables/array/destructuring-assignment-from-array.md)
+[Destructuring assignment từ array](../values-types-variables/array/destructuring-assignment-from-array.md)

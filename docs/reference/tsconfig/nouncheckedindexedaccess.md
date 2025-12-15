@@ -1,17 +1,17 @@
 ---
-description: インデックス型のプロパティや配列要素を参照したときundefinedのチェックを必須にする
+description: Bắt buộc check undefined khi tham chiếu property của index type hoặc phần tử array
 ---
 
 # noUncheckedIndexedAccess
 
-`noUncheckedIndexedAccess`はインデックス型のプロパティや配列要素を参照したときundefinedのチェックを必須にするコンパイラオプションです。
+`noUncheckedIndexedAccess` là compiler option bắt buộc check undefined khi tham chiếu property của index type hoặc phần tử array.
 
-- デフォルト: `false`
-- 追加されたバージョン: 4.1
+- Mặc định: `false`
+- Phiên bản thêm vào: 4.1
 
-## 解説
+## Giải thích
 
-インデックス型や配列で宣言されたオブジェクトが持つプロパティへのアクセスを厳密に評価します。
+Evaluate nghiêm ngặt khi truy cập property của object được khai báo bằng index type hoặc array.
 
 [インデックス型 (index signature)](../values-types-variables/object/index-signature.md)
 
@@ -47,7 +47,7 @@ const phoneticCodes: ArrayObjectLike = {
 };
 ```
 
-`ObjectLiteralLike, ArrayObjectLike`は共に`string`型のプロパティを持つオブジェクトの型として宣言されています。
+`ObjectLiteralLike, ArrayObjectLike` đều được khai báo là type của object có property kiểu `string`.
 
 ```ts twoslash
 type ObjectLiteralLike = {
@@ -87,7 +87,7 @@ console.log(spanish);
 console.log(third);
 ```
 
-これらのオブジェクトのプロパティにアクセスするときは完全な型安全ではありません。このオプションを有効にすると次のようなエラーが発生します。
+Khi truy cập property của các object này không đảm bảo type safe hoàn toàn. Khi bật option này sẽ báo lỗi như sau:
 
 ```ts twoslash
 // @noUncheckedIndexedAccess: true
@@ -126,7 +126,7 @@ const spanish: string = butterfly.es;
 const third: string = phoneticCodes[2];
 ```
 
-このように厳密に定義されていないプロパティは`undefined`型とのユニオン型として解釈されるようになります。
+Như vậy, property không được định nghĩa rõ ràng sẽ được phân tích là union type với `undefined`:
 
 ```ts twoslash
 // @noUncheckedIndexedAccess: true
@@ -165,7 +165,7 @@ const spanish: string | undefined = butterfly.es;
 const third: string | undefined = phoneticCodes[2];
 ```
 
-配列はインデックス記法でアクセスをすると`undefined`型とのユニオン型と解釈されますが`for-of, array.forEach()`はこの制約を受けないため積極的に使用を検討してください。
+Array khi truy cập bằng index notation sẽ được phân tích là union type với `undefined`, nhưng `for-of, array.forEach()` không bị ràng buộc này nên nên cân nhắc sử dụng tích cực:
 
 ```ts twoslash
 const phoneticCodes: string[] = ["alpha", "bravo", "charlie"];

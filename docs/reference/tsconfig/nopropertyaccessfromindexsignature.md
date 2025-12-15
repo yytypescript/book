@@ -1,19 +1,19 @@
 ---
-description: インデックス型のプロパティ参照に[]を必須にする
+description: Bắt buộc dùng [] khi tham chiếu property của index type
 ---
 
 # noPropertyAccessFromIndexSignature
 
-`noPropertyAccessFromIndexSignature`はインデックス型のプロパティ参照に`[]`を必須にするコンパイラオプションです。
+`noPropertyAccessFromIndexSignature` là compiler option bắt buộc dùng `[]` khi tham chiếu property của index type.
 
-- デフォルト: `false`
-- 追加されたバージョン: 4.2
+- Mặc định: `false`
+- Phiên bản thêm vào: 4.2
 
-## 解説
+## Giải thích
 
-`noUncheckedIndexedAccess`と同様にインデックス型を持つオブジェクトに対する型評価です。インデックス型に対するアクセスをインデックス記法に強制します。
+Giống như `noUncheckedIndexedAccess`, đây là type evaluation đối với object có index type. Bắt buộc phải dùng index notation khi truy cập vào index type.
 
-ドット記法とインデックス記法についてですが、次のようにあるオブジェクトがあるとしてドット(`.`)でプロパティアクセスをしているものがドット記法、ブラケット(`[]`)でアクセスをしているものがインデックス記法です。
+Về dot notation và index notation, xét object như sau thì truy cập property bằng dấu chấm (`.`) là dot notation, truy cập bằng bracket (`[]`) là index notation:
 
 ```ts twoslash
 type SystemTerms = {
@@ -34,7 +34,7 @@ butterfly.en;
 butterfly["en"];
 ```
 
-`SystemTerms`は`noUncheckedIndexedAccess`にて登場した型と同じものでシステムにおける単語、用語のうち英語は担保し他言語の存在は曖昧なものにしています。
+`SystemTerms` là type giống với type xuất hiện trong `noUncheckedIndexedAccess`, đảm bảo tiếng Anh trong các từ/thuật ngữ của system nhưng sự tồn tại của ngôn ngữ khác là không chắc chắn:
 
 ```ts twoslash
 type SystemTerms = {
@@ -53,7 +53,7 @@ console.log(butterfly.fr);
 // @log: "Papillon"
 ```
 
-存在が不確かなプロパティへのアクセスについて、ドット記法でアクセスするときに、このオプションを有効にすると次のようなエラーが発生します。
+Khi truy cập property có sự tồn tại không chắc chắn bằng dot notation, nếu bật option này sẽ báo lỗi như sau:
 
 ```ts twoslash
 // @noPropertyAccessFromIndexSignature: true
@@ -73,4 +73,4 @@ const butterfly: SystemTerms = {
 console.log(butterfly.fr);
 ```
 
-このようにインデックス型へのドット記法でのアクセスが禁止されます。
+Như vậy, truy cập vào index type bằng dot notation bị cấm.

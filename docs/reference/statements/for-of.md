@@ -1,6 +1,6 @@
-# for-of文 - 拡張for文
+# Vòng lặp for-of - Enhanced for loop
 
-JavaScriptで配列をループするのに使えるのがfor-of構文です。PHPの`foreach`やPythonの`for in`と使い勝手が似ている構文です。
+Trong JavaScript, cú pháp for-of có thể được sử dụng để lặp qua mảng. Đây là cú pháp có cách sử dụng tương tự như `foreach` trong PHP hoặc `for in` trong Python.
 
 ```js
 for (変数 of 配列) {
@@ -8,9 +8,9 @@ for (変数 of 配列) {
 }
 ```
 
-このとき変数側に対して型を書くことができないことに注意してください。
+Lưu ý rằng bạn không thể viết kiểu cho biến.
 
-次の例は、配列`[1, 2, 3]`をループして順番に`1`、`2`、`3`を出力するものです。
+Ví dụ sau lặp qua mảng `[1, 2, 3]` và xuất ra `1`, `2`, `3` theo thứ tự.
 
 ```js twoslash
 const numbers = [1, 2, 3];
@@ -19,9 +19,9 @@ for (const n of numbers) {
 }
 ```
 
-## for-ofでインデックスを取得する
+## Lấy index trong for-of
 
-JavaScriptで、for-ofで配列のインデックスと値を一緒に得るには、`entries`メソッドを組み合わせます。
+Trong JavaScript, để lấy cả index và giá trị của mảng trong for-of, kết hợp với method `entries`.
 
 ```js twoslash
 const words = ["I", "love", "TypeScript"];
@@ -35,7 +35,7 @@ for (const [index, word] of words.entries()) {
 // @log: 2 TypeScript
 ```
 
-## 関連情報
+## Thông tin liên quan
 
 [配列をループする方法](../values-types-variables/array/how-to-loop-an-array.md)
 

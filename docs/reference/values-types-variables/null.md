@@ -1,32 +1,32 @@
 # null型
 
-JavaScriptのnullは値がないことを示す値です。
+null trong JavaScript là giá trị biểu thị không có giá trị.
 
-## nullリテラル
+## null literal
 
-JavaScriptのnullリテラルは`null`です。
+null literal trong JavaScript là `null`.
 
 ```ts twoslash
 const x = null;
 ```
 
-## nullの型注釈
+## Type annotation của null
 
-TypeScriptでnull型を型注釈するには`null`を用います。
+Để type annotation cho null trong TypeScript, sử dụng `null`.
 
 ```ts twoslash
 const x: null = null;
 ```
 
-## typeof演算子の注意点
+## Lưu ý về toán tử typeof
 
-JavaScriptには値の型を調べるtypeof演算子があります。`null`に対して`typeof`を用いると`"object"`が返るので注意が必要です。
+JavaScript có toán tử typeof để kiểm tra type của giá trị. Cần lưu ý khi dùng `typeof` với `null` sẽ trả về `"object"`.
 
 ```ts twoslash
 console.log(typeof null);
 // @log: "object"
 ```
 
-typeof演算子の詳細は「typeof演算子」のセクションをご覧ください。
+Chi tiết về toán tử typeof xem tại phần "typeof演算子".
 
 [typeof演算子 (typeof operator)](typeof-operator.md)

@@ -1,25 +1,25 @@
 ---
-title: 非同期処理
+title: Xử lý bất đồng bộ
 slug: /reference/asynchronous
 ---
 
-もしJavaScriptで本格的に何かを作りたいのであれば、非同期処理とは切っても切れない関係になるでしょう。初めのうちは理解に苦しむことが多いですが今では非同期処理を直観的に操作できる機能が実装されたのでハードルは大きく下がりました。
+Nếu bạn muốn xây dựng một ứng dụng JavaScript nghiêm túc, bạn sẽ không thể tách rời khỏi xử lý bất đồng bộ. Ban đầu có thể khó hiểu, nhưng giờ đây JavaScript đã có các tính năng giúp thao tác với xử lý bất đồng bộ một cách trực quan hơn nhiều, làm giảm đáng kể rào cản.
 
-## JavaScriptにおける非同期処理
+## Xử lý bất đồng bộ trong JavaScript
 
-JavaScriptはシングルプロセス、シングルスレッドで動作する言語です。この特徴については別のページにもありますが、これはすべてのプログラムは直列に処理されるということを意味します。
+JavaScript là ngôn ngữ hoạt động với single-process và single-thread. Đặc điểm này được đề cập ở trang khác, nhưng có nghĩa là tất cả các chương trình được xử lý tuần tự.
 
-[シングルプロセス・シングルスレッドとコールバック](../single-process-and-callback.md)
+[Single-process, Single-thread và Callback](../single-process-and-callback.md)
 
-これだけ聞けばすべてのJavaScriptのプログラムは上から下に同期的に処理されるようにも聞こえます。
-ですがこの特徴には弱点があります。直列に処理されるため時間のかかる処理があるとその間は他の処理が実行されません。たとえばAPIリクエストの場合処理の大部分は待ち時間ですが、この待ち時間も直列に処理されるとその間は何もできないことになってしまいます。これをブロッキングといいます。
-この問題を回避するためにJavaScriptではノンブロッキングを扱います。ノンブロッキングでは処理を受けたあと即座に処理を返し、あとで別の方法で結果を伝えます。この方法をコールバックと呼ぶこともあります。コールバックの言葉は折り返しの電話を意味します。
+Nghe như vậy có vẻ như tất cả các chương trình JavaScript đều được xử lý đồng bộ từ trên xuống dưới.
+Tuy nhiên, đặc điểm này có điểm yếu. Vì được xử lý tuần tự, nếu có một xử lý tốn nhiều thời gian thì các xử lý khác sẽ không được thực thi trong thời gian đó. Ví dụ, với API request, phần lớn thời gian là thời gian chờ, nhưng nếu thời gian chờ này cũng được xử lý tuần tự thì sẽ không thể làm gì khác trong khoảng thời gian đó. Đây được gọi là blocking.
+Để tránh vấn đề này, JavaScript sử dụng non-blocking. Với non-blocking, sau khi nhận xử lý, nó sẽ trả về ngay lập tức và thông báo kết quả sau bằng một phương thức khác. Phương thức này còn được gọi là callback. Callback có nghĩa là cuộc gọi điện thoại gọi lại.
 
-## Promiseの誕生
+## Sự ra đời của Promise
 
-JavaScriptにおける非同期処理にはコードの見通しが悪くなる(コールバック地獄)という弊害があります。ES2015から追加されたPromiseはその打開策ともいえ、JavaScriptのコードをコールバック地獄から解き放ちました。
-そしてそのPromiseをさらに使いやすくするためにasync/awaitがES2017で追加されました。
+Xử lý bất đồng bộ trong JavaScript có vấn đề là code trở nên khó đọc (callback hell). Promise được thêm vào từ ES2015 có thể coi là giải pháp cho vấn đề này, giải thoát code JavaScript khỏi callback hell.
+Và để Promise trở nên dễ sử dụng hơn nữa, async/await đã được thêm vào trong ES2017.
 
-## 本章で取り上げる内容について
+## Nội dung được đề cập trong chương này
 
-本章ではこれらPromise/async/awaitの使いかたや特徴をそれぞれのページに分けて取り上げていきます。
+Trong chương này, chúng ta sẽ đề cập đến cách sử dụng và đặc điểm của Promise/async/await trong từng trang riêng biệt.

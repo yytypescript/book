@@ -1,12 +1,12 @@
 ---
-sidebar_label: セッターとゲッター
+sidebar_label: Getter và Setter
 ---
 
-# セッターとゲッター (set, get)
+# Getter và Setter (set, get)
 
-プロパティへのインターセプター(参照・代入・監視などの意味)としGetter/Setterがあります。
+Getter và Setter là interceptor cho property (có ý nghĩa như truy cập, gán giá trị, theo dõi).
 
-記述方法のサンプルは次のようになります。
+Cách khai báo như sau:
 
 ```ts twoslash
 class Human {
@@ -16,26 +16,26 @@ class Human {
     this._name = name;
   }
 
-  // Getter宣言
+  // Khai báo Getter
   get name(): string {
     return this._name;
   }
 
-  // Setter宣言
+  // Khai báo Setter
   set name(name: string) {
     this._name = name;
   }
 }
 
 const human = new Human("");
-// Setterを利用
+// Sử dụng Setter
 human.name = `田中太郎`;
-// Getterを利用
+// Sử dụng Getter
 console.log(human.name);
 // @log: 田中太郎
 ```
 
-メソッドと違い、getter/setterを呼ぶ場合は`()`は不要です。
+Khác với method, khi gọi getter/setter không cần dùng `()`.
 
 ```ts twoslash
 class Human {
@@ -58,37 +58,37 @@ const human = new Human("田中太郎");
 // ---cut---
 // @errors: 2349 6234
 // Getter
-console.log(human.name); // 正しいGetterの使用方法
+console.log(human.name); // Cách sử dụng Getter đúng
 // @log: "田中太郎"
-console.log(human.name()); // エラー :human.name is not a function
+console.log(human.name()); // Lỗi: human.name is not a function
 
 // Setter
-human.name = "田中太郎"; // 正しいSetterの使用方法
+human.name = "田中太郎"; // Cách sử dụng Setter đúng
 human.name("田中太郎");
 ```
 
 ## Getter
 
-Getterの記述方法を日本語で表すと次のようになります。
+Cú pháp của Getter:
 
 ```ts
-get 名前(): 型 {
-  必要ならば処理();
-  return 戻り値;
+get tên(): kiểu_dữ_liệu {
+  // Xử lý nếu cần
+  return giá_trị;
 }
 ```
 
-Getterに引数を指定することはできません。また戻り値を必ず指定する必要があります。
+Getter không thể có tham số. Phải chỉ định giá trị trả về.
 
 ## Setter
 
-Setterの記述方法を日本語で表すと次のようになります。
+Cú pháp của Setter:
 
 ```ts
-set 名前(変数 : 型) {
-  必要ならば処理();
-  保存処理();
+set tên(biến: kiểu_dữ_liệu) {
+  // Xử lý nếu cần
+  // Xử lý lưu giá trị
 }
 ```
 
-引数が必ずひとつ必要です。また戻り値を指定することはできません。
+Setter bắt buộc phải có đúng một tham số. Không thể chỉ định giá trị trả về.

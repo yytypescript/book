@@ -1,14 +1,14 @@
 ---
-sidebar_label: オブジェクトで受け、オブジェクトを返す
+sidebar_label: Nhận object, trả về object
 ---
 
-# オブジェクトで受け、オブジェクトを返す (RORO)
+# Nhận object, trả về object (RORO)
 
-関数やメソッドでオブジェクトひとつを引数として受け、戻り値もオブジェクトひとつとする RORO という考え方があります。RORO は **Receive an Object, Return an Object** の略です。この考えは JavaScript ならびに TypeScript では大きな恩恵をもたらします。
+Có một cách nghĩ gọi là RORO, trong đó function hoặc method nhận một object làm tham số và giá trị trả về cũng là một object. RORO là viết tắt của **Receive an Object, Return an Object**. Cách nghĩ này mang lại lợi ích lớn trong JavaScript và TypeScript.
 
-## いままでの関数
+## Function truyền thống
 
-JavaScript に限らず、駆け出しの頃の関数はこのような姿形をしています。
+Không chỉ JavaScript, function thời mới bắt đầu thường có dạng như sau.
 
 ```ts twoslash
 // @noErrors
@@ -31,23 +31,23 @@ function findUser(
 }
 ```
 
-好きなパラメータで検索できるようにか、引数自体を省略可能にして検索できるようにしています。とはいえ次の問題が立ちはだかります。
+Để có thể tìm kiếm theo parameter tùy thích, các tham số được làm thành optional để có thể tìm kiếm. Tuy nhiên các vấn đề sau xuất hiện.
 
-### 引数が追加されたとき
+### Khi tham số được thêm vào
 
-居住地と国籍は違う！とパラメータとして国籍(`nationality`)が追加されたとします。このとき国籍はどこに追加されるでしょうか?`isVip`の次が安全ですが人によってはその位置を嫌うかもしれません。
+Giả sử nơi cư trú và quốc tịch khác nhau! và parameter quốc tịch(`nationality`) được thêm vào. Khi đó quốc tịch sẽ được thêm ở đâu? Sau `isVip` là an toàn nhưng có người có thể không thích vị trí đó.
 
-また、今回は`findUser()`という関数に限定しての話にしていますが、同じような引数をとる`~~~User()`のメソッドがあれば何箇所も同時に修正が必要になるでしょう。これは面倒です。
+Ngoài ra, lần này chỉ nói về function `findUser()`, nhưng nếu có method `~~~User()` nhận các tham số tương tự thì cần sửa đồng thời nhiều chỗ. Điều này rất phiền phức.
 
-### 省略可能でない引数がある他の関数の場合
+### Trường hợp function khác có tham số không thể bỏ qua
 
-引数のうち、省略可能であるものは右側 (後ろ) に詰めて書かなければいけません。今回は検索ですべての引数を省略可能にしていますが、ものによっては国 (`country`) のみは必須入力とする関数を作るとなれば、それだけは関数の第 1 引数にせざるを得ません。このような問題が生じれば引数が追加されたときと同じように引数の並びで混乱を生むでしょう。
+Trong các tham số, những cái có thể bỏ qua phải được viết về bên phải (phía sau). Lần này vì là tìm kiếm nên tất cả tham số đều có thể bỏ qua, nhưng tùy trường hợp nếu tạo function yêu cầu quốc gia (`country`) là bắt buộc, thì chỉ nó phải là tham số thứ 1 của function. Nếu vấn đề như vậy xảy ra, sẽ gây nhầm lẫn về thứ tự tham số giống như khi tham số được thêm vào.
 
-このような問題を解決するものとしてオブジェクトに必要な情報をひとつに詰めて引数に送るROROという考えがあります。
+Để giải quyết vấn đề như vậy, có cách nghĩ RORO là đóng gói thông tin cần thiết vào một object và gửi làm tham số.
 
 ## RORO (Receive an Object, Return an Object)
 
-上記ユーザーであればデータクラスのような (ただのデータだけ入った可視性 public のクラス) を作れば問題は回避できます。 TypeScript でその型を`UserInfo`とすれば`UserInfo`は次になります。
+Với user trên, nếu tạo data class (class chỉ có data với visibility public) thì có thể tránh được vấn đề. Nếu gọi type đó là `UserInfo` trong TypeScript thì `UserInfo` như sau.
 
 ```ts twoslash
 type UserInfo = {
@@ -58,9 +58,9 @@ type UserInfo = {
 };
 ```
 
-今回は律儀に`Optional`の`?`をつけましたが`Partial<T>`でも代用可です。
+Lần này có thêm `?` của `Optional` cẩn thận, nhưng cũng có thể thay thế bằng `Partial<T>`.
 
-このようにしてこの型のオブジェクトを引数の型としてひとつ受けるようにします。
+Như vậy nhận một object của type này làm type tham số.
 
 ```ts twoslash
 // @noErrors
@@ -88,9 +88,9 @@ function findUser(info: UserInfo): User {
 }
 ```
 
-これでは JavaScript ならびに TypeScript で使える便利な Tip というよりは、ただの Tip です。ではこれはなぜ JavaScript, TypeScript で重用されるのかというと、分割代入が関係しています。
+Như vậy thì không phải là Tip tiện lợi có thể sử dụng trong JavaScript và TypeScript, mà chỉ là Tip bình thường. Tại sao nó được coi trọng trong JavaScript, TypeScript là vì liên quan đến destructuring assignment.
 
-分割代入を使うと関数はオブジェクトのキーを引数に指定するだけでその値にアクセスできます。たとえば`findUserByName()`と名前 (`name`) しか必要のない関数で`UserInfo`をすべて受けるのではなく分割代入を使うとこのようになります。
+Khi sử dụng destructuring assignment, function có thể truy cập giá trị chỉ bằng cách chỉ định key của object làm tham số. Ví dụ với `findUserByName()` là function chỉ cần tên (`name`), thay vì nhận toàn bộ `UserInfo`, sử dụng destructuring assignment như sau.
 
 ```ts twoslash
 // @noErrors
@@ -114,13 +114,13 @@ function findUserByName({ name }: UserInfo): User {
 }
 ```
 
-分割代入について再度知識が必要な方は次のページをご参照ください。
+Nếu cần ôn lại kiến thức về destructuring assignment, hãy xem trang sau.
 
-[オブジェクトの分割代入 (destructuring assignment)](../reference/values-types-variables/object/destructuring-assignment-from-objects.md)
+[Destructuring assignment của object](../reference/values-types-variables/object/destructuring-assignment-from-objects.md)
 
-[分割代入引数 (destructuring assignment parameter)](../reference/functions/destructuring-assignment-parameters.md)
+[Destructuring assignment parameter](../reference/functions/destructuring-assignment-parameters.md)
 
-分割代入はこの関数を使う側としても引数の順番を気にする必要がなくなるとともに、ありがたいことに今後の機能拡張によって`UserInfo`が成長したとしても毎回引数を追加する必要はなく`UserInfo`を書き換え使用したい関数でそのキーにアクセスをするだけですみます。上記例のように国籍 (`nationality`) が増えれば好きなところに加えるだけです。順番は呼び出しに影響を与えません。
+Destructuring assignment giúp người dùng function không cần quan tâm đến thứ tự tham số, và điều đáng mừng là dù `UserInfo` phát triển do mở rộng chức năng trong tương lai, cũng không cần thêm tham số mỗi lần mà chỉ cần viết lại `UserInfo` và truy cập key đó trong function muốn sử dụng. Như ví dụ trên, nếu thêm quốc tịch (`nationality`) thì chỉ cần thêm ở vị trí tùy thích. Thứ tự không ảnh hưởng đến việc gọi.
 
 ```ts twoslash
 type UserInfo = {
@@ -132,7 +132,7 @@ type UserInfo = {
 };
 ```
 
-これだけで`nationality`を (`byName`で国籍を使っている問題は置いておくとして) 簡単に呼び出せます。
+Chỉ cần vậy là có thể gọi `nationality` dễ dàng (tạm bỏ qua vấn đề `byName` sử dụng quốc tịch).
 
 ```ts twoslash
 // @noErrors
@@ -157,7 +157,7 @@ function findUserByName({ name, nationality }: UserInfo): User {
 }
 ```
 
-関数の説明でもあったとおりですが、分割代入にも初期値を使うことができます。たとえば`findUser()`では通常引退済みのユーザーを検索しないのであれば`UserInfo`と関数は次のように書き換えるだけです。
+Như đã nói trong phần giải thích về function, destructuring assignment cũng có thể sử dụng giá trị mặc định. Ví dụ nếu `findUser()` thông thường không tìm kiếm user đã nghỉ hưu, chỉ cần viết lại `UserInfo` và function như sau.
 
 ```ts twoslash
 type UserInfo = {

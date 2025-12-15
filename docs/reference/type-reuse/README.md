@@ -2,13 +2,13 @@
 slug: /reference/type-reuse
 ---
 
-# 型の再利用
+# Tái sử dụng kiểu
 
-TypeScriptでは型から別の型を導き出す機能があります。既存の型を再度利用して、新たな型を生み出すことを本書では「型の再利用」と呼ぶことにします。
+TypeScript có khả năng tạo ra kiểu mới từ kiểu đã có. Trong tài liệu này, chúng ta gọi việc sử dụng lại kiểu hiện có để tạo ra kiểu mới là "tái sử dụng kiểu".
 
-## 型の再利用のメタファー
+## Khái niệm tái sử dụng kiểu
 
-多くのプログラミング言語では、変数を処理して別の変数を導き出せます。たとえば、あるオブジェクトのキーの配列が欲しいとき、キーの配列を別途宣言してもよいです。しかし、オブジェクトからキーを導きだしたほうが変更に強いコードになります。
+Trong nhiều ngôn ngữ lập trình, bạn có thể xử lý biến để tạo ra biến khác. Ví dụ, khi cần mảng các key của một object, bạn có thể khai báo riêng mảng key đó. Tuy nhiên, việc trích xuất key từ object sẽ tạo ra code dễ bảo trì hơn khi có thay đổi.
 
 ```ts twoslash
 const obj = { a: 1, b: 2, c: 3 };
@@ -16,7 +16,7 @@ const keys1 = ["a", "b", "c"];
 const keys2 = Object.keys(obj); // keys1より保守性が高い
 ```
 
-上は変数の再利用の例です。TypeScriptには変数の再利用の型バージョンがあります。それが型の再利用です。たとえば、あるオブジェクトの型からキーの型を導き出すことができます。
+Đây là ví dụ về tái sử dụng biến. TypeScript cung cấp phiên bản kiểu của việc tái sử dụng biến này, đó chính là tái sử dụng kiểu. Ví dụ, bạn có thể trích xuất kiểu của các key từ kiểu của một object.
 
 ```ts twoslash
 type Obj = { a: string; b: string; c: string };
@@ -24,4 +24,4 @@ type Keys = keyof Obj;
 //=> "a" | "b" | "c"
 ```
 
-型の再利用とは、変数の再利用のメタファーなのです。
+Tái sử dụng kiểu chính là phép ẩn dụ của việc tái sử dụng biến.

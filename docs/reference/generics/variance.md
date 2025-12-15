@@ -1,39 +1,39 @@
 ---
-sidebar_label: 変性
+sidebar_label: Variance
 ---
 
-# 変性 (variance)
+# Variance (variance)
 
-TypeScriptでは、型の互換性を判定する際に変性(variance)という概念が使われます。変性とは型同士の関係性を示すもので、TypeScriptにおいてはこの変性を示すためにはジェネリクスの型変数の前に`in`あるいは`out`を付与します。
+Trong TypeScript, khi xác định tính tương thích của các kiểu, khái niệm variance được sử dụng. Variance biểu thị mối quan hệ giữa các kiểu, và trong TypeScript, để biểu thị variance này, ta thêm `in` hoặc `out` trước type variable của generics.
 
-なお、ここで語られる変性はtsconfig.jsonの`strictFunctionTypes`の設定でも変更することができます。
-今回は特筆しない限り`strictFunctionTypes`は`false`として説明します。
+Lưu ý, variance được đề cập ở đây cũng có thể thay đổi bằng cấu hình `strictFunctionTypes` trong tsconfig.json.
+Trong phần này, trừ khi có đề cập đặc biệt, ta giả định `strictFunctionTypes` là `false`.
 
 [strictFunctionTypes](../tsconfig/strictfunctiontypes.md)
 
-## 共変性 (Covariance)
+## Covariance (Covariance)
 
-共変性はジェネリクスの型変数に`out`を付与した場合の変位です。共変性とはサブタイプの関係が保たれることを意味します。
+Covariance là variance khi thêm `out` vào type variable của generics. Covariance có nghĩa là mối quan hệ subtype được bảo toàn.
 
-## 反変性 (Contravariance)
+## Contravariance (Contravariance)
 
-反変性はジェネリクスの型変数に`in`を付与した場合の変位です。反変性とはサブタイプの関係が逆転することを意味します。
+Contravariance là variance khi thêm `in` vào type variable của generics. Contravariance có nghĩa là mối quan hệ subtype bị đảo ngược.
 
-## 不変性 (Invariance)
+## Invariance (Invariance)
 
-不変性はジェネリクスの型変数に`in`と`out`を付与した場合の変位です。不変性とは型が共変性でも反変性でもないことを意味します。
+Invariance là variance khi thêm cả `in` và `out` vào type variable của generics. Invariance có nghĩa là kiểu không covariant cũng không contravariant.
 
-## 双変性 (Bivariance)
+## Bivariance (Bivariance)
 
-双変性はジェネリクスの型変数に`in`と`out`を付与しない場合の変位です。
+Bivariance là variance khi không thêm `in` hoặc `out` vào type variable của generics.
 
-ここで例としてひとつの引数`I`を受け取り戻り値`O`を返す関数の型として`BivariantFunction<I, O>`(変位をつけていないのでTypeScriptとしては双変と同じ)を定義します。
+Ở đây, ta định nghĩa `BivariantFunction<I, O>` (không thêm variance nên trong TypeScript giống như bivariant) là kiểu của hàm nhận một tham số `I` và trả về giá trị `O`.
 
 ```ts twoslash
 type BivariantFunction<I, O> = (arg: I) => O;
 ```
 
-ここで引数`I`を共変にした`CovariantFunction<in I, O>`と戻り値`O`を反変にした`ContravariantFunction<I, out O>`、引数も戻り値も不変にした`InvariantFunction<in out I, in out O>`を定義します。するとそれらは次のように定義されます。
+Tiếp theo, định nghĩa `CovariantFunction<in I, O>` với tham số `I` là covariant, `ContravariantFunction<I, out O>` với giá trị trả về `O` là contravariant, và `InvariantFunction<in out I, in out O>` với cả tham số và giá trị trả về đều invariant. Chúng được định nghĩa như sau:
 
 ```ts twoslash
 type BivariantFunction<I, O> = (arg: I) => O;
@@ -42,9 +42,9 @@ type ContravariantFunction<in I, O> = BivariantFunction<I, O>;
 type InvariantFunction<in out I, in out O> = BivariantFunction<I, O>;
 ```
 
-## クラスの継承関係を使った例
+## Ví dụ sử dụng quan hệ kế thừa class
 
-継承関係がわかりやすくなるようにクラス`A`, `B`, `C`を定義します。`A`は`B`を継承し、`B`は`C`を継承しており、メソッドを追加しました。
+Để dễ hiểu quan hệ kế thừa, định nghĩa các class `A`, `B`, `C`. `A` kế thừa `B`, `B` kế thừa `C`, và đã thêm các method.
 
 ```ts twoslash
 class A {
@@ -66,7 +66,7 @@ class C extends B {
 }
 ```
 
-各変性の関数の`I`と`O`の両方を`B`にした関数を定義します。
+Định nghĩa các hàm với cả `I` và `O` đều là `B` cho mỗi loại variance.
 
 ```ts twoslash
 type BivariantFunction<I, O> = (arg: I) => O;
@@ -85,7 +85,7 @@ declare const contraFunc: ContravariantFunction<B, B>;
 declare const inFunc: InvariantFunction<B, B>;
 ```
 
-これらの関数のジェネリクスを変更してみます。
+Thử thay đổi generics của các hàm này.
 
 ```ts twoslash
 // @strictFunctionTypes: false
@@ -136,23 +136,23 @@ const f11: InvariantFunction<B, A> = inFunc;
 const f12: InvariantFunction<B, C> = inFunc;
 ```
 
-これらの中でエラーになるものをまとめると
+Tóm tắt những trường hợp xảy ra lỗi:
 
-1. `f04`は引数、戻り値ともに双変でスーパータイプとサブタイプの関係が許容されますが、戻り値の`C`に対し`B`はメソッド`c()`を持っていないためエラーになります
-2. `f06`は戻り値が共変でスーパータイプの割り当てが許容されますが、戻り値`C`は`B`のサブタイプなのでエラーになります
-3. `f07`は引数が反変でサブタイプの割り当てが許容されますが、引数`A`は`B`のスーパータイプなのでエラーになります
-4. `f09`は引数、戻り値ともに不変でスーパータイプとサブタイプの関係が許容されないためエラーになります
-5. `f10`は引数、戻り値ともに不変でスーパータイプとサブタイプの関係が許容されないためエラーになります
-6. `f11`は引数、戻り値ともに不変でスーパータイプとサブタイプの関係が許容されないためエラーになります
-7. `f12`は引数、戻り値ともに不変でスーパータイプとサブタイプの関係が許容されないためエラーになります
+1. `f04`: Tham số và giá trị trả về đều bivariant nên mối quan hệ supertype và subtype được chấp nhận, nhưng `B` không có method `c()` so với giá trị trả về `C` nên xảy ra lỗi
+2. `f06`: Giá trị trả về là covariant nên việc gán supertype được chấp nhận, nhưng giá trị trả về `C` là subtype của `B` nên xảy ra lỗi
+3. `f07`: Tham số là contravariant nên việc gán subtype được chấp nhận, nhưng tham số `A` là supertype của `B` nên xảy ra lỗi
+4. `f09`: Tham số và giá trị trả về đều invariant nên mối quan hệ supertype và subtype không được chấp nhận, do đó xảy ra lỗi
+5. `f10`: Tham số và giá trị trả về đều invariant nên mối quan hệ supertype và subtype không được chấp nhận, do đó xảy ra lỗi
+6. `f11`: Tham số và giá trị trả về đều invariant nên mối quan hệ supertype và subtype không được chấp nhận, do đó xảy ra lỗi
+7. `f12`: Tham số và giá trị trả về đều invariant nên mối quan hệ supertype và subtype không được chấp nhận, do đó xảy ra lỗi
 
-また、`strictFunctionTypes`を`true`にすると上記のエラーに加えて
+Ngoài ra, khi đặt `strictFunctionTypes` là `true`, ngoài các lỗi trên còn có:
 
-1. `f01`は引数、戻り値ともに双変でスーパータイプとサブタイプの関係が許容されますが、引数の`A`はメソッド`b()`を持っていないためエラーになります
+1. `f01`: Tham số và giá trị trả về đều bivariant nên mối quan hệ supertype và subtype được chấp nhận, nhưng tham số `A` không có method `b()` nên xảy ra lỗi
 
-## ユニオン型を使った例
+## Ví dụ sử dụng union type
 
-ユニオン型を使って継承関係を表してみます。
+Hãy biểu diễn quan hệ kế thừa bằng union type.
 
 ```ts twoslash
 type A = null;
@@ -160,7 +160,7 @@ type B = null | undefined;
 type C = null | undefined | string;
 ```
 
-このとき`A`は`B`の部分型であり、`B`は`C`の部分型です。言い換えると`A extends B`、`B extends C`です。
+Lúc này `A` là subtype của `B`, và `B` là subtype của `C`. Nói cách khác, `A extends B` và `B extends C`.
 
 ```ts twoslash
 // @strictFunctionTypes: false
@@ -197,27 +197,27 @@ const f11: InvariantFunction<B, A> = inFunc;
 const f12: InvariantFunction<B, C> = inFunc;
 ```
 
-1. `f03`は引数、戻り値ともに双変でスーパータイプとサブタイプの関係が許容されますが、戻り値の`A`に対し`B`の`undefined`は`null`に割り当てることができないためエラーになります
-1. `f05`は戻り値が共変でスーパータイプの割り当てが許容されますが、戻り値`A`に対し`B`の`undefined`は`null`に割り当てることができないためエラーになります
-1. `f08`は引数が反変でサブタイプの割り当てが許容されますが、引数`C`の`string`は`B`に割り当てることができないためエラーになります
-1. `f09`は引数、戻り値ともに不変でスーパータイプとサブタイプの関係が許容されないためエラーになります
-1. `f10`は引数、戻り値ともに不変でスーパータイプとサブタイプの関係が許容されないためエラーになります
-1. `f11`は引数、戻り値ともに不変でスーパータイプとサブタイプの関係が許容されないためエラーになります
-1. `f12`は引数、戻り値ともに不変でスーパータイプとサブタイプの関係が許容されないためエラーになります
+1. `f03`: Tham số và giá trị trả về đều bivariant nên mối quan hệ supertype và subtype được chấp nhận, nhưng `undefined` của `B` không thể gán cho `null` của giá trị trả về `A` nên xảy ra lỗi
+1. `f05`: Giá trị trả về là covariant nên việc gán supertype được chấp nhận, nhưng `undefined` của `B` không thể gán cho giá trị trả về `A` là `null` nên xảy ra lỗi
+1. `f08`: Tham số là contravariant nên việc gán subtype được chấp nhận, nhưng `string` của tham số `C` không thể gán cho `B` nên xảy ra lỗi
+1. `f09`: Tham số và giá trị trả về đều invariant nên mối quan hệ supertype và subtype không được chấp nhận, do đó xảy ra lỗi
+1. `f10`: Tham số và giá trị trả về đều invariant nên mối quan hệ supertype và subtype không được chấp nhận, do đó xảy ra lỗi
+1. `f11`: Tham số và giá trị trả về đều invariant nên mối quan hệ supertype và subtype không được chấp nhận, do đó xảy ra lỗi
+1. `f12`: Tham số và giá trị trả về đều invariant nên mối quan hệ supertype và subtype không được chấp nhận, do đó xảy ra lỗi
 
-`strictFunctionTypes`を`true`にすると上記のエラーに加えて
+Khi đặt `strictFunctionTypes` là `true`, ngoài các lỗi trên còn có:
 
-1. `f02`は引数、戻り値ともに双変でスーパータイプとサブタイプの関係が許容されますが、引数`C`の`string`は`B`に割り当てることができないためエラーになります
+1. `f02`: Tham số và giá trị trả về đều bivariant nên mối quan hệ supertype và subtype được chấp nhận, nhưng `string` của tham số `C` không thể gán cho `B` nên xảy ra lỗi
 
-## 継承関係を見る
+## Kiểm tra quan hệ kế thừa
 
-継承関係を見るために[Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)を使ってみましょう。ある型`T`が`U`のサブタイプかどうかを判定する型`IsSubType<T, U>`を定義します。
+Hãy sử dụng [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html) để kiểm tra quan hệ kế thừa. Định nghĩa kiểu `IsSubType<T, U>` để xác định xem kiểu `T` có phải là subtype của `U` hay không.
 
 ```ts twoslash
 type IsSubType<T, U> = T extends U ? true : false;
 ```
 
-先ほどのクラス`A`, `B`, `C`に`IsSubType<T, U>`を適用してみます。
+Áp dụng `IsSubType<T, U>` cho các class `A`, `B`, `C` trước đó.
 
 ```ts twoslash
 type IsSubType<T, U> = T extends U ? true : false;
@@ -263,9 +263,9 @@ declare const t9: IsSubType<C, A>;
 //            ^?
 ```
 
-自分自身のクラスあるいはサブクラスに限り`true`が返されることがわかります。
+Có thể thấy chỉ trả về `true` khi là chính class đó hoặc subclass.
 
-ユニオン型も見てみましょう。なお、こちらはユニオン型であるためDistributive Conditional Typeを使用します。
+Hãy xem union type. Lưu ý, vì đây là union type nên sử dụng Distributive Conditional Type.
 
 [Distributive Conditional Types](../type-reuse/conditional-types/distributive-conditional-types.md)
 
@@ -303,4 +303,4 @@ declare const t9: IsSubType<C, A>;
 //            ^?
 ```
 
-`A`は`B`の部分型であり、`B`は`C`の部分型であるため`t4`、`t5`、`t6`が`true`になることがわかります。
+Có thể thấy `t4`, `t5`, `t6` trả về `true` vì `A` là subtype của `B`, và `B` là subtype của `C`.

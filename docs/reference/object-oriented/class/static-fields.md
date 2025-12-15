@@ -1,10 +1,10 @@
 ---
-sidebar_label: 静的フィールド
+sidebar_label: Static field
 ---
 
-# 静的フィールド (static field)
+# Static field (static field)
 
-JavaやPHPには静的フィールド(static field)という概念があります。通常のフィールドはインスタンスのプロパティですが、静的フィールドはクラスのプロパティです。JavaやPHPではstaticキーワードで静的フィールドを宣言できます。
+Trong Java và PHP có khái niệm static field. Field thông thường là property của instance, nhưng static field là property của class. Trong Java và PHP có thể khai báo static field bằng từ khóa static.
 
 ```java title="Java"
 class SomeClass {
@@ -27,7 +27,7 @@ class SomeClass
 var_dump(SomeClass::$field); //=> int(123)
 ```
 
-JavaScriptやTypeScriptでもstaticキーワードを使った静的フィールドの宣言ができます。
+JavaScript và TypeScript cũng có thể khai báo static field bằng từ khóa static.
 
 ```ts title="TypeScript" twoslash
 class SomeClass {
@@ -37,9 +37,9 @@ console.log(SomeClass.field);
 // @log: 123
 ```
 
-## 静的フィールドの型推論
+## Type inference cho static field
 
-TypeScriptの静的フィールドは初期値がセットされている場合、その初期値からフィールドの型が型推論されます。そのため、フィールドの型注釈が省略できます。
+Static field của TypeScript được suy luận kiểu từ giá trị khởi tạo nếu có giá trị khởi tạo. Do đó có thể bỏ qua type annotation cho field.
 
 ```ts twoslash
 class SomeClass {
@@ -47,9 +47,9 @@ class SomeClass {
 }
 ```
 
-## 静的フィールドとアクセス修飾子
+## Static field và access modifier
 
-TypeScriptの静的フィールドはアクセス修飾子を組み合わせられます。
+Static field của TypeScript có thể kết hợp với access modifier.
 
 ```ts twoslash
 class SomeClass {
@@ -57,11 +57,11 @@ class SomeClass {
 }
 ```
 
-[アクセス修飾子 (access modifier)](access-modifiers.md)
+[Access modifier (access modifier)](access-modifiers.md)
 
-## 読み取り専用の静的フィールド
+## Static field chỉ đọc
 
-TypeScriptの静的フィールドはreadonly修飾子をつけると読み取り専用になります。
+Static field của TypeScript trở thành chỉ đọc khi thêm readonly modifier.
 
 ```ts twoslash
 class SomeClass {
@@ -69,4 +69,4 @@ class SomeClass {
 }
 ```
 
-[クラスのreadonly修飾子](readonly-modifier-in-classes.md)
+[Readonly modifier của class](readonly-modifier-in-classes.md)

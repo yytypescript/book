@@ -1,40 +1,38 @@
-# ジェネリクスが使われている標準ライブラリ
+# Thư viện chuẩn sử dụng generics
 
-ジェネリクスは標準ライブラリの中でも多くの箇所で利用されています。ジェネリクスを利用する代表的なものとしては、
+Generics được sử dụng ở nhiều nơi trong thư viện chuẩn. Các đối tượng tiêu biểu sử dụng generics bao gồm:
 
-- Arrayオブジェクト
-- Promiseオブジェクト
-- Mapオブジェクト
+- Array object
+- Promise object
+- Map object
 
-などがあります。
+Hãy xem generics được sử dụng như thế nào trong các đối tượng này.
 
-これらのオブジェクトでジェネリクスがどう使われているのかを見てきましょう。
+## Tại sao generics được sử dụng
 
-## なぜジェネリクスが使われているか
+`Array` object cần lưu trữ các phần tử có nhiều kiểu khác nhau như `string` hay `number` tùy theo tình huống. Lúc này, kiểu của phần tử mảng sẽ thay đổi tùy thuộc vào chương trình bạn implement. Nói cách khác, cần phải trừu tượng hóa kiểu phần tử để programmer có thể chỉ định kiểu khi implement.
 
-`Array`オブジェクトは`string`や`number`など状況に応じて色々な型の要素を保持する必要があります。このとき、配列の要素の型はどんなプログラムを実装するかで変わってきます。つまり、要素の型を抽象化してプログラマーが実装時に型を指定できる必要があります。
-
-この型を抽象化する方法としてジェネリクスが利用されています。
+Generics được sử dụng như một phương pháp để trừu tượng hóa kiểu này.
 
 ```ts twoslash
 const numbers: Array<number> = [1, 2, 3, 4];
 ```
 
-`Array`は特別に別の記法で型表記をすることもできます。これらについては配列のページに詳細がありますので併せて参照ください。
+`Array` có thể được biểu diễn kiểu bằng cú pháp khác. Chi tiết về những cách này có trong trang về array, vui lòng tham khảo thêm.
 
 ```ts twoslash
 const numbers: number[] = [1, 2, 3, 4];
 ```
 
-[配列の型注釈 (type annotation)](../values-types-variables/array/type-annotation-of-array.md)
+[Type annotation của array](../values-types-variables/array/type-annotation-of-array.md)
 
-## 標準ライブラリを使ってみる
+## Sử dụng thư viện chuẩn
 
-実際にジェネリクスが使われる標準ライブラリを利用した実装をみてみましょう。
+Hãy xem implementation thực tế sử dụng thư viện chuẩn với generics.
 
 ### `Array.prototype.map<T>()`
 
-`Array`オブジェクトの`map<T>()`メソッドは引数で渡された関数をすべての配列の要素に適用することで新しい配列を返す関数です。サンプルコードでは、新しく生成される数値配列の要素の型を指定する`map<number>`でジェネリクスが使われています。
+Method `map<T>()` của `Array` object trả về một mảng mới bằng cách áp dụng hàm được truyền vào làm tham số cho tất cả các phần tử của mảng. Trong đoạn code mẫu, generics được sử dụng trong `map<number>` để chỉ định kiểu phần tử của mảng số mới được tạo ra.
 
 ```ts twoslash
 const textNumbers = ["1", "2", "3", "4"];
@@ -45,7 +43,7 @@ const numbers = textNumbers.map<number>(function (text: string) {
 
 ### `Map<K, V>`
 
-`Map<K, V>`オブジェクトでは、`K`にキーの型を指定し`V`にキーに紐づく値の型を指定します。先ほどの`map<T>()`メソッドは、ジェネリクスの型定義がひとつだけでしたが、`Map<K, V>`は型定義がふたつあります。このようにジェネリクスの型定義はひとつである必要はなく、複数の型定義を持つことも可能です。
+Trong `Map<K, V>` object, `K` chỉ định kiểu của key và `V` chỉ định kiểu của value liên kết với key. Method `map<T>()` trước đó chỉ có một type definition cho generics, nhưng `Map<K, V>` có hai type definition. Như vậy, type definition của generics không nhất thiết phải là một, mà có thể có nhiều type definition.
 
 ```ts twoslash
 type Address = {
@@ -66,13 +64,13 @@ console.log(addresses.get("太郎"));
 
 ### `Promise<T>`
 
-`Promise`オブジェクトについての説明は本書より詳細な記載がありますので、そちらをご参照ください。
+Về `Promise` object, có mô tả chi tiết hơn trong cuốn sách này, vui lòng tham khảo.
 
 [Promise](../asynchronous/promise.md)
 
-### 標準ライブラリの型定義の参照方法
+### Cách tham khảo type definition của thư viện chuẩn
 
-標準ライブラリの型定義ファイルはTypeScriptの公式リポジトリのsrc/libディレクトリで確認することができます。
+Type definition file của thư viện chuẩn có thể xem trong thư mục src/lib của repository chính thức TypeScript.
 <https://github.com/microsoft/TypeScript/tree/main/src/lib>
 
-`Array.prototype.map()`の型は [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/main/src/lib/es5.d.ts#L1246) のファイルで確認できます。
+Type của `Array.prototype.map()` có thể xem trong file [lib/lib.es5.d.ts](https://github.com/microsoft/TypeScript/blob/main/src/lib/es5.d.ts#L1246).

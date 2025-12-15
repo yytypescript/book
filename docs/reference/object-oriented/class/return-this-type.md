@@ -1,10 +1,10 @@
-# メソッド戻り値のthis型とメソッドチェーン
+# Kiểu this cho giá trị trả về của method và method chaining
 
-## fluent interface
+## Fluent interface
 
-fluent interfaceとは「流れるようなインターフェース」という意味で、method chaining(メソッドの連鎖)という小技を使って、可読性の高いコードを実現するメソッドの作り方のことです。よくドメイン固有言語(DSL)を提供するようなクラスを作るときに使われます。
+Fluent interface có nghĩa là "giao diện trôi chảy", là cách thiết kế method sử dụng kỹ thuật method chaining (chuỗi method) để tạo code có khả năng đọc cao. Thường được dùng khi tạo class cung cấp domain-specific language (DSL).
 
-四則演算ができる変哲もないクラス`Operator`を考えます
+Xét class `Operator` đơn giản có thể thực hiện các phép tính bốn phép toán:
 
 ```ts twoslash
 class Operator {
@@ -39,7 +39,7 @@ op.multiply(6); // 12
 op.divide(3); // 4
 ```
 
-演算ごとにステートメントを分ける必要があります。このような場合メソッドチェーンを使って処理を連続させることができます。
+Cần phải tách statement cho mỗi phép tính. Trong trường hợp này có thể sử dụng method chaining để liên tục các xử lý.
 
 ```ts twoslash
 class Operator {
@@ -74,9 +74,9 @@ const op: Operator = new Operator(0);
 op.sum(5).subtract(3).multiply(6).divide(3); // 4
 ```
 
-`op.sum(), op.subtract(), op.multiply(). op.divide()`の戻り値の型を`Operator`に変更しました。これによりメソッドチェーンが可能になりました。
+Thay đổi kiểu giá trị trả về của `op.sum(), op.subtract(), op.multiply(), op.divide()` thành `Operator`. Nhờ đó method chaining trở nên khả thi.
 
-ここで、このクラス`Operator`を拡張して累乗の計算を追加したいとします。すると新しいクラス`NewOperator`は次のようになるでしょう。
+Giờ muốn mở rộng class `Operator` để thêm phép tính lũy thừa. Class mới `NewOperator` sẽ như sau:
 
 ```ts twoslash
 class Operator {
@@ -100,7 +100,7 @@ class NewOperator extends Operator {
 }
 ```
 
-ですが、このクラスでは次の演算ができません。
+Tuy nhiên, class này không thể thực hiện phép tính sau:
 
 ```ts twoslash
 class Operator {
@@ -147,9 +147,9 @@ const op: NewOperator = new NewOperator(2);
 op.power(3).multiply(2).power(3);
 ```
 
-これは`op.multiply()`の戻り値が`Operator`だからです。`Operator`には`power()`というメソッドがないためこのような問題が発生します。
+Lý do là giá trị trả về của `op.multiply()` là `Operator`. Vì `Operator` không có method `power()` nên xảy ra vấn đề này.
 
-このようなとき、戻り値に`this`を設定することができます。上記クラスの戻り値の`Operator, NewOperator`をすべて`this`に置き換えると問題が解消されます。
+Trong trường hợp như vậy, có thể đặt `this` cho giá trị trả về. Thay thế tất cả `Operator, NewOperator` trong giá trị trả về của class trên bằng `this` thì vấn đề được giải quyết.
 
 ```ts twoslash
 class Operator {

@@ -1,10 +1,10 @@
 ---
-sidebar_label: コンストラクタ
+sidebar_label: Constructor
 ---
 
-# コンストラクタ (constructor)
+# Constructor (constructor)
 
-コンストラクタはクラスをnewしたときに実行される関数です。コンストラクタは、インスタンスプロパティの初期化する処理を実装する場所です。JavaScriptのコンストラクタは、constructor構文で書きます。
+Constructor là function được thực thi khi new class. Constructor là nơi implement xử lý khởi tạo instance property. Constructor trong JavaScript được viết bằng cú pháp constructor.
 
 ```ts
 class Person {
@@ -14,9 +14,9 @@ class Person {
 }
 ```
 
-## コンストラクタの型注釈
+## Type annotation cho constructor
 
-TypeScriptでコンストラクタ引数の型注釈は、関数の型注釈のやり方と同じです。
+Trong TypeScript, type annotation cho tham số constructor giống như cách type annotation cho function.
 
 ```ts twoslash
 class Person {
@@ -26,11 +26,11 @@ class Person {
 }
 ```
 
-コンストラクタの戻り値は型注釈できません。コンストラクタの戻り値は、当然クラスのインスタンスなので、型注釈でコンパイラーに教える必要性がないのです。
+Không thể type annotation cho giá trị trả về của constructor. Giá trị trả về của constructor đương nhiên là instance của class, nên không cần phải báo cho compiler biết qua type annotation.
 
-## コンストラクタに引数を渡す
+## Truyền tham số cho constructor
 
-JavaScriptでコンストラクタに引数を渡す方法は、関数呼び出しの書き方とほぼ同じです。違いはnew演算子をつけることです。
+Cách truyền tham số cho constructor trong JavaScript gần giống với cách gọi function. Điểm khác là có thêm toán tử new.
 
 ```ts twoslash
 class Person {
@@ -42,9 +42,9 @@ class Person {
 new Person("Alice");
 ```
 
-## コンストラクタを非同期化する
+## Async hóa constructor
 
-TypeScriptでは、コンストラクタを非同期化することはできません。次のような書きかたをすることはできません。
+Trong TypeScript, không thể async hóa constructor. Không thể viết như sau:
 
 <!--prettier-ignore-->
 ```ts
@@ -55,12 +55,12 @@ class Person {
 }
 ```
 
-どうしても非同期化したい場合は、クラスのインスタンスを返すファクトリーメソッドを用意して、そのメソッドの中で非同期処理を実行するようにします。
+Nếu nhất định muốn async hóa, hãy chuẩn bị factory method trả về instance của class và thực thi xử lý async trong method đó.
 
 ```ts
 class Person {
   static async create(name: string): Promise<Person> {
-    // 非同期処理
+    // Xử lý async
     return new Person(name);
   }
 
@@ -70,6 +70,6 @@ class Person {
 }
 ```
 
-## 関連情報
+## Thông tin liên quan
 
 [constructor shorthand](constructor-shorthand.md)

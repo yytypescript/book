@@ -3,24 +3,24 @@ sidebar_label: string型
 title: string型 (文字列型)
 ---
 
-## 文字列リテラル
+## String literal
 
 <!-- textlint-disable prh -->
 
-Javaなどの言語では、ダブルクォートで文字列リテラル(String型)を表現し、シングルクォートで文字リテラル(char型)を表現するといったように、使うクォートで型が変わります。
+Trong các ngôn ngữ như Java, dấu ngoặc kép biểu thị string literal (String型), dấu ngoặc đơn biểu thị char literal (char型), nghĩa là type thay đổi theo loại dấu ngoặc dùng.
 
 <!-- textlint-enable prh -->
 
-一方JavaScriptでは、ダブルクォートでもシングルクォートでもまったく同じstring型になります。この点はPHPと同様です。またバッククォート(`` ` ``)を使ってもstring型になります。
+Trong khi đó JavaScript, dù dùng dấu ngoặc kép hay đơn đều là string type giống nhau. Điểm này giống PHP. Ngoài ra dùng backtick (`` ` ``) cũng là string type.
 
 <!--prettier-ignore-->
 ```ts twoslash
-"Hello"; 
-'Hello'; 
+"Hello";
+'Hello';
 `Hello`;
 ```
 
-文字列中に同じ引用符が含まれている場合は、バックスラッシュ`\`でエスケープしなければなりません。
+Nếu chuỗi chứa cùng dấu ngoặc, phải escape bằng backslash `\`.
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -28,13 +28,13 @@ Javaなどの言語では、ダブルクォートで文字列リテラル(String
 "He said \"madam, I'm Adam.\""
 ```
 
-ダブルクォートとシングルクォートを使った文字列リテラルは、文字列の途中で改行できません。改行を入れたい場合は、`\n`などの改行シーケンスを入れる必要があります。
+String literal dùng dấu ngoặc kép và đơn không thể xuống dòng giữa chuỗi. Muốn xuống dòng cần dùng escape sequence như `\n`.
 
-### テンプレートリテラル
+### Template literal
 
-JavaScriptで、バッククォート`` ` ``で囲んだ文字列はテンプレートリテラル（template literal）と言います。テンプレートリテラルは、改行と式の挿入(expression interpolation)ができます。
+Trong JavaScript, chuỗi được bao bởi backtick `` ` `` gọi là template literal. Template literal cho phép xuống dòng và chèn expression (expression interpolation).
 
-改行の挿入はテンプレートリテラルの中で実際に改行をすれば、そのとおりに反映されます。
+Để xuống dòng, chỉ cần xuống dòng thực tế trong template literal, sẽ được phản ánh đúng như vậy.
 
 ```ts twoslash
 console.log(`実際に改行を
@@ -42,7 +42,7 @@ console.log(`実際に改行を
 // @log: 実際に改行を<br />してみる
 ```
 
-式の挿入は`${式}`のように書きます。
+Để chèn expression, viết theo cú pháp `${expression}`.
 
 ```ts twoslash
 const count = 10;
@@ -50,51 +50,51 @@ console.log(`現在、${count}名が見ています。`);
 // @log: 現在、10名が見ています。
 ```
 
-式の部分は変数だけでなく、計算式や関数を使った式も書けます。
+Phần expression không chỉ là biến, còn có thể viết biểu thức tính toán hoặc hàm.
 
 <!--prettier-ignore-->
 ```ts twoslash
 `税込み${Math.floor(100 * 1.1)}円`
 ```
 
-### 文字列リテラルは`'`、`"`、`` ` ``のどれを使うべきか？
+### Nên dùng `'`, `"`, hay `` ` `` cho string literal?
 
-前述のとおりJavaScriptでは文字列を表すときに3種類のクォートがありますが、どれを使えばいいのでしょうか。ここではJavaScriptのコードフォーマッターであるPrettierに倣い使い分けを紹介します。
-なおこれは正解でもなければデファクトスタンダードというわけでもないので開発チームの基準があるならばそちらに従うことが望ましいです。
+Như đã nói, JavaScript có 3 loại dấu ngoặc để biểu thị chuỗi, vậy nên dùng loại nào? Ở đây giới thiệu cách phân biệt theo Prettier - code formatter của JavaScript.
+Lưu ý đây không phải câu trả lời đúng hay de facto standard, nếu team có quy chuẩn riêng thì nên tuân theo quy chuẩn đó.
 
-1. 基本的に`"`を使用する
-1. 文字列の中に`"`が含まれる場合は`'`を使用する
-1. 文字列展開する必要があるときは`` ` ``を使用する
+1. Cơ bản dùng `"`
+1. Nếu chuỗi chứa `"` thì dùng `'`
+1. Khi cần string interpolation thì dùng `` ` ``
 
-#### 基本的に`"`を使用する
+#### Cơ bản dùng `"`
 
-ただの文字列で内部で変数展開をしていないのであれば`"`を使用します。
+Với chuỗi thông thường không có string interpolation bên trong thì dùng `"`.
 
-#### 文字列の中に`"`が含まれる場合は`'`を使用する
+#### Nếu chuỗi chứa `"` thì dùng `'`
 
-文字列の中に`"`が含まれる場合はエスケープするのではなく`'`を使用します。
+Nếu chuỗi chứa `"` thì dùng `'` thay vì escape.
 
-#### 文字列展開する必要があるときは`` ` ``を使用する
+#### Khi cần string interpolation thì dùng `` ` ``
 
-式を計算する必要があるときはテンプレートリテラル`` ` ``を使用します。
+Khi cần tính toán expression thì dùng template literal `` ` ``.
 
-## 文字列の型注釈
+## Type annotation của string
 
-TypeScriptのstring型の型注釈は`string`を用います。
+Type annotation của string trong TypeScript dùng `string`.
 
 ```ts twoslash
 const message: string = "Hello";
 ```
 
-名前がよく似た型に`String`型がありますが、`string`とは異なるので注意してください。
+Có type `String` tên khá giống, nhưng cần lưu ý đây khác với `string`.
 
-## 文字列結合
+## Nối chuỗi
 
-JavaScriptの文字列結合は文字列結合演算子(`+`)を用います。number型の加算でも同じ演算子が使われます。
+Nối chuỗi trong JavaScript dùng toán tử nối chuỗi (`+`). Toán tử tương tự cũng được dùng cho phép cộng number型.
 
 <!--prettier-ignore-->
 ```ts twoslash
 "hello" + "world"
 ```
 
-PHPでは文字列結合演算子(`.`)と、数値の加算演算子(`+`)の2つに分かれていますが、JavaScriptでは文字列結合と加算は同じプラス記号で表現するので、PHPからJavaScriptに来た人は注意してください。
+Trong PHP, toán tử nối chuỗi (`.`) và toán tử cộng số (`+`) là 2 toán tử khác nhau, nhưng JavaScript dùng cùng dấu cộng cho cả nối chuỗi và phép cộng, nên những người từ PHP chuyển sang JavaScript cần chú ý.

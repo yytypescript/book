@@ -1,25 +1,25 @@
 ---
-description: クラスプロパティの初期化を必須にする
+description: Bắt buộc khởi tạo class property
 tags: [strict]
 ---
 
 # strictPropertyInitialization
 
-`strictPropertyInitialization`はクラスプロパティの初期化を必須にするコンパイラオプションです。
+`strictPropertyInitialization` là compiler option bắt buộc khởi tạo class property.
 
-- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
-- 追加されたバージョン: 2.7
-- TypeScript公式が有効化推奨
+- Mặc định: `true` nếu [strict](./strict.md) được bật, ngược lại là `false`
+- Phiên bản thêm vào: 2.7
+- TypeScript khuyến nghị nên bật
 
 :::caution
 
-このオプションを効かすには[`strictNullChecks`](./strictnullchecks.md)も`true`する必要があります。
+Để option này có hiệu lực, cần set [`strictNullChecks`](./strictnullchecks.md) thành `true`.
 
 :::
 
-## 解説
+## Giải thích
 
-`strictPropertyInitialization`を`true`にすると、値が初期化されていないクラスプロパティについて警告を出します。
+Đặt `strictPropertyInitialization` thành `true` để cảnh báo các class property chưa được khởi tạo giá trị.
 
 ```ts twoslash
 // @errors: 2564
@@ -28,13 +28,13 @@ class Foo {
 }
 ```
 
-初期化は、次のいずれかで行う必要があります。
+Khởi tạo phải được thực hiện bằng một trong các cách sau:
 
-1. コンストラクタで初期化
-1. 初期化子で初期化
-1. undefinedとのユニオン型で型注釈する
+1. Khởi tạo trong constructor
+1. Khởi tạo bằng initializer
+1. Type annotate bằng union type với undefined
 
-次は、コンストラクタで初期化する例です。
+Dưới đây là ví dụ khởi tạo trong constructor:
 
 ```ts twoslash
 class Foo {
@@ -46,16 +46,16 @@ class Foo {
 }
 ```
 
-次は、[初期化子](../object-oriented/class/field-initializers.md)で初期化する例です。
+Dưới đây là ví dụ khởi tạo bằng [initializer](../object-oriented/class/field-initializers.md):
 
 ```ts twoslash
 class Foo {
   prop: number = 1;
-  //           ^^^初期化子
+  //           ^^^initializer
 }
 ```
 
-プロパティの型が`undefined`との[ユニオン型](../values-types-variables/union.md)の場合、初期化しなくても警告が出ません。
+Khi type của property là [union type](../values-types-variables/union.md) với `undefined`, không cảnh báo ngay cả khi không khởi tạo:
 
 ```ts twoslash
 class Foo {
@@ -63,7 +63,7 @@ class Foo {
 }
 ```
 
-プロパティがオプションの場合も警告が出ません。
+Khi property là optional cũng không cảnh báo:
 
 ```ts twoslash
 class Foo {
@@ -73,15 +73,15 @@ class Foo {
 
 <PostILearned>
 
-TypeScriptのstrictPropertyInitializationはプロパティの初期化を必須にするコンパイラオプション。
+strictPropertyInitialization của TypeScript là compiler option bắt buộc khởi tạo property.
 
-⚠️strictNullChecksもtrueする必要あり
-✅コンストラクタで初期化OR初期化子が必須になる
-🙆🏻‍♂️undefinedとのユニオン型で型注釈するのはOK
+⚠️strictNullChecks cũng cần set thành true
+✅Bắt buộc khởi tạo trong constructor HOẶC initializer
+🙆🏻‍♂️Type annotate bằng union type với undefined là OK
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
 [strict](./strict.md)
 

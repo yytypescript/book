@@ -1,67 +1,67 @@
 ---
-sidebar_label: ESLintでコーディング規約を自動化しよう
+sidebar_label: Tự động hóa coding convention với ESLint
 ---
 
-# ESLintでTypeScriptのコーディング規約チェックを自動化しよう
+# Tự động hóa kiểm tra coding convention TypeScript với ESLint
 
-本章では、<ruby>ESLint<rt>イーエスリント</rt></ruby>を使って、TypeScriptをチェックするためのノウハウをチュートリアル形式で学びます。
+Trong chương này, bạn sẽ học các kiến thức sử dụng <ruby>ESLint<rt>E-S-Lint</rt></ruby> để kiểm tra TypeScript theo dạng tutorial.
 
-## 本章で学べること
+## Những gì có thể học trong chương này
 
-本章では次のことを学んでいただきます。
+Trong chương này, bạn sẽ học những điều sau.
 
-- コーディング規約の必要性とコーディング規約の問題点
-- ESLintでJavaScriptやTypeScriptをチェックする方法
-- ESLintのルールの設定のしかた
-- Airbnbのコーディング規約をESLintで活用する術
-- エラーを解消する方法
-- チェックを部分的に無効化する方法
-- VS CodeやJetBrains IDEとESLintを統合する方法
+- Tại sao cần coding convention và vấn đề của coding convention
+- Cách check JavaScript và TypeScript bằng ESLint
+- Cách config rule của ESLint
+- Cách sử dụng coding convention của Airbnb trong ESLint
+- Cách giải quyết lỗi
+- Cách vô hiệu hóa check một phần
+- Cách tích hợp ESLint với VS Code và JetBrains IDE
 
-チュートリアルをやり終えると、ご自身のプロジェクトにESLintを導入できるようになったりと、実務で役立つ基本的なスキルが身につくはずです。
+Khi hoàn thành tutorial, bạn sẽ có được kỹ năng cơ bản hữu ích trong thực tế như có thể giới thiệu ESLint vào project của mình.
 
-## 本章の流れと読み進め方
+## Luồng và cách đọc chương này
 
-本章は次の3部構成です。
+Chương này gồm 3 phần.
 
-- [背景知識]
-- [ESLintでJavaScriptをリントしよう]
-- [ESLintでTypeScriptをリントしよう]
+- [Kiến thức nền tảng]
+- [Lint JavaScript bằng ESLint]
+- [Lint TypeScript bằng ESLint]
 
-本章の前半は座学です。「コーディング規約」や「リンター」が何か知らない方向けに、その背景知識を解説します([背景知識])。すでにコーディング規約やリンターが分かっている方、すぐに手を動かしたい方は、ここは読み飛ばしても構いません。
+Nửa đầu chương này là lý thuyết. Giải thích kiến thức nền tảng cho những ai chưa biết "coding convention" hay "linter" là gì ([Kiến thức nền tảng]). Nếu bạn đã hiểu coding convention và linter, hoặc muốn thực hành ngay, có thể bỏ qua phần này.
 
-本章の後半はチュートリアルです。本章のゴールは、TypeScriptをESLintでチェックできるようになることです。しかしながら、ESLintでTypeScriptを扱うのは発展的な用法です。そこで、チュートリアルの流れとしては、まず基礎編として、JavaScriptをESLintで扱う方法を学びます([ESLintでJavaScriptをリントしよう])。その後、TypeScriptをESLintを扱う方法を学んでいただきます([ESLintでTypeScriptをリントしよう])。
+Nửa sau chương này là tutorial. Mục tiêu của chương này là có thể check TypeScript bằng ESLint. Tuy nhiên, việc xử lý TypeScript bằng ESLint là cách sử dụng nâng cao. Do đó, trong tutorial, trước tiên sẽ học cách xử lý JavaScript bằng ESLint như phần cơ bản ([Lint JavaScript bằng ESLint]). Sau đó, bạn sẽ học cách xử lý TypeScript bằng ESLint ([Lint TypeScript bằng ESLint]).
 
-章末にはおまけとして次のチュートリアルも用意してあります。関心と余力がある方はこちらもご覧ください。
+Cuối chương có thêm các tutorial bonus sau. Nếu quan tâm và có thời gian, hãy xem thêm.
 
-- [VS CodeとESLintを統合しよう]
-- [JetBrains IDEとESLintを統合しよう]
+- [Tích hợp VS Code và ESLint]
+- [Tích hợp JetBrains IDE và ESLint]
 
-## このチュートリアルに必要なもの
+## Những thứ cần thiết cho tutorial này
 
-このチュートリアルで必要なものは次のとおりです。
+Những thứ cần thiết cho tutorial này như sau.
 
-- Node.js v22以上
-- NPM v7系以上
-- Yarn v1系 (このチュートリアルはv1.22.18で動作確認しています)
+- Node.js v22 trở lên
+- NPM v7 trở lên
+- Yarn v1 (Tutorial này được xác nhận hoạt động với v1.22.18)
 
-Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
+Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường phát triển](./setup.md).
 
-パッケージ管理ツールとしてYarnを利用します。最初にインストールをしておきましょう。すでにインストール済みの方はここのステップはスキップして大丈夫です。
+Chúng ta sử dụng Yarn làm package management tool. Hãy install trước. Nếu đã install rồi thì có thể bỏ qua bước này.
 
 ```shell
 npm install -g yarn
 ```
 
-## 背景知識
+## Kiến thức nền tảng
 
-[背景知識]: #背景知識
+[Kiến thức nền tảng]: #kiến-thức-nền-tảng
 
-### TypeScriptの書き方はさまざま
+### TypeScript có nhiều cách viết
 
-TypeScriptに限らず、プログラミング言語には文法があります。文法を守って書かれたコードは、エラーなく実行やコンパイルができます。
+Không chỉ TypeScript, ngôn ngữ lập trình đều có cú pháp. Code được viết tuân thủ cú pháp có thể thực thi hoặc compile mà không có lỗi.
 
-プログラムは文法さえ守れば、誰が書いても一字一句同じコードになるかというと、そうではありません。たとえば、TypeScriptでは文末のセミコロンが省略できます。次の2行のコードの違いは、セミコロンの有無です。どちらも文法的に正しく、どちらを使うかは好みの問題です。
+Nếu tuân thủ cú pháp, liệu ai viết code cũng giống nhau từng chữ một? Không phải vậy. Ví dụ, trong TypeScript có thể bỏ qua semicolon cuối dòng. 2 dòng code sau chỉ khác nhau ở việc có hay không có semicolon. Cả hai đều đúng cú pháp, dùng cái nào là vấn đề sở thích.
 
 ```ts twoslash
 // prettier-ignore
@@ -69,7 +69,7 @@ console.log("OK")
 console.log("OK");
 ```
 
-文字列はシングルクォート、ダブルクォート、バッククォートの3通りで書けます。シングルクォートとダブルクォートは機能上の違いがありません。バッククォートは[テンプレートリテラル](/reference/values-types-variables/string#テンプレートリテラル)と言い、文字列リテラルとは仕様が異なります。しかし、次の例のような単純な文字列では、この3つは同じ意味になります。
+Chuỗi có thể viết bằng single quote, double quote, hoặc backtick với 3 cách. Single quote và double quote không có sự khác biệt về chức năng. Backtick là [template literal](/reference/values-types-variables/string#テンプレートリテラル) có spec khác với string literal. Tuy nhiên, với chuỗi đơn giản như ví dụ sau, 3 cách này có cùng ý nghĩa.
 
 ```ts twoslash
 // prettier-ignore
@@ -78,30 +78,30 @@ console.log("OK");
 console.log(`OK`);
 ```
 
-この例は、どれを使うか意見が割れるところです。本書独自の調査では、「原則的にどれをもっとも多く使うか？」という問いに対し、シングルクォートが55%ともっとも多く、次にダブルクォートが29%、バッククォートは16%という回答が得られました。(回答数232件)
+Ví dụ này có thể gây ra ý kiến khác nhau về việc dùng cái nào. Theo khảo sát độc quyền của sách này, với câu hỏi "Về nguyên tắc, bạn dùng cái nào nhiều nhất?", single quote chiếm 55% nhiều nhất, tiếp theo là double quote 29%, backtick 16%. (Số câu trả lời: 232)
 
 <figure><img src="/img/tutorial/eslint/string-quotes-chart.svg" width="320" /></figure>
 
-上でとりあげた例はほんの一例です。意味が同じで書き方が異なる例は、数多くあります。
+Những ví dụ nêu trên chỉ là một phần. Có rất nhiều ví dụ khác về cùng ý nghĩa nhưng cách viết khác nhau.
 
-### 書き方の違いが問題になることも
+### Sự khác biệt trong cách viết có thể trở thành vấn đề
 
-書き方の違いが問題なることがあります。たとえば、プログラムを共同で開発する場合です。人によって書き方が異なると、その違いが気になったり驚いたりして、コードの本筋が頭に入ってこないことがあります。インデントの幅が統一されていないと、コードが読みにくくなることもあります。結果的に、**書き方に違いがあるとプログラムの保守性を損ねる**一因になります。
+Sự khác biệt trong cách viết có thể trở thành vấn đề. Ví dụ, trong trường hợp phát triển chung chương trình. Nếu mỗi người có cách viết khác nhau, sự khác biệt đó có thể gây chú ý hoặc ngạc nhiên, khiến nội dung chính của code không vào đầu. Nếu độ rộng indent không thống nhất, code có thể khó đọc. Kết quả là, **sự khác biệt trong cách viết có thể làm giảm khả năng bảo trì chương trình**.
 
-### コーディング規約で書き方を統一
+### Thống nhất cách viết bằng coding convention
 
-理想は、誰が書いても同じコードになることです。そのためにはどうしたらよいでしょうか。解決策のひとつは、書き方のルールを決めることです。コードの**書き方の取り決めは「コーディング規約(coding standards)」**と呼ばれます。
+Lý tưởng là ai viết code cũng giống nhau. Để làm điều đó, phải làm gì? Một giải pháp là quy định rule về cách viết. **Quy định về cách viết code được gọi là "coding convention (coding standards)"**.
 
-コーディング規約では、たとえば、次のようなことを決めます。
+Trong coding convention, ví dụ quy định những điều sau.
 
-- 変数名はキャメルケースにしましょう。
-- `function`の中カッコは関数名と同じ行に書きましょう。(次の行に置いてはなりません)
-- `console.log`は消しましょう。
-- if文の条件式で変数代入してはいけません。たとえば`if (data = getData())`はだめ。
+- Tên biến phải là camelCase.
+- Dấu ngoặc nhọn của `function` phải cùng dòng với tên hàm. (Không được đặt ở dòng tiếp theo)
+- Phải xóa `console.log`.
+- Không được gán biến trong biểu thức điều kiện của if. Ví dụ `if (data = getData())` không được.
 
-このようなルールを取りまとめて規約を作るのですが、実用的な規約に仕上げるにはかなりの労力を要します。実務では、公開されている規約を借りてくるほうが現実的です。
+Tổng hợp các rule như vậy để tạo convention, nhưng để hoàn thiện convention thực tế cần tốn nhiều công sức. Trong thực tế, mượn convention đã công khai sẽ thực tế hơn.
 
-公開されている規約には主に次のものがあります。これらは実際に多くのプロジェクトで利用されています。
+Convention đã công khai chủ yếu có những cái sau. Những cái này thực sự được sử dụng rộng rãi trong nhiều project.
 
 - [Google JavaScript Style Guide]
 - [JavaScript Standard Style]
@@ -111,102 +111,102 @@ console.log(`OK`);
 [javascript standard style]: https://standardjs.com/rules.html
 [airbnb javascript style guide]: https://github.com/airbnb/javascript
 
-コーディング規約をチームのみんなで守れば、書き方を統一しやすくなります。
+Nếu mọi người trong team cùng tuân thủ coding convention, việc thống nhất cách viết sẽ dễ dàng hơn.
 
-### コーディング規約の問題点
+### Vấn đề của coding convention
 
-コーディング規約にも問題点があります。
+Coding convention cũng có vấn đề.
 
-#### 運用の手間は少なくない
+#### Công sức vận hành không ít
 
-開発者ひとりひとりが規約を守れば、コーディング規約は機能します。しかし、ヒューマンエラーは起きるものです。規約を知った上で破る場合もありますが、多いのは知らずに破ってしまうことや、間違えてしまうことです。もしも、規約が守られなければ、規約は形式上のものになってしまいます。そうなると、書き方を統一するという目標は達成できなくなってしまいます。
+Nếu mỗi developer tuân thủ convention, coding convention sẽ hoạt động. Tuy nhiên, human error là điều xảy ra. Có trường hợp biết rule nhưng vẫn vi phạm, nhưng nhiều hơn là không biết mà vi phạm, hoặc nhầm lẫn. Nếu convention không được tuân thủ, convention sẽ chỉ còn hình thức. Khi đó, mục tiêu thống nhất cách viết sẽ không đạt được.
 
-ヒューマンエラーを防ぐには、コードが**規約に準拠しているかを日々点検しなければなりません**。しかし、これには多くの労力がかかります。もっと重要な仕事がある中で、点検を行うのは無理な場合もあるかもしれません。規約を正しく運用するには、多くの手間がかかるのです。
+Để ngăn human error, **phải kiểm tra hàng ngày xem code có tuân thủ convention không**. Tuy nhiên, điều này tốn nhiều công sức. Trong khi có công việc quan trọng hơn, việc kiểm tra có thể không khả thi. Vận hành convention đúng cách tốn nhiều công sức.
 
-#### コミュニケーション上の心理的な負担が増す
+#### Tăng gánh nặng tâm lý trong giao tiếp
 
-コーディング規約は、何が正しく、何が間違いかを定めます。すると、明らかに誤りと判断できるコードが出てきます。他者が書いたコードの誤りを指摘する場面も出てきます。**人の仕事の誤りを指摘するのは難しいものです**。想像以上に心理的な負担になります。指摘する側は相手の心象を悪くしないよう、伝え方に苦慮します。指摘される側も、前向きに受け取れない場合もあります。相手との対人関係によっては、指摘することが遠慮される場合もあります。
+Coding convention định nghĩa cái gì đúng, cái gì sai. Khi đó, sẽ có code rõ ràng là sai. Cũng có tình huống phải chỉ ra lỗi trong code của người khác. **Chỉ ra lỗi trong công việc của người khác là điều khó khăn**. Gánh nặng tâm lý hơn tưởng tượng. Người chỉ ra phải cân nhắc cách nói để không làm ảnh hưởng xấu đến ấn tượng của đối phương. Người bị chỉ ra cũng có thể không tiếp nhận một cách tích cực. Tùy thuộc vào mối quan hệ, việc chỉ ra có thể bị kiêng dè.
 
-### コーディング規約の自動化
+### Tự động hóa coding convention
 
-書き方を統一するには、コーディング規約は不可欠です。しかし、運用の手間や心理的な課題もあります。これを解決する手助けとなるのがESLintです。**ESLintは、JavaScriptやTypeScriptのコードがコーディング規約に準拠しているかをチェックするツール**です。
+Để thống nhất cách viết, coding convention là không thể thiếu. Tuy nhiên, cũng có vấn đề về công sức vận hành và tâm lý. Tool hỗ trợ giải quyết điều này là ESLint. **ESLint là tool kiểm tra xem code JavaScript hoặc TypeScript có tuân thủ coding convention không**.
 
-ESLintは、コマンドひとつでチェックが行なえます。チェックは数秒で完了し、すぐに結果がわかります。そのため、点検の手間がほぼなくなります。
+ESLint có thể check chỉ bằng một lệnh. Check hoàn thành trong vài giây và ngay lập tức biết kết quả. Do đó, công sức kiểm tra gần như không còn.
 
-加えて、自動修正機能もあります。コードによっては、ESLintが規約に準じたコードに直せる場合もあります。この機能を利用できる場合は、規約違反箇所を修正する手間もなくせます。
+Thêm vào đó, còn có tính năng tự động sửa. Tùy code, ESLint có thể sửa code tuân thủ convention. Khi sử dụng tính năng này, công sức sửa chỗ vi phạm convention cũng không còn.
 
-不思議なもので、同じ指摘でも人に言われるより、機械に指摘されたほうが気が楽なものです。ESLintでは機械的に問題を指摘してくれるため、コミュニケーション上の心理的負担も軽減できます。
+Điều kỳ lạ là, cùng một chỉ trích nhưng được máy móc chỉ ra thì thoải mái hơn người chỉ ra. ESLint chỉ ra vấn đề một cách máy móc, nên gánh nặng tâm lý trong giao tiếp cũng giảm.
 
-ESLintを導入すると、開発者は規約の運用や心理的ストレスから開放され、**開発などのより重要な仕事に集中できるようになります**。
+Khi giới thiệu ESLint, developer được **giải phóng khỏi vận hành convention và stress tâm lý, có thể tập trung vào công việc quan trọng hơn như phát triển**.
 
 <PostILearned>
 
-📝TypeScriptは同じ意味処理でも異なる書き方が可能
-💥チーム開発では書き方の違いが問題になることも…
-🤝書き方統一のためにコーディング規約を導入しよう
-😵でも、規約には運用の手間や心理的な課題もある
-✅この課題はESLintで解決できる！
+📝TypeScript có thể viết cùng một xử lý với nhiều cách khác nhau
+💥Trong phát triển team, sự khác biệt cách viết có thể trở thành vấn đề…
+🤝Hãy giới thiệu coding convention để thống nhất cách viết
+😵Nhưng convention cũng có vấn đề về công sức vận hành và tâm lý
+✅Vấn đề này có thể giải quyết bằng ESLint!
 
 </PostILearned>
 
-### リンターとは
+### Linter là gì
 
-ESLintは一般的に「リンター(linter)」というジャンルのツールです。リンターは、プログラムを**静的に解析し、バグや問題点を発見するツール**を言います。リンターを使って、問題点を解析することを「リントする(lint)」と言います。
+ESLint nói chung là tool thuộc thể loại "linter". Linter là tool **phân tích tĩnh chương trình, phát hiện bug và vấn đề**. Sử dụng linter để phân tích vấn đề được gọi là "lint".
 
-リント(lint)の由来は紡績です。羊毛や綿花から、繊維をつむぐ際に不要になるホコリのような糸くずをリントと呼びます。紡績ではリントを取り除く工程があり、これにちなんでプログラミングでもリントという名前が使われだしたと言われています。
+Lint có nguồn gốc từ dệt may. Bụi như sợi chỉ không cần thiết khi kéo sợi từ len hoặc bông được gọi là lint. Trong dệt may có công đoạn loại bỏ lint, và từ đó tên lint cũng được sử dụng trong lập trình.
 
-### コンパイラとリンターの違い
+### Sự khác biệt giữa compiler và linter
 
-コンパイラの本質は、ある言語から別の言語に変換することです。TypeScriptコンパイラの場合は、TypeScriptからJavaScriptへの変換です。
+Bản chất của compiler là chuyển đổi từ ngôn ngữ này sang ngôn ngữ khác. Trong trường hợp TypeScript compiler là chuyển đổi từ TypeScript sang JavaScript.
 
-リンターの本質は、プログラムの問題点を指摘することです。言語から言語への変換は行いません。
+Bản chất của linter là chỉ ra vấn đề của chương trình. Không thực hiện chuyển đổi từ ngôn ngữ sang ngôn ngữ.
 
-実際は、TypeScriptコンパイラもプログラムの問題点を報告します。たとえば、コンパイラオプション[`noUnusedLocals`](/reference/tsconfig/nounusedlocals)を有効にすると、未使用の変数をチェックできます。ESLintにもこれと同等のチェックがあります。こうした点はリンターの機能と重複する部分です。
+Thực tế, TypeScript compiler cũng báo cáo vấn đề của chương trình. Ví dụ, nếu bật compiler option [`noUnusedLocals`](/reference/tsconfig/nounusedlocals), có thể check biến không sử dụng. ESLint cũng có check tương đương. Đây là phần trùng lặp với tính năng linter.
 
-類似のチェック機能があるものの、両者は得意分野が異なります。TypeScriptコンパイラは型のチェックが充実しています。型の側面から問題点を発見するのが得意です。一方、ESLintはインデントや命名規則などのコーディングスタイルや、どのようなコードを書くべきか避けるべきかの意思決定、セキュリティやパフォーマンスに関する分野でのチェックが充実しています。どちらも相互補完的な関係です。したがって、コンパイラとリンターの両方を導入すると、より幅広いチェックが行えるようになります。
+Dù có tính năng check tương tự, cả hai có lĩnh vực giỏi khác nhau. TypeScript compiler có check type phong phú. Giỏi phát hiện vấn đề từ góc độ type. Mặt khác, ESLint có check phong phú về coding style như indent hay naming convention, quyết định nên viết code như thế nào hay tránh gì, lĩnh vực liên quan đến security hay performance. Cả hai có quan hệ bổ sung lẫn nhau. Do đó, nếu giới thiệu cả compiler và linter, có thể check rộng hơn.
 
 <figure>
-<figcaption>TypeScriptコンパイラとESLintの得意分野の比較</figcaption>
+<figcaption>So sánh lĩnh vực giỏi của TypeScript compiler và ESLint</figcaption>
 
-|                      | TypeScriptコンパイラ | ESLint |
-| -------------------- | :------------------: | :----: |
-| 言語から言語への変換 |          ○           |        |
-| 型のチェック         |          ○           |        |
-| 構文チェック         |          ○           |   ○    |
-| コーディングスタイル |                      |   ○    |
-| コードの意思決定     |                      |   ○    |
-| セキュリティ         |                      |   ○    |
-| パフォーマンス       |                      |   ○    |
+|                          | TypeScript compiler | ESLint |
+| ------------------------ | :-----------------: | :----: |
+| Chuyển đổi ngôn ngữ      |          ○          |        |
+| Check type               |          ○          |        |
+| Check cú pháp            |          ○          |   ○    |
+| Coding style             |                     |   ○    |
+| Quyết định code          |                     |   ○    |
+| Security                 |                     |   ○    |
+| Performance              |                     |   ○    |
 
 </figure>
 
 <PostILearned>
 
-🧵リンター：コードを静的解析し問題点を指摘するツール。ESLintはリンター。
-🔀コンパイラ：静的解析もするが、別言語への変換が主目的。tscはコンパイラ。
+🧵Linter: Tool phân tích tĩnh code và chỉ ra vấn đề. ESLint là linter.
+🔀Compiler: Cũng phân tích tĩnh nhưng mục đích chính là chuyển đổi sang ngôn ngữ khác. tsc là compiler.
 
-⚖️tscとESLintの相違点
-・tsc：型のチェックが得意
-・ESLint：コーディング規約のチェックが得意
+⚖️Sự khác biệt giữa tsc và ESLint
+・tsc: Giỏi check type
+・ESLint: Giỏi check coding convention
 
 </PostILearned>
 
-## ESLintでJavaScriptをリントしよう
+## Lint JavaScript bằng ESLint
 
-[eslintでjavascriptをリントしよう]: #eslintでjavascriptをリントしよう
+[lint javascript bằng eslint]: #lint-javascript-bằng-eslint
 
-ここからはESLintの導入方法や使い方をチュートリアル形式で説明していきます。ぜひお手元の環境で実際にトライしてみてください。
+Từ đây chúng ta sẽ giải thích cách giới thiệu và sử dụng ESLint theo dạng tutorial. Hãy thực hành trên môi trường của bạn.
 
-### プロジェクトを作成する
+### Tạo project
 
-まず、このチュートリアルに使うプロジェクトを作成します。
+Đầu tiên, tạo project sử dụng cho tutorial này.
 
 ```shell
 mkdir eslint-tutorial
 cd eslint-tutorial
 ```
 
-プロジェクトルートにpackage.jsonを作ってください。その内容は次のようにします。
+Tạo package.json ở project root với nội dung sau.
 
 ```json title="package.json"
 {
@@ -215,36 +215,36 @@ cd eslint-tutorial
 }
 ```
 
-### ESLintを導入する
+### Giới thiệu ESLint
 
-ESLintはYarnでインストールしましょう。ESLintは開発時だけ使うパッケージなので、`yarn add`コマンドには`-D`オプションをつけてインストールします。
+Hãy install ESLint bằng Yarn. ESLint là package chỉ dùng khi phát triển nên install lệnh `yarn add` với option `-D`.
 
 ```shell
 yarn add -D 'eslint@^8'
 ```
 
 :::info
-Next.jsは最初からESLintが導入されています。実務でNext.jsプロジェクトでESLintを使う場合は、導入ステップは省略できます。
+Next.js đã giới thiệu ESLint sẵn. Trong thực tế khi dùng ESLint với project Next.js, có thể bỏ qua bước giới thiệu.
 :::
 
-ESLintが正しくインストールされたか、バージョンを表示して確認してください。
+Hiển thị version để xác nhận ESLint đã được install đúng.
 
 ```shell
 npx eslint -v
 v8.15.0
 ```
 
-ちなみにこの`npx`コマンドは、Nodeモジュール(ライブラリ)の実行ファイルを起動するツールです。`npx eslint`を実行すると、`./node_modules/.bin/eslint`が実行されます。
+Tham khảo, lệnh `npx` này là tool để khởi động file thực thi của Node module (library). Khi thực thi `npx eslint`, `./node_modules/.bin/eslint` sẽ được thực thi.
 
-### ESLintの設定ファイルを作る
+### Tạo file config của ESLint
 
-ESLintの設定ファイル`.eslintrc.js`をプロジェクトルートに作ってください。
+Tạo file config ESLint `.eslintrc.js` ở project root.
 
 ```shell
 touch .eslintrc.js
 ```
 
-```text title="設定ファイル作成後のディレクトリ構造"
+```text title="Cấu trúc thư mục sau khi tạo file config"
 .
 ├── .eslintrc.js
 ├── node_modules
@@ -252,7 +252,7 @@ touch .eslintrc.js
 └── yarn.lock
 ```
 
-設定ファイルの内容は次のようにします。
+Nội dung file config như sau.
 
 ```js twoslash title=".eslintrc.js"
 module.exports = {
@@ -268,59 +268,59 @@ module.exports = {
 };
 ```
 
-この設定内容は次で説明します。
+Nội dung config này được giải thích dưới đây.
 
 #### `root`
 
-`eslint`コマンドを実行したディレクトリを起点に、ディレクトリをさかのぼって設定ファイルを探す仕様がESLintにはあります。たとえば、ディレクトリ`/a/b/`でコマンドを実行した場合、ESLintは次の順で設定ファイルを探します。
+ESLint có spec tìm kiếm file config bằng cách đi ngược thư mục từ thư mục thực thi lệnh `eslint`. Ví dụ, nếu thực thi lệnh trong thư mục `/a/b/`, ESLint tìm file config theo thứ tự sau.
 
 1. `/a/b/.eslintrc.js`
 1. `/a/.eslintrc.js`
 1. `/.eslintrc.js`
 
-この探索はルートディレクトリに達するまでさかのぼります。探索中に複数の設定ファイルが見つかった場合は、設定内容がマージされていきます。この仕様は便利な反面、プロジェクト外の設定ファイルまで見にいってしまう危険性もあります。設定ファイルの探索範囲をしぼるためにも、`root`に`true`を設定するのがお勧めです。これがある設定ファイルが見つかると、これ以上ディレクトリをさかのぼらなくなります。
+Tìm kiếm này đi ngược đến thư mục root. Nếu tìm thấy nhiều file config trong quá trình tìm kiếm, nội dung config sẽ được merge. Spec này tiện lợi nhưng cũng có nguy cơ tìm đến file config ngoài project. Để thu hẹp phạm vi tìm kiếm file config, khuyến nghị set `root` là `true`. Khi tìm thấy file config có setting này, sẽ không đi ngược thư mục nữa.
 
 #### `env`
 
-`env`はチェック対象のJavaScript/TypeScriptコードがどの実行環境で使われるかをESLintに伝えるためのオプションです。これを設定すると、ESLintがグローバル変数を認識するようになります。たとえば、`browser: true`を設定すると、`window`や`alert`などのグローバル変数が認識されます。`es2021`を設定すると、ES2021までに導入されたグローバル変数が認識されます。他にも`node`などの指定ができます。指定できる実行環境の一覧は[公式ドキュメント](https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments)をご覧ください。
+`env` là option để báo cho ESLint biết code JavaScript/TypeScript cần check được sử dụng trong môi trường thực thi nào. Set điều này giúp ESLint nhận diện biến global. Ví dụ, set `browser: true` sẽ nhận diện các biến global như `window` hay `alert`. Set `es2021` sẽ nhận diện các biến global được giới thiệu đến ES2021. Còn có thể chỉ định `node`, v.v. Danh sách môi trường thực thi có thể chỉ định xem [tài liệu chính thức](https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments).
 
-この設定は、ESLintの[no-undefルール](https://eslint.org/docs/rules/no-undef)に関係します。このルールは未定義の変数をチェックするルールです。グローバル変数は定義せずに利用できる変数です。ESLintはどのグローバル変数が定義済みかを知らないと、このルールを正しく適用できません。そのため、`env`オプションは正しく設定する必要があります。
+Setting này liên quan đến [no-undef rule](https://eslint.org/docs/rules/no-undef) của ESLint. Rule này check biến chưa định nghĩa. Biến global là biến có thể sử dụng mà không cần định nghĩa. ESLint không biết biến global nào đã được định nghĩa thì không thể áp dụng rule này đúng cách. Do đó, option `env` cần được set đúng.
 
 #### `parserOptions`
 
 ##### `ecmaVersion`
 
-`parserOptions`はチェック対象のJavaScriptがどの構文を使っているかをESLintに伝えるためのオプションです。`ecmaVersion`は、どのバージョンのECMAScriptの構文を使うかを指定します。`"latest"`を設定すると、最新のECMAScriptの構文を使うという指定になります。デフォルトではECMAScript 5になっています。これはかなり古いバージョンです。実務ではES5で開発することはまれなので、ここは必ず指定しましょう。なお、`env`オプションで`es2022`などECMAScriptのバージョンを指定している場合、`ecmaVersion`にも自動的に`es2022`が設定されます。どちらも同じバージョンを指定する場合は、`ecmaVersion`の指定は省略できます。
+`parserOptions` là option để báo cho ESLint biết JavaScript cần check sử dụng cú pháp nào. `ecmaVersion` chỉ định sử dụng cú pháp version ECMAScript nào. Set `"latest"` nghĩa là sử dụng cú pháp ECMAScript mới nhất. Mặc định là ECMAScript 5. Đây là version khá cũ. Trong thực tế hiếm khi phát triển bằng ES5, nên nhất định phải chỉ định ở đây. Ngoài ra, nếu option `env` chỉ định version ECMAScript như `es2022`, `ecmaVersion` cũng tự động được set `es2022`. Nếu cả hai chỉ định cùng version, có thể bỏ qua chỉ định `ecmaVersion`.
 
 ##### `sourceType`
 
-JavaScriptにはスクリプトモードとモジュールモードがあります。`sourceType`はJavaScriptコードがどちらのモードで書かれるかを指定するオプションです。モジュールモードでは、`import`文や`export`文といった追加の構文がサポートされます。`sourceType`のデフォルト値は`"script"`(スクリプトモード)です。実務で開発する場合は、モジュールモードでJavaScript/TypeScriptを書くほうが普通なので、`sourceType`には`"module"`(モジュールモード)を指定しましょう。
+JavaScript có script mode và module mode. `sourceType` là option chỉ định code JavaScript được viết ở mode nào. Module mode hỗ trợ thêm cú pháp như câu lệnh `import` hay `export`. Giá trị mặc định của `sourceType` là `"script"` (script mode). Trong thực tế khi phát triển, thường viết JavaScript/TypeScript ở module mode, nên `sourceType` nên chỉ định `"module"` (module mode).
 
-### ESLintのルールを設定する
+### Config rule của ESLint
 
-ESLintには「ルール(rule)」という概念があります。ルールはチェックの最小単位です。たとえば、ルールには次のようなものがあります。
+ESLint có khái niệm "rule". Rule là đơn vị check nhỏ nhất. Ví dụ, có các rule sau.
 
-- `no-console`: `console.log`を書いてはならない
-- `camelcase`: 変数名はキャメルケースにすること
-- `semi`: 文末セミコロンは省略しない
+- `no-console`: Không được viết `console.log`
+- `camelcase`: Tên biến phải là camelCase
+- `semi`: Không được bỏ semicolon cuối dòng
 
-ESLintには200を超えるルールがあります。[全ルールのリストは公式ドキュメント](https://eslint.org/docs/rules/)にあります。
+ESLint có hơn 200 rule. [Danh sách tất cả rule ở tài liệu chính thức](https://eslint.org/docs/rules/).
 
-ESLintでは、複数のルールを組み合わせてコーディング規約を組み立てていきます。
+Trong ESLint, kết hợp nhiều rule để xây dựng coding convention.
 
-ルールには、重大度(severity)という重み付けが設定できます。重大度は、`off`、`warn`と`error`の3種類です。`off`はルールを無効化し、チェックを行わなくする設定です。`warn`は発見した問題を警告として報告します。報告はするものの、`eslint`コマンドの終了コードには影響しません。`error`は発見した問題をエラーとして報告し、終了コードを1にする効果があります。それぞれの重大度は、`0`から`2`までの数値で設定することもできます。
+Rule có thể set severity (mức độ nghiêm trọng). Severity có 3 loại: `off`, `warn` và `error`. `off` vô hiệu hóa rule, không check. `warn` báo cáo vấn đề tìm thấy như warning. Có báo cáo nhưng không ảnh hưởng đến exit code của lệnh `eslint`. `error` báo cáo vấn đề tìm thấy như error và có hiệu lực làm exit code thành 1. Mỗi severity cũng có thể set bằng số từ `0` đến `2`.
 
-<figure><figcaption>ESLintの重大度</figcaption>
+<figure><figcaption>Severity của ESLint</figcaption>
 
-| 重大度 | 数値 | 効果                             |
-| ------ | ---- | -------------------------------- |
-| off    | 0    | ルールをオフにする               |
-| warn   | 1    | 警告するが終了コードに影響しない |
-| error  | 2    | 警告し、終了コードを1にする      |
+| Severity | Số | Hiệu lực                               |
+| -------- | -- | -------------------------------------- |
+| off      | 0  | Tắt rule                               |
+| warn     | 1  | Warning nhưng không ảnh hưởng exit code |
+| error    | 2  | Warning và làm exit code thành 1        |
 
 </figure>
 
-ルールは`.eslintrc.js`の`rules`フィールドに、`ルール名: 重大度`のキーバリュー形式で書きます。まずは、`no-console`をルールに追加してみましょう。
+Rule được viết trong field `rules` của `.eslintrc.js` với format key-value `tên-rule: severity`. Đầu tiên, hãy thêm `no-console` vào rule.
 
 ```js twoslash {11-13} title=".eslintrc.js"
 module.exports = {
@@ -339,7 +339,7 @@ module.exports = {
 };
 ```
 
-ルールによっては、細かく設定できるものもあります。たとえば、`camelcase`です。これは変数名がキャメルケースかをチェックするルールです。変数の種類によっては、キャメルケース以外が使いたい場合があります。たとえば、プロパティ名はアンダースコアを使いたいことがあるかもしれません。ウェブAPIによっては、JSONオブジェクトがスネークケース(`foo_bar`のようなアンダースコア区切り)を採用している場合があるからです。この場合、`ルール名: [重大度, 設定値]`のような配列形式で設定することで、細かいルール設定ができます。次の設定例は、プロパティ名に限ってはキャメルケースを強制しない設定です。試しに、この設定を`.eslintrc.js`に加えてみましょう。
+Tùy rule, có thể config chi tiết. Ví dụ, `camelcase`. Đây là rule check xem tên biến có phải camelCase không. Tùy loại biến, có thể muốn dùng khác camelCase. Ví dụ, tên property có thể muốn dùng underscore. Vì có Web API mà JSON object sử dụng snake_case (`foo_bar` kiểu phân cách underscore). Trong trường hợp này, set với format array `tên-rule: [severity, giá trị config]` có thể config rule chi tiết. Ví dụ config sau là setting không bắt buộc camelCase chỉ với tên property. Hãy thử thêm setting này vào `.eslintrc.js`.
 
 ```js twoslash {13} title=".eslintrc.js"
 module.exports = {
@@ -359,34 +359,34 @@ module.exports = {
 };
 ```
 
-:::note ここまでのふりかえり
+:::note Tóm tắt đến đây
 
-- package.jsonを作りました。
-- eslintをインストールしました。
-- 設定ファイル`.eslintrc.js`を作りました。
-- 設定ファイルには次のルールを追加しました。
-  - `no-console`: `console.log`をコードに残しておいてはいけない。
-  - `camelcase`: 変数名はキャメルケースにすること(プロパティ名を除く)。
+- Đã tạo package.json.
+- Đã install eslint.
+- Đã tạo file config `.eslintrc.js`.
+- Đã thêm các rule sau vào file config.
+  - `no-console`: Không được để `console.log` trong code.
+  - `camelcase`: Tên biến phải là camelCase (trừ tên property).
 
 :::
 
-### JavaScriptをチェックする
+### Check JavaScript
 
-設定ファイルが準備できたので、JavaScriptファイルを作り、ESLintでチェックしてみましょう。
+File config đã sẵn sàng, hãy tạo file JavaScript và check bằng ESLint.
 
-まず、`src`ディレクトリを作ってください。
+Đầu tiên, tạo thư mục `src`.
 
 ```shell
 mkdir src
 ```
 
-`src`ディレクトリにJavaScriptファイル`helloWorld.js`を作ってください。
+Tạo file JavaScript `helloWorld.js` trong thư mục `src`.
 
 ```shell
 touch src/helloWorld.js
 ```
 
-`helloWorld.js`が加わったディレクトリ構造が、次のようになっているか確認してください。
+Xác nhận cấu trúc thư mục có file `helloWorld.js` như sau.
 
 ```txt
 .
@@ -394,68 +394,68 @@ touch src/helloWorld.js
 ├── node_modules
 ├── package.json
 ├── src
-│   └── helloWorld.js
+│   └── helloWorld.js
 └── yarn.lock
 ```
 
-`helloWorld.js`の内容は次のようにします。
+Nội dung `helloWorld.js` như sau.
 
 ```js twoslash title="src/helloWorld.js"
 export const hello_world = "Hello World";
 console.log(hello_world);
 ```
 
-この`helloWorld.js`は、わざとコーディング規約に違反するコードになっています。1行目の変数`hello_world`はキャメルケースになっていません。2行目では、使ってはいけない`console.log`が使われています。
+`helloWorld.js` này cố ý viết code vi phạm coding convention. Dòng 1 biến `hello_world` không phải camelCase. Dòng 2 sử dụng `console.log` không được phép.
 
-では、ESLintでチェックを実行してみましょう。チェックは、`eslint`コマンドを起動するだけです。`eslint`コマンドは第一引数に、チェック対象のファイル名やディレクトリ名を指定します。ここでは、`src`ディレクトリ全体をチェックするために、引数は`src`にします。
+Vậy, hãy chạy check bằng ESLint. Check chỉ cần khởi động lệnh `eslint`. Lệnh `eslint` chỉ định tên file hoặc tên thư mục cần check làm argument đầu tiên. Ở đây, để check toàn bộ thư mục `src`, argument là `src`.
 
-```shell title="srcディレクトリをESLintでチェックする"
+```shell title="Check thư mục src bằng ESLint"
 npx eslint src
 ```
 
-これを実行すると、次の出力が表示されます。
+Khi thực thi, output sau hiển thị.
 
 ![](/img/tutorial/eslint/terminal-npx-eslint-src.svg)
 
-#### 結果の読み方
+#### Cách đọc kết quả
 
-チェックした結果、問題点が見つかると表形式で詳細が表示されます。各行は4つの列からなります。左から順に、コードの行番号列番号、重大度、問題点の説明、ルール名です。
+Khi check và tìm thấy vấn đề, chi tiết hiển thị dạng bảng. Mỗi dòng gồm 4 cột. Từ trái sang phải là: số dòng số cột của code, severity, mô tả vấn đề, tên rule.
 
 ![](/img/tutorial/eslint/error-meaning.svg)
 
-結果に表示されている内容だけでは、どうして問題点になっているのか、どう直したらいいのかが分からないことがあります。その場合は、ルール名からESLintのドキュメントでルールの詳細を調べます。たとえば、上の結果ではルール名に`no-console`が挙がっていますが、この文字列をもとにルールの詳細を探します。`no-console`の詳細ページは、<https://eslint.org/docs/rules/no-console>にあります。
+Chỉ với nội dung hiển thị trong kết quả, có thể không hiểu tại sao là vấn đề, sửa như thế nào. Trong trường hợp đó, tra cứu chi tiết rule từ tên rule trong tài liệu ESLint. Ví dụ, kết quả trên có tên rule `no-console`, tìm kiếm chi tiết rule từ chuỗi này. Trang chi tiết của `no-console` ở <https://eslint.org/docs/rules/no-console>.
 
-### コードを修正してエラーを解消する
+### Sửa code để giải quyết error
 
 ```js twoslash title="src/helloWorld.js"
 export const hello_world = "Hello World";
 console.log(hello_world);
 ```
 
-上のコードをESLintでチェックした結果、2つの問題点が指摘されました。
+Kết quả check code trên bằng ESLint, 2 vấn đề được chỉ ra.
 
-- 1行目: 変数名`hello_world`がキャメルケースではない
-- 2行目: `console.log`は使ってはいけない
+- Dòng 1: Tên biến `hello_world` không phải camelCase
+- Dòng 2: `console.log` không được sử dụng
 
-このエラーを解消したいので、`helloWorld.js`を編集してみましょう。変数名`hello_world`は`helloWorld`に変更します。2行目の`console.log`は削除しましょう。修正後のコードは次のようになります。
+Muốn giải quyết error này, hãy edit `helloWorld.js`. Đổi tên biến `hello_world` thành `helloWorld`. Xóa `console.log` ở dòng 2. Code sau khi sửa như sau.
 
 ```js twoslash title="src/helloWorld.js"
 export const helloWorld = "Hello World";
 ```
 
-再びESLintでチェックして、もう問題がなくなっているか確認してみましょう。
+Check lại bằng ESLint để xác nhận không còn vấn đề.
 
 ```shell
 npx eslint src
 ```
 
-この実行結果に何も出力されなければ、問題点が解消されています。
+Nếu output không hiển thị gì, vấn đề đã được giải quyết.
 
-### コードを自動修正する
+### Tự động sửa code
 
-ESLintのルールの中には、コードの自動修正ができるものがあります。たとえば、[`semi`](https://eslint.org/docs/rules/semi)は、文末セミコロンをつけるつけないを定めるルールですが、これは自動修正に対応しています。ここでは、`semi`を使ってESLintの自動修正をためしてみましょう。
+Trong các rule của ESLint, có rule có thể tự động sửa code. Ví dụ, [`semi`](https://eslint.org/docs/rules/semi) là rule quy định có hay không có semicolon cuối dòng, đây là rule hỗ trợ tự động sửa. Ở đây, hãy thử tự động sửa của ESLint bằng `semi`.
 
-まず、設定ファイル`.eslintrc.js`の`rules`に`semi`を追加します。
+Đầu tiên, thêm `semi` vào `rules` của file config `.eslintrc.js`.
 
 ```js twoslash {14} title=".eslintrc.js"
 module.exports = {
@@ -476,61 +476,61 @@ module.exports = {
 };
 ```
 
-このルール設定では、`"always"`を指定しています。これは、文末セミコロンを必須にする設定です。
+Rule setting này chỉ định `"always"`. Đây là setting bắt buộc semicolon cuối dòng.
 
-つぎに、`src/helloWorld.js`のコードのセミコロンを消して保存してください。
+Tiếp theo, xóa semicolon của code `src/helloWorld.js` và save.
 
 ```js twoslash title="src/helloWorld.js"
 // prettier-ignore
 export const helloWorld = "Hello World"
 ```
 
-自動修正の前にチェックだけを実行し、`semi`についての問題が報告されるか確認します。
+Trước khi tự động sửa, chỉ chạy check để xác nhận có báo cáo vấn đề về `semi` không.
 
 ```shell
 npx eslint src
 ```
 
-次のような結果が表示されれば、追加した`semi`ルールが効いていることになります。
+Nếu hiển thị kết quả như sau, rule `semi` đã thêm đang hoạt động.
 
 ![](/img/tutorial/eslint/terminal-npx-eslint-src-semi.svg)
 
-ESLintでコードを自動修正するには、`eslint`コマンドに`--fix`オプションをつけます。次のコマンドを実行し、自動修正してみましょう。
+Để tự động sửa code bằng ESLint, thêm option `--fix` vào lệnh `eslint`. Thực thi lệnh sau để tự động sửa.
 
 ```shell
 npx eslint src --fix
 ```
 
-自動修正が成功していれば、出力は何も表示されずに処理が終了します。自動修正が効いているかを確認するために、`src/helloWorld.js`を開いてみてください。文末にセミコロンが追加されているでしょうか。追加されていれば自動修正成功です。
+Nếu tự động sửa thành công, xử lý kết thúc không hiển thị output. Để xác nhận tự động sửa có hoạt động, mở `src/helloWorld.js`. Semicolon đã được thêm ở cuối dòng chưa? Nếu đã được thêm thì tự động sửa thành công.
 
-:::note ここまでのふりかえり
+:::note Tóm tắt đến đây
 
-- `src/helloWorld.js`を作りました。
-- `npx eslint src`を実行し、`src`ディレクトリをチェックしてみました。
-- コードを手直しして、ESLintのチェックを通過する流れを体験しました。(`camelcase`, `no-console`)
-- `npx eslint src --fix`を実行し、ESLintの自動修正機能を試しました。(`semi`)
+- Đã tạo `src/helloWorld.js`.
+- Đã thực thi `npx eslint src` để check thư mục `src`.
+- Đã trải nghiệm luồng sửa code thủ công để pass check ESLint. (`camelcase`, `no-console`)
+- Đã thực thi `npx eslint src --fix` để thử tính năng tự động sửa của ESLint. (`semi`)
 
 :::
 
-### ESLintにはどんなルールがある？
+### ESLint có những rule nào?
 
-ここまでのチュートリアルでは3つのルールを扱いました(`camelcase`、`no-console`、`semi`)。ESLintにはもっと多くのルールがあります。ルール数は200を超えます。
+Tutorial đến đây đã xử lý 3 rule (`camelcase`, `no-console`, `semi`). ESLint còn nhiều rule hơn. Số rule vượt quá 200.
 
-ルールの一覧は、[公式ドキュメントのRules](https://eslint.org/docs/rules/)にあります。この一覧では、どのルールが自動修正に対応しているかも確認できます。
+Danh sách rule ở [Rules của tài liệu chính thức](https://eslint.org/docs/rules/). Danh sách này cũng có thể xác nhận rule nào hỗ trợ tự động sửa.
 
-### Shareable configを導入する
+### Giới thiệu Shareable config
 
-ESLintのルールは数があまりにも多いため、ルールをひとつひとつ調べて導入していくのは大変です。そこで、お勧めなのがshareable configの活用です。
+Rule của ESLint có quá nhiều, nên việc tìm hiểu và giới thiệu từng rule một rất khó khăn. Vì vậy, khuyến nghị sử dụng shareable config.
 
-shareable configは、誰かが設定したルールのプリセットです。これを導入すると、自分でルールを設定する手間が省けます。
+shareable config là preset rule đã được ai đó config. Giới thiệu điều này giúp tiết kiệm công sức config rule của mình.
 
-有名なshareable configのひとつに、ESLint公式が公開している`eslint:recommended`があります。これを導入すると、[Rulesの一覧](https://eslint.org/docs/rules/)でチェックマークがついているルールが一括して有効化されます。これは公式が提供してるため有名ですが、有効になっているルールが少ないため、実務では物足りなさがあるかもしれません。
+Một shareable config nổi tiếng là `eslint:recommended` do ESLint chính thức công bố. Giới thiệu điều này sẽ kích hoạt hàng loạt các rule có check mark trong [danh sách Rules](https://eslint.org/docs/rules/). Vì đây là của chính thức nên nổi tiếng, nhưng số rule được kích hoạt ít, nên trong thực tế có thể không đủ.
 
-第三者が公開しているshareable configもあり、次にあげるものは実務でも広く使われています。
+Cũng có shareable config do bên thứ ba công bố, và những cái sau được sử dụng rộng rãi trong thực tế.
 
-| 名前                        | 作成        | 準拠するコーディング規約                                        |
+| Tên                         | Tác giả     | Coding convention tuân thủ                                      |
 | --------------------------- | ----------- | --------------------------------------------------------------- |
-| [eslint-config-airbnb]      | Airbnb      | [Airbnb JavaScript Style Guide]、[Airbnb React/JSX Style Guide] |
+| [eslint-config-airbnb]      | Airbnb      | [Airbnb JavaScript Style Guide], [Airbnb React/JSX Style Guide] |
 | [eslint-config-airbnb-base] | Airbnb      | [Airbnb JavaScript Style Guide]                                 |
 | [eslint-config-standard]    | Standard JS | [JavaScript Standard Style]                                     |
 | [eslint-config-google]      | Google      | [Google JavaScript Style Guide]                                 |
@@ -541,13 +541,13 @@ shareable configは、誰かが設定したルールのプリセットです。�
 [eslint-config-standard]: https://www.npmjs.com/package/eslint-config-standard
 [eslint-config-google]: https://www.npmjs.com/package/eslint-config-google
 
-上のshareable configはコーディング規約に基づいて作成されているため、文書としてのコーディング規約とESLintの設定をセットでプロジェクトに導入できる利点があります。
+Shareable config ở trên được tạo dựa trên coding convention, nên có lợi thế có thể giới thiệu cả coding convention văn bản và ESLint setting thành set vào project.
 
-このチュートリアルでは、人気のAirbnbのものを使っていきます。Airbnbの設定には、[eslint-config-airbnb]と[eslint-config-airbnb-base]の2つがあります。前者は、React向けの設定が追加で盛り込まれています。今回はReactは扱わないので、よりシンプルな後者を導入します。
+Tutorial này sẽ sử dụng cái của Airbnb phổ biến. Config của Airbnb có 2 cái: [eslint-config-airbnb] và [eslint-config-airbnb-base]. Cái trước có thêm setting cho React. Lần này không xử lý React nên giới thiệu cái sau đơn giản hơn.
 
-<figure><figcaption>各shareable configのインストール件数の推移</figcaption><iframe src="https://npmcharts.com/compare/eslint-config-airbnb-base,eslint-config-airbnb,eslint-config-standard,eslint-config-google?interval=30&log=false&minimal=true" height="500" width="100%"></iframe></figure>
+<figure><figcaption>Biến động số lượt install của mỗi shareable config</figcaption><iframe src="https://npmcharts.com/compare/eslint-config-airbnb-base,eslint-config-airbnb,eslint-config-standard,eslint-config-google?interval=30&log=false&minimal=true" height="500" width="100%"></iframe></figure>
 
-まず、Yarnで`eslint-config-airbnb-base`をインストールします。その際、合わせて`eslint-plugin-import`も導入します。
+Đầu tiên, install `eslint-config-airbnb-base` bằng Yarn. Đồng thời, cũng giới thiệu `eslint-plugin-import`.
 
 ```shell
 yarn add -D \
@@ -555,7 +555,7 @@ yarn add -D \
   'eslint-plugin-import@^2'
 ```
 
-次に、設定ファイル`.eslintrc.js`の`rules`を消します。その上で、`extends: ["airbnb-base"]`を追加してください。
+Tiếp theo, xóa `rules` của file config `.eslintrc.js`. Và thêm `extends: ["airbnb-base"]`.
 
 ```js twoslash {11} title=".eslintrc.js"
 module.exports = {
@@ -572,37 +572,37 @@ module.exports = {
 };
 ```
 
-これで、shareable configの導入は完了です。
+Vậy là việc giới thiệu shareable config hoàn tất.
 
-チェックを試すために、`src/helloWorld.js`を次の内容に置き換えてください。
+Để thử check, thay đổi `src/helloWorld.js` thành nội dung sau.
 
 ```js twoslash title="src/helloWorld.js"
 export const hello_world = "Hello World";
 console.log(hello_world);
 ```
 
-このコードはAirbnbの規約にわざと違反する内容になっています。
+Code này cố ý vi phạm convention của Airbnb.
 
-最後に`eslint`を実行し、チェックを動かしてみましょう。
+Cuối cùng thực thi `eslint` để chạy check.
 
 ```shell
 npx eslint src
 ```
 
-すると、次のような結果が得られるはずです。
+Sẽ có kết quả như sau.
 
 ![](/img/tutorial/eslint/terminal-npx-eslint-src-airbnb.svg)
 
-ここで報告されている問題点は、次のような内容になります。
+Vấn đề được báo cáo ở đây là nội dung sau.
 
-- `import/prefer-default-export`: デフォルトエクスポートを使わければなりません。
-- `camelcase`: 変数`hello_world`はキャメルケースでなければなりません。
-- `quotes`: 文字列リテラルはシングルクォートで囲む必要があります。
-- `no-console`: `console.log`は残しておいてはいけません。
+- `import/prefer-default-export`: Phải sử dụng default export.
+- `camelcase`: Biến `hello_world` phải là camelCase.
+- `quotes`: String literal phải được bao bằng single quote.
+- `no-console`: Không được để `console.log`.
 
-続いて、shareable configのルールを上書きする方法を学んでいきましょう。
+Tiếp theo, hãy học cách ghi đè rule của shareable config.
 
-上の結果では、`import/prefer-default-export`違反が報告されていました。これは、名前付きエクスポート(`export const helloWorld = "..."`)ではなく、デフォルトエクスポート(`export default "..."`)にすべきというエラーです。しかし、ここでは名前付きエクスポートを使いたいので、このルールをオフにすることで警告されないようにしてみましょう。ルールを上書きするには、`.eslintrc.js`の`rules`に`"import/prefer-default-export": "off"`を追加します。
+Trong kết quả trên, vi phạm `import/prefer-default-export` được báo cáo. Đây là error nói rằng phải dùng default export (`export default "..."`) thay vì named export (`export const helloWorld = "..."`). Tuy nhiên, ở đây muốn dùng named export, nên hãy tắt rule này để không bị cảnh báo. Để ghi đè rule, thêm `"import/prefer-default-export": "off"` vào `rules` của `.eslintrc.js`.
 
 ```js twoslash {12-14} title=".eslintrc.js"
 module.exports = {
@@ -622,7 +622,7 @@ module.exports = {
 };
 ```
 
-さらに、文字列リテラルはダブルクォートのほうを使いたいので、`rules`に`quotes: ["error", "double"]`を追加します。
+Thêm nữa, muốn dùng double quote cho string literal, nên thêm `quotes: ["error", "double"]` vào `rules`.
 
 ```js twoslash {14} title=".eslintrc.js"
 module.exports = {
@@ -643,52 +643,52 @@ module.exports = {
 };
 ```
 
-再び`eslint`を実行して、ルールの上書きが効いているか確認してみましょう。
+Thực thi lại `eslint` để xác nhận ghi đè rule có hoạt động.
 
 ```shell
 npx eslint src
 ```
 
-次のように、出力結果からデフォルトエクスポートと文字列クォートについての警告が消えていれば、ルールが効いています。
+Như sau, nếu cảnh báo về default export và string quote biến mất trong output kết quả, rule đang hoạt động.
 
 ![](/img/tutorial/eslint/terminal-npx-eslint-src-airbnb-with-rules.svg)
 
-### ルールを部分的に無効化する
+### Vô hiệu hóa rule một phần
 
-`.eslintrc.js`で設定した規約はプロジェクト全体に及びます。コードを書いていると、どうしても規約を破らざるをえない部分が出てくることがあります。その場合は、コードのいち部分について、ルールを無効化することもできます。
+Convention set trong `.eslintrc.js` có hiệu lực toàn bộ project. Khi viết code, có trường hợp bắt buộc phải vi phạm convention. Trong trường hợp đó, cũng có thể vô hiệu hóa rule cho một phần code.
 
-部分的にルールを無効にするには、その行の前にコメント`eslint-disable-next-line`を追加します。たとえば、次の例ように書いておくと、変数名`hello_world`がキャメルケースでなくても、ESLintは警告を出さなくできます。
+Để vô hiệu hóa rule một phần, thêm comment `eslint-disable-next-line` trước dòng đó. Ví dụ, viết như ví dụ sau, dù tên biến `hello_world` không phải camelCase, ESLint cũng không đưa ra cảnh báo.
 
 ```js twoslash
 // eslint-disable-next-line camelcase
 export const hello_world = "Hello World";
 ```
 
-この方法はいざというときに知っておくとよいというものです。ルール無効化コメントだらけになってしまうと本末転倒です。節度を持って使うのが望ましいです。
+Phương pháp này nên biết để dùng khi cần. Nếu comment vô hiệu hóa rule tràn lan thì mất ý nghĩa. Sử dụng có chừng mực là điều mong muốn.
 
-:::note ここまでのふりかえり
+:::note Tóm tắt đến đây
 
-- shareable configの`eslint-config-airbnb-base`を導入しました。
-- これのルールを一部上書きしてみました。
-  - `import/prefer-default-export`を無効化
-  - `quotes`の指定をシングルクォートからダブルクォートに変更
-- ルール無効化コメント`// eslint-disable-next-line`を試しました。
+- Đã giới thiệu shareable config `eslint-config-airbnb-base`.
+- Đã thử ghi đè một phần rule của nó.
+  - Vô hiệu hóa `import/prefer-default-export`
+  - Đổi chỉ định `quotes` từ single quote sang double quote
+- Đã thử comment vô hiệu hóa rule `// eslint-disable-next-line`.
 
 :::
 
-## ESLintでTypeScriptをリントしよう
+## Lint TypeScript bằng ESLint
 
-[eslintでtypescriptをリントしよう]: #eslintでtypescriptをリントしよう
+[lint typescript bằng eslint]: #lint-typescript-bằng-eslint
 
-ここまでのチュートリアルでは、JavaScriptにESLintをかける方法を学んできました。ここからは、TypeScriptにESLintを使う方法を学んでいきます。
+Tutorial đến đây đã học cách dùng ESLint với JavaScript. Từ đây, sẽ học cách dùng ESLint với TypeScript.
 
-そもそもESLintでは、TypeScriptはチェックできません。これを補うのが[TypeScript ESLint]です。これを導入するとESLintでTypeScriptがチェックできるようになります。
+Ban đầu ESLint không thể check TypeScript. [TypeScript ESLint] bổ sung điều này. Giới thiệu điều này giúp ESLint có thể check TypeScript.
 
 [typescript eslint]: https://typescript-eslint.io/
 
-### プロジェクトを作成する {#create-typescript-project}
+### Tạo project {#create-typescript-project}
 
-ここからは別のプロジェクトを作り、その新プロジェクトでチュートリアルを進めていきます。空のディレクトリを作り、その中に最低限のpackage.jsonを配置してください。
+Từ đây tạo project khác và tiến hành tutorial trong project mới. Tạo thư mục rỗng và đặt package.json tối thiểu vào trong.
 
 ```shell
 mkdir eslint-typescript-tutorial
@@ -696,21 +696,21 @@ cd eslint-typescript-tutorial/
 echo '{"name": "eslint-typescript-tutorial","license": "UNLICENSED"}' > package.json
 ```
 
-### TypeScriptを導入する
+### Giới thiệu TypeScript
 
-TypeScript ESLintを使うには、TypeScript環境を構築しておく必要があります。まず、`typescript`を導入しておいてください。合わせてNode.jsの型定義`@types/node`もインストールしておきます。この型情報は、`.eslintrc.js`などのNode.js環境で実行されるファイルをESLintでチェックするときに利用されます。
+Để dùng TypeScript ESLint, cần xây dựng môi trường TypeScript trước. Đầu tiên, hãy giới thiệu `typescript`. Đồng thời cũng install định nghĩa type của Node.js `@types/node`. Type information này được sử dụng khi ESLint check các file chạy trong môi trường Node.js như `.eslintrc.js`.
 
 ```shell
 yarn add -D 'typescript@^5.5' '@types/node@^22'
 ```
 
-TypeScriptコンパイラの設定ファイルも作っておきます。
+Cũng tạo file config của TypeScript compiler.
 
 ```shell
 touch tsconfig.json
 ```
 
-tsconfig.jsonの内容はこうします。
+Nội dung tsconfig.json như sau.
 
 ```json title="tsconfig.json"
 {
@@ -721,38 +721,38 @@ tsconfig.jsonの内容はこうします。
 }
 ```
 
-続いて、`src`ディレクトリにTypeScriptファイル`helloWorld.ts`を追加します。内容は空で構いません。
+Tiếp theo, thêm file TypeScript `helloWorld.ts` vào thư mục `src`. Nội dung có thể để trống.
 
 ```shell
 mkdir src
 touch src/helloWorld.ts
 ```
 
-コンパイルもできるか試してみましょう。
+Cũng thử compile xem.
 
 ```shell
 npx tsc
 ```
 
-コンパイルが成功すると、`dist/helloWorld.js`が生成されます。
+Nếu compile thành công, `dist/helloWorld.js` sẽ được tạo.
 
-この段階では、ディレクトリ構成が次のようになっているはずです。
+Ở giai đoạn này, cấu trúc thư mục như sau.
 
-```text title="ディレクトリ構成"
+```text title="Cấu trúc thư mục"
 .
 ├── dist
-│   └── helloWorld.js
+│   └── helloWorld.js
 ├── node_modules
 ├── package.json
 ├── src
-│   └── helloWorld.ts
+│   └── helloWorld.ts
 ├── tsconfig.json
 └── yarn.lock
 ```
 
-### TypeScript ESLintを導入する
+### Giới thiệu TypeScript ESLint
 
-ESLint本体と[TypeScript ESLint]の両方をインストールします。
+Install cả ESLint core và [TypeScript ESLint].
 
 ```shell
 yarn add -D \
@@ -761,31 +761,31 @@ yarn add -D \
   '@typescript-eslint/eslint-plugin@^7'
 ```
 
-TypeScript ESLintは2つのパッケージから成ります。`@typescript-eslint/parser`は、ESLintにTypeScriptの構文を理解させるためのパッケージです。`@typescript-eslint/eslint-plugin`は、TypeScript向けのルールを追加するパッケージです。
+TypeScript ESLint gồm 2 package. `@typescript-eslint/parser` là package để ESLint hiểu cú pháp TypeScript. `@typescript-eslint/eslint-plugin` là package thêm rule cho TypeScript.
 
-ESLintがインストールされ、実行可能になっているかバージョンを表示して確認しましょう。
+Hiển thị version để xác nhận ESLint đã được install và có thể thực thi.
 
 ```shell
 npx eslint -v
 v8.15.0
 ```
 
-### TypeScript ESLintにはどんなルールがある？
+### TypeScript ESLint có những rule nào?
 
-ESLintの[200以上のルール](https://eslint.org/docs/rules/)に加えて、TypeScript ESLintを導入すると、100以上のルールが追加されます。追加されるルールの一覧は、[TypeScript ESLintのドキュメント](https://typescript-eslint.io/rules/)で確認できます。
+Ngoài [hơn 200 rule](https://eslint.org/docs/rules/) của ESLint, giới thiệu TypeScript ESLint sẽ thêm hơn 100 rule. Danh sách rule được thêm có thể xác nhận trong [tài liệu TypeScript ESLint](https://typescript-eslint.io/rules/).
 
-:::note ここまでのふりかえり
+:::note Tóm tắt đến đây
 
-- 新規プロジェクト`eslint-typescript-tutorial`を作成しました。
-- TypeScriptをインストールし、`tsconfig.json`を設定しました。
-- 中身が空の`src/helloWorld.ts`を作成し、コンパイルしてみました。
-- ESLintとTypeScript ESLintをインストールしました。
+- Đã tạo project mới `eslint-typescript-tutorial`.
+- Đã install TypeScript và config `tsconfig.json`.
+- Đã tạo `src/helloWorld.ts` với nội dung trống và thử compile.
+- Đã install ESLint và TypeScript ESLint.
 
 :::
 
-### TypeScript向けのshareable configを導入する
+### Giới thiệu shareable config cho TypeScript
 
-コーディング規約[Airbnb JavaScript Style Guide]に準拠したshareable configをインストールします。
+Install shareable config tuân thủ coding convention [Airbnb JavaScript Style Guide].
 
 ```shell
 yarn add -D \
@@ -794,30 +794,30 @@ yarn add -D \
   'eslint-config-airbnb-typescript@^18'
 ```
 
-`eslint-config-airbnb-base`はJavaScript向けのshareable configです。これを上書きして、TypeScript ESLintのルールを追加したり、TypeScriptコンパイラがチェックするためESLintでチェックする必要がないルールを除外する設定を加えるのが`eslint-config-airbnb-typescript`です。`eslint-plugin-import`は依存関係上、導入が必要なパッケージです。
+`eslint-config-airbnb-base` là shareable config cho JavaScript. `eslint-config-airbnb-typescript` ghi đè cái này, thêm rule của TypeScript ESLint, và thêm setting loại trừ rule không cần check ESLint vì TypeScript compiler đã check. `eslint-plugin-import` là package cần giới thiệu theo dependency.
 
-### TypeScript ESLintの設定ファイルを作る
+### Tạo file config của TypeScript ESLint
 
-TypeScript ESLintを動かすためには、次の2つの設定ファイルを作る必要があります。
+Để chạy TypeScript ESLint, cần tạo 2 file config sau.
 
 - tsconfig.eslint.json
 - .eslintrc.js
 
-これらファイルをプロジェクトルートに作成してください。
+Tạo các file này ở project root.
 
 ```shell
 touch tsconfig.eslint.json .eslintrc.js
 ```
 
-```text title="作成後のディレクトリ構造"
+```text title="Cấu trúc thư mục sau khi tạo"
 .
 ├── .eslintrc.js
 ├── dist
-│   └── helloWorld.js
+│   └── helloWorld.js
 ├── node_modules
 ├── package.json
 ├── src
-│   └── helloWorld.ts
+│   └── helloWorld.ts
 ├── tsconfig.eslint.json
 ├── tsconfig.json
 └── yarn.lock
@@ -825,7 +825,7 @@ touch tsconfig.eslint.json .eslintrc.js
 
 #### tsconfig.eslint.json
 
-TypeScript ESLintは、チェック時に型情報を利用するために、TypeScriptコンパイラを使います。その際のコンパイラ設定を`tsconfig.eslint.json`に書きます。コンパイラ設定は、`tsconfig.json`の内容を`extends`で継承しつつ、上書きが必要なところだけ記述していきます。
+TypeScript ESLint sử dụng TypeScript compiler để sử dụng type information khi check. Config compiler khi đó viết trong `tsconfig.eslint.json`. Config compiler kế thừa nội dung `tsconfig.json` bằng `extends`, và chỉ viết phần cần ghi đè.
 
 ```json title="tsconfig.eslint.json"
 {
@@ -833,7 +833,7 @@ TypeScript ESLintは、チェック時に型情報を利用するために、Typ
 }
 ```
 
-今回は、TypeScriptファイルに加えて、ESLintの設定ファイル`.eslintrc.js`自体もESLintのチェック対象に含めたいので、`allowJs`の追加と`include`の上書きをします。
+Lần này, ngoài file TypeScript, cũng muốn bao gồm file config ESLint `.eslintrc.js` vào đối tượng check ESLint, nên thêm `allowJs` và ghi đè `include`.
 
 ```json {2-5} title="tsconfig.eslint.json"
 {
@@ -845,9 +845,9 @@ TypeScript ESLintは、チェック時に型情報を利用するために、Typ
 }
 ```
 
-`".*.js"`は、`.eslintrc.js`などドット始まりのJSファイルにマッチするパターンです。パターンマッチにしておくことで、将来的に導入される他の設定ファイルもチェック対象に含めるようにできます。
+`".*.js"` là pattern match các file JS bắt đầu bằng dấu chấm như `.eslintrc.js`. Dùng pattern match để có thể bao gồm các file config khác được giới thiệu trong tương lai vào đối tượng check.
 
-また、テストフレームワーク「Jest」の設定ファイルでは、`jest.config.js`のようにドットはじまりでないJSファイルもありえます。このようなファイルが追加されるのを見越して、`"*.js"`もあらかじめ追加しておくとよいです。
+Ngoài ra, với file config của test framework "Jest", có thể có file JS không bắt đầu bằng dấu chấm như `jest.config.js`. Dự đoán các file như vậy sẽ được thêm, nên cũng thêm sẵn `"*.js"`.
 
 ```json {5} title="tsconfig.eslint.json"
 {
@@ -859,15 +859,15 @@ TypeScript ESLintは、チェック時に型情報を利用するために、Typ
 }
 ```
 
-このように、TypeScript ESLintでチェックする対象は、`include`に追加していく必要があります。
+Như vậy, đối tượng check TypeScript ESLint cần thêm vào `include`.
 
-`tsconfig.eslint.json`が正しく設定されているか、次のコマンドを実行して出力を確認してください。
+Thực thi lệnh sau để xác nhận `tsconfig.eslint.json` đã được config đúng.
 
 ```shell
 npx tsc --showConfig --project tsconfig.eslint.json
 ```
 
-設定が正しいと、次のような出力になるはずです。
+Nếu config đúng, output như sau.
 
 ```text
 {
@@ -889,7 +889,7 @@ npx tsc --showConfig --project tsconfig.eslint.json
 
 #### .eslintrc.js
 
-次にESLintの設定ファイル`.eslintrc.js`を作ります。内容は次のとおりにしてください。
+Tiếp theo tạo file config ESLint `.eslintrc.js`. Nội dung như sau.
 
 ```js twoslash {3-4,12-13,15,18-19,23} title=".eslintrc.js"
 module.exports = {
@@ -919,7 +919,7 @@ module.exports = {
 };
 ```
 
-`root`、`env`、`parserOptions`の`ecmaVersion`と`sourceType`については[前のチュートリアル](#eslintの設定ファイルを作る)の解説をご覧ください。まだ説明していない、追加のオプションは次で説明します。
+`root`, `env`, `ecmaVersion` và `sourceType` của `parserOptions` xem giải thích ở [tutorial trước](#eslintの設定ファイルを作る). Các option thêm chưa giải thích được giải thích dưới đây.
 
 #### `parser`
 
@@ -931,9 +931,9 @@ module.exports = {
 };
 ```
 
-`parser`で設定したパーサーを使って、ESLintはJavaScriptやTypeScriptの構文を解析します。上の例では、TypeScriptパーサーを指定しています。この指定がないと、ESLintはTypeScriptを解釈できず、エラーが発生します。
+ESLint phân tích cú pháp JavaScript và TypeScript bằng parser set trong `parser`. Ví dụ trên chỉ định TypeScript parser. Không có chỉ định này, ESLint không thể hiểu TypeScript và sẽ xảy ra error.
 
-TypeScriptはJavaScriptの構文を拡張した言語です。なので、このパーサーさえ入れておけば、TypeScriptに限らずJavaScriptもこのパーサーひとつで対応できます。要するに、このパーサーひとつで、TypeScriptとJavaScriptのファイルどちらもリントできるようになります。
+TypeScript là ngôn ngữ mở rộng cú pháp JavaScript. Nên chỉ cần đưa parser này vào, không chỉ TypeScript mà JavaScript cũng có thể xử lý bằng một parser này. Nghĩa là, với parser này, có thể lint cả file TypeScript và JavaScript.
 
 #### `plugins`
 
@@ -945,7 +945,7 @@ module.exports = {
 };
 ```
 
-ESLintは公式が提供するルールに加えて、第三者が作成したルールを使うこともできます。第三者が作成したルールはプラグインという形で公開されています。この`plugins`フィールドにプラグインを追加すると、ルールが追加できます。上の例では、TypeScript ESLint独自のルールを追加するために、`@typescript-eslint`を設定しています。
+ESLint ngoài rule do chính thức cung cấp, còn có thể sử dụng rule do bên thứ ba tạo. Rule do bên thứ ba tạo được công khai dưới dạng plugin. Thêm plugin vào field `plugins` này có thể thêm rule. Ví dụ trên, để thêm rule độc quyền của TypeScript ESLint, set `@typescript-eslint`.
 
 #### `parserOptions` {#parser-options-2}
 
@@ -961,7 +961,7 @@ module.exports = {
 };
 ```
 
-`project`と`tsconfigRootDir`はTypeScript ESLint独自のオプションです。`tsconfigRootDir`はプロジェクトルートの絶対パスを指定します。`project`は、ESLint実行時に使うコンパイラ設定ファイルを`tsconfigRootDir`からの相対パスで指定します。これらの設定は、TypeScript ESLintが型情報を参照するために必要な設定です。
+`project` và `tsconfigRootDir` là option độc quyền của TypeScript ESLint. `tsconfigRootDir` chỉ định đường dẫn tuyệt đối của project root. `project` chỉ định file config compiler sử dụng khi thực thi ESLint bằng đường dẫn tương đối từ `tsconfigRootDir`. Các setting này cần thiết để TypeScript ESLint tham chiếu type information.
 
 #### `ignorePatterns`
 
@@ -973,7 +973,7 @@ module.exports = {
 };
 ```
 
-`ignorePatterns`はESLintのチェック対象外にするファイルやディレクトリを指定するオプションです。TypeScriptプロジェクトでは、コンパイルで生成されるJavaScriptは、リントしないのが普通です。なので、`dist`ディレクトリをチェック対象外にしておきます。
+`ignorePatterns` là option chỉ định file hoặc thư mục không phải đối tượng check ESLint. Trong TypeScript project, JavaScript được tạo bởi compile thường không lint. Nên loại trừ thư mục `dist` khỏi đối tượng check.
 
 #### `extends`
 
@@ -989,9 +989,9 @@ module.exports = {
 };
 ```
 
-`extends`はshareable configを使うための設定です。①は、JavaScript向けのルールです。これを拡張してTypeScript ESLintのルールにも範囲を広げたのが②です。①と②は上の順番でないと正しく設定されないので注意してください。
+`extends` là setting để sử dụng shareable config. ① là rule cho JavaScript. ② mở rộng cái này và mở rộng phạm vi sang rule của TypeScript ESLint. ① và ② phải theo thứ tự trên nếu không sẽ không được config đúng.
 
-③はTypeScript ESLintが提供する推奨ルールセットで、型情報を要するルールを含みます。このルールセットでどのルールが有効になるかは、[公式ドキュメント](https://typescript-eslint.io/rules/)をご覧ください。
+③ là recommended rule set do TypeScript ESLint cung cấp, bao gồm rule cần type information. Rule nào được kích hoạt trong rule set này xem [tài liệu chính thức](https://typescript-eslint.io/rules/).
 
 #### `rules`
 
@@ -1006,96 +1006,96 @@ module.exports = {
 };
 ```
 
-ここの`rules`は、shareable configで有効化されたルールを上書きするのに用いています。TypeScript ESLintで追加されたルールは、`@typescript-eslint/`が接頭辞になります。
+`rules` ở đây được dùng để ghi đè rule được kích hoạt bởi shareable config. Rule được thêm bởi TypeScript ESLint có prefix `@typescript-eslint/`.
 
-:::note ここまでのふりかえり
+:::note Tóm tắt đến đây
 
-- コーディング規約Airbnb JavaScript Style Guideに準拠したshareable configをインストールしました。
-- TypeScript ESLintの設定ファイルを作りました。
+- Đã install shareable config tuân thủ coding convention Airbnb JavaScript Style Guide.
+- Đã tạo file config của TypeScript ESLint.
   - tsconfig.eslint.json
   - .eslintrc.js
 
 :::
 
-### TypeScriptをチェックする
+### Check TypeScript
 
-TypeScript ESLintを使う準備ができたので、いよいよTypeScriptをチェックしてみたいと思います。
+Đã sẵn sàng để dùng TypeScript ESLint, giờ hãy thực sự check TypeScript.
 
-まず、空だった`src/helloWorld.ts`に次のコードを書いて保存してください。
+Đầu tiên, viết code sau vào `src/helloWorld.ts` đang trống và save.
 
 ```ts twoslash title="src/helloWorld.ts"
 export const hello_world = "Hello World";
 console.log(hello_world);
 ```
 
-そうしたら、ESLintを実行してみましょう。
+Sau đó, thực thi ESLint.
 
 ```shell
 npx eslint .
 ```
 
-すると、次の結果が出力されるはずです。
+Sẽ có output kết quả sau.
 
 ![](/img/tutorial/eslint/terminal-npx-eslint-src-typescript.svg)
 
-2つの問題点が報告されています。1つ目は、変数名の命名規則が守られていない点についてのエラーです。2つ目は、`console.log`が使われている点についての警告です。
+2 vấn đề được báo cáo. Cái đầu tiên là error về naming convention không được tuân thủ. Cái thứ hai là warning về việc `console.log` được sử dụng.
 
-これらの問題点を修正してみましょう。`src/helloWorld.ts`を次の内容に変更し、保存してください。
+Hãy sửa những vấn đề này. Thay đổi `src/helloWorld.ts` thành nội dung sau và save.
 
 ```ts twoslash title="src/helloWorld.ts"
 export const helloWorld = "Hello World";
 ```
 
-再びESLintを実行して、問題点が解消されているか確認してみましょう。
+Thực thi lại ESLint để xác nhận vấn đề đã được giải quyết.
 
 ```shell
 npx eslint .
 ```
 
-出力結果に何も表示されていなければ、問題点が解決されています。
+Nếu output kết quả không hiển thị gì, vấn đề đã được giải quyết.
 
-以上で、ESLintでTypeScriptをリントするチュートリアルは終わりです。
+Vậy là tutorial lint TypeScript bằng ESLint đã kết thúc.
 
-## VS CodeとESLintを統合しよう
+## Tích hợp VS Code và ESLint
 
-[vs codeとeslintを統合しよう]: #vs-codeとeslintを統合しよう
+[tích hợp vs code và eslint]: #tích-hợp-vs-code-và-eslint
 
 :::info
-このステップはVS Codeを使っている方向けの内容です。WebStormなどのJetBrains IDEを使っている方は、[JetBrains IDEとESLintを統合しよう]を参照してください。これからVS Codeを導入する方は、[VS Codeの公式サイト](https://code.visualstudio.com/download)からダウンロードしてください。
+Bước này là nội dung cho người dùng VS Code. Người dùng JetBrains IDE như WebStorm, xem [Tích hợp JetBrains IDE và ESLint]. Người mới giới thiệu VS Code, download từ [trang web chính thức VS Code](https://code.visualstudio.com/download).
 :::
 
-ここでは、Visual Studio Code(VS Code)に、ESLintを組み込む方法を説明します。
+Ở đây giải thích cách tích hợp ESLint vào Visual Studio Code (VS Code).
 
-ESLintはコマンドひとつでコーディング規約をチェックできるようになり、それだけでも便利です。しかし、VS CodeとESLintを統合するとさらに便利になります。コードを書いているときに、リアルタイムで問題点のフィードバックが得られるようになるからです。
+ESLint có thể check coding convention chỉ bằng một lệnh, đã rất tiện lợi. Tuy nhiên, tích hợp VS Code và ESLint còn tiện hơn. Vì có thể nhận feedback vấn đề realtime khi viết code.
 
-<figure><figcaption>ESLintのエラーがVS Codeに表示される様子</figcaption>
+<figure><figcaption>Cách error ESLint hiển thị trong VS Code</figcaption>
 
 ![](/img/tutorial/eslint/vscode-eslint-example.png)
 
 </figure>
 
-VS CodeとESLintを統合するには、[ESLintの拡張](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)をVisual Studio Codeのマーケットプレイスからインストールするだけです。
+Để tích hợp VS Code và ESLint, chỉ cần install [extension ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) từ Visual Studio Code marketplace.
 
 ![](/img/tutorial/eslint/vscode-marketplace.png)
 
-## JetBrains IDEとESLintを統合しよう
+## Tích hợp JetBrains IDE và ESLint
 
-[jetbrains ideとeslintを統合しよう]: #jetbrains-ideとeslintを統合しよう
+[tích hợp jetbrains ide và eslint]: #tích-hợp-jetbrains-ide-và-eslint
 
 :::info
-このステップはJetBrains IDE(WebStorm、IntelliJ IDEA、PyCharmなど)を使っている方向けの内容です。VS Codeを使っている方は、[VS CodeとESLintを統合しよう]を参照してください。
+Bước này là nội dung cho người dùng JetBrains IDE (WebStorm, IntelliJ IDEA, PyCharm, v.v.). Người dùng VS Code, xem [Tích hợp VS Code và ESLint].
 :::
 
-ここでは、WebStormなどのJetBrains IDEに、ESLintを組み込む方法を説明します。
+Ở đây giải thích cách tích hợp ESLint vào JetBrains IDE như WebStorm.
 
-ESLintはコマンドひとつでコーディング規約をチェックできるようになり、それだけでも便利です。しかし、JetBrains IDEとESLintを統合するとさらに便利になります。コードを書いているときに、リアルタイムで問題点のフィードバックが得られるようになるからです。
+ESLint có thể check coding convention chỉ bằng một lệnh, đã rất tiện lợi. Tuy nhiên, tích hợp JetBrains IDE và ESLint còn tiện hơn. Vì có thể nhận feedback vấn đề realtime khi viết code.
 
-<figure><figcaption>ESLintのエラーがWebStormに表示される様子</figcaption>
+<figure><figcaption>Cách error ESLint hiển thị trong WebStorm</figcaption>
 
 ![](/img/tutorial/eslint/webstorm-eslint-example.png)
 
 </figure>
 
-WebStormは、ESLint統合機能がデフォルトで入っているので、プラグインなどをインストールする必要はありません。ESLintを有効にするには、「Preferences」を開き、検索に「eslint」と入力します(①)。絞り込まれたメニューから「ESLint」を開きます(②)。「Automatic ESLint configuration」にチェックを入れます(③)。最後に「OK」を押すと設定完了です(④)。
+WebStorm có sẵn tính năng tích hợp ESLint, nên không cần install plugin, v.v. Để enable ESLint, mở "Preferences", nhập "eslint" vào ô tìm kiếm (①). Mở "ESLint" từ menu được lọc (②). Check vào "Automatic ESLint configuration" (③). Cuối cùng nhấn "OK" để hoàn tất setting (④).
 
 ![](/img/tutorial/eslint/webstorm-eslint-config.png)

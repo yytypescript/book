@@ -1,235 +1,235 @@
 ---
-description: TSConfigのオプション一覧
+description: Danh sách option của TSConfig
 ---
 
-# オプションの一覧
+# Danh sách option
 
-最新の情報は[TypeScriptのTSConfigリファレンス](https://www.typescriptlang.org/ja/tsconfig)もご参照ください。
+Thông tin mới nhất vui lòng tham khảo [TypeScript TSConfig Reference](https://www.typescriptlang.org/ja/tsconfig).
 
-## ルートオプション
+## Root option
 
-TSConfigのルートのオプションです。これらは、型チェックを対象とするファイルなどのプロジェクト全体に関する設定です。
+Các option ở root của TSConfig. Đây là các cấu hình liên quan đến toàn bộ project như file nào được type check.
 
-| オプション名 | 追加されたバージョン |
-| ------------ | -------------------- |
-| files        | -                    |
-| extends      | 2.1                  |
-| include      | 2.0                  |
-| exclude      | -                    |
-| references   | -                    |
+| Tên option   | Phiên bản thêm vào |
+| ------------ | ------------------ |
+| files        | -                  |
+| extends      | 2.1                |
+| include      | 2.0                |
+| exclude      | -                  |
+| references   | -                  |
 
-## 型チェック
+## Type check
 
-型チェックに関する設定です。
+Cấu hình liên quan đến type check.
 
-| オプション名                                                                  | 追加されたバージョン |
-| ----------------------------------------------------------------------------- | -------------------- |
-| allowUnreachableCode                                                          | 1.8                  |
-| allowUnusedLabels                                                             | 1.8                  |
-| [alwaysStrict](./alwaysstrict.md)                                             | 2.1                  |
-| [exactOptionalPropertyTypes](./exactoptionalpropertytypes.md)                 | 4.4                  |
-| [noFallthroughCasesInSwitch](./nofallthroughcasesinswitch.md)                 | 1.8                  |
-| [noimplicitany](./noimplicitany.md)                                           | -                    |
-| [noimplicitoverride](./noimplicitoverride.md)                                 | 4.3                  |
-| [noImplicitReturns](./noimplicitreturns.md)                                   | 1.8                  |
-| [noimplicitthis](./noimplicitthis.md)                                         | 2.0                  |
-| [nopropertyaccessfromindexsignature](./nopropertyaccessfromindexsignature.md) | 4.2                  |
-| [nouncheckedindexedaccess](./nouncheckedindexedaccess.md)                     | 4.1                  |
-| [nounusedlocals](./nounusedlocals.md)                                         | 2.0                  |
-| [nounusedparameters](./nounusedparameters.md)                                 | 2.0                  |
-| [strict](./strict.md)                                                         | 2.3                  |
-| [strictbindcallapply](./strictbindcallapply.md)                               | 3.2                  |
-| [strictfunctiontypes](./strictfunctiontypes.md)                               | 2.6                  |
-| [strictnullchecks](./strictnullchecks.md)                                     | 2.0                  |
-| [strictpropertyinitialization](./strictpropertyinitialization.md)             | 2.7                  |
-| [useunknownincatchvariables](./useunknownincatchvariables.md)                 | 4.4                  |
+| Tên option                                                                    | Phiên bản thêm vào |
+| ----------------------------------------------------------------------------- | ------------------ |
+| allowUnreachableCode                                                          | 1.8                |
+| allowUnusedLabels                                                             | 1.8                |
+| [alwaysStrict](./alwaysstrict.md)                                             | 2.1                |
+| [exactOptionalPropertyTypes](./exactoptionalpropertytypes.md)                 | 4.4                |
+| [noFallthroughCasesInSwitch](./nofallthroughcasesinswitch.md)                 | 1.8                |
+| [noimplicitany](./noimplicitany.md)                                           | -                  |
+| [noimplicitoverride](./noimplicitoverride.md)                                 | 4.3                |
+| [noImplicitReturns](./noimplicitreturns.md)                                   | 1.8                |
+| [noimplicitthis](./noimplicitthis.md)                                         | 2.0                |
+| [nopropertyaccessfromindexsignature](./nopropertyaccessfromindexsignature.md) | 4.2                |
+| [nouncheckedindexedaccess](./nouncheckedindexedaccess.md)                     | 4.1                |
+| [nounusedlocals](./nounusedlocals.md)                                         | 2.0                |
+| [nounusedparameters](./nounusedparameters.md)                                 | 2.0                |
+| [strict](./strict.md)                                                         | 2.3                |
+| [strictbindcallapply](./strictbindcallapply.md)                               | 3.2                |
+| [strictfunctiontypes](./strictfunctiontypes.md)                               | 2.6                |
+| [strictnullchecks](./strictnullchecks.md)                                     | 2.0                |
+| [strictpropertyinitialization](./strictpropertyinitialization.md)             | 2.7                |
+| [useunknownincatchvariables](./useunknownincatchvariables.md)                 | 4.4                |
 
-## モジュール解決
+## Module resolution
 
-TypeScriptコンパイラーのモジュール解決に関する設定です。
+Cấu hình liên quan đến module resolution của TypeScript compiler.
 
-| オプション名               | 追加されたバージョン |
-| -------------------------- | -------------------- |
-| allowArbitraryExtensions   | -                    |
-| allowImportingTsExtensions | -                    |
-| allowUmdGlobalAccess       | 3.5                  |
-| baseUrl                    | -                    |
-| customConditions           | -                    |
-| module                     | 1.0                  |
-| moduleResolution           | -                    |
-| moduleSuffixes             | 4.7                  |
-| noResolve                  | -                    |
-| paths                      | -                    |
-| resolveJsonModule          | -                    |
-| resolvePackageJsonExports  | -                    |
-| resolvePackageJsonImports  | -                    |
-| rootDir                    | 1.5                  |
-| rootDirs                   | 2.0                  |
-| typeRoots                  | -                    |
-| types                      | -                    |
+| Tên option                 | Phiên bản thêm vào |
+| -------------------------- | ------------------ |
+| allowArbitraryExtensions   | -                  |
+| allowImportingTsExtensions | -                  |
+| allowUmdGlobalAccess       | 3.5                |
+| baseUrl                    | -                  |
+| customConditions           | -                  |
+| module                     | 1.0                |
+| moduleResolution           | -                  |
+| moduleSuffixes             | 4.7                |
+| noResolve                  | -                  |
+| paths                      | -                  |
+| resolveJsonModule          | -                  |
+| resolvePackageJsonExports  | -                  |
+| resolvePackageJsonImports  | -                  |
+| rootDir                    | 1.5                |
+| rootDirs                   | 2.0                |
+| typeRoots                  | -                  |
+| types                      | -                  |
 
-## 型定義ファイル・JavaScriptファイルの出力
+## Output của type definition file và JavaScript file
 
-型定義ファイルやJavaScriptファイルをどのように出力するかの設定です。
+Cấu hình về cách output type definition file và JavaScript file.
 
-| オプション名           | 追加されたバージョン |
-| ---------------------- | -------------------- |
-| declaration            | 1.0                  |
-| declarationDir         | 2.0                  |
-| declarationMap         | 2.9                  |
-| downlevelIteration     | 2.3                  |
-| emitBOM                | -                    |
-| emitDeclarationOnly    | 2.8                  |
-| importHelpers          | -                    |
-| importsNotUsedAsValues | 3.8                  |
-| inlineSourceMap        | 1.5                  |
-| inlineSources          | 1.5                  |
-| mapRoot                | -                    |
-| newLine                | 1.5                  |
-| noEmit                 | -                    |
-| noEmitHelpers          | 1.5                  |
-| noEmitOnError          | 1.4                  |
-| outDir                 | -                    |
-| outFile                | 1.0                  |
-| preserveConstEnums     | -                    |
-| preserveValueImports   | 4.5                  |
-| removeComments         | -                    |
-| sourceMap              | -                    |
-| sourceRoot             | -                    |
-| stripInternal          | -                    |
+| Tên option             | Phiên bản thêm vào |
+| ---------------------- | ------------------ |
+| declaration            | 1.0                |
+| declarationDir         | 2.0                |
+| declarationMap         | 2.9                |
+| downlevelIteration     | 2.3                |
+| emitBOM                | -                  |
+| emitDeclarationOnly    | 2.8                |
+| importHelpers          | -                  |
+| importsNotUsedAsValues | 3.8                |
+| inlineSourceMap        | 1.5                |
+| inlineSources          | 1.5                |
+| mapRoot                | -                  |
+| newLine                | 1.5                |
+| noEmit                 | -                  |
+| noEmitHelpers          | 1.5                |
+| noEmitOnError          | 1.4                |
+| outDir                 | -                  |
+| outFile                | 1.0                |
+| preserveConstEnums     | -                  |
+| preserveValueImports   | 4.5                |
+| removeComments         | -                  |
+| sourceMap              | -                  |
+| sourceRoot             | -                  |
+| stripInternal          | -                  |
 
-## JavaScriptのサポート
+## Hỗ trợ JavaScript
 
-生のJavaScriptの取り扱いに関する設定です。
+Cấu hình liên quan đến xử lý JavaScript thuần.
 
-| オプション名         | 追加されたバージョン |
-| -------------------- | -------------------- |
-| allowJs              | 1.8                  |
-| checkJs              | 2.3                  |
-| maxNodeModuleJsDepth | -                    |
+| Tên option           | Phiên bản thêm vào |
+| -------------------- | ------------------ |
+| allowJs              | 1.8                |
+| checkJs              | 2.3                |
+| maxNodeModuleJsDepth | -                  |
 
-## エディターサポート
+## Hỗ trợ editor
 
-エディター上でのTypeScriptの挙動の設定です。
+Cấu hình về hành vi của TypeScript trong editor.
 
-| オプション名     | 追加されたバージョン |
-| ---------------- | -------------------- |
-| disableSizeLimit | -                    |
-| plugins          | -                    |
+| Tên option       | Phiên bản thêm vào |
+| ---------------- | ------------------ |
+| disableSizeLimit | -                  |
+| plugins          | -                  |
 
-## 相互運用性の成約
+## Ràng buộc về khả năng tương thích
 
-ESModuleとCommonJS間の相互運用や異なるファイルシステムでの開発を想定したファイルの大文字小文字の区別など相互運用性に関する設定です。
+Cấu hình liên quan đến khả năng tương thích như tương tác giữa ESModule và CommonJS, phân biệt chữ hoa chữ thường của file khi phát triển trên các file system khác nhau.
 
-| オプション名                            | 追加されたバージョン |
-| --------------------------------------- | -------------------- |
-| allowSyntheticDefaultImports            | 1.8                  |
-| esModuleInterop                         | 2.7                  |
-| forceConsistentCasingInFileNames        | -                    |
-| [isolatedModules](./isolatedModules.md) | 1.5                  |
-| preserveSymlinks                        | -                    |
-| verbatimModuleSyntax                    | -                    |
+| Tên option                                  | Phiên bản thêm vào |
+| ------------------------------------------- | ------------------ |
+| allowSyntheticDefaultImports                | 1.8                |
+| esModuleInterop                             | 2.7                |
+| forceConsistentCasingInFileNames            | -                  |
+| [isolatedModules](./isolatedModules.md)     | 1.5                |
+| preserveSymlinks                            | -                  |
+| verbatimModuleSyntax                        | -                  |
 
-## 下位互換性のサポート
+## Hỗ trợ backward compatibility
 
-TypeScriptの下位バージョンをサポートするための設定です。
+Cấu hình để hỗ trợ các phiên bản cũ hơn của TypeScript.
 
-| オプション名                   | 追加されたバージョン |
-| ------------------------------ | -------------------- |
-| charset                        | -                    |
-| keyofStringsOnly               | 2.9                  |
-| noImplicitUseStrict            | -                    |
-| noStrictGenericChecks          | 2.4                  |
-| out                            | -                    |
-| suppressExcessPropertyErrors   | -                    |
-| suppressImplicitAnyIndexErrors | -                    |
+| Tên option                     | Phiên bản thêm vào |
+| ------------------------------ | ------------------ |
+| charset                        | -                  |
+| keyofStringsOnly               | 2.9                |
+| noImplicitUseStrict            | -                  |
+| noStrictGenericChecks          | 2.4                |
+| out                            | -                  |
+| suppressExcessPropertyErrors   | -                  |
+| suppressImplicitAnyIndexErrors | -                  |
 
-## 言語と環境設定
+## Ngôn ngữ và cấu hình môi trường
 
-デコレーターなどの実験的な言語機能やJSX構文に関する設定です。
+Cấu hình liên quan đến các tính năng ngôn ngữ thử nghiệm như decorator và cú pháp JSX.
 
-| オプション名            | 追加されたバージョン |
-| ----------------------- | -------------------- |
-| emitDecoratorMetadata   | -                    |
-| experimentalDecorators  | -                    |
-| jsx                     | 2.2                  |
-| jsxFactory              | -                    |
-| jsxFragmentFactory      | 4.0                  |
-| jsxImportSource         | 4.1                  |
-| lib                     | 2.0                  |
-| moduleDetection         | 4.7                  |
-| noLib                   | -                    |
-| reactNamespace          | -                    |
-| target                  | 1.0                  |
-| useDefineForClassFields | 3.7                  |
+| Tên option              | Phiên bản thêm vào |
+| ----------------------- | ------------------ |
+| emitDecoratorMetadata   | -                  |
+| experimentalDecorators  | -                  |
+| jsx                     | 2.2                |
+| jsxFactory              | -                  |
+| jsxFragmentFactory      | 4.0                |
+| jsxImportSource         | 4.1                |
+| lib                     | 2.0                |
+| moduleDetection         | 4.7                |
+| noLib                   | -                  |
+| reactNamespace          | -                  |
+| target                  | 1.0                |
+| useDefineForClassFields | 3.7                |
 
-## コンパイラの診断情報
+## Thông tin chẩn đoán của compiler
 
-コンパイルのプロファイリングなどのコンパイラの診断情報に関する設定です
+Cấu hình liên quan đến thông tin chẩn đoán của compiler như profiling compile.
 
-| オプション名        | 追加されたバージョン |
-| ------------------- | -------------------- |
-| diagnostics         | -                    |
-| explainFiles        | 4.2                  |
-| extendedDiagnostics | -                    |
-| generateCpuProfile  | 3.7                  |
-| listEmittedFiles    | -                    |
-| listFiles           | -                    |
-| traceResolution     | 2.0                  |
+| Tên option          | Phiên bản thêm vào |
+| ------------------- | ------------------ |
+| diagnostics         | -                  |
+| explainFiles        | 4.2                |
+| extendedDiagnostics | -                  |
+| generateCpuProfile  | 3.7                |
+| listEmittedFiles    | -                  |
+| listFiles           | -                  |
+| traceResolution     | 2.0                |
 
-## プロジェクト
+## Project
 
-TypeScriptのProject Referencesに関する設定です。
+Cấu hình liên quan đến TypeScript Project References.
 
-| オプション名                            | 追加されたバージョン |
-| --------------------------------------- | -------------------- |
-| composite                               | 3.0                  |
-| disableReferencedProjectLoad            | 4.0                  |
-| disableSolutionSearching                | 3.8                  |
-| disableSourceOfProjectReferenceRedirect | 3.7                  |
-| incremental                             | 3.4                  |
-| tsBuildInfoFile                         | 3.4                  |
+| Tên option                              | Phiên bản thêm vào |
+| --------------------------------------- | ------------------ |
+| composite                               | 3.0                |
+| disableReferencedProjectLoad            | 4.0                |
+| disableSolutionSearching                | 3.8                |
+| disableSourceOfProjectReferenceRedirect | 3.7                |
+| incremental                             | 3.4                |
+| tsBuildInfoFile                         | 3.4                |
 
-## 出力フォーマット
+## Output format
 
-出力フォーマットに関する設定です。
+Cấu hình liên quan đến output format.
 
-| オプション名        | 追加されたバージョン |
-| ------------------- | -------------------- |
-| noErrorTruncation   | -                    |
-| preserveWatchOutput | -                    |
-| pretty              | -                    |
+| Tên option          | Phiên bản thêm vào |
+| ------------------- | ------------------ |
+| noErrorTruncation   | -                  |
+| preserveWatchOutput | -                  |
+| pretty              | -                  |
 
-## 型チェックの完全性
+## Độ đầy đủ của type check
 
-型チェックの厳密性に関する設定です。
+Cấu hình liên quan đến độ nghiêm ngặt của type check.
 
-| オプション名        | 追加されたバージョン |
-| ------------------- | -------------------- |
-| skipDefaultLibCheck | -                    |
-| skipLibCheck        | 2.0                  |
+| Tên option          | Phiên bản thêm vào |
+| ------------------- | ------------------ |
+| skipDefaultLibCheck | -                  |
+| skipLibCheck        | 2.0                |
 
-## ファイル監視
+## File watching
 
-ファイルの監視に関する設定です。
+Cấu hình liên quan đến file watching.
 
-| オプション名                              | 追加されたバージョン |
-| ----------------------------------------- | -------------------- |
-| assumeChangesOnlyAffectDirectDependencies | 3.8                  |
-| watchFile                                 | 3.8                  |
-| watchDirectory                            | 3.8                  |
-| fallbackPolling                           | 3.8                  |
-| synchronousWatchDirectory                 | -                    |
-| excludeDirectories                        | -                    |
-| excludeFiles                              | -                    |
+| Tên option                                | Phiên bản thêm vào |
+| ----------------------------------------- | ------------------ |
+| assumeChangesOnlyAffectDirectDependencies | 3.8                |
+| watchFile                                 | 3.8                |
+| watchDirectory                            | 3.8                |
+| fallbackPolling                           | 3.8                |
+| synchronousWatchDirectory                 | -                  |
+| excludeDirectories                        | -                  |
+| excludeFiles                              | -                  |
 
-## 型の取得
+## Lấy type
 
-JavaScriptプロジェクトでの型のダウンロードに関する設定です。
+Cấu hình liên quan đến download type trong JavaScript project.
 
-| オプション名                        | 追加されたバージョン |
-| ----------------------------------- | -------------------- |
-| enable                              | -                    |
-| include                             | -                    |
-| exclude                             | -                    |
-| disableFilenameBasedTypeAcquisition | 4.1                  |
+| Tên option                          | Phiên bản thêm vào |
+| ----------------------------------- | ------------------ |
+| enable                              | -                  |
+| include                             | -                  |
+| exclude                             | -                  |
+| disableFilenameBasedTypeAcquisition | 4.1                |

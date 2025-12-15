@@ -1,20 +1,20 @@
-# instanceof演算子
+# Toán tử instanceof
 
-`instanceof`演算子は、特定のオブジェクトがクラスのインスタンスかをチェックするJavaScriptの演算子です。
+Toán tử `instanceof` là toán tử của JavaScript để kiểm tra xem một object có phải là instance của class hay không.
 
-## 構文
+## Cú pháp
 
 ```js twoslash
 // prettier-ignore
 オブジェクト instanceof クラス
 ```
 
-### 引数
+### Tham số
 
-- オブジェクト: 検査するオブジェクトです。
-- クラス: 検査対象のクラス名です。
+- オブジェクト: Object cần kiểm tra.
+- クラス: Tên class cần kiểm tra.
 
-## 例
+## Ví dụ
 
 ```ts twoslash
 class ClassA {}
@@ -26,9 +26,9 @@ console.log(a instanceof ClassB);
 // @log: false
 ```
 
-## 継承と`instanceof`
+## Kế thừa và `instanceof`
 
-`instanceof`は継承関係をチェックすることもできます。たとえば、次のように`Child`クラスのインスタンスが`Parent`クラスのインスタンスかをチェックすることができます。
+`instanceof` cũng có thể kiểm tra quan hệ kế thừa. Ví dụ, có thể kiểm tra xem instance của class `Child` có phải là instance của class `Parent` hay không như sau:
 
 ```ts twoslash
 class Parent {}
@@ -38,22 +38,22 @@ console.log(child instanceof Parent);
 // @log: true
 ```
 
-## `instanceof`の反転
+## Đảo ngược `instanceof`
 
-`instanceof`演算子の結果を反転させる場合は、`値 instanceof クラス名`の句全体をカッコで囲った上で、否定演算子`!`を先頭につける必要があります。
+Để đảo ngược kết quả của toán tử `instanceof`, cần bao toàn bộ câu `値 instanceof クラス名` bằng ngoặc đơn và thêm toán tử phủ định `!` ở đầu.
 
 ```ts twoslash
 class MyClass {}
 const myInstance = new MyClass();
 // ---cut---
 if (!(myInstance instanceof MyClass)) {
-  // myInstanceがMyClassではないときの処理
+  // Xử lý khi myInstance không phải MyClass
 }
 ```
 
-## 抽象クラスと`instanceof`
+## Abstract class và `instanceof`
 
-TypeScriptには[抽象クラス](./abstract-class.md)があります。`instanceof`演算子は抽象クラスについても使うことができます。
+TypeScript có [abstract class](./abstract-class.md). Toán tử `instanceof` cũng có thể sử dụng với abstract class.
 
 ```ts twoslash
 abstract class AbstractClass {}

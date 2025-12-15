@@ -4,15 +4,15 @@ sidebar_label: Mapped Types
 
 # Mapped Types
 
-インデックス型では設定時はどのようなキーも自由に設定できてしまい、アクセス時は毎回`undefined`かどうかの型チェックが必要です。入力の形式が決まっているのであればMapped Typesの使用を検討できます。
+Với index type, bạn có thể tự do thiết lập bất kỳ key nào khi gán giá trị, nhưng khi truy cập phải kiểm tra `undefined` mỗi lần. Nếu format input đã được xác định rõ ràng, bạn có thể cân nhắc sử dụng Mapped Types.
 
-Mapped Typesは主にユニオン型と組み合わせて使います。ここにサポートする言語を定義します。
+Mapped Types chủ yếu được sử dụng kết hợp với union type. Dưới đây là định nghĩa các ngôn ngữ được hỗ trợ:
 
 ```ts twoslash
 type SystemSupportLanguage = "en" | "fr" | "it" | "es";
 ```
 
-これをインデックス型と同じようにキーの制約として使用することができます。
+Bạn có thể sử dụng nó như ràng buộc cho key tương tự như index type:
 
 ```ts twoslash
 type SystemSupportLanguage = "en" | "fr" | "it" | "es";
@@ -22,7 +22,7 @@ type Butterfly = {
 };
 ```
 
-このように`Butterfly`を定義するとシステムがサポートしない言語、ここでは`de`が設定、使用できなくなります。
+Khi định nghĩa `Butterfly` như thế này, ngôn ngữ không được hệ thống hỗ trợ (ở đây là `de`) sẽ không thể được thiết lập và sử dụng:
 
 ```ts twoslash
 type SystemSupportLanguage = "en" | "fr" | "it" | "es";
@@ -40,13 +40,13 @@ const butterflies: Butterfly = {
 };
 ```
 
-## Mapped Typesを使ったユーティリティ型の紹介とその実現方法
+## Giới thiệu utility types sử dụng Mapped Types và cách thực hiện
 
-プロパティを読み取り専用にする`readonly`をそのオブジェクトのすべてのプロパティに適用する`Readonly<T>`というユーティリティ型があります。
+Có một utility type tên là `Readonly<T>` áp dụng `readonly` cho tất cả các property của object, biến chúng thành read-only.
 
 [Readonly&lt;T>](utility-types/readonly.md)
 
-`Readonly<T>`もこの機能で実現されています。`Readonly<T>`は次のように実装されています。
+`Readonly<T>` cũng được thực hiện bằng tính năng này. `Readonly<T>` được implement như sau:
 
 ```ts twoslash
 // @noErrors
@@ -55,13 +55,13 @@ type Readonly<T> = {
 };
 ```
 
-`keyof T`という見慣れない表現が登場しましたが、これはオブジェクトのキーをユニオン型に変更するものだと解釈してください。`keyof`の詳細は型演算子をご覧ください。
+Biểu thức `keyof T` có vẻ xa lạ, nhưng bạn có thể hiểu nó là chuyển đổi các key của object thành union type. Chi tiết về `keyof` xem tại type operator.
 
-[keyof型演算子](keyof-type-operator.md)
+[keyof type operator](keyof-type-operator.md)
 
 ### mapping modifier
 
-`-`を先頭につけ`-readonly`とすることで、逆に読み取り専用となっているプロパティを変更可能にする`Mutable<T>`を作ることもできます（これはユーティリティ型にはありません）。このときの`-`をmapping modifierと呼びます。
+Bằng cách thêm `-` vào đầu và viết `-readonly`, bạn có thể tạo ra `Mutable<T>` để biến các property read-only thành có thể thay đổi (đây không phải là utility type có sẵn). Dấu `-` này được gọi là mapping modifier.
 
 ```ts twoslash
 type SystemSupportLanguage = "en" | "fr" | "it" | "es";
@@ -94,17 +94,17 @@ const mutableButterfly: MutableButterfly = {
 mutableButterfly.en = "Schmetterling"; // OK
 ```
 
-mapping modifier(`-`)は他にもオプション修飾子の前につけて`-?`とすることで、オプション修飾子を取り除くことができます。これを使うことで、`Partial<T>`の逆の効果を持つ`Required<T>`を実装することができます。
+Mapping modifier (`-`) cũng có thể được thêm vào trước optional modifier và viết thành `-?` để loại bỏ optional modifier. Sử dụng điều này, bạn có thể implement `Required<T>` có tác dụng ngược lại với `Partial<T>`.
 
 [Partial&lt;T>](utility-types/partial.md)
 
 [Required&lt;T>](utility-types/required.md)
 
-## インデックスアクセスの注意点
+## Lưu ý về index access
 
-`{ [K in string]: ... }`のようにキーに`string`など、リテラル型でない型を指定した場合は、インデックスアクセスに注意してください。存在しないキーにアクセスしても、キーが必ずあるかのようにあつかわれるためです。
+Khi chỉ định kiểu không phải literal type như `string` cho key trong `{ [K in string]: ... }`, cần chú ý về index access. Bởi vì ngay cả khi truy cập key không tồn tại, nó vẫn được xử lý như thể key đó luôn tồn tại.
 
-次の例のように、`{ [K in string]: number }`型の`dict`オブジェクトには、`a`キーはあるのに対し、`b`キーはありません。しかし、`dict.b`は`number`として推論されます。
+Trong ví dụ sau, object `dict` có kiểu `{ [K in string]: number }` có key `a` nhưng không có key `b`. Tuy nhiên, `dict.b` vẫn được suy luận là `number`.
 
 ```ts twoslash
 // @noUncheckedIndexedAccess: false
@@ -113,7 +113,7 @@ dict.b;
 //   ^?
 ```
 
-実際の`dict.b`の値は`undefined`になるので、もしも`dict.b`のメソッドを呼び出すと実行時エラーになります。
+Giá trị thực tế của `dict.b` là `undefined`, nên nếu gọi method của `dict.b` sẽ gây lỗi runtime.
 
 ```ts twoslash
 const dict: { [K in string]: number } = { a: 1 };
@@ -123,9 +123,9 @@ dict.b.toFixed(); // 実行時エラーが発生する
 // @noUncheckedIndexedAccess: false
 ```
 
-このような挙動は、型チェックで実行時エラーを減らしたいと考える開発者にとっては不都合です。
+Hành vi này không thuận lợi cho các developer muốn giảm runtime error thông qua type checking.
 
-この問題に対処するため、TypeScriptにはコンパイラオプション`noUncheckedIndexedAccess`が用意されています。これを有効にすると、インデックスアクセスの結果の型が`T | undefined`になります。つまり、`undefined`の可能性を考慮した型になるわけです。そのため、`dict.b`のメソッドを呼び出すコードはコンパイルエラーになり、型チェックの恩恵が得られます。
+Để giải quyết vấn đề này, TypeScript cung cấp compiler option `noUncheckedIndexedAccess`. Khi bật option này, kết quả của index access sẽ có kiểu `T | undefined`. Tức là kiểu này sẽ xem xét khả năng là `undefined`. Do đó, code gọi method của `dict.b` sẽ gây compile error và bạn có thể hưởng lợi từ type checking.
 
 ```ts twoslash
 // @errors: 18048
@@ -138,9 +138,9 @@ dict.b.toFixed();
 
 [noUncheckedIndexedAccess](../tsconfig/nouncheckedindexedaccess.md)
 
-## Mapped Typesには追加のプロパティが書けない
+## Mapped Types không thể thêm property bổ sung
 
-Mapped Typesは追加のプロパティが定義できません。ここは、[インデックス型]とは異なる点です。
+Mapped Types không thể định nghĩa property bổ sung. Đây là điểm khác biệt so với [index type].
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -151,7 +151,7 @@ type KeyValuesAndName = {
 };
 ```
 
-追加のプロパティがある場合は、その部分をオブジェクトの型として定義し、Mapped Typesと[インターセクション型]を成す必要があります。
+Nếu có property bổ sung, bạn cần định nghĩa phần đó như một object type riêng và tạo [intersection type] với Mapped Types.
 
 ```ts twoslash
 type KeyValues = {
@@ -163,7 +163,7 @@ type Name = {
 type KeyValuesAndName = KeyValues & Name;
 ```
 
-上の例は、ひとつの型にまとめることもできます。
+Ví dụ trên cũng có thể gộp thành một kiểu duy nhất:
 
 ```ts twoslash
 type KeyValuesAndName = {
@@ -173,5 +173,5 @@ type KeyValuesAndName = {
 };
 ```
 
-[インデックス型]: ../values-types-variables/object/index-signature.md
-[インターセクション型]: ../values-types-variables/intersection.md
+[index type]: ../values-types-variables/object/index-signature.md
+[intersection type]: ../values-types-variables/intersection.md

@@ -1,10 +1,10 @@
 ---
-sidebar_label: ジェネレーター
+sidebar_label: Generator
 ---
 
-# ジェネレーター (generator)
+# Generator
 
-Generatorを使用した関数はアロー関数での表記ではなく、必ず`function*() {}`と書く必要があります。次は可能なGeneratorの記述方法です。
+Hàm sử dụng Generator không thể viết bằng arrow function, mà bắt buộc phải viết dưới dạng `function*() {}`. Dưới đây là các cách khai báo Generator hợp lệ:
 
 ```ts twoslash
 function* generatorFunction1() {
@@ -22,6 +22,6 @@ class GeneratorSample {
 }
 ```
 
-Generatorは反復可能(`Iterable<T>`)な反復子(`Iterator<T>`)であるインターフェース`IterableIterator<T>`を実装したクラスのオブジェクトのことです。条件を満たしたクラスはGenerator関数の中で`yield`キーワードを使えます。`yield`は呼ばれたときに一度その値を呼び出し元へ返却し、次に呼ばれたときはその続きから処理を開始します。
+Generator là một object của class implement interface `IterableIterator<T>`, vừa là iterator (`Iterator<T>`) vừa là iterable (`Iterable<T>`). Các class thỏa mãn điều kiện này có thể sử dụng keyword `yield` trong hàm generator. `yield` khi được gọi sẽ trả về giá trị cho caller một lần, và khi được gọi tiếp theo sẽ tiếp tục xử lý từ vị trí đó.
 
-`Promise`が一般化する以前、非同期処理を代わりに担当する目的でGeneratorが使われていたことはありますが、前述の`Promise`に加えて`async / await`が一般的に使われるようになってから非同期処理の目的でGeneratorを使う機会は減りました。現在でも大量のデータを取得したいときに一度ではなく、小出しに取得したいときにGeneratorは使い道があります。
+Trước khi `Promise` trở nên phổ biến, Generator đã từng được sử dụng để xử lý bất đồng bộ. Tuy nhiên, với sự ra đời của `Promise` và `async/await`, việc sử dụng Generator cho mục đích xử lý bất đồng bộ đã giảm đi đáng kể. Hiện nay, Generator vẫn hữu ích khi cần lấy lượng lớn dữ liệu theo từng phần thay vì một lần.

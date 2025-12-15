@@ -1,10 +1,10 @@
 ---
-sidebar_label: 静的メソッド
+sidebar_label: Static method
 ---
 
-# 静的メソッド (static method)
+# Static method (static method)
 
-JavaやPHPには静的メソッド(static method)という概念があります。Rubyではクラスメソッドに相当します。通常のメソッドはインスタンスに属しますが、静的メソッドはクラスに属します。JavaやPHPではstaticキーワードで静的フィールドを宣言できます。
+Trong Java và PHP có khái niệm static method. Trong Ruby tương đương với class method. Method thông thường thuộc về instance, nhưng static method thuộc về class. Trong Java và PHP có thể khai báo static field bằng từ khóa static.
 
 ```java title="Java"
 class SomeClass {
@@ -32,7 +32,7 @@ class SomeClass
 SomeClass::doSomething();
 ```
 
-JavaScriptやTypeScriptでもstaticキーワードを使った静的メソッドの宣言ができます。
+JavaScript và TypeScript cũng có thể khai báo static method bằng từ khóa static.
 
 ```js title="JavaScript" twoslash
 class SomeClass {
@@ -43,9 +43,9 @@ class SomeClass {
 SomeClass.doSomething();
 ```
 
-## 静的メソッドとアクセス修飾子
+## Static method và access modifier
 
-TypeScriptの静的メソッドはアクセス修飾子を組み合わせられます。
+Static method của TypeScript có thể kết hợp với access modifier.
 
 ```ts twoslash
 class SomeClass {
@@ -55,4 +55,4 @@ class SomeClass {
 }
 ```
 
-[アクセス修飾子 (access modifier)](access-modifiers.md)
+[Access modifier (access modifier)](access-modifiers.md)

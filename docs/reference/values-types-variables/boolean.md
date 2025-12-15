@@ -3,23 +3,23 @@ sidebar_label: boolean型
 title: boolean型 (論理型)
 ---
 
-JavaScriptのboolean型は、`true`と`false`の論理値からなる型です。
+boolean型trong JavaScript là type bao gồm các giá trị logic `true` và `false`.
 
-## boolean型リテラル
+## boolean literal
 
-JavaScriptのboolean型リテラルは`true`または`false`を用いて次のように書きます。
+boolean literal trong JavaScript được viết bằng `true` hoặc `false`.
 
 ```ts twoslash
 const isOk = true;
 const isPanda = false;
 ```
 
-## boolean型の型注釈
+## Type annotation của boolean
 
-TypeScriptのboolean型の型注釈は`boolean`を使います。
+Type annotation của boolean trong TypeScript sử dụng `boolean`.
 
 ```ts twoslash
 const isOk: boolean = true;
 ```
 
-TypeScriptには大文字で始まる`Boolean`型がありますが、これと`boolean`は別の型です。
+TypeScript có type `Boolean` viết hoa đầu, nhưng đây là type khác với `boolean`.

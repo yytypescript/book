@@ -1,17 +1,17 @@
 ---
-description: 全プロパティをオプショナルにする
+description: Biến tất cả property thành optional
 title: Partial<T>
 ---
 
-`Partial<T>`は、オブジェクトの型`T`のすべてのプロパティをオプションプロパティにするユーティリティ型です。
+`Partial<T>` là utility type biến tất cả các property của object type `T` thành optional property.
 
-## Partial&lt;T>の型引数
+## Type argument của Partial&lt;T>
 
 ### T
 
-型引数`T`にはオブジェクトの型を渡します。
+Type argument `T` nhận object type.
 
-## Partialの使用例
+## Ví dụ sử dụng Partial
 
 ```ts twoslash
 type Person = {
@@ -23,7 +23,7 @@ type PartialPerson = Partial<Person>;
 //    ^?
 ```
 
-この`PartialPerson`は次の型と同じになります。
+`PartialPerson` này sẽ giống với kiểu sau:
 
 ```ts twoslash
 type PartialPerson = {
@@ -33,9 +33,9 @@ type PartialPerson = {
 };
 ```
 
-## Partialの実装
+## Implementation của Partial
 
-`Partial<T>`は次のように実装されています。
+`Partial<T>` được implement như sau:
 
 ```ts twoslash
 // @noErrors: 2300
@@ -44,15 +44,15 @@ type Partial<T> = {
 };
 ```
 
-`?`はオプション修飾子と呼ばれるもので、この修飾子をつけることでプロパティがオプショナルになります。`Partial<T>`は、`T`のすべてのプロパティにこの修飾子をつけた型を生成します。
+`?` được gọi là optional modifier, khi thêm modifier này, property sẽ trở thành optional. `Partial<T>` tạo ra kiểu với modifier này được thêm vào tất cả các property của `T`.
 
-## Partialを用いたOptions Objectパターンの例
+## Ví dụ về Options Object pattern sử dụng Partial
 
-`Partial`をOptions Objectパターンに応用すると、省略可能でありながら見やすい関数を実装できます。
+Áp dụng `Partial` vào Options Object pattern, bạn có thể implement function dễ đọc với các tham số có thể bỏ qua.
 
-[キーワード引数とOptions Objectパターン](../../functions/keyword-arguments-and-options-object-pattern.md)
+[Keyword arguments và Options Object pattern](../../functions/keyword-arguments-and-options-object-pattern.md)
 
-ユーザーの検索をかける関数を作ります。プロパティはそれぞれ引数となっており、対応する引数に値を与えると検索ができる関数`findUsers()`があるとします。ここでは例のため引数をすべてオプション引数にします。
+Tạo function để tìm kiếm user. Giả sử có function `findUsers()` mà mỗi property tương ứng với một argument, và bạn có thể tìm kiếm bằng cách cung cấp giá trị cho các argument tương ứng. Ở đây, để làm ví dụ, tất cả các argument đều là optional.
 
 ```ts twoslash
 type User = {
@@ -78,7 +78,7 @@ function findUsers(
 }
 ```
 
-この`findUsers()`のシグネチャだと**年齢だけがXX才の**ユーザーが欲しい時は引数の順番を維持するために他の引数は`undefined`を入力しなければいけません。
+Với signature của `findUsers()` này, khi chỉ muốn tìm user **chỉ có tuổi là XX**, phải nhập `undefined` cho các argument khác để duy trì thứ tự argument.
 
 ```ts twoslash
 type User = {
@@ -104,9 +104,9 @@ declare function findUsers(
 findUsers(undefined, undefined, undefined, 22);
 ```
 
-この例では引数は6個しかなく`age`以降の引数は省略できるためそこまで見辛くありませんが、多い引数の関数になるとどこが対応する引数なのかを探すだけでも面倒です。これを`Partial<T>`を使って見た目をよくできます。
+Trong ví dụ này chỉ có 6 argument và các argument sau `age` có thể bỏ qua nên chưa quá khó đọc, nhưng với function có nhiều argument, việc tìm argument tương ứng sẽ rất mệt mỏi. Chúng ta có thể cải thiện bằng `Partial<T>`.
 
-まず引数はすべてオブジェクトで受け渡しされるものとしてそのオブジェクトの型を定義します。さらにプロパティを省略可能にするために`Partial<T>`をつけます。
+Đầu tiên, định nghĩa kiểu của object mà tất cả argument sẽ được truyền qua object đó. Thêm `Partial<T>` để có thể bỏ qua các property.
 
 ```ts twoslash
 type User = {
@@ -123,7 +123,7 @@ type User = {
 type FindUsersArgs = Partial<User>;
 ```
 
-これを関数`findUsers()`の引数にします。
+Sử dụng nó làm argument của function `findUsers()`:
 
 ```ts twoslash
 type User = {
@@ -150,7 +150,7 @@ function findUsers({
 }
 ```
 
-これだけではまだ呼び出し側は省略ができません。`findUsers()`を使用する時は仮に何も設定する必要がなくても引数に`{}`を与えなければいけません。
+Với cách này, phía gọi vẫn chưa thể bỏ qua argument. Khi sử dụng `findUsers()`, ngay cả khi không cần thiết lập gì, vẫn phải truyền `{}` cho argument.
 
 ```ts twoslash
 type User = {
@@ -170,7 +170,7 @@ declare function findUsers(findUser: FindUsersArgs): unknown;
 findUsers({});
 ```
 
-引数を省略できるようにするためにデフォルト引数を使い省略時に`{}`が代入されるようにします。
+Để có thể bỏ qua argument, sử dụng default argument để gán `{}` khi bỏ qua:
 
 ```ts twoslash
 type User = {
@@ -200,9 +200,9 @@ findUsers();
 findUsers({ age: 22 });
 ```
 
-`FindUsersArgs`の右の`= {}`がそれにあたります。これにより`findUsers()`は引数がなくても呼び出せるようになります。特定の引数だけ値を指定することもできます。`findUsers({ age: 22 })`がその例です。
+`= {}` bên phải `FindUsersArgs` chính là phần đó. Nhờ đó, `findUsers()` có thể được gọi mà không cần argument. Bạn cũng có thể chỉ định giá trị cho argument cụ thể. `findUsers({ age: 22 })` là ví dụ.
 
-さらに`FindUsersArgs`側にもデフォルト型を設定することで初期値を代入することもできます。
+Ngoài ra, bạn cũng có thể gán giá trị mặc định bằng cách thiết lập default type cho `FindUsersArgs`:
 
 ```ts twoslash
 type User = {
@@ -227,6 +227,6 @@ function findUsers({
 }
 ```
 
-## 関連情報
+## Thông tin liên quan
 
 [Required&lt;T>](required.md)

@@ -1,10 +1,10 @@
-# 制御フロー分析と型ガードによる型の絞り込み
+# Phân tích control flow và thu hẹp kiểu bằng type guard
 
-TypeScriptは制御フローと型ガードにより、処理の流れに応じて変数の型を絞り込むことができます。
+TypeScript có thể thu hẹp kiểu của biến theo luồng xử lý thông qua control flow và type guard.
 
-## ユニオン型と曖昧さ
+## Union type và sự mơ hồ
 
-ユニオン型で変数の型注釈を書いた時に、片方の型でしか定義されていないメソッドやプロパティにアクセスをすると型エラーが発生します。
+Khi viết type annotation cho biến bằng union type, sẽ xảy ra lỗi kiểu nếu truy cập vào method hoặc property chỉ được định nghĩa ở một trong các kiểu.
 
 ```ts twoslash
 // @errors: 2339
@@ -13,13 +13,13 @@ function showMonth(month: string | number) {
 }
 ```
 
-これは`month`の変数が`string`or`number`型のどちらかになる可能性があり`number`型が渡された時に未定義なメソッドへのアクセスが発生する危険があるためです。
+Điều này là do biến `month` có thể là kiểu `string` hoặc `number`, và có nguy cơ xảy ra truy cập vào method chưa được định nghĩa khi kiểu `number` được truyền vào.
 
-## 制御フロー分析
+## Phân tích control flow
 
-TypeScriptは`if`や`for`ループなどの制御フローを分析することで、コードが実行されるタイミングでの型の可能性を判断しています。
+TypeScript phân tích control flow như `if` hoặc vòng lặp `for` để xác định khả năng về kiểu tại thời điểm code được thực thi.
 
-先ほどの例に`month`変数が`string`型であることを条件判定を追加することで`month`の`padStart`メソッドの実行時は`month`が`string`型であるとTypeScriptが判断し型エラーを解消することができます。
+Trong ví dụ trước, bằng cách thêm điều kiện kiểm tra biến `month` là kiểu `string`, TypeScript sẽ xác định rằng tại thời điểm thực thi method `padStart` của `month`, `month` là kiểu `string`, giúp giải quyết lỗi kiểu.
 
 ```ts twoslash
 function showMonth(month: string | number) {
@@ -29,9 +29,9 @@ function showMonth(month: string | number) {
 }
 ```
 
-もう少し複雑な例を見てみましょう。
+Hãy xem một ví dụ phức tạp hơn.
 
-次の例では`month`の`toFixed`メソッドの呼び出しは条件分岐のスコープ外であり`month`変数の型が`string | number`となるため型エラーが発生します。
+Trong ví dụ sau, việc gọi method `toFixed` của `month` nằm ngoài scope của điều kiện phân nhánh, nên kiểu của biến `month` vẫn là `string | number`, dẫn đến lỗi kiểu.
 
 ```ts twoslash
 // @errors: 2339
@@ -43,7 +43,7 @@ function showMonth(month: string | number) {
 }
 ```
 
-この関数の最初の条件分岐の中に`return`を追記して早期リターンで関数の処理を終了させてみます。
+Thêm `return` vào điều kiện phân nhánh đầu tiên của hàm để kết thúc xử lý hàm bằng early return.
 
 ```ts twoslash
 function showMonth(month: string | number) {
@@ -55,23 +55,23 @@ function showMonth(month: string | number) {
 }
 ```
 
-この変更によりエラーとなっていた`month`の`toFixed`メソッドの呼び出しの型エラーが解消されます。
+Thay đổi này giải quyết lỗi kiểu khi gọi method `toFixed` của `month`.
 
-これは制御フロー分析により`month`変数が`string`型の場合は早期リターンにより関数が終了し、`month`の`toFixed`メソッドが実行されるタイミングでは`month`変数は`number`型のみであるとTypeScriptが判断するためです。
+Điều này là do phân tích control flow xác định rằng nếu biến `month` là kiểu `string`, hàm sẽ kết thúc bằng early return, và tại thời điểm method `toFixed` của `month` được thực thi, TypeScript xác định biến `month` chỉ có thể là kiểu `number`.
 
-## 型ガード
+## Type guard
 
-制御フローの説明において、型の曖昧さを回避するために`if(typeof month === "string")`という条件判定で変数の型を判定して型の絞り込みを行いました。
+Trong phần giải thích về control flow, chúng ta đã thu hẹp kiểu bằng cách sử dụng điều kiện `if(typeof month === "string")` để kiểm tra kiểu của biến và tránh sự mơ hồ về kiểu.
 
-このような型チェックのコードを型ガードと呼びます。
+Code kiểm tra kiểu như thế này được gọi là type guard.
 
 ### typeof
 
-代表的な例は`typeof`演算子を利用した型ガードです。
+Ví dụ điển hình là type guard sử dụng toán tử `typeof`.
 
 [typeof演算子](../values-types-variables/typeof-operator.md)
 
-次の例では`typeof`で`month`変数の型を`string`型と判定しています。
+Trong ví dụ sau, `typeof` được sử dụng để xác định biến `month` là kiểu `string`.
 
 ```ts twoslash
 function showMonth(month: string | number) {
@@ -81,9 +81,9 @@ function showMonth(month: string | number) {
 }
 ```
 
-`typeof`の型ガードでは`typeof null === "object"`となる点に注意が必要です。
+Cần lưu ý rằng với type guard bằng `typeof`, `typeof null === "object"`.
 
-JavaScriptにおいて`null`はオブジェクトであるため、次の型ガードを書いた場合は`date`変数は`Date | null`に絞り込まれ`null`となる可能性が残ってしまい型エラーが発生します。
+Trong JavaScript, `null` là object, nên khi viết type guard như sau, biến `date` sẽ bị thu hẹp thành `Date | null`, vẫn còn khả năng là `null`, dẫn đến lỗi kiểu.
 
 ```ts twoslash
 // @errors: 18047
@@ -94,7 +94,7 @@ function getMonth(date: string | Date | null) {
 }
 ```
 
-`date != null`の型ガードを追加することで型エラーを解消できます。
+Có thể giải quyết lỗi kiểu bằng cách thêm type guard `date != null`.
 
 ```ts twoslash
 function getMonth(date: string | Date | null) {
@@ -106,8 +106,8 @@ function getMonth(date: string | Date | null) {
 
 ### instanceof
 
-`typeof`でインスタンスを判定した場合はオブジェクトであることまでしか判定ができません。
-特定のクラスのインスタンスであることを判定する型ガードを書きたい場合は`instanceof`を利用します。
+Khi xác định instance bằng `typeof`, chỉ có thể xác định là object.
+Để viết type guard xác định là instance của một class cụ thể, sử dụng `instanceof`.
 
 ```ts twoslash
 function getMonth(date: string | Date) {
@@ -119,7 +119,7 @@ function getMonth(date: string | Date) {
 
 ### in
 
-特定のクラスのインスタンスであることを明示せず、`in`演算子でオブジェクトが特定のプロパティを持つかを判定する型ガードを書くことで型を絞り込むこともできます。
+Không cần chỉ định rõ là instance của class cụ thể, mà có thể thu hẹp kiểu bằng cách viết type guard sử dụng toán tử `in` để kiểm tra object có property cụ thể hay không.
 
 ```ts twoslash
 interface Wizard {
@@ -138,9 +138,9 @@ function attack(player: Wizard | Swordsman) {
 }
 ```
 
-### ユーザー定義の型ガード関数
+### Hàm type guard do người dùng định nghĩa
 
-型ガードはインラインで記述する以外にも関数として定義することもできます。
+Type guard có thể được định nghĩa dưới dạng hàm ngoài việc viết inline.
 
 ```ts
 function isWizard(player: Player): player is Wizard {
@@ -156,13 +156,13 @@ function attack(player: Wizard | Swordsman) {
 }
 ```
 
-この名称(user-defined type guard)は英語としても長いらしく、型ガード関数(type guarding function, guard's function)と呼ばれることもあります。
+Tên gọi này (user-defined type guard) dường như dài ngay cả trong tiếng Anh, nên đôi khi được gọi là hàm type guard (type guarding function, guard's function).
 
 [型ガード関数](../functions/type-guard-functions.md)
 
-### 型ガードの変数代入
+### Gán type guard vào biến
 
-型ガードに変数を使うこともできます。
+Cũng có thể sử dụng biến cho type guard.
 
 ```ts twoslash
 function getMonth(date: string | Date) {
@@ -173,9 +173,9 @@ function getMonth(date: string | Date) {
 }
 ```
 
-## `switch (true)` による型の絞り込み
+## Thu hẹp kiểu bằng `switch (true)`
 
-`switch`文は`case`節の値によって異なるコードを実行します。通常、`case`節には文字列や数値を指定しますが、TypeScriptでは`switch (true)`を使用すると、各`case`節で真偽値を返す式を評価できます。`true`と評価された`case`ブロック内では、その条件に基づいて型が自動的に絞り込まれます。
+Câu lệnh `switch` thực thi code khác nhau dựa trên giá trị của mệnh đề `case`. Thông thường, trong mệnh đề `case` sẽ chỉ định chuỗi hoặc số, nhưng trong TypeScript, sử dụng `switch (true)` cho phép đánh giá biểu thức trả về giá trị boolean trong mỗi mệnh đề `case`. Trong block `case` được đánh giá là `true`, kiểu sẽ tự động được thu hẹp dựa trên điều kiện đó.
 
 ```ts twoslash
 function handleValue(value: string | number | boolean): void {
@@ -195,7 +195,7 @@ function handleValue(value: string | number | boolean): void {
 }
 ```
 
-`typeof`に限らず`instanceof`に対しても同様に使用することができます。次の例の`UserError`と`SystemError`は独自に`user`と`system`プロパティを持っているクラスです。`switch (true)`を使用してどちらのエラーかを判別し、それぞれのプロパティにアクセスしています。
+Không chỉ `typeof`, mà cũng có thể sử dụng tương tự với `instanceof`. Trong ví dụ sau, `UserError` và `SystemError` là các class có property riêng `user` và `system`. Sử dụng `switch (true)` để phân biệt error nào và truy cập vào property tương ứng.
 
 ```ts twoslash
 class UserError extends Error {
@@ -231,7 +231,7 @@ function handleError(error: UserError | SystemError): void {
 }
 ```
 
-ユーザー定義型ガード関数を`switch (true)`に使用することもできます。
+Cũng có thể sử dụng hàm type guard do người dùng định nghĩa với `switch (true)`.
 
 ```ts twoslash
 type Panda = {
@@ -270,7 +270,7 @@ function handleValue(value: Panda | Broccoli | User): void {
 }
 ```
 
-## 関連情報
+## Thông tin liên quan
 
 [any型](../values-types-variables/any.md)
 

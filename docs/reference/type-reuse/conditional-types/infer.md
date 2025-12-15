@@ -4,11 +4,11 @@ sidebar_label: infer
 
 # infer
 
-inferはConditional Typesの中で使われる型演算子です。`infer`は「推論する」という意味で`extends`の右辺にのみ書くことができます。
+infer là type operator được sử dụng trong Conditional Types. `infer` có nghĩa là "suy luận" và chỉ có thể được viết ở phía bên phải của `extends`.
 
-## ユーティリティ型`ReturnType<T>`の例から`infer`を知る
+## Tìm hiểu `infer` qua ví dụ utility type `ReturnType<T>`
 
-ある関数の戻り値の型を取得するユーティリティ型`ReturnType<T>`があります。`ReturnType<T>`は次のように定義されています。
+Có một utility type `ReturnType<T>` lấy kiểu return value của một function. `ReturnType<T>` được định nghĩa như sau:
 
 ```ts twoslash
 // @noErrors
@@ -19,7 +19,7 @@ type ReturnType<T extends (...args: any) => any> = T extends (
   : any;
 ```
 
-試しに使ってみましょう。
+Hãy thử sử dụng nó:
 
 ```ts twoslash
 const request = (url: string): Promise<string> => {
@@ -30,25 +30,25 @@ type X = ReturnType<typeof request>;
 //   ^?
 ```
 
-`typeof`は変数から型を取得する演算子です。JavaScriptの`typeof`とは異なるので注意してください。
+`typeof` là operator lấy kiểu từ biến. Lưu ý rằng nó khác với `typeof` của JavaScript.
 
-[typeof型演算子](../typeof-type-operator.md)
+[typeof type operator](../typeof-type-operator.md)
 
-このように関数`request`の型から戻り値の型を取得することができました。
+Như vậy, chúng ta có thể lấy kiểu return value từ kiểu của function `request`.
 
-### `ReturnType<T>`の解説
+### Giải thích `ReturnType<T>`
 
-`ReturnType<T>`の構造を知るためにはまず`T extends (...args: any) => any`が何かを知る必要があります。これは一般的な関数の型を示しています。任意の個数で任意の型の引数を受け取り、任意の型の値を返すことを示しています。`T`は任意の関数を示しています。
-そして戻り値の部分が`=> infer R ? R : any`となっており、`T`が関数である場合は戻り値の型である`R`、そうでない場合は`any`を返すという意味になっています。
-総合的に`ReturnType<T>`は`T`が関数に割り当て可能である場合は`R`、そうでない場合は`any`を返します。
+Để hiểu cấu trúc của `ReturnType<T>`, trước tiên cần biết `T extends (...args: any) => any` là gì. Đây là kiểu biểu diễn một function tổng quát. Nó biểu thị function nhận số lượng tùy ý các argument với kiểu tùy ý và trả về giá trị với kiểu tùy ý. `T` biểu thị một function bất kỳ.
+Và phần return value là `=> infer R ? R : any`, có nghĩa là nếu `T` là function thì trả về kiểu return value `R`, ngược lại trả về `any`.
+Tổng thể, `ReturnType<T>` trả về `R` nếu `T` có thể gán cho function, ngược lại trả về `any`.
 
-`infer`を使うことによってある型`T`が配列である場合はその要素の型、そうでない場合は`never`を返す`Flatten<T>`を作ってみましょう。
+Hãy sử dụng `infer` để tạo `Flatten<T>` trả về kiểu phần tử nếu kiểu `T` là array, ngược lại trả về `never`.
 
 ```ts twoslash
 type Flatten<T> = T extends (infer U)[] ? U : never;
 ```
 
-この`Flatten<T>`を使ってみましょう。
+Hãy thử sử dụng `Flatten<T>`:
 
 ```ts twoslash
 type Flatten<T> = T extends (infer U)[] ? U : never;
@@ -63,4 +63,4 @@ type D = Flatten<[string, number]>;
 //   ^?
 ```
 
-2次元配列に`Flatten<T>`を適用すると1次元配列が返ってくることが、タプル型に`Flatten<T>`を適用するとユニオン型が返ってくることがわかります。
+Chúng ta có thể thấy rằng khi áp dụng `Flatten<T>` cho mảng 2 chiều sẽ trả về mảng 1 chiều, và khi áp dụng `Flatten<T>` cho tuple type sẽ trả về union type.

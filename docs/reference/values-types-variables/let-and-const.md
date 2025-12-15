@@ -1,38 +1,38 @@
-# 変数宣言: letとconst
+# Khai báo biến: let và const
 
-JavaScriptの変数宣言(variable declaration)には、`let`と`const`があります。
+Variable declaration trong JavaScript có `let` và `const`.
 
-## letの変数宣言
+## Khai báo biến với let
 
-`let`を用いた変数宣言の書き方は次のようにします。
+Cách viết khai báo biến bằng `let` như sau.
 
 ```ts twoslash
 let x = 1;
 ```
 
-`let`は再代入が可能です。
+`let` cho phép gán lại giá trị.
 
 ```ts twoslash
 let x = 1;
 x = 2; // 再代入ができる
 ```
 
-`let`は変数の初期値なしで変数定義できます。初期値なしの変数の値は`undefined`になります。
+`let` có thể định nghĩa biến không có giá trị khởi tạo. Giá trị của biến không có giá trị khởi tạo là `undefined`.
 
 ```js twoslash
 let x; // 初期値なし
 x = 1; // 後で代入
 ```
 
-## constの変数宣言
+## Khai báo biến với const
 
-`const`を用いた変数宣言の書き方は次のようになります。初期値は必須です。
+Cách viết khai báo biến bằng `const` như sau. Giá trị khởi tạo là bắt buộc.
 
 ```js twoslash
 const y = 2;
 ```
 
-`const`は変数への再代入が禁止されています。
+`const` không cho phép gán lại giá trị cho biến.
 
 ```js twoslash
 const y = 1;
@@ -40,23 +40,23 @@ y = 1;
 // @error: TypeError: Assignment to constant variable.
 ```
 
-## letとconstの使い分け
+## Phân biệt cách dùng let và const
 
-初めて JavaScript を書く場合に、`let`と`const`のどちらの変数宣言を使えばよいか悩む場合があるかもしれません。基本は`const`で変数宣言をして必要な場合にのみ、`let`を使うのがオススメです。`const`で変数宣言することで再代入を禁止して、意図せず変数が書き換えられることを予防できるので、より安全なコードになります。
+Khi lần đầu viết JavaScript, có thể phân vân nên dùng `let` hay `const` để khai báo biến. Khuyến nghị là cơ bản dùng `const` để khai báo biến, chỉ dùng `let` khi cần thiết. Khai báo biến bằng `const` ngăn chặn việc gán lại, tránh việc biến bị thay đổi ngoài ý muốn, giúp code an toàn hơn.
 
 <PostILearned>
 
-・JavaScriptの変数宣言はletとconstがある
-・letは再代入OK、constは再代入NG
-・基本的にconstを使うとよい
+・Variable declaration trong JavaScript có let và const
+・let cho phép gán lại, const không cho phép gán lại
+・Cơ bản nên dùng const
 
 </PostILearned>
 
-## constは可変オブジェクトを保護しない
+## const không bảo vệ mutable object
 
-constは再代入不可な変数名を宣言するだけです。constには、可変(ミュータブル)なオブジェクトのプロパティを不変にする保護効果はありません。この点は誤解されがちです。
+const chỉ khai báo tên biến không thể gán lại. const không có hiệu quả bảo vệ khiến property của mutable object trở nên immutable. Điểm này thường bị hiểu lầm.
 
-たとえば、constでオブジェクトを宣言した場合、変数自体への再代入はできません。ところが、オブジェクトプロパティは変更できます。
+Ví dụ, khi khai báo object bằng const, không thể gán lại cho bản thân biến. Tuy nhiên có thể thay đổi object property.
 
 ```ts twoslash
 // @errors: 2588
@@ -65,11 +65,11 @@ obj = { a: 2 }; // 再代入は不可
 obj.a = 2; // プロパティの変更はできる
 ```
 
-TypeScriptでオブジェクトを不変にするには、プロパティを読み取り専用にする必要があります。
+Để làm object immutable trong TypeScript, cần đặt property thành read-only.
 
 [readonlyプロパティ](./object/readonly-property.md)
 
-配列もオブジェクトの一種なので同様です。変数自体の再代入はできません。しかし、配列要素は変更できます。
+Array cũng là một loại object nên tương tự. Không thể gán lại cho bản thân biến. Tuy nhiên có thể thay đổi element của array.
 
 ```ts twoslash
 // @errors: 2588
@@ -78,10 +78,10 @@ arr = [3, 4]; // 再代入は不可
 arr.push(3); // 要素の変更はできる
 ```
 
-TypeScriptで配列を不変にするには読み取り専用配列を使う必要があります。
+Để làm array immutable trong TypeScript cần dùng read-only array.
 
 [読み取り専用配列](./array/readonly-array.md)
 
-constアサーションを使ってオブジェクトや配列を不変にする方法もあります。
+Cũng có phương pháp làm object hoặc array immutable bằng const assertion.
 
 [constアサーション](./const-assertion.md)

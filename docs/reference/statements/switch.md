@@ -1,22 +1,22 @@
-# switch文
+# Câu lệnh switch
 
-switch構文はJavaScriptで条件分岐を行うための構文です。
+Cú pháp switch là cú pháp để thực hiện điều kiện phân nhánh trong JavaScript.
 
 ```js
-switch (条件) {
-  case 値A:
-    値Aの処理;
+switch (điều_kiện) {
+  case giá_trị_A:
+    xử_lý_cho_giá_trị_A;
     break;
-  case 値B:
-    値Bの処理;
+  case giá_trị_B:
+    xử_lý_cho_giá_trị_B;
     break;
   default:
-    値Aと値B以外の処理;
+    xử_lý_cho_các_giá_trị_khác;
     break;
 }
 ```
 
-switch文を使った例は次です。
+Ví dụ sử dụng câu lệnh switch như sau.
 
 ```js twoslash
 const extension = "ts";
@@ -28,13 +28,13 @@ switch (extension) {
     console.log("TypeScript");
     break;
   default:
-    console.log("不明な言語");
+    console.log("Ngôn ngữ không xác định");
     break;
 }
 // @log: "TypeScript"
 ```
 
-このコードはif-elseで書き直すと次のようになります。
+Viết lại code này bằng if-else như sau.
 
 ```js twoslash
 const extension = "ts";
@@ -43,12 +43,12 @@ if (extension === "js") {
 } else if (extension === "ts") {
   console.log("TypeScript");
 } else {
-  console.log("不明な言語");
+  console.log("Ngôn ngữ không xác định");
 }
 // @log: "TypeScript"
 ```
 
-caseは連続して書くこともできます。
+Các case cũng có thể viết liên tiếp.
 
 ```js twoslash
 const food = "🍙";
@@ -56,28 +56,28 @@ switch (food) {
   case "🍎":
   case "🍓":
   case "🍉":
-    console.log("くだもの");
+    console.log("Trái cây");
     break;
   case "🍙":
   case "🍜":
   case "🍞":
-    console.log("炭水化物");
+    console.log("Tinh bột");
     break;
   case "🥕":
   case "🧅":
   case "🥬":
-    console.log("野菜");
+    console.log("Rau củ");
     break;
   default:
-    console.log("未知の食べ物");
+    console.log("Thức ăn không xác định");
     break;
 }
-// @log: "炭水化物"
+// @log: "Tinh bột"
 ```
 
-## switchは厳密等価演算
+## switch sử dụng phép so sánh bằng nghiêm ngặt
 
-switch構文でその値であると判断されるのは等価演算(`==`)ではなく厳密等価演算(`===`)です。たとえば`null`と`undefined`は等価演算では等しいとされますが厳密等価演算では等しくありません。
+Trong cú pháp switch, giá trị được xác định bằng phép so sánh bằng nghiêm ngặt (`===`) chứ không phải phép so sánh bằng (`==`). Ví dụ, `null` và `undefined` được coi là bằng nhau trong phép so sánh bằng, nhưng không bằng nhau trong phép so sánh bằng nghiêm ngặt.
 
 ```ts twoslash
 console.log(null == undefined);
@@ -86,7 +86,7 @@ console.log(null === undefined);
 // @log: false
 ```
 
-このふたつを使ったswitch構文を作るとそのことがよくわかります。
+Điều này rõ ràng khi tạo cú pháp switch sử dụng hai giá trị này.
 
 ```ts twoslash
 function test(n: unknown): void {

@@ -1,19 +1,19 @@
 ---
-description: strict系のオプションを一括で有効化する
+description: Bật hàng loạt các option thuộc nhóm strict
 tags: [strict]
 ---
 
 # strict
 
-`strict`はstrict系のコンパイラオプションを一括で有効化するコンパイラオプションです。
+`strict` là compiler option bật hàng loạt các compiler option thuộc nhóm strict.
 
-- デフォルト: `false`
-- 追加されたバージョン: 2.3
-- TypeScript公式が有効化推奨
+- Mặc định: `false`
+- Phiên bản thêm vào: 2.3
+- TypeScript khuyến nghị nên bật
 
-## 解説
+## Giải thích
 
-このオプションは**TypeScript4.4時点で**次の8個のオプションをすべて有効にしていることと同じです。スクラッチから開発するのであれば有効にしておいて差し支えないでしょう。
+Option này **tính đến TypeScript 4.4** tương đương với việc bật cả 8 option sau. Nếu phát triển từ đầu thì nên bật option này.
 
 - noImplicitAny
 - strictNullChecks
@@ -24,4 +24,4 @@ tags: [strict]
 - useUnknownInCatchVariables
 - alwaysStrict
 
-この説明にTypeScriptのバージョンが明記されているのは、今後のバージョンで**オプションが追加または廃止されることがありうる**からです。より安定したオプションを設定したい場合は`strict`ではなく個々のオプションを有効にしてください。このオプションを有効にして個々のオプションを無効にした場合個々の設定が優先されます。
+Lý do ghi rõ phiên bản TypeScript trong giải thích là vì **trong các phiên bản tương lai có thể thêm hoặc bỏ các option**. Nếu muốn cấu hình ổn định hơn, thay vì dùng `strict` hãy bật từng option riêng lẻ. Khi bật option này mà tắt các option riêng lẻ thì cấu hình riêng lẻ sẽ được ưu tiên.

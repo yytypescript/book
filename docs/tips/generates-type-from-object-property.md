@@ -1,10 +1,10 @@
-# オブジェクトからプロパティの型を生成する
+# Tạo type property từ object
 
-## オブジェクトからプロパティだけ欲しい
+## Muốn lấy chỉ property từ object
 
-[オブジェクトからキーの型を生成する](generates-type-from-object-key.md)
+[Tạo type key từ object](generates-type-from-object-key.md)
 
-前ページとは対照的にオブジェクトからプロパティだけのユニオン型を得ることを目的とします。今回も前回と同様に次のメッセージが定義されているとします。
+Trái ngược với trang trước, mục tiêu là lấy union type chỉ của property từ object. Lần này cũng giống như lần trước, giả sử có message sau được định nghĩa.
 
 ```ts twoslash
 const conf = {
@@ -16,7 +16,7 @@ const conf = {
 };
 ```
 
-最終的には次のようなユニオン型が今回の目的です。
+Cuối cùng, union type như sau là mục tiêu lần này.
 
 ```ts twoslash
 type ConfirmationMessage =
@@ -27,21 +27,21 @@ type ConfirmationMessage =
   | "您确定吗？";
 ```
 
-## 今回の問題を解くにあたって
+## Để giải bài toán lần này
 
-今回は今まで紹介してきたオブジェクトから型を作り出す方法と Mapped Types の合わせ技で再現することができます。
+Lần này có thể thực hiện bằng cách kết hợp phương pháp tạo type từ object đã giới thiệu trước đó và Mapped Types.
 
-[オブジェクトから型を生成する](generates-type-from-object.md)
+[Tạo type từ object](generates-type-from-object.md)
 
-[オブジェクトからキーの型を生成する](generates-type-from-object-key.md)
+[Tạo type key từ object](generates-type-from-object-key.md)
 
-アプローチの方法としてはまずオブジェクトからキーの型を生成し Mapped Types を使いオブジェクトのプロパティの型を参照、それらをリテラル型で取得します。
+Cách tiếp cận là đầu tiên tạo type key từ object, sử dụng Mapped Types để tham chiếu type property của object, và lấy chúng dưới dạng literal type.
 
-### キーの型を生成する
+### Tạo type key
 
-キーの型の生成は前のページにあるものと同一です。次のようにすることでキーである言語のユニオン型を取得できます。詳細についてはオブジェクトからキーの値を生成するのページをご覧ください。
+Tạo type key giống với trang trước. Có thể lấy được union type của ngôn ngữ là key bằng cách sau. Để biết chi tiết, hãy xem trang tạo type key từ object.
 
-[オブジェクトからキーの型を生成する](generates-type-from-object-key.md)
+[Tạo type key từ object](generates-type-from-object-key.md)
 
 ```ts twoslash
 const conf = {
@@ -58,7 +58,7 @@ type Language = keyof typeof conf;
 
 ### Mapped Types
 
-オブジェクトのプロパティの型を参照するために Mapped Types を使います。そのとき元のオブジェクトから型を生成するために`typeof`を使います。
+Sử dụng Mapped Types để tham chiếu type property của object. Khi đó sử dụng `typeof` để tạo type từ object gốc.
 
 ```ts twoslash
 const conf = {
@@ -74,9 +74,9 @@ type ConfirmationMessage = (typeof conf)[Language];
 //   ^?
 ```
 
-### リテラル型を取得するできるようにする
+### Làm cho có thể lấy literal type
 
-このままだとオブジェクトから型を生成すると同じように型はリテラル型ではありません。つまりただの`string`型のユニオン型つまり`string`型です。そこで、元のオブジェクト`conf`に`as const`をつけます。
+Nếu để nguyên như này, giống như tạo type từ object, type không phải là literal type. Nghĩa là chỉ là union type của `string` type tức là `string` type. Vì vậy, thêm `as const` vào object gốc `conf`.
 
 ```ts twoslash
 const conf = {
@@ -88,9 +88,9 @@ const conf = {
 } as const;
 ```
 
-## まとめ
+## Tóm tắt
 
-お好みで定義したキーの型`Language`を Mapped Types のキーの部分に代入します。最終的な形は次のようになります。
+Tùy ý gán type key `Language` đã định nghĩa vào phần key của Mapped Types. Hình thức cuối cùng như sau.
 
 ```ts twoslash
 const conf = {
@@ -105,4 +105,4 @@ type ConfirmationMessage = (typeof conf)[keyof typeof conf];
 //   ^?
 ```
 
-`as const`を忘れないようにしてください。
+Đừng quên `as const`.

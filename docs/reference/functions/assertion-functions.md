@@ -1,11 +1,11 @@
 ---
-sidebar_label: アサーション関数
+sidebar_label: Assertion function
 ---
 
-# アサーション関数 (assertion functions)
+# Assertion function
 
-ユーザー定義の型ガード関数として使われるのはType predicateが主ですが、Assertion functionという方法もあります。
-Type predicateはboolean型の戻り値に対して使いましたがこちらは関数が例外を投げるかどうかで判定します。型ガード関数のページで作った関数`isDuck()`をAssertion functionsで書きかえると次のようになります。
+Type predicate chủ yếu được sử dụng như user-defined type guard function, nhưng cũng có một phương pháp khác là assertion function.
+Type predicate được sử dụng với giá trị trả về kiểu boolean, còn assertion function xác định dựa trên việc function có throw exception hay không. Nếu viết lại function `isDuck()` được tạo trong trang type guard function bằng assertion function, nó sẽ như sau:
 
 ```ts twoslash
 // @errors: 2339
@@ -28,7 +28,7 @@ function isDuck(animal: Animal): asserts animal is Duck {
   throw new Error("YOU ARE A FROG!!!");
 }
 
-// ここではquacks()は存在しない
+// Ở đây quacks() không tồn tại
 animal.quacks();
 
 isDuck(animal);
@@ -36,4 +36,4 @@ isDuck(animal);
 animal.quacks();
 ```
 
-こちらはこの関数が呼ばれた後であればいつでも変数`animal`は`Duck`型として解釈されます。
+Với cách này, sau khi function được gọi, biến `animal` sẽ luôn được hiểu là kiểu `Duck`.

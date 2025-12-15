@@ -1,15 +1,15 @@
 ---
-sidebar_label: ジェネリクス
+sidebar_label: Generics
 slug: /reference/generics
 ---
 
-# ジェネリクス (generics)
+# Generics (generics)
 
-型の安全性とコードの共通化の両立は難しいものです。あらゆる型で同じコードを使おうとすると、型の安全性が犠牲になります。逆に、型の安全性を重視しようとすると、同じようなコードを量産する必要が出てコードの共通化が達成しづらくなります。こうした問題を解決するために導入された言語機能がジェネリクスです。ジェネリクスを用いると、**型の安全性とコードの共通化を両立する**ことができます。
+Việc kết hợp giữa type safety và code reusability là một thách thức. Nếu cố gắng sử dụng cùng một đoạn code cho nhiều kiểu dữ liệu khác nhau, type safety sẽ bị hy sinh. Ngược lại, nếu tập trung vào type safety, bạn sẽ phải viết nhiều đoạn code tương tự nhau, khiến code reusability khó đạt được. Generics là tính năng được giới thiệu để giải quyết vấn đề này. Với generics, bạn có thể **đồng thời đảm bảo type safety và code reusability**.
 
-## ジェネリクスが解決する問題
+## Vấn đề mà generics giải quyết
 
-ジェネリクスが具体的にどのような問題を解決するのか見ていきましょう。ここに、`chooseRandomlyString()`という普通の関数があります。この関数は、2つの文字列を引数に受け取り、五分五分の確率で第1引数か第2引数の値を抽選して返します。
+Hãy xem generics giải quyết những vấn đề cụ thể nào. Ở đây có một hàm thông thường là `chooseRandomlyString()`. Hàm này nhận hai tham số kiểu string và trả về ngẫu nhiên một trong hai giá trị với xác suất 50-50.
 
 ```ts twoslash
 function chooseRandomlyString(v1: string, v2: string): string {
@@ -17,7 +17,7 @@ function chooseRandomlyString(v1: string, v2: string): string {
 }
 ```
 
-`chooseRandomlyString`は文字列の抽選に限っては、この関数を再利用していくことができます。
+`chooseRandomlyString` có thể được tái sử dụng cho việc chọn ngẫu nhiên string.
 
 ```ts twoslash
 declare function chooseRandomlyString(v1: string, v2: string): string;
@@ -25,33 +25,33 @@ declare function chooseRandomlyString(v1: string, v2: string): string;
 const winOrLose = chooseRandomlyString("勝ち", "負け");
 ```
 
-次に、文字列だけでなく数値の抽選も同じロジックで行う必要が出てきたと考えてみましょう。`chooseRandomlyString()`は文字列にしか対応していないので、数値用の関数を新設しないとなりません。
+Tiếp theo, giả sử bạn cần chọn ngẫu nhiên không chỉ string mà còn cả number với cùng logic. Vì `chooseRandomlyString()` chỉ hỗ trợ string nên bạn phải tạo một hàm mới cho number.
 
 ```ts twoslash
-// 数値用の抽選関数
+// Hàm chọn ngẫu nhiên cho number
 function chooseRandomlyNumber(v1: number, v2: number): number {
   return Math.random() <= 0.5 ? v1 : v2;
 }
 const num: number = chooseRandomlyNumber(1, 2);
 ```
 
-さらに、五分五分抽選のロジックは汎用的なので、広告のA/Bテストのために`URL`オブジェクト向けの実装も作ることになりました。
+Hơn nữa, vì logic chọn ngẫu nhiên 50-50 rất generic, bạn cũng tạo implementation cho đối tượng `URL` để phục vụ A/B test quảng cáo.
 
 ```ts twoslash
 const urlA: URL = new URL("https://www.example.com/1");
 const urlB: URL = new URL("https://www.example.com/2");
 // ---cut---
-// URLオブジェクト向けの抽選関数
+// Hàm chọn ngẫu nhiên cho URL object
 function chooseRandomlyURL(v1: URL, v2: URL): URL {
   return Math.random() <= 0.5 ? v1 : v2;
 }
 const url: URL = chooseRandomlyURL(urlA, urlB);
 ```
 
-ここまでで、`chooseRandomly()`関数は二度複製され、型だけが異なる同じ関数が3つもできてしまいました。
+Đến đây, hàm `chooseRandomly()` đã bị sao chép hai lần, tạo ra ba hàm giống hệt nhau chỉ khác nhau về kiểu dữ liệu.
 
 ```ts twoslash
-// 重複した3つの関数
+// 3 hàm trùng lặp
 function chooseRandomlyString(v1: string, v2: string): string {
   return Math.random() <= 0.5 ? v1 : v2;
 }
@@ -63,9 +63,9 @@ function chooseRandomlyURL(v1: URL, v2: URL): URL {
 }
 ```
 
-では、コードを共通化するにはどうしたらいいのでしょうか？まず考えられる方法としては、型を`any`にしてしまう方法です。この方法の問題点としては、戻り値の型も`any`になってしまうため、コンパイラのチェックが行われなくなり、バグを生みやすくなることです。つまり、型の安全性が損なわれるということです。
+Vậy làm thế nào để tái sử dụng code? Một phương pháp có thể nghĩ đến là dùng kiểu `any`. Vấn đề của phương pháp này là kiểu trả về cũng trở thành `any`, khiến compiler không thể kiểm tra và dễ gây ra lỗi. Nói cách khác, type safety bị mất đi.
 
-下のサンプルコードでは、`chooseRandomly()`に`number`型を渡していますが、戻り値は`string`型のつもりで扱っています。このコードはコンパイルエラーにはなりませんが、コンパイル後のコードを実行してみると5行目で「TypeError: str.toLowerCase is not a function」というエラーが発生します。
+Trong đoạn code mẫu dưới đây, tuy truyền kiểu `number` vào `chooseRandomly()`, nhưng lại xử lý giá trị trả về như kiểu `string`. Code này không gây compile error, nhưng khi chạy sẽ xuất hiện lỗi "TypeError: str.toLowerCase is not a function" ở dòng 5.
 
 ```ts twoslash
 function chooseRandomly(v1: any, v2: any): any {
@@ -75,7 +75,7 @@ let str = chooseRandomly(0, 1);
 str = str.toLowerCase();
 ```
 
-コードの共通化と型の安全性の両方を達成するにはどうしたらいいのでしょうか？ここで、役に立つのがジェネリクスです。ジェネリクスの発想は実はとてもシンプルで、「型も変数のように扱えるようにする」というものです。どういうことでしょうか？先に取り上げた重複した3つの関数を「どの部分がそれぞれ異なっているのか？」という視点で見てみましょう。すると、次のように`<>`で強調した部分が違うことに気がつくはずです。それ以外はまったく同じコードです。
+Làm thế nào để đạt được cả code reusability và type safety? Đây là lúc generics phát huy tác dụng. Ý tưởng của generics rất đơn giản: "cho phép xử lý type như biến". Điều này có nghĩa là gì? Hãy xem ba hàm trùng lặp ở trên từ góc độ "phần nào khác nhau?". Bạn sẽ nhận thấy chỉ có phần được đánh dấu bằng `<>` dưới đây là khác nhau. Phần còn lại hoàn toàn giống nhau.
 
 ```ts twoslash
 // @noErrors
@@ -93,11 +93,11 @@ chooseRandomly<Number>(1, 2);
 chooseRandomly<URL>(urlA, urlB);
 ```
 
-このそれぞれ違う部分は型に関するところです。この部分を変数のように扱いたいとしたら、ジェネリクスの文法を知らなくても、プログラマーなら次のようなコードを想像するのではないでしょうか？
+Phần khác nhau này liên quan đến type. Nếu muốn xử lý phần này như biến, ngay cả khi chưa biết cú pháp generics, các programmer có thể tưởng tượng ra code như sau:
 
 ```ts twoslash
 // @noErrors
-// 注意: これは架空の文法です
+// Lưu ý: Đây là cú pháp giả định
 function chooseRandomly<type>(v1: <type>, v2: <type>): <type> {
   return Math.random() <= 0.5 ? v1 : v2;
 }
@@ -106,9 +106,9 @@ chooseRandomly<number>(1, 2);
 chooseRandomly<URL>(urlA, urlB);
 ```
 
-`<type>`に置き換えたところが「型の引数」を表した部分です。値の引数と同様に、この例では型も引数なので`chooseRandomly()`関数を呼び出すときは、`chooseRandomly<string>`のように型を関数に渡します。型をまるで引数のように扱ったコードがここで誕生したわけです。「ジェネリクスは、型も変数のように扱えるようにすること」だと説明しましたが、もうその意味がお分かりなのではないでしょうか。
+Phần được thay thế bằng `<type>` biểu thị "type argument". Giống như argument của value, trong ví dụ này type cũng là argument nên khi gọi hàm `chooseRandomly()`, bạn truyền type vào hàm như `chooseRandomly<string>`. Code xử lý type như argument đã ra đời. Bây giờ bạn đã hiểu ý nghĩa của "generics cho phép xử lý type như biến" chưa?
 
-上のコードは、あくまでジェネリクスの発想を理解するためにでっち上げた架空のコードでした。このままではTypeScriptは理解できないので、TypeScriptのジェネリクスの文法で書き直してみましょう。架空のコードともそこまでかけ離れてはいません。次のように書きます。
+Đoạn code trên chỉ là code giả định để hiểu ý tưởng của generics. TypeScript không thể hiểu code này, vì vậy hãy viết lại bằng cú pháp generics của TypeScript. Nó không quá khác biệt so với code giả định. Cú pháp như sau:
 
 ```ts twoslash
 const urlA: URL = new URL("https://www.example.com/1");
@@ -122,9 +122,9 @@ chooseRandomly<number>(1, 2);
 chooseRandomly<URL>(urlA, urlB);
 ```
 
-`chooseRandomly`の`<T>`は型変数名の定義です。慣習として`T`がよく使われますが、`A`でも`Type`でも構いません。関数の引数の型や戻り値の型として書かれた`T`は型変数を参照しています。
+`<T>` trong `chooseRandomly` là định nghĩa type variable. Theo quy ước, `T` thường được sử dụng, nhưng bạn cũng có thể dùng `A` hoặc `Type`. `T` được viết ở kiểu tham số và kiểu trả về của hàm là tham chiếu đến type variable.
 
-先ほどコンパイル時には気づけなかったバグコードに、ジェネリクス化した`chooseRandomly`を使ってみましょう。すると、「Argument of type '0' is not assignable to parameter of type 'string'.」というコンパイルエラーが発生するようになり、`string`型を入れなければならないところに`0`を代入しているバグに気づくことができるようになりました。
+Hãy thử dùng hàm `chooseRandomly` đã được generic hóa với đoạn code lỗi mà trước đây không phát hiện được lúc compile. Bây giờ sẽ xuất hiện compile error "Argument of type '0' is not assignable to parameter of type 'string'.", giúp phát hiện lỗi khi truyền `0` vào nơi phải là kiểu `string`.
 
 ```ts twoslash
 // @errors: 2345
@@ -135,11 +135,11 @@ let str = chooseRandomly<string>(0, 1);
 str = str.toLowerCase();
 ```
 
-これまでで、ジェネリックではない関数たちを共通化した上で、さらに型の安全性を確保していく過程を見ながら、ジェネリクスが解決する問題点について説明してきました。ジェネリクスはコードの共通化と型の安全性を両立してくれる言語機能です。汎用的なコードをさまざまな型で使えるようにしたい際に、ジェネリクスを使うことを考えてみてください。
+Cho đến nay, chúng ta đã thấy quá trình tái sử dụng các hàm không generic và đồng thời đảm bảo type safety, đồng thời giải thích các vấn đề mà generics giải quyết. Generics là tính năng ngôn ngữ cho phép kết hợp code reusability và type safety. Khi muốn sử dụng code generic với nhiều kiểu dữ liệu khác nhau, hãy cân nhắc sử dụng generics.
 
-## まとめ
+## Tóm tắt
 
-- コードの共通化すると、型の安全性が弱まる。
-- 型の安全性を高めると、コードの共通化が難しくなる。
-- ジェネリクスは、コードの共通化と型の安全性を両立するための言語機能。
-- ジェネリクスは、型も引数のように扱うという発想。
+- Code reusability làm giảm type safety.
+- Type safety cao khiến code reusability khó đạt được.
+- Generics là tính năng ngôn ngữ giúp kết hợp code reusability và type safety.
+- Generics dựa trên ý tưởng xử lý type như argument.

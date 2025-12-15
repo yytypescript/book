@@ -1,6 +1,6 @@
-# if-else文
+# Câu lệnh if-else
 
-JavaScriptの条件分岐はJavaやPHPと同じようにif-else構文を用います。
+Trong JavaScript, điều kiện phân nhánh sử dụng cú pháp if-else giống như Java hoặc PHP.
 
 ```js twoslash
 if (value === 0) {
@@ -10,7 +10,7 @@ if (value === 0) {
 }
 ```
 
-JavaScriptにもelse-ifがあります。`else if`のようにelseとifの間にはスペースが必要です。
+JavaScript cũng có else-if. Cần có khoảng trắng giữa else và if như `else if`.
 
 ```js twoslash
 if (value === 0) {
@@ -22,14 +22,14 @@ if (value === 0) {
 }
 ```
 
-JavaScriptのif-elseは文です。式ではないので、条件分岐を直接変数に代入することはできません。
+if-else trong JavaScript là câu lệnh (statement), không phải biểu thức (expression), nên không thể gán trực tiếp điều kiện phân nhánh cho biến.
 
 ```js
-// こんな書き方はできない
+// Không thể viết như thế này
 const result = if (value === 0) "OK" else "NG";
 ```
 
-式で条件分岐を使いたい場合は三項演算子(ternary operator)を用います。
+Nếu muốn sử dụng điều kiện phân nhánh dưới dạng biểu thức, sử dụng toán tử ba ngôi (ternary operator).
 
 ```js twoslash
 const result = value === 0 ? "OK" : "NG";
@@ -37,7 +37,7 @@ const result = value === 0 ? "OK" : "NG";
 
 [三項演算子 (ternary operator)](ternary-operator.md)
 
-上のコードと同じロジックをif-elseで書く場合は、`if`ブロックの手前で結果を代入する変数を`let`で宣言します。
+Nếu viết logic tương tự đoạn code trên bằng if-else, cần khai báo biến để gán kết quả bằng `let` trước block `if`.
 
 ```js twoslash
 let result;
@@ -48,6 +48,6 @@ if (value === 0) {
 }
 ```
 
-## 関連情報
+## Thông tin liên quan
 
 [switch文](switch.md)

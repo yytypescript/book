@@ -5,9 +5,9 @@ sidebar_label: Conditional Types
 
 # Conditional Types
 
-Conditional Typesは日本語では条件付き型、型の条件分岐、条件型などと呼ばれ、ちょうど三項演算子のように`?`と`:`を使って`T extends U ? X : Y`のように書きます。これは`T`が`U`に割り当て可能である場合、`X`になり、そうでない場合は`Y`になります。
+Conditional Types được gọi bằng nhiều tên như kiểu điều kiện, phân nhánh kiểu, v.v. Nó được viết dưới dạng `T extends U ? X : Y` giống như toán tử ba ngôi, sử dụng `?` và `:`. Nếu `T` có thể gán cho `U`, kết quả sẽ là `X`, ngược lại sẽ là `Y`.
 
-このような場合だと型は`true`になります。
+Trong trường hợp này, kiểu sẽ là `true`:
 
 ```ts twoslash
 type IsString<T> = T extends string ? true : false;
@@ -16,7 +16,7 @@ const a: IsString<"a"> = true;
 //    ^?
 ```
 
-たとえば、あるobject型のプロパティを読み取り専用にする`Readonly<T>`というユーティリティ型があります。`Readonly<T>`はそのオブジェクトの直下のプロパティを読み取り専用にしますが、ネストしたオブジェクトのプロパティは読み取り専用にしません。たとえば、次のようなオブジェクトがあるとします。
+Ví dụ, có một utility type `Readonly<T>` biến các property của object type thành read-only. `Readonly<T>` chỉ biến các property trực tiếp của object thành read-only, nhưng không áp dụng cho các property của object lồng nhau. Giả sử có object như sau:
 
 ```ts twoslash
 type Person = {
@@ -29,7 +29,7 @@ type Person = {
 };
 ```
 
-このとき`Readonly<Person>`では`address`プロパティ自体は読み取り専用になっており書き換えることはできませんが、`address`のプロパティの`country`と`city`は読み取り専用になっていません。上書きが可能です。
+Khi sử dụng `Readonly<Person>`, property `address` tự nó đã là read-only và không thể ghi đè, nhưng các property `country` và `city` của `address` không phải read-only và có thể ghi đè.
 
 ```ts twoslash
 type Person = {
@@ -61,7 +61,7 @@ kimberley.address.country = "United States";
 kimberley.address.city = "Seattle";
 ```
 
-これを解決するには`Readonly<T>`を再帰的に適用する必要があります。このような場合にMapped TypesとConditional Typesを組み合わせて使います。
+Để giải quyết vấn đề này, cần áp dụng `Readonly<T>` một cách đệ quy. Trong trường hợp này, chúng ta kết hợp Mapped Types và Conditional Types.
 
 ```ts twoslash
 type Freeze<T> = Readonly<{
@@ -69,7 +69,7 @@ type Freeze<T> = Readonly<{
 }>;
 ```
 
-このような`Freeze<T>`を作ってみました。まずはこれを使ってみましょう。
+Hãy tạo `Freeze<T>` như thế này và thử sử dụng nó.
 
 ```ts twoslash
 type Person = {
@@ -105,11 +105,11 @@ kimberley.address.country = "United States";
 kimberley.address.city = "Seattle";
 ```
 
-`Readonly<T>`とは異なり、`address.country`と`address.city`が書き換え不可能になりました。これは`Freeze<T>`が再帰的に適用されているからです。
+Khác với `Readonly<T>`, `address.country` và `address.city` giờ đây không thể ghi đè. Đó là vì `Freeze<T>` được áp dụng một cách đệ quy.
 
-`[P in keyof T]`の部分についてはMapped Typesのページで説明していますのでここでは簡潔に説明します。`keyof T`はオブジェクトのキーをユニオン型に変更するものです。`kimberley`の場合は`"name" | "age" | "address"`になります。`in`はその中のどれかを意味します。
-`T[P]`でオブジェクトのあるキーにおけるプロパティの型を取得します。その型が`object`であれば再起的に`Freeze<T[P]>`を適用し、そうでなければ`T[P]`をそのまま使います。
+Phần `[P in keyof T]` đã được giải thích trong trang Mapped Types nên ở đây sẽ giải thích ngắn gọn. `keyof T` chuyển đổi các key của object thành union type. Với `kimberley`, nó sẽ là `"name" | "age" | "address"`. `in` có nghĩa là một trong số đó.
+`T[P]` lấy kiểu của property tại một key nào đó của object. Nếu kiểu đó là `object`, áp dụng đệ quy `Freeze<T[P]>`, ngược lại sử dụng `T[P]` như vốn có.
 
 [Mapped Types](../mapped-types.md)
 
-これによってオブジェクトを再帰的に凍結することができました。
+Nhờ đó, chúng ta có thể đóng băng object một cách đệ quy.

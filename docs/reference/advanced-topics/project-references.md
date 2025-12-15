@@ -1,77 +1,77 @@
 ---
-sidebar_label: プロジェクト参照
+sidebar_label: Project References
 ---
 
-# プロジェクト参照 (project references)
+# Project References
 
-TypeScriptのプロジェクト参照(project references)は、大規模なTypeScriptプログラムを効率的に管理するための強力な機能です。この機能を使用することで、開発者は大きなコードベースを小さな部分に分割し、より効率的に作業を進めることができます。
+Project references của TypeScript là tính năng mạnh mẽ giúp quản lý hiệu quả các chương trình TypeScript quy mô lớn. Với tính năng này, developer có thể chia codebase lớn thành các phần nhỏ hơn và làm việc hiệu quả hơn.
 
-## TypeScriptプロジェクト参照とは何か
+## Project References của TypeScript là gì
 
-プロジェクト参照は、TypeScript 3.0で導入された機能で、複数の関連するTypeScriptプロジェクトを論理的に分割し、それらの間の依存関係を明示的に定義する方法を提供します。これにより、大規模なアプリケーションやライブラリを構造化し、管理しやすくすることができます。
+Project references là tính năng được giới thiệu trong TypeScript 3.0, cung cấp cách chia các TypeScript project liên quan thành các phần logic và định nghĩa rõ ràng mối quan hệ phụ thuộc giữa chúng. Nhờ đó có thể cấu trúc và quản lý các application hoặc library quy mô lớn dễ dàng hơn.
 
-たとえば、フロントエンドもバックエンドも一枚岩(single monolith)の大規模なTypeScriptプロジェクトを、小さな独立したプロジェクトに分割して、それらの間の依存関係を明確に定義することができるということです。以下は、プロジェクト参照を使用した大規模なTypeScriptプロジェクトの構造の一例です：
+Ví dụ, một TypeScript project quy mô lớn kiểu monolith (cả frontend và backend) có thể được chia thành các project độc lập nhỏ hơn, và định nghĩa rõ ràng mối quan hệ phụ thuộc giữa chúng. Dưới đây là một ví dụ cấu trúc TypeScript project quy mô lớn sử dụng project references:
 
 ```plaintext
-├── フロントエンド
+├── Frontend
 │   ├── UI
-│   └── ロジック
+│   └── Logic
 │
-├── バックエンド
+├── Backend
 │   ├── API
-│   └── データベース
+│   └── Database
 │
-└── 共通
+└── Common
 ```
 
-この中の、UI、ロジック、API、データベース、共通がプロジェクト参照における「プロジェクト」です。プロジェクト間の依存関係も次のように明確に定義できます。
+Trong đó, UI, Logic, API, Database, Common là các "project" trong project references. Mối quan hệ phụ thuộc giữa các project có thể được định nghĩa rõ ràng như sau:
 
-- フロントエンド/UI は フロントエンド/ロジック に依存しています。
-- フロントエンド/ロジック は 共通 に依存しています。
-- バックエンド/API は バックエンド/データベース に依存しています。
-- バックエンド/データベース は 共通 に依存しています。
+- Frontend/UI phụ thuộc vào Frontend/Logic
+- Frontend/Logic phụ thuộc vào Common
+- Backend/API phụ thuộc vào Backend/Database
+- Backend/Database phụ thuộc vào Common
 
-プロジェクトという単位に分割されることで、各プロジェクトは独立してビルドすることができます。そして、ビルドも依存関係を考慮して自動的に行われます。
+Nhờ việc chia thành các đơn vị project, mỗi project có thể được build độc lập. Và việc build cũng được thực hiện tự động dựa trên mối quan hệ phụ thuộc.
 
-## なぜプロジェクト参照が必要なのか
+## Tại sao cần Project References
 
-プロジェクト参照には次のような重要な利点があります：
+Project references mang lại các lợi ích quan trọng sau:
 
-1. ビルド時間の大幅な改善
-2. コンポーネント間の論理的な分離の強化
-3. コードの新しい、よりよい組織化方法の実現
-4. 型チェックとコンパイルの速度向上
-5. エディター使用時のメモリ使用量の減少
-6. プログラムの論理的なグループ化の強化
+1. Cải thiện đáng kể thời gian build
+2. Tăng cường sự phân tách logic giữa các component
+3. Thực hiện cách tổ chức code tốt hơn, mới hơn
+4. Tăng tốc độ type checking và compilation
+5. Giảm memory usage khi sử dụng editor
+6. Tăng cường nhóm các phần logic của chương trình
 
-これらの利点により、大規模なTypeScriptプロジェクトの開発と保守が大幅に容易になります。
+Nhờ các lợi ích này, việc phát triển và bảo trì TypeScript project quy mô lớn trở nên dễ dàng hơn đáng kể.
 
-## プロジェクト参照の基本概念
+## Khái niệm cơ bản về Project References
 
-プロジェクト参照を理解し、効果的に使用するためには、いくつかの基本的な概念と設定オプションを知る必要があります。
+Để hiểu và sử dụng hiệu quả project references, cần nắm một số khái niệm cơ bản và tùy chọn cấu hình.
 
-### `tsconfig.json`の`references`プロパティ
+### Property `references` trong `tsconfig.json`
 
-プロジェクト参照の中心となるのは、`tsconfig.json`ファイルの`references`プロパティです。このプロパティを使用して、他のプロジェクトへの参照を定義します。
+Trung tâm của project references là property `references` trong file `tsconfig.json`. Property này được sử dụng để định nghĩa tham chiếu đến các project khác.
 
 ```json
 {
   "compilerOptions": {
-    // 通常のコンパイラオプション
+    // Các compiler option thông thường
   },
   "references": [{ "path": "../otherproject" }]
 }
 ```
 
-この例では、現在のプロジェクトが`../otherproject`にあるプロジェクトを参照していることを示しています。
+Ví dụ này cho thấy project hiện tại đang tham chiếu đến project ở `../otherproject`.
 
-### `composite`オプションの役割
+### Vai trò của option `composite`
 
-参照されるプロジェクトでは、`composite`オプションを有効にする必要があります。このオプションは次の効果があります：
+Các project được tham chiếu cần bật option `composite`. Option này có các hiệu ứng sau:
 
-1. `rootDir`が明示的に設定されていない場合、デフォルトで`tsconfig.json`ファイルを含むディレクトリになります。
-2. すべての実装ファイルが`include`パターンにマッチするか、`files`配列にリストされている必要があります。
-3. `declaration`オプションを有効にする必要があります。
+1. Nếu `rootDir` không được thiết lập rõ ràng, mặc định sẽ là thư mục chứa file `tsconfig.json`.
+2. Tất cả file implementation phải match với pattern `include` hoặc được liệt kê trong mảng `files`.
+3. Phải bật option `declaration`.
 
 ```json
 {
@@ -82,12 +82,12 @@ TypeScriptのプロジェクト参照(project references)は、大規模なTypeS
 }
 ```
 
-### `declarationMap`オプションとその利点
+### Option `declarationMap` và lợi ích
 
-`declarationMap`オプションを有効にすると、宣言ファイル（`.d.ts`）のソースマップが生成されます。これにより、次のような利点があります：
+Khi bật option `declarationMap`, source map của declaration file (`.d.ts`) sẽ được tạo ra. Điều này mang lại các lợi ích sau:
 
-1. プロジェクトの境界を越えて「定義へ移動」や「名前の変更」などのエディター機能を透過的に使用できます。
-2. ソースコードとコンパイル後のコードの対応関係をより詳細に把握できます。
+1. Có thể sử dụng các tính năng của editor như "Go to Definition" hoặc "Rename" một cách trong suốt qua ranh giới project.
+2. Có thể nắm bắt chi tiết hơn mối quan hệ tương ứng giữa source code và code sau compile.
 
 ```json
 {
@@ -99,128 +99,128 @@ TypeScriptのプロジェクト参照(project references)は、大規模なTypeS
 }
 ```
 
-これらの基本的な設定を理解することで、プロジェクト参照を効果的に使用し、大規模なTypeScriptプロジェクトを効率的に管理できるようになります。
+Bằng cách hiểu các thiết lập cơ bản này, bạn có thể sử dụng hiệu quả project references và quản lý hiệu quả các TypeScript project quy mô lớn.
 
-## プロジェクト参照が解決する主な課題
+## Các vấn đề chính mà Project References giải quyết
 
-プロジェクト参照は、大規模なTypeScriptプロジェクトで開発者が直面する多くの課題を解決します。次に主な課題とその解決方法を示します：
+Project references giải quyết nhiều vấn đề mà developer gặp phải trong các TypeScript project quy mô lớn. Dưới đây là các vấn đề chính và cách giải quyết:
 
-1. ビルド時間の長さ：
-   - プロジェクト参照を使用すると、変更されたプロジェクトのみを再コンパイルできるため、大規模プロジェクトでのコンパイル時間が大幅に短縮されます。
-2. コード構造の複雑さ：
-   - 大きなコードベースを論理的に分割し、各部分を独立したプロジェクトとして管理できるため、全体の構造が明確になり、管理が容易になります。
-3. 依存関係の管理：
-   - プロジェクト間の依存関係を`tsconfig.json`ファイルで明示的に定義できるため、コードベース全体の構造と関係性が明確になります。
-4. 不必要な再コンパイル：
-   - 変更されていない部分の再コンパイルを避けることができるため、ビルドプロセスの効率が大幅に向上します。
-5. 型チェックの遅延：
-   - プロジェクトを小さな部分に分割することで、各部分の型チェックが高速化され、全体的な性能が向上します。
-6. モジュール間の不適切な参照：
-   - プロジェクト境界を明確に定義することで、意図しないモジュール間の参照を防ぎ、コードの構造を改善できます。
-7. ビルドプロセスの複雑さ：
-   - `tsc --build`モードを使用することで、複数の設定ファイルや複雑なビルドスクリプトの必要性が減り、ビルドプロセスが簡素化されます。
+1. Thời gian build dài:
+   - Khi sử dụng project references, chỉ cần recompile các project đã thay đổi, giúp giảm đáng kể thời gian compilation trong project quy mô lớn.
+2. Độ phức tạp của cấu trúc code:
+   - Chia codebase lớn thành các phần logic và quản lý mỗi phần như một project độc lập, giúp cấu trúc tổng thể rõ ràng và dễ quản lý hơn.
+3. Quản lý dependency:
+   - Có thể định nghĩa rõ ràng dependency giữa các project trong file `tsconfig.json`, làm rõ cấu trúc và mối quan hệ của toàn bộ codebase.
+4. Recompilation không cần thiết:
+   - Có thể tránh recompilation các phần không thay đổi, giúp tăng đáng kể hiệu quả của build process.
+5. Type checking chậm:
+   - Chia project thành các phần nhỏ giúp tăng tốc type checking của mỗi phần, cải thiện performance tổng thể.
+6. Tham chiếu không phù hợp giữa các module:
+   - Định nghĩa rõ ràng ranh giới project giúp ngăn chặn tham chiếu không mong muốn giữa các module, cải thiện cấu trúc code.
+7. Độ phức tạp của build process:
+   - Sử dụng mode `tsc --build` giúp giảm nhu cầu về nhiều config file hoặc build script phức tạp, đơn giản hóa build process.
 
-これらの課題を解決することで、プロジェクト参照は大規模なTypeScriptプロジェクトの開発効率と保守性を大幅に向上させます。
+Bằng cách giải quyết các vấn đề này, project references giúp cải thiện đáng kể hiệu quả phát triển và khả năng bảo trì của các TypeScript project quy mô lớn.
 
-## プロジェクト参照の利点
+## Lợi ích của Project References
 
-プロジェクト参照を導入することで、開発者は多くの利点を享受できます。主な利点は次の通りです：
+Khi áp dụng project references, developer có thể hưởng nhiều lợi ích. Các lợi ích chính như sau:
 
-### メモリ効率
+### Hiệu quả về Memory
 
-プロジェクト参照は、従来の方法と比較して非常にメモリ効率がよいです：
+Project references rất hiệu quả về memory so với phương pháp truyền thống:
 
-1. プロセス数の削減：
-   - 従来の方法：各パッケージで`tsc --watch`を実行する場合、パッケージごとに1つのプロセスが必要でした。
-   - プロジェクト参照：1つのプロセスですべてのパッケージをカバーできます。
-2. メモリ使用量の比較：
-   - 従来の方法（`tsc --watch`）：1プロセスあたり120MB〜200MB
-   - プロジェクト参照：約70MB（パッケージ数による大きな変動なし）
-3. 10プロジェクトの場合の比較：
-   - 従来の方法：1.2GB〜2.0GB
-   - プロジェクト参照：約70MB
+1. Giảm số lượng process:
+   - Phương pháp truyền thống: Khi chạy `tsc --watch` cho mỗi package, cần 1 process cho mỗi package.
+   - Project references: 1 process có thể cover tất cả các package.
+2. So sánh memory usage:
+   - Phương pháp truyền thống (`tsc --watch`): 120MB~200MB mỗi process
+   - Project references: Khoảng 70MB (không thay đổi nhiều theo số lượng package)
+3. So sánh với 10 project:
+   - Phương pháp truyền thống: 1.2GB~2.0GB
+   - Project references: Khoảng 70MB
 
-この大幅なメモリ使用量の削減により、開発マシンのリソースを他のタスクに活用できます。
+Việc giảm memory usage đáng kể này cho phép sử dụng tài nguyên máy phát triển cho các task khác.
 
-### 開発体験（DX）の向上
+### Cải thiện Developer Experience (DX)
 
-プロジェクト参照の導入により、次のような開発体験の向上が期待できます：
+Việc áp dụng project references mang lại những cải thiện về developer experience sau:
 
-1. 高速なフィードバックループ：
-   - ビルド時間の短縮により、コード変更後のフィードバックが迅速に得られます。
-   - 部分的なビルドが可能になり、作業中の箇所に関連する部分のみを素早くチェックできます。
-2. IDEパフォーマンスの向上：
-   - プロジェクトの分割により、各部分の型チェックが高速化され、IDEのレスポンスが向上します。
-   - メモリ使用量の削減により、大規模プロジェクトでもIDEの動作が軽快になります。
-3. コードナビゲーションの改善：
-   - `declarationMap`機能により、プロジェクト間のジャンプ（定義へ移動など）がスムーズになります。
-4. モジュール境界の明確化：
-   - プロジェクト間の依存関係が明示的になり、アーキテクチャの理解が容易になります。
-   - 不適切な依存関係を早期に発見できるため、コード品質の維持が容易になります。
-5. 柔軟な開発環境：
-   - 大規模プロジェクトの一部のみを扱うことができ、開発者は必要な部分に集中できます。
-6. ビルドプロセスの簡素化：
-   - `tsc --build`モードにより、複雑なビルドスクリプトが不要になります。
-7. エラー検出の改善：
-   - プロジェクト間の型の不一致や、不適切な依存関係をより早く、正確に検出できます。
-8. コラボレーションの向上：
-   - プロジェクトの明確な分割により、チーム間の作業分担や責任範囲が明確になります。
+1. Feedback loop nhanh:
+   - Rút ngắn thời gian build giúp nhận được feedback nhanh chóng sau khi thay đổi code.
+   - Có thể build từng phần, kiểm tra nhanh chỉ phần liên quan đến nơi đang làm việc.
+2. Cải thiện performance của IDE:
+   - Chia nhỏ project giúp tăng tốc type checking của mỗi phần, cải thiện response của IDE.
+   - Giảm memory usage giúp IDE hoạt động mượt mà ngay cả với project quy mô lớn.
+3. Cải thiện code navigation:
+   - Tính năng `declarationMap` giúp jump giữa các project (như Go to Definition) mượt mà hơn.
+4. Làm rõ ranh giới module:
+   - Dependency giữa các project trở nên rõ ràng, giúp dễ hiểu architecture.
+   - Phát hiện sớm dependency không phù hợp, giúp duy trì chất lượng code dễ dàng hơn.
+5. Môi trường phát triển linh hoạt:
+   - Có thể làm việc chỉ với một phần của project quy mô lớn, developer có thể tập trung vào phần cần thiết.
+6. Đơn giản hóa build process:
+   - Mode `tsc --build` giúp không cần build script phức tạp.
+7. Cải thiện phát hiện lỗi:
+   - Phát hiện nhanh và chính xác hơn sự không khớp về type giữa các project, hoặc dependency không phù hợp.
+8. Cải thiện collaboration:
+   - Chia project rõ ràng giúp phân công công việc và phạm vi trách nhiệm giữa các team rõ ràng hơn.
 
-これらの利点により、開発者はより生産的に、ストレスなく作業を進めることができ、コードの品質向上と開発速度の向上が期待できます。
+Nhờ các lợi ích này, developer có thể làm việc hiệu quả hơn, ít stress hơn, cải thiện chất lượng code và tăng tốc độ phát triển.
 
-### 従来のアプローチとプロジェクト参照の比較
+### So sánh phương pháp truyền thống và Project References
 
-次の表は、従来の一枚岩のプロジェクト管理とプロジェクト参照を使用した場合の主な違いを示しています：
+Bảng sau so sánh sự khác biệt chính giữa quản lý project kiểu monolith truyền thống và sử dụng project references:
 
-| 特徴               | 一枚岩のアプローチ       | プロジェクト参照       |
-| ------------------ | ------------------------ | ---------------------- |
-| ビルド時間         | 全体を毎回ビルド         | 変更部分のみビルド     |
-| 依存関係の管理     | 暗黙的                   | 明示的                 |
-| モジュール間の参照 | 制限なし                 | プロジェクト境界で制限 |
-| メモリ使用量       | 高い                     | 低い                   |
-| IDE性能            | 大規模プロジェクトで低下 | 比較的安定             |
-| 部分的なビルド     | 不可                     | 容易                   |
-| 設定ファイル       | 単一または複雑           | 複数の明確な設定       |
+| Đặc điểm            | Phương pháp Monolith     | Project References         |
+| ------------------- | ------------------------ | -------------------------- |
+| Thời gian build     | Build toàn bộ mỗi lần    | Chỉ build phần thay đổi    |
+| Quản lý dependency  | Ngầm định                | Rõ ràng                    |
+| Tham chiếu giữa module | Không hạn chế         | Hạn chế theo ranh giới project |
+| Memory usage        | Cao                      | Thấp                       |
+| Performance IDE     | Giảm với project lớn     | Tương đối ổn định          |
+| Partial build       | Không thể                | Dễ dàng                    |
+| Config file         | Đơn hoặc phức tạp        | Nhiều config rõ ràng       |
 
-この比較から、プロジェクト参照が大規模プロジェクトの管理にどれだけ有効かが分かります。
+Từ so sánh này, có thể thấy project references rất hiệu quả cho quản lý project quy mô lớn.
 
-## プロジェクト参照の実装
+## Triển khai Project References
 
-プロジェクト参照の基本概念を理解したところで、より複雑なシナリオでの実装方法を見ていきましょう。ここでは、モノレポ（monorepo）構成でのプロジェクト参照の実装を例に説明します。
+Sau khi hiểu khái niệm cơ bản về project references, hãy xem cách triển khai trong các tình huống phức tạp hơn. Ở đây sẽ giải thích triển khai project references trong cấu hình monorepo.
 
-### モノレポとは
+### Monorepo là gì
 
-モノレポ（monorepo）は、複数の関連するプロジェクトやパッケージを単一のリポジトリで管理する開発アプローチです。この方法は、コードの共有、依存関係の管理、リリースの調整が容易になるため、大規模プロジェクトや複数のパッケージを持つライブラリの開発で人気があります。
+Monorepo là phương pháp phát triển quản lý nhiều project hoặc package liên quan trong một repository duy nhất. Phương pháp này được ưa chuộng trong phát triển project quy mô lớn hoặc library có nhiều package vì dễ dàng chia sẻ code, quản lý dependency và điều phối release.
 
-### プロジェクト構造の設計
+### Thiết kế cấu trúc Project
 
-典型的なモノレポ構造は次のようになります：
+Cấu trúc monorepo điển hình như sau:
 
 ```plaintext
 .
 ├── package.json
-├── packages (プログラムコードを置く場所)
+├── packages (nơi đặt code chương trình)
 │   ├── cli
 │   ├── common
 │   └── web
-├── tsconfig.base.json (全パッケージで共通のコンパイル設定を記述するファイル)
-├── tsconfig.json (プロジェクトリファレンスの設定を記述するファイル)
+├── tsconfig.base.json (file mô tả cấu hình compile chung cho tất cả package)
+├── tsconfig.json (file mô tả cấu hình project references)
 ```
 
-この例では、`packages` ディレクトリ内に3つのパッケージ（cli、common、web）があります。これらのパッケージは次のような依存関係を持ちます：
+Trong ví dụ này, có 3 package (cli, common, web) trong thư mục `packages`. Các package này có mối quan hệ phụ thuộc như sau:
 
-- `cli` パッケージは `common` パッケージに依存しています。
-- `web` パッケージは `common` パッケージに依存しています。
+- Package `cli` phụ thuộc vào package `common`
+- Package `web` phụ thuộc vào package `common`
 
-`common`パッケージで共通の機能を実装し、それを`cli`（CLIアプリケーション）と`web`（ウェブアプリケーション）で利用する構成です。
+Đây là cấu hình implement các tính năng chung trong package `common`, và sử dụng chúng trong `cli` (CLI application) và `web` (web application).
 
-### `tsconfig.json`ファイルの設定
+### Cấu hình file `tsconfig.json`
 
-モノレポでプロジェクト参照を使用する場合、複数の`tsconfig.json`ファイルを適切に設定する必要があります。
+Khi sử dụng project references trong monorepo, cần cấu hình phù hợp nhiều file `tsconfig.json`.
 
-#### ルートの`tsconfig.json`
+#### `tsconfig.json` ở root
 
-ルートディレクトリの`tsconfig.json`は、プロジェクト全体の「目次」のような役割を果たします：
+`tsconfig.json` ở thư mục root đóng vai trò như "mục lục" của toàn bộ project:
 
 ```json
 {
@@ -239,11 +239,11 @@ TypeScriptのプロジェクト参照(project references)は、大規模なTypeS
 }
 ```
 
-この設定により、TypeScriptコンパイラーはモノレポ内の各パッケージを認識し、適切な順序でビルドできるようになります。
+Cấu hình này giúp TypeScript compiler nhận biết từng package trong monorepo và build theo thứ tự phù hợp.
 
-#### 共通の`tsconfig.base.json`
+#### `tsconfig.base.json` chung
 
-共通の設定を`tsconfig.base.json`にまとめることで、各パッケージの設定を簡素化できます：
+Tập hợp cấu hình chung vào `tsconfig.base.json` giúp đơn giản hóa cấu hình của mỗi package:
 
 ```json
 {
@@ -261,11 +261,11 @@ TypeScriptのプロジェクト参照(project references)は、大規模なTypeS
 }
 ```
 
-ここで重要なのは`composite: true`設定です。これにより、各パッケージがプロジェクト参照の「プロジェクト」として認識されます。
+Điểm quan trọng ở đây là cấu hình `composite: true`. Nhờ đó mỗi package được nhận biết như một "project" trong project references.
 
-#### 各パッケージの`tsconfig.json`
+#### `tsconfig.json` của mỗi package
 
-各パッケージの`tsconfig.json`は、共通の設定を継承し、必要に応じて参照を追加します：
+`tsconfig.json` của mỗi package kế thừa cấu hình chung và thêm tham chiếu khi cần:
 
 ```json
 {
@@ -278,13 +278,13 @@ TypeScriptのプロジェクト参照(project references)は、大規模なTypeS
 }
 ```
 
-この例は`cli`や`web`パッケージの設定で、`common`パッケージへの参照を含んでいます。
+Ví dụ này là cấu hình của package `cli` hoặc `web`, bao gồm tham chiếu đến package `common`.
 
-### `composite`と`declarationMap`オプションの使用
+### Sử dụng option `composite` và `declarationMap`
 
-`composite`オプションは、プロジェクト参照で必須の設定です。これにより、プロジェクトが他のプロジェクトから参照可能になります。
+Option `composite` là cấu hình bắt buộc trong project references. Nhờ đó project có thể được tham chiếu từ các project khác.
 
-`declarationMap`オプションは、ソースマップを`.d.ts`ファイルに含めるためのものです。これにより、プロジェクト間のナビゲーションが改善されます：
+Option `declarationMap` dùng để bao gồm source map trong file `.d.ts`. Nhờ đó cải thiện navigation giữa các project:
 
 ```json
 {
@@ -296,9 +296,9 @@ TypeScriptのプロジェクト参照(project references)は、大規模なTypeS
 }
 ```
 
-### プロジェクト間の参照の設定
+### Cấu hình tham chiếu giữa các Project
 
-プロジェクト間の参照は、`tsconfig.json`の`references`セクションで設定します：
+Tham chiếu giữa các project được cấu hình trong section `references` của `tsconfig.json`:
 
 ```json
 {
@@ -310,7 +310,7 @@ TypeScriptのプロジェクト参照(project references)は、大規模なTypeS
 }
 ```
 
-また、`package.json`でも依存関係を明示的に宣言する必要があります：
+Ngoài ra, cần khai báo rõ ràng dependency trong `package.json`:
 
 ```json
 {
@@ -320,146 +320,146 @@ TypeScriptのプロジェクト参照(project references)は、大規模なTypeS
 }
 ```
 
-この設定により、TypeScriptコンパイラーとパッケージマネージャーの両方が、プロジェクト間の依存関係を正しく理解できます。
+Cấu hình này giúp cả TypeScript compiler và package manager đều hiểu đúng dependency giữa các project.
 
-## ビルドモードの使用
+## Sử dụng Build Mode
 
-プロジェクト参照を効果的に使用するためには、TypeScriptコンパイラーのビルドモードを理解することが重要です。
+Để sử dụng hiệu quả project references, việc hiểu build mode của TypeScript compiler là quan trọng.
 
-### `tsc --build`コマンドの概要
+### Tổng quan về lệnh `tsc --build`
 
-`tsc --build`（または`tsc -b`）コマンドは、プロジェクト参照を考慮して、必要なプロジェクトを正しい順序でビルドします。
+Lệnh `tsc --build` (hoặc `tsc -b`) build các project cần thiết theo đúng thứ tự, có xét đến project references.
 
-基本的な使用方法：
+Cách sử dụng cơ bản:
 
 ```bash
-tsc -b                  # カレントディレクトリのtsconfig.jsonを使用
-tsc -b src              # src/tsconfig.jsonを使用
-tsc -b foo/tsconfig.json bar # 複数のプロジェクトをビルド
+tsc -b                  # Sử dụng tsconfig.json ở thư mục hiện tại
+tsc -b src              # Sử dụng src/tsconfig.json
+tsc -b foo/tsconfig.json bar # Build nhiều project
 ```
 
-### 増分ビルドとクリーニング
+### Incremental Build và Cleaning
 
-`tsc --build`は増分ビルドをサポートしており、変更されたファイルとその依存先のみを再ビルドします。これにより、大規模プロジェクトでのビルド時間を大幅に短縮できます。
+`tsc --build` hỗ trợ incremental build, chỉ rebuild các file đã thay đổi và các dependency của chúng. Nhờ đó có thể giảm đáng kể thời gian build trong project quy mô lớn.
 
-クリーンビルドを行う場合は、`--clean`フラグを使用します：
+Để thực hiện clean build, sử dụng flag `--clean`:
 
 ```bash
 tsc -b --clean
 ```
 
-これにより、ビルド出力が削除され、次回のビルドですべてのファイルが再コンパイルされます。
+Lệnh này xóa output của build, và ở lần build tiếp theo sẽ recompile tất cả các file.
 
-### ウォッチモードの活用
+### Sử dụng Watch Mode
 
-ウォッチモードを使用すると、ファイルの変更を監視し、自動的に再ビルドを行います：
+Watch mode theo dõi thay đổi của file và tự động rebuild:
 
 ```bash
 tsc -b --watch
 ```
 
-これは開発中に非常に便利で、コードを変更するたびに手動でビルドを実行する必要がなくなります。
+Điều này rất tiện lợi trong quá trình phát triển, không cần thực thi build thủ công mỗi khi thay đổi code.
 
-## プロジェクト参照の管理ツール
+## Công cụ quản lý Project References
 
-大規模なプロジェクトでは、プロジェクト参照の管理が複雑になる可能性があります。そのため、いくつかの管理ツールが開発されています：
+Trong project quy mô lớn, việc quản lý project references có thể trở nên phức tạp. Vì vậy một số công cụ quản lý đã được phát triển:
 
 - [Moonrepo](https://moonrepo.dev/moon)
 - [@monorepo-utils/workspaces-to-typescript-project-references](https://www.npmjs.com/package/@monorepo-utils/workspaces-to-typescript-project-references)
 - [update-ts-references](https://www.npmjs.com/package/update-ts-references)
 
-## 注意点とトレードオフ
+## Lưu ý và Trade-off
 
-プロジェクト参照を導入する際は、次の点に注意が必要です：
+Khi áp dụng project references, cần lưu ý các điểm sau:
 
-1. 初期セットアップの複雑さ：プロジェクト参照の初期設定は、単一の`tsconfig.json`を使用する場合よりも複雑です。
-2. ビルド出力の管理：各プロジェクトの出力ディレクトリを適切に管理する必要があります。
-3. 既存のビルドワークフローとの互換性：既存のビルドスクリプトやCI/CDパイプラインの更新が必要になる場合があります。
-4. 学習曲線：チームメンバーがプロジェクト参照の概念と使用方法を理解する必要があります。
+1. Độ phức tạp của initial setup: Thiết lập ban đầu project references phức tạp hơn so với sử dụng một `tsconfig.json` duy nhất.
+2. Quản lý build output: Cần quản lý phù hợp output directory của mỗi project.
+3. Tương thích với build workflow hiện có: Có thể cần cập nhật build script hoặc CI/CD pipeline hiện có.
+4. Learning curve: Các thành viên trong team cần hiểu khái niệm và cách sử dụng project references.
 
-これらの課題は、プロジェクトの規模が大きくなるにつれて、得られる利点によって相殺されることが多いです。
+Các vấn đề này thường được bù đắp bởi lợi ích thu được khi quy mô project tăng lên.
 
-プロジェクト参照は、大規模なTypeScriptプロジェクトの管理を大幅に改善する強力な機能です。適切に実装することで、開発効率の向上、ビルド時間の短縮、コードベースの整理が可能になります。次の章では、プロジェクト参照の具体的な活用例を見ていきます。
+Project references là tính năng mạnh mẽ cải thiện đáng kể việc quản lý TypeScript project quy mô lớn. Triển khai phù hợp có thể cải thiện hiệu quả phát triển, rút ngắn thời gian build và tổ chức codebase tốt hơn. Chương tiếp theo sẽ xem các ví dụ ứng dụng cụ thể của project references.
 
-## プロジェクト参照の活用: モノレポ
+## Ứng dụng Project References: Monorepo
 
-### はじめに
+### Giới thiệu
 
-#### 概要
+#### Tổng quan
 
-このチュートリアルでは、TypeScriptのプロジェクト参照機能を使用してモノレポ（monorepo）を構築する方法を、ステップバイステップで説明します。
+Tutorial này hướng dẫn từng bước cách xây dựng monorepo sử dụng tính năng project references của TypeScript.
 
-#### 目的
+#### Mục đích
 
-このガイドの目的は、次の要素を含むモノレポ構造を構築することです：
+Mục đích của hướng dẫn này là xây dựng cấu trúc monorepo bao gồm các yếu tố sau:
 
-1. 共通のコードを含む `common` プロジェクト
-2. `common` プロジェクトを利用する `cli` プロジェクト
-3. 同じく `common` プロジェクトを利用する `web` プロジェクト
+1. Project `common` chứa code chung
+2. Project `cli` sử dụng project `common`
+3. Project `web` sử dụng project `common`
 
-これらのプロジェクトは、TypeScriptのプロジェクト参照機能を使用して相互に関連付けられます。
+Các project này được liên kết với nhau thông qua tính năng project references của TypeScript.
 
-#### 最終的なプロジェクト構造
+#### Cấu trúc Project cuối cùng
 
-チュートリアルの完了時、次のような構造のプロジェクトが完成します：
+Khi hoàn thành tutorial, project sẽ có cấu trúc như sau:
 
 ```plaintext
-typescript-monorepo-example/ (ワークスペースルート)
+typescript-monorepo-example/ (workspace root)
 ├── package.json
 ├── tsconfig.json
 ├── tsconfig.base.json
 ├── .yarnrc.yml
 └── packages/
-    ├── common/ (プロジェクト)
+    ├── common/ (project)
     │   ├── package.json
     │   ├── tsconfig.json
     │   └── src/
     │       └── index.ts
-    ├── cli/ (プロジェクト)
+    ├── cli/ (project)
     │   ├── package.json
     │   ├── tsconfig.json
     │   └── src/
     │       └── index.ts
-    └── web/ (プロジェクト)
+    └── web/ (project)
         ├── package.json
         ├── tsconfig.json
         └── src/
             └── index.ts
 ```
 
-この構造により、効率的なコード共有と型チェック、そして高速なビルドが可能になります。
+Cấu trúc này cho phép chia sẻ code hiệu quả, type checking và build nhanh.
 
-#### 完成形のコード
+#### Code hoàn chỉnh
 
-このチュートリアルの完成形のコードは、次のGitHubリポジトリで確認できます：
+Code hoàn chỉnh của tutorial này có thể xem tại GitHub repository:
 https://github.com/yytypescript/project-reference-samples/tree/main/02-monorepo
 
-### 用語の整理
+### Giải thích thuật ngữ
 
-#### ワークスペース
+#### Workspace
 
-Yarnのワークスペース機能を使用して管理される、複数のプロジェクトを含むプロジェクト全体を指します。
+Chỉ toàn bộ project bao gồm nhiều project, được quản lý bằng tính năng workspace của Yarn.
 
-#### ワークスペースルート
+#### Workspace Root
 
-ワークスペースの最上位ディレクトリを指します。この例では `typescript-monorepo-example/` ディレクトリがワークスペースルートになります。
+Chỉ thư mục cấp cao nhất của workspace. Trong ví dụ này, thư mục `typescript-monorepo-example/` là workspace root.
 
-#### プロジェクト
+#### Project
 
-TypeScriptのコンパイル単位を指します。この例では `common`、`cli`、`web` の各ディレクトリがそれぞれ独立したプロジェクトになります。
+Chỉ đơn vị compilation của TypeScript. Trong ví dụ này, các thư mục `common`, `cli`, `web` là các project độc lập.
 
-#### プロジェクトルート
+#### Project Root
 
-各プロジェクトの最上位ディレクトリを指します。たとえば、`packages/common/` ディレクトリが `common` プロジェクトのプロジェクトルートになります。
+Chỉ thư mục cấp cao nhất của mỗi project. Ví dụ, thư mục `packages/common/` là project root của project `common`.
 
-### 前提条件
+### Yêu cầu
 
-このチュートリアルをはじめる前に、次のツールがインストールされていることを確認してください：
+Trước khi bắt đầu tutorial này, hãy đảm bảo các công cụ sau đã được cài đặt:
 
-- Node.js（最新の LTS バージョン）
-- Yarn（バージョン 4.4.0 以上）
+- Node.js (phiên bản LTS mới nhất)
+- Yarn (phiên bản 4.4.0 trở lên)
 
-また、基本的な TypeScript の知識があることを前提としています。
+Ngoài ra, giả định bạn đã có kiến thức cơ bản về TypeScript.
 
 ### ワークスペースの初期化
 

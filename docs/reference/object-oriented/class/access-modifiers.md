@@ -1,44 +1,44 @@
 ---
-sidebar_label: アクセス修飾子
+sidebar_label: Access modifier
 ---
 
-# アクセス修飾子 (access modifier)
+# Access modifier (access modifier)
 
-JavaやPHPなどの言語では、フィールドやメソッドに`private`, `protected`, `public`を指定できます。JavaScriptでも`private`のようなプロパティを実現するために[プライベートクラスフィールド](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_class_fields)という仕様がありますが、Javaのようなアクセス修飾子とはやや様相が異なります。TypeScriptにはJava風のアクセス修飾子があります。
+Trong các ngôn ngữ như Java hay PHP, có thể chỉ định `private`, `protected`, `public` cho field và method. JavaScript cũng có spec [Private class fields](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_class_fields) để thực hiện property kiểu `private`, nhưng hơi khác với access modifier kiểu Java. TypeScript có access modifier theo phong cách Java.
 
-| アクセス修飾子 | 説明                                     |
-| :------------- | :--------------------------------------- |
-| (宣言なし)     | publicと同等                             |
-| public         | どこからもアクセス可能                   |
-| protected      | 自身のクラスとサブクラスからアクセス可能 |
-| private        | 自身のクラスのみアクセス可能             |
+| Access modifier | Mô tả                                         |
+| :-------------- | :-------------------------------------------- |
+| (không khai báo)| Tương đương với public                        |
+| public          | Có thể truy cập từ bất kỳ đâu                 |
+| protected       | Có thể truy cập từ class hiện tại và subclass |
+| private         | Chỉ có thể truy cập từ class hiện tại         |
 
-アクセス修飾子を省略した場合は`public`になります。
+Khi bỏ qua access modifier, mặc định là `public`.
 
-アクセス修飾子は、フィールド、コンストラクタ、メソッドに宣言することができます。
+Access modifier có thể khai báo cho field, constructor và method.
 
 ## `public`
 
-`public`アクセス修飾子はどこからもアクセス可能です。アクセス修飾子を省略した場合も`public`を指定したものと同等として扱われます。
+Access modifier `public` có thể truy cập từ bất kỳ đâu. Khi bỏ qua access modifier cũng được xem là tương đương với `public`.
 
 ```ts twoslash
 class Animal {
-  public name: string; // フィールドにpublicアクセス修飾子
+  public name: string; // Public access modifier cho field
 
-  // コンストラクターにpublicアクセス修飾子
+  // Public access modifier cho constructor
   public constructor(theName: string) {
     this.name = theName;
   }
 
-  // メソッドにpublicアクセス修飾子
+  // Public access modifier cho method
   public move(distanceInMeters: number) {
     console.log(`${this.name} moved ${distanceInMeters}m.`);
-    // publicアクセス修飾子である`this.name`を使用することが可能
+    // Có thể sử dụng `this.name` vì nó có public access modifier
   }
 }
 ```
 
-`gorilla`を実装し、動作を確認してみます。
+Implement `gorilla` và kiểm tra hoạt động.
 
 ```ts twoslash
 class Animal {
@@ -62,13 +62,13 @@ gorilla.move(20);
 // @log: "ゴリラゴリラ moved 20m."
 ```
 
-`name`プロパティは`public`宣言されているため、インスタンスされた変数(`gorilla`)からの読み書きが可能になっています。「ゴリラ」から「ゴリラゴリラ」に変更することができます。
+Property `name` được khai báo `public` nên có thể đọc và ghi từ biến instance (`gorilla`). Có thể thay đổi từ "ゴリラ" sang "ゴリラゴリラ".
 
 ## `protected`
 
-`protected`アクセス修飾子は自身のクラスとサブクラスからアクセス可能です。
+Access modifier `protected` có thể truy cập từ class hiện tại và subclass.
 
-`Animal`クラス`move`メソッドのアクセス修飾子を`public`から`protected`に変更しエラーを出してみます。
+Thay đổi access modifier của method `move` trong class `Animal` từ `public` sang `protected` để xem lỗi.
 
 ```ts twoslash
 // @errors: 2445
@@ -79,7 +79,7 @@ class Animal {
     this.name = theName;
   }
 
-  // `public`から`protected`に変更
+  // Thay đổi từ `public` sang `protected`
   protected move(distanceInMeters: number) {
     console.log(`${this.name} moved ${distanceInMeters}m.`);
   }
@@ -89,9 +89,9 @@ const gorilla = new Animal("ゴリラ");
 gorilla.move(10);
 ```
 
-`gorilla.move()`メソッドは`protected`宣言されているため、自身のクラスとサブクラスのみアクセスとなります。つまりインスタンスされた`gorilla`からはアクセスが拒否され、コンパイルエラーが発生します。
+Method `gorilla.move()` được khai báo `protected` nên chỉ có thể truy cập từ class hiện tại và subclass. Tức là truy cập từ instance `gorilla` bị từ chối và xảy ra lỗi compile.
 
-`protected`で保護された`move()`メソッドを新たに実装し、10倍速く動くゴリラを作ってみます。
+Implement lại method `move()` được bảo vệ bằng `protected` để tạo gorilla di chuyển nhanh gấp 10 lần.
 
 ```ts twoslash
 class Animal {
@@ -101,7 +101,7 @@ class Animal {
     this.name = theName;
   }
 
-  // `public`から`protected`に変更
+  // Thay đổi từ `public` sang `protected`
   protected move(distanceInMeters: number) {
     console.log(`${this.name} moved ${distanceInMeters}m.`);
   }
@@ -118,13 +118,13 @@ gorilla.move(10);
 // @log: "速いゴリラ moved 100m."
 ```
 
-`Animal`スーパークラスを持つ`Gorilla`クラスを定義し`move()`を実装しています。`Gorilla`クラスの`move()`メソッド内で`super`キーワードを利用してスーパークラスの`move()`メソッドを呼び出しています。
+Định nghĩa class `Gorilla` có superclass `Animal` và implement `move()`. Trong method `move()` của class `Gorilla`, sử dụng từ khóa `super` để gọi method `move()` của superclass.
 
 ## `private`
 
-`private`アクセス修飾子は自身のクラスのみアクセス可能です。
+Access modifier `private` chỉ có thể truy cập từ class hiện tại.
 
-`protected move()`を`private move()`に変更してみます。`private`に変更されたことにより`Gorilla`クラスの`super.move`にアクセスすることが許されずエラーとなります。
+Thay đổi `protected move()` thành `private move()`. Do thay đổi thành `private`, class `Gorilla` không được phép truy cập `super.move` và xảy ra lỗi.
 
 ```ts twoslash
 // @errors: 2415 2341
@@ -135,7 +135,7 @@ class Animal {
     this.name = theName;
   }
 
-  // `public`から`private`に変更
+  // Thay đổi từ `public` sang `private`
   private move(distanceInMeters: number) {
     console.log(`${this.name} moved ${distanceInMeters}m.`);
   }
@@ -148,11 +148,11 @@ class Gorilla extends Animal {
 }
 ```
 
-`private`メソッドの多くの使い方としては、自身のクラス内の長いコードを機能別に分ける時に利用します。
+Cách sử dụng phổ biến của `private` method là tách code dài trong class thành các phần theo chức năng.
 
-## アクセス修飾子を変更する
+## Thay đổi access modifier
 
-クラスの継承時に、メソッドのアクセス修飾子を変更することができます。とはいえなんでも自由に変更できるのではなく、アクセス制限を緩める方向にだけ変更できます。つまり`protected` > `public`の方向への変更は可能ですがその逆はできません。
+Khi kế thừa class, có thể thay đổi access modifier của method. Tuy nhiên không thể tự do thay đổi bất kỳ, chỉ có thể thay đổi theo hướng nới lỏng hạn chế truy cập. Tức là có thể thay đổi theo hướng `protected` > `public` nhưng không thể làm ngược lại.
 
 ```ts twoslash
 class ProtectedClass {
@@ -168,7 +168,7 @@ class PublicClass extends ProtectedClass {
 }
 ```
 
-逆の`public` > `protected`の実装はできません。
+Không thể implement ngược lại `public` > `protected`.
 
 ```ts twoslash
 // @errors: 2415

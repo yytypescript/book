@@ -3,35 +3,35 @@ title: Promise<T>
 slug: /reference/asynchronous/promise
 ---
 
-`Promise`はES2015から追加された機能で、非同期処理を見通しよく書くことができます。ES2017で導入された`async`/`await`を使うことで`Promise`で書いたコードをさらに見通しよく書くことができます。
+`Promise` là tính năng được thêm vào từ ES2015, giúp viết xử lý bất đồng bộ một cách dễ đọc hơn. Với `async`/`await` được giới thiệu trong ES2017, bạn có thể viết code sử dụng `Promise` dễ đọc hơn nữa.
 
-## `Promise`がなかった時代のこと
+## Thời kỳ chưa có `Promise`
 
-次の３つのAPIがあるとしてこれらで得た結果を表示する処理を考えてみます。
+Hãy xem xét 3 API sau và xử lý để hiển thị kết quả thu được từ chúng.
 
-1. API1: リクエストを送り、結果を受け取る
-1. API2: API1の結果を使ってリクエストを送り、結果を受け取る
-1. API3: API2の結果を使ってリクエストを送り、結果を受け取る
+1. API1: Gửi request và nhận kết quả
+1. API2: Sử dụng kết quả từ API1 để gửi request và nhận kết quả
+1. API3: Sử dụng kết quả từ API2 để gửi request và nhận kết quả
 
-API1, API2, API3の通信をする関数`request1()`, `request2()`, `request3()`は次のようになります。各関数の`setTimeout()`はAPI通信をしている部分の遅延を意味している程度に考えてください。
+Các function `request1()`, `request2()`, `request3()` thực hiện giao tiếp với API1, API2, API3 sẽ như sau. Hãy hiểu `setTimeout()` trong mỗi function là độ trễ trong quá trình giao tiếp với API.
 
 ```js twoslash
-// API1. 非同期でAPIにリクエストを送って値を取得する処理
+// API1. Xử lý gửi request bất đồng bộ đến API để lấy giá trị
 function request1(callback) {
   setTimeout(() => {
-    // 1 は適当な例、なんでもいいです
+    // 1 là ví dụ tùy ý, có thể là bất kỳ giá trị nào
     callback(1);
   }, 1000);
 }
 
-// API2. 受け取った値を別のAPIにリクエストを送って値を取得する処理
+// API2. Xử lý nhận giá trị và gửi request đến API khác để lấy giá trị
 function request2(result1, callback) {
   setTimeout(() => {
     callback(result1 + 1);
   }, 1000);
 }
 
-// API3. 受け取った値を別のAPIにリクエストを送って値を取得する処理
+// API3. Xử lý nhận giá trị và gửi request đến API khác để lấy giá trị
 function request3(result2, callback) {
   setTimeout(() => {
     callback(result2 + 2);
@@ -39,7 +39,7 @@ function request3(result2, callback) {
 }
 ```
 
-これらの関数を組み合わせて３つのAPIリクエストを順次実装すると次のようになります。
+Khi kết hợp các function này để thực hiện 3 API request tuần tự, code sẽ như sau.
 
 ```js twoslash
 request1((result1) => {
@@ -52,15 +52,15 @@ request1((result1) => {
 });
 ```
 
-次のAPIにリクエストを投げるためにひとつ前の非同期なAPIリクエストの結果を待つ必要があり、関数の呼び出しが入れ子になってしまいます。
-これを**コールバック地獄**と呼び、ネストが深くコードの記述が非常に複雑になってしまう問題があります。ちなみにコールバック地獄は英語でもCallback hellと呼びます。どの世界でも地獄は地獄です。
+Để gửi request đến API tiếp theo, cần phải chờ kết quả từ API request bất đồng bộ trước đó, dẫn đến việc các lời gọi function bị lồng nhau.
+Đây được gọi là **callback hell**, một vấn đề làm cho code trở nên rất phức tạp với độ lồng sâu. Callback hell trong tiếng Anh cũng là Callback hell. Địa ngục ở đâu cũng là địa ngục.
 
-## `Promise`が解決してくれること
+## `Promise` giải quyết vấn đề này
 
-先ほどの例を`Promise`を使って書き直してみます。
+Hãy viết lại ví dụ trên bằng cách sử dụng `Promise`.
 
 ```js twoslash
-// 非同期でAPIにリクエストを投げて値を取得する処理
+// Xử lý gọi API bất đồng bộ để lấy giá trị
 function request1() {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -69,7 +69,7 @@ function request1() {
   });
 }
 
-// 受け取った値を別のAPIにリクエストを投げて値を取得する処理
+// Xử lý nhận giá trị và gọi API khác để lấy giá trị
 function request2(result1) {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -78,7 +78,7 @@ function request2(result1) {
   });
 }
 
-// 受け取った値を別のAPIにリクエストを投げて値を取得する処理
+// Xử lý nhận giá trị và gọi API khác để lấy giá trị
 function request3(result2) {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -88,7 +88,7 @@ function request3(result2) {
 }
 ```
 
-戻り値が`Promise`になり、コールバック関数を示す引数がなくなりました。`Promise`を返す関数を使うと次のように３つのAPIリクエストを実装できます。
+Giá trị trả về trở thành `Promise`, và argument chỉ định callback function đã được loại bỏ. Khi sử dụng function trả về `Promise`, bạn có thể implement 3 API request như sau.
 
 ```js twoslash
 request1()
@@ -104,12 +104,12 @@ request1()
   });
 ```
 
-先ほどのコールバックの例と比べると非常にスッキリ書けるようになりました。
+So với ví dụ callback trước đó, code trở nên gọn gàng hơn rất nhiều.
 
-## `Promise`とジェネリクス
+## `Promise` và Generics
 
-TypeScriptで`Promise`の型を指定する場合はジェネリクスを伴い`Promise<T>`と書きます。`T`には`Promise`が履行された(fulfilled)ときに返す値の型を指定します。今回の例では`resolve(1)`と履行する値として数値を渡しているので`Promise<number>`を指定しています。
-たとえば、独自で定義した型の値を履行する場合は次のように記述します。
+Khi chỉ định kiểu của `Promise` trong TypeScript, bạn sử dụng generics và viết là `Promise<T>`. `T` chỉ định kiểu của giá trị trả về khi `Promise` được fulfilled. Trong ví dụ này, vì truyền số `resolve(1)` làm giá trị fulfill, nên chỉ định `Promise<number>`.
+Ví dụ, khi fulfill một giá trị có kiểu do bạn tự định nghĩa, viết như sau.
 
 ```ts twoslash
 type User = {
@@ -133,7 +133,7 @@ getUser().then((user: User) => {
 });
 ```
 
-`Promise`のジェネリクスの型`T`は必須なので、省略した場合はコンパイルエラーになります。
+Kiểu generic `T` của `Promise` là bắt buộc, nên nếu bỏ qua sẽ gây ra compile error.
 
 ```ts twoslash
 // @errors: 2314
@@ -144,41 +144,41 @@ function request(): Promise {
 }
 ```
 
-ジェネリクスの型`T`と返す値の型が合わない場合もコンパイルエラーになります。
+Nếu kiểu generic `T` và kiểu của giá trị trả về không khớp cũng sẽ gây ra compile error.
 
 ```ts twoslash
 // @errors: 2345
 function request(): Promise<string> {
   return new Promise((resolve) => {
-    // string型を期待しているが、number型を返しているのでコンパイルエラー
+    // Expect kiểu string, nhưng return kiểu number nên compile error
     resolve(1);
   });
 }
 ```
 
-## `Promise`のメソッド
+## Các method của `Promise`
 
-`Promise<T>`には覚えておくべきメソッドが３つあります。
+`Promise<T>` có 3 method quan trọng cần nhớ.
 
-### 待ち受けた非同期処理の結果をコールバックで実行する - `Promise.prototype.then()`
+### Thực thi callback với kết quả của xử lý bất đồng bộ đã chờ - `Promise.prototype.then()`
 
-`Promise<T>`が履行された(fulfilled)ときに呼び出されます。引数に使われるコールバックの第1引数は`T`型の値です。
-コールバックの戻り値として`S`型または`Promise<S>`型の値を返すと`Promise<S>`型を返します。
+Được gọi khi `Promise<T>` được fulfilled. Argument thứ nhất của callback là giá trị kiểu `T`.
+Nếu trả về giá trị kiểu `S` hoặc `Promise<S>` làm giá trị trả về của callback, nó sẽ trả về `Promise<S>`.
 
 ```ts twoslash
 const promise1: Promise<number> = Promise.resolve(1);
 const promise2: Promise<string> = promise1.then((value) => `${value}`);
 ```
 
-上記例は`Promise.prototype.then()`のたびに新しく定数を定義していますが。上述のとおり`Promise.prototype.then()`でメソッドチェーンできます。
+Ví dụ trên định nghĩa constant mới cho mỗi lần gọi `Promise.prototype.then()`, nhưng như đã đề cập ở trên, bạn có thể chain method với `Promise.prototype.then()`.
 
 ```ts twoslash
 const promise: Promise<boolean> = Promise.resolve("1")
-  .then((value) => Number(value)) // Promise<number>型になる
-  .then((value) => value > 0); // Promise<boolean>型になる
+  .then((value) => Number(value)) // Trở thành kiểu Promise<number>
+  .then((value) => value > 0); // Trở thành kiểu Promise<boolean>
 ```
 
-コールバック内で例外を投げるとそのPromiseは拒否されます。
+Nếu throw exception trong callback, Promise đó sẽ bị reject.
 
 ```ts twoslash
 Promise.resolve(1)
@@ -194,7 +194,7 @@ Promise.resolve(1)
 // @log: 'rejected'
 ```
 
-同様に、コールバック内で拒否された`Promise`を返すとそのPromiseは拒否されます。
+Tương tự, nếu trả về `Promise` bị reject trong callback, Promise đó sẽ bị reject.
 
 ```ts twoslash
 Promise.resolve(1)
@@ -210,30 +210,30 @@ Promise.resolve(1)
 // @log: 'rejected'
 ```
 
-### 待ち受けた非同期処理の拒否の結果をコールバックで実行する - `Promise.prototype.catch()`
+### Thực thi callback với kết quả reject của xử lý bất đồng bộ đã chờ - `Promise.prototype.catch()`
 
-`Promise<T>`が拒否された(rejected)ときに呼び出されます。引数に使われるコールバックの第1引数は`any`型の値です。
-これもコールバックの戻り値として`S`型または`Promise<S>`型の値を返すと`Promise<S>`型を返します。
+Được gọi khi `Promise<T>` bị rejected. Argument thứ nhất của callback là giá trị kiểu `any`.
+Method này cũng trả về `Promise<S>` nếu trả về giá trị kiểu `S` hoặc `Promise<S>` làm giá trị trả về của callback.
 
 ```ts twoslash
 const promise1: Promise<number> = Promise.reject(new Error());
 const promise2: Promise<string> = promise1.catch((e) => e.message);
 ```
 
-`Promise.prototype.catch()`は`Promise`が履行されている状態だと実行されません。そのため`Promise.prototype.catch()`のあとに`Promise.prototype.then()`をつなげると実行されたときの型と実行されなかったときの型の両方を考える必要があります。
+`Promise.prototype.catch()` không được thực thi khi `Promise` ở trạng thái fulfilled. Do đó, khi kết nối `Promise.prototype.then()` sau `Promise.prototype.catch()`, cần xem xét cả kiểu khi được thực thi và kiểu khi không được thực thi.
 
 ```ts twoslash
 Promise.resolve(1)
   .catch(() => {
     return "1";
   })
-  // string | number型になる
+  // Kiểu trở thành string | number
   .then((value: string | number) => {
     console.log(value);
   });
 ```
 
-ただし`Promise.prototype.catch()`のあとに`Promise.prototype.then()`を書くというより、`Promise.prototype.then()`のあとに`Promise.prototype.catch()`を書くほうが多いでしょう。
+Tuy nhiên, thường thì viết `Promise.prototype.catch()` sau `Promise.prototype.then()` nhiều hơn là ngược lại.
 
 ```ts twoslash
 Promise.resolve(1)
@@ -248,19 +248,19 @@ Promise.resolve(1)
   });
 ```
 
-### 待ち受けた非同期処理が終了次第コールバックを実行する - `Promise.prototype.finally()`
+### Thực thi callback ngay khi xử lý bất đồng bộ đã chờ kết thúc - `Promise.prototype.finally()`
 
-`Promise<T>`が決定された(settled)ときに呼び出されます。コールバックに引数はありません。
-このメソッドは戻り値を設定することはできません。
-`Promise.prototype.finally()`はES2018になって追加されました。
+Được gọi khi `Promise<T>` được settled. Callback không có argument.
+Method này không thể set giá trị trả về.
+`Promise.prototype.finally()` được thêm vào trong ES2018.
 
-## `Promise`の静的メソッド
+## Các static method của `Promise`
 
-静的メソッドでも覚えておくべき大事なメソッドがあります。
+Có các static method quan trọng cần nhớ.
 
-### すべての非同期処理の結果を待ち受ける - `Promise.all()`
+### Chờ kết quả của tất cả các xử lý bất đồng bộ - `Promise.all()`
 
-第1引数に要素が`Promise`の配列を取り、それらの実行結果を非同期で待ち受けます。戻り値は`Promise`が解決される時間にかかわらず配列に与えられた順番どおりにPromiseの結果が返ります。
+Nhận một mảng các `Promise` làm argument thứ nhất và chờ kết quả thực thi của chúng bất đồng bộ. Giá trị trả về được trả về theo thứ tự các Promise được cung cấp trong mảng, bất kể thời gian Promise được resolve.
 
 ```ts twoslash
 function request1(): Promise<number> {
@@ -288,13 +288,13 @@ function request3(): Promise<number> {
 }
 
 Promise.all([request1(), request2(), request3()]).then(([num1, num2, num3]) => {
-  // request1が一番終了するまで遅いが結果の順番は保持され、num1がrequest1の結果になる
+  // request1 hoàn thành chậm nhất nhưng thứ tự kết quả được giữ nguyên, num1 là kết quả của request1
   console.log(num1, num2, num3);
   // @log: 1, 2, 3
 });
 ```
 
-与えられた`Promise`のうちひとつでも拒否された場合`Promise.all()`は拒否されます。
+Nếu một trong các `Promise` được cung cấp bị reject, `Promise.all()` sẽ bị reject.
 
 ```ts twoslash
 function request1(): Promise<number> {
@@ -326,36 +326,36 @@ Promise.all([request1(), request2(), request3()])
     console.log(num1, num2, num3);
   })
   .catch((e) => {
-    // 最も早く終わった例外が返る
+    // Exception hoàn thành sớm nhất được trả về
     console.log(e.message);
     // @log: 'failed3'
   });
 ```
 
-### 履行された`Promise`を返す - `Promise.resolve()`
+### Trả về `Promise` đã fulfilled - `Promise.resolve()`
 
-履行された`Promise`を返します。
+Trả về `Promise` đã fulfilled.
 
 ```ts twoslash
 const promise: Promise<number> = Promise.resolve(4);
 ```
 
-### 拒否された`Promise`を返す - `Promise.reject()`
+### Trả về `Promise` đã rejected - `Promise.reject()`
 
-拒否された`Promise`を返します。
+Trả về `Promise` đã rejected.
 
 ```ts twoslash
 const promise: Promise<string> = Promise.reject(new Error("failed"));
 ```
 
-### `Promise`を履行、拒否にかかわらずすべて待ち受ける - `Promise.allSettled()`
+### Chờ tất cả `Promise` bất kể fulfill hay reject - `Promise.allSettled()`
 
-第1引数に与えられたすべての`Promise`が決定される(settled)まで実行します。決定とは履行か拒否のことであり、ひとつでも拒否されると終了する`Promise.all()`と異なり、すべてが履行されるか拒否されるまで処理を待ちます。
-戻り値は判別可能なユニオン型として返ります。
+Thực thi cho đến khi tất cả các `Promise` được cung cấp làm argument thứ nhất được settled. Settled có nghĩa là fulfilled hoặc rejected. Khác với `Promise.all()` kết thúc khi có một Promise bị reject, `Promise.allSettled()` chờ cho đến khi tất cả đều fulfilled hoặc rejected.
+Giá trị trả về được trả về dưới dạng discriminated union type.
 
-[判別可能なユニオン型](../../reference/values-types-variables/discriminated-union.md)
+[Discriminated union type](../../reference/values-types-variables/discriminated-union.md)
 
-`Promise.allSettled()`はES2020になって追加されました。
+`Promise.allSettled()` được thêm vào trong ES2020.
 
 ```ts twoslash
 function request1(): Promise<number> {
@@ -369,13 +369,13 @@ function request2(): Promise<number> {
 Promise.allSettled([request1(), request2()]).then((values) => {
   console.log(values);
   // @log: { status: "fulfilled", value: 1}, { status: "rejected", reason: {}}
-  // reason はエラーのオブジェクト
+  // reason là object của error
 });
 ```
 
-### いちばん初めに決定された`Promise`を返す - `Promise.race()`
+### Trả về `Promise` được settled đầu tiên - `Promise.race()`
 
-`Promise.all()`のように第1引数に要素が`Promise`の配列を取り、それらをすべて非同期で実行しますが、その中のうちもっとも早く決定された`Promise`の結果を履行、拒否に関係なく返します。
+Giống như `Promise.all()`, nhận một mảng các `Promise` làm argument thứ nhất và thực thi tất cả bất đồng bộ, nhưng trả về kết quả của `Promise` được settled sớm nhất, bất kể fulfilled hay rejected.
 
 ```ts twoslash
 function request1(): Promise<number> {
@@ -408,7 +408,7 @@ Promise.race([request1(), request2(), request3()]).then((num) => {
 });
 ```
 
-次の例は一番初めに決定される`Promise`が拒否される場合の例です。
+Ví dụ tiếp theo là trường hợp `Promise` được settled đầu tiên bị rejected.
 
 ```ts twoslash
 function request1(): Promise<number> {
@@ -445,15 +445,15 @@ Promise.race([request1(), request2(), request3()])
   });
 ```
 
-## `Promise`ふかぼり
+## Tìm hiểu sâu về `Promise`
 
-### `Promise`の状態
+### Các trạng thái của `Promise`
 
-文章中にも何度も出てきましたが、`Promise`には３つの状態があります。
+Như đã xuất hiện nhiều lần trong bài viết, `Promise` có 3 trạng thái.
 
 - pending
 - fulfilled
 - rejected
 
-pendingは待機中という意味で、まだ待ち受けている非同期処理が完了していないときの状態を示します。fulfilledは履行という意味で、待ち受けている非同期処理が完了し、意図している状態（例外が発生しなかった）になったことを示します。rejectedは拒否という意味で、待ち受けている非同期処理が例外とともに完了したことを示します。
-fulfilledとrejectedを合わせてsettledということがあります。このsettledは決定という意味です。
+Pending có nghĩa là đang chờ, chỉ trạng thái khi xử lý bất đồng bộ đang chờ chưa hoàn thành. Fulfilled có nghĩa là đã thực hiện, chỉ trạng thái khi xử lý bất đồng bộ đang chờ đã hoàn thành và đạt trạng thái mong muốn (không có exception xảy ra). Rejected có nghĩa là bị từ chối, chỉ trạng thái khi xử lý bất đồng bộ đang chờ đã hoàn thành cùng với exception.
+Fulfilled và rejected gộp lại được gọi là settled. Settled có nghĩa là đã quyết định.

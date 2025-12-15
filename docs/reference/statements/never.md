@@ -1,19 +1,19 @@
-# never型
+# Kiểu never
 
-`never`型は「値を持たない」を意味するTypeScriptの特別な型です。
+Kiểu `never` là kiểu đặc biệt của TypeScript có nghĩa là "không có giá trị".
 
-## neverの特性
+## Đặc tính của never
 
-### 何も代入できない
+### Không thể gán gì vào
 
-`never`型には何も代入できません。
+Không thể gán bất cứ thứ gì vào kiểu `never`.
 
 ```ts twoslash
 // @errors: 2322
 const foo: never = 1;
 ```
 
-たとえ`any`型でも代入は不可能です。
+Ngay cả kiểu `any` cũng không thể gán vào.
 
 ```ts twoslash
 // @errors: 2322
@@ -21,25 +21,25 @@ const any: any = 1;
 const foo: never = any;
 ```
 
-唯一`never`型は代入できます。
+Chỉ có kiểu `never` mới có thể gán vào.
 
 ```ts twoslash
 const foo: never = 1 as never;
 ```
 
-### 何にでも代入できる
+### Có thể gán vào bất cứ kiểu nào
 
-`never`型はどんな型にも代入できます。
+Kiểu `never` có thể được gán vào bất kỳ kiểu nào.
 
 ```ts twoslash
 const nev = 1 as never;
-const a: string = nev; // 代入OK
-const b: string[] = nev; // 代入OK
+const a: string = nev; // Gán OK
+const b: string[] = nev; // Gán OK
 ```
 
-## 値が無いとは
+## Không có giá trị nghĩa là gì
 
-`never`型の「値が無い」とはどういうことでしょうか。たとえば、例外が必ず発生する関数の戻り値です。戻り値は絶対に取れません。そのため、戻り値の型は`never`型になります。
+"Không có giá trị" của kiểu `never` nghĩa là gì? Ví dụ, giá trị trả về của hàm luôn gây ra exception. Giá trị trả về không bao giờ có thể lấy được. Do đó, kiểu của giá trị trả về là kiểu `never`.
 
 ```ts twoslash
 function throwError(): never {
@@ -47,24 +47,24 @@ function throwError(): never {
 }
 ```
 
-終了しない関数も戻り値が`never`型になります。
+Hàm không kết thúc cũng có giá trị trả về là kiểu `never`.
 
 ```ts twoslash
 function forever(): never {
-  while (true) {} // 無限ループ
+  while (true) {} // Vòng lặp vô hạn
 }
 ```
 
-作り得ない値も`never`型になります。たとえば、number型とstring型の両方に代入可能な値は作れません。そのため、number型とstring型の[インターセクション型](../values-types-variables/intersection.md)は`never`型になります。
+Giá trị không thể tạo ra cũng trở thành kiểu `never`. Ví dụ, không thể tạo ra giá trị có thể gán cho cả kiểu number và kiểu string. Do đó, [intersection type](../values-types-variables/intersection.md) của kiểu number và kiểu string là kiểu `never`.
 
 ```ts twoslash
 type NumberString = number & string;
 //   ^?
 ```
 
-## void型とnever型の違い
+## Sự khác biệt giữa kiểu void và kiểu never
 
-`void`型は`undefined`が代入できますが、`never`は値を持てません。
+Kiểu `void` có thể gán `undefined`, nhưng `never` không thể có giá trị.
 
 ```ts twoslash
 // @errors: 2322
@@ -72,33 +72,33 @@ const ok: void = undefined;
 const ng: never = undefined;
 ```
 
-意味的に戻り値での`void`と`never`は、戻り値が無い点は同じです。関数が終了するかが異なります。`void`は関数が最後まで実行されるという意味です。`never`は関数の処理が中断、もしくは、永遠に続くことを意味します。
+Về mặt ý nghĩa, `void` và `never` ở giá trị trả về đều giống nhau là không có giá trị trả về. Điểm khác biệt là hàm có kết thúc hay không. `void` có nghĩa là hàm được thực thi đến cuối. `never` có nghĩa là xử lý của hàm bị gián đoạn hoặc thực thi mãi mãi.
 
-| 型      | 戻り値 | 終了するか                           |
-| ------- | ------ | ------------------------------------ |
-| `void`  | 無い   | `return`されるか、最後まで実行される |
-| `never` | 無い   | 中断されるか、永遠に実行される       |
+| Kiểu    | Giá trị trả về | Có kết thúc không                           |
+| ------- | -------------- | ------------------------------------------- |
+| `void`  | Không          | `return` hoặc thực thi đến cuối             |
+| `never` | Không          | Bị gián đoạn hoặc thực thi mãi mãi          |
 
-そのため、戻り値が`never`の関数が最後まで到達できてしまう実装の場合、TypeScriptはコンパイルエラーを出します。
+Do đó, nếu implementation của hàm có giá trị trả về là `never` có thể chạy đến cuối, TypeScript sẽ báo lỗi compile.
 
 ```ts twoslash
 // @errors: 2534
 function func(): never {}
 ```
 
-## neverを使った網羅性チェック
+## Kiểm tra tính đầy đủ (exhaustiveness check) bằng never
 
-`never`の何も代入できないという特性は、網羅性チェック(exhaustiveness check)に応用できます。網羅性チェックとは、[ユニオン型](../values-types-variables/union.md)を分岐処理するとき、ロジックがすべてのパターンを網羅しているかをコンパイラにチェックさせることを言います。
+Đặc tính không thể gán gì vào của `never` có thể được ứng dụng cho exhaustiveness check. Exhaustiveness check là việc để compiler kiểm tra xem logic có xử lý hết tất cả các pattern hay không khi xử lý phân nhánh [union type](../values-types-variables/union.md).
 
-たとえば、3パターンのユニオン型があるとします。
+Ví dụ, có một union type với 3 pattern.
 
 ```ts twoslash
 type Extension = "js" | "ts" | "json";
 ```
 
-このうち2パターンにだけ対応した分岐処理が次です。これには網羅性がありませんが、TypeScriptは警告を出しません。
+Đây là xử lý phân nhánh chỉ xử lý 2 pattern. Không có tính đầy đủ, nhưng TypeScript không cảnh báo.
 
-```ts twoslash title="網羅性がない分岐"
+```ts twoslash title="Phân nhánh không đầy đủ"
 type Extension = "js" | "ts" | "json";
 // ---cut---
 function printLang(ext: Extension): void {
@@ -109,16 +109,16 @@ function printLang(ext: Extension): void {
     case "ts":
       console.log("TypeScript");
       break;
-    // "json"に対する分岐がない
+    // Không có phân nhánh cho "json"
   }
 }
 ```
 
-### 網羅性チェックの基本
+### Cơ bản về exhaustiveness check
 
-網羅性チェックを行うには、`default`分岐で網羅性をチェックしたい値をnever型に代入します。すると、TypeScriptが代入エラーの警告を出すようになります。
+Để thực hiện exhaustiveness check, gán giá trị cần kiểm tra tính đầy đủ cho kiểu never trong phân nhánh `default`. Khi đó, TypeScript sẽ cảnh báo lỗi gán.
 
-```ts twoslash title="網羅性チェックがついた分岐"
+```ts twoslash title="Phân nhánh có exhaustiveness check"
 // @errors: 2322
 type Extension = "js" | "ts" | "json";
 // ---cut---
@@ -137,11 +137,11 @@ function printLang(ext: Extension): void {
 }
 ```
 
-### 例外による網羅性チェック
+### Exhaustiveness check bằng exception
 
-一歩進んで網羅性チェック用の例外クラスを定義するのがお勧めです。このクラスは、コンストラクタ引数に`never`型を取る設計にします。
+Khuyến nghị nên định nghĩa class exception cho exhaustiveness check. Class này được thiết kế để nhận kiểu `never` làm tham số constructor.
 
-```ts twoslash title="網羅性チェック関数"
+```ts twoslash title="Hàm exhaustiveness check"
 class ExhaustiveError extends Error {
   constructor(value: never, message = `Unsupported type: ${value}`) {
     super(message);
@@ -149,7 +149,7 @@ class ExhaustiveError extends Error {
 }
 ```
 
-この例外を`default`分岐で投げるようにします。コンストラクタに網羅性をチェックしたい引数を渡します。こうしておくと、網羅性が満たされていない場合、TypeScriptが代入エラーを警告します。
+Ném exception này trong phân nhánh `default`. Truyền tham số cần kiểm tra tính đầy đủ vào constructor. Khi làm như vậy, nếu tính đầy đủ không được đáp ứng, TypeScript sẽ cảnh báo lỗi gán.
 
 ```ts twoslash
 // @errors: 2345
@@ -174,16 +174,16 @@ function printLang(ext: Extension): void {
 }
 ```
 
-例外にしておく利点は2つあります。
+Có 2 lợi ích khi dùng exception.
 
-1. `noUnusedLocals`に対応可能
-2. 実行時を意識したコードになる
+1. Có thể xử lý `noUnusedLocals`
+2. Code có ý thức về runtime
 
-#### `noUnusedLocals`に対応可能
+#### Có thể xử lý `noUnusedLocals`
 
-コンパイラオプション[`noUnusedLocals`](../tsconfig/nounusedlocals.md)は使われていない変数について警告を出すかを設定します。これが`true`のとき、変数に代入するだけの網羅性チェックはコンパイルエラーになります。
+Compiler option [`noUnusedLocals`](../tsconfig/nounusedlocals.md) cài đặt có cảnh báo về biến không được sử dụng hay không. Khi option này là `true`, exhaustiveness check chỉ gán vào biến sẽ gây lỗi compile.
 
-```ts twoslash title="全網羅するも未使用変数で警告される"
+```ts twoslash title="Dù xử lý đủ hết nhưng vẫn bị cảnh báo biến không sử dụng"
 // @noUnusedLocals: true
 // @errors: 6133
 function func(value: "yes" | "no"): void {
@@ -201,13 +201,13 @@ function func(value: "yes" | "no"): void {
 }
 ```
 
-網羅性チェックを例外にしておくと、未使用変数についてのコンパイルエラーが発生しなくなります。
+Nếu làm exhaustiveness check bằng exception, lỗi compile về biến không sử dụng sẽ không xảy ra.
 
-#### 実行時を意識したコードになる
+#### Code có ý thức về runtime
 
-例外のほうが、コンパイル後のJavaScriptを意識した実装になります。変数代入による網羅性チェックのコードをコンパイルすると、次のJavaScriptが生成されます。
+Exception là implementation có ý thức hơn về JavaScript sau khi compile. Khi compile code exhaustiveness check bằng gán biến, sẽ sinh ra JavaScript sau.
 
-```ts twoslash title="コンパイル後のJavaScript(変数代入による網羅性チェック)"
+```ts twoslash title="JavaScript sau khi compile (exhaustiveness check bằng gán biến)"
 // @alwaysStrict: false
 // @showEmit
 function func(value: "yes" | "no"): void {
@@ -225,11 +225,11 @@ function func(value: "yes" | "no"): void {
 }
 ```
 
-コンパイルもとのTypeScriptを知らない者がこのコードを見ると、`exhaustivenessCheck`への代入は意図が不明です。また、網羅性のチェックは実行時に行われません。
+Người không biết TypeScript gốc khi nhìn code này, việc gán vào `exhaustivenessCheck` có ý đồ không rõ ràng. Hơn nữa, exhaustiveness check không được thực hiện tại runtime.
 
-例外による網羅性チェックは、コンパイル後コードだけ見ても意図が明瞭です。また、実行時にもチェックが行われます。このほうがよい実装になります。
+Exhaustiveness check bằng exception có ý đồ rõ ràng ngay cả khi chỉ nhìn code sau compile. Hơn nữa, check cũng được thực hiện tại runtime. Đây là implementation tốt hơn.
 
-```ts twoslash title="コンパイル後のJavaScript(例外による網羅性チェック)"
+```ts twoslash title="JavaScript sau khi compile (exhaustiveness check bằng exception)"
 // @alwaysStrict: false
 // @showEmit
 class ExhaustiveError extends Error {
@@ -253,12 +253,12 @@ function func(value: "yes" | "no"): void {
 
 <PostILearned>
 
-TypeScriptのneverは「値を持たない」型。
+never trong TypeScript là kiểu "không có giá trị".
 
-1️⃣特性1: neverへは何も代入できない
-2️⃣特性2: neverは何にでも代入できる
-💥常に例外を起こす関数の戻り値に使える
-👐voidとは異なる
-✅網羅性チェックに応用できる
+1️⃣Đặc tính 1: Không thể gán gì vào never
+2️⃣Đặc tính 2: never có thể gán vào bất cứ thứ gì
+💥Có thể dùng cho giá trị trả về của hàm luôn gây exception
+👐Khác với void
+✅Có thể ứng dụng cho exhaustiveness check
 
 </PostILearned>

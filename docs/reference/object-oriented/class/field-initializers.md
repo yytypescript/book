@@ -1,10 +1,10 @@
 ---
-sidebar_label: フィールドの初期化子
+sidebar_label: Initializer cho field
 ---
 
-# フィールドの初期化子 (initializer)
+# Initializer cho field (initializer)
 
-TypeScriptでは、初期化子(initializer)を使うとインスタンスのフィールドの初期値を指定できます。初期化子はフィールド名の右に`= 値`と書きます。初期化子は、クラスがインスタンス化されるときに自動的に実行されます。
+Trong TypeScript, có thể chỉ định giá trị khởi tạo cho field của instance bằng initializer. Initializer được viết bên phải tên field là `= giá trị`. Initializer tự động thực thi khi class được instance hóa.
 
 ```ts twoslash
 class Point {
@@ -16,7 +16,7 @@ console.log(point.x, point.y);
 // @log: 0 0
 ```
 
-初期化子を用いた上の例は、次のコンストラクタでフィールドを初期化するのと同じ意味です。
+Ví dụ trên sử dụng initializer có cùng ý nghĩa với việc khởi tạo field trong constructor như sau:
 
 ```ts twoslash
 class Point {
@@ -30,12 +30,12 @@ class Point {
 }
 ```
 
-## 初期化子と型推論
+## Initializer và type inference
 
-初期化子で値の型が自明な場合、TypeScriptコンパイラーはフィールドの型を推論してくれます。そのため、初期化子を伴うフィールドは型注釈を省略できます。
+Khi kiểu của giá trị trong initializer là rõ ràng, TypeScript compiler sẽ suy luận kiểu của field. Do đó, có thể bỏ qua type annotation cho field có initializer.
 
 ```ts twoslash
 class Point {
-  x = 0; // number型と型推論される
+  x = 0; // Được suy luận là kiểu number
 }
 ```

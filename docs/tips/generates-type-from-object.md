@@ -1,10 +1,10 @@
-# オブジェクトから型を生成する
+# Tạo type từ object
 
-多くの言語では型による構造体、オブジェクトの定義をしてからコーディングが始まりますが、元がJavaScriptであるTypeScriptにはそのような決まりがないことも多々あります。
+Trong nhiều ngôn ngữ, coding bắt đầu bằng việc định nghĩa struct, object bằng type, nhưng TypeScript có nguồn gốc từ JavaScript nên thường không có quy định như vậy.
 
-## 一般的な型を先に決めるプログラミング
+## Lập trình quyết định type trước - cách thông thường
 
-多くの言語ではその型が何かを決めてから、その型に属するオブジェクトを決めます。次の例はTypeScriptの例ですが、他の言語に当てはめても問題なく受け入れられると思います。
+Trong nhiều ngôn ngữ, quyết định type là gì trước, sau đó quyết định object thuộc type đó. Ví dụ sau là ví dụ TypeScript, nhưng có thể áp dụng cho ngôn ngữ khác mà không có vấn đề.
 
 ```ts twoslash
 type Account = {
@@ -22,11 +22,11 @@ const account: Account = {
 };
 ```
 
-すでにJavaScriptの資産があるプロジェクトにおいては表立って型などなく、そのため`Account`といった型は存在せず代入式の`const account`のみが存在していることでしょう。そんなときはこの`const account`をTypeScriptに変換してできるだけ近い形で型を作ることができます。
+Trong project có sẵn JavaScript asset, không có type công khai, nên không tồn tại type như `Account` và chỉ tồn tại biểu thức gán `const account`. Trong trường hợp đó, có thể chuyển đổi `const account` này sang TypeScript và tạo type gần nhất có thể.
 
 ### `typeof`
 
-この`typeof`はJavaScriptのものではなく、TypeScriptの`typeof`です。これを実際に動作している変数に使ってみるとその変数をTypeScriptはどのような型と認識しているのかがわかります。
+`typeof` này không phải của JavaScript, mà là `typeof` của TypeScript. Nếu sử dụng nó với biến đang hoạt động thực tế, có thể biết TypeScript nhận diện biến đó là type gì.
 
 ```ts twoslash
 const account = {
@@ -40,11 +40,11 @@ type Account = typeof account;
 //   ^?
 ```
 
-`plan`が意図するユニオン型にはなりませんが、それなりに近い型を得ることができました。
+`plan` không thành union type như mong muốn, nhưng đã có thể lấy được type khá gần.
 
-### プロパティを定数値で取得したい場合
+### Trường hợp muốn lấy property dưới dạng giá trị constant
 
-プロパティを定数値で取得したい場合はオブジェクトに`as const`をつけます。
+Nếu muốn lấy property dưới dạng giá trị constant, thêm `as const` vào object.
 
 ```ts twoslash
 const account = {
@@ -58,9 +58,9 @@ type Account = typeof account;
 //   ^?
 ```
 
-### 特定のプロパティだけを定数値で取得したい場合
+### Trường hợp chỉ muốn lấy property cụ thể dưới dạng giá trị constant
 
-これでは型の制約が強力すぎて他の値が代入できないので、もう少し柔軟にします。たとえば`plan`だけがユニオン型になるようにしたければ`plan`の右に希望の型を書いてあげればそれでその型になります。
+Với cách này, ràng buộc type quá mạnh nên không thể gán giá trị khác, cần linh hoạt hơn. Ví dụ, nếu muốn chỉ `plan` thành union type, viết type mong muốn ở bên phải của `plan` thì sẽ thành type đó.
 
 ```ts twoslash
 const account = {

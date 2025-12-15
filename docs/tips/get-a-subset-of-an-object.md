@@ -1,10 +1,10 @@
 ---
-description: オブジェクトから任意のプロパティのみを持ったオブジェクトを得る方法。
+description: Cách lấy object chỉ có property tùy ý từ object.
 ---
 
-# オブジェクトのサブセットを得る
+# Lấy subset của object
 
-オブジェクトのサブセットを得る方法です。サブセットとは、あるオブジェクトのいち部分を切り取ったもので、ここで紹介する方法は、プロパティ名を指定してオブジェクトの一部分を切り出すものです。たとえば、次のような数多くのプロパティを持つオブジェクトがあるとき、ここから数個のプロパティだけを持つオブジェクトを作る方法です。
+Đây là cách lấy subset của object. Subset là một phần được cắt ra từ một object, và phương pháp giới thiệu ở đây là cắt một phần của object bằng cách chỉ định tên property. Ví dụ, khi có object với nhiều property như sau, đây là cách tạo object chỉ có vài property từ đó.
 
 ```ts twoslash
 const profile = {
@@ -19,7 +19,7 @@ const profile = {
   zipcode: "100-6390",
 };
 
-// 上の9つプロパティを持つオブジェクトから、下の6つのプロパティだけを抽出したオブジェクトを得たい
+// Muốn lấy object chỉ có 6 property dưới đây từ object có 9 property ở trên
 
 const address = {
   country: "JP",
@@ -31,9 +31,9 @@ const address = {
 };
 ```
 
-## 方法1: 即時関数・分割代入・shorthand property nameの合わせ技
+## Phương pháp 1: Kết hợp immediately invoked function, destructuring assignment và shorthand property name
 
-オブジェクトのサブセットを得る1つ目の方法は、即時関数と分割代入、そして、shorthand property nameを組み合わせる方法です。
+Phương pháp đầu tiên để lấy subset của object là kết hợp immediately invoked function, destructuring assignment và shorthand property name.
 
 ```ts twoslash
 const profile = {
@@ -55,17 +55,17 @@ const sns = (({ twitter, github }) => ({ twitter, github }))(profile);
 // }
 ```
 
-この方法のメリットとデメリットは次のとおりです。
+Ưu và nhược điểm của phương pháp này như sau.
 
-- メリット
-  - 外部ライブラリを必要としない。
-- デメリット
-  - 初見の読み手には意外性のあるコードに見える場合がある。
-  - 即時関数の引数部分とshorthand property nameの2箇所に同じプロパティ名を書く必要があり冗長。
+- Ưu điểm
+  - Không cần library bên ngoài.
+- Nhược điểm
+  - Với người đọc lần đầu có thể thấy code bất ngờ.
+  - Cần viết cùng tên property ở 2 chỗ: phần tham số của immediately invoked function và shorthand property name, nên dư thừa.
 
-この書き方は、数個の少ないプロパティを抽出したいときは便利ですが、たくさんのプロパティを抽出しようとすると記述量が増え、徐々に大変さが出てきます。
+Cách viết này tiện lợi khi muốn trích xuất vài property ít, nhưng khi muốn trích xuất nhiều property thì lượng code tăng và dần trở nên khó khăn.
 
-抽出したいプロパティよりも、除きたいプロパティのほうが少ない場合は、次のような書き方で除きたいプロパティを指定するほうが簡単です。
+Khi property muốn loại bỏ ít hơn property muốn trích xuất, chỉ định property muốn loại bỏ như sau sẽ dễ hơn.
 
 ```ts twoslash
 const profile = {
@@ -92,7 +92,7 @@ const address = (({ name, twitter, github, ...rest }) => rest)(profile);
 // }
 ```
 
-JavaScriptでは、`delete`を使うとオブジェクトからプロパティを取り除けるので、上の書き方はまどろっこしいと思われるかもしれません。この書き方をするには理由があって、TypeScriptでは`delete`の使い勝手が良くないからです。あるオブジェクトから`delete`を使ってプロパティを取り除きたい場合、TypeScriptではそのプロパティがオプショナルでなければなりません。
+Trong JavaScript, có thể loại bỏ property từ object bằng `delete`, nên cách viết trên có thể trông rườm rà. Lý do viết như này là vì trong TypeScript, `delete` không dễ sử dụng. Khi muốn loại bỏ property từ object bằng `delete`, trong TypeScript property đó phải là optional.
 
 ```ts twoslash
 const profile = {
@@ -112,9 +112,9 @@ const address = { ...profile };
 delete address.name;
 ```
 
-## 方法2: lodash.pick / lodash.omit
+## Phương pháp 2: lodash.pick / lodash.omit
 
-2つ目の方法は[lodash](https://lodash.com/)を用いるものです。lodashはさまざまな便利関数を提供するライブラリで、その中のひとつに`pick`というオブジェクトのサブセットを得るための関数があります。
+Phương pháp thứ hai sử dụng [lodash](https://lodash.com/). lodash là library cung cấp nhiều hàm tiện ích, trong đó có hàm `pick` để lấy subset của object.
 
 ```ts twoslash
 // @filename: lodash
@@ -128,7 +128,7 @@ const sns = _.pick(profile, ["twitter", "github"]);
 // }
 ```
 
-lodash全体ではなく、`pick`関数だけが必要な場合は、パッケージ[lodash.pick](https://www.npmjs.com/package/lodash.pick)を使うこともできます。この場合、次のようにして`pick`関数を使います。
+Nếu chỉ cần hàm `pick` thay vì toàn bộ lodash, có thể sử dụng package [lodash.pick](https://www.npmjs.com/package/lodash.pick). Trong trường hợp này, sử dụng hàm `pick` như sau.
 
 ```ts twoslash
 // @filename: lodash.pick
@@ -138,15 +138,15 @@ import pick from "lodash.pick";
 const sns = pick(profile, ["twitter", "github"]);
 ```
 
-lodash.pickのメリットとデメリットは次のとおりです。
+Ưu và nhược điểm của lodash.pick như sau.
 
-- メリット
-  - 宣言的で読みやすい。
-  - 記述量が少ない。
-- デメリット
-  - ライブラリを導入する必要がある。
+- Ưu điểm
+  - Khai báo và dễ đọc.
+  - Lượng code ít.
+- Nhược điểm
+  - Cần cài đặt library.
 
-lodash.pickは抽出したいプロパティ名を指定する関数ですが、抽出したいプロパティより除外したいプロパティが少ない場合は、[lodash.omit](https://www.npmjs.com/package/lodash.omit)を使ったほうが便利です。
+lodash.pick là hàm chỉ định tên property muốn trích xuất, nhưng khi property muốn loại bỏ ít hơn property muốn trích xuất, sử dụng [lodash.omit](https://www.npmjs.com/package/lodash.omit) sẽ tiện hơn.
 
 ```ts twoslash
 // @filename: lodash
@@ -164,14 +164,14 @@ const address = _.omit(profile, ["name", "twitter", "github"]);
 // }
 ```
 
-lodash、lodash.pickとlodash.omitのインストールは次のコマンドで行なえます。
+Cài đặt lodash, lodash.pick và lodash.omit bằng lệnh sau.
 
 ```bash
-# lodashのインストール
+# Cài đặt lodash
 npm install lodash
 npm install -D @types/lodash
 
-# lodash.pickとlodash.omitのインストール
+# Cài đặt lodash.pick và lodash.omit
 npm install lodash.pick lodash.omit
 npm install -D @types/lodash.pick @types/lodash.omit
 ```

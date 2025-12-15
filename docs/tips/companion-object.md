@@ -1,13 +1,13 @@
-# コンパニオンオブジェクトパターン
+# Companion Object Pattern
 
-TypeScriptでは値と型に同名を与えてその両方を区別なく使うことができるテクニックがあります。これをコンパニオンオブジェクトと呼びます。
-これは、クラスを作るほどでもなけどそれっぽいファクトリーメソッドとオブジェクトが欲しいときに重宝します。
+Trong TypeScript có một kỹ thuật cho phép đặt cùng tên cho cả value và type, và sử dụng cả hai mà không phân biệt. Điều này được gọi là companion object.
+Điều này hữu ích khi bạn muốn có factory method và object giống như class nhưng không cần tạo class.
 
-## コンパニオンオブジェクト (Companion Object)
+## Companion Object
 
-次の例は長方形 (Rectangle) を作成するためのメソッド`from()`をもつオブジェクト`Rectangle`とその生成されるオブジェクトの型`Rectangle`です。これらの名称は衝突することなく定義ができ、外部から呼び出したときは同名で使用できます。
+Ví dụ sau là object `Rectangle` có method `from()` để tạo hình chữ nhật (Rectangle) và type `Rectangle` của object được tạo ra. Những tên này có thể được định nghĩa mà không xung đột, và khi gọi từ bên ngoài có thể sử dụng cùng tên.
 
-次の型と値 (ファクトリーメソッドを持つオブジェクト) は同じファイル`rectangle.ts`に存在するとします。
+Giả sử type và value (object có factory method) sau tồn tại trong cùng file `rectangle.ts`.
 
 ```ts twoslash
 export type Rectangle = {
@@ -25,7 +25,7 @@ export const Rectangle = {
 };
 ```
 
-値も型も同名で定義します。これを外部から import してみます。
+Định nghĩa cùng tên cho cả value và type. Hãy thử import từ bên ngoài.
 
 ```ts twoslash
 // @filename: rectangle.ts
@@ -54,4 +54,4 @@ console.log(rec.width);
 // @log: 3
 ```
 
-このように import の部分は`Rectangle`のみとなり見通しもつきやすいという特徴があります。ちなみに`Rectangle.from()`のRectangleが値であり`const rec: Rectangle`のRectangleが型です。このようにTypeScriptでは同名の値と型を同時に使うことができます。
+Như vậy, phần import chỉ có `Rectangle` nên dễ nhìn. Tham khảo, Rectangle trong `Rectangle.from()` là value, còn Rectangle trong `const rec: Rectangle` là type. Như vậy trong TypeScript có thể sử dụng đồng thời value và type cùng tên.

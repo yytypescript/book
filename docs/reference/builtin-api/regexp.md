@@ -2,33 +2,33 @@
 title: RegExp
 ---
 
-RegExpは正規表現のためのJavaScriptの組み込みクラスです。組み込みなだけあり、リテラルでの表記とコンストラクタを利用した表記の2通りがあります。
-このページではJavaScriptのRegExp型について触れ、正規表現そのものについては直接触れません。
+RegExp là class built-in của JavaScript cho regular expression. Vì là built-in nên có 2 cách viết: literal và sử dụng constructor.
+Trang này đề cập đến kiểu RegExp trong JavaScript, không đề cập trực tiếp đến bản thân regular expression.
 
-リテラルでのRegExp型は`/`で検索したい文字を囲み、最後にフラグを書きます。一方コンストラクタでは第1引数が検索したい文字で、第2引数がフラグになります。次のRegExp型は同じものを指しています。
+Kiểu RegExp dạng literal bao quanh ký tự cần tìm bằng `/` và viết flag ở cuối. Còn với constructor, tham số thứ nhất là ký tự cần tìm, tham số thứ hai là flag. Các kiểu RegExp sau đây giống nhau:
 
 ```ts twoslash
 const regexp1 = /0(8|9)0-[0-9]{4}-[0-9]{4}/g;
 const regexp2 = new RegExp("0(8|9)0-[0-9]{4}-[0-9]{4}", "g");
 ```
 
-このとき`\`については、コンストラクタを利用する場合はふたつ書く必要があります。次のRegExp型は同じものを指します。
+Lúc này, với `\`, khi sử dụng constructor cần viết hai lần. Các kiểu RegExp sau đây giống nhau:
 
 ```ts twoslash
 const regexp1 = /0(8|9)0-\d{4}-\d{4}/g;
 const regexp2 = new RegExp("0(8|9)0-\\d{4}-\\d{4}", "g");
 ```
 
-とくに、バックスラッシュ`\`1文字を検索したい場合、コンストラクタでは`\\\\`と4文字書く必要があるので注意してください。
+Đặc biệt, khi muốn tìm 1 ký tự backslash `\`, với constructor cần viết 4 ký tự `\\\\`, cần lưu ý.
 
-動的に検索する対象を切り替えたい場合はコンストラクタを利用し、特に理由がなければリテラル記法を利用するのがよいでしょう。
+Khi muốn thay đổi động đối tượng tìm kiếm thì dùng constructor, còn nếu không có lý do đặc biệt thì nên dùng literal.
 
-## RegExpの操作
+## Thao tác với RegExp
 
-### 文字列に一致するものがあるかどうかを検査する - `Regexp.prototype.test()`
+### Kiểm tra xem có ký tự khớp trong chuỗi hay không - `Regexp.prototype.test()`
 
-第1引数の文字列を正規表現で検索するには`test`メソッドを使います。
-一致するものがある場合は`true`、そうでない場合は`false`を返します。
+Để tìm kiếm chuỗi tham số thứ nhất bằng regular expression, sử dụng method `test`.
+Trả về `true` nếu có ký tự khớp, ngược lại trả về `false`.
 
 ```ts twoslash
 const regex = /日/;
@@ -37,11 +37,11 @@ console.log(regex.test("日曜日"));
 // @log: true
 ```
 
-### 文字列で一致するものの検索をする - `Regexp.prototype.exec()`
+### Tìm kiếm ký tự khớp trong chuỗi - `Regexp.prototype.exec()`
 
-第1引数の文字列を正規表現で検索し、結果を`string[]`型で返します。
-`string[]`の0番目はマッチした文字列を、1番目以降はキャプチャグループを設定したときに限りパターンにマッチした文字列を取得します。
-一致するものがない場合は`null`を返します。
+Tìm kiếm chuỗi tham số thứ nhất bằng regular expression và trả về kết quả dạng kiểu `string[]`.
+Phần tử thứ 0 của `string[]` là chuỗi khớp, từ phần tử thứ 1 trở đi chỉ khi đặt capture group mới lấy được chuỗi khớp với pattern.
+Trả về `null` nếu không có ký tự khớp.
 
 ```ts twoslash
 const regex = /(.日).*(.日).*(.日).*(.日).*(.日)/;
@@ -51,13 +51,13 @@ console.log(results);
 // @log: ["1日は日曜日で祝日、晴れの日", "1日", "は日", "曜日", "祝日", "の日"]
 ```
 
-## string型のメソッドでRegExpを使うメソッド
+## Method của string sử dụng RegExp
 
-### 文字列を検索する - `String.prototype.match()`
+### Tìm kiếm chuỗi - `String.prototype.match()`
 
-文字列を`RegExp`で検索します。`Regexp.prototype.exec()`と同じように使うことができます。
-結果は`string[]`型で返り、0番目はマッチした文字列を、1番目以降はキャプチャグループを設定したときにパターンにマッチした文字列を取得します。
-一致するものがない場合は`null`を返します。
+Tìm kiếm chuỗi bằng `RegExp`. Có thể sử dụng tương tự `Regexp.prototype.exec()`.
+Kết quả trả về dạng kiểu `string[]`, phần tử thứ 0 là chuỗi khớp, từ phần tử thứ 1 trở đi khi đặt capture group sẽ lấy được chuỗi khớp với pattern.
+Trả về `null` nếu không có ký tự khớp.
 
 ```ts twoslash
 const regex = /(.日).*(.日).*(.日).*(.日).*(.日)/;
@@ -67,9 +67,9 @@ console.log(str.match(regex));
 // @log: ["1日は日曜日で祝日、晴れの日", "1日", "は日", "曜日", "祝日", "の日"]
 ```
 
-### `String.prototype.match()`で注意すること
+### Lưu ý khi dùng `String.prototype.match()`
 
-RegExpにgのフラグがついている場合、完全一致した文字列の配列を返し、キャプチャグループを返さなくなります。
+Khi RegExp có flag g, sẽ trả về mảng các chuỗi khớp hoàn toàn và không trả về capture group.
 
 ```ts twoslash
 const regex1 = /(.日)/;
@@ -82,10 +82,10 @@ console.log(str.match(regex2));
 // @log: ["1日", "は日", "曜日", "祝日", "の日"]
 ```
 
-## Named capturing groupsについて
+## Về Named capturing groups
 
-キャプチャグループで名前を指定することができるNamed capturing groupsがありますが、残念ながらTypeScriptとの相性はよくありません。
-次の例ではNamed capturing groupsとして`pref`と`ward`にはそれぞれ`"静岡県"`と`"磐田市"`がマッチしますがTypeScriptはそのプロパティに値が設定されていることを保証しません。値の取得はオプショナルチェーンを使うとよいでしょう。
+Có Named capturing groups cho phép chỉ định tên cho capture group, nhưng tiếc là không tương thích tốt với TypeScript.
+Trong ví dụ sau, với Named capturing groups `pref` và `ward` sẽ khớp với `"静岡県"` và `"磐田市"` nhưng TypeScript không đảm bảo rằng giá trị đã được set cho property đó. Nên dùng optional chaining khi lấy giá trị.
 
 ```ts twoslash
 const regex = /(?<pref>.+[都道府県])(?<ward>.+[市区町村])/gu;
@@ -100,4 +100,4 @@ console.log(match?.groups?.ward);
 // @errors: 2532
 ```
 
-[オプショナルチェーン](../values-types-variables/object/optional-chaining.md)
+[Optional chaining](../values-types-variables/object/optional-chaining.md)

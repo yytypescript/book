@@ -1,6 +1,6 @@
-# typeof型演算子
+# typeof type operator
 
-TypeScriptの`typeof`は変数から型を抽出する型演算子です。次は、変数`point`に`typeof`型演算子を用いて、`Point`型を定義する例です。このPoint型は次のような型になります。
+`typeof` trong TypeScript là type operator trích xuất kiểu từ một biến. Ví dụ dưới đây sử dụng type operator `typeof` với biến `point` để định nghĩa kiểu `Point`:
 
 ```ts twoslash
 const point = { x: 135, y: 35 };
@@ -8,6 +8,6 @@ type Point = typeof point;
 //   ^?
 ```
 
-ここで説明したのはTypeScriptのtypeof**型**演算子です。JavaScriptのtypeof演算子と同じ名前ですが、まったく別のものなので注意してください。
+Lưu ý rằng đây là typeof **type** operator của TypeScript. Mặc dù có cùng tên với typeof operator của JavaScript, nhưng chúng hoàn toàn khác nhau.
 
-[typeof演算子 (typeof operator)](../values-types-variables/typeof-operator.md)
+[typeof operator](../values-types-variables/typeof-operator.md)

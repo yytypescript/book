@@ -1,14 +1,14 @@
 ---
-sidebar_label: 関数宣言
+sidebar_label: Function declaration
 ---
 
-# 関数宣言 (function declaration)
+# Function declaration
 
-関数宣言はJavaScriptで関数を定義する構文です。
+Function declaration là cú pháp để định nghĩa function trong JavaScript.
 
-## 関数宣言構文
+## Cú pháp function declaration
 
-JavaScriptの関数宣言はfunction構文を使います。
+Function declaration trong JavaScript sử dụng cú pháp function.
 
 ```js twoslash
 function hello() {
@@ -16,9 +16,9 @@ function hello() {
 }
 ```
 
-## 関数宣言構文の型注釈
+## Type annotation cho function declaration
 
-TypeScriptでは関数宣言の引数と戻り値に型注釈を書けます。
+Trong TypeScript, bạn có thể viết type annotation cho tham số và giá trị trả về của function declaration.
 
 ```ts twoslash
 function increment(num: number): number {
@@ -26,7 +26,7 @@ function increment(num: number): number {
 }
 ```
 
-引数の型注釈を省略した場合、コンパイラーは`any`型と暗黙的に解釈します。
+Khi bỏ qua type annotation cho tham số, compiler sẽ ngầm hiểu nó là kiểu `any`.
 
 ```ts twoslash
 // @noImplicitAny: false
@@ -36,7 +36,7 @@ function increment(num): number {
 }
 ```
 
-コンパイラーオプションの`noImplicitAny`を`true`に設定することで、引数の型注釈を必須にできます。
+Bằng cách đặt compiler option `noImplicitAny` thành `true`, bạn có thể bắt buộc type annotation cho tham số.
 
 ```ts twoslash
 // @noImplicitAny: true
@@ -48,7 +48,7 @@ function increment(num): number {
 
 [noImplicitAny](../tsconfig/noimplicitany.md)
 
-戻り値の型注釈を省略した場合、コンパイラーがコードから型推論します。
+Khi bỏ qua type annotation cho giá trị trả về, compiler sẽ suy luận kiểu từ code.
 
 ```ts twoslash
 function increment(num: number) {
@@ -58,7 +58,7 @@ const value = increment(1);
 //            ^?
 ```
 
-`return`が複数あり違う型を返している場合推論される型はユニオン型になります。
+Khi có nhiều `return` và trả về các kiểu khác nhau, kiểu được suy luận sẽ là union type.
 
 ```ts twoslash
 function getFirst(items: number[]) {

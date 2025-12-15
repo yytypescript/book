@@ -1,12 +1,12 @@
 ---
-sidebar_label: 関数宣言と巻き上げ
+sidebar_label: Function declaration và hoisting
 ---
 
-# 関数宣言と巻き上げ (hoisting)
+# Function declaration và hoisting
 
-JavaScriptの関数宣言と関数式の違いが現れるひとつの例は巻き上げ(hoisting)です。関数宣言には巻き上げがあり、関数式には巻き上げがありません。
+Một ví dụ về sự khác biệt giữa function declaration và function expression trong JavaScript là hoisting. Function declaration có hoisting, còn function expression thì không.
 
-まずは関数宣言の例を見てみましょう。次のコードは、3行目に`hello`関数の関数宣言があります。そして、その宣言の前で`hello`関数を実行しています。
+Đầu tiên, hãy xem ví dụ về function declaration. Trong đoạn code sau, function declaration của function `hello` nằm ở dòng thứ 3. Và function `hello` được thực thi trước khi khai báo.
 
 ```js twoslash
 hello();
@@ -16,9 +16,9 @@ function hello() {
 }
 ```
 
-このコードは、`hello`関数を宣言した行より前でその関数を呼び出しているのに、エラーにはならず問題なく"Hello World"が出力されます。これは関数宣言には巻き上げがあるためです。
+Đoạn code này gọi function `hello` trước dòng khai báo function, nhưng không bị lỗi và "Hello World" được in ra bình thường. Đây là do function declaration có hoisting.
 
-次に関数式の例を見てみましょう。下のコードは`hello`関数を関数式を使って定義するようにしたものです。
+Tiếp theo, hãy xem ví dụ về function expression. Đoạn code dưới đây định nghĩa function `hello` bằng function expression.
 
 ```js twoslash
 hello();
@@ -28,11 +28,11 @@ const hello = function () {
 };
 ```
 
-このコードをJavaScriptとして実行してみると、1行目で「ReferenceError: Cannot access 'hello' before initialization」というエラーが起こります。関数式で関数を定義した場合は巻き上げがないため、このようなエラーが発生します。
+Khi thực thi đoạn code này như JavaScript, lỗi "ReferenceError: Cannot access 'hello' before initialization" sẽ xảy ra ở dòng 1. Khi định nghĩa function bằng function expression, không có hoisting nên lỗi này xảy ra.
 
-以上のように、関数宣言と関数式には巻き上げの有無の違いがあります。関数式の場合は、関数定義と実行の順番を意識する必要が出てくるわけです。
+Như vậy, có sự khác biệt về hoisting giữa function declaration và function expression. Với function expression, bạn cần chú ý đến thứ tự giữa định nghĩa function và thực thi function.
 
-TypeScriptでは、定義前の関数式を呼び出そうとするとコンパイラーが指摘してくれます。
+Trong TypeScript, khi cố gắng gọi function expression trước khi định nghĩa, compiler sẽ cảnh báo.
 
 ```ts twoslash
 hello();
@@ -41,9 +41,9 @@ hello();
 const hello = function () {};
 ```
 
-関数宣言の場合は、JavaScriptと同じくエラーは発生しません。
+Với function declaration, không xảy ra lỗi giống như JavaScript.
 
-巻き上げにより実行されるため、コンパイラーからの指摘はありません。
+Vì được thực thi nhờ hoisting, compiler không có cảnh báo.
 
 ```ts
 hello(); // Hello World

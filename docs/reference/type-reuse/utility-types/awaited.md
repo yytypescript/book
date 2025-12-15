@@ -1,18 +1,18 @@
 ---
-description: Promiseの解決値の型を取得する
+description: Lấy kiểu giá trị resolved của Promise
 title: "Awaited<T>"
 ---
 
-`Awaited<T>`は、`Promise`の解決値の型`T`を取得するユーティリティ型です。
-`Promise`が解決するまでの非同期処理の結果が必要な場合や、`async`/`await`パターンで複数の入れ子になった`Promise`の中から解決済みの値の型を取り出したい場合に非常に便利です。
+`Awaited<T>` là utility type lấy kiểu `T` là giá trị resolved của `Promise`.
+Rất hữu ích khi cần kết quả của xử lý bất đồng bộ cho đến khi `Promise` được resolve, hoặc khi muốn trích xuất kiểu giá trị đã resolved từ nhiều `Promise` lồng nhau trong pattern `async`/`await`.
 
-## Awaited&lt;T>の型引数
+## Type argument của Awaited&lt;T>
 
 ### T
 
-型引数`T`には、任意の型を渡します。それが`Promise<V>`である場合は解決された型である`V`を返します。これは`Promise`が何重にネストしていても、最終的な解決値の型を取得できます。
+Type argument `T` nhận bất kỳ kiểu nào. Nếu nó là `Promise<V>`, sẽ trả về kiểu đã resolved là `V`. Điều này có thể lấy kiểu giá trị resolved cuối cùng cho dù `Promise` lồng bao nhiêu cấp.
 
-## Awaitedの使用例
+## Ví dụ sử dụng Awaited
 
 ```ts twoslash
 // @errors: 2344
@@ -24,9 +24,9 @@ type Awaited3 = Awaited<Promise<Promise<string>>>;
 //   ^?
 ```
 
-## `Promise`がネストしていても解決された値を取得できるのはなぜか
+## Tại sao có thể lấy giá trị resolved ngay cả khi `Promise` lồng nhau?
 
-まずは`Awaited<T>`の実装を見てみましょう。
+Trước tiên, hãy xem implementation của `Awaited<T>`:
 
 ```ts twoslash
 // @noErrors
@@ -39,6 +39,6 @@ type Awaited<T> = T extends null | undefined
   : T;
 ```
 
-少々複雑ですが、ひとつずつみていきましょう。
+Có vẻ phức tạp một chút, nhưng hãy xem từng phần.
 
-まず`T`が`null`または`undefined`である場合はそのまま`T`を返します。次に、`T`が`object`であり、`then`メソッドを持つ場合は、その`then`メソッドの第1引数の型を取得します。この型が`Promise`の解決値である場合は再帰的に`Awaited`を適用します。これにより、`Promise`が何重にネストしていても、最終的な解決値の型を取得できるようになります。
+Đầu tiên, nếu `T` là `null` hoặc `undefined`, trả về `T` nguyên dạng. Tiếp theo, nếu `T` là `object` và có method `then`, lấy kiểu của argument thứ nhất của method `then` đó. Nếu kiểu này là giá trị resolved của `Promise`, áp dụng `Awaited` một cách đệ quy. Nhờ đó, dù `Promise` lồng bao nhiêu cấp, vẫn có thể lấy được kiểu giá trị resolved cuối cùng.

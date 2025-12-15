@@ -4,15 +4,15 @@ sidebar_label: Distributive Conditional Types
 
 # Distributive Conditional Types
 
-Distributive Conditional Types は日本語では分配された条件型、条件付き型の分配、ユニオン分配、ユニオン型の分配法則などと呼ばれ、 [Conditional Types](./README.md) が [ジェネリクス型](../../generics/README.md) に適用され、かつ型引数に [ユニオン型](../../values-types-variables/union.md) が与えられた場合に、そのユニオン型を構成する各メンバーに対して個別に条件判定が適用される（＝分配される）性質を指します。
+Distributive Conditional Types (có thể được gọi là kiểu điều kiện phân phối, phân phối union type, v.v.) chỉ tính chất khi [Conditional Types](./README.md) được áp dụng cho [generic type](../../generics/README.md) và type argument là [union type](../../values-types-variables/union.md), thì điều kiện sẽ được áp dụng riêng lẻ (= phân phối) cho từng thành viên cấu thành union type đó.
 
-たとえば、次のような型があります。
+Ví dụ, có kiểu như sau:
 
 ```ts twoslash
 type ToArray<T> = T extends any ? T[] : never;
 ```
 
-このとき `ToArray<number>` は `number[]`, `ToArray<string>` は `string[]` となりますが、`T`にユニオン型である `number | string` を与えた場合、次のようになります。
+Khi đó `ToArray<number>` là `number[]`, `ToArray<string>` là `string[]`, nhưng khi truyền union type `number | string` cho `T`, kết quả sẽ như sau:
 
 ```ts twoslash
 type ToArray<T> = T extends any ? T[] : never;
@@ -21,9 +21,9 @@ type NumOrStrArray = ToArray<number | string>;
 //    ^?
 ```
 
-これは次のような流れで型が解決されています。
+Kiểu này được giải quyết theo luồng như sau:
 
-1. ジェネリクス型に Conditional Types が適用され、ユニオン型( `number | string` ) が与えられているため、分配の条件を満たす。
+1. Conditional Types được áp dụng cho generic type và union type (`number | string`) được truyền vào, nên đáp ứng điều kiện phân phối.
 
    ```ts twoslash
    type ToArray<T> = T extends any ? T[] : never;
@@ -31,7 +31,7 @@ type NumOrStrArray = ToArray<number | string>;
    type NumOrStrArray = ToArray<number | string>;
    ```
 
-2. ユニオンの個々の要素に対して `ToArray` が分配される。
+2. `ToArray` được phân phối cho từng phần tử riêng lẻ của union.
 
    ```ts twoslash
    type ToArray<T> = T extends any ? T[] : never;
@@ -40,13 +40,13 @@ type NumOrStrArray = ToArray<number | string>;
    type NumOrStrArray = ToArray<number> | ToArray<string>;
    ```
 
-3. それぞれ `number[]`, `string[]` となり、最終的な型として `number[] | string[]` を得る。
+3. Mỗi phần tử trở thành `number[]` và `string[]`, cuối cùng nhận được kiểu `number[] | string[]`.
 
    ```ts twoslash
    type NumOrStrArray = number[] | string[];
    ```
 
-この性質は Conditional Types でジェネリクスが利用された時のみ起こります。たとえば次のような型エイリアスでは分配は行われません。
+Tính chất này chỉ xảy ra khi generics được sử dụng trong Conditional Types. Ví dụ, với type alias như sau, phân phối không xảy ra:
 
 ```ts twoslash
 type ToArray2<T> = T[];
@@ -55,7 +55,7 @@ type NumOrStrArray2 = ToArray2<number | string>;
 //     ^?
 ```
 
-分配が起こるかどうかにより次のような違いが生まれるため、用途に応じて使い分けましょう。
+Việc phân phối có xảy ra hay không tạo ra sự khác biệt như sau, nên hãy sử dụng phù hợp với mục đích:
 
 ```ts twoslash
 type ToArray<T> = T extends any ? T[] : never;
@@ -74,15 +74,15 @@ numOrStrArray2 = ["a", "b", "c"]; // OK
 numOrStrArray2 = [1, 2, "a"]; // OK
 ```
 
-## 分配を起こさせない方法
+## Cách ngăn chặn phân phối
 
-Conditional Types を利用したいが分配させたくないと言う場合、型変数を`[]`で囲むことで分配を避けることができます。
+Nếu muốn sử dụng Conditional Types nhưng không muốn phân phối, bạn có thể tránh phân phối bằng cách bao type variable trong `[]`.
 
 ```ts twoslash
 type NotDistribute<T> = [T] extends [string] ? true : false;
 ```
 
-この`NotDistribute`型は`string`型に対しては`true`を返しますが、`string | number`型に対しては`false`を返します。`string | number`型は`string`型の部分型ではないため（つまり `string | number extends string` は false のため）、 `false` が返されます。
+Kiểu `NotDistribute` này trả về `true` với kiểu `string`, nhưng trả về `false` với kiểu `string | number`. Bởi vì kiểu `string | number` không phải là subtype của kiểu `string` (tức là `string | number extends string` là false), nên `false` được trả về.
 
 ```ts twoslash
 type NotDistribute<T> = [T] extends [string] ? true : false;

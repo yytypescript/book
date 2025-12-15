@@ -1,27 +1,27 @@
-# 関数は値
+# Function là value
 
-他の言語では関数は特別な立ち位置のことがあります。ある言語では、同じ名前の変数を定義してもエラーにならないのに対し、同じ名前の関数定義はエラーになります。またある言語では、関数を変数に代入できなかったりします。
+Trong các ngôn ngữ khác, function đôi khi có vị trí đặc biệt. Trong một số ngôn ngữ, khai báo biến cùng tên không gây lỗi, nhưng định nghĩa function cùng tên lại gây lỗi. Trong ngôn ngữ khác, không thể gán function vào biến.
 
-JavaScriptの関数は値です。つまり、PHPのような他の言語と比べると特別扱いの度合いが少ないです。たとえば、関数を変数に代入することができます。
+Function trong JavaScript là value. Nghĩa là, so với các ngôn ngữ khác như PHP, nó ít được đối xử đặc biệt hơn. Ví dụ, bạn có thể gán function vào biến.
 
 ```js twoslash
 function hello() {
   return "Hello World";
 }
 
-const helloWorld = hello; // 関数を変数に代入
+const helloWorld = hello; // Gán function vào biến
 
-helloWorld(); // 関数呼び出しも問題なくできる
+helloWorld(); // Gọi function cũng không có vấn đề
 ```
 
-また、JavaScriptでは定義済みの関数と同じ名前の関数を宣言することができます。これはエラーにはなりません。これは実質、再代入のような振る舞いになります。
+Ngoài ra, trong JavaScript, bạn có thể khai báo function có cùng tên với function đã định nghĩa. Điều này không gây lỗi. Về bản chất, điều này hoạt động như reassignment.
 
 ```js twoslash
 function hello() {
   return "HELLO";
 }
 
-// これは二度目の関数宣言ですが、実質的には再代入です
+// Đây là lần khai báo function thứ hai, nhưng về bản chất là reassignment
 function hello() {
   return "KONNICHIWA";
 }
@@ -30,9 +30,9 @@ hello();
 // @log: KONNICHIWA
 ```
 
-このようにJavaScriptの関数は、booleanの値やstringの値などと同じような値としての性質があります。意図しない再代入はバグの原因になりますが、JavaScriptでは関数宣言では注意して書く以外に方法はありません。
+Như vậy, function trong JavaScript có tính chất như value giống như giá trị boolean hoặc string. Reassignment không mong muốn có thể gây bug, nhưng trong JavaScript, với function declaration không có cách nào khác ngoài viết cẩn thận.
 
-JavaScriptで関数の再代入によるバグを未然に回避したい場合は、`const`と関数式を組み合わせます。関数式については後述します。
+Trong JavaScript, nếu muốn tránh bug do reassignment function, hãy kết hợp `const` và function expression. Function expression sẽ được đề cập sau.
 
 ```js twoslash
 const hello = function () {
@@ -40,15 +40,15 @@ const hello = function () {
 };
 ```
 
-ちなみに、TypeScriptではコンパイラーが重複した関数宣言を警告してくれるので、バグの心配はありません。
+Nhân tiện, trong TypeScript, compiler sẽ cảnh báo khai báo function trùng lặp nên không lo lắng về bug.
 
-## 関数のスコープ
+## Scope của function
 
-関数は値なので、関数名のスコープも変数と同じようにスコープの概念があります。たとえば、関数スコープの中で定義された関数は、そのローカルスコープでのみ使うことができます。
+Vì function là value, tên function cũng có khái niệm scope giống như biến. Ví dụ, function được định nghĩa bên trong function scope chỉ có thể được sử dụng trong local scope đó.
 
 ```js twoslash
 function main() {
-  // ローカルスコープの関数
+  // Function trong local scope
   function hello() {
     console.log("hello");
   }
@@ -59,7 +59,7 @@ function main() {
 main();
 // @log: "hello"
 
-// ローカルスコープで宣言された関数にはアクセスできない
+// Không thể truy cập function được khai báo trong local scope
 hello();
 // @error: ReferenceError: hello is not defined
 ```

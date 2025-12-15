@@ -1,21 +1,21 @@
 ---
-description: thisの型注釈を必須にする
+description: Bắt buộc type annotation cho this
 tags: [strict]
 ---
 
 # noImplicitThis
 
-`noImplicitThis`はthisの型注釈を必須にするコンパイラオプションです。
+`noImplicitThis` là compiler option bắt buộc type annotation cho this.
 
-- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
-- 追加されたバージョン: 2.0
-- TypeScript公式が有効化推奨
+- Mặc định: `true` nếu [strict](./strict.md) được bật, ngược lại là `false`
+- Phiên bản thêm vào: 2.0
+- TypeScript khuyến nghị nên bật
 
-## 解説
+## Giải thích
 
-名前付き関数、匿名関数はアロー関数と異なり、実行時に`this`が決定されます。そのため、内部で`this`を使っているとそれらは関数を書いている時点では`any`型と同じ扱いになります。
+Named function và anonymous function khác với arrow function ở chỗ `this` được xác định tại runtime. Do đó, khi sử dụng `this` bên trong, chúng được xem như có type `any` tại thời điểm viết function.
 
-たとえば、対角線の長さを求める関数`lengthOfDiagonal()`を考えます。(横, 縦)を (width, height) とすれば関数は次のようになります。
+Ví dụ, xét function `lengthOfDiagonal()` tính độ dài đường chéo. Nếu (ngang, dọc) là (width, height) thì function sẽ như sau:
 
 ```ts twoslash
 // @noErrors
@@ -24,7 +24,7 @@ function lengthOfDiagonal(): number {
 }
 ```
 
-これを`width, height`をプロパティに持つオブジェクトのインスタンスに代入すれば対角線の長さを計算できます。
+Gán function này vào instance của object có property `width, height` thì có thể tính độ dài đường chéo:
 
 ```ts twoslash
 declare function lengthOfDiagonal(): number;
@@ -40,7 +40,7 @@ console.log(area.diagonal());
 // @log: 5
 ```
 
-このとき、打ち間違いで`width`を`witch`としてしまったとするとこの関数は意図した結果を返さなくなります。
+Nếu nhầm lẫn gõ `width` thành `witch` thì function này sẽ không trả về kết quả như mong muốn:
 
 ```ts twoslash
 declare function lengthOfDiagonal(): number;
@@ -56,7 +56,7 @@ console.log(area.diagonal());
 // @log: NaN
 ```
 
-このオプションを有効にすると`any`型として認識されてしまっている`this`がどの型であるかを明確にできない限り実行することができなくなります。
+Khi bật option này, `this` đang bị nhận dạng là type `any` sẽ không thể thực thi được trừ khi làm rõ type của nó:
 
 ```ts twoslash
 // @noImplicitThis: true
@@ -66,7 +66,7 @@ function lengthOfDiagonal(): number {
 }
 ```
 
-これを回避するためには`this`が何かを明示します。引数の`this`については関数のページに詳細がありますので併せてご参照ください。
+Để tránh lỗi này, phải chỉ rõ `this` là gì. Chi tiết về `this` parameter có ở trang function, vui lòng tham khảo:
 
 [this引数 (this parameter)](../functions/this-parameters.md)
 

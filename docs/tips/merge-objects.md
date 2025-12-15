@@ -1,21 +1,21 @@
-# オブジェクトをマージ (結合) する
+# Merge (kết hợp) object
 
-前ページではオブジェクトの浅いコピーについて語りました。
-そこでは以前出てきたスプレッド構文 (`...`) のおかげで簡単に浅いコピーができることがわかりました。
+Ở trang trước đã nói về shallow copy của object.
+Nhờ spread syntax (`...`) đã giới thiệu trước đó, có thể dễ dàng thực hiện shallow copy.
 
-今回はふたつ以上のオブジェクトをマージすることを考えます。なお、前ページのオブジェクトの浅いコピーで得た知識を活用するため、まだお読みでない方については改めてお読みいただき、その後こちらをご覧ください。
+Lần này xem xét việc merge hai object trở lên. Vì sử dụng kiến thức về shallow copy của object từ trang trước, nếu chưa đọc hãy đọc trước rồi xem trang này.
 
-[オブジェクトを浅くコピーする](shallow-copy-object.md)
+[Copy nông object](shallow-copy-object.md)
 
-## 今回行うマージについて
+## Về merge lần này
 
-マージという言葉をよく聞くのは Git などに代表される VCS (Version Control System) でしょう。一般的にマージはする側とされる側が存在し、する側にされる側のすべて (時に選択できる) が移動ないしコピーされることを指すことが多いでしょう。
+Từ merge thường nghe thấy nhiều nhất ở VCS (Version Control System) như Git. Nói chung merge có bên thực hiện và bên bị thực hiện, thường chỉ việc tất cả (đôi khi có thể chọn) của bên bị thực hiện được di chuyển hoặc copy sang bên thực hiện.
 
-JavaScript, TypeScript でコードベースで行われるマージは VCS のそれとは少々異なり、ふたつのオブジェクトから新しいマージ済みのオブジェクトを生成することが主流です。
+Merge trong codebase JavaScript, TypeScript hơi khác với VCS, chủ yếu là tạo object mới đã merge từ hai object.
 
-### マージをするには
+### Cách merge
 
-オブジェクトを浅くコピーする知識を使います。おさらいとして浅いコピーはスプレッド構文を使えば次のように書くだけです。
+Sử dụng kiến thức về shallow copy của object. Ôn lại, shallow copy chỉ cần viết như sau với spread syntax.
 
 ```ts twoslash
 const obj: object = {
@@ -25,7 +25,7 @@ const obj: object = {
 const copied = { ...obj };
 ```
 
-オブジェクトのマージはマージしたいオブジェクトを引数のようにスプレッド構文で並べるだけでコピーができます
+Merge object có thể copy bằng cách xếp các object muốn merge với spread syntax như tham số
 
 ```ts twoslash
 const obj1: object = {
@@ -38,9 +38,9 @@ const obj2: object = {
 const merged = { ...obj1, ...obj2 };
 ```
 
-### うれしいこと
+### Điều vui
 
-オブジェクトのマージはふたつにとどまらず、何個でもオブジェクトをマージできます。
+Merge object không giới hạn ở hai, có thể merge bao nhiêu object tùy ý.
 
 ```ts twoslash
 const obj1: object = {
@@ -61,7 +61,7 @@ const merged = {
 };
 ```
 
-浅いコピーのときもES2017で出力しましたのでこちらも併せて出力すると
+Vì shallow copy cũng output ES2017 nên kết hợp output sẽ là
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -78,7 +78,7 @@ const obj3: object = {
 const merged = Object.assign(Object.assign(Object.assign({}, obj1), obj2), obj3);
 ```
 
-とコンパイルされます。ちなみにこれは少々冗長で
+được compile. Nhân tiện điều này hơi dài dòng và
 
 ```ts twoslash
 const obj1: object = {
@@ -94,11 +94,11 @@ const obj3: object = {
 const merged = Object.assign({}, obj1, obj2, obj3);
 ```
 
-と書いても同じ結果になります。
+viết như vậy cũng cho kết quả tương tự.
 
-### 注意すること
+### Điều cần chú ý
 
-同名のキーがある場合、必ず最後に書かれているものが優先されます。値を消し込まないように注意してください。
+Khi có key trùng tên, cái được viết cuối cùng luôn được ưu tiên. Hãy cẩn thận để không ghi đè giá trị.
 
 ```ts twoslash
 const obj1: object = {

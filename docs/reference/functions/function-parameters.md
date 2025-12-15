@@ -1,12 +1,12 @@
 ---
-sidebar_label: 関数の引数
+sidebar_label: Tham số function
 ---
 
-# 関数の引数 (function parameter)
+# Tham số function (function parameter)
 
-## 引数の個数
+## Số lượng tham số
 
-JavaScriptの関数では、関数が期待する引数の個数と、関数を呼び出した際に渡した引数の数が一致していなくても、関数が呼び出せます。つまり、JavaScriptは引数のチェックを行わないということです。たとえば、引数が1つ渡されることを期待する関数を、引数2つで呼び出してもエラーになりません。
+Trong function của JavaScript, function có thể được gọi ngay cả khi số lượng tham số mà function mong đợi và số lượng tham số được truyền khi gọi function không khớp. Nghĩa là JavaScript không kiểm tra tham số. Ví dụ, gọi function mong đợi nhận 1 tham số với 2 tham số cũng không gây lỗi.
 
 ```js twoslash
 function increment(n) {
@@ -15,17 +15,17 @@ function increment(n) {
 increment(1, 2); // OK
 ```
 
-逆に、JavaScriptでは、引数が少ない場合であっても関数が実行されます。その際、渡されなかった引数の値は`undefined`になります。
+Ngược lại, trong JavaScript, function cũng được thực thi khi có ít tham số. Trong trường hợp này, giá trị của tham số không được truyền sẽ là `undefined`.
 
 ```js twoslash
 function foo(a, b) {
   console.log(b);
 }
-foo(1); // 引数が足りない
+foo(1); // Thiếu tham số
 // @log: undefined
 ```
 
-基本的に引数が多く渡される分には、関数の実行が問題になることはありません。余分な引数は無視してしまえばよいからです。それでも、引数の個数を厳密にチェックしたいケースでは、変数`arguments`の`length`プロパティで引数の数をチェックします。
+Về cơ bản, việc truyền nhiều tham số hơn không gây vấn đề cho việc thực thi function. Vì có thể bỏ qua các tham số thừa. Tuy nhiên, trong trường hợp muốn kiểm tra nghiêm ngặt số lượng tham số, bạn kiểm tra số lượng tham số bằng property `length` của biến `arguments`.
 
 ```js twoslash
 function foo(a, b) {
@@ -34,12 +34,12 @@ function foo(a, b) {
   }
 }
 foo(1, 2); // OK
-foo(1, 2, 3); // エラー
+foo(1, 2, 3); // Error
 ```
 
-JavaScriptでは、上のように引数の数をチェックするには、そのためのロジックを書く必要があります。
+Trong JavaScript, để kiểm tra số lượng tham số như trên, bạn cần viết logic cho việc đó.
 
-TypeScriptでは、関数の引数の数が一致していないとコンパイルエラーになります。
+Trong TypeScript, sẽ xảy ra compile error nếu số lượng tham số của function không khớp.
 
 ```ts twoslash
 // @noImplicitAny: false
@@ -47,15 +47,15 @@ TypeScriptでは、関数の引数の数が一致していないとコンパイ�
 function increment(n) {
   return n + 1;
 }
-increment(1, 2); // 引数が多い
-increment(); // 引数が足りない
+increment(1, 2); // Nhiều tham số
+increment(); // Thiếu tham số
 ```
 
-そのため、TypeScriptではJavaScriptのようにチェックロジックを書く必要はありません。
+Do đó, trong TypeScript không cần viết logic kiểm tra như JavaScript.
 
-## 引数の型
+## Kiểu của tham số
 
-JavaScriptは、引数の型についてもチェックを行いません。JavaやPHPなどの他のプログラミング言語の中には、関数の引数の型を定義することで、関数が期待する引数の型と異なる値が渡されたときに、関数実行前にエラーにしてくれる言語があります。JavaScriptにはこのような機能がありません。たとえば、string型の引数を期待する関数に、null型の値を渡しても、JavaScriptの関数は実行されます。
+JavaScript cũng không kiểm tra kiểu của tham số. Một số ngôn ngữ lập trình khác như Java hoặc PHP có tính năng định nghĩa kiểu của tham số function, khi giá trị có kiểu khác với kiểu mà function mong đợi được truyền vào, sẽ xảy ra lỗi trước khi function được thực thi. JavaScript không có tính năng này. Ví dụ, function mong đợi tham số kiểu string vẫn được thực thi ngay cả khi truyền giá trị kiểu null.
 
 ```js twoslash
 function len(str) {
@@ -64,9 +64,9 @@ function len(str) {
 console.log(len(null));
 ```
 
-この関数`len`の引数`str`はstring型であることを想定していますが、渡される値は`null`です。それでも、関数の実行自体は行われ、`null`に存在しない`length`プロパティへの参照を試みる段階でやっとエラーになります。
+Tham số `str` của function `len` này được giả định là kiểu string, nhưng giá trị được truyền là `null`. Dù vậy, function vẫn được thực thi và chỉ xảy ra lỗi khi cố tham chiếu property `length` không tồn tại trên `null`.
 
-JavaScriptでは、引数の型を厳密にする場合、チェック処理を書く必要があります。たとえば、引数がnumber型やstring型などのプリミティブ型かのチェックはこの`typeof`演算子を使って行います。
+Trong JavaScript, khi muốn làm nghiêm ngặt kiểu của tham số, cần viết xử lý kiểm tra. Ví dụ, kiểm tra xem tham số có phải là primitive type như number hoặc string được thực hiện bằng toán tử `typeof`.
 
 ```js twoslash
 function len(str) {
@@ -76,10 +76,10 @@ function len(str) {
   return str.length;
 }
 len("a"); // OK
-len(1); // エラー
+len(1); // Error
 ```
 
-TypeScriptでは、関数の引数に型注釈が書けます。型注釈を書いておくと、引数に意図しない型を書くとコンパイルエラーになります。
+Trong TypeScript, bạn có thể viết type annotation cho tham số của function. Khi viết type annotation, nếu viết kiểu không mong muốn cho tham số, sẽ xảy ra compile error.
 
 ```ts twoslash
 // @errors: 2345
@@ -87,7 +87,7 @@ function len(str: string) {
   return str.length;
 }
 len("a"); // OK
-len(1); // エラー
+len(1); // Error
 ```
 
-そのため、TypeScriptではJavaScriptのように型チェックの処理を書く必要はありません。
+Do đó, trong TypeScript không cần viết xử lý kiểm tra kiểu như JavaScript.

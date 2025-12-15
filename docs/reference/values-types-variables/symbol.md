@@ -3,7 +3,7 @@ sidebar_label: symbol型
 title: symbol型 (シンボル型)
 ---
 
-JavaScriptのsymbol型はプリミティブ型の一種で、その値が一意になる値です。boolean型やnumber型は値が同じであれば、等価比較が`true`になります。一方、シンボルはシンボル名が同じであっても、初期化した場所が違うと`false`になります。
+symbol型trong JavaScript là một loại primitive type, giá trị của nó là duy nhất. boolean型hay number型nếu giá trị giống nhau thì so sánh bằng sẽ là `true`. Ngược lại, symbol ngay cả khi tên giống nhau nhưng nơi khởi tạo khác nhau thì sẽ là `false`.
 
 ```js twoslash
 const s1 = Symbol("foo");
@@ -14,7 +14,7 @@ console.log(s1 === s2);
 // @log: false
 ```
 
-Rubyにもシンボルという名前の型があります。Rubyのシンボルは値さえ同じなら、書いてある場所が異なっても等価比較が`true`になります。
+Ruby cũng có type tên là symbol. Symbol của Ruby nếu giá trị giống nhau thì so sánh bằng sẽ là `true` dù viết ở vị trí khác nhau.
 
 ```ruby
 # Rubyコード
@@ -23,26 +23,26 @@ s2 = :foo
 p s1 == s2 #=> true
 ```
 
-一方、JavaScriptでは前述のとおり、シンボルを初期化した場所で決まるので、Rubyから来た方は注意してください。Rubyのシンボル的なことは、JavaScriptやTypeScriptでは文字列を用いて解決します。
+Ngược lại, JavaScript như đã nói ở trên, được quyết định bởi nơi khởi tạo symbol, nên những người từ Ruby chuyển sang cần chú ý. Điều tương tự symbol của Ruby, trong JavaScript hay TypeScript được giải quyết bằng chuỗi.
 
-## シンボルの型注釈
+## Type annotation của symbol
 
-TypeScriptでシンボルの型注釈は`symbol`を用います。
+Type annotation của symbol trong TypeScript dùng `symbol`.
 
 ```ts twoslash
 const s: symbol = Symbol();
 ```
 
-## symbol型を使う上での注意点
+## Lưu ý khi dùng symbol型
 
-symbol型を直接`JSON.stringify()`に渡すと`undefined`が返ります。
+Truyền symbol型 trực tiếp vào `JSON.stringify()` sẽ trả về `undefined`.
 
 ```ts twoslash
 console.log(JSON.stringify(Symbol("many")));
 // @log: undefined
 ```
 
-また、symbol型をプロパティに含むオブジェクトを`JSON.stringify()`に渡すと、symbol型をプロパティに含むキーは消滅します。
+Ngoài ra, truyền object chứa symbol型 trong property vào `JSON.stringify()`, key chứa symbol型 trong property sẽ biến mất.
 
 ```ts twoslash
 console.log(
@@ -54,7 +54,7 @@ console.log(
 // @log: { "y": "hello" }
 ```
 
-同様に、symbol型をキーに含むオブジェクトを`JSON.stringify()`に渡すと、symbol型のキーは消滅します。
+Tương tự, truyền object chứa symbol型 làm key vào `JSON.stringify()`, key là symbol型 sẽ biến mất.
 
 ```ts twoslash
 console.log(
@@ -66,6 +66,6 @@ console.log(
 // @log: { "y": "hello" }
 ```
 
-## シンボルの用途
+## Mục đích của symbol
 
-JavaScriptにシンボルが導入された動機は、JavaScriptの組み込みAPIの下位互換性を壊さずに新たなAPIを追加することでした。要するに、JavaScript本体をアップデートしやすくするために導入されたものです。したがって、アプリケーションを開発する場合に限っては、シンボルを駆使してコードを書く機会はそう多くはありません。
+Động cơ đưa symbol vào JavaScript là để thêm API mới mà không phá vỡ backward compatibility của built-in API của JavaScript. Tóm lại, được đưa vào để dễ dàng update bản thân JavaScript. Do đó, giới hạn trong trường hợp phát triển application, cơ hội viết code sử dụng nhiều symbol không nhiều lắm.

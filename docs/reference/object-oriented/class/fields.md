@@ -1,10 +1,10 @@
 ---
-sidebar_label: フィールド
+sidebar_label: Field
 ---
 
-# フィールド (field)
+# Field (field)
 
-JavaScriptでインスタンスにフィールドを持たせるには、インスタンス化したオブジェクトのプロパティに値を代入します。
+Để instance có field trong JavaScript, gán giá trị cho property của object đã instance hóa.
 
 ```js title="JavaScript" twoslash
 class Person {}
@@ -12,7 +12,7 @@ const alice = new Person();
 alice.name = "Alice";
 ```
 
-TypeScriptでは、これに加えてフィールドの型注釈を書く必要があります。
+Trong TypeScript, ngoài ra còn cần viết type annotation cho field.
 
 ```ts title="TypeScript" twoslash
 class Person {
@@ -23,7 +23,7 @@ alice.name = "Alice";
 // @noErrors
 ```
 
-TypeScriptは、クラスの宣言に書かれていないフィールドへアクセスした場合、コンパイルエラーになります。
+TypeScript sẽ báo lỗi compile khi truy cập field không được viết trong khai báo class.
 
 ```ts title="TypeScript" twoslash
 // @errors: 2339
@@ -32,7 +32,7 @@ const person = new Person();
 console.log(person.age);
 ```
 
-フィールドは宣言時に型を省略した場合でもコンストラクタで値が代入される場合は、代入する値で型が推論されます。下の例ではコンストラクタで`string`の型の値を代入しているため`name`は`string`型となります。
+Ngay cả khi bỏ qua kiểu khi khai báo field, nếu giá trị được gán trong constructor thì kiểu sẽ được suy luận từ giá trị gán. Trong ví dụ dưới, `name` có kiểu `string` vì gán giá trị kiểu `string` trong constructor.
 
 ```ts twoslash
 class Person {
@@ -44,9 +44,9 @@ class Person {
 }
 ```
 
-## 初期化なしのフィールドとチェック
+## Field không khởi tạo và kiểm tra
 
-TypeScriptのコンパイラーオプションで`strictNullChecks`と`strictPropertyInitialization`の両方が有効になっている場合、次の例の`name: string`の部分はコンパイルエラーとして指摘されます。なぜなら、`new Person`した直後は、`name`が`undefined`になるためです。
+Khi cả hai compiler option `strictNullChecks` và `strictPropertyInitialization` của TypeScript được bật, phần `name: string` trong ví dụ sau sẽ bị báo lỗi compile. Vì ngay sau khi `new Person`, `name` sẽ là `undefined`.
 
 ```ts twoslash
 class Person {
@@ -62,7 +62,7 @@ console.log(alice.name);
 
 [strictPropertyInitialization](../../tsconfig/strictpropertyinitialization.md)
 
-この2つのコンパイラーオプションが有効な場合でもチェックを通るように書くには、nameフィールドの型注釈を`string | undefined`のようなユニオン型にする必要があります。
+Để vượt qua kiểm tra ngay cả khi hai compiler option này được bật, cần đặt type annotation cho field name là union type như `string | undefined`.
 
 ```ts twoslash
 class Person {
@@ -73,9 +73,9 @@ console.log(alice.name);
 // @log: undefined
 ```
 
-## コンストラクタを用いたフィールドの初期化
+## Khởi tạo field bằng constructor
 
-フィールドへの値代入は、コンストラクタを用いて行えます。コンストラクタの中では、`this`を用いて値を代入したいフィールドにアクセスします。
+Có thể gán giá trị cho field bằng constructor. Trong constructor, sử dụng `this` để truy cập field muốn gán giá trị.
 
 ```ts title="TypeScript" twoslash
 class Person {
@@ -87,7 +87,7 @@ class Person {
 }
 ```
 
-コンストラクタに引数を持たせれば、フィールドの値を動的に指定できるようにもできます。
+Cho constructor nhận tham số để có thể chỉ định giá trị field động.
 
 ```ts title="TypeScript" twoslash
 class Person {

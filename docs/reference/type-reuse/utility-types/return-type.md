@@ -1,17 +1,17 @@
 ---
-description: 関数の戻り値の型を取得する
+description: Lấy kiểu return value của function
 title: "ReturnType<T>"
 ---
 
-`ReturnType<T>`は、関数型`T`の戻り値を取得するユーティリティ型です。
+`ReturnType<T>` là utility type lấy return value của function type `T`.
 
-## ReturnType&lt;T>の型引数
+## Type argument của ReturnType&lt;T>
 
 ### T
 
-型引数`T`には、関数の型を渡します。
+Type argument `T` nhận function type.
 
-## ReturnTypeの使用例
+## Ví dụ sử dụng ReturnType
 
 ```ts twoslash
 // @errors: 2344
@@ -23,7 +23,7 @@ type ReturnType3 = ReturnType<() => never>;
 //   ^?
 ```
 
-多くは`typeof`と併用して実際の関数の戻り値を取得します。
+Thường được sử dụng kết hợp với `typeof` để lấy return value của function thực tế:
 
 ```ts twoslash
 const isEven = (num: number) => {
@@ -34,7 +34,7 @@ type isEvenRetType = ReturnType<typeof isEven>;
 //   ^?
 ```
 
-`ReturnType<T>`は内部的には`infer`を使って実装されています。
+`ReturnType<T>` được implement nội bộ bằng `infer`:
 
 ```ts twoslash
 // @noErrors

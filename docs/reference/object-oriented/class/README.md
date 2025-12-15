@@ -1,17 +1,17 @@
 ---
-sidebar_label: クラス
+sidebar_label: Class
 slug: /reference/object-oriented/class
 ---
 
-# クラス (class)
+# Class (class)
 
-クラスはオブジェクトの雛形を定義したもので、JavaScriptとTypeScriptでは`class`構文を用いてクラスが定義できます。
+Class là khuôn mẫu để định nghĩa object. Trong JavaScript và TypeScript, class được định nghĩa bằng cú pháp `class`.
 
 ```ts twoslash
 class Person {}
 ```
 
-クラスに対して`new`キーワードを使うと、オブジェクトを生成できます。
+Sử dụng từ khóa `new` với class để tạo object.
 
 ```ts twoslash
 class Person {}
@@ -19,11 +19,11 @@ class Person {}
 const person = new Person();
 ```
 
-このように`class`でクラスを定義し、`new`でインスタンスを生成するスタイルは、JavaやPHP、Rubyなどと使用感がよく似ています。
+Cách định nghĩa class bằng `class` và tạo instance bằng `new` này tương tự như Java, PHP, Ruby.
 
-## クラスの型注釈
+## Type annotation cho class
 
-TypeScriptでは、クラスを定義するとクラス名と同じ名前の型が同時に定義されます。インスタンスを代入する変数に型注釈するには、クラス名を使います。
+Trong TypeScript, khi định nghĩa class, đồng thời một type cùng tên với class cũng được định nghĩa. Để type annotation cho biến chứa instance, dùng tên class.
 
 ```ts twoslash
 class Person {}

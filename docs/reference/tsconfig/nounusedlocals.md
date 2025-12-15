@@ -1,17 +1,17 @@
 ---
-description: 使われていない変数を禁止する
+description: Cấm biến không được sử dụng
 ---
 
 # noUnusedLocals
 
-`noUnusedLocals`は使われていない変数を禁止するコンパイラオプションです。
+`noUnusedLocals` là compiler option cấm biến không được sử dụng.
 
-- デフォルト: `false`
-- 追加されたバージョン: 2.0
+- Mặc định: `false`
+- Phiên bản thêm vào: 2.0
 
-## 解説
+## Giải thích
 
-宣言したにもかかわらず使用されていない変数を禁止します。
+Cấm biến đã khai báo nhưng không được sử dụng.
 
 ```ts twoslash
 function add(n1: number, n2: number): number {
@@ -21,7 +21,7 @@ function add(n1: number, n2: number): number {
 }
 ```
 
-このオプションを有効にすると次のようなエラーが発生します。
+Khi bật option này sẽ báo lỗi như sau:
 
 ```ts twoslash
 // @noUnusedLocals: true

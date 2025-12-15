@@ -1,26 +1,26 @@
 ---
-sidebar_label: 型定義ファイル
+sidebar_label: Type definition file
 ---
 
-# 型定義ファイル (.d.ts)
+# Type definition file (.d.ts)
 
-自身のプロジェクトでTypeScriptでコーディングする場合は型を宣言することにより、IDEやエディターの補完機能やコードチェックを行えます。しかし外部のパッケージ(npm)を利用する場合は型定義ファイルが含まれているとは限りません。
+Khi coding bằng TypeScript trong project của mình, bạn có thể sử dụng chức năng autocomplete và code check của IDE hoặc editor bằng cách khai báo type. Tuy nhiên, khi sử dụng package bên ngoài (npm) thì không chắc là có bao gồm type definition file.
 
-## 型定義ファイルとは
+## Type definition file là gì
 
-型定義ファイルとはアクセス可能な宣言を記述したファイルです。拡張子は`.d.ts`です。
+Type definition file là file mô tả các khai báo có thể truy cập. Extension là `.d.ts`.
 
-型定義ファイルは主にパッケージを配布するために作成されます。TypeScriptはJavaScriptにコンパイルされるときに型情報は無くなってしまいます。そのままJavaScriptパッケージを利用すると型定義の恩恵を得ることができません。しかし型定義ファイルを同梱することにより補完やコードチェックとして利用することができます。
+Type definition file được tạo chủ yếu để phân phối package. Khi TypeScript được compile sang JavaScript, thông tin type sẽ biến mất. Nếu sử dụng package JavaScript nguyên bản thì không thể hưởng lợi từ type definition. Tuy nhiên, bằng cách đính kèm type definition file, có thể sử dụng để autocomplete và code check.
 
-残念なことにnpmに公開されているすべてのパッケージに必ずしも定義ファイルが存在するとは限りません。こちらに関しては**型定義ファイルの有無**にて説明します。
+Đáng tiếc là không phải tất cả package được public trên npm đều có definition file. Điều này sẽ được giải thích trong phần **Có hay không có type definition file**.
 
-### 型定義ファイル出力例
+### Ví dụ output type definition file
 
-tscコマンドに`-d`オプションをつけてコンパイルを行うとJavaScriptと型定義ファイルを出力することができます。
+Khi compile bằng lệnh tsc với option `-d`, có thể output JavaScript và type definition file.
 
-#### TypeScriptファイル
+#### File TypeScript
 
-次のTypeScriptファイル(sample.ts)を`-d`オプションを付けてコンパイルしてみます。
+Thử compile file TypeScript sau (sample.ts) với option `-d`.
 
 ```ts title="sample.ts" twoslash
 interface Person {
@@ -33,15 +33,15 @@ function greeter(person: Person): string {
 }
 ```
 
-tscコマンドに`-d`オプションを付けコンパイルを実行する。
+Thực hiện compile với option `-d` của lệnh tsc.
 
 ```bash
 tsc -d
 ```
 
-#### JavaScriptファイル
+#### File JavaScript
 
-sample.tsではInterfaceを使っていますが、JavaScriptにはInterfaceの概念がないため関数のみになりました。また引数の型情報もなくなります。
+sample.ts sử dụng Interface, nhưng vì JavaScript không có khái niệm Interface nên chỉ còn function. Thông tin type của tham số cũng biến mất.
 
 ```js title="sample.js" twoslash
 function greeter(person) {
@@ -50,9 +50,9 @@ function greeter(person) {
 //# sourceMappingURL=sample.js.map
 ```
 
-#### `d.ts`ファイル
+#### File `d.ts`
 
-定義情報のみ記載されたファイルが出力されます。
+File chỉ chứa thông tin definition được output.
 
 ```ts title="sample.d.ts" twoslash
 interface Person {
@@ -62,65 +62,65 @@ interface Person {
 declare function greeter(person: Person): string;
 ```
 
-## 型定義ファイルの有無
+## Có hay không có type definition file
 
-型定義ファイルはパッケージ開発者またはボランティアにより作成されています。
+Type definition file được tạo bởi developer của package hoặc volunteer.
 
-- 型定義ファイル有り
-  - TypeScriptで書かれたパッケージ
-  - JavaScriptで書かれたパッケージだが`.d.ts`ファイルを同梱している
-- 型定義ファイル有りだが別途インストールが必要
-  - JavaScriptで書かれたパッケージだが、 DefinitelyTypedに登録されている
-- 型定義ファイル無し
-  - JavaScriptで書かれたパッケージで型定義ファイルが存在しない
+- Có type definition file
+  - Package được viết bằng TypeScript
+  - Package được viết bằng JavaScript nhưng đính kèm file `.d.ts`
+- Có type definition file nhưng cần cài đặt riêng
+  - Package được viết bằng JavaScript nhưng đã được đăng ký trên DefinitelyTyped
+- Không có type definition file
+  - Package được viết bằng JavaScript và không tồn tại type definition file
 
-### 型定義ファイル有り
+### Có type definition file
 
-NPMのパッケージの紹介ページを見るとパッケージ名称の右にTSのアイコンが表示されている場合があります。これは型定義ファイルが存在することを示しています。
-これは、パッケージ開発者がTypeScriptで開発しているか、JavaScriptで開発しているが型定義ファイルを同梱していることを示しています。型定義ファイルが含まれているパッケージの場合は特別な作業は必要ありません。
+Khi xem trang giới thiệu package trên NPM, đôi khi có icon TS hiển thị bên phải tên package. Điều này cho biết có tồn tại type definition file.
+Điều này có nghĩa là developer của package đang phát triển bằng TypeScript, hoặc đang phát triển bằng JavaScript nhưng có đính kèm type definition file. Với package có bao gồm type definition file, không cần thao tác đặc biệt nào.
 
-例としてdate libraryの[date-fns](https://date-fns.org/)はJavaScriptで構築されていますが、`typings.d.ts`を同封しています。そのままinstallを行うだけで定義ファイルの恩恵を受けられます。
+Ví dụ, date library [date-fns](https://date-fns.org/) được xây dựng bằng JavaScript nhưng có đính kèm `typings.d.ts`. Chỉ cần install là có thể hưởng lợi từ definition file.
 
 ```bash
 npm install date-fns
 ```
 
-型定義ファイル有りの場合は、設定なく型情報を参照することができます。
+Trường hợp có type definition file, có thể tham chiếu thông tin type mà không cần cấu hình.
 
-### 型定義ファイル有りだが別途インストールが必要
+### Có type definition file nhưng cần cài đặt riêng
 
-NPMのパッケージの紹介ページを見るとパッケージ名称の右にDTのアイコンが表示されている場合があります。これは型定義ファイルがこのパッケージ自身には含まれていないが、[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)に登録されていることを示しています。
-この場合は、パッケージをインストールした後に別途型定義ファイルをインストールする必要があります。定義ファイルのインストールも`npm`コマンドを利用します。
+Khi xem trang giới thiệu package trên NPM, đôi khi có icon DT hiển thị bên phải tên package. Điều này cho biết type definition file không có trong package này, nhưng đã được đăng ký trên [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped).
+Trong trường hợp này, sau khi install package, cần install type definition file riêng. Việc install definition file cũng sử dụng lệnh `npm`.
 
-例として[Express](https://expressjs.com/)はJavaScriptで構築されていますが、型定義ファイルは`@types/express`というパッケージとして別途インストールする必要があります。
+Ví dụ, [Express](https://expressjs.com/) được xây dựng bằng JavaScript, nhưng type definition file cần được install riêng dưới dạng package `@types/express`.
 
-[Express](https://expressjs.com/)本体と定義ファイルのインストール例は次のようになります。
+Ví dụ install [Express](https://expressjs.com/) và definition file như sau.
 
 ```bash
-npm install express --save # express本体のインストール
-npm install @types/express --save-dev # 型定義ファイルのインストール
+npm install express --save # install express
+npm install @types/express --save-dev # install type definition file
 ```
 
-### 型定義ファイル無し
+### Không có type definition file
 
-型定義ファイルがないライブラリも存在します。その場合は
+Cũng có library không có type definition file. Trong trường hợp đó
 
-1. `any`で妥協する
-2. 型定義ファイルを作る
+1. Chấp nhận `any`
+2. Tạo type definition file
 
-型定義ファイルの存在しないライブラリも利用することが可能ですが暗黙的に`any`型になります。また自身で作成しDefinitelyTypedに公開することもできます。
+Cũng có thể sử dụng library không có type definition file nhưng nó sẽ ngầm trở thành type `any`. Bạn cũng có thể tự tạo và public lên DefinitelyTyped.
 
-[コントリビュート（貢献）する方法 | Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/README.ja.md#%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%83%88%E8%B2%A2%E7%8C%AE%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95)
+[Cách đóng góp (contribute) | Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/README.ja.md#%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%83%88%E8%B2%A2%E7%8C%AE%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95)
 
-## 型定義ファイルで登場するキーワード
+## Keyword xuất hiện trong type definition file
 
-ここでは型定義ファイルを読めるようになるために、型定義ファイルでよく利用されるキーワードを紹介します。
+Ở đây giới thiệu các keyword thường được sử dụng trong type definition file để bạn có thể đọc được type definition file.
 
 ### declare
 
-`declare`キーワードを使うことでTypeScriptに変数、関数、クラスなどがJavaScript内に「存在する」ことを伝えることができます。これを「アンビエント宣言」と呼びます。
+Sử dụng keyword `declare` có thể cho TypeScript biết rằng variable, function, class, v.v. "tồn tại" trong JavaScript. Điều này được gọi là "ambient declaration".
 
-次のファイルがJavaScriptライブラリとして読み込まれており、グローバル関数として`hello`が使える状態だとします。
+Giả sử file sau được load như JavaScript library và `hello` có thể sử dụng như global function.
 
 ```js twoslash
 function hello(name) {
@@ -128,14 +128,14 @@ function hello(name) {
 }
 ```
 
-この状態でTypeScriptで`hello`関数を呼び出すと型エラーが発生します。これは、TypeScriptが`hello`関数が存在することを知らないためです。
+Trong trạng thái này, nếu gọi function `hello` từ TypeScript sẽ xảy ra lỗi type. Điều này là do TypeScript không biết function `hello` tồn tại.
 
 ```ts twoslash
 // @errors: 2304
 hello("taro");
 ```
 
-`declare`を利用してアンビエント宣言をすることで、TypeScriptにJavaScript内のどこかに`hello`関数が「存在する」ことを宣言することができます。これによりTypeScriptが`hello`関数を認識できるようになります。
+Bằng cách sử dụng `declare` để thực hiện ambient declaration, có thể khai báo với TypeScript rằng function `hello` "tồn tại" ở đâu đó trong JavaScript. Nhờ đó TypeScript có thể nhận ra function `hello`.
 
 ```ts twoslash
 declare function hello(name: string): string;
@@ -144,7 +144,7 @@ hello("taro");
 // @log: "hello, taro"
 ```
 
-実際のモジュールの型定義ファイルの例として`jest`の型定義ファイルを見てみましょう。`beforeAll`などの関数が型定義ファイル内でアンビエント宣言されているのが確認できます。これによりモジュールの読み込みをしなくても、TypeScriptが`beforeAll`を関数として認識することができます。
+Như một ví dụ về type definition file của module thực tế, hãy xem type definition file của `jest`. Có thể xác nhận các function như `beforeAll` được ambient declare trong type definition file. Nhờ đó TypeScript có thể nhận ra `beforeAll` là function mà không cần import module.
 
 ```ts title="node_modules/@types/jest/index.d.ts" twoslash
 // @noErrors
@@ -157,10 +157,10 @@ declare namespace jest {
 
 ### namespace
 
-`namespace`キーワードを使うことで名前空間を定義することができます。
-名前空間を定義することで、型名の衝突を避けることができます。
+Sử dụng keyword `namespace` có thể định nghĩa namespace.
+Bằng cách định nghĩa namespace, có thể tránh xung đột tên type.
 
-`Element`という型をライブラリの型として定義してライブラリ利用者が参照できるようにしたいと考えみます。この型はTypeScriptの`lib.dom.d.ts`にすでに定義されているため、そのまま同じグローバルな空間に定義をすると名前が衝突してしまいます。
+Hãy nghĩ về việc muốn định nghĩa type `Element` như type của library và cho người dùng library tham chiếu. Type này đã được định nghĩa sẵn trong `lib.dom.d.ts` của TypeScript, nên nếu định nghĩa trực tiếp trong cùng không gian global sẽ xung đột tên.
 
 ```ts title="node_modules/typescript/lib/lib.dom.d.ts"
 interface Element
@@ -176,11 +176,11 @@ interface Element
   /** Allows for manipulation of element's class content attribute as a set of whitespace-separated tokens through a DOMTokenList object. */
   readonly classList: DOMTokenList;
 
-  // 省略
+  // lược bỏ
 }
 ```
 
-次のコードは`namespace`を使わずにライブラリ独自の型として`Element`を定義している例です。TypeScriptでは同じインターフェースが定義された場合は宣言のマージが発生するため、`lib.dom.d.ts`で定義されている型とマージされるため、`attributes`プロパティなど複数プロパティの指定を求められてしまいます。
+Code sau là ví dụ định nghĩa `Element` như type riêng của library mà không sử dụng `namespace`. Trong TypeScript, khi interface cùng tên được định nghĩa, declaration merging xảy ra, nên sẽ merge với type được định nghĩa trong `lib.dom.d.ts`, và yêu cầu chỉ định nhiều property như `attributes`.
 
 ```ts twoslash
 // hello.d.ts
@@ -196,7 +196,7 @@ const e: Element = {
 };
 ```
 
-名前空間を定義することで衝突を避けてライブラリ独自の型を定義をすることができます。
+Bằng cách định nghĩa namespace, có thể tránh xung đột và định nghĩa type riêng của library.
 
 ```ts twoslash
 // @filename: hello.d.ts
@@ -213,10 +213,10 @@ const e: Hello.Element = {
 };
 ```
 
-Reactの型定義ファイルでは、次のように`namespace JSX`で名前空間が定義されて`Element`の型が定義がされています。
+Trong type definition file của React, type `Element` được định nghĩa với namespace `namespace JSX` như sau.
 
-`declare global` と `declare namespace`の違いについて
-型定義ファイルでは同じ振る舞いをするため違いはない。`declare global`と記述をすることで、グローバルスコープに名前空間を定義するということを開発者の意図として明示できる？
+Về sự khác biệt giữa `declare global` và `declare namespace`
+Trong type definition file chúng hoạt động giống nhau nên không có sự khác biệt. Bằng cách viết `declare global`, có thể làm rõ ý định của developer là định nghĩa namespace trong global scope?
 
 ```ts twoslash
 // @filename: node_modules/@types/react/index.d.ts
@@ -224,37 +224,37 @@ declare global {
   namespace JSX {
     interface Element extends React.ReactElement<any, any> {}
 
-    // 省略
+    // lược bỏ
   }
 }
 ```
 
 ### module
 
-TypeScript1.5以前では、`module`キーワードが「内部モジュール（名前空間）」を定義するために使用されていました。これは現在の`namespace`の機能と同等です。しかし、この名前がESModuleの「外部モジュール」の定義とキーワード名が重複し、混乱を招いてしまう可能性があったため、TypeScript1.5から「内部モジュール」は「名前空間」と呼ばれるように変更され、`namespace`キーワードが新たに導入されました。
+Trước TypeScript 1.5, keyword `module` được sử dụng để định nghĩa "internal module (namespace)". Điều này tương đương với chức năng của `namespace` hiện tại. Tuy nhiên, vì tên này trùng với keyword của định nghĩa "external module" của ESModule và có thể gây nhầm lẫn, từ TypeScript 1.5, "internal module" được đổi tên thành "namespace" và keyword `namespace` mới được giới thiệu.
 
-現在では、`module`キーワードは非推奨となっているため、`namespace`キーワードの使用をするようにしてください。
+Hiện tại, keyword `module` đã không còn được khuyến khích sử dụng, vui lòng sử dụng keyword `namespace`.
 
-### トリプルスラッシュ・ディレクティブ
+### Triple-slash directive
 
-型定義ファイルの先頭で見かける3つのスラッシュ(`///`)ではじめるコメント行をトリプルスラッシュ・ディレクティブと呼びます。これは、TypeScript独自の形式でコンパイラに対して指示を出す機能を持っています。
+Comment line bắt đầu bằng ba dấu slash (`///`) ở đầu type definition file được gọi là triple-slash directive. Đây là định dạng riêng của TypeScript và có chức năng đưa ra chỉ thị cho compiler.
 
-トリプルスラッシュ・ディレクティブにはいくつかの種類が存在しており、ここでは多くの型定義ファイルで目にする代表的なディレクティブを2つ紹介します。
+Triple-slash directive có một số loại, ở đây giới thiệu 2 directive đại diện thường thấy trong nhiều type definition file.
 
-#### `/// <reference path="..." />` (参照ディレクティブ)
+#### `/// <reference path="..." />` (Reference directive)
 
-参照ディレクティブはコンパイラに型定義ファイル間の依存関係を宣言でき、`path`で指定された型定義ファイルを追加でコンパイル時に読み込むように指示を与えることができます。たとえば、次の例では`index.d.ts`をコンパイラが読み込む際に追加で`global.d.ts`を読み込みます。
+Reference directive có thể khai báo dependency giữa các type definition file cho compiler, và có thể chỉ thị để load thêm type definition file được chỉ định bằng `path` khi compile. Ví dụ, trong ví dụ sau, khi compiler load `index.d.ts`, nó sẽ load thêm `global.d.ts`.
 
 ```ts title="node_modules/@types/react/index.d.ts" twoslash
 // @noErrors
 /// <reference path="global.d.ts" />
 ```
 
-#### `/// <reference types="..." />` (型ディレクティブ)
+#### `/// <reference types="..." />` (Type directive)
 
-型ディレクティブはnpmパッケージへの依存関係を宣言できます。宣言されたパッケージの依存を解決する処理はimport文でのパッケージの解決と似た処理のため、型ディレクティブは型のimportのようなものとも考えられます。
+Type directive có thể khai báo dependency đến npm package. Xử lý giải quyết dependency của package được khai báo tương tự như xử lý giải quyết package trong câu lệnh import, nên type directive cũng có thể được coi như import của type.
 
-次の例はexpressの型定義ファイルの一部です。型ディレクティブで`serve-static`パッケージの型定義ファイルに依存していることが示されています。
+Ví dụ sau là một phần của type definition file của express. Type directive cho thấy đang phụ thuộc vào type definition file của package `serve-static`.
 
 ```ts title="node_modules/@types/express/index.d.ts" twoslash
 // @noErrors

@@ -1,6 +1,6 @@
-# anyとunknownの違い
+# Sự khác biệt giữa any và unknown
 
-`any, unknown`型はどのような値も代入できます。
+Cả hai kiểu `any` và `unknown` đều có thể được gán bất kỳ giá trị nào.
 
 ```ts twoslash
 const any1: any = null;
@@ -26,9 +26,9 @@ const unknown6: unknown = {
 };
 ```
 
-ちなみに逆の概念としてどの値も代入できない`never`という型もありますが、今回は説明を省きます。
+Ngoài ra, có một kiểu ngược lại là `never`, không thể gán bất kỳ giá trị nào, nhưng ở đây chúng ta sẽ không giải thích về nó.
 
-`any`型に代入したオブジェクトのプロパティ、メソッドは使用することができます。
+Với kiểu `any`, bạn có thể sử dụng các property và method của object đã được gán.
 
 ```ts twoslash
 const any4: any = 0.8;
@@ -47,7 +47,7 @@ console.log(any6.name);
 // @log: "origin"
 ```
 
-一方、`unknown`型に代入したオブジェクトのプロパティ、メソッドは使用することができません。使用できないどころか、実行することができません。
+Ngược lại, với kiểu `unknown`, bạn không thể sử dụng các property và method của object đã được gán. Không chỉ không sử dụng được, mà còn không thể thực thi.
 
 ```ts twoslash
 const unknown4: unknown = 0.8;
@@ -65,11 +65,11 @@ console.log(unknown5.length);
 console.log(unknown6.name);
 ```
 
-これだけ見ると`unknown`型よりも`any`型の方が優れていると思われるかもしれませんがそうではありません。`any`型は言い換えれば**TypeScriptが型のチェックを放棄した型**であり、そのためなんでもできます。`any`型を使うということはTypeScriptでせっかく得た型という利点を手放しているのと同じです。
+Chỉ nhìn vào điều này có thể nghĩ rằng kiểu `any` tốt hơn kiểu `unknown`, nhưng không phải vậy. Nói cách khác, kiểu `any` là **kiểu mà TypeScript từ bỏ việc kiểm tra kiểu**, vì vậy bạn có thể làm bất cứ điều gì. Sử dụng kiểu `any` giống như đang từ bỏ lợi ích về kiểu mà TypeScript mang lại.
 
-これでは存在しているエラーはコンパイル時には気が付けず、ソフトウェアをリリースしたあと実際のユーザーが使ったときに実行時エラーとなります。それが不具合報告や、クレームとなり、被害が拡大していきます。
+Khi đó, các lỗi tồn tại sẽ không được phát hiện tại thời điểm compile, và sẽ trở thành lỗi runtime khi người dùng thực tế sử dụng sau khi phát hành phần mềm. Điều đó dẫn đến báo cáo lỗi và khiếu nại, làm thiệt hại lan rộng.
 
-`any`型に関しては、次のような無茶なコードもTypeScriptは一切関与せず、実行してみてプログラムが実行時エラーになる、初めてこのプログラムが不完全であることがわかります。
+Với kiểu `any`, TypeScript hoàn toàn không can thiệp vào những đoạn code vô lý như sau, và chỉ khi chạy thử chương trình gặp lỗi runtime, ta mới biết được chương trình này không hoàn chỉnh.
 
 ```ts twoslash
 const any6: any = {
@@ -83,7 +83,7 @@ console.log(any6.x.y.z);
 // @error: Cannot read property 'z' of undefined
 ```
 
-`unknown`型は一貫してTypeScriptがプロパティ、メソッドへのアクセスを行わせません。そのため実行することができず、意図しないランタイム時のエラーを防止します。
+Kiểu `unknown` nhất quán không cho phép truy cập property và method. Vì vậy không thể thực thi, và ngăn chặn lỗi runtime không mong muốn.
 
 ```ts twoslash
 const unknown6: unknown = {
@@ -97,4 +97,4 @@ const unknown6: unknown = {
 console.log(unknown6.x.y.z);
 ```
 
-TypeScriptのプロジェクトを作る時に必要なtsconfig.jsonにはこの`any`型の使用を防ぐためのオプションとして`noImplicitAny`があります。既存のJavaScriptのプロジェクトをTypeScriptに置き換えていくのではなく、スクラッチの状態からTypeScriptで作るのであればこの設定を入れるとよいでしょう。
+Trong file tsconfig.json cần thiết khi tạo project TypeScript, có option `noImplicitAny` để ngăn chặn việc sử dụng kiểu `any`. Nếu bạn tạo project TypeScript từ đầu thay vì chuyển đổi project JavaScript hiện có sang TypeScript, nên bật cài đặt này.

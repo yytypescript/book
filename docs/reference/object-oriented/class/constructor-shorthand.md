@@ -1,19 +1,19 @@
-# constructor shorthand
+# Constructor shorthand
 
-メソッドの引数にはアクセス修飾子を設定することはできませんがコンストラクタは特別です。
+Không thể đặt access modifier cho tham số của method, nhưng constructor là trường hợp đặc biệt.
 
-引数に対してアクセス修飾子を宣言した場合はこのような意味になります。
+Khi khai báo access modifier cho tham số, ý nghĩa như sau:
 
-| アクセス修飾子 | 説明                                                                             |
-| :------------- | :------------------------------------------------------------------------------- |
-| (宣言なし)     | constructorメソッド内のみアクセス可能                                            |
-| public         | 自身のクラス内、継承クラス、インスタンス化されたクラスのどれからでもアクセス可能 |
-| protected      | 自身のクラス、継承クラスからアクセス可能                                         |
-| private        | 自身のクラスのみアクセス可能                                                     |
+| Access modifier | Mô tả                                                                                 |
+| :-------------- | :------------------------------------------------------------------------------------ |
+| (không khai báo)| Chỉ có thể truy cập trong method constructor                                         |
+| public          | Có thể truy cập từ class hiện tại, class kế thừa và class đã instance hóa            |
+| protected       | Có thể truy cập từ class hiện tại và class kế thừa                                   |
+| private         | Chỉ có thể truy cập từ class hiện tại                                                |
 
-`ConstructorInAccessModifier`クラスと`ConstructorOutAccessModifier`クラスのふたつを定義しました。
+Định nghĩa hai class `ConstructorInAccessModifier` và `ConstructorOutAccessModifier`.
 
-ふたつのクラスの違いはコンストラクタにアクセス修飾子を定義しているかどうかだけで機能はまったく同じです。
+Sự khác biệt duy nhất giữa hai class là có khai báo access modifier trong constructor hay không, chức năng hoàn toàn giống nhau.
 
 ```ts title="example.ts" twoslash
 class ConstructorInAccessModifier {
@@ -40,7 +40,7 @@ class ConstructorOutAccessModifier {
 }
 ```
 
-コンパイル後のJavaScriptファイルを見てみると同一の機能を持つことが確認することができます。
+Xem file JavaScript sau khi compile có thể xác nhận cả hai có chức năng giống hệt nhau.
 
 ```js title="example.js" twoslash
 class ConstructorInAccessModifier {
@@ -61,7 +61,7 @@ class ConstructorOutAccessModifier {
 }
 ```
 
-TypeScriptで記述する際は各アクセス修飾子のスコープ機能が有効になるため、インスタンスからのアクセスが可能なプロパティは`public`宣言された`arg1`のみが有効になります。
+Khi viết TypeScript, chức năng scope của mỗi access modifier có hiệu lực, nên property có thể truy cập từ instance chỉ là `arg1` được khai báo `public`.
 
 ```ts title="example.ts" twoslash
 class ConstructorInAccessModifier {
@@ -102,4 +102,4 @@ outAccess.arg2;
 outAccess.arg3;
 ```
 
-つまり、コンストラクタの引数のアクセス修飾子はプロパティ宣言の省略をしてくれるだけにすぎません。
+Tức là access modifier của tham số constructor chỉ đơn giản là cách viết tắt cho việc khai báo property.

@@ -3,13 +3,13 @@ title: async
 slug: /reference/asynchronous/async
 ---
 
-`Promise`を利用した非同期処理をより簡単に書ける構文として`async`/`await`が存在します。
-この構文を利用することで、非同期処理をより同期処理と同じような文脈で書くことができるようになります。
-`async`/`await`は基本セットで使いますが、本ページでは`async`を主に取り上げます。
+`async`/`await` là cú pháp giúp viết xử lý bất đồng bộ sử dụng `Promise` một cách đơn giản hơn.
+Với cú pháp này, bạn có thể viết xử lý bất đồng bộ giống như xử lý đồng bộ hơn.
+`async`/`await` thường được sử dụng cùng nhau, nhưng trong trang này chúng ta sẽ tập trung vào `async`.
 
-### `async`関数、`async`メソッド
+### Function `async`, method `async`
 
-関数、メソッドの前に`async`キーワードをつけると、たとえその関数内で`Promise`が返されていなくても、戻り値の型を`Promise`で包んで返します。`async`関数、メソッドの中では`await`キーワードを使うことができます。`await`については`await`のページをご参照ください。
+Khi thêm keyword `async` trước function hoặc method, ngay cả khi trong function đó không trả về `Promise`, kiểu trả về sẽ được bao bọc bởi `Promise`. Trong function và method `async`, bạn có thể sử dụng keyword `await`. Về `await`, vui lòng tham khảo trang `await`.
 
 [await](./await.md)
 
@@ -43,14 +43,14 @@ class UserRepository {
 }
 ```
 
-この例では`Promise`ではない定数を返していますが`async`関数はその戻り値を`Promise`で包んでいます。
+Trong ví dụ này, mặc dù trả về một hằng số không phải `Promise`, nhưng function `async` sẽ bao bọc giá trị trả về bằng `Promise`.
 
 ```ts twoslash
 async function requestAsync(): Promise<number> {
   return 1;
 }
 
-// requestAsyncはこれと同じ
+// requestAsync tương đương với
 function request(): Promise<number> {
   return new Promise((resolve) => {
     resolve(1);
@@ -63,9 +63,9 @@ requestAsync().then((result) => {
 });
 ```
 
-### `async`関数の宣言
+### Khai báo function `async`
 
-JavaScriptには３つの関数の宣言方法がありますが、それらを`async`関数として宣言することもできます。
+JavaScript có 3 cách khai báo function, và tất cả đều có thể khai báo dưới dạng function `async`.
 
 ```ts twoslash
 async function requestAsync1(): Promise<number> {
@@ -81,9 +81,9 @@ const requestAsync3 = async (): Promise<number> => {
 };
 ```
 
-### `async`メソッドとアクセス修飾子
+### Method `async` và access modifier
 
-メソッドでアクセス修飾子をつけたい場合は`async`の前につけます。
+Nếu muốn thêm access modifier cho method, đặt nó trước `async`.
 
 ```ts twoslash
 type User = {
@@ -107,9 +107,9 @@ class UserRepository {
 }
 ```
 
-### `async`関数、メソッドの戻り値
+### Giá trị trả về của function và method `async`
 
-`async`関数は`Promise`を戻り値として返すことも可能です。このとき`Promise<Promise<T>>`のように`Promise`が二重に包まれることはなく、`Promise<T>`となります。
+Function `async` cũng có thể trả về `Promise`. Khi đó, `Promise` sẽ không bị bao bọc thành `Promise<Promise<T>>` mà sẽ là `Promise<T>`.
 
 ```ts twoslash
 async function requestAsync(): Promise<number> {
@@ -124,9 +124,9 @@ requestAsync().then((result) => {
 });
 ```
 
-### `async`関数、メソッドをreject(拒否)する
+### Reject function và method `async`
 
-`async`関数、メソッドを拒否するためには`async`関数、メソッド内で`throw`を使うだけです。
+Để reject một function hoặc method `async`, chỉ cần sử dụng `throw` bên trong function hoặc method `async`.
 
 ```ts twoslash
 async function requestAsync(): Promise<number> {
@@ -134,4 +134,4 @@ async function requestAsync(): Promise<number> {
 }
 ```
 
-これで`requestAsync`が返す`Promise`はreject(拒否)されます。
+Như vậy, `Promise` mà `requestAsync` trả về sẽ bị reject.

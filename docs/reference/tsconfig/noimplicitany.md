@@ -1,21 +1,21 @@
 ---
-description: 暗黙のany型を禁ずる
+description: Cấm any type ngầm định
 tags: [strict]
 ---
 
 # noImplicitAny
 
-`noImplicitAny`は暗黙のany型を禁止するコンパイラオプションです。
+`noImplicitAny` là compiler option cấm any type ngầm định.
 
-- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
-- 追加されたバージョン: -
-- TypeScript公式が有効化推奨
+- Mặc định: `true` nếu [strict](./strict.md) được bật, ngược lại là `false`
+- Phiên bản thêm vào: -
+- TypeScript khuyến nghị nên bật
 
-## 暗黙のanyの問題点
+## Vấn đề của any ngầm định
 
-型注釈もなく型推論もできない場合、TypeScriptは変数の型を`any`にします。これを暗黙のanyといいます。特に引数やプロパティで暗黙のanyになることが多いです。
+Khi không có type annotation và không thể type inference, TypeScript sẽ đặt type của biến là `any`. Điều này được gọi là any ngầm định. Đặc biệt, any ngầm định thường xảy ra ở tham số và property.
 
-```ts twoslash title="暗黙のanyが発生する例"
+```ts twoslash title="Ví dụ xảy ra any ngầm định"
 // @noImplicitAny: false
 function foo(param) {}
 //           ^?
@@ -26,7 +26,7 @@ class Bar {
 }
 ```
 
-any型の変数には型チェックが無いため、バグの危険性が増します。
+Biến có type là any không được type check nên nguy cơ bug tăng cao.
 
 ```ts twoslash
 function increment(number) {
@@ -39,11 +39,11 @@ increment(undefined);
 // @noImplicitAny: false
 ```
 
-## `noImplicitAny`で暗黙のanyを防ぐ
+## Ngăn chặn any ngầm định với `noImplicitAny`
 
-`noImplicitAny`を`true`にすると、変数が暗黙のanyになることを避けられます。TypeScriptは暗黙のanyになる変数を見つけると、警告を出すようになります。
+Đặt `noImplicitAny` thành `true` để tránh biến trở thành any ngầm định. TypeScript sẽ cảnh báo khi phát hiện biến có any ngầm định.
 
-```ts twoslash title="暗黙のanyが警告される例"
+```ts twoslash title="Ví dụ any ngầm định được cảnh báo"
 // @noImplicitAny: true
 // @errors: 7006 7008
 function foo(param) {}
@@ -53,9 +53,9 @@ class Bar {
 }
 ```
 
-## 関数の戻り値の型
+## Type của return value của function
 
-関数の戻り値は、多くの場合は推論されるため暗黙の`any`にはなりません。したがって、戻り値に型注釈が無くても、`noImplicitAny`では警告されません（`noImplicitAny`の対象は「暗黙のany」だけです）。
+Return value của function trong nhiều trường hợp được infer nên không trở thành any ngầm định. Do đó, ngay cả khi không có type annotation cho return value, `noImplicitAny` cũng không cảnh báo (đối tượng của `noImplicitAny` chỉ là "any ngầm định").
 
 ```ts twoslash
 function foo() {
@@ -66,14 +66,14 @@ function foo() {
 
 <PostILearned>
 
-😢TypeScriptは型注釈がないOR型推論不能の場合、型をanyにする(暗黙のany)
-🙅‍♂️noImplicitAnyは暗黙のanyを禁止するコンパイラオプション
-😊これをtrueにすると暗黙のanyが警告される
-✅有効化推奨のオプション
+😢TypeScript đặt type thành any khi không có type annotation HOẶC không thể type inference (any ngầm định)
+🙅‍♂️noImplicitAny là compiler option cấm any ngầm định
+😊Đặt thành true để cảnh báo any ngầm định
+✅Option khuyến nghị nên bật
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
 [strict](./strict.md)
 

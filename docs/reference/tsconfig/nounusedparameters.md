@@ -1,17 +1,17 @@
 ---
-description: 使われていない引数を禁止する
+description: Cấm tham số không được sử dụng
 ---
 
 # noUnusedParameters
 
-`noUnusedParameters`は使われていない引数を禁止するコンパイラオプションです。
+`noUnusedParameters` là compiler option cấm tham số không được sử dụng.
 
-- デフォルト: `false`
-- 追加されたバージョン: 2.0
+- Mặc định: `false`
+- Phiên bản thêm vào: 2.0
 
-## 解説
+## Giải thích
 
-関数で使用していない引数を禁止します。
+Cấm tham số trong function không được sử dụng.
 
 ```ts twoslash
 // @noUnusedParameters: false
@@ -20,7 +20,7 @@ function add(n1: number, n2: number, n3: number): number {
 }
 ```
 
-このオプションを有効にすると次のようなエラーが発生します。
+Khi bật option này sẽ báo lỗi như sau:
 
 ```ts twoslash
 // @noUnusedParameters: true
@@ -31,7 +31,7 @@ function add(n1: number, n2: number, n3: number): number {
 }
 ```
 
-これを回避するためには、使用していない引数を`_`で始まる名前に変更します。
+Để tránh lỗi này, đổi tên tham số không sử dụng thành tên bắt đầu bằng `_`:
 
 ```ts twoslash
 function add(n1: number, n2: number, _n3: number): number {

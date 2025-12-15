@@ -1,8 +1,8 @@
-# オブジェクトからキーの型を生成する
+# Tạo type key từ object
 
-## オブジェクトからキーだけ欲しい
+## Muốn lấy chỉ key từ object
 
-あるメッセージが言語ごとに定義されているとします。
+Giả sử có message được định nghĩa theo từng ngôn ngữ.
 
 ```ts twoslash
 const conf = {
@@ -14,7 +14,7 @@ const conf = {
 };
 ```
 
-内容は確認を促す変哲もないシステムのメッセージです。このオブジェクトを使ってシステムがサポートしている言語の一覧を作ります。次のようなユニオン型が今回の目的です。
+Nội dung là message hệ thống bình thường để xác nhận. Sử dụng object này để tạo danh sách các ngôn ngữ hệ thống hỗ trợ. Union type sau là mục tiêu lần này.
 
 ```ts twoslash
 type Language = "en" | "fr" | "es" | "ja" | "zh";
@@ -22,11 +22,11 @@ type Language = "en" | "fr" | "es" | "ja" | "zh";
 
 ### `typeof`
 
-頻出するこの`typeof`はJavaScriptのものではなく、TypeScriptの`typeof`です。これをオブジェクトに対して使用している例は前のページにあるとおりです。
+`typeof` xuất hiện thường xuyên này không phải của JavaScript, mà là `typeof` của TypeScript. Ví dụ sử dụng nó với object có ở trang trước.
 
-[オブジェクトから型を生成する](generates-type-from-object.md)
+[Tạo type từ object](generates-type-from-object.md)
 
-この例で実行すれば次のような型`TypeOfLanguage`が生成されるでしょう (型名は便宜的なものです) 。
+Nếu thực thi với ví dụ này, type `TypeOfLanguage` như sau sẽ được tạo (tên type chỉ là cho tiện).
 
 ```ts twoslash
 const conf = {
@@ -41,11 +41,11 @@ type TypeOfLanguage = typeof conf;
 //   ^?
 ```
 
-ここまでくればあとは少しです。`TypeOfLanguage`型のキーだけを型にしてしまいます。
+Đến đây thì chỉ còn một chút nữa. Chỉ biến key của type `TypeOfLanguage` thành type.
 
 ### `keyof`
 
-`keyof`はオブジェクトの型に使うとそのオブジェクトのキーをユニオン型にして返します。上記の`TypeOfLanguage`型があれば
+`keyof` khi sử dụng với type của object sẽ trả về key của object đó dưới dạng union type. Nếu có type `TypeOfLanguage` ở trên
 
 ```ts twoslash
 const conf = {
@@ -61,13 +61,13 @@ type Language = keyof TypeOfLanguage;
 //   ^?
 ```
 
-となります。
+sẽ được như vậy.
 
-[keyof型演算子](../reference/type-reuse/keyof-type-operator.md)
+[keyof type operator](../reference/type-reuse/keyof-type-operator.md)
 
-## まとめ
+## Tóm tắt
 
-見た目が少々いびつですが、次でオブジェクトから希望するキーのユニオン型を生成できます。
+Mặc dù trông hơi kỳ lạ, nhưng có thể tạo union type của key mong muốn từ object bằng cách sau.
 
 ```ts twoslash
 const conf = {
@@ -83,6 +83,6 @@ type Language = keyof typeof conf;
 //   ^?
 ```
 
-### 疑問: `keyof conf`じゃダメなんですか？
+### Câu hỏi: `keyof conf` không được sao?
 
-動作しません。なぜなら`keyof`は値ではなく (オブジェクトの) 型に対して使用できるからです。一方`typeof`は値から型を生成するのでこの順番で使用する必要があります。
+Không hoạt động. Vì `keyof` có thể sử dụng với type (của object) chứ không phải value. Mặt khác `typeof` tạo type từ value nên cần sử dụng theo thứ tự này.

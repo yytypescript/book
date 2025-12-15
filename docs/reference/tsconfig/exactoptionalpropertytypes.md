@@ -1,18 +1,18 @@
 ---
-description: オプションプロパティにundefinedの代入することを禁止する
+description: Cấm gán undefined cho optional property
 ---
 
 # exactOptionalPropertyTypes
 
-`exactOptionalPropertyTypes`はオプションプロパティに`undefined`の代入することを禁止するコンパイラオプションです。
+`exactOptionalPropertyTypes` là compiler option cấm gán `undefined` cho optional property.
 
-- デフォルト: `false`
-- 追加されたバージョン: 4.4
-- TypeScript公式が有効化推奨
+- Mặc định: `false`
+- Phiên bản thêm vào: 4.4
+- TypeScript khuyến nghị nên bật
 
-## 解説
+## Giải thích
 
-今までオプション修飾子は値を設定しないことに加えて`undefined`を意図的に設定することができました。
+Trước đây, optional modifier cho phép không chỉ bỏ qua việc set giá trị mà còn có thể set `undefined` một cách có chủ đích.
 
 ```ts twoslash
 interface User {
@@ -35,7 +35,7 @@ const user3: User = {
 };
 ```
 
-値が未定義であることと値が`undefined`であることは厳密には動作が異なります。たとえば`Object.keys()`は最たる例で、上記の`user1, user2, user3`にそれぞれ`Object.keys()`を適用すれば結果は次のようになります。
+Giá trị chưa được định nghĩa và giá trị là `undefined` có hành vi khác nhau. Ví dụ điển hình là `Object.keys()`, khi áp dụng lên `user1, user2, user3` ở trên, kết quả sẽ như sau:
 
 ```ts twoslash
 // user1
@@ -46,9 +46,9 @@ const user3: User = {
 ["name"];
 ```
 
-この差異が意図しない実行時エラーを生むことがあります。意図する値が設定されていれば(この場合`'India' | 'China'`)`nationality`は`Object.keys()`に含まれるべきですが`undefined`のときは結局その先で値の存在チェックが必要になります。
+Sự khác biệt này có thể gây ra lỗi runtime không mong muốn. Nếu giá trị được set đúng (trong trường hợp này là `'India' | 'China'`) thì `nationality` nên có trong `Object.keys()`, nhưng khi là `undefined` thì vẫn cần phải check sự tồn tại của giá trị ở phía sau.
 
-このオプションを有効にすると`interface, type`でオプション修飾子を持つキーはその値がキー自体を持たないようにしなければなりません。先ほどの例では`undefined`を代入した`user2`で次のようなエラーが発生します。
+Khi bật option này, các key có optional modifier trong `interface, type` sẽ không được phép có key với giá trị `undefined`. Trong ví dụ trước, `user2` gán `undefined` sẽ báo lỗi như sau:
 
 ```ts twoslash
 // @exactOptionalPropertyTypes: true
@@ -73,4 +73,4 @@ const user3: User = {
 };
 ```
 
-どうしてもキーに`undefined`も指定したい場合はオプション修飾子に加えて`undefined`のユニオン型を付加してください。
+Nếu thực sự muốn key có thể nhận giá trị `undefined`, hãy thêm union type với `undefined` vào ngoài optional modifier.

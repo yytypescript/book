@@ -4,7 +4,7 @@ sidebar_label: "ボックス化"
 
 # ボックス化 (boxing)
 
-多くの言語では、プリミティブは一般的にフィールドやメソッドを持ちません。プリミティブをオブジェクトのように扱うには、プリミティブをオブジェクトに変換する必要があります。プリミティブからオブジェクトへの変換をボックス化(boxing)と言います。
+Trong nhiều ngôn ngữ, primitive thường không có field hay method. Để xử lý primitive như object, cần chuyển đổi primitive sang object. Việc chuyển đổi từ primitive sang object được gọi là boxing.
 
 ```ts twoslash
 // プリミティブ型
@@ -16,11 +16,11 @@ strObject.length; // フィールドの参照
 strObject.toUpperCase(); // メソッド呼び出し
 ```
 
-上の例は、JavaScriptでボックス化のイメージを書いたものです。実際のコードでは、プリミティブ型を`String`のようなラッパーオブジェクトにわざわざ入れる必要はありません。JavaScriptには自動ボックス化という仕組みがあるからです。
+Ví dụ trên minh họa khái niệm boxing trong JavaScript. Trong code thực tế, không cần phải bỏ primitive type vào wrapper object như `String`. Vì JavaScript có cơ chế auto-boxing.
 
-## 自動ボックス化
+## Auto-boxing
 
-JavaScriptでは、プリミティブ型の値でもフィールドを参照できたり、メソッドが呼び出せます。
+Trong JavaScript, ngay cả giá trị primitive type cũng có thể truy cập field và gọi method.
 
 ```ts twoslash
 const str = "abc";
@@ -29,11 +29,11 @@ str.length; // フィールドの参照
 str.toUpperCase(); // メソッド呼び出し
 ```
 
-プリミティブ型の値はオブジェクトではないため、このような操作ができるのは変です。ボックス化する必要があるように思えます。しかし、このようなことができるのは、JavaScriptが内部的にプリミティブ型の値をオブジェクトに変換しているからです。この暗黙の変換を自動ボックス化(auto-boxing)と呼びます。
+Giá trị primitive type không phải object, nên việc có thể thao tác như vậy là điều lạ. Có vẻ cần boxing. Tuy nhiên điều này có thể thực hiện được là vì JavaScript nội bộ chuyển đổi giá trị primitive type sang object. Việc chuyển đổi ngầm định này gọi là auto-boxing.
 
-## ラッパーオブジェクト
+## Wrapper object
 
-JavaScriptの自動ボックス化で変換先となるオブジェクトをラッパーオブジェクト(wrapper object)と呼びます。プリミティブ型とラッパーオブジェクトの対応は次の表のとおりです。
+Object được chuyển đổi đến trong auto-boxing của JavaScript gọi là wrapper object. Tương ứng giữa primitive type và wrapper object như bảng sau.
 
 | プリミティブ型 | ラッパーオブジェクト |
 | -------------- | -------------------- |
@@ -43,7 +43,7 @@ JavaScriptの自動ボックス化で変換先となるオブジェクトをラ�
 | `symbol`       | `Symbol`             |
 | `bigint`       | `BigInt`             |
 
-プリミティブ型の`undefined`と`null`にはラッパーオブジェクトがありません。したがって、メソッドやフィールドの参照は常にエラーが発生します。
+Primitive type `undefined` và `null` không có wrapper object. Do đó việc truy cập method hay field luôn phát sinh lỗi.
 
 ```ts twoslash
 // @errors: 18050
@@ -51,19 +51,19 @@ null.toString();
 undefined.toString();
 ```
 
-## MDNの読み方
+## Cách đọc MDN
 
-JavaScriptを学ぶ過程で一度はお世話になるドキュメントが[MDN Web Docs](https://developer.mozilla.org/ja/docs/Web/JavaScript)です。自動ボックス化とラッパーオブジェクトを意識すると、MDNのドキュメントが理解しやすくなります。
+Document thường được dùng khi học JavaScript là [MDN Web Docs](https://developer.mozilla.org/ja/docs/Web/JavaScript). Khi hiểu về auto-boxing và wrapper object, document MDN sẽ dễ hiểu hơn.
 
-たとえば、数値の`toString`メソッドの説明は、MDNでは[「Number.prototype.toString()」というタイトルのページ](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)に書かれています。`toString`がプリミティブ型の`number`に生えているものだと思っていると、「Number.prototypeは何だろう」「number型を調べているはずなのに、なぜNumberオブジェクトのページに書いてあるんだろう」などといった疑問を持つかもしれません。
+Ví dụ, giải thích về method `toString` của số được viết trong MDN tại trang có tiêu đề [「Number.prototype.toString()」](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Number/toString). Nếu nghĩ `toString` là thứ có trong primitive type `number`, có thể có thắc mắc như "Number.prototype là gì", "Đang tìm hiểu number type mà tại sao lại viết trong trang Number object".
 
-自動ボックス化とラッパーオブジェクトを知っていると、この疑問が解消します。`number`にはメソッドもフィールドもありません。メソッドなどがあるように見えるのは、自動ボックス化で`number`が`Number`オブジェクトに変換されるためです。したがって、`toString`の説明が`Number`オブジェクトのページに書いてあることが腑に落ちます。また、`Number.prototype`が表す意味は「`Number`オブジェクトのインスタンスに生えている」ということも理解できます。
+Khi biết về auto-boxing và wrapper object, thắc mắc này được giải quyết. `number` không có method cũng không có field. Có vẻ như có method là do auto-boxing chuyển `number` sang `Number` object. Vì vậy việc giải thích `toString` viết trong trang `Number` object là hợp lý. Ngoài ra cũng hiểu được ý nghĩa `Number.prototype` biểu thị là "có trong instance của `Number` object".
 
-## ラッパーオブジェクトとTypeScriptの型
+## Wrapper object type và type của TypeScript
 
 <!-- textlint-disable prh -->
 
-TypeScriptでは、ラッパーオブジェクトの型も定義されています。次のように、ラッパーオブジェクトの型を使って、型注釈を書くこともできます。ラッパーオブジェクト型の変数にプリミティブ型の値を代入するのも可能です。
+Trong TypeScript, type của wrapper object cũng được định nghĩa. Có thể viết type annotation bằng wrapper object type như sau. Cũng có thể gán giá trị primitive type vào biến wrapper object type.
 
 ```ts twoslash
 const bool: Boolean = false;
@@ -73,7 +73,7 @@ const sym: Symbol = Symbol();
 const big: BigInt = 10n;
 ```
 
-しかし、ラッパーオブジェクト型はプリミティブ型に代入できません。
+Tuy nhiên wrapper object type không thể gán vào primitive type.
 
 ```ts twoslash
 // @errors: 2322
@@ -81,7 +81,7 @@ const n1: Number = 0;
 const n2: number = n1;
 ```
 
-ラッパーオブジェクト型は演算子が使えません。
+Wrapper object type không dùng được operator.
 
 ```ts twoslash
 // @errors: 2362
@@ -89,7 +89,7 @@ const num: Number = 1;
 num * 2;
 ```
 
-ラッパーオブジェクト型は、そのインターフェースを満たしたオブジェクトであれば、プリミティブ型の値以外も代入できます。
+Wrapper object type có thể gán các giá trị khác ngoài primitive type, miễn là object đáp ứng interface đó.
 
 ```ts twoslash
 const boolLike = {
@@ -100,7 +100,7 @@ const boolLike = {
 const bool: Boolean = boolLike;
 ```
 
-プリミティブ型の代わりに、ラッパーオブジェクト型を型注釈に使う利点はありません。型注釈にはプリミティブ型を使いましょう。
+Không có lợi ích gì khi dùng wrapper object type cho type annotation thay vì primitive type. Hãy dùng primitive type cho type annotation.
 
 ```ts twoslash
 // ❌間違い
@@ -113,9 +113,9 @@ const num2: number = 0;
 
 <PostILearned>
 
-・ボックス化とはプリミティブをオブジェクトに変換すること
-・JavaScriptでプリミティブがオブジェクトのように扱えるのは、自動ボックス化のおかげ
-・TypeScriptではラッパーオブジェクト(例:String)よりもプリミティブ型(例:string)で型注釈すべし
+・Boxing là việc chuyển đổi primitive sang object
+・Primitive trong JavaScript có thể xử lý như object nhờ auto-boxing
+・Trong TypeScript nên type annotation bằng primitive type (ví dụ: string) hơn là wrapper object (ví dụ: String)
 
 </PostILearned>
 

@@ -1,16 +1,16 @@
-# 配列から型を生成する
+# Tạo type từ array
 
-単位のように振る舞うことを期待されて定義されたコレクションは少なくないでしょう。今回はコレクションでも主に配列に焦点を当てそれらから型を生成する方法の紹介です。
+Có không ít collection được định nghĩa với kỳ vọng hoạt động như đơn vị. Lần này tập trung vào array trong các collection và giới thiệu cách tạo type từ chúng.
 
-## 通貨の配列から通貨の型を作りたい
+## Muốn tạo type tiền tệ từ array tiền tệ
 
-国際的な外貨を使うことができるサービスを開発していたとします。サポートしている通貨を配列で保持しているとし次のようになっているとします。
+Giả sử bạn đang phát triển service có thể sử dụng ngoại tệ quốc tế. Giả sử các đồng tiền được hỗ trợ được lưu trong array như sau.
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"];
 ```
 
-このようなとき、このJavaScriptの資産をできるだけ変更せずに貨幣の型 (ユニオン型) を作ることができれば今後便利そうです。つまり次のようなユニオン型です。
+Trong trường hợp như vậy, nếu có thể tạo type tiền tệ (union type) mà không thay đổi nhiều JavaScript asset này thì sẽ tiện lợi trong tương lai. Nghĩa là union type như sau.
 
 ```ts twoslash
 type Currency = "CNY" | "EUR" | "GBP" | "JPY" | "KRW" | "USD";
@@ -18,7 +18,7 @@ type Currency = "CNY" | "EUR" | "GBP" | "JPY" | "KRW" | "USD";
 
 ### `typeof`
 
-これはJavaScriptの`typeof`ではなくTypeScriptの`typeof`です。`typeof`はTypeScriptがその変数をどのような型であるかと認識しているかかを教えてくれます。
+Đây không phải `typeof` của JavaScript mà là `typeof` của TypeScript. `typeof` cho biết TypeScript nhận diện biến đó là type gì.
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"];
@@ -27,7 +27,7 @@ type Currency = typeof currencies;
 //   ^?
 ```
 
-予想されている方が多かったかもしれませんが`string[]`型と出てしまいました。ではこれをどうすれば`string`ではなく定数値で取得できるでしょうか。それは定数値で取得したいオブジェクトに`as const`をつけると取得できます。
+Có lẽ nhiều người đã đoán trước, nhưng kết quả là `string[]`. Vậy làm thế nào để lấy được giá trị constant thay vì `string`? Đó là thêm `as const` vào object muốn lấy giá trị constant.
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -36,11 +36,11 @@ type Currency = typeof currencies;
 //   ^?
 ```
 
-定数 (リテラル型) は取れましたが依然配列のままです。これをユニオン型で取るためには考え方を逆転させる必要があります。
+Đã lấy được constant (literal type) nhưng vẫn là array. Để lấy dưới dạng union type, cần đảo ngược cách suy nghĩ.
 
-#### 何番目のリテラル型が欲しいか
+#### Muốn lấy literal type ở vị trí nào
 
-たとえば`'GBP'`が欲しいとします。`'GBP'`は2番目なので`currencies`の2番目の型を取れば希望のリテラル型が取れます。
+Ví dụ muốn lấy `'GBP'`. `'GBP'` ở vị trí thứ 2 nên lấy type ở vị trí thứ 2 của `currencies` sẽ có được literal type mong muốn.
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -49,19 +49,19 @@ type Currency = (typeof currencies)[2];
 //   ^?
 ```
 
-`'GBP'`を取ることができました。
+Đã lấy được `'GBP'`.
 
-### すべてのリテラル型が欲しい
+### Muốn lấy tất cả literal type
 
-本題です。まさか次のようにするわけには行かないのでもっと賢い方法を考える必要があります。
+Đây là vấn đề chính. Không thể viết như sau nên cần nghĩ cách thông minh hơn.
 
 ```ts
 type Currency = typeof currencies[0] | typeof currencies[1] | typeof currencies[2] | ....
 ```
 
-そこで思いつくのは`typeof`をしているときのインデックスです。実はこれもリテラル型であり`currencies`の`2`のリテラル型を取ることを意味しています。
+Từ đó, điều đến trong đầu là index khi đang thực hiện `typeof`. Thực ra đây cũng là literal type và có nghĩa là lấy literal type của `2` trong `currencies`.
 
-配列はnumber型のインデックスに要素を代入しているオブジェクトなのでこのリテラル型のインデックスの代わりに`number`を使うことによって
+Array là object gán phần tử vào index kiểu number, nên bằng cách sử dụng `number` thay cho index literal type
 
 ```ts twoslash
 const currencies = ["CNY", "EUR", "GBP", "JPY", "KRW", "USD"] as const;
@@ -70,4 +70,4 @@ type Currency = (typeof currencies)[number];
 //   ^?
 ```
 
-と希望のユニオン型を取得できます。
+có thể lấy được union type mong muốn.
