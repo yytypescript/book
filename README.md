@@ -1,44 +1,44 @@
-# サバイバルTypeScript
+# Survival TypeScript
 
-TypeScriptの入門書です。
+Sách nhập môn TypeScript.
 
 https://typescriptbook.jp/
 
-## 特徴
+## Đặc điểm
 
-### 実務指向
+### Định hướng thực tế
 
-「TypeScriptを最短ルートで実務で使えるように読者を導く」を目標に、実務で必須な知識に厳選した内容になっています。実務利用が希なTypeScript機能は、過学習になるため意図的に省いています。逆に、TypeScript範囲外のことでも実務利用が頻繁な知識はふんだんに盛り込んでいます。
+Với mục tiêu "Dẫn dắt người đọc theo con đường ngắn nhất để có thể sử dụng TypeScript trong công việc thực tế", nội dung được chọn lọc kỹ, tập trung vào những kiến thức thiết yếu trong thực tế. Các tính năng TypeScript hiếm khi được sử dụng trong thực tế sẽ được bỏ qua để tránh quá tải. Ngược lại, những kiến thức nằm ngoài phạm vi TypeScript nhưng thường xuyên được sử dụng trong thực tế sẽ được đề cập đầy đủ.
 
-### 自然な学習の流れ
+### Luồng học tự nhiên
 
-まず、プログラマーの言語学習の自然な流れを意識した章立てになっています。次の順で章立てされているため、ストレス少なめで学習していけます。
+Đầu tiên, cấu trúc chương được thiết kế theo luồng học ngôn ngữ tự nhiên của programmer. Với thứ tự chương như sau, bạn có thể học với ít căng thẳng hơn.
 
-1. あらまし: TypeScriptがどんなものか概要を知る
-2. 作って学ぶ: TypeScriptで動くものを書いて、雰囲気をつかむ
-3. 読んで学ぶ: TypeScriptの各言語機能を深堀りする
+1. Tổng quan: Nắm bắt khái quát về TypeScript
+2. Học qua thực hành: Viết code TypeScript chạy được, cảm nhận quy trình
+3. Học qua đọc: Đào sâu từng tính năng ngôn ngữ TypeScript
 
-次に、TypeScriptを知るのに必須なJavaScriptの知識も並行して学べるようになっています。
+Tiếp theo, bạn cũng có thể học song song kiến thức JavaScript cần thiết để hiểu TypeScript.
 
-さらに、他言語での知識がTypeScript学習に活かせるよう工夫しています。TypeScript学習者の多くが他言語経験者です。Java、Python、PHP、Rubyなどの他言語と対比しながらTypeScriptを学べるようになっています。
+Hơn nữa, cuốn sách được thiết kế để kiến thức từ các ngôn ngữ khác có thể được tận dụng trong việc học TypeScript. Phần lớn người học TypeScript đã có kinh nghiệm với các ngôn ngữ khác. Bạn có thể học TypeScript trong khi so sánh với các ngôn ngữ khác như Java, Python, PHP, Ruby.
 
-### オープンソース
+### Open Source
 
-本書はオープンソースです。無料で読めるだけでなく、執筆にも携わることができます。
+Cuốn sách này là open source. Không chỉ có thể đọc miễn phí, bạn còn có thể tham gia vào việc viết.
 
-## 執筆に参加するには
+## Để tham gia viết
 
-執筆に参加する方法は次のページをご覧ください。
+Vui lòng xem trang sau để biết cách tham gia viết.
 
 https://typescriptbook.jp/writing
 
-## コントリビューター
+## Contributors
 
-数々のPRありがとうございます！
+Cảm ơn vì những PR đã đóng góp!
 
 [![](https://contrib.rocks/image?repo=yytypescript/book)](https://github.com/yytypescript/book/graphs/contributors)
 
-## Launch
+## Khởi chạy
 
 ```bash
 nvm use 20

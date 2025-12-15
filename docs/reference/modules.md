@@ -1,43 +1,43 @@
-# 🚧モジュール
+# 🚧Module
 
 :::caution
-**Experimental!** このページは執筆途中の草稿です。構成が大きく変わることがありえますので、リンクなどをする場合はリンク切れが起こる可能性がある点をご留意ください。このページの内容は、[import、export、require](./import-export-require.md)をもとに再構成・加筆しています。
+**Experimental!** Trang này là bản thảo đang được viết. Cấu trúc có thể thay đổi lớn, nên nếu liên kết đến trang này, xin lưu ý rằng liên kết có thể bị hỏng. Nội dung trang này được tái cấu trúc và bổ sung dựa trên [import, export, require](./import-export-require.md).
 :::
 
-## モジュールの基礎
+## Cơ bản về Module
 
-### モジュールの目的
+### Mục đích của Module
 
-プログラムは大きさがさまざまです。行数で見ると、数行のものから数万行のものまであります。
+Chương trình có nhiều kích thước khác nhau. Về số dòng code, có thể từ vài dòng đến hàng chục nghìn dòng.
 
-小さいプログラムなら、1つのファイルでも十分ですが、大きなプログラムは1つのファイルだけで作るのは大変です。
+Với chương trình nhỏ, một file là đủ, nhưng với chương trình lớn thì việc tạo trong một file duy nhất rất khó khăn.
 
-想像してみてください。何千行もあるプログラムが1つのファイルに詰め込まれている状態は、読みにくく、修正もしにくくなります。
+Hãy tưởng tượng: trạng thái mà chương trình hàng nghìn dòng được nhồi nhét vào một file sẽ khó đọc và khó sửa.
 
-1. **保守性の問題** ─ 保守性が低いことです。大量のコードが1つのファイルに詰め込まれているため、変更がしにくいです。コードの見通しが悪いため、1行の変更が他の数千行にどのような影響を与えるのか、予想もつかないことがあります。これは、変更に対して臆病になってしまう原因にもなります。
-2. **変数名の衝突** ─ コードが長いと、変数名が衝突する危険性が高まります。これにより、関係のない変数を上書きしてしまう恐れがあります。これを避けるために変数名を長くすることもありますが、それは可読性を損ねる原因になります。
-3. **再利用の問題** ─ たとえば、数千行のコードの中から特定の部分だけを別のプロジェクトで使用したい場合、それらが1つの大きな塊にまとめられているため、必要な部分だけを抜き出せません。無理に読み込むと、不要なコードも一緒に読み込んでしまい、それがどう悪さをするかは予想がつきません。
+1. **Vấn đề về khả năng bảo trì** ─ Khả năng bảo trì thấp. Vì lượng lớn code được nhồi nhét vào một file nên khó thay đổi. Vì tầm nhìn code kém, không thể dự đoán được một thay đổi một dòng sẽ ảnh hưởng như thế nào đến hàng nghìn dòng khác. Điều này cũng là nguyên nhân khiến người ta trở nên rụt rè với việc thay đổi.
+2. **Xung đột tên biến** ─ Khi code dài, nguy cơ xung đột tên biến tăng cao. Điều này có thể dẫn đến việc ghi đè biến không liên quan. Để tránh điều này, đôi khi phải dùng tên biến dài, nhưng điều đó lại làm giảm khả năng đọc.
+3. **Vấn đề về tái sử dụng** ─ Ví dụ, nếu muốn sử dụng chỉ một phần cụ thể trong hàng nghìn dòng code cho dự án khác, vì chúng được gộp thành một khối lớn nên không thể trích xuất chỉ phần cần thiết. Nếu cố đọc vào, code không cần thiết cũng sẽ được đọc vào, và không thể dự đoán được nó sẽ gây hại như thế nào.
 
-このような問題を解決するのが、**モジュール**(module)と呼ばれる仕組みです。モジュールは1つのファイルを複数のファイルに分割し、関連付けて、ひとつのプログラムとして動かすことができます。
+Cơ chế để giải quyết những vấn đề này được gọi là **module**. Module cho phép chia một file thành nhiều file, liên kết chúng và chạy như một chương trình.
 
-大規模なプログラムを作る場合、それぞれの機能ごとにモジュールを分けることで、各モジュールを読みやすく、保守性も高く、再利用もしやすくなります。
+Khi tạo chương trình quy mô lớn, bằng cách chia module theo từng chức năng, mỗi module trở nên dễ đọc hơn, khả năng bảo trì cao hơn và dễ tái sử dụng hơn.
 
-### JavaScriptのモジュール
+### Module trong JavaScript
 
-JavaScriptのモジュールは、`export`または`import`を1つ以上含むJavaScriptファイルを言います。
+Module JavaScript là file JavaScript chứa ít nhất một `export` hoặc `import`.
 
-- `export`は他のモジュールに変数を公開するためのキーワードです。
-- `import`は他のモジュールから変数をインポートするキーワードです。
+- `export` là từ khóa để công khai biến cho các module khác.
+- `import` là từ khóa để import biến từ các module khác.
 
-`export`と`import`を使うと、モジュール間で変数を受け渡しできるようになります。
+Sử dụng `export` và `import` cho phép truyền biến giữa các module.
 
-たとえば、次は変数`world`をエクスポートしているモジュールです。
+Ví dụ, sau đây là module export biến `world`.
 
 ```ts twoslash title="world.js"
 export const world = "World";
 ```
 
-別のファイルでこれをインポートして使います。
+Import và sử dụng nó trong file khác.
 
 ```ts twoslash title="hello.js"
 // @filename: world.js
@@ -49,36 +49,36 @@ console.log(`Hello ${world}`);
 // @log: Hello World
 ```
 
-### 値の公開と非公開
+### Công khai và không công khai giá trị
 
-JavaScriptのモジュールは、明示的に`export`をつけた値だけが公開され、他のモジュールから参照できます。たとえば、次の例の`publicValue`は他のモジュールから利用できます。一方、`privateValue`は外部からは利用できません。
+Trong module JavaScript, chỉ các giá trị được gắn `export` một cách rõ ràng mới được công khai và có thể tham chiếu từ các module khác. Ví dụ, `publicValue` trong ví dụ sau có thể được sử dụng từ các module khác. Mặt khác, `privateValue` không thể sử dụng từ bên ngoài.
 
 ```js twoslash
 export const publicValue = 1;
 const privateValue = 2;
 ```
 
-JavaScriptのモジュールでは、デフォルトで変数や関数などは非公開になるわけです。Javaなどの他の言語では、モジュール(パッケージ)のメンバーがデフォルトで公開になり、非公開にしたいものには`private`修飾子をつける言語があります。そういった言語と比べると、JavaScriptは基本方針が真逆なので注意が必要です。
+Trong module JavaScript, biến và hàm mặc định là không công khai. Trong một số ngôn ngữ khác như Java, thành viên của module (package) mặc định là công khai, và cần gắn modifier `private` cho những gì muốn giữ riêng tư. So với những ngôn ngữ đó, phương châm cơ bản của JavaScript ngược lại, cần lưu ý.
 
-### パッケージとモジュールの違い
+### Sự khác biệt giữa Package và Module
 
-モジュールと似た用語に、パッケージ(package)という言葉があります。プログラミング言語によって、モジュールとパッケージの定義は異なります。JavaScriptでは、これらはどのように捉えられているでしょうか。
+Một thuật ngữ tương tự với module là package. Tùy theo ngôn ngữ lập trình, định nghĩa của module và package khác nhau. Trong JavaScript, chúng được hiểu như thế nào?
 
-モジュールは、基本的にひとつひとつのJavaScript/TypeScriptファイルを指します。詳細は「[スクリプトとモジュール](https://typescriptbook.jp/reference/import-export-require#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%A8%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB)」のセクションで説明しますが、JavaScript/TypeScriptファイルのうち、`export`または`import`を1つ以上含んだものがモジュールに当たります。
+Module về cơ bản chỉ từng file JavaScript/TypeScript. Chi tiết sẽ được giải thích trong phần "[Script và Module](https://typescriptbook.jp/reference/import-export-require#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%A8%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB)", nhưng trong số các file JavaScript/TypeScript, những file chứa ít nhất một `export` hoặc `import` là module.
 
-パッケージは、package.jsonとJavaScriptファイル群を持つディレクトリを指します。package.jsonは、パッケージの名前、バージョン、ライセンスなどのメタデータを記載したファイルです。
+Package là thư mục có package.json và các file JavaScript. package.json là file ghi các metadata như tên package, version, license.
 
-モジュールとパッケージには、利用用途の違いがあります。一般的なアプリケーション開発では、複数のJavaScript/TypeScriptファイルに分けて開発します。この際に作られるファイルひとつひとつがモジュールになります。アプリケーションの保守性の担保、コードの再利用性の確保、変数名衝突の回避のために用いられるのがモジュールです。
+Module và package có sự khác biệt về mục đích sử dụng. Trong phát triển ứng dụng thông thường, ta phát triển bằng cách chia thành nhiều file JavaScript/TypeScript. Mỗi file được tạo ra lúc này là một module. Module được sử dụng để đảm bảo khả năng bảo trì ứng dụng, đảm bảo khả năng tái sử dụng code và tránh xung đột tên biến.
 
-一方、パッケージの典型的な目的は配布です。ライブラリ製作者が、プログラムを他者に配布する際に用いられるのがパッケージです。そして、アプリケーション開発者は、自己のアプリケーションにパッケージを組み込む形で、パッケージは利用されていきます。
+Mặt khác, mục đích điển hình của package là phân phối. Package được sử dụng khi người tạo library muốn phân phối chương trình cho người khác. Và người phát triển ứng dụng sử dụng package bằng cách tích hợp nó vào ứng dụng của mình.
 
-## モジュールとエコシステム
+## Module và Ecosystem
 
-### バンドラー
+### Bundler
 
-JavaScriptでは、複数のJavaScriptファイルを1つのファイルに繋ぎ合わせることをバンドル(bundle)と言います。バンドルを、自動的に行なう開発ツールを、バンドラー(bundler)と呼びます。バンドラーは「モジュールバンドラー」と呼ばれることもあります。
+Trong JavaScript, việc nối nhiều file JavaScript thành một file được gọi là bundle. Công cụ phát triển tự động thực hiện bundle được gọi là bundler. Bundler đôi khi còn được gọi là "module bundler".
 
-JavaScriptには、さまざまなバンドラーがあります。たとえば、有名なものとしては次のようなバンドラーがあります。
+JavaScript có nhiều bundler khác nhau. Ví dụ, các bundler nổi tiếng bao gồm:
 
 - webpack
 - rollup
@@ -86,94 +86,94 @@ JavaScriptには、さまざまなバンドラーがあります。たとえば�
 - esbuild
 - vite
 
-これらのバンドラーは、JavaScriptだけではなく、TypeScriptやCSS、画像などさまざまな種類のファイルをバンドルできます。
+Những bundler này không chỉ bundle JavaScript mà còn có thể bundle TypeScript, CSS, hình ảnh và nhiều loại file khác.
 
-#### バンドラーが必要な理由
+#### Lý do cần Bundler
 
-JavaScriptのバンドラーを使わないと、Webアプリケーションを実行するために、複数のJavaScriptファイルを個別に読み込む必要があります。これは、いくつかの問題を生みます。
+Nếu không sử dụng bundler JavaScript, cần đọc nhiều file JavaScript riêng lẻ để chạy web application. Điều này gây ra một số vấn đề.
 
-第一に、ウェブブラウザーがJavaScriptのコードを読み込む際に、多くの時間がかかるようになります。
+Thứ nhất, khi web browser đọc code JavaScript, sẽ tốn nhiều thời gian hơn.
 
-第二に、JavaScriptファイル同士の依存関係が整理されないことに起因して、コードが壊れ、バグが起こることがあります。
+Thứ hai, do các phụ thuộc giữa các file JavaScript không được sắp xếp, code có thể bị hỏng và gây ra bug.
 
-第三に、JavaScriptコードが最適化された書き方になっていない場合、アプリケーションの実行パフォーマンスが悪くなることがあります。
+Thứ ba, nếu code JavaScript không được viết theo cách tối ưu hóa, hiệu suất thực thi ứng dụng có thể kém.
 
-このような問題を解決するがバンドラーの役割です。
+Vai trò của bundler là giải quyết những vấn đề như vậy.
 
-#### サーバーサイドJSではバンドラーの利点は少ない
+#### Lợi ích của Bundler ít hơn ở Server-side JS
 
-JavaScriptはウェブブラウザーで実行するために作られた言語ですが、サーバーサイドでも使えます。サーバーサイドのJavaScript実行環境のひとつにNode.jsがあります。Node.jsは、古くからモジュールシステムを内部で実装しているため、JavaScriptにESモジュールのようなモジュールシステムがまだ無い時代から、モジュールが使えていました。そのため、サーバーサイドJavaScriptの環境では、バンドラーの必要性が生まれませんでした。
+JavaScript được tạo ra để thực thi trên web browser, nhưng cũng có thể sử dụng ở server-side. Một trong những môi trường thực thi JavaScript server-side là Node.js. Node.js đã implement hệ thống module nội bộ từ lâu, nên có thể sử dụng module từ thời JavaScript chưa có hệ thống module như ES module. Do đó, nhu cầu về bundler không phát sinh trong môi trường JavaScript server-side.
 
-昨今のJavaScriptはモジュールシステムを持っているため、バンドラーを使わなくともモジュールを実現できます。これはフロントエンドでも同様です。しかしながら、フロントエンドでは数百、数千のモジュールをバラバラにダウンロードして実行するのは時間がかかるため、ひとつのJavaScriptファイルにまとめるバンドラーの役割というのは、依然として重要です。
+JavaScript ngày nay có hệ thống module nên có thể thực hiện module mà không cần bundler. Điều này cũng đúng với frontend. Tuy nhiên, ở frontend, việc download và thực thi riêng lẻ hàng trăm, hàng nghìn module tốn thời gian, nên vai trò của bundler gộp chúng thành một file JavaScript vẫn còn quan trọng.
 
-一方で、サーバーサイドでは、モジュールが数百、数千とあったとしても、モジュールをロードするのはサーバー起動時だけです。そのため、バンドラーの利点はほぼありません。
+Mặt khác, ở server-side, dù có hàng trăm, hàng nghìn module, việc load module chỉ xảy ra khi khởi động server. Do đó, lợi ích của bundler gần như không có.
 
-## モジュールシステム
+## Hệ thống Module
 
-### CommonJSとESモジュール
+### CommonJS và ES Module
 
-### CommonJSとESモジュールが混在している理由
+### Lý do CommonJS và ES Module cùng tồn tại
 
-これをお読みの皆さんの中には、JavaScriptやTypeScript以外のプログラミング言語を経験したことがある人もいるかと思います。他の言語で、複数のモジュールシステムが共存している言語を使ったことはありますでしょうか。
+Trong số các bạn đang đọc bài này, có lẽ có người đã có kinh nghiệm với ngôn ngữ lập trình khác ngoài JavaScript hoặc TypeScript. Bạn đã từng sử dụng ngôn ngữ có nhiều hệ thống module cùng tồn tại chưa?
 
-JavaScriptには、系統が異なるモジュールシステムが、少なくとも2つ存在しています。ESモジュールとCommonJSです。こうした状況は、プログラミング言語としては、珍しいことです。JavaScriptのモジュールまわりを理解するのを難しくしている要因でもあります。
+JavaScript có ít nhất 2 hệ thống module thuộc các dòng khác nhau. ES module và CommonJS. Tình huống này khá hiếm đối với ngôn ngữ lập trình. Đây cũng là yếu tố làm cho việc hiểu về module JavaScript trở nên khó khăn.
 
-では、どうしてJavaScriptは2系統もモジュールシステムを持つようになったのでしょうか？ ここでは、JavaScriptの現状に至る流れを歴史からひも解いていきます。
+Vậy tại sao JavaScript lại có 2 dòng hệ thống module? Ở đây, chúng ta sẽ tìm hiểu lịch sử dẫn đến tình trạng hiện tại của JavaScript.
 
-#### ひとつめのモジュールシステム
+#### Hệ thống Module đầu tiên
 
-JavaScriptのモジュールシステムは、ブラウザよりも先んじて、サーバーサイドJavaScript、とりわけNode.jsの文脈で発展してきた経緯があります。
+Hệ thống module của JavaScript có lịch sử phát triển trong bối cảnh server-side JavaScript, đặc biệt là Node.js, trước browser.
 
-JavaScriptで広く普及しているモジュールシステムのひとつがCommonJSです。CommonJSの歴史をさかのぼると、2009年のServerJS発足に至ります。ServerJSはJavaScriptをサーバーサイドで使えるようにすることを目指し、サーバーサイドJavaScriptの共通APIを策定する標準化プロジェクトでした。のちに、CommonJSに改名されます。
+Một trong những hệ thống module phổ biến rộng rãi trong JavaScript là CommonJS. Truy ngược lịch sử CommonJS, ta đến năm 2009 khi ServerJS được thành lập. ServerJS là dự án chuẩn hóa nhằm thiết lập API chung cho server-side JavaScript, với mục tiêu cho phép sử dụng JavaScript ở server-side. Sau đó, nó được đổi tên thành CommonJS.
 
-サーバーサイドにJavaScriptを持ってくると一言で言っても、ブラウザのJavaScriptをそのまま持ち込んでもうまくいきません。たとえば、ブラウザには`<script>`タグがあるので、ひとつのページに複数の`<script>`タグを書くことで、複数のJavaScriptが実行できます。一方、サーバーサイドにはページという概念がありません。
+Nói đơn giản là đưa JavaScript lên server-side, nhưng việc mang JavaScript của browser sang y nguyên sẽ không hoạt động. Ví dụ, browser có thẻ `<script>`, nên bằng cách viết nhiều thẻ `<script>` trong một trang, có thể thực thi nhiều JavaScript. Mặt khác, server-side không có khái niệm trang.
 
-また、当時のJavaScriptにはESモジュールのようなモジュールシステムもありませんでした。そのため、JavaScriptファイルを複数ロードできる仕組みを考えるところから始めなければなりませんでした。
+Ngoài ra, JavaScript thời đó không có hệ thống module như ES module. Do đó, phải bắt đầu từ việc nghĩ ra cơ chế load nhiều file JavaScript.
 
-そこで考え出された仕様がCommonJSのモジュールです。おなじみの`require()`や`module.exports`です。CommonJSは、モジュールシステムが存在しない当時のJavaScriptの文法や機能の枠を超えずに、関数や変数で工夫することで、モジュール的なものを成立させるものでした。
+Từ đó, specification được nghĩ ra là module của CommonJS. Đó là `require()` và `module.exports` quen thuộc. CommonJS là thứ thực hiện thứ giống như module bằng cách sử dụng function và variable một cách khéo léo, trong khuôn khổ syntax và feature của JavaScript thời đó không có hệ thống module.
 
-Node.jsはCommonJSと同時期にリリースされましたが、Node.jsに採用されたモジュールシステムがこのCommonJSでした。このおかげで、Node.jsにおいてはサーバーサイドJavaScriptでもファイルの分割と、複数ファイルのロードができるようになっていました。このモジュールシステムは、Node.jsユーザーに受け入れられはじめ、ライブラリを公開できるnpmなど、モジュールまわりのエコシステムも発展していきました。
+Node.js được release cùng thời với CommonJS, và hệ thống module được Node.js adopt chính là CommonJS. Nhờ đó, trong Node.js, server-side JavaScript cũng có thể chia file và load nhiều file. Hệ thống module này bắt đầu được Node.js user chấp nhận, và ecosystem xung quanh module như npm cho phép publish library cũng phát triển.
 
-ちなみに、CommonJSやNode.jsがスタートした2009年の前年には、ECMAScript 4草案破棄というショッキングな出来ごとがありました。ES4には、モジュールシステムをJavaScriptに追加する仕様も盛り込まれていました。もし、ES4が実現していたら、CommonJSは必要無かったかも知れません。現実はESの仕様を決めるブラウザベンダー間での意見と対立があり、JavaScriptを改善する動きは仲たがいで終わってしまいました。
+Nhân tiện, năm trước khi CommonJS và Node.js bắt đầu, năm 2008, có sự kiện gây sốc là ECMAScript 4 draft bị hủy bỏ. ES4 cũng bao gồm specification thêm hệ thống module vào JavaScript. Nếu ES4 được thực hiện, có lẽ CommonJS đã không cần thiết. Thực tế, có ý kiến và đối lập giữa các browser vendor quyết định ES specification, và nỗ lực cải thiện JavaScript đã kết thúc trong bất hòa.
 
-Node.jsの登場時期がそんなバッドタイミングだったこともあり、JavaScript自体がモジュールシステムを改善するのはなかなか期待できない状況でした。そのため、Node.jsは既存のJavaScriptでできる範囲内の解決策として、モジュールシステムにCommonJSを採用したという見方もできます。
+Thời điểm Node.js xuất hiện đúng lúc tồi tệ như vậy, nên không thể kỳ vọng nhiều vào việc JavaScript tự cải thiện hệ thống module. Do đó, có thể nói Node.js đã adopt CommonJS như giải pháp trong phạm vi JavaScript hiện có cho hệ thống module.
 
-CommonJSはサーバーサイドで生まれ、発展してきました。CommonJSの土台に乗ったライブラリも数多く作られました。こうしたライブラリは、クライアントサイドでも需要がありました。そのため、webpackを筆頭にモジュールバンドラーはCommonJSをサポートしてきました。CommonJSの生い立ちはサーバーサイドではあったものの、モジュールバンドラーの対応によって、フロントエンドもCommonJSに頼る状況が醸成されました。
+CommonJS ra đời và phát triển ở server-side. Nhiều library được xây dựng trên nền tảng CommonJS. Những library như vậy cũng có nhu cầu ở client-side. Do đó, module bundler như webpack đã support CommonJS. Dù nguồn gốc của CommonJS là server-side, nhờ sự hỗ trợ của module bundler, tình huống frontend cũng phụ thuộc vào CommonJS đã được hình thành.
 
-#### ふたつめのモジュールシステム
+#### Hệ thống Module thứ hai
 
-CommonJSの誕生から歴史は流れ、2015年になると、ES6という新しいJavaScriptの標準仕様が確定します。これはJavaScriptの10年数ぶりの大型アップデートです。そこには、ES6 Modulesというモジュールシステムを実現するための仕様も盛り込まれていました。皆さんご存知の`import`文と`export`文です。これは、JavaScript初のJavaScriptネイティブのモジュールシステムです。CommonJSが草の根活動で規格化されたモジュールシステムだとすると、ESモジュールは本家が発表した公式的・標準的なモジュールシステムだとも言えます。
+Từ khi CommonJS ra đời, lịch sử trôi qua, đến năm 2015, specification JavaScript mới ES6 được xác định. Đây là bản cập nhật lớn đầu tiên của JavaScript sau hơn mười năm. Trong đó có specification ES6 Modules để thực hiện hệ thống module. Đó là câu lệnh `import` và `export` mà các bạn đều biết. Đây là hệ thống module native JavaScript đầu tiên của JavaScript. Nếu CommonJS là hệ thống module được chuẩn hóa bởi hoạt động cơ sở, thì ES module có thể nói là hệ thống module chính thức, tiêu chuẩn do nhà phát triển gốc công bố.
 
-JavaScript界は、サーバーサイドもクライアントサイドも関係なく、ES6に対応する中で、ES6 Modulesも導入する方向になり、2016年頃からESモジュール導入に向けて議論が始まりました。議論の中心は、やはり、在来のモジュールシステムであるCommonJSと新システムのESモジュールの共存についてです。
+Giới JavaScript, bất kể server-side hay client-side, trong quá trình hỗ trợ ES6, cũng hướng đến việc giới thiệu ES6 Modules, và thảo luận về việc giới thiệu ES module bắt đầu từ khoảng năm 2016. Trọng tâm của thảo luận tất nhiên là về sự cùng tồn tại của hệ thống module truyền thống CommonJS và hệ thống mới ES module.
 
-ESモジュールの仕様が確定する頃には、JavaScriptはCommonJS前提とした環境ができあがっていて、CommonJSに準拠したNPMパッケージも沢山あったため、CommonJSを切り捨てる選択肢はありませんでした。もしも、CommonJSを切り捨ててしまうと、過去の資産をほぼすべて失うことになるわけで、CommonJSとESモジュールの共存はNode.jsにとって重要なテーマだったのです。
+Vào thời điểm specification ES module được xác định, JavaScript đã có môi trường dựa trên tiền đề CommonJS, và cũng có nhiều NPM package tuân thủ CommonJS, nên không có lựa chọn loại bỏ CommonJS. Nếu loại bỏ CommonJS, sẽ mất gần như toàn bộ tài sản quá khứ, nên sự cùng tồn tại của CommonJS và ES module là chủ đề quan trọng đối với Node.js.
 
-たとえば、サーバーサイドJavaScriptのNode.jsひとつとっても、長い議論のすえ、2017年にNode.js v8.5.0にて、ESモジュールが実験的な機能としてリリースされます。その後、2019年にv13.2.0にて、ESモジュールから「実験的な機能」というラベルが外れ、プロダクションで使われることを想定した機能に昇格しました。そして2020年には、CommonJSの名前付きエクスポートがESモジュールの名前付きインポートでロードできるようになり、次第にNode.jsでESモジュールを動かす環境が整ってきています。
+Ví dụ, chỉ riêng Node.js server-side JavaScript, sau nhiều thảo luận dài, năm 2017, ES module được release như tính năng thử nghiệm trong Node.js v8.5.0. Sau đó, năm 2019, trong v13.2.0, label "tính năng thử nghiệm" được gỡ bỏ khỏi ES module, và nó được nâng cấp thành tính năng được thiết kế cho production. Và năm 2020, named export của CommonJS có thể được load bằng named import của ES module, và môi trường để chạy ES module trong Node.js dần được hoàn thiện.
 
-ESモジュール環境が整備されてきたとは言っても、CommonJSは10年以上、JavaScriptを支えてきており、もはや切っても切れない関係になっています。そのため、今日現在においては、2つのモジュールシステムがJavaScriptに生きているわけです。
+Dù môi trường ES module đã được hoàn thiện, CommonJS đã hỗ trợ JavaScript hơn 10 năm, và đã trở thành mối quan hệ không thể tách rời. Do đó, hiện tại, hai hệ thống module đang cùng tồn tại trong JavaScript.
 
-#### まとめ
+#### Tóm tắt
 
-- JavaScriptにはCommonJSとESモジュールの2つのモジュールシステムがある。
-- CommonJSはJSと10年以上に及ぶ長く深いつながりがある。
-- JS界はCommonJSとESモジュールが共存する道を選んだ。
+- JavaScript có 2 hệ thống module: CommonJS và ES module.
+- CommonJS có mối liên hệ sâu và dài hơn 10 năm với JS.
+- Giới JS đã chọn con đường cùng tồn tại CommonJS và ES module.
 
-### CommonJSとESモジュールの違い
+### Sự khác biệt giữa CommonJS và ES Module
 
-#### `import`と`require`の違い
+#### Sự khác biệt giữa `import` và `require`
 
-JavaScriptでは、モジュールから変数などの値をインポートする際に、`import`と`require`を用います。この2つはよく似ていますが、それぞれ異なるモジュールシステムの書き方です。
+Trong JavaScript, khi import giá trị như biến từ module, ta sử dụng `import` và `require`. Hai cái này rất giống nhau, nhưng là cách viết của các hệ thống module khác nhau.
 
-JavaScriptのモジュールシステムはいくつかありますが、代表的なものが次の2つです。
+JavaScript có một số hệ thống module, nhưng hai cái đại diện là:
 
-- ESモジュール
+- ES module
 - CommonJS
 
-この2つのモジュールシステムの違いの詳細は、**(TODO参照先記事記載)** で解説していますので、そちらをご覧ください。
+Chi tiết về sự khác biệt giữa hai hệ thống module này được giải thích trong **(TODO tham chiếu bài viết)**, xin hãy xem ở đó.
 
 ##### import
 
-`import`は、JavaScriptのモジュールシステムのひとつであるESモジュールで用いる構文です。`import`は他のモジュールでエクスポートされた変数や関数をインポートするのに用いられます。たとえば、次のような使い方ができます。
+`import` là syntax được sử dụng trong ES module, một trong những hệ thống module của JavaScript. `import` được sử dụng để import biến và function được export trong các module khác. Ví dụ, có thể sử dụng như sau.
 
 ```js
 import { myVariable, myFunction } from "./myModule";
@@ -181,46 +181,46 @@ import { myVariable, myFunction } from "./myModule";
 
 ##### require
 
-一方で、`require`は、CommonJSというモジュールシステムで用いる関数です。`require`関数は、他のモジュールから変数や関数をインポートするのに使われます。たとえば、次のような使い方になります。
+Mặt khác, `require` là function được sử dụng trong hệ thống module CommonJS. Function `require` được sử dụng để import biến và function từ các module khác. Ví dụ, cách sử dụng như sau.
 
 ```js
 const { myVariable, myFunction } = require("./myModule");
 ```
 
-#### `export`と`module.exports`の違い
+#### Sự khác biệt giữa `export` và `module.exports`
 
-`import`と`require`は、他のモジュールから値をインポートするためのものでした。これと対をなすものとして、`export`と`module.export`があります。これらは、他のモジュールに値をエクスポートするためのものです。`export`と`module.export`も、それぞれ異なるモジュールシステムで使われます。
+`import` và `require` dùng để import giá trị từ các module khác. Tương ứng với chúng là `export` và `module.exports`. Chúng dùng để export giá trị cho các module khác. `export` và `module.exports` cũng được sử dụng trong các hệ thống module khác nhau.
 
 ##### export
 
-JavaScriptの`export`は、ESモジュールというモジュールシステムで用いる構文です。`export`を使うと、モジュール内で定義した変数や関数などを、エクスポートすることができます。たとえば、次のような使い方ができます。
+`export` của JavaScript là syntax được sử dụng trong hệ thống module ES module. Sử dụng `export`, có thể export biến và function được định nghĩa trong module. Ví dụ, có thể sử dụng như sau.
 
 ```js
 export const myVariable = "foo";
 export const myFunction = () => {
-  /* 関数の処理 */
+  /* Xử lý function */
 };
 ```
 
 ##### module.exports
 
-一方で、`module.exports`は、CommonJSというモジュールシステムで用いる変数です。CommonJSでは、モジュール内で定義された変数や関数を、`module.exports`に代入することで、エクスポートできます。たとえば、次のような書き方になります。
+Mặt khác, `module.exports` là biến được sử dụng trong hệ thống module CommonJS. Trong CommonJS, bằng cách gán biến và function được định nghĩa trong module vào `module.exports`, có thể export chúng. Ví dụ, cách viết như sau.
 
 ```js
 module.exports.myVariable = "foo";
 module.exports.myFunction = () => {
-  /* 関数の処理 */
+  /* Xử lý function */
 };
 ```
 
-## ESモジュールの構文
+## Syntax của ES Module
 
-## モジュール解決
+## Module Resolution
 
-## ESモジュールの仕様
+## Specification của ES Module
 
-## CommonJSのAPI
+## API của CommonJS
 
-## TypeScriptとモジュール
+## TypeScript và Module
 
-## ESモジュールのベストプラクティス
+## Best Practices của ES Module

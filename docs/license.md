@@ -1,10 +1,10 @@
-# 本書のライセンス
+# License của cuốn sách
 
-本書は[Creative Commons — 表示 - 継承 4.0 国際 — CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.ja)で公開しています。商用利用の制限がありません。
+Cuốn sách này được công bố theo [Creative Commons — Attribution - ShareAlike 4.0 International — CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.vi). Không có hạn chế sử dụng thương mại.
 
-## サンプルコードのライセンス
+## License của sample code
 
-本書のうち、コードブロックで表現されたプログラミングコードは、CC BY-SA 4.0またはMIT Licenseのデュアルライセンスで公開しています。読者が自身が開発するプログラムにサンプルコードを利用する際、MIT Licenseも選択していただけます。「コードブロックで表現されたプログラミングコード」とは次のような表示で、罫線や背景色により地の文と区別して表示するコードをいいます。
+Trong cuốn sách này, các programming code được thể hiện trong code block được công bố theo dual license CC BY-SA 4.0 hoặc MIT License. Khi người đọc sử dụng sample code trong chương trình của mình, có thể chọn MIT License. "Programming code được thể hiện trong code block" là code được hiển thị phân biệt với văn bản bằng đường kẻ hoặc màu nền như sau.
 
 ```ts
 const value = "Hello World";
@@ -36,43 +36,43 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## CC BY-SAの表示義務の詳細
+## Chi tiết về nghĩa vụ ghi nhận CC BY-SA
 
-CC BY-SA 4.0では具体的な表示義務の方法に定めがないため、本書では表示ポリシーを次のように定めます。
+CC BY-SA 4.0 không quy định cách thức cụ thể về nghĩa vụ ghi nhận, vì vậy cuốn sách này định nghĩa chính sách ghi nhận như sau.
 
-### CC BY-SAの表示ポリシー
+### Chính sách ghi nhận CC BY-SA
 
-本書コンテンツを再公開・二次創作する場合は、CC BY-SAの表示について次のことを行う必要があります。
+Khi tái công bố hoặc tạo tác phẩm phái sinh từ nội dung cuốn sách này, cần thực hiện các điều sau về việc ghi nhận CC BY-SA.
 
-1. 本書のタイトル『サバイバルTypeScript』を明記してください。
-1. ウェブサイトやHTML形式で再公開される場合、ページごとに本書の該当する元ページに直接ハイパーリンクしてください。
-   1. ハイパーリンクは直接であり、短縮URLやリダイレクトを挟んではいけません。
-   1. ハイパーリンクはJavaScriptが無効になっている場合でもリンクを辿れる必要があります。
-   1. リンクは`rel="nofollow"`にしてはいけません。
-   1. リンク先はGitHubのページではなく、typescriptbook.jpのページのURLにしてください。
-   1. その他、リンクをクリックしにくくするなど辿りにくくなるような仕掛けはしてはいけません。
-1. GitHubのフォーク機能でフォークし、フォーク元のリンク先が本書のGitHubリポジトリになっている場合、GitHubリポジトリでのハイパーリンクは不要です。
-1. 印刷物や画像、映像、スライドなど読者や聴衆がクリックでリンクを辿れない媒体では、本書のURLを明記してください。
-   1. URLは目立たせる必要はありませんが、十分に読める文字サイズである必要があります。
-   1. YouTubeなどの動画配信サイトでは、概要欄にリンクを載せる形でも構いません。
+1. Ghi rõ tên cuốn sách "Survival TypeScript".
+1. Khi tái công bố trên website hoặc định dạng HTML, hãy hyperlink trực tiếp đến trang gốc tương ứng của cuốn sách cho mỗi trang.
+   1. Hyperlink phải trực tiếp, không được sử dụng URL rút gọn hoặc redirect.
+   1. Hyperlink phải có thể truy cập ngay cả khi JavaScript bị tắt.
+   1. Link không được đặt `rel="nofollow"`.
+   1. URL đích phải là trang của typescriptbook.jp, không phải trang GitHub.
+   1. Không được sử dụng các kỹ thuật khác để làm cho link khó click hoặc khó truy cập.
+1. Nếu fork bằng tính năng fork của GitHub và link nguồn fork trỏ đến repository GitHub của cuốn sách này, không cần hyperlink trong repository GitHub.
+1. Đối với ấn phẩm in, hình ảnh, video, slide và các phương tiện khác mà người đọc hoặc khán giả không thể click để theo link, hãy ghi rõ URL của cuốn sách.
+   1. URL không cần nổi bật nhưng phải có kích thước chữ đủ đọc được.
+   1. Trên các nền tảng video như YouTube, có thể đặt link trong phần mô tả.
 
-#### ハイパーリンクの具体例
+#### Ví dụ cụ thể về hyperlink
 
 <!--prettier-ignore-->
 ```html
-<a href="https://typescriptbook.jp/overview/features">『サバイバルTypeScript』「TypeScriptの特徴」</a>
+<a href="https://typescriptbook.jp/overview/features">"Survival TypeScript" - "Đặc điểm của TypeScript"</a>
 ```
 
-## 例外
+## Ngoại lệ
 
-本書は基本的にCC BY-SA 4.0でライセンスされていますが、本書に掲載される企業のロゴや広告クリエイティブは、各企業などに権利が帰属し、二次利用が不可の場合がありますのでご注意ください。
+Cuốn sách này về cơ bản được cấp license theo CC BY-SA 4.0, tuy nhiên logo doanh nghiệp và creative quảng cáo được đăng trong cuốn sách thuộc quyền sở hữu của các doanh nghiệp tương ứng và có thể không được phép sử dụng lại.
 
 ## Q&A
 
-### なぜサンプルコードはMIT Licenseが選べるのですか？
+### Tại sao sample code có thể chọn MIT License?
 
-CC BY-SA 4.0は優れたライセンスですが、プログラミングコードのライセンスにはMIT Licenseのほうが一般的です。CC BY-SA 4.0には継承の義務があるため、サンプルコードをコピペして利用するといったことがしにくいです。サンプルコードを利用していただきやすくするためにも、MIT Licenseが選択できるようにしています。
+CC BY-SA 4.0 là license tuyệt vời, nhưng MIT License phổ biến hơn cho license code lập trình. CC BY-SA 4.0 có nghĩa vụ kế thừa, nên việc copy paste sample code để sử dụng sẽ khó khăn. Để người dùng dễ dàng sử dụng sample code, chúng tôi cho phép chọn MIT License.
 
-### 社内の勉強会や従業員の教育に本書を使えますか？
+### Có thể sử dụng cuốn sách này cho buổi học nội bộ công ty hoặc đào tạo nhân viên không?
 
-はい。お役立てください。
+Có. Vui lòng sử dụng.
