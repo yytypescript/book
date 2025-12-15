@@ -1,90 +1,90 @@
 # ECMAScript
 
-ECMAScriptはJavaScriptの仕様です。TypeScriptもECMAScriptに準拠しています。ECMAScriptとは何なのか、仕様改定のプロセス、ECMAScriptとブラウザの関係がどのようになっているかについて解説します。
+ECMAScript là specification của JavaScript. TypeScript cũng tuân thủ ECMAScript. Chúng tôi sẽ giải thích ECMAScript là gì, quy trình cải tiến specification, và mối quan hệ giữa ECMAScript và browser như thế nào.
 
-## JavaScriptとECMAScriptの関係
+## Mối quan hệ giữa JavaScript và ECMAScript
 
-ECMAScriptはJavaScriptの仕様を定義したものです。仕様とは決まりごとのことで、ブラウザなどがJavaScriptを読み込んだときに、どのような文法を解釈しなければならないか、処理がどのように動くべきかといったことを決めたものです。ECMAScriptという異なる名前がついていますが、JavaScriptと別の言語があるわけではありません。
+ECMAScript định nghĩa specification của JavaScript. Specification là các quy tắc, quyết định browser và các thứ khác phải hiểu cú pháp nào khi đọc JavaScript, xử lý sẽ hoạt động như thế nào. Mặc dù có tên khác là ECMAScript, nhưng không có ngôn ngữ khác riêng biệt với JavaScript.
 
-歴史的には、JavaScriptを標準化するべく、ECMAScriptが策定されました。JavaScriptはNetscape社が開発した言語です。Netscape社が発表してすぐに、Microsoft社もJScriptという名前で実装しました。Netscape社は、JavaScriptを標準化するために、国際規格策定団体Ecmaインターナショナルに依頼します。Ecmaによって標準化されたJavaScriptは「ECMAScript」と呼ばれることになりました。
+Về lịch sử, ECMAScript được định nghĩa để chuẩn hóa JavaScript. JavaScript là ngôn ngữ do Netscape phát triển. Ngay sau khi Netscape công bố, Microsoft cũng implement với tên JScript. Netscape đã yêu cầu tổ chức tiêu chuẩn quốc tế Ecma International chuẩn hóa JavaScript. JavaScript được chuẩn hóa bởi Ecma được gọi là "ECMAScript".
 
-現在のECMAScriptは、JavaScriptの仕様という立場です。ブラウザなどのJavaScript実装が、従うべき仕様という位置づけです。この関係性から、ECMAScriptの実装のことを指してJavaScriptと呼ぶことがあります。ECMAScriptは仕様なので、ECMAScriptというプログラムがあるわけではありません。ダウンロードしたりインストールするものではないということです。
+ECMAScript hiện tại có vai trò là specification của JavaScript. Đây là specification mà các implementation JavaScript như browser phải tuân theo. Từ mối quan hệ này, đôi khi người ta gọi JavaScript để chỉ implementation của ECMAScript. ECMAScript là specification nên không có chương trình gọi là ECMAScript. Tức là không phải thứ để download hay install.
 
-JavaScriptの仕様が「ECMAScript」と名付けられた理由は諸説あります。当時、競争関係だったNetscape社とMicrosoft社で、ECMAScriptが合意できる妥協案だった説があります。Netscape社はJavaScriptという名前で開発し、Microsoft社はJScriptという名前で開発していました。JavaScriptが商標というのも一因だと考えられています。JavaScriptは当時Sunが所有する商標でした。その後、権利はOracleに引き継がれます。
+Có nhiều giả thuyết về lý do specification JavaScript được đặt tên là "ECMAScript". Có giả thuyết rằng đây là giải pháp thỏa hiệp có thể đồng ý giữa Netscape và Microsoft, hai công ty cạnh tranh lúc đó. Netscape phát triển với tên JavaScript, Microsoft phát triển với tên JScript. Việc JavaScript là thương hiệu cũng được cho là một nguyên nhân. JavaScript lúc đó là thương hiệu thuộc sở hữu của Sun. Sau đó, quyền được chuyển cho Oracle.
 
-ECMAScriptはEcmaインターナショナルが策定しています。この団体では、情報通信技術のさまざまな国際規格を策定しています。各規格には番号が割り振られています。ECMAScriptの規格番号はECMA-262です。他にもJSON(ECMA-404)やC#(ECMA-334)などがあります。Ecmaインターナショナルにはさまざまな専門委員会があり、ECMAScriptを策定する委員会の名称はTC39です。
+ECMAScript được định nghĩa bởi Ecma International. Tổ chức này định nghĩa nhiều tiêu chuẩn quốc tế về công nghệ thông tin. Mỗi tiêu chuẩn được gán một số. Số tiêu chuẩn của ECMAScript là ECMA-262. Ngoài ra còn có JSON (ECMA-404) và C# (ECMA-334). Ecma International có nhiều ủy ban chuyên môn khác nhau, và ủy ban định nghĩa ECMAScript có tên là TC39.
 
-## ECMAScriptの仕様改定
+## Cải tiến specification ECMAScript
 
-ECMAScriptは毎年1回、仕様改定されます。改定されるごとにバージョンが上がります。ECMAScriptのバージョンはリリースされた西暦になってます。たとえば、2021年に改定されたECMAScriptはES2021となります。TypeScriptもECMAScriptの仕様改定に合わせて、アップデートされていきます。
+ECMAScript được cải tiến specification mỗi năm một lần. Mỗi lần cải tiến, version sẽ tăng lên. Version của ECMAScript là năm dương lịch khi release. Ví dụ, ECMAScript được cải tiến năm 2021 sẽ là ES2021. TypeScript cũng được update theo cải tiến specification của ECMAScript.
 
-ECMAScriptの改定は、募集された提案から始まります。応募のあった改定案は[TC39のGitHub](https://github.com/tc39/proposals)で一覧できます。
+Cải tiến ECMAScript bắt đầu từ các đề xuất được tuyển mộ. Các đề xuất cải tiến có thể xem tại [GitHub của TC39](https://github.com/tc39/proposals).
 
-進捗に応じて、各提案にはステージ0からステージ4までのランクがつきます。条件を満たすとそのステージに進めます。
+Tùy theo tiến độ, mỗi đề xuất được gán rank từ stage 0 đến stage 4. Khi đáp ứng điều kiện, đề xuất có thể tiến lên stage đó.
 
-| ステージ      | 条件                                                                                                                               |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| 0 Strawperson | なし                                                                                                                               |
-| 1 Proposal    | チャンピオン(委員会の改定推進パートナー)が決まっていること。課題と解決策を説明したリポジトリが公開されていること。デモがあるとよい |
-| 2 Draft       | ECMAScriptの仕様記述言語で主要な部分の仕様が書かれていること                                                                       |
-| 3 Candidate   | 完全な仕様書があること。レビュアとECMAScript編集者の署名があること                                                                 |
-| 4 Finished    | 2つ以上のJSエンジンに実装が存在していること。ECMAScriptへプルリクエストが送信されており、ECMAScript編集者に承認されていること      |
+| Stage         | Điều kiện                                                                                                                                                                |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 0 Strawperson | Không có                                                                                                                                                                 |
+| 1 Proposal    | Có champion (đối tác thúc đẩy cải tiến của ủy ban). Repository giải thích vấn đề và giải pháp được công bố. Có demo thì tốt                                              |
+| 2 Draft       | Specification của phần chính được viết bằng ngôn ngữ mô tả specification của ECMAScript                                                                                  |
+| 3 Candidate   | Có specification hoàn chỉnh. Có chữ ký của reviewer và editor ECMAScript                                                                                                 |
+| 4 Finished    | Có implementation trong 2 JS engine trở lên. Pull request đã được gửi đến ECMAScript và được editor ECMAScript phê duyệt                                                |
 
-ステージ2以下の提案は仕様が大きく変わる可能性が高いです。提案が取り下げられる可能性も高いです。
+Đề xuất stage 2 trở xuống có khả năng cao specification sẽ thay đổi lớn. Khả năng đề xuất bị rút cũng cao.
 
-ステージ3になると、改定が確実視されます。TypeScriptはステージ3に達した提案に対応します。この頃にはブラウザでもステージ3の提案が実装されます。中には実装が遅れるケースもあります。
+Khi đạt stage 3, cải tiến gần như chắc chắn. TypeScript đối ứng các đề xuất đạt stage 3. Thời điểm này, browser cũng implement đề xuất stage 3. Có trường hợp implementation bị trễ.
 
-ステージ4になると、ほぼ間違いなくECMAScriptの仕様になります。ステージ4の提案は、例年6月のECMAScriptの改定に加えられます。改定までのおおよその年間スケジュールは次の流れです。
+Khi đạt stage 4, gần như chắc chắn sẽ trở thành specification của ECMAScript. Đề xuất stage 4 được thêm vào cải tiến ECMAScript vào tháng 6 hàng năm. Lịch trình năm đại khái cho đến cải tiến như sau.
 
-- 2月: 候補ドラフトが作成される
-- 3月: ステージ4の提案が組み込まれ、最終的な仕様が承認される
-- 4月〜6月: ECMA CCおよびECMA GAのレビュー期間
-- 6月: ECMAの総会による承認を経て、改定仕様の確定
+- Tháng 2: Candidate draft được tạo
+- Tháng 3: Đề xuất stage 4 được tích hợp, specification cuối cùng được phê duyệt
+- Tháng 4~6: Thời gian review của ECMA CC và ECMA GA
+- Tháng 6: Sau khi được phê duyệt bởi đại hội ECMA, specification cải tiến được xác nhận
 
-## ECMAScriptとブラウザの仕様
+## ECMAScript và specification browser
 
-ECMAScriptが決めるクライアントサイドJavaScriptの仕様は部分的です。ECMAScriptが定める範囲は、言語の文法、構文の解釈方法、コアのAPIなど言語の中核部分です。たとえば、次のようなことを定めています。
+Specification JavaScript client-side mà ECMAScript quyết định là một phần. Phạm vi ECMAScript định nghĩa là phần core của ngôn ngữ như cú pháp ngôn ngữ, cách giải thích cú pháp, API core. Ví dụ, nó định nghĩa những điều sau.
 
-- 関数宣言の書き方はこういう文法になる
-- 変数が宣言されたとき、JavaScriptエンジンはこういう動作になる
-- `String`や`Array`オブジェクトにはこういうメソッドがある
+- Cú pháp khai báo hàm như thế này
+- Khi biến được khai báo, JavaScript engine hoạt động như thế này
+- `String` và `Array` object có những method này
 
-JavaScriptのうちブラウザ仕様に関する部分は、HTML Living Standardが決めています。ブラウザでJavaScriptを使うと、触れることになるのが`window`オブジェクトや`HTMLDivElement`、ローカルストレージなどのAPIです。これらは[HTML Living Standard](https://html.spec.whatwg.org/)と呼ばれる規格が定めています。この規格はEcmaインターナショナルとは異なる標準化団体WHATWGが策定しています。
+Phần liên quan đến specification browser trong JavaScript được quyết định bởi HTML Living Standard. Khi sử dụng JavaScript trong browser, bạn sẽ tiếp xúc với `window` object, `HTMLDivElement`, API như local storage. Chúng được định nghĩa bởi tiêu chuẩn gọi là [HTML Living Standard](https://html.spec.whatwg.org/). Tiêu chuẩn này được định nghĩa bởi WHATWG, tổ chức chuẩn hóa khác với Ecma International.
 
-JavaScriptの機能の中でも、ECMAScriptとHTML Living Standardで役割分担があるものもあります。たとえばモジュールです。ECMAScriptはモジュールの仕様を定めます。`import`や`export`の構文や、モジュール内部の仕様などは、ECMAScriptが定めます。一方、モジュールの具体的なロード方法はHTML Living Standardが定めています。たとえば、`import "指定子";`の指定子の部分にどんな文字列を書いていいか、モジュールはどの順番でロードするかなどはHTML Living Standardが定めます。
+Trong các tính năng JavaScript, cũng có những tính năng phân chia vai trò giữa ECMAScript và HTML Living Standard. Ví dụ là module. ECMAScript định nghĩa specification của module. Cú pháp `import` và `export`, specification bên trong module được ECMAScript định nghĩa. Mặt khác, cách load module cụ thể được HTML Living Standard định nghĩa. Ví dụ, có thể viết chuỗi gì trong phần specifier của `import "specifier";`, module được load theo thứ tự nào được HTML Living Standard định nghĩa.
 
-[モジュール](../reference/modules.md)
+[Module](../reference/modules.md)
 
-「JavaScript」と一言で言っても、複数の規格で構成されているわけです。
+"JavaScript" tuy chỉ là một từ nhưng được cấu thành từ nhiều tiêu chuẩn.
 
-## ECMAScriptとブラウザの関係性
+## Mối quan hệ giữa ECMAScript và browser
 
-主要なブラウザの内部を分解すると、レンダリングエンジンやJavaScriptエンジンと呼ばれる部品の単位があります。
+Phân tách bên trong của các browser chính, có đơn vị component gọi là rendering engine và JavaScript engine.
 
-JavaScriptエンジンは、ECMAScriptを実装したモジュールです。JavaScriptエンジンには、主要なものでV8、SpiderMonkey、JavaScriptCoreがあります。
+JavaScript engine là module implement ECMAScript. Trong số các JavaScript engine chính có V8, SpiderMonkey, JavaScriptCore.
 
-レンダリングエンジンは、JavaScriptエンジンを組み込んだブラウザの表示機能を担うモジュールです。有名なレンダリングエンジンは、Blink、Gecko、WebKitがあります。たとえば、BlinkはV8をJavaScriptエンジンに採用しています。レンダリングエンジンはJavaScriptだけでなく、HTMLやCSSを解釈し、画面描画を総合的に行います。
+Rendering engine là module đảm nhận chức năng hiển thị browser tích hợp JavaScript engine. Rendering engine nổi tiếng có Blink, Gecko, WebKit. Ví dụ, Blink sử dụng V8 làm JavaScript engine. Rendering engine không chỉ JavaScript mà còn hiểu HTML và CSS, thực hiện vẽ màn hình tổng hợp.
 
-ブラウザは、レンダリングエンジンを組み込み、その他にブックマーク機能などの付属機能をつけてアプリケーションというかたちでユーザーに提供されます。たとえば、Google ChromeはBlinkを、SafariはWebKitを組み込んでいます。ブラウザはレンダリングエンジンを変更することもあります。Microsoft Edgeはかつて、EdgeHTMLを採用していましたが、のちにGoogle Chromeと同じBlinkに移行しました。OperaのレンダリングエンジンもPrestoでしたが、Blinkに変更した経緯があります。
+Browser tích hợp rendering engine, thêm các tính năng phụ thuộc khác như bookmark và cung cấp cho người dùng dưới dạng ứng dụng. Ví dụ, Google Chrome tích hợp Blink, Safari tích hợp WebKit. Browser cũng có thể thay đổi rendering engine. Microsoft Edge trước đây sử dụng EdgeHTML, nhưng sau đó chuyển sang Blink giống Google Chrome. Rendering engine của Opera cũng từng là Presto nhưng đã đổi sang Blink.
 
-同じブラウザブランドでも、iOS版のブラウザのレンダリングエンジンはWebKitです。たとえば、Google ChromeはBlinkを採用していますが、iOS版のGoogle ChromeのレンダリングエンジンはWebKitです。これは、iOSのレンダリングエンジンにWebKitだけが独占的に利用を許されているためです。
+Ngay cả cùng brand browser, rendering engine của browser phiên bản iOS là WebKit. Ví dụ, Google Chrome sử dụng Blink, nhưng rendering engine của Google Chrome phiên bản iOS là WebKit. Điều này là vì chỉ WebKit được phép sử dụng độc quyền làm rendering engine trên iOS.
 
 <figure>
-<figcaption>ブラウザ、レンダリングエンジン、JavaScriptエンジン、ECMAScriptの関係図</figcaption>
+<figcaption>Sơ đồ mối quan hệ giữa Browser, Rendering Engine, JavaScript Engine, ECMAScript</figcaption>
 <a href="/img/overview/ecmascript/browser-rendering-engine-javascript-engine-ecmascript-relations.svg" target="_blank"><img src="/img/overview/ecmascript/browser-rendering-engine-javascript-engine-ecmascript-relations.svg" width="800"/></a>
 </figure>
 
-TypeScriptプログラマーがブラウザとエンジンの対応を理解しておくことは重要です。エンジンを知ることは、開発したプログラムが実行される環境を把握することと同義です。エンジンは仕様にできるだけ準拠しますが、エンジンによって実装が異なることがあります。エンジンによっては実装がされていない仕様がある場合もあります。また、ブラウザによっては古いエンジンを使っている場合もあります。
+Việc TypeScript programmer hiểu mối quan hệ giữa browser và engine là quan trọng. Biết engine đồng nghĩa với việc nắm được môi trường chạy chương trình đã phát triển. Engine tuân thủ specification tối đa có thể, nhưng implementation có thể khác nhau tùy engine. Tùy engine có thể có specification chưa được implement. Ngoài ra, tùy browser có thể đang sử dụng engine cũ.
 
-プログラムをテストするときも、ブラウザとエンジンの組み合わせが理解できていると、同じエンジンを採用しているブラウザはテストを省略できる場合もあります。iOSのWebKit独占の例のように、同じブランド名のブラウザでもエンジンが異なる場合があります。この場合、テストで網羅するブラウザを増やすといった意思決定が行えるようになります。
+Khi test chương trình, nếu hiểu tổ hợp browser và engine, có thể bỏ qua test cho browser sử dụng cùng engine. Như ví dụ độc quyền WebKit trên iOS, ngay cả browser cùng brand name cũng có thể có engine khác nhau. Trong trường hợp này, có thể đưa ra quyết định tăng browser cần cover trong test.
 
 <PostILearned>
 
-・ECMAScript(ES)はJavaScriptの仕様
-・ESはEcmaインターナショナルのTC39委員会が定める
-・ESは毎年6月に改定される
-・ESの改定提案は公募され、ステージ4で採用される
-・ブラウザはレンダリングエンジンとJSエンジンを持つ
-・JSエンジンはESを実装する
+・ECMAScript (ES) là specification của JavaScript
+・ES được định nghĩa bởi ủy ban TC39 của Ecma International
+・ES được cải tiến vào tháng 6 hàng năm
+・Đề xuất cải tiến ES được tuyển mộ và được chấp nhận ở stage 4
+・Browser có rendering engine và JS engine
+・JS engine implement ES
 
 </PostILearned>

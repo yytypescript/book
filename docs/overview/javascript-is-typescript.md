@@ -1,6 +1,6 @@
-# JavaScriptはTypeScriptの一部
+# JavaScript là một phần của TypeScript
 
-TypeScriptの文法はJavaScriptの文法を拡張したものです。TypeScriptで拡張された文法は、主に型に関する部分です。それ以外のほとんどの文法はJavaScriptに由来するものです。そのため、素のJavaScriptもTypeScriptとして扱うことができます。たとえば、次のコードは100%JavaScriptのものですが、これをTypeScriptコンパイラーは解析でき、静的な検査が行なえます。
+Cú pháp TypeScript là phần mở rộng của cú pháp JavaScript. Cú pháp được mở rộng trong TypeScript chủ yếu liên quan đến kiểu. Hầu hết các cú pháp khác đều bắt nguồn từ JavaScript. Do đó, JavaScript thuần cũng có thể được xử lý như TypeScript. Ví dụ, code dưới đây là 100% JavaScript, nhưng TypeScript compiler có thể phân tích và thực hiện kiểm tra tĩnh.
 
 ```js twoslash
 const hello = "Hello";
@@ -9,4 +9,4 @@ console.log(hello + " " + world);
 // @log: "Hello World"
 ```
 
-TypeScriptから見ると、JavaScriptはTypeScriptの一部と言えます。そのため、TypeScriptを十分に理解するには、JavaScriptの理解が欠かせません。まだJavaScriptをよく分かっていない場合は、TypeScriptの学習と平行してJavaScriptも学ぶ必要があります。本書はTypeScript入門者向けですが、TypeScriptの理解に欠かせないJavaScriptの文法や仕様についても同時に学べるようになっています。
+Từ góc độ TypeScript, JavaScript có thể được coi là một phần của TypeScript. Do đó, để hiểu đầy đủ TypeScript, việc hiểu JavaScript là không thể thiếu. Nếu bạn chưa hiểu rõ JavaScript, bạn cần học JavaScript song song với TypeScript. Cuốn sách này dành cho người mới bắt đầu TypeScript, nhưng cũng cho phép học đồng thời cú pháp và specification của JavaScript cần thiết để hiểu TypeScript.

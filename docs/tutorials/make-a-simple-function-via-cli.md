@@ -1,20 +1,20 @@
-# 簡単な関数を作ってみよう
+# Tạo một hàm đơn giản
 
-このチュートリアルではTypeScriptで簡単な関数を作る体験を通じて、TypeScriptの型がJavaScriptのどのような問題を解決するのか、コンパイラはどのような役割を果たすのかを学びます。
+Trong tutorial này, qua trải nghiệm tạo một hàm đơn giản với TypeScript, bạn sẽ học type của TypeScript giải quyết vấn đề gì của JavaScript và compiler đóng vai trò gì.
 
-## このチュートリアルに必要なもの
+## Những thứ cần thiết cho tutorial này
 
-このチュートリアルをやるに当たり、必要なツールがあります。次にリストアップするものを準備しておいてください。
+Để thực hiện tutorial này, cần có một số tool. Hãy chuẩn bị những thứ được liệt kê dưới đây.
 
 - Node.js
-- VS CodeやWebStormなどのエディター
-- tsc(TypeScriptコンパイラ)
+- Editor như VS Code hoặc WebStorm
+- tsc (TypeScript compiler)
 
-[開発環境の準備](./setup.md)
+[Chuẩn bị môi trường phát triển](./setup.md)
 
-## JavaScriptで発生しうる問題
+## Vấn đề có thể xảy ra với JavaScript
 
-まず、次のJavaScriptファイルをローカル環境に作ります。
+Đầu tiên, hãy tạo file JavaScript sau ở môi trường local.
 
 ```js title="increment.js"
 function increment(num) {
@@ -24,14 +24,14 @@ function increment(num) {
 console.log(increment(999));
 ```
 
-このプログラムは引数をインクリメントして返すだけのものです。これをNode.jsで実行してみましょう。
+Chương trình này chỉ increment argument và trả về. Hãy thử chạy với Node.js.
 
 ```sh
 $ node increment.js
 1000
 ```
 
-問題なく動いたと思います。つづいて、`increment`関数の引数を`999`からstring型の`"999"`に書き換えてみましょう。
+Chắc là chạy không có vấn đề gì. Tiếp theo, hãy thay đổi argument của hàm `increment` từ `999` sang string `"999"`.
 
 ```js title="increment.js"
 function increment(num) {
@@ -42,51 +42,51 @@ console.log(increment("999"));
 //                    ^^^^^
 ```
 
-この小さな変更で実行結果は大きく変わってしまいます。実行してみましょう。
+Thay đổi nhỏ này làm kết quả thực thi thay đổi lớn. Hãy thử chạy.
 
 ```sh
 $ node increment.js
 9991
 ```
 
-出力結果は1000から9991に変わったはずです。この理由は、引数`num`が文字列になったせいで、`+`演算子が足し算ではなく文字列結合になったからです。JavaScriptは`"999" + 1`を`"999" + "1"`と解釈します。この解釈の詳細を知るには型強制の説明をご覧ください。
+Kết quả output chắc đã thay đổi từ 1000 sang 9991. Lý do là vì argument `num` trở thành string, toán tử `+` không còn là phép cộng mà trở thành nối chuỗi. JavaScript hiểu `"999" + 1` thành `"999" + "1"`. Để biết chi tiết về cách hiểu này, hãy xem giải thích về type coercion.
 
-[型強制](../reference/values-types-variables/type-coercion.md)
+[Type coercion](../reference/values-types-variables/type-coercion.md)
 
-引数は`999`と`"999"`という型の微妙な違いだけです。もしもこれが金額の計算だったら大問題です。`increment`関数は引数`num`がnumber型のときだけ正しい動きをします。しかし、関数を呼び出すときは、制約なしにさまざまな型を渡せてしまいます。引数にnumber型のみ代入できるように制約するには、どのようにしたらよいのでしょうか。ここでTypeScriptの出番になります。
+Argument chỉ khác nhau về type một cách tinh tế giữa `999` và `"999"`. Nếu đây là tính toán số tiền thì sẽ là vấn đề lớn. Hàm `increment` chỉ hoạt động đúng khi argument `num` là kiểu number. Tuy nhiên, khi gọi hàm, có thể truyền nhiều type khác nhau mà không có ràng buộc. Làm thế nào để ràng buộc chỉ có thể gán kiểu number cho argument? Đây là lúc TypeScript xuất hiện.
 
-## JavaScriptをTypeScriptに変換する
+## Chuyển đổi JavaScript sang TypeScript
 
-JavaScriptをTypeScriptにする第一歩は、ファイルの拡張子を`.js`から`.ts`に変更することです。TypeScriptはざっくり言って、JavaScriptに型関連の構文を追加したにすぎない言語です。なので、JavaScriptのコードはそのままでもTypeScriptとして扱えます。
+Bước đầu tiên để biến JavaScript thành TypeScript là đổi extension của file từ `.js` sang `.ts`. TypeScript nói đơn giản là ngôn ngữ chỉ thêm cú pháp liên quan đến type vào JavaScript. Vì vậy, code JavaScript có thể được xử lý như TypeScript nguyên vẹn.
 
 ```sh
 mv increment.js increment.ts
 ```
 
-## コンパイラを働かせる
+## Làm compiler hoạt động
 
-TypeScriptの目玉機能はなんと言ってもコンパイラです。コンパイラの役割のひとつは、上例のような型の問題をチェックし、発見した問題点をプログラマに報告することです。TypeScriptコンパイラはとても賢く、ノーヒントでも型の問題を指摘してくれます。しかし、ヒントを十分に与えたほうが、コンパイラはもっと緻密なチェックをしてくれます。
+Tính năng nổi bật của TypeScript chính là compiler. Một trong những vai trò của compiler là kiểm tra vấn đề về type như ví dụ trên và báo cáo các điểm phát hiện cho programmer. TypeScript compiler rất thông minh, có thể chỉ ra vấn đề về type mà không cần gợi ý. Tuy nhiên, nếu cho đủ gợi ý, compiler sẽ kiểm tra tỉ mỉ hơn.
 
-コンパイラに与えるヒントのことを「型注釈(type annotation)」と言います。それでは、`increment`関数の引数`num`に型注釈を書いてみましょう。型注釈は`num`の右に`: number`と書きます。これを書くことで「引数`num`はnumber型だけが代入できます」という意味になります。コンパイラはこれをヒントに関数呼び出しコードをチェックするようになります。
+Gợi ý cho compiler được gọi là "type annotation". Vậy hãy viết type annotation cho argument `num` của hàm `increment`. Type annotation được viết là `: number` bên phải `num`. Viết điều này có nghĩa là "argument `num` chỉ có thể gán kiểu number". Compiler sẽ dựa vào gợi ý này để kiểm tra code gọi hàm.
 
 <!--prettier-ignore-->
 ```ts twoslash {1,2} title="increment.ts"
 // @noErrors
 function increment(num: number) {
-//                 ^^^^^^^^型注釈
+//                 ^^^^^^^^type annotation
   return num + 1;
 }
 
 console.log(increment("999"));
 ```
 
-型注釈を書いたら、TypeScriptコンパイラにチェックをさせてみましょう。TypeScriptコンパイラのコマンドは`tsc`です。
+Sau khi viết type annotation, hãy để TypeScript compiler kiểm tra. Lệnh của TypeScript compiler là `tsc`.
 
 ```sh
 tsc increment.ts
 ```
 
-すると、次のエラーが報告されるはずです。
+Sẽ có error sau được báo cáo.
 
 ```ts twoslash {1,2}
 // @errors: 2345
@@ -97,13 +97,13 @@ function increment(num: number) {
 console.log(increment("999"));
 ```
 
-このエラーの内容は、「引数`num`はnumber型しか代入できないはずだが、関数呼び出しではstring型を代入している。本当に問題ないか？」という指摘です。
+Nội dung error này là chỉ ra rằng "argument `num` chỉ có thể gán kiểu number, nhưng khi gọi hàm lại gán kiểu string. Liệu có thực sự không có vấn đề gì?".
 
-エラーというと望まれないものというイメージがあるかもしれません。しかし、コンパイラが報告するエラーはむしろ歓迎されるものです。なぜなら、自分の代わりにコードに潜んでいる危険を、コーディング時点で知らせてくれるからです。
+Error có thể có hình ảnh là thứ không mong muốn. Tuy nhiên, error mà compiler báo cáo là thứ được hoan nghênh. Bởi vì nó thay bạn thông báo về nguy hiểm tiềm ẩn trong code tại thời điểm coding.
 
-## コンパイルを通す
+## Vượt qua compile
 
-コンパイラが指摘する問題点をすべて解消する作業のことを「コンパイルを通す」といいます。上のコードをコンパイルが通るコードに直してみましょう。直し方は単純に、関数呼び出しの引数をnumber型にするだけです。
+Công việc giải quyết tất cả các điểm vấn đề mà compiler chỉ ra được gọi là "vượt qua compile". Hãy sửa code trên thành code có thể vượt qua compile. Cách sửa đơn giản là chỉ cần biến argument khi gọi hàm thành kiểu number.
 
 ```ts twoslash {5} title="increment.ts"
 function increment(num: number) {
@@ -111,20 +111,20 @@ function increment(num: number) {
 }
 
 console.log(increment(999));
-//                    ^^^直す箇所
+//                    ^^^chỗ cần sửa
 ```
 
-直したら再びコンパイルしてみましょう。
+Sau khi sửa, hãy compile lại.
 
 ```sh
 tsc increment.ts
 ```
 
-今度は何も表示されずに処理が終わるはずです。コンパイル成功です。
+Lần này chắc xử lý kết thúc mà không hiển thị gì. Compile thành công.
 
-## 生成されたJavaScript
+## JavaScript được tạo ra
 
-ここまでの手順で、increment.jsというファイルができていることに気づいたかもしれません。そのファイルの内容は次のようになっていると思います。
+Bạn có thể đã nhận ra rằng qua các bước đến đây, một file increment.js đã được tạo ra. Nội dung của file đó chắc như sau.
 
 ```ts twoslash title="increment.js"
 // @showEmit
@@ -136,15 +136,15 @@ function increment(num: number) {
 console.log(increment(999));
 ```
 
-これは、increment.tsをコンパイルする過程でコンパイラが生成したJavaScriptファイルです。TypeScriptのコードと比べてみると、引数`num`から型注釈が取り除かれていることがわかります。
+Đây là file JavaScript được compiler tạo ra trong quá trình compile increment.ts. So sánh với code TypeScript, bạn có thể thấy type annotation đã bị xóa khỏi argument `num`.
 
-型注釈の部分はTypeScript固有のものです。それが書いてあるとブラウザやNode.jsでは実行できません。なので、TypeScriptコンパイラはJavaScript実行環境で動かす用のJavaScriptファイルを生成してくれます。開発者はこの成果物のJavaScriptファイルを本番環境にデプロイすることになります。
+Phần type annotation là thứ riêng của TypeScript. Nếu có nó thì không thể thực thi trên browser hoặc Node.js. Vì vậy, TypeScript compiler tạo ra file JavaScript để chạy trên môi trường thực thi JavaScript. Developer sẽ deploy file JavaScript thành phẩm này lên môi trường production.
 
 <PostILearned>
 
-・JavaScriptからTypeScriptへの書き換えは拡張子を.tsにする
-・コンパイラは型の問題を教えてくれる
-・型注釈を書き加えると、コンパイラはより細かいチェックをしてくれる
-・コンパイラが生成したJSをデプロイして使う
+・Viết lại từ JavaScript sang TypeScript là đổi extension thành .ts
+・Compiler cho biết vấn đề về type
+・Thêm type annotation giúp compiler kiểm tra chi tiết hơn
+・Deploy và sử dụng JS được compiler tạo ra
 
 </PostILearned>

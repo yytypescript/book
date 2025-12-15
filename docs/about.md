@@ -1,50 +1,50 @@
 ---
-sidebar_label: 本書について
+sidebar_label: Về cuốn sách
 ---
 
-# サバイバルTypeScriptとは
+# Survival TypeScript là gì
 
-本書の目標は、本読者がTypeScriptをすぐに実務で利用できるよう、最短ルートに読者を導く一冊になることです。本書は、TypeScriptの網羅的なドキュメントではありません。逆に、実務であまり使わないTypeScriptの機能は割愛します。扱う内容は、頻出する機能にしぼりにしぼって、「実務でTypeScriptを使うなら、ここだけはおさえておこう」「ここだけはおさえておけば、実務で死なない(=サバイバルできる)」という観点で執筆しています。
+Mục tiêu của cuốn sách này là trở thành một cuốn sách dẫn dắt người đọc theo con đường ngắn nhất để có thể sử dụng TypeScript trong công việc thực tế ngay lập tức. Cuốn sách này không phải là tài liệu toàn diện về TypeScript. Ngược lại, chúng tôi sẽ bỏ qua các tính năng TypeScript ít được sử dụng trong thực tế. Nội dung được chọn lọc kỹ, tập trung vào các tính năng thường gặp nhất, với quan điểm "Nếu sử dụng TypeScript trong thực tế, đây là những điều bạn cần nắm vững" và "Nếu nắm vững những điều này, bạn sẽ không bị chết trong thực tế (= có thể survival)".
 
-本書はTypeScriptを中心に扱いますが、実務上、必要になる知識としてJavaScriptの仕様、フロントエンドフレームワークのReactなどについても扱います。
+Cuốn sách này tập trung chủ yếu vào TypeScript, nhưng cũng đề cập đến JavaScript specification, frontend framework React, v.v. vì đây là những kiến thức cần thiết trong công việc thực tế.
 
-## 誰に向けて書かれた本か？
+## Cuốn sách này dành cho ai?
 
-本書は、プログラミング経験はあるが、これからTypeScriptをはじめる人、もしくは、始めたばかりという人を対象にしています。たとえば、次のような属性のプログラマを想定しています。
+Cuốn sách này dành cho những người có kinh nghiệm lập trình nhưng mới bắt đầu học TypeScript, hoặc vừa mới bắt đầu. Ví dụ, chúng tôi hướng đến các programmer có các thuộc tính sau:
 
-1. 主としてサーバーサイドのプログラミング(PHPやRuby、Javaなど)をしているが、フロントエンドも担当することになった。
-2. JavaScriptの経験があるが、そこまでJavaScriptに精通しているわけではないので、TypeScriptと並行して勉強したい。
-3. RubyやPythonなどの動的型付け言語を主に扱ってきており、型をそこまで意識してこなかったので、型システムについて学ぶ必要性を感じている。
+1. Chủ yếu làm server-side programming (PHP, Ruby, Java, v.v.) nhưng cũng cần đảm nhận frontend.
+2. Có kinh nghiệm JavaScript nhưng chưa thành thạo lắm, muốn học song song TypeScript.
+3. Chủ yếu làm việc với ngôn ngữ kiểu động như Ruby hoặc Python, chưa quan tâm nhiều đến kiểu, và cảm thấy cần học về hệ thống kiểu.
 
-## 本書では扱わないこと
+## Những gì không được đề cập trong cuốn sách này
 
-本書は、TypeScript初心者であるものの、プログラミング経験自体はある人を対象読者としています。そのため、「変数とは何か？」「関数とは何か？」といったプログラミングのいろはは本書では扱いません。
+Cuốn sách này dành cho người mới học TypeScript nhưng đã có kinh nghiệm lập trình. Do đó, những kiến thức cơ bản về lập trình như "Biến là gì?" hay "Hàm là gì?" sẽ không được đề cập.
 
-## 本書の構成
+## Cấu trúc cuốn sách
 
-第2章「TypeScriptのあらまし」では、TypeScriptの概要について触れます。同時に、TypeScriptの良さや、TypeScriptがJavaScriptエコシステムでどういった立ち位置にあるのかを示すことで、全体像を知っていただきます。TypeScriptとは何なのか詳しく知ってもらったり、読者が同僚や属するチームにTypeScriptをPRできるような情報を提供します。TypeScriptの歴史、思想、哲学を知ってもらうことで、どのようなところでTypeScriptがその本領を発揮するのかを学びます。TypeScriptをなぜ使うべきなのか？TypeScriptのアドバンテージは何なのか？TypeScriptとJavaScriptはどのような関係なのか？といった疑問に答えていきます。
+Chương 2 "Tổng quan về TypeScript" giới thiệu khái quát về TypeScript. Đồng thời, chúng tôi cho bạn thấy ưu điểm của TypeScript và vị trí của nó trong hệ sinh thái JavaScript, giúp bạn nắm được bức tranh tổng thể. Chúng tôi cung cấp thông tin chi tiết về TypeScript và giúp bạn có thể giới thiệu TypeScript với đồng nghiệp hoặc team của mình. Bằng cách tìm hiểu lịch sử, tư tưởng và triết lý của TypeScript, bạn sẽ biết TypeScript phát huy sức mạnh thực sự ở đâu. Chúng tôi sẽ trả lời các câu hỏi như: Tại sao nên sử dụng TypeScript? Ưu thế của TypeScript là gì? Mối quan hệ giữa TypeScript và JavaScript như thế nào?
 
-第3章「作って学ぶTypeScript」では、さまざまなアプリケーションをTypeScriptで実装するワークショップ形式の解説を通じて、TypeScriptそのものについては軽めに学びながら、TypeScriptを用いた開発の流れを感じ取って頂きます。このワークショップでは、実務の開発により近づけるよう、TypeScriptだけでなく、フロントエンドフレームワークのReact、テストフレームワークのJest、REST APIによるCRUD操作やWebSocketを使ったバックエンドとの通信についても扱って行きます。本章でもTypeScriptの機能や書き方について必要最低限説明しますが、詳しい言語機能の説明は第4章で扱います。
+Chương 3 "Học TypeScript qua thực hành" là phần workshop nơi bạn sẽ implement các ứng dụng khác nhau bằng TypeScript. Qua đó, bạn sẽ học nhẹ nhàng về TypeScript và cảm nhận được quy trình phát triển với TypeScript. Trong workshop này, để gần với phát triển thực tế hơn, chúng tôi không chỉ đề cập TypeScript mà còn cả frontend framework React, testing framework Jest, thao tác CRUD qua REST API và giao tiếp với backend qua WebSocket. Chương này cũng giải thích tối thiểu về tính năng và cách viết TypeScript, nhưng giải thích chi tiết về tính năng ngôn ngữ sẽ được trình bày ở Chương 4.
 
-第4章「読んで学ぶTypeScript」では、TypeScriptの言語機能をひとつひとつ解説します。すべての機能のリファレンスというよりは、実際の開発で頻繁に使用するものに限定し、これだけはおさえておきたい機能を中心に取り上げていきます。TypeScript学習者はJavaScriptも並行して学習することが多いので、JavaScriptについての説明も織り交ぜながら解説します。
+Chương 4 "Học TypeScript qua đọc" giải thích từng tính năng ngôn ngữ của TypeScript. Thay vì tham khảo tất cả tính năng, chúng tôi giới hạn vào những tính năng thường xuyên sử dụng trong phát triển thực tế, tập trung vào những tính năng cần nắm vững. Vì người học TypeScript thường học song song JavaScript, chúng tôi cũng xen kẽ giải thích về JavaScript.
 
-第5章「Tips」では、JavaScriptやTypeScriptでよく使われるコーディングテクニックを紹介します。
+Chương 5 "Tips" giới thiệu các kỹ thuật coding thường dùng trong JavaScript và TypeScript.
 
-## 本書の使い方
+## Cách sử dụng cuốn sách
 
-本書は基本的に、章立ての順番通りに読み進めて頂いて問題ありません。
+Về cơ bản, bạn có thể đọc cuốn sách theo thứ tự các chương.
 
-本書の大まかな流れとして、応用編であるアプリ開発(第3章)のほうが、基礎編であるTypeScriptの言語機能(第4章)より先んじていますが、これには実践を通じて学んだほうが学習効率がいいという経験則に基づいています。
+Luồng tổng thể của cuốn sách là phần ứng dụng - phát triển app (Chương 3) đứng trước phần cơ bản - tính năng ngôn ngữ TypeScript (Chương 4). Điều này dựa trên kinh nghiệm rằng học qua thực hành hiệu quả hơn.
 
-意図的に応用編を先に解説しているので、TypeScriptに初めて触れる読者でも、基礎編(第4章)を先に読まなくても、第3章から読み進められるように十分配慮しています。
+Vì chúng tôi cố ý đặt phần ứng dụng trước, ngay cả người đọc lần đầu tiếp xúc TypeScript cũng có thể đọc từ Chương 3 mà không cần đọc phần cơ bản (Chương 4) trước.
 
-## 執筆者について
+## Về tác giả
 
-本書は、主に[YYTypeScript](https://yyts.connpass.com/)の参加者を中心とした複数の有志のプログラマが集って執筆を行っています。執筆はいわばオープンソース的に行われており、本書はGitHubでも公開されていて、執筆への参加も随時受け付けています。執筆に興味がある方は、執筆者向け情報ページをご覧ください。
+Cuốn sách này được viết bởi một nhóm programmer tình nguyện, chủ yếu là những người tham gia [YYTypeScript](https://yyts.connpass.com/). Việc viết được thực hiện theo cách open-source, cuốn sách được công bố trên GitHub và luôn chào đón sự tham gia viết. Nếu bạn quan tâm đến việc viết, vui lòng xem trang thông tin dành cho tác giả.
 
-### コントリビューター
+### Contributors
 
-本書の企画、執筆、編集等に携わった方々を順不同敬称略で紹介します。
+Dưới đây là những người đã tham gia lên kế hoạch, viết và biên tập cuốn sách này (không theo thứ tự, không kính ngữ).
 
 - reoring
 - suin
@@ -66,8 +66,8 @@ sidebar_label: 本書について
 
 [![](https://contrib.rocks/image?repo=yytypescript/book)](https://github.com/yytypescript/book/graphs/contributors)
 
-コントリビューターの方でこちらのリストに掲載されていない方がいらっしゃいましたら[GitHub Issues](https://github.com/yytypescript/book/issues/new)にご連絡ください。
+Nếu bạn là contributor mà chưa có trong danh sách này, vui lòng liên hệ qua [GitHub Issues](https://github.com/yytypescript/book/issues/new).
 
-## 継続的アップデート
+## Cập nhật liên tục
 
-本書は継続的にアップデートされていきます。
+Cuốn sách này sẽ được cập nhật liên tục.

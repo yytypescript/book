@@ -2,78 +2,78 @@
 image: /img/range-of-typescript.png
 ---
 
-# TypeScriptの射程
+# Phạm vi ứng dụng của TypeScript
 
-TypeScriptを覚えるとさまざまなものを作れるようになります。TypeScriptはJavaScriptにコンパイルして使う言語です。そのため、JavaScriptで作れるものは何でも作れます。ここでは、TypeScriptを学んだらどのようなソフトウェアを作れるのか、「TypeScriptの射程」について説明します。
+Học TypeScript, bạn có thể tạo nhiều thứ khác nhau. TypeScript là ngôn ngữ compile sang JavaScript để sử dụng. Do đó, có thể tạo bất cứ thứ gì JavaScript có thể tạo. Ở đây, chúng tôi giải thích "phạm vi ứng dụng của TypeScript" - loại phần mềm nào bạn có thể tạo khi học TypeScript.
 
-## フロントエンド
+## Frontend
 
-TypeScriptがもっとも人気な分野は、フロントエンドアプリケーション開発です。ブラウザで動くアプリです。ブラウザではJavaScriptが圧倒的な地位を確立しています。TypeScriptはJavaScriptのエコシステムに乗っかっているため、フロントエンドアプリケーション開発で大きな力を発揮します。
+Lĩnh vực TypeScript phổ biến nhất là phát triển ứng dụng frontend. Ứng dụng chạy trên browser. Trong browser, JavaScript đã thiết lập vị trí áp đảo. TypeScript dựa trên hệ sinh thái JavaScript nên phát huy sức mạnh lớn trong phát triển ứng dụng frontend.
 
-## バックエンド
+## Backend
 
-バックエンドアプリケーションもTypeScriptを使って開発ができます。技術的にはNode.jsというサーバーサイドJavaScriptのエコシステムに乗ることができます。バックエンド言語はJava、Ruby、PHPなどの多数の競合があるものの、TypeScriptもサーバーサイドプログラミングのひとつの選択肢になります。
+Ứng dụng backend cũng có thể phát triển bằng TypeScript. Về mặt kỹ thuật, có thể dựa trên hệ sinh thái Node.js - JavaScript server-side. Mặc dù ngôn ngữ backend có nhiều đối thủ như Java, Ruby, PHP, TypeScript cũng là một lựa chọn cho lập trình server-side.
 
-## フロントエンドとバックエンドの両方でTypeScriptを採用するメリット
+## Lợi ích khi áp dụng TypeScript cho cả frontend và backend
 
-フロントエンドとバックエンドの両方でTypeScriptを採用するとメリットがあります。プロジェクトで扱う言語が1つでよいという点です。言語が1つであると、次のような利点が生まれます。
+Áp dụng TypeScript cho cả frontend và backend có lợi ích. Đó là dự án chỉ cần xử lý một ngôn ngữ. Khi chỉ có một ngôn ngữ, các lợi thế sau xuất hiện.
 
-### モジュールを共有できる
+### Có thể chia sẻ module
 
-両方で言語が異なる場合、同じロジックであっても各言語で実装しなければなりません。テストも倍になります。一方、両方でTypeScriptを採用すると、一方で作ったTypeScriptのモジュールをもう一方で再利用できます。
+Khi cả hai dùng ngôn ngữ khác nhau, ngay cả logic giống nhau cũng phải implement bằng mỗi ngôn ngữ. Test cũng tăng gấp đôi. Mặt khác, nếu cả hai dùng TypeScript, module TypeScript tạo ở một bên có thể tái sử dụng ở bên kia.
 
-### プロジェクト内でのノウハウが共有できる
+### Có thể chia sẻ know-how trong dự án
 
-言語の壁はノウハウ共有を難しくします。フロントエンドとバックエンドで言語が異なる場合、ノウハウ共有はフロントエンドとバックエンドの垣根を超えにくいものになります。たとえば、バックエンドで便利な日付操作ライブラリを見つけていたとしても、フロントエンドではそれが使えないので、そのノウハウはバックエンドだけで終わってしまいます。
+Rào cản ngôn ngữ làm khó chia sẻ know-how. Khi frontend và backend dùng ngôn ngữ khác nhau, việc chia sẻ know-how khó vượt qua ranh giới frontend và backend. Ví dụ, dù đã tìm thấy library xử lý ngày tháng tiện lợi ở backend, frontend không thể dùng nó nên know-how đó chỉ dừng ở backend.
 
-もしも、両方でTypeScriptを使っているなら、フロントエンドのノウハウをバックエンドに還元したり、その逆が成立しやすくなります。
+Nếu cả hai đều dùng TypeScript, know-how frontend có thể được trả lại cho backend và ngược lại.
 
-### 学習のコストパフォーマンスが最大化する
+### Tối đa hóa hiệu quả học tập
 
-新しい言語を覚えることは思いの外、時間のかかるものです。チュートリアルやリファレンスで座学するだけなら、短期間で学習できます。しかし、その言語のエコシステムや実務上のベストプラクティス、言語の細かい癖や陥りがちな罠などまで、しっかり理解した実践レベルに到達しようとなると、多くの学習時間を要します。
+Học ngôn ngữ mới tốn nhiều thời gian hơn tưởng tượng. Nếu chỉ học qua tutorial hoặc reference, có thể học trong thời gian ngắn. Tuy nhiên, để đạt đến trình độ thực hành hiểu đầy đủ hệ sinh thái ngôn ngữ, best practice trong thực tế, các đặc thù nhỏ và bẫy dễ mắc của ngôn ngữ, cần nhiều thời gian học.
 
-フロントエンドとバックエンドの両方を担当する場合にそれぞれが別言語であれば、安心して実務的なコードを書けるようになるまで、個人であれ、組織であれ、言語習得にかなりの時間を投資することになるでしょう。
+Nếu đảm nhận cả frontend và backend mà mỗi cái dùng ngôn ngữ khác nhau, dù là cá nhân hay tổ chức, sẽ phải đầu tư khá nhiều thời gian để học ngôn ngữ trước khi có thể tự tin viết code thực tế.
 
-逆にどこでもTypeScriptが使えるようになっていれば、言語やエコシステムの学習オーバーヘッドが最小限で済みます。
+Ngược lại, nếu có thể dùng TypeScript ở mọi nơi, overhead học ngôn ngữ và hệ sinh thái sẽ ở mức tối thiểu.
 
-## デスクトップアプリケーション
+## Ứng dụng Desktop
 
-WindowsやmacOS、Linux向けにデスクトップアプリケーションを作る場合もTypeScriptが使えます。デスクトップアプリケーションをJavaScript、HTML、CSSの技術スタックで開発できる[Electron](https://www.electronjs.org/)を用います。Electron + TypeScript製の著名なアプリとしては、SlackやMicrosoft社のVS Codeがあります。
+Khi tạo ứng dụng desktop cho Windows, macOS, Linux, cũng có thể dùng TypeScript. Sử dụng [Electron](https://www.electronjs.org/) có thể phát triển ứng dụng desktop bằng technology stack JavaScript, HTML, CSS. Ứng dụng nổi tiếng bằng Electron + TypeScript có Slack và VS Code của Microsoft.
 
-## CLIアプリケーション
+## Ứng dụng CLI
 
-コマンドラインツールの開発もTypeScriptで行えます。サーバーサイドJavaScript実行環境のNode.jsとTypeScriptを組み合わせて開発します。CLIアプリケーションフレームワークには、Heroku製の[oclif](https://github.com/oclif/oclif)などがあります。Google製の[zx](https://github.com/google/zx)を用いると、シェルスクリプトの代わりにTypeScriptを使うのもしやすくなります。
+Phát triển command-line tool cũng có thể thực hiện bằng TypeScript. Phát triển bằng cách kết hợp Node.js, môi trường chạy JavaScript server-side, và TypeScript. CLI application framework có [oclif](https://github.com/oclif/oclif) của Heroku. Sử dụng [zx](https://github.com/google/zx) của Google có thể dễ dàng dùng TypeScript thay cho shell script.
 
-## サーバーレス (FaaS)
+## Serverless (FaaS)
 
-サーバーレスとは、サーバーの構築や保守なしに、サーバーサイドのプログラムを実行できる仕組みです。通常、バックエンドアプリケーションを動かそうとすると、Linuxなどのサーバーを立てたり、メンテナンスする必要が出てきます。サーバーレスでは、AWSなどのクラウドベンダーがJavaScriptなどのマネージド実行環境を提供することで、アプリケーション開発者はサーバーを保守する必要がなくなります。開発者はJavaScriptの関数を書いたファイルをアップロードするだけで、バックエンドなどのウェブサービスを公開できます。このような関数を実行するクラウドサービスのことをFaaS(Function as a Service)と言います。
+Serverless là cơ chế có thể chạy chương trình server-side mà không cần xây dựng hoặc bảo trì server. Thông thường, để chạy ứng dụng backend, cần dựng server Linux và bảo trì. Với serverless, cloud vendor như AWS cung cấp môi trường chạy managed như JavaScript, developer không cần bảo trì server. Developer chỉ cần upload file có hàm JavaScript để có thể công bố web service như backend. Cloud service chạy các hàm như vậy được gọi là FaaS (Function as a Service).
 
-JavaScriptをサポートしているFaaSは多数あります。もっとも有名なのがAWSの[Lambda](https://aws.amazon.com/lambda/)です。この他に、[Google Cloud Functions](https://cloud.google.com/functions)やMicrosoftの[Azure Functions](https://azure.microsoft.com/ja-jp/products/functions/)、Next.jsと親和性の高いVercelの[Serverless Functions](https://vercel.com/docs/functions/introduction)、静的サイトホスティングで有名なNetlifyの[Netlify Functions](https://www.netlify.com/products/functions/)、世界90カ国194の都市にエッジを持つCDN Cloudflareの[Cloudflare Workers](https://workers.cloudflare.com/)などがあります。これらのサービスを用いると、TypeScriptでサーバーレスなウェブアプリケーションを提供できます。
+Có nhiều FaaS hỗ trợ JavaScript. Nổi tiếng nhất là [Lambda](https://aws.amazon.com/lambda/) của AWS. Ngoài ra còn có [Google Cloud Functions](https://cloud.google.com/functions), [Azure Functions](https://azure.microsoft.com/ja-jp/products/functions/) của Microsoft, [Serverless Functions](https://vercel.com/docs/functions/introduction) của Vercel có độ tương thích cao với Next.js, [Netlify Functions](https://www.netlify.com/products/functions/) của Netlify nổi tiếng với static site hosting, [Cloudflare Workers](https://workers.cloudflare.com/) của Cloudflare CDN có edge tại 194 thành phố ở 90 quốc gia trên thế giới. Sử dụng các service này có thể cung cấp web application serverless bằng TypeScript.
 
-## インフラ構成管理 (IaC)
+## Quản lý cấu hình infrastructure (IaC)
 
-インフラが物理的なものから仮想的なものになり、自社サーバーからクラウド化が進んだ結果、サーバーをいくつどのように配置するか、ネットワークはどう繋ぎこむかといったインフラ構成管理も、ソフトウェアで自動化されることが増えてきました。インフラ構成をコードで定義し、プログラマブルにすることをIaC(Infrastructure as Code)と呼びます。
+Khi infrastructure chuyển từ vật lý sang ảo, từ server nội bộ sang cloud, việc quản lý cấu hình infrastructure như đặt bao nhiêu server như thế nào, kết nối mạng ra sao cũng ngày càng được tự động hóa bằng phần mềm. Việc định nghĩa cấu hình infrastructure bằng code và làm cho programmable được gọi là IaC (Infrastructure as Code).
 
-TypeScriptでもIaCを行えます。AWSのインフラ構成を自動化するツールに[AWS CDK(Cloud Development Kit)](https://aws.amazon.com/cdk/#:~:text=The%20AWS%20Cloud%20Development%20Kit,resources%20using%20familiar%20programming%20languages.&text=AWS%20CDK%20uses%20the%20familiarity,languages%20for%20modeling%20your%20applications.)があります。これはTypeScriptをサポートしています。
+TypeScript cũng có thể thực hiện IaC. Công cụ tự động hóa cấu hình infrastructure AWS là [AWS CDK (Cloud Development Kit)](https://aws.amazon.com/cdk/#:~:text=The%20AWS%20Cloud%20Development%20Kit,resources%20using%20familiar%20programming%20languages.&text=AWS%20CDK%20uses%20the%20familiarity,languages%20for%20modeling%20your%20applications.). Công cụ này hỗ trợ TypeScript.
 
-AWSやGoogle Platformなど複数のクラウドベンダーに対応したインフラ構成ツールとして、[Pulumi](https://www.pulumi.com/)もあります。PulumiはTypeScriptで各ベンダーのインフラ構成を記述できます。インフラ構成ツールでもっとも有名なのは[Terraform](https://www.terraform.io/)ですが、TerraformはHCLと呼ばれる独自言語で記述するのに対し、PulumiはTypeScriptなので、TypeScriptプログラマーにとって手が届きやすいツールです。
+Công cụ cấu hình infrastructure hỗ trợ nhiều cloud vendor như AWS hay Google Platform là [Pulumi](https://www.pulumi.com/). Pulumi có thể viết cấu hình infrastructure của các vendor bằng TypeScript. Công cụ cấu hình infrastructure nổi tiếng nhất là [Terraform](https://www.terraform.io/), nhưng Terraform viết bằng ngôn ngữ độc lập gọi là HCL, trong khi Pulumi dùng TypeScript nên là công cụ dễ tiếp cận với TypeScript programmer.
 
 ## Google Apps Script
 
-GoogleはSpreadsheetやDocsなどのオフィススイートを提供していて、多くの企業で導入されています。Google Spreadsheetなどには、JavaScriptで機能を拡張する仕組みが備わっています。それをGoogle Apps Scriptと呼びます。Google Apps Scriptを使うと、スプレッドシートに独自の関数を作ったり、操作を自動化したりでき、業務の効率化に役立ちます。TypeScriptで書いたコードはJavaScriptにコンパイルすれば、Google Apps Scriptで利用できます。
+Google cung cấp office suite như Spreadsheet và Docs, được nhiều doanh nghiệp áp dụng. Google Spreadsheet và các ứng dụng khác có cơ chế mở rộng tính năng bằng JavaScript. Đó gọi là Google Apps Script. Sử dụng Google Apps Script có thể tạo hàm tùy chỉnh trong spreadsheet, tự động hóa thao tác, hữu ích cho việc tăng hiệu quả công việc. Code viết bằng TypeScript có thể compile sang JavaScript và sử dụng trong Google Apps Script.
 
-## ブラウザ拡張
+## Browser extension
 
-Google ChromeやFirefoxなどのブラウザには、ブラウザの機能を拡張する仕組みがあります。ブラウザ拡張はJavaScriptで書くことができます。TypeScriptで書いたコードもJavaScriptにコンパイルすることで、ブラウザ拡張として動かせます。
+Browser như Google Chrome và Firefox có cơ chế mở rộng tính năng browser. Browser extension có thể viết bằng JavaScript. Code viết bằng TypeScript cũng có thể compile sang JavaScript và chạy như browser extension.
 
-## 機械学習
+## Machine learning
 
-機械学習やニューラルネットワーク、ディープラーニングなどの分野はPythonが一強であることは異論がないでしょう。しかし、JavaScriptでも機械学習などのツールが多数作られてきており、TypeScriptプログラマーも手が届きやすくなってきています。[TensorFlow.js](https://www.tensorflow.org/js/)はGoogleが開発した機械学習ライブラリです。[Brain.js](https://brain.js.org/)はニューラルネットワークのライブラリです。
+Không có tranh cãi rằng Python là số một trong lĩnh vực machine learning, neural network, deep learning. Tuy nhiên, nhiều công cụ machine learning cũng đã được tạo bằng JavaScript, và TypeScript programmer cũng ngày càng dễ tiếp cận hơn. [TensorFlow.js](https://www.tensorflow.org/js/) là library machine learning do Google phát triển. [Brain.js](https://brain.js.org/) là library neural network.
 
-## 組み込み系
+## Embedded
 
-MicrosoftはTypeScriptのサブセット言語として、リソースの少ない組み込みデバイスを対象としたStatic TypeScript(STS)を開発し、実際にそれで組み込み系のソフトウェアを作る[研究成果を発表](https://www.infoq.com/jp/news/2019/11/static-typescript-msft-paper/)しました。STSはTypeScriptと同じではありませんし、まだ研究段階ですが、こうした動きが活発になってくれば、組み込み系プログラミングもTypeScriptプログラマーの射程圏内に入ってくることでしょう。
+Microsoft đã phát triển Static TypeScript (STS), ngôn ngữ subset của TypeScript nhắm đến thiết bị embedded với tài nguyên ít, và [công bố kết quả nghiên cứu](https://www.infoq.com/jp/news/2019/11/static-typescript-msft-paper/) về việc tạo phần mềm embedded bằng nó. STS không giống TypeScript và vẫn đang trong giai đoạn nghiên cứu, nhưng nếu các hoạt động như vậy trở nên sôi động, lập trình embedded cũng sẽ đi vào phạm vi của TypeScript programmer.
 
 ## WebAssembly
 
-WebAssembly(WASM)はブラウザで動くアセンブリー言語です。WASMはJavaScriptよりも高速な処理が必要とされるところで用いられます。WASMのプログラムはC言語やC++、Rustといったシステム言語で開発されることが多いですが、TypeScriptでWASMを開発できるようにする試みも出てきています。その筆頭が[AssemblyScript](https://www.assemblyscript.org/)です。AssemblyScriptを使うと、TypeScript風のコードをWASMに変換できます。
+WebAssembly (WASM) là ngôn ngữ assembly chạy trên browser. WASM được sử dụng ở những nơi cần xử lý nhanh hơn JavaScript. Chương trình WASM thường được phát triển bằng system language như C, C++, Rust, nhưng cũng có các nỗ lực cho phép phát triển WASM bằng TypeScript. Đứng đầu là [AssemblyScript](https://www.assemblyscript.org/). Sử dụng AssemblyScript có thể chuyển đổi code kiểu TypeScript sang WASM.

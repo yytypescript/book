@@ -1,13 +1,13 @@
 ---
 slug: /
 image: /img/ogp.png
-sidebar_label: トップ
+sidebar_label: Trang chủ
 ---
 
 # TypeScript
 
 <head>
-  <title>TypeScript入門『サバイバルTypeScript』〜実務で使うなら最低限ここだけはおさえておきたいこと〜</title>
+  <title>Nhập môn TypeScript "Survival TypeScript" - Những điều tối thiểu cần nắm vững khi sử dụng trong thực tế</title>
 </head>
 
 <!-- markdownlint-disable MD033 -->
@@ -17,166 +17,166 @@ sidebar_label: トップ
 <!-- markdownlint-restore -->
 
 :::note
-本書『サバイバルTypeScript』は実務でTypeScriptを使う開発者のための入門書です。そして、このページはTypeScriptの特徴を最速で把握できるよう、数百ページからなる本書のコンテンツをつまみ食いした要約です。
+Cuốn sách "Survival TypeScript" này là sách nhập môn dành cho các developer sử dụng TypeScript trong công việc thực tế. Trang này là bản tóm tắt các nội dung chính từ hàng trăm trang của cuốn sách, giúp bạn nắm bắt nhanh nhất các đặc điểm của TypeScript.
 
-» [本書について詳しく知る](./about.md)
-» [とにかく今すぐTypeScriptを書いてみたい](./tutorials/README.md)
+» [Tìm hiểu thêm về cuốn sách](./about.md)
+» [Muốn viết TypeScript ngay bây giờ](./tutorials/README.md)
 :::
 
-## TypeScriptとは
+## TypeScript là gì
 
-- JavaScriptの**スーパーセット**となるプログラミング言語。
-- **静的型付け言語**であり、プログラムの正しさが**静的に検査**できる。
-- ライブラリやIDEなどの開発環境が充実しており、**大きなエコシステム**を持っている。
-- **Microsoft**が2012年に開発し、**オープンソース**で公開した。
+- Ngôn ngữ lập trình là **superset** của JavaScript.
+- Là **ngôn ngữ kiểu tĩnh**, có thể **kiểm tra tĩnh** tính đúng đắn của chương trình.
+- Có hệ sinh thái phong phú với nhiều library và IDE hỗ trợ phát triển.
+- Được **Microsoft** phát triển năm 2012 và công bố dưới dạng **mã nguồn mở**.
 
-» [TypeScriptの特徴について詳しく知る](./overview/features.md)
-» [TypeScript誕生の背景について詳しく知る](./overview/before-typescript.md)
+» [Tìm hiểu thêm về đặc điểm của TypeScript](./overview/features.md)
+» [Tìm hiểu thêm về bối cảnh ra đời của TypeScript](./overview/before-typescript.md)
 
-## TypeScriptはJavaScriptのスーパーセット
+## TypeScript là Superset của JavaScript
 
-- **スーパーセット**とは、元の言語との**互換性**を保ちつつ、元の言語を**拡張**して作った言語のこと。
-- TypeScriptは、JavaScriptとの互換性を保ちつつ、JavaScriptを拡張して作った言語である。
-- よって、JavaScriptのコードはすべてTypeScriptとしてあつかえる。
-- TypeScriptは、型注釈やインターフェース、ジェネリクスなど独自の機能を追加している。
+- **Superset** là ngôn ngữ được tạo ra bằng cách **mở rộng** ngôn ngữ gốc, đồng thời duy trì **tính tương thích** với ngôn ngữ gốc.
+- TypeScript là ngôn ngữ được tạo ra bằng cách mở rộng JavaScript, đồng thời duy trì tính tương thích với JavaScript.
+- Do đó, mọi code JavaScript đều có thể được xử lý như TypeScript.
+- TypeScript bổ sung các tính năng riêng như type annotation, interface, generics.
 
-<figure><figcaption>TypeScriptの機能とJavaScriptの機能</figcaption>
+<figure><figcaption>Các tính năng của TypeScript và JavaScript</figcaption>
 <img src="/top/typescript-as-superset-of-javascript.svg" width="480" />
 </figure>
 
-### スーパーセットのメリット
+### Lợi ích của Superset
 
-- **学習のしやすさ**: JavaScriptの知識を活かしてTypeScriptを学べる。
-- **資産が活かせる**: 既存のJavaScriptコード資産を活かして開発できる。
-- **移行のしやすさ**: 既存のJavaScriptプロジェクトはTypeScriptへ移行がしやすい。
+- **Dễ học**: Có thể tận dụng kiến thức JavaScript để học TypeScript.
+- **Tận dụng tài sản có sẵn**: Có thể phát triển dựa trên code JavaScript hiện có.
+- **Dễ chuyển đổi**: Các dự án JavaScript hiện có có thể dễ dàng chuyển sang TypeScript.
 
-» [TypeScriptとJavaScriptの関係について詳しく知る](./overview/javascript-is-typescript.md)
+» [Tìm hiểu thêm về mối quan hệ giữa TypeScript và JavaScript](./overview/javascript-is-typescript.md)
 
-## 静的な検査
+## Kiểm tra tĩnh
 
-- TypeScriptはプログラムの正しさを静的に検査できる。
-- JavaScriptは実行しないとバグがあるかを確かめられない。
-- TypeScriptは実行せずにチェックが行える。
+- TypeScript có thể kiểm tra tĩnh tính đúng đắn của chương trình.
+- JavaScript phải chạy chương trình mới biết có bug hay không.
+- TypeScript có thể kiểm tra mà không cần chạy chương trình.
 
-» [静的な検査について詳しく知る](./overview/static-type.md)
+» [Tìm hiểu thêm về kiểm tra tĩnh](./overview/static-type.md)
 
-### 開発効率と品質を向上し、安心感を高める
+### Nâng cao hiệu quả phát triển, chất lượng và sự an tâm
 
-- 問題を早期に発見し、開発を効率化できる。
-- コーディング時に問題を発見し、修正できるため、バグを予防できる。
-- エディターとTypeScriptを連携させると、リアルタイムのチェックやコード補完が可能。
+- Phát hiện vấn đề sớm, tăng hiệu quả phát triển.
+- Phát hiện và sửa lỗi ngay khi viết code, ngăn ngừa bug.
+- Khi tích hợp editor với TypeScript, có thể kiểm tra realtime và code completion.
 
-<figure><figcaption>エディター上でのフィードバック</figcaption>
+<figure><figcaption>Phản hồi trên editor</figcaption>
 <img src="/top/compile-error-feedback-on-editor.svg" width="480" />
 </figure>
 
-- 問題を早期に修正できることで、製品の信頼感や安心感が高まる。
-- 見通しの悪い大規模なプログラムや、重要なシステムの開発では静的な検査が安心材料になる。
+- Việc sửa lỗi sớm giúp tăng độ tin cậy và sự an tâm cho sản phẩm.
+- Kiểm tra tĩnh là yếu tố an tâm quan trọng khi phát triển các chương trình lớn, khó nhìn thấy tổng thể, hoặc các hệ thống quan trọng.
 
-## 検査の仕組み
+## Cơ chế kiểm tra
 
-- TypeScriptの検査は**型システム**に基づく。
-- 型システムに基づき、**コンパイル**のタイミングでプログラムを検査する。
+- Kiểm tra của TypeScript dựa trên **hệ thống kiểu** (type system).
+- Dựa trên hệ thống kiểu, chương trình được kiểm tra tại thời điểm **compile**.
 
-### 型システム
+### Hệ thống kiểu
 
-- 型システムは、データの種別ごとに型を与え、データに対して行える操作に制約を設ける。
-- これにより、変数には決められた値のみが代入され、決められた操作のみが行われることが保証され、プログラムが正確で安全になる。
-- 型システムは、数学の「型理論」を背景に構築され、数学的証明によりプログラムの欠陥をあぶり出せる。
+- Hệ thống kiểu gán kiểu cho mỗi loại dữ liệu và đặt ra các ràng buộc về thao tác có thể thực hiện trên dữ liệu đó.
+- Nhờ đó, đảm bảo rằng chỉ các giá trị được chỉ định mới được gán cho biến và chỉ các thao tác được chỉ định mới được thực hiện, giúp chương trình chính xác và an toàn hơn.
+- Hệ thống kiểu được xây dựng dựa trên "lý thuyết kiểu" trong toán học, có thể phát hiện lỗi chương trình thông qua chứng minh toán học.
 
-### 型注釈
+### Type annotation
 
-- 変数にどのような値が代入できるのかを制約するものを「**型**」と言う。
-- 開発者は、変数がどのような型なのかを**型注釈**で指定する。
-- TypeScriptでは、型注釈を手がかりに検査が行われる。
+- **Kiểu** (type) là thứ ràng buộc giá trị nào có thể được gán cho biến.
+- Developer chỉ định kiểu của biến thông qua **type annotation**.
+- Trong TypeScript, kiểm tra được thực hiện dựa trên type annotation.
 
-<figure><figcaption>型注釈</figcaption>
+<figure><figcaption>Type annotation</figcaption>
 <img src="/top/type-annotation.svg" width="480" />
 </figure>
 
-### 型推論
+### Type inference
 
-- 値の型が文脈で明白な場合、型が自動で判断される。この仕組みを**型推論**という。
-- 型推論のおかげで、開発者は型注釈を割愛でき、記述量を減らせる。
+- Khi kiểu của giá trị rõ ràng từ ngữ cảnh, kiểu sẽ được tự động suy luận. Cơ chế này gọi là **type inference** (suy luận kiểu).
+- Nhờ type inference, developer có thể bỏ qua type annotation, giảm lượng code cần viết.
 
-<figure><figcaption>型推論</figcaption>
+<figure><figcaption>Type inference</figcaption>
 <img src="/top/type-inference.svg" width="480" />
 </figure>
 
-### コンパイル
+### Compile
 
-- TypeScriptを実行するために、JavaScriptへ変換する。この変換のことを**コンパイル**という。
-- 変換後のJavaScriptコードはブラウザやサーバーで実行できる。
-- TypeScriptの検査はコンパイルのタイミングで行われる。
+- Để chạy TypeScript, cần chuyển đổi sang JavaScript. Quá trình chuyển đổi này gọi là **compile**.
+- Code JavaScript sau khi chuyển đổi có thể chạy trên browser hoặc server.
+- Kiểm tra của TypeScript được thực hiện tại thời điểm compile.
 
-<figure><figcaption>コンパイル</figcaption>
+<figure><figcaption>Compile</figcaption>
 <img src="/top/compile-from-typescript-to-javascript.svg" width="480" />
 </figure>
 
-## 型はドキュメント、リファクタリング、ツールの充実にも寄与
+## Kiểu còn đóng góp cho documentation, refactoring và công cụ
 
-- **ドキュメントになる**: 型情報はドキュメントの役割を果たし、コードの理解を助ける。
-- **リファクタリングが安全に**: 変数の型や関数のシグネチャを変更したとき、修正が必要な箇所がコンパイル時にすべて分かり、不注意による誤修正を減らせる。
-- **ツールサポートが充実**: IDEやエディターでのリアルタイムのエラーチェック、自動補完、リファクタリングツール、ナビゲーションなど、開発ツールのサポートが充実している。
+- **Là documentation**: Thông tin kiểu đóng vai trò như documentation, giúp hiểu code.
+- **Refactoring an toàn**: Khi thay đổi kiểu biến hoặc signature hàm, tất cả các vị trí cần sửa đều được phát hiện khi compile, giảm lỗi do sơ suất.
+- **Hỗ trợ công cụ phong phú**: Hỗ trợ IDE và editor với kiểm tra lỗi realtime, auto-completion, refactoring tools, navigation.
 
-» [TypeScriptを使う動機について詳しく知る](./overview/why-you-should-use-typescript.md)
+» [Tìm hiểu thêm về lý do sử dụng TypeScript](./overview/why-you-should-use-typescript.md)
 
-## 多くのエディターがTypeScriptをサポート
+## Nhiều editor hỗ trợ TypeScript
 
 - Visual Studio Code
-- JetBrains IDE (IntelliJ, WebStorm, PhpStorm, RubyMine, PyCharm, GoLandなど)
+- JetBrains IDE (IntelliJ, WebStorm, PhpStorm, RubyMine, PyCharm, GoLand, v.v.)
 - Vim
 - NeoVim
 - Emacs (Tide)
 - Atom
 - Sublime Text
 
-» [TypeScriptとエコシステムについて詳しく知る](./overview/ecosystem.md)
+» [Tìm hiểu thêm về TypeScript và hệ sinh thái](./overview/ecosystem.md)
 
-## 多様なソフトウェアが作れる
+## Có thể tạo nhiều loại phần mềm
 
-作れるものの範囲が広いことは、TypeScriptの魅力のひとつ。
+Phạm vi ứng dụng rộng là một trong những điểm hấp dẫn của TypeScript.
 
-- **Webアプリケーション**: TypeScriptの主戦場。フロントエンドの開発に広く使用される。
-- **サーバーサイドアプリケーション**: Node.jsと組み合わせて、バックエンドやAPIサーバーを開発することが可能。
-- **モバイルアプリケーション**: React Nativeなどのフレームワークを利用して、モバイルアプリケーションを開発できる。
-- **デスクトップアプリケーション**: Electronを使用して、クロスプラットフォームのデスクトップアプリを開発できる。
-- **クラウド関連の機能**: AWS LambdaやAzure Functionsなどのクラウドプラットフォームで、サーバーレス関数が作成できる。
-- **ユーティリティーやCLIツール**: コマンドラインツールや各種ユーティリティの開発ができる。
-- **インフラ構成管理(IaC)**: PulumiやAWS CDKを使用して、インフラの構成を管理することができる。
-- **アプリケーションの拡張機能**: Google ChromeやVisual Studio Codeなどデスクトップアプリケーションの拡張をTypeScriptで開発できる。
+- **Web application**: Chiến trường chính của TypeScript. Được sử dụng rộng rãi trong phát triển frontend.
+- **Server-side application**: Kết hợp với Node.js để phát triển backend hoặc API server.
+- **Mobile application**: Sử dụng framework như React Native để phát triển ứng dụng mobile.
+- **Desktop application**: Sử dụng Electron để phát triển ứng dụng desktop cross-platform.
+- **Cloud functions**: Tạo serverless functions trên các nền tảng cloud như AWS Lambda hoặc Azure Functions.
+- **Utility và CLI tools**: Phát triển command-line tools và các utility khác.
+- **Infrastructure as Code (IaC)**: Sử dụng Pulumi hoặc AWS CDK để quản lý cấu hình infrastructure.
+- **Extension cho ứng dụng**: Phát triển extension cho các ứng dụng desktop như Google Chrome hoặc Visual Studio Code bằng TypeScript.
 
-» [TypeScriptの射程圏について詳しく知る](./overview/range-of-typescript.md)
+» [Tìm hiểu thêm về phạm vi ứng dụng của TypeScript](./overview/range-of-typescript.md)
 
-## TypeScriptを導入した企業の感想
+## Cảm nhận của các công ty đã áp dụng TypeScript
 
-- **[Slack][]**: コードベースが大規模になっても、型システムが安全性と信頼性を保証してくれる。
-- **[Airbnb][]**: TypeScriptを使っていたらAirbnbの38%ものバグを未然に防げた。
-- **[ヤフー株式会社][]**: 静的型付けによりコードの品質とメンテナンス性が向上し、IDEとの連携により開発者の生産性が向上した。
-- **[LINE株式会社][]**: ちょっとした修正でもかかるQAのコストを、TypeScript化によって抑制。
-- **[Sansan株式会社][]**: 型がドキュメントとしての役割を果たし、コードリーディングや他チームのコード変更に役立った。採用の文脈でアピールポイントにもなった。
-- **[ラクスル株式会社][]**:型システムの恩恵が得られる、エディターの入力補完を受けられる、コード=ドキュメントという状況を作りやすい。
+- **[Slack][]**: Dù codebase lớn, hệ thống kiểu vẫn đảm bảo tính an toàn và độ tin cậy.
+- **[Airbnb][]**: Nếu sử dụng TypeScript, có thể ngăn ngừa được 38% bug của Airbnb.
+- **[Yahoo Japan][]**: Kiểu tĩnh cải thiện chất lượng code và khả năng bảo trì, tích hợp với IDE tăng năng suất developer.
+- **[LINE Corporation][]**: Giảm chi phí QA cho những sửa đổi nhỏ nhờ TypeScript hóa.
+- **[Sansan Corporation][]**: Kiểu đóng vai trò như documentation, hữu ích cho việc đọc code và thay đổi code của team khác. Cũng là điểm thu hút trong tuyển dụng.
+- **[Raksul Corporation][]**: Được hưởng lợi từ hệ thống kiểu, auto-completion từ editor, dễ dàng tạo tình huống code = documentation.
 
 [Slack]: https://slack.engineering/typescript-at-slack/
 [Airbnb]: https://www.reddit.com/r/typescript/comments/aofcik/38_of_bugs_at_airbnb_could_have_been_prevented_by/
-[ヤフー株式会社]: https://codezine.jp/article/detail/16905
-[Sansan株式会社]: https://buildersbox.corp-sansan.com/entry/2021/06/24/110000
-[ラクスル株式会社]: https://techblog.raksul.com/entry/2020/10/07/after-introducing-typescript-to-existing-product/
-[LINE株式会社]: https://logmi.jp/tech/articles/322702
+[Yahoo Japan]: https://codezine.jp/article/detail/16905
+[Sansan Corporation]: https://buildersbox.corp-sansan.com/entry/2021/06/24/110000
+[Raksul Corporation]: https://techblog.raksul.com/entry/2020/10/07/after-introducing-typescript-to-existing-product/
+[LINE Corporation]: https://logmi.jp/tech/articles/322702
 
-## 基本的な型
+## Các kiểu cơ bản
 
-### プリミティブ型
+### Kiểu primitive
 
 <!--TODO: ここから続きやる-->
 
-- [`boolean`](./reference/values-types-variables/boolean.md): 真偽値。
-- [`number`](./reference/values-types-variables/number/README.md): 数値。
-- [`string`](./reference/values-types-variables/string.md): 文字列。
-- [`bigint`](./reference/values-types-variables/bigint.md): 大きな整数。
-- [`symbol`](./reference/values-types-variables/symbol.md): 一意の値を示す。
-- [`undefined`](./reference/values-types-variables/undefined.md): 値が定義されていない状態を示す。
-- [`null`](./reference/values-types-variables/null.md): 値が存在しない状態を示す。
+- [`boolean`](./reference/values-types-variables/boolean.md): Giá trị boolean (true/false).
+- [`number`](./reference/values-types-variables/number/README.md): Số.
+- [`string`](./reference/values-types-variables/string.md): Chuỗi.
+- [`bigint`](./reference/values-types-variables/bigint.md): Số nguyên lớn.
+- [`symbol`](./reference/values-types-variables/symbol.md): Biểu thị giá trị duy nhất.
+- [`undefined`](./reference/values-types-variables/undefined.md): Biểu thị trạng thái giá trị chưa được định nghĩa.
+- [`null`](./reference/values-types-variables/null.md): Biểu thị trạng thái không có giá trị.
 
 ```typescript twoslash
 const isReady: boolean = false;
@@ -188,47 +188,47 @@ const notDefined: undefined = undefined;
 const empty: null = null;
 ```
 
-### 特殊な型
+### Kiểu đặc biệt
 
-- [`any`](./reference/values-types-variables/any.md): 何でも代入できる型。型が不明な場合に使用する。その値に対する操作の制限がなく、型の安全性は弱まる。
-- [`unknown`](./reference/statements/unknown.md): any型と似て、何でも代入できる型。その値に対する操作は制限され、型の安全性が保たれる。
-- [`void`](./reference/functions/void-type.md): 値が存在しないことを示す。関数が何も返さない場合に使用する。
-- [`never`](./reference/statements/never.md): 決して何も返さないことを示す。エラーを投げる関数や無限ループの関数の戻り値として使用する。
+- [`any`](./reference/values-types-variables/any.md): Kiểu có thể gán bất cứ thứ gì. Sử dụng khi không biết kiểu. Không có ràng buộc thao tác trên giá trị, tính an toàn kiểu yếu đi.
+- [`unknown`](./reference/statements/unknown.md): Tương tự any, có thể gán bất cứ thứ gì. Thao tác trên giá trị bị hạn chế, tính an toàn kiểu được đảm bảo.
+- [`void`](./reference/functions/void-type.md): Biểu thị không có giá trị. Sử dụng khi hàm không trả về gì.
+- [`never`](./reference/statements/never.md): Biểu thị không bao giờ trả về gì. Sử dụng làm kiểu trả về cho hàm throw error hoặc vòng lặp vô hạn.
 
 ```typescript twoslash
-const a: any = 100; // 代入できる
-console.log(a * 3); // 操作もできる
+const a: any = 100; // Có thể gán
+console.log(a * 3); // Có thể thao tác
 // @log: 300
 
 // @errors: 18046
-const x: unknown = 100; // 代入はできる
-console.log(x * 3); // 操作はできない
+const x: unknown = 100; // Có thể gán
+console.log(x * 3); // Không thể thao tác
 
-// 戻り値のない関数
+// Hàm không có giá trị trả về
 function doSomething(): void {}
 
-// 戻り値を返すことがありえない関数
+// Hàm không bao giờ trả về giá trị
 function throwError(): never {
   throw new Error();
 }
 ```
 
-## 型エイリアス
+## Type alias
 
-- [型エイリアス](./reference/values-types-variables/type-alias.md)は既存の型を新たな名前で定義する機能。
-- より複雑な型を簡素に表現したり、コードの可読性を向上するのに役立つ。
+- [Type alias](./reference/values-types-variables/type-alias.md) là tính năng định nghĩa kiểu có sẵn với tên mới.
+- Hữu ích để biểu diễn kiểu phức tạp một cách đơn giản hoặc cải thiện khả năng đọc code.
 
 ```typescript twoslash
 type StringOrNumber = string | number;
 let value: StringOrNumber;
-value = "hello"; // string型が代入可能
-value = 123; // number型も代入可能
+value = "hello"; // Có thể gán kiểu string
+value = 123; // Có thể gán kiểu number
 ```
 
-## 構造的部分型
+## Structural subtyping
 
-- TypeScriptは[構造的部分型](./reference/values-types-variables/structural-subtyping.md)を採用している。
-- 構造的部分型では、変数の代入可否を、構造が互換しているかに着目して判定する。
+- TypeScript áp dụng [structural subtyping](./reference/values-types-variables/structural-subtyping.md).
+- Trong structural subtyping, việc gán biến được xác định dựa trên việc cấu trúc có tương thích hay không.
 
 ```typescript twoslash
 // @errors: 2741
@@ -236,36 +236,36 @@ type Summary = { name: string };
 type Detail = { name: string; age: number };
 
 const johnDetail: Detail = { name: "John", age: 28 };
-const summary: Summary = johnDetail; // 代入できる。構造的部分型として互換があるため
+const summary: Summary = johnDetail; // Có thể gán vì tương thích structural subtyping
 
 const johnSummary: Summary = { name: "John" };
-const detail: Detail = johnSummary; // 代入できない。構造的部分型として互換がない（ageを含まないため）
+const detail: Detail = johnSummary; // Không thể gán vì không tương thích structural subtyping (thiếu age)
 ```
 
-## 配列
+## Array
 
-### 配列リテラル
+### Array literal
 
-- 配列の値を作るには[配列リテラル](reference/values-types-variables/array/array-literal.md)(`[]`)を使う。
-- `[要素1, 要素2, ...]`の形で配列の初期値を設定できる。
+- Để tạo giá trị array, sử dụng [array literal](reference/values-types-variables/array/array-literal.md)(`[]`).
+- Có thể đặt giá trị khởi tạo array theo dạng `[phần tử 1, phần tử 2, ...]`.
 
 ```typescript twoslash
 const numbers = [1, 2, 3];
 ```
 
-### 配列の型注釈
+### Type annotation cho array
 
-- [配列の型注釈](reference/values-types-variables/array/type-annotation-of-array.md)には`型名[]`または`Array<型名>`を使う。
+- [Type annotation cho array](reference/values-types-variables/array/type-annotation-of-array.md) sử dụng `tên_kiểu[]` hoặc `Array<tên_kiểu>`.
 
 ```typescript twoslash
 let numbers: number[];
 let strings: Array<string>;
 ```
 
-### 配列要素へのアクセス
+### Truy cập phần tử array
 
-- [配列要素にアクセスする](reference/values-types-variables/array/how-to-access-elements-in-an-array.md)にはインデックス（インデックス）を使う。
-- 0から始まる整数を指定して配列の値を取得し、代入も可能。
+- Để [truy cập phần tử array](reference/values-types-variables/array/how-to-access-elements-in-an-array.md), sử dụng index.
+- Chỉ định số nguyên bắt đầu từ 0 để lấy giá trị array và cũng có thể gán.
 
 ```typescript twoslash
 const colors = ["red", "green", "blue"];
@@ -276,49 +276,49 @@ console.log(colors);
 // @log: ['red', 'yellow', 'blue']
 ```
 
-### 読み取り専用配列
+### Readonly array
 
-- [読み取り専用配列](reference/values-types-variables/array/readonly-array.md)は値の変更ができない配列を表す。
-- 配列の型注釈に`readonly`をつけると読み取り専用配列となる。
-- `ReadonlyArray<型名>`でも読み取り専用配列が宣言でき、`readonly 型名[]`と機能は同じ。
+- [Readonly array](reference/values-types-variables/array/readonly-array.md) biểu thị array không thể thay đổi giá trị.
+- Thêm `readonly` vào type annotation array để tạo readonly array.
+- Cũng có thể khai báo readonly array bằng `ReadonlyArray<tên_kiểu>`, chức năng giống với `readonly tên_kiểu[]`.
 
 ```typescript twoslash
 // @errors: 2542 2339
 const numbers: readonly number[] = [1, 2, 3];
 const strings: ReadonlyArray<string> = ["hello", "world"];
 
-numbers[0] = 4; // 値を変更できない
-strings.push("!"); // 要素を追加できない
+numbers[0] = 4; // Không thể thay đổi giá trị
+strings.push("!"); // Không thể thêm phần tử
 ```
 
-### 配列のループ
+### Lặp array
 
-- [配列をループする](reference/values-types-variables/array/how-to-loop-an-array.md)ための`for...of`構文もある。
+- Có cú pháp `for...of` để [lặp array](reference/values-types-variables/array/how-to-loop-an-array.md).
 
 ```typescript twoslash
 const numbers = [1, 2, 3];
 
 for (const num of numbers) {
-  console.log(num); // 1, 2, 3と出力される
+  console.log(num); // In ra 1, 2, 3
 }
 ```
 
-## タプル型
+## Tuple type
 
-- [タプル型](reference/values-types-variables/tuple.md)を使うと、配列の要素数と要素の型が固定される。
-- それぞれの要素のインデックスごとに型が決まる。
+- Sử dụng [tuple type](reference/values-types-variables/tuple.md) để cố định số lượng phần tử và kiểu của mỗi phần tử trong array.
+- Kiểu được xác định cho mỗi index của phần tử.
 
 ```typescript twoslash
 // @errors: 2322
 let tuple: [string, number];
-tuple = ["hello", 10]; // 代入できる
-tuple = [10, "hello"]; // 順序が正しくないため、代入できない
-tuple = ["hello", 10, "world"]; // 要素が多すぎるため代入できない
+tuple = ["hello", 10]; // Có thể gán
+tuple = [10, "hello"]; // Không thể gán vì thứ tự không đúng
+tuple = ["hello", 10, "world"]; // Không thể gán vì quá nhiều phần tử
 ```
 
-### タプルの要素へのアクセス
+### Truy cập phần tử tuple
 
-- タプルの要素にアクセスする場合も配列同様にインデックス（インデックス）を使用する。
+- Để truy cập phần tử tuple, cũng sử dụng index như array.
 
 ```typescript twoslash
 const tuple: [string, number] = ["hello", 10];
@@ -326,20 +326,20 @@ console.log(tuple[0]);
 // @log: 'hello'
 ```
 
-## オブジェクト
+## Object
 
-### オブジェクトリテラル
+### Object literal
 
-- オブジェクトの作り方は[オブジェクトリテラル](reference/values-types-variables/object/object-literal.md)(`{}`)を使う。
-- `{ プロパティキー: 値, ... }` の形でオブジェクトの初期値を設定できる。
+- Để tạo object, sử dụng [object literal](reference/values-types-variables/object/object-literal.md)(`{}`).
+- Có thể đặt giá trị khởi tạo object theo dạng `{ key: giá trị, ... }`.
 
 ```typescript twoslash
 const john = { name: "John", age: 20 };
 ```
 
-### プロパティアクセス
+### Property access
 
-- ドット`.`を使ってオブジェクトのプロパティにアクセスできる。
+- Sử dụng dấu chấm `.` để truy cập property của object.
 
 ```typescript twoslash
 declare const john: { name: string; age: number };
@@ -348,17 +348,17 @@ console.log(john.name);
 // @log: 'John'
 ```
 
-### オブジェクトの型注釈
+### Type annotation cho object
 
-- [オブジェクトの型注釈](reference/values-types-variables/object/type-annotation-of-objects.md)は`{プロパティ1: 型1, プロパティ2: 型2, ...}`の形で記述する。
+- [Type annotation cho object](reference/values-types-variables/object/type-annotation-of-objects.md) được viết theo dạng `{property1: kiểu1, property2: kiểu2, ...}`.
 
 ```typescript twoslash
 let obj: { name: string; age: number };
 ```
 
-### readonlyプロパティ
+### Readonly property
 
-- [`readonly`](reference/values-types-variables/object/readonly-property.md)をつけたプロパティは代入できない。
+- Property có [`readonly`](reference/values-types-variables/object/readonly-property.md) không thể gán.
 
 ```typescript twoslash
 // @errors: 2540
@@ -367,18 +367,18 @@ obj = { name: "John", age: 20 };
 obj.name = "Tom";
 ```
 
-### オプションプロパティ
+### Optional property
 
-- [オプションプロパティ](reference/values-types-variables/object/optional-property.md)`?`をつけたプロパティは省略可能。
+- Property có dấu `?` ([optional property](reference/values-types-variables/object/optional-property.md)) có thể bỏ qua.
 
 ```typescript twoslash
 let obj: { name: string; age?: number };
-obj = { name: "John" }; // `age`プロパティがなくてもエラーにならない
+obj = { name: "John" }; // Không có property `age` cũng không lỗi
 ```
 
-### オブジェクトメソッド
+### Object method
 
-- 関数をプロパティに持つオブジェクトを定義できる。
+- Có thể định nghĩa object có hàm làm property.
 
 ```typescript twoslash
 const obj = {
@@ -392,10 +392,10 @@ console.log(obj.sum());
 // @log: 3
 ```
 
-### インデックス型
+### Index signature
 
-- オブジェクトは[インデックス型](reference/values-types-variables/object/index-signature.md)を利用して任意のキーの値を取得することができる。
-- インデックス型プロパティの型注釈は`[キー名: プロパティキーの型]: プロパティ値の型` の形で記述する。
+- Object có thể sử dụng [index signature](reference/values-types-variables/object/index-signature.md) để lấy giá trị với key bất kỳ.
+- Type annotation cho index signature property được viết theo dạng `[tên_key: kiểu_key]: kiểu_giá_trị`.
 
 ```typescript twoslash
 let obj: { [key: string]: number };
@@ -408,10 +408,10 @@ console.log(obj["key2"]);
 
 ### Shorthand property names
 
-- プロパティの値がすでに定義されている変数である場合、そのプロパティ名を省略して記述できる([shorthand property names](reference/values-types-variables/object/shorthand-property-names.md))。
+- Khi giá trị của property là biến đã được định nghĩa, có thể bỏ qua tên property đó ([shorthand property names](reference/values-types-variables/object/shorthand-property-names.md)).
 
 ```typescript twoslash
-export default "変数nameを使いたいのでモジュール化する必要がありました。";
+export default "Cần module hóa để sử dụng biến name.";
 // ---cut---
 const name = "John";
 const age = 20;
@@ -420,9 +420,9 @@ console.log(obj);
 // @log: { name: 'John', age: 20 }
 ```
 
-### オプショナルチェーン
+### Optional chaining
 
-- プロパティが存在するかどうか不確定である場合、`?.`演算子（[オプショナルチェーン](reference/values-types-variables/object/optional-chaining.md)）で安全にアクセスできる。
+- Khi không chắc property có tồn tại hay không, có thể truy cập an toàn bằng toán tử `?.` ([optional chaining](reference/values-types-variables/object/optional-chaining.md)).
 
 ```typescript twoslash
 function printLength(obj: { a?: string }) {
@@ -436,10 +436,10 @@ printLength({});
 
 ## Map
 
-### Mapオブジェクト
+### Map object
 
-- [Mapオブジェクト](reference/builtin-api/map.md)はキーとそれに対応する値を対にしたコレクション。
-- キーはオブジェクトも含め任意の値が可能。
+- [Map object](reference/builtin-api/map.md) là collection ghép cặp key và value tương ứng.
+- Key có thể là bất kỳ giá trị nào, kể cả object.
 
 ```typescript twoslash
 const map = new Map();
@@ -450,18 +450,18 @@ console.log(map.get("name"));
 // @log: 'John'
 ```
 
-### Mapの型注釈
+### Type annotation cho Map
 
-- Mapの型注釈は`Map<キーの型, 値の型>`の形で記述する。
+- Type annotation cho Map được viết theo dạng `Map<kiểu_key, kiểu_value>`.
 
 ```typescript twoslash
 let people: Map<string, number>;
 ```
 
-### Mapのループ
+### Lặp Map
 
-- Mapオブジェクトは`for...of`でループすると、各エントリーがキーと値の配列として順に取得できる。
-- 要素の順序は、要素を追加した順が保証されている。
+- Khi lặp Map object bằng `for...of`, mỗi entry được lấy theo thứ tự dưới dạng array gồm key và value.
+- Thứ tự phần tử được đảm bảo theo thứ tự thêm phần tử.
 
 ```typescript twoslash
 const map = new Map<string, number>();
@@ -473,33 +473,33 @@ for (const [key, value] of map) {
 
 ## Set
 
-### Set オブジェクト
+### Set object
 
-- [Setオブジェクト](reference/builtin-api/set.md)は同じ値が存在しないコレクション。
-- Setの要素は何でも可能である。
+- [Set object](reference/builtin-api/set.md) là collection không có giá trị trùng lặp.
+- Phần tử của Set có thể là bất cứ thứ gì.
 
 ```typescript twoslash
 const set = new Set();
 set.add(1);
 set.add(2);
-set.add(2); // 同じ値は追加されない。
+set.add(2); // Giá trị trùng không được thêm.
 
 console.log(set);
 // @log: Set {1, 2}
 ```
 
-### Setの型注釈
+### Type annotation cho Set
 
-- Setの型注釈は`Set<要素の型>`の形で記述する。
+- Type annotation cho Set được viết theo dạng `Set<kiểu_phần_tử>`.
 
 ```typescript twoslash
 let numSet: Set<number>;
 ```
 
-### Setのループ
+### Lặp Set
 
-- SetもMap同様に`for...of`でループすることが可能。
-- 順序は`add`した順。
+- Set cũng có thể lặp bằng `for...of` như Map.
+- Thứ tự theo thứ tự `add`.
 
 ```typescript twoslash
 const set = new Set<number>();
@@ -509,12 +509,12 @@ for (const value of set) {
 }
 ```
 
-## 列挙型 (Enum)
+## Enum (Kiểu liệt kê)
 
-### 列挙型の基本
+### Cơ bản về enum
 
-- [列挙型](reference/values-types-variables/enum/README.md)(enum)は、関連する一連の数値または文字列値の集まりを定義する。
-- 列挙型は`enum`キーワードを使用して定義する。
+- [Enum](reference/values-types-variables/enum/README.md) định nghĩa tập hợp các giá trị số hoặc chuỗi liên quan.
+- Enum được định nghĩa bằng từ khóa `enum`.
 
 ```typescript twoslash
 enum Color {
@@ -524,9 +524,9 @@ enum Color {
 }
 ```
 
-### 列挙型に値を設定
+### Gán giá trị cho enum
 
-- 列挙体の値は文字列リテラルまたは数値リテラルで指定できる。
+- Giá trị của enum có thể chỉ định bằng string literal hoặc numeric literal.
 
 ```typescript twoslash
 enum Color {
@@ -536,9 +536,9 @@ enum Color {
 }
 ```
 
-### 列挙型の利用
+### Sử dụng enum
 
-- 列挙型の各値にアクセスするにはドット演算子を使用する。
+- Để truy cập từng giá trị của enum, sử dụng toán tử dấu chấm.
 
 ```typescript twoslash
 enum Color {
@@ -550,22 +550,22 @@ enum Color {
 const myColor: Color = Color.Red;
 ```
 
-## ユニオン型
+## Union type
 
-- [ユニオン型](reference/values-types-variables/union.md)は複数の型のうちのいずれかをとる値を表現できる。
-- `型1 | 型2 | ...`の形式で使う。
-- ひとつ以上の異なる型の値を同じ変数で扱う場合に使用する。
+- [Union type](reference/values-types-variables/union.md) có thể biểu diễn giá trị nhận một trong nhiều kiểu.
+- Sử dụng theo dạng `kiểu1 | kiểu2 | ...`.
+- Sử dụng khi muốn xử lý giá trị của nhiều kiểu khác nhau trong cùng một biến.
 
 ```typescript twoslash
 let value: boolean | number;
-value = true; // 代入できる
-value = 100; // 代入できる
+value = true; // Có thể gán
+value = 100; // Có thể gán
 ```
 
-### 判別可能なユニオン型
+### Discriminated union
 
-- [判別可能なユニオン型](reference/values-types-variables/discriminated-union.md)は、共通のリテラル型のプロパティを持つ特別なユニオン型。
-- 共通のプロパティを利用して、型を判別できる。
+- [Discriminated union](reference/values-types-variables/discriminated-union.md) là union type đặc biệt có property kiểu literal chung.
+- Có thể phân biệt kiểu bằng property chung.
 
 ```typescript twoslash
 type Triangle = { kind: "triangle"; base: number; height: number };
@@ -573,23 +573,23 @@ type Rectangle = { kind: "rectangle"; width: number; height: number };
 type Shape = Triangle | Rectangle;
 
 function getArea(shape: Shape): number {
-  // 共通のプロパティkindを利用して型を判定する
+  // Sử dụng property chung kind để xác định kiểu
   switch (shape.kind) {
     case "triangle":
-      // この節ではshapeがTriangle型に絞り込まれる
+      // Trong nhánh này shape được thu hẹp thành kiểu Triangle
       return (shape.base * shape.height) / 2;
     case "rectangle":
-      //  この節ではshapeがRectangle型に絞り込まれる
+      // Trong nhánh này shape được thu hẹp thành kiểu Rectangle
       return shape.width * shape.height;
   }
 }
 ```
 
-## インターセクション型
+## Intersection type
 
-- [インターセクション型](reference/values-types-variables/intersection.md)は複数の型を1つに結合した新しい型を定義する。
-- `型1 & 型2 & ...`の形式で使う。
-- その結果として生じた型は、それぞれの型が持つすべてのプロパティとメソッドを備えている。
+- [Intersection type](reference/values-types-variables/intersection.md) định nghĩa kiểu mới kết hợp nhiều kiểu thành một.
+- Sử dụng theo dạng `kiểu1 & kiểu2 & ...`.
+- Kiểu kết quả có tất cả property và method của mỗi kiểu.
 
 ```typescript twoslash
 type Octopus = { swims: boolean };
@@ -601,9 +601,9 @@ console.log(octocat);
 // @log: { swims: true, nightVision: true }
 ```
 
-## 分割代入
+## Destructuring assignment
 
-- 分割代入を使うと、配列の各要素を一度に変数に代入できる([配列の分割代入](reference/values-types-variables/array/destructuring-assignment-from-array.md))。
+- Sử dụng destructuring assignment có thể gán từng phần tử của array vào biến cùng lúc ([destructuring assignment cho array](reference/values-types-variables/array/destructuring-assignment-from-array.md)).
 
 ```typescript twoslash
 const [a, b] = [1, 2];
@@ -613,10 +613,10 @@ console.log(b);
 // @log: 2
 ```
 
-- 分割代入により、オブジェクトのプロパティを個別の変数へ代入できる([オブジェクトの分割代入](reference/values-types-variables/object/destructuring-assignment-from-objects.md))。
+- Với destructuring assignment, có thể gán property của object vào các biến riêng lẻ ([destructuring assignment cho object](reference/values-types-variables/object/destructuring-assignment-from-objects.md)).
 
 ```typescript twoslash
-export default "変数nameを使いたいのでモジュール化する必要がありました。";
+export default "Cần module hóa để sử dụng biến name.";
 // ---cut---
 const obj = {
   name: "John",
@@ -630,11 +630,11 @@ console.log(age);
 // @log: 20
 ```
 
-## 条件分岐
+## Rẽ nhánh điều kiện
 
-- TypeScriptではJavaScriptと同様に、条件分岐には`if`構文や`switch`構文が利用できる。
+- Trong TypeScript, giống JavaScript, có thể sử dụng câu lệnh `if` hoặc `switch` để rẽ nhánh điều kiện.
 
-### [if-else文](reference/statements/if-else.md)
+### [Câu lệnh if-else](reference/statements/if-else.md)
 
 ```typescript twoslash
 const age: number = 20;
@@ -647,7 +647,7 @@ if (age >= 20) {
 // @log: 'You are an adult.'
 ```
 
-### [switch文](reference/statements/switch.md)
+### [Câu lệnh switch](reference/statements/switch.md)
 
 ```typescript twoslash
 const color: string = "blue";
@@ -665,29 +665,29 @@ switch (color) {
 // @log: 'Color is blue.'
 ```
 
-### 型の絞り込み
+### Thu hẹp kiểu
 
-- 条件分岐を利用すると、その節内では型が自動的に絞り込まれる([制御フロー分析と型ガードによる型の絞り込み](reference/statements/control-flow-analysis-and-type-guard))。
+- Sử dụng rẽ nhánh điều kiện, kiểu được tự động thu hẹp trong nhánh đó ([Control flow analysis và type guard](reference/statements/control-flow-analysis-and-type-guard)).
 
 ```typescript twoslash
 let value: string | number;
-// 50%の確率でstring型またはnumber型の値を代入する
+// Gán giá trị kiểu string hoặc number với xác suất 50%
 value = Math.random() < 0.5 ? "Hello" : 100;
 
 if (typeof value === "string") {
-  // この節ではvalueはstring型として扱われる
+  // Trong nhánh này value được xử lý như kiểu string
   console.log(value.toUpperCase());
 } else {
-  // この節ではvalueはnumber型として扱われる
+  // Trong nhánh này value được xử lý như kiểu number
   console.log(value * 3);
 }
 ```
 
-## 関数
+## Function
 
-- TypeScriptではアロー関数や関数宣言に型注釈をつけることができる。
+- Trong TypeScript có thể thêm type annotation cho arrow function hoặc function declaration.
 
-### [アロー関数](reference/functions/arrow-functions.md)
+### [Arrow function](reference/functions/arrow-functions.md)
 
 ```typescript twoslash
 const greet = (name: string): string => {
@@ -698,7 +698,7 @@ console.log(greet("John"));
 // @log: 'Hello John'
 ```
 
-### [関数宣言](reference/functions/function-declaration.md)
+### [Function declaration](reference/functions/function-declaration.md)
 
 ```typescript twoslash
 function greet(name: string): string {
@@ -709,9 +709,9 @@ console.log(greet("John"));
 // @log: 'Hello John'
 ```
 
-### 分割代入引数
+### Destructuring parameter
 
-- 関数の引数に配列またはオブジェクトリテラルを展開することができる([分割代入引数](reference/functions/destructuring-assignment-parameters.md))。
+- Có thể destructure array hoặc object literal làm tham số hàm ([destructuring parameter](reference/functions/destructuring-assignment-parameters.md)).
 
 ```typescript twoslash
 const printCoord = ({ x, y }: { x: number; y: number }) => {
@@ -722,9 +722,9 @@ printCoord({ x: 10, y: 20 });
 // @log: 'Coordinate is (10, 20)'
 ```
 
-### 型ガード関数
+### Type guard function
 
-- 特定の型であることを判定する関数([型ガード関数](reference/functions/type-guard-functions.md))を利用することで、型が絞り込まれる。
+- Sử dụng hàm xác định kiểu cụ thể ([type guard function](reference/functions/type-guard-functions.md)), kiểu sẽ được thu hẹp.
 
 ```typescript twoslash
 function isString(value: any): value is string {
@@ -733,7 +733,7 @@ function isString(value: any): value is string {
 
 function printLength(value: any) {
   if (isString(value)) {
-    // この節ではvalueはstring型として扱われる
+    // Trong nhánh này value được xử lý như kiểu string
     console.log(value.length);
   }
 }
@@ -742,9 +742,9 @@ printLength("hello");
 // @log: 5
 ```
 
-### オプション引数
+### Optional parameter
 
-- 関数の引数には`?`をつけることで任意とすることができる([オプション引数](reference/functions/optional-parameters.md))。
+- Có thể thêm `?` vào tham số hàm để làm cho nó tùy chọn ([optional parameter](reference/functions/optional-parameters.md)).
 
 ```typescript twoslash
 function greet(name?: string) {
@@ -761,9 +761,9 @@ console.log(greet());
 // @log: 'Hello!'
 ```
 
-### デフォルト引数
+### Default parameter
 
-- 関数の引数には`=`を使ってデフォルトの値を設定することができる([デフォルト引数](reference/functions/default-parameters.md))。
+- Có thể đặt giá trị mặc định cho tham số hàm bằng `=` ([default parameter](reference/functions/default-parameters.md)).
 
 ```typescript twoslash
 function greet(name: string = "Mystery") {
@@ -776,9 +776,9 @@ console.log(greet());
 // @log: 'Hello Mystery!'
 ```
 
-### 残余引数
+### Rest parameter
 
-- `...`を使って[残余引数](reference/functions/rest-parameters.md)(任意の数の引数)を設定することができる。
+- Có thể sử dụng `...` để đặt [rest parameter](reference/functions/rest-parameters.md) (số lượng tham số bất kỳ).
 
 ```typescript twoslash
 function sum(...numbers: number[]) {
@@ -789,12 +789,12 @@ console.log(sum(1, 2, 3, 4, 5));
 // @log: 15
 ```
 
-## クラス
+## Class
 
-### クラス構文
+### Cú pháp class
 
-- JavaScriptの[クラス](reference/object-oriented/class/README.md)構文はそのまま利用できる。
-- [フィールド](reference/object-oriented/class/fields.md)宣言に型注釈をつけることができる。
+- Cú pháp [class](reference/object-oriented/class/README.md) của JavaScript có thể sử dụng như bình thường.
+- Có thể thêm type annotation cho khai báo [field](reference/object-oriented/class/fields.md).
 
 ```typescript twoslash
 class Person {
@@ -816,9 +816,9 @@ john.introduce();
 // @log: 'My name is John and I am 20 years old.'
 ```
 
-### アクセス修飾子
+### Access modifier
 
-- `public`(デフォルト)、`protected`、`private`の3つの[アクセス修飾子](reference/object-oriented/class/access-modifiers.md)が利用できる。
+- Có 3 [access modifier](reference/object-oriented/class/access-modifiers.md): `public` (mặc định), `protected`, `private`.
 
 ```typescript twoslash
 // @errors: 2341
@@ -837,14 +837,14 @@ class Person {
 }
 
 const john = new Person("John", 20);
-console.log(john.name); // 'John'が出力される
-console.log(john.age); // エラー（privateなのでアクセスできない）
+console.log(john.name); // In ra 'John'
+console.log(john.age); // Lỗi (không thể truy cập vì private)
 ```
 
-### クラスのreadonly修飾子
+### Readonly modifier trong class
 
-- [`readonly`修飾子](reference/object-oriented/class/readonly-modifier-in-classes.md)をつけたプロパティは、読み取り専用となる。
-- `readonly`修飾子はアクセス修飾子と併用可能。
+- Property có [`readonly` modifier](reference/object-oriented/class/readonly-modifier-in-classes.md) là read-only.
+- `readonly` modifier có thể kết hợp với access modifier.
 
 ```typescript twoslash
 // @errors: 2540
@@ -863,13 +863,13 @@ class Person {
 }
 
 const john = new Person("John", 20);
-john.name = "Tom"; // エラー（readonlyのため変更不可）
+john.name = "Tom"; // Lỗi (không thể thay đổi vì readonly)
 ```
 
 ### Constructor shorthand
 
-- TypeScriptでは、コンストラクタパラメータにアクセス修飾子をつけることで、自動的にそのフィールドが定義される([constructor shorthand](reference/object-oriented/class/constructor-shorthand.md))。
-- これによりコードの簡略化が図れる。
+- Trong TypeScript, thêm access modifier vào constructor parameter sẽ tự động định nghĩa field đó ([constructor shorthand](reference/object-oriented/class/constructor-shorthand.md)).
+- Điều này giúp đơn giản hóa code.
 
 ```typescript twoslash
 class Person {
@@ -885,14 +885,14 @@ john.introduce();
 // @log: 'My name is John and I am 20 years old.'
 ```
 
-### フィールドの初期化子
+### Field initializer
 
-- フィールド宣言の際に直接初期値を設定できる([フィールドの初期化子](reference/object-oriented/class/field-initializers.md))。
+- Có thể đặt giá trị khởi tạo trực tiếp khi khai báo field ([field initializer](reference/object-oriented/class/field-initializers.md)).
 
 ```typescript twoslash
 class Counter {
-  count = 0; // 初期値を0に設定
-  //    ^^^初期化子
+  count = 0; // Đặt giá trị khởi tạo là 0
+  //    ^^^initializer
 
   increment(): void {
     this.count++;
@@ -907,9 +907,9 @@ console.log(counter.count);
 // @log: 1
 ```
 
-### 静的フィールドと静的メソッド
+### Static field và static method
 
-- `static`キーワードを使うことで、インスタンスではなくクラス自体に関連するフィールドやメソッドを定義できる([静的フィールド](reference/object-oriented/class/static-fields.md)、[静的メソッド](reference/object-oriented/class/static-methods.md))。
+- Sử dụng từ khóa `static` có thể định nghĩa field hoặc method liên quan đến class thay vì instance ([static field](reference/object-oriented/class/static-fields.md), [static method](reference/object-oriented/class/static-methods.md)).
 
 ```typescript twoslash
 class MyClass {
@@ -924,9 +924,9 @@ MyClass.printX();
 // @log: 0
 ```
 
-### this型
+### This type
 
-- メソッド内で`this`を返すことで、メソッドの呼び出しを直列につなげるメソッドチェーンを可能にする([メソッドチェーン](reference/object-oriented/class/return-this-type.md))。
+- Trả về `this` trong method cho phép method chaining nối các lời gọi method ([method chaining](reference/object-oriented/class/return-this-type.md)).
 
 ```typescript twoslash
 class MyClass {
@@ -952,10 +952,10 @@ new MyClass().increment().add(3).print();
 // @log: 5
 ```
 
-### クラスの継承
+### Kế thừa class
 
-- `extends`キーワードにより、[クラスの継承](reference/object-oriented/class/class-inheritance.md)が可能。
-- スーパークラスのプロパティ・メソッドの値は、サブクラスからアクセス可能。
+- Có thể [kế thừa class](reference/object-oriented/class/class-inheritance.md) bằng từ khóa `extends`.
+- Giá trị property và method của superclass có thể truy cập từ subclass.
 
 ```typescript twoslash
 class Animal {
@@ -983,9 +983,9 @@ console.log(dog.bark());
 // @log: 'Woof!'
 ```
 
-### `instanceof`演算子
+### Toán tử `instanceof`
 
-- [`instanceof`演算子](reference/object-oriented/class/instanceof-operator.md)は、オブジェクトが特定のクラスのインスタンスであるかを判定できる。
+- [Toán tử `instanceof`](reference/object-oriented/class/instanceof-operator.md) có thể xác định object có phải là instance của class cụ thể hay không.
 
 ```typescript twoslash
 class Animal {}
@@ -999,10 +999,10 @@ console.log(dog instanceof Animal);
 // @log: true
 ```
 
-### 抽象クラス
+### Abstract class
 
-- `abstract`キーワードにより、[抽象クラス](reference/object-oriented/class/abstract-class.md)を定義できる。
-- 抽象クラスはインスタンス化できず、他のクラスが継承するための基底クラスに使用される。
+- Có thể định nghĩa [abstract class](reference/object-oriented/class/abstract-class.md) bằng từ khóa `abstract`.
+- Abstract class không thể khởi tạo instance, được sử dụng làm base class cho các class khác kế thừa.
 
 ```typescript twoslash
 abstract class Animal {
@@ -1026,10 +1026,10 @@ dog.makeSound();
 // @log: 'Woof Woof'
 ```
 
-### ゲッターとセッター
+### Getter và Setter
 
-- ゲッターやセッターは、オブジェクトのプロパティを取得・設定するためのメソッド。
-- ゲッターは`get`キーワードで、セッターは`set`キーワードで定義する。
+- Getter và setter là method để lấy/đặt property của object.
+- Getter được định nghĩa bằng từ khóa `get`, setter bằng từ khóa `set`.
 
 ```typescript twoslash
 class Circle {
@@ -1039,12 +1039,12 @@ class Circle {
     this._radius = radius;
   }
 
-  // ゲッター
+  // Getter
   get radius(): number {
     return this._radius;
   }
 
-  // セッター
+  // Setter
   set radius(radius: number) {
     if (radius <= 0) {
       throw new Error("Invalid radius value");
@@ -1060,13 +1060,13 @@ circle.radius = 3;
 console.log(circle.radius);
 // @log: 3
 circle.radius = -2;
-// 例外: 'Invalid radius value'
+// Exception: 'Invalid radius value'
 ```
 
-### インターフェース
+### Interface
 
-- TypeScriptのインターフェースは、プロパティ、メソッド、クラスなどの形状を定義する能力を持つ。
-- インターフェースを使用する主な目的は、特定のクラスまたはオブジェクトが特定のプロパティまたはメソッドを保持することを強制する。
+- Interface của TypeScript có khả năng định nghĩa shape của property, method, class.
+- Mục đích chính của sử dụng interface là bắt buộc class hoặc object cụ thể phải có property hoặc method cụ thể.
 
 ```typescript twoslash
 interface Printable {
@@ -1080,10 +1080,10 @@ class MyClass implements Printable {
 }
 ```
 
-### インターフェース構文
+### Cú pháp interface
 
-- TypeScriptの[インターフェース](reference/object-oriented/interface/README.md)はオブジェクトの形状を定義することが可能。
-- インターフェースはプロパティやメソッドのシグネチャを記述できる。
+- [Interface](reference/object-oriented/interface/README.md) của TypeScript có thể định nghĩa shape của object.
+- Interface có thể mô tả signature của property và method.
 
 ```typescript twoslash
 interface Point {
@@ -1101,10 +1101,10 @@ const point: Point = {
 };
 ```
 
-### インターフェースのreadonly修飾子
+### Readonly modifier trong interface
 
-- インターフェース内でreadonly修飾子を使用して、プロパティを読み取り専用に設定できる。
-- これにより、プロパティの値が一旦設定されると後から変更できなくなる。
+- Có thể sử dụng readonly modifier trong interface để đặt property là read-only.
+- Điều này khiến giá trị property không thể thay đổi sau khi được đặt.
 
 ```typescript twoslash
 // @errors: 2540
@@ -1117,10 +1117,10 @@ const p1: Point = { x: 10, y: 20 };
 p1.x = 5;
 ```
 
-## 例外処理
+## Xử lý exception
 
-- TypeScriptでは[例外処理](reference/statements/exception.md)のためにtry / catch / finally ブロックを使用できる。
-- 例外が発生した場合（つまり、エラーオブジェクトをスローした場合）catchブロックが実行される。
+- Trong TypeScript có thể sử dụng block try / catch / finally cho [xử lý exception](reference/statements/exception.md).
+- Khi exception xảy ra (tức là throw error object), block catch được thực thi.
 
 ```typescript twoslash
 try {
@@ -1130,10 +1130,10 @@ try {
 }
 ```
 
-### try-catch-finally構文
+### Cú pháp try-catch-finally
 
-- tryブロック内のコードは、エラーを検出し、catchブロックはエラーをハンドリングする。
-- finallyブロックはエラーの有無に関係なく実行される。
+- Code trong block try phát hiện lỗi, block catch xử lý lỗi.
+- Block finally được thực thi bất kể có lỗi hay không.
 
 ```typescript twoslash
 try {
@@ -1145,10 +1145,10 @@ try {
 }
 ```
 
-### 例外クラス
+### Exception class
 
-- TypeScriptでは、カスタムエラークラスを作成することも可能。
-- Errorクラスを継承したカスタムクラスで、具体的なエラータイプを作成することができる。
+- Trong TypeScript cũng có thể tạo custom error class.
+- Có thể tạo error type cụ thể bằng custom class kế thừa Error class.
 
 ```typescript twoslash
 class CustomError extends Error {
@@ -1168,13 +1168,13 @@ try {
 }
 ```
 
-## 非同期処理
+## Xử lý bất đồng bộ
 
-- TypeScriptでは、[非同期プログラミング](reference/asynchronous/README.md)をサポートしていて、コード内で時間を要する処理を効率的に扱うことができる。
+- TypeScript hỗ trợ [lập trình bất đồng bộ](reference/asynchronous/README.md), có thể xử lý hiệu quả các tác vụ tốn thời gian trong code.
 
 ### Promise
 
-- [Promise](reference/asynchronous/promise.md)は非同期操作の最終的な完了（または失敗）とその結果の値を表す。
+- [Promise](reference/asynchronous/promise.md) biểu thị sự hoàn thành (hoặc thất bại) cuối cùng của thao tác bất đồng bộ và giá trị kết quả.
 
 ```typescript twoslash
 const promise = new Promise((resolve, reject) => {
@@ -1189,10 +1189,10 @@ promise.then((data) => {
 // @log: 'Promise resolved'
 ```
 
-### async/await 構文
+### Cú pháp async/await
 
-- 非同期処理をより直感的に書くことができる[async構文](reference/asynchronous/async.md)と[await構文](reference/asynchronous/await.md)を導入している。
-- async/await 構文を使うと、非同期コードをあたかも同期コードであるかのように書ける。
+- Đã giới thiệu [cú pháp async](reference/asynchronous/async.md) và [cú pháp await](reference/asynchronous/await.md) để viết xử lý bất đồng bộ trực quan hơn.
+- Sử dụng cú pháp async/await có thể viết code bất đồng bộ như thể là code đồng bộ.
 
 ```typescript twoslash
 function delay(ms: number) {
@@ -1208,33 +1208,33 @@ async function asyncFunction() {
 asyncFunction();
 
 // @log: 'Start'
-// 2秒後
+// Sau 2 giây
 // @log: 'End'
 ```
 
-## ジェネリクス
+## Generics
 
-- TypeScriptの[ジェネリクス](reference/generics/README.md)を使用すると、型の再利用性が向上し、型の一貫性を保つことができる。
-- ジェネリクスを使用すると、[型変数](reference/generics/type-variables.md)を導入でき、これにより機能の一部を一般化できる。
+- Sử dụng [generics](reference/generics/README.md) của TypeScript có thể tăng khả năng tái sử dụng kiểu và duy trì tính nhất quán của kiểu.
+- Sử dụng generics có thể giới thiệu [type variable](reference/generics/type-variables.md), từ đó tổng quát hóa một phần chức năng.
 
 ```typescript twoslash
-// Tが型変数
+// T là type variable
 function identity<T>(arg: T): T {
   return arg;
 }
 
-// 型変数Tにstringを割り当てる
+// Gán string cho type variable T
 const output1 = identity<string>("myString");
 //    ^?
 
-// 型変数Tにnumberを割り当てる
+// Gán number cho type variable T
 const output2 = identity<number>(100);
 //    ^?
 ```
 
-## モジュール
+## Module
 
-- TypeScriptのモジュールシステムは、他のモジュールと共有するコードと、モジュール内部限定のコードとを分けることを可能にする([モジュール](reference/modules.md))。
+- Hệ thống module của TypeScript cho phép tách code chia sẻ với các module khác và code nội bộ của module ([module](reference/modules.md)).
 
 ```typescript twoslash title="greeter.ts"
 export function greet(name: string) {
@@ -1255,10 +1255,10 @@ console.log(greet("TypeScript"));
 // @log: 'Hello, TypeScript!'
 ```
 
-### importとexport
+### import và export
 
-- モジュール内で定義した関数や変数を外部に公開するには、exportを使用する。
-- モジュールが公開した関数や変数を利用するには、importを使用する。
+- Để công khai hàm hoặc biến định nghĩa trong module ra bên ngoài, sử dụng export.
+- Để sử dụng hàm hoặc biến mà module công khai, sử dụng import.
 
 ```typescript twoslash title="math.ts"
 export function square(x: number) {
@@ -1292,8 +1292,8 @@ console.log(cube(2));
 
 ### default export
 
-- defaultキーワードを使用すると、モジュールがデフォルトで1つの値のみをエクスポートすることを意味する。
-- default exportは、importする際に別名を指定することが可能である。
+- Sử dụng từ khóa default có nghĩa là module mặc định chỉ export một giá trị.
+- default export có thể chỉ định alias khi import.
 
 ```typescript twoslash title="greeter.ts"
 export default function greet(name: string) {
@@ -1314,9 +1314,9 @@ console.log(greetFunction("TypeScript"));
 // @log: 'Hello, TypeScript!'
 ```
 
-### 再export
+### Re-export
 
-- モジュールは、別のモジュールからエクスポートされたものを再エクスポートすることができる。
+- Module có thể re-export những gì được export từ module khác.
 
 ```typescript twoslash title="math.ts"
 export function add(x: number, y: number) {
@@ -1332,7 +1332,7 @@ export function add(x: number, y: number) {
 
 // @filename: index.ts
 // ---cut---
-// 再エクスポート
+// Re-export
 export { add } from "./math";
 ```
 
@@ -1352,9 +1352,9 @@ console.log(add(2, 3));
 // @log: 5
 ```
 
-### type importとtype export
+### type import và type export
 
-- 型だけをエクスポート・インポートすることもできる。
+- Cũng có thể chỉ export/import kiểu.
 
 ```typescript twoslash title="types.ts"
 export type MyObject = {
@@ -1373,7 +1373,7 @@ export type MyObject = {
 // @filename: main.ts
 // ---cut---
 import type { MyObject } from "./types";
-//     ^^^^型インポート
+//     ^^^^type import
 
 const obj: MyObject = {
   name: "TypeScript",
@@ -1381,13 +1381,13 @@ const obj: MyObject = {
 };
 ```
 
-## 型レベルプログラミング
+## Lập trình ở cấp độ kiểu
 
-- TypeScriptには、typeof演算子やkeyof演算子、ユーティリティータイプなど、型レベルでプログラミングをするためのさまざまな機能が搭載されている。
+- TypeScript có nhiều tính năng để lập trình ở cấp độ kiểu như toán tử typeof, toán tử keyof, utility type.
 
-### typeof型演算子
+### Toán tử typeof
 
-- [typeof演算子](reference/type-reuse/typeof-type-operator.md)は、変数名から型を逆算できる。
+- [Toán tử typeof](reference/type-reuse/typeof-type-operator.md) có thể suy ra kiểu từ tên biến.
 
 ```typescript twoslash
 const object = {
@@ -1399,9 +1399,9 @@ type ObjectType = typeof object;
 //   ^?
 ```
 
-### keyof型演算子
+### Toán tử keyof
 
-- [keyof演算子](reference/type-reuse/keyof-type-operator.md)を使うと、object型のすべてのキーを文字列リテラルのユニオン型として取得できる。
+- Sử dụng [toán tử keyof](reference/type-reuse/keyof-type-operator.md) có thể lấy tất cả key của object type dưới dạng union type của string literal.
 
 ```typescript twoslash
 // @errors: 2322
@@ -1412,20 +1412,20 @@ type Point = {
 
 type Key = keyof Point;
 //   ^?
-const key1: Key = "x"; // 代入OK
-const key2: Key = "y"; // 代入OK
-const key3: Key = "z"; // 代入不可
+const key1: Key = "x"; // Gán OK
+const key2: Key = "y"; // Gán OK
+const key3: Key = "z"; // Không thể gán
 ```
 
-`type Key = keyof Point = "x" | "y"`となる。
+`type Key = keyof Point = "x" | "y"`.
 
-### ユーティリティ型
+### Utility type
 
-- TypeScriptは、既存の型から新しい型を作成するためのさまざまな一般的な型操作を提供している。
+- TypeScript cung cấp nhiều thao tác kiểu phổ biến để tạo kiểu mới từ kiểu có sẵn.
 
 #### Required
 
-- [`Required`](reference/type-reuse/utility-types/required.md)は、オプションプロパティを必須プロパティにするユーティリティ型。
+- [`Required`](reference/type-reuse/utility-types/required.md) là utility type biến optional property thành required property.
 
 ```typescript twoslash
 type Person = {
@@ -1435,12 +1435,12 @@ type Person = {
 
 type RequiredPerson = Required<Person>;
 //   ^?
-// ageがオプションでなくなっている点に注目
+// Chú ý age không còn là optional
 ```
 
 #### Partial
 
-- [`Partial`](reference/type-reuse/utility-types/partial.md)は、型のすべてのプロパティをオプションにするユーティリティ型。
+- [`Partial`](reference/type-reuse/utility-types/partial.md) là utility type biến tất cả property của kiểu thành optional.
 
 ```typescript twoslash
 type Person = {
@@ -1454,7 +1454,7 @@ type OptionalPerson = Partial<Person>;
 
 #### Readonly
 
-- [`Readonly`](reference/type-reuse/utility-types/readonly.md)は、型のすべてのプロパティをreadonlyにするユーティリティ型。それらのプロパティは再代入できない。
+- [`Readonly`](reference/type-reuse/utility-types/readonly.md) là utility type biến tất cả property của kiểu thành readonly. Các property đó không thể gán lại.
 
 ```typescript twoslash
 type Person = {
@@ -1468,7 +1468,7 @@ type ReadonlyPerson = Readonly<Person>;
 
 #### Record
 
-- [`Record`](reference/type-reuse/utility-types/record.md)は、オブジェクトのすべてのプロパティ値を特定の型に設定するユーティリティ型。
+- [`Record`](reference/type-reuse/utility-types/record.md) là utility type đặt tất cả giá trị property của object thành kiểu cụ thể.
 
 ```typescript twoslash
 type ThreeLetterRecord = Record<"one" | "two" | "three", string>;
@@ -1477,7 +1477,7 @@ type ThreeLetterRecord = Record<"one" | "two" | "three", string>;
 
 #### Pick
 
-- [`Pick`](reference/type-reuse/utility-types/pick.md)は、オブジェクトから特定のプロパティだけを拾い出すユーティリティ型。
+- [`Pick`](reference/type-reuse/utility-types/pick.md) là utility type chọn ra các property cụ thể từ object.
 
 ```typescript twoslash
 type Person = {
@@ -1492,7 +1492,7 @@ type PersonNameAndAge = Pick<Person, "name" | "age">;
 
 #### Omit
 
-- [`Omit`](reference/type-reuse/utility-types/omit.md)は、オブジェクトから特定のプロパティを省いた型を作るユーティリティ型。
+- [`Omit`](reference/type-reuse/utility-types/omit.md) là utility type tạo kiểu bỏ đi property cụ thể từ object.
 
 ```typescript twoslash
 type Person = {
@@ -1507,7 +1507,7 @@ type PersonWithoutAddress = Omit<Person, "address">;
 
 #### Exclude
 
-- [`Exclude`](reference/type-reuse/utility-types/exclude.md)は、ユニオン型から特定の型を除外するユーティリティ型。
+- [`Exclude`](reference/type-reuse/utility-types/exclude.md) là utility type loại bỏ kiểu cụ thể từ union type.
 
 ```typescript twoslash
 type T1 = number | string | boolean;
@@ -1517,7 +1517,7 @@ type T2 = Exclude<T1, boolean>;
 
 #### Extract
 
-- [`Extract`](reference/type-reuse/utility-types/extract.md)は、ふたつのユニオン型の共通の部分を抽出するユーティリティ型。
+- [`Extract`](reference/type-reuse/utility-types/extract.md) là utility type trích xuất phần chung của hai union type.
 
 ```typescript twoslash
 type T1 = number | string | boolean;
@@ -1528,7 +1528,7 @@ type T3 = Extract<T1, T2>;
 
 #### NonNullable
 
-- [`NonNullable`](reference/type-reuse/utility-types/nonnullable.md)は、nullまたはundefinedを含む型からいずれも除外するユーティリティ型。
+- [`NonNullable`](reference/type-reuse/utility-types/nonnullable.md) là utility type loại bỏ cả null và undefined từ kiểu có chứa chúng.
 
 ```typescript twoslash
 type T1 = string | null | undefined;
@@ -1538,7 +1538,7 @@ type T2 = NonNullable<T1>;
 
 #### ReturnType
 
-- [`ReturnType`](reference/type-reuse/utility-types/return-type.md)は、関数の戻り値の型を取得するユーティリティ型。
+- [`ReturnType`](reference/type-reuse/utility-types/return-type.md) là utility type lấy kiểu trả về của hàm.
 
 ```typescript twoslash
 function stringify(value: number): string {
@@ -1551,7 +1551,7 @@ type StringifyReturnType = ReturnType<typeof stringify>;
 
 #### Awaited
 
-- [`Awaited`](reference/type-reuse/utility-types/awaited.md)は、Promiseの戻り値の型を取得するユーティリティ型。
+- [`Awaited`](reference/type-reuse/utility-types/awaited.md) là utility type lấy kiểu giá trị trả về của Promise.
 
 ```typescript twoslash
 const promise1 = Promise.resolve("data");
@@ -1565,8 +1565,8 @@ type Data2 = Awaited<typeof promise2>;
 
 ### Mapped types
 
-- [Mapped types](reference/type-reuse/mapped-types.md)を使うと、既存の型から新しい型を生成できる。
-- Mapped typesは、オブジェクトの各プロパティを”マップ”し、新しいオブジェクトを生成する。
+- Sử dụng [Mapped types](reference/type-reuse/mapped-types.md) có thể tạo kiểu mới từ kiểu có sẵn.
+- Mapped types "map" từng property của object để tạo object mới.
 
 ```typescript twoslash
 type Person = {
@@ -1578,9 +1578,9 @@ type ReadOnlyPerson = { readonly [K in keyof Person]: Person[K] };
 //   ^?
 ```
 
-### インデックスアクセス型
+### Indexed access type
 
-- [インデックスアクセス型](reference/type-reuse/indexed-access-types.md)を使うと、型のプロパティの型を取得できる。
+- Sử dụng [indexed access type](reference/type-reuse/indexed-access-types.md) có thể lấy kiểu của property trong kiểu.
 
 ```typescript twoslash
 type Person = {

@@ -1,130 +1,130 @@
-# Reactでいいねボタンを作ろう
+# Tạo nút Like với React
 
-このチュートリアルでは、TypeScriptとReactの両方を用いて、SNSでよく見かける「いいねボタン」のUIを実装します。
+Trong tutorial này, sử dụng cả TypeScript và React, chúng ta sẽ implement UI "nút Like" thường thấy trên SNS.
 
-本チュートリアルは、TypeScriptとReactによるコーディングの体験をすることを主眼に置いています。そのため、TSとReactの理論的な説明は省きます。「TypeScriptとReactでUIを開発するにはどのような流れになるのか」を感じ取って頂くことを目的としています。
+Tutorial này tập trung vào trải nghiệm coding với TypeScript và React. Do đó, giải thích lý thuyết về TS và React được bỏ qua. Mục đích là để bạn cảm nhận "Quy trình phát triển UI với TypeScript và React như thế nào".
 
-Reactの専門書と比べて、本書の解説は詳しさや正確さは劣ります。それでも、初めてReactに触れる方でも読み進められるよう、Reactについて随時ワンポイント解説をしていくので、安心してお読みください。
+So với sách chuyên về React, giải thích trong sách này kém chi tiết và chính xác hơn. Tuy nhiên, để người lần đầu tiếp xúc với React cũng có thể đọc được, chúng tôi sẽ giải thích từng điểm về React, nên hãy yên tâm đọc.
 
-このチュートリアルで作成するいいねボタンの最終的な成果物は[デモサイト](https://like-button.typescriptbook.jp)で確認できます。チュートリアルを開始する前に事前に触ってみることで、各ステップでどんな実装をしているかのイメージが掴みやすくなります。また、完成形のソースコードは[GitHub](https://github.com/yytypescript/like-button)で確認することができます。
+Thành phẩm cuối cùng của nút Like được tạo trong tutorial này có thể xác nhận tại [demo site](https://like-button.typescriptbook.jp). Bằng cách thử trước khi bắt đầu tutorial, bạn sẽ dễ hình dung implementation ở mỗi bước đang làm gì. Ngoài ra, source code hoàn chỉnh có thể xem tại [GitHub](https://github.com/yytypescript/like-button).
 
-## Reactとは？
+## React là gì?
 
-ReactはFacebook社が開発した、ウェブアプリケーションのUIを作るためのパッケージです。JavaScriptやTypeScriptだけでもインタラクティブなUIは実装できます。しかし、UIが複雑になるとReactなしではコードの記述量が増大したり、可読性が悪くなったりと難易度が上がります。なんといっても、UIが今どのような状態なのかを管理するのは、プログラマが把握しきれない複雑さになることがあります。Reactを使うと、複雑なUIやインタラクションを短く簡潔に読みやすく書けるようになり、状態の管理も分かりやすくなります。
+React là package do Facebook phát triển để tạo UI cho web application. Chỉ với JavaScript hoặc TypeScript cũng có thể implement UI interactive. Tuy nhiên, khi UI trở nên phức tạp, không có React thì lượng code tăng lên, khả năng đọc kém đi và độ khó tăng lên. Đặc biệt, việc quản lý trạng thái UI hiện tại như thế nào đôi khi trở nên phức tạp vượt quá khả năng nắm bắt của programmer. Sử dụng React, có thể viết UI phức tạp và interaction một cách ngắn gọn dễ đọc, và việc quản lý trạng thái cũng trở nên dễ hiểu hơn.
 
-## Reactの3大特徴
+## 3 đặc điểm lớn của React
 
-Reactはどのような特徴を持ったパッケージなのでしょうか？ここではReactの特徴を3つに分けて説明します。Reactについて多少の予備知識を得たい方は、このセクションをお読みください。今すぐコードを書きたいという方は、ここは読み飛ばしても問題ありません。
+React là package có những đặc điểm gì? Ở đây chúng tôi giải thích đặc điểm của React chia thành 3 phần. Những ai muốn có một chút kiến thức sơ bộ về React, hãy đọc phần này. Những ai muốn viết code ngay, có thể bỏ qua phần này cũng không sao.
 
-### 特徴その1: 仮想DOM
+### Đặc điểm 1: Virtual DOM
 
-Reactは仮想DOM(virtual DOM)という考えを採用しています。仮想DOMを理解するには、仮想ではない普通のDOMが何かを知る必要があります。DOM(document object model)とは、HTMLをJavaScriptから参照・操作する仕組みです。これのおかげで、HTMLを文字列操作ではなく、オブジェクトとして処理できます。DOMはHTMLを操作するためのAPIのようなものです。
+React áp dụng khái niệm virtual DOM. Để hiểu virtual DOM, cần biết DOM không phải virtual - DOM thông thường là gì. DOM (document object model) là cơ chế tham chiếu và thao tác HTML từ JavaScript. Nhờ điều này, có thể xử lý HTML như object thay vì thao tác string. DOM giống như API để thao tác HTML.
 
-プログラマがDOMを操作すると、間接的にHTMLが書き換えられ、その結果が画面に描画されます。多くの動的なUIはDOM操作で成り立っています。
+Khi programmer thao tác DOM, HTML được viết lại gián tiếp, và kết quả được render lên màn hình. Nhiều UI động được tạo thành từ thao tác DOM.
 
 ```js twoslash
-// <input id="email">の文字色を赤色にするDOM操作の例
+// Ví dụ thao tác DOM đổi màu chữ của <input id="email"> thành đỏ
 const emailInput = document.getElementById("email");
 emailInput.style.color = "red";
 ```
 
-DOMは必ずしもプログラマにとって使いやすいAPIではありません。上の例のようなスタイルを少し変更するくらいなら実用的です。しかし、複雑なUIを作ろうとすると途端に難しくなります。注意深く実装しないと、表示や状態の変更し忘れといったバグを生みやすくなります。操作の方法が悪くパフォーマンス面で問題が出たりします。
+DOM không nhất thiết là API dễ sử dụng cho programmer. Với ví dụ trên như thay đổi style một chút thì còn thực dụng. Tuy nhiên, khi cố tạo UI phức tạp thì trở nên khó khăn ngay. Nếu không implement cẩn thận, dễ tạo ra bug như quên thay đổi hiển thị hoặc trạng thái. Cách thao tác không tốt cũng có thể gây vấn đề về performance.
 
-仮想DOMはリアルDOMのプロキシのようなものです。リアルDOMと比べて、状態管理上のバグを起こしにくい設計になっています。加えて、パフォーマンス面では描画処理の最適化もします。プログラマにとっては、リアルDOMを扱うときのような慎重さが不要になります。画面表示を変えたければ、仮想DOMを操作します。仮想DOMに起こった変更はリアルDOMに伝わり、画面に現れてきます。仮想DOMは、複雑なUIを苦労せずに実装するための仕組みと言えます。
+Virtual DOM giống như proxy của real DOM. So với real DOM, nó được thiết kế để khó gây bug trong quản lý trạng thái hơn. Thêm vào đó, về mặt performance, nó cũng tối ưu hóa xử lý rendering. Với programmer, không cần sự cẩn thận như khi xử lý real DOM. Nếu muốn thay đổi hiển thị màn hình, thao tác virtual DOM. Thay đổi xảy ra ở virtual DOM được truyền đến real DOM và xuất hiện trên màn hình. Virtual DOM có thể nói là cơ chế để implement UI phức tạp mà không cần vất vả.
 
-### 特徴その2: 宣言的UI
+### Đặc điểm 2: Declarative UI
 
-Reactの2つ目の特徴はUIを宣言的に書ける点です。Reactを使わずにUIを実装すると、命令的なコードになります。命令的なコードでは、何かを表示したい場合でもどのように表示するかのhowの部分を細かく書く必要があります。
+Đặc điểm thứ 2 của React là có thể viết UI theo cách declarative. Nếu implement UI mà không dùng React, code sẽ trở nên imperative. Trong code imperative, ngay cả khi muốn hiển thị gì đó, cần viết chi tiết phần how - làm thế nào để hiển thị.
 
-次の簡単なHTMLのリストを表示するために、命令的なコードと宣言的なコードで書き方がどう違うかを見ていきましょう。
+Hãy xem cách viết khác nhau giữa code imperative và declarative để hiển thị HTML list đơn giản sau.
 
 ```html
 <ul>
-  <li>リンゴ</li>
-  <li>オレンジ</li>
-  <li>ぶどう</li>
+  <li>Táo</li>
+  <li>Cam</li>
+  <li>Nho</li>
 </ul>
 ```
 
-まず、命令的なコードでは、次のようになります。
+Đầu tiên, với code imperative sẽ như sau.
 
 ```js twoslash
 const list = document.createElement("ul");
 const apple = document.createElement("li");
-apple.innerText = "リンゴ";
+apple.innerText = "Táo";
 list.append(apple);
 const orange = document.createElement("li");
-orange.innerText = "オレンジ";
+orange.innerText = "Cam";
 list.append(orange);
 const grape = document.createElement("li");
-grape.innerText = "ぶどう";
+grape.innerText = "Nho";
 list.append(grape);
 ```
 
-この処理を日本語に書き下すと、次のようになります。
+Nếu viết lại xử lý này bằng tiếng Việt sẽ như sau.
 
-- `ul`要素を作り、変数`list`に代入する
-- `li`要素を作り、変数`apple`に代入する
-- `apple`のテキストは「リンゴ」にする
-- `list`に`apple`を追加する
-- `li`要素を作り、変数`orange`に代入する
-- `orange`のテキストは「オレンジ」にする
-- `list`に`orange`を追加する
+- Tạo element `ul`, gán vào biến `list`
+- Tạo element `li`, gán vào biến `apple`
+- Text của `apple` là "Táo"
+- Thêm `apple` vào `list`
+- Tạo element `li`, gán vào biến `orange`
+- Text của `orange` là "Cam"
+- Thêm `orange` vào `list`
 - ...
 
-3つの果物のリストのような簡単なUIでも、どのように作ったらいいかを細かく記述しなければなりません。これを見るだけでも、UIを命令的に書くのは大変で、保守していくことも考えると望ましい書き方には思えないのではないでしょうか。
+Ngay cả list đơn giản của 3 loại trái cây cũng phải mô tả chi tiết làm như thế nào. Chỉ nhìn điều này, có lẽ bạn không nghĩ viết UI theo cách imperative là dễ dàng và việc bảo trì cũng không phải cách viết mong muốn.
 
-今度は宣言的な書き方を見てみましょう。次はReactでの書き方です。
+Bây giờ hãy xem cách viết declarative. Sau đây là cách viết trong React.
 
 ```js twoslash
 function Fruits() {
   return (
     <ul>
-      <li>リンゴ</li>
-      <li>オレンジ</li>
-      <li>ぶどう</li>
+      <li>Táo</li>
+      <li>Cam</li>
+      <li>Nho</li>
     </ul>
   );
 }
 ```
 
-見てのとおり、どのように表示するかの部分はなく、「このような表示になってほしい」という目標だけが書かれています。
+Như bạn thấy, không có phần làm thế nào để hiển thị, chỉ có mục tiêu "muốn hiển thị như thế này" được viết.
 
-宣言的UIでは、実装の細部やアルゴリズムを気にしなくてよいです。「どんなUIにしたいか」の一点に集中してコードを書けるようになります。
+Với declarative UI, không cần quan tâm đến chi tiết implementation hay algorithm. Có thể tập trung viết code chỉ vào một điểm "muốn UI như thế nào".
 
-### 特徴その3: コンポーネントベース
+### Đặc điểm 3: Component-based
 
-Reactの3つ目の特徴は、コンポーネントベースです。コンポーネントというのはUIの部品のことです。たとえば、小さいもので言えばボタンや入力欄、より大きめの部品だとフォーム、さらに大きい部品ではページもコンポーネントです。
+Đặc điểm thứ 3 của React là component-based. Component là các phần của UI. Ví dụ, nhỏ thì là button hay input field, phần lớn hơn là form, phần lớn hơn nữa là page cũng là component.
 
-Reactには、小さいコンポーネントを組み合わせ、大きなアプリケーションを成すという思想があります。ここがReactがコンポーネントベースと言われるゆえんです。
+React có tư tưởng kết hợp các component nhỏ để tạo thành application lớn. Đây là lý do React được gọi là component-based.
 
-コンポーネントベースのメリットは、同じコンポーネントを再利用できる点です。たとえば、ボタンコンポーネントを1つ作っておけば、それをアプリケーションの至るところで使い回せます。プログラマは同じコードを何度も書かなくて済み、開発効率が良くなります。
+Lợi ích của component-based là có thể tái sử dụng cùng một component. Ví dụ, nếu tạo một button component, có thể sử dụng lại nó ở nhiều nơi trong application. Programmer không cần viết cùng code nhiều lần, hiệu quả phát triển tốt hơn.
 
-加えて、オープンソースのコンポーネントも数多く公開されています。プログラマは自分でゼロからコンポーネントを作らなくても、公開されているコンポーネントを利用することもできます。カレンダーUIのような自力で作ると面倒なコンポーネントも種類豊富に公開されているので、開発者はオープンソースのコンポーネントを使うとより手軽にアプリケーションが作れます。
+Thêm vào đó, nhiều component open source cũng được công bố. Programmer không cần tự tạo component từ đầu, cũng có thể sử dụng component đã được công bố. Các component phức tạp như calendar UI tự làm thì phiền phức cũng được công bố phong phú về chủng loại, nên developer sử dụng component open source có thể tạo application dễ dàng hơn.
 
-## このチュートリアルに必要なもの
+## Những thứ cần thiết cho tutorial này
 
-このチュートリアルをやるに当たって、必要なツールがあります。それらはここにリストアップしておくのであらかじめ用意しておいてください。
+Để thực hiện tutorial này, cần có một số tool. Hãy chuẩn bị trước những thứ được liệt kê ở đây.
 
-- Node.js (このチュートリアルではv22.16.0で動作確認しています)
-- NPM (v10.8.2で動作確認しています)
-- VS CodeやWebStormなどのエディター
+- Node.js (Tutorial này được xác nhận hoạt động với v22.16.0)
+- NPM (Được xác nhận hoạt động với v10.8.2)
+- Editor như VS Code hoặc WebStorm
 
-## プロジェクトを作る
+## Tạo project
 
-まず、`npm create`コマンドでReactプロジェクトのひながたを生成します。
+Đầu tiên, tạo template React project bằng lệnh `npm create`.
 
 ```sh
 npm create vite@latest like-button -- --template react-swc-ts
 ```
 
-1分ほどするとひながたの生成が完了します。`like-button`ディレクトリが生成されるので、次のコマンドを実行してそのディレクトリに移動すると、ひながたが生成されているのが分かります。
+Sau khoảng 1 phút, việc tạo template hoàn tất. Thư mục `like-button` được tạo, chạy lệnh sau để di chuyển vào thư mục đó, bạn sẽ thấy template đã được tạo.
 
 ```sh
 cd like-button
 ```
 
-```text title="生成後のディレクトリ構成"
+```text title="Cấu trúc thư mục sau khi tạo"
 .
 ├── eslint.config.js
 ├── index.html
@@ -146,34 +146,34 @@ cd like-button
 └── vite.config.ts
 ```
 
-ひながたのディレクトリに移動したら、次のコマンドを実行してライブラリなど依存パッケージをインストールします。
+Sau khi di chuyển vào thư mục template, chạy lệnh sau để install các dependency package như library.
 
 ```sh
 npm install
 ```
 
-これを実行するとReactもインストールされます。インストールされたReactのバージョンを確認するには次のコマンドを用います。
+Chạy lệnh này sẽ install React. Để xác nhận version React đã install, dùng lệnh sau.
 
 ```sh
 npm list react
 ```
 
-```text title="npm list reactの実行結果"
+```text title="Kết quả chạy npm list react"
 like-button@0.0.0 /Users/test/like-button
 ├─┬ react-dom@18.3.1
 │ └── react@18.3.1 deduped
 └── react@18.3.1
 ```
 
-このディレクトリにて次のコマンドを実行すると、Reactのローカル開発サーバーが起動します。
+Chạy lệnh sau trong thư mục này sẽ khởi động React local development server.
 
 ```sh
 npm run dev
 ```
 
-コマンドを実行すると、次のようなメッセージが表示されます。ここに表示されているURLをブラウザで開くと、ひながたアプリの様子が確認できます。
+Khi chạy lệnh, message sau sẽ hiển thị. Mở URL hiển thị ở đây trong browser, bạn có thể xác nhận trạng thái của template app.
 
-```text title="npm run devの実行結果"
+```text title="Kết quả chạy npm run dev"
   VITE v5.4.10  ready in 262 ms
 
   ➜  Local:   http://localhost:5173/
@@ -181,15 +181,15 @@ npm run dev
   ➜  press h + enter to show help
 ```
 
-![ViteとReactのロゴが表示された、カウントが0のVite + Reactスターターページ](react-like-button-tutorial/screen1.png)
+![Trang starter Vite + React với logo Vite và React hiển thị, count là 0](react-like-button-tutorial/screen1.png)
 
-<!-- TODO: 上の画像をおきかえる -->
+<!-- TODO: Thay thế hình trên -->
 
-Reactのローカル開発サーバーを停止する場合は、<kbd>Ctrl</kbd> + <kbd>C</kbd>キーを押してください。<kbd>Ctrl</kbd>キーと<kbd>C</kbd>キーを同時に押すと、コマンドを中断することができます。
+Để dừng React local development server, nhấn <kbd>Ctrl</kbd> + <kbd>C</kbd>. Nhấn đồng thời phím <kbd>Ctrl</kbd> và phím <kbd>C</kbd> có thể ngắt lệnh.
 
-ここからは実際にコードを書いて行きますので、生成したlike-buttonプロジェクトをお好みのエディターで開いてください。
+Từ đây chúng ta sẽ thực sự viết code, nên hãy mở project like-button đã tạo trong editor yêu thích của bạn.
 
-ひながた初期状態の上のページはsrc/App.tsxの内容が描画されています。ためしに、src/App.tsxを変更してみましょう。App.tsxを、次のような内容にまるっと書き換えてください。
+Trang trên ở trạng thái ban đầu của template là nội dung của src/App.tsx được render. Hãy thử thay đổi src/App.tsx. Thay thế toàn bộ App.tsx thành nội dung sau.
 
 ```tsx twoslash title="src/App.tsx"
 // @noErrors
@@ -198,7 +198,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <h1>TypeScriptはいいぞ</h1>
+      <h1>TypeScript tuyệt vời</h1>
     </>
   );
 }
@@ -206,29 +206,29 @@ function App() {
 export default App;
 ```
 
-:::tip ワンポイント解説: .tsxって何？TypeScriptの中にHTMLが書ける？
+:::tip Giải thích: .tsx là gì? Có thể viết HTML trong TypeScript?
 
-App.tsxを見てこのような疑問を持ったのではないでしょうか。このHTMLに見える部分はJSXと言われるものです。JSXはJavaScriptを拡張した言語で、JavaScriptの中にXMLを直接書けるようにしたものです。XMLとHTMLは厳密には異なりますが、ここでは同じものと考えてください。
+Nhìn App.tsx, bạn có thể có câu hỏi như vậy. Phần trông giống HTML này được gọi là JSX. JSX là ngôn ngữ mở rộng của JavaScript, cho phép viết XML trực tiếp trong JavaScript. XML và HTML về mặt nghiêm ngặt thì khác nhau, nhưng ở đây hãy coi chúng giống nhau.
 
-UIを実装しようとするとHTMLと密接に関わるコードを書くことになりますが、JavaScriptの構文だけでHTMLを表現しようとすると、可読性が低くなりがちです。ReactではJSXを採用することで可読性の問題を解決しました。JSXは、HTMLをほぼありのままに書けるので、可読性の高いコードになります。
+Khi cố implement UI, bạn sẽ viết code liên quan chặt chẽ với HTML, nhưng nếu cố biểu diễn HTML chỉ bằng cú pháp JavaScript, khả năng đọc thường kém. React đã giải quyết vấn đề khả năng đọc bằng cách áp dụng JSX. JSX có thể viết HTML gần như nguyên vẹn, nên code có khả năng đọc cao.
 
-TypeScriptとJSXは本来無関係の言語ですが、開発者の利便性のために、TypeScriptでもJSXが書けるようになっています。
+TypeScript và JSX ban đầu là ngôn ngữ không liên quan, nhưng vì tiện lợi cho developer, TypeScript cũng có thể viết JSX.
 
-JSXを書いたJavaScriptファイルは拡張子を.jsxにします。同様にTypeScriptファイルは.tsxにします。
+File JavaScript viết JSX có extension .jsx. Tương tự, file TypeScript có extension .tsx.
 
 :::
 
 [JSX](../reference/jsx/README.md)
 
-書き換えたらファイルを保存し、ブラウザで確認してみてください。ブラウザに書いた文言が表示されていればOKです。
+Sau khi thay đổi, save file và kiểm tra trong browser. Nếu text bạn viết hiển thị trong browser là OK.
 
-![「TypeScriptはいいぞ」というテキストが表示されたWebページのスクリーンショット](react-like-button-tutorial/screen2.png)
+![Screenshot trang web hiển thị text "TypeScript tuyệt vời"](react-like-button-tutorial/screen2.png)
 
-## ボタンを作る場所を用意する
+## Tạo chỗ đặt button
 
-ここからは、いいねボタンを実際に作っていきます。まずは、いいねボタンを実装する場所を作ります。
+Từ đây, chúng ta sẽ thực sự tạo nút like. Đầu tiên, tạo nơi để implement nút like.
 
-まず、先ほど「TypeScriptはいいぞ」と書いたところを`<LikeButton />`に変えます。次に、`LikeButton`関数を作ります。次のコードのようになるようにしてください。
+Đầu tiên, thay đổi chỗ vừa viết "TypeScript tuyệt vời" thành `<LikeButton />`. Tiếp theo, tạo hàm `LikeButton`. Hãy làm cho code trông như sau.
 
 ```tsx twoslash {6,11-13} title="src/App.tsx"
 import "./App.css";
@@ -242,41 +242,41 @@ function App() {
 }
 
 function LikeButton() {
-  return <span>いいねボタン予定地</span>;
+  return <span>Vị trí nút like</span>;
 }
 
 export default App;
 ```
 
-この`LikeButton`関数が、これからいいねボタンを作っていく場所になります。
+Hàm `LikeButton` này là nơi chúng ta sẽ tạo nút like từ bây giờ.
 
-![「いいねボタン予定地」というテキストが中央に表示されたブラウザウィンドウのスクリーンショット](react-like-button-tutorial/screen3.png)
+![Screenshot browser window hiển thị text "Vị trí nút like" ở giữa](react-like-button-tutorial/screen3.png)
 
-:::tip ワンポイント解説: 関数コンポーネント
+:::tip Giải thích: Function component
 
-ReactのJSXでは、HTMLタグの`div`や`header`が使えるだけでなく、自分で定義した関数もタグとして使うことができます。上で定義した`LikeButton`関数はその一例です。JSXを戻り値として返す関数だけがタグとして使えます。上の例では、`span`タグが戻り値になっているのがわかると思います。
+Trong JSX của React, không chỉ có thể sử dụng HTML tag như `div` hay `header`, mà còn có thể sử dụng hàm bạn tự định nghĩa như tag. Hàm `LikeButton` được định nghĩa ở trên là một ví dụ. Chỉ những hàm trả về JSX mới có thể được sử dụng như tag. Trong ví dụ trên, bạn có thể thấy tag `span` là return value.
 
-JSXを戻り値にする関数をReact用語で「関数コンポーネント」と言います。Reactを使ったフロントエンドアプリケーション開発では、関数コンポーネントをうまく使うことがポイントになります。画面の部品をコンポーネントにしておくと、再利用できたり変更が一箇所で済んだりと、開発や保守がしやすくなります。
-
-:::
-
-:::tip ワンポイント解説: JSXのセルフクロージング要素
-
-先ほども書いたように、JSXはJavaScriptの拡張構文であり、厳密にはHTMLと異なるものです。そのため、JSXにはHTMLとは異なる書き方や制約があります。
-
-`<LikeButton />`のようにスラッシュをタグに含める書き方も、JSXならではの書き方です。これはセルフクロージング要素(self-closing element)と呼ばれます。自己閉じ要素、自己完結型要素と呼ばれることもあります。`<LikeButton></LikeButton>`のように子要素などを持たない場合に、`<LikeButton />`のように末尾に`/`をつけることで、短く表現できる書き方です。
-
-JSXとHTMLのその他の違いについては、[Reactの公式ドキュメント](https://beta.reactjs.org/learn/writing-markup-with-jsx)を参照してください。
+Hàm có JSX là return value được gọi là "function component" trong thuật ngữ React. Trong phát triển frontend application sử dụng React, việc sử dụng function component tốt là điểm quan trọng. Nếu biến các phần của màn hình thành component, có thể tái sử dụng, thay đổi chỉ cần ở một chỗ, và việc phát triển bảo trì trở nên dễ dàng hơn.
 
 :::
 
-## ボタンのビジュアルを作り込む
+:::tip Giải thích: Self-closing element trong JSX
 
-いいねボタンの実装場所が確保できたので、ここではボタンのタグを変更したり、CSSを書いたりして、ボタンの見た目を作っていきます。今回作るボタンは次の図のようなシンプルなものです。
+Như đã viết trước đó, JSX là cú pháp mở rộng của JavaScript, về mặt nghiêm ngặt khác với HTML. Do đó, JSX có cách viết và ràng buộc khác với HTML.
 
-![今回実装するいいねボタン](react-like-button-tutorial/like1.png)
+Cách viết như `<LikeButton />` với slash trong tag cũng là cách viết riêng của JSX. Đây được gọi là self-closing element. Đôi khi cũng được gọi là self-closing element, self-contained element. Khi không có child element như `<LikeButton></LikeButton>`, có thể biểu diễn ngắn gọn bằng cách thêm `/` ở cuối như `<LikeButton />`.
 
-まずは、`LikeButton`関数の`span`タグのテキストを`♥ {count}`にします。この`count`は変数なので、その変数も一緒に定義します。
+Về các khác biệt khác giữa JSX và HTML, hãy tham khảo [tài liệu chính thức của React](https://beta.reactjs.org/learn/writing-markup-with-jsx).
+
+:::
+
+## Tạo visual của button
+
+Đã có chỗ đặt nút like, ở đây chúng ta sẽ thay đổi tag của button, viết CSS, và tạo giao diện của button. Button chúng ta tạo lần này là button đơn giản như hình sau.
+
+![Nút like sẽ implement lần này](react-like-button-tutorial/like1.png)
+
+Đầu tiên, thay đổi text của tag `span` trong hàm `LikeButton` thành `♥ {count}`. `count` này là biến, nên cũng định nghĩa biến đó cùng lúc.
 
 ```tsx twoslash {2-3} title="src/App.tsx"
 function LikeButton() {
@@ -285,9 +285,9 @@ function LikeButton() {
 }
 ```
 
-`count`変数は固定値になっていますが、あとでクリックしたときに増減するように変えるので今はこれで構いません。JSX内では`{}`で囲まれた部分には、JavaScriptの変数や式が書けます。上の例は変数名だけですが、`{count + 1}`のような式も有効です。
+Biến `count` là giá trị cố định, nhưng sau này sẽ thay đổi để tăng giảm khi click nên bây giờ như thế này là được. Trong JSX, phần được bao bởi `{}` có thể viết biến hoặc expression JavaScript. Ví dụ trên chỉ là tên biến, nhưng expression như `{count + 1}` cũng hợp lệ.
 
-次に、CSSのクラスを割り当てるために、`span`タグに`className`属性を追加します。
+Tiếp theo, để gán CSS class, thêm attribute `className` vào tag `span`.
 
 ```tsx twoslash {3} title="src/App.tsx"
 function LikeButton() {
@@ -296,13 +296,13 @@ function LikeButton() {
 }
 ```
 
-:::tip ワンポイント解説: class属性は使わない？
+:::tip Giải thích: Không dùng attribute class?
 
-HTMLではCSSクラスを指定するのに`class`属性を用いるので、ここで`className`属性にしていることに驚いたのではないでしょうか。これは初期のReactがDOMプロパティに直接値をセットしていた名残りです。DOMでは、HTMLの`class`属性が`className`プロパティになります。現在は、ReactがDOMプロパティを直接セットすることがなくなったので、`className`属性に縛られる技術的理由はないのですが、React開発陣は`class`属性への乗り換えは慎重のようです。これまで作られたコンポーネントが動かなくなるかも知れないからです。また、両方サポートする気もないようです。`class`と`className`のどちらもOKとなると混乱を招くからです。
+Trong HTML, dùng attribute `class` để chỉ định CSS class, nên bạn có thể ngạc nhiên khi ở đây dùng attribute `className`. Đây là di sản từ thời đầu React khi set giá trị trực tiếp vào DOM property. Trong DOM, attribute `class` của HTML trở thành property `className`. Hiện tại, React không còn set trực tiếp DOM property nữa, nên về mặt kỹ thuật không có lý do phải bị ràng buộc bởi attribute `className`, nhưng team phát triển React có vẻ thận trọng về việc chuyển sang attribute `class`. Vì có thể component đã được tạo cho đến nay sẽ không hoạt động. Ngoài ra, họ cũng không có ý định hỗ trợ cả hai. Vì nếu cả `class` và `className` đều OK sẽ gây nhầm lẫn.
 
 :::
 
-続いて、`likeButton`クラスのCSSを書いていきます。Reactではスタイルシートを実装するのにいくつか方法がありますが、ここではApp.cssにCSSを書く方法にします。次のCSSをApp.cssの最後に追加してください。
+Tiếp theo, viết CSS cho class `likeButton`. Trong React có nhiều cách implement stylesheet, ở đây chúng ta sẽ dùng cách viết CSS trong App.css. Thêm CSS sau vào cuối App.css.
 
 ```css title="src/App.css"
 .likeButton {
@@ -314,16 +314,16 @@ HTMLではCSSクラスを指定するのに`class`属性を用いるので、こ
 }
 ```
 
-App.cssに上の内容を書いたら、ブラウザで確認してみましょう。スタイルが効いていれば、次の図のような表示になっているはずです。
+Sau khi viết nội dung trên vào App.css, hãy kiểm tra trong browser. Nếu style có hiệu lực, hiển thị sẽ như hình sau.
 
-![赤色の背景の上にハートアイコンと数字「999」が表示された「いいね」ボタンがブラウザの中央に配置されているスクリーンショット](react-like-button-tutorial/screen4.png)
+![Screenshot button "like" với icon heart và số "999" trên nền màu đỏ đặt ở giữa browser](react-like-button-tutorial/screen4.png)
 
-:::caution トラブルシューティング
+:::caution Troubleshooting
 
-App.cssはApp.tsxで`import`しているので特に何もしなくても`LikeButton`コンポーネントのスタイルに反映されます。もし、スタイルが反映されていないようなら、App.tsxにApp.cssを`import`するコードがあるか確認してください。
+App.css được `import` trong App.tsx nên sẽ tự động phản ánh vào style của component `LikeButton` mà không cần làm gì đặc biệt. Nếu style không được phản ánh, hãy xác nhận trong App.tsx có code `import` App.css không.
 
 ```tsx twoslash {1} title="src/App.tsx"
-import "./App.css"; // この行があるか確認する
+import "./App.css"; // Xác nhận có dòng này
 
 function App() {
   // ...
@@ -332,17 +332,17 @@ function App() {
 
 :::
 
-ここまでで、ボタンのビジュアルの作り込みは一旦完了です。
+Đến đây việc tạo visual của button tạm hoàn thành.
 
-## ボタンに機能をつける
+## Thêm chức năng cho button
 
-このままでは、ボタンを押しても何も起きません。ここからは、ボタンを押したときに999がひとつ増えて1,000にカウントアップされる機能を作っていきます。
+Như thế này, nhấn button cũng không có gì xảy ra. Từ đây, chúng ta sẽ tạo chức năng count up từ 999 lên 1,000 khi nhấn button.
 
-現状のボタンは`count`変数を表示していますが、この変数は固定値になっています。この値が変動できるように、Reactの`useState`関数を使い、カウント数の状態をReactに管理させるようにします。
+Button hiện tại hiển thị biến `count`, nhưng biến này là giá trị cố định. Để giá trị này có thể thay đổi, sử dụng hàm `useState` của React để React quản lý trạng thái count.
 
 ```tsx twoslash {2,13} title="App.tsx"
 import "./App.css";
-import { useState } from "react"; // この行を追加
+import { useState } from "react"; // Thêm dòng này
 
 function App() {
   return (
@@ -353,16 +353,16 @@ function App() {
 }
 
 function LikeButton() {
-  const [count, setCount] = useState(999); // このように書き換える
+  const [count, setCount] = useState(999); // Viết lại như thế này
   return <span className="likeButton">♥ {count}</span>;
 }
 
 export default App;
 ```
 
-この`useState`は関数コンポーネントに状態を持たせるためのReactの機能です。`useState`の戻り値を`count`と`setCount`の2つの変数に代入しています。`count`には`999`のような値が代入され、`setCount`には`count`の値を変更する関数が代入されます。
+`useState` này là tính năng của React để cho function component có state. Return value của `useState` được gán vào 2 biến `count` và `setCount`. `count` được gán giá trị như `999`, `setCount` được gán hàm để thay đổi giá trị của `count`.
 
-次に、`span`要素をクリックしたときに、`count`の値を増加する`handleClick`関数を実装します。この関数では、現在の`count`の値に1を足した値を`setCount`関数に渡すようにします。そして、`span`要素の`onClick`属性に`handleClick`関数を渡します。
+Tiếp theo, implement hàm `handleClick` để tăng giá trị `count` khi click vào element `span`. Trong hàm này, truyền giá trị `count` hiện tại cộng 1 vào hàm `setCount`. Và truyền hàm `handleClick` vào attribute `onClick` của element `span`.
 
 ```tsx twoslash {14-16,18} title="src/App.tsx"
 import "./App.css";
@@ -391,8 +391,8 @@ function LikeButton() {
 export default App;
 ```
 
-これで、ボタンをクリックしたらいいねの数が増えるようになります。
+Bây giờ khi click button, số like sẽ tăng lên.
 
 ![](react-like-button-tutorial/like2.gif)
 
-以上でTypeScriptで作るReactいいねボタンは完成です。
+Đến đây nút Like React tạo với TypeScript đã hoàn thành.

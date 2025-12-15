@@ -2,92 +2,92 @@
 image: /overview/ecosystem/typescript-ecosystem-map.png
 ---
 
-# TypeScriptとエコシステム
+# TypeScript và hệ sinh thái
 
 [![](/overview/ecosystem/typescript-ecosystem-map.svg)](/overview/ecosystem/typescript-ecosystem-map.svg)
 
-TypeScriptを学習するとき、TypeScriptそのものを理解することは不可欠です。しかし、それだけでは実務上不十分なことが多いです。実際の現場では、TypeScriptに数多くの技術スタックを組み合わせて、開発を行うからです。そのため、TypeScriptを知ると同時に、TypeScriptをとりまくエコシステムを知ることが重要になってきます。
+Khi học TypeScript, việc hiểu bản thân TypeScript là không thể thiếu. Tuy nhiên, chỉ như vậy thường không đủ cho công việc thực tế. Trong thực tế, phát triển được thực hiện bằng cách kết hợp TypeScript với nhiều technology stack khác nhau. Do đó, việc biết hệ sinh thái xung quanh TypeScript cũng quan trọng như việc biết TypeScript.
 
-前項の[TypeScript誕生の背景](./before-typescript.md)が歴史学だとすると、本項は地理学です。フロントエンドの技術スタックを中心に、TypeScriptとの関わりや、各技術の役割について俯瞰的に学びます。
+Nếu phần trước [Bối cảnh ra đời của TypeScript](./before-typescript.md) là lịch sử học, thì phần này là địa lý học. Chúng ta sẽ học tổng quan về mối quan hệ với TypeScript và vai trò của từng công nghệ, tập trung vào technology stack frontend.
 
-## 言語
+## Ngôn ngữ
 
-JavaScriptの仕様を定義したのがECMAScriptです。ECMAScriptはJavaScriptのコア部分の仕様を扱います。ブラウザ関連のJavaScript仕様を定めるのがWHATWGです。また、XMLの構文をJavaScriptに書けるJSXという言語もあります。TypeScriptは、JavaScriptを拡張した言語です。JSXも取り込んでいます。したがって、TypeScriptの仕様には、ECMAScript由来のもの、WHATWG由来のもの、JSX、そして、TypeScript固有仕様が含まれることになります。
+ECMAScript là specification định nghĩa JavaScript. ECMAScript xử lý specification phần core của JavaScript. WHATWG định nghĩa specification JavaScript liên quan đến browser. Ngoài ra còn có ngôn ngữ JSX cho phép viết cú pháp XML trong JavaScript. TypeScript là ngôn ngữ mở rộng JavaScript. Nó cũng tích hợp JSX. Do đó, specification của TypeScript bao gồm những thứ có nguồn gốc từ ECMAScript, có nguồn gốc từ WHATWG, JSX, và specification riêng của TypeScript.
 
-[ECMASCript](./ecmascript.md)
+[ECMAScript](./ecmascript.md)
 
-## ライブラリ
+## Library
 
-### UIライブラリ
+### UI Library
 
-HTML、CSS、JavaScriptを使えば、UIを持ったウェブアプリケーションを作ることができます。しかし、複雑なUIは素のJavaScriptだけで作るのは工数が大きくなりがちです。JavaScriptには、UIを作りやすくするライブラリが多くあります。その中でも特に人気なのが、React、Vue、Angular、Svelteです。UIライブラリを使うと、素のJavaScriptで書くよりも、少ないコード量で実装できたり、保守性の高いコードで書けたりとメリットがあります。
+Với HTML, CSS và JavaScript, bạn có thể tạo web application có UI. Tuy nhiên, việc tạo UI phức tạp chỉ với JavaScript thuần thường tốn nhiều công sức. JavaScript có nhiều library giúp dễ dàng tạo UI. Trong số đó, phổ biến nhất là React, Vue, Angular và Svelte. Sử dụng UI library có lợi ích như có thể implement với ít code hơn so với viết JavaScript thuần, hoặc viết code có khả năng bảo trì cao hơn.
 
 [React](../tutorials/react-like-button-tutorial.md)
 
-### フロントエンドフレームワーク
+### Frontend Framework
 
-ウェブアプリケーション開発には多種多様な要件があるものの、どんなアプリケーションでも共通した要件、ファイル構成などある程度型にはめられるパターンがあります。フロントエンドフレームワークは、ウェブアプリケーション開発で、よくありがちな機能を車輪の再発明をすることなく開発に臨めるよう、ウェブアプリケーションの土台となるものです。
+Mặc dù phát triển web application có nhiều yêu cầu đa dạng, nhưng có những pattern có thể đóng khung ở mức độ nhất định như yêu cầu chung cho mọi ứng dụng, cấu trúc file. Frontend framework là nền tảng của web application, cho phép bạn bắt đầu phát triển mà không cần phát minh lại bánh xe cho các tính năng thường gặp.
 
-フロントエンドフレームワークには、よく使われるものとして、Next.js、Nuxt、Gatsbyなどがあります。これらを使うと、シングルページアプリケーション(SPA)や静的サイト生成、サーバーサイドレンダリングなど、フロントエンドで必要とされる機能基盤を自分で実装しなくてもよくなります。
+Trong số các frontend framework được sử dụng phổ biến có Next.js, Nuxt, Gatsby. Sử dụng chúng, bạn không cần tự implement cơ sở hạ tầng chức năng cần thiết cho frontend như single-page application (SPA), static site generation, server-side rendering.
 
 [Next.js](../tutorials/nextjs.md)
 
-### 型定義ファイル
+### Type Definition File
 
-TypeScriptは型をチェックすることで、プログラムの不具合がチェックできます。しかし、JavaScriptだけで作られたライブラリには、TypeScriptコンパイラーがチェックの材料にする型情報がついていません。
+TypeScript có thể kiểm tra lỗi chương trình bằng cách kiểm tra kiểu. Tuy nhiên, library được tạo chỉ bằng JavaScript không có thông tin kiểu mà TypeScript compiler cần để kiểm tra.
 
-JavaScript純正のライブラリに型情報を持たせる機能として、TypeScriptには型定義ファイルというものがあります。型定義ファイルは、ライブラリの型情報を記したファイルです。
+TypeScript có tính năng gọi là type definition file để cung cấp thông tin kiểu cho library JavaScript thuần. Type definition file là file ghi lại thông tin kiểu của library.
 
-JavaScript純正のライブラリを使いたいときは、ライブラリとは別途、型定義ファイルを入手すると、JavaScriptのライブラリであっても、TypeScriptで型チェックができるようになります。型定義ファイルの多くは、DefinitelyTypedというプロジェクトが公開しています。
+Khi muốn sử dụng library JavaScript thuần, nếu bạn lấy type definition file riêng biệt với library, bạn có thể kiểm tra kiểu TypeScript ngay cả với library JavaScript. Nhiều type definition file được công bố bởi dự án DefinitelyTyped.
 
-## 実行環境
+## Môi trường chạy
 
-JavaScriptの実行環境は大きく分けて、ブラウザとサーバーの2種類があります。ブラウザは画面描画を行うコンポーネントとして、レンダリングエンジンを持ちます。レンダリングエンジンには、BlinkやWebkit、Geckoなどがあります。
+Môi trường chạy JavaScript chia thành 2 loại lớn: browser và server. Browser có rendering engine là component vẽ màn hình. Rendering engine có Blink, Webkit, Gecko.
 
-さらに、レンダリングエンジンの内部にJavaScriptエンジンがあります。JavaScriptコードはこのエンジンで評価され実行されます。JavaScriptエンジンには、V8、SpiderMonkey、JavaScriptCoreがあります。
+Hơn nữa, bên trong rendering engine có JavaScript engine. Code JavaScript được đánh giá và chạy bởi engine này. JavaScript engine có V8, SpiderMonkey, JavaScriptCore.
 
-サーバーの実行環境にはNodeやDenoがあります。Nodeは、もっとも有名なJavaScript実行環境です。Denoは、TypeScriptがそのまま実行できることで近年注目を集める実行環境です。サーバー実行環境にはブラウザと異なりレンダリングエンジンがありませんが、JavaScriptエンジンはブラウザと共通のものを持ちます。
+Môi trường chạy server có Node và Deno. Node là môi trường chạy JavaScript nổi tiếng nhất. Deno là môi trường chạy được chú ý gần đây vì có thể chạy TypeScript trực tiếp. Môi trường chạy server không có rendering engine như browser, nhưng có JavaScript engine chung với browser.
 
-[ECMASCript](./ecmascript.md)
+[ECMAScript](./ecmascript.md)
 
-## 開発ツール
+## Công cụ phát triển
 
-### パッケージマネージャー
+### Package Manager
 
-パッケージマネージャーは、JavaScriptのライブラリを管理するツールです。パッケージマネージャーを使うことで、JavaScriptのライブラリをインストールしたり、アップデートしたりできます。また、ライブラリ同士の依存関係の管理も行ってくれます。パッケージマネージャのうち、npmとYarnが広く使われています。npmは、Node package managerの略ですが、サーバーサイドJavaScriptのライブラリだけでなく、フロントエンド向けのライブラリも数多く取り扱います。
+Package manager là công cụ quản lý library JavaScript. Sử dụng package manager, bạn có thể install hoặc update library JavaScript. Nó cũng quản lý dependency giữa các library. Trong số các package manager, npm và Yarn được sử dụng rộng rãi. npm là viết tắt của Node package manager, nhưng nó xử lý không chỉ library cho server-side JavaScript mà còn nhiều library cho frontend.
 
-npmやYarnでインストールされるライブラリは、npmjs.comにホスティングされています。npmjs.comは中央集権型のレジストリです。
+Library được install bởi npm hoặc Yarn được host trên npmjs.com. npmjs.com là registry tập trung.
 
-### モジュールバンドラー
+### Module Bundler
 
-モジュールバンドラー(module bundler)は、複数のJavaScriptファイルをひとつのファイルに結合するためのツールです。複数のJavaScriptファイルに依存関係がある場合、それをそのままブラウザに読み込ませるには、慎重に読み込み順を指定しないと、アプリケーションが壊れてしまいます。このようなトラブルは、モジュールバンドラーを使うと回避できます。
+Module bundler là công cụ kết hợp nhiều file JavaScript thành một file. Khi có dependency giữa nhiều file JavaScript, nếu load chúng trực tiếp vào browser, ứng dụng sẽ bị hỏng trừ khi chỉ định thứ tự load cẩn thận. Vấn đề như vậy có thể tránh được bằng module bundler.
 
-また、フロントエンドでは、JavaScriptアプリケーションをブラウザにダウンロードさせる必要があります。数多くのファイルからなるアプリケーションは、モジュールバンドラーで1ファイルのほうが効率的にダウンロードできます。
+Ngoài ra, ở frontend, cần download ứng dụng JavaScript xuống browser. Ứng dụng bao gồm nhiều file có thể download hiệu quả hơn dưới dạng 1 file bằng module bundler.
 
-モジュールバンドラーを使うと、CommonJSを採用しているサーバーサイド向けに作られたライブラリをブラウザで使えるといったメリットもあります。
+Sử dụng module bundler cũng có lợi ích như có thể sử dụng library được tạo cho server-side sử dụng CommonJS trên browser.
 
-### タスクランナー
+### Task Runner
 
-タスクランナー(task runner)は、ビルドなどの開発上の手続きを自動化するツールです。複数のビルドタスクを束ねたり、実行の順番を調整することができます。タスクランナーを使うと、複雑なビルドワークフローをコマンドひとつで実行できるようになります。
+Task runner là công cụ tự động hóa quy trình phát triển như build. Nó có thể gom nhiều build task lại hoặc điều chỉnh thứ tự thực thi. Sử dụng task runner, bạn có thể chạy workflow build phức tạp chỉ với một lệnh.
 
-### トランスパイラー
+### Transpiler
 
-トランスパイラー(transpiler)は、あるプログラミング言語でかかれたコードを、別の言語に変換するツールです。トランスパイラーはコンパイラーの一種です。JavaScriptでは、新しいバージョンのJavaScriptから古いバージョンのJavaScriptに変換するトランスパイラーがあります。Babelやswcがこれにあたります。TypeScriptのtsc(TypeScript compiler)もトランスパイラーです。tscはTypeScriptからJavaScriptへの変換を行います。
+Transpiler là công cụ chuyển đổi code viết bằng một ngôn ngữ lập trình sang ngôn ngữ khác. Transpiler là một loại compiler. Trong JavaScript, có transpiler chuyển đổi từ phiên bản JavaScript mới sang phiên bản cũ. Babel và swc là như vậy. tsc (TypeScript compiler) của TypeScript cũng là transpiler. tsc thực hiện chuyển đổi từ TypeScript sang JavaScript.
 
-### コードフォーマッター
+### Code Formatter
 
-コードフォーマッター(code formatter)は、ソースコードのインデントや字下げスタイルを自動で整えてくれるツールです。コードフォーマッターを使うと、誰が書いても同じ見た目のコードに整形できます。よく使われるのが、Prettier(プリティア)です。
+Code formatter là công cụ tự động chỉnh sửa indentation và kiểu thụt lề của source code. Sử dụng code formatter, ai viết cũng có thể format thành code có cùng giao diện. Công cụ được sử dụng phổ biến là Prettier.
 
 [Prettier](./../tutorials/prettier.md)
 
-### リンター
+### Linter
 
-リンター(linter)は、コードがコーディング規約に準拠しているかをチェックするツールです。コーディング規約に沿ったコードを書くことは、保守性を高めることに繋がります。しかし、コードがコーディング規約に準拠しているかを手動でチェックするのは、大変な作業です。リンターを使うと、チェックを自動的に行えるので、開発者の生産性の向上が期待できます。リンターでよく使われるツールはESLint(イーエスリント)です。
+Linter là công cụ kiểm tra xem code có tuân thủ coding convention hay không. Việc viết code theo coding convention giúp tăng khả năng bảo trì. Tuy nhiên, việc kiểm tra thủ công xem code có tuân thủ coding convention hay không là công việc khó khăn. Sử dụng linter có thể kiểm tra tự động, nên có thể mong đợi tăng năng suất developer. Công cụ linter được sử dụng phổ biến là ESLint.
 
 [ESLint](./../tutorials/eslint.md)
 
-### Gitフック
+### Git Hook
 
-Gitフックは、Gitにコミットするタイミングや、プッシュするタイミングに、何らかのプログラムを実行する機能です。JavaScriptの開発現場では、Gitコミット時にTypeScriptのコンパイルで型チェックをしたり、リンターのチェックを起動したり、コードフォーマッターでコード整形をかけることがよくあります。Gitフックを手軽に利用できるようにするツールとして、huskyやlint-stagedがあります。
+Git hook là tính năng chạy chương trình nào đó vào thời điểm commit hoặc push Git. Trong phát triển JavaScript, thường hay kiểm tra kiểu bằng TypeScript compile, chạy kiểm tra linter, hoặc format code bằng code formatter khi Git commit. Công cụ giúp dễ dàng sử dụng Git hook có husky và lint-staged.
 
 [husky](../tutorials/husky.md)

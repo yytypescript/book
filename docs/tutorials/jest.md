@@ -1,54 +1,54 @@
-# Jestでテストを書こう
+# Viết test với Jest
 
-このチュートリアルでは、テストフレームワーク「Jest」を使い、ユニットテストをTypeScriptで書くことを学びます。
+Trong tutorial này, sử dụng test framework "Jest", bạn sẽ học cách viết unit test bằng TypeScript.
 
-## 本章で学べること
+## Những gì có thể học trong chương này
 
-本章では、簡単な関数のテストをJestで書くことを目標に、次のことを学びます。
+Trong chương này, với mục tiêu viết test cho hàm đơn giản bằng Jest, bạn sẽ học những điều sau.
 
-- Jestを使ってTypeScriptの関数をテストする方法
-- Jestの導入方法
-- Jestでのテストの書き方
-- テストの実行方法
-- 結果の見方
+- Cách test hàm TypeScript bằng Jest
+- Cách giới thiệu Jest
+- Cách viết test trong Jest
+- Cách chạy test
+- Cách đọc kết quả
 
-本章の目的はJestを完全に理解することではありません。むしろ、Jestがどういったものなのか、その雰囲気を実際に体験することに主眼を置いています。そのため、内容はかなり最低限のものとなりますが、逆に言えば少しの時間でJestを試してみれるシンプルな内容にまとまってますから、ぜひ手を動かしてみてください。
+Mục đích của chương này không phải là hiểu hoàn toàn Jest. Thay vào đó, trọng tâm là trải nghiệm thực tế Jest là gì. Do đó, nội dung khá tối thiểu, nhưng ngược lại, đây là nội dung đơn giản có thể thử Jest trong thời gian ngắn, nên hãy thử thực hành.
 
-## Jestとは
+## Jest là gì
 
-JestはJavaScriptのテストフレームワークです。TypeScriptでテストを書くこともできます。Jestは、フロントエンドライブラリのReactやVueなどのテストだけでなく、Node.js向けのパッケージのテストも行えます。要するに、JavaScriptやTypeScriptで書かれたコードであれば、そのほとんどはJestでテストが行えます。
+Jest là test framework của JavaScript. Cũng có thể viết test bằng TypeScript. Jest có thể test không chỉ frontend library như React hay Vue, mà còn package cho Node.js. Nói chung, hầu hết code viết bằng JavaScript hoặc TypeScript đều có thể test bằng Jest.
 
-## このチュートリアルに必要なもの
+## Những thứ cần thiết cho tutorial này
 
-このチュートリアルで必要なものは次のとおりです。
+Những thứ cần thiết cho tutorial này như sau.
 
-- Node.js v22以上
-- Yarn v1系 (このチュートリアルはv1.22.19で動作確認しています)
+- Node.js v22 trở lên
+- Yarn v1 (Tutorial này được xác nhận hoạt động với v1.22.19)
 
-Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
+Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường phát triển](./setup.md).
 
-パッケージ管理ツールとしてYarnを利用します。最初にインストールをしておきましょう。すでにインストール済みの方はここのステップはスキップして大丈夫です。
+Chúng ta sẽ sử dụng Yarn làm package management tool. Hãy install trước. Nếu đã install rồi thì có thể bỏ qua bước này.
 
 ```shell
 npm install -g yarn
 ```
 
-## プロジェクトを作成する
+## Tạo project
 
-まず、このチュートリアルに使うプロジェクトを作成します。
+Đầu tiên, tạo project để sử dụng cho tutorial này.
 
 ```shell
 mkdir jest-tutorial
 cd jest-tutorial
 ```
 
-プロジェクトルートにpackage.jsonを作ってください。
+Tạo package.json ở project root.
 
 ```shell
 touch package.json
 ```
 
-package.jsonの内容は次のようにします。
+Nội dung của package.json như sau.
 
 ```json title="package.json"
 {
@@ -57,47 +57,47 @@ package.jsonの内容は次のようにします。
 }
 ```
 
-## TypeScriptのインストール
+## Install TypeScript
 
-プロジェクトにTypeScriptをインストールします。
+Install TypeScript vào project.
 
 ```shell
 yarn add -D typescript
 ```
 
-次に、tsconfig.jsonを生成します。
+Tiếp theo, tạo tsconfig.json.
 
 ```shell
 yarn tsc --init
 ```
 
-## Jestをインストールする
+## Install Jest
 
-Jestをプロジェクトにインストールしましょう。インストールが必要なパッケージは、次の3つです。
+Hãy install Jest vào project. Cần install 3 package sau.
 
 1. jest
 2. ts-jest
 3. @types/jest
 
-これらのインストールは次のコマンドで、一度にインストールできます。
+Có thể install tất cả cùng lúc bằng lệnh sau.
 
 ```shell
 yarn add -D 'jest@^29.7.0' 'ts-jest@^29.3.4' '@types/jest@^29.5.14'
 ```
 
-`jest`はJest本体です。JavaScriptだけのプロジェクトであれば、このパッケージを入れるだけでテストが始められます。`ts-jest`は、JestをTypeScriptに対応させるためのものです。`ts-jest`を入れると、TypeScriptで書いたテストコードを、コンパイルの手間なしにそのまま実行できるようになります。`@types/jest`はJestのAPIの型定義ファイルです。TypeScriptの型情報を付与されるので、テストコードの型チェックが行えるようになります。
+`jest` là Jest core. Nếu là project chỉ có JavaScript, chỉ cần install package này là có thể bắt đầu test. `ts-jest` là để làm cho Jest tương thích với TypeScript. Khi install `ts-jest`, có thể thực thi test code viết bằng TypeScript trực tiếp mà không cần compile. `@types/jest` là file định nghĩa type của Jest API. Type information của TypeScript được bổ sung, nên có thể type check test code.
 
-## Jestの設定ファイルを作る
+## Tạo file config của Jest
 
-JestはそのままではTypeScriptを直接テストできません。なので、ここではJestでTypeScriptコードがテストできるように設定を加えます。
+Jest không thể test TypeScript trực tiếp. Vì vậy, ở đây chúng ta thêm config để Jest có thể test TypeScript code.
 
-次のコマンドを実行すると、Jestの設定ファイル`jest.config.js`が生成されます。
+Chạy lệnh sau sẽ tạo file config Jest `jest.config.js`.
 
 ```shell
 yarn ts-jest config:init
 ```
 
-生成された`jest.config.js`の内容は次のようになります。
+Nội dung của `jest.config.js` được tạo như sau.
 
 ```ts twoslash title="jest.config.js"
 /** @type {import("ts-jest/dist/types").InitialOptionsTsJest} */
@@ -107,31 +107,31 @@ module.exports = {
 };
 ```
 
-この`@type`のコメントはエディターに型情報を与えるためのものです。これを書いておくことで、エディター上で入力補完が効くようになります。
+Comment `@type` này là để cung cấp type information cho editor. Viết điều này giúp input completion hoạt động trong editor.
 
-## チェックポイント
+## Checkpoint
 
-ここまでに作成したファイルに漏れがないか確認しましょう。
+Hãy xác nhận không thiếu file đã tạo cho đến giờ.
 
 ```text
-├── jest.config.js ... Jestの設定ファイル
-├── node_modules ... jestやtypescriptがインストールされたフォルダ
+├── jest.config.js ... File config của Jest
+├── node_modules ... Thư mục đã install jest và typescript
 ├── package.json
-├── tsconfig.json ... TypeScriptの設定ファイル
+├── tsconfig.json ... File config của TypeScript
 └── yarn.lock
 ```
 
-## Jestが動くかを確認する
+## Xác nhận Jest có hoạt động không
 
-ここでは、実際のテストコードを書く前に、Jestでテストコードが実行できる状態になっているかを、動作確認用のテストファイルを作って確かめます。
+Ở đây, trước khi viết test code thực tế, chúng ta tạo test file để xác nhận xem có thể thực thi test code bằng Jest không.
 
-Jestで実行できるテストファイルには命名規則があります。ファイル名が`.test.ts`または`.spec.ts`で終わるものが、テストファイルになります。動作確認用のファイルとして、`check.test.ts`を作ってください。
+Test file có thể thực thi bằng Jest có naming convention. File có tên kết thúc bằng `.test.ts` hoặc `.spec.ts` sẽ là test file. Tạo file `check.test.ts` để xác nhận hoạt động.
 
 ```shell
 touch check.test.ts
 ```
 
-`check.test.ts`の内容は次のようにします。
+Nội dung của `check.test.ts` như sau.
 
 ```ts twoslash title="check.test.ts"
 // @types: jest
@@ -140,29 +140,29 @@ test("check", () => {
 });
 ```
 
-ファイルを保存したら、`jest`コマンドを実行してみてください。
+Sau khi save file, hãy chạy lệnh `jest`.
 
 ```shell
 yarn jest
 ```
 
-すると、次のような結果が出るはずです。
+Sẽ có kết quả như sau.
 
 ![](/tutorials/jest/check-jest-works.svg)
 
-結果に`check.test.ts`が「PASS」と表示されていれば、テストファイルが実行されていることになります。
+Nếu kết quả hiển thị `check.test.ts` là "PASS", test file đã được thực thi.
 
-問題なく実行されていることが確認できたら、`check.test.ts`は削除してください。
+Sau khi xác nhận chạy không có vấn đề, hãy xóa `check.test.ts`.
 
-```shell title="削除するコマンド"
+```shell title="Lệnh xóa"
 rm check.test.ts
 ```
 
-## このチュートリアルでテストする関数
+## Hàm test trong tutorial này
 
-ここからは、TypeScriptのテスト対象コードを書いて、それをテストしていきます。
+Từ đây, chúng ta sẽ viết TypeScript code cần test và test nó.
 
-具体的には、次のような簡単な関数のテストを書くことを例に進めていきます。
+Cụ thể, chúng ta sẽ tiến hành với ví dụ viết test cho hàm đơn giản như sau.
 
 ```ts twoslash
 function isZero(value: number): boolean {
@@ -170,20 +170,20 @@ function isZero(value: number): boolean {
 }
 ```
 
-この`isZero`関数は、数値がゼロかどうかを判定するものです。
+Hàm `isZero` này kiểm tra xem số có phải là zero hay không.
 
-## テスト対象のファイルを作る
+## Tạo file cần test
 
-まず、この関数を書いたファイルを作ります。ファイル名は`isZero.ts`にしてください。
+Đầu tiên, tạo file chứa hàm này. Tên file là `isZero.ts`.
 
 ```shell
 touch isZero.ts
 ```
 
-このファイルを作ると、プロジェクトのファイル構成は次のようになります。
+Sau khi tạo file này, cấu trúc file của project như sau.
 
 ```text
-├── isZero.ts ... テスト対象ファイル
+├── isZero.ts ... File cần test
 ├── jest.config.js
 ├── node_modules
 ├── package.json
@@ -191,16 +191,16 @@ touch isZero.ts
 └── yarn.lock
 ```
 
-`isZero.ts`の内容は次のようにします。
+Nội dung của `isZero.ts` như sau.
 
 ```ts twoslash title="isZero.ts"
 function isZero(value: number): boolean {
   return value === 0;
 }
-// 注意: このままではテストできません。
+// Chú ý: Không thể test như thế này.
 ```
 
-このままでは`isZero`関数はテストできません。Jestでテストできるようにするには、関数をエクスポートする必要があります。関数をエクスポートするために、`function`の前に`export`キーワードを追加してください。
+Như thế này, hàm `isZero` không thể test được. Để có thể test bằng Jest, cần export hàm. Để export hàm, thêm keyword `export` trước `function`.
 
 ```ts twoslash title="isZero.ts" {1}
 export function isZero(value: number): boolean {
@@ -208,21 +208,21 @@ export function isZero(value: number): boolean {
 }
 ```
 
-## テストコードを書く
+## Viết test code
 
-上の`isZero`関数をテストするコードを書きます。
+Viết code test hàm `isZero` ở trên.
 
-Jestではテストコードはテスト対象と別のファイルに書きます。テストファイルを作りましょう。ファイル名は、テストしたいファイル名に、`.test.ts`をつけたものにします。テスト対象ファイルが`isZero.ts`なので、ここでは`isZero.test.ts`というファイル名にします。
+Trong Jest, test code được viết trong file khác với file cần test. Hãy tạo test file. Tên file là tên file muốn test thêm `.test.ts`. Vì file cần test là `isZero.ts`, ở đây tên file là `isZero.test.ts`.
 
 ```shell
 touch isZero.test.ts
 ```
 
-このファイルを作ると、プロジェクトのファイル構成は次のようになります。
+Sau khi tạo file này, cấu trúc file của project như sau.
 
 ```text
-├── isZero.ts ... テスト対象ファイル
-├── isZero.test.ts ... テストコードのファイル
+├── isZero.ts ... File cần test
+├── isZero.test.ts ... File test code
 ├── jest.config.js
 ├── node_modules
 ├── package.json
@@ -230,7 +230,7 @@ touch isZero.test.ts
 └── yarn.lock
 ```
 
-テスト対象の関数をテストコードで扱うには、まず関数をインポートする必要があります。`import`文を使って、`isZero`関数を読み込みましょう。
+Để xử lý hàm cần test trong test code, đầu tiên cần import hàm. Dùng câu lệnh `import` để load hàm `isZero`.
 
 ```ts twoslash title="isZero.test.ts"
 // @filename: isZero.ts
@@ -243,7 +243,7 @@ export function isZero(value: number): boolean {
 import { isZero } from "./isZero";
 ```
 
-次に、1つ目のテストケースを追加します。このテストケースは、`isZero`関数に`0`を渡したら`true`が返るかをチェックするものです。
+Tiếp theo, thêm test case đầu tiên. Test case này kiểm tra xem khi truyền `0` vào hàm `isZero` thì có trả về `true` không.
 
 ```ts twoslash {3-5} title="isZero.test.ts"
 // @types: jest
@@ -256,33 +256,33 @@ export function isZero(value: number): boolean {
 // ---cut---
 import { isZero } from "./isZero";
 
-test("0を渡したらtrueになること", () => {
+test("Truyền 0 thì trả về true", () => {
   const result = isZero(0);
   expect(result).toBe(true);
 });
 ```
 
-Jestでは`expect`関数とマッチャーを使い、結果が期待する値になっているかを記述します。マッチャーは、`expect`関数の戻り値に生えているメソッドです。上の例では、`toBe`がマッチャーになります。このメソッドの引数には期待値を書きます。上のテストケースでは、`true`が期待値なので、`toBe(true)`と記述しています。
+Trong Jest, dùng hàm `expect` và matcher để mô tả kết quả có phải giá trị mong đợi không. Matcher là method có trên return value của hàm `expect`. Trong ví dụ trên, `toBe` là matcher. Argument của method này là giá trị mong đợi. Trong test case trên, giá trị mong đợi là `true`, nên viết `toBe(true)`.
 
-`toBe`マッチャーは、JavaScriptの厳密等価比較(`===`)と同じです。したがって、`expect(result).toBe(true)`は内部的に`result === true`かを評価します。もし、この評価が真なら、テストは合格します。逆に、偽ならテストは不合格となります。
+Matcher `toBe` giống với so sánh bằng nghiêm ngặt (`===`) của JavaScript. Do đó, `expect(result).toBe(true)` nội bộ đánh giá `result === true`. Nếu đánh giá này đúng, test pass. Ngược lại, nếu sai thì test fail.
 
-マッチャーは、`toBe`以外にもさまざまなものがあります。このチュートリアルでは細かく解説しないので、詳しく知りたい方は、[公式ドキュメントのリファレンス](https://jestjs.io/ja/docs/expect)をご覧ください。
+Matcher có nhiều loại khác ngoài `toBe`. Tutorial này không giải thích chi tiết, nếu muốn biết thêm, hãy xem [reference của tài liệu chính thức](https://jestjs.io/ja/docs/expect).
 
-## テストを実行する
+## Chạy test
 
-1つ目のテストケースができたので、Jestでテストを実行してみましょう。
+Đã tạo test case đầu tiên, hãy chạy test bằng Jest.
 
 ```shell
 yarn jest
 ```
 
-テスト結果は次のように表示されていれば、テストの実行ができています。
+Nếu kết quả test hiển thị như sau, test đã thực thi được.
 
 ![](/tutorials/jest/yarn-jest-isZero-1.svg)
 
-## テストケースを追加する
+## Thêm test case
 
-さらにテストケースを追加してみましょう。今度は、`isZero`関数に`1`を渡して、戻り値が`false`になるかをチェックするケースを追加します。
+Hãy thêm test case. Lần này, thêm case kiểm tra khi truyền `1` vào hàm `isZero` thì return value là `false`.
 
 ```ts twoslash {8-11} title="isZero.test.ts"
 // @types: jest
@@ -295,25 +295,25 @@ export function isZero(value: number): boolean {
 // ---cut---
 import { isZero } from "./isZero";
 
-test("0を渡したらtrueになること", () => {
+test("Truyền 0 thì trả về true", () => {
   const result = isZero(0);
   expect(result).toBe(true);
 });
 
-test("1を渡したらfalseになること", () => {
+test("Truyền 1 thì trả về false", () => {
   const result = isZero(1);
   expect(result).toBe(false);
 });
 ```
 
-テストケースを追加したら、再びJestを実行し、テストコードを走らせます。
+Sau khi thêm test case, chạy Jest lại để chạy test code.
 
 ```shell
 yarn jest
 ```
 
-今度は次のような結果になるはずです。
+Lần này kết quả sẽ như sau.
 
 ![](/tutorials/jest/yarn-jest-isZero-2.svg)
 
-以上でJestを体験してみるチュートリアルは完了です。
+Đến đây tutorial trải nghiệm Jest đã hoàn thành.

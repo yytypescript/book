@@ -37,3 +37,10 @@ https://typescriptbook.jp/writing
 数々のPRありがとうございます！
 
 [![](https://contrib.rocks/image?repo=yytypescript/book)](https://github.com/yytypescript/book/graphs/contributors)
+
+## Launch
+
+```bash
+yarn install
+yarn start
+```

@@ -1,53 +1,53 @@
-# Reactコンポーネントのテストを書こう
+# Viết test cho React component
 
-このチュートリアルでは、Reactコンポーネントのテストを書くことを学びます。
+Trong tutorial này, bạn sẽ học cách viết test cho React component.
 
-## 本章で学べること
+## Những gì có thể học trong chương này
 
-本章では、簡単なコンポーネントのテストを書くことを目標に、具体的には次のことをやっていきます。
+Trong chương này, với mục tiêu viết test cho component đơn giản, cụ thể chúng ta sẽ làm những điều sau.
 
-- UIテストのためのライブラリ群`testing-library`を使ったテストの作成
-- `Jest`を使ったスナップショットテストの作成
+- Tạo test sử dụng nhóm library `testing-library` cho UI test
+- Tạo snapshot test sử dụng `Jest`
 
-本章の目的はコンポーネントのテストを完全に理解することではありません。むしろ、それがどういったものなのか、その雰囲気を実際に体験することに主眼を置いています。そのため、内容はかなり最低限のものとなりますが、逆に言えば少しの時間でコンポーネントテストを試してみれるシンプルな内容にまとまってますから、ぜひ手を動かしてみてください。
+Mục đích của chương này không phải là hiểu hoàn toàn test cho component. Thay vào đó, trọng tâm là trải nghiệm thực tế đó là gì. Do đó, nội dung khá tối thiểu, nhưng ngược lại, đây là nội dung đơn giản có thể thử test component trong thời gian ngắn, nên hãy thử thực hành.
 
 :::info
-Reactでコンポーネントが作れることを前提にしますので、Reactの基本的な使い方を知りたいという方は[Reactでいいねボタンを作ろう](./react-like-button-tutorial.md)をご参照ください。
+Giả định là bạn có thể tạo component với React, nếu muốn biết cách sử dụng cơ bản của React, hãy tham khảo [Tạo nút Like với React](./react-like-button-tutorial.md).
 :::
 
-このチュートリアルで作成するテストコードの完成形は[GitHub](https://github.com/yytypescript/component-test-tutorial/blob/main/src/SimpleButton.test.tsx)で確認することができます。
+Test code hoàn chỉnh được tạo trong tutorial này có thể xem tại [GitHub](https://github.com/yytypescript/component-test-tutorial/blob/main/src/SimpleButton.test.tsx).
 
-## このチュートリアルに必要なもの
+## Những thứ cần thiết cho tutorial này
 
-このチュートリアルをやるに当たって、必要なツールがあります。それらはここにリストアップしておくのであらかじめ用意しておいてください。
+Để thực hiện tutorial này, cần có một số tool. Hãy chuẩn bị trước những thứ được liệt kê ở đây.
 
-- Node.js (このチュートリアルではv18.15.0で動作確認しています)
+- Node.js (Tutorial này được xác nhận hoạt động với v18.15.0)
 - NPM
-- Yarn v1系 (このチュートリアルはv1.22.19で動作確認しています)
+- Yarn v1 (Tutorial này được xác nhận hoạt động với v1.22.19)
 
-Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
+Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường phát triển](./setup.md).
 
-パッケージ管理ツールとしてYarnを利用します。最初にインストールをしておきましょう。すでにインストール済みの方はここのステップはスキップして大丈夫です。
+Chúng ta sẽ sử dụng Yarn làm package management tool. Hãy install trước. Nếu đã install rồi thì có thể bỏ qua bước này.
 
 ```shell
 npm install -g yarn
 ```
 
-## Reactプロジェクトの作成
+## Tạo React project
 
-テストに使用するためのReactプロジェクトを作成します。下記コマンドを実行してください。
+Tạo React project để sử dụng cho test. Hãy chạy lệnh sau.
 
 ```shell
 yarn create react-app component-test-tutorial --template typescript
 ```
 
-成功すると今いるディレクトリ配下に`component-test-tutorial`というディレクトリが作られます。そのまま下記コマンドを実行して`component-test-tutorial`に移動しましょう。
+Nếu thành công, thư mục `component-test-tutorial` sẽ được tạo trong thư mục hiện tại. Chạy lệnh sau để di chuyển vào `component-test-tutorial`.
 
 ```shell
 cd component-test-tutorial
 ```
 
-`component-test-tutorial`配下のファイル構成は次のようになっているはずです。
+Cấu trúc file bên trong `component-test-tutorial` sẽ như sau.
 
 ```text
 ├── .gitignore
@@ -75,34 +75,34 @@ cd component-test-tutorial
 └── yarn.lock
 ```
 
-ここで次のコマンドを実行してください。
+Ở đây hãy chạy lệnh sau.
 
 ```shell
 yarn start
 ```
 
-自動的にブラウザが開かれて次の画像のように表示されれば、プロジェクト作成が成功しています。
+Browser sẽ tự động mở, nếu hiển thị như hình sau thì việc tạo project đã thành công.
 
-![ひながた初期状態の画面](react-like-button-tutorial/screen1.png)
+![Màn hình trạng thái ban đầu của template](react-like-button-tutorial/screen1.png)
 
-## テストするコンポーネント
+## Component sẽ test
 
-ここでは、簡単なボタンコンポーネントのテストを書くことを例に進めていきます。具体的には、はじめは`OFF`となっているボタン上の文字が、ボタンをクリックするたびに`ON`/`OFF`と切り替わるようなボタンを題材にします。
+Ở đây, chúng ta sẽ tiến hành với ví dụ viết test cho button component đơn giản. Cụ thể, đây là button với text ban đầu là `OFF`, mỗi lần click button thì text chuyển đổi giữa `ON`/`OFF`.
 
-![ボタン上の文字がクリックによってON,OFFと切り替わる様子](component-test/simpleButton.gif)
+![Hình ảnh text trên button chuyển đổi ON, OFF khi click](component-test/simpleButton.gif)
 
-このコンポーネントについて、ボタンをクリックすると`ON`/`OFF`の表示が切り替わることをテストしましょう。
+Với component này, hãy test việc hiển thị `ON`/`OFF` chuyển đổi khi click button.
 
-## テスト対象のコンポーネントを作る
+## Tạo component cần test
 
-テストを作成するために、まずはテスト対象となるコンポーネントを実装していきます。`src`ディレクトリ配下に、`SimpleButton.tsx`という名前でファイルを作成してください。
+Để tạo test, đầu tiên hãy implement component cần test. Tạo file với tên `SimpleButton.tsx` trong thư mục `src`.
 
 ```shell
 cd src
 touch SimpleButton.tsx
 ```
 
-このファイルを作ると、`src`ディレクトリのファイル構成は次のようになります。
+Sau khi tạo file này, cấu trúc file của thư mục `src` sẽ như sau.
 
 ```text
 ├── App.css
@@ -117,7 +117,7 @@ touch SimpleButton.tsx
 └── setupTests.ts
 ```
 
-`SimpleButton.tsx`の内容は次のようにします。
+Nội dung của `SimpleButton.tsx` như sau.
 
 ```tsx twoslash title="SimpleButton.tsx"
 // @noErrors
@@ -132,7 +132,7 @@ export const SimpleButton: () => JSX.Element = () => {
 };
 ```
 
-ここで、この`SimpleButton`コンポーネントの挙動を確認してみましょう。`index.tsx`ファイルを次のようにして保存してください。
+Ở đây, hãy xác nhận behavior của component `SimpleButton` này. Hãy thay đổi file `index.tsx` như sau và save.
 
 ```tsx twoslash title="index.tsx"
 // @noErrors
@@ -150,31 +150,31 @@ root.render(
 );
 ```
 
-そのうえで下記コマンドを実行しましょう。
+Sau đó hãy chạy lệnh sau.
 
 ```shell
 yarn start
 ```
 
-すると、ブラウザが自動で立ち上がり、次のようなボタンが表示されます。初めは`OFF`と表示され、クリックにより`ON`と`OFF`が交互に切り替わることを確認してください。
+Browser sẽ tự động mở, button như sau sẽ hiển thị. Ban đầu hiển thị `OFF`, hãy xác nhận `ON` và `OFF` chuyển đổi lần lượt khi click.
 
-![ボタン上の文字がクリックによってON,OFFと切り替わる様子](component-test/simpleButton.gif)
+![Hình ảnh text trên button chuyển đổi ON, OFF khi click](component-test/simpleButton.gif)
 
 :::info
-ボタンが小さければ、ブラウザの拡大率を上げてみると大きく表示されます。
+Nếu button nhỏ, hãy thử tăng tỷ lệ phóng to của browser.
 :::
 
-これで今回テストするコンポーネントを作成できました。
+Đến đây đã tạo xong component sẽ test lần này.
 
-## `testing-library`を使ったテストの作り方とやり方
+## Cách tạo và thực hiện test sử dụng `testing-library`
 
-ここからはテストの作り方とやり方に入ります。今回は、ボタンをクリックすると`ON`/`OFF`の表示が切り替わることをテストしていきます。
+Từ đây chúng ta sẽ vào phần cách tạo và thực hiện test. Lần này, chúng ta sẽ test việc hiển thị `ON`/`OFF` chuyển đổi khi click button.
 
-Reactコンポーネントをテストする方法は複数ありますが、ここでは利用者が比較的多い`testing-library`というライブラリ群を用いる方法を紹介します。`testing-library`はUIコンポーネントのテストをするためのライブラリ群であり、コンポーネントの描画やコンポーネントに対する操作などが実現できます。`testing-library`があれば、コンポーネントのテストはひととおりできると考えてよいでしょう。
+Có nhiều cách test React component, ở đây chúng tôi giới thiệu cách sử dụng nhóm library gọi là `testing-library` có số người dùng tương đối nhiều. `testing-library` là nhóm library để test UI component, có thể render component và thao tác với component. Với `testing-library`, có thể coi là có thể test component đầy đủ.
 
-### testing-libraryをインストールする
+### Install testing-library
 
-次のコマンドを実行してtesting-libraryをインストールしてください。
+Hãy chạy lệnh sau để install testing-library.
 
 ```shell
 yarn add \
@@ -183,90 +183,90 @@ yarn add \
   @testing-library/user-event@14
 ```
 
-### テストを作る
+### Tạo test
 
-それでは、実際に`testing-library`を使ってテストを作っていきましょう。まずは先ほどと同じ`src`ディレクトリ配下で`SimpleButton.test.tsx`というファイルを作成します。
+Vậy hãy thực sự tạo test sử dụng `testing-library`. Đầu tiên, tạo file `SimpleButton.test.tsx` trong cùng thư mục `src` như trước.
 
 ```shell
 touch SimpleButton.test.tsx
 ```
 
-このファイルに、テストを実行するためのひな形を書きます。
+Viết template để thực thi test trong file này.
 
 ```tsx twoslash title="SimpleButton.test.tsx"
 // @noErrors
-test("ボタンをクリックするとON/OFFの表示が切り替わる", async () => {
-  // ここにテストの中身を書いていきます
+test("Khi click button, hiển thị ON/OFF chuyển đổi", async () => {
+  // Viết nội dung test ở đây
 });
 ```
 
-ここにテストの中身を追加していきます。今回はボタンをクリックすると`ON`/`OFF`の表示が切り替わることがテストしたいので、次のような流れのテストコードになります。
+Thêm nội dung test vào đây. Lần này chúng ta muốn test hiển thị `ON`/`OFF` chuyển đổi khi click button, nên test code sẽ theo flow sau.
 
-1. ボタンを描画する
-2. `OFF`と表示されていることを確かめる
-3. ボタンをクリックする
-4. `ON`と表示されていることを確かめる
+1. Render button
+2. Xác nhận hiển thị `OFF`
+3. Click button
+4. Xác nhận hiển thị `ON`
 
 :::info
-コンポーネントのテストは、コンポーネントを描画した後、次の2つのことを組み合わせて実現されます。
+Test component được thực hiện bằng cách kết hợp 2 điều sau sau khi render component.
 
-1. コンポーネントに操作を施す
-2. コンポーネントの状態を確かめる
+1. Thực hiện thao tác với component
+2. Xác nhận trạng thái của component
 
-今回の例もボタンを描画した後、「`OFF`と表示されている」という状態確認から始まり、「クリック」という操作を施した後、再び「`ON`と表示されている」という状態確認をします。みなさんが自分でコンポーネントのテストを書く際も、どのような操作と状態確認を行えばよいかを意識することでテスト作成がスムーズにできるはずです。
+Ví dụ lần này cũng bắt đầu từ xác nhận trạng thái "hiển thị `OFF`" sau khi render button, thực hiện thao tác "click", sau đó lại xác nhận trạng thái "hiển thị `ON`". Khi bạn tự viết test cho component, việc ý thức thao tác và xác nhận trạng thái nào cần thực hiện sẽ giúp tạo test suôn sẻ hơn.
 :::
 
-まずはボタンを描画してみましょう。コンポーネントの描画は`@testing-library/react`の`render()`を使って、次のようにするだけです。なお、この`@testing-library/react`というライブラリは、今回`yarn create react-app`でReactアプリケーションを作成したためすでにプロジェクトにインストールされています。
+Đầu tiên hãy thử render button. Render component chỉ cần sử dụng `render()` của `@testing-library/react` như sau. Lưu ý là `@testing-library/react` này đã được install trong project vì chúng ta tạo React application bằng `yarn create react-app`.
 
 ```tsx twoslash {1,2,5} title="SimpleButton.test.tsx"
 // @noErrors
 import { render } from "@testing-library/react";
 import { SimpleButton } from "./SimpleButton";
 
-test("ボタンをクリックするとON/OFFの表示が切り替わる", async () => {
+test("Khi click button, hiển thị ON/OFF chuyển đổi", async () => {
   render(<SimpleButton />);
 });
 ```
 
-ボタンが描画されたので、次は`OFF`と表示されていることを確かめます。具体的には、ボタンのDOM(DOMとは、ここではボタンを表すオブジェクトくらいに捉えていただければ大丈夫です)を取得し、そのテキストが`OFF`という文字列に等しいかのアサーションを実施します。今回、ボタンのDOMの取得には`@testing-library/react`が提供するクエリのひとつである`getByRole()`を使います。これは[WAI-ARIA](https://developer.mozilla.org/ja/docs/Learn/Accessibility/WAI-ARIA_basics)(アクセシビリティ向上を主目的として定められたwebの仕様)で定められたRoleを引数に指定すると、そのRoleを持つコンポーネントを取得するクエリです。詳細は[公式ドキュメント](https://testing-library.com/docs/queries/byrole)をご参照ください。具体的には、このように書けます。
+Button đã được render, tiếp theo xác nhận hiển thị `OFF`. Cụ thể, lấy DOM của button (DOM ở đây hãy hiểu đại khái là object biểu diễn button), thực hiện assertion xem text của nó có bằng string `OFF` không. Lần này, để lấy DOM của button, chúng ta sử dụng `getByRole()`, một trong các query được `@testing-library/react` cung cấp. Đây là query lấy component có Role được chỉ định trong argument theo [WAI-ARIA](https://developer.mozilla.org/ja/docs/Learn/Accessibility/WAI-ARIA_basics) (specification web được định nghĩa chủ yếu để cải thiện accessibility). Chi tiết vui lòng tham khảo [tài liệu chính thức](https://testing-library.com/docs/queries/byrole). Cụ thể có thể viết như sau.
 
 ```tsx twoslash {1-2,7} title="SimpleButton.test.tsx"
 // @noErrors
 import { render, screen } from "@testing-library/react";
-//               ^^^^^^追加
+//               ^^^^^^thêm
 import { SimpleButton } from "./SimpleButton";
 
-test("ボタンをクリックするとON/OFFの表示が切り替わる", async () => {
+test("Khi click button, hiển thị ON/OFF chuyển đổi", async () => {
   render(<SimpleButton />);
   const simpleButton = screen.getByRole("button");
 });
 ```
 
-そして、ボタンのテキストのアサーションは`@testing-library/jest-dom`が提供する`toHaveTextContent()`を使います。`expect()`にコンポーネントを渡し、そのまま`toHaveTextContent()`を呼び出すと、そのコンポーネントがどのようなテキストを持っているかのアサーションが行なえます。具体的には次のようになります。
+Và assertion text của button sử dụng `toHaveTextContent()` được `@testing-library/jest-dom` cung cấp. Truyền component vào `expect()` và gọi `toHaveTextContent()` như vậy có thể thực hiện assertion text mà component đó có. Cụ thể như sau.
 
 ```tsx twoslash {7} title="SimpleButton.test.tsx"
 // @noErrors
 import { render, screen } from "@testing-library/react";
 import { SimpleButton } from "./SimpleButton";
 
-test("ボタンをクリックするとON/OFFの表示が切り替わる", async () => {
+test("Khi click button, hiển thị ON/OFF chuyển đổi", async () => {
   render(<SimpleButton />);
   const simpleButton = screen.getByRole("button");
   expect(simpleButton).toHaveTextContent("OFF");
 });
 ```
 
-ここで一旦`yarn test`コマンドでテストを実行し、テストが通ることを確認しましょう。
+Ở đây tạm thời chạy lệnh `yarn test` để xác nhận test pass.
 
 ```shell
 yarn test
 ```
 
-次のような結果になるはずです。
+Kết quả sẽ như sau.
 
-![テストがPASSしているコンソールの画面](component-test/result_pass2.png)
+![Màn hình console test PASS](component-test/result_pass2.png)
 
-さて、次にボタンをクリックします。コンポーネントの操作は`testing-library`に収録されている`@testing-library/user-event`を使って実現できます。`@testing-library/user-event`はコンポーネントの操作を含む、色々なユーザーイベントをテストで実行するライブラリです。具体的には`click()`にクエリでみつけた`simpleButton`を引数として渡すことで、ボタンのクリックを実現できます。
+Tiếp theo, click button. Thao tác component có thể thực hiện bằng `@testing-library/user-event` có trong `testing-library`. `@testing-library/user-event` là library thực thi các user event khác nhau bao gồm thao tác component trong test. Cụ thể, có thể thực hiện click button bằng cách truyền `simpleButton` tìm bằng query làm argument cho `click()`.
 
 ```tsx twoslash {2,6,10} title="SimpleButton.test.tsx"
 // @noErrors
@@ -274,7 +274,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SimpleButton } from "./SimpleButton";
 
-test("ボタンをクリックするとON/OFFの表示が切り替わる", async () => {
+test("Khi click button, hiển thị ON/OFF chuyển đổi", async () => {
   const user = userEvent.setup();
   render(<SimpleButton />);
   const simpleButton = screen.getByRole("button");
@@ -283,7 +283,7 @@ test("ボタンをクリックするとON/OFFの表示が切り替わる", async
 });
 ```
 
-続けて、ボタンがクリックされた後のアサーションを実施します。先ほどと同様に`toHaveTextContent()`を用いますが、今度はボタンのテキストが`ON`になっていることを確認しましょう。
+Tiếp tục, thực hiện assertion sau khi button được click. Tương tự sử dụng `toHaveTextContent()`, nhưng lần này xác nhận text của button là `ON`.
 
 ```tsx twoslash {11} title="SimpleButton.test.tsx"
 // @noErrors
@@ -291,7 +291,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SimpleButton } from "./SimpleButton";
 
-test("ボタンをクリックするとON/OFFの表示が切り替わる", async () => {
+test("Khi click button, hiển thị ON/OFF chuyển đổi", async () => {
   const user = userEvent.setup();
   render(<SimpleButton />);
   const simpleButton = screen.getByRole("button");
@@ -301,78 +301,78 @@ test("ボタンをクリックするとON/OFFの表示が切り替わる", async
 });
 ```
 
-この状態で`yarn test`コマンドでテストを実行し、テストが通ることを確認しましょう。次のような結果になるはずです。
+Với trạng thái này, chạy lệnh `yarn test` để xác nhận test pass. Kết quả sẽ như sau.
 
-![テストがPASSしているコンソールの画面](component-test/result_pass2.png)
+![Màn hình console test PASS](component-test/result_pass2.png)
 
-以上が、`testing-library`を用いてコンポーネントのテストを作成する流れです。`testing-library`からは、ここで紹介したもの以外にも多くのクエリやアサーション、ユーザーイベントの機能が提供されています。英語にはなってしまいますが、クエリは[こちら](https://testing-library.com/docs/queries/about)、アサーションは[こちら](https://github.com/testing-library/jest-dom#custom-matchers)、ユーザーイベントは[こちら](https://testing-library.com/docs/user-event/intro)に公式ドキュメントによる詳細な説明があります。実際に自分でテストを作る際には、ぜひそれらも確認してみてください。
+Đây là flow tạo test cho component sử dụng `testing-library`. Từ `testing-library`, ngoài những gì giới thiệu ở đây, còn cung cấp nhiều chức năng query, assertion và user event khác. Dù là tiếng Anh, nhưng có giải thích chi tiết bằng tài liệu chính thức về query tại [đây](https://testing-library.com/docs/queries/about), assertion tại [đây](https://github.com/testing-library/jest-dom#custom-matchers), user event tại [đây](https://testing-library.com/docs/user-event/intro). Khi tự tạo test, hãy xác nhận cả những điều đó.
 
-## `Jest`を使ったスナップショットテストの作り方とやり方
+## Cách tạo và thực hiện snapshot test sử dụng `Jest`
 
-ここからは「スナップショットテスト」と呼ばれるテスト手法について解説します。
+Từ đây chúng tôi giải thích về phương pháp test gọi là "snapshot test".
 
-先ほどまでのテストはコンポーネントのある部分(例: テキスト)の状態を確認するものでしたが、「スナップショットテスト」はコンポーネントの全体の状態を確かめるためのテストです。より正確には、コンポーネントのDOMをまるごと保存し、その保存したDOMと、テスト実行時にコンポーネントを描画して生成したDOMとが一致するかを確認します(DOMとは何かがよく分からない場合、ここではひとまず「コンポーネントを表すオブジェクト」程度に捉えてください)。
+Test trước đó là xác nhận một phần (ví dụ: text) của trạng thái component, nhưng "snapshot test" là test để xác nhận toàn bộ trạng thái component. Chính xác hơn, lưu DOM của component nguyên vẹn và xác nhận DOM đã lưu đó có khớp với DOM được tạo khi render component lúc thực thi test không (DOM là gì nếu không hiểu rõ, ở đây tạm hiểu là "object biểu diễn component").
 
-「スナップショットテスト」は簡単に書くことができます。それでいてスタイルなど含めた全体の確認ができるので、手軽なリグレッションテストとして活用できます。一方で、そうであるからこそコンポーネントを一旦作り終えるまでは機能しないテストですので、テストファーストの開発には不向きです。
+"Snapshot test" có thể viết dễ dàng. Hơn nữa có thể xác nhận toàn bộ bao gồm style, nên có thể tận dụng như regression test đơn giản. Mặt khác, chính vì vậy đây là test không hoạt động cho đến khi tạo xong component, nên không phù hợp với phát triển test-first.
 
 :::caution
-本来、スナップショットテストの対象はコンポーネントおよびDOMに限られたものではありません。幅広い対象にスナップショットテストが実施できます。詳しくはJestの[公式ドキュメント](https://jestjs.io/ja/docs/snapshot-testing#%E3%82%B9%E3%83%8A%E3%83%83%E3%83%97%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E3%81%AFreact%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%81%A7%E3%81%AE%E3%81%BF%E5%88%A9%E7%94%A8%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%81%8B)をご参照ください。
+Về nguyên tắc, đối tượng của snapshot test không giới hạn ở component và DOM. Có thể thực hiện snapshot test cho nhiều đối tượng. Chi tiết vui lòng tham khảo [tài liệu chính thức](https://jestjs.io/ja/docs/snapshot-testing#%E3%82%B9%E3%83%8A%E3%83%83%E3%83%97%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E3%81%AFreact%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%81%A7%E3%81%AE%E3%81%BF%E5%88%A9%E7%94%A8%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%81%8B) của Jest.
 :::
 
-それでは、スナップショットテストを実際にやってみましょう。先ほどと同じ`src`ディレクトリ配下で`SimpleButton.test.tsx`というファイルを作成します。
+Vậy hãy thực sự thực hiện snapshot test. Tạo file `SimpleButton.test.tsx` trong cùng thư mục `src` như trước.
 
 ```shell
 touch SimpleButton.test.tsx
 ```
 
 :::info
-「`testing-library`を使ったテストの作り方とやり方」から続けてこのチュートリアルを実施される方は、ここから作成するテストケースを`SimpleButton.test.tsx`内に追加で書いていくのでも大丈夫です。
+Nếu bạn tiếp tục thực hiện tutorial này từ "Cách tạo và thực hiện test sử dụng `testing-library`", cũng có thể viết thêm test case tạo từ đây vào `SimpleButton.test.tsx`.
 :::
 
-スナップショットテストは次の2ステップから成ります。
+Snapshot test bao gồm 2 bước sau.
 
-1. スナップショットを検証したい状態にコンポーネントを持っていく
-2. スナップショットに照合する
+1. Đưa component vào trạng thái muốn xác nhận snapshot
+2. So khớp với snapshot
 
-ここではボタンが描画されてまだ何も操作されていない状態、つまりボタンにOFFと表示されている状態についてスナップショットテストを実施することを考えます。描画されたばかりの状態を検証したいので、描画してすぐにスナップショット照合を行えばよいことになります。
+Ở đây chúng ta xem xét thực hiện snapshot test về trạng thái button được render và chưa có thao tác gì, tức là trạng thái button hiển thị OFF. Vì muốn xác nhận trạng thái vừa render, chỉ cần thực hiện so khớp snapshot ngay sau khi render.
 
-この考えをもとに、実際のコードを書いてみましょう。コンポーネントの描画には`@testing-library/react`の`render`関数を、スナップショットの照合にはJestの`toMatchSnapshot()`関数をそれぞれ使用して次のように書くことができます。
+Dựa trên suy nghĩ này, hãy viết code thực tế. Render component sử dụng hàm `render` của `@testing-library/react`, so khớp snapshot sử dụng hàm `toMatchSnapshot()` của Jest và có thể viết như sau.
 
 ```tsx twoslash title="SimpleButton.test.tsx"
 // @noErrors
 import { render } from "@testing-library/react";
 import { SimpleButton } from "./SimpleButton";
 
-test("描画されてすぐはOFFと表示されている", () => {
+test("Vừa render hiển thị OFF", () => {
   const view = render(<SimpleButton />);
   expect(view.container).toMatchSnapshot();
 });
 ```
 
 :::info
-Jest単体ではReactコンポーネントの描画ができません。そこで、コンポーネントの描画をするためのライブラリを使用する必要があります。多くのライブラリがありますが、ここでは前章「`testing-library`を使ったテストの作り方とやり方」でも紹介した`@testing-library/react`を用いました。
+Jest đơn lẻ không thể render React component. Vì vậy, cần sử dụng library để render component. Có nhiều library, nhưng ở đây chúng tôi sử dụng `@testing-library/react` đã giới thiệu trong chương trước "Cách tạo và thực hiện test sử dụng `testing-library`".
 :::
 
-テストファイルが作成できたら、`yarn test`コマンドを実行します。
+Sau khi tạo test file, chạy lệnh `yarn test`.
 
 ```shell
 yarn test
 ```
 
-そうすると次のように表示され、テストが実行されて成功した(`PASS`した)ことがわかります。
+Sẽ hiển thị như sau, có thể thấy test được thực thi và thành công (`PASS`).
 
-![SimpleButtonコンポーネントのテストがPASSした結果画面](component-test/result_pass.png)
+![Màn hình kết quả PASS test component SimpleButton](component-test/result_pass.png)
 
-さて、このとき`src`ディレクトリの中に`__snapshots__`というディレクトリが自動で追加されているはずです。これはJestがスナップショットテスト用のファイルを保存していくためのフォルダです。Jestのスナップショットテストは初回実行時にスナップショットテスト用のファイルを生成し、2回目から照合を行います。いまは初回実行だったため、ファイルとその置き場であるディレクトリが自動で生成されました。
+Bây giờ, lúc này trong thư mục `src` sẽ có thư mục `__snapshots__` được tự động thêm vào. Đây là thư mục Jest lưu file cho snapshot test. Snapshot test của Jest lần chạy đầu tiên tạo file cho snapshot test, từ lần thứ 2 thực hiện so khớp. Vì bây giờ là lần chạy đầu tiên, file và thư mục chứa nó được tự động tạo.
 
-ここでスナップショットテストについてもう少しだけ知るために、生成されたスナップショットテスト用のファイルの中身を覗いてみましょう。
+Ở đây để biết thêm một chút về snapshot test, hãy nhìn vào nội dung file cho snapshot test được tạo.
 
-`__snapshots__`ディレクトリの中に作られた`SimpleButton.test.tsx.snap`は次のようになっています。
+`SimpleButton.test.tsx.snap` được tạo trong thư mục `__snapshots__` như sau.
 
 ```js twoslash title='SimpleButton.test.tsx.snap'
 // @noErrors
 // Jest Snapshot v1, https://goo.gl/fbAQLP
-exports[`描画されてすぐはOFFと表示されている 1`] = `
+exports[`Vừa render hiển thị OFF 1`] = `
 <div>
   <button>
     OFF
@@ -381,19 +381,19 @@ exports[`描画されてすぐはOFFと表示されている 1`] = `
 `;
 ```
 
-このように、スナップショットテスト用のファイルはテストケースの名前と、そのテストケースで使われるスナップショットで構成されています。
+Như vậy, file cho snapshot test bao gồm tên test case và snapshot sử dụng trong test case đó.
 
-さて、今回生成されたスナップショットは`OFF`というテキストを持った`button`タグと、その親要素である`div`タグで構成されています。これは、まさに先ほど作った`SimpleButton`コンポーネントのDOMに一致します(`div`要素はReactの起動時に自動生成される要素です)。このスナップショットテストは実行のたびに、`SimpleButton`コンポーネントを描画して、たった今作られたこのスナップショットとの違いが生まれていないかを確認してくれます。
-たとえば、もしも何かの手違いで`SimpleButton`コンポーネントが描画されたときに`ON`と表示されるようになっていたら、このスナップショットテストに引っかかるのです。
+Bây giờ, snapshot được tạo lần này bao gồm tag `button` có text `OFF` và element `div` là parent element của nó. Điều này khớp chính xác với DOM của component `SimpleButton` vừa tạo (element `div` là element được tự động tạo khi khởi động React). Snapshot test này mỗi lần thực thi sẽ render component `SimpleButton` và xác nhận xem có sự khác biệt với snapshot vừa tạo không.
+Ví dụ, nếu do sai sót nào đó mà component `SimpleButton` hiển thị `ON` khi render, sẽ bị phát hiện bởi snapshot test này.
 
-ここで、実際に失敗する様子も確認してみましょう。`SimpleButton`コンポーネントが描画されたときに`ON`と表示されるよう変更を加えます。
+Ở đây, hãy xác nhận tình huống fail. Thêm thay đổi để component `SimpleButton` hiển thị `ON` khi render.
 
 ```tsx twoslash {4,5} title="SimpleButton.tsx"
 import { useState } from "react";
 
 export const SimpleButton: () => JSX.Element = () => {
   const [state, setState] = useState(true);
-  // falseからtrueに変更               ^^^^
+  // Thay đổi từ false sang true               ^^^^
   const handleClick = () => {
     setState((prevState) => !prevState);
   };
@@ -401,20 +401,20 @@ export const SimpleButton: () => JSX.Element = () => {
 };
 ```
 
-この状態で`yarn start`コマンドを実行すると、描画されたボタンの文字の初期値が`ON`になっていることが分かります。
+Với trạng thái này, chạy lệnh `yarn start`, có thể thấy giá trị khởi tạo của text button được render là `ON`.
 
-さて、ここで`yarn test`コマンドを実行します。
+Bây giờ, chạy lệnh `yarn test`.
 
 ```shell
 yarn test
 ```
 
-先ほどのスナップショットテストが実行されますが、今回はテストが通らず、描画されたコンポーネントとスナップショットの差分が表示されます。
+Snapshot test trước đó được thực thi, nhưng lần này test không pass và diff giữa component được render và snapshot hiển thị.
 
-![SimpleButtonコンポーネントのテストがFAILし、描画されたコンポーネントとスナップショットの差分が表示されている結果画面](component-test/result_fail.png)
+![Màn hình kết quả FAIL test component SimpleButton, hiển thị diff giữa component được render và snapshot](component-test/result_fail.png)
 
-今回はボタン内テキストの初期値を変更しましたが、たとえば`button`タグから`div`タグへの変更や`button`タグへのクラスの追加など、DOMに対する変更のほとんどをスナップショットテストで検知できます。
+Lần này chúng ta đã thay đổi giá trị khởi tạo của text trong button, nhưng hầu hết các thay đổi đối với DOM như thay đổi từ tag `button` sang tag `div` hay thêm class vào tag `button` đều có thể phát hiện bằng snapshot test.
 
-スナップショットテストの詳しいやり方やベストプラクティスなど、さらに詳しい情報に触れたい方はJestの[公式ドキュメント](https://jestjs.io/ja/docs/snapshot-testing)をご参照ください。
+Cách thực hiện snapshot test chi tiết và best practice, nếu muốn biết thêm thông tin, vui lòng tham khảo [tài liệu chính thức](https://jestjs.io/ja/docs/snapshot-testing) của Jest.
 
-以上でJestを使ったスナップショットテストのチュートリアルは完了です。また、Reactコンポーネントのテストのチュートリアルも完了です。
+Đến đây tutorial snapshot test sử dụng Jest đã hoàn thành. Ngoài ra, tutorial test React component cũng đã hoàn thành.

@@ -1,9 +1,9 @@
-# 🚧huskyでコミット前チェックを自動化しよう
+# 🚧Tự động hóa kiểm tra trước commit với husky
 
 :::caution
 
-執筆中
+Đang viết
 
-huskyを導入しprettierやeslintをコミット時に実行できるようになるチュートリアルを書く。
+Sẽ viết tutorial cho phép chạy prettier và eslint khi commit bằng cách giới thiệu husky.
 
 :::

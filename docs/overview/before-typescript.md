@@ -1,129 +1,129 @@
-# TypeScript誕生の背景
+# Bối cảnh ra đời của TypeScript
 
-TypeScriptは、JavaScriptでも大規模なアプリケーションを開発しやすくすることを目的に開発されたプログラミング言語です。
+TypeScript là ngôn ngữ lập trình được phát triển với mục đích giúp phát triển ứng dụng lớn bằng JavaScript dễ dàng hơn.
 
-確かにJavaScriptは元々、大規模な開発を想定した設計ではありませんでした。それでも、JavaScript自体が進化して、大規模開発に対応してゆけば良かったはずです。しかし、実際はそううまくは行きませんでした。代わりに、大規模開発の一部はTypeScriptが引き受けることになったのです。
+Đúng là JavaScript ban đầu không được thiết kế cho phát triển quy mô lớn. Tuy nhiên, lẽ ra JavaScript có thể tự tiến hóa để đáp ứng phát triển quy mô lớn. Nhưng thực tế không suôn sẻ như vậy. Thay vào đó, TypeScript đã đảm nhận một phần phát triển quy mô lớn.
 
-なぜ、そうなったのでしょうか？その答えはJavaScriptの歴史にあります。TypeScriptが必要な発明で、そして、今もなお必要とされている理由が見えてきます。それでは、TypeScript誕生以前の歴史をひも解いていきましょう。
+Tại sao lại như vậy? Câu trả lời nằm trong lịch sử JavaScript. Bạn sẽ thấy lý do tại sao TypeScript là phát minh cần thiết và vẫn còn cần thiết đến ngày nay. Hãy cùng tìm hiểu lịch sử trước khi TypeScript ra đời.
 
-## 1990年代
+## Thập niên 1990
 
-### JavaScriptの誕生
+### Sự ra đời của JavaScript
 
-JavaScript誕生以前は、簡単なフォームのバリデーションをするのも、サーバーサイドのプログラムで行う必要がありました。Netscape Navigatorというブラウザを開発していたNetscape社は、クライアントサイドで動くプログラムの必要性に気づきました。そこで、1995年、Netscape社はNetscape Navigatorで動くスクリプト言語として、JavaScriptを実装しました。
+Trước khi JavaScript ra đời, ngay cả validation form đơn giản cũng cần thực hiện bằng chương trình server-side. Netscape, công ty phát triển browser Netscape Navigator, nhận ra sự cần thiết của chương trình chạy ở client-side. Vì vậy, năm 1995, Netscape đã implement JavaScript như một ngôn ngữ script chạy trên Netscape Navigator.
 
-### 補助的な道具
+### Công cụ bổ trợ
 
-当時のJavaScriptは、HTMLの補助的な言語と考えられていて、その用途は簡単なアニメーションを実装したり、フォームのバリデーションに使う程度でした。ましてや、JavaScriptが大規模なアプリケーションを作るための言語とは見なされていませんでした。
+JavaScript thời đó được coi là ngôn ngữ bổ trợ cho HTML, chỉ được sử dụng để implement animation đơn giản hoặc validation form. Người ta không coi JavaScript là ngôn ngữ để tạo ứng dụng quy mô lớn.
 
-今となっては事実か不明ですが、当時JavaScriptにはセキュリティ上の問題があるという主張があり、ブラウザの設定でJavaScriptをオフにした上でネットサーフィンをするのが、“ITリテラシーが高い人”という印象すらありました。そのため、サイトによっては「当サイトを閲覧するにはJavaScriptをオンにしてください」といった注意書きもしばしば見かけました。
+Mặc dù bây giờ không rõ có đúng không, nhưng thời đó có quan điểm rằng JavaScript có vấn đề bảo mật, và thậm chí có ấn tượng rằng người "có IT literacy cao" là người tắt JavaScript khi lướt web. Do đó, một số trang web có thông báo "Vui lòng bật JavaScript để xem trang này".
 
-1990年代のJavaScriptは、現代のように必須のものでは決してなく、あくまで補助的・随意的な立ち位置の言語だったのです。
+JavaScript trong thập niên 1990 không phải là thứ thiết yếu như hiện đại, mà chỉ là ngôn ngữ có vị trí bổ trợ, tùy chọn.
 
-## 2000年代初頭
+## Đầu thập niên 2000
 
-### くすぶりはじめる大規模開発のニーズ
+### Nhu cầu phát triển quy mô lớn bắt đầu âm ỉ
 
-他のプラットフォームに目を移すと、この時期にはすでにブラウザアプリケーションを実現する技術として、[Javaアプレット](https://ja.wikipedia.org/wiki/Java%E3%82%A2%E3%83%97%E3%83%AC%E3%83%83%E3%83%88)や[Adobe Flash](https://ja.wikipedia.org/wiki/Adobe_Flash)がありました。特にFlashはJavaアプレットよりも動作が軽く、ウェブサイト全体をFlashで実装するサイトが登場したり、この時代を省みて「[Flash黄金時代](https://dic.nicovideo.jp/a/flash%E9%BB%84%E9%87%91%E6%99%82%E4%BB%A3)」という言葉が後に生まれたりしました。一方のJavaScriptは依然として「補助的な道具」のイメージが支配的でした。
+Nhìn sang các nền tảng khác, thời kỳ này đã có [Java applet](https://ja.wikipedia.org/wiki/Java%E3%82%A2%E3%83%97%E3%83%AC%E3%83%83%E3%83%88) và [Adobe Flash](https://ja.wikipedia.org/wiki/Adobe_Flash) như công nghệ thực hiện ứng dụng browser. Đặc biệt Flash nhẹ hơn Java applet, xuất hiện các trang web implement toàn bộ bằng Flash, và từ "[Flash thời hoàng kim](https://dic.nicovideo.jp/a/flash%E9%BB%84%E9%87%91%E6%99%82%E4%BB%A3)" được sinh ra sau để nhìn lại thời đại này. Trong khi đó, JavaScript vẫn bị chi phối bởi hình ảnh "công cụ bổ trợ".
 
-一般的に対話型のユーザーインターフェースを備えたウェブサイト、今で言うウェブアプリケーションは、当時は「リッチインターネットアプリケーション」と呼ばれ、その多くはJavaアプレットやFlashが担っていましたが、プログラマの中にはJavaScriptを使ったウェブアプリケーションの開発を試みる人たちもいました。
+Thông thường, website có giao diện người dùng tương tác, ngày nay gọi là web application, thời đó được gọi là "rich internet application", và hầu hết được thực hiện bằng Java applet hoặc Flash, nhưng cũng có programmer thử phát triển web application bằng JavaScript.
 
-1997年に、Microsoftが企業向けウェブメーラーとして、Outlook Web Access 2000を市場投入しましたが、これはJavaScript製のウェブアプリケーションでした。現代の我々からすると意外かもしれませんが、この時代のJavaScriptはまだサーバーと通信することができませんでした。そこで、Microsoftはこのアプリのために、後のXMLHttpRequest(XHR)となるXMLHTTPという機能をInternet Explorerに追加したりもしました。XHRは革新的なアップデートでしたが、多くのプログラマから注目を得るのはもっと歴史が流れてからになります。
+Năm 1997, Microsoft đưa ra thị trường Outlook Web Access 2000 như webmail cho doanh nghiệp, đây là web application bằng JavaScript. Với chúng ta ngày nay có thể bất ngờ, nhưng JavaScript thời đó vẫn chưa thể giao tiếp với server. Vì vậy, Microsoft đã thêm tính năng XMLHTTP, sau này trở thành XMLHttpRequest (XHR), vào Internet Explorer cho ứng dụng này. XHR là bản cập nhật cách mạng, nhưng phải chờ thêm thời gian nữa mới được nhiều programmer chú ý.
 
-2000年代初頭には、対話型のUIを備えた大規模なウェブアプリケーションがJavaScriptで開発できるようになることが望まれだしてきました。
+Đầu thập niên 2000, người ta bắt đầu mong muốn có thể phát triển web application quy mô lớn với UI tương tác bằng JavaScript.
 
-### 失われた10年
+### 10 năm mất mát
 
-この頃には、JavaScriptはNetscape社が所有する言語から、ウェブ業界を上げて取り組む言語になっていました。そのため、JavaScriptの言語仕様はECMAScriptという名で策定され、各ベンダーがその仕様に基づいてそれぞれJavaScriptを実装するという流れになっていました。このECMAScriptを策定する会合がTC39であり、JavaScriptに関わるNetscape社やMicrosoft社を始めとしたベンダーが参加していました。
+Thời điểm này, JavaScript đã chuyển từ ngôn ngữ thuộc sở hữu của Netscape sang ngôn ngữ mà toàn ngành web cùng làm việc. Do đó, specification ngôn ngữ JavaScript được định nghĩa dưới tên ECMAScript, và các vendor implement JavaScript dựa trên specification đó. Cuộc họp định nghĩa ECMAScript này là TC39, với sự tham gia của các vendor liên quan đến JavaScript như Netscape và Microsoft.
 
-TC39では、大規模開発にも耐えうるJavaScriptの必要性を鑑みて、新たな言語仕様である「ECMAScript 4」の策定についての議論を1999年頃から始めていました。このECMAScript 4(ES4)では、主に次のような野心的な言語仕様が議論されていました:
+Tại TC39, xem xét sự cần thiết của JavaScript chịu được phát triển quy mô lớn, họ bắt đầu thảo luận về việc định nghĩa specification ngôn ngữ mới "ECMAScript 4" từ khoảng năm 1999. ECMAScript 4 (ES4) này thảo luận các specification ngôn ngữ tham vọng như sau:
 
-- モジュール
-- Javaのようなクラス
-- 静的型付け
-- Nullable型
-- ユニオン型
-- ジェネリクス
+- Module
+- Class giống Java
+- Static typing
+- Nullable type
+- Union type
+- Generics
 
-おや、どれもTypeScriptが持っているものではありませんか？そうなのです。「大規模なアプリケーション開発をしやすく」という点は、2つの言語が共有する問題意識であり、そのため、今から20年前のJavaScriptにおいても、TypeScriptと同じような解決策が検討されていたのです。
+Ồ, đây chẳng phải đều là những thứ TypeScript có sao? Đúng vậy. "Giúp phát triển ứng dụng quy mô lớn dễ dàng hơn" là vấn đề chung của cả hai ngôn ngữ, do đó, ngay cả trong JavaScript 20 năm trước, giải pháp tương tự như TypeScript đã được xem xét.
 
-ここでひとつ疑問が出てきます。「ES4のアイディアがJavaScriptにもたらされていたら、そもそもTypeScriptなんて必要なかったのでは？」という疑問です。
+Ở đây nảy sinh một câu hỏi. "Nếu ý tưởng của ES4 được đưa vào JavaScript, chẳng phải TypeScript không cần thiết sao?"
 
-実は、残念ながら、ES4は正式な仕様として採用されることにはならなかったのです。ES4の仕様策定は、2003年に2年間の中断を経て、2005年に再開され、2007年に仕様書のドラフトが公開されました。ES4はこれまでのJavaScriptと互換性がありませんでした。保守的な立場を取るMicrosoft社と、革新的な変更を加えたいNetscape社で対立が起こり、政治的な背景からも折り合いをつけられなかったES4の草案は、2008年についに破棄されることとなります。
+Thực ra, đáng tiếc, ES4 không bao giờ được chấp nhận như specification chính thức. Việc định nghĩa specification ES4 bị gián đoạn 2 năm từ 2003, được nối lại năm 2005, và bản thảo specification được công bố năm 2007. ES4 không tương thích với JavaScript hiện có. Xung đột xảy ra giữa Microsoft với lập trường bảo thủ và Netscape muốn thay đổi cách mạng, và bản thảo ES4 không thể thỏa hiệp cũng vì lý do chính trị, cuối cùng bị hủy bỏ năm 2008.
 
-このような出来事があり、一度は大規模化を目指したJavaScriptでしたが、その目標を達成できないまま、約10年の年月が流れることとなります。
+Vì những sự kiện như vậy, JavaScript từng hướng đến quy mô lớn nhưng không đạt được mục tiêu đó, và khoảng 10 năm trôi qua.
 
-## 2000年代中盤
+## Giữa thập niên 2000
 
-### Google Mapの衝撃
+### Cú sốc Google Map
 
-JavaScriptの進化は足踏み状態、「本格的なアプリケーションを開発する言語ではない」というJavaScriptのイメージが依然として支配的な中、ウェブ業界に衝撃的な出来事が起こります。2005年のGoogle Mapの登場です。
+Trong khi sự tiến hóa của JavaScript bị đình trệ, hình ảnh "không phải ngôn ngữ để phát triển ứng dụng nghiêm túc" về JavaScript vẫn chi phối, một sự kiện gây sốc xảy ra trong ngành web. Đó là sự xuất hiện của Google Map năm 2005.
 
-当時の地図サイトの多くは、地図を移動したり拡大縮小するとウェブページがリロードされるものばかりだったので、画面遷移なしにスムーズに地図を操作できるGoogle Mapは、当時の感覚で言えば、ネイティブアプリの操作感をウェブページで実現した画期的な発明でした。
+Hầu hết các trang bản đồ thời đó đều reload trang web khi di chuyển hoặc zoom bản đồ, nên Google Map có thể thao tác bản đồ mượt mà mà không chuyển trang là phát minh đột phá thực hiện cảm giác ứng dụng native trên trang web theo cảm giác thời đó.
 
-Google Mapの操作性を裏で支えたのが、AJAXです。AJAXは“**A**synchronous **Ja**vaScript and **X**ML”の略で、XMLHttpRequestオブジェクトによる非同期のHTTP通信を利用し、ページをリロードなしにサーバーからXMLでデータを取得し、HTMLの一部を書き換える技術です。今となってはAJAXは常識を通りすぎて、古めの技術のイメージがありますが、当時としては最先端の技術でした。
+Công nghệ hỗ trợ khả năng thao tác của Google Map phía sau là AJAX. AJAX là viết tắt của "**A**synchronous **Ja**vaScript and **X**ML", là công nghệ sử dụng HTTP communication bất đồng bộ qua XMLHttpRequest object để lấy dữ liệu XML từ server mà không reload trang và viết lại một phần HTML. Ngày nay AJAX là điều hiển nhiên đến mức bị coi là công nghệ cũ, nhưng thời đó là công nghệ tiên tiến nhất.
 
-Google Mapは多くのプログラマに衝撃を与えました。AJAXに脚光を浴びせただけでなく、JavaScriptでも立派なアプリケーションが作れることを証明して見せたのです。
+Google Map đã gây sốc cho nhiều programmer. Không chỉ đưa AJAX vào spotlight, mà còn chứng minh rằng JavaScript cũng có thể tạo ứng dụng đàng hoàng.
 
-## 2000年代後半
+## Cuối thập niên 2000
 
-### 大規模化のニーズの強まり
+### Nhu cầu quy mô lớn tăng mạnh
 
-Google Mapの成功を目にした開発者は、ブラウザさえあれば他に何もインストールする必要がないアプリケーションをユーザーに提供できるウェブアプリケーションにより一層の魅力を感じるようになり、JavaScriptによる大規模開発のニーズも日に日に増してきました。
+Developer chứng kiến thành công của Google Map ngày càng bị thu hút bởi web application có thể cung cấp cho người dùng ứng dụng mà không cần install gì khác ngoài browser, và nhu cầu phát triển quy mô lớn bằng JavaScript cũng tăng từng ngày.
 
-2005年には、JavaScriptアプリケーションフレームワークの先駆けであるPrototype.jsがリリースされました。翌年にはjQueryがリリースされ、その後しばらくして、2009年にAngularJS、2010年にBackbone.jsが発表され、フロントエンドWebアプリケーション開発のツールが続々と発明される流れになっていきます。
+Năm 2005, Prototype.js, tiên phong của JavaScript application framework, được release. Năm sau jQuery được release, sau đó một thời gian, năm 2009 AngularJS, năm 2010 Backbone.js được công bố, và công cụ phát triển frontend web application tiếp tục được phát minh.
 
-### 進化なきJS、一世風靡のAltJS
+### JS không tiến hóa, AltJS làm mưa làm gió
 
-JavaScriptの開発スタイルは一変し、大規模化が進む中、JavaScript自体には動きが見られません。期待が寄せられたES4も、2008年にご破算となってしまいました。
+Phong cách phát triển JavaScript thay đổi hoàn toàn, quy mô lớn tiến triển, nhưng bản thân JavaScript không có động thái. ES4 được kỳ vọng cũng bị hủy bỏ năm 2008.
 
-開発者たちは進化なきJavaScriptに甘んじていたわけではありませんでした。「JavaScript本体が良くならないなら、JavaScriptにコンパイルできる言語を作ればいいのではないだろうか？」開発者の中にはこう考える人々が現れました。
+Developer không cam chịu JavaScript không tiến hóa. "Nếu bản thân JavaScript không tốt lên, sao không tạo ngôn ngữ có thể compile sang JavaScript?" Một số developer bắt đầu suy nghĩ như vậy.
 
-こうした発想のもと、JavaScriptアプリケーションの開発言語として一世を風靡するのが、2009年に発表されたCoffeeScriptです。CoffeeScriptはRubyのような簡潔な文法でコーディングできることが魅力の言語で、サーバーサイドフレームワークのRuby on Railsにもフロントエンド開発用言語として正式採用されました。CoffeeScriptにはclass構文があり、クラス指向のオブジェクト指向プログラミングに慣れ親しんだプログラマには好評でした。
+Dựa trên ý tưởng như vậy, CoffeeScript được công bố năm 2009 và làm mưa làm gió như ngôn ngữ phát triển ứng dụng JavaScript. CoffeeScript là ngôn ngữ hấp dẫn vì có thể coding với cú pháp ngắn gọn như Ruby, và được Ruby on Rails, server-side framework, chính thức chấp nhận như ngôn ngữ phát triển frontend. CoffeeScript có cú pháp class, được programmer quen với lập trình hướng đối tượng class-based ưa thích.
 
-コーディングは別の言語で行い、それをJavaScriptにコンパイルするという奇抜に思えた手法は成功を収め、このアプローチを採用する言語が数多く開発され、それらの言語は総称してAltJSと呼ばれるようになりました。言語から言語にコンパイルすることを「トランスパイル」と言いますが、この言葉が定着したのもこの頃です。AltJSが一般化すると、JavaScriptは「現代のアセンブラ」と揶揄されることもありました。
+Phương pháp có vẻ kỳ lạ là coding bằng ngôn ngữ khác rồi compile sang JavaScript đã thành công, và nhiều ngôn ngữ áp dụng cách tiếp cận này được phát triển, chúng được gọi chung là AltJS. Việc compile từ ngôn ngữ này sang ngôn ngữ khác được gọi là "transpile", và từ này cũng trở nên phổ biến thời này. Khi AltJS trở nên phổ biến, JavaScript đôi khi bị chế giễu là "assembler hiện đại".
 
-### ECMAScript 2015始動
+### ECMAScript 2015 khởi động
 
-2008年になると、ECMAScriptに新たな動きが生まれます。JavaScriptを改善しようという議論が再開したのです。ES4は革新的すぎたため、保守派から大きな反対にあいました。そこで、ES4ほど革新的ではなく、既存のJSとの互換性を保ちながらES4の成果を取り込むための折衷案として、Harmonyという新しい言語仕様が検討されることになりました。Harmonyにはclass構文や、module構文、import/exportなど大規模開発を想定した言語仕様が提案されました。そのうちのいくつかは、のちのECMAScript 2015に採用されることになります。
+Năm 2008, ECMAScript có động thái mới. Thảo luận về cải thiện JavaScript được nối lại. ES4 quá cách mạng nên gặp phản đối lớn từ phe bảo thủ. Vì vậy, Harmony, specification ngôn ngữ mới, được xem xét như giải pháp thỏa hiệp để tích hợp thành quả ES4 trong khi duy trì tương thích với JS hiện có, không cách mạng như ES4. Harmony đề xuất specification ngôn ngữ hướng đến phát triển quy mô lớn như cú pháp class, cú pháp module, import/export. Một số trong đó được chấp nhận vào ECMAScript 2015 sau này.
 
-このようにして、JavaScriptの言語仕様を話し合うTC39が生産的な会合になってきたこともあり、JavaScriptの将来に期待も集まるようになってきました。
+Như vậy, TC39 nơi thảo luận specification ngôn ngữ JavaScript đã trở thành cuộc họp hiệu quả, và kỳ vọng vào tương lai JavaScript cũng bắt đầu tăng lên.
 
-## 2010年代
+## Thập niên 2010
 
-### TypeScriptの誕生
+### Sự ra đời của TypeScript
 
-ECMAScript 2015の策定に向け、TC39で大規模開発の議論が活発になる中、2012年に発表されたのがTypeScriptです。
+Trong khi thảo luận về phát triển quy mô lớn trở nên sôi động tại TC39 hướng đến việc định nghĩa ECMAScript 2015, TypeScript được công bố năm 2012.
 
-TypeScriptは誕生当初より、ますます困難になるJavaScriptの大規模開発に焦点を当てていました。特に強調された特徴が、JavaScriptのスーパーセット、モジュール性、そして型です。
+TypeScript ngay từ đầu đã tập trung vào phát triển JavaScript quy mô lớn ngày càng khó khăn. Đặc điểm được nhấn mạnh đặc biệt là superset của JavaScript, tính module, và kiểu.
 
-当時、人気を博していたCoffeeScriptがJavaScriptの文法とはドラスティックに異なる独自路線を打ち出したのに対し、TypeScriptはJavaScriptの文法を拡張するに留める「JavaScriptのスーパーセット言語」としての戦略を採用しました。そのため、TypeScriptを導入したとしても、既存のJavaScript資産はそのまま活用でき、チームの学習にも突発的なコストがかからず、徐々にTypeScriptの恩恵を増やしていけるようになっていたので、大規模開発でもすぐに導入できるようになっていました。
+Trong khi CoffeeScript phổ biến thời đó đưa ra lộ trình độc lập với cú pháp khác biệt đáng kể so với JavaScript, TypeScript áp dụng chiến lược "ngôn ngữ superset của JavaScript" chỉ mở rộng cú pháp JavaScript. Do đó, ngay cả khi áp dụng TypeScript, tài sản JavaScript hiện có có thể sử dụng như cũ, team không phải tốn chi phí học đột ngột, và có thể tăng dần lợi ích của TypeScript, nên có thể áp dụng ngay trong phát triển quy mô lớn.
 
-モジュール性は大規模開発ではとても重要になります。コードを適切な粒度に分割し整理できたり、実装の詳細をカプセル化できたり、変数名や関数名が衝突しないような言語仕様がなければ、大規模開発はかなり難しいものになります。
+Tính module rất quan trọng trong phát triển quy mô lớn. Nếu không có specification ngôn ngữ cho phép chia và tổ chức code thành kích thước phù hợp, encapsulate chi tiết implementation, và tránh xung đột tên biến hoặc hàm, phát triển quy mô lớn sẽ rất khó khăn.
 
-当時のJavaScriptには、モジュールシステムや名前空間といったものが無かったため、大規模開発を難しいものにしていました。TypeScriptは、この問題を解決するためにES2015の提案に上がっていたクラスやモジュールの構文を先取りし、モジュール性を実現しました。
+JavaScript thời đó không có hệ thống module hay namespace, khiến phát triển quy mô lớn khó khăn. TypeScript giải quyết vấn đề này bằng cách áp dụng trước cú pháp class và module được đề xuất trong ES2015, thực hiện tính module.
 
-型はTypeScriptの最大の特徴でした。型の恩恵として、コーディング中にコードジャンプやコード補完ができ、型情報がドキュメントにもなり、プログラムを動かす前にソースコードのチェックを行えるようになりました。このように型は大規模開発の生産性を大きく向上させました。
+Kiểu là đặc điểm lớn nhất của TypeScript. Lợi ích của kiểu là có thể code jump và code completion khi coding, thông tin kiểu cũng là documentation, và có thể kiểm tra source code trước khi chạy chương trình. Như vậy, kiểu đã nâng cao đáng kể năng suất phát triển quy mô lớn.
 
-### 薄れないTypeScriptの強み
+### Thế mạnh của TypeScript không phai nhạt
 
-TypeScriptが発表された後、TypeScriptが手本としたECMAScript 2015は正式に発表され、その後、ECMAScriptは毎年アップデートされるようになりました。一時期停滞したJavaScriptも、大規模開発のハードルを下げるべく年々進化を遂げてきています。
+Sau khi TypeScript được công bố, ECMAScript 2015 mà TypeScript làm mẫu đã được công bố chính thức, sau đó ECMAScript được update hàng năm. JavaScript từng đình trệ cũng đã tiến hóa hàng năm để hạ thấp rào cản phát triển quy mô lớn.
 
-そうした中で、TypeScriptが誕生当初に掲げていた3大特徴のうち、モジュール性はJavaScriptの仕様にも盛り込まれ、その部分ではTypeScriptは優位性を失いました。しかし、TypeScriptの目玉である「型」は、今日でもJavaScriptの仕様には盛り込まれていません。
+Trong bối cảnh đó, trong 3 đặc điểm lớn mà TypeScript đưa ra từ đầu, tính module đã được đưa vào specification JavaScript, và ở phần đó TypeScript đã mất lợi thế. Tuy nhiên, "kiểu" là tính năng chính của TypeScript vẫn chưa được đưa vào specification JavaScript đến ngày nay.
 
-大規模開発をするにあたって、型は非常に重要な言語仕様であり、JavaScriptが進化を続ける中においても、TypeScriptの「型」というのは今でも確固たる強みであることは間違いないでしょう。
+Kiểu là specification ngôn ngữ rất quan trọng khi phát triển quy mô lớn, và trong khi JavaScript tiếp tục tiến hóa, "kiểu" của TypeScript chắc chắn vẫn là thế mạnh vững chắc đến ngày nay.
 
-## まとめ
+## Tóm tắt
 
-1995年に生まれたJavaScriptは当初、大規模な開発に用いられることが想定されていませんでした。10年もすると、大規模開発のニーズが顕在化しはじめ、JavaScriptは対応に迫られました。しかし、ベンダー同士の合意をとりつけられず、JavaScriptの進化は停滞します。
+JavaScript ra đời năm 1995 ban đầu không được giả định sử dụng cho phát triển quy mô lớn. Sau 10 năm, nhu cầu phát triển quy mô lớn bắt đầu hiện rõ, và JavaScript phải đối mặt với việc đáp ứng. Tuy nhiên, không thể đạt được thỏa thuận giữa các vendor, và sự tiến hóa của JavaScript bị đình trệ.
 
-JavaScriptが硬直状態だった間も、ウェブアプリケーションは大規模化が進み、開発の難易度が日に日に増してきました。それに対して、さまざまな解決策がコミュニティからなされるようになります。
+Trong khi JavaScript bị đóng băng, web application vẫn tiếp tục quy mô lớn, và độ khó phát triển tăng lên từng ngày. Để đối phó, cộng đồng đã đưa ra nhiều giải pháp khác nhau.
 
-その流れの中で発明されたのがTypeScriptです。TypeScriptは大規模開発の困難さに立ち向かう言語として、JavaScriptのスーパーセット・モジュール性・型の3つの特徴を携えて2012年に発表されました。
+Trong dòng chảy đó, TypeScript được phát minh. TypeScript được công bố năm 2012 với 3 đặc điểm: superset của JavaScript, tính module và kiểu, như ngôn ngữ đối mặt với khó khăn của phát triển quy mô lớn.
 
-TypeScriptの発表後、JavaScriptも再び進歩を始め、6年ぶりのメジャーアップデートとしてECMAScript 2015を発表し、そこから毎年新仕様を発表しつづけています。それでも、TypeScriptの最大の特徴である「型」は、依然としてJavaScriptにはありません。今日においてもTypeScriptが大規模開発で好まれるのは、JavaScriptでは得られない開発体験があるためです。
+Sau khi TypeScript được công bố, JavaScript cũng bắt đầu tiến bộ trở lại, công bố ECMAScript 2015 như bản cập nhật lớn đầu tiên sau 6 năm, và từ đó tiếp tục công bố specification mới hàng năm. Tuy nhiên, "kiểu" là đặc điểm lớn nhất của TypeScript vẫn không có trong JavaScript. TypeScript vẫn được ưa chuộng trong phát triển quy mô lớn ngày nay là vì có trải nghiệm phát triển không có được với JavaScript.
 
-## 参考資料
+## Tài liệu tham khảo
 
 - [Chapter 4. How JavaScript Was Created](http://speakingjs.com/es5/ch04.html)
 - [Microsoft augments JavaScript for large-scale development | InfoWorld](https://www.infoworld.com/article/2614863/microsoft-augments-javascript-for-large-scale-development.html)

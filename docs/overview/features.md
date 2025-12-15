@@ -1,20 +1,20 @@
-# TypeScriptの特徴
+# Đặc điểm của TypeScript
 
-TypeScriptは、Microsoftにより2012年10月1日に初めて発表された、スケーラブルなJavaScriptの上位互換言語です。スケーラブルな言語は、プロジェクトの規模や開発チームの人数が増えても、うまく機能し続けることができる言語のことで、TypeScriptはその特性から大規模プロジェクトにも適しています。
+TypeScript là ngôn ngữ superset của JavaScript có khả năng mở rộng (scalable), được Microsoft phát hành lần đầu vào ngày 1 tháng 10 năm 2012. Ngôn ngữ scalable là ngôn ngữ có thể tiếp tục hoạt động tốt ngay cả khi quy mô dự án và số lượng thành viên trong team tăng lên, và TypeScript phù hợp với các dự án lớn nhờ đặc tính này.
 
-TypeScriptはJavaScriptの上位互換であり、JavaScriptに静的な型付けが追加されています。TypeScriptで書かれたコードは純粋なJavaScriptにコンパイルされ、ブラウザ、サーバーなどJavaScriptが実行できるすべての実行環境で動作します。さらに、オープンソースプロジェクトであり、Apache License 2.0で提供されています。
+TypeScript là superset của JavaScript, với việc bổ sung static typing vào JavaScript. Code viết bằng TypeScript được compile thành JavaScript thuần và chạy trên tất cả các môi trường có thể chạy JavaScript như browser, server. Hơn nữa, đây là dự án open-source, được cung cấp theo Apache License 2.0.
 
-## JavaScriptの上位互換
+## Superset của JavaScript
 
-TypeScriptはJavaScriptに型が追加され、それ以外の部分は基本的に互換性があります。これまでJavaScriptに慣れ親しんできた方であれば時間をかけずに習得できます。
+TypeScript là JavaScript với việc bổ sung kiểu, phần còn lại về cơ bản tương thích. Nếu bạn đã quen thuộc với JavaScript, bạn có thể học nhanh chóng.
 
-## トランスパイル
+## Transpile
 
-TypeScriptコードは、さまざまなJavaScriptのバージョン（例: ES5, ES6）へトランスパイルすることができます。これにより、ブラウザや実行環境の互換性問題を回避できます。
+Code TypeScript có thể được transpile sang các phiên bản JavaScript khác nhau (ví dụ: ES5, ES6). Điều này giúp tránh các vấn đề tương thích với browser và môi trường chạy.
 
-## 静的型付け
+## Static typing
 
-TypeScriptは[静的型付け](./static-type.md)を持つ言語で、変数や関数の引数に型を指定することで、コードの安全性が向上し、バグが発見しやすくなります。
+TypeScript là ngôn ngữ có [static typing](./static-type.md), bằng cách chỉ định kiểu cho biến và tham số hàm, độ an toàn của code được cải thiện và bug dễ phát hiện hơn.
 
 ```typescript
 function sum(a: number, b: number): number {
@@ -22,17 +22,17 @@ function sum(a: number, b: number): number {
 }
 ```
 
-## 型推論
+## Type inference
 
-TypeScriptは、型注釈がついていない変数でもコンテキストに基づいて自動的に型を推測します。これにより、開発者は型を明示しなくても安全性が向上します。
+TypeScript tự động suy luận kiểu dựa trên context ngay cả với biến không có type annotation. Điều này cải thiện độ an toàn mà developer không cần khai báo kiểu rõ ràng.
 
-## 構造的部分型システム
+## Hệ thống structural subtyping
 
-TypeScriptは[構造的部分型](../reference/values-types-variables/structural-subtyping.md)システムを採用しており、オブジェクトの形状（つまり、オブジェクトがどのようなプロパティとメソッドを有しているか）に基づいて型を判断します。したがって、公称型ではなく、構造的部分型に基づいて動作します。
+TypeScript áp dụng hệ thống [structural subtyping](../reference/values-types-variables/structural-subtyping.md), xác định kiểu dựa trên shape của object (tức là object có những property và method nào). Do đó, nó hoạt động dựa trên structural subtyping thay vì nominal typing.
 
-## ジェネリクス
+## Generics
 
-TypeScriptは[ジェネリクス](../reference/generics/README.md)をサポートしており、汎用的で再利用可能なコードを書くことができます。
+TypeScript hỗ trợ [generics](../reference/generics/README.md), cho phép viết code tổng quát và có thể tái sử dụng.
 
 ```typescript twoslash
 function identity<T>(arg: T): T {
@@ -40,17 +40,17 @@ function identity<T>(arg: T): T {
 }
 ```
 
-## 高度な型表現
+## Biểu diễn kiểu nâng cao
 
-TypeScriptでは、高度な型システムを用いて複雑な型を表現できます。これにより、アプリケーションのロジックをより堅牢で表現豊かな形で開発できます。以下は、TypeScriptで利用可能な高度な型表現のいくつかの例です。
+Trong TypeScript, có thể biểu diễn kiểu phức tạp bằng hệ thống kiểu nâng cao. Điều này cho phép phát triển logic ứng dụng một cách mạnh mẽ và biểu cảm hơn. Dưới đây là một số ví dụ về biểu diễn kiểu nâng cao có sẵn trong TypeScript.
 
-1. **ユニオン型**: 複数の型のどれかを表すことができます。たとえば、初期値が`null`の変数を処理する場合、ユニオン型を使うことができます。
+1. **Union type**: Có thể biểu diễn một trong nhiều kiểu. Ví dụ, khi xử lý biến có giá trị khởi tạo là `null`, có thể sử dụng union type.
 
    ```typescript
    type NullableString = string | null;
    ```
 
-2. **タプル型**: 配列の各要素に異なる型を指定できる型です。これにより、異なる型の組み合わせを簡潔に表現できます。
+2. **Tuple type**: Kiểu cho phép chỉ định kiểu khác nhau cho mỗi phần tử của array. Điều này cho phép biểu diễn ngắn gọn các tổ hợp kiểu khác nhau.
 
    ```typescript
    type Response = [number, string];
@@ -58,13 +58,13 @@ TypeScriptでは、高度な型システムを用いて複雑な型を表現で�
    const response: Response = [200, "OK"];
    ```
 
-## 複数の言語パラダイムのサポート
+## Hỗ trợ nhiều paradigm ngôn ngữ
 
-TypeScriptは、オブジェクト指向プログラミング (OOP) と関数型プログラミング (FP) の両方をサポートしています。これにより、開発者は柔軟で強力なプログラムを構築することができます。
+TypeScript hỗ trợ cả lập trình hướng đối tượng (OOP) và lập trình hàm (FP). Điều này cho phép developer xây dựng chương trình linh hoạt và mạnh mẽ.
 
-## クラスとインターフェース
+## Class và interface
 
-TypeScriptはクラスベースのオブジェクト指向プログラミングとインターフェースをサポートします。これにより、コードの再利用や継承が容易になり、大規模なプロジェクトを管理する際に役立ちます。
+TypeScript hỗ trợ lập trình hướng đối tượng dựa trên class và interface. Điều này giúp tái sử dụng code và kế thừa dễ dàng hơn, hữu ích khi quản lý dự án lớn.
 
 ```typescript twoslash
 interface Person {
@@ -82,13 +82,13 @@ class Employee implements Person {
 }
 ```
 
-## メモリ管理
+## Quản lý bộ nhớ
 
-TypeScriptは、基本的にJavaScriptと同様のメモリ管理を行います。JavaScriptエンジンがガベージコレクションを用いて、自動的にメモリを解放します。
+TypeScript về cơ bản quản lý bộ nhớ giống như JavaScript. JavaScript engine sử dụng garbage collection để tự động giải phóng bộ nhớ.
 
-## 非同期処理
+## Xử lý bất đồng bộ
 
-TypeScriptは、JavaScriptと同様にイベント駆動型の非同期プログラミングをサポートしています。Promiseやasync/awaitを用いて、非同期処理を簡潔かつ効率的に実装できます。
+TypeScript hỗ trợ lập trình bất đồng bộ event-driven giống JavaScript. Sử dụng Promise và async/await có thể implement xử lý bất đồng bộ một cách ngắn gọn và hiệu quả.
 
 ```typescript twoslash
 async function fetchData(): Promise<void> {
@@ -102,18 +102,18 @@ async function fetchData(): Promise<void> {
 }
 ```
 
-## シングルスレッドモデル
+## Mô hình single-thread
 
-TypeScript (およびJavaScript) はシングルスレッドモデルを採用しています。シングルスレッドモデルは、シンプルで分かりやすいコードを実現し、イベントループと非同期処理で効率的なタスク処理をサポートします。一方で、Web Workersを利用してバックグラウンドで実行されるスレッドを作成し、マルチタスクを実現することもできます。
+TypeScript (và JavaScript) áp dụng mô hình single-thread. Mô hình single-thread thực hiện code đơn giản và dễ hiểu, hỗ trợ xử lý tác vụ hiệu quả với event loop và xử lý bất đồng bộ. Mặt khác, cũng có thể tạo thread chạy background bằng Web Workers để thực hiện multitask.
 
-## 強力な開発環境
+## Môi trường phát triển mạnh mẽ
 
-TypeScriptは強力な開発環境を提供しています。開発者が良質な開発体験を享受できるよう、インテリセンスとリアルタイムエラー表示の機能をエディターに提供しています。これにより、自動補完や型情報が手に入るため、開発がスムーズに進み、型の誤りや不整合が早い段階で検出され、確かなコードを書きやくなっています。
+TypeScript cung cấp môi trường phát triển mạnh mẽ. Để developer có trải nghiệm phát triển tốt, nó cung cấp tính năng intellisense và hiển thị lỗi realtime cho editor. Nhờ đó, auto-completion và thông tin kiểu có sẵn, phát triển diễn ra suôn sẻ, lỗi kiểu và sự không nhất quán được phát hiện sớm, giúp viết code đáng tin cậy hơn.
 
-## オープンソース
+## Open-source
 
-TypeScriptは、オープンソースで開発されており、[TypeScript GitHubリポジトリ](https://github.com/microsoft/TypeScript)でソースコードやドキュメントが公開されています。開発者は、GitHubリポジトリを介してTypeScriptプロジェクトに寄与することができます。
+TypeScript được phát triển dưới dạng open-source, source code và tài liệu được công bố trên [TypeScript GitHub repository](https://github.com/microsoft/TypeScript). Developer có thể đóng góp cho dự án TypeScript thông qua GitHub repository.
 
-## まとめ
+## Tóm tắt
 
-これらの特徴により、TypeScriptは現代のWeb開発において非常に魅力的な選択肢となっています。静的型付けと高度な型システムを導入したことで、大規模プロジェクトや、オブジェクト指向プログラミングおよび関数型プログラミングなど、多様な開発スタイルに対応しており、堅牢で柔軟なコードが実現できます。そして、オープンソースでありながら、Microsoftの強力なバックアップがあることも魅力のひとつです。
+Với những đặc điểm này, TypeScript đã trở thành lựa chọn rất hấp dẫn trong phát triển Web hiện đại. Với việc giới thiệu static typing và hệ thống kiểu nâng cao, nó đáp ứng nhiều phong cách phát triển khác nhau như dự án lớn, lập trình hướng đối tượng và lập trình hàm, cho phép code mạnh mẽ và linh hoạt. Và việc là open-source nhưng có sự hỗ trợ mạnh mẽ từ Microsoft cũng là một trong những điểm hấp dẫn.

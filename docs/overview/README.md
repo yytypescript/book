@@ -2,8 +2,8 @@
 slug: /overview
 ---
 
-# TypeScriptのあらまし
+# Tổng quan về TypeScript
 
-本章では、TypeScriptの概要について触れます。同時に、TypeScriptの良さや、TypeScriptがJavaScriptエコシステムでどういった立ち位置にあるのかを示すことで、全体像を知っていただきます。
+Chương này giới thiệu khái quát về TypeScript. Đồng thời, chúng tôi cho bạn thấy ưu điểm của TypeScript và vị trí của nó trong hệ sinh thái JavaScript, giúp bạn nắm được bức tranh tổng thể.
 
-TypeScriptとは何なのか詳しく知ってもらったり、読者が同僚や属するチームにTypeScriptをPRできるような情報を提供します。TypeScriptの歴史、思想、哲学を知ってもらうことで、どのようなところでTypeScriptがその本領を発揮するのかを学びます。TypeScriptをなぜ使うべきなのか？TypeScriptのアドバンテージは何なのか？逆に、TypeScriptが向かないところはどこなのか？TypeScriptとJavaScriptはどのような関係なのか？といった疑問に答えていきます。
+Chúng tôi cung cấp thông tin chi tiết về TypeScript và giúp bạn có thể giới thiệu TypeScript với đồng nghiệp hoặc team của mình. Bằng cách tìm hiểu lịch sử, tư tưởng và triết lý của TypeScript, bạn sẽ biết TypeScript phát huy sức mạnh thực sự ở đâu. Chúng tôi sẽ trả lời các câu hỏi như: Tại sao nên sử dụng TypeScript? Ưu thế của TypeScript là gì? Ngược lại, TypeScript không phù hợp ở đâu? Mối quan hệ giữa TypeScript và JavaScript như thế nào?

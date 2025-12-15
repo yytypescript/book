@@ -1,93 +1,93 @@
-# TypeScriptは何ではないか？
+# TypeScript không phải là gì?
 
-多くの開発者がTypeScriptを高く評価しています。そのような中、誤解の上にTypeScriptを過度に高評価する人もいます。TypeScriptも魔法の杖ではありません。本稿では、TypeScriptが何を解決してくれないのかを見ていきます。TypeScriptでできないことを無理にやらせようとしても、その努力は無駄になりますから、これを理解することは重要です。
+Nhiều developer đánh giá cao TypeScript. Trong bối cảnh đó, cũng có người đánh giá quá cao TypeScript dựa trên hiểu lầm. TypeScript cũng không phải là cây đũa thần. Bài viết này xem xét những gì TypeScript không giải quyết được. Điều quan trọng là hiểu điều này vì nỗ lực làm những gì TypeScript không thể làm sẽ trở nên vô ích.
 
-## 実行時の高速化・省メモリ化に影響しない
+## Không ảnh hưởng đến tăng tốc runtime / giảm bộ nhớ
 
-しばしば、TypeScriptとJavaScriptを比較する話の中で、次のような言説が見られます。
+Trong các cuộc thảo luận so sánh TypeScript và JavaScript, thỉnh thoảng thấy các ý kiến như sau.
 
-- TypeScriptはJavaScriptより高速に実行できる
-- TypeScriptはJavaScriptよりメモリ消費量が少ない
+- TypeScript có thể chạy nhanh hơn JavaScript
+- TypeScript tiêu thụ ít bộ nhớ hơn JavaScript
 
-また逆に次のように心配されることもあります。
+Ngược lại, đôi khi cũng có lo ngại như sau.
 
-- TypeScriptはJavaScriptで書くより低速になるのでは？
-- TypeScriptはJavaScriptよりメモリ消費量が大きいのでは？
+- TypeScript có chậm hơn JavaScript không?
+- TypeScript có tiêu thụ nhiều bộ nhớ hơn JavaScript không?
 
-結論を言うと、TypeScriptの実行時パフォーマンスはJavaScriptと同じです。これを理解するには、次の2つの前提をおさえておく必要がります。
+Kết luận là, performance runtime của TypeScript giống JavaScript. Để hiểu điều này, cần nắm 2 tiền đề sau.
 
-1. TypeScriptのランタイムはない。
-1. TypeScriptコンパイラは最適化しない。
+1. Không có TypeScript runtime.
+2. TypeScript compiler không tối ưu hóa.
 
-### TypeScriptランタイムはない
+### Không có TypeScript runtime
 
-TypeScriptにはランタイムがありません。どういうことかというと、TypeScriptを直接実行するエンジンがないということです。TypeScriptを開発しているMicrosoftのブラウザMicrosoft Edgeであっても、TypeScriptは実行できません。サーバーのNode.jsもそうです[^1]。TypeScriptで書いたコードを実行するには、一度JavaScriptコードに変換する必要があります。そのため、TypeScriptのパフォーマンスは、コンパイル後のJavaScriptがどうなっているかで決まるわけです。
+TypeScript không có runtime. Điều này có nghĩa là không có engine trực tiếp chạy TypeScript. Ngay cả Microsoft Edge, browser do Microsoft phát triển TypeScript, cũng không thể chạy TypeScript. Server Node.js cũng vậy[^1]. Để chạy code viết bằng TypeScript, cần chuyển đổi sang code JavaScript một lần. Do đó, performance của TypeScript được quyết định bởi JavaScript sau khi compile như thế nào.
 
-[^1]: TypeScriptのランタイムを謳うDenoというサーバー環境があります。このDenoであっても、内部的にTypeScriptをJavaScriptにコンパイルし、それをJavaScriptエンジン上で実行しています。
+[^1]: Có môi trường server gọi là Deno tự xưng là TypeScript runtime. Ngay cả Deno này, bên trong cũng compile TypeScript sang JavaScript và chạy trên JavaScript engine.
 
-### TypeScriptコンパイラは最適化しない
+### TypeScript compiler không tối ưu hóa
 
-一般的に「コンパイラ」には、次の3つの仕事があると言われます。
+Thông thường "compiler" được cho là có 3 công việc sau.
 
-1. ソースコードを解析し、問題点をチェックする
-1. ソースコードを別の言語に変換する
-1. 最適化する
-   - 実行速度が速くなるようにする
-   - 少ないメモリで動くようにする
-   - 少ない電力で済むようにする
-   - 実行ファイルのサイズを小さくする
+1. Phân tích source code và kiểm tra vấn đề
+2. Chuyển đổi source code sang ngôn ngữ khác
+3. Tối ưu hóa
+   - Làm cho tốc độ chạy nhanh hơn
+   - Làm cho chạy với ít bộ nhớ hơn
+   - Làm cho tiêu thụ ít điện năng hơn
+   - Làm cho kích thước file thực thi nhỏ hơn
 
-このうち、TypeScriptコンパイラがするのは上の2つです。3つ目の最適化はしません。TypeScriptコンパイラは、基本的に型に関する部分を消すだけで、それ以外の部分はほぼそのままJavaScriptに変換します。
+Trong số này, TypeScript compiler chỉ làm 2 việc trên. Việc thứ 3 là tối ưu hóa không được thực hiện. TypeScript compiler về cơ bản chỉ xóa phần liên quan đến kiểu và chuyển đổi sang JavaScript gần như nguyên vẹn phần còn lại.
 
-たとえば、次のようなTypeScriptコードをコンパイルすると、
+Ví dụ, nếu compile code TypeScript sau,
 
-```ts twoslash title="TypeScriptコード"
+```ts twoslash title="Code TypeScript"
 const oneDay: number = 60 * 60 * 24;
 ```
 
-次のJavaScriptコードが生成されます。型注釈の`number`が消されただけです。
+Code JavaScript sau sẽ được tạo ra. Chỉ type annotation `number` bị xóa.
 
-```js twoslash title="コンパイル後のJavaScriptコード"
+```js twoslash title="Code JavaScript sau compile"
 const oneDay = 60 * 60 * 24;
 ```
 
-この`60 * 60 * 24`の式は静的に計算できるものです。コンパイル時に計算して、次のようなJavaScriptを生成しておけば、実行時の余計な計算が不要になります。高速化に寄与します。
+Biểu thức `60 * 60 * 24` này có thể tính toán tĩnh. Nếu tính toán khi compile và tạo JavaScript như sau, sẽ không cần tính toán thừa khi runtime. Đóng góp vào tăng tốc.
 
-```js twoslash title="予め計算したJavaScriptコード"
+```js twoslash title="Code JavaScript đã tính toán trước"
 const oneDay = 86400;
 ```
 
-上のような最適化は技術的には可能なはずです。しかし、TypeScriptはこうした最適化は原則的に行いません。TypeScriptコンパイラがするのは基本的に型を外すだけです。
+Tối ưu hóa như trên về mặt kỹ thuật có thể thực hiện được. Tuy nhiên, TypeScript nguyên tắc không thực hiện tối ưu hóa như vậy. TypeScript compiler về cơ bản chỉ xóa kiểu.
 
-### 両者のパフォーマンスは基本的に同等
+### Performance của cả hai về cơ bản tương đương
 
-TypeScriptには次の特徴があることを見てきました。
+Chúng ta đã thấy TypeScript có các đặc điểm sau.
 
-1. TypeScriptのランタイムはない。
-1. TypeScriptコンパイラは最適化しない。
+1. Không có TypeScript runtime.
+2. TypeScript compiler không tối ưu hóa.
 
-この2つの特徴から、まったく同じロジックのコードをTypeScriptとJavaScriptで書いて比較したとき、その間には注意が必要なほどのパフォーマンスの違いはないと考えて差し支えありません[^2]。
+Từ 2 đặc điểm này, khi viết code cùng logic bằng TypeScript và JavaScript và so sánh, có thể coi không có khác biệt performance đáng chú ý[^2].
 
-[^2]: 厳密に言うと、コンパイラオプション`target`を`es3`(古いJavaScript)に指定するなどで、「単に型を消すだけ」のコンパイルではなくなる場合もあるので常に同等が保証されているわけではありません。
+[^2]: Nói chính xác, khi chỉ định compiler option `target` là `es3` (JavaScript cũ), compile không chỉ đơn giản là "xóa kiểu" nên không phải lúc nào cũng đảm bảo tương đương.
 
-## JavaScriptの仕様バグは修正しない
+## Không sửa bug specification của JavaScript
 
-JavaScriptには元々バグだったものが仕様に変わった例があります。たとえば、値の型を調べる[typeof演算子]は、`null`を渡すと`"object"`が返ります。これはバグと考えられていましたが、後方互換性のため修正されることなく仕様になりました。
+JavaScript có ví dụ về bug ban đầu trở thành specification. Ví dụ, [toán tử typeof] kiểm tra kiểu của giá trị, trả về `"object"` khi truyền `null`. Điều này được coi là bug, nhưng không được sửa vì tương thích ngược và trở thành specification.
 
-[typeof演算子]: ../reference/values-types-variables/typeof-operator.md
+[toán tử typeof]: ../reference/values-types-variables/typeof-operator.md
 
 ```js twoslash
 typeof null;
 // @log: "object"
 ```
 
-TypeScriptでも、こうした仕様バグは修正されていません。なぜかというと、TypeScriptはあくまでJavaScriptに型をプラスした言語というスタンスだからです。
+Trong TypeScript, bug specification như vậy cũng không được sửa. Lý do là TypeScript có lập trường là ngôn ngữ thêm kiểu vào JavaScript.
 
 <PostILearned>
 
-TypeScriptが解決しないこと
+Những gì TypeScript không giải quyết
 
-・JavaScriptの実行時パフォーマンス改善
-・JSの仕様バグの解決
+・Cải thiện performance runtime của JavaScript
+・Giải quyết bug specification của JS
 
 </PostILearned>

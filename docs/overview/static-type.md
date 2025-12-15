@@ -1,19 +1,19 @@
-# 静的型付け
+# Static typing
 
-プログラミング言語は大きく2つに分類されます。静的型付け言語と動的型付け言語です。静的型付け言語の中には、C言語やJavaがあり、今学んでいるTypeScriptもその仲間です。一方の動的型付け言語には、RubyやPython、PHP、そしてJavaScriptがあります。
+Ngôn ngữ lập trình được phân loại thành 2 nhóm lớn: ngôn ngữ static typing và ngôn ngữ dynamic typing. Trong ngôn ngữ static typing có C và Java, và TypeScript mà bạn đang học cũng thuộc nhóm này. Mặt khác, ngôn ngữ dynamic typing có Ruby, Python, PHP và JavaScript.
 
-もし、読者のあなたが動的型付け言語をずっとやってきて、TypeScriptが初めての静的型付け言語になるなら、きっとこのような疑問を持つはずです。
+Nếu bạn đã làm việc với ngôn ngữ dynamic typing và TypeScript là ngôn ngữ static typing đầu tiên của bạn, chắc hẳn bạn sẽ có những câu hỏi như:
 
-- 「動的型付け言語」と「静的型付け言語」にはどんな違いがあるか？
-- 「静的型付け言語」にはどんな利点があるのか？
+- Sự khác biệt giữa "ngôn ngữ dynamic typing" và "ngôn ngữ static typing" là gì?
+- "Ngôn ngữ static typing" có những lợi ích gì?
 
-ここでは、そんな静的型付け言語に初めて挑戦する読者の疑問を解消していきます。
+Ở đây, chúng tôi sẽ giải đáp những thắc mắc của người đọc lần đầu thử sức với ngôn ngữ static typing.
 
-## 動的型付け言語は「実行時」に型が定まる
+## Ngôn ngữ dynamic typing xác định kiểu tại "runtime"
 
-静的型付け言語とは何かを考える前に、慣れ親しんだ動的型付け言語とは何だったのか振り返ってみましょう。
+Trước khi xem xét ngôn ngữ static typing là gì, hãy nhìn lại ngôn ngữ dynamic typing quen thuộc là gì.
 
-たとえばPythonで、与えられた引数から1を引き算して返す関数を例に考えてみます。
+Ví dụ, hãy xem xét hàm trừ 1 từ tham số đầu vào và trả về kết quả trong Python.
 
 ```python
 def minus(x):
@@ -22,9 +22,9 @@ def minus(x):
 print(minus(2))
 ```
 
-この`minus()`関数には変数`x`があり、ここに整数型の`2`が代入されると問題なく計算され、整数型の`1`が返ります。当たり前ですね。
+Hàm `minus()` này có biến `x`, khi số nguyên `2` được gán vào, nó tính toán không vấn đề gì và trả về số nguyên `1`. Điều này là hiển nhiên.
 
-では、今度は`minus()`関数に`string`型の`"two"`を渡すとどうなるでしょうか。
+Vậy nếu truyền kiểu `string` `"two"` vào hàm `minus()` thì sao?
 
 ```python
 def minus(x):
@@ -33,17 +33,17 @@ def minus(x):
 print(minus("two"))
 ```
 
-このコードを実行してみると、「TypeError: unsupported operand type(s) for -: 'str' and 'int'」というエラーが発生します。これは「文字列から整数はマイナスできないよ」という意味です。
+Khi chạy code này, sẽ xảy ra lỗi "TypeError: unsupported operand type(s) for -: 'str' and 'int'". Điều này có nghĩa là "không thể trừ số nguyên từ chuỗi".
 
-文字列から数値を引き算するというのは、人間からすると明らかに変です。実行するまでもなく型のおかしさに気づくと思います。
+Việc trừ số từ chuỗi rõ ràng là kỳ lạ với con người. Bạn có thể nhận ra sự bất thường về kiểu mà không cần chạy.
 
-しかし、動的型付け言語ではプログラムを実行するまで型の問題は見過ごされます。プログラムを実行していくと、変数の型が定まっていきます。その過程で問題が発覚して、エラーになるのです。
+Tuy nhiên, trong ngôn ngữ dynamic typing, vấn đề về kiểu bị bỏ qua cho đến khi chương trình được chạy. Khi chương trình chạy, kiểu của biến được xác định. Trong quá trình đó, vấn đề được phát hiện và xảy ra lỗi.
 
-ここからわかるように、**動的型付け言語の最大の特徴は、変数の型はプログラムを実行するまで定まらない**という点です。この特徴はプログラミングの自由度を高めるという利点でもあります。
+Từ đây có thể thấy, **đặc điểm lớn nhất của ngôn ngữ dynamic typing là kiểu của biến không được xác định cho đến khi chương trình được chạy**. Đặc điểm này cũng là lợi thế vì nó tăng độ tự do trong lập trình.
 
-## 静的型付け言語は「コンパイル時」に型が定まる
+## Ngôn ngữ static typing xác định kiểu tại "compile time"
 
-では、静的型付け言語にはどのような特徴があるのでしょうか？先ほどPythonで示した`minus()`関数を静的型付け言語であるTypeScriptで書いてみましょう。
+Vậy ngôn ngữ static typing có những đặc điểm gì? Hãy viết hàm `minus()` được trình bày trong Python bằng TypeScript, một ngôn ngữ static typing.
 
 ```ts twoslash
 function minus(x: number) {
@@ -51,30 +51,30 @@ function minus(x: number) {
 }
 ```
 
-注目すべきは、変数`x`の隣に`number`と書かれている点です。これは、型注釈と呼ばれるもので、変数`x`が`number`型であることを表しています。
+Điểm cần chú ý là `number` được viết bên cạnh biến `x`. Đây được gọi là type annotation, biểu thị rằng biến `x` có kiểu `number`.
 
-この変数`x`に`string`型の`"two"`を代入してコンパイルしてみるとどうなるでしょうか？
+Nếu gán kiểu `string` `"two"` vào biến `x` này và compile thì sao?
 
 ```ts
 minus("two");
 ```
 
-コンパイル結果はエラーになり、「Argument of type 'string' is not assignable to parameter of type 'number'.」という警告が表示されます。この警告の内容は「`number`型のパラメータに`string`型は代入できません」というものです。
+Kết quả compile là lỗi, và cảnh báo "Argument of type 'string' is not assignable to parameter of type 'number'." được hiển thị. Nội dung cảnh báo này là "không thể gán kiểu `string` cho parameter kiểu `number`".
 
-Pythonの例でも似たようなエラーが確認できましたが、それは実行時に発生していました。一方、このTypeScriptの例のエラーは、コンパイル時に発生しています。ここが動的型付け言語と静的型付け言語の大きな特徴の違いです。コンパイル時というのは、プログラムを実行するよりも前の工程です。つまり、**型が実行時よりも前のコンパイル時で定まるというのが、静的型付け言語の特徴なのです**。そのおかげで、明らかにおかしな代入を早期発見できるというのが、TypeScriptを始めとした静的型付け言語の大きな利点になるわけです。
+Lỗi tương tự cũng được xác nhận trong ví dụ Python, nhưng nó xảy ra tại runtime. Mặt khác, lỗi trong ví dụ TypeScript này xảy ra tại compile time. Đây là sự khác biệt lớn giữa ngôn ngữ dynamic typing và ngôn ngữ static typing. Compile time là giai đoạn trước khi chạy chương trình. Tức là, **đặc điểm của ngôn ngữ static typing là kiểu được xác định tại compile time, trước runtime**. Nhờ đó, việc phát hiện sớm các phép gán rõ ràng bất thường là lợi thế lớn của ngôn ngữ static typing như TypeScript.
 
-## 型注釈をコストと考えるか、投資と考えるか
+## Xem type annotation là chi phí hay đầu tư
 
-動的型付け言語では書く必要がなかった型注釈を、TypeScriptでは基本的には変数ごとに書いていくことになります。そのため、動的型の言語からTypeScriptに入ってきた人の中には、コードの記述量が増えて面倒に感じる人がいるかもしれません。型注釈の記述は「コスト」と考えることもできます。(それを省力化する「型推論」という仕組みもありますが、ここではその説明は割愛します。)
+Trong ngôn ngữ dynamic typing bạn không cần viết type annotation, nhưng trong TypeScript về cơ bản bạn sẽ viết cho mỗi biến. Do đó, một số người từ ngôn ngữ dynamic typing chuyển sang TypeScript có thể cảm thấy phiền khi lượng code tăng lên. Type annotation có thể được coi là "chi phí". (Có cơ chế "type inference" để giảm bớt điều này, nhưng ở đây chúng tôi bỏ qua phần giải thích đó.)
 
-そもそも型注釈の目的は何なんでしょうか？それは、プログラマがコンパイラに「この変数の型は何であるか」を教えることです。型注釈があると、たとえば、コンパイラが`minus()`関数を処理するときに、「`x`変数は`number`型でなければならないのか。じゃあ、`string`型を代入するようなコードは間違いだな。エラーにしてプログラマに教えてあげよう」といったような働きをしてくれるのです。
+Vậy mục đích của type annotation là gì? Đó là để programmer nói cho compiler "kiểu của biến này là gì". Khi có type annotation, ví dụ khi compiler xử lý hàm `minus()`, nó sẽ làm việc như "biến `x` phải là kiểu `number`. Vậy code gán kiểu `string` là sai. Hãy báo lỗi để cho programmer biết".
 
-コンパイラは、細かく問題を指摘してくるので、鬱陶しく思うかもしれません。ここは見方を変える必要があります。コンパイラは「あなた専属のコードレビュア」なのだと。バグに気づかずリリースしてしまい、大問題となって発覚するといった経験はないでしょうか？コンパイラはそういったことに至るずっと前の段階で、問題点を教えてくれる頼りになる存在です。
+Compiler chỉ ra vấn đề chi tiết, có thể bạn cảm thấy phiền. Ở đây cần thay đổi cách nhìn. Compiler là "code reviewer chuyên dụng của bạn". Bạn có từng gặp trường hợp release mà không nhận ra bug, rồi phát hiện thành vấn đề lớn không? Compiler là sự tồn tại đáng tin cậy cho bạn biết vấn đề ở giai đoạn rất sớm trước khi điều đó xảy ra.
 
-コンパイラも決して全知全能ではありません。ちゃんと型を教えてあげなければ、いいコンパイラに成長しません。逆に型注釈をちゃんとしていけば、多くの問題に気がつく賢いコンパイラに育っていきます。この観点に立つと、型注釈はコストではなく、コンパイラを正しく育て、バグを未然に防ぐための「投資」と考えることができるのではないでしょうか。
+Compiler cũng không phải toàn năng. Nếu không dạy kiểu đúng cách, nó sẽ không trở thành compiler tốt. Ngược lại, nếu viết type annotation đúng cách, nó sẽ trở thành compiler thông minh nhận ra nhiều vấn đề. Từ quan điểm này, type annotation có thể được coi là "đầu tư" để nuôi dưỡng compiler đúng cách và ngăn ngừa bug từ trước.
 
-## まとめ
+## Tóm tắt
 
-- 動的型付け言語: 実行時に変数の型が定まる言語。型にまつわる問題はプログラムを実行してみないと発覚しない。
-- 静的型付け言語: コンパイル時に変数の型が定まる言語。型にまつわる問題はプログラムを実行しなくても発見できる。
-- 型注釈は、あなた専属のコードレビュアであるコンパイラを育てるための投資。
+- Ngôn ngữ dynamic typing: Ngôn ngữ xác định kiểu biến tại runtime. Vấn đề liên quan đến kiểu không được phát hiện cho đến khi chạy chương trình.
+- Ngôn ngữ static typing: Ngôn ngữ xác định kiểu biến tại compile time. Vấn đề liên quan đến kiểu có thể được phát hiện mà không cần chạy chương trình.
+- Type annotation là đầu tư để nuôi dưỡng compiler, code reviewer chuyên dụng của bạn.

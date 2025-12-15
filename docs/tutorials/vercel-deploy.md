@@ -1,69 +1,69 @@
-# Vercelにデプロイしてみよう
+# Deploy lên Vercel
 
-このチュートリアルでは前のNext.jsのハンズオンで作成した猫画像ジェネレーターをVercelへデプロイする方法を学びます。
+Trong tutorial này, bạn sẽ học cách deploy lên Vercel ứng dụng tạo ảnh mèo đã tạo trong hands-on Next.js trước đó.
 
-## Vercelとは？
+## Vercel là gì?
 
-Next.jsを開発しているVercel社が提供しているフロントエンド向けのクラウドプラットフォームで、特徴としては次の点があります。
+Là cloud platform cho frontend do Vercel - công ty phát triển Next.js - cung cấp, có các đặc điểm sau.
 
-- 特別な設定をせずにゼロコンフィグでGitHubリポジトリと連携をするだけで簡単にデプロイ環境を構築できる
-- プルリク単位で自動でプレビュー環境を利用できる
-- JavaScriptやCSSファイルを自動で圧縮してCDN環境で配信
+- Có thể xây dựng môi trường deploy dễ dàng chỉ bằng cách liên kết với GitHub repository mà không cần config đặc biệt (zero config)
+- Có thể sử dụng môi trường preview tự động theo từng pull request
+- Tự động nén file JavaScript và CSS và phân phối qua môi trường CDN
 
-特にVercelはNext.jsをホスティングする環境として開発されており、Next.jsのサーバーサイド機能を特別なセットアップなしに利用できるので、他のクラウドプラットフォームを利用する理由がない場合はNext.jsのホスティング環境としてVercelはオススメです。
+Đặc biệt Vercel được phát triển như môi trường hosting Next.js, có thể sử dụng tính năng server-side của Next.js mà không cần setup đặc biệt, nên nếu không có lý do sử dụng cloud platform khác, Vercel là lựa chọn được khuyến nghị làm môi trường hosting cho Next.js.
 
-## このチュートリアルに必要なもの
+## Những thứ cần thiết cho tutorial này
 
-今回のチュートリアルではGitHubリポジトリとの連携を利用してデプロイ環境を構築するために、次のものが必要です。
+Trong tutorial lần này, để xây dựng môi trường deploy bằng cách liên kết với GitHub repository, cần những thứ sau.
 
-- GitHubアカウント
-- 「[Next.jsで猫画像ジェネレーターを作ろう](./nextjs.md)」で作成したコードと、それをpush済みのGitHubリポジトリ
-  - 上のチュートリアルを実施された方は、ご自身のGitHubアカウントのリポジトリにコードをpushしておいてください。
-  - 自分で作ったコードでなくても構わない方は、本書が提供する[random-catリポジトリ](https://github.com/yytypescript/random-cat)を[フォーク](https://docs.github.com/ja/get-started/quickstart/fork-a-repo)しておくのでも構いません。
+- Tài khoản GitHub
+- Code đã tạo trong "[Tạo trình tạo ảnh mèo với Next.js](./nextjs.md)" và GitHub repository đã push code đó
+  - Nếu bạn đã thực hiện tutorial trên, hãy push code vào repository của tài khoản GitHub của bạn.
+  - Nếu bạn không cần phải là code tự tạo, cũng có thể [fork](https://docs.github.com/ja/get-started/quickstart/fork-a-repo) [random-cat repository](https://github.com/yytypescript/random-cat) do sách này cung cấp.
 
-## デプロイの流れ
+## Quy trình deploy
 
-- Vercelアカウントを作成する
-- Vercelにログインする
-- GitHubリポジトリを連携する
+- Tạo tài khoản Vercel
+- Đăng nhập vào Vercel
+- Liên kết GitHub repository
 
-## Vercelアカウントを作成する
+## Tạo tài khoản Vercel
 
 :::note
-Vercelのアカウントをすでにお持ちの方は、この手順を飛ばしてください。
+Nếu bạn đã có tài khoản Vercel, hãy bỏ qua bước này.
 :::
 
-最初に[Vercel](https://vercel.com/signup)にアクセスをして、GitHubアカウントでVercelのアカウントを作成しましょう。アカウント作成後に連携するGitHubリポジトリの選択画面が表示されるので、「GitHubリポジトリを連携する」にお進みください。
+Đầu tiên, truy cập [Vercel](https://vercel.com/signup) và tạo tài khoản Vercel bằng tài khoản GitHub. Sau khi tạo tài khoản, màn hình chọn GitHub repository để liên kết sẽ hiển thị, hãy tiếp tục với "Liên kết GitHub repository".
 
-## Vercelにログインする
+## Đăng nhập vào Vercel
 
-[Vercelのログイン画面](https://vercel.com/login)に遷移してGitHubアカウントでログインをします。
+Chuyển đến [màn hình đăng nhập Vercel](https://vercel.com/login) và đăng nhập bằng tài khoản GitHub.
 
-## GitHubリポジトリを連携する
+## Liên kết GitHub repository
 
-[VercelのGitHubリポジトリ連携のページ](https://vercel.com/new)へアクセスして猫画像ジェネレーターのGitHubリポジトリを検索して「Import」ボタンをクリックします。
+Truy cập [trang liên kết GitHub repository của Vercel](https://vercel.com/new), tìm kiếm GitHub repository của trình tạo ảnh mèo và click nút "Import".
 
-![VercelのGitHubリポジトリ連携画面で、ユーザーのリポジトリから「random-cat」を検索し、検索結果に表示されたリポジトリ名の横に「Import」ボタンが表示されている。](vercel-deploy/vercel-import-github-random-cat.png)
+![Màn hình liên kết GitHub repository của Vercel, tìm kiếm "random-cat" từ repository của user, nút "Import" hiển thị bên cạnh tên repository trong kết quả tìm kiếm.](vercel-deploy/vercel-import-github-random-cat.png)
 
-プロジェクトの設定画面が表示されるので、設定はデフォルトのままで「Deploy」ボタンをクリックしてください。
+Màn hình config project hiển thị, để config mặc định và click nút "Deploy".
 
-![Vercelの新規プロジェクト作成画面で、GitHubリポジトリ「random-cat」が選択され、Next.jsのプリセットが設定された状態。プロジェクト名やルートディレクトリが自動入力され、「Deploy」ボタンが表示されている。](vercel-deploy/vercel-project-settings-random-cat.png)
+![Màn hình tạo project mới của Vercel, GitHub repository "random-cat" được chọn, preset Next.js được set. Tên project và root directory được tự động điền, nút "Deploy" hiển thị.](vercel-deploy/vercel-project-settings-random-cat.png)
 
-デプロイ完了画面が表示されればデプロイは完了です。🎉画面のプレビュー表示がリンクになっており、クリックすることでデプロイされたアプリを表示することができます。
+Nếu màn hình hoàn tất deploy hiển thị thì deploy đã hoàn thành. 🎉Preview hiển thị trên màn hình là link, click vào có thể hiển thị app đã deploy.
 
-![Vercelのデプロイ完了画面で、新規プロジェクトデプロイ成功を知らせるメッセージと共に、中央に「他のにゃんこも見る」ボタン付きの猫画像表示アプリが表示されている。](vercel-deploy/vercel-deploy-complete-random-cat.png)
+![Màn hình hoàn tất deploy của Vercel, cùng với message thông báo deploy project mới thành công, ở giữa hiển thị app hiển thị ảnh mèo với nút "Xem mèo khác".](vercel-deploy/vercel-deploy-complete-random-cat.png)
 
-「Continue To Dashboard」のボタンをクリックすることでプロジェクトのダッシュボードページへ遷移できます。ダッシュボード上でVercelが自動生成したドメインを確認できます。このドメインはプロジェクトが存続している限り変更されないため、このURLを他の人に共有することでアプリを公開することができます。
+Click nút "Continue To Dashboard" để chuyển đến trang dashboard của project. Trên dashboard có thể xác nhận domain được Vercel tự động tạo. Domain này không thay đổi miễn là project còn tồn tại, nên có thể công khai app bằng cách chia sẻ URL này với người khác.
 
-![Vercelのダッシュボードに表示された「random-cat」プロジェクトの本番デプロイ情報。中央には「他のにゃんこも見る」ボタンと猫の画像があり、右側にデプロイURLやステータス「Ready」などの詳細が表示されている。](vercel-deploy/vercel-dashboard-production-random-cat.png)
+![Thông tin production deploy của project "random-cat" hiển thị trên dashboard Vercel. Ở giữa có nút "Xem mèo khác" và ảnh mèo, bên phải hiển thị chi tiết như URL deploy và status "Ready".](vercel-deploy/vercel-dashboard-production-random-cat.png)
 
-## 自動デプロイを体験
+## Trải nghiệm auto deploy
 
-プルリクエストを作成・マージして自動デプロイを実行してみます。VercelではGitHub連携が完了した段階で自動デプロイのCI/CD環境も自動で構築されるので、プルリクエストを作成・マージするだけで自動でデプロイがされる状態になっています。
+Hãy tạo và merge pull request để thực thi auto deploy. Trong Vercel, môi trường CI/CD cho auto deploy cũng được tự động xây dựng khi hoàn tất liên kết GitHub, nên chỉ cần tạo và merge pull request là tự động deploy.
 
-実際に猫画像ジェネレーターのコードの一部を修正して自動デプロイを実行してみましょう。
+Hãy thực sự sửa một phần code của trình tạo ảnh mèo và thực thi auto deploy.
 
-次のようにボタンの文言を「他のにゃんこも見る」を「One more cat!」に変更してGitHubリポジトリでプルリクエストを作成してください。
+Thay đổi text của button từ "Xem mèo khác" thành "One more cat!" như sau và tạo pull request trên GitHub repository.
 
 ```tsx twoslash {22-24} title="app/cat-image.tsx"
 // @filename: index.tsx
@@ -103,25 +103,25 @@ export declare function fetchImage(): Promise<Image>;
 export {};
 ```
 
-Vercelは連携しているGitHubリポジトリに新たにブランチがプッシュされると自動でビルドが実行されて、プレビュー環境をデプロイしてくれます。
+Vercel tự động thực thi build và deploy môi trường preview khi có branch mới được push vào GitHub repository đã liên kết.
 
-プルリクエストを作成するとVercel BOTが画像のようにビルドのステータスとプレビュー環境のURLをコメントとしてくれるので、「Visit Preview」のリンクをクリックすることでレビュアーは簡単に新しい変更の確認をすることができます。
+Khi tạo pull request, Vercel BOT sẽ comment status của build và URL môi trường preview như hình, reviewer có thể dễ dàng xác nhận thay đổi mới bằng cách click link "Visit Preview".
 
-![GitHubのプルリクエストにVercel BOTが投稿したコメントで、プロジェクト「random-cat」の最新のデプロイ状況を表すテーブルが表示されている。ステータスは「Ready」で、「Visit Preview」リンクからプレビュー環境にアクセス可能。](vercel-deploy/vercel-github-pr-preview-comment.png)
+![Comment được Vercel BOT đăng trên pull request GitHub, hiển thị bảng trạng thái deploy mới nhất của project "random-cat". Status là "Ready", có thể truy cập môi trường preview từ link "Visit Preview".](vercel-deploy/vercel-github-pr-preview-comment.png)
 
-ビルドの結果はプルリクエストのstatus checksにも表示されるので、ビルドが失敗している状態で誤ってデプロイをする事故も防ぐこともできます。
+Kết quả build cũng hiển thị trong status checks của pull request, nên cũng có thể ngăn ngừa sự cố deploy nhầm khi build fail.
 
-![GitHubのプルリクエスト画面で、Vercelによる2件のチェックが成功し、ベースブランチとの競合もないことが確認された状態。「Merge pull request」ボタンが緑色で有効になっている。](vercel-deploy/vercel-github-checks-merge-ready.png)
+![Màn hình pull request GitHub, 2 check của Vercel thành công, xác nhận không có conflict với base branch. Nút "Merge pull request" có màu xanh và enabled.](vercel-deploy/vercel-github-checks-merge-ready.png)
 
-「Merge pull request」ボタンをクリックして、このプルリクエストをマージしてみましょう。ベースブランチに新しくブランチがマージされると本番環境に更新が自動でデプロイされます。
+Click nút "Merge pull request" để merge pull request này. Khi có branch mới được merge vào base branch, update sẽ tự động deploy vào môi trường production.
 
-先ほど確認した本番環境のURLにアクセスをすることで、ボタンのデザインが変更されており今回の修正が本番環境に自動でデプロイされたのを確認できます。😺
+Bằng cách truy cập URL môi trường production đã xác nhận trước đó, có thể xác nhận design của button đã thay đổi và sửa đổi lần này đã được tự động deploy vào môi trường production. 😺
 
-![Vercelでデプロイされた猫画像ジェネレーターのプレビュー画面。画面中央に「One more cat!」ボタンと、トラのフィギュアを見つめる茶トラ猫の画像が表示されている。](vercel-deploy/random-cat-preview-one-more-cat.png)
+![Màn hình preview của trình tạo ảnh mèo deploy trên Vercel. Ở giữa màn hình hiển thị nút "One more cat!" và ảnh mèo mướp đang nhìn figurine hổ.](vercel-deploy/random-cat-preview-one-more-cat.png)
 
-## プロジェクトを削除
+## Xóa project
 
-プロジェクトが残って気になる方は、Settingsページに移動して「Delete」ボタンをクリックし、ダイアログで必要なテキストを入力することでプロジェクトを削除できます。
+Nếu bạn lo lắng về project còn lại, có thể xóa project bằng cách di chuyển đến trang Settings, click nút "Delete" và nhập text cần thiết trong dialog.
 
-![Vercelのプロジェクト設定画面で、「random-cat」プロジェクトの削除セクションが表示されており、赤い「Delete」ボタンが強調されている。上部の「Settings」タブからアクセスされたことを示す矢印付きの注釈がある。](vercel-deploy/vercel-project-settings-delete-random-cat.png)
-![Vercelのプロジェクト削除ダイアログで、削除確認として2つの入力欄にプロジェクト名と「delete my project」の文言が入力され、「Delete」ボタンが強調表示されている。](vercel-deploy/vercel-project-delete-confirmation.png)
+![Màn hình settings project Vercel, hiển thị section xóa project "random-cat", nút "Delete" màu đỏ được highlight. Có mũi tên chú thích cho thấy được truy cập từ tab "Settings" ở trên.](vercel-deploy/vercel-project-settings-delete-random-cat.png)
+![Dialog xóa project Vercel, tên project và text "delete my project" được nhập vào 2 ô input để xác nhận xóa, nút "Delete" được highlight.](vercel-deploy/vercel-project-delete-confirmation.png)

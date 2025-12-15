@@ -2,22 +2,22 @@
 slug: /tutorials
 ---
 
-# 作って学ぶTypeScript
+# Học TypeScript qua thực hành
 
-この章では、TypeScriptを使った実践的な開発の流れを学びます。次のチュートリアルを用意しています。
+Trong chương này, bạn sẽ học quy trình phát triển thực tế sử dụng TypeScript. Chúng tôi đã chuẩn bị các tutorial sau.
 
-- [開発環境の準備](./setup.md)
-- [簡単な関数を作ってみよう](./make-a-simple-function-via-cli.md)
-- [Reactでいいねボタンを作ろう](./react-like-button-tutorial.md)
-- [Next.jsで猫画像ジェネレーターを作ろう](./nextjs.md)
-- [Vercelにデプロイしてみよう](./vercel-deploy.md)
-- [Jestでテストを書こう](./jest.md)
-- [Reactコンポーネントのテストを書こう](./component-test.md)
-- [Prettierでコード整形を自動化しよう](./prettier.md)
-- [ESLintでコーディング規約を自動化しよう](./eslint.md)
+- [Chuẩn bị môi trường phát triển](./setup.md)
+- [Tạo một hàm đơn giản](./make-a-simple-function-via-cli.md)
+- [Tạo nút Like với React](./react-like-button-tutorial.md)
+- [Tạo trình tạo ảnh mèo với Next.js](./nextjs.md)
+- [Deploy lên Vercel](./vercel-deploy.md)
+- [Viết test với Jest](./jest.md)
+- [Viết test cho React component](./component-test.md)
+- [Tự động hóa format code với Prettier](./prettier.md)
+- [Tự động hóa coding convention với ESLint](./eslint.md)
 
-この章の目的は、「もし実務でTypeScriptを使ったらどんな開発になるのか？」について体験することです。この章を進めるにあたって、TypeScriptの知識はまだ無くても構いません。解説の手順どおりに進めることで、開発を追体験できるようになっています。
+Mục đích của chương này là trải nghiệm "Nếu sử dụng TypeScript trong công việc thực tế thì việc phát triển sẽ như thế nào?". Khi tiến hành chương này, bạn chưa cần có kiến thức về TypeScript. Bằng cách làm theo các bước hướng dẫn, bạn có thể trải nghiệm quá trình phát triển.
 
-この章でのTypeScriptについての解説は最小限です。チュートリアルを進めるにあたり、必要なものは解説します。しかし、言語の詳しい仕様については省いています。まずは具体的な開発を体験してください。TypeScriptがどんな雰囲気なのか感じ取った上で、より詳しい言語の仕様や機能について学びたくなったら、次の章の「読んで学ぶTypeScript」をお読みください。
+Giải thích về TypeScript trong chương này được giữ ở mức tối thiểu. Những gì cần thiết để tiến hành tutorial sẽ được giải thích. Tuy nhiên, các specification chi tiết của ngôn ngữ được bỏ qua. Trước hết, hãy trải nghiệm phát triển cụ thể. Sau khi cảm nhận được TypeScript như thế nào, nếu bạn muốn tìm hiểu thêm về specification và tính năng chi tiết của ngôn ngữ, hãy đọc chương tiếp theo "Học TypeScript qua đọc".
 
-[読んで学ぶTypeScript](/reference/README)
+[Học TypeScript qua đọc](/reference/README)
