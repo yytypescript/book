@@ -29,10 +29,10 @@ class Human {
 
 const human = new Human("");
 // Sử dụng Setter
-human.name = `田中太郎`;
+human.name = `Nguyen Van An`;
 // Sử dụng Getter
 console.log(human.name);
-// @log: 田中太郎
+// @log: Nguyen Van An
 ```
 
 Khác với method, khi gọi getter/setter không cần dùng `()`.
@@ -54,17 +54,17 @@ class Human {
   }
 }
 
-const human = new Human("田中太郎");
+const human = new Human("Nguyen Van An");
 // ---cut---
 // @errors: 2349 6234
 // Getter
 console.log(human.name); // Cách sử dụng Getter đúng
-// @log: "田中太郎"
+// @log: "Nguyen Van An"
 console.log(human.name()); // Lỗi: human.name is not a function
 
 // Setter
-human.name = "田中太郎"; // Cách sử dụng Setter đúng
-human.name("田中太郎");
+human.name = "Nguyen Van An"; // Cách sử dụng Setter đúng
+human.name("Nguyen Van An");
 ```
 
 ## Getter

@@ -1,12 +1,12 @@
-# インターフェースとinstanceof
+# Interface và instanceof
 
-[instanceof演算子](../class/instanceof-operator.md)は、オブジェクトがクラスのインスタンスかを判定するJavaScriptの演算子です。ここでは、`instanceof`演算子がTypeScriptのインターフェースとどのような関係にあるのかを解説します。
+[Toán tử instanceof](../class/instanceof-operator.md) là toán tử của JavaScript để kiểm tra xem object có phải là instance của class hay không. Ở đây sẽ giải thích mối quan hệ giữa toán tử `instanceof` và interface của TypeScript.
 
-## 他言語の`instanceof`との違い
+## Khác biệt với `instanceof` của các ngôn ngữ khác
 
-JavaやPHPなど他の言語の`instanceof`演算子は、インターフェースに用いることができる言語もありますので、他言語の次にTypeScriptに学ぶ場合は注意してください。次はPHPで`instanceof`演算子をインターフェースに使っている例です。
+Toán tử `instanceof` của các ngôn ngữ khác như Java hay PHP có thể sử dụng với interface, nên cần lưu ý khi học TypeScript sau các ngôn ngữ khác. Dưới đây là ví dụ sử dụng toán tử `instanceof` với interface trong PHP.
 
-```php title="PHPのinstanceof演算子の例"
+```php title="Ví dụ toán tử instanceof của PHP"
 interface MyInterface
 {
 }
@@ -20,11 +20,11 @@ var_dump($a instanceof MyInterface);
 //=> bool(true)
 ```
 
-### `instanceof`はインターフェースに使えない
+### Không thể sử dụng `instanceof` với interface
 
-TypeScriptは上のような言語とは異なり、`instanceof インターフェイス名`で型を判定することができません。もしも、`instanceof`演算子にインターフェース名を使うと、コンパイルエラーになります。
+TypeScript khác với các ngôn ngữ trên, không thể kiểm tra kiểu bằng `instanceof tên_interface`. Nếu sử dụng tên interface với toán tử `instanceof`, sẽ xảy ra lỗi compile.
 
-```ts twoslash title="TypeScriptでinstanceof演算子を使うとコンパイルエラーになる例"
+```ts twoslash title="Ví dụ lỗi compile khi sử dụng toán tử instanceof trong TypeScript"
 // @errors: 2693
 interface MyInterface {}
 
@@ -34,13 +34,13 @@ const a = new MyClass();
 console.log(a instanceof MyInterface);
 ```
 
-なぜかというと、インターフェースがTypeScript固有の機能でコンパイル時にコードから消えるためです。インターフェースは型レベルのものです。TypeScriptはJavaScriptにコンパイルするとき、型レベルのものを消します。変数の型注釈がコンパイル時に消えるのと同じ理屈です。
+Lý do là vì interface là tính năng riêng của TypeScript và bị xóa khỏi code khi compile. Interface là thứ ở level type. TypeScript xóa các thứ ở level type khi compile sang JavaScript. Đây là lý do tương tự như type annotation của biến bị xóa khi compile.
 
-コンパイル時に消えるということは、JavaScript実行時にインターフェースの情報が、どこにもないということです。そのため、`instanceof`がインターフェース名を取ることができないというわけです。
+Việc bị xóa khi compile có nghĩa là không có thông tin về interface ở đâu cả khi chạy JavaScript. Do đó, `instanceof` không thể nhận tên interface.
 
-## インターフェースの判定には型ガード関数を使う
+## Sử dụng type guard function để kiểm tra interface
 
-実行時に値がインターフェースと互換しているかを判定するには、[型ガード関数](../../functions/type-guard-functions.md)を用います。型ガード関数は、型を判定したい値を引数に取り、`true`または`false`を返す関数です。たとえば、値が`Student`インターフェース型であるかを判定する関数は次のようになります。
+Để kiểm tra xem giá trị có tương thích với interface khi runtime hay không, sử dụng [type guard function](../../functions/type-guard-functions.md). Type guard function là function nhận giá trị muốn kiểm tra kiểu làm tham số và trả về `true` hoặc `false`. Ví dụ, function kiểm tra xem giá trị có phải là kiểu `Student` interface hay không như sau:
 
 ```ts twoslash
 interface Student {
@@ -48,18 +48,18 @@ interface Student {
   grade: number;
 }
 
-// Student型かを判定する型ガード関数
+// Type guard function kiểm tra kiểu Student
 function isStudent(value: unknown): value is Student {
-  // 値がオブジェクトであるかの判定
+  // Kiểm tra xem giá trị có phải object không
   if (typeof value !== "object" || value === null) {
     return false;
   }
   const { name, grade } = value as Record<keyof Student, unknown>;
-  // nameプロパティーが文字列型かを判定
+  // Kiểm tra xem property name có phải kiểu string không
   if (typeof name !== "string") {
     return false;
   }
-  // gradeプロパティーが数値型かを判定
+  // Kiểm tra xem property grade có phải kiểu number không
   if (typeof grade !== "number") {
     return false;
   }
@@ -67,7 +67,7 @@ function isStudent(value: unknown): value is Student {
 }
 ```
 
-そして、この`isStudent`関数を`instanceof`の代わりに用いると、実行時に型の判定ができるようになります。
+Sử dụng function `isStudent` này thay cho `instanceof` để có thể kiểm tra kiểu khi runtime.
 
 ```ts twoslash
 interface Student {
@@ -84,32 +84,32 @@ if (isStudent(tom)) {
 }
 ```
 
-型ガード関数の詳細については、次のページをご覧ください。
+Để biết chi tiết về type guard function, xem trang sau:
 
-[型ガード関数](../../functions/type-guard-functions.md)
+[Type guard function](../../functions/type-guard-functions.md)
 
-## 複雑なインターフェースの判定はzodが便利
+## zod hữu ích cho việc kiểm tra interface phức tạp
 
-型ガード関数の例として、上で`isStudent`の実装を示しましたが、中身を見てみるとプロパティーごとに型を判定するロジックが必要なのが分かります。プロパティーが少なければ、型ガード関数の実装は短く保守可能な範囲に収まりますが、プロパティーが多くなると保守困難なコードになると想像されます。
+Như ví dụ về type guard function, tôi đã trình bày implementation của `isStudent` ở trên, nhưng khi xem nội dung có thể thấy cần logic kiểm tra kiểu cho từng property. Nếu property ít, implementation của type guard function có thể giữ ngắn trong phạm vi bảo trì được, nhưng có thể tưởng tượng khi property nhiều sẽ trở thành code khó bảo trì.
 
-そのようなケースで便利なのが[zod](https://zod.dev/)です。zodはオブジェクトの構造をチェックするライブラリで、TypeScript向けに作られています。zodでは、オブジェクトの構造を定義すると、構造をチェックする型ガード関数が得られます。次は、`isStudent`をzodで実装した例です。
+Trong trường hợp đó, [zod](https://zod.dev/) rất hữu ích. zod là thư viện kiểm tra cấu trúc object, được tạo cho TypeScript. Với zod, khi định nghĩa cấu trúc object, sẽ có được type guard function kiểm tra cấu trúc. Dưới đây là ví dụ implement `isStudent` bằng zod:
 
 ```ts twoslash
 import z from "zod";
 
-// zodによるスキーマの定義
+// Định nghĩa schema bằng zod
 const studentSchema = z.object({
   name: z.string(),
   grade: z.number(),
 });
-// インターフェースの型を導出
+// Suy luận kiểu của interface
 type Student = z.infer<typeof studentSchema>;
 //   ^?
-// 型ガード関数
+// Type guard function
 function isStudent(value: unknown): value is Student {
   return studentSchema.safeParse(value).success;
 }
-// 型の判定
+// Kiểm tra kiểu
 const tom: object = { name: "Tom", grade: 2 };
 if (isStudent(tom)) {
   tom;
@@ -117,11 +117,11 @@ if (isStudent(tom)) {
 }
 ```
 
-zodを用いると、宣言的なコードになることで、型ガード関数の細かい実装を自分で書かなくてよくなることがわかるかと思います。プロパティーの数が多いインターフェースや、プロパティーがネストされて構造化されたインターフェースの型ガード関数が必要になった場合は、zodの導入を検討してみるといいでしょう。
+Với zod, code trở nên declarative, không cần tự viết implementation chi tiết của type guard function. Khi cần type guard function cho interface có nhiều property hoặc interface có cấu trúc lồng nhau, nên xem xét việc sử dụng zod.
 
-## 抽象クラスと`instanceof`
+## Abstract class và `instanceof`
 
-TypeScriptにはインターフェースの似たものに[抽象クラス](./../class/abstract-class.md)があります。抽象クラスはインターフェースと異なり、`instanceof`演算子が使えます。これは、抽象クラスはコンパイルしても、クラスとして残るためです。
+TypeScript có [abstract class](./../class/abstract-class.md) tương tự interface. Khác với interface, abstract class có thể sử dụng toán tử `instanceof`. Lý do là vì abstract class vẫn tồn tại dưới dạng class ngay cả sau khi compile.
 
 ```ts twoslash
 abstract class AbstractClass {}

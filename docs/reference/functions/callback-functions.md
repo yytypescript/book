@@ -201,7 +201,7 @@ function greetUser(getUser: () => User) {
 function fetchUserFromDB(): Promise<User> {
   return new Promise<User>((resolve) => {
     setTimeout(() => {
-      resolve({ name: "太郎" });
+      resolve({ name: "Tuan" });
     }, 1000);
   });
 }

@@ -19,14 +19,14 @@ module.exports = {
     "README",
     {
       type: "category",
-      label: "本書について",
+      label: "Về cuốn sách",
       collapsed: true,
       link: { type: "doc", id: "about" },
       items: ["license"],
     },
     {
       type: "category",
-      label: "TypeScriptのあらまし",
+      label: "Tổng quan TypeScript",
       collapsed: false,
       link: { type: "doc", id: "overview/README" },
       items: [
@@ -43,7 +43,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "作って学ぶTypeScript",
+      label: "Học TypeScript qua thực hành",
       collapsed: false,
       link: { type: "doc", id: "tutorials/README" },
       items: [
@@ -61,13 +61,13 @@ module.exports = {
     },
     {
       type: "category",
-      label: "読んで学ぶTypeScript",
+      label: "Học TypeScript qua tài liệu",
       collapsed: false,
       link: { type: "doc", id: "reference/README" },
       items: [
         {
           type: "category",
-          label: "値・型・変数",
+          label: "Giá trị, kiểu và biến",
           link: {
             type: "generated-index",
             slug: "/reference/values-types-variables",
@@ -82,7 +82,7 @@ module.exports = {
             "reference/values-types-variables/boolean",
             {
               type: "category",
-              label: "number型",
+              label: "Kiểu number",
               link: {
                 type: "doc",
                 id: "reference/values-types-variables/number/README",
@@ -103,7 +103,7 @@ module.exports = {
             "reference/values-types-variables/any",
             {
               type: "category",
-              label: "オブジェクト",
+              label: "Object",
               link: {
                 type: "generated-index",
                 slug: "reference/values-types-variables/object",
@@ -129,7 +129,7 @@ module.exports = {
             "reference/values-types-variables/structural-subtyping",
             {
               type: "category",
-              label: "配列",
+              label: "Array",
               link: {
                 type: "generated-index",
                 slug: "reference/values-types-variables/array",
@@ -150,7 +150,7 @@ module.exports = {
             "reference/values-types-variables/tuple",
             {
               type: "category",
-              label: "列挙型",
+              label: "Enum",
               link: {
                 type: "doc",
                 id: "reference/values-types-variables/enum/README",
@@ -177,7 +177,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "文",
+          label: "Câu lệnh",
           link: {
             type: "generated-index",
             slug: "reference/statements",
@@ -199,7 +199,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "関数",
+          label: "Hàm",
           link: {
             type: "generated-index",
             slug: "reference/functions",
@@ -231,7 +231,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "非同期処理",
+          label: "Xử lý bất đồng bộ",
           link: {
             type: "doc",
             id: "reference/asynchronous/README",
@@ -244,7 +244,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "オブジェクト指向",
+          label: "Lập trình hướng đối tượng",
           link: {
             type: "generated-index",
             slug: "reference/object-oriented",
@@ -252,7 +252,7 @@ module.exports = {
           items: [
             {
               type: "category",
-              label: "クラス",
+              label: "Class",
               link: {
                 type: "doc",
                 id: "reference/object-oriented/class/README",
@@ -278,7 +278,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "インターフェース",
+              label: "Interface",
               link: {
                 type: "doc",
                 id: "reference/object-oriented/interface/README",
@@ -306,7 +306,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "組み込みAPI",
+          label: "API tích hợp",
           link: {
             type: "generated-index",
             slug: "reference/builtin-api",
@@ -324,7 +324,7 @@ module.exports = {
         "reference/single-process-and-callback",
         {
           type: "category",
-          label: "型の再利用",
+          label: "Tái sử dụng kiểu",
           link: {
             type: "doc",
             id: "reference/type-reuse/README",
@@ -334,15 +334,15 @@ module.exports = {
             "reference/type-reuse/keyof-type-operator",
             {
               type: "category",
-              label: "ユーティリティ型",
+              label: "Utility Types",
               link: {
                 type: "generated-index",
                 slug: "reference/type-reuse/utility-types",
-                title: "ユーティリティ型 (utility type)",
+                title: "Utility Types",
                 description:
-                  "ユーティリティ型(utility type)は、型から別の型を導き出してくれる型です。functionが実行時の世界の関数だとしたら、ユーティリティ型は型の世界の関数といったイメージです。\n" +
+                  "Utility type là các kiểu giúp tạo ra kiểu mới từ kiểu có sẵn. Nếu function là hàm trong thế giới runtime, thì utility type giống như hàm trong thế giới kiểu.\n" +
                   "\n" +
-                  "ここではユーティリティ型のうち、主要なものだけを取り上げます。興味がある方は公式やソースコードを参照してください。ここで取り上げるユーティリティ型は、すべてTypeScriptのビルトインパッケージで定義されています。ソースコードも同梱されているので、その実装方法を見ることが可能です。",
+                  "Ở đây chúng ta chỉ đề cập đến các utility type chính. Nếu bạn quan tâm, hãy tham khảo tài liệu chính thức và source code. Tất cả utility type được đề cập ở đây đều được định nghĩa trong built-in package của TypeScript.",
               },
               items: [
                 "reference/type-reuse/utility-types/required",
@@ -377,7 +377,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "ジェネリクス",
+          label: "Generics",
           link: {
             type: "doc",
             id: "reference/generics/README",
@@ -446,7 +446,7 @@ module.exports = {
         type: "generated-index",
         slug: "tips",
         description:
-          "今日の開発で知っておくと便利なTypeScript (JavaScript) の小技を紹介する",
+          "Giới thiệu các mẹo hữu ích khi phát triển với TypeScript (JavaScript)",
       },
       items: [
         "tips/shallow-copy-object",
@@ -497,7 +497,7 @@ module.exports = {
         "writing/pdr/0010-ticket-driven",
         {
           type: "category",
-          label: "廃止",
+          label: "Ngưng sử dụng",
           items: ["writing/pdr/0001-write-with-gitbook"],
         },
       ],

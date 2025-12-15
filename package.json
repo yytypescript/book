@@ -2,7 +2,7 @@
   "name": "book",
   "version": "1.0.0",
   "private": true,
-  "description": "サバイバルTypeScript 〜実務で使うなら最低限ここだけはおさえておきたいTypeScript入門〜",
+  "description": "Survival TypeScript - Nhập môn TypeScript tối thiểu cần biết để làm việc thực tế",
   "keywords": [
     "typescript"
   ],

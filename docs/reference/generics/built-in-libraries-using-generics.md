@@ -53,13 +53,13 @@ type Address = {
 };
 
 const addresses = new Map<string, Address>();
-addresses.set("太郎", {
-  country: "日本",
-  postalCode: "8256405",
-  address1: "東京都",
+addresses.set("Tuan", {
+  country: "Vietnam",
+  postalCode: "100000",
+  address1: "Ha Noi",
 });
 
-console.log(addresses.get("太郎"));
+console.log(addresses.get("Tuan"));
 ```
 
 ### `Promise<T>`

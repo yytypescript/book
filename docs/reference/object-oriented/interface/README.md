@@ -42,8 +42,8 @@ interface Person {
   age: number;
 }
 
-const taro: Person = {
-  name: "太郎",
+const tuan: Person = {
+  name: "Tuan",
   age: 12,
 };
 ```

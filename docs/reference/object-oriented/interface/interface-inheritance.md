@@ -1,12 +1,12 @@
 ---
-sidebar_label: インターフェースの継承
+sidebar_label: Kế thừa interface
 ---
 
-# インターフェースの継承 (inheritance)
+# Kế thừa interface (inheritance)
 
-TypeScriptでは、`extends`キーワードを利用して定義済みのインターフェースを継承して、新たにインターフェースを定義することができます。インターフェースを継承した場合、継承元のプロパティの型情報はすべて引き継がれます。新しくプロパティを追加することもできますし、すでに宣言されているプロパティの型を部分型に指定しなおすこともできます。
+Trong TypeScript, có thể sử dụng từ khóa `extends` để kế thừa interface đã định nghĩa và định nghĩa interface mới. Khi kế thừa interface, tất cả thông tin kiểu property của interface gốc sẽ được kế thừa. Có thể thêm property mới, hoặc chỉ định lại kiểu property đã khai báo thành subtype.
 
-## プロパティを追加する
+## Thêm property
 
 ```ts twoslash
 interface Person {
@@ -15,31 +15,31 @@ interface Person {
 }
 
 interface Student extends Person {
-  grade: number; // 学年
+  grade: number; // Lớp
 }
 
 interface Teacher extends Person {
-  students: Student[]; // 生徒
+  students: Student[]; // Học sinh
 }
 
 const studentA: Student = {
-  name: "花子",
+  name: "Mai",
   age: 10,
   grade: 3,
 };
 
 const teacher: Teacher = {
-  name: "太郎",
+  name: "Tuan",
   age: 30,
   students: [studentA],
 };
 ```
 
-## プロパティを部分型に宣言しなおす
+## Khai báo lại property thành subtype
 
-ある型からその型のリテラル型にすることも、ユニオン型から部分的に選択することもTypeScriptではそれぞれサブタイプにしていることと同じ意味があります。もちろん他のオブジェクト指向の言語と同じようにサブクラスにすることもできます。
+Trong TypeScript, việc chuyển từ một kiểu sang literal type của kiểu đó, hoặc lựa chọn một phần từ union type đều có cùng ý nghĩa là biến thành subtype. Tất nhiên cũng có thể biến thành subclass giống như các ngôn ngữ OOP khác.
 
-### リテラル型に変更する
+### Thay đổi thành literal type
 
 ```ts twoslash
 interface WebPage {
@@ -51,7 +51,7 @@ interface IndexPage extends WebPage {
 }
 ```
 
-### ユニオン型から選ぶ
+### Chọn từ union type
 
 ```ts twoslash
 interface Person {

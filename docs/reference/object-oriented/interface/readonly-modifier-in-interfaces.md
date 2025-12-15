@@ -1,6 +1,6 @@
-# インターフェースのreadonly修飾子
+# Readonly modifier của interface
 
-TypeScriptのインターフェースでは、フィールドにreadonly修飾子をつけることで読み取り専用のフィールドが定義できます。
+Trong interface của TypeScript, có thể định nghĩa field chỉ đọc bằng cách thêm readonly modifier cho field.
 
 ```ts twoslash
 interface SomeInterface {
@@ -8,8 +8,8 @@ interface SomeInterface {
 }
 ```
 
-## 関連情報
+## Thông tin liên quan
 
-[クラスのreadonly修飾子](../class/readonly-modifier-in-classes.md)
+[Readonly modifier của class](../class/readonly-modifier-in-classes.md)
 
-[オブジェクト型のreadonlyプロパティ (readonly property)](../../values-types-variables/object/readonly-property.md)
+[Readonly property của object type (readonly property)](../../values-types-variables/object/readonly-property.md)

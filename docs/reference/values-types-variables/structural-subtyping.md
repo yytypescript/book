@@ -1,14 +1,14 @@
 ---
-sidebar_label: 構造的型付け
+sidebar_label: Structural typing
 ---
 
-# TypeScriptと構造的型付け
+# TypeScript và Structural Typing
 
-プログラミング言語にとって、型システムは大事なトピックです。型システムとは、プログラム内のさまざまな値や変数に「型」を割り当てる決まりを指します。この決まりによってデータの性質や扱い方が決まります。特に、**どのように型と型を区別するのか**、逆に、**どのように型同士が互換性ありと判断するか**は、言語の使いやすさや安全性に直結するテーマです。
+Đối với ngôn ngữ lập trình, hệ thống kiểu là một chủ đề quan trọng. Hệ thống kiểu là tập hợp các quy tắc gán "kiểu" cho các giá trị và biến khác nhau trong chương trình. Những quy tắc này quyết định tính chất và cách xử lý dữ liệu. Đặc biệt, **cách phân biệt giữa các kiểu** và ngược lại, **cách xác định tính tương thích giữa các kiểu** là chủ đề liên quan trực tiếp đến tính dễ sử dụng và an toàn của ngôn ngữ.
 
-考えてみましょう。`string`型と`boolean`型は同じものと見なせるでしょうか？これらは明らかに異なるデータ型であり、たとえば`boolean`型の変数に文字列を代入することは、型の安全性を守る上で望ましくありません。このような型の区別は、プログラムを正しく動作させるために欠かせません。
+Hãy suy nghĩ xem: kiểu `string` và kiểu `boolean` có thể được coi là giống nhau không? Đây rõ ràng là các kiểu dữ liệu khác nhau, và việc gán chuỗi cho biến kiểu `boolean` không phải là điều mong muốn khi bảo vệ tính an toàn kiểu. Sự phân biệt kiểu như vậy là cần thiết để chương trình hoạt động đúng.
 
-さらに、型の「互換性」も重要な概念です。たとえば、次のふたつのクラスを考えます。
+Hơn nữa, "tính tương thích" của kiểu cũng là khái niệm quan trọng. Ví dụ, hãy xem xét hai class sau:
 
 ```ts twoslash
 class Person {
@@ -20,24 +20,24 @@ class Dog {
 }
 ```
 
-これらのクラスは、`walk`メソッドを持つ点で似ています。このようなとき、`Person`型と`Dog`型は「互換性がある」とみなすことができるでしょうか。それとも、まったく異なる型として扱うべきでしょうか。
+Các class này giống nhau ở điểm đều có method `walk`. Trong trường hợp này, liệu kiểu `Person` và kiểu `Dog` có thể được coi là "tương thích"? Hay nên xử lý chúng như các kiểu hoàn toàn khác nhau?
 
-こうした問題を扱うために、プログラミング言語はさまざまな型システムを採用しています。どのように型を区別すべきか、また、どのように型同士の互換性を判断するべきか、このような観点から型システムの仕様を考える必要があります。TypeScriptでは、「構造的型付け」という型システムが採用されています。構造的型付けがどのように型を区別し、逆にどのように型同士に互換性があると判断するのか、こうした言語仕様を知ることは、よいコードを書くために役立ちます。
+Để giải quyết những vấn đề này, các ngôn ngữ lập trình áp dụng các hệ thống kiểu khác nhau. Cần xem xét đặc tả hệ thống kiểu từ góc độ: nên phân biệt kiểu như thế nào, và nên xác định tính tương thích giữa các kiểu như thế nào. TypeScript áp dụng hệ thống kiểu gọi là "structural typing". Việc hiểu cách structural typing phân biệt kiểu và ngược lại, cách xác định tính tương thích giữa các kiểu sẽ hữu ích cho việc viết code tốt.
 
-## 型の区別に関する2つのアプローチ
+## Hai cách tiếp cận phân biệt kiểu
 
-プログラミング言語における型の区別や互換性の判定には、主に次の2つのアプローチが存在します。
+Trong ngôn ngữ lập trình, có hai cách tiếp cận chính để phân biệt và xác định tính tương thích của kiểu:
 
-- 名前的型付け
-- 構造的型付け
+- Nominal typing (kiểu định danh)
+- Structural typing (kiểu cấu trúc)
 
-ここからは、TypeScriptだけでなく他の言語も含めて、それぞれのアプローチについて見ていきましょう。
+Từ đây, chúng ta sẽ xem xét từng cách tiếp cận, bao gồm cả TypeScript và các ngôn ngữ khác.
 
-### 名前的型付け
+### Nominal typing
 
-名前的型付け(nominal typing)は、型の名前に基づいて型の区別を行う方法です。このアプローチでは、型同士が同一かどうかを判断する際に、その型の名前が重要な役割を果たします。たとえば、`string`型と`number`型は名前が異なるため、異なる型として扱います。同様に、型が同じ名前を持つ場合（例：`string`と`string`）は、同じ型と判断します。このアプローチでは、`Person`型と`Dog`型は名前が異なるため、異なる型として扱い、互換性もなしと判断します。
+Nominal typing là phương pháp phân biệt kiểu dựa trên tên của kiểu. Trong cách tiếp cận này, tên kiểu đóng vai trò quan trọng khi xác định các kiểu có giống nhau hay không. Ví dụ, kiểu `string` và kiểu `number` có tên khác nhau nên được xử lý như các kiểu khác nhau. Tương tự, khi các kiểu có cùng tên (ví dụ: `string` và `string`), chúng được coi là cùng kiểu. Trong cách tiếp cận này, kiểu `Person` và kiểu `Dog` có tên khác nhau nên được xử lý như các kiểu khác nhau và không có tính tương thích.
 
-名前的型付けを採用している言語の例としては、Java、PHP、C#、Swiftなどが挙げられます。これらの言語では、型の互換性は型の名前によって制御されます。たとえばJavaでは、次のように`Person`インスタンスを`Dog`型の変数に代入しようとすると、型の不一致がコンパイルエラーとして報告されます。
+Các ngôn ngữ áp dụng nominal typing bao gồm Java, PHP, C#, Swift, v.v. Trong những ngôn ngữ này, tính tương thích kiểu được kiểm soát bởi tên kiểu. Ví dụ trong Java, nếu cố gán instance `Person` cho biến kiểu `Dog`, sự không khớp kiểu sẽ được báo lỗi compile.
 
 ```java
 class Person {}
@@ -47,18 +47,18 @@ class Dog {}
 class Main {
     public static void main(String[] args) {
         Person person = new Person();
-        Dog dog = person; // コンパイルエラー: 不適合な型
+        Dog dog = person; // Lỗi compile: kiểu không tương thích
     }
 }
 ```
 
-この例では、`Person`型と`Dog`型は名前が異なるため、Javaの型システムはこれらを異なる型として扱い、互換性がないと判断します。このように、名前的型付けでは型の名前が型の同一性および互換性を判断するための基準となります。
+Trong ví dụ này, kiểu `Person` và kiểu `Dog` có tên khác nhau, nên hệ thống kiểu Java xử lý chúng như các kiểu khác nhau và không có tính tương thích. Như vậy, trong nominal typing, tên kiểu là tiêu chuẩn để xác định tính đồng nhất và tương thích của kiểu.
 
-### 構造的型付け
+### Structural typing
 
-構造的型付け(structural typing)は、型の名前ではなく、その「構造」に着目して型の区別や互換性を判定するアプローチです。この方法では、型が持つプロパティやメソッドの構造が同一であれば、異なる名前を持つ型同士でも互換性があると見なします。TypeScriptはこの構造的型付けを型システムとして採用しています。
+Structural typing là cách tiếp cận phân biệt và xác định tính tương thích của kiểu dựa trên "cấu trúc" của kiểu, không phải tên. Trong phương pháp này, nếu cấu trúc property và method của các kiểu giống nhau, các kiểu có tên khác nhau vẫn được coi là tương thích. TypeScript áp dụng structural typing làm hệ thống kiểu.
 
-構造的型付けの考え方を、`Person`クラスと`Dog`クラスの例で具体的に見てみましょう。
+Hãy xem xét cách nghĩ của structural typing với ví dụ class `Person` và class `Dog`.
 
 ```ts twoslash
 class Person {
@@ -70,9 +70,9 @@ class Dog {
 }
 ```
 
-これらのクラスは、名前は異なりますが、構造が同じです。両クラスとも`walk`メソッドをひとつ持っています。このメソッドは引数を取らず、戻り値も持ちません。構造的型付けの観点からは、この共通の構造により`Person`と`Dog`は互換性があると判断されます。
+Các class này có tên khác nhau nhưng cấu trúc giống nhau. Cả hai đều có một method `walk`. Method này không nhận tham số và không có giá trị trả về. Từ góc độ structural typing, cấu trúc chung này khiến `Person` và `Dog` được coi là tương thích.
 
-TypeScriptのコード例を見てみましょう。
+Hãy xem ví dụ code TypeScript.
 
 ```ts twoslash
 class Person {
@@ -84,12 +84,12 @@ class Dog {
 }
 // ---cut---
 const person = new Person();
-const dog: Dog = person; // コンパイルエラーにならない
+const dog: Dog = person; // Không có lỗi compile
 ```
 
-このコードでは、`Person`インスタンスを`Dog`型の変数に代入していますが、コンパイルエラーになりません。これは、`Person`と`Dog`が構造的に互換性があるためです。
+Trong code này, instance `Person` được gán cho biến kiểu `Dog`, nhưng không có lỗi compile. Điều này là do `Person` và `Dog` tương thích về cấu trúc.
 
-一方で、構造が異なる場合は互換性が認められません。
+Ngược lại, nếu cấu trúc khác nhau thì không được công nhận tính tương thích.
 
 ```ts twoslash
 // @errors: 2741
@@ -100,37 +100,37 @@ class Dog {
   bark() {}
 }
 const person = new Person();
-const dog: Dog = person; // コンパイルエラーになる
+const dog: Dog = person; // Lỗi compile
 ```
 
-この場合、`Person`と`Dog`は異なるメソッドを持っているため、構造的に互換性がないと見なされ、代入しようとするとコンパイルエラーが発生します。
+Trong trường hợp này, `Person` và `Dog` có các method khác nhau nên không tương thích về cấu trúc, và việc gán sẽ gây lỗi compile.
 
-構造的型付けを採用している他の言語には、Go言語があります。このように構造的型付けは、型の名前よりもその「構造」に重点を置いた型システムを提供し、柔軟かつ直感的なプログラミングを可能にします。
+Một ngôn ngữ khác áp dụng structural typing là Go. Như vậy, structural typing cung cấp hệ thống kiểu tập trung vào "cấu trúc" hơn là tên kiểu, cho phép lập trình linh hoạt và trực quan.
 
-次の表は、名前的型付けと構造的型付けの特徴をまとめたものです。
+Bảng sau tóm tắt đặc điểm của nominal typing và structural typing.
 
-|              | 名前的型付け                 | 構造的型付け                 |
-| ------------ | ---------------------------- | ---------------------------- |
-| 型の区別基準 | 型の名前                     | 型の構造                     |
-| 互換性の判断 | 名前が同じであれば互換性あり | 構造が同じであれば互換性あり |
-| 主な採用言語 | Java, C#, Swift, PHPなど     | TypeScript, Goなど           |
+|                         | Nominal typing                             | Structural typing                          |
+| ----------------------- | ------------------------------------------ | ------------------------------------------ |
+| Tiêu chuẩn phân biệt    | Tên kiểu                                   | Cấu trúc kiểu                              |
+| Xác định tính tương thích | Tương thích nếu tên giống nhau           | Tương thích nếu cấu trúc giống nhau        |
+| Ngôn ngữ chính          | Java, C#, Swift, PHP, v.v.                 | TypeScript, Go, v.v.                       |
 
-## 部分型
+## Subtype (kiểu con)
 
-多くのプログラミング言語では、型と型の関係性を階層関係で捉えることができます。階層構造において、頂点に位置するのはもっとも抽象的な型です。階層を下に進むほど具体的な型に分化していきます。階層構造の上位に位置する型を**基本型**(supertype)と言います。下層の型と比べると、基本型は抽象的な型です。階層構造の下位に位置する型を**部分型**(subtype)と呼びます。部分型は、基本型が持つすべての性質や振る舞い(メソッドやプロパティ)を持ちつつ、加えて新たな性質や振る舞いも持つ型です。
+Trong nhiều ngôn ngữ lập trình, mối quan hệ giữa các kiểu có thể được hiểu như cấu trúc phân cấp. Ở đỉnh của cấu trúc phân cấp là kiểu trừu tượng nhất. Càng đi xuống trong cấu trúc, kiểu càng cụ thể. Kiểu ở vị trí trên trong cấu trúc phân cấp được gọi là **supertype** (kiểu cha). So với kiểu dưới, supertype là kiểu trừu tượng hơn. Kiểu ở vị trí dưới trong cấu trúc phân cấp được gọi là **subtype** (kiểu con). Subtype là kiểu có tất cả tính chất và hành vi (method và property) của supertype, đồng thời có thêm tính chất và hành vi mới.
 
-たとえば、図形と面積に関する型を考えたとき、図形(`Shape`)という基本型の下に、円(`Circle`)や長方形(`Rectangle`)という部分型が定義できます。`Shape`は下位の型に比べて抽象的な型で、面積を求められる能力(`area`メソッド)を持っています。一方で、`Circle`はより具体的な型で、`Shape`の能力を引き継ぎつつ、半径(`radius`)という新たな属性を持っています。同様に、`Rectangle`も`Shape`の能力を引き継ぎつつ、幅(`width`)と高さ(`height`)という新たな属性を持っています。
+Ví dụ, khi xem xét các kiểu về hình dạng và diện tích, dưới supertype `Shape` (hình dạng) có thể định nghĩa các subtype như `Circle` (hình tròn) và `Rectangle` (hình chữ nhật). `Shape` là kiểu trừu tượng hơn so với các kiểu dưới, có khả năng tính diện tích (method `area`). Mặt khác, `Circle` là kiểu cụ thể hơn, kế thừa khả năng của `Shape` và có thêm thuộc tính mới là bán kính (`radius`). Tương tự, `Rectangle` cũng kế thừa khả năng của `Shape` và có thêm thuộc tính chiều rộng (`width`) và chiều cao (`height`).
 
 import ClassDiagramShapeCircleRectangle from '@site/static/img/reference/values-types-variables/structural-subtyping/class-diagram-shape-circle-rectangle.svg';
 
 <!-- 画像ソース: https://www.figma.com/file/E22NH0kgcl5xhVCtn1HCfz/%E3%82%B5%E3%83%90%E3%82%A4%E3%83%90%E3%83%ABTypeScript%E7%94%BB%E5%83%8F%E3%82%A2%E3%82%BB%E3%83%83%E3%83%88?type=design&node-id=558-127&mode=design&t=Mw06bZx3zqMd92aa-4 -->
 
 <figure class="themed">
-    <figcaption>階層構造</figcaption>
+    <figcaption>Cấu trúc phân cấp</figcaption>
     <ClassDiagramShapeCircleRectangle />
 </figure>
 
-部分型は基本型と互換性があります。基本型の変数に部分型の値を代入することが可能です。たとえば、`Circle`と`Rectangle`は異なる型ですが、同じ`Shape`として扱うことができます。より抽象的な階層レベルで扱えると利便性が高まります。たとえば、異なる図形同士の面積を合計するケースです。`Shape`型の変数に`Circle`や`Rectangle`の値を代入して、それらの合計面積を求めることができます。
+Subtype tương thích với supertype. Có thể gán giá trị subtype cho biến supertype. Ví dụ, `Circle` và `Rectangle` là các kiểu khác nhau, nhưng có thể xử lý như cùng `Shape`. Khả năng xử lý ở mức trừu tượng hơn tăng tính tiện lợi. Ví dụ, trường hợp tính tổng diện tích của các hình khác nhau: có thể gán giá trị `Circle` hoặc `Rectangle` cho biến kiểu `Shape` và tính tổng diện tích của chúng.
 
 ```ts twoslash
 declare class Shape {
@@ -154,16 +154,16 @@ function totalArea(shape1: Shape, shape2: Shape): number {
 
 const circle = new Circle({ radius: 10 });
 const rectangle = new Rectangle({ width: 10, height: 20 });
-totalArea(circle, rectangle); // CircleとRectangleをShapeとして扱える
+totalArea(circle, rectangle); // Có thể xử lý Circle và Rectangle như Shape
 ```
 
-ある型とある型が、基本型と部分型の関係になるかどうかを判断する基準は、名前的型付けと構造的型付けでも異なります。たとえば、`Circle`が`Shape`の部分型かどうかは、名前的型付けと構造的型付けで判断基準が異なるということです。それぞれどのような判断基準があるのか、次の節で見ていきましょう。
+Tiêu chuẩn xác định kiểu nào là supertype và subtype của kiểu nào cũng khác nhau giữa nominal typing và structural typing. Ví dụ, việc `Circle` có phải là subtype của `Shape` hay không có tiêu chuẩn khác nhau trong nominal typing và structural typing. Hãy xem các tiêu chuẩn đó ở phần tiếp theo.
 
-### 名前的部分型
+### Nominal subtype
 
-名前的型付けを採用しているプログラミング言語では、型の階層関係を定義する際に、型の名前とその関係性に重点を置きます。このアプローチでは、クラスやインターフェースの継承を通じて、型間の親子関係（基本型と部分型の関係）が形成されます。名前的型付けのアプローチで扱われる部分型のことを**名前的部分型**(nominal subtype)と呼びます。
+Trong ngôn ngữ lập trình áp dụng nominal typing, khi định nghĩa cấu trúc phân cấp kiểu, tên kiểu và mối quan hệ của chúng được chú trọng. Trong cách tiếp cận này, mối quan hệ cha-con giữa các kiểu (supertype và subtype) được hình thành thông qua kế thừa class hoặc interface. Subtype được xử lý theo cách tiếp cận nominal typing được gọi là **nominal subtype**.
 
-たとえば、Javaでは`extends`キーワードを使用して、基本型と部分型の関係性を宣言します。この宣言により、特定のクラスが別のクラスの部分型であることをJavaコンパイラに知らせます。
+Ví dụ, trong Java, sử dụng từ khóa `extends` để khai báo mối quan hệ giữa supertype và subtype. Khai báo này cho Java compiler biết rằng class cụ thể là subtype của class khác.
 
 ```java
 class Shape {}
@@ -171,13 +171,13 @@ class Shape {}
 class Circle extends Shape {}
 ```
 
-このコード例では、`Circle`クラスが`Shape`クラスを継承しています。この継承により、`Circle`は`Shape`の部分型となります。この階層関係により、`Shape`型の変数に`Circle`型のインスタンスを代入することが可能になります。この代入は、`Circle`が`Shape`の部分型であるために、型の互換性が保証されているからです。
+Trong ví dụ code này, class `Circle` kế thừa class `Shape`. Thông qua kế thừa này, `Circle` trở thành subtype của `Shape`. Mối quan hệ phân cấp này cho phép gán instance kiểu `Circle` cho biến kiểu `Shape`. Việc gán này được đảm bảo tính tương thích kiểu vì `Circle` là subtype của `Shape`.
 
 ```java
 Shape shape = new Circle();
 ```
 
-一方で、`Circle`と`Shape`間に`extends`キーワードによる継承関係が宣言されていない場合、両者の間に階層関係は存在しません。
+Mặt khác, nếu không có khai báo kế thừa bằng từ khóa `extends` giữa `Circle` và `Shape`, không có mối quan hệ phân cấp giữa chúng.
 
 ```java
 class Shape {}
@@ -185,18 +185,18 @@ class Shape {}
 class Circle {}
 ```
 
-この状況では、`Shape`型の変数に`Circle`型のインスタンスを代入しようとすると、型不一致のエラーが発生します。このエラーは、`Circle`と`Shape`が互換性のない独立した型であるとJavaコンパイラに判断されたために起きます。
+Trong tình huống này, nếu cố gán instance kiểu `Circle` cho biến kiểu `Shape`, sẽ xảy ra lỗi kiểu không khớp. Lỗi này xảy ra vì Java compiler đánh giá `Circle` và `Shape` là các kiểu độc lập không tương thích.
 
 ```java
 Shape shape = new Circle();
-// エラー: 不適合な型: CircleをShapeに変換できません
+// Lỗi: kiểu không tương thích: không thể chuyển Circle thành Shape
 ```
 
-### 構造的部分型
+### Structural subtype
 
-構造的型付けを採用しているTypeScriptでは、型間の階層関係もその構造に基づいて判断されます。このアプローチでは、型の名前ではなく、型が持つプロパティやメソッドの構造に着目して、基本型と部分型の関係性を判断します。このような部分型のことを**構造的部分型**(structural subtype)と呼びます。
+Trong TypeScript áp dụng structural typing, mối quan hệ phân cấp giữa các kiểu cũng được xác định dựa trên cấu trúc. Cách tiếp cận này tập trung vào cấu trúc property và method của kiểu, không phải tên kiểu, để xác định mối quan hệ supertype và subtype. Loại subtype như vậy được gọi là **structural subtype**.
 
-次のTypeScriptのコード例を考えてみましょう。
+Hãy xem xét ví dụ code TypeScript sau.
 
 ```ts twoslash
 class Shape {
@@ -218,7 +218,7 @@ class Circle {
 }
 ```
 
-この例では、`Circle`クラスは`Shape`クラスの`area`メソッドを持っており、追加で`radius`プロパティを定義しています。`extends`キーワードを使用していないにもかかわらず、`Circle`は`Shape`の部分型として扱われます。これは、`Circle`が`Shape`の持つ構造（ここでは`area`メソッド）を含んでいるためです。その結果、`Shape`型の変数に`Circle`型のインスタンスを代入することが可能になります。
+Trong ví dụ này, class `Circle` có method `area` của class `Shape`, và định nghĩa thêm property `radius`. Mặc dù không sử dụng từ khóa `extends`, `Circle` được xử lý như subtype của `Shape`. Điều này là do `Circle` chứa cấu trúc của `Shape` (ở đây là method `area`). Do đó, có thể gán instance kiểu `Circle` cho biến kiểu `Shape`.
 
 ```ts twoslash
 declare class Shape {
@@ -232,7 +232,7 @@ declare class Circle {
 const shape: Shape = new Circle(10);
 ```
 
-TypeScriptでも`extends`キーワードを用いてクラス間の継承関係を宣言できます。しかし、これは部分型かどうかを判定するための基準には用いられません。これはJavaのような名前的部分型の言語とは異なる点です。`extends`キーワードが持つ効果は、親クラスの機能を継承すること、そして、子クラスが親クラスのインターフェースを守ることです。
+Trong TypeScript cũng có thể sử dụng từ khóa `extends` để khai báo mối quan hệ kế thừa giữa các class. Tuy nhiên, điều này không được sử dụng làm tiêu chuẩn xác định có phải subtype hay không. Đây là điểm khác với ngôn ngữ nominal subtype như Java. Hiệu quả của từ khóa `extends` là kế thừa chức năng của class cha và đảm bảo class con tuân theo interface của class cha.
 
 ```ts twoslash
 class Animal {
@@ -244,9 +244,9 @@ class Dog extends Animal {
 }
 ```
 
-このコードでは、`Dog`が`Animal`を継承しています。この例では、`Dog`の`walk`メソッドが`Animal`の`walk`メソッドと同じ引数と戻り値を持っているため、`Dog`は`Animal`のインターフェースを守っているということになります。`Dog`が`Animal`のインターフェースを守っているため、`Dog`についてコンパイルエラーは発生しません。
+Trong code này, `Dog` kế thừa `Animal`. Trong ví dụ này, method `walk` của `Dog` có cùng tham số và giá trị trả về với method `walk` của `Animal`, nên `Dog` tuân theo interface của `Animal`. Vì `Dog` tuân theo interface của `Animal`, không có lỗi compile cho `Dog`.
 
-一方で、子クラスが親クラスのインターフェースを守らない場合、TypeScriptはエラーを報告します。次のコード例では、`Dog`クラスの`walk`メソッドが`Animal`クラスのそれと異なる引数を持っています。`Dog`クラスは`Animal`クラスのインターフェースを守っていないということです。この例では、`walk`メソッドに対して、その旨の警告がなされます。これが`extends`キーワードの効果です。
+Mặt khác, nếu class con không tuân theo interface của class cha, TypeScript sẽ báo lỗi. Trong ví dụ code sau, method `walk` của class `Dog` có tham số khác với method của class `Animal`. Class `Dog` không tuân theo interface của class `Animal`. Trong ví dụ này, cảnh báo được đưa ra cho method `walk`. Đây là hiệu quả của từ khóa `extends`.
 
 ```ts twoslash
 // @errors: 2416
@@ -255,25 +255,25 @@ class Animal {
 }
 
 class Dog extends Animal {
-  walk(speed: number) {} // コンパイルエラーになる
+  walk(speed: number) {} // Lỗi compile
 }
 ```
 
-## 構造的型付けの採用理由
+## Lý do áp dụng structural typing
 
-TypeScriptが構造的型付けを採用した背景には、JavaScriptの特性が深く関わっています。ここでは、なぜTypeScriptが構造的型付けを選んだのかについて考えてみましょう。
+Lý do TypeScript áp dụng structural typing liên quan sâu sắc đến đặc tính của JavaScript. Ở đây, hãy xem xét tại sao TypeScript chọn structural typing.
 
-### ダックタイピング
+### Duck typing
 
-ダックタイピングは、オブジェクトの型よりもオブジェクトの持つメソッドやプロパティが何であるかによってオブジェクトを判断するプログラミングスタイルです。ダックタイピングの世界では、特定のインターフェースを`implements`キーワードを使うなどして明示的に実装する必要はありません。代わりに、オブジェクトが特定の規約にしたがっているか、たとえば、特定のメソッドを持っているかという基準で、そのオブジェクトの型を判断します。ダックタイピングでは、型を判断するために型の名前を使わないのが一般的です。ちなみに、ダックタイピングという用語は、「もし鳥がアヒルのように歩き、アヒルのように鳴くなら、それはアヒルだ」という言葉に由来しています。
+Duck typing là phong cách lập trình đánh giá object dựa trên method và property mà object có, thay vì kiểu của object. Trong thế giới duck typing, không cần implement interface cụ thể một cách rõ ràng bằng từ khóa `implements`. Thay vào đó, kiểu của object được xác định dựa trên việc object có tuân theo quy ước cụ thể hay không, ví dụ có method cụ thể hay không. Duck typing thường không sử dụng tên kiểu để xác định kiểu. Nhân tiện, thuật ngữ duck typing xuất phát từ câu nói "Nếu một con chim đi như vịt và kêu như vịt, thì đó là vịt".
 
-ダックタイピングは、動的型付け言語によく見られます。JavaScriptも動的型付け言語であり、ダックタイピングとともに歩んできた歴史があります。TypeScriptはJavaScriptの延長線上にある言語です。そのため、ダックタイピングが行えるような型システムが求められました。構造的型付けは、ダックタイピングに適した型システムです。こうした背景もTypeScriptが構造的型付けを採用した理由のひとつと考えられます。
+Duck typing thường thấy trong ngôn ngữ kiểu động. JavaScript cũng là ngôn ngữ kiểu động và có lịch sử đi cùng duck typing. TypeScript là ngôn ngữ mở rộng của JavaScript. Do đó, cần hệ thống kiểu cho phép duck typing. Structural typing là hệ thống kiểu phù hợp với duck typing. Đây cũng được coi là một trong những lý do TypeScript áp dụng structural typing.
 
-### オブジェクトリテラル
+### Object literal
 
-JavaScriptの特徴のひとつには[オブジェクトリテラル]があります。オブジェクトリテラルは、クラスやインターフェースなどの型を定義することなく、その場でオブジェクトを生成する機能です。
+Một trong những đặc điểm của JavaScript là [object literal]. Object literal là tính năng tạo object tại chỗ mà không cần định nghĩa kiểu như class hoặc interface.
 
-[オブジェクトリテラル]: ./object/object-literal.md
+[object literal]: ./object/object-literal.md
 
 ```ts twoslash
 const circle = {
@@ -284,17 +284,17 @@ const circle = {
 };
 ```
 
-上の例のように、`circle`オブジェクトには型の名前がありません。型に名前がない以上、名前的型付けのように型名を使って型を判断することができません。こうしたJavaScriptコードを扱えるようにするためにも、TypeScriptは構造的型付けを採用したと考えられます。
+Như ví dụ trên, object `circle` không có tên kiểu. Vì không có tên kiểu, không thể xác định kiểu bằng tên kiểu như nominal typing. Để có thể xử lý code JavaScript như vậy, TypeScript được cho là đã áp dụng structural typing.
 
-## 構造的型システムの利点
+## Ưu điểm của structural typing
 
-構造的型付けの柔軟性や便利さは注目に値するところがあります。ここでは、具体例を交えて構造的型付けの利点について見ていきましょう。
+Tính linh hoạt và tiện lợi của structural typing đáng được chú ý. Ở đây, hãy xem xét ưu điểm của structural typing với các ví dụ cụ thể.
 
-### モックテストの簡略化
+### Đơn giản hóa mock test
 
-構造的型付けは、モックテストや依存性の注入を簡単に行えるようにします。特に、外部のAPIやサービスに依存するコンポーネントをテストする際に、その依存関係を模倣したモックオブジェクトを簡単に作成できます。名前的型付けでは、モック化したいオブジェクトをまずインターフェース化する必要があります。その上で、インターフェースを実装するモッククラスを用意します。構造的型付けでは、必要なメソッドやプロパティを持つオブジェクトリテラルを直接提供するだけで、テスト用のモックを簡単に用意できます。インターフェースの定義が省けるため、構造がシンプルになり、テストの準備も省力化されます。
+Structural typing giúp dễ dàng thực hiện mock test và dependency injection. Đặc biệt, khi test component phụ thuộc vào API hoặc service bên ngoài, có thể dễ dàng tạo mock object mô phỏng dependency đó. Trong nominal typing, cần interface hóa object cần mock trước. Sau đó, chuẩn bị mock class implement interface đó. Trong structural typing, chỉ cần cung cấp trực tiếp object literal có method và property cần thiết để dễ dàng chuẩn bị mock cho test. Vì không cần định nghĩa interface, cấu trúc đơn giản hơn và chuẩn bị test cũng tiết kiệm hơn.
 
-次の例では、`UserService`クラスが`UserApi`に依存しています。この依存関係をテストするために、`UserApi`のメソッド`getUser`を模倣したモックを作成し、`UserService`の動作をテストします。
+Trong ví dụ sau, class `UserService` phụ thuộc vào `UserApi`. Để test dependency này, tạo mock mô phỏng method `getUser` của `UserApi` và test hoạt động của `UserService`.
 
 ```ts twoslash
 // @noErrors: 2355
@@ -302,7 +302,7 @@ type User = { id: number; name: string };
 
 class UserApi {
   async getUser(id: number): Promise<User | undefined> {
-    // 実装は割愛しますが、fetchなどを使って実際のAPIを呼び出す実装をイメージしてください。
+    // Bỏ qua implementation, hãy tưởng tượng implementation gọi API thực tế bằng fetch, v.v.
   }
 }
 
@@ -320,7 +320,7 @@ class UserService {
 }
 ```
 
-テストケースでは、`UserApi`の構造を満たすオブジェクトを直接作成し、`UserService`のインスタンスに渡すだけで単体テストを行えます。
+Trong test case, chỉ cần tạo trực tiếp object thỏa mãn cấu trúc của `UserApi` và truyền cho instance của `UserService` để thực hiện unit test.
 
 ```ts twoslash
 declare const test: any;
@@ -335,27 +335,27 @@ declare class UserService {
   userExists(id: number): Promise<boolean>;
 }
 // ---cut---
-test("ユーザーがいるときはtrueを返す", async () => {
-  // モックオブジェクトを直接作成
+test("Trả về true khi user tồn tại", async () => {
+  // Tạo mock object trực tiếp
   const api: UserApi = {
     async getUser(id) {
       return { id, name: "Alice" };
     },
   };
-  // モックオブジェクトをUserServiceに渡してテスト
+  // Truyền mock object cho UserService để test
   const service = new UserService(api);
   const result = await service.userExists(123);
   expect(result).toBe(true);
 });
 ```
 
-このように、構造的型付けを利用することで、テスト対象の依存物の注入がより簡単になります。
+Như vậy, sử dụng structural typing giúp việc inject dependency của đối tượng test trở nên dễ dàng hơn.
 
-## 構造的型付けの注意点
+## Lưu ý về structural typing
 
-構造的型付けは、その柔軟性により多くの利点を提供しますが、注意が必要な点もあります。特に、意図せず型に互換性が生じる可能性があることがそのひとつです。
+Structural typing cung cấp nhiều ưu điểm nhờ tính linh hoạt, nhưng cũng có những điểm cần lưu ý. Đặc biệt, một trong số đó là khả năng kiểu vô tình có tính tương thích.
 
-構造的型付けシステムでは、型の互換性はその構造に基づいて判断されます。このため、異なる目的や意味合いを持つ型が、偶然同じ構造を持っている場合に、意図せずに互換性があると判断されることがあります。
+Trong hệ thống structural typing, tính tương thích kiểu được xác định dựa trên cấu trúc. Do đó, các kiểu có mục đích hoặc ý nghĩa khác nhau có thể vô tình được đánh giá là tương thích nếu tình cờ có cùng cấu trúc.
 
 ```ts
 class UserId {
@@ -367,18 +367,18 @@ class ProductId {
 }
 
 const userId: UserId = new UserId();
-const productId: ProductId = userId; // 代入できるが、意図した設計ではない
+const productId: ProductId = userId; // Có thể gán, nhưng không phải thiết kế có chủ đích
 ```
 
-この例では、`UserId`クラスと`ProductId`クラスがあり、どちらも`id`プロパティを持つ同じ構造になっています。TypeScriptはこれらの型を互換性があるとみなします。なぜなら構造が同じだからです。しかし、データモデルやドメインモデルの観点からは、ユーザーのIDと商品のIDはまったく異なる概念であり、型システムで区別したい場合がほとんどです。値オブジェクト(value object)のようなデザインパターンをTypeScriptで用いる場合は、このような問題に注意が必要です。型としてどうしても区別したい場合は、後述の「名前的型付けを実現する方法」で紹介するテクニックを検討してみてください。
+Trong ví dụ này, class `UserId` và class `ProductId` có cùng cấu trúc với property `id`. TypeScript coi các kiểu này là tương thích vì cấu trúc giống nhau. Tuy nhiên, từ góc độ data model hoặc domain model, ID người dùng và ID sản phẩm là các khái niệm hoàn toàn khác nhau, và trong hầu hết trường hợp muốn phân biệt chúng trong hệ thống kiểu. Khi sử dụng design pattern như value object trong TypeScript, cần chú ý vấn đề này. Nếu nhất định muốn phân biệt về kiểu, hãy xem xét các kỹ thuật giới thiệu trong phần "Cách thực hiện nominal typing" dưới đây.
 
-## 名前的型付けを実現する方法
+## Cách thực hiện nominal typing
 
-TypeScriptは基本的に構造的型付けを採用していますが、名前的型付けになる場合や、名前的型付けを模倣するデザインパターンもあります。これは、TypeScriptの型システムの柔軟性を利用したテクニックであり、プログラムの正当性を強化するために用いられることがあります。
+TypeScript về cơ bản áp dụng structural typing, nhưng cũng có trường hợp trở thành nominal typing hoặc design pattern mô phỏng nominal typing. Đây là kỹ thuật tận dụng tính linh hoạt của hệ thống kiểu TypeScript, được sử dụng để tăng cường tính chính xác của chương trình.
 
-### privateメンバーを持つクラス
+### Class có private member
 
-TypeScriptでは、`private`メンバーを持つクラスは、他のクラスと区別されます。これは、`private`メンバーがそのクラス固有のものであるため、異なるクラスのインスタンス同士は、構造が同じであっても互換性がないと見なされるからです。
+Trong TypeScript, class có `private` member được phân biệt với các class khác. Điều này là do `private` member là riêng của class đó, nên các instance của class khác nhau không được coi là tương thích ngay cả khi có cùng cấu trúc.
 
 ```ts twoslash
 // @errors: 2322
@@ -407,16 +407,16 @@ class ProductId {
 }
 
 const userId: UserId = new UserId("1");
-const productId: ProductId = userId; // 代入エラー
+const productId: ProductId = userId; // Lỗi gán
 ```
 
-この例では、`UserId`と`ProductId`は、内部的に`private`メンバー`id`を持っていますが、互いに別の型として扱われます。つまり、名前的型付けのように、名前によって型が区別されるようになります。
+Trong ví dụ này, `UserId` và `ProductId` có `private` member `id` bên trong, nhưng được xử lý như các kiểu khác nhau. Tức là, giống như nominal typing, kiểu được phân biệt bằng tên.
 
-[公称型クラス](../object-oriented/class/class-nominality.md)
+[Class với tính nominal](../object-oriented/class/class-nominality.md)
 
-### ブランド型
+### Brand type
 
-ブランド型(または幽霊型(phantom type)、opaque type)は、型を区別するためのプロパティを型に持たせることで、その型を明確に区別するデザインパターンです。これは、型にメタデータのようなタグをつけることで、構造的には同じであっても型と型を区別できるようにします。
+Brand type (hoặc phantom type, opaque type) là design pattern phân biệt kiểu rõ ràng bằng cách cho kiểu có property để phân biệt. Đây là cách gắn tag như metadata cho kiểu, cho phép phân biệt các kiểu về cấu trúc giống nhau.
 
 ```ts twoslash
 interface UserId {
@@ -430,11 +430,11 @@ interface ProductId {
 }
 ```
 
-この例では、`__brand`プロパティを使って`UserId`型と`ProductId`型を区別しています。これにより、両者が構造的に同じ`id`プロパティを持っていても、型システム上では異なる型として扱われます。これは、構造的型付けの特徴をうまく利用したテクニックです。構造的型付けでは、構造が異なる場合は互換性がないと見なすわけですから、`__brand`のような構造を意図的に違えるものを使うことで、型を区別することができるのです。
+Trong ví dụ này, sử dụng property `__brand` để phân biệt kiểu `UserId` và kiểu `ProductId`. Nhờ đó, dù cả hai có cùng property `id` về cấu trúc, trong hệ thống kiểu chúng được xử lý như các kiểu khác nhau. Đây là kỹ thuật tận dụng khéo léo đặc điểm của structural typing. Trong structural typing, khi cấu trúc khác nhau thì không có tính tương thích, nên bằng cách sử dụng thứ như `__brand` cố tình làm khác cấu trúc, có thể phân biệt kiểu.
 
-ブランド型で用いられる`__brand`プロパティは、型を区別するためのものであり、実行時のデータとして持たせる必要はありません。このため、`__brand`プロパティは、実際のデータには含まれないようにすることが一般的です。これを達成するために、`__brand`プロパティは`as`キーワードを使って[型アサーション]を行う手法がよく使われます。
+Property `__brand` được sử dụng trong brand type là để phân biệt kiểu, không cần giữ như dữ liệu runtime. Do đó, thường làm cho property `__brand` không được bao gồm trong dữ liệu thực tế. Để đạt được điều này, kỹ thuật thường dùng là sử dụng từ khóa `as` để thực hiện [type assertion].
 
-[型アサーション]: ./type-assertion-as.md
+[type assertion]: ./type-assertion-as.md
 
 ```ts twoslash
 interface UserId {
@@ -445,7 +445,7 @@ interface UserId {
 const userId = { id: 1 } as UserId;
 ```
 
-ブランド型を用いて作られた値は、あたかも名前的型付けのように、名前によって型が区別されるようになります。
+Giá trị được tạo bằng brand type sẽ được phân biệt kiểu bằng tên, giống như nominal typing.
 
 ```ts twoslash
 // @errors: 2322
@@ -460,34 +460,34 @@ interface ProductId {
 }
 // ---cut---
 const userId = { id: 1 } as UserId;
-const productId: ProductId = userId; // 代入不可
+const productId: ProductId = userId; // Không thể gán
 ```
 
-これらのテクニックを利用することで、構造的型付けのTypeScriptでも、名前に依存した型の区別が行えます。名前による型の区別が必要な場合は、これらのテクニックを検討してみるとよいでしょう。
+Sử dụng các kỹ thuật này, ngay cả trong TypeScript với structural typing, cũng có thể phân biệt kiểu phụ thuộc vào tên. Nếu cần phân biệt kiểu bằng tên, hãy xem xét những kỹ thuật này.
 
-## まとめ
+## Tóm tắt
 
-|                        | 名前的型付け                                                                                   | 構造的型付け                                                                         |
-| ---------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| 型の区別基準           | 型の名前                                                                                       | 型の構造（プロパティやメソッドなど）                                                 |
-| 互換性の判断基準       | 名前が同じであれば互換性あり                                                                   | 構造が同じであれば互換性あり                                                         |
-| 基本型と部分型の明示性 | 明示的（`extends`などのキーワードによる継承を使用）                                            | 暗黙的（型の構造が一致する場合、自動的に部分型とみなされる）                         |
-| 主な採用言語           | Java, C#, Swift, PHP                                                                           | TypeScript, Go                                                                       |
-| 利点                   | - 型の名前に基づく明確な区別が可能<br />- 明示的な型の階層関係により、設計の意図を明確にできる | - ダックタイピングにより、アドホックにオブジェクトを作れる                           |
-| 欠点                   | - 型間の互換性が名前に依存し、柔軟性に欠ける場合がある                                         | - 意図しない型間の互換性が生じる可能性がある<br />- 型の区別が直感的でない場合がある |
+|                              | Nominal typing                                                                                      | Structural typing                                                            |
+| ---------------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Tiêu chuẩn phân biệt kiểu    | Tên kiểu                                                                                            | Cấu trúc kiểu (property và method, v.v.)                                     |
+| Tiêu chuẩn xác định tương thích | Tương thích nếu tên giống nhau                                                                    | Tương thích nếu cấu trúc giống nhau                                          |
+| Tính rõ ràng supertype-subtype | Rõ ràng (sử dụng kế thừa bằng từ khóa `extends`, v.v.)                                            | Ngầm định (tự động coi là subtype khi cấu trúc kiểu khớp)                    |
+| Ngôn ngữ chính               | Java, C#, Swift, PHP                                                                                | TypeScript, Go                                                               |
+| Ưu điểm                      | - Có thể phân biệt rõ ràng dựa trên tên kiểu<br />- Mối quan hệ phân cấp kiểu rõ ràng, thể hiện ý đồ thiết kế | - Nhờ duck typing, có thể tạo object ad-hoc                                  |
+| Nhược điểm                   | - Tính tương thích giữa kiểu phụ thuộc vào tên, có thể thiếu linh hoạt                              | - Có thể xảy ra tính tương thích không mong muốn<br />- Phân biệt kiểu có thể không trực quan |
 
-構造的型付けはTypeScriptの型システムの核心を成す概念であり、型の互換性をその構造に基づいて判断します。これは、型の名前ではなく、型が持つプロパティやメソッドの構造を見て型の同一性や互換性を判断するというものです。このアプローチは、JavaScriptの動的で柔軟な特性に対応するために採用されており、ダックタイピングやオブジェクトリテラルといったJavaScriptの特徴と良く合います。
+Structural typing là khái niệm cốt lõi của hệ thống kiểu TypeScript, xác định tính tương thích kiểu dựa trên cấu trúc. Đây là cách nhìn vào cấu trúc property và method của kiểu để xác định tính đồng nhất và tương thích, không phải tên kiểu. Cách tiếp cận này được áp dụng để đáp ứng đặc tính động và linh hoạt của JavaScript, phù hợp với các đặc điểm của JavaScript như duck typing và object literal.
 
-構造的型付けは柔軟性が高く、モックテストなどを容易にしますが、意図せず互換性が生じる可能性もあるという注意点があります。しかし、`private`メンバーやブランド型といったテクニックを用いることで、構造的型付けのシステム内で名前的型付けの振る舞いを模倣し、型の明確な区別を実現することも可能です。
+Structural typing có tính linh hoạt cao, giúp dễ dàng thực hiện mock test, v.v., nhưng cũng có điểm cần lưu ý là có thể xảy ra tính tương thích không mong muốn. Tuy nhiên, bằng cách sử dụng các kỹ thuật như `private` member hoặc brand type, có thể mô phỏng hành vi nominal typing trong hệ thống structural typing và thực hiện phân biệt kiểu rõ ràng.
 
-構造的型付けを理解し、適切に活用することで、より安全で保守しやすいコードを書くことができるでしょう。
+Bằng cách hiểu và áp dụng đúng structural typing, bạn có thể viết code an toàn và dễ bảo trì hơn.
 
 <PostILearned>
 
-・TypeScriptは構造的型付け
-・構造的型付けは型名より構造を重視
-・構造的型付けは型の構造で互換性判断
-・privateやブランド型で名前的型付けを模倣できる
-・構造的型付けは意図しない互換性に注意
+・TypeScript sử dụng structural typing
+・Structural typing chú trọng cấu trúc hơn tên kiểu
+・Structural typing xác định tính tương thích dựa trên cấu trúc kiểu
+・Có thể mô phỏng nominal typing bằng private hoặc brand type
+・Structural typing cần chú ý tính tương thích không mong muốn
 
 </PostILearned>

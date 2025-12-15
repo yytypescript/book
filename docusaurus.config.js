@@ -10,8 +10,8 @@ const tsconfigForTwoslash = require(__dirname + "/tsconfig.twoslash.json");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "TypeScript入門『サバイバルTypeScript』",
-  tagline: "Dinosaurs are cool",
+  title: "Survival TypeScript - Nhập môn TypeScript",
+  tagline: "Học TypeScript để sống sót trong thế giới lập trình",
   favicon: "img/logo.svg",
   url: "https://typescriptbook.jp",
   baseUrl: "/",
@@ -20,8 +20,8 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   i18n: {
-    defaultLocale: "ja",
-    locales: ["ja"],
+    defaultLocale: "vi",
+    locales: ["vi"],
   },
   presets: [
     [
@@ -57,9 +57,9 @@ const config = {
     ({
       image: "img/docusaurus-social-card.jpg",
       navbar: {
-        title: "サバイバルTypeScript",
+        title: "Survival TypeScript",
         logo: {
-          alt: "サバイバルTypeScript",
+          alt: "Survival TypeScript",
           src: "img/logo.svg",
         },
         items: [
@@ -79,40 +79,40 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "サバイバルTypeScript",
+            title: "Survival TypeScript",
             items: [
-              { label: "第1章 はじめに", to: "/" },
-              { label: "第2章 TypeScriptのあらまし", to: "/overview" },
-              { label: "第3章 作って学ぶTypeScript", to: "/tutorials" },
-              { label: "第4章 読んで学ぶTypeScript", to: "/reference" },
-              { label: "第5章 Tips", to: "/tips" },
+              { label: "Chương 1: Giới thiệu", to: "/" },
+              { label: "Chương 2: Tổng quan TypeScript", to: "/overview" },
+              { label: "Chương 3: Học TypeScript qua thực hành", to: "/tutorials" },
+              { label: "Chương 4: Học TypeScript qua tài liệu", to: "/reference" },
+              { label: "Chương 5: Tips", to: "/tips" },
             ],
           },
           {
-            title: "ユーティリティ",
+            title: "Tiện ích",
             items: [
-              { label: "記号とキーワード", to: "/symbols-and-keywords" },
+              { label: "Ký hiệu và từ khóa", to: "/symbols-and-keywords" },
               {
-                label: "TypeScript解読アシスタント",
+                label: "Trợ lý đọc code TypeScript",
                 to: "/code-reading-assistant",
               },
             ],
           },
           {
-            title: "執筆に参加したい方",
+            title: "Đóng góp",
             items: [
-              { label: "概要", to: "/writing" },
+              { label: "Tổng quan", to: "/writing" },
               { label: "CONTRIBUTING", to: "/writing/contributing" },
               {
-                label: "はじめて執筆する方へ",
+                label: "Hướng dẫn cho người mới",
                 to: "/writing/getting-started",
               },
               {
-                label: "チケット駆動",
+                label: "Ticket-driven",
                 to: "/writing/ticket-driven",
               },
               {
-                label: "環境構築からプルリクエストまでの流れ",
+                label: "Từ setup đến pull request",
                 to: "/writing/how-to-change",
               },
               { label: "Markdown", to: "/writing/markdown" },
@@ -120,7 +120,7 @@ const config = {
             ],
           },
           {
-            title: "コミュニティー",
+            title: "Cộng đồng",
             items: [
               {
                 label: "GitHub",

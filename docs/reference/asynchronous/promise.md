@@ -120,7 +120,7 @@ type User = {
 function getUser(): Promise<User> {
   return new Promise((resolve) => {
     const user: User = {
-      name: "太郎",
+      name: "Tuan",
       age: 10,
     };
     resolve(user);
@@ -129,7 +129,7 @@ function getUser(): Promise<User> {
 
 getUser().then((user: User) => {
   console.log(user);
-  // @log: { "name": "太郎", "age": 10 }
+  // @log: { "name": "Tuan", "age": 10 }
 });
 ```
 

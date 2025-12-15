@@ -1,19 +1,19 @@
 ---
-description: 例外捕捉catch(e)のeをunknown型として扱う
+description: Xử lý e trong catch(e) bắt exception là unknown type
 tags: [strict]
 ---
 
 # useUnknownInCatchVariables
 
-`useUnknownInCatchVariables`は例外捕捉`catch(e)`の`e`をunknown型として扱うコンパイラオプションです。
+`useUnknownInCatchVariables` là compiler option xử lý `e` trong `catch(e)` bắt exception là unknown type.
 
-- デフォルト: [strict](./strict.md)が有効の場合は`true`、それ以外は`false`
-- 追加されたバージョン: 4.4
-- TypeScript公式が有効化推奨
+- Mặc định: `true` nếu [strict](./strict.md) được bật, ngược lại là `false`
+- Phiên bản thêm vào: 4.4
+- TypeScript khuyến nghị nên bật
 
-## 解説
+## Giải thích
 
-JavaScript はいかなる値も例外として投げることができます。そのため捕捉した値は`any`型でした。
+JavaScript có thể throw bất kỳ giá trị nào làm exception. Do đó giá trị bắt được là `any` type.
 
 ```ts twoslash
 // @useUnknownInCatchVariables: false
@@ -39,7 +39,7 @@ try {
 }
 ```
 
-この混沌は TypeScript4.0 でようやく整理されることとなりました。捕捉した値に対して`unknown`型を明記することによって捕捉した値の型はわからないものの型安全を獲得できるようになりました。
+Sự hỗn loạn này cuối cùng được sắp xếp trong TypeScript 4.0. Bằng cách ghi rõ `unknown` type cho giá trị bắt được, có thể đạt được type safe mặc dù không biết type của giá trị bắt được.
 
 ```ts twoslash
 // @useUnknownInCatchVariables: false
@@ -65,7 +65,7 @@ try {
 }
 ```
 
-今回のオプションはこの機能を常時有効にするものです。例外が捕捉した値は型の明記をすることなくすべてが`unknown`型として解釈されるようになります。
+Option này làm tính năng này luôn được bật. Giá trị exception bắt được sẽ được phân tích là `unknown` type mà không cần ghi rõ type.
 
 ```ts twoslash
 // case 1
@@ -90,4 +90,4 @@ try {
 }
 ```
 
-また、この制限を緩くしたい。つまり`unknown`型ではなく`any`型にしたいのであれば捕捉した値に対し`any`型を明記してください。
+Ngoài ra, nếu muốn nới lỏng ràng buộc này, tức muốn là `any` type thay vì `unknown` type, hãy ghi rõ `any` type cho giá trị bắt được.

@@ -168,8 +168,6 @@ Phạm vi ứng dụng rộng là một trong những điểm hấp dẫn của 
 
 ### Kiểu primitive
 
-<!--TODO: ここから続きやる-->
-
 - [`boolean`](./reference/values-types-variables/boolean.md): Giá trị boolean (true/false).
 - [`number`](./reference/values-types-variables/number/README.md): Số.
 - [`string`](./reference/values-types-variables/string.md): Chuỗi.

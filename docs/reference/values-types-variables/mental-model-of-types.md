@@ -1,93 +1,93 @@
 ---
-sidebar_label: 型のメンタルモデル
+sidebar_label: Mental model của kiểu
 ---
 
-# 型のメンタルモデル
+# Mental Model của Kiểu
 
-## 型システムの背景理論
+## Lý thuyết nền tảng của hệ thống kiểu
 
-プログラミング言語の型システムにはそれぞれ固有の世界観があり、言語ごとに型の機能が異なります。
+Hệ thống kiểu của mỗi ngôn ngữ lập trình có thế giới quan riêng, và chức năng kiểu khác nhau giữa các ngôn ngữ.
 
-その一方で複数の言語で共通している機能もあり、それらのさまざまな型の機能は唐突にどこからともなく出現してきたわけではありません。背景として大きくは**型理論**(type theory)と呼ばれる数学的な研究分野があり、各言語の型システムは型理論に基づいて実装されています。
+Mặt khác, cũng có những chức năng chung giữa nhiều ngôn ngữ, và các chức năng kiểu đó không xuất hiện từ hư không. Làm nền tảng có một lĩnh vực nghiên cứu toán học gọi là **type theory** (lý thuyết kiểu), và hệ thống kiểu của mỗi ngôn ngữ được implementation dựa trên type theory.
 
-たとえば、TypeScriptの`unknown`型や`never`型のような一見何のためにあるか分からないような型であっても、型理論においてはその役割や機能を一般的に説明することができます。これらの型はトップ型やボトム型と呼ばれる型の種類に分類され、部分型関係が作る階層構造の両端点に位置する型として振る舞います。
+Ví dụ, ngay cả những kiểu như `unknown` hoặc `never` của TypeScript mà thoạt nhìn không biết để làm gì, trong type theory có thể giải thích vai trò và chức năng của chúng một cách tổng quát. Những kiểu này được phân loại vào top type và bottom type, hoạt động như các kiểu ở hai đầu của cấu trúc phân cấp được tạo bởi quan hệ subtype.
 
-<figure><figcaption>部分型階層の両端点に位置する型</figcaption>
+<figure><figcaption>Kiểu ở hai đầu của cấu trúc phân cấp subtype</figcaption>
 <img src="/reference/values-types-variables/mental-model-of-types/subtyping-end-points.svg" width="480" />
 </figure>
 
-型理論的な観点からの知識を持つことで似たような型システムを持つ他の言語においても型の機能について自然に推論することが可能になります。たとえばScalaというプログラミング言語では`Nothing`と呼ばれる型が型階層のボトムに位置することから`never`型と同じ働きをすることが推論できます。このように型について一般化された知識を使うことで、プログラミング言語をスイッチするような場合でもスムーズに機能の類推や学習を行うことができるようになります。
+Có kiến thức từ góc độ type theory cho phép suy luận tự nhiên về chức năng kiểu trong các ngôn ngữ khác có hệ thống kiểu tương tự. Ví dụ, trong ngôn ngữ Scala, có thể suy luận rằng kiểu `Nothing` ở bottom của cấu trúc phân cấp kiểu có cùng chức năng với kiểu `never`. Như vậy, bằng cách sử dụng kiến thức tổng quát về kiểu, ngay cả khi chuyển đổi ngôn ngữ lập trình, có thể suy luận và học các chức năng một cách thuận lợi.
 
-型理論は非常に奥深く難解な分野でもありますが、その一方で比較的簡単に理解できて実用的にも役立つ概念も非常に多くあります。このドキュメントではそういった知識からTypeScriptの型の世界観、いわば**メンタルモデル**を構築するための知識の一部を紹介します。
+Type theory là lĩnh vực rất sâu và khó, nhưng mặt khác cũng có nhiều khái niệm tương đối dễ hiểu và hữu ích cho thực tế. Tài liệu này giới thiệu một phần kiến thức để xây dựng thế giới quan của kiểu TypeScript, có thể gọi là **mental model**.
 
-:::info より深く学ぶには
-この章の内容を読んでみて型システムや型理論について興味が湧いたら、著名な入門書である『[型システム入門 プログラミング言語と型の理論](https://www.ohmsha.co.jp/book/9784274069116/)』の単純型や部分型付けの章などを読んでみることをオススメします。
+:::info Để tìm hiểu sâu hơn
+Nếu đọc nội dung chương này và có hứng thú với type system hoặc type theory, khuyến khích đọc các chương về simple type và subtyping trong sách nhập môn nổi tiếng『[Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)』.
 
-論理学的な知識があると推論規則などが比較的読みやすくなるので、東京大学出版会から出版されている『[論理学](https://www.utp.or.jp/book/b298898.html)』などの書籍を合わせて読むとよいかもしれません。また、型システム入門の読み方としては定理を隅々検証して読むというよりかは、知識や概念を入手する目的で面白そうなところを拾って読んでいくと意外と読みやすくなるのでぜひ挑戦してみてください。
+Nếu có kiến thức về logic, inference rule sẽ dễ đọc hơn. Ngoài ra, cách đọc Types and Programming Languages là thay vì xác minh tỉ mỉ từng định lý, hãy đọc với mục đích thu thập kiến thức và khái niệm từ những phần thú vị, như vậy sẽ dễ đọc hơn, hãy thử thách xem.
 :::
 
-## 集合論的なデザイン
+## Thiết kế theo set theory
 
-型のメンタルモデル、つまり「型をどのように解釈するか」を考える上で非常に有用でありなが身近な数学的なツールがあります。それが集合論(set thoery)であり、この章では「型=集合」として考えることにします。
+Một công cụ toán học rất hữu ích và quen thuộc để nghĩ về mental model của kiểu, tức là "cách diễn giải kiểu", đó là set theory (lý thuyết tập hợp). Trong chương này, chúng ta sẽ coi "kiểu = tập hợp".
 
-一般に型(type)は集合(set)は異なる概念ですが、型理論と集合論の間には[密接な関連](https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%83%E3%82%BB%E3%83%AB%E3%81%AE%E3%83%91%E3%83%A9%E3%83%89%E3%83%83%E3%82%AF%E3%82%B9)があります。
+Nói chung type (kiểu) và set (tập hợp) là các khái niệm khác nhau, nhưng giữa type theory và set theory có [mối liên hệ mật thiết](https://en.wikipedia.org/wiki/Russell%27s_paradox).
 
-特にTypeScriptにおいては、型を集合論的に扱えるようなデザインが意図的になされており、型を「**値の集合**」として捉えることで直感的に型を理解することができるようになっています。この見方は決して偏ったものではなく、[公式ドキュメント](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html#types-as-sets)でも推奨されている型の考え方です。
+Đặc biệt trong TypeScript, thiết kế được cố ý tạo ra để có thể xử lý kiểu theo set theory, và bằng cách coi kiểu như "**tập hợp các giá trị**", có thể hiểu kiểu một cách trực quan. Cách nhìn này không phải là thiên lệch, mà là cách nghĩ về kiểu được khuyến nghị trong [tài liệu chính thức](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html#types-as-sets).
 
-本章ではこのような集合論的な見方に立って型を考えることで、型の振る舞いについての自然な推論を行えるようなメンタルモデルを構築します。
+Trong chương này, chúng ta sẽ xây dựng mental model cho phép suy luận tự nhiên về hành vi của kiểu bằng cách nghĩ về kiểu từ góc độ set theory như vậy.
 
-## 和集合と共通部分
+## Union và intersection
 
-型を集合論的に扱えるお陰で、TypeScriptの型は集合が持つような演算の一部を利用することができます。
+Nhờ có thể xử lý kiểu theo set theory, kiểu TypeScript có thể sử dụng một số phép toán mà tập hợp có.
 
-集合の演算は集合から新しい集合を作り出すような操作であり、そのような演算にはいくつも種類があります。TypeScriptではそのような演算の中で和集合と共通部分を演算に相当する[ユニオン型](./union.md)と[インターセクション型](./intersection.md)が備わっています。
+Phép toán tập hợp là thao tác tạo tập hợp mới từ tập hợp, và có nhiều loại phép toán như vậy. TypeScript được trang bị [union type](./union.md) và [intersection type](./intersection.md) tương ứng với union (hợp) và intersection (giao) trong các phép toán đó.
 
 ```ts twoslash twoslash
 type A = { a: string };
 type B = { b: number };
 
-// AとBの和集合を表現する型
+// Kiểu biểu diễn union của A và B
 type Union = A | B;
 
-// AとBの共通部分を表現する型
+// Kiểu biểu diễn intersection của A và B
 type Intersection = A & B;
 ```
 
-<figure><figcaption>和集合と共通部分に相当する型表現</figcaption>
+<figure><figcaption>Biểu diễn kiểu tương ứng với union và intersection</figcaption>
 <img src="/reference/values-types-variables/mental-model-of-types/union-intersection-inclusion.svg" width="480" />
 </figure>
 
-直感的にはユニオン型はふたつの集合の和集合を表現する型であり、インターセクション型はふたつの型の共通部分を表現する型です。ユニオン型は特に型の絞り込み(narrowing)において特に重要な役割を果たし、型の和集合から選択的に型の候補を削っていくことができます。
+Trực quan, union type là kiểu biểu diễn hợp của hai tập hợp, và intersection type là kiểu biểu diễn phần giao của hai kiểu. Union type đặc biệt đóng vai trò quan trọng trong narrowing (thu hẹp kiểu), có thể loại bỏ chọn lọc các ứng cử viên kiểu từ hợp của các kiểu.
 
-```ts twoslash title="型の絞り込みは和集合から集合を削っていく"
+```ts twoslash title="Narrowing kiểu là loại bỏ tập hợp từ union"
 type StrOrNum = string | number;
 
 function narrowUnion(param: StrOrNum) {
   if (typeof param === "string") {
-    // stringとnumberの和集合からstringを削る
+    // Loại bỏ string từ union của string và number
     console.log(param.toUpperCase());
   } else {
-    // 残された集合はnumber
+    // Tập hợp còn lại là number
     console.log(param * 3);
   }
 }
 ```
 
-このふたつの型は複数の型から新しい型を合成できるという点で演算として重要ですが、特定の型そのものが集合としてどのように解釈できるかを次に紹介する３つの型で解説していきます。
+Hai kiểu này quan trọng như phép toán có thể hợp thành kiểu mới từ nhiều kiểu, nhưng tiếp theo chúng ta sẽ giải thích bằng 3 kiểu sau về cách kiểu cụ thể có thể được diễn giải như tập hợp.
 
-## ユニット型
+## Unit type
 
-ここからは、TypeScriptにおいて型は値の集合として扱えることができることを具体例を交えて説明していきます。
+Từ đây, chúng ta sẽ giải thích với các ví dụ cụ thể rằng trong TypeScript, kiểu có thể được xử lý như tập hợp các giá trị.
 
-まずは単に型を「値の集合」であると考えてください。たとえば、`number`型という数値を表す型ですが、この型が集合であるとすると、その要素は具体的な`number`型の値である数値です。たとえば`1`や`3.14`などの数値がこの集合の要素となります。[number型](../values-types-variables/number/README.md)のページで述べているようにnumber型で表現可能な範囲は有限であり、それらの範囲の要素に`NaN`と`Infinity`などの特殊な定数を加えた集合が`number`型の集合ということになります。
+Trước tiên, hãy đơn giản coi kiểu là "tập hợp các giá trị". Ví dụ, kiểu `number` biểu diễn số, nếu kiểu này là tập hợp thì các phần tử của nó là các giá trị `number` cụ thể. Ví dụ, các số như `1` hay `3.14` là phần tử của tập hợp này. Như đã nói trong trang [kiểu number](../values-types-variables/number/README.md), phạm vi có thể biểu diễn của number type là hữu hạn, và tập hợp kiểu `number` là tập hợp các phần tử trong phạm vi đó cộng với các hằng số đặc biệt như `NaN` và `Infinity`.
 
-さて、重要な型の概念として**ユニット型**(unit type)という型の種類があります。ユニット型とは文字通りの単位的な型であり、型の要素として値をひとつしか持たないような型です。集合論においては単一の要素からなる集合は単位集合(unit set)や単集合(singleton set)など呼ばれます。
+Bây giờ, có một khái niệm kiểu quan trọng gọi là **unit type**. Unit type là kiểu đơn vị theo nghĩa đen, là kiểu chỉ có một giá trị làm phần tử. Trong set theory, tập hợp có một phần tử duy nhất được gọi là unit set hoặc singleton set.
 
-型の世界での単位集合に相当するものがユニット型であり、たとえば、PHPでは`null`という単一の値を持つ`null`型がユニット型に相当し、KotlinやScalaでは分かりやすく`Unit`型という名前の型がユニット型です。
+Thứ tương ứng với unit set trong thế giới kiểu là unit type. Ví dụ, trong PHP, kiểu `null` có giá trị duy nhất `null` tương ứng với unit type, trong Kotlin và Scala có kiểu tên rõ ràng là `Unit` là unit type.
 
-TypeScriptでは`null`という単一の値を持つ`null`型と、`undefined`という単一の値を持つ`undefined`型がユニット型に相当します。
+Trong TypeScript, kiểu `null` với giá trị duy nhất `null` và kiểu `undefined` với giá trị duy nhất `undefined` tương ứng với unit type.
 
-```ts twoslash title="nullとundefinedはユニット型"
+```ts twoslash title="null và undefined là unit type"
 type N = null;
 const n: N = null;
 
@@ -95,24 +95,24 @@ type U = undefined;
 const u: U = undefined;
 ```
 
-他にもTypeScriptには[リテラル型](../values-types-variables/literal-types.md)という型がありましたが、このリテラル型もユニット型に相当します。
+Ngoài ra, TypeScript có [literal type](../values-types-variables/literal-types.md), và literal type này cũng tương ứng với unit type.
 
-```ts twoslash title="リテラル型はユニット型"
+```ts twoslash title="Literal type là unit type"
 type Unit = 1;
 const one: Unit = 1;
 ```
 
-リテラル型は値リテラルをそのまま型として表現できる型であり、`number`や`string`などのプリミティブ型にはそれぞれ具体的な値のリテラルによって作成されるリテラル型が存在します。
+Literal type là kiểu có thể biểu diễn value literal như kiểu, và mỗi primitive type như `number` hay `string` đều có literal type được tạo bởi literal của giá trị cụ thể.
 
-- 文字列リテラル型 : `"st"`, `"@"`, ...
-- 数値リテラル型 : `1`, `3.14`, `-2`, ...
-- 真偽値リテラル型 : `ture`, `false` のふたつのみ
+- String literal type: `"st"`, `"@"`, ...
+- Number literal type: `1`, `3.14`, `-2`, ...
+- Boolean literal type: chỉ có hai `true`, `false`
 
-型は値の集合でしたが、具体的な値はそのリテラル型と一対一で対応します。
+Kiểu là tập hợp các giá trị, nhưng giá trị cụ thể tương ứng một-một với literal type của nó.
 
-集合の要素の個数は「濃度(cardinality)」と呼ばれる概念によって一般化され、基数という数によって表記されます。たとえば、要素がひとつしかない単位集合の濃度は１です。つまり、型を集合としてみなしたときのユニット型の濃度は１ということになります。
+Số phần tử của tập hợp được tổng quát hóa bởi khái niệm "cardinality" (độ lớn) và được biểu diễn bằng cardinal number. Ví dụ, cardinality của unit set chỉ có một phần tử là 1. Tức là, cardinality của unit type khi coi kiểu như tập hợp là 1.
 
-それでは濃度が２、つまり要素の個数が二個からなるシンプルな型について考えてみましょう。たとえば、真偽値を表す `boolean` という型の要素(値)は`true`と`false`のみであり、`boolean`型の変数にはそれら以外の値を割り当てることはできません。したがって`boolean`型は濃度2の集合としてみなせます。
+Vậy hãy nghĩ về kiểu đơn giản có cardinality 2, tức là có hai phần tử. Ví dụ, các phần tử (giá trị) của kiểu `boolean` biểu diễn boolean chỉ có `true` và `false`, không thể gán giá trị nào khác cho biến kiểu `boolean`. Do đó, kiểu `boolean` có thể coi như tập hợp cardinality 2.
 
 ```ts twoslash
 const b1: boolean = true;
@@ -121,40 +121,40 @@ const b2: boolean = false;
 const b3: boolean = 1;
 ```
 
-リテラル型について思い出すと真偽値についてもそれぞれリテラル型`true`と`false`が存在しました。これらの型はそれぞれがひとつの値だけを持つユニット型でした。
+Nhớ lại về literal type, với boolean cũng có các literal type `true` và `false`. Mỗi kiểu này là unit type chỉ có một giá trị.
 
-リテラル型は具体的な値と一対一の対応となります。型の集まりには集合演算が備わっていたので、リテラル型を要素として新しい集合を作ってみると考えてもよいでしょう。ふたつの単集合`true`と`false`を合成してふたつの型(あるいは値)から和集合を作成すると濃度2の型を得ることができます。
+Literal type tương ứng một-một với giá trị cụ thể. Tập hợp các kiểu có phép toán tập hợp, nên có thể nghĩ là tạo tập hợp mới với literal type làm phần tử. Hợp thành từ hai singleton `true` và `false` để tạo union từ hai kiểu (hoặc giá trị) sẽ cho kiểu cardinality 2.
 
-```ts twoslash title="true と false の和集合"
+```ts twoslash title="Union của true và false"
 type Bool = true | false;
 ```
 
-このようにユニオン型で合成した型`Bool`は`boolean`型と同一の型となります。
+Kiểu `Bool` được hợp thành bằng union type như vậy trở thành kiểu đồng nhất với kiểu `boolean`.
 
-## ボトム型
+## Bottom type
 
-ユニット型は値をひとつしか持たない型ですが、値をまったく持たないような型も存在しています。そのような型を**ボトム型**(bottom type)と呼びます。型が集合であるとするとき、ボトム型は空集合(empty set)に相当し、空型(empty type)とも呼ばれることがあります。
+Unit type là kiểu chỉ có một giá trị, nhưng cũng tồn tại kiểu không có giá trị nào. Kiểu như vậy được gọi là **bottom type**. Khi kiểu là tập hợp, bottom type tương ứng với empty set (tập rỗng), cũng được gọi là empty type.
 
-ボトム型は値をまったく持たない型として、例外が発生する関数の返り値の型として利用されますが、TypeScriptでのボトム型は部分型階層の一番下、つまりボトムの位置に存在している`never`型となります。
+Bottom type là kiểu không có giá trị nào, được sử dụng làm kiểu trả về của hàm ném exception. Bottom type trong TypeScript là kiểu `never` ở vị trí bottom, tức là dưới cùng của cấu trúc phân cấp subtype.
 
 ```ts twoslash
 function neverReturn(): never {
-  throw new Error("決して返ってこない関数");
+  throw new Error("Hàm không bao giờ trả về");
 }
 ```
 
-`never`型は集合としては空集合であり、値をひとつも持たないため、その型の変数にはどのような要素も割り当てることができません。
+Kiểu `never` như tập hợp là empty set, không có giá trị nào, nên không thể gán bất kỳ phần tử nào cho biến của kiểu đó.
 
 ```ts twoslash
 // @errors: 1206 2322
 const n: never = 42;
 ```
 
-## トップ型
+## Top type
 
-ボトム型が値をまったく持たない型なら、それとは逆にすべての値を持つような型も存在しています。そのような型を**トップ型**(top type)と呼びます。
+Nếu bottom type là kiểu không có giá trị nào, thì ngược lại cũng tồn tại kiểu có tất cả giá trị. Kiểu như vậy được gọi là **top type**.
 
-トップ型はすべての値を持っており、その型の変数にはあらゆる値を割り当てることができます。オブジェクト指向言語であれば大抵は型階層のルート位置、つまりトップ位置に存在している型であり、TypeScriptでは`unknown`型がトップ型に相当します。
+Top type có tất cả giá trị, có thể gán mọi giá trị cho biến của kiểu đó. Trong ngôn ngữ hướng đối tượng, thường là kiểu ở vị trí root, tức là top của cấu trúc phân cấp kiểu, và trong TypeScript kiểu `unknown` tương ứng với top type.
 
 ```ts twoslash
 const u1: unknown = 42;
@@ -164,18 +164,18 @@ const u4: unknown = null;
 const u5: unknown = () => 2;
 ```
 
-ボトム型が空集合に相当するなら、トップ型は全体集合に相当すると言えるでしょう。なおTypeScriptでは`{} | null | undefind`という特殊なユニオン型を`unknown`型相当として扱い、相互に割当可能としています。
+Nếu bottom type tương ứng với empty set, thì có thể nói top type tương ứng với universal set (tập toàn thể). Nhân tiện, trong TypeScript, union type đặc biệt `{} | null | undefined` được xử lý tương đương với kiểu `unknown`, có thể gán qua lại.
 
-```ts twoslash twoslash title="unknown型相当の特殊なユニオン型"
+```ts twoslash twoslash title="Union type đặc biệt tương đương kiểu unknown"
 declare const u: unknown;
 const t: {} | null | undefined = u;
 ```
 
-`{}`はプロパティを持たないオブジェクトを表現する空のobject型であり、この型はあらゆるオブジェクトの型と`null`と`undefined`を除くすべてのプリミティブ型を包含しています。したがって、`unknown`という全体集合は上記のような３つの集合に分割できると考えることもできます。
+`{}` là empty object type biểu diễn object không có property, kiểu này bao gồm mọi kiểu object và mọi primitive type trừ `null` và `undefined`. Do đó, có thể nghĩ `unknown` như universal set có thể phân chia thành 3 tập hợp như trên.
 
-## ダイナミック型
+## Dynamic type
 
-TypeScriptには`unknwon`型以外にもうひとつ特殊なトップ型があります。それが`any`型です。`any`型には`unknown`型と同様にあらゆる型の値を割当可能です。
+Trong TypeScript còn có một top type đặc biệt khác ngoài kiểu `unknown`. Đó là kiểu `any`. Kiểu `any` giống kiểu `unknown`, có thể gán mọi kiểu giá trị.
 
 ```ts twoslash
 const a1: any = 42;
@@ -185,7 +185,7 @@ const a4: any = null;
 const a5: any = () => 2;
 ```
 
-`any`型の特殊性はトップ型としてあらゆる型からの割当が可能だけでなく、`never`型を除くあらゆる型へも割当可能な点です。
+Tính đặc biệt của kiểu `any` là không chỉ có thể gán từ mọi kiểu như top type, mà còn có thể gán cho mọi kiểu trừ kiểu `never`.
 
 ```ts twoslash
 declare const a: any;
@@ -198,35 +198,35 @@ const n4: 1 = a;
 const n5: never = a;
 ```
 
-`any`型は`never`型を除けばあらゆる型へも割当可能なため一見するとボトム型のように振る舞っているように見えますが、実際にはボトム型ではありません。
+Vì kiểu `any` có thể gán cho mọi kiểu trừ kiểu `never`, thoạt nhìn có vẻ hoạt động như bottom type, nhưng thực tế không phải bottom type.
 
-TypeScriptは元来、JavaScriptに対して**オプショナルに型付けを行う**という言語であり、型注釈を省略して型推論ができない場合には未知の型を暗黙的に`any`型として推論します。このような状況において`any`型はあらゆる型からの割当が可能であるだけでなく、あらゆる型への割当が可能であることが必要であり、それによって型注釈がないJavaScriptに対して漸進的に型を付けていくことが可能になります。
+TypeScript vốn là ngôn ngữ **type annotation tùy chọn** cho JavaScript, khi bỏ qua type annotation và không thể type inference, kiểu không xác định được ngầm suy luận là kiểu `any`. Trong tình huống này, kiểu `any` không chỉ có thể gán từ mọi kiểu mà còn phải có thể gán cho mọi kiểu, nhờ đó có thể dần dần thêm kiểu cho JavaScript không có type annotation.
 
-実は`any`型は`unknown`型がTypeScriptに導入されるまで唯一のトップ型として機能していましたが、純粋にあらゆる型の上位型になる部分型関係のトップ位置の型として機能する`unknown`型が導入されたことで部分型関係の概念が明瞭になりました。
+Thực tế, kiểu `any` là top type duy nhất cho đến khi kiểu `unknown` được thêm vào TypeScript, nhưng với việc kiểu `unknown` được thêm vào như kiểu thuần túy ở top của quan hệ subtype, khái niệm quan hệ subtype trở nên rõ ràng hơn.
 
-そして、`any`型のメンタルモデルには、トップ型やボトム型ではなくダイナミック型(Dynamic type)と呼ばれる型の概念に割り当てるとよいです。
+Và mental model của kiểu `any` nên được gán cho khái niệm kiểu gọi là Dynamic type.
 
-漸進的型付けの型システムでは静的な世界と動的な世界の境界となる型が必要となります。この境界となる型は`dynamic`と呼ばれ、`?` の記号で表されます。この種の型は静的に不明な型(statically-unknown type)を表し、静的型付けと動的型付けを共存させるのに役立ちます。
+Trong type system của gradual typing, cần kiểu làm ranh giới giữa thế giới tĩnh và động. Kiểu ranh giới này được gọi là `dynamic`, biểu diễn bằng ký hiệu `?`. Loại kiểu này biểu diễn kiểu không xác định tĩnh (statically-unknown type), hữu ích cho việc cùng tồn tại static typing và dynamic typing.
 
-より厳密に言えば、[公式ドキュメントに記述してある通り](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#gradual-typing)、TypeScriptの`any`はダイナミック型というよりも、より単純な「**型チェックの無効化装置**」でしかないのですが、ダイナミック型という存在を知っていると型システムでの`any`型の立ち位置が理解しやすくなります。
+Nói chính xác hơn, như [mô tả trong tài liệu chính thức](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#gradual-typing), kiểu `any` của TypeScript hơn là Dynamic type, chỉ là "**thiết bị vô hiệu hóa type check**" đơn giản hơn. Nhưng biết đến sự tồn tại của Dynamic type giúp dễ hiểu vị trí của kiểu `any` trong type system.
 
-## 部分型関係の解釈
+## Diễn giải quan hệ subtype
 
-部分型関係とはそもそも「型Bが型Aの部分型であるとき、Aの型の値が求められる際にBの型の値を指定できる」という型同士の互換性に関わる関係です。関数型を除く通常の型については、ここまで見てきた通り型を集合として解釈すれば部分型関係は**集合の包含関係**に相当します。
+Quan hệ subtype về cơ bản là "khi kiểu B là subtype của kiểu A, có thể chỉ định giá trị kiểu B khi yêu cầu giá trị kiểu A", là quan hệ về tính tương thích giữa các kiểu. Với các kiểu thông thường không phải function type, như đã thấy ở trên, nếu diễn giải kiểu như tập hợp thì quan hệ subtype tương ứng với **quan hệ bao hàm tập hợp**.
 
-[部分型関係の説明](./structural-subtyping.md)において、型と型の関係性は**階層構造**で捉えることができると述べましたが、集合の包含関係は階層構造について少し見方を変えた構造であると言えます。
+Trong [giải thích về quan hệ subtype](./structural-subtyping.md), đã nói rằng quan hệ giữa các kiểu có thể được hiểu như **cấu trúc phân cấp**, nhưng quan hệ bao hàm tập hợp có thể nói là cấu trúc với cách nhìn hơi khác về cấu trúc phân cấp.
 
-<figure><figcaption>集合的と見方と階層的な見方</figcaption>
+<figure><figcaption>Cách nhìn theo tập hợp và cách nhìn theo phân cấp</figcaption>
 <img src="/reference/values-types-variables/mental-model-of-types/2way-views-types.svg" width="480" />
 </figure>
 
-トップ型である`unknown`型はあらゆる型の基本型、つまり上位型として振る舞い、あらゆる型は`unknown`型の部分型となります。したがって、型を集合として解釈したとき、`unknown`型はTypeScriptにおけるあらゆる値を含む集合となります。つまり全体集合であり、あらゆる型は`unknown`型の部分集合とみなすことができます。
+Top type `unknown` hoạt động như supertype, tức là kiểu cấp trên của mọi kiểu, mọi kiểu là subtype của kiểu `unknown`. Do đó, khi diễn giải kiểu như tập hợp, kiểu `unknown` là tập hợp chứa mọi giá trị trong TypeScript. Tức là universal set, mọi kiểu có thể coi như tập con của kiểu `unknown`.
 
-それとは逆に、ボトム型である`never`型はあらゆる型の部分型となります。したがって、型を集合として解釈したとき、`never`型はTypeScriptにおけるどのような値も含まない集合、つまり空集合としてみなすことができます。
+Ngược lại, bottom type `never` là subtype của mọi kiểu. Do đó, khi diễn giải kiểu như tập hợp, kiểu `never` là tập hợp không chứa giá trị nào trong TypeScript, tức là có thể coi như empty set.
 
-このように部分型関係を集合の包含関係として捉えることで、より直感的に型の互換性についての推論が可能となります。
+Như vậy, bằng cách nắm bắt quan hệ subtype như quan hệ bao hàm tập hợp, có thể suy luận trực quan hơn về tính tương thích kiểu.
 
-たとえばふたつの集合の和集合はその共通部分を包含します。ユニオン型とインターセクション型は和集合と共通部分に相当していたので、包含関係からインターセクション型がユニオン型の部分型となることが推論されます。実際に検証してみると、ユニオン型の変数にインターセクション型の変数を割りあてることが可能です。
+Ví dụ, union của hai tập hợp bao hàm intersection của chúng. Union type và intersection type tương ứng với union và intersection, nên từ quan hệ bao hàm có thể suy luận intersection type là subtype của union type. Thực tế xác minh, có thể gán biến intersection type cho biến union type.
 
 ```ts twoslash
 type A = { a: string };
