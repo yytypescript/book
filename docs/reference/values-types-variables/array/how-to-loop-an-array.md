@@ -1,14 +1,15 @@
 ---
+sidebar_label: Cách loop array
 image: /img/how-to-loop-an-array.png
 ---
 
-# 配列をループする方法
+# Cách loop array
 
-JavaScript/TypeScriptで配列をループするには、主にfor文、for-of文、配列のメソッドの3つの方法があります。
+Trong JavaScript/TypeScript, để loop array có 3 cách chính: câu lệnh for, câu lệnh for-of, và các method của array.
 
-## for文
+## Câu lệnh for
 
-for文は古くからある配列をループする方法です。
+Câu lệnh for là cách loop array có từ lâu đời.
 
 ```ts twoslash
 const arr = ["a", "b", "c"];
@@ -16,11 +17,11 @@ for (let i = 0; i < arr.length; i++) {
   console.log(i, arr[i]);
   // 0 a
   // 1 b
-  // 2 c の順で出力される
+  // 2 c theo thứ tự
 }
 ```
 
-`break`でループを中断できます。
+Có thể dùng `break` để dừng loop.
 
 ```ts twoslash
 const arr = ["a", "b", "c"];
@@ -30,10 +31,10 @@ for (let i = 0; i < arr.length; i++) {
     break;
   }
 }
-// a b が順に出力されて終了する
+// a b được xuất ra theo thứ tự rồi kết thúc
 ```
 
-`continue`で次のループにスキップできます。
+Có thể dùng `continue` để skip sang loop tiếp theo.
 
 ```ts twoslash
 const arr = ["a", "b", "c"];
@@ -42,31 +43,31 @@ for (let i = 0; i < arr.length; i++) {
     continue;
   }
   console.log(arr[i]);
-  // b c が順に出力される
+  // b c được xuất ra theo thứ tự
 }
 ```
 
-## for-of文
+## Câu lệnh for-of
 
-for-of文は、配列の要素をひとつひとつ処理する場合、for文よりもシンプルに書けるのが特徴です。
+Câu lệnh for-of có đặc điểm là khi xử lý từng phần tử của array, có thể viết đơn giản hơn câu lệnh for.
 
 ```ts twoslash
 const arr = ["a", "b", "c"];
 for (const value of arr) {
   console.log(value);
-  // a b cの順で出力される
+  // a b c theo thứ tự
 }
 ```
 
-for-of文もfor文と同様に、`break`や`continue`が使えます。
+Câu lệnh for-of cũng có thể dùng `break` và `continue` giống như câu lệnh for.
 
-[for-of文](../../statements/for-of.md)
+[Câu lệnh for-of](../../statements/for-of.md)
 
-## Arrayのメソッド
+## Các method của Array
 
-`Array`には要素ごとに処理を行うメソッドがいくつかあります。
+`Array` có một số method để xử lý từng phần tử.
 
-`forEach`メソッドに渡したコールバック関数が、要素ごとに実行されます。`forEach`には戻り値がありません。for文などと異なり、`break`や`continue`は使えません。
+Callback function được truyền vào method `forEach` sẽ được thực thi cho mỗi phần tử. `forEach` không có return value. Khác với câu lệnh for, không thể dùng `break` hay `continue`.
 
 ```ts twoslash
 const arr = ["a", "b", "c"];
@@ -74,11 +75,11 @@ arr.forEach((value, i) => {
   console.log(value, i);
   // a 0
   // b 1
-  // c 2 の順で出力される
+  // c 2 theo thứ tự
 });
 ```
 
-`map`メソッドも要素ごとにコールバック関数を実行します。コールバック関数の戻り値が、`map`には戻り値になります。配列要素の値を加工して、別の配列を作るときに便利です。`map`では`break`や`continue`は使えません。
+Method `map` cũng thực thi callback function cho mỗi phần tử. Return value của callback function sẽ trở thành return value của `map`. Tiện lợi khi muốn xử lý các giá trị phần tử của array để tạo array khác. `map` cũng không thể dùng `break` hay `continue`.
 
 ```ts twoslash
 const arr = ["a", "b", "c"];
@@ -87,36 +88,36 @@ console.log(arr2);
 // @log: [ 'aa', 'bb', 'cc' ]
 ```
 
-## for-in文は使わない
+## Không nên dùng câu lệnh for-in
 
-for-in文で配列をループすることもできます。しかし、for-in文は配列をループするのには使わないほうがよいです。配列は順番が重要なことが多いですが、for-in文は順番どおりになる保証がないためです。
+Cũng có thể loop array bằng câu lệnh for-in. Tuy nhiên, không nên dùng câu lệnh for-in để loop array. Vì với array, thứ tự thường rất quan trọng, nhưng câu lệnh for-in không đảm bảo thứ tự.
 
-また、配列オブジェクトに追加のプロパティがある場合、for-in文はそれも反復処理に含めます。これが予期しない不具合につながる危険性もあります。
+Ngoài ra, nếu array object có thêm property, câu lệnh for-in cũng sẽ bao gồm nó trong quá trình lặp. Điều này có nguy cơ dẫn đến bug không mong muốn.
 
 ```js twoslash
 const arr = ["a", "b", "c"];
-arr.foo = "bar"; // 追加のプロパティ
+arr.foo = "bar"; // Property bổ sung
 for (const x in arr) {
   console.log(x, arr[x]);
   // 0 a
   // 1 b
   // 2 c
-  // foo bar が順に出力される
+  // foo bar theo thứ tự
 }
 ```
 
 <PostILearned>
 
-・TypeScript/JavaScriptで配列をループするには主に3つの方法がある。
-① for文
-② for-of文
-③ 配列のメソッド
-・for文は古くからある構文
-・for-of文はfor文よりもループをシンプルに書ける
-・配列にはforEachやmapメソッドがある
+・Trong TypeScript/JavaScript, có 3 cách chính để loop array.
+① Câu lệnh for
+② Câu lệnh for-of
+③ Các method của array
+・Câu lệnh for là cú pháp có từ lâu đời
+・Câu lệnh for-of có thể viết loop đơn giản hơn câu lệnh for
+・Array có các method như forEach và map
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
-[オブジェクトをループする方法](../object/how-to-loop-an-object.md)
+[Cách loop object](../object/how-to-loop-an-object.md)

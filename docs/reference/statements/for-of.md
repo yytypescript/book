@@ -3,8 +3,8 @@
 Trong JavaScript, cú pháp for-of có thể được sử dụng để lặp qua mảng. Đây là cú pháp có cách sử dụng tương tự như `foreach` trong PHP hoặc `for in` trong Python.
 
 ```js
-for (変数 of 配列) {
-  文;
+for (biến of mảng) {
+  câu_lệnh;
 }
 ```
 
@@ -37,6 +37,6 @@ for (const [index, word] of words.entries()) {
 
 ## Thông tin liên quan
 
-[配列をループする方法](../values-types-variables/array/how-to-loop-an-array.md)
+[Cách loop array](../values-types-variables/array/how-to-loop-an-array.md)
 
-[オブジェクトをループする方法](../values-types-variables/object/how-to-loop-an-object.md)
+[Cách loop object](../values-types-variables/object/how-to-loop-an-object.md)

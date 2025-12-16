@@ -1,14 +1,14 @@
 ---
-sidebar_label: 配列の共変性
+sidebar_label: Tính hiệp biến của array
 ---
 
-# 配列の共変性 (covariance)
+# Tính hiệp biến của array (covariance)
 
-TypeScriptの配列の型は共変(covariant)です。ここでは配列の共変性(covariance)がどのようなものなのか、共変性があるためにどういうことに注意が必要なのか、なぜTypeScriptの配列は共変なのかについて見ていきます。
+Kiểu array của TypeScript là hiệp biến (covariant). Ở đây chúng ta sẽ xem xét tính hiệp biến (covariance) của array là gì, cần chú ý điều gì do tính hiệp biến này, và tại sao array của TypeScript lại là hiệp biến.
 
-## 共変とは
+## Hiệp biến là gì
 
-型の世界の話で、共変とはその型自身、もしくは、その部分型(subtype)が代入できることを言います。たとえば、Animal型とDog型の2つの型があるとします。DogはAnimalの部分型とします。共変であれば、Animal型の変数にはAnimal自身とその部分型のDogが代入できます。
+Trong thế giới của type, hiệp biến nghĩa là có thể gán chính kiểu đó hoặc subtype (kiểu con) của nó. Ví dụ, giả sử có hai kiểu Animal và Dog. Dog là subtype của Animal. Nếu là hiệp biến, biến kiểu Animal có thể được gán chính Animal hoặc subtype của nó là Dog.
 
 ```ts twoslash
 interface Animal {
@@ -19,10 +19,10 @@ interface Dog extends Animal {
 }
 
 let pochi: Dog = { isAnimal: true, isDog: true };
-let animal: Animal = pochi; // 代入OK
+let animal: Animal = pochi; // Gán OK
 ```
 
-一方で共変では、Dog型の変数には、DogのスーパータイプであるAnimalは代入できません。
+Mặt khác, với hiệp biến, biến kiểu Dog không thể được gán Animal - supertype của Dog.
 
 ```ts twoslash
 interface Animal {
@@ -37,9 +37,9 @@ let animal: Animal = { isAnimal: true };
 let pochi: Dog = animal;
 ```
 
-## 配列は共変が許される
+## Array cho phép hiệp biến
 
-TypeScriptの配列型は共変になっています。たとえば、`Animal[]`型の配列に`Dog[]`を代入できます。
+Kiểu array của TypeScript là hiệp biến. Ví dụ, có thể gán `Dog[]` cho array kiểu `Animal[]`.
 
 ```ts twoslash
 interface Animal {
@@ -50,43 +50,43 @@ interface Dog extends Animal {
 }
 
 let pochi: Dog = { isAnimal: true, isDog: true };
-let animal: Animal = pochi; // 代入OK
+let animal: Animal = pochi; // Gán OK
 // ---cut---
 const dogs: Dog[] = [pochi];
-const animals: Animal[] = dogs; // 代入OK
+const animals: Animal[] = dogs; // Gán OK
 ```
 
-一見するとこの性質は問題なさそうです。ところが、次の例のように`animals[0]`をAnimal型の値に置き換えると問題が起こります。
+Thoạt nhìn tính chất này có vẻ không có vấn đề. Tuy nhiên, vấn đề xảy ra khi thay thế `animals[0]` bằng giá trị kiểu Animal như ví dụ sau.
 
 ```ts twoslash
 interface Animal {
   isAnimal: boolean;
 }
 interface Dog extends Animal {
-  wanwan(): string; // メソッド
+  wanwan(): string; // Method
 }
 
 const pochi = {
   isAnimal: true,
   wanwan() {
-    return "wanwan"; // メソッドの実装
+    return "wanwan"; // Implementation của method
   },
 };
 
 const dogs: Dog[] = [pochi];
 const animals: Animal[] = dogs;
-animals[0] = { isAnimal: true }; // 同時にdogs[0]も書き換わる
+animals[0] = { isAnimal: true }; // Đồng thời dogs[0] cũng bị thay đổi
 const mayBePochi: Dog = dogs[0];
 mayBePochi.wanwan();
-// JS実行時エラー: mayBePochi.wanwan is not a function
+// Lỗi runtime JS: mayBePochi.wanwan is not a function
 ```
 
-変数`animals`に`dogs`を代入した場合、`animals`の変更は`dogs`にも影響します。これはJavaScriptの配列がミュータブルなオブジェクトであるためです。`animals[0]`にAnimal型の値を代入すると、`dogs[0]`もAnimalの値になります。`dogs`は`Dog[]`型なので、型どおりならAnimal型を受け付けないことが望ましいですが、実際はそれができてしまいます。その結果、`dogs[0]`の`wanwan`メソッドを呼び出すところで、メソッドが存在しないというJavaScript実行時エラーが発生します。
+Khi gán `dogs` cho biến `animals`, thay đổi `animals` cũng ảnh hưởng đến `dogs`. Điều này là do array của JavaScript là mutable object. Khi gán giá trị kiểu Animal cho `animals[0]`, `dogs[0]` cũng trở thành giá trị Animal. `dogs` là kiểu `Dog[]`, nên theo lý thuyết không nên chấp nhận kiểu Animal, nhưng thực tế lại có thể. Kết quả là khi gọi method `wanwan` của `dogs[0]`, xảy ra lỗi runtime JavaScript vì method không tồn tại.
 
-型の安全性を突き詰めると、配列は共変であるべきではないです。型がある他の言語のJavaでは、`List<T>`型は共変ではなく非変(invariant)になっています。非変な配列では、その型自身しか代入できないようになり、上のような問題が起こらなくなります。
+Nếu truy cầu sự an toàn của type, array không nên là hiệp biến. Trong Java - ngôn ngữ có type khác, kiểu `List<T>` là bất biến (invariant) chứ không phải hiệp biến. Với array bất biến, chỉ có thể gán chính kiểu đó, và vấn đề như trên sẽ không xảy ra.
 
 ```java
-// Javaコード
+// Code Java
 import java.util.*;
 
 class Animal {
@@ -99,31 +99,31 @@ public class Main {
     static {
         List<Dog> dogs = new ArrayList<Dog>();
         List<Animal> animals = dogs;
-        // エラー: 不適合な型: List<Dog>をList<Animal>に変換できません
+        // Lỗi: kiểu không tương thích: không thể convert List<Dog> sang List<Animal>
     }
 }
 ```
 
-上のJavaコードの例では`dogs`を`animals`に代入する段階でコンパイルエラーになります。
+Trong ví dụ code Java trên, compile error xảy ra ngay khi gán `dogs` cho `animals`.
 
-## TypeScriptで配列が共変になっている理由
+## Lý do array là hiệp biến trong TypeScript
 
-配列が非変である言語がある中、TypeScriptはなぜ型の安全性を犠牲にしてまで配列を共変にしているでしょうか。それはTypeScriptが健全性(soundness)と利便性のバランスを取ること目標にして、型システムを設計しているためです。配列が非変であると健全性は高くなりますが、利便性は下がります。
+Trong khi có ngôn ngữ mà array là bất biến, tại sao TypeScript lại làm cho array hiệp biến với cái giá là hy sinh sự an toàn của type? Đó là vì TypeScript thiết kế type system với mục tiêu cân bằng giữa tính đúng đắn (soundness) và tính tiện lợi. Nếu array là bất biến thì tính đúng đắn cao hơn, nhưng tính tiện lợi giảm đi.
 
-では、具体的にどのようなところで不便になるのか、見ていきましょう。込み入った話になるので、段階を踏んで説明していきます。
+Vậy cụ thể sẽ bất tiện ở đâu, hãy xem xét. Vì đây là vấn đề phức tạp, sẽ giải thích từng bước.
 
-まず、共変とは、ある型とその部分型が代入できることです。たとえば、`number`型は、ユニオン型の`number | null`型の部分型です。これを配列にした`number[]`型は、`(number | null)[]`型の部分型ということになります。
+Đầu tiên, hiệp biến nghĩa là có thể gán một kiểu và subtype của nó. Ví dụ, kiểu `number` là subtype của union type `number | null`. Khi biến thành array, kiểu `number[]` là subtype của kiểu `(number | null)[]`.
 
-TypeScriptの配列の型は、共変です。したがって、`number[]`型は`(number | null)[]`型に代入できます。もし、TypeScriptの配列の型が非変なら、`(number | null)[]`型に代入できるのは、それ自身になります。`number[]`は`(number | null)[]`に代入できないことになります。
+Kiểu array của TypeScript là hiệp biến. Do đó, kiểu `number[]` có thể gán cho kiểu `(number | null)[]`. Nếu kiểu array của TypeScript là bất biến, thì chỉ có thể gán chính kiểu đó cho `(number | null)[]`. `number[]` sẽ không thể gán cho `(number | null)[]`.
 
-ここまでのことを整理すると次のようになります。
+Tổng hợp những điều trên như sau:
 
-- `number`は`number | null`の部分型
-- `number[]`は`(number | null)[]`の部分型
-- 共変なら、`(number | null)[]`に`number[]`が代入できる
-- 非変なら、`(number | null)[]`に`number[]`は代入できない
+- `number` là subtype của `number | null`
+- `number[]` là subtype của `(number | null)[]`
+- Nếu hiệp biến, có thể gán `number[]` cho `(number | null)[]`
+- Nếu bất biến, không thể gán `number[]` cho `(number | null)[]`
 
-次に、ここで話を変えて、次のような関数を考えてみます。
+Tiếp theo, thay đổi chủ đề, xem xét function như sau.
 
 ```ts twoslash
 function sum(values: (number | null)[]): number {
@@ -137,7 +137,7 @@ function sum(values: (number | null)[]): number {
 }
 ```
 
-この`sum`関数は、`(number | null)[]`、つまり数値とヌルが混在しうる配列を受け取り、数値だけピックアップして、その合計値を返す関数です。関数の引数に代入する場合も、TypeScriptの配列は共変です。共変なので、次のような`number[]`型の値を代入できます。
+Function `sum` này nhận `(number | null)[]` - tức array có thể chứa cả number và null, pick ra chỉ các number và trả về tổng. Khi gán cho argument của function, array của TypeScript cũng là hiệp biến. Vì hiệp biến nên có thể gán giá trị kiểu `number[]` như sau.
 
 ```ts twoslash
 declare function sum(values: (number | null)[]): number;
@@ -146,16 +146,16 @@ const values: number[] = [1, 2, 3];
 sum(values);
 ```
 
-もしも、TypeScriptの配列が非変だと、上のようなコードはコンパイルエラーになるでしょう。`sum`関数は、引数に`(number | null)[]`を期待していますが、`number[]`を渡しているからです。そして、そのようなコンパイルエラーを回避しようとしたら、次のような余計な型アサーションを加えたりしないとなりません。
+Nếu array của TypeScript là bất biến, code như trên sẽ gây compile error. Vì function `sum` expect `(number | null)[]` cho argument, nhưng lại truyền `number[]`. Và để tránh compile error đó, phải thêm type assertion thừa như sau.
 
 ```ts twoslash
 declare function sum(values: (number | null)[]): number;
 declare const values: number[];
 // ---cut---
 sum(values as (number | null)[]);
-//         ^^^^^^^^^^^^^^^^^型アサーション
+//         ^^^^^^^^^^^^^^^^^type assertion
 ```
 
-こうしたことが随所で起きると、書くのも読むのも不便になります。したがって、TypeScriptでは型の完璧さよりも、利便性を優先しているものと考えられます。
+Nếu điều này xảy ra ở nhiều nơi, việc viết và đọc đều bất tiện. Do đó, có thể thấy TypeScript ưu tiên tính tiện lợi hơn là sự hoàn hảo của type.
 
-また、TypeScriptはJavaScriptに型を追加した言語で、根底にはJavaScriptがあります。JavaScriptからTypeScriptに移行するコードもあると思いますが、配列が非変であることを前提に書かれたJavaScriptコードは少ないと思われます。そうした状況もあって、共変を許した可能性もあります。
+Ngoài ra, TypeScript là ngôn ngữ thêm type vào JavaScript, với JavaScript làm nền tảng. Có thể có code migrate từ JavaScript sang TypeScript, nhưng code JavaScript được viết với giả định array là bất biến có lẽ rất ít. Trong tình huống đó, có thể TypeScript đã cho phép hiệp biến.

@@ -38,10 +38,11 @@ const config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-        googleAnalytics: {
-          trackingID: "UA-43572771-14",
-          anonymizeIP: true,
-        },
+        // Google Analytics tắt cho bản dịch tiếng Việt
+        // googleAnalytics: {
+        //   trackingID: "UA-43572771-14",
+        //   anonymizeIP: true,
+        // },
       }),
     ],
     [
@@ -83,8 +84,14 @@ const config = {
             items: [
               { label: "Chương 1: Giới thiệu", to: "/" },
               { label: "Chương 2: Tổng quan TypeScript", to: "/overview" },
-              { label: "Chương 3: Học TypeScript qua thực hành", to: "/tutorials" },
-              { label: "Chương 4: Học TypeScript qua tài liệu", to: "/reference" },
+              {
+                label: "Chương 3: Học TypeScript qua thực hành",
+                to: "/tutorials",
+              },
+              {
+                label: "Chương 4: Học TypeScript qua tài liệu",
+                to: "/reference",
+              },
               { label: "Chương 5: Tips", to: "/tips" },
             ],
           },

@@ -129,16 +129,16 @@ type Failure = { type: "Failure"; error: Error };
 // ---cut---
 function printStatus(status: UploadStatus) {
   if (status.type === "InProgress") {
-    console.log(`Đang upload: ${status.progress}%`);
-    //                          ^?
+    console.log(`Uploading: ${status.progress}%`);
+    //                        ^?
   } else if (status.type === "Success") {
-    console.log("Upload thành công", status);
-    //                           ^?
+    console.log("Upload success", status);
+    //                            ^?
   } else if (status.type === "Failure") {
-    console.log(`Upload thất bại: ${status.error.message}`);
-    //                           ^?
+    console.log(`Upload failed: ${status.error.message}`);
+    //                            ^?
   } else {
-    console.log("Trạng thái không hợp lệ: ", status);
+    console.log("Invalid status: ", status);
   }
 }
 ```

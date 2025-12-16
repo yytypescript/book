@@ -1,10 +1,10 @@
 ---
-sidebar_label: 戻り値がない関数とvoid型
+sidebar_label: Hàm không có return value và kiểu void
 ---
 
-# 戻り値がない関数とvoid型 (void type)
+# Hàm không có return value và kiểu void (void type)
 
-TypeScriptで戻り値がない関数の戻り値を型注釈するにはvoid型を用います。void型は関数の戻り値を型注釈するためにある特別な型です。
+Trong TypeScript, để type annotation cho return value của hàm không có return value, sử dụng kiểu void. Kiểu void là kiểu đặc biệt dùng để type annotation cho return value của hàm.
 
 ```ts twoslash
 function print(message: string): void {
@@ -12,42 +12,42 @@ function print(message: string): void {
 }
 ```
 
-JavaScriptでは、戻り値がない関数を呼び出したとき、その関数から返る値は`undefined`です。
+Trong JavaScript, khi gọi hàm không có return value, giá trị trả về từ hàm đó là `undefined`.
 
 ```ts twoslash
 function fn() {
-  // 戻り値のない関数
+  // Hàm không có return value
 }
 const result = fn();
 console.log(result);
 // @log: undefined
 ```
 
-しかし、TypeScriptでは、このような戻り値がない関数の戻り値の型注釈には`void`を用いるのが一般的です。
+Tuy nhiên, trong TypeScript, đối với hàm không có return value như vậy, thường dùng `void` cho type annotation của return value.
 
 ```ts twoslash
 function fn(): void {
-  // 戻り値のない関数
+  // Hàm không có return value
 }
 ```
 
-## undefined型とvoid型の違い
+## Sự khác biệt giữa kiểu undefined và kiểu void
 
-void型の代わりに、undefined型を関数の戻り値の型注釈に用いる書き方もできます。ただし、これは一般的な書き方ではありません。
+Thay vì kiểu void, cũng có thể dùng kiểu undefined cho type annotation của return value của hàm. Tuy nhiên, đây không phải là cách viết phổ biến.
 
-### undefined型を用いるべきときとそうでないとき
+### Khi nào nên dùng kiểu undefined và khi nào không
 
-戻り値型に`undefined`型を注釈することもできます。型の扱いとしては`void`との違いはありません。しがって、次のコードはコンパイルエラーになりません。
+Cũng có thể annotation kiểu `undefined` cho return type. Về mặt xử lý kiểu thì không có khác biệt với `void`. Do đó, code sau không gây compile error.
 
 ```ts twoslash
 function fn(): undefined {
-  // 戻り値のない関数
+  // Hàm không có return value
 }
 ```
 
-しかし、戻り値がない関数を意図している場合は、`void`を使うほうが自然です。
+Tuy nhiên, nếu ý định là hàm không có return value, dùng `void` sẽ tự nhiên hơn.
 
-一方で戻り値が`undefined`を含みうる関数の場合は、undefined型を含んだユニオン型を使うのが一般的です。
+Mặt khác, với hàm có return value có thể chứa `undefined`, thường dùng union type có chứa kiểu undefined.
 
 ```ts twoslash
 function getIfExists(numbers: number[], search: number): number | undefined {
@@ -58,17 +58,17 @@ function getIfExists(numbers: number[], search: number): number | undefined {
 }
 ```
 
-### voidはundefinedの上位型
+### void là supertype của undefined
 
-void型は関数戻り値の型注釈にだけ使うのが普通です。変数の型注釈に使うことはまずありません。しかし、もしも変数の型注釈にvoid型を使った場合、voidとundefinedは異なる型になります。undefined型はvoid型に代入できる一方、void型はundefined型に代入できません。これを一言でいうと、voidはundefinedの上位型(supertype)ということになります。
+Kiểu void thường chỉ dùng cho type annotation của return value của hàm. Hầu như không dùng cho type annotation của biến. Tuy nhiên, nếu dùng kiểu void cho type annotation của biến, void và undefined là các kiểu khác nhau. Kiểu undefined có thể gán cho kiểu void, nhưng kiểu void không thể gán cho kiểu undefined. Nói ngắn gọn, void là supertype của undefined.
 
 ```ts twoslash
 // @errors: 2322
-const v: void = undefined; // undefined型はvoid型に代入できる
-const u: undefined = v; // void型はundefined型に代入できない
+const v: void = undefined; // Kiểu undefined có thể gán cho kiểu void
+const u: undefined = v; // Kiểu void không thể gán cho kiểu undefined
 ```
 
-この特徴は、関数の誤用に気づくきっかけを与えてくれます。たとえば、次の2つの関数を考えてみましょう。どちらも戻り値なしを意図した関数です。処理内容も同じです。違いは、`f1`は型注釈が`void`ですが、`f2`は`undefined`です。
+Đặc điểm này giúp phát hiện việc sử dụng sai hàm. Ví dụ, xem xét hai hàm sau. Cả hai đều là hàm có ý định không có return value. Nội dung xử lý cũng giống nhau. Điểm khác biệt là `f1` có type annotation là `void`, còn `f2` là `undefined`.
 
 ```ts twoslash
 function f1(): void {}
@@ -77,7 +77,7 @@ function f2(): undefined {
 }
 ```
 
-これらの関数を呼び出すとき、戻り値を受け取るように書けるものの、これら関数の使い方としては正しくないでしょう。次のコードは、戻り値を変数に代入しようとしています。これは誤ったコードです。
+Khi gọi các hàm này, có thể viết code nhận return value, nhưng đây không phải cách sử dụng đúng của các hàm này. Code sau đang cố gán return value vào biến. Đây là code sai.
 
 ```ts twoslash
 // @noErrors
@@ -87,11 +87,11 @@ function f2(): undefined {
 }
 // ---cut---
 let mayBeNumber: number | undefined;
-mayBeNumber = f1(); // 誤った関数の使い方
-mayBeNumber = f2(); // 誤った関数の使い方
+mayBeNumber = f1(); // Cách sử dụng hàm sai
+mayBeNumber = f2(); // Cách sử dụng hàm sai
 ```
 
-このとき、型注釈が`void`の`f1`の呼び出し部分はコンパイルエラーとなります。これにより、誤りに気づきやすくなります。
+Lúc này, phần gọi `f1` có type annotation là `void` sẽ gây compile error. Nhờ đó dễ nhận ra lỗi hơn.
 
 ```ts twoslash
 // @errors: 2322
@@ -101,8 +101,8 @@ function f2(): undefined {
 }
 // ---cut---
 let mayBeNumber: number | undefined;
-mayBeNumber = f1(); // コンパイルで誤りに気づける
-mayBeNumber = f2(); // コンパイルでは誤りに気づけない
+mayBeNumber = f1(); // Có thể nhận ra lỗi qua compile
+mayBeNumber = f2(); // Không thể nhận ra lỗi qua compile
 ```
 
-このような観点からも、戻り値がない関数を宣言するときは`void`を使ったほうがよいわけです。
+Từ quan điểm này, khi khai báo hàm không có return value nên dùng `void`.
