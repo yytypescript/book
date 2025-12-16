@@ -1,14 +1,14 @@
 ---
-description: 執筆者向けのドキュメントです。
+description: Tài liệu dành cho người đóng góp.
 slug: /writing
 ---
 
-# README
+# Hướng dẫn đóng góp
 
 [CONTRIBUTING](contributing.md)
 
-[はじめて執筆する方へ](getting-started.md)
+[Hướng dẫn cho người mới bắt đầu](getting-started.md)
 
-[執筆の流れ](how-to-change.md)
+[Quy trình từ cài đặt đến Pull Request](how-to-change.md)
 
 [PDR](/writing/pdr)

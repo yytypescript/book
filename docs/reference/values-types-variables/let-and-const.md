@@ -14,14 +14,14 @@ let x = 1;
 
 ```ts twoslash
 let x = 1;
-x = 2; // 再代入ができる
+x = 2; // Có thể gán lại
 ```
 
 `let` có thể định nghĩa biến không có giá trị khởi tạo. Giá trị của biến không có giá trị khởi tạo là `undefined`.
 
 ```js twoslash
-let x; // 初期値なし
-x = 1; // 後で代入
+let x; // Không có giá trị khởi tạo
+x = 1; // Gán sau
 ```
 
 ## Khai báo biến với const
@@ -61,27 +61,27 @@ Ví dụ, khi khai báo object bằng const, không thể gán lại cho bản t
 ```ts twoslash
 // @errors: 2588
 const obj = { a: 1 };
-obj = { a: 2 }; // 再代入は不可
-obj.a = 2; // プロパティの変更はできる
+obj = { a: 2 }; // Không thể gán lại
+obj.a = 2; // Có thể thay đổi property
 ```
 
 Để làm object immutable trong TypeScript, cần đặt property thành read-only.
 
-[readonlyプロパティ](./object/readonly-property.md)
+[readonly property](./object/readonly-property.md)
 
 Array cũng là một loại object nên tương tự. Không thể gán lại cho bản thân biến. Tuy nhiên có thể thay đổi element của array.
 
 ```ts twoslash
 // @errors: 2588
 const arr = [1, 2];
-arr = [3, 4]; // 再代入は不可
-arr.push(3); // 要素の変更はできる
+arr = [3, 4]; // Không thể gán lại
+arr.push(3); // Có thể thay đổi element
 ```
 
 Để làm array immutable trong TypeScript cần dùng read-only array.
 
-[読み取り専用配列](./array/readonly-array.md)
+[Read-only array](./array/readonly-array.md)
 
 Cũng có phương pháp làm object hoặc array immutable bằng const assertion.
 
-[constアサーション](./const-assertion.md)
+[const assertion](./const-assertion.md)

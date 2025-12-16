@@ -1,14 +1,14 @@
 ---
-sidebar_label: 読み取り専用の配列
+sidebar_label: Read-only array
 ---
 
-# 読み取り専用の配列 (readonly array)
+# Read-only array
 
-TypeScriptでは配列を読み取り専用(readonly)として型注釈できます。型注釈の方法は2通りあります。1つ目は`readonly`キーワードを使う方法です。2つ目は`ReadonlyArray<T>`を使う方法です。
+Trong TypeScript, có thể type annotation cho array là read-only (readonly). Có 2 cách type annotation. Cách thứ nhất là sử dụng từ khóa `readonly`. Cách thứ hai là sử dụng `ReadonlyArray<T>`.
 
 ## readonly T\[]
 
-配列の型注釈`T[]`の前に`readonly`キーワードを添えると、読み取り専用の配列型にできます。たとえば、`readonly number[]`と書くと、その変数の型はnumberの読み取り専用配列型になります。
+Thêm từ khóa `readonly` trước type annotation `T[]` của array sẽ tạo thành kiểu read-only array. Ví dụ, viết `readonly number[]` thì kiểu của biến đó trở thành read-only array của number.
 
 ```ts twoslash
 const nums: readonly number[] = [1, 2, 3];
@@ -16,19 +16,19 @@ const nums: readonly number[] = [1, 2, 3];
 
 ## ReadonlyArray&lt;T>
 
-`ReadonlyArray<T>`のような書き方でも読み取り専用の配列型になります。たとえば、要素がnumber型の配列を読み取り専用にしたい場合、`ReadonlyArray<number>`と書きます。
+Cũng có thể viết dạng `ReadonlyArray<T>` để tạo kiểu read-only array. Ví dụ, nếu muốn array có phần tử kiểu number thành read-only, viết `ReadonlyArray<number>`.
 
 ```ts twoslash
 const nums: ReadonlyArray<number> = [1, 2, 3];
 ```
 
-## readonly T\[]とReadonlyArray&lt;T>の違い
+## Sự khác biệt giữa readonly T\[] và ReadonlyArray&lt;T>
 
-`readonly T[]`と`ReadonlyArray<T>`の違いは書き方以外にありません。どちらを使うかは書き手の好みです。開発チームとしてはどちらの書き方にするかは統一しておいたほうがよいでしょう。
+Không có sự khác biệt nào giữa `readonly T[]` và `ReadonlyArray<T>` ngoài cách viết. Chọn cách nào tùy thuộc vào sở thích người viết. Trong team phát triển nên thống nhất sử dụng một cách viết.
 
-## 読み取り専用配列の特徴
+## Đặc điểm của read-only array
 
-読み取り専用の配列には、配列に対して破壊的操作をする`push`メソッドや`pop`メソッドが、**コンパイル時には無いことに**なります。したがって、`readonly number[]`型の変数`nums`に対して、`nums.push(4)`をするコードはコンパイルエラーになります。
+Với read-only array, các method thực hiện thao tác phá hủy (destructive operation) như `push` và `pop` **sẽ không tồn tại tại thời điểm compile**. Do đó, code gọi `nums.push(4)` trên biến `nums` kiểu `readonly number[]` sẽ báo compile error.
 
 ```ts twoslash
 // @errors: 2339
@@ -36,7 +36,7 @@ const nums: readonly number[] = [1, 2, 3];
 nums.push(4);
 ```
 
-これは、破壊的操作系のメソッドを呼び出そうとするコードがTypeScriptコンパイラーに警告されるだけです。配列オブジェクトから`push`メソッドを削除しているわけではありません。なので、JavaScript実行時には`push`メソッドが残っている状態になります。
+Điều này chỉ có nghĩa là TypeScript compiler sẽ cảnh báo code cố gắng gọi các method thao tác phá hủy. Không phải là method `push` bị xóa khỏi array object. Do đó, khi chạy JavaScript, method `push` vẫn còn.
 
 ```ts twoslash
 const nums: readonly number[] = [1, 2, 3];
@@ -44,19 +44,19 @@ console.log("push" in nums);
 // @log: true
 ```
 
-メソッドは削除されるわけではないので、コンパイルエラーを無視して実行してみると、読み取り専用型でも配列を書き換えることはできます。
+Vì method không bị xóa, nếu bỏ qua compile error và thực thi, vẫn có thể thay đổi array dù là kiểu read-only.
 
 ```ts twoslash
 const nums: readonly number[] = [1, 2, 3];
 // @ts-ignore
-nums.push(4); // 本来コンパイルエラーになるが無視する
+nums.push(4); // Bỏ qua compile error
 console.log(nums);
 // @log: [1, 2, 3, 4]
 ```
 
-## 読み取り専用配列を配列に代入する
+## Gán read-only array cho array thông thường
 
-TypeScriptの読み取り専用配列を普通の配列に代入することはできません。代入しようとするとコンパイルエラーになります。
+Không thể gán read-only array của TypeScript cho array thông thường. Cố gắng gán sẽ báo compile error.
 
 ```ts twoslash
 // @errors: 4104
@@ -64,24 +64,24 @@ const readonlyNumbers: readonly number[] = [1, 2, 3];
 const writableNumbers: number[] = readonlyNumbers;
 ```
 
-これは、普通の配列は`push`や`pop`などのメソッドが必要なのに、読み取り専用配列にはそれが無いことになっているためです。どうしても読み取り専用配列を普通の配列に代入したいときは、型アサーション(type assertion)を使う方法があります。
+Điều này là do array thông thường cần các method như `push` và `pop`, nhưng read-only array được coi là không có chúng. Nếu thực sự muốn gán read-only array cho array thông thường, có thể sử dụng type assertion.
 
 ```ts twoslash
 const readonlyNumbers: readonly number[] = [1, 2, 3];
 const writableNumbers: number[] = readonlyNumbers as number[];
-//                                                ^^^^^^^^^^^ 型アサーション
+//                                                ^^^^^^^^^^^ Type assertion
 ```
 
-[型アサーション「as」(type assertion)](../type-assertion-as.md)
+[Type assertion「as」](../type-assertion-as.md)
 
-逆のパターンとして、普通の配列を読み取り専用配列に代入することは可能です。
+Ngược lại, có thể gán array thông thường cho read-only array.
 
-## 関連情報
+## Thông tin liên quan
 
-[配列の破壊的操作](array-operations.md)
+[Thao tác phá hủy của array](array-operations.md)
 
-[オブジェクト型のreadonlyプロパティ (readonly property)](../object/readonly-property.md)
+[Readonly property của object type](../object/readonly-property.md)
 
 [Readonly&lt;T>](../../type-reuse/utility-types/readonly.md)
 
-[constアサーション](./../const-assertion.md)
+[const assertion](./../const-assertion.md)

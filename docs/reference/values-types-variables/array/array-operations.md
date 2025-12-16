@@ -1,10 +1,10 @@
-# 配列の破壊的操作
+# Thao tác phá hủy của array
 
-JavaScriptの配列メソッドには、破壊的なメソッドと非破壊的なメソッドの2種類があります。特に、破壊的なメソッドは注意深く使う必要があります。
+Các method của array trong JavaScript có 2 loại: method phá hủy (destructive) và method không phá hủy (non-destructive). Đặc biệt, cần sử dụng cẩn thận các method phá hủy.
 
-## 非破壊的なメソッド
+## Method không phá hủy
 
-**非**破壊的なメソッドは、操作に配列の変更をともなわないメソッドです。たとえば、`concat`は非破壊的なメソッドです。これは複数の配列を結合するメソッドです。もとの配列は書き換えず、新しい配列を返します。
+Method **không** phá hủy là method không thay đổi array. Ví dụ, `concat` là method không phá hủy. Đây là method nối nhiều array. Nó không thay đổi array gốc mà trả về array mới.
 
 ```ts twoslash
 const nums1 = [1, 2];
@@ -18,36 +18,36 @@ console.log(all);
 // @log: [ 1, 2, 3, 4 ]
 ```
 
-## 非破壊的なメソッドの一覧
+## Danh sách method không phá hủy
 
-非破壊的なメソッドには次のものがあります。
+Các method không phá hủy bao gồm:
 
-| メソッド                                                                                                       | 操作                                                                                           |
-| -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| [concat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)           | 2つ以上の配列を結合した配列を返す                                                              |
-| [find](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/find)               | 提供されたテスト関数を満たす配列内の最初の要素を返す                                           |
-| [findIndex](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)     | 配列内の指定されたテスト関数を満たす最初の要素の位置を返す                                     |
-| [lastIndexOf](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf) | 配列中で与えられた要素が見つかった最後のインデックスを返す                                     |
-| [slice](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)             | 配列の一部を切り出して返す                                                                     |
-| [includes](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)       | 配列に任意の要素が含まれているかを`true`か`false`で返す                                        |
-| [indexOf](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)         | 引数に与えられた内容と同じ内容を持つ最初の配列要素のインデックスを返す                         |
-| [join](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/join)               | 全要素を連結した文字列を返す                                                                   |
-| [keys](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)               | 配列のインデックスをArray Iteratorオブジェクトで返す                                           |
-| [entries](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)         | 配列のインデックスと値のペアをArray Iteratorオブジェクトで返す                                 |
-| [values](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/values)           | 配列の値をArray Iteratorオブジェクトで返す                                                     |
-| [forEach](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)         | 与えられた関数を、配列の各要素に対して一度ずつ実行する                                         |
-| [filter](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)           | 与えられた関数によって実装されたテストに合格したすべての配列からなる新しい配列を返す           |
-| [flat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)               | すべてのサブ配列の要素を指定した深さで再帰的に結合した新しい配列を返す                         |
-| [flatMap](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap)         | 最初にマッピング関数を使用してそれぞれの要素をマップした後、結果を新しい配列内にフラット化する |
-| [map](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/map)                 | 与えられた関数を配列のすべての要素に対して呼び出し、その結果からなる新しい配列を返す           |
-| [every](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/every)             | 列内のすべての要素が指定された関数で実装されたテストに合格するかどうかをテストする             |
-| [some](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/some)               | 配列の少なくともひとつの要素が、指定された関数で実装されたテストに合格するかどうかをテストする |
-| [reduce](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)           | 配列のそれぞれの要素に対してユーザーが提供した「縮小」コールバック関数を呼び出す               |
-| [reduceRight](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight) | アキュームレーターと配列のそれぞれの値に対して (右から左へ) 関数を適用して、単一の値にする     |
+| Method                                                                                                            | Thao tác                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)           | Trả về array kết hợp từ 2 array trở lên                                                        |
+| [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find)               | Trả về phần tử đầu tiên trong array thỏa mãn hàm test                                          |
+| [findIndex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)     | Trả về vị trí của phần tử đầu tiên trong array thỏa mãn hàm test                               |
+| [lastIndexOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf) | Trả về index cuối cùng tìm thấy phần tử cho trước trong array                                  |
+| [slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)             | Cắt và trả về một phần của array                                                               |
+| [includes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)       | Trả về `true` hoặc `false` tùy thuộc array có chứa phần tử cho trước hay không                 |
+| [indexOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)         | Trả về index của phần tử đầu tiên có nội dung giống argument                                   |
+| [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)               | Trả về string nối tất cả phần tử                                                               |
+| [keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)               | Trả về các index của array dưới dạng Array Iterator object                                     |
+| [entries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)         | Trả về cặp index và value của array dưới dạng Array Iterator object                            |
+| [values](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/values)           | Trả về các value của array dưới dạng Array Iterator object                                     |
+| [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)         | Thực thi hàm cho trước một lần cho mỗi phần tử của array                                       |
+| [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)           | Trả về array mới gồm tất cả phần tử pass test được implement bởi hàm cho trước                 |
+| [flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)               | Trả về array mới với tất cả phần tử sub-array được nối đệ quy theo độ sâu chỉ định             |
+| [flatMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap)         | Map từng phần tử bằng mapping function rồi flatten kết quả vào array mới                       |
+| [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)                 | Gọi hàm cho trước với tất cả phần tử của array và trả về array mới từ kết quả                  |
+| [every](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)             | Test xem tất cả phần tử trong array có pass test được implement bởi hàm chỉ định hay không     |
+| [some](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)               | Test xem ít nhất một phần tử của array có pass test được implement bởi hàm chỉ định hay không  |
+| [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)           | Gọi callback function "reduce" do user cung cấp cho từng phần tử của array                     |
+| [reduceRight](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight) | Áp dụng hàm cho accumulator và từng value của array (từ phải sang trái) để tạo thành một value |
 
-## 破壊的なメソッド
+## Method phá hủy
 
-破壊的なメソッドは、配列の内容や配列の要素の順番を変更する操作をともなうメソッドです。たとえば、`push`は破壊的メソッドの1つです。これは、配列末尾に要素を追加します。
+Method phá hủy là method thay đổi nội dung hoặc thứ tự phần tử của array. Ví dụ, `push` là một trong các method phá hủy. Nó thêm phần tử vào cuối array.
 
 ```ts twoslash
 const nums = [1, 2];
@@ -56,25 +56,25 @@ console.log(nums);
 // @log: [ 1, 2, 3 ]
 ```
 
-## 破壊的なメソッドの一覧
+## Danh sách method phá hủy
 
-破壊的なメソッドには次のものがあります。
+Các method phá hủy bao gồm:
 
-| メソッド                                                                                                     | 操作                                                                                   |
-| ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
-| [push](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/push)             | 配列の末尾に要素を追加する                                                             |
-| [unshift](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)       | 配列の最初に要素を追加する                                                             |
-| [pop](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)               | 配列から最後の要素を取り除き、その要素を返す                                           |
-| [shift](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/shift)           | 配列から最初の要素を取り除き、その要素を返す                                           |
-| [splice](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)         | 要素を取り除いたり、置き換えたり、新しい要素を追加する                                 |
-| [sort](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)             | 配列の要素をソートする                                                                 |
-| [reverse](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)       | 配列の要素を逆順に並び替える                                                           |
-| [fill](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)             | 開始インデックスから終了インデックスまでのすべての要素を、静的な値に変更した配列を返す |
-| [copyWithin](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin) | サイズを変更せずに、配列の一部を同じ配列内の別の場所にシャローコピーして返す           |
+| Method                                                                                                          | Thao tác                                                                                 |
+| --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)             | Thêm phần tử vào cuối array                                                              |
+| [unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)       | Thêm phần tử vào đầu array                                                               |
+| [pop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)               | Xóa phần tử cuối cùng của array và trả về phần tử đó                                     |
+| [shift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift)           | Xóa phần tử đầu tiên của array và trả về phần tử đó                                      |
+| [splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)         | Xóa, thay thế hoặc thêm phần tử mới                                                      |
+| [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)             | Sắp xếp các phần tử của array                                                            |
+| [reverse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)       | Đảo ngược thứ tự các phần tử của array                                                   |
+| [fill](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)             | Thay đổi tất cả phần tử từ index bắt đầu đến index kết thúc thành một giá trị cố định    |
+| [copyWithin](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin) | Shallow copy một phần của array sang vị trí khác trong cùng array mà không thay đổi size |
 
-## 特に要注意な破壊的なメソッド
+## Method phá hủy cần đặc biệt chú ý
 
-`reverse`メソッドは配列を逆順にした配列を返します。戻り値があるので、一見すると**非**破壊なメソッドに見えなくもありません。しかし、このメソッドは配列の順番も逆にしてしまうので注意が必要です。
+Method `reverse` trả về array đã đảo ngược. Vì có giá trị trả về nên nhìn qua có vẻ là method **không** phá hủy. Tuy nhiên, cần chú ý vì method này cũng đảo ngược thứ tự của array gốc.
 
 ```ts twoslash
 const nums = [1, 2, 3];
@@ -85,9 +85,9 @@ console.log(newNums);
 // @log: [ 3, 2, 1 ]
 ```
 
-PHPの`array_reverse`関数はJavaScriptの`reverse`メソッドと名前が同じですが、PHPのほうは**非**破壊的な操作です。もとの配列を変更せずに逆順にソートされた配列を新しく生成して返します。
+Hàm `array_reverse` của PHP có tên giống với method `reverse` của JavaScript, nhưng phía PHP là thao tác **không** phá hủy. Nó tạo và trả về array mới được sắp xếp ngược mà không thay đổi array gốc.
 
-```php title="PHPのarray_reverse"
+```php title="array_reverse của PHP"
 $nums = [1, 2, 3];
 $reversedNums = array_reverse($nums);
 var_dump($nums);
@@ -96,27 +96,27 @@ var_dump($reversedNums);
 //=> [3, 2, 1]
 ```
 
-このように、他の言語では非破壊的な配列操作がJavaScriptでは破壊的操作の場合もあります。メソッド名だけで破壊的か非破壊的かを判断せず、各メソッドの使い方をしっかり確認する必要があります。
+Như vậy, có những thao tác array không phá hủy ở ngôn ngữ khác nhưng lại là thao tác phá hủy trong JavaScript. Không nên chỉ dựa vào tên method để phán đoán là phá hủy hay không phá hủy, cần xác nhận cách sử dụng của từng method.
 
-## 破壊的なメソッドを安全に使う方法
+## Cách sử dụng an toàn method phá hủy
 
-破壊的なメソッドを**非**破壊的に使うには、破壊的操作を行う前に、配列を別の配列にコピーします。配列のコピーはスプレッド構文`...`を用います。
+Để sử dụng method phá hủy một cách **không** phá hủy, hãy copy array sang array khác trước khi thực hiện thao tác phá hủy. Sử dụng spread syntax `...` để copy array.
 
-[スプレッド構文](./spread-syntax-for-array.md)
+[Spread syntax](./spread-syntax-for-array.md)
 
-コピーした配列に対して破壊的操作を行えば、もとの配列が変更される心配が無くなります。
+Nếu thực hiện thao tác phá hủy trên array đã copy, không cần lo lắng array gốc bị thay đổi.
 
 ```ts twoslash
 const original = [1, 2, 3];
-const copy = [...original]; // コピーを作る
+const copy = [...original]; // Tạo bản copy
 copy.reverse();
-console.log(original); // 破壊的操作の影響がない
+console.log(original); // Không bị ảnh hưởng bởi thao tác phá hủy
 // @log: [ 1, 2, 3 ]
 console.log(copy);
 // @log: [ 3, 2, 1 ]
 ```
 
-この`reverse`の例は、コピーと破壊的なメソッドの呼び出しを1行に短縮して書くこともできます。
+Ví dụ `reverse` này có thể viết gọn việc copy và gọi method phá hủy trên 1 dòng.
 
 ```ts twoslash {2}
 const original = [1, 2, 3];
@@ -129,10 +129,10 @@ console.log(reversed);
 
 <PostILearned>
 
-・JavaScriptの配列メソッドには、破壊的なものと非破壊的なものがある
-・破壊的なものは、配列に変更を加える
-・非破壊的なものは、配列に変更を加えない
-・非破壊に思えるメソッドが実は破壊的なこともあるから要注意
-・配列をコピーしてから破壊的操作をすると安全
+・Các method của array trong JavaScript có loại phá hủy và không phá hủy
+・Loại phá hủy thay đổi array
+・Loại không phá hủy không thay đổi array
+・Cần chú ý vì có method tưởng không phá hủy nhưng thực tế là phá hủy
+・Copy array trước rồi thực hiện thao tác phá hủy sẽ an toàn
 
 </PostILearned>

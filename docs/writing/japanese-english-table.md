@@ -1,51 +1,34 @@
-# 日英対訳表
+# Bảng thuật ngữ Anh-Việt
 
-本書では専門用語を翻訳するにあたって、次の訳語を採用します。
+Trong bản dịch này, các thuật ngữ chuyên môn sẽ được giữ nguyên tiếng Anh để đảm bảo tính nhất quán với tài liệu gốc và dễ tra cứu. Dưới đây là danh sách các thuật ngữ thường gặp:
 
 <!--textlint-disable prh-->
 
-- Type assertion
-  - 型アサーション
-- Spread syntax
-  - スプレッド構文
-- Generic
-  - ジェネリクス
-- Template literal
-  - テンプレートリテラル
-- Optional parameters
-  - オプション引数
-- Default parameters
-  - デフォルト引数
-- Rest parameters
-  - 残余引数
-- Destructuring assignment
-  - 分割代入
-- Index signature
-  - インデックス型
-- Discriminated unions
-  - 判別可能なユニオン型
-- Nullish coalescing operator
-  - Null合体演算子
-- Type guard
-  - 型ガード
-- User defined type guard
-  - ユーザー定義の型ガード
-- Enum
-  - 列挙型
-- Polyfill
-  - ポリフィル
-- Mapped Types
-  - Mapped Types
-  - Deep Diveでは「マップ型」と訳している箇所もあるが、`Map<T, U>`との曖昧さが出てしまう恐れがあるので和訳はしない。
-- Definite assignment assertion
-  - 明確な割り当てアサーション
-- Declaration merging
-  - 宣言マージ
-- Assertion functions
-  - アーサーション関数
-- Type predicate
-  - 型述語
+| Thuật ngữ tiếng Anh           | Ghi chú                             |
+| ----------------------------- | ----------------------------------- |
+| Type assertion                | Khẳng định kiểu                     |
+| Spread syntax                 | Cú pháp spread                      |
+| Generic                       | Kiểu tổng quát                      |
+| Template literal              | Template literal                    |
+| Optional parameters           | Tham số tùy chọn                    |
+| Default parameters            | Tham số mặc định                    |
+| Rest parameters               | Tham số còn lại                     |
+| Destructuring assignment      | Gán phân rã                         |
+| Index signature               | Index signature                     |
+| Discriminated unions          | Union phân biệt                     |
+| Nullish coalescing operator   | Toán tử Nullish coalescing          |
+| Type guard                    | Type guard                          |
+| User defined type guard       | Type guard do người dùng định nghĩa |
+| Enum                          | Kiểu enum                           |
+| Polyfill                      | Polyfill                            |
+| Mapped Types                  | Mapped Types                        |
+| Definite assignment assertion | Khẳng định gán xác định             |
+| Declaration merging           | Gộp khai báo                        |
+| Assertion functions           | Assertion function                  |
+| Type predicate                | Type predicate                      |
 
 <!--textlint-enable prh-->
 
-## 日本語が不明
+:::note
+Trong bản dịch tiếng Việt, nhiều thuật ngữ được giữ nguyên tiếng Anh vì đây là các thuật ngữ phổ biến trong cộng đồng lập trình và việc dịch sang tiếng Việt có thể gây khó hiểu.
+:::

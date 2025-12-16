@@ -1,10 +1,10 @@
 ---
-sidebar_label: 数値列挙型
+sidebar_label: Numeric enum
 ---
 
-# 数値列挙型 (numeric enum)
+# Numeric enum
 
-TypeScriptの数値列挙型(numeric enum)はもっとも典型的な列挙型です。メンバーの値は上から順に`0`からの連番になります。
+Numeric enum trong TypeScript là loại enum điển hình nhất. Giá trị của các member được đánh số thứ tự từ `0` trở đi theo thứ tự từ trên xuống.
 
 ```ts twoslash
 enum Position {
@@ -15,7 +15,7 @@ enum Position {
 }
 ```
 
-メンバーは値を代入できます。値を代入した場合、それに続くメンバーは連番になります。
+Có thể gán giá trị cho member. Khi gán giá trị, các member tiếp theo sẽ được đánh số thứ tự tiếp nối.
 
 ```ts twoslash
 enum Position {

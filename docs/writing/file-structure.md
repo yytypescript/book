@@ -1,19 +1,19 @@
-# ファイル構成
+# Cấu trúc file
 
-どこにどのようなファイルがあるかを説明します。
+Trang này giải thích cấu trúc thư mục và các file trong repository.
 
-このリポジトリのファイル構成は次のようになっています。
+Cấu trúc file của repository như sau:
 
 ```tree
-├── .markdownlint.yaml ... markdownlintの設定
-├── .prettierrc ... prettierの設定
-├── .textlintrc ... textlintの設定
-├── docs/ ... ⭐️本書のコンテンツ(文書・画像)
-├── docusaurus.config.js ... Docusaurusの設定
-├── prh/ ... textlintのprhルールの定義
-├── sidebars.js ... ⭐️サイドバー(目次)の設定
-├── src/ ... Docusaurusを拡張するプログラムなど
-└── static/ ... Docusaurus用の静的ファイル
+├── .markdownlint.yaml ... Cấu hình markdownlint
+├── .prettierrc ... Cấu hình prettier
+├── .textlintrc ... Cấu hình textlint
+├── docs/ ... ⭐️ Nội dung sách (văn bản, hình ảnh)
+├── docusaurus.config.js ... Cấu hình Docusaurus
+├── prh/ ... Định nghĩa rule prh cho textlint
+├── sidebars.js ... ⭐️ Cấu hình sidebar (mục lục)
+├── src/ ... Các chương trình mở rộng Docusaurus
+└── static/ ... File tĩnh cho Docusaurus
 ```
 
-執筆者が変更を加える上で重要になるのは、`docs`ディレクトリと`sidebars.js`です。
+Đối với người đóng góp, hai phần quan trọng nhất là thư mục `docs` và file `sidebars.js`.

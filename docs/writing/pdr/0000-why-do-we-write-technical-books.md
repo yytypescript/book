@@ -1,27 +1,27 @@
-# 0000-なぜ私たちは技術書を書くのか？
+# 0000-Tại sao chúng tôi viết sách kỹ thuật?
 
-- ステータス: 採用
-- 決定者: reoring, suin, philomagi, kakiuchi
-- 更新日: 2019-12-13
+- Trạng thái: Áp dụng
+- Người quyết định: reoring, suin, philomagi, kakiuchi
+- Ngày cập nhật: 2019-12-13
 
-## 背景: なぜTypeScriptの技術書を書くのか？
+## Bối cảnh: Tại sao viết sách kỹ thuật TypeScript?
 
-TypeScriptコミュニティを盛り上げるには、今何をしたらもっともインパクトがあるのか？この疑問がTypeScriptの技術書を書きはじめる原点となる。
+Để phát triển cộng đồng TypeScript, điều gì sẽ có tác động lớn nhất? Câu hỏi này là khởi nguồn cho việc viết sách kỹ thuật TypeScript.
 
-reoring, suin, nouphetの3名は、2019年9月よりYYTypeScriptというイベントを主催してきた。YYTypeScriptは、プログラマーが集まってTypeScriptについての雑談をしながら、プログラマー同士の繋がりを築くことを主眼とした取り組みだ。TypeScriptコミュニティを盛り上げていきたいという考えのもと、このイベントが開催されてきた。さらに歴史をさかのぼると、YYTypeScriptの前進となるイベントに、YYPHPというイベントがあった。PHPerが集い雑談する交流会で、2年間に渡り100回開催された。
+Ba người reoring, suin, nouphet đã tổ chức sự kiện YYTypeScript từ tháng 9 năm 2019. YYTypeScript là nơi các lập trình viên tụ họp để trò chuyện về TypeScript và xây dựng mối quan hệ. Sự kiện được tổ chức với mong muốn phát triển cộng đồng TypeScript. Trước đó còn có sự kiện YYPHP - nơi giao lưu cho PHPer, được tổ chức 100 lần trong 2 năm.
 
-YYPHPとYYTypeScriptを主催して感じたことは、PHPと比べて**TypeScriptのコミュニティは規模が小さい**という点だ。いざYYTypeScriptをやってみると、参加者はすぐに顔見知りばかりになり、コミュニティ規模の差は参加者なら肌感覚で感じるところであろう。それも当然で、PHPと比べると、TypeScriptのほうが新興の言語であり、歴史が違う。YYPHPが成功したのは、成熟したコミュニティの上で開催されたことによることが大きい。状況に即した行動が実を結んだと言える。
+Điều nhận ra khi tổ chức YYPHP và YYTypeScript là **cộng đồng TypeScript còn nhỏ** so với PHP. Khi tổ chức YYTypeScript, người tham gia nhanh chóng trở thành những gương mặt quen thuộc. Điều này là tự nhiên vì TypeScript là ngôn ngữ mới hơn so với PHP. YYPHP thành công vì được tổ chức trên nền tảng cộng đồng đã trưởng thành.
 
-では、TypeScriptにおける「状況に即した行動」は何なのだろうか？TypeScriptコミュニティは急激な成長段階にあり、TypeScriptの人気は衰えを知らない。今後、TypeScriptを使い出すプログラマーも増加することが予想される。**今やるべきは、将来的にTypeScriptプログラマーを増やし、彼らをサポートすること**だ。もちろん、YYTypeScriptのような交流会にも大きな意義があると考えられるが、それはコミュニティがもっと大きくなったときに大きな効果を発揮する。
+Vậy "hành động phù hợp với tình hình" đối với TypeScript là gì? Cộng đồng TypeScript đang trong giai đoạn tăng trưởng nhanh chóng và độ phổ biến của TypeScript không ngừng tăng. Dự kiến sẽ có nhiều lập trình viên bắt đầu sử dụng TypeScript trong tương lai. **Điều cần làm bây giờ là tăng số lượng lập trình viên TypeScript và hỗ trợ họ**. Tất nhiên, các sự kiện giao lưu như YYTypeScript cũng có ý nghĩa lớn, nhưng chúng sẽ phát huy hiệu quả khi cộng đồng lớn hơn.
 
-今我々がすべき、インパクトを最大化する行動は、TypeScriptの技術書を書くことだ。執筆はコミュニティが成長途上であるタイミングだからこそ、やる意義が大きい。日本語で書かれたTypeScriptの技術書は、片手で数えるほどしかない。そんな中、新たに書を送り出すことの価値は計り知れない。我々の執筆活動は、TypeScriptを学ぼうとする個々のプログラマーを助けるだけでなく、引いてはコミュニティを伸ばす大きな原動力のひとつになると確信している。
+Hành động để tối đa hóa tác động bây giờ là viết sách kỹ thuật TypeScript. Viết sách có ý nghĩa lớn đặc biệt trong giai đoạn cộng đồng đang phát triển. Số lượng sách kỹ thuật TypeScript bằng tiếng Nhật có thể đếm trên đầu ngón tay. Trong bối cảnh đó, giá trị của việc xuất bản một cuốn sách mới là vô cùng lớn. Chúng tôi tin rằng hoạt động viết sách không chỉ giúp đỡ từng lập trình viên đang học TypeScript, mà còn là động lực lớn để phát triển cộng đồng.
 
-- 関連動画: [YYTypeScript#13 執筆会 - YouTube 6:45~11:50](https://youtu.be/zYiazS4h5e8?t=406)
+- Video liên quan: [YYTypeScript#13 - YouTube 6:45~11:50](https://youtu.be/zYiazS4h5e8?t=406)
 
-## 決定事項
+## Quyết định
 
-TypeScriptの技術書を書く。なぜなら、
+Viết sách kỹ thuật TypeScript vì:
 
-- TypeScriptのコミュニティは成長途上で情報が必要とされているから。
-- TypeScriptの技術書が少なく、書くことに大きな意義があるから。
-- TypeScriptコミュニティの成長に寄与できるから。
+- Cộng đồng TypeScript đang phát triển và cần thông tin.
+- Số lượng sách kỹ thuật TypeScript còn ít, nên việc viết có ý nghĩa lớn.
+- Có thể đóng góp cho sự phát triển của cộng đồng TypeScript.

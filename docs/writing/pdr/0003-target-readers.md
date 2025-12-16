@@ -1,37 +1,37 @@
 ---
-description: 本書はどのような読者層を想定するか？
+description: Cuốn sách này hướng đến đối tượng độc giả nào?
 ---
 
-# 0003-読者層
+# 0003-Đối tượng độc giả
 
-- ステータス: 採用
-- 決定者: reoring, suin, philomagi, kakiuchi
-- 更新日: 2019-12-13
+- Trạng thái: Áp dụng
+- Người quyết định: reoring, suin, philomagi, kakiuchi
+- Ngày cập nhật: 2019-12-13
 
-## 解決する問題とその背景
+## Vấn đề cần giải quyết và bối cảnh
 
-本書はどのような読者層を想定するか？
+Cuốn sách này hướng đến đối tượng độc giả nào?
 
-## 決定事項
+## Quyết định
 
-読者層としては、TypeScript初心者ではあるが、プログラミング経験者を想定する。
+Đối tượng độc giả là người mới học TypeScript nhưng đã có kinh nghiệm lập trình.
 
-初心者を対象とする理由:
+Lý do hướng đến người mới:
 
-- 本書執筆の根底には、TypeScriptプログラマを増やすことで、コミュニティを大きくするという目的がある。TypeScript経験者のスキルアップに貢献するよりも、これからTypeScriptをはじめる人に向けて書いたほうが、目的達成に効果的だから。
+- Mục đích cơ bản của việc viết sách này là phát triển cộng đồng bằng cách tăng số lượng lập trình viên TypeScript. Viết cho người mới bắt đầu TypeScript hiệu quả hơn trong việc đạt mục đích so với việc nâng cao kỹ năng cho người đã có kinh nghiệm TypeScript.
 
-プログラミング経験者を対象とする理由:
+Lý do hướng đến người có kinh nghiệm lập trình:
 
-- [アンケートにより、95%のプログラマがTypeScriptを第二言語として習得する](https://twitter.com/suin/status/1195159863665422338)ことが分かったため。
+- [Theo khảo sát, 95% lập trình viên học TypeScript như ngôn ngữ thứ hai](https://twitter.com/suin/status/1195159863665422338).
 
-### 読者ペルソナ
+### Chân dung độc giả
 
-- 変数とか関数とかはわかってるような人。
-- PHPやPythonなどの動的型付け言語を主に扱ってきており、型をそこまで意識してこなかった。
+- Người đã hiểu biến, hàm, v.v.
+- Chủ yếu làm việc với ngôn ngữ kiểu động như PHP, Python và chưa quá chú ý đến type.
 
-### 対象外となる読者
+### Độc giả không nằm trong phạm vi
 
-上記の読者層定義にしたがって、次のような読者は読者として想定しない。
+Theo định nghĩa đối tượng độc giả ở trên, những người sau không được xem là đối tượng:
 
-- いわゆる中上級者。TypeScriptに精通していたり、自信を持ってTypeScriptのコーディングができる。
-- いわゆるプログラミング入門者。変数や関数などプログラミングの基礎をまだ理解していなかったり、他の言語でもまだソフトウェアを開発した経験がない。
+- Người trung cao cấp. Đã thành thạo TypeScript hoặc có thể tự tin viết code TypeScript.
+- Người mới bắt đầu lập trình. Chưa hiểu các khái niệm cơ bản như biến, hàm hoặc chưa có kinh nghiệm phát triển phần mềm với bất kỳ ngôn ngữ nào.

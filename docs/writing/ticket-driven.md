@@ -1,80 +1,80 @@
 ---
-description: 「着手する前に話し合おう」をチケット駆動で行う流れについて説明します。
+description: Quy trình làm việc - thảo luận trước khi tạo Pull Request.
 ---
 
-# チケット駆動(プルリクする前に話し合おう)
+# Quy trình làm việc (Thảo luận trước khi tạo PR)
 
-唐突に送られてくるプルリクエストには、事前に認識合わせができていないため、本書の方針にそぐわないものや求めていないものがあります。そうしたプルリクエストはマージされずにクローズとなることがあります。
+Các Pull Request được gửi đột ngột mà không có sự thống nhất trước có thể không phù hợp với định hướng của dự án hoặc không phải là điều cần thiết. Những PR như vậy có thể bị đóng mà không được merge.
 
-プルリクエストを作成するには時間と労力を要しますが、マージされなければその時間と労力が無駄になってしまいます。これは非常にもったいないことです。
+Việc tạo Pull Request tốn thời gian và công sức. Nếu không được merge, thời gian và công sức đó sẽ lãng phí.
 
-このような事態を避けるために、本プロジェクトではチケット駆動が原則とし、「プルリクする前に話し合おう」をモットーとしています。
+Để tránh tình huống này, dự án áp dụng quy trình làm việc với phương châm "thảo luận trước khi tạo PR".
 
-改善点が見つかったとき、すぐに手を動かしたい気持ちは理解できますが、まずはissueを作成いただき、話し合いのステップを踏んでからプルリクエストに進んでいただくよう、ご協力をお願いいたします。
+Khi tìm thấy điểm cần cải thiện, chúng tôi hiểu bạn muốn bắt tay ngay, nhưng hãy tạo issue trước và thảo luận rồi mới tiến hành tạo PR.
 
-## チケット駆動の流れ
+## Quy trình làm việc
 
-チケット駆動の流れは次のようになります。
+Quy trình như sau:
 
-1. issueを作る
-2. 話し合う
-3. 着手する (話し合いが深まるなどして、頃合いを見計らってから)
-4. プルリクエストを作る
-5. マージ
+1. Tạo issue
+2. Thảo luận
+3. Bắt đầu làm (sau khi thảo luận đầy đủ)
+4. Tạo Pull Request
+5. Merge
 
-### issueを作る
+### Tạo issue
 
-本書に変更を加えたいときは、そのアイディアをissueとして共有してください。
+Khi muốn thay đổi nội dung, hãy chia sẻ ý tưởng dưới dạng issue.
 
-issueには次の内容を記してください。
+Issue cần ghi rõ:
 
-- 何をどうしたいか？
-- そうしたい理由は何か？ (誤植の修正など理由が自明な場合は不要)
-- やるとなったら自分が担当したいか？ (自分がその変更のプルリクエストを作りたい場合)
+- Muốn thay đổi gì?
+- Lý do thay đổi? (không cần nếu lý do hiển nhiên như sửa lỗi chính tả)
+- Bạn có muốn tự đảm nhận không? (nếu bạn muốn tự tạo PR)
 
 :::info
-誤植の修正など、軽微な変更と思われる場合でも、まずはissueから始めましょう。
+Ngay cả với các thay đổi nhỏ như sửa lỗi chính tả, hãy bắt đầu từ issue.
 :::
 
-### 話し合う
+### Thảo luận
 
-issueにて、メンテナーを含めて話し合いをします。話し合いでは次について話し合います。
+Thảo luận trong issue cùng với maintainer về:
 
-- そもそもやるべきか？
-- 他によいアイディアは無いか？
-- 誰が担当すべきか？
+- Có nên làm không?
+- Có ý tưởng nào tốt hơn không?
+- Ai nên đảm nhận?
 
-話し合いが執筆会などの口頭で行われた場合は、その記録をissueに残すようにします。
+Nếu thảo luận diễn ra qua các kênh khác, hãy ghi lại trong issue.
 
-メンテナーが「やらない」と判断した場合は、issueをクローズします。
+Nếu maintainer quyết định "không làm", issue sẽ được đóng.
 
-### 着手する
+### Bắt đầu làm
 
-十分に話し合い、メンテナーが「やる」と判断した場合に着手のステップになります。着手する人は、メンテナーが決めます。
+Sau khi thảo luận đầy đủ và maintainer quyết định "làm", bạn có thể bắt đầu. Maintainer sẽ quyết định ai đảm nhận.
 
-### プルリクエストを作る
+### Tạo Pull Request
 
-着手した人は、変更をプルリクエストとして作成します。
+Người đảm nhận tạo Pull Request với các thay đổi.
 
-プルリクエストの作成時には[GitHubのキーワードを用いたissueの関連付け機能]を用いて、対応したissueをプルリクエストに関連付けてください。これには2つの目的があります。ひとつは、プルリクエストの経緯をたどれるようにすることです。もうひとつは、プルリクエストがマージされた際に、issueが自動クローズされるようにするためです。たとえば、issue #123を解決するプルリクエストであれば、本文中に次のようなキーワードを書きます。
+Khi tạo PR, sử dụng [chức năng liên kết issue bằng keyword của GitHub] để liên kết issue tương ứng. Điều này có 2 mục đích: một là để theo dõi lịch sử PR, hai là để tự động close issue khi PR được merge. Ví dụ, với PR giải quyết issue #123:
 
-[githubのキーワードを用いたissueの関連付け機能]: https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword
+[chức năng liên kết issue bằng keyword của GitHub]: https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword
 
 ```markdown
 Close #123
 ```
 
-### マージ
+### Merge
 
-メンテナーがプルリクエストの内容を確認し、問題なければマージします。
+Maintainer xem xét nội dung PR và merge nếu không có vấn đề.
 
-## チケット駆動でないプルリクエスト
+## PR không theo quy trình
 
-もしもチケット駆動でないプルリクエストが作られた場合は、次のいずれかのプロセスに従います。
+Nếu có PR được tạo mà không theo quy trình:
 
-- issueから始め直す。
-- 例外として、議論の余地がまったくなく、取り込む必要性が自明な場合は、そのままマージすることがあります。ただし、できるだけチケット駆動を崩さないようにするため、issueから再度はじめることをデフォルトフローとします。
+- Bắt đầu lại từ issue.
+- Ngoại lệ: nếu không có gì cần thảo luận và sự cần thiết của thay đổi là hiển nhiên, có thể merge trực tiếp. Tuy nhiên, để duy trì quy trình, mặc định sẽ yêu cầu bắt đầu lại từ issue.
 
 :::caution
-過去には、チケット駆動でないプルリクエストが、事前の認識合わせが十分でなかったため本書の方向性と合わせきれず、クローズとなってしまった例もありますので、できる限りチケット駆動に則ることをお勧めします。
+Trong quá khứ, đã có các PR không theo quy trình bị đóng vì không phù hợp với định hướng dự án do thiếu sự thống nhất trước. Vì vậy, khuyến khích tuân theo quy trình.
 :::

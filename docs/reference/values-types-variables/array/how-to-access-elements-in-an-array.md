@@ -1,8 +1,8 @@
-# 配列要素へのアクセス
+# Truy cập phần tử array
 
-## JavaScriptでの配列要素アクセス
+## Truy cập phần tử array trong JavaScript
 
-JavaScriptの配列の要素にアクセスするにはブラケット`[]`を使います。ブラケットにはアクセスする要素のインデックス番号を書きます。インデックス番号は0始まりです。たとえば、`abc = ["a", "b", "c"]`の1つ目の要素にアクセスするには、`abc[0]`と書きます。
+Để truy cập phần tử của array trong JavaScript, sử dụng bracket `[]`. Trong bracket, viết số index của phần tử cần truy cập. Số index bắt đầu từ 0. Ví dụ, để truy cập phần tử đầu tiên của `abc = ["a", "b", "c"]`, viết `abc[0]`.
 
 ```js twoslash
 const abc = ["a", "b", "c"];
@@ -10,7 +10,7 @@ console.log(abc[0]);
 // @log: "a"
 ```
 
-JavaScriptの配列では、存在しないインデックス番号でもアクセスできます。その場合でも、JavaScriptではエラーになりません。得られる値は`undefined`になります。
+Trong JavaScript, có thể truy cập bằng số index không tồn tại. Trong trường hợp đó, JavaScript không báo lỗi. Giá trị nhận được là `undefined`.
 
 ```js twoslash
 const abc = ["a", "b", "c"];
@@ -18,23 +18,23 @@ console.log(abc[100]);
 // @log: undefined
 ```
 
-## TypeScriptの要素の型
+## Kiểu của phần tử trong TypeScript
 
-TypeScriptでは、`Type[]`型の配列から要素を取り出したとき、その値の型は`Type`になります。たとえば、`string[]`型から0番目の要素の型は`string`になります。
+Trong TypeScript, khi lấy phần tử từ array kiểu `Type[]`, kiểu của giá trị đó là `Type`. Ví dụ, kiểu của phần tử thứ 0 từ array kiểu `string[]` là `string`.
 
 ```ts twoslash
 const abc: string[] = ["a", "b", "c"];
 const character: string = abc[0];
 ```
 
-JavaScriptでは存在しないインデックスで要素アクセスした場合、エラーにならず、代わりに`undefined`が得られると説明しましたが、TypeScriptでも不在要素へのアクセスについて、コンパイラーが警告することはありません。
+Như đã giải thích, trong JavaScript khi truy cập phần tử bằng index không tồn tại, không báo lỗi mà nhận được `undefined`. Tuy nhiên, TypeScript compiler cũng không cảnh báo về việc truy cập phần tử không tồn tại.
 
 ```ts twoslash
 const abc = ["a", "b", "c"];
-const character: string = abc[100]; // エラーにはならない
+const character: string = abc[100]; // Không báo lỗi
 ```
 
-要素アクセスで得た値は`string`と`undefined`どちらの可能性もありながら、TypeScriptは常にstring型であると考えるようになっています。そのため、要素アクセスで`undefined`が返ってくる場合のエラーはTypeScriptでは発見できず、JavaScript実行時に判明することになります。
+Giá trị lấy được từ truy cập phần tử có thể là `string` hoặc `undefined`, nhưng TypeScript luôn coi nó là kiểu string. Do đó, lỗi khi truy cập phần tử trả về `undefined` không thể phát hiện bởi TypeScript mà chỉ xuất hiện khi chạy JavaScript.
 
 ```ts twoslash
 const abc = ["a", "b", "c"];
@@ -45,13 +45,13 @@ character.toUpperCase();
 // @error: Cannot read properties of undefined (reading 'toUpperCase')
 ```
 
-## TypeScriptで要素アクセスを型安全にする設定
+## Cài đặt để truy cập phần tử type-safe trong TypeScript
 
-TypeScriptにこの問題を指摘してもらうようにするには、コンパイラーオプションの`noUncheckedIndexedAccess`を有効にします。
+Để TypeScript chỉ ra vấn đề này, cần bật compiler option `noUncheckedIndexedAccess`.
 
 [noUncheckedIndexedAccess](../../tsconfig/nouncheckedindexedaccess.md)
 
-これを有効にすると、たとえば、`string[]`配列から要素アクセスで得た値の型は、string型もしくはundefined型を意味する`string | undefined`になります。
+Khi bật option này, ví dụ kiểu của giá trị lấy được từ array `string[]` sẽ là `string | undefined`, nghĩa là kiểu string hoặc undefined.
 
 ```ts twoslash
 const abc: string[] = ["a", "b", "c"];
@@ -60,15 +60,15 @@ character.toUpperCase();
 // @error: Object is possibly 'undefined'.
 ```
 
-`string | undefined`型のままでは`toUpperCase`などのstring型のメソッドは呼び出せません。そこで、if文で変数がstring型だけになるように絞り込みます。すると、string型のメソッドを呼び出してもコンパイルエラーで指摘されることがなくなります。
+Với kiểu `string | undefined`, không thể gọi các method của kiểu string như `toUpperCase`. Do đó, cần thu hẹp biến để chỉ còn kiểu string bằng câu lệnh if. Khi đó, có thể gọi method của kiểu string mà không bị compile error.
 
 ```ts twoslash
 const abc: string[] = ["a", "b", "c"];
 const character = abc[0];
-// 絞り込み条件
+// Điều kiện thu hẹp
 if (typeof character === "string") {
-  character.toUpperCase(); // コンパイルエラーにならない
+  character.toUpperCase(); // Không bị compile error
 }
 ```
 
-配列要素へのアクセスを安全にするために、`noUncheckedIndexedAccess`を有効にしておくことを推奨します。
+Khuyến nghị bật `noUncheckedIndexedAccess` để đảm bảo an toàn khi truy cập phần tử array.

@@ -1,16 +1,16 @@
 ---
-sidebar_label: 配列リテラル
+sidebar_label: Array literal
 ---
 
-# 配列リテラル (array literal)
+# Array literal
 
-JavaScriptでは配列を配列リテラル(array literal)で書けます。配列リテラルはブラケット(`[`、`]`)を用いて書きます。
+Trong JavaScript có thể viết array bằng array literal. Array literal sử dụng dấu ngoặc vuông (`[`, `]`).
 
 ```js twoslash
 [1, 2, 3];
 ```
 
-配列リテラルは要素の区切れ目で改行して書くこともできます。最後の要素にはカンマを書いても構いません。
+Array literal cũng có thể viết xuống dòng ở điểm phân cách các phần tử. Phần tử cuối cùng có thể có dấu phẩy.
 
 <!--prettier-ignore-->
 ```js twoslash

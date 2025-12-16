@@ -1,10 +1,10 @@
-# 配列はオブジェクト
+# Array là object
 
-JavaScriptの配列はオブジェクトです。そのため、比較やコピーの際の挙動に注意が必要です。
+Array trong JavaScript là object. Do đó, cần chú ý hành vi khi so sánh và copy.
 
-## 配列同士の比較
+## So sánh array
 
-配列の中身が同じでも、オブジェクトのインスタンスが異なると`==`では期待する比較ができないので注意が必要です。
+Dù nội dung array giống nhau, nếu instance của object khác nhau thì không thể so sánh như mong đợi bằng `==`.
 
 ```ts twoslash
 const list1 = [1, 2, 3];
@@ -13,7 +13,7 @@ console.log(list1 == list2);
 // @log: false
 ```
 
-PHPでは配列(インデックス配列)は要素の内容で等価比較できますが、JavaScriptでは同じようにはできないので注意しましょう。
+Trong PHP có thể so sánh bằng nhau với array (indexed array) dựa trên nội dung phần tử, nhưng JavaScript không làm được như vậy.
 
 ```php
 <?php
@@ -22,30 +22,30 @@ $list2 = [1, 2, 3];
 var_dump($list1 === $list2); //=> bool(true)
 ```
 
-このような配列の中身を比べるための演算子やメソッドはJavaScriptにはないため、中身を比較したいときにはlodashの[isEqual](https://lodash.com/docs/4.17.15#isEqual)などのパッケージを使うのがお勧めです。
+JavaScript không có operator hay method để so sánh nội dung array, nên khi muốn so sánh nội dung, khuyến nghị sử dụng package như [isEqual](https://lodash.com/docs/4.17.15#isEqual) của lodash.
 
-## 配列のコピー
+## Copy array
 
-配列も他のオブジェクトと同様に、代入を用いても値のコピーにはなりません。代入元の変数と代入先の変数は同じ値を指します。そして、一方の変数だけを変更したつもりでも、他方にも変更が反映されます。
+Giống như các object khác, việc gán array không tạo ra bản copy của giá trị. Biến gán và biến được gán đều trỏ đến cùng một giá trị. Và khi thay đổi một biến, biến còn lại cũng bị ảnh hưởng.
 
 ```ts twoslash
 const arr = [1, 2, 3];
 const backup = arr;
-arr.push(4); // 変更
+arr.push(4); // Thay đổi
 console.log(arr);
-// @log: (4) [1, 2, 3, 4]
-console.log(backup); // こちらにも影響
-// @log: (4) [1, 2, 3, 4]
+// @log: (4) [1, 2, 3, 4]
+console.log(backup); // Cũng bị ảnh hưởng
+// @log: (4) [1, 2, 3, 4]
 ```
 
-上のような単純な配列のコピーには、スプレッド構文を使ってください。
+Để copy array đơn giản như trên, hãy sử dụng spread syntax.
 
 ```ts twoslash
 const arr = [1, 2, 3];
-const backup = [...arr]; // スプレッド構文
-arr.push(4); // 変更
-console.log(backup); // 影響なし
-// @log: (4) [1, 2, 3]
+const backup = [...arr]; // Spread syntax
+arr.push(4); // Thay đổi
+console.log(backup); // Không bị ảnh hưởng
+// @log: (4) [1, 2, 3]
 ```
 
-[配列のコピー](./spread-syntax-for-array.md)
+[Copy array](./spread-syntax-for-array.md)

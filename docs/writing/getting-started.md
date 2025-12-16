@@ -1,45 +1,45 @@
-# はじめて執筆する方へ
+# Hướng dẫn cho người mới bắt đầu
 
-執筆に興味を持ってくださりありがとうございます！ここでは執筆にあたって知っておくべきことを説明します。
+Cảm ơn bạn đã quan tâm đến việc đóng góp! Trang này giải thích những điều cần biết khi tham gia đóng góp.
 
-## 本書のターゲットを意識してください
+## Hãy chú ý đến đối tượng độc giả
 
-「はじめに」の「誰に向けて書かれた本か？」に記載されている読者をイメージして、その人にとってちょうどよいレベル感を想像して書いてください。
+Hãy hình dung đối tượng độc giả được mô tả trong phần "Giới thiệu" - "Cuốn sách này viết cho ai?" và viết với mức độ phù hợp cho họ.
 
-[はじめに](../README.md)
+[Giới thiệu](../README.md)
 
-まったくのプログラミング初心者はターゲットではないため、たとえば「変数とは」「関数とは」といった初級すぎるところは説明を割愛します。しかし、変数という概念は他のプログラミング言語で知っているが、JavaScriptの構文として変数宣言をどう書くかは知らない可能性があります。なので、プログラミング経験者をイメージしつつも、JavaScriptの知識は無いかもしれないプログラマーを想像してください。
+Người mới hoàn toàn chưa biết lập trình không phải là đối tượng mục tiêu, nên những khái niệm quá cơ bản như "biến là gì", "hàm là gì" sẽ được bỏ qua. Tuy nhiên, có thể họ biết khái niệm biến từ ngôn ngữ khác nhưng chưa biết cú pháp khai báo biến trong JavaScript. Vì vậy, hãy hình dung một lập trình viên có kinh nghiệm nhưng có thể chưa biết JavaScript.
 
-## 文体・スタイルを周りに合わせてください
+## Hãy tuân theo văn phong và style
 
-基本的な文体スタイルは次のページで定めています。
+Văn phong cơ bản được quy định tại trang sau:
 
-[文体・スタイル](styles.md)
+[Văn phong và style](styles.md)
 
-## 用語はできるだけ統一してください
+## Hãy thống nhất thuật ngữ
 
 <!-- textlint-disable prh -->
 
-用語の表記ゆれができるだけ起こらないよう注意してください。「サーバ」や「サーバー」、「インターフェイス」「インターフェース」など、できるだけ既存のものに統一してください。神経を尖らせず、意識できる範囲で構いません。後で誰かが見つけて修正できます。
+Hãy chú ý để tránh sự không nhất quán trong cách sử dụng thuật ngữ. Hãy cố gắng thống nhất với các thuật ngữ đã có. Không cần quá căng thẳng, chỉ cần chú ý trong phạm vi có thể. Sau đó ai đó có thể tìm và sửa.
 
 <!-- textlint-enable prh -->
 
-英語の訳語は一定の決まりがあります:
+Các thuật ngữ tiếng Anh có quy định nhất định:
 
-[日英対訳表](japanese-english-table.md)
+[Bảng thuật ngữ Anh-Việt](japanese-english-table.md)
 
-## プルリクする前に話し合おう
+## Hãy thảo luận trước khi tạo Pull Request
 
-本プロジェクトのコラボレーションは「プルリクする前に話し合おう」を原則としています。改善点が見つかってもすぐに着手せず、まずはissueにて話し合いを行う必要があります。詳しくは次のページをご覧ください。
+Nguyên tắc cộng tác của dự án này là "thảo luận trước khi tạo PR". Khi tìm thấy điểm cần cải thiện, đừng bắt đầu ngay mà hãy thảo luận trong issue trước. Chi tiết xem tại:
 
-[チケット駆動](ticket-driven.md)
+[Quy trình làm việc](ticket-driven.md)
 
-## 途中でも公開しましょう
+## Hãy công khai dù chưa hoàn thành
 
-書き途中でもプルリクエストして構いません。途中までの情報でも、情報ゼロよりは読者の役に立ちます。
+Bạn có thể tạo Pull Request ngay cả khi chưa viết xong. Thông tin một phần vẫn hữu ích hơn là không có thông tin gì.
 
-## 環境構築からプルリクエストまでの流れ
+## Quy trình từ cài đặt đến Pull Request
 
-具体的な環境構築からプルリクエストまでの流れは次のページをご覧ください。
+Chi tiết quy trình từ cài đặt môi trường đến tạo Pull Request xem tại:
 
-[環境構築からプルリクエストまでの流れ](how-to-change.md)
+[Quy trình từ cài đặt đến Pull Request](how-to-change.md)

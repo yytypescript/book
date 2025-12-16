@@ -22,7 +22,7 @@ function chooseRandomlyString(v1: string, v2: string): string {
 ```ts twoslash
 declare function chooseRandomlyString(v1: string, v2: string): string;
 // ---cut---
-const winOrLose = chooseRandomlyString("勝ち", "負け");
+const winOrLose = chooseRandomlyString("win", "lose");
 ```
 
 Tiếp theo, giả sử bạn cần chọn ngẫu nhiên không chỉ string mà còn cả number với cùng logic. Vì `chooseRandomlyString()` chỉ hỗ trợ string nên bạn phải tạo một hàm mới cho number.
@@ -88,7 +88,7 @@ function chooseRandomly<Number>(v1: <number>, v2: <number>): <number> {
 function chooseRandomly<URL>(v1: <URL>, v2: <URL>): <URL> {
   return Math.random() <= 0.5 ? v1 : v2;
 }
-chooseRandomly<String>("勝ち", "負け");
+chooseRandomly<String>("win", "lose");
 chooseRandomly<Number>(1, 2);
 chooseRandomly<URL>(urlA, urlB);
 ```
@@ -101,7 +101,7 @@ Phần khác nhau này liên quan đến type. Nếu muốn xử lý phần này
 function chooseRandomly<type>(v1: <type>, v2: <type>): <type> {
   return Math.random() <= 0.5 ? v1 : v2;
 }
-chooseRandomly<string>("勝ち", "負け");
+chooseRandomly<string>("win", "lose");
 chooseRandomly<number>(1, 2);
 chooseRandomly<URL>(urlA, urlB);
 ```
@@ -117,7 +117,7 @@ const urlB: URL = new URL("https://www.example.com/2");
 function chooseRandomly<T>(v1: T, v2: T): T {
   return Math.random() <= 0.5 ? v1 : v2;
 }
-chooseRandomly<string>("勝ち", "負け");
+chooseRandomly<string>("win", "lose");
 chooseRandomly<number>(1, 2);
 chooseRandomly<URL>(urlA, urlB);
 ```

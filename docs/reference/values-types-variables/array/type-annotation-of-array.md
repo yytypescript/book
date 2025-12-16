@@ -1,14 +1,14 @@
 ---
-sidebar_label: 配列の型注釈
+sidebar_label: Type annotation của array
 ---
 
-# 配列の型注釈 (type annotation)
+# Type annotation của array
 
-TypeScriptでは、配列に型注釈する方法が2通りあります。
+Trong TypeScript có 2 cách để type annotation cho array.
 
 ## Type\[]
 
-1つ目の型注釈は、要素の型の後ろに`[]`をつける書き方です。たとえば、number型の配列の型注釈は`number[]`と書きます。
+Cách đầu tiên là thêm `[]` sau kiểu của phần tử. Ví dụ, type annotation cho array kiểu number viết là `number[]`.
 
 ```ts twoslash
 let array: number[];
@@ -17,13 +17,13 @@ array = [1, 2, 3];
 
 ## Array&lt;T>
 
-2つ目の型注釈は、`Array<T>`を用いる書き方です。`T`には要素の型を書きます。たとえば、number型の配列の型注釈は`Array<number>`と書きます。
+Cách thứ hai là sử dụng `Array<T>`. `T` là kiểu của phần tử. Ví dụ, type annotation cho array kiểu number viết là `Array<number>`.
 
 ```ts twoslash
 let array: Array<number>;
 array = [1, 2, 3];
 ```
 
-## Type\[]とArray&lt;T>どちらを使うべきか？
+## Nên dùng Type\[] hay Array&lt;T>?
 
-TypeScriptでの配列の型注釈は、`Type[]`と`Array<T>`の2通りあるわけですが、その違いは書き方だけです。コード上の意味、つまり、コンパイラのチェックの内容はどちらも同じです。したがって、どちらの書き方を選ぶかは、書き手の好みになります。ただし、プロジェクトとしてはどちらの書き方にするかは統一しておくべきです。
+Type annotation cho array trong TypeScript có 2 cách là `Type[]` và `Array<T>`, nhưng sự khác biệt chỉ là cách viết. Ý nghĩa trong code, tức là nội dung kiểm tra của compiler, đều giống nhau. Do đó, việc chọn cách viết nào tùy thuộc vào sở thích của người viết. Tuy nhiên, trong project nên thống nhất sử dụng một cách viết.

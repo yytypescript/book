@@ -1,40 +1,36 @@
-# VS Codeで編集する
+# Chỉnh sửa bằng VS Code
 
-Markdownファイルを編集するエディターはVS Codeがお勧めです。
+VS Code là editor được khuyến nghị để chỉnh sửa file Markdown.
 
-## 推奨プラグイン
+## Plugin khuyến nghị
 
-執筆者が導入すると便利なVS Codeプラグインです。
+Các plugin VS Code hữu ích cho người đóng góp.
 
-### textlintプラグイン
+### Plugin textlint
 
-[textlintプラグイン](https://marketplace.visualstudio.com/items?itemName=taichi.vscode-textlint)をインストールすると、修正が必要な箇所がわかりやすくなります。
+Cài đặt [plugin textlint](https://marketplace.visualstudio.com/items?itemName=taichi.vscode-textlint) để dễ dàng nhận biết các vị trí cần sửa.
 
-### markdownlintプラグイン
+### Plugin markdownlint
 
-[markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)プラグインをインストールすると、修正が必要な箇所がわかりやすくなります。
+Cài đặt [plugin markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) để dễ dàng nhận biết các vị trí cần sửa.
 
-### twoslashプラグイン
+### Plugin twoslash
 
-[twoslashプラグイン](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-twoslash)をインストールすると、twoslashの補完が効くようになります。
+Cài đặt [plugin twoslash](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-twoslash) để có autocomplete cho twoslash.
 
-### Speechプラグイン
+### Plugin Code Spell Checker
 
-[Speechプラグイン](https://marketplace.visualstudio.com/items?itemName=bierner.speech)は、選択したテキストを音声読み上げします。文章の音声読み上げを聞きながら、文章を確認すると、誤字などに気づける場合があります。
+[Plugin Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) gạch chân các từ có thể bị lỗi chính tả. Hữu ích để tránh lỗi spelling.
 
-### Code Spell Checkerプラグイン
+## Tips thao tác
 
-[Code Spell Checkerプラグイン](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)は英単語のスペルミスと思われる箇所を下線で表示します。スペルミスの防止に役立ちます。
+### Tìm file để chỉnh sửa
 
-## 操作Tips
+Nhấn <kbd>⌘</kbd><kbd>P</kbd> để tìm kiếm theo tên file.
 
-### 編集するファイルを探す
+### Hiển thị preview Markdown
 
-<kbd>⌘</kbd><kbd>P</kbd>でファイル名から検索できます。
+Trong VS Code, dùng shortcut sau để hiển thị preview Markdown:
 
-### Markdownプレビューを表示する方法
-
-VS Codeでは次のショートカットキーでMarkdownプレビューが表示できます。
-
-- Windows: <kbd>Ctrl</kbd><kbd>K</kbd>を同時押しし、すぐに<kbd>V</kbd>を押す。
-- macOS: <kbd>⌘</kbd><kbd>K</kbd>を同時押しし、すぐに<kbd>V</kbd>を押す。
+- Windows: Nhấn <kbd>Ctrl</kbd><kbd>K</kbd> cùng lúc, sau đó nhấn <kbd>V</kbd>.
+- macOS: Nhấn <kbd>⌘</kbd><kbd>K</kbd> cùng lúc, sau đó nhấn <kbd>V</kbd>.

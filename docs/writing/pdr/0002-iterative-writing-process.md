@@ -1,41 +1,41 @@
-# 0002-イテレーティブな執筆プロセス
+# 0002-Quy trình viết iterative
 
-- ステータス: 採用
-- 決定者: reoring, suin, philomagi, kakiuchi
-- 更新日: 2019-12-13
+- Trạng thái: Áp dụng
+- Người quyết định: reoring, suin, philomagi, kakiuchi
+- Ngày cập nhật: 2019-12-13
 
-## 解決する問題とその背景
+## Vấn đề cần giải quyết và bối cảnh
 
-読まれるコンテンツにしていくにはどうしたらいいか？
+Làm thế nào để tạo nội dung được đọc?
 
-## 検討した選択肢
+## Các lựa chọn đã xem xét
 
-- ウォータフォール的な手法 (書ききってからリリース)
-- イテレーティブな手法 (書きながらちょいちょいリリース)
+- Phương pháp waterfall (viết xong mới release)
+- Phương pháp iterative (viết và release dần dần)
 
-## 決定事項
+## Quyết định
 
-イテレーティブな手法を採用する。この手法では、**全体をざっくり書いた上で**、次のステップを繰り返しながら、**漸進的に全体の内容を充実させていく**。
+Áp dụng phương pháp iterative. Với phương pháp này, **sau khi viết sơ bộ toàn bộ**, lặp lại các bước sau để **cải thiện dần nội dung tổng thể**.
 
-1. 書く
-2. 公開する
-3. 読者からフィードバックをもらう
-4. どこを良くするか決める
+1. Viết
+2. Công khai
+3. Nhận phản hồi từ độc giả
+4. Quyết định cải thiện phần nào
 
-イテレーティブとインクリメンタルは区別する。
+Phân biệt iterative và incremental.
 
-![イテレーティブな絵の書き方とインクリメンタルな絵の書き方](0002-iterative-writing-process/iterative-vs-incremental.jpg)
+![Cách viết iterative và incremental](0002-iterative-writing-process/iterative-vs-incremental.jpg)
 
-イテレーティブに書くため、初期は内容が薄い本になることが想定されるが、執筆を繰り返していくことで、完成度を高めていく。
+Vì viết theo cách iterative, ban đầu nội dung sẽ mỏng, nhưng qua nhiều lần viết, độ hoàn thiện sẽ tăng lên.
 
-フィードバックからは、次のような意思決定がなされる。
+Từ phản hồi, các quyết định sau được đưa ra:
 
-- 次にどんなテーマについて書くか？
-- 既存のコンテンツを加筆すべきか？
+- Viết về chủ đề nào tiếp theo?
+- Có nên bổ sung nội dung hiện có không?
 
-フィードバックには、読者からの疑問が含まれる。疑問に答えるようにコンテンツを編集する。
+Phản hồi bao gồm các câu hỏi từ độc giả. Chỉnh sửa nội dung để trả lời những câu hỏi đó.
 
-### 採用理由
+### Lý do áp dụng
 
-- 公開時は本が完成していることが理想的だが、その理想には多くの時間を要する。公開後「読まれない」となると、かけたコストだけ損失も大きくなる。そのような大失敗は避ける必要がある。
-- 需要のあるテーマから攻めることで、「本が役に立つ」状態を常時キープしやすくする。
+- Lý tưởng là sách hoàn thành khi công khai, nhưng điều đó tốn nhiều thời gian. Nếu sau khi công khai mà "không ai đọc", thiệt hại sẽ lớn tương ứng với chi phí đã bỏ ra. Cần tránh thất bại lớn như vậy.
+- Bằng cách tập trung vào các chủ đề có nhu cầu, dễ dàng duy trì trạng thái "sách hữu ích".

@@ -1,53 +1,53 @@
 ---
-description: PDRを書くための雛形です。
+description: Template để viết PDR.
 ---
 
-# <!-- 4桁番号 -->-<!-- 意思決定の短いタイトル -->
+# <!-- Số 4 chữ số -->-<!-- Tiêu đề ngắn của quyết định -->
 
-- ステータス: <!-- 提案 | 不採用 | 採用 | 非推奨 -->
-- 提案者: <!-- 提案した人 -->
-- 参加者: <!-- 意思決定に参加した者のリスト -->
-- 更新日: <!-- 意思決定がアップデートされた日 YYYY-MM-DD -->
+- Trạng thái: <!-- Đề xuất | Từ chối | Áp dụng | Không khuyến nghị -->
+- Người đề xuất: <!-- Người đề xuất -->
+- Người tham gia: <!-- Danh sách người tham gia quyết định -->
+- Ngày cập nhật: <!-- Ngày quyết định được cập nhật YYYY-MM-DD -->
 
-<!-- ①背景文脈と問題点、②解決策(意思決定)、③採用理由を簡潔に書いてください。自由形式で2、3文書きます。-->
+<!-- Viết ngắn gọn: ①Bối cảnh và vấn đề, ②Giải pháp (quyết định), ③Lý do áp dụng. Viết 2-3 câu tự do. -->
 
-<!-- 例文: 「{背景文脈と問題点}」という問題点がある。これを解決すべく「{解決策}」を採用する。理由は、{採用理由}。 -->
+<!-- Ví dụ: Có vấn đề "{bối cảnh và vấn đề}". Để giải quyết, áp dụng "{giải pháp}". Lý do là {lý do áp dụng}. -->
 
-## 検討した選択肢
+## Các lựa chọn đã xem xét
 
-1. <!-- 選択肢タイトル -->
-1. <!-- 選択肢タイトル -->
-1. <!-- 選択肢タイトル -->
+1. <!-- Tiêu đề lựa chọn -->
+1. <!-- Tiêu đề lựa chọn -->
+1. <!-- Tiêu đề lựa chọn -->
 
-## 各選択肢のよい点と悪い点
+## Ưu nhược điểm của từng lựa chọn
 
-### 候補1: <!-- 選択肢タイトル -->
+### Ứng viên 1: <!-- Tiêu đề lựa chọn -->
 
-<!-- 選択肢の説明 -->
+<!-- Mô tả lựa chọn -->
 
-- Good: <!-- 説明 -->
-- Good: <!-- 説明 -->
-- Bad: <!-- 説明 -->
-- Bad: <!-- 説明 -->
+- Good: <!-- Mô tả -->
+- Good: <!-- Mô tả -->
+- Bad: <!-- Mô tả -->
+- Bad: <!-- Mô tả -->
 
-### 候補2: <!-- 選択肢タイトル -->
+### Ứng viên 2: <!-- Tiêu đề lựa chọn -->
 
-<!-- 選択肢の説明 -->
+<!-- Mô tả lựa chọn -->
 
-- Good: <!-- 説明 -->
-- Good: <!-- 説明 -->
-- Bad: <!-- 説明 -->
-- Bad: <!-- 説明 -->
+- Good: <!-- Mô tả -->
+- Good: <!-- Mô tả -->
+- Bad: <!-- Mô tả -->
+- Bad: <!-- Mô tả -->
 
-### 候補3: <!-- 選択肢タイトル -->
+### Ứng viên 3: <!-- Tiêu đề lựa chọn -->
 
-<!-- 選択肢の説明 -->
+<!-- Mô tả lựa chọn -->
 
-- Good: <!-- 説明 -->
-- Good: <!-- 説明 -->
-- Bad: <!-- 説明 -->
-- Bad: <!-- 説明 -->
+- Good: <!-- Mô tả -->
+- Good: <!-- Mô tả -->
+- Bad: <!-- Mô tả -->
+- Bad: <!-- Mô tả -->
 
-## 関連PDR
+## PDR liên quan
 
-<!-- 関連PDRへのリンク -->
+<!-- Link đến PDR liên quan -->

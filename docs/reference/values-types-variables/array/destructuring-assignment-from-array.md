@@ -1,14 +1,14 @@
 ---
-sidebar_label: 配列の分割代入
+sidebar_label: Destructuring assignment của array
 ---
 
-# 配列の分割代入 (destructuring assignment)
+# Destructuring assignment của array
 
-## 配列の分割代入
+## Cơ bản
 
-JavaScriptでは、配列から要素を取り出す方法のひとつに、`array[1]`のようにインデックスでアクセスする方法があります。この方法とは別に、分割代入(destructuring assignment)という方法を使っても、配列要素にアクセスできます。
+Trong JavaScript, một cách để lấy phần tử từ array là truy cập bằng index như `array[1]`. Ngoài cách này, còn có thể sử dụng destructuring assignment để truy cập phần tử array.
 
-たとえば、`[1, 2, 3, 4, 5]`のような配列から、最初の3要素を取り出して変数に代入するには次のように書きます。
+Ví dụ, để lấy 3 phần tử đầu tiên từ array `[1, 2, 3, 4, 5]` và gán vào biến, viết như sau.
 
 ```ts twoslash
 const oneToFive = [1, 2, 3, 4, 5];
@@ -21,7 +21,7 @@ console.log(three);
 // @log: 3
 ```
 
-存在しない要素に対して分割代入した場合は、変数に`undefined`が代入されます。JavaScriptではこれはエラーになりません。
+Khi destructuring assignment cho phần tử không tồn tại, biến sẽ được gán `undefined`. JavaScript không báo lỗi trong trường hợp này.
 
 ```js twoslash
 const oneToFive = [1, 2];
@@ -30,31 +30,31 @@ console.log(three);
 // @log: undefined
 ```
 
-TypeScriptでは、分割代入された値の型は`T[]`の配列なら`T`型になります。たとえば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number`になります。
+Trong TypeScript, kiểu của giá trị được destructuring assignment từ array `T[]` sẽ là kiểu `T`. Ví dụ, nếu destructuring assignment từ `[1, 2, 3, 4, 5]` kiểu `number[]`, kiểu sẽ là `number`.
 
 ```ts twoslash
 const oneToFive = [1, 2, 3, 4, 5];
 const [one, two, three] = oneToFive;
-const num: number = one; // oneはnumber型になるので代入できる
+const num: number = one; // one là kiểu number nên có thể gán
 ```
 
-ただしTypeScriptのコンパイラーオプション`noUncheckedIndexedAccess`を有効にした場合は異なります。
+Tuy nhiên, trường hợp sẽ khác khi bật compiler option `noUncheckedIndexedAccess` của TypeScript.
 
 [noUncheckedIndexedAccess](../../tsconfig/nouncheckedindexedaccess.md)
 
-このオプション有効状態で、配列`T[]`から分割代入すると`T`型もしくはundefined型を示す`T | undefined`型になります。たとえば、`number[]`型の`[1, 2, 3, 4, 5]`から分割代入したのなら、型は`number | undefined`になります。
+Khi option này được bật, destructuring assignment từ array `T[]` sẽ có kiểu `T | undefined`, nghĩa là kiểu `T` hoặc undefined. Ví dụ, nếu destructuring assignment từ `[1, 2, 3, 4, 5]` kiểu `number[]`, kiểu sẽ là `number | undefined`.
 
 ```ts twoslash
 const oneToFive = [1, 2, 3, 4, 5];
 const [one, two, three] = oneToFive;
 const num: number = one;
-// 上はコンパイルエラーになる。
-// oneはnumber | undefinedになり、numberには代入できないため。
+// Dòng trên sẽ báo compile error.
+// one là number | undefined nên không thể gán cho number.
 ```
 
-## ネストした配列の分割代入
+## Destructuring assignment với array lồng nhau
 
-JavaScriptの分割代入はフラットな配列だけでなく、ネストした入れ子構造の配列からも要素を抽出できます。ネストした要素の分割代入の書き方は、ネスト構造と一致するようにブラケット(`[ ]`)を重ねます。
+Destructuring assignment của JavaScript không chỉ dùng cho array phẳng mà còn có thể trích xuất phần tử từ array có cấu trúc lồng nhau. Cách viết destructuring assignment cho phần tử lồng nhau là lồng bracket (`[ ]`) theo cấu trúc.
 
 ```ts twoslash
 const twoByTwo = [
@@ -70,9 +70,9 @@ console.log(three);
 // @log: 3
 ```
 
-## 途中要素の分割代入
+## Destructuring assignment phần tử ở giữa
 
-配列の分割代入は先頭からでなく、途中の要素を取り出すこともできます。その場合、取り出さない要素の数だけカンマを書きます。
+Destructuring assignment của array không chỉ lấy từ đầu mà còn có thể lấy phần tử ở giữa. Trong trường hợp đó, viết số dấu phẩy tương ứng với số phần tử không cần lấy.
 
 ```ts twoslash
 const oneToFive = [1, 2, 3, 4, 5];
@@ -83,9 +83,9 @@ console.log(five);
 // @log: 5
 ```
 
-## 残余部分の代入
+## Gán phần còn lại
 
-JavaScriptの配列を分割代入するときに、残余パターン(`...`)を用いて、配列の残りの部分を取り出して変数に代入できます。
+Khi destructuring assignment array trong JavaScript, có thể sử dụng rest pattern (`...`) để lấy phần còn lại của array và gán vào biến.
 
 ```ts twoslash
 const oneToFive = [1, 2, 3, 4, 5];
@@ -96,10 +96,10 @@ console.log(rest);
 // @log: [ 2, 3, 4, 5 ]
 ```
 
-このときTypeScriptでは、残余部分の型は配列の`number[]`になります。
+Trong TypeScript, kiểu của phần còn lại sẽ là array `number[]`.
 
-## 関連情報
+## Thông tin liên quan
 
-[配列要素へのアクセス](how-to-access-elements-in-an-array.md)
+[Truy cập phần tử array](how-to-access-elements-in-an-array.md)
 
-[オブジェクトの分割代入 (destructuring assignment)](../object/destructuring-assignment-from-objects.md)
+[Destructuring assignment của object](../object/destructuring-assignment-from-objects.md)

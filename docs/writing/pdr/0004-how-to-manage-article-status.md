@@ -1,50 +1,50 @@
 ---
-description: 各ページのステータス管理方法について
+description: Về cách quản lý trạng thái các trang
 ---
 
-# 0004-各ページのステータス管理方法
+# 0004-Cách quản lý trạng thái trang
 
-- ステータス:採用
-- 決定者: suin, reoring, nouphet
-- 更新日: 2020-01-31
+- Trạng thái: Áp dụng
+- Người quyết định: suin, reoring, nouphet
+- Ngày cập nhật: 2020-01-31
 
-## 解決する問題とその背景
+## Vấn đề cần giải quyết và bối cảnh
 
-列挙された目次に対してのアサイン方法や管理方法が未定。
+Chưa xác định phương pháp phân công và quản lý cho mục lục đã liệt kê.
 
-## 検討した選択肢
+## Các lựa chọn đã xem xét
 
-- Google Docsで管理
-- 各ページにて管理
-- GitHub Issuesで管理
+- Quản lý bằng Google Docs
+- Quản lý tại mỗi trang
+- Quản lý bằng GitHub Issues
 
-## 決定事項
+## Quyết định
 
-Google Docsで管理を採用した。なぜなら、
+Áp dụng quản lý bằng Google Docs vì:
 
-- 目次がGoogle Docs上で管理されているため
-- ステータスがリアルタイムで同期できるため
-- 現在の運用人数(<10)であれば問題なさそうなため
+- Mục lục đang được quản lý trên Google Docs
+- Trạng thái có thể đồng bộ realtime
+- Với số người vận hành hiện tại (<10) thì không có vấn đề
 
-## 各選択肢のよい点と悪い点
+## Ưu nhược điểm của từng lựa chọn
 
-### Google Docsで管理
+### Quản lý bằng Google Docs
 
-- Good: 一覧化が容易
-- Good: 目次を他のツールと同期する手間がない
-- Bad: 利用ツールが増え得る
-- Bad: スケールしない
+- Good: Dễ dàng tạo danh sách
+- Good: Không cần đồng bộ mục lục với công cụ khác
+- Bad: Có thể tăng số công cụ sử dụng
+- Bad: Không scale được
 
-### 各ページにて管理
+### Quản lý tại mỗi trang
 
-別途管理ツールを導入せず、記事の各ページの先頭にステータスを表記、本文内に担当者を書く。
+Không dùng công cụ quản lý riêng, ghi trạng thái ở đầu mỗi trang bài viết, ghi người phụ trách trong nội dung.
 
-- Good: 利用ツールが増えない
-- Bad: 大人数になった時にどうか
-- Bad: 対応期限でソートが難しい
-- Bad: **GitBookはマージするまで最新情報が伝わらないので難しい**
+- Good: Không tăng số công cụ sử dụng
+- Bad: Khó khăn khi số người tăng
+- Bad: Khó sort theo deadline
+- Bad: **GitBook không cập nhật thông tin mới nhất cho đến khi merge nên khó**
 
-### GitHub Issuesで管理
+### Quản lý bằng GitHub Issues
 
-- Good: スケールしそう
-- Bad: 今今の人数だと手間のほうが多そう
+- Good: Có vẻ scale được
+- Bad: Với số người hiện tại thì công sức nhiều hơn

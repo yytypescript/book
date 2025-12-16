@@ -1,63 +1,43 @@
 ---
-description: あなたが本書に貢献できること。
+description: Những cách bạn có thể đóng góp cho bản dịch tiếng Việt.
 ---
 
 # CONTRIBUTING
 
-本書の執筆には、TypeScripterのための座談会「YYTypeScript」の参加者を中心に、オープンソース的に複数人のライターが参加しています。本書をお読み下さった読者の方も、執筆をはじめ、さまざまな方法で本プロジェクトに参画できます。このページでは、どのような参加方法があるのか説明します。
+Bản dịch tiếng Việt này được thực hiện dựa trên cuốn sách gốc "Survival TypeScript" của cộng đồng YYTypeScript. Nếu bạn muốn đóng góp cho bản dịch này, có nhiều cách để tham gia.
 
-## 感想を伝える
+## Chia sẻ cảm nhận
 
-- 読んでの感想を教えて頂けると、執筆の参考になります。
-- ポジティブな感想はうれしいです。モチベーションが上がります。
+- Nếu bạn chia sẻ cảm nhận sau khi đọc, điều đó sẽ rất hữu ích cho việc cải thiện bản dịch.
+- Những phản hồi tích cực luôn được chào đón và tạo động lực cho người dịch.
 
-## 分からないことを質問する
+## Đặt câu hỏi
 
-- TypeScriptで分からないことを質問して頂けると、執筆のトピックを考えるのに役立ちます。
-- 読んだ上で生まれた疑問を質問して頂けると、内容の改善に役立ちます。
-- 質問は下記で受け付けています:
-  - Twitter: @suin <https://twitter.com/suin>
-  - Slack: <https://yytypescript.github.io/slack>
-  - 執筆会に参加してもらって質問して頂いても構いません。
+- Nếu bạn có thắc mắc về TypeScript, hãy đặt câu hỏi. Điều này giúp xác định các chủ đề cần bổ sung.
+- Nếu có điểm nào chưa rõ trong nội dung, hãy phản hồi để cải thiện chất lượng bản dịch.
+- Bạn có thể đặt câu hỏi qua:
+  - GitHub Issues: <https://github.com/LeHoangTuanbk/survival-typescript-vietnamese/issues>
 
-## SNSでシェアする
+## Chia sẻ trên mạng xã hội
 
-- TwitterなどSNSでシェアして頂けるとうれしいです。
+- Nếu bạn thấy bản dịch hữu ích, hãy chia sẻ trên Twitter, Facebook hoặc các mạng xã hội khác.
 
-## 執筆会を見学する
+## Đóng góp bản dịch
 
-- 「見学」はもっとも簡単な参加形態です。まずは気軽に見に来てください。
-- 見学の際には「見学に来ました」とお伝えください。
-- 執筆会の開催スケジュールはconnpassをご確認ください。
-  - <https://yyts.connpass.com/>
+- Đóng góp bản dịch là hoạt động chính của dự án này.
+- Các hoạt động đóng góp bao gồm:
+  - Dịch trang mới
+  - Cải thiện trang đã dịch
+    - Sửa lỗi chính tả
+    - Cải thiện nội dung
+    - Bổ sung nội dung
+  - Comment góp ý cho các trang
 
-## 執筆する
+## Cách đóng góp
 
-- 執筆はこのプロジェクトの中心的な活動です。
-- 執筆には、次のような活動があります:
-  - 新規ページを書く
-  - 既存ページを良くする
-    - 誤字脱字の訂正
-    - 内容の改善
-    - 内容の追記
-  - 既存ページにコメントする
+1. Fork repository
+2. Tạo branch mới cho thay đổi của bạn
+3. Thực hiện thay đổi
+4. Tạo Pull Request
 
-[はじめて執筆する方へ](getting-started.md)
-
-### 執筆会Discordに参加する
-
-執筆会にはDiscordがあります。
-
-こちらのURLから参加できます→ <https://discord.gg/DTwRgzt>
-
-## 意思決定に参加する
-
-行動方針や執筆に当たっての取り決めなど、意思決定をしたい場合、次のいずれかの方法があります。
-
-- Discordで、雑談レベルで提案する。
-- PDRの提案を書き、共有する。
-- 執筆会に来て相談する。
-
-### 意思決定プロセス
-
-しっかりとしたプロセスはまだありません。今の所ふわっと合意できれば決定します。
+Chi tiết xem tại: [Hướng dẫn cho người mới bắt đầu](getting-started.md)
