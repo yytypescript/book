@@ -46,3 +46,4 @@ yarn start
 - [ ] Add thêm các bài cho đúng với license sách gốc theo CC BY-SA
 - [ ] Chỉnh lại ngôn ngữ dịch cho thật chuẩn, trong sáng, văn phong kĩ thuật, ngắn gọn, dễ hiểu
 - [ ] Việt hoá lại các ví dụ. Hiện tại có nhiều ví dụ thuần tiếng Nhật, khó dịch sang tiếng Việt
+- [ ] Add Analytics tool: Google Analytics hoặc Vercel Analytics
