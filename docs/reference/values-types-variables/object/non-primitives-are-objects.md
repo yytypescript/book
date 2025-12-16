@@ -1,8 +1,8 @@
-# プリミティブ以外はすべてオブジェクト
+# Tất cả những gì không phải primitive đều là object
 
-JavaScriptでは、プリミティブ型以外のものはすべてオブジェクトです。オブジェクトには、クラスから作ったインスタンスだけでなく、クラスそのものや配列、正規表現もあります。
+Trong JavaScript, tất cả những gì không phải primitive type đều là object. Object không chỉ bao gồm instance tạo từ class, mà còn có bản thân class, array, regular expression.
 
-プリミティブ型は値が同じであれば、同一のものと判定できますが、オブジェクトはプロパティの値が同じであっても、インスタンスが異なると同一のものとは判定されません。
+Với primitive type, nếu giá trị giống nhau thì được coi là giống nhau. Nhưng với object, dù giá trị property giống nhau, nếu instance khác nhau thì không được coi là giống nhau.
 
 ```js twoslash
 const value1 = 123;

@@ -1,40 +1,40 @@
 ---
-sidebar_label: オブジェクトの分割代入
+sidebar_label: Destructuring assignment của object
 ---
 
-# オブジェクトの分割代入 (destructuring assignment)
+# Destructuring assignment của object
 
-JavaScriptには、オブジェクトの分割代入(destructuring assignment)という便利な構文があります。分割代入は、オブジェクトからプロパティを取り出す機能です。
+JavaScript có cú pháp tiện lợi là destructuring assignment để lấy property từ object.
 
-通常、オブジェクトからプロパティを取り出す場合は、プロパティアクセサーを用います。プロパティアクセサーは、ドットを使ってプロパティを参照する記法です。
+Thông thường, để lấy property từ object, sử dụng property accessor. Property accessor là cách viết dùng dấu chấm để tham chiếu property.
 
 ```ts twoslash
 const item = { price: 100 };
-const price = item.price; // プロパティアクセサー
+const price = item.price; // Property accessor
 ```
 
-分割代入は、中カッコ`{}`に取り出したいプロパティを指定することで、プロパティ名と同じ名前の変数が作れます。次の分割代入のサンプルコードは、上のプロパティアクセサーを使ったコードと同等の処理になります。
+Destructuring assignment cho phép tạo biến cùng tên với property bằng cách chỉ định property muốn lấy trong dấu ngoặc nhọn `{}`. Code mẫu destructuring assignment sau tương đương với code sử dụng property accessor ở trên.
 
 ```ts twoslash
 const item = { price: 100 };
 const { price } = item;
-// 上は const price = item.price; と同等の処理
+// Tương đương với const price = item.price;
 ```
 
-分割代入は、プロパティ名と同じ名前で変数を定義するときに、プロパティ名を2度書かないで済むのがひとつの利点です。
+Một lợi ích của destructuring assignment là khi định nghĩa biến cùng tên với property, không cần viết tên property hai lần.
 
-## 複数のプロパティを取り出す
+## Lấy nhiều property
 
-分割代入は、複数のプロパティを一度に取り出すこともできます。その場合、取り出したいプロパティを中カッコに列挙します。
+Destructuring assignment có thể lấy nhiều property cùng lúc. Trong trường hợp đó, liệt kê các property muốn lấy trong dấu ngoặc nhọn.
 
 ```ts twoslash
 const obj = { a: 1, b: 2 };
 const { a, b } = obj;
 ```
 
-この特徴は、取り出すプロパティ数が多い場合に、プロパティアクセサーより便利です。プロパティアクセサーでは、プロパティごとに代入文を書かないとなりません。
+Đặc điểm này tiện lợi hơn property accessor khi số property cần lấy nhiều. Với property accessor, phải viết câu lệnh gán cho từng property.
 
-```ts twoslash title="プロパティアクセサーで取り出す例"
+```ts twoslash title="Ví dụ lấy bằng property accessor"
 const color = { r: 0, g: 122, b: 204, a: 1 };
 const r = color.r;
 const g = color.g;
@@ -42,16 +42,16 @@ const b = color.b;
 const a = color.a;
 ```
 
-分割代入を使うと、これを簡潔にまとめられます。
+Sử dụng destructuring assignment có thể viết ngắn gọn hơn.
 
-```ts twoslash title="多くのプロパティを分割代入で取り出す例"
+```ts twoslash title="Ví dụ lấy nhiều property bằng destructuring assignment"
 const color = { r: 0, g: 122, b: 204, a: 1 };
 const { r, g, b, a } = color;
 ```
 
-## 代入する変数名の指定
+## Chỉ định tên biến gán
 
-オブジェクトの分割代入では、コロン`:`のあとに変数名を指定すると、その名前の変数に代入できます。
+Trong destructuring assignment của object, có thể gán vào biến có tên khác bằng cách chỉ định tên biến sau dấu hai chấm `:`.
 
 ```ts twoslash
 const color = { r: 0, g: 122, b: 204, a: 1 };
@@ -60,16 +60,16 @@ console.log(green);
 // @log: 122
 ```
 
-## 入れ子構造の分割代入
+## Destructuring assignment với cấu trúc lồng nhau
 
-オブジェクトの中にオブジェクトある入れ子構造にも、分割代入が使えます。深い階層のプロパティを取り出すには、階層の分だけ中カッコで囲みます。
+Destructuring assignment cũng có thể sử dụng với cấu trúc lồng nhau khi object chứa object. Để lấy property ở level sâu, bao quanh bằng dấu ngoặc nhọn tương ứng với số level.
 
 ```ts twoslash
 const continent = {
-  name: "北アメリカ",
+  name: "North America",
   us: {
-    name: "アメリカ合衆国",
-    capitalCity: "ワシントンD.C.",
+    name: "United States",
+    capitalCity: "Washington D.C.",
   },
 };
 
@@ -78,22 +78,22 @@ const {
 } = continent;
 
 console.log(name);
-// @log: "アメリカ合衆国"
+// @log: "United States"
 console.log(capitalCity);
-// @log: "ワシントンD.C."
+// @log: "Washington D.C."
 // @lib: esnext
 ```
 
-## 入れ子構造の分割代入と変数名の指定
+## Destructuring assignment lồng nhau với chỉ định tên biến
 
-入れ子構造の分割代入をしながら、値を代入する変数名を指定することを同時にすることもできます。
+Có thể đồng thời destructuring assignment cấu trúc lồng nhau và chỉ định tên biến gán.
 
 ```ts twoslash
 const continent = {
-  name: "北アメリカ",
+  name: "North America",
   us: {
-    name: "アメリカ合衆国",
-    capitalCity: "ワシントンD.C.",
+    name: "United States",
+    capitalCity: "Washington D.C.",
   },
 };
 
@@ -103,14 +103,14 @@ const {
 } = continent;
 
 console.log(continentName);
-// @log: "北アメリカ"
+// @log: "North America"
 console.log(countryName);
-// @log: "アメリカ合衆国"
+// @log: "United States"
 ```
 
-## 分割代入のデフォルト値
+## Giá trị default trong destructuring assignment
 
-分割代入では、`=`のあとにデフォルト値が指定できます。デフォルト値は値が、`undefined`のときに代入されます。
+Trong destructuring assignment, có thể chỉ định giá trị default sau dấu `=`. Giá trị default được gán khi giá trị là `undefined`.
 
 ```ts twoslash
 const color = { r: undefined, g: 122, b: 204 };
@@ -119,7 +119,7 @@ console.log(r, g, b);
 // @log: 0,  122,  204
 ```
 
-値が`null`のときは、デフォルト値が使われません。`null`がそのまま代入されます。
+Khi giá trị là `null`, giá trị default không được sử dụng. `null` được gán nguyên vẹn.
 
 ```ts twoslash
 const color = { r: null };
@@ -128,9 +128,9 @@ console.log(r);
 // @log: null
 ```
 
-## デフォルト値と変数名の指定
+## Giá trị default và chỉ định tên biến
 
-分割代入のデフォルト値と代入先の変数名を同時に指定することもできます。その場合、代入先変数名に続けて、デフォルト値を書きます。
+Có thể đồng thời chỉ định giá trị default và tên biến gán trong destructuring assignment. Trong trường hợp đó, viết giá trị default sau tên biến gán.
 
 ```ts twoslash
 const color = { r: undefined, g: 122, b: 204 };
@@ -141,14 +141,14 @@ console.log(red);
 
 <PostILearned>
 
-・JavaScriptの分割代入はプロパティを取り出せる。
-・同じ変数名を使う場合、コードが簡潔になる。
-・複数のプロパティを取り出すときは特に便利。
-・入れ子のプロパティも取り出せる。
-・デフォルト値も指定できる。
+・Destructuring assignment trong JavaScript có thể lấy property
+・Khi sử dụng cùng tên biến, code trở nên ngắn gọn
+・Đặc biệt tiện lợi khi lấy nhiều property
+・Có thể lấy property lồng nhau
+・Có thể chỉ định giá trị default
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
-[配列の分割代入 (destructuring assignment)](../array/destructuring-assignment-from-array.md)
+[Destructuring assignment của array](../array/destructuring-assignment-from-array.md)

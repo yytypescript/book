@@ -1,10 +1,10 @@
-# オブジェクトをループする方法
+# Cách loop object
 
-JavaScript・TypeScriptでオブジェクトのプロパティをループする方法を説明します。
+Giải thích cách loop qua property của object trong JavaScript/TypeScript.
 
-## for-in文
+## Câu lệnh for-in
 
-JavaScriptでオブジェクトをループする古くからある方法はfor-in文を使うものです。
+Cách cổ điển để loop object trong JavaScript là sử dụng câu lệnh for-in.
 
 ```js twoslash
 const foo = { a: 1, b: 2, c: 3 };
@@ -12,13 +12,13 @@ for (const prop in foo) {
   console.log(prop, foo[prop]);
   // a 1
   // b 2
-  // c 3 の順で出力される
+  // c 3 được output theo thứ tự
 }
 ```
 
-## for-in文では`hasOwnProperty`を使おう
+## Nên sử dụng `hasOwnProperty` với for-in
 
-JavaScriptのオブジェクトには元になるプロトタイプがあります。たとえば、オブジェクトリテラルであれば、`Object.prototype`がプロトタイプになります。
+Object trong JavaScript có prototype làm nguồn gốc. Ví dụ, với object literal, `Object.prototype` là prototype.
 
 ```js twoslash
 const foo = { a: 1, b: 2, c: 3 };
@@ -26,26 +26,26 @@ console.log(Object.getPrototypeOf(foo) === Object.prototype);
 // @log: true
 ```
 
-`Object.prototype`を変更するとその影響は、このプロトタイプを持つすべてのオブジェクトに影響します。
+Khi thay đổi `Object.prototype`, ảnh hưởng sẽ lan đến tất cả object có prototype này.
 
 ```js twoslash
 const foo = { a: 1 };
 const date = new Date();
 const arr = [1, 2, 3];
 
-// どのオブジェクトもhiプロパティが無いことを確認
+// Xác nhận không có property hi ở object nào
 console.log(foo.hi, date.hi, arr.hi);
 // @log: undefined undefined undefined
 
-// プロトタイプにプロパティを追加する
+// Thêm property vào prototype
 Object.prototype.hi = "Hi!";
 
-// どのオブジェクトもhiプロパティを持つようになる
+// Tất cả object đều có property hi
 console.log(foo.hi, date.hi, arr.hi);
 // @log: Hi! Hi! Hi!
 ```
 
-for-in文はプロトタイプのプロパティも含めてループする仕様があります。そのため、プロトタイプが変更されると、意図しないところでfor-inのループ回数が変わることがあります。
+Câu lệnh for-in có đặc điểm loop bao gồm cả property của prototype. Do đó, khi prototype bị thay đổi, số lần loop của for-in có thể thay đổi ngoài ý muốn.
 
 ```js twoslash
 const foo = { a: 1, b: 2, c: 3 };
@@ -55,11 +55,11 @@ for (const prop in foo) {
   // a 1
   // b 2
   // c 3
-  // hi Hi! の順で出力される
+  // hi Hi! được output theo thứ tự
 }
 ```
 
-したがって、for-inで反復処理を書く場合は、`hasOwnProperty`でプロパティがプロトタイプのものでないことをチェックしたほうが安全です。
+Do đó, khi viết xử lý lặp bằng for-in, an toàn hơn là kiểm tra property không phải của prototype bằng `hasOwnProperty`.
 
 ```js twoslash
 const foo = { a: 1, b: 2, c: 3 };
@@ -69,14 +69,14 @@ for (const prop in foo) {
     console.log(prop, foo[prop]);
     // a 1
     // b 2
-    // c 3  の順で出力される
+    // c 3 được output theo thứ tự
   }
 }
 ```
 
 ## `Object.entries`
 
-`Object.entries`の戻り値をfor-of文でループする方法もあります。
+Cũng có cách loop giá trị trả về của `Object.entries` bằng câu lệnh for-of.
 
 ```ts twoslash
 // @target: es2017
@@ -85,15 +85,15 @@ for (const [key, value] of Object.entries(foo)) {
   console.log(key, value);
   // a 1
   // b 2
-  // c 3 の順で出力される
+  // c 3 được output theo thứ tự
 }
 ```
 
-for-in文と異なり、`hasOwnProperty`のチェックが不要です。
+Khác với câu lệnh for-in, không cần kiểm tra `hasOwnProperty`.
 
 ## `Object.keys`
 
-プロパティのキーだけを反復処理する場合は、`Object.key`の戻り値をfor-of文でループする方法があります。
+Khi chỉ muốn lặp qua key của property, có cách loop giá trị trả về của `Object.keys` bằng câu lệnh for-of.
 
 ```ts twoslash
 // @target: es2017
@@ -102,15 +102,15 @@ for (const key of Object.keys(foo)) {
   console.log(key);
   // a
   // b
-  // c の順で出力される
+  // c được output theo thứ tự
 }
 ```
 
-for-in文と異なり、`hasOwnProperty`のチェックが不要です。
+Khác với câu lệnh for-in, không cần kiểm tra `hasOwnProperty`.
 
 ## `Object.values`
 
-プロパティの値だけを反復処理する場合は、`Object.values`の戻り値をfor-of文でループする方法があります。
+Khi chỉ muốn lặp qua value của property, có cách loop giá trị trả về của `Object.values` bằng câu lệnh for-of.
 
 ```ts twoslash
 // @target: es2017
@@ -119,25 +119,25 @@ for (const value of Object.values(foo)) {
   console.log(value);
   // 1
   // 2
-  // 3 の順で出力される
+  // 3 được output theo thứ tự
 }
 ```
 
-for-in文と異なり、`hasOwnProperty`のチェックが不要です。
+Khác với câu lệnh for-in, không cần kiểm tra `hasOwnProperty`.
 
 <PostILearned>
 
-JavaScriptやTypeScriptのオブジェクトプロパティをループするには次の方法がある。
+Để loop qua property của object trong JavaScript và TypeScript có các cách sau:
 
-1️⃣ for-in文
-2️⃣ for-of文 + Object.entries()
-3️⃣ for-of文 + Object.keys()
-4️⃣ for-of文 + Object.values()
+1️⃣ Câu lệnh for-in
+2️⃣ Câu lệnh for-of + Object.entries()
+3️⃣ Câu lệnh for-of + Object.keys()
+4️⃣ Câu lệnh for-of + Object.values()
 
-⚠️ for-in文はhasOwnPropertyのチェックが必要。
+⚠️ Câu lệnh for-in cần kiểm tra hasOwnProperty.
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
-[配列をループする方法](../array/how-to-loop-an-array.md)
+[Cách loop array](../array/how-to-loop-an-array.md)

@@ -1,61 +1,61 @@
-# 0010-チケット駆動の執筆
+# 0010-Viết theo hướng Ticket-driven
 
-- ステータス: 採用
-- 提案者: @suin
-- 参加者: @suin, @canalun, @jamashita
-- 更新日: 2023-02-24
+- Trạng thái: Áp dụng
+- Người đề xuất: @suin
+- Người tham gia: @suin, @canalun, @jamashita
+- Ngày cập nhật: 2023-02-24
 
-プルリクエストをマージしない場合、プルリクエスト作者の時間と労力が無駄になり、申し訳ないという問題がある。これを解決すべく、プルリクエストを作成する前に、issueで話し合うプロセスを採用します。
+Khi không merge pull request, thời gian và công sức của tác giả pull request sẽ bị lãng phí, điều này gây áy náy. Để giải quyết vấn đề này, chúng tôi áp dụng quy trình thảo luận trên issue trước khi tạo pull request.
 
-## 背景: コントリビューターの増加
+## Bối cảnh: Số lượng contributor tăng lên
 
-サバイバルTypeScriptのコントリビューターの増加に伴い、プルリクエストが増えてきました。プルリクエストの中には、マージされないものも出てきました。その理由として、本書の方向性と合わないといった理由が多いです。
+Cùng với sự gia tăng số lượng contributor của Survival TypeScript, số lượng pull request cũng tăng lên. Trong số đó, có những pull request không được merge. Lý do thường gặp là không phù hợp với định hướng của cuốn sách.
 
-## 課題1: 労力などがもったいない
+## Vấn đề 1: Lãng phí công sức
 
-プルリクエストは、コントリビューターの時間・労力・才能が注ぎ込まれて作られます。そうした貢献を取り込まないことは、時間・労力・才能を無駄遣いすることに他なりません。これは、コントリビューターにとって望ましいことではないでしょう。
+Pull request được tạo ra từ thời gian, công sức và tài năng của contributor. Việc không tiếp nhận những đóng góp như vậy đồng nghĩa với việc lãng phí thời gian, công sức và tài năng. Điều này không phải là điều mong muốn đối với contributor.
 
-## 課題2: 断るのが心理的負担
+## Vấn đề 2: Từ chối là gánh nặng tâm lý
 
-プルリクエストを断ることは、メンテナーにとっても難しいことです。プルリクエストの背後にある時間や労力について考えると、ひとことでは断れません。読者のことを考えるとマージすべきではないと思いつつも、コントリビューターのことを思うとマージしてあげたい。そんな板挟みもあります。そうした心理的負担は、メンテナーにとっての問題であり、執筆を進める上での抵抗にもなっています。
+Việc từ chối pull request cũng là điều khó khăn đối với maintainer. Khi nghĩ đến thời gian và công sức đằng sau pull request, không thể từ chối bằng một vài lời. Dù nghĩ rằng không nên merge khi xét đến độc giả, nhưng lại muốn merge khi nghĩ đến contributor. Có những tình huống tiến thoái lưỡng nan như vậy. Gánh nặng tâm lý này là vấn đề đối với maintainer và cũng trở thành rào cản trong quá trình viết.
 
-## 解決策: チケット駆動
+## Giải pháp: Ticket-driven
 
-上の課題を解決するのがチケット駆動です。「着手する前に話し合いましょう」というのが趣旨です。
+Ticket-driven là giải pháp cho các vấn đề trên. Mục đích là "hãy thảo luận trước khi bắt đầu".
 
-着手する前に話し合うことで、上の課題が解決し、次のメリットがあります。
+Bằng cách thảo luận trước khi bắt đầu, các vấn đề trên được giải quyết và có những lợi ích sau:
 
-- 本書の方向性とあったプルリクエストが生まれやすい
-- コントリビューターの時間・労力・才能の無駄遣いが減る
-- メンテナーの心理的負担が軽減される
+- Dễ tạo ra pull request phù hợp với định hướng của cuốn sách
+- Giảm lãng phí thời gian, công sức và tài năng của contributor
+- Giảm gánh nặng tâm lý cho maintainer
 
-また副次的に次のようなメリットもあります。
+Ngoài ra còn có các lợi ích phụ sau:
 
-- 変更の経緯が追える。変更についてどのような議論がなされたのか、なぜ変更する必要があったのかなどを後の人が知れるようになります。
+- Có thể theo dõi lịch sử thay đổi. Những người sau có thể biết được những cuộc thảo luận nào đã diễn ra về thay đổi, tại sao cần thay đổi, v.v.
 
-### もしもチケット駆動でないプルリクエストが作られた場合
+### Nếu pull request được tạo mà không theo ticket-driven
 
-もしも議論をせずにプルリクエストが作られた場合は、次のプロセスを行います。
+Nếu pull request được tạo mà không thảo luận trước, sẽ thực hiện quy trình sau:
 
-- issueから始め直す。議論が必要そうであれば、issueからやり直す必要があります。
-- そのままマージする。議論が必要なく、取り込む必要性が自明なときはマージする。
+- Bắt đầu lại từ issue. Nếu cần thảo luận, cần bắt đầu lại từ issue.
+- Merge trực tiếp. Khi không cần thảo luận và sự cần thiết của việc tiếp nhận là hiển nhiên thì sẽ merge.
 
-ただし、できるだけチケット駆動を崩すべきではないと思うので、issueから始め直すがデフォルトフローとなるようにします。
+Tuy nhiên, vì không nên phá vỡ ticket-driven càng nhiều càng tốt, nên việc bắt đầu lại từ issue sẽ là flow mặc định.
 
-また、issueなしにプルリクエストが作られた場合は、Closeされるリスクが高いことをドキュメントで注意喚起しておきます。
+Ngoài ra, trong tài liệu sẽ cảnh báo rằng pull request được tạo mà không có issue sẽ có nguy cơ bị Close cao.
 
-## 副解決策: PULL_REQUEST_TEMPLATE.mdの導入
+## Giải pháp phụ: Đưa vào PULL_REQUEST_TEMPLATE.md
 
-PULL_REQUEST_TEMPLATE.mdを用意しておき、チケット駆動で行っていることを旨をそれに含めておきます。こうすることで、プルリクエストを作成する際にその内容が表示されるため、新規参加者もチケット駆動に気づきやすくなります。この解決策は、課題1には効果が薄いですが、課題2への解決策にはなります。
+Chuẩn bị sẵn PULL_REQUEST_TEMPLATE.md và bao gồm nội dung về việc thực hiện ticket-driven trong đó. Bằng cách này, nội dung đó sẽ được hiển thị khi tạo pull request, nên người tham gia mới cũng dễ nhận ra ticket-driven. Giải pháp này không hiệu quả lắm với vấn đề 1, nhưng là giải pháp cho vấn đề 2.
 
-## 補助策: GitHub Actionsで「Close {issue_number}」をチェックする
+## Biện pháp hỗ trợ: Kiểm tra "Close {issue_number}" bằng GitHub Actions
 
-GitHub Actionsでプルリクエストの本文にイシューを閉じる指示「Close {issue_number}」が含まれているかをチェックし、チケット駆動が原則として働く環境づくりをします。
+Sử dụng GitHub Actions để kiểm tra xem phần mô tả của pull request có chứa chỉ dẫn đóng issue "Close {issue_number}" hay không, tạo môi trường để ticket-driven hoạt động như nguyên tắc.
 
-使用するGitHub Action: https://github.com/marketplace/actions/verify-linked-issue
+GitHub Action sử dụng: https://github.com/marketplace/actions/verify-linked-issue
 
-いくらチケット駆動を謳っても、それを働きかける環境がないと形骸化しそうです。形骸化を防ぐためには、このGitHub Actionsが有効そうです。
+Dù có tuyên bố ticket-driven bao nhiêu, nếu không có môi trường thúc đẩy nó thì có vẻ sẽ trở nên hình thức. Để ngăn chặn sự hình thức hóa, GitHub Actions này có vẻ hiệu quả.
 
-## 関連PDR
+## PDR liên quan
 
-なし
+Không có

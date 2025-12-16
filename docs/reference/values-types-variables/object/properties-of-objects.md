@@ -1,34 +1,34 @@
-# オブジェクトのプロパティ
+# Property của object
 
-JavaScriptのオブジェクトは、プロパティの集合体です。プロパティはキーと値の対です。プロパティの値には、`1`や`"string"`のようなプリミティブ型や関数、そして、オブジェクトも入れることができます。
+Object trong JavaScript là tập hợp các property. Property là cặp key và value. Value của property có thể là primitive type như `1` hay `"string"`, function, hoặc object.
 
 ```js twoslash
 const product = {
-  name: "ミネラルウォーター",
+  name: "Mineral Water",
   price: 100,
   getTaxIncludedPrice: function () {
     return Math.floor(this.price * 1.1);
   },
-  shomikigen: new Date("2022-01-20"),
+  expiryDate: new Date("2022-01-20"),
 };
 ```
 
-上の`getTaxIncludedPrice`には関数が代入されていますが、この関数は「メソッド」と呼ばれます。メソッドとは、オブジェクトに関連づいた関数のことです。メソッドを定義するには、キーと関数の値に分けて書く方法だけでなく、メソッド定義のための短い構文を使うこともできます。
+Ở trên, `getTaxIncludedPrice` được gán function, function này gọi là "method". Method là function gắn với object. Để định nghĩa method, ngoài cách viết tách key và value của function, còn có cú pháp ngắn gọn để định nghĩa method.
 
 ```js twoslash
 const object = {
-  // キーと値に分けて書いたメソッド定義
+  // Định nghĩa method tách key và value
   printHello1: function () {
     console.log("Hello");
   },
-  // 短い構文を用いたメソッド定義
+  // Định nghĩa method bằng cú pháp ngắn
   printHello2() {
     console.log("Hello");
   },
 };
 ```
 
-JavaやPHPでは、オブジェクトのフィールドとメソッドははっきり区別されます。一方、JavaScriptではその区別はきっちりしていません。Javaで言うところのメソッドとフィールドは、JavaScriptでは同じように扱われます。たとえば、メソッドに`null`を代入することで、フィールドに変えてしまうこともできます。
+Trong Java hay PHP, field và method của object được phân biệt rõ ràng. Ngược lại, JavaScript không phân biệt chặt chẽ. Method và field theo cách gọi của Java được JavaScript xử lý như nhau. Ví dụ, có thể gán `null` vào method để biến nó thành field.
 
 ```js twoslash
 const calculator = {
@@ -40,5 +40,5 @@ const calculator = {
 calculator.sum(1, 1);
 // @log: 2
 calculator.sum = null;
-calculator.sum(1, 1); // ここではもうメソッドではないので、呼び出すとエラーになります
+calculator.sum(1, 1); // Không còn là method nên gọi sẽ bị error
 ```

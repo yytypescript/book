@@ -1,68 +1,68 @@
-# 0009-Docusaurusを採用する
+# 0009-Áp dụng Docusaurus
 
-- ステータス: 採用
-- 提案者: @suin
-- 決定者: @suin, @jamashita, @t-yng
-- 更新日: 2021-10-16
+- Trạng thái: Áp dụng
+- Người đề xuất: @suin
+- Người quyết định: @suin, @jamashita, @t-yng
+- Ngày cập nhật: 2021-10-16
 
-今まで執筆に用いてきたGitBookでは次の課題が生じた。これを解決すべくDocusaurusを採用する。理由は、次にあげる。
+GitBook mà chúng tôi đã sử dụng để viết đến nay gặp phải các vấn đề sau. Để giải quyết những vấn đề này, chúng tôi áp dụng Docusaurus. Lý do được liệt kê dưới đây.
 
-## 背景
+## Bối cảnh
 
-- Amazonに電子書籍を出すため、eBook(ePub, mobi, PDFのどれか)を出力したい。入門書を探すとき、Amazonを検索する人が多いため。
-- CIで日本語の校閲やサンプルコードの自動フォーマットを行いたい。
+- Muốn xuất eBook (ePub, mobi hoặc PDF) để phát hành sách điện tử trên Amazon. Vì nhiều người tìm sách nhập môn bằng cách tìm kiếm trên Amazon.
+- Muốn thực hiện kiểm tra ngôn ngữ và tự động format sample code qua CI.
 
-## GitBookの課題
+## Vấn đề của GitBook
 
-- PDF出力するために年間40万円かかる。
-- CIが難しい。
-- 最近のUIリニューアルで、エディターが重すぎて編集がままならない状況が出てきた。
-- その他の細かい問題点
-  - h1, h2, h3など漢字がヘッダーアンカーで中国語ピンインになる。
-  - GitHubのPRをマージした後に、GitBookで編集するとインデックス型やMapped Typesのコード行が消える不具合がある。
-  - GitBookエディターが日本語に十分に対応できてない。
+- Chi phí 400.000 yên/năm để xuất PDF.
+- Khó thực hiện CI.
+- Sau đợt cập nhật UI gần đây, editor quá nặng dẫn đến tình trạng không thể chỉnh sửa bình thường.
+- Các vấn đề nhỏ khác:
+  - Chữ Hán trong h1, h2, h3 bị chuyển thành pinyin tiếng Trung trong header anchor.
+  - Có lỗi khiến các dòng code của index type và Mapped Types bị mất khi chỉnh sửa trên GitBook sau khi merge PR từ GitHub.
+  - GitBook editor không hỗ trợ đầy đủ tiếng Nhật.
 
-## Docusaurus採用理由
+## Lý do áp dụng Docusaurus
 
-- PDFが無料で出力可能。
-- CIによるコンテンツの自動校閲が可能。
+- Có thể xuất PDF miễn phí.
+- Có thể tự động kiểm tra nội dung qua CI.
 
-## 検討した選択肢
+## Các lựa chọn được xem xét
 
 1. Docusaurus
 1. Next.js
 
-## 各選択肢のよい点と悪い点
+## Ưu điểm và nhược điểm của từng lựa chọn
 
-### 候補1: Docusaurus
+### Ứng viên 1: Docusaurus
 
-Docusaurusは、React製オープンソースのJAMStack型ドキュメント生成ツール。
+Docusaurus là công cụ tạo tài liệu dạng JAMStack open source được xây dựng bằng React.
 
-- Good: アップデートが継続していて、成長にも期待が持てる。
-- Good: 権威と実績がある。Facebookが開発し、ReactやJestなど多くのオープンソースのドキュメントに用いられている。
-- Good: PDF出力が可能。docusaurus-prince-pdfを用いてPDF出力ができる。
-- Good: CIで自動校閲が可能。GitHub Actionsと自動校閲ツールを組み合わせることで、自動的に誤字や表記ゆれを検出、場合によっては修正までできる。
-- Good: カスタマイズ性が高い。DocusaurusはReactで作られていて、Reactでできることができる。
-- Good: ドキュメントの表現力が高い。コードブロックの行ハイライトなど。
-- Good: ページ遷移が速い。
-- Good: 編集をすべてプルリクエストを通じてやるようにすれば、CLAが求めやすくなる。
-- Good: 執筆会レギュラーメンバーじゃない人も同じワークフローになり、シンプル化。誤字脱字修正者から執筆者へのレベルアップもしやすくなる。
-- Bad: 検索機能が弱い。特に日本語IMEで変換に十分に対応していない。
-- Bad: 自前でホスティングする必要がある。
+- Good: Được cập nhật liên tục và có thể kỳ vọng sự phát triển.
+- Good: Có uy tín và thành tích. Được phát triển bởi Facebook và được sử dụng cho tài liệu của nhiều dự án open source như React, Jest.
+- Good: Có thể xuất PDF. Có thể xuất PDF bằng docusaurus-prince-pdf.
+- Good: Có thể tự động kiểm tra qua CI. Bằng cách kết hợp GitHub Actions với công cụ kiểm tra tự động, có thể phát hiện lỗi chính tả và sự không nhất quán trong cách viết, thậm chí trong một số trường hợp có thể tự động sửa.
+- Good: Khả năng tùy chỉnh cao. Docusaurus được xây dựng bằng React, nên có thể làm những gì React làm được.
+- Good: Khả năng biểu đạt tài liệu cao. Ví dụ như highlight dòng trong code block.
+- Good: Chuyển trang nhanh.
+- Good: Nếu thực hiện tất cả chỉnh sửa thông qua pull request, việc yêu cầu CLA sẽ dễ dàng hơn.
+- Good: Những người không phải thành viên thường xuyên của nhóm viết cũng có cùng workflow, giúp đơn giản hóa. Việc nâng cấp từ người sửa lỗi chính tả thành người viết cũng trở nên dễ dàng hơn.
+- Bad: Chức năng tìm kiếm yếu. Đặc biệt không hỗ trợ đầy đủ việc chuyển đổi trong IME tiếng Nhật.
+- Bad: Cần tự hosting.
 
-### 候補2: Next.js
+### Ứng viên 2: Next.js
 
-Next.jsはフロントエンドアプリケーション向けのフレームワーク。静的サイト生成にも用いられる。
+Next.js là framework dành cho ứng dụng frontend. Cũng được sử dụng để tạo static site.
 
-- Good: アップデートが継続していて、成長にも期待が持てる。
-- Good: CIで自動校閲が可能。GitHub Actionsと自動校閲ツールを組み合わせることで、自動的に誤字や表記ゆれを検出、場合によっては修正までできる。
-- Good: カスタマイズ性が高い。
-- Good: ページ遷移が速い。
-- Good: 編集をすべてプルリクエストを通じてやるようにすれば、CLAが求めやすくなる。
-- Good: 執筆会レギュラーメンバーじゃない人も同じワークフローになり、シンプル化。誤字脱字修正者から執筆者へのレベルアップもしやすくなる。
-- Bad: UIを自作する必要がある。
-- Bad: Markdownからコンテンツページを生成するロジックを自作する必要がある。
+- Good: Được cập nhật liên tục và có thể kỳ vọng sự phát triển.
+- Good: Có thể tự động kiểm tra qua CI. Bằng cách kết hợp GitHub Actions với công cụ kiểm tra tự động, có thể phát hiện lỗi chính tả và sự không nhất quán trong cách viết, thậm chí trong một số trường hợp có thể tự động sửa.
+- Good: Khả năng tùy chỉnh cao.
+- Good: Chuyển trang nhanh.
+- Good: Nếu thực hiện tất cả chỉnh sửa thông qua pull request, việc yêu cầu CLA sẽ dễ dàng hơn.
+- Good: Những người không phải thành viên thường xuyên của nhóm viết cũng có cùng workflow, giúp đơn giản hóa. Việc nâng cấp từ người sửa lỗi chính tả thành người viết cũng trở nên dễ dàng hơn.
+- Bad: Cần tự xây dựng UI.
+- Bad: Cần tự xây dựng logic để tạo trang nội dung từ Markdown.
 
-## 関連PDR
+## PDR liên quan
 
-[0001-GitBookで執筆する](0001-write-with-gitbook.md)
+[0001-Viết với GitBook](0001-write-with-gitbook.md)

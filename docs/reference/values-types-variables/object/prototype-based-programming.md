@@ -1,23 +1,23 @@
-# プロトタイプベース
+# Prototype-based
 
-ここではJavaScriptのプロトタイプベースの概要を説明します。JavaやPHPなどでクラスを使ったことがある方や、オブジェクト指向プログラミングに触れたことがある方を念頭に書いています。また、ここでは主に次の疑問に答えていきます。
+Phần này giải thích tổng quan về prototype-based của JavaScript. Nội dung được viết dành cho những người đã từng sử dụng class trong Java, PHP hoặc đã tiếp xúc với lập trình hướng đối tượng. Ngoài ra, phần này chủ yếu trả lời các câu hỏi sau:
 
-- プロトタイプベースとはどのような考え方なのか？
-- プロトタイプベースのJavaScriptは、クラスベースのPHPやJavaとどんなところが違う？
-- なぜJavaScriptはプロトタイプベースを採用したのか？
-- プロトタイプベースの利点は何か？
+- Prototype-based là cách tiếp cận như thế nào?
+- JavaScript prototype-based khác gì so với PHP, Java class-based?
+- Tại sao JavaScript lại áp dụng prototype-based?
+- Ưu điểm của prototype-based là gì?
 
-## オブジェクトの生成
+## Tạo object
 
-オブジェクト指向プログラミング(OOP)では、オブジェクトを扱います。オブジェクトを扱う以上は、オブジェクトを生成する必要があります。
+Trong lập trình hướng đối tượng (OOP), chúng ta làm việc với object. Để làm việc với object, cần phải tạo object.
 
-しかし、オブジェクトの生成方式は、OOPで統一的な決まりはありません。言語によって異なるのです。言語によりオブジェクト生成の細部は異なりますが、生成方法は大きく分けて「クラスベース」と「プロトタイプベース」があります。
+Tuy nhiên, cách tạo object không có quy tắc thống nhất trong OOP. Nó khác nhau tùy theo ngôn ngữ. Mặc dù chi tiết về cách tạo object khác nhau theo ngôn ngữ, nhưng phương pháp tạo có thể chia thành hai loại lớn: "class-based" và "prototype-based".
 
-## クラスベースとは
+## Class-based là gì
 
-JavaやPHP、Ruby、Pythonなどはクラスベースに分類されます。クラスベースでのオブジェクト生成は、オブジェクトの設計図である「クラス」を用います。クラスに対して`new`演算子を用いるなどして得られるのがオブジェクトであり、クラスベースの世界では、それを「インスタンス」と呼びます。
+Java, PHP, Ruby, Python được phân loại là class-based. Trong class-based, việc tạo object sử dụng "class" - bản thiết kế của object. Khi sử dụng operator `new` với class, ta nhận được object, và trong thế giới class-based, nó được gọi là "instance".
 
-たとえば、ボタンのオブジェクトがほしいときは、まずその設計図となるボタンクラスを作ります。
+Ví dụ, khi muốn có object button, trước tiên tạo class Button làm bản thiết kế.
 
 ```js twoslash
 class Button {
@@ -27,7 +27,7 @@ class Button {
 }
 ```
 
-その上で、ボタンクラスに対して`new`演算子を用いると、ボタンオブジェクトが得られます。
+Sau đó, sử dụng operator `new` với class Button để nhận được object button.
 
 ```js twoslash
 class Button {
@@ -36,58 +36,58 @@ class Button {
   }
 }
 // ---cut---
-const dangerousButton = new Button("絶対に押すなよ?");
+const dangerousButton = new Button("Đừng có nhấn nhé?");
 ```
 
-このような言語がクラスベースと言われるのは、オブジェクトの素となるのがクラスだからです。
+Ngôn ngữ như vậy được gọi là class-based vì nguồn gốc của object là class.
 
-## プロトタイプベースとは
+## Prototype-based là gì
 
-一方のJavaScriptのオブジェクト生成はプロトタイプベースです。プロトタイプベースの特徴は、クラスのようなものが無いところです。(あったとしてもクラスもオブジェクトの一種だったりと特別扱いされていない)
+Ngược lại, việc tạo object trong JavaScript là prototype-based. Đặc điểm của prototype-based là không có thứ gì giống như class. (Nếu có thì class cũng là một loại object và không được đối xử đặc biệt)
 
-クラスベースではオブジェクトの素となるものはクラスでした。プロトタイプベースには、クラスがありません。では、何を素にしてオブジェクトを生成するのでしょうか。答えは、「オブジェクトを素にして新しいオブジェクトを生成する」です。
+Trong class-based, nguồn gốc của object là class. Prototype-based không có class. Vậy lấy gì làm nguồn gốc để tạo object? Câu trả lời là "tạo object mới từ object làm nguồn gốc".
 
-たとえば、JavaScriptでは既存のオブジェクトに対して、`Object.create()`を実行すると新しいオブジェクトが得られます。
+Ví dụ, trong JavaScript, khi thực thi `Object.create()` với object đã có, ta nhận được object mới.
 
 ```js twoslash
 const button = {
-  name: "ボタン",
+  name: "Button",
 };
 
 const dangerousButton = Object.create(button);
-dangerousButton.name = "絶対に押すなよ？";
+dangerousButton.name = "Đừng có nhấn nhé?";
 ```
 
-上の例の`button`と`dangerousButton`は異なるオブジェクトになります。その証拠に、それぞれの`name`プロパティは値が異なります。
+Trong ví dụ trên, `button` và `dangerousButton` là các object khác nhau. Bằng chứng là property `name` của mỗi object có giá trị khác nhau.
 
 ```js twoslash
 console.log(button.name);
-// @log: "ボタン"
+// @log: "Button"
 console.log(dangerousButton.name);
-// @log: "絶対に押すなよ？"
+// @log: "Đừng có nhấn nhé?"
 ```
 
-「プロトタイプ」とは日本語では「原型」のことです。プロトタイプベースは単純に言ってしまえば、原型となるオブジェクトを素にオブジェクトを生成するアプローチなのです。
+"Prototype" trong tiếng Việt có nghĩa là "nguyên mẫu". Nói đơn giản, prototype-based là cách tiếp cận tạo object từ object nguyên mẫu làm nguồn gốc.
 
 :::info
 
-### コラム: プロトタイプベースは直感的でない？
+### Cột: Prototype-based không trực quan?
 
-この本の読者の多くは、PHPやJavaなどクラスベースの言語に馴染みが深いかと思います。その立場からすると、プロトタイプベースは直感的でないと感じるかもしれません。ところが、日常生活で私たちはプロトタイプベース的な活動をしていることがあります。ここでは、プロトタイプベースが少しでも身近に感じられるよう、ちょっとした例え話をしたいと思います。
+Nhiều độc giả của cuốn sách này có lẽ đã quen với các ngôn ngữ class-based như PHP hay Java. Từ góc độ đó, prototype-based có thể cảm thấy không trực quan. Tuy nhiên, trong cuộc sống hàng ngày, chúng ta thực sự có những hoạt động mang tính prototype-based. Ở đây, tôi muốn kể một câu chuyện ví dụ nhỏ để prototype-based trở nên gần gũi hơn.
 
-仕事などで書類を作成することはないでしょうか。会議の議事録、テスト仕様書、報告書、経費精算書…。いろいろあると思います。中には定期的、または不定期に同じような書類を何度か作ることもあるでしょう。みなさんは繰り返しのペーパーワークをどうこなしていますか。
+Bạn có bao giờ tạo tài liệu trong công việc không? Biên bản họp, tài liệu test spec, báo cáo, phiếu thanh toán chi phí... Có rất nhiều loại. Trong số đó, có những tài liệu tương tự được tạo nhiều lần định kỳ hoặc không định kỳ. Bạn xử lý công việc giấy tờ lặp đi lặp lại như thế nào?
 
-準備のいい人は、雛形を作っておくことでしょう。雛形とは、いつも変わらない部分は埋めておき、毎度内容が変わる部分は空欄にした文書のことです。いざ書類が必要になったときは、雛形をベースに穴埋めすれば書類ができます。このやり方はクラスベースに似ています。クラスはそのままでは使えませんが、インスタンス化すると使えます。書類の雛形もそのままでは提出できませんが、穴埋めすれば役立ちます。
+Người chuẩn bị kỹ sẽ tạo template. Template là tài liệu mà phần không thay đổi được điền sẵn, phần thay đổi mỗi lần thì để trống. Khi cần tài liệu, chỉ cần điền vào chỗ trống dựa trên template là xong. Cách làm này giống với class-based. Class không thể sử dụng nguyên trạng, nhưng khi tạo instance thì có thể sử dụng. Template tài liệu cũng không thể nộp nguyên trạng, nhưng điền vào thì có ích.
 
-一方で、書類の準備の時間がないときや、準備のモチベーションが上がらないときは、雛形までは作らないかもしれません。それでも、前回使った書類があれば、それを複製して今回必要になることに合わせて内容を加筆したり、置き換えたりして仕上げてしまうことはありませんでしょうか。このアプローチはプロトタイプベースに似ています。プロトタイプとなるオブジェクトはそれ自身も使えますし、それを素にした新しいオブジェクトももちろん使えます。前回使った書類はそれ自身で役に立っていますが、それを複製して作った新しい書類も役に立ちます。
+Ngược lại, khi không có thời gian chuẩn bị tài liệu hoặc không có động lực để chuẩn bị, có thể không tạo template. Tuy nhiên, nếu có tài liệu đã dùng lần trước, bạn có thể sao chép nó và thêm bớt, thay thế nội dung cho phù hợp với lần này không? Cách tiếp cận này giống với prototype-based. Object prototype có thể sử dụng được chính nó, và object mới tạo từ nó cũng có thể sử dụng. Tài liệu đã dùng lần trước tự nó đã có ích, và tài liệu mới sao chép từ nó cũng có ích.
 
 :::
 
-## 継承
+## Kế thừa
 
-継承についても、クラスベースとプロトタイプベースでは異なる特徴があります。クラスベースでは、継承するときは`extends`キーワードなどを用いてクラスからクラスを派生させ、派生クラスからオブジェクトを生成する手順を踏みます。
+Về kế thừa, class-based và prototype-based cũng có đặc điểm khác nhau. Trong class-based, khi kế thừa, sử dụng từ khóa `extends` để tạo class dẫn xuất từ class, rồi tạo object từ class dẫn xuất đó.
 
-では上の手順を具体的なコードで確認してみましょう。ここに`Counter`クラスがあります。
+Hãy xác nhận quy trình trên bằng code cụ thể. Ở đây có class `Counter`.
 
 ```js twoslash
 class Counter {
@@ -101,7 +101,7 @@ class Counter {
 }
 ```
 
-このクラスは数とそれをカウントアップする振る舞いを持っています。この`Counter`クラスを継承して、リセット機能を持った派生クラスは次の`ResettableCounter`クラスになります。
+Class này có số đếm và hành vi count up. Class dẫn xuất có chức năng reset kế thừa từ class `Counter` này là class `ResettableCounter` sau.
 
 ```js twoslash
 class Counter {
@@ -121,7 +121,7 @@ class ResettableCounter extends Counter {
 }
 ```
 
-この`ResettableCounter`クラスを使うには、このクラスに対して`new`演算子でオブジェクトを生成します。
+Để sử dụng class `ResettableCounter` này, tạo object bằng operator `new` với class này.
 
 ```js twoslash
 class Counter {
@@ -145,9 +145,9 @@ counter.countUp();
 counter.reset();
 ```
 
-以上の例でもわかるとおり、クラスベースでの継承とオブジェクトの生成は`extends`と`new`といった異なる言語機能になっていることが多いです。
+Như ví dụ trên cho thấy, trong class-based, kế thừa và tạo object thường là các tính năng ngôn ngữ khác nhau như `extends` và `new`.
 
-一方、プロトタイプベースのJavaScriptでは、継承もオブジェクトの生成と同じプロセスで行います。次の例は、`counter`オブジェクトを継承した`resettableCounter`オブジェクトを作っています。
+Ngược lại, trong JavaScript prototype-based, kế thừa cũng được thực hiện với cùng quy trình như tạo object. Ví dụ sau tạo object `resettableCounter` kế thừa từ object `counter`.
 
 ```js twoslash
 const counter = {
@@ -163,13 +163,13 @@ resettableCounter.reset = function () {
 };
 ```
 
-継承と言ってもプロトタイプベースでは、クラスベースの`extends`のような特別な仕掛けがあるわけではなく、「既存のオブジェクトから新しいオブジェクトを作る」というプロトタイプベースの仕組みを継承に応用しているにすぎません。
+Dù gọi là kế thừa, trong prototype-based không có cơ chế đặc biệt như `extends` của class-based, chỉ đơn giản là ứng dụng cơ chế prototype-based "tạo object mới từ object đã có" vào kế thừa.
 
-## クラスベース風にも書けるJavaScript
+## JavaScript cũng có thể viết theo style class-based
 
-ここまでの説明で、クラスベースに慣れ親しんだ読者の中には「JavaScriptでオブジェクト指向プログラミングをしようとすると、随分と独特な書き方になるんだな」と思った方がいるかもしれません。ここで誤解して欲しくないのが、プロトタイプベースのJavaScriptでもクラスのような書き方ができるようになっていることです。
+Qua giải thích đến đây, trong số những độc giả quen với class-based, có thể có người nghĩ "Khi muốn làm OOP trong JavaScript, phải viết theo cách khá độc đáo nhỉ". Điều tôi muốn bạn không hiểu lầm ở đây là JavaScript prototype-based cũng có thể viết theo cách giống class.
 
-古いJavaScriptには確かにクラスの構文がなく独特の書き方がありましたが、ES2015に`class`や`extends`構文が導入されたため、近年のJavaScriptではクラスベース風の書き方が容易にできるようになっています。なので、クラスベースの他言語から来た開発者にも、JavaScriptコードは理解しやすいものになってきています。次のコードはクラスベースの説明の際に提示したものですが、実はこれはJavaScriptでした。
+JavaScript cũ thực sự không có cú pháp class và có cách viết độc đáo, nhưng vì cú pháp `class` và `extends` được đưa vào ES2015, JavaScript gần đây có thể dễ dàng viết theo style class-based. Do đó, code JavaScript cũng trở nên dễ hiểu hơn với developer đến từ các ngôn ngữ class-based khác. Code sau đây được đưa ra khi giải thích class-based, nhưng thực ra đây là JavaScript.
 
 ```js twoslash
 class Counter {
@@ -183,36 +183,36 @@ class Counter {
 }
 ```
 
-`class`構文が使える近年のJavaScript開発では、`Object.create`を多用したり、無理にプロトタイプベースを意識したコードにする必要もそうそう無いので心配しないでください。ただ、`class`構文があると言っても、JavaScriptがクラスベースに転向したのではなく、クラスベース風の書き方ができるにすぎません。かくいう`class`構文もプロトタイプベースの仕組みの上に成り立っており、JavaScriptのオブジェクトモデルはプロトタイプベースなので、この点は頭の片隅に入れておく必要があります。
+Trong phát triển JavaScript gần đây có thể sử dụng cú pháp `class`, không cần phải sử dụng nhiều `Object.create` hay cố gắng viết code theo kiểu prototype-based, nên đừng lo lắng. Tuy nhiên, dù có cú pháp `class`, không phải là JavaScript đã chuyển sang class-based, mà chỉ có thể viết theo style class-based. Cú pháp `class` cũng được xây dựng trên cơ chế prototype-based, và object model của JavaScript là prototype-based, nên cần ghi nhớ điểm này.
 
-## なぜJavaScriptはプロトタイプベースなのか？
+## Tại sao JavaScript là prototype-based?
 
-JavaScriptが採用しているプロトタイプベースがどのようなものなのか見てきました。では、なぜJavaScriptはクラスベースではなくプロトタイプベースを選んだのでしょうか。プロトタイプベースにした狙いとは何だったのでしょうか。
+Chúng ta đã xem prototype-based mà JavaScript áp dụng là gì. Vậy tại sao JavaScript lại chọn prototype-based thay vì class-based? Mục đích của việc chọn prototype-based là gì?
 
-JavaScriptの開発には次のような要件がありました。ブラウザで動く言語で、構文はJava風に。しかし、Javaほど大掛かりでないようにと。そして、開発期間はというと、10日と逼迫したものでした。
+Việc phát triển JavaScript có các yêu cầu sau: Ngôn ngữ chạy trên browser, cú pháp giống Java. Tuy nhiên, không cầu kỳ như Java. Và thời gian phát triển chỉ có 10 ngày, rất gấp rút.
 
-クラスベースの言語を作るのは、プロトタイプベースの言語を作るより難しいと言われています。JavaScriptを作るのに与えられた時間は非常に少ないものでしたから、工数削減にもプロトタイプベースは一役買ったことでしょう。
+Người ta nói việc tạo ngôn ngữ class-based khó hơn tạo ngôn ngữ prototype-based. Vì thời gian để tạo JavaScript rất ít, prototype-based có lẽ đã góp phần giảm công sức.
 
-Javaに似せよと言われて作られたJavaScript。Javaはクラスベースですが、JavaScriptはプロトタイプベースです。では、JavaScriptは泣く泣くクラスベースを諦めたのでしょうか。実はそうではありません。JavaScriptの作者であるBrendan Eich氏は[後のインタビュー](https://learning.oreilly.com/library/view/coders-at-work/9781430219484/Chapter04.html)で次のように語っています。
+JavaScript được tạo ra để giống Java. Java là class-based, nhưng JavaScript là prototype-based. Vậy JavaScript đã miễn cưỡng từ bỏ class-based? Thực ra không phải. Tác giả JavaScript, Brendan Eich, đã nói trong [cuộc phỏng vấn sau này](https://learning.oreilly.com/library/view/coders-at-work/9781430219484/Chapter04.html):
 
 > **Seibel**: So you wanted to be like Java, but not too much.
-> (Javaのようにしたいけれど、大掛かりはしたくなかったわけですね。)
+> (Vậy bạn muốn giống Java, nhưng không quá nhiều.)
 >
 > **Eich**: Not too much. If I put classes in, I'd be in big trouble. Not that I really had time to, but that would've been a no-no.
-> (そうですね。もしクラスを取り入れていたら、大変なことになっていたでしょう。時間がなかったのは確かですが、時間があったとしてもクラスはいやですね。)
+> (Đúng vậy. Nếu tôi đưa class vào, sẽ rắc rối lớn. Không phải là tôi thực sự có thời gian, nhưng dù có thời gian thì class cũng là điều không nên.)
 
-JavaScriptはクラスベースにするつもりはハナからなかったわけです。Eich氏はJavaScriptを設計するにあたって、できるだけ言語をシンプルにしたいと考えていたようです。JavaScriptはプリミティブ型の種類が少なかったり、プリミティブ型もオブジェクトのようにメソッドが使えるようになっていてプリミティブとオブジェクトの間に大きな隔たりが無かったりします。こうした言語設計もシンプルさを目指したからだそうです。
+JavaScript ngay từ đầu không có ý định trở thành class-based. Eich dường như đã nghĩ đến việc làm ngôn ngữ đơn giản nhất có thể khi thiết kế JavaScript. JavaScript có ít loại primitive type, và primitive type cũng có thể sử dụng method như object nên không có khoảng cách lớn giữa primitive và object. Thiết kế ngôn ngữ như vậy cũng là vì hướng đến sự đơn giản.
 
-JavaScriptの開発にあたり、Selfという言語の影響があったとEich氏は言います。Selfは1990年に発表されたプロトタイプベースのオブジェクト指向言語です。Selfの発表論文に掲げられたタイトルは「The Power of Simplicity」つまり「シンプルさの力」です。Selfはクラスを用いたオブジェクト指向プログラミングよりも、プロトタイプベースのほうが言語が単純化されると同時に柔軟になると主張しました。Selfはクラスだけでなく、関数と値の区別や、メソッドとフィールドの区別も撤廃したシンプルさを追求した言語です。言語は単純になると、言語の説明も簡単になり学びやすくもなります。シンプルにするために継承やクラスを諦めたかというとそうではなく、逆に柔軟さが生まれるので、クラスのようなものや継承もプロトタイプを応用すれば実現できるとSelfは主張しています。
+Eich nói rằng có ảnh hưởng từ ngôn ngữ Self trong việc phát triển JavaScript. Self là ngôn ngữ lập trình hướng đối tượng prototype-based được công bố năm 1990. Tiêu đề của bài báo công bố Self là "The Power of Simplicity" nghĩa là "Sức mạnh của sự đơn giản". Self chủ trương rằng prototype-based làm ngôn ngữ đơn giản hơn đồng thời linh hoạt hơn so với OOP sử dụng class. Self là ngôn ngữ theo đuổi sự đơn giản, loại bỏ không chỉ class mà còn sự phân biệt giữa function và value, giữa method và field. Khi ngôn ngữ đơn giản, việc giải thích ngôn ngữ cũng trở nên dễ dàng và dễ học hơn. Self chủ trương rằng không phải từ bỏ kế thừa hay class để đơn giản hóa, ngược lại sự linh hoạt sinh ra nên có thể thực hiện class hay kế thừa bằng cách ứng dụng prototype.
 
-これはあくまでSelfの意見でJavaScriptが明言したわけではありませんが、歴史の文脈から読み取るに、JavaScriptもSelfの考え方に共感してプロトタイプベースを採用したのは明らかです。JavaScriptのプロトタイプベース採用の背景には、言語をシンプルで柔軟なものにしたいという考えが根底にあったわけです。
+Đây chỉ là ý kiến của Self và JavaScript không nói rõ, nhưng đọc từ bối cảnh lịch sử, rõ ràng JavaScript cũng đồng cảm với cách nghĩ của Self và áp dụng prototype-based. Đằng sau việc JavaScript áp dụng prototype-based có suy nghĩ muốn làm ngôn ngữ đơn giản và linh hoạt.
 
-JavaScriptがプロトタイプベースを採用したことで、実際に柔軟なプログラミングが行えるようになっています。その一例として、プロトタイプを応用してクラス風のオブジェクト指向を実現するイディオムが生まれ、それが`class`構文として言語仕様に取り込まれたり、プロトタイプをプログラマが拡張することで古い実行環境でも最新バージョンのJavaScriptのメソッドが使えるようにするポリフィルが誕生してきました。
+Việc JavaScript áp dụng prototype-based đã thực sự cho phép lập trình linh hoạt. Một ví dụ là idiom thực hiện OOP style class bằng cách ứng dụng prototype đã ra đời và được đưa vào cú pháp `class` trong specification ngôn ngữ, hay polyfill cho phép sử dụng method JavaScript phiên bản mới nhất trên môi trường thực thi cũ bằng cách programmer mở rộng prototype.
 
-## まとめ
+## Tóm tắt
 
-- クラスベースは、クラスをもとに新しいオブジェクトを生成するスタイル。JavaやPHPなどが該当。
-- プロトタイプベースは、既存のオブジェクトから新しいオブジェクトを生成するスタイル。JavaScriptが該当。
-- プロトタイプベースでの継承は、特別な操作ではなく、オブジェクト生成とまったく同じプロセスである。
-- JavaScriptでも`class`構文を使えばクラスベース風のプログラミングが可能。
-- JavaScriptがプロトタイプベースを採用したのは、言語をシンプルで柔軟なものにするのが狙い。
+- Class-based là style tạo object mới từ class làm nguồn gốc. Java, PHP thuộc loại này.
+- Prototype-based là style tạo object mới từ object đã có. JavaScript thuộc loại này.
+- Kế thừa trong prototype-based không phải là thao tác đặc biệt, mà là quy trình hoàn toàn giống với tạo object.
+- JavaScript cũng có thể lập trình style class-based bằng cú pháp `class`.
+- JavaScript áp dụng prototype-based với mục đích làm ngôn ngữ đơn giản và linh hoạt.

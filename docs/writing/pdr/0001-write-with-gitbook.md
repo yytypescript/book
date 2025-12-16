@@ -1,33 +1,33 @@
-# 0001-GitBookで執筆する
+# 0001-Viết với GitBook
 
 :::danger
 
-このPDRは廃止されました。代わって次のPDRを採用します。
+PDR này đã bị hủy bỏ. Thay vào đó, PDR sau được áp dụng.
 
-[Docusaurusを採用する](0009-use-docusaurus.md)
+[Áp dụng Docusaurus](0009-use-docusaurus.md)
 
 :::
 
-- ステータス: 廃止
-- 決定者: reoring, suin, philomagi, kakiuchi
-- 更新日: 2021-10-20
+- Trạng thái: Hủy bỏ
+- Người quyết định: reoring, suin, philomagi, kakiuchi
+- Ngày cập nhật: 2021-10-20
 
-## 解決する問題とその背景
+## Vấn đề cần giải quyết và bối cảnh
 
-どのようなツールを使って執筆するか？
+Sử dụng công cụ nào để viết?
 
-## 決定事項
+## Quyết định
 
-執筆するに当たって、GitBookを採用する。なぜなら、
+Khi viết, chúng tôi áp dụng GitBook. Lý do là:
 
-- チームでの共同作業しやすいため。
-- すぐ始められるため。
-- 不特定多数の参加が想定されない初期の少人数のコラボレーションでは十分そうだから。
+- Dễ dàng cộng tác theo nhóm.
+- Có thể bắt đầu ngay lập tức.
+- Đủ dùng cho giai đoạn đầu cộng tác với số ít người, khi chưa có nhiều người tham gia không xác định.
 
-## 関連PDR
+## PDR liên quan
 
-[Docusaurusを採用する](0009-use-docusaurus.md)
+[Áp dụng Docusaurus](0009-use-docusaurus.md)
 
-## 関連情報
+## Thông tin liên quan
 
 - [GitBookからDocusaurusに移行してはどうか？ · Discussion #38 · yytypescript/book](https://github.com/yytypescript/book/discussions/38)

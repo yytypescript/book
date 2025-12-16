@@ -10,7 +10,7 @@ Kiểu any trong TypeScript là kiểu cho phép gán bất kỳ giá trị nào
 let value: any;
 value = 1; // OK
 value = "string"; // OK
-value = { name: "オブジェクト" }; // OK
+value = { name: "Object" }; // OK
 ```
 
 Ngoài ra, với biến kiểu any, compiler sẽ không thực hiện type checking nữa. Ngay cả code sẽ lỗi khi chạy, compiler cũng không cảnh báo. Trong ví dụ sau, ta gán số vào biến `str`. Tuy nhiên `toLowerCase` ở dòng 2 là method của string mà không tồn tại trong number, nên khi chạy sẽ gây lỗi. Mâu thuẫn đơn giản như vậy TypeScript compiler có thể phát hiện được, nhưng với giá trị được type annotation là any thì compiler sẽ không cảnh báo.

@@ -1,6 +1,6 @@
 # Shorthand property names
 
-オブジェクトのキーと変数名が同じ時にかぎり、オブジェクトに値を代入するときも同様にShorthand property namesを使うことができます。これも分割代入と調べると情報を得られることがあります。次の例がほぼすべてです。
+Khi key của object và tên biến giống nhau, có thể sử dụng shorthand property names khi gán giá trị vào object. Đây là tính năng liên quan đến destructuring assignment. Ví dụ sau minh họa gần như toàn bộ.
 
 ```ts twoslash
 import fs from "fs";
@@ -28,7 +28,7 @@ const pikachu: Wild = {
 };
 ```
 
-要するにこちらの省略型です。
+Đây là dạng rút gọn của cách viết sau.
 
 ```ts twoslash
 import fs from "fs";
@@ -56,7 +56,7 @@ const pikachu: Wild = {
 };
 ```
 
-もちろん一行で書くこともできます。
+Tất nhiên cũng có thể viết trên một dòng.
 
 ```ts twoslash
 import fs from "fs";

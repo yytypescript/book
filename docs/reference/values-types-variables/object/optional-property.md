@@ -1,10 +1,10 @@
 ---
-sidebar_label: オブジェクト型のオプションプロパティ
+sidebar_label: Optional property của object type
 ---
 
-# オブジェクトの型のオプションプロパティ (optional property)
+# Optional property của object type
 
-TypeScriptで、オブジェクトプロパティのオプショナルを型付けするには、プロパティ名の後ろに`?`を書きます。
+Trong TypeScript, để type cho optional property của object, thêm `?` sau tên property.
 
 ```ts twoslash
 type Size = {
@@ -12,7 +12,7 @@ type Size = {
 };
 ```
 
-オプションプロパティを持ったオブジェクトの型には、そのオプションプロパティを持たないオブジェクトを代入できます。
+Có thể gán object không có optional property cho object type có optional property.
 
 ```ts twoslash
 type Size = {
@@ -22,7 +22,7 @@ type Size = {
 const size: Size = {}; // OK
 ```
 
-また、オプションプロパティの値が`undefined`のオブジェクトも代入できます。
+Cũng có thể gán object có giá trị optional property là `undefined`.
 
 ```ts twoslash
 type Size = {
@@ -34,7 +34,7 @@ const size: Size = {
 }; // OK
 ```
 
-しかし、オプションプロパティの値が`null`の場合は代入できません。
+Tuy nhiên, không thể gán nếu giá trị optional property là `null`.
 
 ```ts twoslash
 // @errors: 2322
@@ -47,9 +47,9 @@ const size: Size = {
 };
 ```
 
-ただし`strictNullChecks`を無効にしている場合は`null`も代入できるようになります。
+Nhưng nếu tắt `strictNullChecks`, có thể gán `null`.
 
-```ts twoslash title="strictNullChecksがfalseの場合"
+```ts twoslash title="Khi strictNullChecks là false"
 // @strictNullChecks: false
 type Size = {
   width?: number;
@@ -60,8 +60,8 @@ const size: Size = {
 };
 ```
 
-## 関連情報
+## Thông tin liên quan
 
-[オプショナルチェーン (optional chaining)](optional-chaining.md)
+[Optional chaining](optional-chaining.md)
 
 [strictNullChecks](../../../reference/tsconfig/strictnullchecks.md)

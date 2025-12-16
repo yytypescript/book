@@ -1,10 +1,10 @@
 ---
-sidebar_label: インデックス型
+sidebar_label: Index signature
 ---
 
-# インデックス型 (index signature)
+# Index signature
 
-TypeScriptで、オブジェクトのフィールド名をあえて指定せず、プロパティのみを指定したい場合があります。そのときに使えるのがこのインデックス型(index signature)です。たとえば、プロパティがすべて`number`型であるオブジェクトは次のように型注釈します。
+Trong TypeScript, có trường hợp muốn chỉ định type của property mà không chỉ định tên field của object. Lúc này có thể sử dụng index signature. Ví dụ, object có tất cả property là type `number` được type annotation như sau.
 
 ```ts twoslash
 let obj: {
@@ -12,9 +12,9 @@ let obj: {
 };
 ```
 
-フィールド名の表現部分が`[K: string]`です。この`K`の部分は型変数です。任意の型変数名にできます。`K`や`key`にするのが一般的です。`string`の部分はフィールド名の型を表します。インデックス型のフィールド名の型は`string`、`number`、`symbol`のみが指定できます。
+Phần biểu thị tên field là `[K: string]`. `K` ở đây là type variable. Có thể đặt tên type variable tùy ý. Thường dùng `K` hoặc `key`. Phần `string` biểu thị type của tên field. Type của tên field trong index signature chỉ có thể chỉ định `string`, `number`, `symbol`.
 
-インデックス型のオブジェクトであれば、フィールド名が定義されていないプロパティも代入できます。たとえば、インデックス型`{ [K: string]: number }`には、値がnumber型であれば、`a`や`b`など定義されていないフィールドに代入できます。
+Với object có index signature, có thể gán property mà tên field chưa được định nghĩa. Ví dụ, với index signature `{ [K: string]: number }`, nếu value là type number, có thể gán vào các field chưa định nghĩa như `a`, `b`.
 
 ```ts twoslash
 let obj: {
@@ -26,7 +26,7 @@ obj.c = 4; // OK
 obj["d"] = 5; // OK
 ```
 
-コンパイラーオプションの`noUncheckedIndexedAccess`を有効にした場合、インデックス型では、プロパティの型は自動的にプロパティに指定した型とundefined型のユニオン型になります。これは、プロパティが存在しないときに、値が`undefined`になるのを正確に型で表すためです。
+Khi bật compiler option `noUncheckedIndexedAccess`, với index signature, type của property tự động trở thành union type của type chỉ định và undefined. Điều này để biểu thị chính xác rằng khi property không tồn tại, giá trị sẽ là `undefined`.
 
 ```ts twoslash
 const obj: { [K: string]: number } = { a: 1 };
@@ -37,9 +37,9 @@ console.log(b);
 
 [noUncheckedIndexedAccess](../../tsconfig/nouncheckedindexedaccess.md)
 
-## Record&lt;K, T>を用いたインデックス型
+## Index signature sử dụng Record&lt;K, T>
 
-インデックス型は`Record<K, T>`ユーティリティ型を用いても表現できます。次の2つの型注釈は同じ意味になります。
+Index signature cũng có thể biểu thị bằng utility type `Record<K, T>`. Hai type annotation sau có cùng ý nghĩa.
 
 ```ts twoslash
 let obj1: { [K: string]: number };
@@ -48,6 +48,6 @@ let obj2: Record<string, number>;
 
 [Record&lt;Keys, Type>](../../type-reuse/utility-types/record.md)
 
-## 関連情報
+## Thông tin liên quan
 
 [Mapped Types](../../type-reuse/mapped-types.md)

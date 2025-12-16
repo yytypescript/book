@@ -1,31 +1,31 @@
 ---
-sidebar_label: オブジェクトの型注釈
+sidebar_label: Type annotation của object
 ---
 
-# オブジェクトの型注釈 (type annotation)
+# Type annotation của object
 
-TypeScriptでオブジェクトの型注釈は、JavaScriptオブジェクトリテラルのような書き方で、オブジェクトプロパティをキーと値の型のペアを書きます。
+Trong TypeScript, type annotation của object được viết giống như JavaScript object literal, với cặp key và type của value cho từng property.
 
 ```ts twoslash
 let box: { width: number; height: number };
-//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^型注釈
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Type annotation
 box = { width: 1080, height: 720 };
 ```
 
-オブジェクトの型注釈をしておくと、型の誤りをコンパイラーが警告してくれるようになります。
+Khi có type annotation cho object, compiler sẽ cảnh báo nếu có lỗi về type.
 
 ```ts twoslash
 // @errors: 2322 2741
 let box: { width: number; height: number };
-// 誤ってプロパティに文字列を代入した
+// Nhầm gán string cho property
 box = { width: "1080", height: 720 };
-// 誤ってheightを指定し忘れた
+// Quên chỉ định height
 box = { width: 1080 };
 ```
 
-プロパティの区切り文字には、オブジェクトリテラルのようにカンマ`,`も使えますが、セミコロン`;`を用いるほうを推奨します。理由は、コード整形ツール[Prettier](/tutorials/prettier)がオブジェクトの型注釈を直すとき、カンマをセミコロンに置き換えるためです。
+Ký tự phân cách property có thể dùng dấu phẩy `,` như object literal, nhưng khuyến nghị dùng dấu chấm phẩy `;`. Lý do là công cụ format code [Prettier](/tutorials/prettier) sẽ thay thế dấu phẩy bằng dấu chấm phẩy khi sửa type annotation của object.
 
-オブジェクトの型注釈は途中で改行することもできます。改行した場合、プロパティの区切り文字は省略できます。
+Type annotation của object có thể xuống dòng. Khi xuống dòng, ký tự phân cách property có thể bỏ qua.
 
 ```ts twoslash
 let box: {
@@ -35,20 +35,20 @@ let box: {
 box = { width: 1080, height: 720 };
 ```
 
-インラインの型注釈の代わりに、型エイリアスを使った型注釈の書き方もできます。
+Thay vì type annotation inline, cũng có thể sử dụng type alias.
 
 ```ts twoslash
-// 型エイリアス
+// Type alias
 type Box = { width: number; height: number };
 let box: Box = { width: 1080, height: 720 };
-//       ^^^型注釈
+//       ^^^Type annotation
 ```
 
-[型エイリアス](../type-alias.md)
+[Type alias](../type-alias.md)
 
-## メソッドの型注釈
+## Type annotation của method
 
-オブジェクトの型注釈には、メソッドの型注釈を書くこともできます。書き方はJavaScriptのメソッド構文に引数と戻り値の型注釈を加えたようなものになります。
+Type annotation của object cũng có thể viết type annotation cho method. Cách viết giống như method syntax của JavaScript với thêm type annotation cho argument và return value.
 
 ```ts twoslash
 let calculator: {
@@ -62,7 +62,7 @@ calculator = {
 };
 ```
 
-メソッドの型注釈は関数構文の書き方もできます。
+Type annotation của method cũng có thể viết theo function syntax.
 
 ```ts twoslash
 let calculator: {
@@ -70,20 +70,20 @@ let calculator: {
 };
 ```
 
-メソッド構文(method syntax)の型注釈と関数構文(function syntax)の型注釈は、基本的に同じ意味ですが、コンパイラーオプションの`strictFunctionTypes`を有効にした場合に関数構文の書き方は、メソッド引数のチェックが双変(bivariant)から共変(covariant)へと厳格になります。この詳細については`strictFunctionTypes`の説明を参照してください。
+Type annotation theo method syntax và function syntax về cơ bản có cùng ý nghĩa, nhưng khi bật compiler option `strictFunctionTypes`, cách viết function syntax sẽ làm việc kiểm tra argument của method nghiêm ngặt hơn, chuyển từ bivariant sang covariant. Chi tiết xem phần giải thích `strictFunctionTypes`.
 
 [strictFunctionTypes](../../tsconfig/strictfunctiontypes.md)
 
-## オブジェクトの型推論
+## Type inference của object
 
-オブジェクトの値を変数宣言で代入する場合、型注釈を省略できます。値から型が自動的に判別されます。これを型推論といいます。
+Khi gán giá trị object trong khai báo biến, có thể bỏ qua type annotation. Type sẽ được tự động xác định từ giá trị. Đây gọi là type inference.
 
 ```ts twoslash
 let box = { width: 1080, height: 720 };
 //  ^?
 ```
 
-メソッドを持つオブジェクトリテラルでも型推論が働きます。ただし、メソッドの場合は引数の型注釈は必要です。
+Type inference cũng hoạt động với object literal có method. Tuy nhiên, với method cần type annotation cho argument.
 
 ```ts twoslash
 let calculator = {
@@ -97,7 +97,7 @@ calculator;
 
 ## `Record<Keys, Type>`
 
-連想配列のようなキーバリューのオブジェクトの型を定義する場合、ユーティリティ型の`Record`を使う方法もあります。
+Khi định nghĩa type của object key-value giống như associative array, có thể sử dụng utility type `Record`.
 
 ```ts twoslash
 let foo: Record<string, number>;
@@ -106,16 +106,16 @@ foo = { a: 1, b: 2 };
 
 [Record](../../type-reuse/utility-types/record.md)
 
-## `object`型
+## `object` type
 
-オブジェクトの型注釈には`object`型を用いることもできます。
+Type annotation của object cũng có thể sử dụng `object` type.
 
 ```ts twoslash
 let box: object;
 box = { width: 1080, height: 720 };
 ```
 
-`object`型の使用はお勧めしません。第1の理由は、`object`型には何のプロパティがあるかの情報がないためです。そのため、`box.width`を参照するとコンパイルエラーになります。
+Không khuyến nghị sử dụng `object` type. Lý do thứ nhất là `object` type không có thông tin về property nào tồn tại. Do đó, tham chiếu `box.width` sẽ báo compile error.
 
 ```ts twoslash
 // @errors: 2339
@@ -125,26 +125,26 @@ box = { width: 1080, height: 720 };
 box.width;
 ```
 
-第2の理由はどんなオブジェクトでも代入できるからです。期待しない値も代入できてしまうので、コードの問題に気づきにくくなります。
+Lý do thứ hai là có thể gán bất kỳ object nào. Có thể gán cả giá trị không mong đợi, khiến khó phát hiện vấn đề trong code.
 
 ```ts twoslash
 let box: object;
-box = { wtdih: 1080, hihget: 720 }; // スペルミス
+box = { wtdih: 1080, hihget: 720 }; // Lỗi chính tả
 ```
 
-オブジェクトを型注釈する場合は、`object`型はできるだけ使わずに、プロパティまで型を定義することをお勧めします。
+Khi type annotation cho object, khuyến nghị không sử dụng `object` type mà nên định nghĩa type đến từng property.
 
 <PostILearned>
 
-・TypeScriptでオブジェクトを型注釈するには、プロパティキーごとに型を定義する
-例: { width: number; height: number}
-・変数にオブジェクトを代入すると型推論が効く
-・安全性の観点からobject型を用いるのは避ける
+・Trong TypeScript, type annotation cho object là định nghĩa type cho từng property key
+Ví dụ: { width: number; height: number}
+・Khi gán object cho biến, type inference hoạt động
+・Về mặt an toàn, nên tránh sử dụng object type
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
-[object、Object、{}の違い](./difference-among-object-and-object.md)
+[Sự khác biệt giữa object, Object, {}](./difference-among-object-and-object.md)
 
-[インターフェース (interface)](/reference/object-oriented/interface)
+[Interface](/reference/object-oriented/interface)

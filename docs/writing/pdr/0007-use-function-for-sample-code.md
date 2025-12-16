@@ -1,25 +1,25 @@
-# 0007-関数定義のサンプルコードには極力functionを使う
+# 0007-Ưu tiên sử dụng function trong sample code định nghĩa hàm
 
-- ステータス: 採用
-- 提案者: suin
-- 決定者: suin, reoring, クロレ, jamashita
-- 更新日: 2020-02-21
+- Trạng thái: Áp dụng
+- Người đề xuất: suin
+- Người quyết định: suin, reoring, クロレ, jamashita
+- Ngày cập nhật: 2020-02-21
 
-## 解決する問題とその背景
+## Vấn đề cần giải quyết và bối cảnh
 
-TypeScript/JavaScriptの関数定義のサンプルコードを示すとき、関数(function)でもアロー関数(arrow function)でもどちらでも解説に影響がないとき、どちらの書き方を優先して使ったらいいか？
+Khi trình bày sample code định nghĩa hàm trong TypeScript/JavaScript, trong trường hợp cả function và arrow function đều không ảnh hưởng đến nội dung giải thích, nên ưu tiên sử dụng cách viết nào?
 
-JavaScriptでは、関数を定義するとき、functionを使う方法と、arrow functionを使う方法の2つがある。どのような基準でどちらを使うか明確にしておくことで、ひとつの書籍としての一体感が出るとともに、読者の混乱を避けることができる。
+Trong JavaScript, khi định nghĩa hàm, có hai cách: sử dụng function và sử dụng arrow function. Bằng việc làm rõ tiêu chuẩn sử dụng cái nào, cuốn sách sẽ có sự thống nhất, đồng thời tránh gây nhầm lẫn cho độc giả.
 
-## 決定事項
+## Quyết định
 
-**関数定義のサンプルコードには極力functionを使う**。その理由は、
+**Ưu tiên sử dụng function trong sample code định nghĩa hàm**. Lý do là:
 
-- functionのほうが関数であることが、読み手にとって読み取りやすいから。
-- TypeScript公式のハンドブックでfunctionのほうを使っているから。
+- Với function, người đọc dễ nhận biết đó là hàm hơn.
+- Handbook chính thức của TypeScript cũng sử dụng function.
 
-ただし、**arrow functionを使うべきところ、使わないと解説できないところは、arrow functionを使う**。たとえば、
+Tuy nhiên, **những nơi cần sử dụng arrow function, hoặc không thể giải thích được nếu không dùng arrow function, thì sử dụng arrow function**. Ví dụ:
 
-- 高階関数などが、thisへの参照を持ちたい場合。
-- arrow functionそのものについての説明をする場合。
-- フレームワークなどのしきたりでarrow functionのほうが現実でよく使われる場合。
+- Khi higher-order function cần tham chiếu đến this.
+- Khi giải thích về chính arrow function.
+- Khi theo quy ước của framework mà arrow function được sử dụng phổ biến hơn trong thực tế.

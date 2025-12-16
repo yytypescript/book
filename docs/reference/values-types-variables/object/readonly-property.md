@@ -1,10 +1,10 @@
 ---
-sidebar_label: オブジェクト型のreadonlyプロパティ
+sidebar_label: Readonly property của object type
 ---
 
-# オブジェクトの型のreadonlyプロパティ (readonly property)
+# Readonly property của object type
 
-TypeScriptでは、オブジェクトのプロパティを読み取り専用にすることができます。読み取り専用にしたいプロパティには`readonly`修飾子をつけます。読み取り専用のプロパティに値を代入しようとすると、TypeScriptコンパイラーが代入不可の旨を警告するようになります。
+Trong TypeScript, có thể đặt property của object thành read-only. Thêm modifier `readonly` vào property muốn đặt thành read-only. Khi cố gán giá trị cho property read-only, TypeScript compiler sẽ cảnh báo không thể gán.
 
 ```ts twoslash
 // @errors: 2540
@@ -15,11 +15,11 @@ obj = { foo: 1 };
 obj.foo = 2;
 ```
 
-## readonlyは再帰的ではない
+## readonly không áp dụng đệ quy
 
-`readonly`は指定したそのプロパティだけが読み取り専用になります。`readonly`はそのオブジェクトが入れ子になっている場合、その中のオブジェクトのプロパティまでを`readonly`にはしません。つまり、再帰的なものではありません。
+`readonly` chỉ đặt property được chỉ định thành read-only. Khi object có cấu trúc lồng nhau, `readonly` không áp dụng cho property của object bên trong. Nghĩa là nó không áp dụng đệ quy.
 
-たとえば、`foo`プロパティが`readonly`で、`foo.bar`プロパティが`readonly`でない場合、`foo`への代入はコンパイルエラーになるものの、`foo.bar`へ直接代入するのはコンパイルエラーになりません。
+Ví dụ, nếu property `foo` là `readonly` nhưng property `foo.bar` không phải `readonly`, việc gán vào `foo` sẽ báo compile error, nhưng gán trực tiếp vào `foo.bar` sẽ không báo compile error.
 
 ```ts twoslash
 // @errors: 2540
@@ -34,10 +34,10 @@ obj = {
   },
 };
 obj.foo = { bar: 2 };
-obj.foo.bar = 2; // コンパイルエラーにはならない
+obj.foo.bar = 2; // Không báo compile error
 ```
 
-再帰的にプロパティを読み取り専用にしたい場合は、子や孫の各プロパティに`readonly`をつけていく必要があります。
+Nếu muốn đặt property thành read-only một cách đệ quy, cần thêm `readonly` vào từng property con và cháu.
 
 ```ts twoslash
 let obj: {
@@ -47,35 +47,35 @@ let obj: {
 };
 ```
 
-## readonlyはコンパイル時のみ
+## readonly chỉ có tác dụng tại compile time
 
-`readonly`はTypeScriptの型の世界だけの概念です。つまり、読み取り専用指定を受けたプロパティがチェックを受けるのはコンパイル時だけです。コンパイルされた後のJavaScriptとしては、`readonly`がついていたプロパティも代入可能になります。
+`readonly` là khái niệm chỉ tồn tại trong thế giới type của TypeScript. Nghĩa là property được chỉ định read-only chỉ được kiểm tra tại compile time. Sau khi compile thành JavaScript, property từng có `readonly` vẫn có thể gán giá trị được.
 
-たとえば、`foo`プロパティを`readonly`指定したコードで、`foo`に代入するコードはコンパイル時にはエラーとして検出されます。
+Ví dụ, với code chỉ định property `foo` là `readonly`, code gán vào `foo` sẽ được phát hiện là error tại compile time.
 
 ```ts twoslash
 // @errors: 2540
 const obj: { readonly foo: number } = { foo: 1 };
-obj.foo = 2; // コンパイルエラーになる
+obj.foo = 2; // Báo compile error
 ```
 
-しかし、コンパイル後のJavaScriptコードでは、`readonly`の記述がなくなるので、実行時にエラーとして検出されることはありません。
+Tuy nhiên, trong JavaScript code sau khi compile, ký hiệu `readonly` sẽ biến mất nên sẽ không được phát hiện là error tại runtime.
 
-```ts twoslash title="コンパイル後のJavaScriptコード"
+```ts twoslash title="JavaScript code sau khi compile"
 // @noErrors
 // @showEmit
 // @alwaysStrict: false
 const obj: { readonly foo: number } = { foo: 1 };
-obj.foo = 2; // 実行時エラーにはならない
+obj.foo = 2; // Không báo runtime error
 ```
 
-実行時にチェックが無いことは一見すると危険そうですが、コンパイルエラーを無視せず、ちゃんと修正しておけば大きな問題になることはありません。
+Việc không có kiểm tra tại runtime thoạt nhìn có vẻ nguy hiểm, nhưng nếu không bỏ qua compile error và sửa đúng cách thì sẽ không có vấn đề lớn.
 
-## すべてのプロパティを一括して読み取り専用にする方法
+## Cách đặt tất cả property thành read-only cùng lúc
 
-TypeScriptではプロパティを読み取り専用にするには、読み取り専用にしたい各プロパティにひとつひとつ`readonly`修飾子をつける必要があります。プロパティ数が多くなると`readonly`をつけていくのは記述量が多くなり手間です。
+Trong TypeScript, để đặt property thành read-only, cần thêm modifier `readonly` vào từng property. Khi số lượng property nhiều, việc thêm `readonly` sẽ tốn công sức và lượng code nhiều.
 
-そういったケースではユーティリティ型の`Readonly`を使うのも手です。`Readonly`はプロパティをすべて読み取り専用にしてくれる型です。
+Trong trường hợp đó, có thể sử dụng utility type `Readonly`. `Readonly` là type đặt tất cả property thành read-only.
 
 ```ts twoslash
 let obj: Readonly<{
@@ -90,12 +90,12 @@ let obj: Readonly<{
 
 [Readonly&lt;T>](../../type-reuse/utility-types/readonly.md)
 
-## 関連情報
+## Thông tin liên quan
 
-[クラスのreadonly修飾子](../../object-oriented/class/readonly-modifier-in-classes.md)
+[Readonly modifier của class](../../object-oriented/class/readonly-modifier-in-classes.md)
 
-[インターフェースのreadonly修飾子](../../object-oriented/interface/readonly-modifier-in-interfaces.md)
+[Readonly modifier của interface](../../object-oriented/interface/readonly-modifier-in-interfaces.md)
 
-[読み取り専用の配列 (readonly array)](../array/readonly-array.md)
+[Read-only array](../array/readonly-array.md)
 
-[constアサーション](./../const-assertion.md)
+[const assertion](./../const-assertion.md)

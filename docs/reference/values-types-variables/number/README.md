@@ -1,23 +1,23 @@
 ---
-sidebar_label: number型
+sidebar_label: number type
 slug: /reference/values-types-variables/number
-title: number型 (数値型)
+title: number type
 ---
 
-JavaScriptのnumber型は、1や-1などの整数と0.1などの小数を含めた数値の型です。PHPなどの言語では、数値について整数を表す型(int)と小数を表す型(floatやdouble)の2つの型を持ちます。Javaなどの言語では、整数型をさらに32ビットと64ビットに細分化する言語もあります。JavaScriptには、整数と小数を型レベルで区別するものはありません。どちらもnumber型で表現します。
+number type trong JavaScript là type cho các giá trị số bao gồm số nguyên như 1, -1 và số thập phân như 0.1. Trong các ngôn ngữ như PHP có 2 type riêng biệt cho số: type biểu thị số nguyên (int) và type biểu thị số thập phân (float hoặc double). Các ngôn ngữ như Java còn phân chia thêm type số nguyên thành 32-bit và 64-bit. JavaScript không phân biệt số nguyên và số thập phân ở level type. Cả hai đều được biểu thị bằng number type.
 
-## 数値リテラル
+## Numeric literal
 
-JavaScriptの数値リテラルは次のように数値を見たままに書きます。
+Numeric literal trong JavaScript được viết trực tiếp như số thực tế.
 
 <!--prettier-ignore-->
 ```js
-123 // 整数
--123 // 整数(負の数)
-20.315 // 小数
+123 // Số nguyên
+-123 // Số nguyên (số âm)
+20.315 // Số thập phân
 ```
 
-小数は小数点ではじめる書き方もできます。また、整数も小数点で終わる書き方もできます。
+Số thập phân có thể viết bắt đầu bằng dấu chấm thập phân. Số nguyên cũng có thể viết kết thúc bằng dấu chấm thập phân.
 
 <!--prettier-ignore-->
 ```js
@@ -25,27 +25,27 @@ JavaScriptの数値リテラルは次のように数値を見たままに書き�
 5.0 === 5.
 ```
 
-### 2進数、8進数、16進数
+### Binary, octal, hexadecimal
 
-2進数、8進数、16進数の表記も可能です。それぞれ表現したい数値の前に`0b`、`0o`、`0x`をつけます。
+Có thể biểu thị số ở dạng binary, octal và hexadecimal. Thêm `0b`, `0o`, `0x` tương ứng trước số muốn biểu thị.
 
 <!--prettier-ignore-->
 ```ts
-0b1010 // 2進数
-0o755 // 8進数
-0xfff // 16進数
+0b1010 // Binary
+0o755 // Octal
+0xfff // Hexadecimal
 ```
 
-### 数値の区切り文字(numeric separators)
+### Numeric separators
 
-JavaScriptの数値リテラルは可読性のためにアンダースコアで区切って書けます。何桁ごとに区切るかは自由です。表したい値や、国と地域の慣習などに合わせて選択できます。
+Numeric literal trong JavaScript có thể viết với dấu gạch dưới để phân cách cho dễ đọc. Số chữ số phân cách là tùy ý. Có thể chọn theo giá trị muốn biểu thị hoặc theo thói quen của quốc gia, vùng.
 
 <!--prettier-ignore-->
 ```js
-100_000_000 // 1億
+100_000_000 // 100 triệu
 ```
 
-ただし、`_`を先頭や末尾、小数点の前後、連続で2個以上置くことはできません。つまり次のような表記はできません。
+Tuy nhiên, không thể đặt `_` ở đầu, cuối, trước hoặc sau dấu thập phân, hoặc liên tiếp 2 ký tự trở lên. Nghĩa là không thể viết như sau.
 
 ```ts
 _100
@@ -55,16 +55,16 @@ _100
 1__00
 ```
 
-### 数値リテラルのプロパティ
+### Property của numeric literal
 
-JavaScriptの数値リテラルのプロパティを直接参照する場合、小数点のドットとプロパティアクセッサーのドットが区別できないため、構文エラーになります。
+Trong JavaScript, khi tham chiếu trực tiếp property của numeric literal, dấu chấm thập phân và dấu chấm property accessor không phân biệt được nên sẽ bị syntax error.
 
 ```ts twoslash
 // @errors: 1351
-5.toString(); // この書き方は構文エラー
+5.toString(); // Cách viết này bị syntax error
 ```
 
-これを回避するには、ドットを2つ続けるか、数値をカッコで囲む必要があります。
+Để tránh, cần viết 2 dấu chấm liên tiếp hoặc bao số trong ngoặc.
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -72,44 +72,44 @@ JavaScriptの数値リテラルのプロパティを直接参照する場合、�
 (5).toString();
 ```
 
-## number型の型注釈
+## Type annotation của number type
 
-TypeScriptでnumber型の型注釈は`number`を用います。
+Trong TypeScript, type annotation cho number type sử dụng `number`.
 
 ```ts twoslash
 const count: number = 123;
 ```
 
-よく似た名前の型として`Number`型がありますが、これと`number`は別物なので注意してください。
+Có type tên tương tự là `Number` type, nhưng đây là type khác với `number` nên cần chú ý.
 
-## 数値の範囲
+## Phạm vi số
 
-JavaScriptのnumber型は、IEEE 754の倍精度浮動小数です。64ビットのうち、52ビットが数値の格納に、11ビットが小数の位置に、1ビットが正負符号に使われます。正確に扱える数値は`-(2^53 − 1)`から`2^53 − 1`の間です。整数について言うと、他言語の64ビット整数型の範囲より狭いので注意しましょう。
+number type trong JavaScript là số dấu phẩy động độ chính xác kép theo IEEE 754. Trong 64 bit, 52 bit dùng để lưu số, 11 bit dùng cho vị trí thập phân, 1 bit dùng cho dấu dương âm. Phạm vi số có thể xử lý chính xác là từ `-(2^53 − 1)` đến `2^53 − 1`. Về số nguyên, phạm vi này hẹp hơn type số nguyên 64-bit của các ngôn ngữ khác nên cần chú ý.
 
-## 特殊な数値
+## Số đặc biệt
 
-JavaScriptのnumber型には、`NaN`と`Infinity`という特殊な値があります。
+number type trong JavaScript có các giá trị đặc biệt là `NaN` và `Infinity`.
 
 ### NaN
 
-`NaN`は非数(not-a-number)を表す変数です。JavaScriptでは、処理の結果、数値にならない場合に`NaN`を返すことがあります。たとえば、文字列を数値に変換する`parseInt`関数は、数値化できない入力に対し、`NaN`を返します。
+`NaN` là biến biểu thị not-a-number (không phải số). Trong JavaScript, khi kết quả xử lý không phải là số, có thể trả về `NaN`. Ví dụ, function `parseInt` chuyển string thành số sẽ trả về `NaN` với input không thể chuyển thành số.
 
 ```js twoslash
-const price = parseInt("百円");
+const price = parseInt("một trăm đồng");
 console.log(price);
 // @log: NaN
 ```
 
-値が`NaN`であるかのチェックは`Number.isNaN`を用います。
+Để kiểm tra giá trị có phải `NaN` không, sử dụng `Number.isNaN`.
 
 ```ts twoslash
-const price = parseInt("百円");
+const price = parseInt("một trăm đồng");
 if (Number.isNaN(price)) {
-  console.log("数値化できません");
+  console.log("Không thể chuyển thành số");
 }
 ```
 
-`NaN`は特殊で、等号比較では常に`false`になるので注意してください。
+`NaN` đặc biệt ở chỗ so sánh bằng luôn trả về `false`.
 
 ```js twoslash
 console.log(NaN == NaN);
@@ -120,4 +120,4 @@ console.log(NaN === NaN);
 
 ### Infinity
 
-`Infinity`は無限大を表す変数です。たとえば、1を0で割った場合、この値になります。
+`Infinity` là biến biểu thị vô cực. Ví dụ, khi chia 1 cho 0, kết quả là giá trị này.

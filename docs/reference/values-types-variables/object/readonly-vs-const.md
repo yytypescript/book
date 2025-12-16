@@ -1,10 +1,10 @@
-# readonlyとconstの違い
+# Sự khác biệt giữa readonly và const
 
-JavaScriptでは、`const`で宣言した変数は代入不可になります。TypeScriptではオブジェクトの型のプロパティに`readonly`修飾子をつけると、そのプロパティが代入不可になります。これら2つの機能は「代入不可」という点では似ています。ではこれらの違いは何でしょうか。
+Trong JavaScript, biến khai báo bằng `const` không thể gán lại. Trong TypeScript, khi thêm modifier `readonly` vào property của object type, property đó không thể gán lại. Hai tính năng này giống nhau ở điểm "không thể gán lại". Vậy sự khác biệt là gì?
 
-## constは変数への代入を禁止にするもの
+## const cấm gán vào biến
 
-`const`は変数への代入を禁止するものです。たとえば、`const`で宣言されたxに値を代入しようとすると、TypeScriptではコンパイルエラーになり、JavaScriptでは実行時エラーになります。
+`const` cấm gán vào biến. Ví dụ, khi cố gán giá trị vào x đã khai báo bằng `const`, TypeScript sẽ báo compile error và JavaScript sẽ báo runtime error.
 
 ```ts twoslash
 // @errors: 2588
@@ -12,18 +12,18 @@ const x = 1;
 x = 2;
 ```
 
-`const`の代入禁止が効くのは変数そのものへの代入だけです。変数がオブジェクトだった場合、プロパティへの代入は許可されます。
+Việc cấm gán của `const` chỉ có hiệu lực với bản thân biến. Nếu biến là object, việc gán vào property được phép.
 
 ```ts twoslash
 // @errors: 2588
 const x = { y: 1 };
-x = { y: 2 }; // 変数そのものへの代入は不可
-x.y = 2; // プロパティへの代入は許可
+x = { y: 2 }; // Gán vào bản thân biến không được phép
+x.y = 2; // Gán vào property được phép
 ```
 
-## readonlyはプロパティへの代入を禁止にするもの
+## readonly cấm gán vào property
 
-TypeScriptの`readonly`はプロパティへの代入を禁止するものです。たとえば、`readonly`がついたプロパティxに値を代入しようとすると、コンパイルエラーになります。
+`readonly` của TypeScript cấm gán vào property. Ví dụ, khi cố gán giá trị vào property x có `readonly`, sẽ báo compile error.
 
 ```ts twoslash
 // @errors: 2540
@@ -31,16 +31,16 @@ let obj: { readonly x: number } = { x: 1 };
 obj.x = 2;
 ```
 
-一方、変数自体への代入は許可されます。
+Ngược lại, gán vào bản thân biến được phép.
 
 ```ts twoslash
 let obj: { readonly x: number } = { x: 1 };
-obj = { x: 2 }; // 許可される
+obj = { x: 2 }; // Được phép
 ```
 
-## constとreadonlyの違い
+## Sự khác biệt giữa const và readonly
 
-`const`は変数自体を代入不可するものです。変数がオブジェクトの場合、プロパティへの代入は許可されます。一方、`readonly`はプロパティを代入不可にするものです。変数自体を置き換えるような代入は許可されます。以上の違いがあるため、`const`と`readonly`を組み合わせると、変数自体とオブジェクトのプロパティの両方を変更不能なオブジェクトを作ることができます。
+`const` cấm gán vào bản thân biến. Nếu biến là object, việc gán vào property được phép. Ngược lại, `readonly` cấm gán vào property. Việc gán thay thế bản thân biến được phép. Do sự khác biệt này, khi kết hợp `const` và `readonly`, có thể tạo object không thể thay đổi cả bản thân biến lẫn property của object.
 
 ```ts twoslash
 // @errors: 2588 2540
@@ -49,6 +49,6 @@ obj = { x: 2 };
 obj.x = 2;
 ```
 
-## 関連情報
+## Thông tin liên quan
 
-[変数宣言: letとconst](../let-and-const.md)
+[Khai báo biến: let và const](../let-and-const.md)

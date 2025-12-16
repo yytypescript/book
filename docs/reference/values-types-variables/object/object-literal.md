@@ -1,24 +1,24 @@
 ---
-sidebar_label: オブジェクトリテラル
+sidebar_label: Object literal
 ---
 
-# オブジェクトリテラル (object literal)
+# Object literal
 
-JavaScriptの特徴はオブジェクトリテラル`{}`という記法を用いて、簡単にオブジェクトを生成できる点です。
+Đặc điểm của JavaScript là có thể dễ dàng tạo object bằng cú pháp object literal `{}`.
 
 ```js twoslash
-// 空っぽのオブジェクトを生成
+// Tạo object rỗng
 const object = {};
 
-// プロパティを指定しながらオブジェクトを生成
+// Tạo object với các property
 const person = { name: "Bob", age: 25 };
 ```
 
-JavaやPHPなどの言語では、オブジェクトを生成するにはまずクラスを定義し、そのクラスを元にインスタンスを作るのが普通ですが、JavaScriptはクラス定義がなくてもこのようにオブジェクトリテラルを書くと、オブジェクトをインラインで作れます。
+Trong các ngôn ngữ như Java hay PHP, để tạo object thường phải định nghĩa class trước rồi tạo instance từ class đó. Nhưng JavaScript không cần định nghĩa class, chỉ cần viết object literal như trên là có thể tạo object inline.
 
-オブジェクトリテラルがあるおかげで、JavaScriptでは自由度の高いコードが書けるようになっています。
+Nhờ có object literal, JavaScript cho phép viết code với độ linh hoạt cao.
 
-次の例のように、JavaScriptでも`Object`を`new`することでオブジェクトを作ることができます。しかし、オブジェクトリテラルを使ったほうが端的で読みやすいコードになります。
+Như ví dụ sau, JavaScript cũng có thể tạo object bằng cách `new Object`. Tuy nhiên, sử dụng object literal sẽ cho code ngắn gọn và dễ đọc hơn.
 
 ```js twoslash
 const person = new Object();
@@ -26,4 +26,4 @@ person.name = "Bob";
 person.age = 25;
 ```
 
-ちなみに、広く使われるデータシリアライズ形式にJSONがあるのはご存知でしょう。JSONは多くのプログラミング言語で用いられていますが、JSONはJavaScript Object Notationの略で、JSONの由来はJavaScriptのオブジェクトリテラルにあります。そして、JavaScriptではJSONをそのままオブジェクトリテラルとして解釈できます。
+Ngoài ra, bạn chắc đã biết JSON là format serialize dữ liệu được sử dụng rộng rãi. JSON được dùng trong nhiều ngôn ngữ lập trình, nhưng JSON là viết tắt của JavaScript Object Notation, và nguồn gốc của JSON là từ object literal của JavaScript. Và trong JavaScript, có thể interpret JSON trực tiếp như object literal.

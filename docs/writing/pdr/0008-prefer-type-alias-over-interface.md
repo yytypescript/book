@@ -1,26 +1,26 @@
-# 0008-サンプルコードではInterfaceよりType Aliasを優先して使う
+# 0008-Ưu tiên sử dụng Type Alias hơn Interface trong sample code
 
-- ステータス: 採用
-- 提案者: suin, jamashita, t-yng, クロレ
-- 決定者: 同上
-- 更新日: 2020-03-27
+- Trạng thái: Áp dụng
+- Người đề xuất: suin, jamashita, t-yng, クロレ
+- Người quyết định: Như trên
+- Ngày cập nhật: 2020-03-27
 
-## 解決する問題とその背景
+## Vấn đề cần giải quyết và bối cảnh
 
-- 事実: TypeScriptでは、interfaceとtype aliasのどちらでもオブジェクトの型を定義できる。
-- 見解: 書籍のサンプルコードはどちらかに統一するのが好ましい。
-- 論点: サンプルコードにおいて、オブジェクトの型定義には、interfaceとtype aliasどちらを選択するか？
+- Thực tế: Trong TypeScript, cả interface và type alias đều có thể định nghĩa type của object.
+- Quan điểm: Sample code trong sách nên thống nhất sử dụng một trong hai.
+- Vấn đề: Trong sample code, khi định nghĩa type của object, nên chọn interface hay type alias?
 
-## 検討した選択肢
+## Các lựa chọn được xem xét
 
 - interface
 - type alias
 
-## 決定事項
+## Quyết định
 
-- サンプルコードでオブジェクトの型定義を示す場合は、type aliasを優先して使う。
-- 理由: 理由は忘れたが、多数決的に決まった。
-- 例外: 次の目的でサンプルコードを示す場合は、interfaceを使ってもよい。
-  - interface自体を説明する。
-  - interfaceとtype aliasの同異を説明する。
-  - classでインターフェースをimplementsする。
+- Khi trình bày định nghĩa type của object trong sample code, ưu tiên sử dụng type alias.
+- Lý do: Đã quên lý do cụ thể, nhưng được quyết định bằng đa số phiếu.
+- Ngoại lệ: Có thể sử dụng interface khi trình bày sample code với các mục đích sau:
+  - Giải thích về chính interface.
+  - Giải thích sự giống và khác nhau giữa interface và type alias.
+  - Khi class implements interface.

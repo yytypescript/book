@@ -1,22 +1,22 @@
-# 0006-語末には「です」「ます」(敬体)に統一する
+# 0006-Thống nhất văn phong lịch sự
 
-- ステータス: 採用
-- 提案者: suin
-- 決定者: suin, reoring, nouphet, fuubit, クロレ
-- 更新日: 2020-01-31
+- Trạng thái: Áp dụng
+- Người đề xuất: suin
+- Người quyết định: suin, reoring, nouphet, fuubit, クロレ
+- Ngày cập nhật: 2020-01-31
 
-## 解決する問題とその背景
+## Vấn đề cần giải quyết và bối cảnh
 
-書籍としての一体感を出すために、語末表現は統一されているべきだが、それは「〜だ、〜である」(常体)にするか、「〜です、〜ます」(敬体)にするか？
+Để tạo sự thống nhất cho cuốn sách, cách diễn đạt cuối câu cần được thống nhất. Vậy nên sử dụng thể thường (「〜だ、〜である」) hay thể lịch sự (「〜です、〜ます」)?
 
-## 検討した選択肢
+## Các lựa chọn được xem xét
 
-- 「〜だ、〜である」(常体)
-- 「〜です、〜ます」(敬体)
+- 「〜だ、〜である」(thể thường)
+- 「〜です、〜ます」(thể lịch sự)
 
-## 決定事項
+## Quyết định
 
-**語末表現には「〜です、〜ます」(敬体)を採用する**。なぜなら、理由は次のとおり。
+**Áp dụng thể lịch sự「〜です、〜ます」cho cách diễn đạt cuối câu**. Lý do như sau:
 
-- 敬体を使っている技術書も多く、受け入れられていると言えるから。
-- 手順を説明するときに、常体だと命令口調になってしまい書きにくいから。
+- Nhiều sách kỹ thuật cũng sử dụng thể lịch sự và được chấp nhận rộng rãi.
+- Khi giải thích các bước thực hiện, nếu dùng thể thường sẽ trở thành giọng mệnh lệnh và khó viết.

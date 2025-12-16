@@ -1,14 +1,14 @@
 ---
-sidebar_label: オプショナルチェーン
+sidebar_label: Optional chaining
 ---
 
-# オプショナルチェーン (optional chaining)
+# Optional chaining
 
-JavaScriptのオプショナルチェーン`?.`は、オブジェクトの参照が`null`や`undefined`の場合でも、エラーを起こさずにプロパティを参照できる安全な方法です。
+Optional chaining `?.` trong JavaScript là cách an toàn để tham chiếu property mà không gây error ngay cả khi object reference là `null` hoặc `undefined`.
 
-## プロパティ参照がエラーになる問題
+## Vấn đề khi tham chiếu property gây error
 
-JavaScriptでは`null`や`undefined`のプロパティを参照するとエラーが発生します。
+Trong JavaScript, việc tham chiếu property của `null` hoặc `undefined` sẽ gây error.
 
 ```js twoslash
 const book = undefined;
@@ -20,7 +20,7 @@ const email = author.email;
 // @error: TypeError: Cannot read property 'email' of null
 ```
 
-エラーを避けるには、値が`null`や`undefined`でないかチェックする必要があります。
+Để tránh error, cần kiểm tra xem giá trị có phải `null` hoặc `undefined` không.
 
 ```js twoslash
 const book = undefined;
@@ -30,13 +30,13 @@ console.log(title);
 ```
 
 ```js twoslash
-const book = { title: "サバイバルTypeScript" };
+const book = { title: "Survival TypeScript" };
 const title = book === null || book === undefined ? undefined : book.title;
 console.log(title);
-// @log: "サバイバルTypeScript"
+// @log: "Survival TypeScript"
 ```
 
-ネストしたオブジェクトの場合、チェック処理はいっそう複雑になってきます。
+Với object lồng nhau, xử lý kiểm tra càng trở nên phức tạp.
 
 ```js twoslash
 const book = { author: { email: "alice@example.com" } };
@@ -48,28 +48,28 @@ const authorEmail =
     : book.author.email;
 ```
 
-チェックすればエラーなく動きますが、記述量が多くなるという課題もあります。
+Kiểm tra thì code chạy không error, nhưng lượng code viết ra lại nhiều.
 
-## オプショナルチェーン
+## Cú pháp Optional chaining
 
-JavaScriptのオプショナルチェーンは`null`や`undefined`のプロパティを誤って参照しないようにしつつ、記述量を抑えられる書き方です。オプショナルチェーンは`?.`演算子を用いて書きます。
+Optional chaining trong JavaScript là cách viết giúp tránh tham chiếu nhầm property của `null` hoặc `undefined`, đồng thời giảm lượng code. Optional chaining sử dụng operator `?.`.
 
 ```js twoslash
 const book = undefined;
 const title = book?.title;
-//                ^^オプショナルチェーン
+//                ^^Optional chaining
 console.log(title);
 // @log: undefined
 ```
 
 ```js twoslash
-const book = { title: "サバイバルTypeScript" };
+const book = { title: "Survival TypeScript" };
 const title = book?.title;
 console.log(title);
-// @log: "サバイバルTypeScript"
+// @log: "Survival TypeScript"
 ```
 
-オプショナルチェーンはネストして使うこともできます。
+Optional chaining có thể sử dụng lồng nhau.
 
 ```js twoslash
 const book = undefined;
@@ -85,7 +85,7 @@ console.log(authorEmail);
 // @log: "alice@example.com"
 ```
 
-もしも`?.`に先行する変数やプロパティの値が`null`または`undefined`のときは、その先のプロパティは評価されず、`undefined`が返ります。
+Nếu biến hoặc property đứng trước `?.` có giá trị `null` hoặc `undefined`, các property phía sau sẽ không được evaluate và trả về `undefined`.
 
 ```js twoslash
 const book = null;
@@ -99,9 +99,9 @@ console.log(book.author?.name);
 // @log: undefined
 ```
 
-## 関数呼び出し
+## Gọi function
 
-関数を呼び出すときにもオプショナルチェーンが使えます。関数に使う場合は、引数カッコの前に`?.`を書きます。
+Optional chaining cũng có thể sử dụng khi gọi function. Khi dùng với function, viết `?.` trước dấu ngoặc argument.
 
 ```js twoslash
 const increment = undefined;
@@ -117,7 +117,7 @@ console.log(result);
 // @log: 2
 ```
 
-メソッドを呼び出すときも同様の書き方です。
+Gọi method cũng viết tương tự.
 
 ```js twoslash
 const book = { getPrice: undefined };
@@ -135,9 +135,9 @@ console.log(book.getPrice?.());
 // @log: 0
 ```
 
-## 配列要素の参照
+## Tham chiếu phần tử array
 
-配列要素を参照する際にもオプショナルチェーンが使えます。要素を参照する場合は、カギカッコの前に`?.`を書きます。
+Optional chaining cũng có thể sử dụng khi tham chiếu phần tử array. Khi tham chiếu phần tử, viết `?.` trước dấu ngoặc vuông.
 
 ```js twoslash
 const books = undefined;
@@ -147,15 +147,15 @@ console.log(title);
 ```
 
 ```js twoslash
-const books = ["サバイバルTypeScript"];
+const books = ["Survival TypeScript"];
 const title = books?.[0];
 console.log(title);
-// @log: "サバイバルTypeScript"
+// @log: "Survival TypeScript"
 ```
 
-## TypeScriptでの型
+## Type trong TypeScript
 
-TypeScriptでオプショナルチェーンを使った場合、得られる値の型は、最後のプロパティの型と`undefined`のユニオン型になります。
+Khi sử dụng optional chaining trong TypeScript, type của giá trị nhận được là union type của type property cuối cùng và `undefined`.
 
 ```ts twoslash
 let book: undefined | { title: string };
@@ -163,9 +163,9 @@ const title = book?.title;
 //    ^?
 ```
 
-## TypeScriptのコンパイル結果
+## Kết quả compile của TypeScript
 
-TypeScriptのコンパイラーオプション`target`が`es2020`以上のときは、オプショナルチェーンはそのままJavaScriptにコンパイルされます。
+Khi compiler option `target` của TypeScript là `es2020` trở lên, optional chaining được compile nguyên vẹn sang JavaScript.
 
 ```ts twoslash
 // @target: es2020
@@ -175,7 +175,7 @@ let book: undefined | { title: string };
 const title = book?.title;
 ```
 
-`target`が`es2019`以前の場合は、次のような三項演算子を用いたコードにコンパイルされます。
+Khi `target` là `es2019` trở xuống, sẽ được compile thành code sử dụng ternary operator như sau.
 
 ```ts twoslash
 // @target: es2019
@@ -185,31 +185,31 @@ let book: undefined | { title: string };
 const title = book?.title;
 ```
 
-## Null合体演算子と組み合わせる
+## Kết hợp với Nullish coalescing operator
 
-オプショナルチェーンが`undefined`を返したときに、デフォルト値を代入したい場合があります。その際には、Null合体演算子`??`を用いると便利です。
+Khi optional chaining trả về `undefined` và muốn gán giá trị default, có thể sử dụng Nullish coalescing operator `??`.
 
 ```js twoslash
 const book = undefined;
-const title = book?.title ?? "デフォルトタイトル";
+const title = book?.title ?? "Default title";
 console.log(title);
-// @log: "デフォルトタイトル"
+// @log: "Default title"
 ```
 
 <PostILearned>
 
-・JavaScriptのオプショナルチェーン?.は安全にプロパティを参照する方法
-・値がnullかundefinedのときundefinedが返る
-・a?.b?.cのようにネストも可能
-・関数は?.()
-・配列は?.[]
-・TypeScriptでは値の型とundefinedのユニオン型になる
-・Null合体演算子と相性がいい
+・Optional chaining ?. trong JavaScript là cách tham chiếu property an toàn
+・Khi giá trị là null hoặc undefined, trả về undefined
+・Có thể lồng nhau như a?.b?.c
+・Với function là ?.()
+・Với array là ?.[]
+・Trong TypeScript, type là union của type giá trị và undefined
+・Kết hợp tốt với Nullish coalescing operator
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
-[配列要素へのアクセス](../array/how-to-access-elements-in-an-array.md)
+[Truy cập phần tử array](../array/how-to-access-elements-in-an-array.md)
 
-[三項演算子 (ternary operator)](../../statements/ternary-operator.md)
+[Ternary operator](../../statements/ternary-operator.md)

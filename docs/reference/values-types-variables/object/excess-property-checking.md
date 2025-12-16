@@ -1,25 +1,25 @@
 ---
-sidebar_label: 余剰プロパティチェック
+sidebar_label: Excess property checking
 ---
 
-# 余剰プロパティチェック (excess property checking)
+# Excess property checking
 
-TypeScriptのオブジェクトの型には余剰プロパティチェック(excess property checking)という、追加のチェックが働く場合があります。余剰プロパティチェックとは、オブジェクトの型に存在しないプロパティを持つオブジェクトの代入を禁止する検査です。
+Type của object trong TypeScript có trường hợp được kiểm tra thêm gọi là excess property checking. Excess property checking là kiểm tra cấm việc gán object có property không tồn tại trong type của object.
 
-たとえば、`{ x: number }`はプロパティ`x`が必須なオブジェクトの型です。この型に`{ x: 1, y: 2 }`のような値を代入しようとします。この代入は許可されるでしょうか。代入値の型は、必須プロパティの`{ x: number }`を満たしているので問題なさそうです。ところが、この代入は許可されません。
+Ví dụ, `{ x: number }` là type của object có property `x` bắt buộc. Giả sử cố gán giá trị `{ x: 1, y: 2 }` cho type này. Việc gán này có được phép không? Vì type của giá trị gán thỏa mãn property bắt buộc `{ x: number }` nên có vẻ không có vấn đề. Tuy nhiên, việc gán này không được phép.
 
 ```ts twoslash
 // @errors: 2353
 let onlyX: { x: number };
 onlyX = { x: 1 }; // OK
-onlyX = { x: 1, y: 2 }; // コンパイルエラー
+onlyX = { x: 1, y: 2 }; // Compile error
 ```
 
-このとき、「Object literal may only specify known properties, and 'y' does not exist in type '{ x: number; }'.」というコンパイルエラーが発生します。なぜこれがコンパイルエラーになるかというと、`{ y: 2 }`が余計だと判断されるからです。こうした余計なプロパティを許さないTypeScriptのチェックが余剰プロパティチェックなのです。
+Lúc này, compile error "Object literal may only specify known properties, and 'y' does not exist in type '{ x: number; }'." xảy ra. Lý do là `{ y: 2 }` bị coi là thừa. Việc kiểm tra không cho phép property thừa như vậy trong TypeScript chính là excess property checking.
 
-## 余剰プロパティチェックはオブジェクトリテラルだけを検査する
+## Excess property checking chỉ kiểm tra object literal
 
-余剰プロパティチェックはオブジェクトの余計なプロパティを禁止するため、コードが型に厳密になるよう手助けをします。しかし、余剰プロパティチェックが効くのは、オブジェクトリテラルの代入に対してのみです。なので、変数代入にはこのチェックは働きません。
+Excess property checking cấm property thừa của object, giúp code tuân thủ type nghiêm ngặt hơn. Tuy nhiên, excess property checking chỉ có hiệu lực với việc gán object literal. Do đó, kiểm tra này không hoạt động với gán biến.
 
 ```ts twoslash
 const xy: { x: number; y: number } = { x: 1, y: 2 };
@@ -27,4 +27,4 @@ let onlyX: { x: number };
 onlyX = xy; // OK
 ```
 
-変数代入にも余剰プロパティチェックが働いたほうが良さそうと思われるかもしれません。型が厳密になるからです。しかし、そうなっていないのは、TypeScriptが型の安全性よりも利便性を優先しているためです。
+Có thể nghĩ excess property checking nên hoạt động cả với gán biến để type nghiêm ngặt hơn. Tuy nhiên, không như vậy vì TypeScript ưu tiên tính tiện lợi hơn tính an toàn của type.
