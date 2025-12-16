@@ -45,7 +45,7 @@ Những thứ cần thiết cho tutorial này như sau.
 - NPM v7 trở lên
 - Yarn v1 (Tutorial này được xác nhận hoạt động với v1.22.18)
 
-Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường phát triển](./setup.md).
+Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường code](./setup.md).
 
 Chúng ta sử dụng Yarn làm package management tool. Hãy install trước. Nếu đã install rồi thì có thể bỏ qua bước này.
 
@@ -168,15 +168,15 @@ Dù có tính năng check tương tự, cả hai có lĩnh vực giỏi khác nh
 <figure>
 <figcaption>So sánh lĩnh vực giỏi của TypeScript compiler và ESLint</figcaption>
 
-|                          | TypeScript compiler | ESLint |
-| ------------------------ | :-----------------: | :----: |
-| Chuyển đổi ngôn ngữ      |          ○          |        |
-| Check type               |          ○          |        |
-| Check cú pháp            |          ○          |   ○    |
-| Coding style             |                     |   ○    |
-| Quyết định code          |                     |   ○    |
-| Security                 |                     |   ○    |
-| Performance              |                     |   ○    |
+|                     | TypeScript compiler | ESLint |
+| ------------------- | :-----------------: | :----: |
+| Chuyển đổi ngôn ngữ |          ○          |        |
+| Check type          |          ○          |        |
+| Check cú pháp       |          ○          |   ○    |
+| Coding style        |                     |   ○    |
+| Quyết định code     |                     |   ○    |
+| Security            |                     |   ○    |
+| Performance         |                     |   ○    |
 
 </figure>
 
@@ -312,11 +312,11 @@ Rule có thể set severity (mức độ nghiêm trọng). Severity có 3 loại
 
 <figure><figcaption>Severity của ESLint</figcaption>
 
-| Severity | Số | Hiệu lực                               |
-| -------- | -- | -------------------------------------- |
-| off      | 0  | Tắt rule                               |
-| warn     | 1  | Warning nhưng không ảnh hưởng exit code |
-| error    | 2  | Warning và làm exit code thành 1        |
+| Severity | Số  | Hiệu lực                                |
+| -------- | --- | --------------------------------------- |
+| off      | 0   | Tắt rule                                |
+| warn     | 1   | Warning nhưng không ảnh hưởng exit code |
+| error    | 2   | Warning và làm exit code thành 1        |
 
 </figure>
 

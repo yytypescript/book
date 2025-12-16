@@ -12,7 +12,16 @@ sidebar_label: Trang chủ
 
 <!-- markdownlint-disable MD033 -->
 
-<iframe src="https://ghbtns.com/github-btn.html?user=yytypescript&repo=book&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="170" height="30" title="GitHub" style={{marginBottom: "1rem"}}></iframe>
+<div style={{display: "flex", gap: "2rem", flexWrap: "wrap", marginBottom: "1rem"}}>
+  <div>
+    <small style={{color: "gray"}}>Bản gốc tiếng Nhật</small><br/>
+    <iframe src="https://ghbtns.com/github-btn.html?user=yytypescript&repo=book&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
+  </div>
+  <div>
+    <small style={{color: "gray"}}>Bản dịch tiếng Việt</small><br/>
+    <iframe src="https://ghbtns.com/github-btn.html?user=LeHoangTuanbk&repo=survival-typescript-vietnamese&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
+  </div>
+</div>
 
 <!-- markdownlint-restore -->
 

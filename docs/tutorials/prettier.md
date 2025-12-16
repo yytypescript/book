@@ -69,7 +69,7 @@ Những thứ cần thiết cho tutorial này như sau.
 - Node.js v16 trở lên
 - Yarn v1 (Tutorial này được xác nhận hoạt động với v1.22.19)
 
-Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường phát triển](./setup.md).
+Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường code](./setup.md).
 
 Chúng ta sẽ sử dụng Yarn làm package management tool. Hãy install trước. Nếu đã install rồi thì có thể bỏ qua bước này.
 
@@ -165,13 +165,13 @@ Prettier có rule format mặc định được định nghĩa. Nhìn kết qu�
 Giá trị mặc định của các mục đại diện như sau.
 Nếu muốn xác nhận giá trị mặc định của tất cả mục, hãy tham khảo [tài liệu chính thức của Prettier](https://prettier.io/docs/en/options.html).
 
-| Mục | Giá trị mặc định |
-| --------------- | -------------- |
-| Số ký tự tối đa 1 dòng | 80 |
-| Độ rộng indent | 2 |
-| Indent | Space |
-| Semicolon | Có |
-| Quote | Double quote |
+| Mục                    | Giá trị mặc định |
+| ---------------------- | ---------------- |
+| Số ký tự tối đa 1 dòng | 80               |
+| Độ rộng indent         | 2                |
+| Indent                 | Space            |
+| Semicolon              | Có               |
+| Quote                  | Double quote     |
 
 ## Config rule format của Prettier
 
@@ -254,12 +254,12 @@ singleQuote = true
 Ngoài `.prettierrc`, còn có một số tên file được nhận diện tự động như file config.
 Kết hợp format và tên file như sau.
 
-| Format | Tên file |
-| :----------- | :-------------------------------------------------------------------------------------- |
-| json | `.prettierrc`, `.prettierrc.json`, `.prettierrc.json5` |
-| js | `.prettierrc.js`, `.prettierrc.cjs`, `prettier.config.js`, <br /> `prettier.config.cjs` |
-| yaml | `.prettierrc`, `.prettierrc.yml`, `.prettierrc.yaml` |
-| toml | `.prettierrc.toml` |
+| Format | Tên file                                                                                |
+| :----- | :-------------------------------------------------------------------------------------- |
+| json   | `.prettierrc`, `.prettierrc.json`, `.prettierrc.json5`                                  |
+| js     | `.prettierrc.js`, `.prettierrc.cjs`, `prettier.config.js`, <br /> `prettier.config.cjs` |
+| yaml   | `.prettierrc`, `.prettierrc.yml`, `.prettierrc.yaml`                                    |
+| toml   | `.prettierrc.toml`                                                                      |
 
 ### Xác nhận rule format khác
 

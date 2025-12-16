@@ -25,7 +25,7 @@ Test code hoàn chỉnh được tạo trong tutorial này có thể xem tại [
 - NPM
 - Yarn v1 (Tutorial này được xác nhận hoạt động với v1.22.19)
 
-Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường phát triển](./setup.md).
+Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường code](./setup.md).
 
 Chúng ta sẽ sử dụng Yarn làm package management tool. Hãy install trước. Nếu đã install rồi thì có thể bỏ qua bước này.
 

@@ -6,7 +6,7 @@ slug: /tutorials
 
 Trong chương này, bạn sẽ học quy trình phát triển thực tế sử dụng TypeScript. Chúng tôi đã chuẩn bị các tutorial sau.
 
-- [Chuẩn bị môi trường phát triển](./setup.md)
+- [Chuẩn bị môi trường code](./setup.md)
 - [Tạo một hàm đơn giản](./make-a-simple-function-via-cli.md)
 - [Tạo nút Like với React](./react-like-button-tutorial.md)
 - [Tạo trình tạo ảnh mèo với Next.js](./nextjs.md)

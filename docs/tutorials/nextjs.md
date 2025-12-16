@@ -42,7 +42,7 @@ Những thứ cần thiết cho tutorial này như sau.
 - npm v10 trở lên (đi kèm với Node.js)
 - Browser (tutorial này giả định sử dụng Google Chrome)
 
-Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường phát triển](./setup.md).
+Về cách giới thiệu Node.js, vui lòng xem [Chuẩn bị môi trường code](./setup.md).
 
 ## Setup Next.js
 

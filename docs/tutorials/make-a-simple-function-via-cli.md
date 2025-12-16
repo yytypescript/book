@@ -10,7 +10,7 @@ Trong tutorial này, qua trải nghiệm tạo một hàm đơn giản với Typ
 - Editor như VS Code hoặc WebStorm
 - tsc (TypeScript compiler)
 
-[Chuẩn bị môi trường phát triển](./setup.md)
+[Chuẩn bị môi trường code](./setup.md)
 
 ## Vấn đề có thể xảy ra với JavaScript
 

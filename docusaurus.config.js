@@ -15,8 +15,8 @@ const config = {
   favicon: "img/logo.svg",
   url: "https://typescriptbook.jp",
   baseUrl: "/",
-  organizationName: "yytypescript",
-  projectName: "book",
+  organizationName: "LeHoangTuanbk",
+  projectName: "survival-typescript-vietnamese",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   i18n: {
@@ -30,7 +30,8 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/yytypescript/book/edit/master/",
+          editUrl:
+            "https://github.com/LeHoangTuanbk/survival-typescript-vietnamese/edit/master/",
           routeBasePath: "/",
           numberPrefixParser: false,
           remarkPlugins: [remarkBreaks, pageRef, postILearned],

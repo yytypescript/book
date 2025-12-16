@@ -2,7 +2,7 @@
 description: Hãy cài đặt Node.js, TypeScript compiler và editor cần thiết cho phát triển TypeScript.
 ---
 
-# Chuẩn bị môi trường phát triển
+# Chuẩn bị môi trường code
 
 ## Node.js là gì
 
