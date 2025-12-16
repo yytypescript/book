@@ -1,16 +1,16 @@
 ---
-sidebar_label: 等価であるということ
+sidebar_label: Equality (sự bằng nhau)
 ---
 
-# 等価であるということ
+# Equality (sự bằng nhau)
 
-どの言語でも、値を比較することがあります。JavaScriptにおいて等価の演算子は等価演算子(`==`)と厳密等価演算子(`===`)のふたつがあります。等しいことを判定するための演算子がふたつ存在するのは、必ずしも同じものを等しいとはしないためです。
+Trong bất kỳ ngôn ngữ nào, đều có lúc cần so sánh giá trị. Trong JavaScript, có hai toán tử so sánh bằng là toán tử bằng (`==`) và toán tử bằng nghiêm ngặt (`===`). Lý do có hai toán tử để kiểm tra bằng nhau là vì không phải lúc nào cùng một thứ cũng được coi là bằng nhau.
 
-## `===`で等価であるということ
+## Bằng nhau với `===`
 
-厳密と名がついているとおり、この演算子での等価は**型が等しく、かつ値が等しい**ことを指します。この動作は等価演算子がひとつしかない言語の`==`と同じものです。
+Đúng như tên gọi "nghiêm ngặt", bằng nhau với toán tử này nghĩa là **type bằng nhau VÀ giá trị bằng nhau**. Hành vi này giống với `==` trong các ngôn ngữ chỉ có một toán tử so sánh bằng.
 
-次の例は同然ではないかと思うかもしれません。
+Ví dụ sau có thể bạn thấy là đương nhiên.
 
 ```js twoslash
 // JavaScript
@@ -23,13 +23,13 @@ console.log(0 === "0");
 // @log: false
 ```
 
-`0n`はnumber型ではなくbigint型のことです。
+`0n` là kiểu bigint chứ không phải kiểu number.
 
-[bigint型](./bigint.md)
+[Kiểu bigint](./bigint.md)
 
-## `==`で等価であるということ
+## Bằng nhau với `==`
 
-ただの等価演算子という名ですが、こちらは**型が異なっていても同じと見なす**ことがあります。厳密には、値の型が異なる場合は型の変換ができないか試みてから値が等しいかを比較します。
+Dù chỉ là toán tử bằng thông thường, nhưng toán tử này **có thể coi là bằng nhau ngay cả khi type khác nhau**. Chính xác hơn, khi type của giá trị khác nhau, nó sẽ thử convert type rồi mới so sánh giá trị.
 
 ```ts twoslash
 console.log(null == undefined);
@@ -49,23 +49,23 @@ console.log("" == false);
 // @noErrors
 ```
 
-`"0" == false`, `"" == false`は戻り値が`true`ですが、だからとはいえ`"" == "0"`は`false`となるので注意が必要です。
+`"0" == false` và `"" == false` đều trả về `true`, nhưng cần lưu ý rằng `"" == "0"` lại là `false`.
 
-## いつ`==`と`===`を使うのか、使い分けるのか
+## Khi nào dùng `==` và `===`, hay phân biệt sử dụng
 
-意図しない動作を避けるという観点においては、厳密等価演算子(`===`)を常用し、必要なタイミングで等価演算子を使うといいでしょう。とはいえその必要なタイミングの多くは`x == null`です。これは変数xが`null`か`undefined`のときに`true`を返します。
+Từ quan điểm tránh hành vi không mong muốn, nên thường xuyên dùng toán tử bằng nghiêm ngặt (`===`), và dùng toán tử bằng (`==`) khi cần thiết. Tuy nhiên, hầu hết "khi cần thiết" đó là `x == null`. Điều này trả về `true` khi biến x là `null` hoặc `undefined`.
 
-## 等価であることを気をつける値
+## Các giá trị cần cẩn thận khi so sánh bằng
 
-安易に等値比較をすると`false`になってしまい、注意が必要な値があります。
+Có những giá trị nếu so sánh bằng không cẩn thận sẽ trả về `false` và cần chú ý.
 
 - `NaN`
-- symbol型の値
-- object型の値
+- Giá trị kiểu symbol
+- Giá trị kiểu object
 
 ### `NaN`
 
-`NaN`はnumber型の値ですが、どの値と比較をしても`false`を返します。たとえそれが`NaN`同士の比較であっても`false`を返します。
+`NaN` là giá trị kiểu number, nhưng khi so sánh với bất kỳ giá trị nào đều trả về `false`. Ngay cả khi so sánh `NaN` với `NaN` cũng trả về `false`.
 
 ```js twoslash
 // JavaScript
@@ -76,7 +76,7 @@ console.log(NaN === NaN);
 // @log: false
 ```
 
-この性質を使うとその値が`NaN`であるかどうかを判定することができます。
+Sử dụng tính chất này, có thể kiểm tra xem giá trị có phải `NaN` không.
 
 ```ts twoslash
 function isNaN(value: unknown): boolean {
@@ -89,9 +89,9 @@ console.log(isNaN(NaN));
 // @log: true
 ```
 
-### symbol型の値
+### Giá trị kiểu symbol
 
-symbol型は、たとえ同じdescription(第1引数)が同じ値同士を比較しても、まったく同じ変数名を参照しない限り`false`を返します。
+Kiểu symbol, dù so sánh các giá trị có cùng description (tham số đầu tiên), nếu không tham chiếu đến cùng một biến thì sẽ trả về `false`.
 
 ```ts twoslash
 console.log(Symbol("piano") == Symbol("piano"));
@@ -103,9 +103,9 @@ console.log(sym === sym);
 // @log: true
 ```
 
-### object型の値
+### Giá trị kiểu object
 
-object型は、同じプロパティと値のペアの比較をしても、まったく同じ変数名を参照しない限り`false`を返します。これはオブジェクトについて理解がある人にとっては当然の挙動です。
+Kiểu object, dù so sánh các object có cùng cặp property và value, nếu không tham chiếu đến cùng một biến thì sẽ trả về `false`. Đây là hành vi đương nhiên với những người hiểu về object.
 
 ```js twoslash
 // JavaScript
@@ -124,4 +124,4 @@ console.log(obj === obj);
 // @noErrors
 ```
 
-## まとめ
+## Tóm tắt

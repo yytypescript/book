@@ -1,4 +1,8 @@
-# null型
+---
+sidebar_label: Kiểu null
+---
+
+# Kiểu null
 
 null trong JavaScript là giá trị biểu thị không có giá trị.
 
@@ -27,6 +31,6 @@ console.log(typeof null);
 // @log: "object"
 ```
 
-Chi tiết về toán tử typeof xem tại phần "typeof演算子".
+Chi tiết về toán tử typeof xem tại phần "Toán tử typeof".
 
-[typeof演算子 (typeof operator)](typeof-operator.md)
+[Toán tử typeof (typeof operator)](typeof-operator.md)

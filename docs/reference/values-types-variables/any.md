@@ -1,6 +1,10 @@
-# any型
+---
+sidebar_label: Kiểu any
+---
 
-any型trong TypeScript là kiểu cho phép gán bất kỳ giá trị nào. Dù là primitive type hay object, bạn có thể gán gì vào cũng không gây lỗi.
+# Kiểu any
+
+Kiểu any trong TypeScript là kiểu cho phép gán bất kỳ giá trị nào. Dù là primitive type hay object, bạn có thể gán gì vào cũng không gây lỗi.
 
 ```ts twoslash
 let value: any;

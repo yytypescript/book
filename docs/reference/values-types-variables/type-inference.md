@@ -1,13 +1,13 @@
-# 変数宣言の型推論
+# Type inference trong khai báo biến
 
-TypeScriptには型推論(type inference)と呼ばれる機能があります。型推論は、**コンパイラが型を自動で判別する機能**です。プログラマーは型推論を活用すると、型注釈を省略できるので、コードの記述量を減らせる利点があります。
+TypeScript có tính năng gọi là type inference (suy luận kiểu). Type inference là **tính năng cho phép compiler tự động xác định kiểu**. Lập trình viên có thể tận dụng type inference để bỏ qua type annotation, giảm lượng code cần viết.
 
 ```ts twoslash
 // @errors: 2322
-let x = 1; // let x: number = 1;と同じ意味になる
+let x = 1; // Có nghĩa giống như let x: number = 1;
 x = "hello";
 ```
 
-上の例では変数`x`に`1`の値コードを代入しています。この時点でコンパイラは代入された値から、変数`x`の型を`number`型と自動で判別します。型注釈`x: number`を書くことを省略できます。
+Trong ví dụ trên, giá trị `1` được gán cho biến `x`. Tại thời điểm này, compiler tự động xác định kiểu của biến `x` là `number` từ giá trị được gán. Bạn có thể bỏ qua việc viết type annotation `x: number`.
 
-型注釈が書かれていないものの`x`は`number`型を推論されているため、`x`に`hello`のstring型を再代入する記述は、型の不一致によりコンパイルエラーとなります。
+Mặc dù không có type annotation được viết, `x` đã được suy luận là kiểu `number`, nên việc gán lại giá trị string `hello` cho `x` sẽ gây ra lỗi compile do không khớp kiểu.

@@ -1,19 +1,19 @@
 ---
-sidebar_label: "ボックス化"
+sidebar_label: Boxing
 ---
 
-# ボックス化 (boxing)
+# Boxing
 
 Trong nhiều ngôn ngữ, primitive thường không có field hay method. Để xử lý primitive như object, cần chuyển đổi primitive sang object. Việc chuyển đổi từ primitive sang object được gọi là boxing.
 
 ```ts twoslash
-// プリミティブ型
+// Kiểu primitive
 const str = "abc";
-// ラッパーオブジェクトに入れる
+// Đưa vào wrapper object
 const strObject = new String(str);
-// オブジェクトのように扱う
-strObject.length; // フィールドの参照
-strObject.toUpperCase(); // メソッド呼び出し
+// Xử lý như object
+strObject.length; // Tham chiếu field
+strObject.toUpperCase(); // Gọi method
 ```
 
 Ví dụ trên minh họa khái niệm boxing trong JavaScript. Trong code thực tế, không cần phải bỏ primitive type vào wrapper object như `String`. Vì JavaScript có cơ chế auto-boxing.
@@ -24,9 +24,9 @@ Trong JavaScript, ngay cả giá trị primitive type cũng có thể truy cập
 
 ```ts twoslash
 const str = "abc";
-// オブジェクトのように扱う
-str.length; // フィールドの参照
-str.toUpperCase(); // メソッド呼び出し
+// Xử lý như object
+str.length; // Tham chiếu field
+str.toUpperCase(); // Gọi method
 ```
 
 Giá trị primitive type không phải object, nên việc có thể thao tác như vậy là điều lạ. Có vẻ cần boxing. Tuy nhiên điều này có thể thực hiện được là vì JavaScript nội bộ chuyển đổi giá trị primitive type sang object. Việc chuyển đổi ngầm định này gọi là auto-boxing.
@@ -35,13 +35,13 @@ Giá trị primitive type không phải object, nên việc có thể thao tác 
 
 Object được chuyển đổi đến trong auto-boxing của JavaScript gọi là wrapper object. Tương ứng giữa primitive type và wrapper object như bảng sau.
 
-| プリミティブ型 | ラッパーオブジェクト |
-| -------------- | -------------------- |
-| `boolean`      | `Boolean`            |
-| `number`       | `Number`             |
-| `string`       | `String`             |
-| `symbol`       | `Symbol`             |
-| `bigint`       | `BigInt`             |
+| Primitive type | Wrapper object |
+| -------------- | -------------- |
+| `boolean`      | `Boolean`      |
+| `number`       | `Number`       |
+| `string`       | `String`       |
+| `symbol`       | `Symbol`       |
+| `bigint`       | `BigInt`       |
 
 Primitive type `undefined` và `null` không có wrapper object. Do đó việc truy cập method hay field luôn phát sinh lỗi.
 
@@ -103,9 +103,9 @@ const bool: Boolean = boolLike;
 Không có lợi ích gì khi dùng wrapper object type cho type annotation thay vì primitive type. Hãy dùng primitive type cho type annotation.
 
 ```ts twoslash
-// ❌間違い
+// ❌ Sai
 const num1: Number = 0;
-// ✅正しい
+// ✅ Đúng
 const num2: number = 0;
 ```
 
@@ -119,6 +119,6 @@ const num2: number = 0;
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
-[プリミティブ型 (primitive types)](primitive-types.md)
+[Kiểu primitive](primitive-types.md)

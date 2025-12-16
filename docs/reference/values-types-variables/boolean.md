@@ -1,9 +1,9 @@
 ---
-sidebar_label: boolean型
-title: boolean型 (論理型)
+sidebar_label: Kiểu boolean
+title: Kiểu boolean (kiểu logic)
 ---
 
-boolean型trong JavaScript là type bao gồm các giá trị logic `true` và `false`.
+Kiểu boolean trong JavaScript là type bao gồm các giá trị logic `true` và `false`.
 
 ## boolean literal
 

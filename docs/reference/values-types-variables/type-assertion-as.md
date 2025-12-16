@@ -1,34 +1,34 @@
 ---
-sidebar_label: 型アサーション「as」
+sidebar_label: Type assertion "as"
 ---
 
-# 型アサーション「as」(type assertion)
+# Type assertion "as"
 
-TypeScriptには、型推論を上書きする機能があります。その機能を型アサーション(type assertion)と言います。
+TypeScript có tính năng ghi đè type inference. Tính năng này được gọi là type assertion.
 
-TypeScriptコンパイラーはコードをヒントに型を推論してくれます。その型推論は非常に知的ですが、場合によってはコンパイラーよりもプログラマーがより正確な型を知っている場合があります。そのような場合は、型アサーションを用いるとコンパイラーに型を伝えることができます。型アサーションはコンパイラに「私を信じて！私のほうが型に詳しいから」と伝えるようなものです。
+TypeScript compiler suy luận kiểu từ code. Type inference đó rất thông minh, nhưng đôi khi lập trình viên biết kiểu chính xác hơn compiler. Trong trường hợp đó, có thể sử dụng type assertion để cho compiler biết kiểu. Type assertion giống như nói với compiler "Tin tôi đi! Tôi biết rõ về kiểu hơn".
 
-## 型アサーションの書き方
+## Cách viết type assertion
 
-型アサーションの書き方は2つあります。1つはas構文です。
+Có 2 cách viết type assertion. Một là cú pháp as.
 
 ```ts twoslash
 const value: string | number = "this is a string";
 const strLength: number = (value as string).length;
 ```
 
-もう1つはアングルブラケット構文(angle-bracket syntax)です。
+Cách còn lại là cú pháp angle-bracket (angle-bracket syntax).
 
 ```ts twoslash
 const value: string | number = "this is a string";
 const strLength: number = (<string>value).length;
 ```
 
-どちらを用いるかは好みですが、アングルブラケット構文はJSXと見分けがつかないことがあるため、as構文が用いられることのほうが多いです。
+Tùy sở thích dùng cách nào, nhưng cú pháp angle-bracket đôi khi không phân biệt được với JSX, nên cú pháp as được dùng nhiều hơn.
 
-## コンパイルエラーになる型アサーション
+## Type assertion gây lỗi compile
 
-型アサーションを使えば制限なく型の情報を上書きできるかというとそうではありません。たとえば、`number`型を`string`型にする型アサーションはコンパイルエラーになります。
+Không phải type assertion có thể ghi đè thông tin kiểu không giới hạn. Ví dụ, type assertion chuyển kiểu `number` thành kiểu `string` sẽ gây lỗi compile.
 
 ```ts twoslash
 // @errors: 2352
@@ -36,44 +36,44 @@ const num = 123;
 const str: string = num as string;
 ```
 
-このエラーは「number型をstring型にするのは間違いです。お互いの型に共通する部分が少なすぎるからです」という内容です。
+Lỗi này có nghĩa "Việc chuyển kiểu number thành kiểu string là sai. Vì hai kiểu có quá ít phần chung".
 
-このように型アサーションはコンパイラーの型推論を上書きできるとは言っても、無茶な型の変換はできないようになっています。
+Như vậy, dù type assertion có thể ghi đè type inference của compiler, nhưng không thể chuyển đổi kiểu vô lý.
 
-それでも自分の書いた型アサーションが正しいという場合は、`unknown`型を経由することで上のようなエラーを出さないようにもできます。
+Nếu vẫn tin type assertion mình viết là đúng, có thể tránh lỗi trên bằng cách đi qua kiểu `unknown`.
 
 ```ts twoslash
 const num = 123;
 const str: string = num as unknown as string; // OK
 ```
 
-## 型アサーションとキャストの違い
+## Sự khác biệt giữa type assertion và cast
 
-型アサーションは、他の言語のキャストに似ています。キャストとは、実行時にある値の型を別の型に変換することです。型アサーションは、実行時に影響しません。値の型変換はしないのです。あくまでコンパイル時にコンパイラーに型を伝えるだけです。コンパイラーはその情報を手がかりに、コードをチェックします。型アサーションはキャストではないため、TypeScriptでは型アサーションをキャストとは呼ばないことになっています。実行時に型変換をするには、そのためのロジックを書く必要があります。
+Type assertion giống với cast của các ngôn ngữ khác. Cast là việc chuyển đổi kiểu của một giá trị sang kiểu khác tại runtime. Type assertion không ảnh hưởng đến runtime. Nó không chuyển đổi kiểu giá trị. Chỉ đơn thuần là truyền kiểu cho compiler tại compile time. Compiler dùng thông tin đó để kiểm tra code. Type assertion không phải cast, nên trong TypeScript không gọi type assertion là cast. Để chuyển đổi kiểu tại runtime, cần viết logic cho việc đó.
 
-## 大いなる力には大いなる責任が伴う
+## Với sức mạnh lớn đi kèm trách nhiệm lớn
 
-型アサーションには、コンパイラーの型推論を上書きする強力さがあります。そのため、プログラマーは型アサーションによってバグを産まないように十分注意する必要があります。型に関することはできるだけ、コンパイラーの型推論に頼ったほうが安全なので、型アサーションは、やむを得ない場合にのみ使うべきです。
+Type assertion có sức mạnh ghi đè type inference của compiler. Do đó, lập trình viên cần cẩn thận để type assertion không gây ra bug. Về kiểu, dựa vào type inference của compiler sẽ an toàn hơn, nên type assertion chỉ nên dùng khi không còn cách nào khác.
 
-型アサーションを使う必要が出てきたら、それよりも先に、型ガードやユーザー定義型ガードで解決できないか検討してみるとよいでしょう。
+Khi cần sử dụng type assertion, trước hết hãy xem xét có thể giải quyết bằng type guard hoặc user-defined type guard không.
 
-[制御フロー分析と型ガードによる型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
+[Thu hẹp kiểu bằng control flow analysis và type guard](../statements/control-flow-analysis-and-type-guard.md)
 
-[型ガード関数 (type guard function)](../functions/type-guard-functions.md)
+[Type guard function](../functions/type-guard-functions.md)
 
-[アサーション関数 (assertion functions)](../functions/assertion-functions.md)
+[Assertion function](../functions/assertion-functions.md)
 
-## 型アサーションと型アノテーションの違い
+## Sự khác biệt giữa type assertion và type annotation
 
-型アサーションと型アノテーション(type annotation)は名前が似ているためかしばしば混同されます。本書では型アノテーションを「型注釈」と表記しています。この2つはTypeScriptの異なる機能です。
+Type assertion và type annotation có tên giống nhau nên thường bị nhầm lẫn. Trong sách này, type annotation được gọi là "type annotation". Đây là 2 tính năng khác nhau của TypeScript.
 
-型注釈は、コンパイラーに「この変数に代入できるのはこの型だよ」と伝えるものです。コンパイラーは型注釈をヒントに、その型に値が代入可能かどうかをチェックし、代入できないことが分かり次第報告してきます。
+Type annotation là việc cho compiler biết "Biến này chỉ có thể gán kiểu này". Compiler dùng type annotation làm gợi ý để kiểm tra xem giá trị có thể gán vào kiểu đó không, và báo cáo ngay khi phát hiện không thể gán.
 
 ```ts twoslash
 let value: number;
-//         ^^^^^^ 型注釈
+//         ^^^^^^ Type annotation
 ```
 
-一方、型アサーションはコンパイラーに「君はこの型だと思ってるかもしれないけど、本当はこの型だよ」と型推論の不正確さを伝えるものです。
+Mặt khác, type assertion là việc cho compiler biết "Bạn nghĩ kiểu này, nhưng thực tế là kiểu kia" để truyền đạt sự không chính xác của type inference.
 
-[変数宣言の型注釈 (type annotation)](type-annotation.md)
+[Type annotation trong khai báo biến](type-annotation.md)

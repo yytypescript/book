@@ -1,18 +1,18 @@
 ---
-sidebar_label: satisfies演算子 「satisfies operator」
+sidebar_label: Toán tử satisfies
 ---
 
-# satisfies演算子「satisfies operator」
+# Toán tử satisfies (satisfies operator)
 
-`satisfies T`(`T`は型)は、変数宣言時に使用する演算子で、その値が型`T`を満たすことを検証します。この演算子は型の絞り込みを保持したまま型チェックを行える特徴があります。
+`satisfies T` (T là type) là toán tử sử dụng khi khai báo biến, dùng để kiểm tra xem giá trị đó có thỏa mãn type T không. Đặc điểm của toán tử này là có thể thực hiện type check trong khi vẫn giữ được việc thu hẹp type.
 
-`as const`と異なり、`satisfies`はその後に型を要求します。単独で使用することはできません。
+Khác với `as const`, `satisfies` yêu cầu một type đi sau nó. Không thể sử dụng đơn lẻ.
 
-## 型アノテーションと同じようにできること
+## Những điều giống với type annotation
 
-変数宣言のときに変数名の後ろに`: T`と書くことを型アノテーションといいます。こちらは変数宣言時にその変数が型`T`を満たすことを検証します。
+Việc viết `: T` sau tên biến khi khai báo biến được gọi là type annotation. Type annotation kiểm tra xem biến đó có thỏa mãn type T khi khai báo biến.
 
-というと`satisfies T`の機能が型アノテーションとまったく同じように見えます。実際次の例はまったく同じ働きをします。
+Nghe có vẻ chức năng của `satisfies T` hoàn toàn giống với type annotation. Thực tế, ví dụ sau hoạt động hoàn toàn giống nhau.
 
 ```ts twoslash
 type Pokemon = {
@@ -38,8 +38,8 @@ const raichu = {
 } satisfies Pokemon;
 ```
 
-どちらも宣言した型に沿わない型を与えるとエラーが発生します。
-また、存在しないプロパティを追加することもできません。
+Cả hai đều phát sinh lỗi nếu gán type không theo đúng type đã khai báo.
+Ngoài ra, cũng không thể thêm property không tồn tại.
 
 ```ts twoslash
 type Pokemon = {
@@ -97,10 +97,10 @@ const raichu = {
 } satisfies Pokemon;
 ```
 
-## 型アノテーションとちがうこと
+## Những điều khác với type annotation
 
-`satisfies`の最大の特徴は、型`T`にユニオン型が含まれる場合でも、実際の値に基づいて型を絞り込むことができる点です。型アノテーションでは失われてしまう型の情報を保持できます。
-主にオブジェクトリテラルや配列で使用しますが、プリミティブ型でも使用できます。
+Đặc điểm lớn nhất của `satisfies` là khi type T chứa union type, nó vẫn có thể thu hẹp type dựa trên giá trị thực tế. Có thể giữ lại thông tin type mà với type annotation sẽ bị mất đi.
+Chủ yếu sử dụng với object literal hoặc array, nhưng cũng có thể sử dụng với primitive type.
 
 ```ts twoslash
 const array1: (string | number)[] = [1, 2, 3];
@@ -109,7 +109,7 @@ const array2 = [1, 2, 3] satisfies (string | number)[];
 //    ^?
 ```
 
-ユニオン型の配列の場合は期待する結果にならないときもあります。
+Với array của union type, đôi khi kết quả không như mong đợi.
 
 ```ts twoslash
 const array1: (string | number)[] = [1, "2", 3];
@@ -118,7 +118,7 @@ const array2 = [1, "2", 3] satisfies (string | number)[];
 //    ^?
 ```
 
-タプル型の場合は個々に型の絞り込みを行います。
+Với tuple type, việc thu hẹp type được thực hiện cho từng phần tử.
 
 ```ts twoslash
 const tuple1: [string | number, string | number, string | number] = [1, "2", 3];
@@ -131,7 +131,7 @@ const tuple2 = [1, "2", 3] satisfies [
 ];
 ```
 
-オブジェクトのプロパティにあるユニオン型にも効果があります。
+Cũng có hiệu quả với union type trong property của object.
 
 ```ts twoslash
 type SuccessResponse = {
@@ -156,11 +156,11 @@ const res2 = {
 } satisfies ApiResponse;
 ```
 
-## as constと組み合わせる
+## Kết hợp với as const
 
-`as const`と組み合わせて`as const satisfies T`と書くことができます。
+Có thể kết hợp với `as const` và viết `as const satisfies T`.
 
-これは型`T`を満たしていることを検証した上で絞り込みを行い、さらにリテラル型にしてreadonlyにするという`as const`と`satisfies`の機能をあわせ持っています。
+Điều này kết hợp chức năng của `as const` và `satisfies`: kiểm tra xem có thỏa mãn type T không, thực hiện thu hẹp type, và thêm vào đó làm thành literal type và readonly.
 
 ```ts twoslash
 type SuccessResponse = {

@@ -1,10 +1,10 @@
 ---
-sidebar_label: typeof演算子
+sidebar_label: Toán tử typeof
 ---
 
-# typeof演算子 (typeof operator)
+# Toán tử typeof (typeof operator)
 
-JavaScriptの`typeof`演算子では値の型を調べることができます。
+Toán tử `typeof` của JavaScript cho phép kiểm tra kiểu của giá trị.
 
 ```js twoslash
 typeof true; //=> "boolean"
@@ -19,9 +19,9 @@ typeof { a: 1, b: 2 }; //=> "object"
 typeof (() => {}); //=> "function"
 ```
 
-## TypeScriptで`typeof`を使うとifやswitchでその型として使うことができる
+## Sử dụng `typeof` trong TypeScript để dùng kiểu đó trong if hoặc switch
 
-TypeScriptでは`typeof`演算子をifやswitchと併せてつかうと、条件と合致したときにその変数をその型として扱えるようになります。次の例は`unknown`型とされた変数`n`が`typeof`演算子によって`string`型であると判別された例です。
+Trong TypeScript, khi sử dụng toán tử `typeof` kết hợp với if hoặc switch, biến đó có thể được xử lý như kiểu tương ứng khi điều kiện khớp. Ví dụ sau cho thấy biến `n` có kiểu `unknown` được xác định là kiểu `string` bằng toán tử `typeof`.
 
 ```ts twoslash
 // @noErrors
@@ -33,20 +33,20 @@ if (typeof n === "string") {
 }
 ```
 
-## `null`を判別する
+## Phân biệt `null`
 
-`typeof`演算子で特筆すべきなのは、値が`null`の場合です。`typeof null`の演算結果は`"null"`ではなく`"object"`です。誤解が起きやすい部分なので注意しましょう。特に値がオブジェクトかどうかを判定したいときは、`typeof null`が`"object"`になることを意識して書かないと思いがけない不具合になることがあります。
+Điều đáng chú ý với toán tử `typeof` là trường hợp giá trị là `null`. Kết quả của `typeof null` không phải `"null"` mà là `"object"`. Đây là phần dễ gây hiểu nhầm nên cần chú ý. Đặc biệt khi muốn xác định giá trị có phải object không, nếu không ý thức rằng `typeof null` là `"object"` thì có thể gây ra bug không mong muốn.
 
 ```js twoslash
-// まずい実装
+// Implementation có vấn đề
 function isObject(value) {
-  return typeof value === "object"; // valueがnullになる場合を考慮していない
+  return typeof value === "object"; // Không xem xét trường hợp value là null
 }
 
-isObject(null); // 戻り値がtrueになってしまう
+isObject(null); // Giá trị trả về là true
 ```
 
-`typeof null`を考慮した実装は次のようになります。
+Implementation có xem xét `typeof null` như sau.
 
 ```js twoslash
 function isObject(value) {
@@ -54,17 +54,17 @@ function isObject(value) {
 }
 ```
 
-ここで説明したのはJavaScriptのtypeof演算子です。TypeScriptのtypeof型演算子については、typeof型演算子の説明をご覧ください。
+Phần giải thích ở đây là toán tử typeof của JavaScript. Về toán tử typeof type của TypeScript, hãy xem phần giải thích toán tử typeof type.
 
-[typeof型演算子](../type-reuse/typeof-type-operator.md)
+[Toán tử typeof type](../type-reuse/typeof-type-operator.md)
 
-## 配列を判別する
+## Phân biệt mảng
 
-上記例にもあるとおり、配列を`typeof`にかけると`"object"`となります。これは不具合でもなんでもなく、配列はオブジェクトであるのでそのように判別されます。
+Như ví dụ trên, khi áp dụng `typeof` cho mảng sẽ trả về `"object"`. Đây không phải bug, vì mảng là object nên được phân biệt như vậy.
 
-とはいえそれが配列かどうかを判別する機会は多いため、専用に`Array.isArray()`というメソッドが`Array`オブジェクトにあります。
+Tuy nhiên, vì có nhiều cơ hội phân biệt xem đó có phải mảng không, nên có method chuyên dụng `Array.isArray()` trong object `Array`.
 
-`Array.isArray()`を使ってtrueの戻り値が帰ってきた場合、その変数は`any[]`型であると判別されます。
+Khi sử dụng `Array.isArray()` và nhận giá trị trả về true, biến đó được xác định là kiểu `any[]`.
 
 ```ts twoslash
 const n: unknown = [];
@@ -75,8 +75,8 @@ if (Array.isArray(n)) {
 }
 ```
 
-`any[]`型を任意の型の配列として判別したい場合は各要素に対して`typeof`や`Array.isArray()`など型を調べる関数を使います。
+Khi muốn xác định `any[]` là mảng của kiểu tùy ý, sử dụng các function kiểm tra kiểu như `typeof` hoặc `Array.isArray()` cho từng phần tử.
 
 [unknown](../statements/unknown.md)
 
-[型ガード](../functions/type-guard-functions.md)
+[Type guard](../functions/type-guard-functions.md)

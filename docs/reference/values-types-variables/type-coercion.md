@@ -1,22 +1,22 @@
 ---
-sidebar_label: 型強制
+sidebar_label: Type coercion
 ---
 
-# 型強制 (type coercion)
+# Type coercion (ép kiểu)
 
-JavaScriptにはデータ型がありますが、型が異なる2つの値に対し演算してもエラーにならない場合があります。たとえば、string型の`"1"`からnumber型の`1`を減算した場合、number型の`0`が計算結果として出てきます。
+JavaScript có data type, nhưng có những trường hợp khi thực hiện phép toán với hai giá trị khác kiểu mà không gây lỗi. Ví dụ, khi trừ kiểu number `1` từ kiểu string `"1"`, kết quả là kiểu number `0`.
 
 ```js
 "1" - 1; //=> 0
 ```
 
-これは型強制(type coercion)と呼ばれる仕組みがあるためです。型強制とは、型が異なる2つの値を処理するとき、暗黙的に別の型へ変換されることを言います。
+Điều này là do cơ chế gọi là type coercion (ép kiểu). Type coercion là việc khi xử lý hai giá trị khác kiểu, một trong số chúng được chuyển đổi ngầm định sang kiểu khác.
 
-上の例では、string型の`"1"`がnumber型の`1`に型強制された上で、`- 1`が演算されたため`0`が計算結果になるわけです。
+Trong ví dụ trên, kiểu string `"1"` được ép kiểu thành kiểu number `1`, sau đó phép toán `- 1` được thực hiện, nên kết quả là `0`.
 
-型に厳しい言語では、型が異なる値同士の演算ができない言語もあるので、そのような言語に慣れている方は特に注意してください。
+Trong các ngôn ngữ nghiêm ngặt về kiểu, có những ngôn ngữ không cho phép phép toán giữa các giá trị khác kiểu, nên những người quen với các ngôn ngữ đó cần đặc biệt chú ý.
 
-ちなみに、どんな型に型強制されるかは演算子によっても異なるので注意が必要です。たとえば、string型の`"1"`にnumber型の`1`を加算する場合は、string型の`"11"`が計算結果になります。これは、number型の`1`がstring型の`"1"`に型強制された上で、`"1" + "1"`の文字列結合の演算になるためです。
+Ngoài ra, cần lưu ý rằng kiểu được ép sang phụ thuộc vào toán tử. Ví dụ, khi cộng kiểu number `1` vào kiểu string `"1"`, kết quả là kiểu string `"11"`. Điều này là vì kiểu number `1` được ép kiểu thành kiểu string `"1"`, và trở thành phép nối chuỗi `"1" + "1"`.
 
 ```js
 "1" + 1; //=> "11"
@@ -24,7 +24,7 @@ JavaScriptにはデータ型がありますが、型が異なる2つの値に対
 
 <PostILearned>
 
-文字列と数値など型が異なる2つの値を演算するとき、暗黙に型変換される「型強制」がJavaScriptにはある。
+Khi thực hiện phép toán giữa hai giá trị khác kiểu như chuỗi và số, JavaScript có "type coercion" chuyển đổi kiểu ngầm định.
 
 "1" - 1; //=> 0
 "1" + 1; //=> "11"

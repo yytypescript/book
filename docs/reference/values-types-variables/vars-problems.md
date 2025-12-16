@@ -1,28 +1,28 @@
-# varはもう使わない
+# Không nên sử dụng var nữa
 
-`var`は古い変数宣言の方法です。`var`にはいくつかの問題点がありました。それを解決するために、ES2015で`let`と`const`が導入されました。ここでは、`var`とその問題点を説明します。新たにコードを書く場合には`var`は使わずに`let`と`const`を使うことを推奨します。
+`var` là cách khai báo biến cũ. `var` có một số vấn đề. Để giải quyết những vấn đề đó, `let` và `const` đã được giới thiệu trong ES2015. Ở đây, chúng ta sẽ giải thích về `var` và các vấn đề của nó. Khi viết code mới, khuyến nghị sử dụng `let` và `const` thay vì `var`.
 
-## varの変数宣言
+## Khai báo biến với var
 
-`var`は次のように書くことで変数を宣言できます。
+Bạn có thể khai báo biến bằng `var` như sau:
 
 ```js twoslash
-var name = "taro";
+var name = "tuan";
 ```
 
-初期値を省略した変数宣言もできます。その場合の変数値は`undefined`です。
+Bạn cũng có thể khai báo biến mà không cần giá trị khởi tạo. Trong trường hợp đó, giá trị của biến là `undefined`.
 
 ```js twoslash
 var name;
 ```
 
-## varの問題点
+## Các vấn đề của var
 
-`var`による変数宣言には気をつけるべき挙動が何点か存在します。
+Khai báo biến bằng `var` có một số hành vi cần chú ý.
 
-### 同名の変数宣言
+### Khai báo biến cùng tên
 
-`var`の変数宣言では同じ変数名で宣言をした場合にエラーとならずに、後から宣言された変数が有効となります。これは思いがけず既存の変数を書き換えてしまい、意図しない結果を出力する可能性があります。
+Với `var`, khi khai báo biến cùng tên, không có lỗi xảy ra và biến được khai báo sau sẽ có hiệu lực. Điều này có thể vô tình ghi đè biến hiện có và tạo ra kết quả không mong muốn.
 
 ```js twoslash
 function test() {
@@ -32,7 +32,7 @@ function test() {
 }
 ```
 
-`let`と`const`では、同名の変数宣言はエラーになるようになっています。
+Với `let` và `const`, khai báo biến cùng tên sẽ gây ra lỗi.
 
 ```ts twoslash
 let x = 1;
@@ -45,11 +45,11 @@ const y = 2;
 // @noErrors
 ```
 
-### グローバル変数の上書き
+### Ghi đè biến global
 
-`var`はグローバル変数として定義されたときに、`window`オブジェクトのプロパティとして定義されるため、既存のプロパティを上書きする危険性があります。
+Khi `var` được định nghĩa như biến global, nó trở thành property của object `window`, có nguy cơ ghi đè các property hiện có.
 
-たとえば、ブラウザ上で`innerWidth`変数をグローバル変数として定義してしまうと、標準APIの`window.innerWidth`が上書きされるため、ブラウザの幅を変更しても常に同じ値が返ってくるようになってしまいます。
+Ví dụ, nếu bạn định nghĩa biến `innerWidth` như biến global trên trình duyệt, API tiêu chuẩn `window.innerWidth` sẽ bị ghi đè, khiến cho dù có thay đổi kích thước trình duyệt, giá trị trả về vẫn luôn giống nhau.
 
 ```js twoslash
 var innerWidth = 10;
@@ -57,7 +57,7 @@ console.log(window.innerWidth);
 // @log: 10
 ```
 
-`let`や`const`はグローバルなスコープで定義されることはないため、`window`オブジェクトのプロパティを不用意に上書きする心配はありません。
+`let` và `const` không được định nghĩa trong scope global, nên không có nguy cơ vô tình ghi đè property của object `window`.
 
 ```ts twoslash
 const innerWidth = 10;
@@ -66,29 +66,29 @@ console.log(window.innerWidth);
 // @noErrors
 ```
 
-[変数のスコープ (scope)](../statements/variable-scope.md)
+[Scope của biến](../statements/variable-scope.md)
 
-### 変数の巻き上げ
+### Hoisting của biến
 
-JavaScriptで宣言された変数はスコープの先頭で変数が生成されます。これは**変数の巻き上げ**と呼ばれています。`var`で宣言された変数は、スコープの先頭で生成されて`undefined`で値が初期化されます。次の例では`greeting`変数への参照はエラーとならずに`undefined`となります。
+Trong JavaScript, các biến được khai báo sẽ được tạo ở đầu scope. Điều này được gọi là **hoisting của biến**. Biến được khai báo bằng `var` sẽ được tạo ở đầu scope và được khởi tạo với giá trị `undefined`. Trong ví dụ sau, tham chiếu đến biến `greeting` không gây lỗi mà trả về `undefined`.
 
 ```ts twoslash
 console.log(greeting);
 // @log: undefined
-var greeting = "こんにちは";
+var greeting = "Xin chào";
 
-// ↓ 巻き上げの影響で実際はこう実行される
+// ↓ Do hoisting, thực tế code chạy như sau
 
 // @noErrors
 var greeting;
 console.log(greeting);
 // @log: undefined
-greeting = "こんにちは";
+greeting = "Xin chào";
 ```
 
-`var`での変数巻き上げでは参照エラーとならないため、意図せずに`undefined`の値を参照し予期せぬバグが発生する危険性があります。
+Với hoisting của `var`, không có lỗi tham chiếu, nên có nguy cơ vô tình tham chiếu giá trị `undefined` và gây ra bug không mong muốn.
 
-`let`と`const`では、宣言前の変数を参照すると`Reference Error`が発生します。
+Với `let` và `const`, tham chiếu đến biến trước khi khai báo sẽ gây ra `Reference Error`.
 
 ```ts twoslash
 console.log(x);
@@ -100,11 +100,11 @@ console.log(y);
 const y = 2;
 ```
 
-ただ、ここで注意すべきなのが`let`と`const`の場合でも**変数の巻き上げは発生している**という点です。では、なぜ`Reference Error`が発生するのでしょうか？
+Tuy nhiên, điều cần lưu ý là **hoisting vẫn xảy ra** với `let` và `const`. Vậy tại sao `Reference Error` lại xảy ra?
 
-`var`は変数の巻き上げが発生したタイミングで`undefined`で**変数を初期化している**ため、値の参照が可能となっていました。それに対して`let`と`const`は変数の巻き上げが発生しても変数が評価されるまで**変数は初期化されません**。そのため、初期化されていない変数を参照するためReference Errorが発生しているのです。
+Với `var`, khi hoisting xảy ra, biến được **khởi tạo với `undefined`**, cho phép tham chiếu giá trị. Ngược lại, với `let` và `const`, dù hoisting xảy ra, **biến không được khởi tạo** cho đến khi được đánh giá. Do đó, Reference Error xảy ra vì tham chiếu đến biến chưa được khởi tạo.
 
-次の例では`let`や`const`で変数の巻き上げが発生しないなら`console.log(x)`の評価のタイミングで関数の先頭で宣言されている`var x = 1`が参照されて`1`が出力されるはずです。しかし、実際は`let`で宣言された変数`x`がブロックスコープ内で初期化されていない状態で生成されるため、未初期化の`x`を参照してReference Errorが発生します。
+Trong ví dụ sau, nếu hoisting không xảy ra với `let` hay `const`, tại thời điểm đánh giá `console.log(x)`, biến `var x = 1` được khai báo ở đầu function sẽ được tham chiếu và output `1`. Tuy nhiên, thực tế biến `x` được khai báo bằng `let` được tạo trong block scope ở trạng thái chưa khởi tạo, gây ra Reference Error khi tham chiếu đến `x` chưa khởi tạo.
 
 ```ts twoslash
 // @errors: 2448 2454
@@ -119,9 +119,9 @@ function output() {
 output();
 ```
 
-### スコープ
+### Scope
 
-JavaScript では`var`で宣言された変数のスコープは関数となるため、`{}`の中で変数宣言をしても最初に定義した変数`x`は上書きされます。
+Trong JavaScript, scope của biến được khai báo bằng `var` là function, nên dù khai báo biến trong `{}`, biến `x` được định nghĩa ban đầu vẫn bị ghi đè.
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -137,7 +137,7 @@ function print() {
 }
 ```
 
-`let`と`const`のスコープはブロックスコープです。次の例は`var`では変数`x`が上書きされていましたが、ここではブロックスコープ内で異なる変数として別々に定義されています。
+Scope của `let` và `const` là block scope. Trong ví dụ sau, với `var` biến `x` bị ghi đè, nhưng ở đây chúng được định nghĩa như các biến khác nhau trong block scope.
 
 <!--prettier-ignore-->
 ```ts twoslash

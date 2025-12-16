@@ -1,9 +1,9 @@
 ---
-sidebar_label: symbol型
-title: symbol型 (シンボル型)
+sidebar_label: Kiểu symbol
+title: Kiểu symbol
 ---
 
-symbol型trong JavaScript là một loại primitive type, giá trị của nó là duy nhất. boolean型hay number型nếu giá trị giống nhau thì so sánh bằng sẽ là `true`. Ngược lại, symbol ngay cả khi tên giống nhau nhưng nơi khởi tạo khác nhau thì sẽ là `false`.
+Kiểu symbol trong JavaScript là một loại primitive type, giá trị của nó là duy nhất. Kiểu boolean hay kiểu number nếu giá trị giống nhau thì so sánh bằng sẽ là `true`. Ngược lại, symbol ngay cả khi tên giống nhau nhưng nơi khởi tạo khác nhau thì sẽ là `false`.
 
 ```js twoslash
 const s1 = Symbol("foo");
@@ -17,7 +17,7 @@ console.log(s1 === s2);
 Ruby cũng có type tên là symbol. Symbol của Ruby nếu giá trị giống nhau thì so sánh bằng sẽ là `true` dù viết ở vị trí khác nhau.
 
 ```ruby
-# Rubyコード
+# Ruby code
 s1 = :foo
 s2 = :foo
 p s1 == s2 #=> true
@@ -33,16 +33,16 @@ Type annotation của symbol trong TypeScript dùng `symbol`.
 const s: symbol = Symbol();
 ```
 
-## Lưu ý khi dùng symbol型
+## Lưu ý khi dùng kiểu symbol
 
-Truyền symbol型 trực tiếp vào `JSON.stringify()` sẽ trả về `undefined`.
+Truyền kiểu symbol trực tiếp vào `JSON.stringify()` sẽ trả về `undefined`.
 
 ```ts twoslash
 console.log(JSON.stringify(Symbol("many")));
 // @log: undefined
 ```
 
-Ngoài ra, truyền object chứa symbol型 trong property vào `JSON.stringify()`, key chứa symbol型 trong property sẽ biến mất.
+Ngoài ra, truyền object chứa kiểu symbol trong property vào `JSON.stringify()`, key chứa kiểu symbol trong property sẽ biến mất.
 
 ```ts twoslash
 console.log(
@@ -54,7 +54,7 @@ console.log(
 // @log: { "y": "hello" }
 ```
 
-Tương tự, truyền object chứa symbol型 làm key vào `JSON.stringify()`, key là symbol型 sẽ biến mất.
+Tương tự, truyền object chứa kiểu symbol làm key vào `JSON.stringify()`, key là kiểu symbol sẽ biến mất.
 
 ```ts twoslash
 console.log(

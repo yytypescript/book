@@ -1,12 +1,12 @@
 ---
-sidebar_label: タプル
+sidebar_label: Tuple
 ---
 
-# タプル (tuple)
+# Tuple
 
-TypeScriptの関数は1値のみ返却できます。ですが実際は複数の値を返したくなる時もあります。そんな時は配列に返したいすべての値を入れて返すことがあります。
+Function của TypeScript chỉ có thể trả về 1 giá trị. Tuy nhiên, thực tế có lúc muốn trả về nhiều giá trị. Trong trường hợp đó, có thể đặt tất cả giá trị muốn trả về vào mảng và return.
 
-次の関数の戻り値は定数になっていますが、実際は演算した結果だと解釈してください。
+Giá trị trả về của function sau là hằng số, nhưng hãy hiểu như kết quả tính toán thực tế.
 
 ```ts twoslash
 function tuple() {
@@ -15,9 +15,9 @@ function tuple() {
 }
 ```
 
-## 配列が抱える問題
+## Vấn đề của mảng
 
-上記例では戻り値の型として何が妥当でしょうか。配列のページから読み進めていただいた方はなんでも入れられる型、ということで`any[]`または`unknown[]`が型の候補として思い浮かぶ人もいるかと思います。
+Trong ví dụ trên, kiểu nào là phù hợp cho giá trị trả về? Nếu bạn đã đọc từ trang mảng, có thể nghĩ đến `any[]` hoặc `unknown[]` vì đây là kiểu có thể chứa bất kỳ thứ gì.
 
 ```ts twoslash
 // @errors: 2571
@@ -28,13 +28,13 @@ const list: unknown[] = tuple();
 list[0].toString();
 ```
 
-ですが、この`list[n]`からメソッドを呼ぶことができません。それは`list`の各要素は`unknown`であるからです。
+Tuy nhiên, không thể gọi method từ `list[n]`. Vì mỗi phần tử của `list` là `unknown`.
 
-では`any[]`を戻り値の型として使うべきかというと、それも問題です。せっかくTypeScriptを使って型による恩恵を享受しているのに、ここだけ型がないものとしてコーディングをするのも味気がありません。そこで使えるのがタプルです。
+Vậy có nên dùng `any[]` làm kiểu giá trị trả về không? Điều đó cũng có vấn đề. Đang dùng TypeScript để tận hưởng lợi ích của kiểu, nhưng ở đây lại code như thể không có kiểu thì nhạt nhẽo. Đó là lúc có thể dùng tuple.
 
-## タプルの型
+## Kiểu của tuple
 
-タプルの型は簡単で`[]`を書いて中に型を書くだけです。つまり、上記関数`tuple()`は次のような戻り値を持っていると言えます。
+Kiểu của tuple đơn giản, chỉ cần viết `[]` và đặt kiểu bên trong. Nghĩa là, function `tuple()` ở trên có thể nói là có giá trị trả về như sau.
 
 ```ts twoslash
 declare function tuple(): [number, string, boolean];
@@ -42,7 +42,7 @@ declare function tuple(): [number, string, boolean];
 const list: [number, string, boolean] = tuple();
 ```
 
-同様に関数の戻り値にも書くことができます。
+Tương tự có thể viết ở giá trị trả về của function.
 
 ```ts twoslash
 function tuple(): [number, string, boolean] {
@@ -51,11 +51,11 @@ function tuple(): [number, string, boolean] {
 }
 ```
 
-配列の型は`T[]`と`Array<T>`のふたつの書き方がありましたがタプルはこの書き方しか存在しません。
+Kiểu mảng có 2 cách viết `T[]` và `Array<T>` nhưng tuple chỉ có cách viết này.
 
-### タプルにラベルをつける
+### Đặt label cho tuple
 
-同じ型の値ばかりをタプルにして返却する関数の場合、その型が何を示しているのか分かりにくくなることがあります。そんな時はタプルにラベルをつけることができます。
+Khi function trả về tuple toàn giá trị cùng kiểu, có thể khó hiểu kiểu đó biểu thị điều gì. Trong trường hợp đó, có thể đặt label cho tuple.
 
 ```ts twoslash
 declare function tuple(): [x: number, y: number, z: number];
@@ -63,11 +63,11 @@ declare function tuple(): [x: number, y: number, z: number];
 const coordinate: [x: number, y: number, z: number] = tuple();
 ```
 
-この例であれば3次元座標を返す関数の戻り値であることが分かりやすくなります。
+Với ví dụ này, dễ hiểu rằng đây là giá trị trả về của function trả về tọa độ 3 chiều.
 
-## タプルへのアクセス
+## Truy cập tuple
 
-タプルを受けた変数はそのまま中の型が持っているプロパティ、メソッドを使用できます。
+Biến nhận tuple có thể sử dụng trực tiếp property và method của kiểu bên trong.
 
 ```ts twoslash
 declare function tuple(): [number, string, boolean];
@@ -79,7 +79,7 @@ list[1].length;
 list[2].valueOf();
 ```
 
-タプルを受けた変数は、タプルで定義した範囲外の要素に対してアクセスができません。
+Biến nhận tuple không thể truy cập phần tử ngoài phạm vi đã định nghĩa trong tuple.
 
 ```ts twoslash
 // @errors: 2493
@@ -90,11 +90,11 @@ const list: [number, string, boolean] = tuple();
 list[5];
 ```
 
-そのため`list.push()`のような配列の要素を増やす操作をしてもその要素を使うことはできません。
+Do đó, ngay cả khi thực hiện thao tác tăng phần tử mảng như `list.push()`, cũng không thể sử dụng phần tử đó.
 
-### ラベルをつけたタプルへのアクセス
+### Truy cập tuple có label
 
-あくまでもラベルは可読性の向上のために使われるもので、実際のコードの中でラベルを使ってアクセスすることはできません。
+Label chỉ được dùng để cải thiện khả năng đọc, không thể dùng label để truy cập trong code thực tế.
 
 ```ts twoslash
 // @errors: 2339
@@ -108,9 +108,9 @@ coordinate[0];
 coordinate.x;
 ```
 
-### 分割代入を使ってタプルにアクセスする
+### Truy cập tuple bằng destructuring assignment
 
-上記関数`tuple()`の戻り値は分割代入を使うと次のように受けることができます。
+Giá trị trả về của function `tuple()` có thể nhận bằng destructuring assignment như sau.
 
 ```ts twoslash
 declare function tuple(): [number, string, boolean];
@@ -118,7 +118,7 @@ declare function tuple(): [number, string, boolean];
 const [num, str, bool]: [number, string, boolean] = tuple();
 ```
 
-また、特定の戻り値だけが必要である場合は変数名を書かず`,`だけを書きます。
+Ngoài ra, nếu chỉ cần một số giá trị trả về nhất định, chỉ viết `,` mà không viết tên biến.
 
 ```ts twoslash
 declare function tuple(): [number, string, boolean];
@@ -126,14 +126,14 @@ declare function tuple(): [number, string, boolean];
 const [, , bool]: [number, string, boolean] = tuple();
 ```
 
-## タプルを使う場面
+## Trường hợp sử dụng tuple
 
-TypeScriptで非同期プログラミングをする時に、時間のかかる処理を直列ではなく並列で行いたい時があります。そのときTypeScriptでは`Promise.all()`というものを使用します。このときタプルが役に立ちます。
-`Promise`についての詳しい説明は本書に専門の頁がありますので譲ります。ここでは`Promise<T>`という型の変数は`await`をその前につけると`T`が取り出せることだけ覚えておいてください。また、この`T`をジェネリクスと言いますが、こちらも専門の頁があるので譲ります。
+Khi lập trình bất đồng bộ trong TypeScript, có lúc muốn thực hiện các xử lý tốn thời gian song song thay vì tuần tự. Lúc đó TypeScript sử dụng `Promise.all()`. Đây là lúc tuple hữu ích.
+Giải thích chi tiết về `Promise` có trang chuyên đề trong sách này. Ở đây chỉ cần nhớ rằng biến kiểu `Promise<T>` khi đặt `await` phía trước sẽ lấy ra được `T`. Ngoài ra, `T` này được gọi là generics, cũng có trang chuyên đề.
 
-[非同期処理](../asynchronous/README.md)
+[Xử lý bất đồng bộ](../asynchronous/README.md)
 
-[ジェネリクス (generics)](/reference/generics)
+[Generics](/reference/generics)
 
 ```ts twoslash
 // @module: esnext
@@ -146,7 +146,7 @@ const promise: Promise<number> = yyAsync();
 const num: number = await promise;
 ```
 
-たとえば次のような処理に時間が3秒、5秒かかる関数`takes3Seconds(), takes5Seconds()`があるとします。
+Ví dụ, giả sử có 2 function `takes3Seconds(), takes5Seconds()` mất 3 giây và 5 giây để xử lý.
 
 ```ts twoslash
 async function takes3Seconds(): Promise<string> {
@@ -160,7 +160,7 @@ async function takes5Seconds(): Promise<number> {
 }
 ```
 
-この関数をそのまま実行すると3 + 5 = 8秒かかってしまいます。
+Nếu thực thi trực tiếp các function này sẽ mất 3 + 5 = 8 giây.
 
 ```ts twoslash
 // @module: esnext
@@ -174,7 +174,7 @@ const str: string = await takes3Seconds();
 const num: number = await takes5Seconds();
 ```
 
-これを`Promise.all()`を使うことで次のように書くことができます。このときかかる時間は関数の中でもっとも時間がかかる関数、つまり5秒です。
+Sử dụng `Promise.all()` có thể viết như sau. Thời gian mất là thời gian của function lâu nhất, tức là 5 giây.
 
 ```ts twoslash
 // @module: esnext
@@ -190,7 +190,7 @@ const tuple: [string, number] = await Promise.all([
 ]);
 ```
 
-このとき`Promise.all()`の戻り値を受けた変数`tuple`は`[string, number]`です。実行する関数の`Promise<T>`のジェネリクスの部分とタプルの型の順番は一致します。つまり次のように入れ替えたら、入れ変えた結果のタプルである`[number, string]`が得られます。
+Lúc này biến `tuple` nhận giá trị trả về của `Promise.all()` có kiểu `[string, number]`. Phần generics `Promise<T>` của các function thực thi và thứ tự kiểu của tuple là nhất quán. Nghĩa là nếu đổi chỗ như sau, sẽ nhận được tuple `[number, string]` đã đổi chỗ.
 
 ```ts twoslash
 // @module: esnext
@@ -206,4 +206,4 @@ const tuple: [number, string] = await Promise.all([
 ]);
 ```
 
-`Promise.all()`は先に終了した関数から順番に戻り値のタプルとして格納されることはなく、元々の順番を保持します。`take3seconds()`の方が早く終わるから、先にタプルに格納されるということはなく、引数に渡した順番のとおりにタプル`tuple`の要素の型は決まります。
+`Promise.all()` không lưu vào tuple giá trị trả về theo thứ tự function kết thúc trước, mà giữ nguyên thứ tự ban đầu. Không phải vì `take3seconds()` kết thúc sớm hơn nên được lưu vào tuple trước, mà kiểu phần tử của tuple `tuple` được quyết định theo thứ tự truyền vào argument.

@@ -69,7 +69,7 @@ Code kiểm tra kiểu như thế này được gọi là type guard.
 
 Ví dụ điển hình là type guard sử dụng toán tử `typeof`.
 
-[typeof演算子](../values-types-variables/typeof-operator.md)
+[Toán tử typeof](../values-types-variables/typeof-operator.md)
 
 Trong ví dụ sau, `typeof` được sử dụng để xác định biến `month` là kiểu `string`.
 

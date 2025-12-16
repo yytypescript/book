@@ -31,7 +31,7 @@ export default function HtmlNavbarItemWrapper(props: Props) {
           className="navbar__link button button--primary"
         >
           <Bot />
-          AIに質問する
+          Hỏi AI
           <svg
             width="13.5"
             height="13.5"

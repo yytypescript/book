@@ -1,16 +1,16 @@
 ---
-sidebar_label: constアサーション「as const」
+sidebar_label: Const assertion "as const"
 ---
 
-# constアサーション「as const」 (const assertion)
+# Const assertion "as const"
 
-変数宣言のときに、末尾に`as const`をつけるとその値をreadonlyにした上で、リテラル型にしてくれます。
-プリミティブ型の値だとそこまでうま味を感じにくいですが、配列やオブジェクトリテラルに対して使うと便利です。
+Khi khai báo biến, thêm `as const` vào cuối sẽ làm cho giá trị đó thành readonly và chuyển thành literal type.
+Với giá trị primitive type thì không cảm nhận được nhiều lợi ích, nhưng với array hoặc object literal thì rất tiện lợi.
 
 ```ts twoslash
 const str1 = "hello";
 //    ^?
-const str2 = "hello" as const; // これはas constがなくても同じ
+const str2 = "hello" as const; // Trường hợp này có hay không as const cũng giống nhau
 //    ^?
 const array1 = [1, 2, 3];
 //    ^?
@@ -34,7 +34,7 @@ const obj2 = {
 } as const;
 ```
 
-readonlyになるため代入はもちろんできません。
+Vì trở thành readonly nên đương nhiên không thể gán giá trị mới.
 
 ```ts twoslash
 const array1 = [1, 2, 3];
@@ -62,17 +62,17 @@ obj1.name = "raichu";
 obj2.name = "raichu";
 ```
 
-## `readonly`と`const assertion`の違い
+## Sự khác biệt giữa `readonly` và `const assertion`
 
-どちらもオブジェクトのプロパティを`readonly`にする機能は同じですが、以下が異なります。
+Cả hai đều có chức năng làm cho property của object thành `readonly`, nhưng có các điểm khác biệt sau.
 
-### `readonly`はプロパティごとにつけられる
+### `readonly` có thể áp dụng cho từng property
 
-`const assertion`はオブジェクト全体に対する宣言なので、すべてのプロパティが対象になりますが、`readonly`は必要なプロパティのみにつけることができます。
+`const assertion` là khai báo cho toàn bộ object nên tất cả property đều bị ảnh hưởng, trong khi `readonly` có thể áp dụng chỉ cho những property cần thiết.
 
-### `const assertion`は再帰的に`readonly`にできる
+### `const assertion` có thể áp dụng `readonly` đệ quy
 
-オブジェクトの中にオブジェクトがあるときの挙動が異なります。たとえば次のようなオブジェクトがあるとします。
+Hành vi khác nhau khi có object lồng trong object. Ví dụ, giả sử có object như sau.
 
 ```ts twoslash
 type Country = {
@@ -104,7 +104,7 @@ const america: Continent = {
 };
 ```
 
-ここで`Continent`のタイプエイリアスがもつプロパティはすべて`readonly`です。よって次のようなことはできません。
+Ở đây tất cả property của type alias `Continent` đều là `readonly`. Do đó không thể làm những việc như sau.
 
 ```ts twoslash
 // @errors: 2540
@@ -143,7 +143,7 @@ america.canada = {
 };
 ```
 
-しかしながら、次のようなことは問題なくできてしまいます。
+Tuy nhiên, những việc như sau vẫn có thể thực hiện được mà không có vấn đề.
 
 ```ts twoslash
 type Country = {
@@ -178,11 +178,11 @@ america.canada.name = "Republic of Côte d'Ivoire";
 america.canada.capitalCity = "Yamoussoukro";
 ```
 
-これは`readonly`をつけたプロパティがオブジェクトである場合に、そのオブジェクトのプロパティまで`readonly`にはしないことに起因します。
+Điều này là do khi property có `readonly` là object, thì property của object đó không được làm thành `readonly`.
 
-### `const assertion`はすべてのプロパティを固定する
+### `const assertion` cố định tất cả property
 
-`as const`を付けます。
+Thêm `as const`.
 
 ```ts twoslash
 const america = {
@@ -202,7 +202,7 @@ const america = {
 } as const;
 ```
 
-`readonly`と同様にトップレベルのプロパティへの代入はできません。
+Tương tự như `readonly`, không thể gán cho property ở top-level.
 
 ```ts twoslash
 // @errors: 2540
@@ -229,7 +229,7 @@ america.canada = {
 };
 ```
 
-これだけではなくオブジェクトが持つプロパティも同様に`readonly`にしてくれます。
+Không chỉ vậy, property của object con cũng được làm thành `readonly`.
 
 ```ts twoslash
 // @errors: 2540
@@ -253,8 +253,8 @@ america.canada.name = "Republic of Côte d'Ivoire";
 america.canada.capitalCity = "Yamoussoukro";
 ```
 
-## 関連情報
+## Thông tin liên quan
 
-[型アサーション「as」(type assertion)](type-assertion-as.md)
+[Type assertion "as"](type-assertion-as.md)
 
-[オブジェクト型のreadonlyプロパティ (readonly property)](object/readonly-property.md)
+[Readonly property trong object type](object/readonly-property.md)

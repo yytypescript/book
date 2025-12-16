@@ -1,12 +1,12 @@
 ---
-sidebar_label: truthyな値、falsyな値
+sidebar_label: Giá trị truthy và falsy
 ---
 
-# truthyな値、falsyな値
+# Giá trị truthy và falsy
 
-## 特定の条件で処理を変えたい
+## Muốn thay đổi xử lý theo điều kiện cụ thể
 
-どのような言語でも、ある条件のときは別の処理をさせたいということがあります。むしろ、ない言語はないでしょう。当然、JavaScriptでもそのような機能はあり、`if`を使います。
+Trong bất kỳ ngôn ngữ nào, đều có lúc muốn xử lý khác đi khi có điều kiện nhất định. Thật ra, không có ngôn ngữ nào không có tính năng này. Đương nhiên, JavaScript cũng có tính năng đó, sử dụng `if`.
 
 ```ts twoslash
 class Employee {
@@ -23,37 +23,37 @@ if (employee.isPartTime()) {
 }
 ```
 
-このときメソッドの`isPartTime()`は真偽値、つまりboolean型を返すとは誰もが見てもそう思います。
+Lúc này, ai cũng nghĩ method `isPartTime()` trả về giá trị boolean.
 
-## JavaScriptでは、真偽値でなくてもifの対象にできる
+## Trong JavaScript, không cần boolean cũng có thể dùng trong if
 
-ところが、JavaScriptではその限りではありません。JavaScriptではその値(や演算結果)がboolean型である必要はありません。では、どのような値の場合は`if`ブロックを実行し、逆に実行しないのでしょうか。
+Tuy nhiên, JavaScript không bị giới hạn như vậy. Trong JavaScript, giá trị (hoặc kết quả phép toán) không nhất thiết phải là kiểu boolean. Vậy, với giá trị nào thì khối `if` được thực thi, ngược lại với giá trị nào thì không?
 
-## true, false「のような」値
+## Giá trị "giống như" true, false
 
-このようなとき、条件を満たすとされる値のことをtruthyと、また満たさないとされる値のことをfalsyと呼びます。これは英語の真と偽を意味するtruthとfalseにそれぞれ「のような」というニュアンスを表す接尾語のyをつけたものです。
+Trong trường hợp như vậy, giá trị thỏa mãn điều kiện được gọi là truthy, giá trị không thỏa mãn được gọi là falsy. Đây là từ truth (đúng) và false (sai) trong tiếng Anh, thêm hậu tố y biểu thị nuance "giống như".
 
-## falsyな値
+## Giá trị falsy
 
-falsyな値から説明します。というのはfalsyな値というのは限られており、それ以外のすべての値がtruthyとなるのでこれだけ覚えてしまえばいいということでもあります。
+Trước hết giải thích về giá trị falsy. Vì giá trị falsy có giới hạn, tất cả giá trị còn lại đều là truthy, nên chỉ cần nhớ những giá trị này.
 
-| 値        | 型        | 意味         |
+| Giá trị   | Kiểu      | Ý nghĩa      |
 | --------- | --------- | ------------ |
-| false     | boolean   | 疑値         |
-| 0         | number    | 数値の0      |
-| 0.0       | number    | 数値の0      |
-| -0        | number    | 数値の-0     |
+| false     | boolean   | Giá trị sai  |
+| 0         | number    | Số 0         |
+| 0.0       | number    | Số 0         |
+| -0        | number    | Số -0        |
 | NaN       | number    | Not a Number |
-| 0n        | bigint    | 整数値の0    |
-| ""        | string    | 空文字列     |
+| 0n        | bigint    | Số nguyên 0  |
+| ""        | string    | Chuỗi rỗng   |
 | null      | null      | null         |
 | undefined | undefined | undefined    |
 
-これらの値が`if`の条件式に入った場合、その`if`ブロックは実行されません。
+Khi những giá trị này được đặt trong biểu thức điều kiện của `if`, khối `if` sẽ không được thực thi.
 
-## truthy, falsyな値で条件分岐することの問題点
+## Vấn đề khi phân nhánh điều kiện bằng giá trị truthy, falsy
 
-これらの値を使って`if`の条件式にすること自体は可能なのですが、同時に意図しない挙動を含むことがあるので使う際は注意したほうがよいでしょう。たとえば、次の例は配列にある`null`を取り除くつもりでコードを書きましたが、意図しない結果になります。
+Việc dùng những giá trị này trong biểu thức điều kiện của `if` là có thể, nhưng đồng thời có thể bao gồm hành vi không mong muốn nên cần cẩn thận khi sử dụng. Ví dụ, code sau được viết với ý định loại bỏ `null` trong mảng, nhưng kết quả không như mong muốn.
 
 ```ts twoslash
 const array = [null, 3, 0, null, 1, 2];
@@ -62,11 +62,11 @@ console.log(array.filter((n) => n));
 // @log: [3, 1, 2]
 ```
 
-`array.filter()`でfalsyな値を取り除いた結果、`null`はともかくnumber型でfalsyな値である`0`までもが取り除かれてしまいました。
+Kết quả `array.filter()` loại bỏ giá trị falsy, không chỉ `null` mà cả `0` - giá trị falsy của kiểu number - cũng bị loại bỏ.
 
-### このような事態にならないために
+### Để tránh tình huống như vậy
 
-意図しない分岐を避けるためには、truthy, falsyの値を直接boolean型として使うのではなく、ちゃんとtrue, falseの値を返すようにします。
+Để tránh phân nhánh không mong muốn, không nên dùng giá trị truthy, falsy trực tiếp như kiểu boolean, mà nên trả về giá trị true, false rõ ràng.
 
 ```ts twoslash
 const array = [null, 3, 0, null, 1, 2];
@@ -75,10 +75,10 @@ console.log(array.filter((n) => n !== null));
 // @log: [3, 0, 1, 2]
 ```
 
-## TypeScript ESLintにもこの問題のためのオプションがある
+## TypeScript ESLint cũng có option cho vấn đề này
 
-TypeScriptのeslintにも`if`ブロックでboolean型以外が与えられると警告を発するオプションがあります。
+ESLint của TypeScript cũng có option cảnh báo khi khối `if` nhận kiểu không phải boolean.
 
 [strict-boolean-expression](https://typescript-eslint.io/rules/strict-boolean-expressions/)
 
-しかしながら、このオプションでも`array.filter()`の例では警告を発しないので気をつける必要があります。
+Tuy nhiên, option này cũng không cảnh báo với ví dụ `array.filter()` nên cần cẩn thận.

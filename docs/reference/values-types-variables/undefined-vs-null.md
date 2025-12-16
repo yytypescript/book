@@ -1,20 +1,24 @@
-# undefinedとnullの違い
+---
+sidebar_label: Sự khác biệt giữa undefined và null
+---
 
-多くのプログラミング言語で「値がない」を表現する方法は、nullなど1通りです。しかし、JavaScriptでは「値がない」に相当する表現にnullとundefinedの2通りがあります。他の言語からJavaScriptに来た人が驚き、使い分けに悩む部分です。ここでは、nullとundefinedの仕様上の違い、実際のコーディングでどう使い分けるべきかについて説明します。
+# Sự khác biệt giữa undefined và null
 
-## 意味合いの違い
+Trong nhiều ngôn ngữ lập trình, cách biểu thị "không có giá trị" chỉ có một cách như null. Tuy nhiên, JavaScript có 2 cách biểu thị "không có giá trị" là null và undefined. Đây là điều khiến những người từ ngôn ngữ khác chuyển sang JavaScript ngạc nhiên và phân vân về cách sử dụng. Ở đây, chúng ta sẽ giải thích sự khác biệt trong specification giữa null và undefined, và cách sử dụng chúng trong thực tế.
 
-undefinedとnullは大きなくくりで「値がない」ことを意味する点は共通しています。意味的な違いがあるとしたら、undefinedは「値が代入されていないため、値がない」、nullは「代入すべき値が存在しないため、値がない」という微妙な違いです。
+## Sự khác biệt về ý nghĩa
 
-この意味的な違いを厳密につきつめてコーディングするのは、入門者には難しいものです。使い分けに客観的な基準があるわけではないためです。もしどちらを使うべきか迷ったらundefinedを使っておくほうが無難です。
+undefined và null có điểm chung là đều có nghĩa "không có giá trị" ở phạm vi rộng. Nếu có sự khác biệt về mặt ngữ nghĩa thì undefined là "không có giá trị vì chưa được gán giá trị", còn null là "không có giá trị vì không tồn tại giá trị để gán" - đây là sự khác biệt tinh tế.
 
-## 言語仕様上の違い
+Việc coding theo đúng sự khác biệt ngữ nghĩa này một cách nghiêm ngặt khá khó với người mới bắt đầu. Vì không có tiêu chuẩn khách quan về cách sử dụng. Nếu phân vân nên dùng cái nào thì sử dụng undefined sẽ an toàn hơn.
 
-undefinedとnullには言語の仕様上の違いがあります。これは意味合いの違いのような漠然としたものではなく、はっきりと確認できるものです。
+## Sự khác biệt trong language specification
 
-### nullは自然発生しない
+undefined và null có sự khác biệt trong specification của ngôn ngữ. Đây không phải là sự khác biệt mơ hồ như về ý nghĩa, mà có thể xác nhận rõ ràng.
 
-undefinedは言語仕様上、プログラマーが明示的に使わなくても、自然に発生してくるものです。たとえば、変数を宣言したときに初期値がなければJavaScriptはその変数にundefinedを代入します。
+### null không tự nhiên phát sinh
+
+undefined theo language specification sẽ tự nhiên phát sinh mà không cần programmer sử dụng rõ ràng. Ví dụ, khi khai báo biến mà không có giá trị khởi tạo, JavaScript sẽ gán undefined cho biến đó.
 
 ```js twoslash
 let value;
@@ -22,7 +26,7 @@ console.log(value);
 // @log: undefined
 ```
 
-オブジェクトに存在しないプロパティや配列にない要素にアクセスしたときも、自動的にundefinedになります。
+Khi truy cập property không tồn tại trong object hoặc phần tử không có trong array, cũng tự động trở thành undefined.
 
 ```js twoslash
 const obj = {};
@@ -33,7 +37,7 @@ console.log(arr[0]);
 // @log: undefined
 ```
 
-戻り値がない関数の戻り値を取得したときもundefinedになります。
+Khi lấy return value của function không có return value cũng là undefined.
 
 ```js twoslash
 function func() {}
@@ -41,15 +45,15 @@ console.log(func());
 // @log: undefined
 ```
 
-一方、nullはプログラマーが意図的に使わない限り発生しません。JavaScriptとしてはnullを提供することがないということです。ただし、一部のDOM系のAPIはnullを返すこともあるため、ライブラリによってはnullと出会うことはあります。
+Mặt khác, null không phát sinh trừ khi programmer cố ý sử dụng. JavaScript không cung cấp null. Tuy nhiên, một số DOM API trả về null, nên tùy library bạn có thể gặp null.
 
-### undefinedは変数
+### undefined là biến
 
-undefinedもnullもプリミティブ型の値という点は共通していますが、undefinedは変数でありnullはリテラルです。nullはリテラルなのでnullという名前の変数を作ることはできません。一方でundefinedはリテラルではなく変数なので、undefinedという変数を作ることはできます。
+undefined và null đều là giá trị primitive type, nhưng undefined là biến còn null là literal. null là literal nên không thể tạo biến có tên null. Mặt khác undefined không phải literal mà là biến, nên có thể tạo biến có tên undefined.
 
-### typeof演算子
+### Toán tử typeof
 
-typeof演算子の結果がundefinedとnullで変わってきます。undefinedはtypeofの結果がプリミティブ名を指す"undefined"になるのに対し、nullは"null"ではなく"object"になります。
+Kết quả của toán tử typeof khác nhau giữa undefined và null. undefined cho kết quả typeof là "undefined" chỉ tên primitive, trong khi null không phải "null" mà là "object".
 
 ```js twoslash
 typeof undefined;
@@ -60,7 +64,7 @@ typeof null;
 
 ### JSON
 
-オブジェクトプロパティの値にundefinedを用いたとき、そのオブジェクトをJSON.stringifyでJSON化したときに、オブジェクトプロパティは削除されます。一方、プロパティの値がnullのときは、JSON化したときに値が保持されます。
+Khi giá trị của object property là undefined, khi JSON hóa object đó bằng JSON.stringify, property sẽ bị xóa. Mặt khác, khi giá trị property là null, giá trị được giữ lại khi JSON hóa.
 
 ```js twoslash
 console.log(JSON.stringify({ foo: undefined }));
@@ -69,20 +73,20 @@ console.log(JSON.stringify({ foo: null }));
 // @log: {"foo": null}
 ```
 
-## undefinedとnullの使い分け
+## Cách sử dụng undefined và null
 
-undefinedとnullをどう使い分けたらいいかは大きな論争を呼ぶテーマです。プログラマーの中には、undefinedだけを使うべきと言う人もいれば、nullを使うべきという人もいます。また、undefinedとnullの意味合いの違いをしっかり理解して、使い分けるべきと主張する人もいます。逆に、深く考えすぎずに使うというスタンスの人もいます。
+Cách sử dụng undefined và null như thế nào là chủ đề gây tranh cãi lớn. Có programmer cho rằng chỉ nên dùng undefined, có người nói nên dùng null. Cũng có người chủ trương cần hiểu rõ sự khác biệt ý nghĩa giữa undefined và null để sử dụng phân biệt. Ngược lại, cũng có người có quan điểm không suy nghĩ quá sâu.
 
-特にこだわりがないのなら、TypeScriptではnullは使わずにundefinedをもっぱら使うようにするのがお勧めです。とは言っても、nullを返すAPIがなくはないので、自分が新たにコードを書く部分においては、nullは使わずにundefinedにできるだけ寄せるといったイメージです。APIが返すnullをundefinedに変換していってもいいですが、変換コードだらけになるような場合は、nullをそのまま許容するといった折衷案もよいです。
+Nếu không có yêu cầu đặc biệt, trong TypeScript khuyến nghị không dùng null mà chỉ dùng undefined. Tuy nhiên, vì cũng có API trả về null, nên trong phần code mới bạn viết, hãy cố gắng không dùng null mà sử dụng undefined. Bạn có thể convert null từ API thành undefined, nhưng nếu code convert nhiều quá thì việc cho phép null như vậy cũng là phương án thỏa hiệp tốt.
 
-### 使い分け意識を育てる労力は、それに見合うメリットが少ない
+### Công sức để phát triển ý thức phân biệt không tương xứng với lợi ích
 
-2種類を使い分けるとなると、コードの各所でどちらを使うべきかの意思決定が必要になります。意思決定は個人作業ならまだしも、チームワークとなるとハードルが上がってきます。チームで「こういう場合はundefinedを使うべき」「こういうときはnullを使う」といったルールと具体例を共通認識として持つ必要がでてきます。共通認識が確立されていないと、コーディング中に質問が出てきたり、コードレビューで指摘されて手直しが発生したりと、あまり本質的でないところで開発が一時停止していまいがちです。使い分けをするために、ルール策定や意識のすり合わせすることは不可能ではありませんが、その労力に見合うほど、undefinedとnullを使い分けるメリットは大したものではないというのが実際のところです。
+Nếu phân biệt sử dụng 2 loại, cần có quyết định ở mỗi nơi trong code là nên dùng cái nào. Quyết định đó nếu làm việc cá nhân thì còn được, nhưng với teamwork thì độ khó tăng lên. Team cần có nhận thức chung về rule và ví dụ cụ thể như "trường hợp này nên dùng undefined", "trường hợp này dùng null". Nếu không có nhận thức chung, trong khi coding sẽ có câu hỏi phát sinh, hoặc khi code review sẽ có chỉnh sửa, dẫn đến development bị dừng ở những chỗ không bản chất. Việc thiết lập rule và thống nhất ý thức để phân biệt sử dụng không phải không thể, nhưng thực tế lợi ích của việc phân biệt undefined và null không đáng với công sức bỏ ra.
 
-一方で、「nullは使わずundefinedに統一しよう」はシンプルなルールです。これなら共通認識として持つことがしやすく、チームワークもしやすくなります。実際にTypeScriptの開発チームでは[「nullは使わない」というたった1行のシンプルなガイドライン](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined)を示し、数多くの開発者が参加しやすくなるようにしています。
+Mặt khác, "không dùng null mà thống nhất dùng undefined" là rule đơn giản. Rule này dễ dàng trở thành nhận thức chung và teamwork cũng dễ dàng hơn. Thực tế, team phát triển TypeScript đã đưa ra [guideline đơn giản chỉ một dòng "không dùng null"](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined), giúp nhiều developer dễ dàng tham gia hơn.
 
-### undefinedに統一するほうが簡単
+### Thống nhất về undefined đơn giản hơn
 
-「値がない」ことを意味するものがundefinedとnullの2種類あることが混乱の元なので、どちらか一方を使うようにするほうがコーディング上の意思決定を減らせます。なので、nullに寄せていく方法も考えられます。しかし、それはお勧めしません。undefinedはいたるところで自然に発生してくるので、それらをすべてnullにしようとすると、記述量がどんどん増えていくからです。
+Việc có 2 loại undefined và null có nghĩa "không có giá trị" là nguồn gốc của sự nhầm lẫn, nên dùng một trong hai sẽ giảm quyết định trong coding. Vì vậy, cũng có thể nghĩ đến phương án thống nhất về null. Tuy nhiên, điều đó không được khuyến nghị. Vì undefined tự nhiên phát sinh ở khắp nơi, nếu cố gắng chuyển tất cả thành null thì lượng code sẽ tăng dần.
 
-変数宣言で初期値をnullにする程度なら簡単ですが、存在しないオブジェクトプロパティや配列要素にアクセスしたときにもnullを返すようにするところまでやろうとすると難しくなってきます。したがって、統一するとしたらundefinedに寄せるほうが現実的です。
+Việc đặt giá trị khởi tạo của biến là null thì đơn giản, nhưng nếu cố gắng làm cho cả trường hợp truy cập object property hoặc array element không tồn tại cũng trả về null thì sẽ khó khăn. Do đó, nếu thống nhất thì nên thống nhất về undefined mới thực tế.

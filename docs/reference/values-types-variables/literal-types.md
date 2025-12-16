@@ -1,19 +1,19 @@
 ---
-sidebar_label: リテラル型
+sidebar_label: Kiểu literal
 ---
 
-# リテラル型 (literal type)
+# Kiểu literal (literal type)
 
-TypeScriptではプリミティブ型の特定の値だけを代入可能にする型を表現できます。そのような型をリテラル型と呼びます。
+TypeScript cho phép biểu diễn kiểu mà chỉ có thể gán một giá trị cụ thể của primitive type. Kiểu như vậy được gọi là literal type.
 
-たとえば、次の例は数値が代入可能な型注釈です。数値であれば、1でも100でも何でも代入できます。
+Ví dụ, đây là type annotation cho phép gán giá trị số. Với số, bạn có thể gán 1, 100, hay bất kỳ số nào.
 
 ```ts twoslash
 let x: number;
 x = 1;
 ```
 
-リテラル型を用いると、1だけが代入可能な型が作れます。
+Với literal type, bạn có thể tạo kiểu chỉ cho phép gán giá trị 1.
 
 ```ts twoslash
 // @errors: 2322
@@ -22,13 +22,13 @@ x = 1;
 x = 100;
 ```
 
-## リテラル型として表現できるもの
+## Những thứ có thể biểu diễn dưới dạng literal type
 
-リテラル型として表現できるプリミティブ型は次のとおりです。
+Các primitive type có thể biểu diễn dưới dạng literal type như sau:
 
-- boolean型のtrueとfalse
-- number型の値
-- string型の文字列
+- true và false của kiểu boolean
+- Giá trị của kiểu number
+- Chuỗi của kiểu string
 
 ```ts twoslash
 const isTrue: true = true;
@@ -36,14 +36,14 @@ const num: 123 = 123;
 const str: "foo" = "foo";
 ```
 
-## リテラル型の用途
+## Mục đích sử dụng của literal type
 
-一般的にリテラル型はマジックナンバーやステートの表現に用いられます。その際、ユニオン型と組み合わせることが多いです。
+Thông thường, literal type được sử dụng để biểu diễn magic number hoặc state. Trong trường hợp đó, thường kết hợp với union type.
 
 ```ts twoslash
 let num: 1 | 2 | 3 = 1;
 ```
 
-[ユニオン型 (union type)](union.md)
+[Union type](union.md)
 
-[判別可能なユニオン (discriminated union)](discriminated-union.md)
+[Discriminated union](discriminated-union.md)

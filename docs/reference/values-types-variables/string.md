@@ -1,13 +1,13 @@
 ---
-sidebar_label: string型
-title: string型 (文字列型)
+sidebar_label: Kiểu string
+title: Kiểu string (kiểu chuỗi)
 ---
 
 ## String literal
 
 <!-- textlint-disable prh -->
 
-Trong các ngôn ngữ như Java, dấu ngoặc kép biểu thị string literal (String型), dấu ngoặc đơn biểu thị char literal (char型), nghĩa là type thay đổi theo loại dấu ngoặc dùng.
+Trong các ngôn ngữ như Java, dấu ngoặc kép biểu thị string literal (String), dấu ngoặc đơn biểu thị char literal (char), nghĩa là type thay đổi theo loại dấu ngoặc dùng.
 
 <!-- textlint-enable prh -->
 
@@ -37,24 +37,24 @@ Trong JavaScript, chuỗi được bao bởi backtick `` ` `` gọi là template
 Để xuống dòng, chỉ cần xuống dòng thực tế trong template literal, sẽ được phản ánh đúng như vậy.
 
 ```ts twoslash
-console.log(`実際に改行を
-してみる`);
-// @log: 実際に改行を<br />してみる
+console.log(`Thực sự xuống dòng
+thử xem`);
+// @log: Thực sự xuống dòng<br />thử xem
 ```
 
 Để chèn expression, viết theo cú pháp `${expression}`.
 
 ```ts twoslash
 const count = 10;
-console.log(`現在、${count}名が見ています。`);
-// @log: 現在、10名が見ています。
+console.log(`Hiện tại có ${count} người đang xem.`);
+// @log: Hiện tại có 10 người đang xem.
 ```
 
 Phần expression không chỉ là biến, còn có thể viết biểu thức tính toán hoặc hàm.
 
 <!--prettier-ignore-->
 ```ts twoslash
-`税込み${Math.floor(100 * 1.1)}円`
+`Giá sau thuế: ${Math.floor(100 * 1.1)} VND`
 ```
 
 ### Nên dùng `'`, `"`, hay `` ` `` cho string literal?
@@ -90,7 +90,7 @@ Có type `String` tên khá giống, nhưng cần lưu ý đây khác với `str
 
 ## Nối chuỗi
 
-Nối chuỗi trong JavaScript dùng toán tử nối chuỗi (`+`). Toán tử tương tự cũng được dùng cho phép cộng number型.
+Nối chuỗi trong JavaScript dùng toán tử nối chuỗi (`+`). Toán tử tương tự cũng được dùng cho phép cộng kiểu number.
 
 <!--prettier-ignore-->
 ```ts twoslash

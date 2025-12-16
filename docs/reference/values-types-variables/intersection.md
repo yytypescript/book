@@ -1,12 +1,12 @@
 ---
-sidebar_label: インターセクション型
+sidebar_label: Intersection type
 ---
 
-# インターセクション型 (intersection type)
+# Intersection type (kiểu giao)
 
-考え方はユニオン型と相対するものです。ユニオン型が**どれか**を意味するならインターセクション型は**どれも**です。言い換えるとオブジェクトの定義を合成させることを指します。
+Khái niệm này đối lập với union type. Nếu union type có nghĩa **một trong các** thì intersection type có nghĩa **tất cả**. Nói cách khác, nó chỉ việc kết hợp các định nghĩa object.
 
-インターセクション型を作るためには合成したいオブジェクト同士を`&`で列挙します。
+Để tạo intersection type, liệt kê các object muốn kết hợp bằng `&`.
 
 ```ts twoslash
 type TwoDimensionalPoint = {
@@ -27,11 +27,11 @@ const p: ThreeDimensionalPoint = {
 };
 ```
 
-xy平面上の点を表す`TwoDimensionalPoint`を拡張してxyz平面上の点の`ThreeDimensionalPoint`に変換しました。
+Chúng ta đã mở rộng `TwoDimensionalPoint` biểu diễn điểm trên mặt phẳng xy thành `ThreeDimensionalPoint` biểu diễn điểm trên không gian xyz.
 
-## プリミティブ型のインターセクション型
+## Intersection type của primitive type
 
-プリミティブ型のインターセクション型をつくることもできますが、作ると`never`という型ができます。
+Có thể tạo intersection type của primitive type, nhưng khi tạo sẽ tạo ra kiểu `never`.
 
 ```ts twoslash
 // @errors: 2322
@@ -40,11 +40,11 @@ type Never = string & number;
 const n: Never = "2";
 ```
 
-この`never`型にはいかなる値も代入できません。使い道がまるでないように見えますが意外なところで役に立ちます。今回は説明を省きます。
+Kiểu `never` này không thể gán bất kỳ giá trị nào. Thoạt nhìn có vẻ vô dụng nhưng thực tế lại hữu ích ở những nơi không ngờ tới. Lần này chúng ta sẽ bỏ qua phần giải thích.
 
-## インターセクション型を使いこなす
+## Sử dụng thành thạo intersection type
 
-システムの巨大化に伴い、受け付けたいパラメーターが巨大化したとします。
+Giả sử khi hệ thống lớn dần, parameter muốn nhận cũng lớn theo.
 
 ```ts twoslash
 type Parameter = {
@@ -64,13 +64,13 @@ type Parameter = {
 };
 ```
 
-一見してどのプロパティが必須で、どのプロパティが選択可かが非常にわかりづらいです。これをインターセクション型とユーティリティ型の`Required<T>`と`Partial<T>`を使いわかりやすく表記できます。ユーティリティ型については解説しているページがありますのでご覧ください。
+Nhìn sơ qua rất khó hiểu property nào là bắt buộc, property nào là tùy chọn. Có thể biểu diễn dễ hiểu hơn bằng intersection type và utility type `Required<T>` và `Partial<T>`. Về utility type có trang giải thích riêng.
 
 [Required&lt;T>](../type-reuse/utility-types/required.md)
 
 [Partial&lt;T>](../type-reuse/utility-types/partial.md)
 
-### 必須とそうでないパラメータのタイプエイリアスに分離する
+### Tách thành type alias cho parameter bắt buộc và không bắt buộc
 
 ```ts twoslash
 type Mandatory = {
@@ -92,9 +92,9 @@ type Optional = {
 };
 ```
 
-### `Required<T>, Partial<T>`をつける
+### Thêm `Required<T>, Partial<T>`
 
-`Mandatory`は`Required<T>`を、`Optional`は`Partial<T>`をつけます。
+Thêm `Required<T>` cho `Mandatory`, thêm `Partial<T>` cho `Optional`.
 
 ```ts twoslash
 type Mandatory = Required<{
@@ -116,9 +116,9 @@ type Optional = Partial<{
 }>;
 ```
 
-### インターセクション型で合成する
+### Kết hợp bằng intersection type
 
-これで最初に定義した`Parameter`と同じタイプエイリアスができました。
+Như vậy chúng ta đã tạo được type alias giống với `Parameter` đã định nghĩa ban đầu.
 
 ```ts twoslash
 type Mandatory = Required<{

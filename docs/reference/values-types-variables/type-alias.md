@@ -1,20 +1,20 @@
 ---
-sidebar_label: 型エイリアス
+sidebar_label: Type alias
 ---
 
-# 型エイリアス (type alias)
+# Type alias (bí danh kiểu)
 
-TypeScriptでは、型に名前をつけられます。名前のついた型を型エイリアス(タイプエイリアス; type alias)と呼びます。
+TypeScript cho phép đặt tên cho kiểu. Kiểu có tên được gọi là type alias.
 
-## 型エイリアスの宣言
+## Khai báo type alias
 
-型エイリアスを宣言するには`type`キーワードを使います。次の例は、`string | number`型に`StringOrNumber`という型名を名付けたものです。
+Để khai báo type alias, sử dụng từ khóa `type`. Ví dụ sau đặt tên `StringOrNumber` cho kiểu `string | number`.
 
 ```ts twoslash
 type StringOrNumber = string | number;
 ```
 
-型エイリアスは、`string`などのビルトインの型と同様に、変数や引数、戻り値の型注釈などで使えます。
+Type alias có thể được sử dụng tương tự như các kiểu built-in như `string`, trong type annotation của biến, tham số, giá trị trả về, v.v.
 
 ```ts twoslash
 type StringOrNumber = string | number;
@@ -22,31 +22,31 @@ type StringOrNumber = string | number;
 const value: StringOrNumber = 123;
 ```
 
-## 型エイリアスの使用例
+## Ví dụ sử dụng type alias
 
-型エイリアスはさまざまな型に名前をつけられます。型エイリアスの一例を次に示します。
+Type alias có thể đặt tên cho nhiều loại kiểu khác nhau. Sau đây là một số ví dụ về type alias.
 
 ```ts twoslash
-// プリミティブ型
+// Kiểu primitive
 type Str = string;
-// リテラル型
+// Kiểu literal
 type OK = 200;
-// 配列型
+// Kiểu mảng
 type Numbers = number[];
-// オブジェクト型
+// Kiểu object
 type UserObject = { id: number; name: string };
-// ユニオン型
+// Union type
 type NumberOrNull = number | null;
-// 関数型
+// Kiểu function
 type CallbackFunction = (value: string) => boolean;
 ```
 
-## 型エイリアスの使い道
+## Mục đích sử dụng của type alias
 
-型エイリアスは同じ型を再利用したいときに使うと便利です。型の定義が一箇所になるため、保守性が向上します。
+Type alias tiện lợi khi muốn tái sử dụng cùng một kiểu. Vì định nghĩa kiểu nằm ở một nơi, nên tính bảo trì được cải thiện.
 
-また、型に名前を与えることで可読性が上がる場合があります。型に名前があると、その型が何を意味しているのかがコードの読み手に伝わりやすくなります。
+Ngoài ra, việc đặt tên cho kiểu có thể cải thiện khả năng đọc. Khi kiểu có tên, người đọc code dễ dàng hiểu kiểu đó có ý nghĩa gì.
 
-## 関連情報
+## Thông tin liên quan
 
-[🚧interfaceとtypeの違い](../object-oriented/interface/interface-vs-type-alias.md)
+[Sự khác biệt giữa interface và type](../object-oriented/interface/interface-vs-type-alias.md)

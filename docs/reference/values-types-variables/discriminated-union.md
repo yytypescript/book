@@ -1,17 +1,17 @@
 ---
-sidebar_label: 判別可能なユニオン型
+sidebar_label: Discriminated union
 image: /reference/values-types-variables/discriminated-union/summary-card.png
 ---
 
-# 判別可能なユニオン型 (discriminated union)
+# Discriminated union (union có thể phân biệt)
 
 ![](/reference/values-types-variables/discriminated-union/summary-card@3x.png)
 
-TypeScriptの判別可能なユニオン型は、ユニオンに属する各オブジェクトの型を区別するための「しるし」がついた特別なユニオン型です。オブジェクトの型からなるユニオン型を絞り込む際に、分岐ロジックが複雑になる場合は、判別可能なユニオン型を使うとコードの可読性と保守性がよくなります。
+Discriminated union của TypeScript là union type đặc biệt, có "dấu hiệu" để phân biệt từng kiểu object trong union. Khi thu hẹp union type gồm các kiểu object mà logic phân nhánh phức tạp, sử dụng discriminated union sẽ cải thiện khả năng đọc và bảo trì code.
 
-## 通常のユニオン型は絞り込みが複雑になる
+## Union type thông thường có việc thu hẹp phức tạp
 
-TypeScriptの[ユニオン型](./union.md)は自由度が高く、好きな型を組み合わせられます。次の`UploadStatus`はファイルアップロードの状況を表現したユニオン型です。アップロード中`InProgress`、アップロード成功`Success`、アップロード失敗`Failure`の組み合わせです。
+[Union type](./union.md) của TypeScript có độ tự do cao, cho phép kết hợp bất kỳ kiểu nào. `UploadStatus` sau đây là union type biểu diễn trạng thái upload file. Là sự kết hợp của đang upload `InProgress`, upload thành công `Success`, upload thất bại `Failure`.
 
 ```ts twoslash
 type UploadStatus = InProgress | Success | Failure;
@@ -20,15 +20,15 @@ type Success = { done: boolean };
 type Failure = { done: boolean; error: Error };
 ```
 
-`UploadStatus`の各状態を整理したのが次の表です。
+Bảng sau tổng hợp các trạng thái của `UploadStatus`.
 
-| 型           | 意味             | `done`  | `progress` |  `error`   |
-| ------------ | ---------------- | :-----: | :--------: | :--------: |
-| `InProgress` | アップロード中   | `false` | 進捗率(%)  |     -      |
-| `Success`    | アップロード成功 | `true`  |     -      |     -      |
-| `Failure`    | アップロード失敗 | `true`  |     -      | エラー詳細 |
+| Kiểu         | Ý nghĩa           | `done`  | `progress` |   `error`    |
+| ------------ | ----------------- | :-----: | :--------: | :----------: |
+| `InProgress` | Đang upload       | `false` | Tiến độ(%) |      -       |
+| `Success`    | Upload thành công | `true`  |     -      |      -       |
+| `Failure`    | Upload thất bại   | `true`  |     -      | Chi tiết lỗi |
 
-状態を表示する関数を実装してみます。
+Hãy thử implement function hiển thị trạng thái.
 
 ```ts twoslash
 // @errors: 2339
@@ -39,14 +39,14 @@ type Failure = { done: boolean; error: Error };
 // ---cut---
 function printStatus(status: UploadStatus) {
   if (status.done === false) {
-    console.log(`アップロード中:${status.progress}%`);
+    console.log(`Đang upload: ${status.progress}%`);
   }
 }
 ```
 
-この実装は、`done`が`false`であることをチェックしています。不具合はないはずです。しかし、コンパイラーには`progress`が無いと警告されます。これは、if分岐内でも、`status`が`Success`や`Failure`かもしれないとコンパイラーが考えるためです。
+Implementation này kiểm tra `done` là `false`. Không có bug. Tuy nhiên, compiler cảnh báo không có `progress`. Vì ngay cả trong nhánh if, compiler vẫn nghĩ `status` có thể là `Success` hoặc `Failure`.
 
-このエラーを解消するには、`progress`があることをチェックする必要があります。そうすると、コンパイラーはif分岐内の`status`は`InProgress`だと判断します。
+Để giải quyết lỗi này, cần kiểm tra có `progress` hay không. Như vậy, compiler sẽ xác định `status` trong nhánh if là `InProgress`.
 
 ```ts twoslash {2}
 type UploadStatus = InProgress | Success | Failure;
@@ -56,14 +56,14 @@ type Failure = { done: boolean; error: Error };
 // ---cut---
 function printStatus(status: UploadStatus) {
   if (status.done === false && "progress" in status) {
-    //                         ^^^^^^^^^^^^^^^^^^^^追加
-    console.log(`アップロード中:${status.progress}%`);
-    // コンパイルエラーが解消！
+    //                         ^^^^^^^^^^^^^^^^^^^^thêm
+    console.log(`Đang upload: ${status.progress}%`);
+    // Lỗi compile được giải quyết!
   }
 }
 ```
 
-コンパイルエラーを起こさないように、すべての状態に対応した関数が次です。
+Function sau xử lý tất cả trạng thái mà không gây lỗi compile.
 
 ```ts twoslash
 type UploadStatus = InProgress | Success | Failure;
@@ -74,31 +74,31 @@ type Failure = { done: boolean; error: Error };
 function printStatus(status: UploadStatus) {
   if (status.done) {
     if ("error" in status) {
-      console.log(`アップロード失敗:${status.error.message}`);
+      console.log(`Upload thất bại: ${status.error.message}`);
     } else {
-      console.log("アップロード成功");
+      console.log("Upload thành công");
     }
   } else if ("progress" in status) {
-    console.log(`アップロード中:${status.progress}%`);
+    console.log(`Đang upload: ${status.progress}%`);
   }
 }
 ```
 
-どうでしょうか。このコードはなんだかごちゃついていませんか。あまり読みやすいとは言えないかもしれません。こうしたオブジェクトのユニオン型は、判別可能なユニオン型に書き直すとよいです。読みやすく、保守性も良くなります。
+Code này có vẻ lộn xộn và không dễ đọc. Với union type của object như vậy, nên viết lại thành discriminated union. Sẽ dễ đọc và bảo trì hơn.
 
-## 判別可能なユニオン型とは？
+## Discriminated union là gì?
 
-TypeScriptの判別可能なユニオン型(discriminated union)はユニオン型の応用です。判別可能なユニオン型は、タグ付きユニオン(tagged union)や直和型と呼ぶこともあります。
+Discriminated union của TypeScript là ứng dụng của union type. Discriminated union còn được gọi là tagged union hoặc sum type.
 
-判別可能なユニオン型は次の特徴を持ったユニオン型です。
+Discriminated union là union type có các đặc điểm sau.
 
-1. オブジェクトの型で構成されたユニオン型
-1. 各オブジェクトの型を判別するためのプロパティ(しるし)を持つ
-   - このプロパティのことをディスクリミネータ(discriminator)と呼ぶ
-1. ディスクリミネータの型は[リテラル型](./literal-types.md)などであること
-1. ディスクリミネータさえ有れば、各オブジェクトの型は固有のプロパティを持ってもよい
+1. Union type gồm các kiểu object
+2. Có property (dấu hiệu) để phân biệt từng kiểu object
+   - Property này được gọi là discriminator
+3. Kiểu của discriminator phải là [literal type](./literal-types.md), v.v.
+4. Miễn có discriminator, mỗi kiểu object có thể có property riêng
 
-たとえば、上の`UploadStatus`を判別可能なユニオン型に書き直すと、次のようになります。
+Ví dụ, viết lại `UploadStatus` trên thành discriminated union như sau.
 
 ```ts twoslash
 type UploadStatus = InProgress | Success | Failure;
@@ -107,19 +107,19 @@ type Success = { type: "Success" };
 type Failure = { type: "Failure"; error: Error };
 ```
 
-これを表に整理したのが次です。
+Bảng tổng hợp như sau.
 
-| 型           | 意味             | ディスクリミネータ   | `progress` |  `error`   |
-| ------------ | ---------------- | -------------------- | :--------: | :--------: |
-| `InProgress` | アップロード中   | `type: "InProgress"` | 進捗率(%)  |     -      |
-| `Success`    | アップロード成功 | `type: "Success"`    |     -      |     -      |
-| `Failure`    | アップロード失敗 | `type: "Failure"`    |     -      | エラー詳細 |
+| Kiểu         | Ý nghĩa           | Discriminator        | `progress` |   `error`    |
+| ------------ | ----------------- | -------------------- | :--------: | :----------: |
+| `InProgress` | Đang upload       | `type: "InProgress"` | Tiến độ(%) |      -       |
+| `Success`    | Upload thành công | `type: "Success"`    |     -      |      -       |
+| `Failure`    | Upload thất bại   | `type: "Failure"`    |     -      | Chi tiết lỗi |
 
-変わった点といえば、`done: boolean`がなくなり、`type`というディスクリミネータが追加されたところです。`type`の型が`string`ではなく、`InProgress`などのリテラル型になったことも重要な変更点です。
+Điểm thay đổi là `done: boolean` đã biến mất, và discriminator `type` được thêm vào. Điểm quan trọng nữa là kiểu của `type` không phải `string` mà là literal type như `InProgress`.
 
-## 判別可能なユニオン型の絞り込み
+## Thu hẹp discriminated union
 
-判別可能なユニオン型は、ディスクリミネータを分岐すると型が絞り込まれます。
+Discriminated union được thu hẹp kiểu khi phân nhánh discriminator.
 
 ```ts twoslash
 type UploadStatus = InProgress | Success | Failure;
@@ -129,21 +129,21 @@ type Failure = { type: "Failure"; error: Error };
 // ---cut---
 function printStatus(status: UploadStatus) {
   if (status.type === "InProgress") {
-    console.log(`アップロード中:${status.progress}%`);
+    console.log(`Đang upload: ${status.progress}%`);
     //                          ^?
   } else if (status.type === "Success") {
-    console.log("アップロード成功", status);
+    console.log("Upload thành công", status);
     //                           ^?
   } else if (status.type === "Failure") {
-    console.log(`アップロード失敗:${status.error.message}`);
+    console.log(`Upload thất bại: ${status.error.message}`);
     //                           ^?
   } else {
-    console.log("不正なステータス: ", status);
+    console.log("Trạng thái không hợp lệ: ", status);
   }
 }
 ```
 
-switch文で書いても同じく絞り込みをコンパイラーが理解します。
+Viết bằng switch cũng được compiler hiểu việc thu hẹp tương tự.
 
 ```ts twoslash
 type UploadStatus = InProgress | Success | Failure;
@@ -154,36 +154,36 @@ type Failure = { type: "Failure"; error: Error };
 function printStatus(status: UploadStatus) {
   switch (status.type) {
     case "InProgress":
-      console.log(`アップロード中:${status.progress}%`);
+      console.log(`Đang upload: ${status.progress}%`);
       break;
     case "Success":
-      console.log("アップロード成功", status);
+      console.log("Upload thành công", status);
       break;
     case "Failure":
-      console.log(`アップロード失敗:${status.error.message}`);
+      console.log(`Upload thất bại: ${status.error.message}`);
       break;
     default:
-      console.log("不正なステータス: ", status);
+      console.log("Trạng thái không hợp lệ: ", status);
   }
 }
 ```
 
-判別可能なユニオン型を使ったほうが、コンパイラーが型の絞り込みを理解できます。その結果、分岐処理が読みやすく、保守性も高くなります。
+Sử dụng discriminated union giúp compiler hiểu được việc thu hẹp kiểu. Kết quả là xử lý phân nhánh dễ đọc và bảo trì hơn.
 
-## ディスクリミネータに使える型
+## Kiểu có thể dùng cho discriminator
 
-ディスクリミネータに使える型は、リテラル型と`null`、`undefined`です。
+Các kiểu có thể dùng cho discriminator là literal type, `null`, và `undefined`.
 
-- リテラル型
-  - 文字列リテラル型: (例)`"success"`、`"OK"`など
-  - 数値リテラル型: (例)`1`、`200`など
-  - 論理値リテラル型: `true`または`false`
+- Literal type
+  - String literal type: (ví dụ) `"success"`, `"OK"`, v.v.
+  - Number literal type: (ví dụ) `1`, `200`, v.v.
+  - Boolean literal type: `true` hoặc `false`
 - `null`
 - `undefined`
 
-上の`UploadStatus`では、文字列リテラル型をディスクリミネータに使いました。リテラル型には数値と論理値もあります。これらもディスクリミネータに使えます。
+Trong `UploadStatus` trên, chúng ta dùng string literal type làm discriminator. Literal type còn có number và boolean. Chúng cũng có thể dùng làm discriminator.
 
-```ts twoslash title="数値リテラル型のディスクリミネータ"
+```ts twoslash title="Discriminator là number literal type"
 type OkOrBadRequest =
   | { statusCode: 200; value: string }
   | { statusCode: 400; message: string };
@@ -197,10 +197,10 @@ function handleResponse(x: OkOrBadRequest) {
 }
 ```
 
-```ts twoslash title="論理値リテラル型のディスクリミネータ"
+```ts twoslash title="Discriminator là boolean literal type"
 // prettier-ignore
-type OkOrNotOk = 
-  | { isOK: true; value: string } 
+type OkOrNotOk =
+  | { isOK: true; value: string }
   | { isOK: false; error: string };
 
 function handleStatus(x: OkOrNotOk) {
@@ -212,12 +212,12 @@ function handleStatus(x: OkOrNotOk) {
 }
 ```
 
-`null`と非nullの関係にある型もディスクリミネータになれます。次の例では、`error`プロパティが`null`または`Error`で、null・非nullの関係が成り立っています。
+Kiểu có quan hệ `null` và non-null cũng có thể làm discriminator. Trong ví dụ sau, property `error` là `null` hoặc `Error`, tạo thành quan hệ null/non-null.
 
 ```ts twoslash
 // prettier-ignore
-type Result = 
-  | { error: null; value: string } 
+type Result =
+  | { error: null; value: string }
   | { error: Error };
 
 function handleResult(result: Result) {
@@ -229,12 +229,12 @@ function handleResult(result: Result) {
 }
 ```
 
-同様に`undefined`もundefined・非undefinedの関係が成り立つプロパティは、ディスクリミネータになります。
+Tương tự, `undefined` cũng có thể làm discriminator với property có quan hệ undefined/non-undefined.
 
 ```ts twoslash
 // prettier-ignore
-type Result = 
-  | { error: undefined; value: string } 
+type Result =
+  | { error: undefined; value: string }
   | { error: Error };
 
 function handleResult(result: Result) {
@@ -246,9 +246,9 @@ function handleResult(result: Result) {
 }
 ```
 
-## ディスクリミネータを変数に代入する場合
+## Khi gán discriminator vào biến
 
-ディスクリミネータを変数に代入し、その変数を条件分岐に使った場合も、型の絞り込みができます。
+Khi gán discriminator vào biến và dùng biến đó trong điều kiện phân nhánh, vẫn có thể thu hẹp kiểu.
 
 ```ts twoslash
 type Shape =
@@ -257,7 +257,7 @@ type Shape =
 
 function toCSS(shape: Shape) {
   const { type, color } = shape;
-  //      ^^^^ディスクリミネータ
+  //      ^^^^discriminator
   switch (type) {
     case "circle":
       return {
@@ -279,16 +279,16 @@ function toCSS(shape: Shape) {
 
 <PostILearned>
 
-🦄TypeScriptの判別可能なユニオン型
-・ディスクリミネータを持つオブジェクトの型からなるユニオン型
-・if/switch分岐で型が絞り込みやすい
+Discriminated union của TypeScript
+・Union type gồm các kiểu object có discriminator
+・Dễ thu hẹp kiểu với if/switch
 
-🏷ディスクリミネータ
-・各オブジェクト共通のプロパティキー(しるし的なもの)
-・使える型は、リテラル型、null、undefined
+Discriminator
+・Property key chung của các object (như dấu hiệu)
+・Kiểu có thể dùng: literal type, null, undefined
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
-[ユニオン型 (union type)](./union.md)
+[Union type](./union.md)

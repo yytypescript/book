@@ -1,20 +1,20 @@
 ---
-sidebar_label: ユニオン型
+sidebar_label: Union type
 ---
 
-# ユニオン型 (union type)
+# Union type (kiểu hợp)
 
-TypeScriptのユニオン型(union type)は「いずれかの型」を表現するものです。
+Union type trong TypeScript là cách biểu diễn "một trong các kiểu".
 
-## ユニオン型の型注釈
+## Type annotation của union type
 
-ユニオン型の型注釈は、2つ以上の型をパイプ記号(`|`)で繋げて書きます。たとえば、number型もしくはundefined型を表す場合は、`number | undefined`のように書きます。
+Type annotation của union type được viết bằng cách nối 2 kiểu trở lên bằng ký hiệu pipe (`|`). Ví dụ, để biểu diễn kiểu number hoặc kiểu undefined, viết `number | undefined`.
 
 ```ts twoslash
 let numberOrUndefined: number | undefined;
 ```
 
-`|`は型のリストの冒頭に置くこともできます。型ごとに改行するときに、列が揃うので便利です。
+`|` cũng có thể đặt ở đầu danh sách kiểu. Tiện lợi khi xuống dòng theo từng kiểu vì các cột được căn thẳng hàng.
 
 <!--prettier-ignore-->
 ```ts twoslash
@@ -27,37 +27,37 @@ type ErrorCode =
   | 405;
 ```
 
-## 配列要素にユニオン型を使う際の書き方
+## Cách viết khi dùng union type cho phần tử mảng
 
-配列の要素としてユニオン型を用いる場合は、書き方に注意が必要です。たとえば、`string`または`number`からなる配列の型を宣言することを考えてみましょう。`string`または`number`をユニオン型で表現すると`string | number`になります。配列型は要素の型に`[]`をつけて表現します。これをそのまま繋げて考えると、次のような型を思いつくかもしれませんが、これは間違いです。
+Khi dùng union type làm phần tử mảng, cần chú ý cách viết. Ví dụ, hãy xem xét việc khai báo kiểu mảng gồm `string` hoặc `number`. Biểu diễn `string` hoặc `number` bằng union type là `string | number`. Kiểu mảng được biểu diễn bằng cách thêm `[]` vào kiểu phần tử. Nếu nối trực tiếp, có thể nghĩ đến kiểu sau, nhưng đây là sai.
 
 ```ts twoslash
 type List = string | number[];
 ```
 
-これは`string`型または`number[]`型であることになっているためです。正しくは以下です。特に配列を`T[]`形式で書いているときは`()`が必要になるので注意してください。
+Vì điều này có nghĩa là kiểu `string` hoặc kiểu `number[]`. Cách viết đúng như sau. Đặc biệt khi viết mảng dạng `T[]`, cần `()` nên hãy chú ý.
 
 ```ts twoslash
 type List = (string | number)[];
 ```
 
-## ユニオン型と絞り込み
+## Union type và narrowing
 
-ユニオン型`string | null`が`string`なのか`null`なのかを判定したいときは、TypeScriptの絞り込み(narrowing)を用います。絞り込みをするにはいくつかの方法がありますが、代表例はif文です。条件分岐で変数がstring型かどうかをチェックすると、同じ変数でも分岐内では`string | null`型が`string`型だと判定されます。
+Khi muốn xác định union type `string | null` là `string` hay `null`, sử dụng narrowing (thu hẹp) của TypeScript. Có nhiều cách để thu hẹp, ví dụ điển hình là câu lệnh if. Khi kiểm tra biến có phải kiểu string hay không trong điều kiện phân nhánh, cùng một biến trong nhánh đó sẽ được xác định là kiểu `string` thay vì `string | null`.
 
 ```ts twoslash
 // @errors: 2322
 const maybeUserId: string | null = localStorage.getItem("userId");
 
-const userId: string = maybeUserId; // nullかもしれないので、代入できない。
+const userId: string = maybeUserId; // Có thể là null nên không thể gán.
 
 if (typeof maybeUserId === "string") {
-  const userId: string = maybeUserId; // この分岐内では文字列型に絞り込まれるため、代入できる。
+  const userId: string = maybeUserId; // Trong nhánh này đã được thu hẹp thành kiểu string nên có thể gán.
 }
 ```
 
-[制御フロー分析と型ガードによる型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
+[Thu hẹp kiểu bằng control flow analysis và type guard](../statements/control-flow-analysis-and-type-guard.md)
 
-## 関連情報
+## Thông tin liên quan
 
-[判別可能なユニオン (discriminated union)](discriminated-union.md)
+[Discriminated union](discriminated-union.md)

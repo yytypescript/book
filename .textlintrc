@@ -1,11 +1,6 @@
 {
   "rules": {
-    "prh": {
-      "rulePaths": [
-        "./prh/js-primer.yml",
-        "./prh/yytypescript.yml"
-      ]
-    }
+    "prh": false
   },
   "filters": {
     "comments": true

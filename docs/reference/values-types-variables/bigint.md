@@ -1,9 +1,9 @@
 ---
-sidebar_label: bigint型
-title: bigint型(長整数型)
+sidebar_label: Kiểu bigint
+title: Kiểu bigint (số nguyên lớn)
 ---
 
-bigint型trong JavaScript là primitive type có thể xử lý số nguyên lớn hơn number型.
+Kiểu bigint trong JavaScript là primitive type có thể xử lý số nguyên lớn hơn kiểu number.
 
 ## bigint literal
 
