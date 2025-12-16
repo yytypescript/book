@@ -18,7 +18,7 @@ import {
 } from "./model";
 import useStore from "./useStore";
 
-const initialCode = "// ここに解読するコードを入力してください\n\n";
+const initialCode = "// Nhập code bạn muốn đọc hiểu vào đây\n\n";
 
 type CodeReadingAssistantProps = Readonly<{
   readme: ReactNode;
@@ -258,13 +258,13 @@ const Fragments: React.FC<FragmentsProps> = ({
     <div>
       {last && (
         <div className={styles.firstFragment}>
-          <div className={styles.firstFragment_title}>選択したコード</div>
+          <div className={styles.firstFragment_title}>Code đã chọn</div>
           <FragmentItem fragment={last} onSelectFragment={onSelectFragment} />
         </div>
       )}
       {parents.length > 0 && (
         <div className={styles.otherFragments}>
-          <div className={styles.otherFragments_title}>他の範囲のコード</div>
+          <div className={styles.otherFragments_title}>Code ở phạm vi khác</div>
           {parents.map((fragment, key) => (
             <FragmentItem
               fragment={fragment}

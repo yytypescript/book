@@ -68,7 +68,12 @@ const config = {
         items: [
           {
             href: "https://github.com/yytypescript/book",
-            label: "GitHub",
+            label: "GitHub bản gốc",
+            position: "right",
+          },
+          {
+            href: "https://github.com/LeHoangTuanbk/survival-typescript-vietnamese",
+            label: "GitHub bản tiếng Việt",
             position: "right",
           },
           {

@@ -1,7 +1,7 @@
 # Survival TypeScript
 
 Sách nhập môn TypeScript.
-
+Trang web gốc tiếng Nhật:
 https://typescriptbook.jp/
 
 ## Đặc điểm
@@ -32,16 +32,17 @@ Vui lòng xem trang sau để biết cách tham gia viết.
 
 https://typescriptbook.jp/writing
 
-## Contributors
-
-Cảm ơn vì những PR đã đóng góp!
-
-[![](https://contrib.rocks/image?repo=yytypescript/book)](https://github.com/yytypescript/book/graphs/contributors)
-
-## Khởi chạy
+## Khởi chạy docusaurus
 
 ```bash
 nvm use 20
 yarn install
 yarn start
 ```
+
+## TODOs
+
+- [ ] Vẽ lại các hình vẽ đang ở tiếng Nhật sang tiếng Việt
+- [ ] Add thêm các bài cho đúng với license sách gốc theo CC BY-SA
+- [ ] Chỉnh lại ngôn ngữ dịch cho thật chuẩn, trong sáng, văn phong kĩ thuật, ngắn gọn, dễ hiểu
+- [ ] Việt hoá lại các ví dụ. Hiện tại có nhiều ví dụ thuần tiếng Nhật, khó dịch sang tiếng Việt
