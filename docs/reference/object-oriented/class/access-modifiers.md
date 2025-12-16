@@ -6,12 +6,12 @@ sidebar_label: Access modifier
 
 Trong các ngôn ngữ như Java hay PHP, có thể chỉ định `private`, `protected`, `public` cho field và method. JavaScript cũng có spec [Private class fields](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_class_fields) để thực hiện property kiểu `private`, nhưng hơi khác với access modifier kiểu Java. TypeScript có access modifier theo phong cách Java.
 
-| Access modifier | Mô tả                                         |
-| :-------------- | :-------------------------------------------- |
-| (không khai báo)| Tương đương với public                        |
-| public          | Có thể truy cập từ bất kỳ đâu                 |
-| protected       | Có thể truy cập từ class hiện tại và subclass |
-| private         | Chỉ có thể truy cập từ class hiện tại         |
+| Access modifier  | Mô tả                                         |
+| :--------------- | :-------------------------------------------- |
+| (không khai báo) | Tương đương với public                        |
+| public           | Có thể truy cập từ bất kỳ đâu                 |
+| protected        | Có thể truy cập từ class hiện tại và subclass |
+| private          | Chỉ có thể truy cập từ class hiện tại         |
 
 Khi bỏ qua access modifier, mặc định là `public`.
 
@@ -54,15 +54,15 @@ class Animal {
 }
 
 // ---cut---
-const gorilla = new Animal("ゴリラ");
+const gorilla = new Animal("Gorilla");
 gorilla.move(10);
-// @log: "ゴリラ moved 10m."
-gorilla.name = "ゴリラゴリラ";
+// @log: "Gorilla moved 10m."
+gorilla.name = "BigGorilla";
 gorilla.move(20);
-// @log: "ゴリラゴリラ moved 20m."
+// @log: "BigGorilla moved 20m."
 ```
 
-Property `name` được khai báo `public` nên có thể đọc và ghi từ biến instance (`gorilla`). Có thể thay đổi từ "ゴリラ" sang "ゴリラゴリラ".
+Property `name` được khai báo `public` nên có thể đọc và ghi từ biến instance (`gorilla`). Có thể thay đổi từ "Gorilla" sang "BigGorilla".
 
 ## `protected`
 
@@ -85,7 +85,7 @@ class Animal {
   }
 }
 
-const gorilla = new Animal("ゴリラ");
+const gorilla = new Animal("Gorilla");
 gorilla.move(10);
 ```
 
@@ -113,9 +113,9 @@ class Gorilla extends Animal {
   }
 }
 
-const gorilla = new Gorilla("速いゴリラ");
+const gorilla = new Gorilla("FastGorilla");
 gorilla.move(10);
-// @log: "速いゴリラ moved 100m."
+// @log: "FastGorilla moved 100m."
 ```
 
 Định nghĩa class `Gorilla` có superclass `Animal` và implement `move()`. Trong method `move()` của class `Gorilla`, sử dụng từ khóa `super` để gọi method `move()` của superclass.

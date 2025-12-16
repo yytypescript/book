@@ -80,12 +80,12 @@ Giải pháp đơn giản nhất là sử dụng union type.
 ```ts twoslash
 type YesNo = "yes" | "no";
 
-function toJapanese(yesno: YesNo) {
+function toVietnamese(yesno: YesNo) {
   switch (yesno) {
     case "yes":
-      return "はい";
+      return "Có";
     case "no":
-      return "いいえ";
+      return "Không";
   }
 }
 ```
@@ -97,12 +97,12 @@ const yes = Symbol();
 const no = Symbol();
 type YesNo = typeof yes | typeof no;
 
-function toJapanese(yesno: YesNo) {
+function toVietnamese(yesno: YesNo) {
   switch (yesno) {
     case yes:
-      return "はい";
+      return "Có";
     case no:
-      return "いいえ";
+      return "Không";
   }
 }
 ```
@@ -122,16 +122,16 @@ const Position = {
 type Position = (typeof Position)[keyof typeof Position];
 // Dòng trên có nghĩa tương đương với type Position = 0 | 1 | 2 | 3
 
-function toJapanese(position: Position) {
+function toVietnamese(position: Position) {
   switch (position) {
     case Position.Top:
-      return "上";
+      return "Trên";
     case Position.Right:
-      return "右";
+      return "Phải";
     case Position.Bottom:
-      return "下";
+      return "Dưới";
     case Position.Left:
-      return "左";
+      return "Trái";
   }
 }
 ```

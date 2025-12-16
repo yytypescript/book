@@ -9,7 +9,7 @@ interface Human {
 
 class Developer implements Human {
   think(): void {
-    console.log("どういう実装にしようかな〜");
+    console.log("Mình sẽ implement như thế nào nhỉ~");
   }
 }
 ```
@@ -27,11 +27,11 @@ interface Programmer {
 
 class TypeScriptProgrammer implements Human, Programmer {
   think(): void {
-    console.log("どういうコードにしようかな〜");
+    console.log("Mình sẽ viết code như thế nào nhỉ~");
   }
 
   writeCode(): void {
-    console.log("カタカタ");
+    console.log("Tạch tạch tạch");
   }
 }
 ```

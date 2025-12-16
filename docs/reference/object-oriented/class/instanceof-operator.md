@@ -6,13 +6,13 @@ Toán tử `instanceof` là toán tử của JavaScript để kiểm tra xem m�
 
 ```js twoslash
 // prettier-ignore
-オブジェクト instanceof クラス
+object instanceof Class
 ```
 
 ### Tham số
 
-- オブジェクト: Object cần kiểm tra.
-- クラス: Tên class cần kiểm tra.
+- object: Object cần kiểm tra.
+- Class: Tên class cần kiểm tra.
 
 ## Ví dụ
 
@@ -40,7 +40,7 @@ console.log(child instanceof Parent);
 
 ## Đảo ngược `instanceof`
 
-Để đảo ngược kết quả của toán tử `instanceof`, cần bao toàn bộ câu `値 instanceof クラス名` bằng ngoặc đơn và thêm toán tử phủ định `!` ở đầu.
+Để đảo ngược kết quả của toán tử `instanceof`, cần bao toàn bộ câu `value instanceof ClassName` bằng ngoặc đơn và thêm toán tử phủ định `!` ở đầu.
 
 ```ts twoslash
 class MyClass {}

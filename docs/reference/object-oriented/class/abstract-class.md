@@ -66,7 +66,7 @@ Abstract method bị xóa khi compile. Ví dụ, `concreteMethod` có implementa
 ```ts twoslash
 abstract class AbstractClass {
   concreteMethod(): void {
-    /* 實装の中身 */
+    /* Nội dung implementation */
   }
   abstract abstractMethod(): void;
 }
@@ -79,7 +79,7 @@ Kết quả compile TypeScript trên như sau:
 // @alwaysStrict: false
 abstract class AbstractClass {
   concreteMethod(): void {
-    /* 實装の中身 */
+    /* Nội dung implementation */
   }
   abstract abstractMethod(): void;
 }

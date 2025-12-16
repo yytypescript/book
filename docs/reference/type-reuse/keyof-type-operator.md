@@ -20,7 +20,7 @@ type Book = {
 };
 type BookKey = keyof Book;
 //   ^?
-// 上は次と同じ意味になる
+// Có ý nghĩa tương đương với
 // type BookKey = "title" | "price" | "rating";
 ```
 

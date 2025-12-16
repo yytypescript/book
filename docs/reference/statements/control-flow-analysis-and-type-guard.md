@@ -158,7 +158,7 @@ function attack(player: Wizard | Swordsman) {
 
 Tên gọi này (user-defined type guard) dường như dài ngay cả trong tiếng Anh, nên đôi khi được gọi là hàm type guard (type guarding function, guard's function).
 
-[型ガード関数](../functions/type-guard-functions.md)
+[Hàm type guard](../functions/type-guard-functions.md)
 
 ### Gán type guard vào biến
 
@@ -272,6 +272,6 @@ function handleValue(value: Panda | Broccoli | User): void {
 
 ## Thông tin liên quan
 
-[any型](../values-types-variables/any.md)
+[Kiểu any](../values-types-variables/any.md)
 
 [any vs unknown](any-vs-unknown.md)

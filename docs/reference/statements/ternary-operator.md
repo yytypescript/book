@@ -58,6 +58,6 @@ if (extension === "js") {
 
 ## Thông tin liên quan
 
-[if-else文](if-else.md)
+[Câu lệnh if-else](if-else.md)
 
-[switch文](switch.md)
+[Câu lệnh switch](switch.md)

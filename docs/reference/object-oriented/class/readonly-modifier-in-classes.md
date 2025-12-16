@@ -10,7 +10,7 @@ class Octopus {
   readonly legs = 8; // Gán trong field initializer là OK
 
   constructor() {
-    this.name = "たこちゃん"; // Gán trong constructor là OK
+    this.name = "Octo"; // Gán trong constructor là OK
   }
 }
 ```
@@ -23,7 +23,7 @@ class Octopus {
   readonly legs = 8; // Gán trong field initializer là OK
 
   constructor() {
-    this.name = "たこちゃん"; // Gán trong constructor là OK
+    this.name = "Octo"; // Gán trong constructor là OK
   }
 }
 // ---cut---
@@ -37,7 +37,7 @@ Ngay cả trong xử lý của method, việc gán lại giá trị cho field ch
 ```ts twoslash
 // @errors: 2540
 class Octopus {
-  readonly name = "たこちゃん";
+  readonly name = "Octo";
 
   setName(newName: string): void {
     this.name = newName;

@@ -13,26 +13,26 @@ Callback function không phải là cú pháp cấp ngôn ngữ, mà được g�
 
 Callback function có thể được sử dụng khi bạn muốn kiểm soát một phần hành vi của function từ bên ngoài.
 
-`greetNewUser` là function chào mừng "ご新規さん" (khách hàng mới).
+`greetNewUser` là function chào mừng khách hàng mới.
 Bằng cách truyền function `hello` và `goodMorning` làm callback function, bạn có thể kiểm soát cách chào mừng.
 
 ```ts twoslash
 function greetNewUser(func: (name: string) => string) {
-  console.log(func("ご新規"));
+  console.log(func("NewUser"));
 }
 
 function hello(name: string) {
-  return `こんにちは!${name}さん!!`;
+  return `Hello! ${name}!!`;
 }
 
 function goodMorning(name: string) {
-  return `おはようございます!${name}さん!!`;
+  return `Good morning! ${name}!!`;
 }
 
-// こんにちは!ご新規さん!!
+// Hello! NewUser!!
 greetNewUser(hello);
 
-// おはようございます!ご新規さん!!
+// Good morning! NewUser!!
 greetNewUser(goodMorning);
 ```
 
@@ -98,7 +98,7 @@ Callback function chỉ là một function, nên đây chỉ là khai báo kiể
 
 ```ts twoslash
 function greetNewUser(func: (name: string) => string) {
-  console.log(func("ご新規さん"));
+  console.log(func("NewUser"));
 }
 ```
 

@@ -119,7 +119,7 @@ Giá trị thực tế của `dict.b` là `undefined`, nên nếu gọi method c
 const dict: { [K in string]: number } = { a: 1 };
 console.log(dict.b);
 // @log: undefined
-dict.b.toFixed(); // 実行時エラーが発生する
+dict.b.toFixed(); // Xảy ra lỗi runtime
 // @noUncheckedIndexedAccess: false
 ```
 
@@ -147,7 +147,7 @@ Mapped Types không thể định nghĩa property bổ sung. Đây là điểm k
 // @errors: 7061
 type KeyValuesAndName = {
   [K in string]: string;
-  name: string; // 追加のプロパティ
+  name: string; // Property bổ sung
 };
 ```
 
@@ -158,7 +158,7 @@ type KeyValues = {
   [K in string]: string;
 };
 type Name = {
-  name: string; // 追加のプロパティ
+  name: string; // Property bổ sung
 };
 type KeyValuesAndName = KeyValues & Name;
 ```
@@ -169,7 +169,7 @@ Ví dụ trên cũng có thể gộp thành một kiểu duy nhất:
 type KeyValuesAndName = {
   [K in string]: string;
 } & {
-  name: string; // 追加のプロパティ
+  name: string; // Property bổ sung
 };
 ```
 

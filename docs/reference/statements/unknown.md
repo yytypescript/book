@@ -54,7 +54,7 @@ obj.name;
 
 Chi tiết về sự khác biệt đặc tính giữa any và unknown, vui lòng xem trang sau.
 
-[anyとunknownの違い](any-vs-unknown.md)
+[Sự khác biệt giữa any và unknown](any-vs-unknown.md)
 
 ## unknown và thu hẹp kiểu
 
@@ -91,7 +91,7 @@ if (isObject(value)) {
 
 [hàm type guard]: ../functions/type-guard-functions.md
 
-[制御フロー分析](../statements/control-flow-analysis-and-type-guard.md)
+[Phân tích control flow](../statements/control-flow-analysis-and-type-guard.md)
 
 ### Thu hẹp kiểu unknown thành kiểu mảng
 

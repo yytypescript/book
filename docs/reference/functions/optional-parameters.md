@@ -1,39 +1,39 @@
 ---
-sidebar_label: オプション引数
+sidebar_label: Optional parameter
 ---
 
-# オプション引数 (optional parameter)
+# Optional parameter (tham số tùy chọn)
 
-オプション引数(optional parameter)は、渡す引数を省略できるようにするTypeScript固有の機能です。オプション引数は疑問符`?`を引数名の後ろに書くことで表現します。
+Optional parameter là tính năng riêng của TypeScript cho phép bỏ qua argument khi truyền vào. Optional parameter được biểu diễn bằng cách viết dấu hỏi `?` sau tên argument.
 
-## オプション引数の構文
+## Cú pháp optional parameter
 
 ```ts twoslash
-interface 型 {}
+interface Type {}
 // ---cut---
 // @noImplicitAny: false
-function 関数名(引数名?: 型) {}
-//                  ^オプション引数の標示
+function functionName(argName?: Type) {}
+//                           ^Dấu hiệu optional parameter
 ```
 
-オプション引数は、関数を呼び出すときに引数が省略できます。
+Optional parameter có thể bỏ qua argument khi gọi function.
 
 ```ts twoslash
 function hello(person?: string) {}
-hello(); // 引数を省略して呼び出せる
-hello("alice"); // 省略しない呼び出しももちろんOK
+hello(); // Có thể gọi mà bỏ qua argument
+hello("alice"); // Gọi không bỏ qua cũng OK
 ```
 
-## 省略すると`undefined`になる
+## Khi bỏ qua sẽ thành `undefined`
 
-オプション引数の型は、型と`undefined`の[ユニオン型](./../values-types-variables/union.md)になります。ユニオン型は日本語で言うと「いずれか」の意味です。上の例では、引数`person`は`string | undefined`型になります。
+Type của optional parameter là [union type](./../values-types-variables/union.md) của type và `undefined`. Union type nghĩa là "một trong các type". Trong ví dụ trên, argument `person` có type là `string | undefined`.
 
 ```ts twoslash
 function hello(person?: string) {}
 //             ^?
 ```
 
-引数を省略した場合、オプション引数の実行時の値は`undefined`になります。
+Khi bỏ qua argument, giá trị runtime của optional parameter sẽ là `undefined`.
 
 ```ts twoslash
 function hello(person?: string) {
@@ -43,9 +43,9 @@ hello();
 // @log: undefined
 ```
 
-## オプション引数の取り回し
+## Xử lý optional parameter
 
-オプション引数は、型が`undefined`とのユニオン型になるため、そのままでは使えません。たとえば、次のコードはstringの`toUpperCase`メソッドを呼び出すコードです。これはコンパイルエラーになります。なぜなら、`person`が`undefined`型である可能性があるからです。そして、`undefined`には`toUpperCase`メソッドがありません。
+Optional parameter có type là union type với `undefined`, nên không thể sử dụng trực tiếp. Ví dụ, code sau gọi method `toUpperCase` của string. Code này sẽ gây compile error. Bởi vì `person` có thể là type `undefined`. Và `undefined` không có method `toUpperCase`.
 
 ```ts twoslash
 // @errors: 18048
@@ -54,11 +54,11 @@ function hello(person?: string) {
 }
 ```
 
-この問題を解消するには、次の2つの方法があります。
+Để giải quyết vấn đề này, có 2 cách sau.
 
-### デフォルト値を代入する
+### Gán giá trị default
 
-引数が`undefined`の場合分けを`if`文で書き、そこでデフォルト値を代入する方法です。
+Viết phân nhánh trường hợp argument là `undefined` bằng câu lệnh `if`, và gán giá trị default tại đó.
 
 ```ts twoslash {2-4}
 function hello(person?: string) {
@@ -69,7 +69,7 @@ function hello(person?: string) {
 }
 ```
 
-Null合体代入演算子`??=`でデフォルト値を代入する方法もあります。
+Cũng có thể gán giá trị default bằng nullish coalescing assignment operator `??=`.
 
 ```ts twoslash {2}
 function hello(person?: string) {
@@ -78,20 +78,20 @@ function hello(person?: string) {
 }
 ```
 
-さらに、デフォルト引数を指定することでも同じことができます。多くのケースでは、デフォルト引数を使うほうがよいです。
+Ngoài ra, cũng có thể làm tương tự bằng cách chỉ định default parameter. Trong hầu hết các trường hợp, nên sử dụng default parameter.
 
 ```ts twoslash {1-2}
 function hello(person: string = "anonymous") {
-  //                          ^^^^^^^^^^^^^デフォルト引数
+  //                          ^^^^^^^^^^^^^default parameter
   return "Hello " + person.toUpperCase();
 }
 ```
 
-[デフォルト引数](./default-parameters.md)
+[Default parameter](./default-parameters.md)
 
-### 処理を分ける
+### Tách xử lý
 
-オプション引数を取り回すもうひとつの方法は、処理を分けることです。
+Một cách khác để xử lý optional parameter là tách xử lý.
 
 ```ts twoslash {2-4}
 function hello(person?: string) {
@@ -102,20 +102,20 @@ function hello(person?: string) {
 }
 ```
 
-## `T | undefined`との違い
+## Sự khác biệt với `T | undefined`
 
-オプション引数はユニオン型`T | undefined`として解釈されます。であれば、引数の型を`T | undefined`と書けば同じなはずです。なぜTypeScriptは、疑問符`?`という別の記法を用意したのでしょうか。違いがあるのでしょうか。
+Optional parameter được hiểu là union type `T | undefined`. Nếu vậy, viết type của argument là `T | undefined` thì cũng giống nhau. Tại sao TypeScript lại chuẩn bị cách viết khác là dấu hỏi `?`? Có sự khác biệt không?
 
-これには呼び出す側で、**引数を省略できるかどうかという違い**が生まれます。オプション引数は引数自体を省略できますが、`T | undefined`型の引数は引数が省略できません。
+Điều này tạo ra **sự khác biệt về việc có thể bỏ qua argument hay không** từ phía gọi. Optional parameter có thể bỏ qua chính argument, nhưng argument có type `T | undefined` không thể bỏ qua.
 
-たとえば、次のオプション引数の関数は引数なしで呼び出せます。
+Ví dụ, function với optional parameter sau có thể gọi mà không có argument.
 
 ```ts twoslash
 function hello(person?: string) {}
-hello(); // 引数を省略して呼び出せる
+hello(); // Có thể gọi mà bỏ qua argument
 ```
 
-一方、次のような`undefined`とのユニオン型の引数は、引数なしではコンパイルエラーになります。
+Mặt khác, argument có union type với `undefined` như sau sẽ gây compile error nếu không có argument.
 
 ```ts twoslash
 // @errors: 2554
@@ -123,16 +123,16 @@ function hello(person: string | undefined) {}
 hello();
 ```
 
-この関数を呼び出すためには、`undefined`を渡す必要があります。
+Để gọi function này, cần truyền `undefined`.
 
 ```ts twoslash {2}
 function hello(person: string | undefined) {}
 hello(undefined);
 ```
 
-## オプション引数の後に普通の引数は書けない
+## Không thể viết argument thường sau optional parameter
 
-オプション引数は必ず最後に書かなければいけません。次のようにオプション引数より後ろに普通の引数を書くと、コンパイルエラーになります。
+Optional parameter bắt buộc phải viết cuối cùng. Nếu viết argument thường sau optional parameter như sau, sẽ xảy ra compile error.
 
 ```ts twoslash
 // @errors: 1016

@@ -1,20 +1,20 @@
 ---
-sidebar_label: オーバーロード関数
+sidebar_label: Overload function
 ---
 
-# オーバーロード関数 (overload function)
+# Overload function (hàm nạp chồng)
 
-オーバーロード関数(overload function)は、TypeScriptの機能で、ひとつの関数に異なる関数シグネチャを複数もつ関数です。関数シグネチャとは、どのような引数を取るか、どのような戻り値を返すかといった関数の型のことです。要するに、異なる引数や戻り値のパターンがいくつかある関数をオーバーロード関数と言います。
+Overload function là tính năng của TypeScript cho phép một hàm có nhiều function signature khác nhau. Function signature là kiểu của hàm bao gồm các tham số và kiểu trả về. Nói cách khác, hàm có nhiều pattern khác nhau về tham số và giá trị trả về được gọi là overload function.
 
-## オーバーロード関数の文法
+## Cú pháp overload function
 
-TypeScriptでは、オーバーロード関数は、関数シグネチャと実装の2つの部分に分けて書きます。
+Trong TypeScript, overload function được viết thành 2 phần: function signature và implementation.
 
 ```ts twoslash
-// 関数シグネチャ部分
-function hello(person: string): void; // シグネチャ1
-function hello(persons: string[]): void; // シグネチャ2
-// 関数の実装部分
+// Phần function signature
+function hello(person: string): void; // Signature 1
+function hello(persons: string[]): void; // Signature 2
+// Phần implementation
 function hello(person: string | string[]): void {
   if (typeof person === "string") {
     console.log(`Hello ${person}`);
@@ -24,25 +24,25 @@ function hello(person: string | string[]): void {
 }
 ```
 
-関数シグネチャの部分は、オーバーロードのパターン数だけ複数書きます。この部分はインターフェースを定義するところなので、関数のボディは書けません。
+Phần function signature được viết nhiều lần tùy theo số pattern overload. Phần này định nghĩa interface nên không thể viết body của hàm.
 
-関数の実装部分は、オーバーロードの全パターンを網羅する関数を書きます。ありうる引数の数や型のパターンを網羅したものになります。ロジックも分岐などを用いて、パターンごとの処理を書く必要があります。
+Phần implementation viết hàm bao quát tất cả các pattern overload. Nó cần bao quát mọi pattern về số lượng và kiểu của tham số. Logic cũng cần sử dụng phân nhánh để viết xử lý cho từng pattern.
 
-関数シグネチャと実装部分の関数名は同じにする必要があります。
+Tên hàm của function signature và phần implementation phải giống nhau.
 
-オーバーロード関数の文法を一般化すると次のようになります。
+Tổng quát hóa cú pháp overload function như sau:
 
 ```js
-function 関数名 関数シグネチャ1
-function 関数名 関数シグネチャ2
-function 関数名 すべてのシグネチャを網羅する実装
+function tênHàm functionSignature1
+function tênHàm functionSignature2
+function tênHàm implementationBaoQuátTấtCảSignature
 ```
 
-## オーバーロード関数のコンパイル結果
+## Kết quả compile của overload function
 
-オーバーロード関数はTypeScriptからJavaScriptにコンパイルすると、関数シグネチャ部分と型注釈が消され、次のようなコードになります。
+Khi compile overload function từ TypeScript sang JavaScript, phần function signature và type annotation sẽ bị xóa, code trở thành như sau:
 
-```ts twoslash title="コンパイル後のJavaScript"
+```ts twoslash title="JavaScript sau khi compile"
 // @showEmit
 // @target: esnext
 // @alwaysStrict: false
@@ -57,13 +57,13 @@ function hello(person: string | string[]): void {
 }
 ```
 
-## なぜJavaのようなオーバーロードではないのか？
+## Tại sao không giống overload của Java?
 
-オーバーロードは他の言語にもあります。たとえば、Javaを始めとするJVM言語、C#、Swiftなどです。これらの言語のオーバーロードを知っていると、TypeScriptのオーバーロードは独特に思えるかもしれません。
+Overload cũng có trong các ngôn ngữ khác như các ngôn ngữ JVM bắt đầu từ Java, C#, Swift, v.v. Nếu bạn biết overload của các ngôn ngữ này, overload của TypeScript có thể trông độc đáo.
 
-他の言語のオーバーロードの書き方は、シグネチャごとに実装が書けます。たとえば、JVM言語のひとつのKotlinでは、次のように書けます。TypeScriptと比べると、シグネチャごとに実装が別れていて、if分岐もなく、読みやすいのではないでしょうか。
+Cách viết overload của các ngôn ngữ khác cho phép viết implementation cho từng signature. Ví dụ, trong Kotlin - một ngôn ngữ JVM, có thể viết như sau. So với TypeScript, implementation được tách riêng cho từng signature, không có if phân nhánh, có thể dễ đọc hơn.
 
-```kotlin title="Kotlinのオーバーロード関数"
+```kotlin title="Overload function trong Kotlin"
 fun hello(person: String) {
   println("Hello $person")
 }
@@ -73,23 +73,23 @@ fun hello(persons: Array<String>) {
 }
 ```
 
-では、なぜTypeScriptは、このような書き方を採用しなかったのでしょうか。理由として、JavaScriptにオーバーロードがない点が挙げられます。
+Vậy tại sao TypeScript không áp dụng cách viết này? Lý do là JavaScript không có overload.
 
-TypeScriptで書いたコードは「型に関する部分を消したらJavaScriptになる」というのがTypeScriptの基本方針です。このおかげで、開発者はTypeScriptコードが意図したJavaScriptにコンパイルされたかを確認する必要がなく、TypeScriptコードを見るだけでJavaScriptコードが予測できるという利点があります。
+Phương châm cơ bản của TypeScript là "code TypeScript thành JavaScript khi xóa phần liên quan đến type". Nhờ đó, developer không cần xác nhận xem code TypeScript có compile thành JavaScript như ý muốn hay không, chỉ cần nhìn code TypeScript là có thể dự đoán được code JavaScript.
 
-もしも、Javaのようなオーバーロードを採用すると、JavaScriptにオーバーロードがない以上、どの関数を呼ぶかといった解決ロジックをTypeScriptがコンパイル時に生成しなければなりません。そうなると、TypeScriptの基本方針から大きく外れてしまいます。ソースコードからの予測可能性も下がります。こうしたことから、TypeScriptのオーバーロードは関数シグネチャ定義にとどめていると見られます。
+Nếu áp dụng overload giống Java, vì JavaScript không có overload, TypeScript sẽ phải sinh logic giải quyết gọi hàm nào khi compile. Điều đó sẽ lệch xa khỏi phương châm cơ bản của TypeScript. Tính dự đoán từ source code cũng giảm. Vì vậy, overload của TypeScript chỉ dừng lại ở việc định nghĩa function signature.
 
-## アロー関数とオーバーロード
+## Arrow function và overload
 
-オーバーロード関数の構文が用意されているのは関数宣言だけです。アロー関数にはオーバーロードの構文がありません。アロー関数でオーバーロード関数を作るには、関数呼び出しシグネチャで型注釈する必要があります。
+Cú pháp overload function chỉ có cho function declaration. Arrow function không có cú pháp overload. Để tạo overload function với arrow function, cần dùng call signature để type annotation.
 
 ```ts twoslash
-// 関数呼び出しシグネチャでHello型を定義
+// Định nghĩa type Hello bằng call signature
 type Hello = {
   (person: string): void;
   (persons: string[]): void;
 };
-// Hello型で型注釈
+// Type annotation bằng type Hello
 const hello: Hello = (person: string | string[]): void => {
   if (typeof person === "string") {
     console.log(`Hello ${person}`);
@@ -99,10 +99,10 @@ const hello: Hello = (person: string | string[]): void => {
 };
 ```
 
-関数呼び出しシグネチャ以外に、関数型(function type)とインターセクション型を用いる方法もあります。
+Ngoài call signature, cũng có thể dùng function type và intersection type.
 
 ```ts twoslash {1-2}
-// 関数型とインターセクション型を用いてHello型を定義
+// Định nghĩa type Hello bằng function type và intersection type
 type Hello = ((person: string) => void) & ((persons: string[]) => void);
 const hello: Hello = (person: string | string[]): void => {
   if (typeof person === "string") {
@@ -113,14 +113,14 @@ const hello: Hello = (person: string | string[]): void => {
 };
 ```
 
-## 関数シグネチャは詳しい順に書く
+## Viết function signature theo thứ tự chi tiết
 
-オーバーロードの関数シグネチャは順番が重要になります。TypeScriptは関数シグネチャを上から順に試していき、最初にマッチしたシグネチャを採用します。そのため、より詳しい関数シグネチャが上に、詳しくないものが下に来るように書き並べなければなりません。詳しいとは、引数の型の範囲が狭いという意味です。たとえば、`number`より`1 | 2`のほうが狭い型です。`any`は`number`より広い型です。
+Thứ tự function signature trong overload rất quan trọng. TypeScript thử function signature từ trên xuống và áp dụng signature đầu tiên match. Vì vậy, function signature chi tiết hơn phải ở trên, ít chi tiết hơn ở dưới. Chi tiết nghĩa là phạm vi type của tham số hẹp. Ví dụ, `1 | 2` hẹp hơn `number`. `any` rộng hơn `number`.
 
 ```ts twoslash
-function func(param: 1 | 2): 1 | 2; // 詳しい関数
-function func(param: number): number; // そこそこ詳しい関数
-function func(param: any): any; // 詳しくない関数
+function func(param: 1 | 2): 1 | 2; // Hàm chi tiết
+function func(param: number): number; // Hàm tương đối chi tiết
+function func(param: any): any; // Hàm không chi tiết
 function func(param: any): any {
   // ...
 }
@@ -132,11 +132,11 @@ const result3 = func("others");
 //    ^?
 ```
 
-次の誤りのように、詳しい関数を下のほうに書いてしまうと、詳しい関数がまったく採用されなくなります。
+Nếu sai lầm viết hàm chi tiết ở dưới như sau, hàm chi tiết sẽ không bao giờ được áp dụng.
 
-```ts twoslash title="誤り:シグネチャの順番が間違っている"
-function func(param: any): any; // 詳しくない関数。採用される
-function func(param: 1 | 2): 1 | 2; // 詳しい関数。採用されない
+```ts twoslash title="Sai: Thứ tự signature sai"
+function func(param: any): any; // Hàm không chi tiết. Được áp dụng
+function func(param: 1 | 2): 1 | 2; // Hàm chi tiết. Không được áp dụng
 function func(param: any): any {
   // ...
 }
@@ -144,15 +144,15 @@ const result = func(1);
 //     ^?
 ```
 
-## オーバーロード以外も検討しよう
+## Hãy cân nhắc các phương pháp khác ngoài overload
 
-オーバーロード関数以外の方法を使ったほうがいい場合もあります。
+Có những trường hợp nên dùng phương pháp khác thay vì overload function.
 
-### 代わりにオプション引数を使う
+### Dùng optional parameter thay thế
 
-引数の数が違うだけの場合、オーバーロードより[オプション引数](./optional-parameters.md)を使ったほうがよいです。たとえば、次のようなオーバーロード関数は、[strictNullChecks](../tsconfig/strictnullchecks.md)が有効な場合、第2引数に`undefined`が渡せません。
+Nếu chỉ khác số lượng tham số, nên dùng [optional parameter](./optional-parameters.md) thay vì overload. Ví dụ, overload function sau không thể truyền `undefined` cho tham số thứ 2 khi [strictNullChecks](../tsconfig/strictnullchecks.md) được bật.
 
-```ts twoslash title="オーバーロードを使う例"
+```ts twoslash title="Ví dụ dùng overload"
 // @strictNullChecks: true
 // @errors: 2345
 function func(one: number): void;
@@ -161,33 +161,33 @@ function func(one: number, two?: number): void {}
 func(1, undefined);
 ```
 
-これは次のように[オプション引数](./optional-parameters.md)を使うだけにとどめたほうがよいです。
+Trường hợp này nên chỉ dùng [optional parameter](./optional-parameters.md) như sau.
 
-```ts twoslash title="オプション引数を使う例"
+```ts twoslash title="Ví dụ dùng optional parameter"
 // @strictNullChecks: true
 function func(one: number, two?: number): void {}
 func(1, undefined);
 ```
 
-### 代わりにユニオン型を使う
+### Dùng union type thay thế
 
-引数の型だけが異なる場合は、[ユニオン型](../values-types-variables/union.md)を使ったほうがシンプルです。
+Nếu chỉ khác kiểu tham số, dùng [union type](../values-types-variables/union.md) sẽ đơn giản hơn.
 
-```ts twoslash title="オーバーロードを使う例"
+```ts twoslash title="Ví dụ dùng overload"
 function func(x: string): void;
 function func(x: number): void;
 function func(x: string | number) {}
 ```
 
-```ts twoslash title="ユニオン型を使う例"
+```ts twoslash title="Ví dụ dùng union type"
 function func(x: string | number) {}
 ```
 
-### 代わりにジェネリクスを使う
+### Dùng generics thay thế
 
-引数の型と戻り値の型に一定の対応関係がある場合は、[ジェネリクス](../generics/README.md)を使ったほうがシンプルになる場合があります。
+Nếu có quan hệ nhất định giữa kiểu tham số và kiểu trả về, dùng [generics](../generics/README.md) có thể đơn giản hơn.
 
-```ts twoslash title="オーバーロードを使う例"
+```ts twoslash title="Ví dụ dùng overload"
 function func(x: boolean): boolean;
 function func(x: number): number;
 function func(x: string): string;
@@ -196,7 +196,7 @@ function func(x: boolean | string | number): boolean | string | number {
 }
 ```
 
-```ts twoslash title="ジェネリクスを使う例"
+```ts twoslash title="Ví dụ dùng generics"
 function func<T extends boolean | number | string>(x: T): T {
   return x;
 }

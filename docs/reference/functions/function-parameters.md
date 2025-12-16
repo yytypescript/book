@@ -30,7 +30,7 @@ Về cơ bản, việc truyền nhiều tham số hơn không gây vấn đề c
 ```js twoslash
 function foo(a, b) {
   if (arguments.length > 2) {
-    throw new Error("引数の数は2つまでです");
+    throw new Error("Số lượng tham số tối đa là 2");
   }
 }
 foo(1, 2); // OK
@@ -71,7 +71,7 @@ Trong JavaScript, khi muốn làm nghiêm ngặt kiểu của tham số, cần v
 ```js twoslash
 function len(str) {
   if (typeof str !== "string") {
-    throw new Error("strは文字列型にしてください");
+    throw new Error("str phải là kiểu string");
   }
   return str.length;
 }

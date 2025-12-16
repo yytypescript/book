@@ -1,13 +1,13 @@
 ---
-sidebar_label: "即時実行関数式(IIFE)"
+sidebar_label: "IIFE"
 ---
 
-# 即時実行関数式 (IIFE)
+# IIFE (Immediately Invoked Function Expression)
 
-IIFE (Immediately Invoked Function Expression; 即時実行関数式) とは定義と同時に実行される関数です。
-デザインパターンの1種で、Self-Executing Anonymous Function; 自己実行匿名関数とも呼ばれます。
+IIFE (Immediately Invoked Function Expression - Biểu thức hàm thực thi ngay lập tức) là function được thực thi ngay khi định nghĩa.
+Đây là một loại design pattern, còn được gọi là Self-Executing Anonymous Function (hàm ẩn danh tự thực thi).
 
-TypeScriptにおいては、次のように定義、使用します。
+Trong TypeScript, định nghĩa và sử dụng như sau.
 
 ```typescript
 (() => {
@@ -25,11 +25,11 @@ const result2 = await(async () => {
 })();
 ```
 
-## TypeScriptでの利用シーン
+## Trường hợp sử dụng trong TypeScript
 
-### ReactのuseEffectなど、非同期関数を受け取らない引数に非同期処理を渡したい場合
+### Khi muốn truyền xử lý bất đồng bộ vào argument không nhận async function như useEffect của React
 
-ReactのuseEffectなど、非同期関数を受け取らない引数に非同期処理を渡したい場合、即時実行関数を使うことで、非同期処理を引数に渡すことができます。
+Khi muốn truyền xử lý bất đồng bộ vào argument không nhận async function như useEffect của React, bằng cách sử dụng IIFE, bạn có thể truyền xử lý bất đồng bộ vào argument.
 
 ```ts twoslash
 function useEffect(f: () => void, args: string[]) {}
@@ -42,7 +42,7 @@ useEffect(() => {
 }, []);
 ```
 
-ただし、実行は非同期で実行されることに注意してください。戻り値としてvoidではなく、何らかの具体値を返す関数には適用できません。
+Tuy nhiên, lưu ý rằng việc thực thi là bất đồng bộ. Không thể áp dụng cho function trả về giá trị cụ thể thay vì void.
 
 ```ts twoslash
 // @errors: 2322
@@ -52,50 +52,50 @@ function receivesSyncFunc(func: () => string) {
 
 // NG
 receivesSyncFunc((): string => {
-  // Promise<string>が戻り値となってしまい、利用不可
+  // Giá trị trả về thành Promise<string> nên không sử dụng được
   return (async () => {
     return "hoge";
   })();
 });
 ```
 
-### ifやswitchなどを式として扱いたい場合
+### Khi muốn xử lý if hoặc switch như expression
 
-TypeScriptでのifやswitchは構文であり式ではないため、判定結果を変数に代入することができません。そのため、疑似的にifやswitchを式として扱うときにIIEFを利用できます。<br />
-また、ifやswitchの条件判定が複雑になった場合に、判定に利用する変数や、どこまでが判定処理かを明確にできるため可読性が向上します。
+if và switch trong TypeScript là statement chứ không phải expression, nên không thể gán kết quả phán định vào biến. Do đó, có thể sử dụng IIFE để xử lý if hoặc switch như expression một cách giả lập.
+Ngoài ra, khi điều kiện phán định của if hoặc switch trở nên phức tạp, việc làm rõ biến sử dụng để phán định và phạm vi xử lý phán định sẽ cải thiện khả năng đọc.
 
 ```typescript
 const result = ((type: string) => {
   if (type === "Apple") {
-    return "林檎";
+    return "Táo";
   } else if (type === "Orange") {
-    return "オレンジ";
+    return "Cam";
   } else {
-    return "謎の果物";
+    return "Quả lạ";
   }
 })(fruit.type);
 ```
 
-もしIIFEを使わない場合は次のような実装となります。
+Nếu không sử dụng IIFE, implementation sẽ như sau.
 
 ```typescript
 let result;
 const type = fruit.type;
 if (type === "Apple") {
-  result = "林檎";
+  result = "Táo";
 } else if (type === "Orange") {
-  result = "蜜柑";
+  result = "Cam";
 } else {
-  result = "謎の果物";
+  result = "Quả lạ";
 }
 ```
 
-この場合、constではなくletを使う必要があるため、変数の再代入のリスクが発生してしまいます。
+Trong trường hợp này, cần sử dụng let thay vì const, nên phát sinh rủi ro gán lại biến.
 
-### スコープ内での変数汚染を防ぐ
+### Ngăn chặn ô nhiễm biến trong scope
 
-汎用的な変数の場合、同じスコープ内で複数回使いたい場合があるかと思います。
-その際に、IIFEを利用することで変数名のスコープを限定し名前の重複を回避できます。
+Với biến có tính tổng quát, có thể bạn muốn sử dụng nhiều lần trong cùng scope.
+Khi đó, bằng cách sử dụng IIFE, có thể giới hạn scope của tên biến và tránh trùng tên.
 
 ```typescript
 async function callApiAAndB() {
@@ -114,7 +114,7 @@ async function callApiAAndB() {
 }
 ```
 
-## 参考
+## Tham khảo
 
-[MDN - IIFE (即時実行関数式)](https://developer.mozilla.org/ja/docs/Glossary/IIFE)
-[MDN Self-Executing Anonymous Function](https://developer.mozilla.org/ja/docs/Glossary/Self-Executing_Anonymous_Function)
+[MDN - IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)
+[MDN Self-Executing Anonymous Function](https://developer.mozilla.org/en-US/docs/Glossary/Self-Executing_Anonymous_Function)

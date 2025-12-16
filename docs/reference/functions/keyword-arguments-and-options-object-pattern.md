@@ -1,39 +1,39 @@
-# キーワード引数とOptions Objectパターン
+# Keyword argument và Options Object pattern
 
-JavaScriptやTypeScriptの関数には、Pythonにあるキーワード引数のような機能はありません。その代わり、分割代入引数を応用することで、キーワード引数と同じようなことができます。
+JavaScript và TypeScript không có tính năng keyword argument như Python. Tuy nhiên, có thể ứng dụng destructuring assignment parameter để làm điều tương tự như keyword argument.
 
-## キーワード引数とは
+## Keyword argument là gì
 
-キーワード引数(keyword argument)は、Pythonの機能です。関数呼び出し時に、値だけを指定するのではなく、引数名を使って「名前=値」の形式で引数を指定する方法です。
+Keyword argument là tính năng của Python. Khi gọi hàm, thay vì chỉ định giá trị, bạn sử dụng tên tham số để chỉ định theo dạng "tên=giá trị".
 
 ```python
-# Pythonコード
+# Code Python
 def func(x, y, z):
     print(x, y, z)
 
 func(x=1, y=2, z=3)  # => 1 2 3
 ```
 
-キーワード引数と同じような機能はRubyや、Scalaの名前付き引数(named argument)などに見られます。JavaScriptやTypeScriptにはキーワード引数に相当する機能はありません。
+Tính năng tương tự keyword argument có thể thấy trong Ruby, và named argument trong Scala. JavaScript và TypeScript không có tính năng tương đương keyword argument.
 
-キーワード引数の仕様上の特徴は、位置引数(positional argument)と異なり、関数呼び出し側が引数の順番を自由に変えられるところです。
+Đặc điểm của keyword argument là khác với positional argument, phía gọi hàm có thể tự do thay đổi thứ tự tham số.
 
 ```python
-# Pythonコード
+# Code Python
 func(z=3, y=2, x=1)  # => 1 2 3
 ```
 
-## Options Objectパターン
+## Options Object pattern
 
-JavaScriptやTypeScriptにはキーワード引数のような言語仕様はありませんが、Options Objectパターンというデザインパターンで似たようなことができます。Options Objectパターンは複数の位置引数を受け取る代わりに、ひとつのオブジェクトを引数に受け取るように設計された関数を言います。
+JavaScript và TypeScript không có spec ngôn ngữ như keyword argument, nhưng có thể làm tương tự bằng design pattern Options Object. Options Object pattern là hàm được thiết kế để nhận một object thay vì nhiều positional argument.
 
 ```js twoslash
-// 位置引数の関数
+// Hàm có positional argument
 function normalFunc(x, y, z) {
   console.log(x, y, z);
 }
 
-// オブジェクトひとつだけを引数に持つ関数
+// Hàm chỉ có một object làm tham số
 function func(options) {
   console.log(options.x, options.y, options.z);
 }
@@ -42,7 +42,7 @@ func({ x: 1, y: 2, z: 3 });
 // @log: 1 2 3
 ```
 
-さらに、Options Objectパターンでは分割代入引数を応用すると、引数の部分をよりシンプルに書けるようになります。
+Hơn nữa, với Options Object pattern, khi ứng dụng destructuring assignment parameter, có thể viết phần tham số đơn giản hơn.
 
 ```js twoslash
 function func({ x, y, z }) {
@@ -50,11 +50,11 @@ function func({ x, y, z }) {
 }
 ```
 
-[分割代入引数 (destructuring assignment parameter)](destructuring-assignment-parameters.md)
+[Destructuring assignment parameter](destructuring-assignment-parameters.md)
 
-## Options Objectパターンの型注釈
+## Type annotation cho Options Object pattern
 
-TypeScriptでOptions Objectパターンを使うときには、引数の型注釈が必要になります。型注釈はオブジェクトの型を書きます。
+Khi sử dụng Options Object pattern trong TypeScript, cần type annotation cho tham số. Type annotation là kiểu của object.
 
 ```ts twoslash
 function func({ x, y, z }: { x: number; y: number; z: number }) {
@@ -62,7 +62,7 @@ function func({ x, y, z }: { x: number; y: number; z: number }) {
 }
 ```
 
-オブジェクトの型の記述が長すぎる場合には、TypeScriptの型エイリアス(type alias)を用いて、引数の型を分けて書くと可読性が良くなります。
+Nếu kiểu của object quá dài, có thể sử dụng type alias của TypeScript để tách riêng kiểu tham số, cải thiện khả năng đọc.
 
 ```ts twoslash
 type Options = {
@@ -76,17 +76,17 @@ function func({ x, y, z }: Options) {
 }
 ```
 
-## Options Objectパターンの利点
+## Ưu điểm của Options Object pattern
 
-Options Objectパターンの利点は次の3つがあります。
+Options Object pattern có 3 ưu điểm sau:
 
-- 引数の値が何を指すのか分かりやすい
-- 引数追加時に古いコードを壊さない
-- デフォルト引数が省略できる
+- Dễ hiểu giá trị tham số chỉ điều gì
+- Không phá vỡ code cũ khi thêm tham số
+- Có thể bỏ qua default argument
 
-### 引数の値が何を指すのか分かりやすい
+### Dễ hiểu giá trị tham số chỉ điều gì
 
-位置引数3つを持つような関数の呼び出しコードには分かりにくさがあります。
+Code gọi hàm có 3 positional argument khó hiểu.
 
 ```ts twoslash
 declare function findProducts(
@@ -98,9 +98,9 @@ declare function findProducts(
 findProducts(true, true, true);
 ```
 
-`true`が3つ並んでいますが、それが何を指すのかは、これを見ただけでは分かりません。それを知るには関数の実装を見に行く必要があります。また、引数の順番を間違えやすいという問題もあります。
+Có 3 giá trị `true`, nhưng chỉ nhìn vào thì không biết chúng chỉ điều gì. Để biết, cần xem implementation của hàm. Ngoài ra, còn có vấn đề dễ nhầm lẫn thứ tự tham số.
 
-Options Objectパターンの場合、関数呼び出しコードを見ただけで、引数の意味が理解できます。引数名が際立つため、誤って引数を入れ替えてしまう心配が少ないです。
+Với Options Object pattern, chỉ cần nhìn code gọi hàm là hiểu được ý nghĩa của tham số. Vì tên tham số nổi bật, ít lo ngại về việc nhầm lẫn thứ tự tham số.
 
 ```ts twoslash
 declare function findProducts({
@@ -116,9 +116,9 @@ declare function findProducts({
 findProducts({ isSale: true, withDetails: true, freeShipping: true });
 ```
 
-### 引数追加時に古いコードを壊さない
+### Không phá vỡ code cũ khi thêm tham số
 
-位置引数の関数は変更に弱い側面があります。たとえば、ユーザーを検索する関数を実装したとします。最初の要件は国と都市でユーザーを絞り込めること、そして、ユーザー属性でソートできることだったとします。その場合、次のような実装をすれば要件は満たせます。
+Hàm có positional argument có mặt yếu với thay đổi. Ví dụ, giả sử implement hàm tìm kiếm user. Yêu cầu ban đầu là lọc user theo quốc gia và thành phố, và có thể sort theo thuộc tính user. Trong trường hợp đó, implementation sau đây đáp ứng yêu cầu.
 
 ```ts twoslash
 class User {}
@@ -133,25 +133,25 @@ declare function findUsers(
 findUsers("JP", "Tokyo", "id", "asc");
 ```
 
-その後、年齢の範囲でも絞り込みたいという要望が出てきたとします。年齢範囲を指定できる引数を追加する必要があります。この場合、2つの選択肢があります。1つ目は、呼び出し側のコードを壊さないよう、引数の最後に年齢範囲を追加することです。
+Sau đó, có yêu cầu muốn lọc theo phạm vi tuổi. Cần thêm tham số chỉ định phạm vi tuổi. Trong trường hợp này có 2 lựa chọn. Thứ nhất, thêm phạm vi tuổi ở cuối tham số để không phá vỡ code phía gọi.
 
 ```js
 function findUsers(country, city, order, sort, ageMin, ageMax);
-//                                             ^^^^^^^^^^^^^^追加
+//                                             ^^^^^^^^^^^^^^thêm
 ```
 
-この場合、並び順指定のorderとsortが絞り込み条件のcityとageMinに挟まれる形となります。これはあまりキレイな引数の並びではありません。
+Trong trường hợp này, order và sort chỉ định thứ tự sắp xếp bị kẹp giữa điều kiện lọc city và ageMin. Đây không phải là thứ tự tham số đẹp.
 
-2つ目の方法は、呼び出し側のコードを壊す代わりに、引数の並びはキレイに保つ方法です。絞り込み条件は前方に、並び順指定は後方に配置します。
+Cách thứ hai là phá vỡ code phía gọi nhưng giữ thứ tự tham số đẹp. Điều kiện lọc ở phía trước, chỉ định thứ tự sắp xếp ở phía sau.
 
 ```js
 function findUsers(country, city, ageMin, ageMax, order, sort);
-//                                ^^^^^^^^^^^^^^^追加
+//                                ^^^^^^^^^^^^^^^thêm
 ```
 
-この場合、呼び出し側コードは修正を余儀なくされます。
+Trong trường hợp này, code phía gọi buộc phải sửa đổi.
 
-Options Objectパターンを用いれば、呼び出し元コードを壊さずに、追加引数を適切な位置に足せます。変更前の関数の実装と、その呼び出しコードは次のようになります。
+Nếu sử dụng Options Object pattern, có thể thêm tham số ở vị trí thích hợp mà không phá vỡ code phía gọi. Implementation của hàm trước khi thay đổi và code gọi nó như sau.
 
 ```ts twoslash
 class User {}
@@ -171,7 +171,7 @@ declare function findUsers({
 findUsers({ country: "JP", city: "Tokyo", order: "id", sort: "asc" });
 ```
 
-これに年齢範囲を追加した場合、関数定義の引数の位置はふさわしいところに置けます。
+Khi thêm phạm vi tuổi, vị trí tham số trong định nghĩa hàm có thể đặt ở nơi phù hợp.
 
 ```ts twoslash
 class User {}
@@ -202,11 +202,11 @@ findUsers({
 });
 ```
 
-加えて、関数呼び出し側のコードは変更する必要がありません。
+Thêm vào đó, không cần thay đổi code phía gọi hàm.
 
-### デフォルト引数が省略できる
+### Có thể bỏ qua default argument
 
-位置引数を採用した関数では、場合によってはデフォルト引数が省略できません。たとえば、デフォルト引数を持つ位置引数3つを持つ関数で、1番目を2番目をデフォルトにしたい場合、それぞれに`undefined`を書く必要があります。
+Với hàm sử dụng positional argument, có trường hợp không thể bỏ qua default argument. Ví dụ, với hàm có 3 positional argument có default argument, nếu muốn tham số thứ 1 và thứ 2 là default, cần viết `undefined` cho mỗi tham số.
 
 ```js twoslash
 function findProducts(
@@ -221,7 +221,7 @@ findProducts(undefined, undefined, true);
 // @log: false false true
 ```
 
-Options Objectパターンを用いた場合は、デフォルトにしたい引数については何も書く必要がありません。
+Nếu sử dụng Options Object pattern, không cần viết gì cho tham số muốn để default.
 
 ```js twoslash
 function findProducts({
@@ -236,13 +236,13 @@ findProducts({ freeShipping: true });
 // @log: false false true
 ```
 
-## 引数名を変更する方法
+## Cách thay đổi tên tham số
 
-位置引数の利点は引数名の変更に強いことです。関数呼び出し側を壊すことなく、関数宣言側の引数名を自由に変更できます。たとえば、`function func(hoge) {}`の`hoge`を`fuga`に変更したとしても、呼び出し側のコードには影響がありません。
+Ưu điểm của positional argument là khả năng chống thay đổi tên tham số mạnh. Có thể tự do thay đổi tên tham số phía khai báo hàm mà không phá vỡ phía gọi. Ví dụ, nếu thay đổi `hoge` thành `fuga` trong `function func(hoge) {}`, code phía gọi không bị ảnh hưởng.
 
-引数名の指定を必要とするOptions Objectパターンでは、引数名の変更が呼び出し側コードに影響を及ぼします。たとえば、`function func({ hoge }) {}`の`hoge`を`fuga`に変更した場合、呼び出し側の`func({ hoge: 123 })`も`func({ fuga: 123 })`に変更しなければなりません。
+Với Options Object pattern yêu cầu chỉ định tên tham số, việc thay đổi tên tham số ảnh hưởng đến code phía gọi. Ví dụ, nếu thay đổi `hoge` thành `fuga` trong `function func({ hoge }) {}`, phía gọi `func({ hoge: 123 })` cũng phải thay đổi thành `func({ fuga: 123 })`.
 
-Options Objectパターンの引数名変更問題を解決するには、分割代入の異なる引数名への代入機能を遣います。上の例でいうと、関数宣言側を`function func({ hoge })`に変更する代わりに`function func({ hoge: fuga })`のようにします。
+Để giải quyết vấn đề thay đổi tên tham số trong Options Object pattern, sử dụng tính năng gán cho tên tham số khác của destructuring. Trong ví dụ trên, thay vì thay đổi khai báo hàm thành `function func({ hoge })`, thay đổi thành `function func({ hoge: fuga })`.
 
 ```js twoslash
 function func({ hoge: fuga }) {
@@ -253,11 +253,11 @@ func({ hoge: 123 });
 // @log: 123
 ```
 
-すると、関数呼び出し側は古い変数名`hoge`を渡すやり方から変えなくても動作するようにできます。関数の実装は、新しい変数名`fuga`が使えます。
+Như vậy, phía gọi hàm có thể hoạt động mà không cần thay đổi cách truyền tên biến cũ `hoge`. Implementation của hàm có thể sử dụng tên biến mới `fuga`.
 
-## デフォルト引数の型注釈
+## Type annotation cho default argument
 
-TypeScriptでOptions Objectにデフォルト引数をもたせたい場合は、引数名のところにデフォルト値を書いた上で、オブジェクトの型注釈にてオプションプロパティを指定する`?`を書きます。
+Khi muốn có default argument trong Options Object của TypeScript, viết giá trị default ở vị trí tên tham số, và chỉ định optional property `?` trong type annotation của object.
 
 ```ts twoslash
 function func({ x, y = 0, z = 0 }: { x: number; y?: number; z?: number }) {
@@ -268,9 +268,9 @@ func({ x: 1, y: undefined });
 // @log: 1 0 0
 ```
 
-## Option Object自体をオプショナルにする方法
+## Cách làm cho Options Object trở thành optional
 
-TypeScriptでOptions Object自体を渡さなくても関数を呼び出せるようにするには、Options Objectのデフォルト値として空のオブジェクト`{}`を指定するとできます。
+Trong TypeScript, để có thể gọi hàm mà không cần truyền Options Object, chỉ định giá trị default cho Options Object là object rỗng `{}`.
 
 ```ts twoslash
 type Options = {
@@ -289,15 +289,15 @@ func();
 
 <PostILearned>
 
-・Pythonのキーワード引数相当の構文はJavaScript/TypeScriptにはない
-・代わりにOptions Objectパターンが使える
-・このパターンのメリット:
-①引数の値が何を指すのか分かりやすい
-②引数追加時に古いコードを壊さない
-③デフォルト引数が省略できる
+・JavaScript/TypeScript không có cú pháp tương đương keyword argument của Python
+・Thay vào đó có thể dùng Options Object pattern
+・Ưu điểm của pattern này:
+①Dễ hiểu giá trị tham số chỉ điều gì
+②Không phá vỡ code cũ khi thêm tham số
+③Có thể bỏ qua default argument
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
 [Partial&lt;T>](../type-reuse/utility-types/partial.md)

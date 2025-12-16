@@ -69,8 +69,8 @@ const increment = function (n) {
 Function expression cũng có thể được gán trực tiếp vào property của object.
 
 ```ts twoslash
-const オブジェクト = {
-  メソッド名: function () {},
+const myObject = {
+  methodName: function () {},
 };
 ```
 
@@ -78,7 +78,7 @@ Function expression cũng có thể được truyền trực tiếp làm tham s�
 
 ```js twoslash
 button.addEventListener("click", function (event) {
-  console.log("クリックされました");
+  console.log("Button clicked");
 });
 ```
 

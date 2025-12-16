@@ -84,8 +84,8 @@ Khi cảm thấy mệt mỏi với type system của TypeScript, hãy nhớ đ�
 
 </PostILearned>
 
-## 関連情報
+## Thông tin liên quan
 
-[🚧unknown型](../statements/unknown.md)
+[Kiểu unknown](../statements/unknown.md)
 
 [any vs unknown](../statements/any-vs-unknown.md)

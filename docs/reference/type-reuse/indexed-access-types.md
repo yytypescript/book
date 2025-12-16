@@ -93,11 +93,11 @@ type State = (typeof stateList)[number];
 
 <PostILearned>
 
-TypeScriptのインデックスアクセス型は、プロパティや配列要素の型を参照できる
+Indexed access types của TypeScript có thể tham chiếu kiểu của property và phần tử mảng
 
-✏️構文1: オブジェクトの型["プロパティ名"]
-✏️構文2: 配列型[number]
-🔑keyofと組み合わせると全プロパティの型が取れる
-🧲typeofと組み合わせると配列値から要素型が取れる
+・Cú pháp 1: ObjectType["propertyName"]
+・Cú pháp 2: ArrayType[number]
+・Kết hợp với keyof có thể lấy kiểu của tất cả property
+・Kết hợp với typeof có thể lấy kiểu phần tử từ giá trị mảng
 
 </PostILearned>

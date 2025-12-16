@@ -36,9 +36,9 @@ function Cat(name) {
   this.name = name;
 }
 // Tạo object Cat
-const cat = new Cat("ミケ");
+const cat = new Cat("Mimi");
 console.log(cat);
-// @log: Cat { name: 'ミケ' }
+// @log: Cat { name: 'Mimi' }
 ```
 
 Thoạt nhìn, việc function có tính năng constructor có vẻ tiện lợi. Tuy nhiên, điều này khiến người sử dụng phải quyết định có nên thêm toán tử `new` vào function hay không. Để quyết định điều đó, bạn phải đọc nội dung xử lý của function. Nếu gọi function nên được thực thi như constructor bằng cách gọi bình thường có thể dẫn đến bug.
@@ -47,7 +47,7 @@ Arrow function không thể trở thành constructor. Nếu dùng toán tử `ne
 
 ```js twoslash
 const Cat = (name) => {};
-const cat = new Cat("ミケ");
+const cat = new Cat("Mimi");
 // @error: TypeError: Cat is not a constructor
 ```
 
@@ -58,7 +58,7 @@ Trong TypeScript, ngay cả traditional function cũng không thể được s�
 function Cat(name: string) {
   /* ... */
 }
-const cat = new Cat("ミケ");
+const cat = new Cat("Mimi");
 ```
 
 Tóm lại, trong JavaScript bạn cần chú ý đến việc có thể trở thành constructor hay không, nhưng trong TypeScript bạn có thể nhận ra qua compile error nên không cần chú ý nhiều như JavaScript.
@@ -124,12 +124,12 @@ Như đã minh họa ở trên, với traditional function, nội dung của `th
 
 <figure><figcaption>this của traditional function trỏ đến gì</figcaption>
 
-| Context                                        | Giá trị this                        |
-| ---------------------------------------------- | ----------------------------------- |
-| Gọi thông thường<br/>`showThis()`              | Global object (`Window`)            |
-| Gọi thông thường + strict mode<br/>`showThis()`| `undefined`                         |
-| Gọi method<br/>`obj.showThis()`                | Object mà method thuộc về (`obj`)   |
-| Gọi constructor<br/>`new showThis()`           | Object đang được tạo                |
+| Context                                         | Giá trị this                      |
+| ----------------------------------------------- | --------------------------------- |
+| Gọi thông thường<br/>`showThis()`               | Global object (`Window`)          |
+| Gọi thông thường + strict mode<br/>`showThis()` | `undefined`                       |
+| Gọi method<br/>`obj.showThis()`                 | Object mà method thuộc về (`obj`) |
+| Gọi constructor<br/>`new showThis()`            | Object đang được tạo              |
 
 </figure>
 
@@ -137,12 +137,12 @@ Như đã minh họa ở trên, với traditional function, nội dung của `th
 
 Ví dụ, object `timer` sau có method `start` hiển thị message sau 1 giây. Method `start` đặt lịch xuất giá trị field `message` của `timer` sau 1 giây.
 
-`this` của function `start` trỏ đến `timer` (❶). Sau 1 giây, cố gắng xuất `this.message`. Traditional function có `this` trỏ đến global object `Window`, nên xuất `undefined` (❷). Còn arrow function có `this` trỏ đến `this` của lexical scope (❸). `this` này là `timer`. Do đó, giá trị field `message` `"時間です！"` được xuất ra đúng.
+`this` của function `start` trỏ đến `timer` (❶). Sau 1 giây, cố gắng xuất `this.message`. Traditional function có `this` trỏ đến global object `Window`, nên xuất `undefined` (❷). Còn arrow function có `this` trỏ đến `this` của lexical scope (❸). `this` này là `timer`. Do đó, giá trị field `message` `"Time's up!"` được xuất ra đúng.
 
 ```js twoslash
 const oneSecond = 1000;
 const timer = {
-  message: "時間です！",
+  message: "Time's up!",
   start: function () {
     console.log(this); // ❶
 
@@ -295,13 +295,13 @@ Function được tạo bằng function declaration tương đương với `var`
 
 ```js twoslash
 function foo() {
-  console.log("1つ目の関数");
+  console.log("Function thứ nhất");
 }
 function foo() {
-  console.log("2つ目の関数");
+  console.log("Function thứ hai");
 }
 foo();
-// @log: "2つ目の関数"
+// @log: "Function thứ hai"
 ```
 
 Arrow function được tạo bằng cú pháp giống khai báo biến, nên miễn là coding tránh `var` và dùng `let` hoặc `const`, không thể xảy ra trùng tên function.
@@ -348,9 +348,9 @@ Hoisting tương tự cũng xảy ra với function declaration. Điểm khác v
 
 ```js twoslash
 foo();
-// @log: 実行しました
+// @log: Đã thực thi
 function foo() {
-  console.log("実行しました");
+  console.log("Đã thực thi");
 }
 ```
 
@@ -405,17 +405,17 @@ Với callback function như thế này, việc dùng arrow function tích cực
 Traditional function cũng có chỗ dùng. Khi muốn thực hiện xử lý khi button HTML được click, dùng method `addEventListener`. Bằng cách truyền xử lý tùy ý làm callback function cho method này, có thể thực hiện xử lý mong muốn.
 
 ```js twoslash
-button.addEventListener("click", コールバック関数);
+button.addEventListener("click", callbackFunction);
 ```
 
-Khi muốn tham chiếu button được click trong xử lý, nếu function được truyền là traditional function, có thể tham chiếu button bằng biến `this`. Ví dụ dưới đây là code thay đổi hiển thị button "保存" đã click thành "保存中…". Thay đổi hiển thị button bằng `this.innerText`. Với cách dùng `this` như thế này, không thể viết bằng arrow function.
+Khi muốn tham chiếu button được click trong xử lý, nếu function được truyền là traditional function, có thể tham chiếu button bằng biến `this`. Ví dụ dưới đây là code thay đổi hiển thị button "Save" đã click thành "Saving...". Thay đổi hiển thị button bằng `this.innerText`. Với cách dùng `this` như thế này, không thể viết bằng arrow function.
 
 ```html
-<button id="save">保存</button>
+<button id="save">Save</button>
 <script>
   const button = document.getElementById("save");
   button.addEventListener("click", function () {
-    this.innerText = "保存中…";
+    this.innerText = "Saving...";
   });
 </script>
 ```
@@ -423,11 +423,11 @@ Khi muốn tham chiếu button được click trong xử lý, nếu function đ�
 Ngay cả trong trường hợp trên, nếu tham chiếu `button` thì cũng có thể dùng arrow function. Vì vậy không phải là lý do quyết định phải dùng traditional function.
 
 ```html {4-5}
-<button id="save">保存</button>
+<button id="save">Save</button>
 <script>
   const button = document.getElementById("save");
   button.addEventListener("click", () => {
-    button.innerText = "保存中…";
+    button.innerText = "Saving...";
     // ^^^Tham chiếu button
   });
 </script>
