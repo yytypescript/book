@@ -1,14 +1,14 @@
 ---
-sidebar_label: "オープンエンドと宣言マージ"
+sidebar_label: "Open-ended và declaration merging"
 ---
 
-# オープンエンドと宣言マージ (open-ended and declaration merging)
+# Open-ended và declaration merging
 
-JavaやPHPなど、他の言語にもinterface構文がある言語があります。他の言語とは異なり、TypeScriptのinterfaceには、オープンエンド(open-ended)と宣言マージ(declaration merging)という珍しい特徴があります。
+Các ngôn ngữ khác như Java hay PHP cũng có cú pháp interface. Khác với các ngôn ngữ khác, interface của TypeScript có những đặc điểm hiếm thấy là open-ended và declaration merging.
 
-## オープンエンドと宣言マージとは
+## Open-ended và declaration merging là gì
 
-他の言語のinterface構文は、同じ名前のインターフェースを宣言するとエラーになるものが多いです。たとえば、PHPで`Foo`インターフェースを2つ宣言すると、重複エラーになります。
+Cú pháp interface của các ngôn ngữ khác thường gây error khi khai báo interface cùng tên. Ví dụ, trong PHP nếu khai báo 2 interface `Foo`, sẽ xảy ra lỗi trùng lặp.
 
 ```php title="PHP"
 interface Foo {}
@@ -16,16 +16,16 @@ interface Foo {}
 // Fatal error:  Cannot declare interface Foo, because the name is already in use in...
 ```
 
-TypeScriptでは、同じ名前のインターフェースを宣言してもエラーにはなりません。
+Trong TypeScript, khai báo interface cùng tên không gây error.
 
 ```ts twoslash
 interface Foo {}
-interface Foo {} // エラーにならない
+interface Foo {} // Không error
 ```
 
-このように、複数のインターフェースを宣言してもエラーにならない仕様のことを、オープンエンドといいます。
+Như vậy, đặc tính cho phép khai báo nhiều interface mà không gây error được gọi là open-ended.
 
-同じ名前のインターフェースを宣言した場合、それぞれのインターフェースの型がマージされます。たとえば、次のようにプロパティ`a`を持つインターフェースと、プロパティ`b`を持つインターフェースを宣言した場合を考えてみましょう。
+Khi khai báo interface cùng tên, các type của interface đó được merge. Ví dụ, hãy xem xét trường hợp khai báo interface có property `a` và interface có property `b` như sau.
 
 ```ts twoslash
 interface Foo {
@@ -36,7 +36,7 @@ interface Foo {
 }
 ```
 
-この宣言は、次のようにプロパティ`a`とプロパティ`b`を持つインターフェースを、ひとつ定義したことと同じことになります。
+Khai báo này tương đương với việc định nghĩa một interface có property `a` và property `b` như sau.
 
 ```ts twoslash
 interface Foo {
@@ -45,28 +45,28 @@ interface Foo {
 }
 ```
 
-このように、同じ名前のインターフェースがマージされる仕組みを宣言マージといいます。
+Như vậy, cơ chế merge các interface cùng tên được gọi là declaration merging.
 
-## 宣言マージの活用シーン
+## Trường hợp sử dụng declaration merging
 
-JavaScriptがアップデートされるにつれ、既存のクラスにもメソッドが追加されることがあります。たとえば`Array`クラスはES2016で`includes()`メソッドが、ES2019で`flatMap()`メソッドが追加されました。
+Khi JavaScript được cập nhật, method cũng được thêm vào các class hiện có. Ví dụ, class `Array` được thêm method `includes()` trong ES2016 và method `flatMap()` trong ES2019.
 
-TypeScriptの開発元は、JavaScriptのアップデートに合わせて、`Array`インターフェースの型定義も対応していく必要があります。単純に考えると、JavaScriptのバージョンごとに、`Array`インターフェースを独立して定義する方法が考えられます。
+Nhà phát triển TypeScript cần cập nhật định nghĩa type của interface `Array` theo các bản cập nhật của JavaScript. Cách đơn giản nhất là định nghĩa interface `Array` độc lập cho mỗi phiên bản JavaScript.
 
-このアプローチは、一見すると良さそうです。しかし、よく考えてみると、JavaScriptがアップデートされるにつれ、インターフェースのコピペコードが増えていくという問題が出てきます。ES2015とES2016の`Array`の違いは、`includes()`メソッドがあるかないかの違いだけです。それなのに、`pop()`メソッドや`push()`メソッドといった多数のメソッドまでコピーしないといけなくなってしまいます。
+Cách tiếp cận này thoạt nhìn có vẻ tốt. Tuy nhiên, nếu suy nghĩ kỹ, sẽ phát sinh vấn đề là code copy-paste của interface tăng lên khi JavaScript được cập nhật. Sự khác biệt giữa `Array` của ES2015 và ES2016 chỉ là có hay không method `includes()`. Mặc dù vậy, bạn phải copy nhiều method khác như `pop()`, `push()`.
 
-これを解決するのが宣言マージです。TypeScriptの開発元が、どのように宣言マージを活用しているのか、具体例を見てみましょう。まず、もっとも古いバージョンの`Array`インターフェースを宣言した型定義ファイルを用意します。
+Declaration merging giải quyết vấn đề này. Hãy xem ví dụ cụ thể về cách nhà phát triển TypeScript sử dụng declaration merging. Đầu tiên, chuẩn bị file định nghĩa type khai báo interface `Array` của phiên bản cũ nhất.
 
-```ts twoslash title="最も古いバージョンのArrayインターフェース"
+```ts twoslash title="Interface Array của phiên bản cũ nhất"
 interface Array<T> {
   pop(): T | undefined;
   push(...items: T[]): number;
   concat(...items: ConcatArray<T>[]): T[];
-  // ...その他沢山のメソッドが続く...
+  // ...và nhiều method khác tiếp theo...
 }
 ```
 
-次に、ES2016で追加されたメソッドに対応する`Array`インターフェースを別ファイルに作ります。
+Tiếp theo, tạo interface `Array` tương ứng với các method được thêm trong ES2016 ở file khác.
 
 ```ts title="ES2016.array.d.ts" twoslash
 interface Array<T> {
@@ -74,7 +74,7 @@ interface Array<T> {
 }
 ```
 
-さらに、ES2019で追加されたメソッドに対応する型定義ファイルも別に作ります。
+Tiếp tục, tạo file định nghĩa type tương ứng với các method được thêm trong ES2019 ở file khác.
 
 ```ts title="ES2019.array.d.ts" twoslash
 interface Array<T> {
@@ -90,8 +90,8 @@ interface Array<T> {
 }
 ```
 
-このようにバージョン間の差分だけを、インターフェースに定義していくと、JavaScriptのバージョンが上がっていっても、コピペコードが発生しません。
+Bằng cách chỉ định nghĩa sự khác biệt giữa các phiên bản trong interface như vậy, code copy-paste không phát sinh ngay cả khi phiên bản JavaScript tăng lên.
 
-TypeScriptユーザーは、自分が必要なJavaScriptのバージョンに応じて、これらのファイルを読み込むことで、最適なインターフェースの型が使えるようになります。たとえば、ES2016のJavaScript環境を対象に開発しているなら、ES2016までの型定義ファイルまで読み込むようにします。ES2019の環境を対象とするなら、ES2016とES2019両方の型定義ファイルを読み込むといった具合です。
+Người dùng TypeScript có thể sử dụng type interface tối ưu bằng cách load các file này tùy theo phiên bản JavaScript cần thiết. Ví dụ, nếu đang phát triển cho môi trường JavaScript ES2016, load đến file định nghĩa type ES2016. Nếu target là môi trường ES2019, load cả hai file định nghĩa type ES2016 và ES2019.
 
-この例のように、すでに宣言したインターフェースは直せないが、インターフェースを拡張する必要がある場合に、宣言マージが活用されます。
+Như ví dụ này, declaration merging được sử dụng khi không thể sửa interface đã khai báo nhưng cần mở rộng interface.

@@ -1,5 +1,5 @@
 ---
-sidebar_label: 三項演算子
+sidebar_label: Toán tử ba ngôi
 ---
 
 # Toán tử ba ngôi (ternary operator)

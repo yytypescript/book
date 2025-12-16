@@ -1,5 +1,5 @@
 ---
-sidebar_label: 変数のスコープ
+sidebar_label: Scope của biến
 ---
 
 # Variable scope (scope)
@@ -19,7 +19,7 @@ console === window.console; //=> true
 
 Khai báo biến bằng `var` ngoài local scope sẽ trở thành biến global. Tuy nhiên, cuốn sách này không khuyến khích sử dụng `var`.
 
-[varはもう使わない](../values-types-variables/vars-problems.md)
+[Không nên dùng var nữa](../values-types-variables/vars-problems.md)
 
 ## Local scope
 

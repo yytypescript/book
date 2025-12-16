@@ -1,22 +1,22 @@
-# 列挙型(enum)の問題点と代替手段
+# Vấn đề của enum và các giải pháp thay thế
 
-TypeScriptの列挙型(enum)にはいくつか問題点が指摘されていてます。ここでは、その問題点と代替手段を説明します。
+Kiểu liệt kê (enum) trong TypeScript có một số vấn đề được chỉ ra. Ở đây sẽ giải thích các vấn đề đó và các giải pháp thay thế.
 
-## 列挙型の問題点
+## Vấn đề của enum
 
-### 列挙型はTypeScript独自すぎる
+### Enum quá đặc thù của TypeScript
 
-TypeScriptは、JavaScriptを拡張した言語です。拡張といっても、むやみに機能を足すのではなく、追加するのは型の世界に限ってです。こういった思想がTypeScriptにはあるため、型に関する部分を除けば、JavaScriptの文法から離れすぎない言語になっています。
+TypeScript là ngôn ngữ mở rộng từ JavaScript. Tuy là mở rộng, nhưng không phải thêm tính năng bừa bãi, mà chỉ giới hạn trong thế giới type. Do tư tưởng này của TypeScript, nếu bỏ qua phần liên quan đến type thì ngôn ngữ không quá xa rời cú pháp JavaScript.
 
-JavaScriptの文法からドラスティックに離れたAltJSもあります。その中で、TypeScriptが多くの開発者に支持されているのは、JavaScriptから離れすぎないところに魅力があるからというのもひとつの要因です。
+Cũng có những AltJS xa rời cú pháp JavaScript một cách triệt để. Trong số đó, TypeScript được nhiều developer ủng hộ một phần vì sự hấp dẫn của việc không xa rời JavaScript quá nhiều.
 
-TypeScriptの列挙型に目を向けると、構文もJavaScriptに無いものであるだけでなく、コンパイル後の列挙型はJavaScriptのオブジェクトに変化したりと、型の世界の拡張からはみ出している独自機能になっています。TypeScriptプログラマーの中には、この点が受け入れられない人もいます。
+Nhìn vào enum của TypeScript, không chỉ cú pháp không có trong JavaScript, mà enum sau khi compile còn biến thành object của JavaScript, đây là tính năng riêng vượt ra ngoài việc mở rộng thế giới type. Một số TypeScript programmer không thể chấp nhận điểm này.
 
-### 数値列挙型には型安全上の問題がある
+### Enum số có vấn đề về type safety
 
-数値列挙型は、`number`型なら何でも代入できるという型安全上の問題点があります。次の例は、値が`0`と`1`のメンバーだけからなる列挙型ですが、実際にはそれ以外の数値を代入できてしまいます。
+Enum số có vấn đề về type safety là có thể gán bất kỳ giá trị `number` nào. Ví dụ sau là enum chỉ có member với giá trị `0` và `1`, nhưng thực tế có thể gán các số khác.
 
-この問題はTypeScript5.0未満で発生します。
+Vấn đề này xảy ra với TypeScript phiên bản dưới 5.0.
 
 ```ts twoslash
 // TypeScript v4.9.5
@@ -25,10 +25,10 @@ enum ZeroOrOne {
   Zero = 0,
   One = 1,
 }
-const zeroOrOne: ZeroOrOne = 9; // コンパイルエラーは起きません！
+const zeroOrOne: ZeroOrOne = 9; // Không có compile error!
 ```
 
-TypeScript5.0からは改善されており、コンパイルエラーとなります。
+Từ TypeScript 5.0 đã được cải thiện và sẽ phát sinh compile error.
 
 ```ts twoslash
 // TypeScript v5.0.4
@@ -40,7 +40,7 @@ enum ZeroOrOne {
 const zeroOrOne: ZeroOrOne = 9;
 ```
 
-列挙型には、列挙型オブジェクトに値でアクセスすると、メンバー名を得られる仕様があります。メンバーに無い値でアクセスしたら、コンパイルエラーになってほしいところですが、そうなりません。
+Enum có đặc tính là khi truy cập object enum bằng giá trị sẽ nhận được tên member. Khi truy cập bằng giá trị không có trong member, ta mong muốn có compile error, nhưng không được như vậy.
 
 ```ts twoslash
 enum ZeroOrOne {
@@ -48,34 +48,34 @@ enum ZeroOrOne {
   One = 1,
 }
 
-console.log(ZeroOrOne[0]); // これは期待どおり
+console.log(ZeroOrOne[0]); // Đây là như mong đợi
 // @log: "Zero"
-console.log(ZeroOrOne[9]); // これはコンパイルエラーになってほしいところ…
+console.log(ZeroOrOne[9]); // Đây mong muốn có compile error...
 // @log: undefined
 ```
 
-### 文字列列挙型だけ公称型になる
+### Chỉ enum chuỗi là nominal type
 
-TypeScriptの型システムは、[構造的部分型](../structural-subtyping.md)を採用しています。ところが、文字列列挙型は例外的に公称型になります。
+Hệ thống type của TypeScript áp dụng [structural subtyping](../structural-subtyping.md). Tuy nhiên, enum chuỗi là ngoại lệ và là nominal type.
 
 ```ts twoslash
 // @errors: 2322
 enum StringEnum {
   Foo = "foo",
 }
-const foo1: StringEnum = StringEnum.Foo; // コンパイル通る
-const foo2: StringEnum = "foo"; // コンパイルエラーになる
+const foo1: StringEnum = StringEnum.Foo; // Compile thành công
+const foo2: StringEnum = "foo"; // Compile error
 ```
 
-この仕様は意外さがある部分です。加えて、数値列挙型は公称型にならないので、不揃いなところでもあります。
+Đặc tính này gây bất ngờ. Hơn nữa, enum số không phải nominal type nên có sự không nhất quán.
 
-## 列挙型の代替案
+## Các giải pháp thay thế cho enum
 
-列挙型の代替案をいくつか提示します。ただし、どの代替案も列挙型の特徴を100%再現するものではありません。次の代替案は目的や用途に合う合わないを判断して使い分けてください。
+Dưới đây là một số giải pháp thay thế cho enum. Tuy nhiên, không có giải pháp nào tái hiện 100% đặc điểm của enum. Hãy cân nhắc mục đích và công dụng khi sử dụng các giải pháp sau.
 
-### 列挙型の代替案1: ユニオン型
+### Giải pháp thay thế 1: Union type
 
-もっともシンプルな代替案はユニオン型を用いる方法です。
+Giải pháp đơn giản nhất là sử dụng union type.
 
 ```ts twoslash
 type YesNo = "yes" | "no";
@@ -90,7 +90,7 @@ function toJapanese(yesno: YesNo) {
 }
 ```
 
-ユニオン型とシンボルを組み合わせる方法もあります。
+Cũng có thể kết hợp union type với Symbol.
 
 ```ts twoslash
 const yes = Symbol();
@@ -107,9 +107,9 @@ function toJapanese(yesno: YesNo) {
 }
 ```
 
-### 列挙型の代替案2: オブジェクトリテラル
+### Giải pháp thay thế 2: Object literal
 
-オブジェクトリテラルを使う方法もあります。
+Cũng có thể sử dụng object literal.
 
 ```ts twoslash
 const Position = {
@@ -120,7 +120,7 @@ const Position = {
 } as const;
 
 type Position = (typeof Position)[keyof typeof Position];
-// 上は type Position = 0 | 1 | 2 | 3 と同じ意味になります
+// Dòng trên có nghĩa tương đương với type Position = 0 | 1 | 2 | 3
 
 function toJapanese(position: Position) {
   switch (position) {
@@ -136,6 +136,6 @@ function toJapanese(position: Position) {
 }
 ```
 
-## まとめ
+## Tổng kết
 
-列挙型の問題点と代替案についても説明しました。特に列挙型は型安全上の問題もあるため、列挙型を積極的に使うかどうかは、よく検討してください。
+Đã giải thích các vấn đề của enum và các giải pháp thay thế. Đặc biệt vì enum có vấn đề về type safety, hãy cân nhắc kỹ trước khi sử dụng tích cực.

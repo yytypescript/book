@@ -1,10 +1,10 @@
 ---
-description: interfaceでの宣言とtype aliasによる宣言の違い
+description: Sự khác biệt giữa khai báo bằng interface và khai báo bằng type alias
 ---
 
-# interfaceとtypeの違い
+# Sự khác biệt giữa interface và type
 
-型エイリアスを利用することで、インターフェースと同様の定義が行なえます。
+Bằng cách sử dụng type alias, bạn có thể định nghĩa tương tự như interface.
 
 ```ts twoslash
 // @noErrors
@@ -18,20 +18,20 @@ type Animal = {
 };
 ```
 
-この章では、インターフェースと型エイリアスの違いについて詳しく説明していきます。
+Chương này sẽ giải thích chi tiết sự khác biệt giữa interface và type alias.
 
-## インターフェースと型エイリアスの違い
+## Sự khác biệt giữa interface và type alias
 
-| 内容             | インターフェース   | 型エイリアス                     |
-| :--------------- | :----------------- | :------------------------------- |
-| 継承             | 可能               | 不可。ただし交差型で表現は可能   |
-| 継承による上書き | 上書きまたはエラー | フィールド毎に交差型が計算される |
-| 同名のものを宣言 | 定義がマージされる | エラー                           |
-| Mapped Types     | 使用不可           | 使用可能                         |
+| Nội dung             | Interface             | Type alias                                                   |
+| :------------------- | :-------------------- | :----------------------------------------------------------- |
+| Kế thừa              | Có thể                | Không thể. Tuy nhiên có thể biểu diễn bằng intersection type |
+| Override khi kế thừa | Override hoặc error   | Intersection type được tính cho mỗi field                    |
+| Khai báo cùng tên    | Định nghĩa được merge | Error                                                        |
+| Mapped Types         | Không sử dụng được    | Sử dụng được                                                 |
 
-### 継承
+### Kế thừa
 
-インターフェースは、インターフェースや型エイリアスを継承できます。
+Interface có thể kế thừa interface hoặc type alias.
 
 ```ts twoslash
 interface Animal {
@@ -45,7 +45,7 @@ interface Dog extends Animal, Creature {
 }
 ```
 
-一方、型エイリアスは継承は行えません。代わりに交差型(&)を使用することで、継承と似たことを実現できます。
+Mặt khác, type alias không thể kế thừa. Thay vào đó, bằng cách sử dụng intersection type (&), có thể thực hiện điều tương tự như kế thừa.
 
 ```ts twoslash
 type Animal = {
@@ -60,9 +60,9 @@ type Dog = Animal &
   };
 ```
 
-### プロパティのオーバーライド
+### Override property
 
-インターフェースで継承の際にプロパティをオーバーライドすると、継承元のプロパティの型が上書きされます。
+Khi override property trong quá trình kế thừa interface, type của property từ nguồn kế thừa sẽ bị ghi đè.
 
 ```ts twoslash
 // OK
@@ -82,7 +82,7 @@ interface Dog extends Animal {
   };
 }
 
-// 最終的なDogの定義
+// Định nghĩa cuối cùng của Dog
 interface Dog {
   name: string;
   price: {
@@ -93,7 +93,7 @@ interface Dog {
 }
 ```
 
-ただし、オーバーライドするためには元の型に代入できるものでなければなりません。次の例は`number`型であるフィールドを`string`型でオーバーライドしようとしている例です。
+Tuy nhiên, để override, phải có thể gán được vào type gốc. Ví dụ sau là trường hợp cố gắng override field có type `number` bằng type `string`.
 
 ```ts twoslash
 // @errors: 2430
@@ -114,7 +114,7 @@ interface B extends A {
 }
 ```
 
-一方、型エイリアスの場合は上書きにはならず、フィールドの型の交差型が計算されます。また、交差型で矛盾があって計算できない場合もコンパイルエラーにはなりません。
+Mặt khác, trong trường hợp type alias, không phải là ghi đè mà intersection type của type của field được tính toán. Ngoài ra, ngay cả khi có mâu thuẫn trong intersection type và không thể tính toán, cũng không xảy ra compile error.
 
 ```ts twoslash
 // @noErrors
@@ -134,9 +134,9 @@ type Dog = Animal & {
   };
 };
 
-// 最終的なDogの定義
+// Định nghĩa cuối cùng của Dog
 type Dog = {
-  name: never; // 交差型を作れない場合はコンパイルエラーではなくnever型になる
+  name: never; // Khi không thể tạo intersection type, thành type never thay vì compile error
   price: {
     yen: number;
     dollar: number;
@@ -145,9 +145,9 @@ type Dog = {
 };
 ```
 
-### 同名のものを宣言
+### Khai báo cùng tên
 
-型エイリアスは同名のものを複数定義できず、コンパイルエラーになります。
+Type alias không thể định nghĩa nhiều type cùng tên, sẽ xảy ra compile error.
 
 ```ts twoslash
 // @errors: 2300
@@ -159,8 +159,8 @@ type SameNameTypeWillError = {
 };
 ```
 
-一方、インターフェースの場合は、同名のインターフェースを定義でき、同名の定義をすべて合成したインターフェースになります。
-ただし、同名のフィールドだが、型の定義が違っている場合はコンパイルエラーになります。
+Mặt khác, trong trường hợp interface, có thể định nghĩa interface cùng tên, và sẽ trở thành interface tổng hợp tất cả các định nghĩa cùng tên.
+Tuy nhiên, nếu field cùng tên nhưng định nghĩa type khác nhau, sẽ xảy ra compile error.
 
 ```ts twoslash
 // @errors: 2717
@@ -182,12 +182,12 @@ interface SameNameInterfaceIsAllowed {
 
 ### Mapped Types
 
-Mapped Typesについては別のページで詳しく説明しますので、ここでは型エイリアスとインターフェースのどちらで使えるかだけを説明します。
+Mapped Types sẽ được giải thích chi tiết ở trang khác, ở đây chỉ giải thích có thể sử dụng với type alias hay interface.
 
 [Mapped Types](../../type-reuse/mapped-types.md)
 
-Mapped Typesは型のキーを動的に指定することができる仕組みであり、型エイリアスでのみ利用することができます。
-次の例ではユニオン型の一覧をキーとした新しい型を生成しています。
+Mapped Types là cơ chế cho phép chỉ định key của type một cách động, và chỉ có thể sử dụng với type alias.
+Ví dụ sau tạo type mới với danh sách union type làm key.
 
 ```typescript twoslash
 type SystemSupportLanguage = "en" | "fr" | "it" | "es";
@@ -196,7 +196,7 @@ type Butterfly = {
 };
 ```
 
-インターフェースでMapped Typesを使うとエラーになります。
+Nếu sử dụng Mapped Types với interface sẽ xảy ra error.
 
 ```typescript twoslash
 // @errors: 7061
@@ -207,21 +207,21 @@ interface Butterfly {
 }
 ```
 
-## インターフェースと型エイリアスの使い分け
+## Phân biệt sử dụng interface và type alias
 
-実際に型を定義する時にインターフェースと型エイリアスのどちらを使うのがよいのでしょうか？残念ながら、これに関しては明確な正解はありません。
+Vậy khi thực tế định nghĩa type, nên sử dụng interface hay type alias? Rất tiếc, không có câu trả lời chính xác rõ ràng cho vấn đề này.
 
-インターフェースと型エイリアスのどちらでも型を定義することができますが、拡張性やMapped Typesの利用可否といった点で異なる部分が存在するので、これらのメリット・デメリットを考慮してプロジェクト内でルールを決めてそれに遵守するようにしましょう。
+Cả interface và type alias đều có thể định nghĩa type, nhưng có những điểm khác nhau về khả năng mở rộng và khả năng sử dụng Mapped Types, vì vậy hãy cân nhắc những ưu nhược điểm này để quyết định quy tắc trong dự án và tuân thủ nó.
 
-参考例として、Googleが公開しているTypeScriptのスタイルガイドの[型エイリアスvsインターフェース](https://google.github.io/styleguide/tsguide.html#interfaces-vs-type-aliases)の項目では、プリミティブな値やユニオン型やタプルの型定義をする場合は型エイリアスを利用し、オブジェクトの型を定義する場合はインターフェースを使うことを推奨しています。
+Làm ví dụ tham khảo, trong mục [Type Aliases vs Interfaces](https://google.github.io/styleguide/tsguide.html#interfaces-vs-type-aliases) của style guide TypeScript mà Google công khai, khuyến nghị sử dụng type alias khi định nghĩa type cho primitive value, union type hoặc tuple, và sử dụng interface khi định nghĩa type cho object.
 
-インターフェースと型エイリアスの使い分けに悩む場面が多く開発スピードが落ちてしまうのであれば、型エイリアスに統一して書く方針にする考え方もあります。
+Nếu việc phân biệt sử dụng interface và type alias gây khó khăn và làm chậm tốc độ phát triển, cũng có cách nghĩ là thống nhất viết bằng type alias.
 
-### インターフェースの利用例
+### Ví dụ sử dụng interface
 
-ライブラリを作成する際に定義した型の構造がアプリケーション側に依存するような場合にはインターフェースを利用するのが適切です。
+Khi tạo library mà cấu trúc của type được định nghĩa phụ thuộc vào phía application, việc sử dụng interface là phù hợp.
 
-Node.jsの`process.env`の型定義は`@types/node/process.d.ts`で次のように実装されています。
+Type định nghĩa của `process.env` trong Node.js được implement trong `@types/node/process.d.ts` như sau.
 
 ```ts twoslash
 declare module "process" {
@@ -235,9 +235,9 @@ declare module "process" {
 }
 ```
 
-インターフェースで型定義されていることで、パッケージを利用する側で型の拡張が自由に行えるようになっています。
+Vì được định nghĩa bằng interface, phía sử dụng package có thể tự do mở rộng type.
 
-もし`ProcessEnv`が型エイリアスで定義されていると型の拡張が行えず、とても開発しづらい状態になってしまいます。このように不特定多数のユーザーが型を参照するような場合には、拡張性を考慮してインターフェースで型定義をするようにしましょう。
+Nếu `ProcessEnv` được định nghĩa bằng type alias, sẽ không thể mở rộng type và trở nên rất khó phát triển. Như vậy, khi nhiều user không xác định tham chiếu type, hãy định nghĩa type bằng interface để cân nhắc khả năng mở rộng.
 
 ```ts twoslash
 // src/types/global.d.ts
@@ -252,8 +252,8 @@ declare module "process" {
 }
 ```
 
-## 関連情報
+## Thông tin liên quan
 
-[インターフェース (interface)](./README.md)
+[Interface](./README.md)
 
-[型エイリアス (type alias)](../../values-types-variables/type-alias.md)
+[Type alias](../../values-types-variables/type-alias.md)

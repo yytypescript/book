@@ -1,10 +1,10 @@
 ---
-sidebar_label: this引数
+sidebar_label: Tham số this
 ---
 
-# this引数 (this parameter)
+# Tham số this (this parameter)
 
-アロー関数以外の関数とクラスのメソッドの第1引数は`this`という特殊な引数を受けることができます。これは使用するコンテキストによって`this`の意味するところが変わってしまうため、これらがどのコンテキストで使用されるべきなのかをTypeScriptに伝えるために使います。この`this`は呼び出す側は意識する必要はありません。第2引数以降を指定してください。
+Tham số đầu tiên của function (ngoài arrow function) và method của class có thể nhận tham số đặc biệt là `this`. Vì ý nghĩa của `this` thay đổi tùy theo context sử dụng, nên điều này được dùng để cho TypeScript biết function này nên được sử dụng trong context nào. Khi gọi, caller không cần quan tâm đến `this` này. Chỉ cần chỉ định từ tham số thứ hai trở đi.
 
 ```twoslash include main
 class Male {
@@ -36,9 +36,9 @@ class Female {
 // @include: main
 ```
 
-上記クラス`Male`、`Female`はほぼ同じ構造ですが`toString()`のメソッドの引数が異なります。
+Class `Male` và `Female` ở trên có cấu trúc gần như giống nhau nhưng tham số của method `toString()` khác nhau.
 
-`Male`、`Female`はともに普通の用途で使うことができます。
+`Male` và `Female` đều có thể sử dụng theo cách thông thường.
 
 ```ts twoslash
 // @include: main
@@ -52,7 +52,7 @@ female.toString();
 // @log: Madame Frédérique
 ```
 
-ですが各インスタンスの`toString()`を変数に代入すると意味が変わります。
+Tuy nhiên, khi gán `toString()` của mỗi instance vào biến, ý nghĩa sẽ thay đổi.
 
 ```ts twoslash
 // @errors: 2684
@@ -67,7 +67,7 @@ maleToStr();
 femaleToStr();
 ```
 
-`femaleToStr()`のコンテキストが`Female`ではないとの指摘を受けています。このコードを実行することはできません。ちなみにこの対応をしていない`maleToStr()`は実行こそできますが実行時に例外が発生します。
+`femaleToStr()` nhận được cảnh báo rằng context không phải là `Female`. Code này không thể thực thi được. Nhân tiện, `maleToStr()` không có xử lý này tuy có thể thực thi nhưng sẽ xảy ra exception runtime.
 
 ```js twoslash
 class Male {
@@ -80,4 +80,4 @@ class Male {
 }
 ```
 
-引数の`this`を指定することによって意図しないメソッドの持ち出しを避けることができます。
+Bằng cách chỉ định tham số `this`, có thể tránh việc mang method ra ngoài context không mong muốn.

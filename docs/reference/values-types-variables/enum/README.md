@@ -1,13 +1,13 @@
 ---
-sidebar_label: 列挙型
+sidebar_label: Kiểu liệt kê
 slug: /reference/values-types-variables/enum
 ---
 
-# 列挙型 (enum)
+# Kiểu liệt kê (enum)
 
-TypeScriptでは、列挙型(enum)を用いると、定数のセットに意味を持たせたコード表現ができます。
+Trong TypeScript, sử dụng kiểu liệt kê (enum) cho phép biểu diễn code với ý nghĩa gắn liền với một tập hợp các hằng số.
 
-列挙型を宣言するには、`enum`キーワードの後に列挙型名とメンバーを書きます。次の例では、`Position`が列挙型名で、`Top`、`Right`、`Bottom`、`Left`がメンバーになります。
+Để khai báo kiểu liệt kê, viết keyword `enum` theo sau là tên enum và các member. Trong ví dụ sau, `Position` là tên enum, còn `Top`, `Right`, `Bottom`, `Left` là các member.
 
 ```ts twoslash
 enum Position {
@@ -18,7 +18,7 @@ enum Position {
 }
 ```
 
-`enum`キーワードはTypeScript独自のものです。なのでJavaScriptにコンパイルすると次のようなコードになります。
+Keyword `enum` là riêng của TypeScript. Vì vậy khi compile sang JavaScript sẽ thành code như sau.
 
 <!--prettier-ignore-->
 ```js
@@ -31,7 +31,7 @@ var Position;
 })(Position || (Position = {}));
 ```
 
-ご覧のとおり、列挙型名と同じ名前のオブジェクトが定義されます。列挙型のメンバーはオブジェクトのプロパティーになります。値は0からの連番になります。
+Như bạn thấy, một object cùng tên với enum được định nghĩa. Các member của enum trở thành property của object. Giá trị là số thứ tự bắt đầu từ 0.
 
 ```ts twoslash
 enum Position {
@@ -46,7 +46,7 @@ console.log(Position.Right); // 1
 console.log(Position.Bottom); // 2
 ```
 
-列挙型名は型として扱うことができます。
+Tên enum có thể được sử dụng như một type.
 
 ```ts twoslash
 enum Position {
@@ -57,5 +57,5 @@ enum Position {
 }
 // ---cut---
 let position: Position;
-//            ^^^^^^^^型
+//            ^^^^^^^^type
 ```

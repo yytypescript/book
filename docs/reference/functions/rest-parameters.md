@@ -1,14 +1,14 @@
 ---
-sidebar_label: 残余引数/可変長引数
+sidebar_label: Rest parameter
 ---
 
-# 残余引数/可変長引数 (rest parameter)
+# Rest parameter (tham số còn lại / tham số có độ dài thay đổi)
 
-通常の関数は引数の数が決まっています。JavaScriptでは引数の数に決まりがない関数も作れます。引数の個数が決まっていない引数のことを可変長引数(variable length arguments, variadic arguments)といいます。JavaScriptでは可変長引数は残余引数(rest parameter)と呼びます。
+Function thông thường có số lượng tham số cố định. Trong JavaScript, bạn cũng có thể tạo function không cố định số lượng tham số. Tham số không cố định số lượng được gọi là variadic arguments (tham số có độ dài thay đổi). Trong JavaScript, variadic arguments được gọi là rest parameter (tham số còn lại).
 
-## 残余引数の書き方
+## Cách viết rest parameter
 
-JavaScriptで残余引数を書くには、引数の前に`...`を書きます。
+Trong JavaScript, để viết rest parameter, thêm `...` trước tham số.
 
 ```js twoslash
 function func(...params) {
@@ -16,7 +16,7 @@ function func(...params) {
 }
 ```
 
-受け取った残余引数は配列になります。
+Rest parameter nhận được sẽ thành array.
 
 ```js twoslash
 function func(...params) {
@@ -26,7 +26,7 @@ func(1, 2, 3);
 // @log: [ 1, 2, 3 ]
 ```
 
-普通の引数と残余引数を持つ関数も作れます。
+Cũng có thể tạo function có cả tham số thông thường và rest parameter.
 
 ```js twoslash
 function func(param1, ...params) {
@@ -36,18 +36,18 @@ func(1, 2, 3);
 // @log: 1 [ 2, 3 ]
 ```
 
-残余引数は必ず最後の引数でなければなりません。残余引数を複数持たせることはできません。また、残余引数の後に普通の引数を置くこともできません。
+Rest parameter bắt buộc phải là tham số cuối cùng. Không thể có nhiều rest parameter. Cũng không thể đặt tham số thông thường sau rest parameter.
 
 ```js twoslash
 // @errors: 1014
-// 構文エラーになるコード
+// Code gây syntax error
 function func(...params1, ...params2) {}
 function func(...params, param1) {}
 ```
 
-## 残余引数の型注釈
+## Type annotation cho rest parameter
 
-TypeScriptで残余引数に型注釈するには、配列の型を書きます。たとえば、残余引数がnumber型なら、`number[]`のように書きます。
+Trong TypeScript, để type annotation cho rest parameter, viết type của array. Ví dụ, nếu rest parameter có type number, viết `number[]`.
 
 ```ts twoslash
 function func(...params: number[]) {
@@ -55,16 +55,16 @@ function func(...params: number[]) {
 }
 ```
 
-## 配列を残余引数として渡す
+## Truyền array làm rest parameter
 
-JavaScriptに組み込みのメソッドに`Math.max()`があります。これは、引数に与えられた数値の中から最大値を返します。この関数は残余引数を要求します。
+JavaScript có method built-in `Math.max()`. Method này trả về giá trị lớn nhất trong các số được truyền vào tham số. Function này yêu cầu rest parameter.
 
 ```js twoslash
 Math.max(1, 10, 100);
 // @log: 100
 ```
 
-残余引数は、引数受取時には配列になりますが、関数呼び出しのときにひとつの配列にまとめて渡すことはできません。
+Rest parameter khi nhận sẽ thành array, nhưng khi gọi function không thể gộp thành một array để truyền.
 
 ```ts twoslash
 // @errors: 2345
@@ -72,11 +72,11 @@ const scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const highest = Math.max(scores);
 ```
 
-このように配列を直接渡してしまうと、`max`の関数内では引数ひとつの`number[][]`型が渡されたと解釈されます。`max`の期待する余剰引数の型は`number[]`型なので、このコードは正しく動きません。配列を余剰引数に渡す場合は、スプレッド構文(spread syntax)を用います。スプレッド構文は`...`と書きます。
+Nếu truyền array trực tiếp như thế này, bên trong function `max` sẽ hiểu là được truyền một tham số có type `number[][]`. Vì type rest parameter mà `max` mong đợi là `number[]`, nên code này không hoạt động đúng. Để truyền array vào rest parameter, sử dụng spread syntax. Spread syntax được viết là `...`.
 
 ```ts twoslash
 const scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const highest = Math.max(...scores);
 ```
 
-残余引数もスプレッド構文も`...`と同じ表記ですが、スプレッド構文は配列を引数にバラすものです。
+Rest parameter và spread syntax đều có cùng ký hiệu `...`, nhưng spread syntax là để tách array thành các tham số riêng lẻ.

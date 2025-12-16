@@ -1,5 +1,5 @@
 ---
-sidebar_label: 例外処理
+sidebar_label: Xử lý exception
 ---
 
 # Xử lý exception (exception)
@@ -62,7 +62,7 @@ Khi bật compiler option `useUnknownInCatchVariables` của TypeScript, kiểu 
 
 [useUnknownInCatchVariables](../tsconfig/useunknownincatchvariables.md)
 
-[undefined型](../values-types-variables/undefined.md)
+[Kiểu undefined](../values-types-variables/undefined.md)
 
 ### Phân nhánh trong catch
 
@@ -104,7 +104,7 @@ async function fetchData() {
 fetchData();
 ```
 
-[変数のスコープ (scope)](variable-scope.md)
+[Scope của biến](variable-scope.md)
 
 Nếu muốn tham chiếu biến bên ngoài câu lệnh try-catch, cần khai báo biến bằng let trước try.
 

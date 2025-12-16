@@ -1,10 +1,10 @@
 ---
-sidebar_label: 文字列列挙型
+sidebar_label: Enum chuỗi
 ---
 
-# 文字列列挙型 (string enum)
+# Enum chuỗi (string enum)
 
-TypeScriptの列挙型では、メンバーの値に文字列も使えます。文字列で構成された列挙型は文字列列挙型(string enum)と呼ばれます。
+Trong kiểu liệt kê của TypeScript, giá trị của member cũng có thể là chuỗi. Enum được cấu thành từ chuỗi được gọi là enum chuỗi (string enum).
 
 ```ts twoslash
 enum Direction {

@@ -1,18 +1,18 @@
 ---
-sidebar_label: 型ガード関数
+sidebar_label: Type guard function
 ---
 
-# 型ガード関数 (type guard function)
+# Type guard function (hàm bảo vệ kiểu)
 
-TypeScriptのコンパイラは`if`や`switch`といった制御フローの各場所での変数の型を分析しており、この機能を[制御フロー分析](../statements/control-flow-analysis-and-type-guard.md)(control flow analysis)と呼びます。
+Compiler của TypeScript phân tích type của biến tại mỗi vị trí trong control flow như `if` hay `switch`, tính năng này được gọi là [control flow analysis](../statements/control-flow-analysis-and-type-guard.md) (phân tích luồng điều khiển).
 
-制御フロー分析の活用として、`if`や`switch`といった制御構造で型ガードを使用することによって各場所での変数を特定の型に絞り込むことができます。
+Bằng cách sử dụng type guard trong các cấu trúc điều khiển như `if` hay `switch` để áp dụng control flow analysis, bạn có thể thu hẹp biến tại mỗi vị trí thành type cụ thể.
 
-TypeScriptに元々用意されている型ガードとしては`typeof`や`instanceof`がありますが、これ以外にもユーザーが独自に型ガードを定義することができます。
+TypeScript có sẵn các type guard như `typeof` và `instanceof`, ngoài ra người dùng cũng có thể tự định nghĩa type guard.
 
-## ユーザー定義の型ガード関数
+## Type guard function do người dùng định nghĩa
 
-ユーザー定義の型ガード関数を作るためには型述語(type predicate)と呼ばれる特殊な注釈を使用します。型述語の注釈は戻り値がboolean型の関数に対して適用でき、戻り値の型の注釈部分を次のように記述します。
+Để tạo type guard function do người dùng định nghĩa, bạn sử dụng annotation đặc biệt gọi là type predicate (vị từ kiểu). Type predicate annotation có thể áp dụng cho function có kiểu trả về boolean, và được viết ở phần annotation kiểu trả về như sau.
 
 ```ts twoslash
 class Animal {}
@@ -23,7 +23,7 @@ function isDuck(animal: Animal): animal is Duck {
 }
 ```
 
-`animal is Duck`の部分が型述語です。これで関数`isDuck()`が`true`を返す時の`if`のブロックの中では`animal`は`Duck`型として解釈されるようになります。
+Phần `animal is Duck` là type predicate. Với điều này, trong block `if` khi function `isDuck()` trả về `true`, `animal` sẽ được hiểu là type `Duck`.
 
 ```ts twoslash
 // @errors: 2339
@@ -35,7 +35,7 @@ declare function isDuck(animal: Animal): animal is Duck;
 
 const animal = new Animal();
 // ---cut---
-// ここではquacks()は存在しない
+// Ở đây quacks() không tồn tại
 animal.quacks();
 
 if (isDuck(animal)) {
@@ -44,7 +44,7 @@ if (isDuck(animal)) {
 }
 ```
 
-しかしながら、これはあくまでもその型であるとTypeScriptに解釈させるだけなので、JavaScriptとして正しいということは断言できません。
+Tuy nhiên, đây chỉ là làm cho TypeScript hiểu rằng đó là type đó, không thể khẳng định rằng nó đúng với JavaScript.
 
 ```ts twoslash
 function isUndefined(value: unknown): value is undefined {
@@ -52,29 +52,29 @@ function isUndefined(value: unknown): value is undefined {
 }
 ```
 
-上記関数`isUndefined()`は明らかに誤っていますが、この誤りに対してTypeScriptは何も警告を出しません。
+Function `isUndefined()` ở trên rõ ràng là sai, nhưng TypeScript không đưa ra cảnh báo nào cho lỗi này.
 
-## 型述語
+## Type predicate
 
-型ガード関数の説明では、いきなり型述語という用語を使って説明しましたが、もう少し詳しく見てみましょう。
+Trong phần giải thích type guard function, chúng ta đã sử dụng thuật ngữ type predicate ngay từ đầu, hãy xem chi tiết hơn một chút.
 
-型述語という言葉を分解してみると「型+述語」となります。つまり型についての述語です。この述語という用語は元々は論理学に由来するものであり、その意味を知ることで型ガード関数についての理解を深めることができます。
+Tách từ type predicate ra thì được "type + predicate". Nghĩa là predicate về type. Thuật ngữ predicate ban đầu có nguồn gốc từ logic học, và hiểu ý nghĩa của nó sẽ giúp hiểu sâu hơn về type guard function.
 
-たとえば、`animal is Duck`という型述語は型ガード関数`isDuck`の戻り値の注釈として使われていましたが、関数本体の実体を見ると単にboolean型の値を返す関数となっています。
+Ví dụ, type predicate `animal is Duck` được sử dụng như annotation kiểu trả về của type guard function `isDuck`, nhưng nhìn vào thân function thì thực chất chỉ là function trả về giá trị boolean.
 
 ```ts twoslash
 class Animal {}
 class Duck {}
 // ---cut---
 function isDuck(animal: Animal): animal is Duck {
-  //                             ^^^^^^^^^^^^^^: 型述語
-  return animal instanceof Duck; // 単に真偽値を返す
+  //                             ^^^^^^^^^^^^^^: type predicate
+  return animal instanceof Duck; // Chỉ đơn giản trả về giá trị boolean
 }
 ```
 
-元々、述語(predicate)とは、論理学において対象が持つ属性や関係などを表現するものです。たとえば、「Xは素数である(X is a prime number)」という命題Pがあったとき、Xを変数としてP(x)のように述語を表現できます。この述語P(X)は変数Xが素数の3などであれば真を返し、非素数の4などであれば偽を返します。これはまさに真か偽(真理値)を返す関数です。
+Ban đầu, predicate (vị từ) trong logic học là thứ biểu diễn thuộc tính hoặc quan hệ mà đối tượng có. Ví dụ, khi có mệnh đề P "X là số nguyên tố (X is a prime number)", có thể biểu diễn predicate như P(x) với X là biến. Predicate P(X) này trả về true nếu biến X là số nguyên tố như 3, và trả về false nếu là số không nguyên tố như 4. Đây chính xác là function trả về true hoặc false (giá trị chân lý).
 
-このように述語とは変数を含んだ命題(=真理値を持つ判断)のことです。型述語(型についての述語)とはそのまま「型を変数に取る命題」ということができます。`x is number`のような型述語は「xはnumber型である」という変数xが持つ型についての判断を表現しています。
+Như vậy, predicate là mệnh đề chứa biến (= phán đoán có giá trị chân lý). Type predicate (predicate về type) có thể gọi là "mệnh đề lấy type làm biến". Type predicate như `x is number` biểu diễn phán đoán về type mà biến x có là "x là type number".
 
 ```ts
 function isNumber(x: unknown): x is number {
@@ -82,23 +82,23 @@ function isNumber(x: unknown): x is number {
 }
 ```
 
-先ほどの例で言えば、`isDuck`関数は命題`animal is Duck`について変数`animal`を受けて真理値を返す関数となっています。
+Trong ví dụ trước, function `isDuck` là function nhận biến `animal` và trả về giá trị chân lý về mệnh đề `animal is Duck`.
 
-型ガード関数の説明で見たように、型注釈に型述語を用いることは単に`boolean`型を返す関数であると型注釈するのとは異なる効果があり、制御フロー分析で型の絞り込みを行うためには型述語を利用する必要がありました。
+Như đã thấy trong phần giải thích type guard function, việc sử dụng type predicate trong type annotation khác với việc chỉ đơn giản annotation là function trả về type `boolean`, và để thực hiện thu hẹp type trong control flow analysis cần phải sử dụng type predicate.
 
 ```ts twoslash
-// 型述語が注釈されているので型ガード関数として機能する
+// Có type predicate annotation nên hoạt động như type guard function
 function typeGuard(x: unknown): x is number {
   return typeof x === "number";
 }
-// 単にboolean型の値を返す関数で型ガード関数として機能しない
+// Chỉ là function trả về giá trị boolean, không hoạt động như type guard function
 function notTypeGuard(x: unknown): boolean {
   return typeof x === "number";
 }
 
 declare const input: number | string;
 
-// 型の絞り込みができる
+// Có thể thu hẹp type
 if (typeGuard(input)) {
   input;
   // ^?
@@ -107,7 +107,7 @@ if (typeGuard(input)) {
   // ^?
 }
 
-// 型の絞り込みができない
+// Không thể thu hẹp type
 if (notTypeGuard(input)) {
   input;
   // ^?
@@ -117,23 +117,23 @@ if (notTypeGuard(input)) {
 }
 ```
 
-このように型述語を持つ型ガード関数は制御フローにおいて静的に型の絞り込みを行うことができますが、単に`boolean`型を返すという注釈がなされた関数ではそのように型の絞り込みができません。単に戻り値が`boolean`型であると注釈してしまうと型ガードとして機能しなくなってしまうことに注意してください。
+Như vậy, type guard function có type predicate có thể thực hiện thu hẹp type tĩnh trong control flow, nhưng function chỉ có annotation trả về type `boolean` thì không thể thu hẹp type như vậy. Hãy chú ý rằng nếu chỉ đơn giản annotation kiểu trả về là `boolean` thì sẽ không hoạt động như type guard.
 
-ただし、TypeScript 5.5からは型述語の注釈無しの次のような関数でも型ガード関数として機能するようになりました。関数の実体から型述語の型推論が可能となっているので、`x is number`という型述語が推論されて型ガード関数となります。
+Tuy nhiên, từ TypeScript 5.5, function như sau không có type predicate annotation cũng hoạt động như type guard function. Vì có thể suy luận type predicate từ thân function, nên type predicate `x is number` được suy luận và trở thành type guard function.
 
 ```ts twoslash
-// 返り値の注釈がないこの関数は x is number という型述語で推論される
+// Function không có annotation kiểu trả về này được suy luận với type predicate x is number
 function noAnnotation(x: unknown) {
   return typeof x === "number";
 }
 ```
 
 :::caution
-5.5以降であっても、単にboolean型を返す関数として型注釈した場合には型ガード関数としては利用できないことに注意していください。
+Từ phiên bản 5.5 trở đi, nếu chỉ annotation là function trả về type boolean thì vẫn không thể sử dụng như type guard function.
 :::
 
-この型述語の機能強化によって配列の`filter`メソッドなどで使用するコールバック関数の型述語の記述なしで正確に型を推論できるようになるなどの改善が得られます。
+Với sự tăng cường tính năng type predicate này, có thể suy luận type chính xác mà không cần viết type predicate cho callback function sử dụng trong method `filter` của array, v.v.
 
-## 関連情報
+## Thông tin liên quan
 
-[制御フロー分析と型ガードによる型の絞り込み](../statements/control-flow-analysis-and-type-guard.md)
+[Thu hẹp type với control flow analysis và type guard](../statements/control-flow-analysis-and-type-guard.md)

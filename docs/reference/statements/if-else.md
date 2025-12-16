@@ -35,7 +35,7 @@ Nếu muốn sử dụng điều kiện phân nhánh dưới dạng biểu thứ
 const result = value === 0 ? "OK" : "NG";
 ```
 
-[三項演算子 (ternary operator)](ternary-operator.md)
+[Toán tử ba ngôi (ternary operator)](ternary-operator.md)
 
 Nếu viết logic tương tự đoạn code trên bằng if-else, cần khai báo biến để gán kết quả bằng `let` trước block `if`.
 
@@ -50,4 +50,4 @@ if (value === 0) {
 
 ## Thông tin liên quan
 
-[switch文](switch.md)
+[Câu lệnh switch](switch.md)
