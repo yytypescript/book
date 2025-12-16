@@ -62,6 +62,7 @@ const config = {
         logo: {
           alt: "Survival TypeScript",
           src: "img/logo.svg",
+          style: { height: "38px", width: "38px" },
         },
         items: [
           {
