@@ -1,10 +1,10 @@
 # Markdown
 
-Markdownは標準的な記法に加えて、本プロジェクトで独自拡張した仕様があります。
+Markdown ngoài cú pháp tiêu chuẩn còn có các specification được mở rộng riêng cho project này.
 
 ## Frontmatter
 
-必要に応じてページのメタ情報や設定をfrontmatterに書くことができます。frontmatterはYAML形式です。
+Có thể viết meta information và setting của trang vào frontmatter khi cần. Frontmatter có format YAML.
 
 ```yaml
 ---
@@ -12,101 +12,101 @@ slug: /reference/function
 ---
 ```
 
-利用可能な設定は次のものがあります。
+Các setting có thể sử dụng như sau.
 
-| キー            | 型         | 説明                                                                                                                                                                    |
-| --------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sidebar_label` | `string`   | サイドバーや前後ページナビゲーション、サイト内リンクブロックに表示されるページタイトルです。指定しない場合、最初の見出しの内容がサイドバーに表示されます。              |
-| `slug`          | `string`   | ページのURLのパス部分。指定しない場合、ファイル名から拡張子を除いたものが`slug`になります。                                                                             |
-| `tags`          | `string[]` | ページのタグ。デフォルト値は`[]`です。                                                                                                                                  |
-| `description`   | `string`   | ページの要約。`<meta name="description" content="..."/>`やサイト内リンクブロックの説明として使われる。指定しない場合、コンテンツの最初の段落が`description`になります。 |
-| `title`         | `string`   | ページのタイトル。これを指定した場合、Markdownに見出しをつける必要はありません。                                                                                        |
-| `image`         | `string`   | OGP画像のパス。staticディレクトリからの相対パスを指定します。                                                                                                           |
+| Key             | Type       | Mô tả                                                                                                                                                                            |
+| --------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sidebar_label` | `string`   | Tiêu đề trang hiển thị trên sidebar, navigation trang trước/sau, và block link nội bộ. Nếu không chỉ định, nội dung heading đầu tiên sẽ hiển thị trên sidebar.                   |
+| `slug`          | `string`   | Phần path của URL trang. Nếu không chỉ định, tên file bỏ extension sẽ là `slug`.                                                                                                 |
+| `tags`          | `string[]` | Tag của trang. Giá trị mặc định là `[]`.                                                                                                                                         |
+| `description`   | `string`   | Tóm tắt trang. Được dùng cho `<meta name="description" content="..."/>` và mô tả trong block link nội bộ. Nếu không chỉ định, đoạn văn đầu tiên của content sẽ là `description`. |
+| `title`         | `string`   | Tiêu đề trang. Nếu chỉ định cái này, không cần thêm heading vào Markdown.                                                                                                        |
+| `image`         | `string`   | Path của ảnh OGP. Chỉ định path tương đối từ thư mục static.                                                                                                                     |
 
 ```yaml
 ---
-sidebar_label: アロー関数
+sidebar_label: Arrow function
 slug: /reference/functions/arrow-function
 tags:
-  - 関数
-  - アロー関数
-description: TypeScriptでアロー関数を定義する方法
+  - function
+  - arrow-function
+description: Cách định nghĩa arrow function trong TypeScript
 image: /img/ogp.png
 ---
 ```
 
-## 見出し
+## Heading
 
-見出しレベル1`#`は、ページタイトルにのみ使います。
-ページ内のセクションは見出しレベル2`##`以上を使います。
+Heading level 1 `#` chỉ dùng cho tiêu đề trang.
+Các section trong trang dùng heading level 2 `##` trở lên.
 
-```markdown title="例"
-# ページタイトル
+```markdown title="Ví dụ"
+# Tiêu đề trang
 
-...序文...
+...lời mở đầu...
 
-## 大見出し
+## Heading lớn
 
 ...
 
-### 中見出し
+### Heading vừa
 
 ...
 ```
 
-## リンク
+## Link
 
-サイト内リンクはMarkdownファイルパスを**相対パス**で書きます。
+Link nội bộ viết đường dẫn file Markdown bằng **relative path**.
 
 ```markdown
-詳細は[関数](../references/functions.md)をご覧ください。
+Chi tiết xem tại [Function](../references/functions.md).
 ```
 
-### 内部リンクブロック
+### Block link nội bộ
 
-内部リンクブロックは、サイト内のページへのリンクを表示するためのものです。次の例のように、ページタイトルと説明文が自動的に表示されるコンポーネントです。
+Block link nội bộ dùng để hiển thị link đến các trang trong site. Như ví dụ sau, đây là component tự động hiển thị tiêu đề trang và mô tả.
 
-[letとconst](../reference/values-types-variables/let-and-const.md)
+[let và const](../reference/values-types-variables/let-and-const.md)
 
-内部リンクブロックには次の利点があります。
+Block link nội bộ có các ưu điểm sau.
 
-- 関連ページが目立つ
-- リンク先ページのタイトル変更に自動的に追従できる
+- Trang liên quan nổi bật
+- Tự động cập nhật theo khi đổi tiêu đề trang đích
 
-リンクブロックを作るには、前後に空白行を置き、かつ、サイト内リンクの行の前後には何も文字を書かないようにします。
+Để tạo block link, đặt dòng trống trước và sau, và không viết gì khác trước/sau dòng link nội bộ.
 
 ```markdown
-...テキスト...
+...text...
 
-[letとconst](../references/values-types-variables/let-and-const.md)
+[let và const](../references/values-types-variables/let-and-const.md)
 
-...テキスト...
+...text...
 ```
 
 :::caution
-Markdownのリンクテキストは無視され、リンク先のタイトルが採用されます。たとえば、function.mdのタイトルが「関数について」で、Markdownが<code>&#91;ファンクション]&#40;./function.md)</code>のとき、「ファンクション」は無視され、ウェブサイト上の表示は「関数について」が採用されます。
+Link text của Markdown bị bỏ qua, tiêu đề của trang đích được sử dụng. Ví dụ, nếu tiêu đề của function.md là "Về function", và Markdown là <code>&#91;Function]&#40;./function.md)</code>, thì "Function" bị bỏ qua, hiển thị trên website sẽ là "Về function".
 :::
 
-## インラインコード
+## Inline code
 
-インラインコードの前後には空白を置かないようにします。
-
-```markdown
-❌ 変数宣言は `const` を用います。
-⭕️ 変数宣言は`const`を用います。
-```
-
-インラインコードでバッククォートを使うには、ダブルバッククォートを使います。
+Không đặt khoảng trắng trước/sau inline code.
 
 ```markdown
-テンプレートリテラルは`` ` ``を使います。
+❌ Khai báo biến dùng `const` .
+⭕️ Khai báo biến dùng`const`.
 ```
 
-> テンプレートリテラルは`` ` ``を使います。
+Để dùng backtick trong inline code, dùng double backtick.
 
-## コードブロック
+```markdown
+Template literal dùng`` ` ``.
+```
 
-コードブロックは言語名を指定すると、シンタックスハイライトが効きます。
+> Template literal dùng`` ` ``.
+
+## Code block
+
+Code block sẽ có syntax highlight nếu chỉ định tên ngôn ngữ.
 
 ````markdown
 ```ts
@@ -114,13 +114,13 @@ Markdownのリンクテキストは無視され、リンク先のタイトルが
 ```
 ````
 
-使用可能な言語は次のとおりです。
+Các ngôn ngữ có thể sử dụng như sau.
 
 - https://github.com/shikijs/shiki/blob/main/docs/languages.md#all-languages
 
-### コードブロックのタイトル
+### Tiêu đề code block
 
-コードブロックにタイトルをつけるには`title`属性を指定します。
+Để thêm tiêu đề cho code block, chỉ định attribute `title`.
 
 ````markdown
 ```ts title="sample.ts"
@@ -132,30 +132,30 @@ Markdownのリンクテキストは無視され、リンク先のタイトルが
 // sample code
 ```
 
-### 行番号
+### Số dòng
 
-4行以上あるコードブロックは行番号が自動で付与されます。
+Code block từ 4 dòng trở lên sẽ tự động có số dòng.
 
 ```markdown
-1行目
-2行目
-3行目
+Dòng 1
+Dòng 2
+Dòng 3
 ```
 
 ```markdown
-1行目
-2行目
-3行目
-4行目
+Dòng 1
+Dòng 2
+Dòng 3
+Dòng 4
 ```
 
 ### Twoslash
 
-TwoslashはサンプルコードにTypeScriptコンパイラーから得られる情報を付加する機能です。付加される情報には変数の型、コンパイルエラーのメッセージなどがあります。
+Twoslash là tính năng thêm thông tin từ TypeScript compiler vào sample code. Thông tin được thêm bao gồm type của biến, message compile error, v.v.
 
-#### 変数の型を表示する
+#### Hiển thị type của biến
 
-`^?`を書くと型推論された変数の型の中身を表示できます。
+Viết `^?` để hiển thị nội dung type được suy luận của biến.
 
 ````markdown
 ```ts twoslash
@@ -166,16 +166,16 @@ type ReadonlyPoint = Readonly<typeof point>;
 ```
 ````
 
-```ts twoslash title="表示例"
+```ts twoslash title="Ví dụ hiển thị"
 const point = { x: 135, y: 35 };
 //    ^?
 type ReadonlyPoint = Readonly<typeof point>;
 //   ^?
 ```
 
-#### エラーを表示する
+#### Hiển thị error
 
-`@errors`でコンパイルエラーの内容を表示できます。
+Dùng `@errors` để hiển thị nội dung compile error.
 
 ````markdown
 ```ts twoslash
@@ -184,14 +184,14 @@ function fn(s) {}
 ```
 ````
 
-```ts twoslash title="表示例"
+```ts twoslash title="Ví dụ hiển thị"
 // @errors: 7006
 function fn(s) {}
 ```
 
-#### コンパイラーオプションを設定する
+#### Thiết lập compiler option
 
-`@コンパイラーオプション: 設定値`の形式で書くと、そのコードブロックでのみ効くコンパイラーオプションを設定できます。
+Viết theo format `@compilerOption: value` để thiết lập compiler option chỉ có hiệu lực trong code block đó.
 
 ````markdown
 ```ts twoslash
@@ -200,44 +200,44 @@ function fn(s) {}
 ```
 ````
 
-```ts twoslash title="表示例"
+```ts twoslash title="Ví dụ hiển thị"
 // @noImplicitAny: false
 function fn(s) {}
 ```
 
 :::tip
 
-twoslashのデフォルトのコンパイラオプションはtsconfig.twoslash.jsonをご覧ください。
+Compiler option mặc định của twoslash xem tại tsconfig.twoslash.json.
 
 :::
 
-#### 実行結果を表示する
+#### Hiển thị kết quả thực thi
 
-`@log`、`@warn`、`@error`を用いると、実行結果のコメントをスタイリングして表示できます。
+Dùng `@log`, `@warn`, `@error` để styling và hiển thị comment kết quả thực thi.
 
 ````markdown
 ```js twoslash
 console.log(123);
 // @log: 123
-console.warn("メッセージ");
-// @warn: メッセージ
+console.warn("message");
+// @warn: message
 const x = value;
 // @error: ReferenceError: value is not defined
 ```
 ````
 
-```js twoslash title="表示例"
+```js twoslash title="Ví dụ hiển thị"
 console.log(123);
 // @log: 123
-console.warn("メッセージ");
-// @warn: メッセージ
+console.warn("message");
+// @warn: message
 const x = value;
 // @error: ReferenceError: value is not defined
 ```
 
-#### コード補完の再現
+#### Tái hiện code completion
 
-`^|`を書いたところにVS Codeでのコード補完の様子を再現できます。
+Viết `^|` để tái hiện code completion như trong VS Code.
 
 <!--prettier-ignore-->
 ````markdown
@@ -249,18 +249,18 @@ const x = value;
 ````
 
 <!--prettier-ignore-->
-```ts twoslash title="表示例"
+```ts twoslash title="Ví dụ hiển thị"
 // @noErrors
 [1, 2, 3].fin
 //           ^|
 ```
 
-#### JavaScriptの出力
+#### Output JavaScript
 
-`@showEmit`でコンパイル結果のJavaScriptコードを表示できます。
+Dùng `@showEmit` để hiển thị code JavaScript sau khi compile.
 
 ````markdown
-```ts twoslash title="表示例"
+```ts twoslash title="Ví dụ hiển thị"
 // @showEmit
 enum Example {
   FOO,
@@ -269,7 +269,7 @@ enum Example {
 ```
 ````
 
-```ts twoslash title="表示例"
+```ts twoslash title="Ví dụ hiển thị"
 // @showEmit
 enum Example {
   FOO,
@@ -277,9 +277,9 @@ enum Example {
 }
 ```
 
-#### 型定義ファイルの出力
+#### Output file định nghĩa type
 
-TypeScriptソースコードを型定義ファイルに変換した結果を表示できます。
+Có thể hiển thị kết quả chuyển đổi TypeScript source code thành file định nghĩa type.
 
 ````markdown
 ```ts twoslash
@@ -293,7 +293,7 @@ export function getStringLength(value: string) {
 ```
 ````
 
-```ts twoslash title="表示例"
+```ts twoslash title="Ví dụ hiển thị"
 // @declaration: true
 // @showEmit
 // @showEmittedFile: index.d.ts
@@ -303,9 +303,9 @@ export function getStringLength(value: string) {
 }
 ```
 
-#### インラインハイライト(下線)
+#### Inline highlight (underline)
 
-下線`^^`を引いた部分がハイライトされます。これは未対応で、下線コメントが消えるだけです。
+Phần có underline `^^` sẽ được highlight. Tính năng này chưa được hỗ trợ, chỉ comment underline biến mất.
 
 ````markdown
 ```ts twoslash
@@ -318,7 +318,7 @@ greet("Maddison", new Date());
 ```
 ````
 
-```ts twoslash title="表示例"
+```ts twoslash title="Ví dụ hiển thị"
 function greet(person: string, date: Date) {
   console.log(`Hello ${person}, today is ${date.toDateString()}!`);
 }
@@ -327,15 +327,15 @@ greet("Maddison", new Date());
 //                ^^^^^^^^^^
 ```
 
-:::tip Twoslashトラブルシューティング
+:::tip Twoslash Troubleshooting
 
-#### `import`がコンパイルエラー(2307)になる
+#### `import` bị compile error (2307)
 
-存在しない架空のモジュールをインポートしたとき、次のエラーが発生します。
+Khi import module giả không tồn tại, sẽ phát sinh error sau.
 
-> [2307] 0 - Cannot find module 'モジュール名' or its corresponding type declarations.
+> [2307] 0 - Cannot find module 'module name' or its corresponding type declarations.
 
-架空のモジュールをサンプルコードに使う場合は、`@filename`を使ってモジュールをでっちあげる必要があります。
+Khi dùng module giả trong sample code, cần dùng `@filename` để tạo module.
 
 ````markdown
 ```ts twoslash
@@ -349,7 +349,7 @@ import { fictional } from "./fictional-module";
 ```
 ````
 
-```ts twoslash title="表示例"
+```ts twoslash title="Ví dụ hiển thị"
 // @filename: fictional-module.ts
 export const fictional = "fictional value!";
 
@@ -359,9 +359,9 @@ import { fictional } from "./fictional-module";
 //       ^?
 ```
 
-##### 架空のNPMモジュールをでっちあげる
+##### Tạo NPM module giả
 
-架空のNPMモジュールをでっちあげるには、`declare module`でモジュールの型定義を用意します。その際、架空のモジュールのほうは`@filename`がなくてもコンパイルが通ります。
+Để tạo NPM module giả, chuẩn bị type definition của module bằng `declare module`. Lúc này, module giả không cần `@filename` cũng compile được.
 
 ````markdown
 ```ts twoslash
@@ -375,7 +375,7 @@ import { fictional } from "fictional-npm-module";
 ```
 ````
 
-```ts twoslash title="表示例"
+```ts twoslash title="Ví dụ hiển thị"
 declare module "fictional-npm-module" {
   const fictional = "fictional NPM module!";
 }
@@ -387,12 +387,12 @@ import { fictional } from "fictional-npm-module";
 
 :::
 
-### 行ハイライト
+### Highlight dòng
 
-特定の行に注目してもらいたいときは、行番号を書くとその行の背景色を変えられます。
+Khi muốn người đọc chú ý vào dòng cụ thể, viết số dòng để đổi màu nền của dòng đó.
 
 ````markdown
-```js twoslash {1,4-6,11} title="行ハイライトの表示例"
+```js twoslash {1,4-6,11} title="Ví dụ highlight dòng"
 import React from "react";
 
 function MyComponent(props) {
@@ -407,7 +407,7 @@ export default MyComponent;
 ```
 ````
 
-```js twoslash {1,4-6,11} title="行ハイライトの表示例"
+```js twoslash {1,4-6,11} title="Ví dụ highlight dòng"
 import React from "react";
 
 function MyComponent(props) {
@@ -421,11 +421,11 @@ function MyComponent(props) {
 export default MyComponent;
 ```
 
-### サンプルコードの自動整形
+### Auto format sample code
 
-コードブロックはPrettierで自動整形されます。
+Code block được auto format bằng Prettier.
 
-自動整形をされたくないコードブロック場合は、`<!--prettier-ignore-->`を直前に書きます。
+Nếu không muốn auto format code block, viết `<!--prettier-ignore-->` ngay trước.
 
 <!--prettier-ignore-->
 ````markdown {4}
@@ -439,7 +439,7 @@ f = x => x;
 ```
 ````
 
-````markdown {1,6} title="整形結果"
+````markdown {1,6} title="Kết quả format"
 ```ts
 f = (x) => x;
 ```
@@ -450,131 +450,131 @@ f = x => x;
 ```
 ````
 
-## 警告表示
+## Hiển thị cảnh báo
 
-トリプルコロン`:::`で囲んだテキストは警告表示にできます。
+Text được bao bởi triple colon `:::` có thể hiển thị dạng cảnh báo.
 
 ```markdown
 :::note
-テキスト
+Text
 :::
 
 :::tip
-テキスト
+Text
 :::
 
 :::info
-テキスト
+Text
 :::
 
 :::caution
-テキスト
+Text
 :::
 
 :::danger
-テキスト
+Text
 :::
 ```
 
 :::note
-テキスト
+Text
 :::
 
 :::tip
-テキスト
+Text
 :::
 
 :::info
-テキスト
+Text
 :::
 
 :::caution
-テキスト
+Text
 :::
 
 :::danger
-テキスト
+Text
 :::
 
-警告表示にはタイトルを指定できます。
+Có thể chỉ định tiêu đề cho hiển thị cảnh báo.
 
 ```markdown
-:::note 好みのタイトル
-テキスト
+:::note Tiêu đề tùy chọn
+Text
 :::
 ```
 
-:::note 好みのタイトル
-テキスト
+:::note Tiêu đề tùy chọn
+Text
 :::
 
-## 図表のキャプション
+## Caption cho hình và bảng
 
-図表にキャプションを追加する場合は、`<figure>`と`<figcaption>`が使えます。
+Khi thêm caption cho hình và bảng, có thể dùng `<figure>` và `<figcaption>`.
 
 ```markdown
-<figure><figcaption>猫の図</figcaption>
+<figure><figcaption>Hình con mèo</figcaption>
 
 ![](https://placekitten.com/300/300)
 
 </figure>
 ```
 
-<figure><figcaption>猫の図</figcaption>
+<figure><figcaption>Hình con mèo</figcaption>
 
 ![](https://placekitten.com/300/300)
 
 </figure>
 
 ```markdown
-<figure><figcaption>国と通貨</figcaption>
+<figure><figcaption>Quốc gia và tiền tệ</figcaption>
 
-| 国             | 通貨     |
-| -------------- | -------- |
-| アメリカ合衆国 | 米国ドル |
-| 日本           | 日本円   |
+| Quốc gia | Tiền tệ |
+| -------- | ------- |
+| Mỹ       | USD     |
+| Việt Nam | VND     |
 
 </figure>
 ```
 
-<figure><figcaption>国と通貨</figcaption>
+<figure><figcaption>Quốc gia và tiền tệ</figcaption>
 
-| 国             | 通貨     |
-| -------------- | -------- |
-| アメリカ合衆国 | 米国ドル |
-| 日本           | 日本円   |
+| Quốc gia | Tiền tệ |
+| -------- | ------- |
+| Mỹ       | USD     |
+| Việt Nam | VND     |
 
 </figure>
 
-## 「学びをシェアする」ブロック
+## Block "Chia sẻ kiến thức"
 
-「学びをシェアする」ブロックは、読者がページの内容をXでシェアしやすくするブロックです。`<PostILearned>`で囲った範囲がポスト内容になります。
+Block "Chia sẻ kiến thức" giúp người đọc dễ dàng chia sẻ nội dung trang lên X. Nội dung được bao bởi `<PostILearned>` sẽ trở thành nội dung post.
 
-```markdown title="学びをシェアするブロックの書き方例"
+```markdown title="Ví dụ cách viết block Chia sẻ kiến thức"
 <PostILearned>
 
-・JavaScriptの変数宣言はletとconstがある
-・letは再代入OK、constは再代入NG
-・基本的にconstを使うとよい
+・JavaScript có khai báo biến let và const
+・let cho phép gán lại, const không cho phép gán lại
+・Cơ bản nên dùng const
 
 </PostILearned>
 ```
 
-表示例:
+Ví dụ hiển thị:
 
 <PostILearned>
 
-・JavaScriptの変数宣言はletとconstがある
-・letは再代入OK、constは再代入NG
-・基本的にconstを使うとよい
+・JavaScript có khai báo biến let và const
+・let cho phép gán lại, const không cho phép gán lại
+・Cơ bản nên dùng const
 
 </PostILearned>
 
-:::caution 「学びをシェアする」ブロックの注意点
+:::caution Lưu ý về block "Chia sẻ kiến thức"
 
-- `<PostILearned>`の直後と`</PostILearned>`の直前には空行が必要です。
-- Xはポスト内容に文字数制限があるため、分量には注意してください。「『サバイバルTypeScript』より」が末尾に追加されることを想定した分量にしてください。
-- ポスト内容にはMarkdownの記法を使わないでください。特にリスト記法は「・」で代用してください。
-- ポスト内容にはURLを含めないでください。URLを含んだポストはタイムラインに表示されにくい傾向があるからです。
+- Cần có dòng trống ngay sau `<PostILearned>` và ngay trước `</PostILearned>`.
+- X có giới hạn số ký tự cho nội dung post, nên hãy chú ý lượng text. Hãy tính toán lượng text với giả định "Từ 『Survival TypeScript』" sẽ được thêm vào cuối.
+- Không dùng cú pháp Markdown trong nội dung post. Đặc biệt, thay thế cú pháp list bằng "・".
+- Không đưa URL vào nội dung post. Vì post có URL có xu hướng ít hiển thị trên timeline.
 
 :::

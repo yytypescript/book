@@ -6,11 +6,11 @@ export default function PostILearned({
 }: {
   readonly children: Child | Child[];
 }) {
-  const texts = extractText(children) + "\n\n『サバイバルTypeScript』より";
+  const texts = extractText(children) + "\n\nTừ 『Survival TypeScript』";
   return (
     <div className="admonition admonition-tip alert alert--info">
       <div className="admonition-heading">
-        <h5>学びをシェアする</h5>
+        <h5>Chia sẻ kiến thức</h5>
       </div>
       <div className="admonition-content">
         <p>{nl2br(texts)}</p>
@@ -20,7 +20,7 @@ export default function PostILearned({
           className="button button--info"
           style={{ textDecoration: "none" }}
         >
-          この内容をXにポストする
+          Đăng nội dung này lên X
         </a>
       </div>
     </div>
