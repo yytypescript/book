@@ -76,7 +76,7 @@ Cuốn sách "Survival TypeScript" này là sách nhập môn dành cho các dev
 - Khi tích hợp editor với TypeScript, có thể kiểm tra realtime và code completion.
 
 <figure><figcaption>Phản hồi trên editor</figcaption>
-<img src="/top/compile-error-feedback-on-editor.svg" width="480" />
+<img src="/top/compile-error-feedback-on-editor.png" width="480" />
 </figure>
 
 - Việc sửa lỗi sớm giúp tăng độ tin cậy và sự an tâm cho sản phẩm.
@@ -109,7 +109,7 @@ Cuốn sách "Survival TypeScript" này là sách nhập môn dành cho các dev
 - Nhờ type inference, developer có thể bỏ qua type annotation, giảm lượng code cần viết.
 
 <figure><figcaption>Type inference</figcaption>
-<img src="/top/type-inference.svg" width="480" />
+<img src="/top/type-inference.png" width="480" />
 </figure>
 
 ### Compile
@@ -119,7 +119,7 @@ Cuốn sách "Survival TypeScript" này là sách nhập môn dành cho các dev
 - Kiểm tra của TypeScript được thực hiện tại thời điểm compile.
 
 <figure><figcaption>Compile</figcaption>
-<img src="/top/compile-from-typescript-to-javascript.svg" width="480" />
+<img src="/top/compile-from-typescript-to-javascript.png" width="480" />
 </figure>
 
 ## Kiểu còn đóng góp cho documentation, refactoring và công cụ
