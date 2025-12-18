@@ -58,9 +58,10 @@ yarn start
 
 ## TODOs
 
-- [ ] Vẽ lại các hình vẽ đang ở tiếng Nhật sang tiếng Việt
-- [ ] Add thêm các bài cho đúng với license sách gốc theo CC BY-SA
-- [ ] Chỉnh lại ngôn ngữ dịch cho thật chuẩn, trong sáng, văn phong kĩ thuật, ngắn gọn, dễ hiểu
+- [ ] 🚧 Vẽ lại các hình vẽ đang ở tiếng Nhật sang tiếng Việt
+- [ ] 🚧 Add thêm các bài cho đúng với license sách gốc theo CC BY-SA
+- [ ] 🚧 Chỉnh lại ngôn ngữ dịch cho thật chuẩn, trong sáng, văn phong kĩ thuật, ngắn gọn, dễ hiểu
 - [ ] Chỉnh sửa lại bản dịch cho đỡ bị "máy dịch", đọc không mượt
 - [ ] Việt hoá lại các ví dụ. Hiện tại có nhiều ví dụ thuần tiếng Nhật, khó dịch sang tiếng Việt
+- [ ] Update search algolia cho bản dịch tiếng Việt
 - [x] Add Analytics tool: Vercel Analytics
