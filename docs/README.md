@@ -25,6 +25,10 @@ sidebar_label: Trang chủ
 
 <!-- markdownlint-restore -->
 
+:::info
+Nội dung được dịch từ [typescriptbook.jp](https://typescriptbook.jp/)
+:::
+
 :::note
 Cuốn sách "Survival TypeScript" này là sách nhập môn dành cho các developer sử dụng TypeScript trong công việc thực tế. Trang này là bản tóm tắt các nội dung chính từ hàng trăm trang của cuốn sách, giúp bạn nắm bắt nhanh nhất các đặc điểm của TypeScript.
 
