@@ -1,20 +1,20 @@
 # Đặc điểm của TypeScript
 
-TypeScript là ngôn ngữ superset của JavaScript có khả năng mở rộng (scalable), được Microsoft phát hành lần đầu vào ngày 1 tháng 10 năm 2012. Ngôn ngữ scalable là ngôn ngữ có thể tiếp tục hoạt động tốt ngay cả khi quy mô dự án và số lượng thành viên trong team tăng lên, và TypeScript phù hợp với các dự án lớn nhờ đặc tính này.
+TypeScript là một superset của JavaScript, được Microsoft phát hành lần đầu vào ngày 01/10/2012. Mục tiêu ban đầu của TypeScript là giải quyết các vấn đề về khả năng mở rộng của JavaScript khi được sử dụng trong các dự án lớn, nơi số lượng developer và độ phức tạp của code tăng lên theo thời gian.
 
-TypeScript là superset của JavaScript, với việc bổ sung static typing vào JavaScript. Code viết bằng TypeScript được compile thành JavaScript thuần và chạy trên tất cả các môi trường có thể chạy JavaScript như browser, server. Hơn nữa, đây là dự án open-source, được cung cấp theo Apache License 2.0.
+Về bản chất, TypeScript mở rộng JavaScript bằng cách bổ sung static typing, giúp code rõ ràng và dễ kiểm soát hơn. Code viết bằng TypeScript được compile thành JavaScript thuần và chạy trên tất cả các môi trường có thể chạy JavaScript như browser, server. Hơn nữa, đây là dự án open-source, được cung cấp theo Apache License 2.0.
 
 ## Superset của JavaScript
 
-TypeScript là JavaScript với việc bổ sung kiểu, phần còn lại về cơ bản tương thích. Nếu bạn đã quen thuộc với JavaScript, bạn có thể học nhanh chóng.
+Có thể xem TypeScript là JavaScript với phần hệ thống kiểu được bổ sung thêm, trong khi các cú pháp và hành vi còn lại vẫn giữ nguyên. Vì vậy, nếu bạn đã quen với JavaScript, việc tiếp cận TypeScript thường khá nhanh.
 
 ## Transpile
 
-Code TypeScript có thể được transpile sang các phiên bản JavaScript khác nhau (ví dụ: ES5, ES6). Điều này giúp tránh các vấn đề tương thích với browser và môi trường chạy.
+Code TypeScript có thể được transpile sang nhiều phiên bản JavaScript khác nhau (ví dụ: ES5, ES6), từ đó giúp đảm bảo khả năng tương thích với các browser và môi trường chạy khác nhau.
 
 ## Static typing
 
-TypeScript là ngôn ngữ có [static typing](./static-type.md), bằng cách chỉ định kiểu cho biến và tham số hàm, độ an toàn của code được cải thiện và bug dễ phát hiện hơn.
+TypeScript là ngôn ngữ hỗ trợ [static typing](./static-type.md), Bằng cách chỉ định kiểu cho biến và tham số hàm, nhiều lỗi có thể được phát hiện sớm hơn trong quá trình phát triển, giúp tăng độ an toàn của code.
 
 ```typescript
 function sum(a: number, b: number): number {
@@ -24,11 +24,11 @@ function sum(a: number, b: number): number {
 
 ## Type inference
 
-TypeScript tự động suy luận kiểu dựa trên context ngay cả với biến không có type annotation. Điều này cải thiện độ an toàn mà developer không cần khai báo kiểu rõ ràng.
+TypeScript có khả năng tự động suy luận kiểu dựa trên context, ngay cả khi biến không được khai báo type annotation. Nhờ đó, developer vẫn có được lợi ích của static typing mà không cần phải khai báo kiểu một cách tường minh ở mọi nơi.
 
 ## Hệ thống structural subtyping
 
-TypeScript áp dụng hệ thống [structural subtyping](../reference/values-types-variables/structural-subtyping.md), xác định kiểu dựa trên shape của object (tức là object có những property và method nào). Do đó, nó hoạt động dựa trên structural subtyping thay vì nominal typing.
+TypeScript áp dụng hệ thống [structural subtyping](../reference/values-types-variables/structural-subtyping.md), trong đó kiểu của một object được xác định dựa trên shape của nó (tức là object có những property và method nào). Vì vậy, TypeScript kiểm tra tính tương thích dựa trên cấu trúc, thay vì dựa trên tên kiểu như nominal typing.
 
 ## Generics
 
@@ -42,7 +42,7 @@ function identity<T>(arg: T): T {
 
 ## Biểu diễn kiểu nâng cao
 
-Trong TypeScript, có thể biểu diễn kiểu phức tạp bằng hệ thống kiểu nâng cao. Điều này cho phép phát triển logic ứng dụng một cách mạnh mẽ và biểu cảm hơn. Dưới đây là một số ví dụ về biểu diễn kiểu nâng cao có sẵn trong TypeScript.
+TypeScript cung cấp hệ thống kiểu nâng cao, cho phép biểu diễn các kiểu phức tạp một cách linh hoạt hơn. Nhờ đó, logic của ứng dụng có thể được mô tả rõ ràng và chặt chẽ hơn ngay từ cấp độ kiểu.
 
 1. **Union type**: Có thể biểu diễn một trong nhiều kiểu. Ví dụ, khi xử lý biến có giá trị khởi tạo là `null`, có thể sử dụng union type.
 
@@ -60,7 +60,7 @@ Trong TypeScript, có thể biểu diễn kiểu phức tạp bằng hệ thốn
 
 ## Hỗ trợ nhiều paradigm ngôn ngữ
 
-TypeScript hỗ trợ cả lập trình hướng đối tượng (OOP) và lập trình hàm (FP). Điều này cho phép developer xây dựng chương trình linh hoạt và mạnh mẽ.
+TypeScript hỗ trợ cả lập trình hướng đối tượng (OOP) và lập trình hàm (FP), cho phép developer lựa chọn phong cách phù hợp với từng bài toán cụ thể.
 
 ## Class và interface
 
@@ -108,7 +108,7 @@ TypeScript (và JavaScript) áp dụng mô hình single-thread. Mô hình single
 
 ## Môi trường phát triển mạnh mẽ
 
-TypeScript cung cấp môi trường phát triển mạnh mẽ. Để developer có trải nghiệm phát triển tốt, nó cung cấp tính năng intellisense và hiển thị lỗi realtime cho editor. Nhờ đó, auto-completion và thông tin kiểu có sẵn, phát triển diễn ra suôn sẻ, lỗi kiểu và sự không nhất quán được phát hiện sớm, giúp viết code đáng tin cậy hơn.
+TypeScript mang lại trải nghiệm phát triển tốt thông qua các tính năng như intellisense và hiển thị lỗi realtime trong editor. Nhờ có auto-completion và thông tin kiểu rõ ràng, developer có thể phát hiện lỗi sớm hơn và viết code một cách tự tin hơn.
 
 ## Open-source
 
@@ -116,4 +116,4 @@ TypeScript được phát triển dưới dạng open-source, source code và t�
 
 ## Tóm tắt
 
-Với những đặc điểm này, TypeScript đã trở thành lựa chọn rất hấp dẫn trong phát triển Web hiện đại. Với việc giới thiệu static typing và hệ thống kiểu nâng cao, nó đáp ứng nhiều phong cách phát triển khác nhau như dự án lớn, lập trình hướng đối tượng và lập trình hàm, cho phép code mạnh mẽ và linh hoạt. Và việc là open-source nhưng có sự hỗ trợ mạnh mẽ từ Microsoft cũng là một trong những điểm hấp dẫn.
+Với những đặc điểm trên, TypeScript ngày càng được sử dụng rộng rãi trong phát triển Web hiện đại. Việc bổ sung static typing và hệ thống kiểu nâng cao giúp TypeScript phù hợp với nhiều phong cách phát triển khác nhau, từ các dự án lớn đến lập trình hướng đối tượng và lập trình hàm. Bên cạnh đó, việc là một dự án open-source với sự hỗ trợ mạnh mẽ từ Microsoft cũng góp phần tạo nên sức hút của TypeScript.
