@@ -1,18 +1,18 @@
 ---
-sidebar_label: デュアルパッケージ開発者のためのtsconfig
+sidebar_label: tsconfig cho nhà phát triển Dual Package
 ---
 
-# デュアルパッケージ開発者のためのtsconfig (Dual Package)
+# tsconfig cho nhà phát triển Dual Package
 
-フロントエンドでもバックエンドでもTypeScriptこれ一本！Universal JSという考えがあります。確かにフロントエンドを動的にしたいのであればほぼ避けて通れないJavaScriptと、バックエンドでも使えるようになったJavaScriptで同じコードを使いまわせれば保守の観点でも異なる言語を触る必要がなくなり、統一言語としての価値が大いにあります。
+Có một khái niệm gọi là Universal JS - TypeScript một mình cân cả frontend lẫn backend! Thực tế, JavaScript gần như không thể tránh khỏi nếu muốn làm frontend động, và JavaScript giờ cũng có thể dùng cho backend. Nếu có thể tái sử dụng cùng một codebase, sẽ rất có giá trị về mặt bảo trì vì không cần phải làm việc với nhiều ngôn ngữ khác nhau - đây chính là giá trị của ngôn ngữ thống nhất.
 
-しかしながらフロントエンドとバックエンドではJavaScriptのモジュール解決の方法が異なります。この差異のために同じTypeScriptのコードを別々に分けなければいけないかというとそうではありません。ひとつのモジュールを`commonjs, esmodule`の両方に対応した出力をするDual Packageという考えがあります。
+Tuy nhiên, frontend và backend có cách resolve module JavaScript khác nhau. Vì sự khác biệt này, không có nghĩa là phải tách code TypeScript thành hai phần riêng biệt. Có một khái niệm gọi là Dual Package - một module xuất ra cả hai định dạng `commonjs` và `esmodule`.
 
-## Dual Packageことはじめ
+## Bắt đầu với Dual Package
 
-名前が仰々しいですが、やることは`commonjs`用のJavaScriptと`esmodule`用のJavaScriptを出力することです。つまり出力する`module`の分だけtsconfig.jsonを用意します。
+Tên nghe có vẻ đao to búa lớn, nhưng thực ra chỉ là xuất JavaScript cho `commonjs` và JavaScript cho `esmodule`. Tức là chuẩn bị tsconfig.json cho mỗi `module` output.
 
-プロジェクトはおおよそ次のような構成になります。
+Cấu trúc project sẽ đại khái như sau:
 
 ```text
 ./
@@ -23,19 +23,19 @@ sidebar_label: デュアルパッケージ開発者のためのtsconfig
 ```
 
 - tsconfig.base.json
-  - 基本となるtsconfig.jsonです
+  - Đây là tsconfig.json cơ sở
 - tsconfig.cjs.json
-  - tsconfig.base.jsonを継承した`commonjs`用のtsconfig.jsonです
+  - tsconfig.json cho `commonjs`, kế thừa từ tsconfig.base.json
 - tsconfig.esm.json
-  - tsconfig.base.jsonを継承した`esmodule`用のtsconfig.jsonです
+  - tsconfig.json cho `esmodule`, kế thừa từ tsconfig.base.json
 - tsconfig.json
-  - IDEはこの名前を優先して探すので、そのためのtsconfig.jsonです
+  - tsconfig.json này dành cho IDE vì IDE ưu tiên tìm file với tên này
 
-tsconfig.base.jsonとtsconfig.jsonを分けるかどうかについては好みの範疇です。まとめてしまっても問題はありません。
+Việc tách tsconfig.base.json và tsconfig.json hay không là tùy sở thích. Gộp chung cũng không có vấn đề gì.
 
-### tsconfig.jsonの継承
+### Kế thừa tsconfig.json
 
-tsconfig.jsonは他のtsconfig.jsonを継承する機能があります。上記はtsconfig.cjs.json, tsconfig.esm.jsonは次のようにしてtsconfig.base.jsonを継承しています。
+tsconfig.json có tính năng kế thừa từ tsconfig.json khác. Ở trên, tsconfig.cjs.json và tsconfig.esm.json kế thừa từ tsconfig.base.json như sau:
 
 ```json
 // tsconfig.cjs.json
@@ -61,32 +61,32 @@ tsconfig.jsonは他のtsconfig.jsonを継承する機能があります。上記
 }
 ```
 
-`outDir`はコンパイルした`js`と、型定義ファイルを出力していれば(後述)それを出力するディレクトリを変更するオプションです。
+`outDir` là option để thay đổi thư mục xuất file `js` đã compile và file định nghĩa type (sẽ đề cập sau).
 
-このようなtsconfig.xxx.jsonができていれば、あとは次のようにファイル指定してコンパイルをするだけです。
+Khi đã có các file tsconfig.xxx.json như vậy, chỉ cần compile với chỉ định file như sau:
 
 ```bash
 tsc -p tsconfig.cjs.json
 tsc -p tsconfig.esm.json
 ```
 
-## Dual Packageのためのpackage.json
+## package.json cho Dual Package
 
-package.jsonもDual Packageのための設定が必要です。
+package.json cũng cần thiết lập cho Dual Package.
 
 ### `main`
 
-package.jsonにあるそのパッケージのエントリーポイントとなるファイルを指定する項目です。Dual Packageのときはここに`commonjs`のエントリーポイントとなる`js`ファイルを設定します。
+Đây là mục chỉ định file entry point của package trong package.json. Với Dual Package, thiết lập file `js` entry point cho `commonjs` ở đây.
 
 ### `module`
 
-Dual Packageのときはここに`esmodule`のエントリーポイントとなる`js`ファイルを設定します。
+Với Dual Package, thiết lập file `js` entry point cho `esmodule` ở đây.
 
 ### `types`
 
-型定義ファイルのエントリーポイントとなる`ts`ファイルを設定します。型定義ファイルを出力するようにしていれば`commonjs, esmodule`のどちらのtsconfig.jsonで出力したものでも問題ありません。
+Thiết lập file `ts` entry point cho file định nghĩa type. Nếu đang xuất file định nghĩa type, dùng output từ tsconfig.json của `commonjs` hay `esmodule` đều được.
 
-package.jsonはこのようになっているでしょう。
+package.json sẽ trông như thế này:
 
 ```json
 {
@@ -104,30 +104,30 @@ package.jsonはこのようになっているでしょう。
 }
 ```
 
-コンパイル後の`js`のファイルの出力先はあくまでも例です。tsconfig.jsonの`outDir`を変更すれば出力先を変更できるのでそちらを設定後、package.jsonでエントリーポイントとなる`js`ファイルの設定をしてください。
+Thư mục output của file `js` sau compile chỉ là ví dụ. Bạn có thể thay đổi nơi output bằng cách thay đổi `outDir` trong tsconfig.json, sau đó thiết lập file `js` entry point trong package.json.
 
 ## Tree Shaking
 
-`module bundler`の登場により、フロントエンドは今までのような`<script>`でいろいろな`js`ファイルを読み込む方式に加えてを全部載せ`js`にしてしまうという選択肢が増えました。この全部載せ`js`は開発者としては自分ができるすべてをそのまま実行環境であるブラウザに持っていけるので楽になる一方、ひとつの`js`ファイルの容量が大きくなりすぎるという欠点があります。特にそれがSPA(Single Page Application)だと問題です。SPAは読み込みが完了してから動作するのでユーザーにしばらく何もない画面を見せることになってしまいます。
+Với sự xuất hiện của `module bundler`, frontend có thêm lựa chọn bundle tất cả vào một file `js` thay vì load nhiều file `js` bằng `<script>` như trước. File `js` all-in-one này giúp developer thoải mái hơn vì có thể mang tất cả những gì mình làm được lên môi trường browser, nhưng nhược điểm là kích thước một file `js` trở nên quá lớn. Đặc biệt với SPA (Single Page Application), đây là vấn đề nghiêm trọng. SPA chỉ hoạt động sau khi load xong, nên người dùng sẽ phải nhìn màn hình trống một lúc.
 
-この事態を避けるために`module bundler`は容量削減のための涙ぐましい努力を続けています。その機能のひとつとして題名のTree Shakingを紹介するとともに、開発者にできるTree Shaking対応パッケージの作り方を紹介します。
+Để tránh tình trạng này, `module bundler` đã nỗ lực không ngừng để giảm kích thước. Một trong những tính năng đó là Tree Shaking, và bài viết này sẽ giới thiệu cách tạo package hỗ trợ Tree Shaking cho developer.
 
-### Tree Shakingとは
+### Tree Shaking là gì
 
-Tree Shakingとは使われていない関数、クラスを最終的な`js`ファイルに含めない機能のことです。使っていないのであれば入れる必要はない。というのは至極当然の結論ですがこのTree Shakingを使うための条件があります。
+Tree Shaking là tính năng không include các function, class không được sử dụng vào file `js` cuối cùng. Không dùng thì không cần đưa vào - đây là kết luận hoàn toàn hợp lý, nhưng có điều kiện để sử dụng Tree Shaking:
 
-- `esmodule`で書かれている
-- 副作用(side effects)のないコードである
+- Được viết bằng `esmodule`
+- Code không có side effect
 
-各条件の詳細を見ていきましょう。
+Hãy xem chi tiết từng điều kiện.
 
-## `esmodule`で書かれている
+## Được viết bằng `esmodule`
 
-`commonjs`と`esmodule`では外部ファイルの解決方法が異なります。
+`commonjs` và `esmodule` có cách resolve file bên ngoài khác nhau.
 
-`commonjs`は`require()`を使用します。`require()`はファイルのどの行でも使用ができますが`esmodule`の`import`はファイルの先頭でやらなければならないという決定的な違いがあります。
+`commonjs` sử dụng `require()`. `require()` có thể dùng ở bất kỳ dòng nào trong file, nhưng `import` của `esmodule` phải đặt ở đầu file - đây là sự khác biệt quyết định.
 
-`require()`はあるときはこの`js`を、それ以外のときはあの`js`を、と読み込むファイルをコードで切り替えることができます。つまり、次のようなことができます。
+`require()` có thể chuyển đổi file load bằng code - khi nào thì load file `js` này, khi khác thì load file `js` kia. Tức là có thể làm như sau:
 
 ```ts twoslash
 declare function shouldCallPolice(): boolean;
@@ -142,28 +142,28 @@ if (shouldCallPolice()) {
 }
 ```
 
-一方、先述のとおり`esmodule`はコードに読み込みロジックを混ぜることはできません。
+Mặt khác, như đã đề cập, `esmodule` không thể mix logic load vào code.
 
-上記例で`shouldCallPolice()`が常に`true`を返すように作られていたとしても`module bundler`はそれを検知できない可能性があります。本来なら必要のない`firefighter`を読み込まないという選択を取ることは難しいでしょう。
+Trong ví dụ trên, ngay cả khi `shouldCallPolice()` được tạo để luôn trả về `true`, `module bundler` có thể không detect được điều đó. Sẽ khó để chọn không load `firefighter` vốn không cần thiết.
 
-最近では`commonjs`でもTree Shakingができる`module bundler`も登場しています。
+Gần đây đã có `module bundler` có thể Tree Shaking cả `commonjs`.
 
-## 副作用のないコードである
+## Code không có side effect
 
-ここで言及している副作用とは以下が挙げられます。
+Side effect được đề cập ở đây bao gồm:
 
-- `export`するだけで効果がある
-- プロトタイプ汚染のような、既存のものに対して影響を及ぼす
+- Chỉ `export` thôi đã có effect
+- Ảnh hưởng đến những thứ đã tồn tại, như prototype pollution
 
-これらが含まれているかもしれないと`module bundler`が判断するとTree Shakingの効率が落ちます。
+Nếu `module bundler` cho rằng có thể có những thứ này, hiệu quả Tree Shaking sẽ giảm.
 
-### 副作用がないことを伝える
+### Thông báo rằng không có side effect
 
-`module bundler`に制作したパッケージに副作用がないことを伝える方法があります。package.jsonにひとつ加えるだけで完了します。
+Có cách để thông báo cho `module bundler` rằng package không có side effect. Chỉ cần thêm một thứ vào package.json là xong.
 
 ### `sideEffects`
 
-このプロパティをpackage.jsonに加えて、値を`false`とすればそのパッケージには副作用がないことを伝えられます。
+Thêm property này vào package.json với giá trị `false` để thông báo rằng package không có side effect.
 
 ```json
 {
@@ -182,7 +182,7 @@ if (shouldCallPolice()) {
 }
 ```
 
-副作用があり、そのファイルが判明しているときはそのファイルを指定します。
+Nếu có side effect và biết rõ file nào, chỉ định file đó:
 
 ```json
 {

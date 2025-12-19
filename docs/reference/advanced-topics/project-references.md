@@ -172,15 +172,15 @@ Nhờ các lợi ích này, developer có thể làm việc hiệu quả hơn, �
 
 Bảng sau so sánh sự khác biệt chính giữa quản lý project kiểu monolith truyền thống và sử dụng project references:
 
-| Đặc điểm            | Phương pháp Monolith     | Project References         |
-| ------------------- | ------------------------ | -------------------------- |
-| Thời gian build     | Build toàn bộ mỗi lần    | Chỉ build phần thay đổi    |
-| Quản lý dependency  | Ngầm định                | Rõ ràng                    |
+| Đặc điểm               | Phương pháp Monolith  | Project References             |
+| ---------------------- | --------------------- | ------------------------------ |
+| Thời gian build        | Build toàn bộ mỗi lần | Chỉ build phần thay đổi        |
+| Quản lý dependency     | Ngầm định             | Rõ ràng                        |
 | Tham chiếu giữa module | Không hạn chế         | Hạn chế theo ranh giới project |
-| Memory usage        | Cao                      | Thấp                       |
-| Performance IDE     | Giảm với project lớn     | Tương đối ổn định          |
-| Partial build       | Không thể                | Dễ dàng                    |
-| Config file         | Đơn hoặc phức tạp        | Nhiều config rõ ràng       |
+| Memory usage           | Cao                   | Thấp                           |
+| Performance IDE        | Giảm với project lớn  | Tương đối ổn định              |
+| Partial build          | Không thể             | Dễ dàng                        |
+| Config file            | Đơn hoặc phức tạp     | Nhiều config rõ ràng           |
 
 Từ so sánh này, có thể thấy project references rất hiệu quả cho quản lý project quy mô lớn.
 
@@ -461,20 +461,20 @@ Trước khi bắt đầu tutorial này, hãy đảm bảo các công cụ sau �
 
 Ngoài ra, giả định bạn đã có kiến thức cơ bản về TypeScript.
 
-### ワークスペースの初期化
+### Khởi tạo Workspace
 
-#### ディレクトリの作成
+#### Tạo thư mục
 
-まず、新しいワークスペースのためのディレクトリを作成します。ターミナルを開き、次のコマンドを実行してください：
+Đầu tiên, tạo thư mục cho workspace mới. Mở terminal và chạy lệnh sau:
 
 ```bash
 mkdir typescript-monorepo-example
 cd typescript-monorepo-example
 ```
 
-#### package.json の作成
+#### Tạo package.json
 
-次に、ワークスペースルートに `package.json` ファイルを直接作成します。次の内容で `package.json` ファイルを作成してください：
+Tiếp theo, tạo trực tiếp file `package.json` ở workspace root. Tạo file `package.json` với nội dung sau:
 
 ```json
 {
@@ -487,26 +487,26 @@ cd typescript-monorepo-example
 }
 ```
 
-ここで重要なポイントは次の通りです：
+Các điểm quan trọng ở đây:
 
-- `"private": true`: このフィールドは、このパッケージが誤って公開されることを防ぎます。モノレポのルートパッケージは通常公開されないため、このフラグを設定します。
-- `"workspaces": ["packages/*"]`: このフィールドは、Yarnにワークスペースの場所を指示します。この設定により、`packages` ディレクトリ内のすべてのサブディレクトリがワークスペースのプロジェクトとして認識されます。
+- `"private": true`: Field này ngăn package bị publish nhầm. Package root của monorepo thường không được publish nên cần set flag này.
+- `"workspaces": ["packages/*"]`: Field này chỉ cho Yarn biết vị trí của workspace. Với cấu hình này, tất cả các thư mục con trong thư mục `packages` sẽ được nhận biết là project của workspace.
 
-#### .yarnrc.yml の作成
+#### Tạo .yarnrc.yml
 
-続いて、Yarnの設定ファイル `.yarnrc.yml` をワークスペースルートに作成し、次の内容を追加します：
+Tiếp theo, tạo file cấu hình Yarn `.yarnrc.yml` ở workspace root và thêm nội dung sau:
 
 ```yaml
 nodeLinker: node-modules
 ```
 
-この設定により、Yarnがnode_modulesディレクトリを使用するようになります。
+Cấu hình này làm cho Yarn sử dụng thư mục node_modules.
 
-### 共通の TypeScript 設定
+### Cấu hình TypeScript chung
 
-#### tsconfig.base.json の作成
+#### Tạo tsconfig.base.json
 
-TypeScriptの共通設定を作成します。ワークスペースルートに `tsconfig.base.json` ファイルを作成し、次の内容を追加してください：
+Tạo cấu hình TypeScript chung. Tạo file `tsconfig.base.json` ở workspace root và thêm nội dung sau:
 
 ```json
 {
@@ -524,15 +524,15 @@ TypeScriptの共通設定を作成します。ワークスペースルートに 
 }
 ```
 
-`tsconfig.base.json` の役割は、すべてのプロジェクトで共有される基本的なTypeScript設定を提供することです。この設定の中で、プロジェクト参照において特に重要なポイントは次の通りです：
+Vai trò của `tsconfig.base.json` là cung cấp cấu hình TypeScript cơ bản được chia sẻ bởi tất cả các project. Trong cấu hình này, các điểm đặc biệt quan trọng với project references:
 
-- `"composite": true`: このオプションは、プロジェクト参照を使用する際に必須です。これにより、プロジェクトが他のプロジェクトから参照可能になります。
-- `"declaration": true`: 宣言ファイル（.d.ts）を生成します。これは `"composite": true` を使用する際に必要です。
-- `"rootDir"` と `"outDir"`: これらのオプションは、ソースファイルと出力ファイルの場所を指定します。プロジェクト参照を使用する際、これらの設定は一貫性を保つために重要です。
+- `"composite": true`: Option này bắt buộc khi sử dụng project references. Nhờ đó project có thể được tham chiếu từ các project khác.
+- `"declaration": true`: Tạo declaration file (.d.ts). Điều này cần thiết khi sử dụng `"composite": true`.
+- `"rootDir"` và `"outDir"`: Các option này chỉ định vị trí của source file và output file. Khi sử dụng project references, các cấu hình này quan trọng để đảm bảo tính nhất quán.
 
-#### ワークスペースルートの tsconfig.json の作成
+#### Tạo tsconfig.json ở workspace root
 
-次に、ワークスペースルートに `tsconfig.json` ファイルを作成し、次の内容を追加します：
+Tiếp theo, tạo file `tsconfig.json` ở workspace root và thêm nội dung sau:
 
 ```json
 {
@@ -551,25 +551,25 @@ TypeScriptの共通設定を作成します。ワークスペースルートに 
 }
 ```
 
-このワークスペースルートの `tsconfig.json` は、TypeScriptコンパイラーに向けた「目次」または「地図」のような役割を果たします。このファイルの `"references"` フィールドには、ワークスペース内のすべてのプロジェクトが列挙されており、これによってTypeScriptコンパイラーはワークスペース全体の構造を把握できます。ここでのプロジェクトの列挙順序は重要ではなく、TypeScriptコンパイラーが自動的に依存関係を解析し、適切なビルド順序を決定します。
+`tsconfig.json` ở workspace root đóng vai trò như "mục lục" hoặc "bản đồ" cho TypeScript compiler. Field `"references"` trong file này liệt kê tất cả các project trong workspace, nhờ đó TypeScript compiler có thể nắm bắt cấu trúc của toàn bộ workspace. Thứ tự liệt kê các project ở đây không quan trọng, TypeScript compiler sẽ tự động phân tích dependency và quyết định thứ tự build phù hợp.
 
-このファイルには `compilerOptions` を含めていないことに注目してください。各プロジェクト固有の設定は、それぞれのプロジェクトの `tsconfig.json` で行います。このファイルの主な目的は、ワークスペース全体を一度にビルドできるようにすることです。ワークスペースルートで `tsc -b` を実行するだけで、すべてのプロジェクトを適切な順序でビルドできるようになります。
+Lưu ý rằng file này không bao gồm `compilerOptions`. Cấu hình riêng của mỗi project được thực hiện trong `tsconfig.json` của project đó. Mục đích chính của file này là cho phép build toàn bộ workspace cùng một lúc. Chỉ cần chạy `tsc -b` ở workspace root là có thể build tất cả các project theo thứ tự phù hợp.
 
-実際には、このファイルがなくても各プロジェクト（例：`packages/web`）で `tsc -b` を実行すれば、依存関係を解決しながらビルドすることは可能です。しかし、このファイルを用意することで、ワークスペース全体のビルドが簡単になります。このファイルは、大規模なプロジェクトの管理を容易にし、ビルドプロセスを効率化するための重要なツールです。コンパイルの制御ではなく、プロジェクト構造の定義に焦点を当てていることが特徴です。
+Thực tế, ngay cả không có file này, vẫn có thể build với việc resolve dependency bằng cách chạy `tsc -b` ở mỗi project (ví dụ: `packages/web`). Tuy nhiên, chuẩn bị file này giúp việc build toàn bộ workspace trở nên đơn giản. File này là công cụ quan trọng để quản lý project quy mô lớn dễ dàng và tối ưu hóa build process. Đặc điểm là tập trung vào định nghĩa cấu trúc project, không phải kiểm soát compilation.
 
-### プロジェクトの設定
+### Cấu hình Project
 
-#### プロジェクトの基本構造の作成
+#### Tạo cấu trúc cơ bản của Project
 
-まず、プロジェクトの基本構造を作成します。`packages` ディレクトリを作成し、その中に3つのサブディレクトリ（`common`、`cli`、`web`）を作成します。次のコマンドを実行してください：
+Đầu tiên, tạo cấu trúc cơ bản của project. Tạo thư mục `packages` và trong đó tạo 3 thư mục con (`common`, `cli`, `web`). Chạy lệnh sau:
 
 ```bash
 mkdir -p packages/{common,cli,web}
 ```
 
-#### common プロジェクトの設定
+#### Cấu hình project common
 
-まず、`common` プロジェクトの設定を行います。`packages/common/package.json` ファイルを作成し、次の内容を追加してください：
+Đầu tiên, cấu hình project `common`. Tạo file `packages/common/package.json` và thêm nội dung sau:
 
 ```json
 {
@@ -579,9 +579,9 @@ mkdir -p packages/{common,cli,web}
 }
 ```
 
-ここで、`"exports"` フィールドは、このパッケージが外部に公開するエントリーポイントを指定します。これにより、他のプロジェクトがこのパッケージをインポートする際の参照先が明確になります。
+Ở đây, field `"exports"` chỉ định entry point mà package này expose ra ngoài. Điều này làm rõ điểm tham chiếu khi các project khác import package này.
 
-次に、`packages/common/tsconfig.json` ファイルを作成し、次の内容を追加します：
+Tiếp theo, tạo file `packages/common/tsconfig.json` và thêm nội dung sau:
 
 ```json
 {
@@ -589,9 +589,9 @@ mkdir -p packages/{common,cli,web}
 }
 ```
 
-`"extends"` フィールドは、別の TSConfig ファイルから設定を継承することを指定します。この場合、ワークスペースルートの `tsconfig.base.json` から設定を継承しています。
+Field `"extends"` chỉ định việc kế thừa cấu hình từ TSConfig file khác. Trong trường hợp này, kế thừa cấu hình từ `tsconfig.base.json` ở workspace root.
 
-最後に、`packages/common/src/index.ts` ファイルを作成し、次の内容を追加します：
+Cuối cùng, tạo file `packages/common/src/index.ts` và thêm nội dung sau:
 
 ```typescript title="packages/common/src/index.ts"
 export function helloWorld(): string {
@@ -599,9 +599,9 @@ export function helloWorld(): string {
 }
 ```
 
-#### cli プロジェクトの設定
+#### Cấu hình project cli
 
-次に、`cli` プロジェクトの設定を行います。`packages/cli/package.json` ファイルを作成し、次の内容を追加してください：
+Tiếp theo, cấu hình project `cli`. Tạo file `packages/cli/package.json` và thêm nội dung sau:
 
 ```json
 {
@@ -613,9 +613,9 @@ export function helloWorld(): string {
 }
 ```
 
-`"dependencies"` フィールドは、このプロジェクトが依存する他のパッケージを指定します。ここでは、`@company/common` パッケージへの依存を宣言しています。`"workspace:^"` は、このパッケージがワークスペース内の別のプロジェクトであることを示しています。
+Field `"dependencies"` chỉ định các package khác mà project này phụ thuộc. Ở đây khai báo dependency đến package `@company/common`. `"workspace:^"` cho biết package này là project khác trong workspace.
 
-続いて、`packages/cli/tsconfig.json` ファイルを作成し、次の内容を追加します：
+Tiếp theo, tạo file `packages/cli/tsconfig.json` và thêm nội dung sau:
 
 ```json
 {
@@ -628,9 +628,9 @@ export function helloWorld(): string {
 }
 ```
 
-`"references"` フィールドは、このプロジェクトが参照する他のプロジェクトを指定します。これにより、TypeScriptコンパイラはプロジェクト間の依存関係を理解し、適切な順序でビルドを行うことができます。
+Field `"references"` chỉ định các project khác mà project này tham chiếu. Nhờ đó, TypeScript compiler có thể hiểu dependency giữa các project và thực hiện build theo thứ tự phù hợp.
 
-最後に、`packages/cli/src/index.ts` ファイルを作成し、次の内容を追加します：
+Cuối cùng, tạo file `packages/cli/src/index.ts` và thêm nội dung sau:
 
 ```typescript title="packages/cli/src/index.ts"
 import { helloWorld } from "@company/common";
@@ -638,9 +638,9 @@ import { helloWorld } from "@company/common";
 console.log(helloWorld());
 ```
 
-#### web プロジェクトの設定
+#### Cấu hình project web
 
-最後に、`web` プロジェクトの設定を行います。`packages/web/package.json` ファイルを作成し、次の内容を追加してください：
+Cuối cùng, cấu hình project `web`. Tạo file `packages/web/package.json` và thêm nội dung sau:
 
 ```json
 {
@@ -652,7 +652,7 @@ console.log(helloWorld());
 }
 ```
 
-次に、`packages/web/tsconfig.json` ファイルを作成し、次の内容を追加します：
+Tiếp theo, tạo file `packages/web/tsconfig.json` và thêm nội dung sau:
 
 ```json
 {
@@ -665,7 +665,7 @@ console.log(helloWorld());
 }
 ```
 
-最後に、`packages/web/src/index.ts` ファイルを作成し、次の内容を追加します：
+Cuối cùng, tạo file `packages/web/src/index.ts` và thêm nội dung sau:
 
 ```typescript title="packages/web/src/index.ts"
 import { helloWorld } from "@company/common";
@@ -673,82 +673,82 @@ import { helloWorld } from "@company/common";
 console.log(helloWorld());
 ```
 
-### 依存関係のインストール
+### Cài đặt Dependency
 
-すべてのプロジェクトの設定が完了したら、依存関係をインストールします。ワークスペースルートで次のコマンドを実行してください：
+Sau khi hoàn thành cấu hình tất cả các project, cài đặt dependency. Chạy lệnh sau ở workspace root:
 
 ```bash
 yarn install
 ```
 
-### プロジェクトのビルド
+### Build Project
 
-これで、ワークスペース全体をビルドする準備が整いました。次のコマンドをワークスペースルートで実行してプロジェクトをビルドしてください：
+Bây giờ đã sẵn sàng để build toàn bộ workspace. Chạy lệnh sau ở workspace root để build project:
 
 ```bash
 yarn tsc -b
 ```
 
-このコマンドをワークスペースルートで実行することが重要です。なぜなら、ワークスペースルートの `tsconfig.json` がプロジェクト参照の構造を定義しているからです。
+Việc chạy lệnh này ở workspace root là quan trọng vì `tsconfig.json` ở workspace root định nghĩa cấu trúc project references.
 
-このコマンドを実行すると、次のような処理が行われます：
+Khi chạy lệnh này, các xử lý sau sẽ được thực hiện:
 
-1. TypeScriptコンパイラ（tsc）は、まずワークスペースルートの `tsconfig.json` を読み込みます。このファイルには `"references"` フィールドがあり、ここに列挙されているプロジェクトがビルドの対象となります。
-2. `"references"` フィールドに記載されている順序は重要ではありません。TypeScriptコンパイラは、これらの参照を解析し、プロジェクト間の依存関係を自動的に判断します。
-3. 依存関係グラフに基づいて、プロジェクトを適切な順序でビルドします。この例では、次の順序でビルドが行われます：
-   - まず `common` プロジェクト（他のプロジェクトに依存していないため）
-   - 次に `cli` と `web` プロジェクト（両方とも `common` に依存しているため）
-4. 各プロジェクトのビルド時には、そのプロジェクトの `tsconfig.json` が使用されます。これらの設定ファイルは `tsconfig.base.json` を継承しているため、共通の設定が適用されます。
-5. 各プロジェクトのソースファイルがコンパイルされ、指定された出力ディレクトリ（`dist`）に JavaScript ファイルと型定義ファイル（.d.ts）が生成されます。
-6. プロジェクト参照の情報を含む `.tsbuildinfo` ファイルが各プロジェクトに生成されます。これにより、次回のビルド時に変更されたファイルのみを再コンパイルすることができ、ビルド時間が短縮されます。
+1. TypeScript compiler (tsc) đầu tiên đọc `tsconfig.json` ở workspace root. File này có field `"references"`, và các project được liệt kê ở đây sẽ là đối tượng build.
+2. Thứ tự được ghi trong field `"references"` không quan trọng. TypeScript compiler sẽ phân tích các tham chiếu này và tự động xác định dependency giữa các project.
+3. Dựa trên dependency graph, build các project theo thứ tự phù hợp. Trong ví dụ này, build được thực hiện theo thứ tự:
+   - Đầu tiên project `common` (vì không phụ thuộc vào project khác)
+   - Tiếp theo project `cli` và `web` (vì cả hai đều phụ thuộc vào `common`)
+4. Khi build mỗi project, `tsconfig.json` của project đó được sử dụng. Các file cấu hình này kế thừa từ `tsconfig.base.json` nên cấu hình chung được áp dụng.
+5. Source file của mỗi project được compile, và JavaScript file cùng type definition file (.d.ts) được tạo ra trong output directory được chỉ định (`dist`).
+6. File `.tsbuildinfo` chứa thông tin project references được tạo ra cho mỗi project. Nhờ đó, ở lần build tiếp theo chỉ cần recompile các file đã thay đổi, giúp rút ngắn thời gian build.
 
-このプロセスにより、プロジェクト間の依存関係が正しく解決され、必要な順序でビルドが行われます。また、変更があったプロジェクトとその依存先のみが再ビルドされるため、大規模なプロジェクトでも効率的なビルドが可能になります。
+Qua process này, dependency giữa các project được resolve đúng cách và build được thực hiện theo thứ tự cần thiết. Ngoài ra, chỉ các project đã thay đổi và dependency của chúng được rebuild, nên có thể build hiệu quả ngay cả với project quy mô lớn.
 
-### 実行
+### Chạy
 
-ビルドが成功したら、作成したプロジェクトを実行してみましょう。まず、CLI プロジェクトを実行します：
+Sau khi build thành công, hãy chạy các project đã tạo. Đầu tiên, chạy CLI project:
 
 ```bash
 node packages/cli/dist/index.js
 ```
 
-次に、Web プロジェクトを実行します：
+Tiếp theo, chạy Web project:
 
 ```bash
 node packages/web/dist/index.js
 ```
 
-両方のコマンドで "Hello World" が出力されれば、セットアップは成功です。
+Nếu cả hai lệnh đều output "Hello World", setup đã thành công.
 
-### まとめ
+### Tổng kết
 
-このチュートリアルでは、TypeScriptのプロジェクト参照機能を使用してモノレポを構築する方法を学びました。この構造により、大規模なTypeScriptプロジェクトを効率的に管理し、ビルド時間を短縮し、コードの再利用性を高めることができます。プロジェクト参照を活用することで、ビルド時間の短縮、型チェックの効率化、依存関係の明確化など、多くの利点を得ることができます。
+Trong tutorial này, chúng ta đã học cách xây dựng monorepo sử dụng tính năng project references của TypeScript. Cấu trúc này cho phép quản lý hiệu quả các TypeScript project quy mô lớn, rút ngắn thời gian build và tăng khả năng tái sử dụng code. Bằng cách tận dụng project references, có thể thu được nhiều lợi ích như rút ngắn thời gian build, tối ưu hóa type checking và làm rõ dependency.
 
-## プロジェクト参照の活用: ソースとテストの分離
+## Ứng dụng Project References: Tách Source và Test
 
-### はじめに {#source-test-separation-intro}
+### Giới thiệu {#source-test-separation-intro}
 
-#### 概要 {#source-test-separation-overview}
+#### Tổng quan {#source-test-separation-overview}
 
-このチュートリアルでは、TypeScriptのプロジェクト参照機能を使用して、ソースコードとテストコードを分離した構造を持つプロジェクトを構築する方法を、ステップバイステップで説明します。
+Tutorial này giải thích từng bước cách xây dựng project có cấu trúc tách biệt source code và test code, sử dụng tính năng project references của TypeScript.
 
-#### 目的 {#source-test-separation-purpose}
+#### Mục đích {#source-test-separation-purpose}
 
-このガイドの目的は、次の要素を含むプロジェクト構造を構築することです：
+Mục đích của hướng dẫn này là xây dựng cấu trúc project bao gồm các yếu tố sau:
 
-1. メインのソースコードを含む `src` ディレクトリ
-2. テストコードを含む `src` ディレクトリ内の `.test.ts` ファイル
-3. ソースコードとテストコードを分離しつつ、プロジェクト参照を使用して関連つける
+1. Thư mục `src` chứa source code chính
+2. Các file `.test.ts` trong thư mục `src` chứa test code
+3. Tách biệt source code và test code, đồng thời liên kết chúng bằng project references
 
-この構造により、ビルドの最適化と依存関係の明確化を実現します。依存関係の明確化は、次のような利点をもたらします：
+Cấu trúc này giúp tối ưu hóa build và làm rõ dependency. Việc làm rõ dependency mang lại các lợi ích sau:
 
-- コードの構造が明確になり、開発者が全体像を把握しやすくなります。
-- 不適切な依存関係（例：ソースコードがテストコードに依存する）を防ぎ、コードの品質を向上させます。
-- ビルドプロセスの効率化につながり、大規模プロジェクトでのビルド時間を短縮します。
+- Cấu trúc code trở nên rõ ràng, developer dễ nắm bắt toàn cảnh hơn.
+- Ngăn chặn dependency không phù hợp (ví dụ: source code phụ thuộc vào test code), cải thiện chất lượng code.
+- Dẫn đến tối ưu hóa build process, rút ngắn thời gian build trong project quy mô lớn.
 
-#### 最終的なプロジェクト構造 {#source-test-separation-final-structure}
+#### Cấu trúc Project cuối cùng {#source-test-separation-final-structure}
 
-チュートリアルの完了時、次のような構造のプロジェクトが完成します：
+Khi hoàn thành tutorial, project sẽ có cấu trúc như sau:
 
 ```plaintext
 typescript-source-test-separation/
@@ -762,32 +762,32 @@ typescript-source-test-separation/
     └── hello-world.test.ts
 ```
 
-この構造により、効率的なコード管理と高速なビルドが可能になります。
+Cấu trúc này cho phép quản lý code hiệu quả và build nhanh.
 
-#### 完成形のコード {#source-test-separation-final-code}
+#### Code hoàn chỉnh {#source-test-separation-final-code}
 
-このチュートリアルの完成形のコードは、次のGitHubリポジトリで確認できます：
+Code hoàn chỉnh của tutorial này có thể xem tại GitHub repository:
 https://github.com/yytypescript/project-reference-samples/tree/main/01-source-test-separation
 
-### 前提条件 {#source-test-separation-prerequisites}
+### Yêu cầu {#source-test-separation-prerequisites}
 
-このチュートリアルをはじめる前に、次のツールがインストールされていることを確認してください：
+Trước khi bắt đầu tutorial này, hãy đảm bảo các công cụ sau đã được cài đặt:
 
-- Node.js（最新の LTS バージョン）
-- Yarn（バージョン 4.4.0 以上）
+- Node.js (phiên bản LTS mới nhất)
+- Yarn (phiên bản 4.4.0 trở lên)
 
-また、基本的な TypeScript の知識があることを前提としています。
+Ngoài ra, giả định bạn đã có kiến thức cơ bản về TypeScript.
 
-### プロジェクトの初期化 {#source-test-separation-init}
+### Khởi tạo Project {#source-test-separation-init}
 
-まず、新しいプロジェクトのためのディレクトリを作成します。ターミナルを開き、次のコマンドを実行してください：
+Đầu tiên, tạo thư mục cho project mới. Mở terminal và chạy lệnh sau:
 
 ```bash
 mkdir typescript-source-test-separation
 cd typescript-source-test-separation
 ```
 
-次に、`package.json` ファイルを手動で作成します。次の内容を `package.json` ファイルに追加してください：
+Tiếp theo, tạo thủ công file `package.json`. Thêm nội dung sau vào file `package.json`:
 
 ```json
 {
@@ -801,25 +801,25 @@ cd typescript-source-test-separation
 }
 ```
 
-続いて、`.yarnrc.yml` ファイルを作成し、次の内容を追加します：
+Tiếp theo, tạo file `.yarnrc.yml` và thêm nội dung sau:
 
 ```yaml
 nodeLinker: node-modules
 ```
 
-この設定により、Yarnがnode_modulesディレクトリを使用するようになります。
+Cấu hình này làm cho Yarn sử dụng thư mục node_modules.
 
-最後に、依存関係をインストールします：
+Cuối cùng, cài đặt dependency:
 
 ```bash
 yarn install
 ```
 
-### TypeScript設定ファイルの作成
+### Tạo file cấu hình TypeScript
 
-#### ルートの tsconfig.json
+#### tsconfig.json ở root
 
-プロジェクトのルートディレクトリに `tsconfig.json` ファイルを作成し、次の内容を追加します：
+Tạo file `tsconfig.json` ở thư mục root của project và thêm nội dung sau:
 
 ```json
 {
@@ -835,13 +835,13 @@ yarn install
 }
 ```
 
-このファイルは、TypeScriptコンパイラに向けた「目次」または「地図」のような役割を果たします。`"references"` フィールドには、このプロジェクトが参照する他のTSConfigファイルを指定します。これにより、TypeScriptコンパイラはプロジェクト間の依存関係を理解し、適切な順序でビルドを行うことができます。
+File này đóng vai trò như "mục lục" hoặc "bản đồ" cho TypeScript compiler. Field `"references"` chỉ định các TSConfig file khác mà project này tham chiếu. Nhờ đó, TypeScript compiler có thể hiểu dependency giữa các project và thực hiện build theo thứ tự phù hợp.
 
-`"files"` フィールドを空に設定することで、このファイル自体はコンパイル対象にならず、純粋にプロジェクト参照の設定のみを行います。これにより、プロジェクト全体の構造を定義しつつ、実際のコンパイルは各サブプロジェクトの設定に委ねることができます。
+Bằng cách set field `"files"` thành rỗng, file này không trở thành đối tượng compile, chỉ thực hiện cấu hình project references thuần túy. Điều này cho phép định nghĩa cấu trúc toàn bộ project, đồng thời giao compilation thực tế cho cấu hình của mỗi sub-project.
 
-#### ソースコード用の tsconfig.src.json
+#### tsconfig.src.json cho source code
 
-次に、ソースコード用の `tsconfig.src.json` ファイルを作成し、次の内容を追加します：
+Tiếp theo, tạo file `tsconfig.src.json` cho source code và thêm nội dung sau:
 
 ```json
 {
@@ -855,20 +855,20 @@ yarn install
 }
 ```
 
-このファイルでは、次の設定が特に重要です：
+Trong file này, các cấu hình sau đặc biệt quan trọng:
 
-- `"composite": true`: このオプションは、プロジェクト参照を使用する際に必須です。これにより、このプロジェクトが他のプロジェクトから参照可能になります。
-- `"rootDir"`: ソースファイルのルートディレクトリを指定します。
-- `"outDir"`: コンパイル後のファイルの出力先を指定します。
+- `"composite": true`: Option này bắt buộc khi sử dụng project references. Nhờ đó project này có thể được tham chiếu từ các project khác.
+- `"rootDir"`: Chỉ định thư mục root của source file.
+- `"outDir"`: Chỉ định nơi output file sau compile.
 
-その他の設定項目：
+Các cấu hình khác:
 
-- `"include"`: コンパイル対象のファイルを指定します。
-- `"exclude"`: コンパイルから除外するファイルを指定します。ここではテストファイルを除外しています。
+- `"include"`: Chỉ định các file là đối tượng compile.
+- `"exclude"`: Chỉ định các file loại trừ khỏi compile. Ở đây loại trừ test file.
 
-#### テストコード用の tsconfig.test.json
+#### tsconfig.test.json cho test code
 
-最後に、テストコード用の `tsconfig.test.json` ファイルを作成し、次の内容を追加します：
+Cuối cùng, tạo file `tsconfig.test.json` cho test code và thêm nội dung sau:
 
 ```json
 {
@@ -886,23 +886,23 @@ yarn install
 }
 ```
 
-このファイルでは、次の設定が特に重要です：
+Trong file này, các cấu hình sau đặc biệt quan trọng:
 
-- `"composite": true`: ソースコードの設定と同様、プロジェクト参照を可能にします。
-- `"references"`: ソースコードのプロジェクトへの参照を定義します。これにより、テストコードからソースコードへの依存関係が明確になります。
-- `"noEmit": true`: この設定により、テストコードのトランスパイル（JavaScriptへの変換）は行われませんが、型チェックは実行されます。これは、テストコードは直接実行されるため、トランスパイルする必要がない一方で、型の整合性は確認したいという要求に応えるものです。
+- `"composite": true`: Tương tự cấu hình source code, cho phép project references.
+- `"references"`: Định nghĩa tham chiếu đến project source code. Điều này làm rõ dependency từ test code đến source code.
+- `"noEmit": true`: Với cấu hình này, test code không được transpile (chuyển đổi sang JavaScript), nhưng type checking vẫn được thực hiện. Điều này đáp ứng yêu cầu không cần transpile test code vì nó được chạy trực tiếp, trong khi vẫn muốn kiểm tra tính nhất quán của type.
 
-その他の設定項目：
+Các cấu hình khác:
 
-- `"skipLibCheck": true`: 宣言ファイルの型チェックをスキップし、ビルド時間を短縮します。
+- `"skipLibCheck": true`: Bỏ qua type checking của declaration file, rút ngắn thời gian build.
 
-この構成により、ソースコードからテストコードへの依存が不可能になります。これは、本番コードにテストコードが混入することを防ぎ、コードの品質と保守性を向上させる重要な利点です。
+Với cấu hình này, không thể có dependency từ source code đến test code. Đây là lợi ích quan trọng để ngăn test code lẫn vào production code, cải thiện chất lượng và khả năng bảo trì của code.
 
-### ソースコードとテストコードの作成
+### Tạo Source Code và Test Code
 
-#### ソースコードの作成
+#### Tạo Source Code
 
-`src` ディレクトリを作成し、その中に `hello-world.ts` ファイルを作成します：
+Tạo thư mục `src` và tạo file `hello-world.ts` trong đó:
 
 ```typescript
 export function helloWorld(): string {
@@ -910,9 +910,9 @@ export function helloWorld(): string {
 }
 ```
 
-#### テストコードの作成
+#### Tạo Test Code
 
-同じく `src` ディレクトリ内に、`hello-world.test.ts` ファイルを作成します：
+Tương tự, tạo file `hello-world.test.ts` trong thư mục `src`:
 
 ```typescript
 import { expect, test } from "vitest";
@@ -923,66 +923,66 @@ test("helloWorld function", () => {
 });
 ```
 
-### プロジェクトのビルドとテスト
+### Build và Test Project
 
-これで、プロジェクトをビルドし、テストを実行する準備が整いました。
+Bây giờ đã sẵn sàng để build project và chạy test.
 
-#### ソースコードのみをコンパイル
+#### Chỉ compile Source Code
 
-ソースコードのみをコンパイルするには、次のコマンドを実行します：
+Để chỉ compile source code, chạy lệnh sau:
 
 ```bash
 yarn tsc -b tsconfig.src.json
 ```
 
-このコマンドは `tsconfig.src.json` で定義されたソースコードのみをコンパイルします。テストコードは除外されます。
+Lệnh này chỉ compile source code được định nghĩa trong `tsconfig.src.json`. Test code được loại trừ.
 
-#### ソースコードとテストコードの両方をコンパイル
+#### Compile cả Source Code và Test Code
 
-ソースコードとテストコードの両方をコンパイルするには、プロジェクトのルートで次のコマンドを実行します：
+Để compile cả source code và test code, chạy lệnh sau ở root của project:
 
 ```bash
 yarn tsc -b
 ```
 
-このコマンドを実行すると、次のような処理が内部的に行われます：
+Khi chạy lệnh này, các xử lý sau được thực hiện nội bộ:
 
-1. TypeScriptコンパイラは、まずルートの `tsconfig.json` を読み込みます。
-2. 依存関係グラフの構築:
-   - `tsconfig.json` の `references` フィールドに基づいて、`tsconfig.src.json` と `tsconfig.test.json` が参照されます。
-   - さらに、`tsconfig.test.json` の `references` フィールドにより、`tsconfig.src.json` への依存関係が認識されます。
-   - これにより、`src` → `test` という依存関係グラフが構築されます。
-3. コンパイルの実行:
-   - 依存関係グラフに基づいて、プロジェクトを適切な順序で処理します。
-   - まず `tsconfig.src.json` が処理されます。これにより、ソースコードがトランスパイルされ、出力ファイルが生成されます。
-   - 次に `tsconfig.test.json` が処理されます。この際、`tsconfig.src.json` の出力を参照します。
-   - `tsconfig.test.json` の `"noEmit": true` 設定により、テストコードのトランスパイルは行われませんが、型チェックは実行されます。
+1. TypeScript compiler đầu tiên đọc `tsconfig.json` ở root.
+2. Xây dựng dependency graph:
+   - Dựa trên field `references` của `tsconfig.json`, `tsconfig.src.json` và `tsconfig.test.json` được tham chiếu.
+   - Thêm vào đó, dựa trên field `references` của `tsconfig.test.json`, dependency đến `tsconfig.src.json` được nhận biết.
+   - Nhờ đó, dependency graph `src` → `test` được xây dựng.
+3. Thực thi compile:
+   - Dựa trên dependency graph, xử lý các project theo thứ tự phù hợp.
+   - Đầu tiên `tsconfig.src.json` được xử lý. Nhờ đó source code được transpile và output file được tạo ra.
+   - Tiếp theo `tsconfig.test.json` được xử lý. Lúc này tham chiếu output của `tsconfig.src.json`.
+   - Do cấu hình `"noEmit": true` của `tsconfig.test.json`, test code không được transpile, nhưng type checking được thực hiện.
 
-この過程により、ソースコードのトランスパイルとテストコードの型チェックが一度の操作で行われます。これにより、ソースコードとテストコード間の型の整合性が保証され、かつテストコードが不要にトランスパイルされることを防ぎます。
+Qua process này, transpile source code và type checking test code được thực hiện trong một thao tác. Điều này đảm bảo tính nhất quán của type giữa source code và test code, đồng thời ngăn test code bị transpile không cần thiết.
 
-#### テストの実行
+#### Chạy Test
 
-テストを実行するには、次のコマンドを使用します：
+Để chạy test, sử dụng lệnh sau:
 
 ```bash
 yarn vitest
 ```
 
-このコマンドは、Vitestを使用してテストを実行します。
+Lệnh này sử dụng Vitest để chạy test.
 
-### プロジェクト参照の利点 {#source-test-separation-benefits}
+### Lợi ích của Project References {#source-test-separation-benefits}
 
-このプロジェクト構造には、次のような利点があります：
+Cấu trúc project này có các lợi ích sau:
 
-1. **ビルドの最適化**: ソースコードとテストコードが分離されているため、本番用のビルドにテストコードが含まれません。
-2. **依存関係の明確化**: テストプロジェクトがソースプロジェクトに依存する構造により、不適切な依存関係を防ぎます。特に、ソースコードからテストコードへの依存が不可能になるため、本番コードの品質が向上します。
-3. **高速なフィードバック**: 部分的なビルドが可能になり、変更された部分のみを素早くチェックできます。
-4. **IDE パフォーマンスの向上**: プロジェクトの分割により、各部分の型チェックが高速化され、IDEのレスポンスが向上します。
+1. **Tối ưu hóa Build**: Vì source code và test code được tách biệt, test code không được include trong build cho production.
+2. **Làm rõ Dependency**: Cấu trúc test project phụ thuộc vào source project giúp ngăn dependency không phù hợp. Đặc biệt, vì không thể có dependency từ source code đến test code, chất lượng production code được cải thiện.
+3. **Feedback nhanh**: Cho phép build từng phần, có thể kiểm tra nhanh chỉ phần đã thay đổi.
+4. **Cải thiện Performance IDE**: Việc chia nhỏ project giúp tăng tốc type checking của mỗi phần, cải thiện response của IDE.
 
-### まとめ {#source-test-separation-summary}
+### Tổng kết {#source-test-separation-summary}
 
-このチュートリアルでは、TypeScriptのプロジェクト参照機能を使用して、ソースコードとテストコードを分離した構造を持つプロジェクトを構築する方法を学びました。この構造により、大規模なTypeScriptプロジェクトを効率的に管理し、ビルド時間を短縮し、コードの品質を向上させることができます。プロジェクト参照を活用することで、開発プロセスの効率化と保守性の向上を実現できます。
+Trong tutorial này, chúng ta đã học cách xây dựng project có cấu trúc tách biệt source code và test code, sử dụng tính năng project references của TypeScript. Cấu trúc này cho phép quản lý hiệu quả các TypeScript project quy mô lớn, rút ngắn thời gian build và cải thiện chất lượng code. Bằng cách tận dụng project references, có thể tối ưu hóa development process và cải thiện khả năng bảo trì.
 
-## おわりに
+## Kết luận
 
-TypeScriptのプロジェクト参照機能は、大規模プロジェクトの管理を効率化する強力なツールです。主な利点には、ビルド時間の短縮、コード構造の改善、型チェックの効率化があります。この機能を使うと、大きなコードベースを論理的に分割し、モジュール間の依存関係を明確にできます。プロジェクト参照の導入には学習が必要ですが、プロジェクトの規模が大きくなるほど、その価値は増大します。大規模なTypeScriptプロジェクトの開発者にとって、この機能の習得は生産性と品質を向上させる重要な投資となるでしょう。
+Tính năng project references của TypeScript là công cụ mạnh mẽ giúp tối ưu hóa việc quản lý project quy mô lớn. Các lợi ích chính bao gồm rút ngắn thời gian build, cải thiện cấu trúc code, và tối ưu hóa type checking. Với tính năng này, có thể chia codebase lớn thành các phần logic và làm rõ dependency giữa các module. Việc áp dụng project references đòi hỏi học tập, nhưng giá trị của nó tăng lên khi quy mô project lớn hơn. Đối với developer của các TypeScript project quy mô lớn, việc thành thạo tính năng này sẽ là đầu tư quan trọng để cải thiện năng suất và chất lượng.

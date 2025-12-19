@@ -1,21 +1,21 @@
-# NPMパッケージ開発者のためのtsconfig
+# tsconfig cho nhà phát triển NPM package
 
-## パッケージを使う人にもTypeScriptによる型の享受を目指す
+## Mục tiêu: Người dùng package cũng được hưởng lợi từ type của TypeScript
 
-パッケージを公開するときは、動作する形で公開するのが前提なので`js`にする必要があります。つまりコンパイルは必須です。ですがせっかくTypeScriptで作ったのだからパッケージの型情報も提供しましょう。
+Khi publish package, bạn cần compile sang `js` vì package phải có khả năng chạy được. Tức là compile là bắt buộc. Tuy nhiên, vì đã tạo package bằng TypeScript, hãy cung cấp luôn thông tin type của package.
 
-### 型定義ファイルも出力する
+### Xuất file định nghĩa type
 
-型定義ファイルを一緒に出力しましょう。そのためにはtsconfig.jsonにある`declaration`の項目を`true`に変更します。
+Hãy xuất file định nghĩa type cùng với package. Để làm điều này, thay đổi mục `declaration` trong tsconfig.json thành `true`.
 
 ```json
 "declaration": true,
 /* Generates corresponding '.d.ts' file. */
 ```
 
-このように設定するとコンパイルで出力した`js`ファイルと同じディレクトリに同名で拡張子が`d.ts`のファイルも出力されるようになります。これが型情報のファイルです。なおこの型定義ファイルだけをコンパイルで出力された`js`と別のディレクトリに出力するためのオプションは存在しません。
+Khi thiết lập như vậy, file có cùng tên nhưng đuôi `d.ts` sẽ được xuất ra cùng thư mục với file `js` đã compile. Đây chính là file chứa thông tin type. Lưu ý rằng không có option nào để xuất riêng file định nghĩa type này sang thư mục khác với file `js` đã compile.
 
-変哲もない`number`型のプロパティ持つ`Value Object`を作ったとします。
+Giả sử chúng ta tạo một `Value Object` đơn giản có property kiểu `number`.
 
 ```ts twoslash
 class NumericalValueObject {
@@ -35,7 +35,7 @@ class NumericalValueObject {
 }
 ```
 
-これをコンパイルし、型定義を生成するとこのようになっています。
+Khi compile và tạo định nghĩa type, kết quả sẽ như sau:
 
 ```ts twoslash
 declare class NumericalValueObject {
@@ -46,22 +46,22 @@ declare class NumericalValueObject {
 }
 ```
 
-内容自体はちょうどインターフェースのようなファイルとなっています。
+Nội dung file này giống như một interface.
 
-### 宣言元へのジャンプでの`ts`ファイルを参照できるようにする
+### Cho phép nhảy đến file `ts` gốc từ khai báo
 
-IDEを使っているときに有用で、実際のTypeScriptのソースコードがどのようにコーディングされているかを閲覧することができるようになります。tsconfig.jsonにある`declarationMap`の項目を`true`に変更します。
+Tính năng này hữu ích khi sử dụng IDE, cho phép xem source code TypeScript gốc được viết như thế nào. Thay đổi mục `declarationMap` trong tsconfig.json thành `true`.
 
 ```json
 "declarationMap": true,
 /* Generates a sourcemap for each corresponding '.d.ts' file. */
 ```
 
-このように設定するとコンパイルで出力した`js`ファイルと同じディレクトリに同名で拡張子が`d.ts.map`のファイルも出力されるようになります。このファイルは元の`ts`と実際に動作する`js`の対応付けをしてくれます。ただしこの設定だけでは不十分で、参照元となる元の`ts`ファイルも一緒にパッケージとして公開する必要があります。
+Khi thiết lập như vậy, file có cùng tên nhưng đuôi `d.ts.map` sẽ được xuất ra cùng thư mục với file `js` đã compile. File này thực hiện mapping giữa file `ts` gốc và file `js` thực thi. Tuy nhiên, chỉ thiết lập này là chưa đủ, bạn cần publish cả file `ts` gốc cùng với package.
 
-### 元の`ts`も公開する
+### Publish cả file `ts` gốc
 
-特に設定していなければ元の`ts`ファイルも公開されますが、公開する内容を調整している場合は逆にpackage.jsonの`files`プロパティを変更して元の`ts`ファイルも公開するように変更が必要です。tsconfig.jsonの`declarationMap`を設定しても元の`ts`ファイルを参照できないときはここで公開する内容を制限していないか確認してください。
+Nếu không có thiết lập đặc biệt, file `ts` gốc cũng sẽ được publish. Tuy nhiên, nếu bạn đang điều chỉnh nội dung publish, cần thay đổi property `files` trong package.json để include cả file `ts` gốc. Nếu đã thiết lập `declarationMap` trong tsconfig.json nhưng không thể tham chiếu đến file `ts` gốc, hãy kiểm tra xem nội dung publish có bị hạn chế ở đây không.
 
 ```json
 {
@@ -81,23 +81,23 @@ IDEを使っているときに有用で、実際のTypeScriptのソースコー�
 }
 ```
 
-この例は`dist`にコンパイルした結果の`js, d.ts, d.ts.map`があり、`src`に元の`ts`があるものと想定しています。
+Ví dụ này giả định `js, d.ts, d.ts.map` đã compile nằm trong `dist`, và file `ts` gốc nằm trong `src`.
 
-実際にパッケージとなるファイルにどのようなファイルが含まれているかについては次のコマンドを実行してください。
+Để kiểm tra những file nào sẽ được include trong package, chạy lệnh sau:
 
 ```sh
 npm publish --dry-run
 ```
 
-### JavaScriptの`sourceMap`も出力する
+### Xuất `sourceMap` của JavaScript
 
-`sourceMap`とはAltJSがコンパイルされたJavaScriptとの行を一致させるものです。これがあることによってデバッグやトレースをしているときに、元の`ts`ファイルの何行目で問題が発生しているかわかりやすくなります。`module bundler`を使用するときはこのオプションを有効にしていないと基本的に何もわかりません。このオプションはパッケージを公開しないとしても有効にしておくことが望ましいでしょう。
+`sourceMap` là thứ giúp mapping dòng code giữa AltJS và JavaScript đã compile. Nhờ có nó, khi debug hoặc trace, bạn có thể dễ dàng biết vấn đề xảy ra ở dòng nào trong file `ts` gốc. Khi sử dụng `module bundler`, nếu không bật option này thì về cơ bản bạn sẽ không biết gì cả. Nên bật option này ngay cả khi không publish package.
 
-tsconfig.jsonにある`sourceMap`の項目を`true`に変更します。
+Thay đổi mục `sourceMap` trong tsconfig.json thành `true`.
 
 ```json
 "sourceMap": true,
 /* Generates corresponding '.map' file. */
 ```
 
-こちらもコンパイルで出力した`js`ファイルと同じディレクトリに同名で拡張子が`js.map`のファイルも出力されるようになります。
+Tương tự, file có cùng tên nhưng đuôi `js.map` sẽ được xuất ra cùng thư mục với file `js` đã compile.
