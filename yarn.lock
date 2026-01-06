@@ -2400,6 +2400,34 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@taml/ast@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@taml/ast/-/ast-1.0.0.tgz#154c648f77bdfe89bb49124b24d0701394d06545"
+  integrity sha512-qVFXG/JYyFikukYuA22+LTqLmWp7pOOczibNc1nEPo4E5WAh0JETJQsdopoc+j/h7mWE0SzTm1CqCsGYefkMxA==
+
+"@taml/docusaurus@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@taml/docusaurus/-/docusaurus-1.1.5.tgz#a5de0331cb3ced30602e44395ac67fa46738df8a"
+  integrity sha512-9YytNe6FJ1P7NIzy2jJlJWmGjApNeV0VfsrrJETc2JVAAbsdPT7eK1luWqbLctQSV8l8wmmhQPYF6ltkakLJLA==
+  dependencies:
+    "@taml/react" "^1.0.0"
+    unist-util-map "^4.0.0"
+
+"@taml/parser@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@taml/parser/-/parser-1.0.0.tgz#4d74f72e76b982d089fddcfc9dc9abcd753208f9"
+  integrity sha512-6sHEfZwnB6xmXlbf2NnwK7oYWoea8tb9za32dcjLiBq+gggq/L01EZ0aRTsHK4jGdeut32yVu3xJxj6PWWJWwA==
+  dependencies:
+    "@taml/ast" "^1.0.0"
+
+"@taml/react@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@taml/react/-/react-1.0.0.tgz#e59b309e9170f7a8df3c565be5975806e19c70ca"
+  integrity sha512-s+v8XAT3EOAjDhhg2BwZ2eCc+XzRRxCGV+ahMvi/PnMIAjJ40LDuSKlxGuewl0mP/XU6qxEaSRoNmb9mdSpPNw==
+  dependencies:
+    "@taml/ast" "^1.0.0"
+    "@taml/parser" "^1.0.0"
+
 "@textlint/ast-node-types@^12.6.1":
   version "12.6.1"
   resolved "https://registry.yarnpkg.com/@textlint/ast-node-types/-/ast-node-types-12.6.1.tgz#35ecefe74e701d7f632c083d4fda89cab1b89012"
@@ -2899,6 +2927,11 @@
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.6.tgz#250a7b16c3b91f672a24552ec64678eeb1d3a08d"
   integrity sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==
+
+"@types/unist@^3.0.0":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/unist/-/unist-3.0.3.tgz#acaab0f919ce69cce629c2d4ed2eb4adc1b6c20c"
+  integrity sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==
 
 "@types/ws@^8.5.5":
   version "8.5.5"
@@ -10106,6 +10139,13 @@ unist-util-is@^5.0.0:
   integrity sha512-u9njyyfEh43npf1M+yGKDGVPbY/JWEemg5nH05ncKPfi+kBbKBJoTdsogMu33uhytuLlv9y0O7GH7fEdwLdLQw==
   dependencies:
     "@types/unist" "^2.0.0"
+
+unist-util-map@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/unist-util-map/-/unist-util-map-4.0.0.tgz#29ab31b16d2760b2a31c71b2169500f5b00dbaac"
+  integrity sha512-HJs1tpkSmRJUzj6fskQrS5oYhBYlmtcvy4SepdDEEsL04FjBrgF0Mgggvxc1/qGBGgW7hRh9+UBK1aqTEnBpIA==
+  dependencies:
+    "@types/unist" "^3.0.0"
 
 unist-util-position@^3.0.0:
   version "3.1.0"

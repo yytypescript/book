@@ -234,3 +234,228 @@ pre .logger.log-log svg {
 .admonition h5 {
   text-transform: unset !important;
 }
+
+/* Custom terminal styling */
+.taml-outer {
+  background: #1e1e2e;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.taml-inner {
+  background: transparent;
+  color: #cdd6f4;
+  font-family: "Monaco", "Menlo", monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/**
+ * CSS styles for @taml/react component
+ * Maps all 37 TAML tags to corresponding CSS classes with ANSI color values
+ */
+
+/* Base styles for the root TAML container */
+.taml {
+  white-space: pre-wrap;
+  line-height: 1.2;
+}
+
+/* Standard Colors (8 tags) */
+.taml-black {
+  color: #45475a;
+}
+.taml-red {
+  color: #f38ba8;
+}
+.taml-green {
+  color: #a6e3a1;
+}
+.taml-yellow {
+  color: #f9e2af;
+}
+.taml-blue {
+  color: #89b4fa;
+}
+.taml-magenta {
+  color: #f5c2e7;
+}
+.taml-cyan {
+  color: #94e2d5;
+}
+.taml-white {
+  color: #bac2de;
+}
+
+/* Bright Colors (8 tags) */
+.taml-bright-black {
+  color: #585b70;
+}
+.taml-bright-red {
+  color: #f38ba8;
+}
+.taml-bright-green {
+  color: #a6e3a1;
+}
+.taml-bright-yellow {
+  color: #f9e2af;
+}
+.taml-bright-blue {
+  color: #89b4fa;
+}
+.taml-bright-magenta {
+  color: #f5c2e7;
+}
+.taml-bright-cyan {
+  color: #94e2d5;
+}
+.taml-bright-white {
+  color: #a6adc8;
+}
+
+/* Standard Background Colors (8 tags) */
+.taml-bg-black {
+  background-color: #45475a;
+}
+.taml-bg-red {
+  background-color: #f38ba8;
+}
+.taml-bg-green {
+  background-color: #a6e3a1;
+}
+.taml-bg-yellow {
+  background-color: #f9e2af;
+}
+.taml-bg-blue {
+  background-color: #89b4fa;
+}
+.taml-bg-magenta {
+  background-color: #f5c2e7;
+}
+.taml-bg-cyan {
+  background-color: #94e2d5;
+}
+.taml-bg-white {
+  background-color: #bac2de;
+}
+
+/* Bright Background Colors (8 tags) */
+.taml-bg-bright-black {
+  background-color: #585b70;
+}
+.taml-bg-bright-red {
+  background-color: #f38ba8;
+}
+.taml-bg-bright-green {
+  background-color: #a6e3a1;
+}
+.taml-bg-bright-yellow {
+  background-color: #f9e2af;
+}
+.taml-bg-bright-blue {
+  background-color: #89b4fa;
+}
+.taml-bg-bright-magenta {
+  background-color: #f5c2e7;
+}
+.taml-bg-bright-cyan {
+  background-color: #94e2d5;
+}
+.taml-bg-bright-white {
+  background-color: #a6adc8;
+}
+
+/* Text Styles (5 tags) */
+.taml-bold {
+  font-weight: bold;
+}
+.taml-dim {
+  opacity: 0.6;
+}
+.taml-italic {
+  font-style: italic;
+}
+.taml-underline {
+  text-decoration: underline;
+}
+.taml-strikethrough {
+  text-decoration: line-through;
+}
+
+/* Utility classes for better contrast */
+.taml-bg-black,
+.taml-bg-bright-black {
+  color: #cdd6f4; /* Ensure text is visible on dark backgrounds */
+}
+
+.taml-bg-red,
+.taml-bg-green,
+.taml-bg-yellow,
+.taml-bg-blue,
+.taml-bg-magenta,
+.taml-bg-cyan,
+.taml-bg-white,
+.taml-bg-bright-red,
+.taml-bg-bright-green,
+.taml-bg-bright-yellow,
+.taml-bg-bright-blue,
+.taml-bg-bright-magenta,
+.taml-bg-bright-cyan,
+.taml-bg-bright-white {
+  color: #1e1e2e; /* Ensure text is visible on light/pastel backgrounds */
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .taml-dim {
+    opacity: 0.8;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .taml {
+    color: #cdd6f4;
+  }
+
+  .taml-white {
+    color: #bac2de;
+  }
+
+  .taml-black {
+    color: #45475a;
+  }
+}
+
+/* Print styles */
+@media print {
+  .taml {
+    color: #000000;
+    background: transparent;
+  }
+
+  /* Convert colors to grayscale for print */
+  .taml-red,
+  .taml-bright-red {
+    color: #333333;
+    font-weight: bold;
+  }
+
+  .taml-green,
+  .taml-bright-green {
+    color: #666666;
+  }
+
+  .taml-blue,
+  .taml-bright-blue {
+    color: #444444;
+  }
+
+  /* Remove backgrounds in print */
+  [class*="taml-bg-"] {
+    background-color: transparent !important;
+    border: 1px solid #cccccc;
+    padding: 0 2px;
+  }
+}

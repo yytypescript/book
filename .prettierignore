@@ -12,3 +12,7 @@
 /build
 pnpm-lock.yaml
 /.cache
+
+/regression-test/issues
+/regression-test/workspace
+/.devbox

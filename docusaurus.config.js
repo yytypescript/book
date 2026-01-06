@@ -51,6 +51,7 @@ const config = {
         defaultCompilerOptions: tsconfigForTwoslash.compilerOptions,
       },
     ],
+    ["@taml/docusaurus", { docusaurusVersion: "v2" }],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -160,6 +161,23 @@ const config = {
       { projectId: "9wrel6kg8q" },
     ],
     "./src/components/codeReadingAssistant/docusaurusPlugin.js",
+    function webpackResolveReactJsxRuntime() {
+      return {
+        name: "webpack-resolve-react-jsx-runtime",
+        configureWebpack() {
+          return {
+            resolve: {
+              alias: {
+                "react/jsx-runtime": require.resolve("react/jsx-runtime"),
+                "react/jsx-dev-runtime": require.resolve(
+                  "react/jsx-dev-runtime"
+                ),
+              },
+            },
+          };
+        },
+      };
+    },
   ],
   scripts: [
     {
