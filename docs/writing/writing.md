@@ -11,4 +11,6 @@ slug: /writing
 
 [執筆の流れ](how-to-change.md)
 
+[macOSでチュートリアルの回帰テストを行う](tutorial-regression-test-on-macos.md)
+
 [PDR](/writing/pdr)

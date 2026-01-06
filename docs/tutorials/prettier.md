@@ -66,16 +66,10 @@ Prettierを導入してコード整形を自動化することで、簡単にコ
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v16以上
-- Yarn v1系 (このチュートリアルはv1.22.19で動作確認しています)
+- Node.js v24以上
+- npm v11以上 (Node.jsに同梱)
 
 Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
-
-パッケージ管理ツールとしてYarnを利用します。最初にインストールをしておきましょう。すでにインストール済みの方はここのステップはスキップして大丈夫です。
-
-```shell
-npm install -g yarn
-```
 
 ## プロジェクトを作成する
 
@@ -100,32 +94,34 @@ cd prettier-tutorial
 Prettierは開発時にだけ使うパッケージなので`-D`オプションをつけてインストールします。
 
 ```shell
-yarn add -D 'prettier@^2'
+npm install -D prettier
 ```
 
 バージョンを表示してインストールを確認してください。
 
 ```shell
-yarn prettier -v
-2.8.1
+npx prettier -v
+3.7.4
 ```
+
+<!-- regression test: 上記とメジャーバージョンが一致しているか確認してください。 -->
 
 ## TypeScriptを自動整形する
 
 `prettier`コマンドを利用して、TypeScriptのファイルをPrettierで自動整形してみましょう。
 
-最初に`src`ディレクトリを作成して、`src/helloWorld.ts`を作成してください。
+最初に`src`ディレクトリを作成して、`src/hello-world.ts`を作成してください。
 
 ```shell
 mkdir src
-touch src/helloWorld.ts
+touch src/hello-world.ts
 ```
 
-`helloWorld.ts`の内容を次のように変更します。
+`hello-world.ts`の内容を次のように変更します。
 このコードは自動整形を確認するために、わざと見づらいコードになっています。
 
 <!--prettier-ignore-->
-```ts twoslash title="src/helloWorld.ts"
+```ts twoslash title="src/hello-world.ts"
 const hello = ( name: string) =>   {
 console.log("Hello,World "
 + name)
@@ -139,24 +135,28 @@ console.log("Hello,World "
 次の例では`src`を引数で指定することで`src`ディレクトリ配下のすべてファイルを対象として自動整形を実行します。
 
 ```shell
-yarn prettier src
+npx prettier src
 ```
 
-整形結果が表示されていますが、`helloWorld.ts`を確認するとファイル内容が変更されていないことに気づくと思います。`prettier`コマンドをオプションなしで実行した場合は整形結果だけが表示されて、ファイルの書き換えは実行されません。
+整形結果が表示されていますが、`hello-world.ts`を確認するとファイル内容が変更されていないことに気づくと思います。`prettier`コマンドをオプションなしで実行した場合は整形結果だけが表示されて、ファイルの書き換えは実行されません。
+
+<!-- regression test: 上と同じ体験ができたか確認してください。 -->
 
 ファイルの書き換えを一緒に実行する場合は`--write`オプションを指定します。
 
 ```shell
-yarn prettier --write src
+npx prettier --write src
 ```
 
-実行後に`helloWorld.ts`を確認してみると、次のようにコードが整形されているのが確認できます。
+実行後に`hello-world.ts`を確認してみると、次のようにコードが整形されているのが確認できます。
 
-```ts twoslash title="src/helloWorld.ts"
+```ts twoslash title="src/hello-world.ts"
 const hello = (name: string) => {
   console.log("Hello,World " + name);
 };
 ```
+
+<!-- regression test: 上のように整形されているか確認してください。 -->
 
 ## Prettierのデフォルトの整形ルール
 
@@ -164,6 +164,8 @@ Prettierはデフォルトの整形ルールが定義されています。先ほ
 
 代表的な項目のデフォルト値は次のようになっています。
 すべての項目のデフォルト値を確認したい場合は、[Prettierの公式ドキュメント](https://prettier.io/docs/en/options.html)を参照してください。
+
+<!-- regression test: 上記のリンクが正しいか確認してください。 -->
 
 | 項目            | デフォルト値   |
 | --------------- | -------------- |
@@ -178,20 +180,22 @@ Prettierはデフォルトの整形ルールが定義されています。先ほ
 ### CLIオプションで設定
 
 整形ルールは`prettier`コマンドを実行する時にオプションとして指定することができます。
-先ほど整形した`helloWorld.ts`を別の整形ルールで整形してみます。
+先ほど整形した`hello-world.ts`を別の整形ルールで整形してみます。
 
 ```shell
-yarn prettier --no-semi --tab-width 4 --write src
+npx prettier --no-semi --tab-width 4 --write src
 ```
 
 整形されたコードを見るとセミコロンが消えて、インデント幅が2から4に変更されているのを確認できます。
 
 <!--prettier-ignore-->
-```ts twoslash title="src/helloWorld.ts"
+```ts twoslash title="src/hello-world.ts"
 const hello = (name: string) => {
     console.log("Hello,World " + name)
 }
 ```
+
+<!-- regression test: 上のように整形されているか確認してください。 -->
 
 ### 設定ファイルを作成する
 
@@ -217,17 +221,19 @@ touch .prettierrc
 Prettierはプロジェクトルートに`.prettierrc`が存在する場合は自動で設定ファイルを読み込んで整形ルールを設定してくれます。
 
 ```shell
-yarn prettier --write src
+npx prettier --write src
 ```
 
-設定ファイルで記述した整形ルールで`helloWorld.ts`が変更されているのを確認できます。
+設定ファイルで記述した整形ルールで`hello-world.ts`が変更されているのを確認できます。
 
 <!--prettier-ignore-->
-```ts twoslash title="src/helloWorld.ts"
+```ts twoslash title="src/hello-world.ts"
 const hello = (name: string) => {
   console.log('Hello,World ' + name);
 };
 ```
+
+<!-- regression test: 上のように整形されているか確認してください。 -->
 
 上記の例ではJSONフォーマットで設定ファイルを作成しましたが、PrettierはJSON以外にもJS,YAML,TOMLのフォーマットをサポートしています。
 
@@ -266,6 +272,8 @@ singleQuote = true
 ここで紹介した以外にもいくつかの整形ルールが存在します。
 他の整形ルールやCLIコマンドのオプション名、設定ファイルのキー名などを確認したい場合は[Prettierの公式ドキュメント](https://prettier.io/docs/en/options.html)をご参照ください。
 
+<!-- regression test: 上記のリンクが正しいか確認してください -->
+
 ### どのような整形ルールがよいのか？
 
 Prettierをプロジェクトに導入する時に整形ルールについて悩む場合があるかもしれません。
@@ -278,12 +286,14 @@ Prettierをプロジェクトに導入する時に整形ルールについて悩
 
 `prettier-ignore`をコメントとして記述することで、一部のコードをPrettierの自動整形の対象から除外することができます。
 
-```ts twoslash title="src/helloWorld.ts"
+```ts twoslash title="src/hello-world.ts"
 const board1 = [1, 0, 0, 1];
 
-//  prettier-ignore
+// prettier-ignore
 const board2 = [
   1, 0,
   0, 1
 ];
 ```
+
+<!-- regression test: prettier-ignoreが正しく機能しているか確認してください。 -->

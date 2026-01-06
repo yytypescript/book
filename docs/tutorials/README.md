@@ -11,8 +11,8 @@ slug: /tutorials
 - [Reactでいいねボタンを作ろう](./react-like-button-tutorial.md)
 - [Next.jsで猫画像ジェネレーターを作ろう](./nextjs.md)
 - [Vercelにデプロイしてみよう](./vercel-deploy.md)
-- [Jestでテストを書こう](./jest.md)
-- [Reactコンポーネントのテストを書こう](./component-test.md)
+- [Vitestでテストを書こう](./vitest.md)
+- [Reactコンポーネントのテストを書こう](./vitest-component-test.md)
 - [Prettierでコード整形を自動化しよう](./prettier.md)
 - [ESLintでコーディング規約を自動化しよう](./eslint.md)
 

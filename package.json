@@ -46,6 +46,7 @@
     "@docusaurus/preset-classic": "2.4.1",
     "@gracefullight/docusaurus-plugin-microsoft-clarity": "^0.1.3",
     "@mdx-js/react": "^1.6.22",
+    "@taml/docusaurus": "^1.1.5",
     "clsx": "^1.2.1",
     "docusaurus-preset-shiki-twoslash": "^1.1.41",
     "file-loader": "^6.2.0",

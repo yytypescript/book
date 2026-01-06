@@ -41,17 +41,10 @@ sidebar_label: ESLintでコーディング規約を自動化しよう
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v22以上
-- NPM v7系以上
-- Yarn v1系 (このチュートリアルはv1.22.18で動作確認しています)
+- Node.js v24以上
+- NPM v11以上 (Node.jsに同梱)
 
 Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
-
-パッケージ管理ツールとしてYarnを利用します。最初にインストールをしておきましょう。すでにインストール済みの方はここのステップはスキップして大丈夫です。
-
-```shell
-npm install -g yarn
-```
 
 ## 背景知識
 
@@ -220,7 +213,7 @@ cd eslint-tutorial
 ESLintはYarnでインストールしましょう。ESLintは開発時だけ使うパッケージなので、`yarn add`コマンドには`-D`オプションをつけてインストールします。
 
 ```shell
-yarn add -D 'eslint@^8'
+npm install -D eslint
 ```
 
 :::info

@@ -13,3 +13,5 @@ node_modules
 #
 /CHANGELOG.md
 /pnpm-lock.yaml
+/regression-test/issues
+/regression-test/workspace

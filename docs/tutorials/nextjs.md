@@ -38,50 +38,71 @@ Next.jsはVercel社が開発を推進しており、同社は[Vercel](https://ve
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v22以上
-- npm v10以上 (Node.jsに同梱)
+- Node.js v24以上
+- npm v11以上 (Node.jsに同梱)
 - ブラウザ (このチュートリアルではGoogle Chromeを想定しています)
 
 Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
+
+<!-- regression test: node -v と npm -v の結果を確認し、環境が適合していない場合、問題として報告してください。 -->
 
 ## Next.jsをセットアップする
 
 最初に`npx create-next-app`コマンドでプロジェクトを作成します。`random-cat`はプロジェクト名となる部分です。この部分は好きな名前でも構いませんが、本チュートリアルでは`random-cat`として話を進めます。
 
 ```sh
-npx create-next-app random-cat
+npm create next-app@latest random-cat -y -- --yes
 ```
 
-このコマンドを実行すると、対話的な設定が始まります。初めて`create-next-app`を実行する場合は、`create-next-app`を導入していいか尋ねられるので、エンターキーを押して進めてください。
+<!-- regression test: 上のコマンドはtmuxを用いて実行してください。AIエージェントが使えるターミナルはTTYがオフになっていて、ユーザーが見る出力と異なるためです。tmux new-session -d -s nextjs -c $PWD -x 256 "npm create next-app random-cat -y -- --yes && sleep infinity" -->
 
-```text
-Need to install the following packages:
-create-next-app@15.3.1
-Ok to proceed? (y)
+`create next-app`が正常に実行されたら、次のようなメッセージが表示されます。
+
+```taml
+> npx
+> create-next-app random-cat --yes
+
+Creating a new Next.js app in <green>/path/to/random-cat</green>.
+
+<bold>Using npm.</bold>
+
+Initializing project with template: app-tw
+
+
+Installing dependencies:
+- <cyan>next</cyan>
+- <cyan>react</cyan>
+- <cyan>react-dom</cyan>
+
+Installing devDependencies:
+- <cyan>@tailwindcss/postcss</cyan>
+- <cyan>@types/node</cyan>
+- <cyan>@types/react</cyan>
+- <cyan>@types/react-dom</cyan>
+- <cyan>eslint</cyan>
+- <cyan>eslint-config-next</cyan>
+- <cyan>tailwindcss</cyan>
+- <cyan>typescript</cyan>
+
+
+added 425 packages, and audited 426 packages in 12s
+
+174 packages are looking for funding
+  run `npm fund` for details
+
+found <bold><green>0</green></bold> vulnerabilities
+
+Generating route types...
+✓ Types generated successfully
+
+Initialized a git repository.
+
+<green>Success!</green> Created random-cat at /path/to/random-cat
 ```
 
-`create-next-app`からはいくつかの質問が出されます。それぞれの質問に対して次のように選択してください：
+<!-- regression test: 出力結果が上のようになっているか確認してください。random-catへのパス、所要時間などの環境依存は確認対象外。パッケージ数の数値も対象外。tmuxではtmux capture-pane -p -e -t nextjs -S - -E -で出力を取得できます。 -->
 
-<div style={{
-  backgroundColor: "#1a1a1a",
-  color: "#e0e0e0",
-  fontFamily: "monospace",
-  padding: "20px",
-  lineHeight: "1.3",
-  whiteSpace: "pre",
-  overflow: "auto",
-  borderRadius: "8px",
-}}>
-  <span style={{ color: "#22c55e" }}>✓</span> Would you like to use TypeScript? … No / <span style={{ color: "#22c55e", textDecoration: "underline" }}>Yes</span><br/>
-  <span style={{ color: "#22c55e" }}>✓</span> Would you like to use ESLint? … No / <span style={{ color: "#22c55e", textDecoration: "underline" }}>Yes</span><br/>
-  <span style={{ color: "#22c55e" }}>✓</span> Would you like to use Tailwind CSS? … No / <span style={{ color: "#22c55e", textDecoration: "underline" }}>Yes</span><br/>
-  <span style={{ color: "#22c55e" }}>✓</span> Would you like your code inside a `src/` directory? … <span style={{ color: "#22c55e", textDecoration: "underline" }}>No</span> / Yes<br/>
-  <span style={{ color: "#22c55e" }}>✓</span> Would you like to use App Router? (recommended) … No / <span style={{ color: "#22c55e", textDecoration: "underline" }}>Yes</span><br/>
-  <span style={{ color: "#22c55e" }}>✓</span> Would you like to use Turbopack for `next dev`? … No / <span style={{ color: "#22c55e", textDecoration: "underline" }}>Yes</span><br/>
-  <span style={{ color: "#22c55e" }}>✓</span> Would you like to customize the import alias (`@/*` by default)? … <span style={{ color: "#22c55e", textDecoration: "underline" }}>No</span> / Yes
-</div>
-
-プロジェクトのセットアップが完了したら、作成されたディレクトリに移動してください。
+これでプロジェクトのセットアップは完了です。作成されたディレクトリに移動してください。
 
 ```sh
 cd random-cat
@@ -100,6 +121,7 @@ cd random-cat
 ├── public/
 ├── .gitignore
 ├── eslint.config.mjs
+├── .next/
 ├── next-env.d.ts
 ├── next.config.ts
 ├── package-lock.json
@@ -108,6 +130,8 @@ cd random-cat
 ├── README.md
 └── tsconfig.json
 ```
+
+<!-- regression test: 上のファイル構成が異なった場合、問題として取り上げてください。 -->
 
 ## 開発サーバーを起動する
 
@@ -119,7 +143,9 @@ npm run dev
 
 開発サーバーが起動したら、ターミナルに表示されているURLにブラウザでアクセスしてください。デフォルトでは<http://localhost:3000>です。
 
-![ブラウザで表示されたNext.jsアプリの初期画面。中央にNext.jsロゴと「app/page.tsx を編集して開始」などのガイド、下部に「Deploy now」ボタンがある](/tutorials/nextjs/nextjs-initial-screen-dark-mode.png)
+![ブラウザで表示されたNext.jsアプリの初期画面。中央に「To get started, edit the page.tsx file.」と記載され、下部に「Deploy Now」および「Documentation」ボタンが配置されている。](/tutorials/nextjs/nextjs-initial-screen-dark-mode.png)
+
+<!-- regression test: 上の画像と同じ画像が表示されているか確認します。 -->
 
 ## ページコンポーネント
 
@@ -137,6 +163,8 @@ export default function Home() {
 }
 ```
 
+<!-- regression test: 上のコードがエディタでエラーなく書けたか確認します。 -->
+
 Next.jsにファイルをページコンポーネントとして認識させるには、次の2つのルールを守る必要があります：
 
 1. ファイル名は`page.tsx`であること
@@ -147,6 +175,8 @@ Next.jsにファイルをページコンポーネントとして認識させる�
 コンポーネントを実装したら、ブラウザをリロードして画面に「猫画像予定地」と表示されているか確認してください。
 
 ![ブラウザで表示されたNext.jsアプリ。左上に「猫画像予定地」というテキストのみがあるプレースホルダー画面](/tutorials/nextjs/nextjs-cat-placeholder-dark-mode.png)
+
+<!-- regression test: 上の画像と同じ画像が表示されているか確認します。 -->
 
 ## The Cat API
 
@@ -169,6 +199,8 @@ Next.jsにファイルをページコンポーネントとして認識させる�
 ]
 ```
 
+<!-- regression test: 上のレスポンスと構造が異なった場合、問題として取り上げてください。 -->
+
 レスポンスにある`url`が猫画像のURLです。この値を取得して猫の画像をランダムに表示します。
 
 ## 画像を取得する関数を実装する
@@ -184,6 +216,8 @@ export async function fetchImage() {
   return images[0]; // 画像情報の配列から最初の要素を返す
 }
 ```
+
+<!-- regression test: 上のコードがエディタでエラーなく書けたか確認します。 -->
 
 [`fetch`](https://developer.mozilla.org/ja/docs/Web/API/Window/fetch)はHTTPリクエストでリソースを取得するブラウザ標準のAPIです。戻り値として[Response](https://developer.mozilla.org/ja/docs/Web/API/Response)オブジェクトを返します。Responseオブジェクトの`json()`メソッドを実行することで、レスポンスのボディーをJSONとしてパースし、JavaScriptのオブジェクトとして取得できます。
 
@@ -222,11 +256,13 @@ export default async function Home() {
 }
 ```
 
+<!-- regression test: 上のindex.tsxの内容でpage.tsxを編集してみて、エラーなく書けたか確認します。 -->
+
 このコードは、ページにアクセスがあったときに、The Cat APIを呼び出し、その結果をコンソールに表示するものです。
 
 (2)の`await connection()`は、`fetchImage`関数の呼び出しをリクエスト時に行わせるためのものです。Next.jsには、ビルド時にページを生成する静的サイト生成(SSG)という機能があります。`await connection()`がない状態でアプリをビルドすると、ビルド時に`fetchImage`関数が実行され、画像が固定化されます。その結果、実行時にブラウザをリロードしても画像が変わらない状態になります。
 
-本アプリの要件としては、ブラウザをリロードしたときに、異なる画像を表示したいので[`connection`](https://nextjs.org/docs/app/api-reference/functions/connection)を呼び出しています。ちなみに、今は`npm start dev`で開発モードになっているため、`connection`がなくてもリロードで画像が変わります。
+本アプリの要件としては、ブラウザをリロードしたときに、異なる画像を表示したいので[`connection`](https://nextjs.org/docs/app/api-reference/functions/connection)を呼び出しています。ちなみに、今は`npm run dev`で開発モードになっているため、`connection`がなくてもリロードで画像が変わります。
 
 (3)は`fetchImage`関数を呼び出す部分です。この関数は非同期関数なので、`await`キーワードを使って呼び出しています。JavaScriptには`await`キーワードを使うには、関数に`async`キーワードをつける必要があります。これを忘れるとエラーが発生します。(1)で`async`キーワードを追加しているのはそのためです。
 
@@ -238,6 +274,8 @@ export default async function Home() {
 
 ![Next.jsアプリの画面。上部に「猫画像予定地」と表示され、下半分でChrome DevToolsのコンソールが開き、猫画像のURLやサイズを含むログが出力されている](/tutorials/nextjs/nextjs-cat-placeholder-console-log.png)
 
+<!-- regression test: 上の画像と同じ画像が表示されているか確認します。コンソールは開いていなくても問題ありません。 -->
+
 ログには「Server」と表示されています。これは`Home`がサーバーサイドで実行されたためです。このことについては後ほど詳しく説明するので、一旦は気にしないでください。
 
 ## 関数の戻り値に型をつける
@@ -246,15 +284,22 @@ export default async function Home() {
 
 [any](../reference/values-types-variables/any.md)
 
-```tsx twoslash {5,7} title="app/page.tsx"
+```tsx twoslash {8,10} title="app/page.tsx"
 // @filename: fetch-image.ts
 export declare function fetchImage(): Promise<any>;
+// @filename: types.ts
+declare module "next/server" {
+  export function connection(): Promise<void>;
+}
 // @filename: index.tsx
 // @jsx: react-jsx
 // ---cut---
+import { connection } from "next/server";
 import { fetchImage } from "./fetch-image";
 
 export default async function Home() {
+  // ビルド時にfetchImageの結果が固定されないようにする
+  await connection();
   // APIから画像を取得
   const image = await fetchImage();
   //    ^?
@@ -263,6 +308,8 @@ export default async function Home() {
   return <div>猫画像予定地</div>;
 }
 ```
+
+<!-- regression test: 上のコードのindex.tsxの部分をpage.tsxに書き、エラーなく書けたか確認します。 -->
 
 `image`には`name`プロパティがありませんが、`image`が`any`型なので、上のような誤ったコードを書いてもTypeScriptは何も警告してくれません。
 
@@ -290,9 +337,11 @@ APIレスポンスには`url`以外のプロパティも含まれていますが
 
 `fetchImage`関数の戻り値が正しく型注釈がされていると、万が一APIレスポンスに存在しないプロパティを参照するコードを書いてしまっても、TypeScriptが警告するため問題に気がつけるようになります。
 
-```tsx twoslash {2-3,5} title="app/page.tsx"
+```tsx twoslash {4-5,7} title="app/page.tsx"
 // @errors: 2339
 export default async function Home() {
+  // ビルド時にfetchImageの結果が固定されないようにする
+  await connection();
   // APIから画像を取得
   const image = await fetchImage();
   //    ^?
@@ -305,6 +354,7 @@ export declare function fetchImage(): Promise<Image>;
 type Image = {
   url: string;
 };
+export declare function connection(): Promise<void>;
 ```
 
 :::info 厳密なレスポンスのチェック
@@ -400,11 +450,13 @@ export function CatImage({ url }: CatImageProps) {
 }
 ```
 
+<!-- regression test: 上のコードがエディタでコンパイルエラーなく書けているかを確認します。 -->
+
 この`CatImage`コンポーネントは`url`というプロパティを受け取り、そのURLを使って猫の画像を表示する作りになっています。
 
 次に、`app/page.tsx`を次のように編集して、猫画像を表示するコンポーネントを使うようにします。
 
-```tsx twoslash {1,7-8} title="app/page.tsx"
+```tsx twoslash {2,10-11} title="app/page.tsx"
 // @filename: fetch-image.ts
 type Image = {
   url: string;
@@ -417,13 +469,20 @@ type CatImageProps = {
 };
 export declare function CatImage({ url }: CatImageProps): JSX.Element;
 export {};
+// @filename: types.ts
+declare module "next/server" {
+  export function connection(): Promise<void>;
+}
 // @filename: index.tsx
 // @jsx: react-jsx
 // ---cut---
+import { connection } from "next/server";
 import { CatImage } from "./cat-image"; // 追加
 import { fetchImage } from "./fetch-image";
 
 export default async function Home() {
+  // ビルド時にfetchImageの結果が固定されないようにする
+  await connection();
   // APIから画像を取得
   const image = await fetchImage();
   // 画像のURLを渡す
@@ -431,11 +490,15 @@ export default async function Home() {
 }
 ```
 
+<!-- regression test: app/page.tsxの内容を、上のコードのindex.tsxの内容に書き換えて、コンパイルエラーなく書けているかを確認します。 -->
+
 `CatImage`コンポーネントをインポートして、`Home`コンポーネントの中で使うようにします。`CatImage`コンポーネントに`url`プロパティを渡すことで、猫の画像を表示するようになります。
 
 `page.tsx`の変更が済んだら、猫の画像が表示されているか確認してみてください。画像がちゃんと表示されているでしょうか。
 
 ![Next.jsアプリでページを表示した直後のブラウザ画面。実装したCatImageコンポーネントにより、テレビを見つめる2匹の猫の写真が全面に表示されている](/tutorials/nextjs/nextjs-cat-image-display-result.png)
+
+<!-- regression test: 上の画像と同じ画像が表示されているか確認します。猫画像の内容はランダムであるため、異なる画像が表示されていても問題ありません。 -->
 
 ## ボタンクリックで画像が更新されるようにする
 
@@ -484,6 +547,8 @@ type Image = {
 export declare function fetchImage(): Promise<Image>;
 export {};
 ```
+
+<!-- regression test: 上のコードがエディタでコンパイルエラーなどがなく書けているか確認します。 -->
 
 変更内容をひとつひとつ見ていきましょう。
 
@@ -569,6 +634,8 @@ declare const imageUrl: string;
 これでクリックしたら画像が更新されるようになります。うまく動いているかブラウザで確認してみてください。
 
 <video width="600" controls="controls" loop="controls" autoPlay="autoplay" muted="muted" playsInline="playsinline" aria-label="Next.jsアプリのデモ。ページ読み込み直後に猫の写真が表示され、ユーザーが「他のにゃんこも見る」ボタンをクリックすると画像が一旦消え、新しい猫の写真に置き換わる様子を示す" src="/tutorials/nextjs/nextjs-cat-image-refresh-demo.mp4"></video>
+
+<!-- regression test: 上の動画と同じ動画が表示されているか確認します。猫画像の内容はランダムであるため、異なる画像が表示されていても問題ありません。重要なことは、クリックしたら画像が更新されるかどうかです。 -->
 
 ## Next.jsのサーバーサイド機能
 
@@ -713,6 +780,8 @@ export async function fetchImage(): Promise<Image> {
 export declare const CAT_API_KEY: string;
 ```
 
+<!-- regression test: 上のコードがエディタでコンパイルエラーなく書けているかを確認します。 -->
+
 このようにAPIキーを環境変数として管理することで、ソースコードにAPIキーを直接書かずに済みます。
 
 ## ビジュアルを作り込む
@@ -780,17 +849,25 @@ export declare function fetchImage(): Promise<Image>;
 export {};
 ```
 
+<!-- regression test: 上のコードがエディタでコンパイルエラーなく書けているかを確認します。 -->
+
 以上でNext.jsを使った猫画像ジェネレーターの開発は完了です。
 
 ![Next.jsアプリの最終デザインプレビュー。白背景のページ中央に黒枠で囲まれた茶トラ子猫の写真があり、その上に吹き出し風デザインのボタン「他のにゃんこも見る」が配置されている](/tutorials/nextjs/nextjs-styled-cat-image-page.png)
 
+<!-- regression test: 上の画像と同じ画像が表示されているか確認します。 -->
+
 ## プロダクションビルドと実行
 
-Next.jsでは`next build`を実行することで最適化されたプロダクション用のコードを生成でき、`next start`で生成されたプロダクションコードを実行できます。このチュートリアルではボイラテンプレートを利用しているので、`package.json`に`build`コマンドと`start`コマンドがすでに用意されています。`npm run build`と`npm run start`を実行して本番用のアプリケーションを実行してみましょう。
+Next.jsでは`next build`を実行することで最適化されたプロダクション用のコードを生成でき、`next start`で生成されたプロダクションコードを実行できます。このチュートリアルではボイラテンプレートを利用しているので、`package.json`に`build`コマンドと`start`コマンドがすでに用意されています。`npm run build`と`npm run start`を実行して本番用のアプリケーションを実行してみましょう。なお、起動中の`npm run dev`はCtrl+Cで停止しておいてください。
 
 ```sh
 npm run build
 npm run start
 ```
 
+<!-- regression test: 上のコマンドが正常に実行されたか確認します。 -->
+
 アプリケーション起動後に<http://localhost:3000>へブラウザでアクセスをすることで、本番用のアプリケーションの実行を確認できます。
+
+<!-- regression test: 上のURLにアクセスして、本番用のアプリケーションの実行を確認します。 -->

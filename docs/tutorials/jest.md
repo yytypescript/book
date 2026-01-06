@@ -1,5 +1,11 @@
 # Jestでテストを書こう
 
+:::warning 非推奨
+
+このチュートリアルは、現在非推奨でメンテナンスされていません。TypeScriptやECMAScript Modulesをネイティブでサポートしているモダンなテストフレームワーク[Vitest](./vitest)をご利用ください。
+
+:::
+
 このチュートリアルでは、テストフレームワーク「Jest」を使い、ユニットテストをTypeScriptで書くことを学びます。
 
 ## 本章で学べること
@@ -22,16 +28,12 @@ JestはJavaScriptのテストフレームワークです。TypeScriptでテス�
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v22以上
-- Yarn v1系 (このチュートリアルはv1.22.19で動作確認しています)
+- Node.js v24以上
+- npm v11以上 (Node.jsに同梱)
 
 Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
 
-パッケージ管理ツールとしてYarnを利用します。最初にインストールをしておきましょう。すでにインストール済みの方はここのステップはスキップして大丈夫です。
-
-```shell
-npm install -g yarn
-```
+<!-- regression test: node -v と npm -v の結果を確認し、環境が適合していない場合、問題として報告してください。 -->
 
 ## プロジェクトを作成する
 
@@ -42,18 +44,27 @@ mkdir jest-tutorial
 cd jest-tutorial
 ```
 
-プロジェクトルートにpackage.jsonを作ってください。
+次のコマンドを実行して、`package.json`を作成します。
 
 ```shell
-touch package.json
+npm init --init-type=module --yes
 ```
 
-package.jsonの内容は次のようにします。
+作成される`package.json`の内容は次のようになります。
 
 ```json title="package.json"
 {
   "name": "jest-tutorial",
-  "license": "UNLICENSED"
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
 }
 ```
 
@@ -62,13 +73,13 @@ package.jsonの内容は次のようにします。
 プロジェクトにTypeScriptをインストールします。
 
 ```shell
-yarn add -D typescript
+npm install -D typescript
 ```
 
 次に、tsconfig.jsonを生成します。
 
 ```shell
-yarn tsc --init
+npx tsc --init
 ```
 
 ## Jestをインストールする
@@ -82,10 +93,12 @@ Jestをプロジェクトにインストールしましょう。インストー�
 これらのインストールは次のコマンドで、一度にインストールできます。
 
 ```shell
-yarn add -D 'jest@^29.7.0' 'ts-jest@^29.3.4' '@types/jest@^29.5.14'
+npm install -D jest ts-jest @types/jest
 ```
 
 `jest`はJest本体です。JavaScriptだけのプロジェクトであれば、このパッケージを入れるだけでテストが始められます。`ts-jest`は、JestをTypeScriptに対応させるためのものです。`ts-jest`を入れると、TypeScriptで書いたテストコードを、コンパイルの手間なしにそのまま実行できるようになります。`@types/jest`はJestのAPIの型定義ファイルです。TypeScriptの型情報を付与されるので、テストコードの型チェックが行えるようになります。
+
+<!-- 筆者ノート: なぜts-jest? Node.js v24でtype strippingが効くため、ts-jestが不要になりそうだが、jestがECMAScript Modulesを安定サポートしていないため、ts-jestを介してトランスパイルするアプローチのほうが実務向けガイドとしては安全である。 -->
 
 ## Jestの設定ファイルを作る
 

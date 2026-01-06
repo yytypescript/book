@@ -1,0 +1,22 @@
+services:
+  env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    working_dir: /home/developer/regression-test
+    volumes:
+      - ../docs:/home/developer/regression-test/docs:ro
+      - ../static:/home/developer/regression-test/static:ro
+      - ../.cursor:/home/developer/regression-test/.cursor:ro
+      # WORKAROUND: Cursor Browser Extension `browser_take_screenshot` may save screenshots
+      # to a host-only macOS temp path like `/var/folders/...`, making them inaccessible
+      # from inside a remote container.
+      # Issue: https://forum.cursor.com/t/browser-take-screenshot-saves-screenshots-to-a-host-only-temp-path-e-g-var-folders-when-using-a-remote-container-making-them-inaccessible-from-the-workspace/147114
+      #
+      # This mounts the host temp into the container (read-only) so returned paths can be read.
+      # NOTE: On macOS, /var is a symlink to /private/var.
+      - /private/var/folders:/var/folders:ro
+      - ./workspace:/home/developer/regression-test/workspace:rw
+      - ./issues:/home/developer/regression-test/issues:rw
