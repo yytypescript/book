@@ -58,7 +58,8 @@ RUN brew --version
 # Node.js 24.x (via Homebrew)
 RUN brew install node@24 \
  && brew link --overwrite --force node@24 \
- && npm install -g npm
+ && npm install -g npm \
+ && npm install -g @taml/cli
 
 # Playwright
 RUN npx playwright install-deps
