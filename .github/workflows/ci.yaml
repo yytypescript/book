@@ -1,0 +1,27 @@
+name: ci
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: jetify-com/devbox-install-action@a0d2d53632934ae004f878c840055956d9f741b0 # v0.14.0
+        with:
+          enable-cache: "true"
+      # twoslashのコンパイルには何分も時間がかかるため、キャッシュを利用します。
+      - name: Restore twoslash cache
+        uses: actions/cache@v4
+        id: twoslash-cache
+        with:
+          path: node_modules/.cache/twoslash
+          key: twoslash-${{ hashFiles('bun.lock') }}-${{ hashFiles('docs/**/*.md') }}
+          restore-keys: |
+            twoslash-${{ hashFiles('bun.lock') }}-
+            twoslash-
+      - run: devbox run -- task ci

@@ -1,0 +1,28 @@
+diff --git a/dist/index.js b/dist/index.js
+index aebc85f5e9efd8ca1b57ca71587ef8ab2f065252..4ae60873b2bb33da51d8d4e6c24e0fb048c60658 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1,8 +1,4 @@
+ 
+ 'use strict'
+ 
+-if (process.env.NODE_ENV === 'production') {
+-  module.exports = require('./twoslash.cjs.production.min.js')
+-} else {
+-  module.exports = require('./twoslash.cjs.development.js')
+-}
++module.exports = require('./twoslash.cjs.development.js')
+diff --git a/dist/twoslash.cjs.development.js b/dist/twoslash.cjs.development.js
+index 687e8840f46e760788ec15630bf11e5ddaa3c01a..24b579595f6f474aa2bfa9339001a050e5147728 100644
+--- a/dist/twoslash.cjs.development.js
++++ b/dist/twoslash.cjs.development.js
+@@ -624,7 +624,8 @@ function twoslasher(code, extension, options) {
+ 
+   var handbookOptions = _extends({}, filterHandbookOptions(codeLines), options.defaultOptions);
+ 
+-  var compilerOptions = filterCompilerOptions(codeLines, defaultCompilerOptions, ts); // Handle special casing the lookup for when using jsx preserve which creates .jsx files
++  var convertedDefaultCompilerOptions = ts.convertCompilerOptionsFromJson(defaultCompilerOptions, "").options;
++  var compilerOptions = filterCompilerOptions(codeLines, convertedDefaultCompilerOptions, ts); // Handle special casing the lookup for when using jsx preserve which creates .jsx files
+ 
+   if (!handbookOptions.showEmittedFile) {
+     handbookOptions.showEmittedFile = compilerOptions.jsx && compilerOptions.jsx === ts.JsxEmit.Preserve ? "index.jsx" : "index.js";

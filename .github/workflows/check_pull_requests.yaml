@@ -9,7 +9,7 @@ jobs:
       issues: read
       pull-requests: write
     steps:
-      - uses: nearform-actions/github-action-check-linked-issues@v1
+      - uses: nearform-actions/github-action-check-linked-issues@7140e2e01aa0c18b8ac61bddf5e89abde1ca760e # v1.8.3
         with:
           exclude-branches: "release/**, dependabot/**"
           custom-body-comment: |-

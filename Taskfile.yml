@@ -1,0 +1,93 @@
+# https://taskfile.dev
+# npm scriptでは表現力が不足するため、Taskfile.ymlを使用しています。
+version: "3"
+tasks:
+  default:
+    cmd: task -a
+    silent: true
+
+  start:
+    desc: 開発用サーバーを起動します
+    cmds:
+      - bunx docusaurus start
+
+  test:
+    desc: テストを実行します
+    cmds:
+      - bunx jest
+
+  clear:
+    desc: ビルドのクリーンアップを行います
+    cmds:
+      - bunx docusaurus clear
+
+  ci:
+    desc: CIを行います
+    cmds:
+      - bun install --frozen-lockfile
+      - node --version
+      - bun --version
+      - task: check
+      - task: test
+      - task: build
+
+  check:
+    desc: 全体的なチェックを行います
+    cmds:
+      - task: check:format
+      - task: check:markdown
+      - task: check:japanese
+      - task: check:type
+
+  check:markdown:
+    desc: Markdownファイルのチェックを行います (markdownlint)
+    cmds:
+      - defer: echo '{{if .EXIT_CODE}}一部のエラーは`task check:markdown:fix`で修正できます{{end}}'
+        silent: true
+      - bunx markdownlint '**/*.md'
+
+  check:markdown:fix:
+    desc: Markdownファイルの問題を修正します (markdownlint)
+    cmds:
+      - bunx markdownlint '**/*.md' --fix
+
+  check:japanese:
+    desc: 日本語の問題をチェックします (textlint)
+    cmds:
+      - defer: echo '{{if .EXIT_CODE}}一部のエラーは`task check:japanese:fix`で修正できます{{end}}'
+        silent: true
+      - bunx textlint 'docs/**/*.md'
+
+  check:japanese:fix:
+    desc: 日本語の問題を修正します (textlint)
+    cmds:
+      - bunx textlint 'docs/**/*.md' --fix
+
+  check:format:
+    desc: コードのフォーマットをチェックします (prettier)
+    cmds:
+      - defer: echo '{{if .EXIT_CODE}}フォーマットエラーは`task format`で修正できます{{end}}'
+        silent: true
+      - bunx prettier '**/*.{js,jsx,ts,tsx,json,json5,css,scss,graphql,gql,html,vue,yaml,md}' --check
+
+  format:
+    desc: コードのフォーマットを修正します (prettier)
+    cmds:
+      - bunx prettier '**/*.{js,jsx,ts,tsx,json,json5,css,scss,graphql,gql,html,vue,yaml,md}' --write
+
+  check:type:
+    desc: 型チェックを行います (tsc)
+    cmds:
+      - bunx tsc --noEmit
+
+  build:
+    desc: ビルドを行います
+    cmds:
+      - bunx docusaurus build
+    env:
+      NODE_OPTIONS: --max-old-space-size=8192 # ヒープ上限にひっかかって、OOMエラーになるのを防ぐため
+
+  serve:
+    desc: ビルドした成果物をサーバーで実行します
+    cmds:
+      - bunx docusaurus serve

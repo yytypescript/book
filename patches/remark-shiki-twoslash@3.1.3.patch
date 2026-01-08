@@ -1,0 +1,39 @@
+diff --git a/dist/index.js b/dist/index.js
+index 418f059a956fe3f5adf4f25185a98a86fe2a7d66..6d336b5521c5ec35dcdb2bd95e21f8e3a2106e90 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1,8 +1,8 @@
+ 
+ 'use strict'
+ 
+-if (process.env.NODE_ENV === 'production') {
+-  module.exports = require('./remark-shiki-twoslash.cjs.production.min.js')
+-} else {
++// if (process.env.NODE_ENV === 'production') {
++//   module.exports = require('./remark-shiki-twoslash.cjs.production.min.js')
++// } else {
+   module.exports = require('./remark-shiki-twoslash.cjs.development.js')
+-}
++// }
+diff --git a/dist/remark-shiki-twoslash.cjs.development.js b/dist/remark-shiki-twoslash.cjs.development.js
+index efaed7711553c44c31abcaf53abab08b8780b248..ff83077d9ca0e6c562a833eb8cc5d5d23f66c76d 100644
+--- a/dist/remark-shiki-twoslash.cjs.development.js
++++ b/dist/remark-shiki-twoslash.cjs.development.js
+@@ -935,6 +935,8 @@ var setupNodeForTwoslashException = function setupNodeForTwoslashException(code,
+     body = String(error);
+     eLog("### Unexpected error:");
+     eLog(error);
++    eLog("\n### Code Sample");
++    eLog(code);
+   } else if (error instanceof twoslash.TwoslashError) {
+     body = bodyFromTwoslashError(error);
+     eLog("### Twoslash error: " + error.title);
+@@ -946,6 +948,8 @@ var setupNodeForTwoslashException = function setupNodeForTwoslashException(code,
+     body = bodyFromError(error);
+     eLog("### Unexpected error:");
+     eLog(error);
++    eLog("\n### Code Sample");
++    eLog(code);
+   }
+ 
+   var codeSample = "<p>Raising Code:</p><pre class='twoslash-exception-code'><code>" + escapeHtml(code) + "</code></pre>";

@@ -1,5 +1,7 @@
 {
   "trailingSlash": false,
+  "buildCommand": "bunx docusaurus build",
+  "installCommand": "bun install --frozen-lockfile",
   "redirects": [
     { "source": "/welcome-to-typescript", "destination": "/overview" },
     {
