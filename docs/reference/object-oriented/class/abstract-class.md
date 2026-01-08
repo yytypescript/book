@@ -13,7 +13,10 @@ JavaやPHPなどの言語では、`abstract`修飾子を使って抽象クラス
 ```ts twoslash
 // @errors: 2515
 abstract class Food {
-  constructor(protected name: string, protected calorie: number) {}
+  constructor(
+    protected name: string,
+    protected calorie: number
+  ) {}
   showDebug() {
     console.log(`name = ${this.name} `);
     console.log(`calorie = ${this.calorie}kcal `);
@@ -28,7 +31,10 @@ class Meat extends Food {}
 
 ```ts twoslash
 abstract class Food {
-  constructor(protected name: string, protected calorie: number) {}
+  constructor(
+    protected name: string,
+    protected calorie: number
+  ) {}
   showDebug() {
     console.log(`name = ${this.name} `);
     console.log(`calorie = ${this.calorie}kcal `);

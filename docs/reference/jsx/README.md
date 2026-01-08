@@ -129,7 +129,7 @@ HTMLでは、スタイル属性は一般的に文字列です。
 一方、JSXではスタイル属性はオブジェクトでなければなりません。
 
 ```jsx
-<div style={{ backgroundColor: "yellow", color: "blue" }}>Hello!</div>;
+<div style={{ backgroundColor: "yellow", color: "blue" }}>Hello!</div>
 // 描画結果: <div style='background-color:yellow;color:blue'>Hello!</div>
 ```
 

@@ -35,10 +35,10 @@ const topicOf = (node: Node): CustomTopic | undefined => {
     isFunctionExpression(node)
     ? CustomTopic.ParameterOfFunction
     : isMethodDeclaration(node) || isSetAccessor(node)
-    ? CustomTopic.ParameterOfMethod
-    : isConstructorDeclaration(node)
-    ? CustomTopic.ParameterOfConstructor
-    : undefined;
+      ? CustomTopic.ParameterOfMethod
+      : isConstructorDeclaration(node)
+        ? CustomTopic.ParameterOfConstructor
+        : undefined;
 };
 
 const parameterOfConstructor = (node: ParameterDeclaration, result: Result) => {

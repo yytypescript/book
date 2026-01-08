@@ -32,6 +32,7 @@ devbox shell
 ```shell
 direnv allow
 ```
+
 :::
 
 必要なパッケージをインストールします。
@@ -186,7 +187,6 @@ Close #123
 
 プルリクエストが作成されると、CIが走りコードスタイルなどのチェックが行われます。CIに問題がなければメンテナーによってマージされます。マージ権限がある方は、CIの結果を確認の上、問題なければ自分でマージして構いません。
 
-
 ## トラブルシューティング
 
 ### `task check:format`(Prettier)が失敗する
@@ -214,7 +214,6 @@ type Code =
 markdownlintで指摘されたエラーの詳細は[markdownlintのドキュメント](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md)をご覧ください。
 
 markdownlintのエラーの中には、`task check:markdown:fix`を実行することで自動修正できるものがあります。そうでないエラーは手動で修正してください。
-
 
 :::caution
 `task check:markdown:fix`はファイルを変更します。万が一に備えて、`git add`や`git commit`などをして、簡単に元に戻せるようにしてから実行してください。
