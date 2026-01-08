@@ -19,7 +19,7 @@ const result1 = (function (arg: string) {
   return "IIFE with args";
 })("hoge");
 
-const result2 = await(async () => {
+const result2 = await (async () => {
   console.log("async IIFE");
   return "async IIFE";
 })();

@@ -44,8 +44,8 @@ const authorEmail =
   book === null || book === undefined
     ? undefined
     : book.author === null || book.author === undefined
-    ? undefined
-    : book.author.email;
+      ? undefined
+      : book.author.email;
 ```
 
 チェックすればエラーなく動きますが、記述量が多くなるという課題もあります。

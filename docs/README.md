@@ -873,7 +873,10 @@ john.name = "Tom"; // エラー（readonlyのため変更不可）
 
 ```typescript twoslash
 class Person {
-  constructor(public name: string, private age: number) {}
+  constructor(
+    public name: string,
+    private age: number
+  ) {}
 
   introduce(): void {
     console.log(`My name is ${this.name} and I am ${this.age} years old.`);

@@ -14,5 +14,5 @@
 環境構築を簡略化するためにnpmスクリプトはbunでの実行を想定しています。
 
 ```sh
-yarn create-gpts-knowledge
+bun run create-gpts-knowledge
 ```

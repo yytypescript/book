@@ -34,10 +34,10 @@ const language =
   extension === "js"
     ? "JavaScript"
     : extension === "ts"
-    ? "TypeScript"
-    : extension === "java"
-    ? "Java"
-    : "不明";
+      ? "TypeScript"
+      : extension === "java"
+        ? "Java"
+        : "不明";
 ```
 
 上のコードと同等の処理をif-elseで書くと次のようになります。

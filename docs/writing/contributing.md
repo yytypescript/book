@@ -17,7 +17,7 @@ description: あなたが本書に貢献できること。
 - 読んだ上で生まれた疑問を質問して頂けると、内容の改善に役立ちます。
 - 質問は下記で受け付けています:
   - Twitter: @suin <https://twitter.com/suin>
-  - Slack: <https://yytypescript.github.io/slack>
+  - Discord: <https://discord.gg/DTwRgzt>
   - 執筆会に参加してもらって質問して頂いても構いません。
 
 ## SNSでシェアする

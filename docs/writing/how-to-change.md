@@ -2,6 +2,10 @@
 
 環境構築から執筆、公開までの流れと手順を説明します。
 
+## issueの確認
+
+本プロジェクトでは[チケット駆動](ticket-driven.md)を原則としています。加えようとしている変更についてのissueがあるか、十分に議論が交されているかなどを確認してください。
+
 ## 編集環境のセットアップ
 
 リポジトリをGitHub上でフォークし、フォークしたリポジトリをチェックアウトします。(当リポジトリにコミット権限がある方はフォークする必要はありません。)
@@ -14,16 +18,33 @@ git clone git@github.com:自分のアカウント/フォーク先のリポジト
 git clone git@github.com:yytypescript/book.git
 ```
 
-必要なツールをインストールします。
+[Devbox](https://devbox.sh/)を使って再現性のある環境を構築します。DevboxではNode.jsやBunなど執筆に必要なツールの導入のために利用しています。まだインストールしていない方は[Devboxの公式サイトのインストール手順](https://www.jetify.com/docs/devbox/installing-devbox)を参照してください。
+
+Devboxで開発用シェルを起動します。
 
 ```shell
-yarn
+devbox shell
+```
+
+:::info Direnvをご利用ください(任意だが推奨)
+毎回`devbox shell`を実行するのが面倒な場合は、[Direnv](https://direnv.net/)をお使いください。Direnvを導入している方は次のコマンドを実行して、`.envrc`の実行を許可してください。
+
+```shell
+direnv allow
+```
+
+:::
+
+必要なパッケージをインストールします。
+
+```shell
+bun install
 ```
 
 開発サーバーを起動します。
 
 ```shell
-yarn start
+task start
 ```
 
 開発サーバーの起動には結構な時間がかかります。プロセスを停止せずにお待ちください。
@@ -86,7 +107,7 @@ module.exports = {
 1. ファイルを移動、またはファイル名を変更します。
 2. `sidebars.js`の該当ページのパスを新しいパスに更新します。
 3. `vercel.json`の`redirects`に旧URLから新URLへのリダイレクト設定を追加します。
-4. `yarn build`を実行し、リンク切れがないか確認します。
+4. `task build`を実行し、リンク切れがないか確認します。
 
 たとえば、`docs/tutorials/setup.md` を `docs/getting-started/setup.md` に移動した場合は、`sidebars.js` の
 `"tutorials/setup"` を `"getting-started/setup"` に修正し、`vercel.json` の `redirects` には次の設定を追加します。
@@ -95,7 +116,7 @@ module.exports = {
 { "source": "/tutorials/setup", "destination": "/getting-started/setup" }
 ```
 
-これらの変更後、`yarn build` を実行してリンク切れがないか確認します。
+これらの変更後、`task build` を実行してリンク切れがないか確認します。
 
 ### コンテンツ編集時に知っておくとよいこと
 
@@ -104,6 +125,21 @@ module.exports = {
 [Markdown](markdown.md)
 
 [ファイル構成](file-structure.md)
+
+## 変更をチェックする
+
+変更をチェックするには、`task check`を実行してください。
+
+```shell
+task check
+```
+
+このコマンドは、コードスタイル、Markdown、日本語、型チェックを行います。もしチェックに失敗した場合は、後述の「トラブルシューティング」を参照してください。
+
+チュートリアルに変更を加えた場合は、可能であれば回帰テストを行ってください。
+
+- [チュートリアル回帰テストを行う(コンテナ)](tutorial-regression-test-on-container.md): 大抵のチュートリアルはコンテナ版で十分です。
+- [チュートリアル回帰テストを行う(macOS)](tutorial-regression-test-on-macos.md): Homebrewが必要など、特殊なチュートリアルはこちらをお使いください。
 
 ## コミットする
 
@@ -125,18 +161,42 @@ git commit -m "「新しいページ」を追加しました。"
 
 :::
 
-## コンテンツを校正する
+## プルリクエストを送る
 
-### コードスタイルの校正
+:::caution
+プルリクエストを送る前に**できるだけ**コミットが1つになっているか確認してください。
+:::
 
-Prettierとmarkdownlintで、Markdownの記法スタイルやコードブロック内のTypeScriptコードスタイルを修正します。
+変更内容をpushします。
 
 ```shell
-yarn markdownlint:fix
-yarn prettier:fix
+git push -u origin ブランチ名
 ```
 
-:::tip
+プルリクエストの作成時には[GitHubのキーワードを用いたissueの関連付け機能]を用いて、対応したissueをプルリクエストに関連付けてください。これには2つの目的があります。ひとつは、プルリクエストの経緯をたどれるようにすることです。もうひとつは、プルリクエストがマージされた際に、issueが自動クローズされるようにするためです。たとえば、issue #123を解決するプルリクエストであれば、本文中に次のようなキーワードを書きます。
+
+[githubのキーワードを用いたissueの関連付け機能]: https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword
+
+```markdown
+Close #123
+```
+
+これはチケット駆動プロセスで必要となる手順です。
+
+[チケット駆動](ticket-driven.md)
+
+プルリクエストが作成されると、CIが走りコードスタイルなどのチェックが行われます。CIに問題がなければメンテナーによってマージされます。マージ権限がある方は、CIの結果を確認の上、問題なければ自分でマージして構いません。
+
+## トラブルシューティング
+
+### `task check:format`(Prettier)が失敗する
+
+`task format`を実行して自動修正を行ってください。
+
+:::caution
+`task format`はファイルを変更します。万が一に備えて、`git add`や`git commit`などをして、簡単に元に戻せるようにしてから実行してください。
+:::
+
 Prettierの自動整形をさせたくないコードブロックには`<!--prettier-ignore-->`をつけます。
 
 ````markdown
@@ -149,29 +209,25 @@ type Code =
 ```
 ````
 
-:::
+### `task check:markdown`(markdownlint)が失敗する
 
-:::tip
 markdownlintで指摘されたエラーの詳細は[markdownlintのドキュメント](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md)をご覧ください。
+
+markdownlintのエラーの中には、`task check:markdown:fix`を実行することで自動修正できるものがあります。そうでないエラーは手動で修正してください。
+
+:::caution
+`task check:markdown:fix`はファイルを変更します。万が一に備えて、`git add`や`git commit`などをして、簡単に元に戻せるようにしてから実行してください。
 :::
 
-### 日本語の校正
+### `task check:japanese`(textlint)が失敗する
 
-textlintで日本語に問題がないかチェックします。
+textlintのエラーが出ない書き方が望ましいです。textlintのエラーの中には、`task check:japanese:fix`を実行することで自動修正できるものがあります。そうでないエラーは手動で修正してください。
 
-```shell
-yarn textlint
-```
-
-textlintで問題が指摘された箇所で、変更すべきところを変更します。
-
-:::tip
-textlint指摘箇所をすべて直していい場合は`yarn textlint:fix`で一括修正できます。
+:::caution
+`task check:japanese:fix`はファイルを変更します。万が一に備えて、`git add`や`git commit`などをして、簡単に元に戻せるようにしてから実行してください。
 :::
 
-:::tip textlintを部分的に無効化する
-
-textlintのエラーが出ない書き方が望ましいです。場合によって、textlintを無効にしたいことがあるかもしれません。無効化したい部分はコメントで囲みます。
+場合によって、textlintを無効にしたいことがあるかもしれません。無効化したい部分はコメントで囲みます。
 
 ```markdown
 ...
@@ -202,50 +258,3 @@ textlintのprhルールが無効になるエリア
 
 <!--textlint-enable-->
 ```
-
-:::
-
-### 校正結果をコミットする
-
-自動修正の結果は差分で確認します。
-
-```shell
-git diff
-```
-
-:::tip
-自動修正による変更をもとに戻すには、`git checkout`を使います。
-:::
-
-自動修正の内容に問題がなければコミットします。
-
-```shell
-git add docs/カテゴリ名/サブカテゴリ名/new-page.md
-git commit --amend # 直前のコミットに含めて、コミットを1つにする方法です
-```
-
-## プルリクエストを送る
-
-:::caution
-プルリクエストを送る前に**できるだけ**コミットが1つになっているか確認してください。
-:::
-
-変更内容をpushします。
-
-```shell
-git push -u origin ブランチ名
-```
-
-プルリクエストの作成時には[GitHubのキーワードを用いたissueの関連付け機能]を用いて、対応したissueをプルリクエストに関連付けてください。これには2つの目的があります。ひとつは、プルリクエストの経緯をたどれるようにすることです。もうひとつは、プルリクエストがマージされた際に、issueが自動クローズされるようにするためです。たとえば、issue #123を解決するプルリクエストであれば、本文中に次のようなキーワードを書きます。
-
-[githubのキーワードを用いたissueの関連付け機能]: https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword
-
-```markdown
-Close #123
-```
-
-これはチケット駆動プロセスで必要となる手順です。
-
-[チケット駆動](ticket-driven.md)
-
-プルリクエストが作成されると、CIが走りコードスタイルなどのチェックが行われます。CIに問題がなければメンテナーによってマージされます。マージ権限がある方は、CIの結果を確認の上、問題なければ自分でマージして構いません。

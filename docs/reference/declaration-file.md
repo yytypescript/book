@@ -164,7 +164,8 @@ declare namespace jest {
 
 ```ts title="node_modules/typescript/lib/lib.dom.d.ts"
 interface Element
-  extends Node,
+  extends
+    Node,
     ARIAMixin,
     Animatable,
     ChildNode,

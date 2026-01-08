@@ -124,10 +124,9 @@ const array2 = [1, "2", 3] satisfies (string | number)[];
 const tuple1: [string | number, string | number, string | number] = [1, "2", 3];
 //    ^?
 const tuple2 = [1, "2", 3] satisfies [
-  //    ^?
   string | number,
   string | number,
-  string | number
+  string | number,
 ];
 ```
 
@@ -176,10 +175,9 @@ type ApiResponse = SuccessResponse | ErrorResponse;
 const array = [1, "2", 3] as const satisfies (string | number)[];
 //    ^?
 const tuple = [1, "2", 3] as const satisfies [
-  //    ^?
   string | number,
   string | number,
-  string | number
+  string | number,
 ];
 
 const res = {

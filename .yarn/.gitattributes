@@ -1,3 +1,0 @@
-# To prevent showing massive diffs when each time you subsequently add or update them
-/releases/** binary
-/plugins/** binary
