@@ -13,7 +13,6 @@ sidebar_label: ESLintでコーディング規約を自動化しよう
 - コーディング規約の必要性とコーディング規約の問題点
 - ESLintでJavaScriptやTypeScriptをチェックする方法
 - ESLintのルールの設定のしかた
-- Airbnbのコーディング規約をESLintで活用する術
 - エラーを解消する方法
 - チェックを部分的に無効化する方法
 - VS CodeやJetBrains IDEとESLintを統合する方法
@@ -54,15 +53,7 @@ Node.jsの導入については、[開発環境の準備](./setup.md)をご覧�
 
 TypeScriptに限らず、プログラミング言語には文法があります。文法を守って書かれたコードは、エラーなく実行やコンパイルができます。
 
-プログラムは文法さえ守れば、誰が書いても一字一句同じコードになるかというと、そうではありません。たとえば、TypeScriptでは文末のセミコロンが省略できます。次の2行のコードの違いは、セミコロンの有無です。どちらも文法的に正しく、どちらを使うかは好みの問題です。
-
-```ts twoslash
-// prettier-ignore
-console.log("OK")
-console.log("OK");
-```
-
-文字列はシングルクォート、ダブルクォート、バッククォートの3通りで書けます。シングルクォートとダブルクォートは機能上の違いがありません。バッククォートは[テンプレートリテラル](/reference/values-types-variables/string#テンプレートリテラル)と言い、文字列リテラルとは仕様が異なります。しかし、次の例のような単純な文字列では、この3つは同じ意味になります。
+プログラムは文法さえ守れば、誰が書いても一字一句同じコードになるかというと、そうではありません。たとえば、文字列はシングルクォート、ダブルクォート、バッククォートの3通りで書けます。シングルクォートとダブルクォートは機能上の違いがありません。バッククォートは[テンプレートリテラル](/reference/values-types-variables/string#テンプレートリテラル)と言い、文字列リテラルとは仕様が異なります。しかし、次の例のような単純な文字列では、この3つは同じ意味になります。
 
 ```ts twoslash
 // prettier-ignore
@@ -88,9 +79,8 @@ console.log(`OK`);
 コーディング規約では、たとえば、次のようなことを決めます。
 
 - 変数名はキャメルケースにしましょう。
-- `function`の中カッコは関数名と同じ行に書きましょう。(次の行に置いてはなりません)
 - `console.log`は消しましょう。
-- if文の条件式で変数代入してはいけません。たとえば`if (data = getData())`はだめ。
+- `any`型は使わないでください。
 
 このようなルールを取りまとめて規約を作るのですが、実用的な規約に仕上げるにはかなりの労力を要します。実務では、公開されている規約を借りてくるほうが現実的です。
 
@@ -103,6 +93,8 @@ console.log(`OK`);
 [google javascript style guide]: https://google.github.io/styleguide/jsguide.html
 [javascript standard style]: https://standardjs.com/rules.html
 [airbnb javascript style guide]: https://github.com/airbnb/javascript
+
+<!-- regression test: 上記のURLが有効かどうかを確認してください。 -->
 
 コーディング規約をチームのみんなで守れば、書き方を統一しやすくなります。
 
@@ -130,11 +122,11 @@ ESLintは、コマンドひとつでチェックが行なえます。チェッ�
 
 不思議なもので、同じ指摘でも人に言われるより、機械に指摘されたほうが気が楽なものです。ESLintでは機械的に問題を指摘してくれるため、コミュニケーション上の心理的負担も軽減できます。
 
-ESLintを導入すると、開発者は規約の運用や心理的ストレスから開放され、**開発などのより重要な仕事に集中できるようになります**。
+ESLintを導入すると、開発者は規約の運用や心理的ストレスから解放され、**開発などのより重要な仕事に集中できるようになります**。
 
 <PostILearned>
 
-📝TypeScriptは同じ意味処理でも異なる書き方が可能
+📝TypeScriptは同じ意味でも異なる書き方が可能
 💥チーム開発では書き方の違いが問題になることも…
 🤝書き方統一のためにコーディング規約を導入しよう
 😵でも、規約には運用の手間や心理的な課題もある
@@ -184,13 +176,13 @@ ESLintは一般的に「リンター(linter)」というジャンルのツール
 
 </PostILearned>
 
-## ESLintでJavaScriptをリントしよう
+### ESLintはJavaScriptとTypeScriptの両方をリントできる
 
-[eslintでjavascriptをリントしよう]: #eslintでjavascriptをリントしよう
+元々ESLintはJavaScriptをリントするために作られ、現在もコアがサポートしているのはJavaScriptのみです。ESLintは「プラグイン」という機能拡張を行える仕組みがあり、これを利用してTypeScriptもリントできるようになっています。
+
+## プロジェクトを作成する
 
 ここからはESLintの導入方法や使い方をチュートリアル形式で説明していきます。ぜひお手元の環境で実際にトライしてみてください。
-
-### プロジェクトを作成する
 
 まず、このチュートリアルに使うプロジェクトを作成します。
 
@@ -199,95 +191,140 @@ mkdir eslint-tutorial
 cd eslint-tutorial
 ```
 
-プロジェクトルートにpackage.jsonを作ってください。その内容は次のようにします。
+プロジェクトルートに`package.json`を作ってください。その内容は次のようにします。
 
 ```json title="package.json"
 {
   "name": "eslint-tutorial",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "type": "module"
 }
 ```
 
-### ESLintを導入する
-
-ESLintはYarnでインストールしましょう。ESLintは開発時だけ使うパッケージなので、`yarn add`コマンドには`-D`オプションをつけてインストールします。
+さらに、TypeScriptをインストールし、TypeScriptの設定ファイル`tsconfig.json`を作成します。
 
 ```shell
-npm install -D eslint
+npm install -D typescript
 ```
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
+  }
+}
+```
+
+ESLintの設定ファイルは従来、JavaScriptで書く必要がありましたが、最新のESLintではTypeScriptで書くこともでき、このチュートリアルでもTypeScriptで書いていきます。しかしながら、ESLintのTypeScriptの設定ファイル対応が完全ではない問題が残っています。それを解消するため`jiti`をインストールしておきます。
+
+<!-- npm init @eslint/config よりも jiti を先なのは、npm init @eslint/config コマンドがjitiに依存しており、実行時に「A config file was generated, but the config file itself may not follow your linting rules.」という警告が出るためです。 -->
+
+<!-- regression test: jitiがない状態でnpx eslintを実行すると、「Error: The 'jiti' library is required for loading TypeScript configuration files. Make sure to install it.」というエラーが発生することを確認してください。この確認は、eslintのセットアップ後に、npm uninstall -D jitiを実行して、jitiを削除した後に行ってみてください。もし発生しない場合は、jitiが不要になったということになるため、問題として報告してください。 -->
+
+```shell
+npm install -D jiti
+```
+
+## ESLintを導入する
+
+次のコマンドを実行してESLintをインストールしましょう。
+
+```shell
+npm init -y @eslint/config@latest
+```
+
+<!-- regression test: tmuxを用いてnpm init -y @eslint/config@latestを実行してください。AIエージェントが使えるターミナルはTTYがオフになっている場合があるためです。tmux new-session -d -s eslint -c "$PWD" -x 256 -e NO_COLOR= -e FORCE_COLOR= 'npm init -y @eslint/config@latest; sleep infinity'。 tmux capture-pane -p -e -t eslint -S - -E - | tamlで結果を確認しながら、tmux send-keys -t eslint enter でエンターキーを押したり、オプションを選択する場合は、tmux send-keys -t eslint tab でタブキーを押したりして、ESLintのインストールを完了させてください。なお、left, down, rightキーではオプションの選択はできません。ウィザードは色情報が必要になるので、capture-paneの結果をtamlコマンドに渡して、色情報を可視化しながら行ってください。-->
 
 :::info
 Next.jsは最初からESLintが導入されています。実務でNext.jsプロジェクトでESLintを使う場合は、導入ステップは省略できます。
 :::
 
+上のコマンドを実行すると、ESLintの構成について質問されます。次のように答えを選択してください。
+
+```taml
+> npx
+> "create-config"
+
+<bold>@eslint/create-config: v1.11.0</bold>
+
+<green>✔</green> <bold>What do you want to lint?</bold> <dim>·</dim> <cyan>javascript</cyan>
+<green>✔</green> <bold>How would you like to use ESLint?</bold> <dim>·</dim> <cyan>problems</cyan>
+<green>✔</green> <bold>What type of modules does your project use?</bold> <dim>·</dim> <cyan>esm</cyan>
+<green>✔</green> <bold>Which framework does your project use?</bold> <dim>·</dim> <cyan>none</cyan> <bgBrightBlue> None of theseを選択してください </bgBrightBlue>
+<green>✔</green> <bold>Does your project use TypeScript?</bold> <dim>·</dim> No<dim> / </dim><cyan>Yes</cyan> <bgBrightBlue> Yesを選択してください </bgBrightBlue>
+<green>✔</green> <bold>Where does your code run?</bold> <dim>·</dim> <cyan>browser</cyan>
+<green>✔</green> <bold>Which language do you want your configuration file be written in?</bold> <dim>·</dim> <cyan>ts</cyan> <bgBrightBlue> TypeScriptを選択してください </bgBrightBlue>
+<blue>ℹ</blue> <bold>The config that you've selected requires the following dependencies:</bold>`
+
+<bold>eslint, @eslint/js, globals, typescript-eslint</bold>
+<green>✔</green> <bold>Would you like to install them now?</bold> <dim>·</dim> No<dim> / </dim><cyan>Yes</cyan>
+<green>✔</green> <bold>Which package manager do you want to use?</bold> <dim>·</dim> <cyan>npm</cyan>
+<bold>☕️Installing...</bold>
+
+up to date, audited 226 packages in 545ms
+
+116 packages are looking for funding
+  run `npm fund` for details
+
+found <bold><green>0</green></bold> vulnerabilities
+<green>✔</green> <bold>Successfully created /path/to/eslint-tutorial/eslint.config.ts file.</bold>
+```
+
+<!-- regression test: 出力結果が上のようになっているか確認してください。eslint.config.tsへのパス、所要時間などの環境依存は確認対象外。パッケージ数の数値も対象外。tmuxではtmux capture-pane -p -e -t eslint -S - -E -で出力を取得できます。 -->
+
 ESLintが正しくインストールされたか、バージョンを表示して確認してください。
 
 ```shell
 npx eslint -v
-v8.15.0
+v9.39.2
 ```
+
+<!-- regression test: インストールされたESLintのメジャーバージョンが上記と一致することを確認してください。 -->
 
 ちなみにこの`npx`コマンドは、Nodeモジュール(ライブラリ)の実行ファイルを起動するツールです。`npx eslint`を実行すると、`./node_modules/.bin/eslint`が実行されます。
 
-### ESLintの設定ファイルを作る
+コマンドが完了すると、次のようなディレクトリ構造になっているはずです。
 
-ESLintの設定ファイル`.eslintrc.js`をプロジェクトルートに作ってください。
-
-```shell
-touch .eslintrc.js
-```
-
-```text title="設定ファイル作成後のディレクトリ構造"
+```text title="完了後のディレクトリ構造"
 .
-├── .eslintrc.js
-├── node_modules
+├── eslint.config.ts
+├── node_modules/
+├── package-lock.json
 ├── package.json
-└── yarn.lock
+└── tsconfig.json
 ```
 
-設定ファイルの内容は次のようにします。
+`eslint.config.ts`は、ESLintの設定ファイルです。このファイルには、ESLintのルールを設定します。設定ファイルの内容は次のようになっているはずです。(見やすさのため、改行やインデントを調整しています)
 
-```js twoslash title=".eslintrc.js"
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2021: true,
+```ts title="eslint.config.ts"
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
+
+export default defineConfig([
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: { globals: globals.browser },
   },
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-  },
-};
+  tseslint.configs.recommended,
+]);
 ```
 
-この設定内容は次で説明します。
+<!-- regression test: 設定ファイルの内容が上のようになっているか確認してください。ただし、インデントや字下げの差は無視してください。また、コンパイルエラーが発生しないか確認してください。 -->
 
-#### `root`
+## ESLintでJavaScriptをリントしよう
 
-`eslint`コマンドを実行したディレクトリを起点に、ディレクトリをさかのぼって設定ファイルを探す仕様がESLintにはあります。たとえば、ディレクトリ`/a/b/`でコマンドを実行した場合、ESLintは次の順で設定ファイルを探します。
+[eslintでjavascriptをリントしよう]: #eslintでjavascriptをリントしよう
 
-1. `/a/b/.eslintrc.js`
-1. `/a/.eslintrc.js`
-1. `/.eslintrc.js`
-
-この探索はルートディレクトリに達するまでさかのぼります。探索中に複数の設定ファイルが見つかった場合は、設定内容がマージされていきます。この仕様は便利な反面、プロジェクト外の設定ファイルまで見にいってしまう危険性もあります。設定ファイルの探索範囲をしぼるためにも、`root`に`true`を設定するのがお勧めです。これがある設定ファイルが見つかると、これ以上ディレクトリをさかのぼらなくなります。
-
-#### `env`
-
-`env`はチェック対象のJavaScript/TypeScriptコードがどの実行環境で使われるかをESLintに伝えるためのオプションです。これを設定すると、ESLintがグローバル変数を認識するようになります。たとえば、`browser: true`を設定すると、`window`や`alert`などのグローバル変数が認識されます。`es2021`を設定すると、ES2021までに導入されたグローバル変数が認識されます。他にも`node`などの指定ができます。指定できる実行環境の一覧は[公式ドキュメント](https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments)をご覧ください。
-
-この設定は、ESLintの[no-undefルール](https://eslint.org/docs/rules/no-undef)に関係します。このルールは未定義の変数をチェックするルールです。グローバル変数は定義せずに利用できる変数です。ESLintはどのグローバル変数が定義済みかを知らないと、このルールを正しく適用できません。そのため、`env`オプションは正しく設定する必要があります。
-
-#### `parserOptions`
-
-##### `ecmaVersion`
-
-`parserOptions`はチェック対象のJavaScriptがどの構文を使っているかをESLintに伝えるためのオプションです。`ecmaVersion`は、どのバージョンのECMAScriptの構文を使うかを指定します。`"latest"`を設定すると、最新のECMAScriptの構文を使うという指定になります。デフォルトではECMAScript 5になっています。これはかなり古いバージョンです。実務ではES5で開発することはまれなので、ここは必ず指定しましょう。なお、`env`オプションで`es2022`などECMAScriptのバージョンを指定している場合、`ecmaVersion`にも自動的に`es2022`が設定されます。どちらも同じバージョンを指定する場合は、`ecmaVersion`の指定は省略できます。
-
-##### `sourceType`
-
-JavaScriptにはスクリプトモードとモジュールモードがあります。`sourceType`はJavaScriptコードがどちらのモードで書かれるかを指定するオプションです。モジュールモードでは、`import`文や`export`文といった追加の構文がサポートされます。`sourceType`のデフォルト値は`"script"`(スクリプトモード)です。実務で開発する場合は、モジュールモードでJavaScript/TypeScriptを書くほうが普通なので、`sourceType`には`"module"`(モジュールモード)を指定しましょう。
+まずは、ESLintを使ってJavaScriptの言語仕様の範囲でリントを試していきましょう。TypeScriptの言語仕様である型注釈やTypeScriptの型情報を使わない範囲でのリントを試していきます。
 
 ### ESLintのルールを設定する
 
@@ -295,9 +332,10 @@ ESLintには「ルール(rule)」という概念があります。ルールは�
 
 - `no-console`: `console.log`を書いてはならない
 - `camelcase`: 変数名はキャメルケースにすること
-- `semi`: 文末セミコロンは省略しない
 
 ESLintには200を超えるルールがあります。[全ルールのリストは公式ドキュメント](https://eslint.org/docs/rules/)にあります。
+
+<!-- regression test: 上記のURLが有効かどうかを確認してください。 -->
 
 ESLintでは、複数のルールを組み合わせてコーディング規約を組み立てていきます。
 
@@ -313,114 +351,133 @@ ESLintでは、複数のルールを組み合わせてコーディング規約�
 
 </figure>
 
-ルールは`.eslintrc.js`の`rules`フィールドに、`ルール名: 重大度`のキーバリュー形式で書きます。まずは、`no-console`をルールに追加してみましょう。
+ルールは設定ファイルの`rules`フィールドに、`ルール名: 重大度`のキーバリュー形式で書きます。まずは、`no-console`をルールに追加してみましょう。
 
-```js twoslash {11-13} title=".eslintrc.js"
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2021: true,
+```ts {13-17} title="eslint.config.ts"
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
+
+export default defineConfig([
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: { globals: globals.browser },
   },
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+  tseslint.configs.recommended,
+  {
+    rules: {
+      "no-console": "warn",
+    },
   },
-  rules: {
-    "no-console": "error",
-  },
-};
+]);
 ```
 
-ルールによっては、細かく設定できるものもあります。たとえば、`camelcase`です。これは変数名がキャメルケースかをチェックするルールです。変数の種類によっては、キャメルケース以外が使いたい場合があります。たとえば、プロパティ名はアンダースコアを使いたいことがあるかもしれません。ウェブAPIによっては、JSONオブジェクトがスネークケース(`foo_bar`のようなアンダースコア区切り)を採用している場合があるからです。この場合、`ルール名: [重大度, 設定値]`のような配列形式で設定することで、細かいルール設定ができます。次の設定例は、プロパティ名に限ってはキャメルケースを強制しない設定です。試しに、この設定を`.eslintrc.js`に加えてみましょう。
+<!-- regression test: 上記のコードがコンパイルエラーが発生しないか確認してください。 -->
 
-```js twoslash {13} title=".eslintrc.js"
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2021: true,
+ルールによっては、細かく設定できるものもあります。たとえば、`camelcase`です。これは変数名がキャメルケースかをチェックするルールです。変数の種類によっては、キャメルケース以外が使いたい場合があります。たとえば、プロパティ名はアンダースコアを使いたいことがあるかもしれません。ウェブAPIによっては、JSONオブジェクトがスネークケース(`foo_bar`のようなアンダースコア区切り)を採用している場合があるからです。この場合、`ルール名: [重大度, 設定値]`のような配列形式で設定することで、細かいルール設定ができます。次の例は、プロパティ名に限ってはキャメルケースを強制しない設定です。試しに、この設定を加えてみましょう。
+
+```ts {16} title="eslint.config.ts"
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
+
+export default defineConfig([
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: { globals: globals.browser },
   },
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+  tseslint.configs.recommended,
+  {
+    rules: {
+      "no-console": "warn",
+      camelcase: ["warn", { properties: "never" }],
+    },
   },
-  rules: {
-    "no-console": "error",
-    camelcase: ["error", { properties: "never" }],
-  },
-};
+]);
 ```
+
+<!-- regression test: 上記のコードがコンパイルエラーが発生しないか確認してください。 -->
 
 :::note ここまでのふりかえり
 
 - package.jsonを作りました。
 - eslintをインストールしました。
-- 設定ファイル`.eslintrc.js`を作りました。
-- 設定ファイルには次のルールを追加しました。
+- 設定ファイルに次のルールを追加しました。
   - `no-console`: `console.log`をコードに残しておいてはいけない。
   - `camelcase`: 変数名はキャメルケースにすること(プロパティ名を除く)。
 
 :::
 
-### JavaScriptをチェックする
+### コードをチェックする
 
-設定ファイルが準備できたので、JavaScriptファイルを作り、ESLintでチェックしてみましょう。
+設定ファイルが準備できたので、コードを作り、ESLintでチェックしてみましょう。
 
-まず、`src`ディレクトリを作ってください。
+`src`ディレクトリを作成し、その中にファイル`hello-world.ts`を作ってください。`hello-world.ts`の内容は次のようにします。ファイルとしてはTypeScriptですが、まずはJavaScriptの構文の範囲でESLintを貯めすため、JavaScriptのコードとしても読み込めるようにしておきます。
 
-```shell
-mkdir src
-```
-
-`src`ディレクトリにJavaScriptファイル`helloWorld.js`を作ってください。
-
-```shell
-touch src/helloWorld.js
-```
-
-`helloWorld.js`が加わったディレクトリ構造が、次のようになっているか確認してください。
-
-```txt
-.
-├── .eslintrc.js
-├── node_modules
-├── package.json
-├── src
-│   └── helloWorld.js
-└── yarn.lock
-```
-
-`helloWorld.js`の内容は次のようにします。
-
-```js twoslash title="src/helloWorld.js"
+```ts twoslash title="src/hello-world.ts"
 export const hello_world = "Hello World";
 console.log(hello_world);
 ```
 
-この`helloWorld.js`は、わざとコーディング規約に違反するコードになっています。1行目の変数`hello_world`はキャメルケースになっていません。2行目では、使ってはいけない`console.log`が使われています。
+`hello-world.ts`が加わったディレクトリ構造が、次のようになっているか確認してください。
 
-では、ESLintでチェックを実行してみましょう。チェックは、`eslint`コマンドを起動するだけです。`eslint`コマンドは第一引数に、チェック対象のファイル名やディレクトリ名を指定します。ここでは、`src`ディレクトリ全体をチェックするために、引数は`src`にします。
+```txt
+.
+├── eslint.config.ts
+├── node_modules/
+├── package-lock.json
+├── package.json
+├── src
+│   └── hello-world.ts
+└── tsconfig.json
+```
 
-```shell title="srcディレクトリをESLintでチェックする"
-npx eslint src
+この`hello-world.ts`は、わざとコーディング規約に違反するコードになっています。1行目の変数`hello_world`はキャメルケースになっていません。2行目では、使ってはいけない`console.log`が使われています。
+
+では、ESLintでチェックを実行してみましょう。チェックは、`eslint`コマンドを起動するだけです。
+
+```shell title="ESLintでチェックする"
+npx eslint
 ```
 
 これを実行すると、次の出力が表示されます。
 
-![](/img/tutorial/eslint/terminal-npx-eslint-src.svg)
+```taml
+<underline>/path/to/eslint-tutorial/src/hello-world.ts</underline>
+  <dim>1:14</dim>  <yellow>warning</yellow>  Identifier 'hello_world' is not in camel case  <dim>camelcase</dim>
+  <dim>2:1</dim>   <yellow>warning</yellow>  Unexpected console statement                   <dim>no-console</dim>
+
+<bold><yellow>✖ 2 problems (0 error, 2 warnings)</yellow></bold>
+```
+
+<!-- regression test: コマンドの結果が上記の内容と一致するか確認してください。プロジェクトディレクトリへのパスは完全に一致してなくても構いません。 -->
 
 #### 結果の読み方
 
 チェックした結果、問題点が見つかると表形式で詳細が表示されます。各行は4つの列からなります。左から順に、コードの行番号列番号、重大度、問題点の説明、ルール名です。
 
-![](/img/tutorial/eslint/error-meaning.svg)
+```taml
+  <red>╭── 行番号と列番号</red>
+  <red>│</red>     <yellow>╭── 重大度</yellow>
+  <red>1:14</red>  <yellow>warning</yellow>  <blue>Identifier 'hello_world' is not in camel case</blue>  <green>camelcase</green>
+  <red>2:1</red>   <yellow>warning</yellow>  <blue>Unexpected console statement</blue>                   <green>no-console</green>
+                 <blue>│</blue>                                              <green>╰── ルール名</green>
+                 <blue>╰── 問題点の説明</blue>
+```
 
 結果に表示されている内容だけでは、どうして問題点になっているのか、どう直したらいいのかが分からないことがあります。その場合は、ルール名からESLintのドキュメントでルールの詳細を調べます。たとえば、上の結果ではルール名に`no-console`が挙がっていますが、この文字列をもとにルールの詳細を探します。`no-console`の詳細ページは、<https://eslint.org/docs/rules/no-console>にあります。
 
+<!-- regression test: 上の段落に含まれるリンクが有効かどうかを確認してください。 -->
+
 ### コードを修正してエラーを解消する
 
-```js twoslash title="src/helloWorld.js"
+```ts twoslash title="src/hello-world.ts"
 export const hello_world = "Hello World";
 console.log(hello_world);
 ```
@@ -430,50 +487,74 @@ console.log(hello_world);
 - 1行目: 変数名`hello_world`がキャメルケースではない
 - 2行目: `console.log`は使ってはいけない
 
-このエラーを解消したいので、`helloWorld.js`を編集してみましょう。変数名`hello_world`は`helloWorld`に変更します。2行目の`console.log`は削除しましょう。修正後のコードは次のようになります。
+このエラーを解消したいので、`hello-world.ts`を編集してみましょう。変数名`hello_world`は`helloWorld`に変更します。2行目の`console.log`は削除しましょう。修正後のコードは次のようになります。
 
-```js twoslash title="src/helloWorld.js"
+```ts twoslash title="src/hello-world.ts"
 export const helloWorld = "Hello World";
 ```
 
 再びESLintでチェックして、もう問題がなくなっているか確認してみましょう。
 
 ```shell
-npx eslint src
+npx eslint
 ```
 
 この実行結果に何も出力されなければ、問題点が解消されています。
 
+<!-- regression test: 上の段落に含まれるリンクが有効かどうかを確認してください。 -->
+
 ### コードを自動修正する
 
-ESLintのルールの中には、コードの自動修正ができるものがあります。たとえば、[`semi`](https://eslint.org/docs/rules/semi)は、文末セミコロンをつけるつけないを定めるルールですが、これは自動修正に対応しています。ここでは、`semi`を使ってESLintの自動修正をためしてみましょう。
+ESLintのルールの中には、コードの自動修正ができるものがあります。たとえば、ESLint公式が提供しているESLint Stylisticプラグインの[`semi`ルール](https://eslint.style/rules/semi)があります。これは、文末セミコロンをつけるつけないを定めるルールで、これは自動修正に対応しています。ここでは、`semi`を使ってESLintの自動修正をためしてみましょう。
 
-まず、設定ファイル`.eslintrc.js`の`rules`に`semi`を追加します。
+<!-- regression test: 上の段落に含まれるリンクが有効かどうかを確認してください。 -->
 
-```js twoslash {14} title=".eslintrc.js"
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-  },
-  rules: {
-    "no-console": "error",
-    camelcase: ["error", { properties: "never" }],
-    semi: ["error", "always"],
-  },
-};
+まず、ESLint Stylisticプラグインをインストールします。
+
+```shell
+npm install -D @stylistic/eslint-plugin
 ```
+
+まず、設定ファイル`eslint.config.ts`の`rules`に`semi`を追加します。
+
+```ts {4,7-13,24} title="eslint.config.ts"
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
+import stylistic from "@stylistic/eslint-plugin"; // この行を追加
+
+export default defineConfig([
+  // 次の要素を追加
+  {
+    plugins: {
+      "@stylistic": stylistic,
+    },
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: { globals: globals.browser },
+  },
+  tseslint.configs.recommended,
+  {
+    rules: {
+      "no-console": "warn",
+      camelcase: ["warn", { properties: "never" }],
+      "@stylistic/semi": ["warn", "always"], // この行を追加
+    },
+  },
+]);
+```
+
+<!-- regression test: 上記のコードがコンパイルエラーが発生しないか確認してください。 -->
 
 このルール設定では、`"always"`を指定しています。これは、文末セミコロンを必須にする設定です。
 
-つぎに、`src/helloWorld.js`のコードのセミコロンを消して保存してください。
+つぎに、`hello-world.ts`のコードのセミコロンを消して保存してください。
 
-```js twoslash title="src/helloWorld.js"
+```ts twoslash title="src/hello-world.ts"
 // prettier-ignore
 export const helloWorld = "Hello World"
 ```
@@ -481,27 +562,37 @@ export const helloWorld = "Hello World"
 自動修正の前にチェックだけを実行し、`semi`についての問題が報告されるか確認します。
 
 ```shell
-npx eslint src
+npx eslint
 ```
 
 次のような結果が表示されれば、追加した`semi`ルールが効いていることになります。
 
-![](/img/tutorial/eslint/terminal-npx-eslint-src-semi.svg)
+```taml
+<underline>/path/to/eslint-tutorial/src/hello-world.ts</underline>
+  <dim>1:40</dim>  <yellow>warning</yellow>  Missing semicolon  <dim>@stylistic/semi</dim>
+
+<bold><yellow>✖ 1 problem (0 errors, 1 warning)</yellow></bold>
+<bold><yellow>  0 errors and 1 warning potentially fixable with the `--fix` option.</yellow></bold>
+```
+
+<!-- regression test: コマンドの結果が上記の内容と一致するか確認してください。プロジェクトディレクトリへのパスは完全に一致してなくても構いません。 -->
 
 ESLintでコードを自動修正するには、`eslint`コマンドに`--fix`オプションをつけます。次のコマンドを実行し、自動修正してみましょう。
 
 ```shell
-npx eslint src --fix
+npx eslint --fix
 ```
 
-自動修正が成功していれば、出力は何も表示されずに処理が終了します。自動修正が効いているかを確認するために、`src/helloWorld.js`を開いてみてください。文末にセミコロンが追加されているでしょうか。追加されていれば自動修正成功です。
+自動修正が成功していれば、出力は何も表示されずに処理が終了します。自動修正が効いているかを確認するために、`hello-world.ts`を開いてみてください。文末にセミコロンが追加されているでしょうか。追加されていれば自動修正成功です。
+
+<!-- regression test: hello-world.tsが自動修正されているか確認してください。 -->
 
 :::note ここまでのふりかえり
 
-- `src/helloWorld.js`を作りました。
-- `npx eslint src`を実行し、`src`ディレクトリをチェックしてみました。
+- `src/hello-world.ts`を作りました。
+- `npx eslint`を実行し、`src`ディレクトリをチェックしてみました。
 - コードを手直しして、ESLintのチェックを通過する流れを体験しました。(`camelcase`, `no-console`)
-- `npx eslint src --fix`を実行し、ESLintの自動修正機能を試しました。(`semi`)
+- `npx eslint --fix`を実行し、ESLintの自動修正機能を試しました。(`semi`)
 
 :::
 
@@ -509,543 +600,200 @@ npx eslint src --fix
 
 ここまでのチュートリアルでは3つのルールを扱いました(`camelcase`、`no-console`、`semi`)。ESLintにはもっと多くのルールがあります。ルール数は200を超えます。
 
-ルールの一覧は、[公式ドキュメントのRules](https://eslint.org/docs/rules/)にあります。この一覧では、どのルールが自動修正に対応しているかも確認できます。
+ルールの一覧は、[公式ドキュメントのRules](https://eslint.org/docs/rules/)や[ESLint Stylisticプラグインのルール一覧](https://eslint.style/rules/)で確認できます。一覧では、どのルールが自動修正に対応しているかも確認できます。
 
-### Shareable configを導入する
-
-ESLintのルールは数があまりにも多いため、ルールをひとつひとつ調べて導入していくのは大変です。そこで、お勧めなのがshareable configの活用です。
-
-shareable configは、誰かが設定したルールのプリセットです。これを導入すると、自分でルールを設定する手間が省けます。
-
-有名なshareable configのひとつに、ESLint公式が公開している`eslint:recommended`があります。これを導入すると、[Rulesの一覧](https://eslint.org/docs/rules/)でチェックマークがついているルールが一括して有効化されます。これは公式が提供してるため有名ですが、有効になっているルールが少ないため、実務では物足りなさがあるかもしれません。
-
-第三者が公開しているshareable configもあり、次にあげるものは実務でも広く使われています。
-
-| 名前                        | 作成        | 準拠するコーディング規約                                        |
-| --------------------------- | ----------- | --------------------------------------------------------------- |
-| [eslint-config-airbnb]      | Airbnb      | [Airbnb JavaScript Style Guide]、[Airbnb React/JSX Style Guide] |
-| [eslint-config-airbnb-base] | Airbnb      | [Airbnb JavaScript Style Guide]                                 |
-| [eslint-config-standard]    | Standard JS | [JavaScript Standard Style]                                     |
-| [eslint-config-google]      | Google      | [Google JavaScript Style Guide]                                 |
-
-[airbnb react/jsx style guide]: https://github.com/airbnb/javascript/tree/master/react
-[eslint-config-airbnb]: https://www.npmjs.com/package/eslint-config-airbnb
-[eslint-config-airbnb-base]: https://www.npmjs.com/package/eslint-config-airbnb-base
-[eslint-config-standard]: https://www.npmjs.com/package/eslint-config-standard
-[eslint-config-google]: https://www.npmjs.com/package/eslint-config-google
-
-上のshareable configはコーディング規約に基づいて作成されているため、文書としてのコーディング規約とESLintの設定をセットでプロジェクトに導入できる利点があります。
-
-このチュートリアルでは、人気のAirbnbのものを使っていきます。Airbnbの設定には、[eslint-config-airbnb]と[eslint-config-airbnb-base]の2つがあります。前者は、React向けの設定が追加で盛り込まれています。今回はReactは扱わないので、よりシンプルな後者を導入します。
-
-<figure><figcaption>各shareable configのインストール件数の推移</figcaption><iframe src="https://npmcharts.com/compare/eslint-config-airbnb-base,eslint-config-airbnb,eslint-config-standard,eslint-config-google?interval=30&log=false&minimal=true" height="500" width="100%"></iframe></figure>
-
-まず、Yarnで`eslint-config-airbnb-base`をインストールします。その際、合わせて`eslint-plugin-import`も導入します。
-
-```shell
-yarn add -D \
-  'eslint-config-airbnb-base@^15' \
-  'eslint-plugin-import@^2'
-```
-
-次に、設定ファイル`.eslintrc.js`の`rules`を消します。その上で、`extends: ["airbnb-base"]`を追加してください。
-
-```js twoslash {11} title=".eslintrc.js"
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-  },
-  extends: ["airbnb-base"],
-};
-```
-
-これで、shareable configの導入は完了です。
-
-チェックを試すために、`src/helloWorld.js`を次の内容に置き換えてください。
-
-```js twoslash title="src/helloWorld.js"
-export const hello_world = "Hello World";
-console.log(hello_world);
-```
-
-このコードはAirbnbの規約にわざと違反する内容になっています。
-
-最後に`eslint`を実行し、チェックを動かしてみましょう。
-
-```shell
-npx eslint src
-```
-
-すると、次のような結果が得られるはずです。
-
-![](/img/tutorial/eslint/terminal-npx-eslint-src-airbnb.svg)
-
-ここで報告されている問題点は、次のような内容になります。
-
-- `import/prefer-default-export`: デフォルトエクスポートを使わければなりません。
-- `camelcase`: 変数`hello_world`はキャメルケースでなければなりません。
-- `quotes`: 文字列リテラルはシングルクォートで囲む必要があります。
-- `no-console`: `console.log`は残しておいてはいけません。
-
-続いて、shareable configのルールを上書きする方法を学んでいきましょう。
-
-上の結果では、`import/prefer-default-export`違反が報告されていました。これは、名前付きエクスポート(`export const helloWorld = "..."`)ではなく、デフォルトエクスポート(`export default "..."`)にすべきというエラーです。しかし、ここでは名前付きエクスポートを使いたいので、このルールをオフにすることで警告されないようにしてみましょう。ルールを上書きするには、`.eslintrc.js`の`rules`に`"import/prefer-default-export": "off"`を追加します。
-
-```js twoslash {12-14} title=".eslintrc.js"
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-  },
-  extends: ["airbnb-base"],
-  rules: {
-    "import/prefer-default-export": "off",
-  },
-};
-```
-
-さらに、文字列リテラルはダブルクォートのほうを使いたいので、`rules`に`quotes: ["error", "double"]`を追加します。
-
-```js twoslash {14} title=".eslintrc.js"
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-  },
-  extends: ["airbnb-base"],
-  rules: {
-    "import/prefer-default-export": "off",
-    quotes: ["error", "double"],
-  },
-};
-```
-
-再び`eslint`を実行して、ルールの上書きが効いているか確認してみましょう。
-
-```shell
-npx eslint src
-```
-
-次のように、出力結果からデフォルトエクスポートと文字列クォートについての警告が消えていれば、ルールが効いています。
-
-![](/img/tutorial/eslint/terminal-npx-eslint-src-airbnb-with-rules.svg)
+<!-- regression test: 上の段落に含まれるリンクが有効かどうかを確認してください。 -->
 
 ### ルールを部分的に無効化する
 
-`.eslintrc.js`で設定した規約はプロジェクト全体に及びます。コードを書いていると、どうしても規約を破らざるをえない部分が出てくることがあります。その場合は、コードのいち部分について、ルールを無効化することもできます。
+`eslint.config.ts`で設定した規約はプロジェクト全体に及びます。コードを書いていると、どうしても規約を破らざるをえない部分が出てくることがあります。その場合は、コードのいち部分について、ルールを無効化することもできます。
 
 部分的にルールを無効にするには、その行の前にコメント`eslint-disable-next-line`を追加します。たとえば、次の例ように書いておくと、変数名`hello_world`がキャメルケースでなくても、ESLintは警告を出さなくできます。
 
-```js twoslash
+```ts twoslash
 // eslint-disable-next-line camelcase
 export const hello_world = "Hello World";
 ```
 
 この方法はいざというときに知っておくとよいというものです。ルール無効化コメントだらけになってしまうと本末転倒です。節度を持って使うのが望ましいです。
 
-:::note ここまでのふりかえり
-
-- shareable configの`eslint-config-airbnb-base`を導入しました。
-- これのルールを一部上書きしてみました。
-  - `import/prefer-default-export`を無効化
-  - `quotes`の指定をシングルクォートからダブルクォートに変更
-- ルール無効化コメント`// eslint-disable-next-line`を試しました。
-
-:::
-
 ## ESLintでTypeScriptをリントしよう
 
 [eslintでtypescriptをリントしよう]: #eslintでtypescriptをリントしよう
 
-ここまでのチュートリアルでは、JavaScriptにESLintをかける方法を学んできました。ここからは、TypeScriptにESLintを使う方法を学んでいきます。
+ここまでのチュートリアルでは、JavaScriptの文法の範疇でESLintをかける方法を学んできました。ここからは、TypeScriptの文法や型システムにまで範囲を広げてESLintを使う方法を学んでいきます。
 
-そもそもESLintでは、TypeScriptはチェックできません。これを補うのが[TypeScript ESLint]です。これを導入するとESLintでTypeScriptがチェックできるようになります。
+そもそもESLintでは、TypeScriptはチェックできません。これを補うのが[TypeScript ESLint]です。これは、上のESLint導入ウィザードで導入済みなので、追加でインストールする必要はありません。
 
 [typescript eslint]: https://typescript-eslint.io/
 
-### プロジェクトを作成する {#create-typescript-project}
+<!-- regression test: 上のリンクが有効かどうかを確認してください。 -->
 
-ここからは別のプロジェクトを作り、その新プロジェクトでチュートリアルを進めていきます。空のディレクトリを作り、その中に最低限のpackage.jsonを配置してください。
+また、`eslint.config.ts`もすでに次のようにTypeScript ESLintの設定が追加済みであるはずなので、設定の変更も必要ありません。
 
-```shell
-mkdir eslint-typescript-tutorial
-cd eslint-typescript-tutorial/
-echo '{"name": "eslint-typescript-tutorial","license": "UNLICENSED"}' > package.json
-```
+```ts {2,18} title="eslint.config.ts"
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint"; // TypeScript ESLintをインポート
+import { defineConfig } from "eslint/config";
+import stylistic from "@stylistic/eslint-plugin";
 
-### TypeScriptを導入する
-
-TypeScript ESLintを使うには、TypeScript環境を構築しておく必要があります。まず、`typescript`を導入しておいてください。合わせてNode.jsの型定義`@types/node`もインストールしておきます。この型情報は、`.eslintrc.js`などのNode.js環境で実行されるファイルをESLintでチェックするときに利用されます。
-
-```shell
-yarn add -D 'typescript@^5.5' '@types/node@^22'
-```
-
-TypeScriptコンパイラの設定ファイルも作っておきます。
-
-```shell
-touch tsconfig.json
-```
-
-tsconfig.jsonの内容はこうします。
-
-```json title="tsconfig.json"
-{
-  "compilerOptions": {
-    "outDir": "dist"
+export default defineConfig([
+  {
+    plugins: {
+      "@stylistic": stylistic,
+    },
   },
-  "include": ["src"]
-}
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: { globals: globals.browser },
+  },
+  tseslint.configs.recommended, // TypeScript ESLintの有効化
+  {
+    rules: {
+      "no-console": "warn",
+      camelcase: ["warn", { properties: "never" }],
+      "@stylistic/semi": ["warn", "always"],
+    },
+  },
+]);
 ```
 
-続いて、`src`ディレクトリにTypeScriptファイル`helloWorld.ts`を追加します。内容は空で構いません。
-
-```shell
-mkdir src
-touch src/helloWorld.ts
-```
-
-コンパイルもできるか試してみましょう。
-
-```shell
-npx tsc
-```
-
-コンパイルが成功すると、`dist/helloWorld.js`が生成されます。
-
-この段階では、ディレクトリ構成が次のようになっているはずです。
-
-```text title="ディレクトリ構成"
-.
-├── dist
-│   └── helloWorld.js
-├── node_modules
-├── package.json
-├── src
-│   └── helloWorld.ts
-├── tsconfig.json
-└── yarn.lock
-```
-
-### TypeScript ESLintを導入する
-
-ESLint本体と[TypeScript ESLint]の両方をインストールします。
-
-```shell
-yarn add -D \
-  'eslint@^8' \
-  '@typescript-eslint/parser@^7' \
-  '@typescript-eslint/eslint-plugin@^7'
-```
-
-TypeScript ESLintは2つのパッケージから成ります。`@typescript-eslint/parser`は、ESLintにTypeScriptの構文を理解させるためのパッケージです。`@typescript-eslint/eslint-plugin`は、TypeScript向けのルールを追加するパッケージです。
-
-ESLintがインストールされ、実行可能になっているかバージョンを表示して確認しましょう。
-
-```shell
-npx eslint -v
-v8.15.0
-```
+<!-- regression test: チュートリアルを進めながら作ってきた手元のコードが上記のコードと一致するか確認してください。コメントの有無の差異は無視してください。 -->
 
 ### TypeScript ESLintにはどんなルールがある？
 
-ESLintの[200以上のルール](https://eslint.org/docs/rules/)に加えて、TypeScript ESLintを導入すると、100以上のルールが追加されます。追加されるルールの一覧は、[TypeScript ESLintのドキュメント](https://typescript-eslint.io/rules/)で確認できます。
+TypeScript ESLintを導入すると、100以上のルールが追加されます。追加されるルールの一覧は、[TypeScript ESLintのドキュメント](https://typescript-eslint.io/rules/)で確認できます。
 
-:::note ここまでのふりかえり
-
-- 新規プロジェクト`eslint-typescript-tutorial`を作成しました。
-- TypeScriptをインストールし、`tsconfig.json`を設定しました。
-- 中身が空の`src/helloWorld.ts`を作成し、コンパイルしてみました。
-- ESLintとTypeScript ESLintをインストールしました。
-
-:::
-
-### TypeScript向けのshareable configを導入する
-
-コーディング規約[Airbnb JavaScript Style Guide]に準拠したshareable configをインストールします。
-
-```shell
-yarn add -D \
-  'eslint-config-airbnb-base@^15' \
-  'eslint-plugin-import@^2' \
-  'eslint-config-airbnb-typescript@^18'
-```
-
-`eslint-config-airbnb-base`はJavaScript向けのshareable configです。これを上書きして、TypeScript ESLintのルールを追加したり、TypeScriptコンパイラがチェックするためESLintでチェックする必要がないルールを除外する設定を加えるのが`eslint-config-airbnb-typescript`です。`eslint-plugin-import`は依存関係上、導入が必要なパッケージです。
-
-### TypeScript ESLintの設定ファイルを作る
-
-TypeScript ESLintを動かすためには、次の2つの設定ファイルを作る必要があります。
-
-- tsconfig.eslint.json
-- .eslintrc.js
-
-これらファイルをプロジェクトルートに作成してください。
-
-```shell
-touch tsconfig.eslint.json .eslintrc.js
-```
-
-```text title="作成後のディレクトリ構造"
-.
-├── .eslintrc.js
-├── dist
-│   └── helloWorld.js
-├── node_modules
-├── package.json
-├── src
-│   └── helloWorld.ts
-├── tsconfig.eslint.json
-├── tsconfig.json
-└── yarn.lock
-```
-
-#### tsconfig.eslint.json
-
-TypeScript ESLintは、チェック時に型情報を利用するために、TypeScriptコンパイラを使います。その際のコンパイラ設定を`tsconfig.eslint.json`に書きます。コンパイラ設定は、`tsconfig.json`の内容を`extends`で継承しつつ、上書きが必要なところだけ記述していきます。
-
-```json title="tsconfig.eslint.json"
-{
-  "extends": "./tsconfig.json"
-}
-```
-
-今回は、TypeScriptファイルに加えて、ESLintの設定ファイル`.eslintrc.js`自体もESLintのチェック対象に含めたいので、`allowJs`の追加と`include`の上書きをします。
-
-```json {2-5} title="tsconfig.eslint.json"
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "allowJs": true
-  },
-  "include": ["src", ".*.js"]
-}
-```
-
-`".*.js"`は、`.eslintrc.js`などドット始まりのJSファイルにマッチするパターンです。パターンマッチにしておくことで、将来的に導入される他の設定ファイルもチェック対象に含めるようにできます。
-
-また、テストフレームワーク「Jest」の設定ファイルでは、`jest.config.js`のようにドットはじまりでないJSファイルもありえます。このようなファイルが追加されるのを見越して、`"*.js"`もあらかじめ追加しておくとよいです。
-
-```json {5} title="tsconfig.eslint.json"
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "allowJs": true
-  },
-  "include": ["src", ".*.js", "*.js"]
-}
-```
-
-このように、TypeScript ESLintでチェックする対象は、`include`に追加していく必要があります。
-
-`tsconfig.eslint.json`が正しく設定されているか、次のコマンドを実行して出力を確認してください。
-
-```shell
-npx tsc --showConfig --project tsconfig.eslint.json
-```
-
-設定が正しいと、次のような出力になるはずです。
-
-```text
-{
-    "compilerOptions": {
-        "outDir": "./dist",
-        "allowJs": true
-    },
-    "files": [
-        "./src/helloWorld.ts",
-        "./.eslintrc.js"
-    ],
-    "include": [
-        "src",
-        ".*.js",
-        "*.js"
-    ]
-}
-```
-
-#### .eslintrc.js
-
-次にESLintの設定ファイル`.eslintrc.js`を作ります。内容は次のとおりにしてください。
-
-```js twoslash {3-4,12-13,15,18-19,23} title=".eslintrc.js"
-module.exports = {
-  root: true,
-  parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: "./tsconfig.eslint.json",
-    tsconfigRootDir: __dirname,
-  },
-  ignorePatterns: ["dist"],
-  extends: [
-    "airbnb-base",
-    "airbnb-typescript/base",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-  ],
-  rules: {
-    "import/prefer-default-export": "off",
-    "@typescript-eslint/quotes": ["error", "double"],
-  },
-};
-```
-
-`root`、`env`、`parserOptions`の`ecmaVersion`と`sourceType`については[前のチュートリアル](#eslintの設定ファイルを作る)の解説をご覧ください。まだ説明していない、追加のオプションは次で説明します。
-
-#### `parser`
-
-```js twoslash {3}
-module.exports = {
-  // ...
-  parser: "@typescript-eslint/parser",
-  // ...
-};
-```
-
-`parser`で設定したパーサーを使って、ESLintはJavaScriptやTypeScriptの構文を解析します。上の例では、TypeScriptパーサーを指定しています。この指定がないと、ESLintはTypeScriptを解釈できず、エラーが発生します。
-
-TypeScriptはJavaScriptの構文を拡張した言語です。なので、このパーサーさえ入れておけば、TypeScriptに限らずJavaScriptもこのパーサーひとつで対応できます。要するに、このパーサーひとつで、TypeScriptとJavaScriptのファイルどちらもリントできるようになります。
-
-#### `plugins`
-
-```js twoslash {3}
-module.exports = {
-  // ...
-  plugins: ["@typescript-eslint"],
-  // ...
-};
-```
-
-ESLintは公式が提供するルールに加えて、第三者が作成したルールを使うこともできます。第三者が作成したルールはプラグインという形で公開されています。この`plugins`フィールドにプラグインを追加すると、ルールが追加できます。上の例では、TypeScript ESLint独自のルールを追加するために、`@typescript-eslint`を設定しています。
-
-#### `parserOptions` {#parser-options-2}
-
-```js twoslash {3-7}
-module.exports = {
-  // ...
-  parserOptions: {
-    // ...
-    project: "./tsconfig.eslint.json",
-    tsconfigRootDir: __dirname,
-  },
-  // ...
-};
-```
-
-`project`と`tsconfigRootDir`はTypeScript ESLint独自のオプションです。`tsconfigRootDir`はプロジェクトルートの絶対パスを指定します。`project`は、ESLint実行時に使うコンパイラ設定ファイルを`tsconfigRootDir`からの相対パスで指定します。これらの設定は、TypeScript ESLintが型情報を参照するために必要な設定です。
-
-#### `ignorePatterns`
-
-```js twoslash {3}
-module.exports = {
-  // ...
-  ignorePatterns: ["dist"],
-  // ...
-};
-```
-
-`ignorePatterns`はESLintのチェック対象外にするファイルやディレクトリを指定するオプションです。TypeScriptプロジェクトでは、コンパイルで生成されるJavaScriptは、リントしないのが普通です。なので、`dist`ディレクトリをチェック対象外にしておきます。
-
-#### `extends`
-
-```js twoslash {3-7}
-module.exports = {
-  // ...
-  extends: [
-    "airbnb-base", // ①
-    "airbnb-typescript/base", // ②
-    "plugin:@typescript-eslint/recommended-requiring-type-checking", // ③
-  ],
-  // ...
-};
-```
-
-`extends`はshareable configを使うための設定です。①は、JavaScript向けのルールです。これを拡張してTypeScript ESLintのルールにも範囲を広げたのが②です。①と②は上の順番でないと正しく設定されないので注意してください。
-
-③はTypeScript ESLintが提供する推奨ルールセットで、型情報を要するルールを含みます。このルールセットでどのルールが有効になるかは、[公式ドキュメント](https://typescript-eslint.io/rules/)をご覧ください。
-
-#### `rules`
-
-```js twoslash {3-6}
-module.exports = {
-  // ...
-  rules: {
-    "import/prefer-default-export": "off",
-    "@typescript-eslint/quotes": ["error", "double"],
-  },
-  // ...
-};
-```
-
-ここの`rules`は、shareable configで有効化されたルールを上書きするのに用いています。TypeScript ESLintで追加されたルールは、`@typescript-eslint/`が接頭辞になります。
-
-:::note ここまでのふりかえり
-
-- コーディング規約Airbnb JavaScript Style Guideに準拠したshareable configをインストールしました。
-- TypeScript ESLintの設定ファイルを作りました。
-  - tsconfig.eslint.json
-  - .eslintrc.js
-
-:::
+<!-- regression test: 上の段落に含まれるリンクが有効かどうかを確認してください。 -->
 
 ### TypeScriptをチェックする
 
-TypeScript ESLintを使う準備ができたので、いよいよTypeScriptをチェックしてみたいと思います。
+すでに、TypeScript ESLintが有効化されているので、さっそくTypeScriptをチェックしてみましょう。
 
-まず、空だった`src/helloWorld.ts`に次のコードを書いて保存してください。
+TypeScriptには`any`型という特殊な型があります。これは、どんな型でも代入を許す反面、型チェックを行わないため、安全なコードを書くためには避けたい型です。`any`の禁止はTypeScriptコンパイラでは強制できないため、TypeScript ESLintで取り扱うチェックとしてぴったりのトピックです。
 
-```ts twoslash title="src/helloWorld.ts"
-export const hello_world = "Hello World";
-console.log(hello_world);
+[any型](../reference/values-types-variables/any.md)
+
+では、`hello-world.ts`の`helloWorld`変数に`any`型を指定して、ESLintでチェックしてみましょう。
+
+```ts twoslash title="src/hello-world.ts"
+export const helloWorld: any = "Hello World";
+//                       ^^^
 ```
 
 そうしたら、ESLintを実行してみましょう。
 
 ```shell
-npx eslint .
+npx eslint
 ```
 
 すると、次の結果が出力されるはずです。
 
-![](/img/tutorial/eslint/terminal-npx-eslint-src-typescript.svg)
+```taml
+<underline>/path/to/eslint-tutorial/src/hello-world.ts</underline>
+  <dim>1:26</dim>  <red>error</red>  Unexpected any. Specify a different type  <dim>@typescript-eslint/no-explicit-any</dim>
 
-2つの問題点が報告されています。1つ目は、変数名の命名規則が守られていない点についてのエラーです。2つ目は、`console.log`が使われている点についての警告です。
-
-これらの問題点を修正してみましょう。`src/helloWorld.ts`を次の内容に変更し、保存してください。
-
-```ts twoslash title="src/helloWorld.ts"
-export const helloWorld = "Hello World";
+<bold><red>✖ 1 problem (1 error, 0 warnings)</red></bold>
 ```
 
-再びESLintを実行して、問題点が解消されているか確認してみましょう。
+<!-- regression test: コマンドの結果が上記の内容と一致するか確認してください。プロジェクトディレクトリへのパスは完全に一致してなくても構いません。 -->
 
-```shell
-npx eslint .
+出力にあるとおり、`any`型が使われていることを警告してくれています。
+
+### 型情報をチェックに活用しよう
+
+TypeScript ESLintのルールは主に2種類に分類されます。ひとつは、TypeScriptの構文情報だけでチェックできるルールです。もうひとつは、TypeScriptの型情報をチェックに活用するルールです。上で試した`no-explicit-any`ルールは、構文情報だけでチェックできるルールでした。
+
+たとえば、次のコードは`C`の分岐が欠けていて問題のあるコードです。こうした問題はTypeScriptコンパイラでは発見できません。また、構文情報だけに頼ったチェックでは`Choice`型がどんな値を取りうるのか不明なため、問題が見つけられません。
+
+```ts twoslash
+type Choice = "A" | "B" | "C";
+
+export function func(choice: Choice) {
+  switch (choice) {
+    case "A":
+      break;
+    case "B":
+      break;
+  }
+}
 ```
 
-出力結果に何も表示されていなければ、問題点が解決されています。
+こういった場面では、型情報をチェックに活用するルールが役立ちます。TypeScript ESLintの[`switch-exhaustiveness-check`ルール](https://typescript-eslint.io/rules/switch-exhaustiveness-check)は、型情報をチェックに活用するルールの一例です。これは、型情報を参照しながら、switch文の分岐が網羅されているかをチェックするルールです。
+
+<!-- regression test: 上の段落に含まれるリンクが有効かどうかを確認してください。 -->
+
+では、実際に上のコードを`switch-exhaustiveness-check`ルールでチェックしてみましょう。
+
+型情報のルール群を有効化するには、`eslint.config.ts`に次のように設定を追加します。具体的には、`languageOptions`に`parserOptions.projectService=true`を追加します。加えて、`recommendedTypeChecked`も追加しておくと、型情報のルールのうちTypeScript ESLintが推奨するものが有効化されます。最後に、`recommendedTypeChecked`に含まれていない`switch-exhaustiveness-check`ルールを有効化します。
+
+```ts {18,22,28} title="eslint.config.ts"
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
+import stylistic from "@stylistic/eslint-plugin";
+
+export default defineConfig([
+  {
+    plugins: {
+      "@stylistic": stylistic,
+    },
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: { projectService: true },
+    },
+  },
+  tseslint.configs.recommended,
+  tseslint.configs.recommendedTypeChecked,
+  {
+    rules: {
+      "no-console": "warn",
+      camelcase: ["warn", { properties: "never" }],
+      "@stylistic/semi": ["warn", "always"],
+      "@typescript-eslint/switch-exhaustiveness-check": "warn",
+    },
+  },
+]);
+```
+
+<!-- regression test: 上記のコードがコンパイルエラーが発生しないか確認してください。 -->
+
+`hello-world.ts`を次のように変更して、ESLintを実行してみましょう。
+
+```ts twoslash title="src/hello-world.ts"
+type Choice = "A" | "B" | "C";
+
+export function func(choice: Choice) {
+  switch (choice) {
+    case "A":
+      break;
+    case "B":
+      break;
+  }
+}
+```
+
+`npx eslint`の結果は次のようになるはずです。
+
+```taml
+<underline>/path/to/eslint-tutorial/src/hello-world.ts</underline>
+  <dim>4:11</dim>  <yellow>warning</yellow>  Switch is not exhaustive. Cases not matched: "C"  <dim>@typescript-eslint/switch-exhaustiveness-check</dim>
+
+<bold><yellow>✖ 1 problem (0 errors, 1 warning)</yellow></bold>
+```
+
+<!-- regression test: コマンドの結果が上記の内容と一致するか確認してください。プロジェクトディレクトリへのパスは完全に一致してなくても構いません。 -->
+
+`switch-exhaustiveness-check`ルールで`C`の分岐が欠けていることを警告してくれています。
 
 以上で、ESLintでTypeScriptをリントするチュートリアルは終わりです。
 
@@ -1053,9 +801,13 @@ npx eslint .
 
 [vs codeとeslintを統合しよう]: #vs-codeとeslintを統合しよう
 
+<!-- regression test: この手順はAIによる回帰テストでは実行できないので、手動で確認してください。 -->
+
 :::info
 このステップはVS Codeを使っている方向けの内容です。WebStormなどのJetBrains IDEを使っている方は、[JetBrains IDEとESLintを統合しよう]を参照してください。これからVS Codeを導入する方は、[VS Codeの公式サイト](https://code.visualstudio.com/download)からダウンロードしてください。
 :::
+
+<!-- regression test: 上の段落に含まれるリンクが有効かどうかを確認してください。 -->
 
 ここでは、Visual Studio Code(VS Code)に、ESLintを組み込む方法を説明します。
 
@@ -1069,11 +821,15 @@ ESLintはコマンドひとつでコーディング規約をチェックでき�
 
 VS CodeとESLintを統合するには、[ESLintの拡張](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)をVisual Studio Codeのマーケットプレイスからインストールするだけです。
 
+<!-- regression test: 上の段落に含まれるリンクが有効かどうかを確認してください。 -->
+
 ![](/img/tutorial/eslint/vscode-marketplace.png)
 
 ## JetBrains IDEとESLintを統合しよう
 
 [jetbrains ideとeslintを統合しよう]: #jetbrains-ideとeslintを統合しよう
+
+<!-- regression test: この手順はAIによる回帰テストでは実行できないので、手動で確認してください。 -->
 
 :::info
 このステップはJetBrains IDE(WebStorm、IntelliJ IDEA、PyCharmなど)を使っている方向けの内容です。VS Codeを使っている方は、[VS CodeとESLintを統合しよう]を参照してください。
