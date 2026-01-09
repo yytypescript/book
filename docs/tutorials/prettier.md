@@ -267,6 +267,31 @@ singleQuote = true
 | yaml         | `.prettierrc`, `.prettierrc.yml`, `.prettierrc.yaml`                                    |
 | toml         | `.prettierrc.toml`                                                                      |
 
+### EditorConfigを利用する
+
+Prettierは[EditorConfig](https://editorconfig.org/)という、プロジェクト参加者の間でインデントのスタイルや改行文字の種類などを統一させる仕組みに対応しています。プロジェクトルートに`.editorconfig`というファイルを置くと、対応しているテキストエディターやIDE、Prettier等がそれを読み込んで、インデントスタイル等を書かれた内容に合わせます。
+
+`.editorconfig`ファイルの例を次に示します。
+
+```ini title=".editorconfig"
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+```
+
+このファイルがプロジェクトルートにあると、Prettierはそれを検知し、`.prettierrc`がなくてもスペース2つでフォーマットします。シングルクォートを使うか・セミコロンを挿入するか等の設定をしたい場合は`.prettierrc`を別途作成する必要がありますが、`tabWidth`・`useTabs`・`endOfLine`の項目は指定しなくてよくなります。
+
+Prettierの他にも、VSCodeは[プラグイン](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)経由で対応している他、IntelliJ IDEAやVisual Studioも対応しています。それらのエディターでファイルの新規作成を行うと、`.editorconfig`に書かれたルールに沿うようにエディターの設定が一時的に変更されます。
+
 ### 他の整形ルールを確認する
 
 ここで紹介した以外にもいくつかの整形ルールが存在します。
