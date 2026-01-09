@@ -22,12 +22,13 @@ type Animal = {
 
 ## インターフェースと型エイリアスの違い
 
-| 内容             | インターフェース   | 型エイリアス                     |
-| :--------------- | :----------------- | :------------------------------- |
-| 継承             | 可能               | 不可。ただし交差型で表現は可能   |
-| 継承による上書き | 上書きまたはエラー | フィールド毎に交差型が計算される |
-| 同名のものを宣言 | 定義がマージされる | エラー                           |
-| Mapped Types     | 使用不可           | 使用可能                         |
+| 内容                         | インターフェース   | 型エイリアス                     |
+| :--------------------------- | :----------------- | :------------------------------- |
+| 継承                         | 可能               | 不可。ただし交差型で表現は可能   |
+| 継承による上書き             | 上書きまたはエラー | フィールド毎に交差型が計算される |
+| 同名のものを宣言             | 定義がマージされる | エラー                           |
+| Mapped Types                 | 使用不可           | 使用可能                         |
+| インデックス型への代入互換性 | なし               | あり                             |
 
 ### 継承
 
@@ -206,6 +207,109 @@ interface Butterfly {
   [key in SystemSupportLanguage]: string;
 }
 ```
+
+### インデックス型への代入互換性
+
+インターフェースと型エイリアスでは、インデックス型への代入互換性が異なります。
+
+- **型エイリアス**: インデックス型に代入できる
+- **インターフェース**: インデックス型に代入できない
+
+次の例では、同じ構造を持つインターフェースと型エイリアスを、インデックス型に代入しています。
+
+```ts twoslash
+// @errors: 2322
+interface PersonInterface {
+  name: string;
+  age: string;
+}
+
+type PersonType = {
+  name: string;
+  age: string;
+};
+
+const personInterface: PersonInterface = { name: "Alice", age: "25" };
+const personType: PersonType = { name: "Bob", age: "30" };
+
+// インターフェースはインデックス型に代入できない
+const stringMap1: { [K: string]: string } = personInterface;
+
+// 型エイリアスはインデックス型に代入できる
+const stringMap2: { [K: string]: string } = personType; // OK
+```
+
+#### 実際のユースケース
+
+この違いは、`Record<string, T>`のようなユーティリティ型を使う場面でよく遭遇します。
+
+```ts twoslash
+// @errors: 2345
+interface User {
+  name: string;
+  email: string;
+}
+
+function printUser(user: Record<string, string>) {
+  console.log(user);
+}
+
+const user: User = { name: "alice", email: "alice@example.com" };
+printUser(user); // エラー
+```
+
+このような場合、型エイリアスで定義するか、後述の回避策を使う必要があります。
+
+#### 回避策
+
+インターフェースをインデックス型に代入したい場合、いくつかの回避策があります。
+
+##### 値レベルの回避策: スプレッド構文を使う
+
+スプレッド構文を使うと、インターフェースの型情報が再計算され、代入できるようになります。
+
+```ts twoslash
+interface PersonInterface {
+  name: string;
+  age: string;
+}
+const personInterface: PersonInterface = { name: "Alice", age: "25" };
+// ---cut---
+const stringMap: { [K: string]: string } = { ...personInterface }; // OK
+```
+
+##### 型レベルの回避策: Pickを使う
+
+`Pick`を使うと、インターフェースから型エイリアス相当の型を作成できます。
+
+```ts twoslash
+interface PersonInterface {
+  name: string;
+  age: string;
+}
+
+type OnlyStringValues<T extends { [K: string]: string }> = T;
+// ---cut---
+type PersonType = Pick<PersonInterface, keyof PersonInterface>;
+type Test = OnlyStringValues<PersonType>; // OK
+```
+
+##### インターフェースにインデックス型を明示的に追加する
+
+インターフェースの定義を変更できる場合は、インデックス型を明示的に追加する方法もあります。
+
+```ts twoslash
+interface PersonInterface {
+  name: string;
+  age: string;
+  [K: string]: string; // 明示的にインデックス型を追加
+}
+
+const person: PersonInterface = { name: "Alice", age: "25" };
+const stringMap: { [K: string]: string } = person; // OK
+```
+
+[インデックス型 (index signature)](../../values-types-variables/object/index-signature.md)
 
 ## インターフェースと型エイリアスの使い分け
 
