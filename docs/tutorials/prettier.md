@@ -286,7 +286,8 @@ Prettierをプロジェクトに導入する時に整形ルールについて悩
 
 `prettier-ignore`をコメントとして記述することで、一部のコードをPrettierの自動整形の対象から除外することができます。
 
-```ts twoslash title="src/hello-world.ts"
+<!--prettier-ignore-->
+```ts title="src/hello-world.ts"
 const board1 = [1, 0, 0, 1];
 
 // prettier-ignore
