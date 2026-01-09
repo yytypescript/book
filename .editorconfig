@@ -1,0 +1,86 @@
+root = true
+
+#-----------------------------------------
+# Global defaults (apply to every file)
+#-----------------------------------------
+[*]
+charset                 = utf-8
+end_of_line             = lf
+indent_style            = space
+indent_size             = 2
+tab_width               = 2          # fallback when indent_style = tab
+insert_final_newline    = true
+trim_trailing_whitespace= true
+max_line_length         = 80         # supported by JetBrains IDEs, VS Code, etc.
+
+#-----------------------------------------
+# Make & Go prefer hard tabs
+#-----------------------------------------
+[Makefile]
+indent_style = tab
+
+[*.go]
+indent_style = tab
+tab_width    = 2
+indent_size  = 1
+
+#-----------------------------------------
+# Markdown - keep two-space breaks, no wrap
+#-----------------------------------------
+[*.{md,markdown,mdx}]
+trim_trailing_whitespace = false
+
+#-----------------------------------------
+# YAML & JSON – 2-space indents
+#-----------------------------------------
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.{json,jsonc}]
+indent_size = 2
+
+#-----------------------------------------
+# Web assets – 2-space indents
+#-----------------------------------------
+[*.{html,htm,css,scss,less}]
+indent_size = 2
+
+#-----------------------------------------
+# JavaScript / TypeScript
+#-----------------------------------------
+[*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}]
+indent_size     = 2
+max_line_length = 80   # Prettier default
+
+#-----------------------------------------
+# Python – Black-ish
+#-----------------------------------------
+[*.py]
+indent_size     = 4
+max_line_length = 88    # Black default
+
+#-----------------------------------------
+# Shell scripts
+#-----------------------------------------
+[*.{sh,bash,zsh,fish}]
+indent_size = 4
+
+#-----------------------------------------
+# C / C++ / Objective-C – tabs for indent, 4-space alignment
+#-----------------------------------------
+[*.{c,cpp,h,hpp,mm}]
+indent_style = tab
+tab_width    = 4
+indent_size  = 4        # alignment width
+
+#-----------------------------------------
+# Rust
+#-----------------------------------------
+[*.rs]
+indent_size = 4
+
+#-----------------------------------------
+# C#
+#-----------------------------------------
+[*.cs]
+indent_size = 4
