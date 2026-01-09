@@ -121,6 +121,7 @@ module.exports = {
                 "reference/values-types-variables/object/prototype-based-programming",
                 "reference/values-types-variables/object/difference-among-object-and-object",
                 "reference/values-types-variables/object/destructuring-assignment-from-objects",
+                "reference/values-types-variables/object/spread-syntax-for-object",
                 "reference/values-types-variables/object/shorthand-property-names",
                 "reference/values-types-variables/object/optional-chaining",
                 "reference/values-types-variables/object/how-to-loop-an-object",

@@ -90,3 +90,7 @@ const concated = [...arr, ...arr2];
 似たシンタックスとして分割代入で使われる残余パターンの構文がありますが、異なる構文なので注意が必要です。
 
 [配列の分割代入](./destructuring-assignment-from-array.md)
+
+## 関連情報
+
+[オブジェクトのスプレッド構文「...」](../object/spread-syntax-for-object.md)
