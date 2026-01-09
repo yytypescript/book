@@ -5,6 +5,8 @@ slug: /reference/jsx
 
 JSX（JavaScript XML）は、コンポーネント指向のJavaScriptライブラリやフレームワーク（特にReact）で一般的に採用されている、JavaScriptの拡張構文です。JSXを用いると、JavaScriptのコード内にHTMLタグのような構文が埋め込み可能となり、より直感的かつ読みやすい形でUIのコードを表現することができます。それによって、開発者のコーディング体験や開発、デバッグの効率が上がります。
 
+なお、本ページではReactでJSXを使う場合を中心に解説しています。React固有の内容については「Reactでは」と明記しています。Preact、SolidJSなど他のライブラリでは仕様が異なる場合がありますのでご注意ください。
+
 ## JSXとECMAScriptの違い
 
 JavaScriptの文法はECMAScriptという言語仕様で規定されています。一方、JSXはJavaScriptの構文を独自に拡張した言語です。そのため、JSXはECMAScriptの言語仕様に盛り込まれていません。ブラウザがJavaScriptエンジンを実装する場合は、ECMAScript(標準)に準拠するため、ブラウザで直接JSXを解釈し、実行することができない現状があります。この問題を解消するためには、JSXをブラウザが認識できるJavaScriptに変換する、いわゆるトランスパイルという過程が必要となります。このトランスパイル作業を助けるツールとして、BabelやTypeScriptコンパイラーが使われます。
@@ -98,14 +100,14 @@ const element1 = <img src="image.jpg" alt="A beautiful scene" />;
 const element2 = <a href="http://example.com">Visit our website</a>;
 ```
 
-ただし、`class`属性はJavaScriptの予約語であるため、代わりに`className`を使用します。たとえば、次のコードでは`h1`要素に`className`属性を適用しています。
+ただし、Reactでは`class`属性の代わりに`className`を使用します。たとえば、次のコードでは`h1`要素に`className`属性を適用しています。
 
 ```tsx twoslash
 const element = <h1 className="greeting">Hello, world!</h1>;
 // 描画結果: <h1 class='greeting'>Hello, world!</h1>
 ```
 
-JSXで用いる属性は、JavaScriptのDOMのプロパティ名です。したがって、いくつかのHTML属性はJSXでは異なる名前を持ちます。次の表は、いくつかの一般的なHTML属性と対応するJSX属性名を示しています。
+Reactでは、JSXで用いる属性はJavaScriptのDOMのプロパティ名に対応しています。したがって、いくつかのHTML属性はReactのJSXでは異なる名前を持ちます。次の表は、いくつかの一般的なHTML属性と対応するReactのJSX属性名を示しています。
 
 | HTML          | JSX           |
 | ------------- | ------------- |
@@ -126,7 +128,7 @@ HTMLでは、スタイル属性は一般的に文字列です。
 <div style="background-color: yellow; color: blue;">Hello!</div>
 ```
 
-一方、JSXではスタイル属性はオブジェクトでなければなりません。
+一方、ReactのJSXではスタイル属性はオブジェクトで指定します。
 
 ```jsx
 <div style={{ backgroundColor: "yellow", color: "blue" }}>Hello!</div>
