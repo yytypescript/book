@@ -118,6 +118,52 @@ Markdownのリンクテキストは無視され、リンク先のタイトルが
 
 - https://github.com/shikijs/shiki/blob/main/docs/languages.md#all-languages
 
+### コードブロックの言語指定
+
+コードブロックは**常に`ts twoslash`を使用**します。twoslashを指定すると、ビルド時にTypeScriptコンパイラによるエラーチェックが行われ、サンプルコードの品質を保てます。
+
+````markdown
+```ts twoslash
+const message = "Hello";
+console.log(message);
+```
+````
+
+JavaScriptのコードであっても`ts twoslash`を使用します。
+
+#### TypeScriptでコンパイルエラーになる場合
+
+JavaScriptとしては正しいが、TypeScriptとしてはコンパイルエラーになるコードには`@noErrors`を指定します。
+
+````markdown
+```ts twoslash
+// @noErrors
+function greet(name) {
+  console.log("Hello, " + name);
+}
+```
+````
+
+#### 最終手段としてのjs指定
+
+`@noErrors`でも回避できない構文エラーなどの場合に限り、最終手段として`js`を使用できます。
+
+````markdown
+```js
+// @noErrorsでも対応できない場合のみ使用
+```
+````
+
+:::tip まとめ
+
+| 状況                                    | 対応                          |
+| --------------------------------------- | ----------------------------- |
+| 通常のコード（TSでもJSでも）            | `ts twoslash`を使う           |
+| TSでコンパイルエラーになるJSコード      | `ts twoslash`＋`// @noErrors` |
+| `@noErrors`でも回避できない構文エラー等 | `js`を使う（最終手段）        |
+
+:::
+
 ### コードブロックのタイトル
 
 コードブロックにタイトルをつけるには`title`属性を指定します。
