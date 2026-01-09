@@ -136,6 +136,8 @@ function toJapanese(position: Position) {
 }
 ```
 
+`as const`についての詳細は[constアサーション](../const-assertion.md)を参照してください。
+
 ## まとめ
 
 列挙型の問題点と代替案についても説明しました。特に列挙型は型安全上の問題もあるため、列挙型を積極的に使うかどうかは、よく検討してください。
