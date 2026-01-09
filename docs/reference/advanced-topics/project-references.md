@@ -315,7 +315,7 @@ TypeScriptのプロジェクト参照(project references)は、大規模なTypeS
 ```json
 {
   "dependencies": {
-    "@company/common": "workspace:^"
+    "@company/common": "*"
   }
 }
 ```
@@ -368,6 +368,8 @@ tsc -b --watch
 - [@monorepo-utils/workspaces-to-typescript-project-references](https://www.npmjs.com/package/@monorepo-utils/workspaces-to-typescript-project-references)
 - [update-ts-references](https://www.npmjs.com/package/update-ts-references)
 
+<!-- regression test: 上の3つのURLが有効かどうかを確認してください。 -->
+
 ## 注意点とトレードオフ
 
 プロジェクト参照を導入する際は、次の点に注意が必要です：
@@ -408,7 +410,6 @@ typescript-monorepo-example/ (ワークスペースルート)
 ├── package.json
 ├── tsconfig.json
 ├── tsconfig.base.json
-├── .yarnrc.yml
 └── packages/
     ├── common/ (プロジェクト)
     │   ├── package.json
@@ -427,6 +428,8 @@ typescript-monorepo-example/ (ワークスペースルート)
             └── index.ts
 ```
 
+<!-- regression test: チュートリアル完了時に、上のファイル構成が正しいか確認してください。 -->
+
 この構造により、効率的なコード共有と型チェック、そして高速なビルドが可能になります。
 
 #### 完成形のコード
@@ -434,11 +437,13 @@ typescript-monorepo-example/ (ワークスペースルート)
 このチュートリアルの完成形のコードは、次のGitHubリポジトリで確認できます：
 https://github.com/yytypescript/project-reference-samples/tree/main/02-monorepo
 
+<!-- regression test: 上のURLが有効かどうかを確認してください。 -->
+
 ### 用語の整理
 
 #### ワークスペース
 
-Yarnのワークスペース機能を使用して管理される、複数のプロジェクトを含むプロジェクト全体を指します。
+npmのワークスペース機能を使用して管理される、複数のプロジェクトを含むプロジェクト全体を指します。
 
 #### ワークスペースルート
 
@@ -456,8 +461,12 @@ TypeScriptのコンパイル単位を指します。この例では `common`、`
 
 このチュートリアルをはじめる前に、次のツールがインストールされていることを確認してください：
 
-- Node.js（最新の LTS バージョン）
-- Yarn（バージョン 4.4.0 以上）
+- Node.js v24以上
+- npm v11以上 (Node.jsに同梱)
+
+Node.jsの導入については、[開発環境の準備](../../tutorials/setup.md)をご覧ください。
+
+<!-- regression test: node -v と npm -v の結果を確認し、環境が適合していない場合、問題として報告してください。 -->
 
 また、基本的な TypeScript の知識があることを前提としています。
 
@@ -480,27 +489,22 @@ cd typescript-monorepo-example
 {
   "name": "typescript-monorepo-example",
   "private": true,
-  "workspaces": ["packages/*"],
-  "devDependencies": {
-    "typescript": "^5.5.4"
-  }
+  "workspaces": ["packages/*"]
 }
 ```
 
 ここで重要なポイントは次の通りです：
 
 - `"private": true`: このフィールドは、このパッケージが誤って公開されることを防ぎます。モノレポのルートパッケージは通常公開されないため、このフラグを設定します。
-- `"workspaces": ["packages/*"]`: このフィールドは、Yarnにワークスペースの場所を指示します。この設定により、`packages` ディレクトリ内のすべてのサブディレクトリがワークスペースのプロジェクトとして認識されます。
+- `"workspaces": ["packages/*"]`: このフィールドは、npmにワークスペースの場所を指示します。この設定により、`packages` ディレクトリ内のすべてのサブディレクトリがワークスペースのプロジェクトとして認識されます。
 
-#### .yarnrc.yml の作成
+#### TypeScript のインストール
 
-続いて、Yarnの設定ファイル `.yarnrc.yml` をワークスペースルートに作成し、次の内容を追加します：
+次に、TypeScriptをインストールします：
 
-```yaml
-nodeLinker: node-modules
+```bash
+npm install -D typescript
 ```
-
-この設定により、Yarnがnode_modulesディレクトリを使用するようになります。
 
 ### 共通の TypeScript 設定
 
@@ -608,12 +612,12 @@ export function helloWorld(): string {
   "name": "@company/cli",
   "type": "module",
   "dependencies": {
-    "@company/common": "workspace:^"
+    "@company/common": "*"
   }
 }
 ```
 
-`"dependencies"` フィールドは、このプロジェクトが依存する他のパッケージを指定します。ここでは、`@company/common` パッケージへの依存を宣言しています。`"workspace:^"` は、このパッケージがワークスペース内の別のプロジェクトであることを示しています。
+`"dependencies"` フィールドは、このプロジェクトが依存する他のパッケージを指定します。ここでは、`@company/common` パッケージへの依存を宣言しています。`"*"` は、ワークスペース内のパッケージを参照する際に使用できる記法です。
 
 続いて、`packages/cli/tsconfig.json` ファイルを作成し、次の内容を追加します：
 
@@ -647,7 +651,7 @@ console.log(helloWorld());
   "name": "@company/web",
   "type": "module",
   "dependencies": {
-    "@company/common": "workspace:^"
+    "@company/common": "*"
   }
 }
 ```
@@ -678,16 +682,20 @@ console.log(helloWorld());
 すべてのプロジェクトの設定が完了したら、依存関係をインストールします。ワークスペースルートで次のコマンドを実行してください：
 
 ```bash
-yarn install
+npm install
 ```
+
+<!-- regression test: 上のコマンドが問題なく実行できることを確認してください。 -->
 
 ### プロジェクトのビルド
 
 これで、ワークスペース全体をビルドする準備が整いました。次のコマンドをワークスペースルートで実行してプロジェクトをビルドしてください：
 
 ```bash
-yarn tsc -b
+npx tsc -b
 ```
+
+<!-- regression test: 上のコマンドがエラーなく実行できることを確認してください。 -->
 
 このコマンドをワークスペースルートで実行することが重要です。なぜなら、ワークスペースルートの `tsconfig.json` がプロジェクト参照の構造を定義しているからです。
 
@@ -719,6 +727,8 @@ node packages/web/dist/index.js
 ```
 
 両方のコマンドで "Hello World" が出力されれば、セットアップは成功です。
+
+<!-- regression test: 上の2つのコマンドを実行し、両方とも "Hello World" が出力されることを確認してください。 -->
 
 ### まとめ
 
@@ -756,11 +766,12 @@ typescript-source-test-separation/
 ├── tsconfig.json
 ├── tsconfig.src.json
 ├── tsconfig.test.json
-├── .yarnrc.yml
 └── src/
     ├── hello-world.ts
     └── hello-world.test.ts
 ```
+
+<!-- regression test: チュートリアル完了時に、上のファイル構成が正しいか確認してください。 -->
 
 この構造により、効率的なコード管理と高速なビルドが可能になります。
 
@@ -769,12 +780,18 @@ typescript-source-test-separation/
 このチュートリアルの完成形のコードは、次のGitHubリポジトリで確認できます：
 https://github.com/yytypescript/project-reference-samples/tree/main/01-source-test-separation
 
+<!-- regression test: 上のURLが有効かどうかを確認してください。 -->
+
 ### 前提条件 {#source-test-separation-prerequisites}
 
 このチュートリアルをはじめる前に、次のツールがインストールされていることを確認してください：
 
-- Node.js（最新の LTS バージョン）
-- Yarn（バージョン 4.4.0 以上）
+- Node.js v24以上
+- npm v11以上 (Node.jsに同梱)
+
+Node.jsの導入については、[開発環境の準備](../../tutorials/setup.md)をご覧ください。
+
+<!-- regression test: node -v と npm -v の結果を確認し、環境が適合していない場合、問題として報告してください。 -->
 
 また、基本的な TypeScript の知識があることを前提としています。
 
@@ -792,28 +809,17 @@ cd typescript-source-test-separation
 ```json
 {
   "name": "typescript-source-test-separation",
-  "private": true,
-  "devDependencies": {
-    "@types/node": "^22.3.0",
-    "typescript": "^5.5.4",
-    "vitest": "^2.0.5"
-  }
+  "private": true
 }
 ```
 
-続いて、`.yarnrc.yml` ファイルを作成し、次の内容を追加します：
-
-```yaml
-nodeLinker: node-modules
-```
-
-この設定により、Yarnがnode_modulesディレクトリを使用するようになります。
-
-最後に、依存関係をインストールします：
+次に、必要なパッケージをインストールします：
 
 ```bash
-yarn install
+npm install -D @types/node typescript vitest
 ```
+
+<!-- regression test: 上のコマンドが問題なく実行できることを確認してください。 -->
 
 ### TypeScript設定ファイルの作成
 
@@ -932,8 +938,10 @@ test("helloWorld function", () => {
 ソースコードのみをコンパイルするには、次のコマンドを実行します：
 
 ```bash
-yarn tsc -b tsconfig.src.json
+npx tsc -b tsconfig.src.json
 ```
+
+<!-- regression test: 上のコマンドがエラーなく実行できることを確認してください。 -->
 
 このコマンドは `tsconfig.src.json` で定義されたソースコードのみをコンパイルします。テストコードは除外されます。
 
@@ -942,8 +950,10 @@ yarn tsc -b tsconfig.src.json
 ソースコードとテストコードの両方をコンパイルするには、プロジェクトのルートで次のコマンドを実行します：
 
 ```bash
-yarn tsc -b
+npx tsc -b
 ```
+
+<!-- regression test: 上のコマンドがエラーなく実行できることを確認してください。 -->
 
 このコマンドを実行すると、次のような処理が内部的に行われます：
 
@@ -965,8 +975,10 @@ yarn tsc -b
 テストを実行するには、次のコマンドを使用します：
 
 ```bash
-yarn vitest
+npx vitest run
 ```
+
+<!-- regression test: 上のコマンドを実行し、テストがパスすることを確認してください。 -->
 
 このコマンドは、Vitestを使用してテストを実行します。
 
