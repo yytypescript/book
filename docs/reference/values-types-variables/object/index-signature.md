@@ -51,3 +51,5 @@ let obj2: Record<string, number>;
 ## 関連情報
 
 [Mapped Types](../../type-reuse/mapped-types.md)
+
+[interfaceとtypeの違い](../../object-oriented/interface/interface-vs-type-alias.md)
