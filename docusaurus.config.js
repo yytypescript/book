@@ -87,6 +87,7 @@ const config = {
               { label: "第3章 作って学ぶTypeScript", to: "/tutorials" },
               { label: "第4章 読んで学ぶTypeScript", to: "/reference" },
               { label: "第5章 Tips", to: "/tips" },
+              { label: "リリースノート", to: "/releasenotes" },
             ],
           },
           {
