@@ -96,24 +96,24 @@ function notTypeGuard(x: unknown): boolean {
   return typeof x === "number";
 }
 
-declare const input: number | string;
+function example(input: number | string) {
+  // 型の絞り込みができる
+  if (typeGuard(input)) {
+    input;
+    // ^?
+  } else {
+    input;
+    // ^?
+  }
 
-// 型の絞り込みができる
-if (typeGuard(input)) {
-  input;
-  // ^?
-} else {
-  input;
-  // ^?
-}
-
-// 型の絞り込みができない
-if (notTypeGuard(input)) {
-  input;
-  // ^?
-} else {
-  input;
-  // ^?
+  // 型の絞り込みができない
+  if (notTypeGuard(input)) {
+    input;
+    // ^?
+  } else {
+    input;
+    // ^?
+  }
 }
 ```
 
