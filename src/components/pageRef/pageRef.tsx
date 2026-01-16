@@ -10,14 +10,16 @@ const PageRef: FC<Props> = ({ link, title }) => {
   try {
     const { metadata } = require("@site/docs" + link.replace(/^\/+/, "/"));
     return (
-      <DocCard
-        item={{
-          type: "link",
-          href: metadata.permalink,
-          label: metadata.frontMatter.sidebar_label ?? metadata.title,
-          docId: metadata.id,
-        }}
-      />
+      <div className="book-pageRef">
+        <DocCard
+          item={{
+            type: "link",
+            href: metadata.permalink,
+            label: metadata.frontMatter.sidebar_label ?? metadata.title,
+            docId: metadata.id,
+          }}
+        />
+      </div>
     );
   } catch (e) {
     console.error(e);

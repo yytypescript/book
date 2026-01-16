@@ -234,6 +234,11 @@ pre .logger.log-log svg {
   text-transform: unset !important;
 }
 
+/* PageRefコンポーネントの余白（段落相当） */
+.book-pageRef {
+  margin-bottom: var(--ifm-paragraph-margin-bottom);
+}
+
 /* Custom terminal styling */
 .taml-outer {
   background: #1e1e2e;
