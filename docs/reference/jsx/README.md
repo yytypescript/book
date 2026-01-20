@@ -135,6 +135,13 @@ HTMLでは、スタイル属性は一般的に文字列です。
 // 描画結果: <div style='background-color:yellow;color:blue'>Hello!</div>
 ```
 
+ここで`{}`が二重になっているのは、外側の`{}`がJavaScriptの式を埋め込むためのJSX構文で、内側の`{}`がオブジェクトリテラルを表すためです。上のコードを少し変形して、スタイルの値を変数に切り出してみると、どの部分がJSXで、どの部分がオブジェクトリテラルかがわかるでしょう。
+
+```jsx
+const styling = { backgroundColor: "yellow", color: "blue" };
+<div style={styling}>Hello!</div>;
+```
+
 ### 真偽属性
 
 真偽属性は要素に特定の特性を指定します。たとえば、input要素には"disabled"というboolean型の属性があり、その値に真を指定するとinput要素は無効になります。
