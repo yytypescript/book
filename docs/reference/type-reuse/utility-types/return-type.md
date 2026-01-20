@@ -34,7 +34,7 @@ type isEvenRetType = ReturnType<typeof isEven>;
 //   ^?
 ```
 
-`ReturnType<T>`は内部的には`infer`を使って実装されています。
+`ReturnType<T>`は内部的には[`infer`](../conditional-types/infer.md)を使って実装されています。
 
 ```ts twoslash
 // @noErrors
