@@ -424,6 +424,24 @@ module.exports = {
         "reference/declaration-file",
         {
           type: "category",
+          label: "パッケージ",
+          link: {
+            type: "doc",
+            id: "reference/packages/README",
+          },
+          items: [
+            "reference/packages/package-manager",
+            "reference/packages/installing-packages",
+            "reference/packages/using-packages",
+            "reference/packages/package-json",
+            "reference/packages/lock-file",
+            "reference/packages/node-modules",
+            "reference/packages/package-security",
+            "reference/packages/finding-packages",
+          ],
+        },
+        {
+          type: "category",
           label: "Advanced Topics",
           link: {
             type: "generated-index",
