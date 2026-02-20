@@ -4,7 +4,7 @@ sidebar_label: using宣言
 
 # 新しい変数宣言 using
 
-using宣言(using declaration)とは、JavaScriptに導入される新しい変数宣言であり、執筆時点のECMAScriptプロポーザルではStage2の機能です。TypeScriptでは5.2からサポートされています。
+using宣言(using declaration)とは、JavaScriptに導入される新しい変数宣言であり、執筆時点のECMAScriptプロポーザルではStage3の機能です。TypeScriptでは5.2からサポートされています。
 
 using宣言された変数がスコープを抜けるときに、その変数に紐づくリソースについて自動的にクリーンアップ処理が実行されることで明示的なリソース管理(Explicit Resource Management)を実現できます。
 
@@ -60,11 +60,11 @@ async function readFile(fileName: string): Promise<void> {
 ```ts
 {
   // 変数初期化によるリソースの確保
-  using file = Deno.openSync();
+  using file = Deno.openSync(fileName);
 
-  file.writeSync();
+  file.writeSync(data);
 
-  file.readSync();
+  file.readSync(buffer);
 } // スコープを抜けると自動的にfileに紐づくリソースの解放処理が呼ばれる
 ```
 
