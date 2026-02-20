@@ -198,7 +198,7 @@ npm uninstall 不要なパッケージ名
 - pnpm: v10.16以降で対応。`pnpm-workspace.yaml`の`minimumReleaseAge`で分単位の設定が可能です。デフォルトは無効です。
 - Bun: v1.3以降で対応。`bunfig.toml`の`minimumReleaseAge`で秒単位の設定が可能です。デフォルトは無効です。
 - Yarn Berry: v4.10以降で対応。`.yarnrc.yml`の`npmMinimalAgeGate`で期間を文字列で指定します。デフォルトは`3d`(3日間)で、唯一デフォルトで有効です。
-- npm: 未対応です。
+- npm: v11.10.0以降で対応。`.npmrc`の`min-release-age`で日数を指定します。デフォルトは無効です。
 
 関心のある方は、各パッケージマネージャーのドキュメントを確認してみてください。
 
