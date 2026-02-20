@@ -72,3 +72,31 @@ async function readFile(fileName: string): Promise<void> {
 
 実は、このようなパターンはRAII(Resource Acquisition is Initialization)パターンと呼ばれ、他のプログラミング言語にも同様のパターンを見ることができます。
 
+## 他の言語でのパターン
+
+### RAIIパターン
+
+RAII(Resource Acquisition Is Initialization)パターンとは、文字通り「リソース取得は初期化」を意味しており、リソースの確保と解放を変数の初期化と破棄に結びつけるというプログラミングパターンを表します。
+
+JavaScriptの `using` を含め、以下に挙げるようなプログラミング言語では類似のRAIIパターンを採用しています。
+
+### C#のusing句
+
+JavaScriptの `using` に似ているのがC#の `using` です。以下のように `using` 句に指定されたオブジェクト(`SqlConnection`)は `IDisposable` インターフェースを実装している必要があります。
+
+```cs
+using(var connection = new SqlConnection(connectionString))
+{
+    // ...
+}
+```
+
+`IDisposable` インターフェースを実装していることで、スコープ脱出時に、`IDisposable`インターフェースの `Dispose` メソッドによるリソース解放が行われます。
+
+### Rustのdropメソッド
+
+RustもRAIIパターンを採用しており、所有権という概念のもとで、メモリを含むあらゆるリソースの解放タイミングを スコープの脱出時に定めており、コードの構造によって解放のタイミングが決定されます。これによって、リソースリークを静的に防ぎ安全性を担保します。
+
+このような所有権に基づいたリソース管理はまさに、RAIIに基づいたリソース管理の方法となっています。
+
+Rustの `Drop` トレイトに存在する `drop` というメソッドがこれを実現しています。オブジェクトがスコープを抜けるときにはこのメソッドが自動的に呼び出されて、登録されているリソース解放の処理を行います。
