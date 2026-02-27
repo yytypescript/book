@@ -88,10 +88,19 @@ JavaScriptの `using` に似ているのがC#の `using` です。以下のよ�
 using(var connection = new SqlConnection(connectionString))
 {
     // ...
-}
+} // スコープを抜けるときに自動的にDisposeが呼ばれる
 ```
 
 `IDisposable` インターフェースを実装していることで、スコープ脱出時に、`IDisposable`インターフェースの `Dispose` メソッドによるリソース解放が行われます。
+
+さらに C# 8.0以降では、JavaScriptの `using` とより似た宣言形式も使えます。
+
+```cs
+{
+  using var connection = new SqlConnection(connectionString);
+  // ...
+} // スコープを抜けるときに自動的にDisposeが呼ばれる
+```
 
 ### Rustのdropメソッド
 
