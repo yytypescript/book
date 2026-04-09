@@ -1,0 +1,38 @@
+.tableOfContents {
+  max-height: calc(100vh - (var(--ifm-navbar-height) + 2rem));
+  overflow-y: auto;
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+@media (max-width: 996px) {
+  .tableOfContents {
+    display: none;
+  }
+
+  .docItemContainer {
+    padding: 0 0.3rem;
+  }
+}
+
+.tocBanner {
+  display: block;
+  margin-bottom: 0.75rem;
+  border-radius: 8px;
+  overflow: hidden;
+  transition:
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tocBanner:hover {
+  opacity: 0.9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.tocBannerImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}

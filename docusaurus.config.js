@@ -56,6 +56,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      announcementBar: {
+        id: "tskaigi2026",
+        content:
+          '📣 <a target="_blank" rel="noopener noreferrer" href="https://2026.tskaigi.org/">TSKaigi 2026</a> — 2026年5月22日-23日 ベルサール羽田空港にて開催！',
+        backgroundColor: "#0D47A1",
+        textColor: "#FFFFFF",
+        isCloseable: true,
+      },
       image: "img/docusaurus-social-card.jpg",
       navbar: {
         title: "サバイバルTypeScript",
