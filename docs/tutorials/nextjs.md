@@ -120,6 +120,8 @@ cd random-cat
 ├── node_modules/
 ├── public/
 ├── .gitignore
+├── AGENTS.md
+├── CLAUDE.md
 ├── eslint.config.mjs
 ├── .next/
 ├── next-env.d.ts
