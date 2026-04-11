@@ -226,7 +226,7 @@ test("ボタンを表示したときのカウントが999であること", async
 
 次は状態確認です。`999`と表示されていることを確かめます。具体的には、ボタンを取得し、そのテキストが`999`という文字列に等しいかのアサーションを実施します。
 
-今回、ボタンの取得には`getByRole`を使います。これは[WAI-ARIA](https://developer.mozilla.org/ja/docs/Learn/Accessibility/WAI-ARIA_basics)(アクセシビリティ向上を主目的として定められたwebの仕様)で定められたロールを引数に指定すると、そのロールを持つ要素を取得するクエリです。具体的には、次のように書けます。詳細は[Locator](https://main.vitest.dev/api/browser/locators)をご参照ください。
+今回、ボタンの取得には`getByRole`を使います。これは[WAI-ARIA](https://developer.mozilla.org/ja/docs/Learn_web_development/Core/Accessibility/WAI-ARIA_basics)(アクセシビリティ向上を主目的として定められたwebの仕様)で定められたロールを引数に指定すると、そのロールを持つ要素を取得するクエリです。具体的には、次のように書けます。詳細は[Locator](https://main.vitest.dev/api/browser/locators)をご参照ください。
 
 <!-- regression test: 上の段落に含まれる全てのリンク先が正しいことを確認してください。 -->
 
