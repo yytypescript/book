@@ -163,7 +163,7 @@ const hello = (name: string) => {
 Prettierはデフォルトの整形ルールが定義されています。先ほどの実行結果を見るとインデントが幅2つのスペースでインデントがされているのが分かります。
 
 代表的な項目のデフォルト値は次のようになっています。
-すべての項目のデフォルト値を確認したい場合は、[Prettierの公式ドキュメント](https://prettier.io/docs/en/options.html)を参照してください。
+すべての項目のデフォルト値を確認したい場合は、[Prettierの公式ドキュメント](https://prettier.io/docs/options)を参照してください。
 
 <!-- regression test: 上記のリンクが正しいか確認してください。 -->
 
@@ -295,7 +295,7 @@ Prettierの他にも、VSCodeは[プラグイン](https://marketplace.visualstud
 ### 他の整形ルールを確認する
 
 ここで紹介した以外にもいくつかの整形ルールが存在します。
-他の整形ルールやCLIコマンドのオプション名、設定ファイルのキー名などを確認したい場合は[Prettierの公式ドキュメント](https://prettier.io/docs/en/options.html)をご参照ください。
+他の整形ルールやCLIコマンドのオプション名、設定ファイルのキー名などを確認したい場合は[Prettierの公式ドキュメント](https://prettier.io/docs/options)をご参照ください。
 
 <!-- regression test: 上記のリンクが正しいか確認してください -->
 
