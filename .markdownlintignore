@@ -15,3 +15,4 @@ node_modules
 /pnpm-lock.yaml
 /regression-test/issues
 /regression-test/workspace
+/refs

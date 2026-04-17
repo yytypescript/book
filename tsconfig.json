@@ -2,13 +2,16 @@
   // This file is not used in compilation. It is here just for a nice editor experience.
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
-    "module": "CommonJS",
     "target": "ES2015",
-    "baseUrl": ".",
+    // `@docusaurus/theme-common/lib/...` の内部パス import が bundler 解決では通らないため、
+    // ベースの `bundler` を上書きして従来の node 解決を維持する。
+    "moduleResolution": "node10",
+    // ベース (`@tsconfig/docusaurus`) の `baseUrl` が TS 6.0 で非推奨警告を出すための抑止。
+    // Docusaurus 公式 v3.10 の推奨対応（https://github.com/facebook/docusaurus/issues/11893）。
+    // `baseUrl` 削除は Docusaurus v4 で破壊的変更として予定されている。
+    "ignoreDeprecations": "6.0",
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "moduleResolution": "node",
-    "downlevelIteration": false,
     "checkJs": true,
     "skipLibCheck": true,
     "types": [

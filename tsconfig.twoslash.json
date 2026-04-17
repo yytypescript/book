@@ -5,6 +5,7 @@
     "allowJs": true,
     "strict": true,
     "types": ["node", "css-modules"],
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "ignoreDeprecations": "6.0"
   }
 }
