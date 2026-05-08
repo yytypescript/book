@@ -142,6 +142,41 @@ const getConnection = (host: string): Disposable => {
 
 実は、このようなパターンは後ほど詳しく解説しますが、RAII(Resource Acquisition is Initialization)パターンと呼ばれ、他のプログラミング言語にも同様のパターンを見ることができます。
 
+### await using
+
+クリーンアップ処理自体が非同期の場合には、`await using` 宣言を使います。`await using` はスコープ脱出時に `[Symbol.asyncDispose]()` を `await` して呼び出します。
+
+`AsyncDisposable` インターフェースを実装したオブジェクトが対象です。
+
+```ts twoslash {1, 4-8, 13}
+const getConnection = (host: string): AsyncDisposable => {
+  console.log(`接続を開く: ${host}`);
+  return {
+    async [Symbol.asyncDispose]() {
+      // 非同期のクリーンアップ処理(例: ネットワーク越しの切断)
+      await Promise.resolve();
+      console.log(`接続を閉じる: ${host}`);
+    },
+  };
+};
+
+{
+  await using connection = getConnection("localhost");
+  // ...
+} // ここで非同期の「接続を閉じる: localhost」が await される
+// ---cut-after---
+export {};
+```
+
+`using` と `await using` の使い分けは次のとおりです。
+
+| 宣言 | 対応インターフェース | クリーンアップ |
+| --- | --- | --- |
+| `using` | `Disposable` (`Symbol.dispose`) | 同期 |
+| `await using` | `AsyncDisposable` (`Symbol.asyncDispose`) | 非同期 |
+
+なお、`await using` は `async` 関数またはトップレベル `await` が使える環境でのみ利用できます。
+
 ## 他の言語でのパターン
 
 ### RAIIパターン
