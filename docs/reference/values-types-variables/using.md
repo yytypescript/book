@@ -160,7 +160,24 @@ const getConnection = (host: string): Disposable => {
 } // ここで自動的に「接続を閉じる: localhost」が出力される
 ```
 
+:::info RAIIパターン
 実は、このようなパターンは後ほど詳しく解説しますが、RAII(Resource Acquisition is Initialization)パターンと呼ばれ、他のプログラミング言語にも同様のパターンを見ることができます。
+:::
+
+なお、`using` を使って宣言した変数は `const` 宣言による変数と同様にブロックスコープの変数として宣言され、再代入を行なうことができません。
+また、`using` 宣言した変数の初期化として使える値は `null`、`undefined` または上述した `Disposable` インターフェースを実装したオブジェクトのみとなります。
+
+```ts twoslash
+using t1 = null;
+using t2 = undefined;
+using t3 = {
+    [Symbol.dispose]() {
+    },
+};
+
+// @errors: 2850
+using t4 = 1;
+```
 
 ### await using
 
