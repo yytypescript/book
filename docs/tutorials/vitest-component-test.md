@@ -21,7 +21,7 @@ Reactでコンポーネントが作れることを前提にします。Reactの�
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v24以上
+- Node.js v26以上
 - npm v11以上 (Node.jsに同梱)
 
 Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
@@ -76,13 +76,13 @@ npm install -D \
 <!-- regression test: 執筆時点では次のバージョンがインストールされました。メジャーバージョンが異なってもチュートリアルが通れば問題ありません。もし、チュートリアルが通らない場合、問題報告の参考情報として活用してください。
 ├── @types/react-dom@19.2.3
 ├── @types/react@19.2.7
-├── @vitejs/plugin-react@5.1.2
-├── @vitest/browser-playwright@4.0.16
+├── @vitejs/plugin-react@6.0.1
+├── @vitest/browser-playwright@4.1.5
 ├── react-dom@19.2.3
 ├── react@19.2.3
-├── typescript@5.9.3
+├── typescript@6.0.3
 ├── vitest-browser-react@2.0.2
-└── vitest@4.0.16
+└── vitest@4.1.5
 -->
 
 ## TypeScriptコンパイラーを設定する
@@ -198,7 +198,7 @@ export function LikeButton() {
 
 ### テストを作る
 
-まずは、1つ目のテストケースを作っていきましょう。`like-button.browser.test.tsx`というファイルこに、`test`関数を使ってテストケースを作成します。
+まずは、1つ目のテストケースを作っていきましょう。`like-button.browser.test.tsx`というファイルに、`test`関数を使ってテストケースを作成します。
 
 ```tsx title="like-button.browser.test.tsx"
 import { test } from "vitest";

@@ -40,7 +40,7 @@ sidebar_label: ESLintでコーディング規約を自動化しよう
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v24以上
+- Node.js v26以上
 - NPM v11以上 (Node.jsに同梱)
 
 Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
@@ -453,7 +453,7 @@ npx eslint
   <dim>1:14</dim>  <yellow>warning</yellow>  Identifier 'hello_world' is not in camel case  <dim>camelcase</dim>
   <dim>2:1</dim>   <yellow>warning</yellow>  Unexpected console statement                   <dim>no-console</dim>
 
-<bold><yellow>✖ 2 problems (0 error, 2 warnings)</yellow></bold>
+<bold><yellow>✖ 2 problems (0 errors, 2 warnings)</yellow></bold>
 ```
 
 <!-- regression test: コマンドの結果が上記の内容と一致するか確認してください。プロジェクトディレクトリへのパスは完全に一致してなくても構いません。 -->

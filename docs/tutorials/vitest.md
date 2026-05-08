@@ -22,7 +22,7 @@ Vitestとは、高速な実行速度と直感的な操作性を兼ね備えた�
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v24以上
+- Node.js v26以上
 - npm v11以上 (Node.jsに同梱)
 
 Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
@@ -57,7 +57,7 @@ cd vitest-tutorial
 npm install -D typescript
 ```
 
-<!-- regression test: インストールされたTypeScriptのバージョンは執筆時点で5.9.3でした。TypeScriptのバージョンが異なることで、チュートリアルが通らなかった場合、問題として報告してください。 -->
+<!-- regression test: インストールされたTypeScriptのバージョンは執筆時点で6.0.3でした。TypeScriptのバージョンが異なることで、チュートリアルが通らなかった場合、問題として報告してください。 -->
 
 次に、`tsconfig.json`を作成します。
 
@@ -100,7 +100,7 @@ Vitestをプロジェクトにインストールしましょう。
 npm install -D vitest
 ```
 
-<!-- regression test: インストールされたVitestのバージョン(npx vitest --version)は執筆時点で"vitest/4.0.16 darwin-arm64 node-v24.1.0"でした。Vitestのバージョンが異なることで、チュートリアルが通らなかった場合、問題として報告してください。 -->
+<!-- regression test: インストールされたVitestのバージョン(npx vitest --version)は執筆時点で"vitest/4.1.5 darwin-arm64 node-v26.0.0"でした。Vitestのバージョンが異なることで、チュートリアルが通らなかった場合、問題として報告してください。 -->
 
 ## チェックポイント
 
@@ -427,11 +427,9 @@ npx vitest run
 テストが成功すると、次のように表示されます。
 
 ```taml
-<bold><bgCyan> RUN </bgCyan></bold> <cyan>v4.0.16 </cyan><brightBlack>/path/to/vitest-tutorial</brightBlack>
+<bold><bgCyan> RUN </bgCyan></bold> <cyan>v4.1.5 </cyan><brightBlack>/path/to/vitest-tutorial</brightBlack>
 
- <green>✓</green> is-zero.unit.test.ts <dim>(2 tests)</dim><green> 1<dim>ms</dim></green>
-   <green>✓</green> 0を渡したらtrueになること<green> 0<dim>ms</dim></green>
-   <green>✓</green> 1を渡したらfalseになること<green> 0<dim>ms</dim></green>
+ <green>✓</green> is-zero.unit.test.ts <dim>(2 tests)</dim><green> 2<dim>ms</dim></green>
 
 <dim> Test Files </dim> <bold><green>1 passed</green></bold><brightBlack> (1)</brightBlack>
 <dim>      Tests </dim> <bold><green>2 passed</green></bold><brightBlack> (2)</brightBlack>

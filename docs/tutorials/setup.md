@@ -17,13 +17,13 @@ Node.jsの典型的な用途は、サーバーサイドアプリケーション�
 Node.jsは公式サイトからダウンロードしてインストールすることもできますが、もっとも手軽な方法はHomebrewを使ったインストールです。Homebrewのインストール方法は[Homebrewの公式サイト](https://brew.sh/ja/)を参照してください。
 
 ```shell
-brew install node@24
+brew install node@26
 ```
 
 インストールが完了したらシェルの環境変数`PATH`にNode.jsのパスを追加します。
 
 ```shell
-echo 'export PATH="/opt/homebrew/opt/node@24/bin:$PATH"' >> ~/.zshrc
+echo 'export PATH="/opt/homebrew/opt/node@26/bin:$PATH"' >> ~/.zshrc
 ```
 
 パスを追加したらターミナルを再起動し、環境変数を反映させてください。
@@ -32,7 +32,7 @@ echo 'export PATH="/opt/homebrew/opt/node@24/bin:$PATH"' >> ~/.zshrc
 
 ```shell
 node -v
-# v24.X.X
+# v26.X.X
 ```
 
 ## TypeScriptをインストールする

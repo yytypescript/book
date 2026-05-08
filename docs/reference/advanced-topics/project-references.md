@@ -461,7 +461,7 @@ TypeScriptのコンパイル単位を指します。この例では `common`、`
 
 このチュートリアルをはじめる前に、次のツールがインストールされていることを確認してください：
 
-- Node.js v24以上
+- Node.js v26以上
 - npm v11以上 (Node.jsに同梱)
 
 Node.jsの導入については、[開発環境の準備](../../tutorials/setup.md)をご覧ください。
@@ -786,7 +786,7 @@ https://github.com/yytypescript/project-reference-samples/tree/main/01-source-te
 
 このチュートリアルをはじめる前に、次のツールがインストールされていることを確認してください：
 
-- Node.js v24以上
+- Node.js v26以上
 - npm v11以上 (Node.jsに同梱)
 
 Node.jsの導入については、[開発環境の準備](../../tutorials/setup.md)をご覧ください。

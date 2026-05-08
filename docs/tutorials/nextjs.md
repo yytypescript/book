@@ -38,7 +38,7 @@ Next.jsはVercel社が開発を推進しており、同社は[Vercel](https://ve
 
 このチュートリアルで必要なものは次のとおりです。
 
-- Node.js v24以上
+- Node.js v26以上
 - npm v11以上 (Node.jsに同梱)
 - ブラウザ (このチュートリアルではGoogle Chromeを想定しています)
 

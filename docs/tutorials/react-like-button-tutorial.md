@@ -110,7 +110,7 @@ Reactには、小さいコンポーネントを組み合わせ、大きなアプ
 
 このチュートリアルをやるに当たって、必要なツールがあります。それらはここにリストアップしておくのであらかじめ用意しておいてください。
 
-- Node.js v24以上 (このチュートリアルではv24.11.1で動作確認しています)
+- Node.js v26以上 (このチュートリアルではv26.0.0で動作確認しています)
 - npm v11以上 (Node.jsに同梱)
 
 Node.jsの導入については、[開発環境の準備](./setup.md)をご覧ください。
@@ -164,20 +164,20 @@ npm install
 <!-- regression test: 執筆時点では次のバージョンがインストールされました。メジャーバージョンが異なってもチュートリアルが通れば問題ありません。もし、チュートリアルが通らない場合、問題報告の参考情報として活用してください。
 npm list
 like-button@0.0.0 /Users/suin/codes/github.com/yytypescript/like-button
-├── @eslint/js@9.39.4
-├── @types/node@24.12.2
+├── @eslint/js@10.0.1
+├── @types/node@24.12.3
 ├── @types/react-dom@19.2.3
 ├── @types/react@19.2.14
 ├── @vitejs/plugin-react@6.0.1
-├── eslint-plugin-react-hooks@7.0.1
+├── eslint-plugin-react-hooks@7.1.1
 ├── eslint-plugin-react-refresh@0.5.2
-├── eslint@9.39.4
-├── globals@17.4.0
-├── react-dom@19.2.5
-├── react@19.2.5
-├── typescript-eslint@8.58.1
-├── typescript@6.0.2
-└── vite@8.0.8
+├── eslint@10.3.0
+├── globals@17.6.0
+├── react-dom@19.2.6
+├── react@19.2.6
+├── typescript-eslint@8.59.2
+├── typescript@6.0.3
+└── vite@8.0.11
 -->
 
 次のコマンドを実行すると、開発サーバーが起動します。

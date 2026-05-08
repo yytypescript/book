@@ -55,9 +55,9 @@ ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}
 
 RUN brew --version
 
-# Node.js 24.x (via Homebrew)
-RUN brew install node@24 \
- && brew link --overwrite --force node@24 \
+# Node.js 26.x (via Homebrew)
+RUN brew install node@26 \
+ && brew link --overwrite --force node@26 \
  && npm install -g npm \
  && npm install -g @taml/cli
 
