@@ -187,10 +187,42 @@ JavaScriptの `using` を含め、以下に挙げるようなプログラミン�
 
 ### C#のusing句
 
-JavaScriptの `using` に似ているのがC#の `using` です。以下のように `using` 句に指定されたオブジェクト(`SqlConnection`)は `IDisposable` インターフェースを実装している必要があります。
+JavaScriptの `using` に似ているのがC#の `using` です。`using` 句に指定されたオブジェクトは `IDisposable` インターフェースを実装している必要があります。
 
-```cs
-using(var connection = new SqlConnection(connectionString))
+`IDisposable` インターフェースは `Dispose` メソッドを持ちます。
+
+```csharp
+public interface IDisposable
+{
+    void Dispose();
+}
+```
+
+実装例として、DB接続クラスに `IDisposable` を実装すると以下のようになります。
+
+```csharp
+class Connection : IDisposable
+{
+    private readonly string host;
+
+    public Connection(string host)
+    {
+        this.host = host;
+        Console.WriteLine($"接続を開く: {host}");
+    }
+
+    public void Dispose()
+    {
+        // スコープを抜けるときに自動的に呼ばれる
+        Console.WriteLine($"接続を閉じる: {host}");
+    }
+}
+```
+
+この `Connection` クラスを `using` 句で使うと、スコープ脱出時に自動的に `Dispose` が呼ばれます。
+
+```csharp title="C#のusing句"
+using(var connection = new Connection("localhost"))
 {
     // ...
 } // スコープを抜けるときに自動的にDisposeが呼ばれる
@@ -198,11 +230,11 @@ using(var connection = new SqlConnection(connectionString))
 
 `IDisposable` インターフェースを実装していることで、スコープ脱出時に、`IDisposable`インターフェースの `Dispose` メソッドによるリソース解放が行われます。
 
-さらに C# 8.0以降では、JavaScriptの `using` とより似た宣言形式も使えます。
+C# 8.0以降では、JavaScriptの `using` により似ている以下のような宣言形式も使えます。
 
-```cs
+```csharp title="C#のusing var"
 {
-  using var connection = new SqlConnection(connectionString);
+  using var connection = new Connection("localhost");
   // ...
 } // スコープを抜けるときに自動的にDisposeが呼ばれる
 ```
