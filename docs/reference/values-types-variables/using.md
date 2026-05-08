@@ -166,7 +166,7 @@ const getConnection = (host: string): Disposable => {
 
 クリーンアップ処理自体が非同期の場合には、`await using` 宣言を使います。`await using` はスコープ脱出時に `[Symbol.asyncDispose]()` を `await` して呼び出します。
 
-`AsyncDisposable` インターフェースを実装したオブジェクトが対象です。
+`await using` は `AsyncDisposable` インターフェースを実装したオブジェクトが対象となります。
 
 ```ts twoslash {1, 4-8, 13}
 const getConnection = (host: string): AsyncDisposable => {
@@ -188,12 +188,14 @@ const getConnection = (host: string): AsyncDisposable => {
 export {};
 ```
 
+ただし、`await using` はスコープ脱出時にまず `[Symbol.asyncDispose]()` を探し、なければ `[Symbol.dispose]()` にフォールバックします。そのため `AsyncDisposable` だけでなく `Disposable` を実装したオブジェクトにも使えます。
+
 `using` と `await using` の使い分けは次のとおりです。
 
 | 宣言 | 対応インターフェース | クリーンアップ |
 | --- | --- | --- |
 | `using` | `Disposable` (`Symbol.dispose`) | 同期 |
-| `await using` | `AsyncDisposable` (`Symbol.asyncDispose`) | 非同期 |
+| `await using` | `AsyncDisposable` (`Symbol.asyncDispose`) を優先、なければ `Disposable` (`Symbol.dispose`) にフォールバック | 非同期（フォールバック時は同期） |
 
 なお、`await using` は `async` 関数またはトップレベル `await` が使える環境でのみ利用できます。
 
