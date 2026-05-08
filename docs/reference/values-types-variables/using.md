@@ -8,6 +8,13 @@ using宣言(using declaration)とは、JavaScriptに導入される新しい変�
 
 using宣言された変数がスコープを抜けるときに、その変数に紐づくリソースについて自動的にクリーンアップ処理が実行されることで「**明示的なリソース管理** (Explicit Resource Management)」を実現できます。
 
+:::info Denoを使う理由
+このページでは以下の理由から [Deno](https://deno.com) ランタイムのファイル API をサンプルコードに多用しています。
+
+1. **`Symbol.dispose` が標準で実装済み**: Deno の `FsFile` は `using` 宣言がそのまま使えるオブジェクトの実例です。
+2. **リソースの概念が直感的**: ファイルハンドルやネットワーク接続は、ブラウザの Web API よりもコンピュータのリソース管理に近く、「開いたら閉じる」というライフサイクルが分かりやすいです。
+:::
+
 ## リソースとは
 
 using宣言を理解するための前提として「**リソース**」の概念を知っておく必要があります。リソース、あるいはシステムリソースとは、以下のようなコンポーネントのことを指します。
@@ -36,6 +43,17 @@ async function readFile(fileName: string): Promise<void> {
     }
 }
 ```
+
+:::info
+[`Deno.open`](https://docs.deno.com/api/deno/~/Deno.open) は Deno ランタイムを利用した環境で利用できるファイルを開くためのAPIです。以下のような型を持ちます。
+
+```ts
+open(
+  path: string | URL,
+  options?: OpenOptions,
+): Promise<FsFile>
+```
+:::
 
 メモリやファイルといったリソースは利用後に必ず解放する必要があります。この解放処理を忘れると、リソースリークという問題が発生します。
 
