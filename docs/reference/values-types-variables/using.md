@@ -28,19 +28,30 @@ JavaScript/TypeScriptの文脈において、特にメモリ領域は実行環�
 
 GCはメモリ領域以外のリソースの管理は行わないため、非メモリリソースの管理はプログラマーが明示的に行なう必要があります。例えば、以下の Deno 環境で作成されたファイル読み込みの処理では、ファイルハンドルは以下のように読み取りのために `open()` したら、利用終了時には `close()` するという処理を行なう必要があります。
 
-```ts
+```ts twoslash {2-3,9-12} title="resource.ts"
+// @noErrors
+declare namespace Deno {
+  interface OpenOptions { read?: boolean; write?: boolean }
+  interface FsFile {
+    read(p: Uint8Array): Promise<number | null>;
+    close(): void;
+    [Symbol.dispose](): void;
+  }
+  function open(path: string | URL, options?: OpenOptions): Promise<FsFile>;
+}
+// ---cut---
 async function readFile(fileName: string): Promise<void> {
-    // ファイルを開く
-    const file = await Deno.open(fileName);
-    try {
-        // ファイルを読み取る
-        const buffer = new Uint8Array(5);
-        const bytesRead = await file.read(buffer);
-        console.log(bytesRead);
-    } finally {
-        // 必ずファイルを閉じる(リソースを解放)
-        file.close();
-    }
+  // ファイルを開く
+  const file = await Deno.open(fileName);
+  try {
+    // ファイルを読み取る
+    const buffer = new Uint8Array(5);
+    const bytesRead = await file.read(buffer);
+    console.log(bytesRead);
+  } finally {
+    // 必ずファイルを閉じる(リソースを解放)
+    file.close();
+  }
 }
 ```
 
@@ -86,7 +97,29 @@ open(
 } // スコープを抜けると自動的に `file` に紐づくリソースの解放処理が呼ばれる
 ```
 
-スコープ脱出のタイミングでリソース解放が行われる、つまり、コードの構造により自動的にリソースの解放タイミングが決まります。
+スコープ脱出のタイミングでリソース解放が行われる、つまり、コードの構造により自動的にリソースの解放タイミングが決まります。この `using` 宣言を使うことで先程の `resource.ts` は以下のように書き換えることができます。
+
+```ts twoslash title="resource.ts"
+declare namespace Deno {
+  interface OpenOptions { read?: boolean; write?: boolean }
+  interface FsFile {
+    read(p: Uint8Array): Promise<number | null>;
+    close(): void;
+    [Symbol.dispose](): void;
+  }
+  function open(path: string | URL, options?: OpenOptions): Promise<FsFile>;
+}
+// ---cut---
+async function readFile(fileName: string): Promise<void> {
+  // ファイルを開く
+  using file = await Deno.open(fileName);
+  // ファイルを読み取る
+  const buffer = new Uint8Array(5);
+  const bytesRead = await file.read(buffer);
+  console.log(bytesRead);
+}
+```
+
 
 実は、このようなパターンは後ほど詳しく解説しますが、RAII(Resource Acquisition is Initialization)パターンと呼ばれ、他のプログラミング言語にも同様のパターンを見ることができます。
 
