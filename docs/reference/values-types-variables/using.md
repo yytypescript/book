@@ -120,6 +120,25 @@ async function readFile(fileName: string): Promise<void> {
 }
 ```
 
+### DisposableとSymbol.dispose
+
+`using` 宣言で使えるオブジェクトは、`Disposable` インターフェースを実装している、つまり `[Symbol.dispose]()` メソッドを持つ必要があります。
+
+```ts twoslash {1, 4-6, 11}
+const getConnection = (host: string): Disposable => {
+  console.log(`接続を開く: ${host}`);
+  return {
+    [Symbol.dispose]() {
+      console.log(`接続を閉じる: ${host}`);
+    },
+  };
+};
+
+{
+  using connection = getConnection("localhost");
+  // ...
+} // ここで自動的に「接続を閉じる: localhost」が出力される
+```
 
 実は、このようなパターンは後ほど詳しく解説しますが、RAII(Resource Acquisition is Initialization)パターンと呼ばれ、他のプログラミング言語にも同様のパターンを見ることができます。
 
