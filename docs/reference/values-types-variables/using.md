@@ -292,3 +292,15 @@ fn main() {
 
 Rustでは `using` のような特別な宣言は不要で、すべての変数がデフォルトでRAIIの対象となります。
 
+## 各言語のRAIIパターン比較
+
+TypeScript・C#・Rustそれぞれの仕組みを比較すると以下のとおりです。
+
+| 比較項目 | TypeScript | C# | Rust |
+| --- | --- | --- | --- |
+| インターフェース/トレイト | `Disposable` | `IDisposable` | `Drop` |
+| クリーンアップメソッド | `[Symbol.dispose]()` | `Dispose()` | `drop(&mut self)` |
+| 宣言構文 | `using` / `await using` | `using` 句 / `using var` | 不要(暗黙) |
+| 強制力 | オプトイン(明示的に `using` が必要) | オプトイン(明示的に `using` が必要) | すべての変数が対象 |
+
+大きな違いは**強制力**にあります。TypeScriptとC#では `using` / `using var` を書かなければRAIIは機能せず、うっかり書き忘れるとリソースリークが起きます。一方Rustでは所有権システムにより、すべての変数がスコープ脱出時に自動的に `drop` される仕組みになっており、書き忘れが原理的に発生しません。
