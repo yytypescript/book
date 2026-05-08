@@ -229,7 +229,6 @@ class Connection : IDisposable
 
     public void Dispose()
     {
-        // スコープを抜けるときに自動的に呼ばれる
         Console.WriteLine($"接続を閉じる: {host}");
     }
 }
@@ -240,7 +239,7 @@ class Connection : IDisposable
 ```csharp title="C#のusing句"
 using(var connection = new Connection("localhost"))
 {
-    // ...
+  // ...
 } // スコープを抜けるときに自動的にDisposeが呼ばれる
 ```
 
