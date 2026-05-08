@@ -257,8 +257,38 @@ C# 8.0以降では、JavaScriptの `using` により似ている以下のよう�
 
 ### Rustのdropメソッド
 
-RustもRAIIパターンを採用しており、所有権という概念のもとで、メモリを含むあらゆるリソースの解放タイミングを スコープの脱出時に定めており、コードの構造によって解放のタイミングが決定されます。これによって、リソースリークを静的に防ぎ安全性を担保します。
+RustもRAIIパターンを採用しており、所有権という概念のもとで、メモリを含むあらゆるリソースの解放タイミングを**スコープの脱出時**に定めており、**コードの構造によって解放のタイミングが決定されます**。これによって、リソースリークを静的に防ぎ安全性を担保します。
 
 このような所有権に基づいたリソース管理はまさに、RAIIに基づいたリソース管理の方法となっています。
 
 Rustの `Drop` トレイトに存在する `drop` というメソッドがこれを実現しています。オブジェクトがスコープを抜けるときにはこのメソッドが自動的に呼び出されて、登録されているリソース解放の処理を行います。
+
+```rust title="Rustのdropメソッド"
+struct Connection {
+    host: String,
+}
+
+impl Connection {
+    fn new(host: &str) -> Self {
+        println!("接続を開く: {}", host);
+        Connection { host: host.to_string() }
+    }
+}
+
+impl Drop for Connection {
+    fn drop(&mut self) {
+        // スコープを抜けるときに自動的に呼ばれる
+        println!("接続を閉じる: {}", self.host);
+    }
+}
+
+fn main() {
+    {
+        let connection = Connection::new("localhost");
+        // ...
+    } // ここで自動的に「接続を閉じる: localhost」が出力される
+}
+```
+
+Rustでは `using` のような特別な宣言は不要で、すべての変数がデフォルトでRAIIの対象となります。
+
