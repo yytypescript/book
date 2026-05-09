@@ -4,9 +4,7 @@ sidebar_label: using宣言
 
 # 新しい変数宣言 using
 
-[変数宣言: letとconst](reference/values-types-variables/let-and-const.md)
-
-この章の最初のページで`let`と`const`という変数宣言について学びました。
+この章の最初のページで[`let`と`const`](reference/values-types-variables/let-and-const.md)という変数宣言について学びました。
 
 **using宣言**(using declaration)とは、JavaScriptに導入される新しい変数宣言であり、執筆時点のECMAScriptプロポーザルではStage3の機能です。TypeScriptでは5.2からサポートされています。
 
@@ -104,7 +102,7 @@ open(
 
 ## usingの登場
 
-そこで、 using宣言が現れました。using宣言で宣言された変数に紐づけられたリソースは、その変数がスコープを抜けるときに `Symbol.dispose` で指定されたメソッドが呼び出されます。このメソッドに記述されたリソースの解放処理が自動的に実行されます。
+そこでusing宣言が登場しました。using宣言で宣言された変数に紐づけられたリソースは、その変数がスコープを抜けるときに `[Symbol.dispose]()` メソッドが呼び出され、リソースの解放処理が自動的に実行されます。
 
 ```ts
 {
@@ -325,4 +323,4 @@ TypeScript・C#・Rustそれぞれの仕組みを比較すると以下のとお�
 | 宣言構文 | `using` / `await using` | `using` 句 / `using var` | 不要(暗黙) |
 | 強制力 | オプトイン(明示的に `using` が必要) | オプトイン(明示的に `using` が必要) | すべての変数が対象 |
 
-大きな違いは**強制力**にあります。TypeScriptとC#では `using` / `using var` を書かなければRAIIは機能せず、うっかり書き忘れるとリソースリークが起きます。一方Rustでは所有権システムにより、すべての変数がスコープ脱出時に自動的に `drop` される仕組みになっており、書き忘れが原理的に発生しません。
+3者間の大きな違いは**強制力**にあります。TypeScriptとC#では `using` を書かなければRAIIは機能せず、うっかり書き忘れるとリソースリークが起きます。一方Rustでは所有権システムにより、すべての変数がスコープ脱出時に自動的に `drop` される仕組みになっており、書き忘れが原理的に発生しません。
