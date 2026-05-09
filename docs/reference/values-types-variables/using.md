@@ -141,8 +141,10 @@ async function readFile(fileName: string): Promise<void> {
   const buffer = new Uint8Array(5);
   const bytesRead = await file.read(buffer);
   console.log(bytesRead);
-}
+} // スコープ脱出時に自動的にリソース解放
 ```
+
+冒頭で使った「明示的なリソース管理」とは、このようにusing宣言で定義された変数に紐づくリソースの解放タイミング、ひいてはライフタイム(生存期間)そのものを、スコープというコードの構造によって明確に表すことができるということです。つまり、`using` が付いていることでリソース解放タイミングが誰が見ても一目でわかるようになっています。
 
 ### DisposableとSymbol.dispose
 
