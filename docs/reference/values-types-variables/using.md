@@ -230,7 +230,7 @@ JavaScriptの `using` に似ているのがC#の `using` です。`using` 句に
 
 `IDisposable` インターフェースは `Dispose` メソッドを持ちます。
 
-```csharp
+```csharp title="C#のIDisposableインターフェース"
 public interface IDisposable
 {
     void Dispose();
@@ -239,7 +239,7 @@ public interface IDisposable
 
 実装例として、DB接続クラスに `IDisposable` を実装すると以下のようになります。
 
-```csharp
+```csharp title="C#のIDisposableインターフェースの実装"
 class Connection : IDisposable
 {
     private readonly string host;
