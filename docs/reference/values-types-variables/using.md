@@ -15,6 +15,7 @@ using宣言された変数がスコープを抜けるときに、その変数に
 
 1. **`Symbol.dispose` が標準で実装済み**: Deno の `FsFile` は `using` 宣言がそのまま使えるオブジェクトの実例です。
 2. **リソースの概念が直感的**: ファイルハンドルやネットワーク接続は、ブラウザの Web API よりもコンピュータのリソース管理に近く、「開いたら閉じる」というライフサイクルが分かりやすいです。
+
 :::
 
 ## リソースとは
@@ -55,7 +56,10 @@ GCはメモリ領域以外のリソースの管理は行わないため、ファ
 ```ts twoslash {2-3,9-12} title="resource.ts"
 // @noErrors
 declare namespace Deno {
-  interface OpenOptions { read?: boolean; write?: boolean }
+  interface OpenOptions {
+    read?: boolean;
+    write?: boolean;
+  }
   interface FsFile {
     read(p: Uint8Array): Promise<number | null>;
     close(): void;
@@ -88,6 +92,7 @@ open(
   options?: OpenOptions,
 ): Promise<FsFile>
 ```
+
 :::
 
 メモリやファイルといったリソースは利用後に必ず解放する必要があります。この解放処理を忘れると、リソースリークという問題が発生します。
@@ -125,7 +130,10 @@ open(
 
 ```ts twoslash title="resource.ts"
 declare namespace Deno {
-  interface OpenOptions { read?: boolean; write?: boolean }
+  interface OpenOptions {
+    read?: boolean;
+    write?: boolean;
+  }
   interface FsFile {
     read(p: Uint8Array): Promise<number | null>;
     close(): void;
@@ -177,8 +185,7 @@ const getConnection = (host: string): Disposable => {
 using t1 = null;
 using t2 = undefined;
 using t3 = {
-    [Symbol.dispose]() {
-    },
+  [Symbol.dispose]() {},
 };
 
 // @errors: 2850
@@ -215,9 +222,9 @@ export {};
 
 `using` と `await using` の使い分けは次のとおりです。
 
-| 宣言 | 対応インターフェース | クリーンアップ |
-| --- | --- | --- |
-| `using` | `Disposable` (`Symbol.dispose`) | 同期 |
+| 宣言          | 対応インターフェース                                                                                        | クリーンアップ                   |
+| ------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `using`       | `Disposable` (`Symbol.dispose`)                                                                             | 同期                             |
 | `await using` | `AsyncDisposable` (`Symbol.asyncDispose`) を優先、なければ `Disposable` (`Symbol.dispose`) にフォールバック | 非同期（フォールバック時は同期） |
 
 なお、`await using` は `async` 関数またはトップレベル `await` が使える環境でのみ利用できます。
@@ -326,11 +333,11 @@ Rustでは `using` のような特別な宣言は不要で、すべての変数�
 
 TypeScript・C#・Rustそれぞれの仕組みを比較すると以下のとおりです。
 
-| 比較項目 | TypeScript | C# | Rust |
-| --- | --- | --- | --- |
-| インターフェース/トレイト | `Disposable` | `IDisposable` | `Drop` |
-| クリーンアップメソッド | `[Symbol.dispose]()` | `Dispose()` | `drop(&mut self)` |
-| 宣言構文 | `using` / `await using` | `using` 句 / `using var` | 不要(暗黙) |
-| 強制力 | オプトイン(明示的に `using` が必要) | オプトイン(明示的に `using` が必要) | すべての変数が対象 |
+| 比較項目                  | TypeScript                          | C#                                  | Rust               |
+| ------------------------- | ----------------------------------- | ----------------------------------- | ------------------ |
+| インターフェース/トレイト | `Disposable`                        | `IDisposable`                       | `Drop`             |
+| クリーンアップメソッド    | `[Symbol.dispose]()`                | `Dispose()`                         | `drop(&mut self)`  |
+| 宣言構文                  | `using` / `await using`             | `using` 句 / `using var`            | 不要(暗黙)         |
+| 強制力                    | オプトイン(明示的に `using` が必要) | オプトイン(明示的に `using` が必要) | すべての変数が対象 |
 
 3者間の大きな違いは**強制力**にあります。TypeScriptとC#では `using` を書かなければRAIIは機能せず、うっかり書き忘れるとリソースリークが起きます。一方Rustでは所有権システムにより、すべての変数がスコープ脱出時に自動的に `drop` される仕組みになっており、書き忘れが原理的に発生しません。
