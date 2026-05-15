@@ -129,6 +129,7 @@ tsc increment.ts
 ```ts twoslash title="increment.js"
 // @showEmit
 // @alwaysStrict: false
+"use strict";
 function increment(num: number) {
   return num + 1;
 }
