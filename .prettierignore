@@ -15,4 +15,5 @@ pnpm-lock.yaml
 
 /regression-test/issues
 /regression-test/workspace
+/refs
 /.devbox
