@@ -33,7 +33,7 @@ TypeScriptでは、型の互換性を判定する際に変性(variance)という
 type BivariantFunction<I, O> = (arg: I) => O;
 ```
 
-ここで引数`I`を共変にした`CovariantFunction<in I, O>`と戻り値`O`を反変にした`ContravariantFunction<I, out O>`、引数も戻り値も不変にした`InvariantFunction<in out I, in out O>`を定義します。するとそれらは次のように定義されます。
+ここで戻り値`O`を共変にした`CovariantFunction<I, out O>`と引数`I`を反変にした`ContravariantFunction<in I, O>`、引数も戻り値も不変にした`InvariantFunction<in out I, in out O>`を定義します。するとそれらは次のように定義されます。
 
 ```ts twoslash
 type BivariantFunction<I, O> = (arg: I) => O;
