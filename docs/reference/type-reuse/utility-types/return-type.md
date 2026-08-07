@@ -27,7 +27,7 @@ type ReturnType3 = ReturnType<() => never>;
 
 ```ts twoslash
 const isEven = (num: number) => {
-  return num / 2 === 0;
+  return num % 2 === 0;
 };
 
 type isEvenRetType = ReturnType<typeof isEven>;
