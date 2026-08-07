@@ -234,7 +234,7 @@ if (typeof n === "number") {
 
 :::
 
-### 要素の個数を取得する - `Map.prototype.size()`
+### 要素の個数を取得する - `Map.prototype.size`
 
 `Map`に登録されている要素数を調べるには`size`フィールドの値を見ます。
 

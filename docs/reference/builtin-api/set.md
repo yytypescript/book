@@ -94,7 +94,7 @@ console.log(numbers.has(999));
 // @log: false
 ```
 
-### 値の個数を取得する - `Set.prototype.size()`
+### 値の個数を取得する - `Set.prototype.size`
 
 `Set`にいくつ値が登録されているかを調べるには、`size`フィールドの値を見ます。
 
