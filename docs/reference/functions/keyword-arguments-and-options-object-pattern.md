@@ -270,7 +270,7 @@ func({ x: 1, y: undefined });
 
 ## Option Object自体をオプショナルにする方法
 
-TypeScriptでOptions Object自体を渡さなくても関数を呼び出せるようにするには、Options Objectのデフォルト値として空のオブジェクト`{}`を指定するとできます。
+TypeScriptでOptions Object自体を渡さずに関数を呼び出せるようにするには、Options Objectのデフォルト値に空のオブジェクト`{}`を指定します。
 
 ```ts twoslash
 type Options = {
