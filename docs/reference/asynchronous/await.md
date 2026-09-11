@@ -201,7 +201,7 @@ main()
 拒否された`Promise`をそのまま関数の戻り値にしてしまうと拒否されたまま呼び出し元に戻されます。
 
 ```ts twoslash
-function request(): Promise<unknown> {
+async function request(): Promise<unknown> {
   throw new Error("error");
 }
 
