@@ -89,9 +89,9 @@ main();
 
 ```ts twoslash
 async function main() {
-  // 1秒後に値を返す
+  // 1秒待つ
   await new Promise((resolve) => {
-    setTimeout(() => resolve, 1000);
+    setTimeout(resolve, 1000);
   });
 }
 ```
