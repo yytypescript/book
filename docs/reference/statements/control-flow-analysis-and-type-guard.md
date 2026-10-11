@@ -272,6 +272,8 @@ function handleValue(value: Panda | Broccoli | User): void {
 
 ## 関連情報
 
+[switch(true)による型の絞り込み](./switch-true-type-narrowing.md)
+
 [any型](../values-types-variables/any.md)
 
 [any vs unknown](any-vs-unknown.md)

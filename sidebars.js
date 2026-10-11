@@ -192,6 +192,7 @@ module.exports = {
             "reference/statements/switch",
             "reference/statements/switch-fallthrough",
             "reference/statements/switch-and-variable-scope",
+            "reference/statements/switch-true-type-narrowing",
             "reference/statements/exception",
             "reference/statements/never",
             "reference/statements/control-flow-analysis-and-type-guard",
